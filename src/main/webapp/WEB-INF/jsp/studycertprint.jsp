@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -94,8 +97,8 @@ span{
 float:right;
 }
 </style>
-	<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Study Certificate</title>
          <script type="text/javascript">
              window.onload = function(){
@@ -128,7 +131,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/school/images/school.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="${logoUrl}">
 			</td>
 				<td >
 					<br>

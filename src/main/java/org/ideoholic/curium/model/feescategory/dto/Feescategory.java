@@ -1,8 +1,6 @@
 package org.ideoholic.curium.model.feescategory.dto;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
+import static javax.persistence.GenerationType.IDENTITY;
 
 // default package
 // Generated 6 Dec, 2014 11:27:37 AM by Hibernate Tools 4.0.0
@@ -10,12 +8,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,11 +32,11 @@ public class Feescategory implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idfeescategory", unique = true, nullable = false)
 	private Integer idfeescategory;
 
-	@Column(name = "feescategoryname", length = 150)
+	@Column(name = "feescategory", length = 150)
 	private String feescategoryname;
 
 	@Column(name = "amount")
@@ -52,18 +46,14 @@ public class Feescategory implements java.io.Serializable {
 	private String particularname;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
-	@Column(name = "academicyear", length = 20)
 	private String academicyear;
 	
 	@Column(name = "totalinstallments")
 	private int totalinstallments;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "feescategory")
-	private List<Studentfeesstructure> feeStudentfeesstructureList;
 
 }

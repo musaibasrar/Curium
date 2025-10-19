@@ -5,7 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,8 +23,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>SMS Delivery Report</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +414,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/school/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/school/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/school/js/bootstrap.min.js"></script>
-<!-- <script src="/school/js/jquery.min.js"></script> -->
+	<!-- <link href="${cssPath}/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="${jsPath}/bootstrap.min.js"></script>
+<!-- <script src="${jsPath}/jquery.min.js"></script> -->
 
 
-<link href="/school/css/select2.min.css" rel="stylesheet" />
-<script src="/school/js/select2.min.js"></script>
+<link href="${cssPath}/select2.min.css" rel="stylesheet" />
+<script src="${jsPath}/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -501,7 +507,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {

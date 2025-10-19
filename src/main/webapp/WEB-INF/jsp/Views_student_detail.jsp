@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,8 +16,8 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
         <style type="text/css">
         
          .headerText {
@@ -62,7 +65,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -93,7 +96,7 @@ for(Cookie cookie : cookies){
                     </thead>
                     <tbody>
                     <tr>
-                    <td ><h2><a  href="/school/StudentProcess/ViewDetails?id=<c:out value="${username}"/>"></a></h2></td>
+                    <td ><h2><a  href="${ctx}/StudentProcess/ViewDetails?id=<c:out value="${username}"/>"></a></h2></td>
                     </tr>
                     </tbody>
                     </table>

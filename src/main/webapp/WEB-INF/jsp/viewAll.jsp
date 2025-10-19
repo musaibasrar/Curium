@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -26,15 +29,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
         <style type="text/css" >
             <!--
             .header {
@@ -355,14 +358,14 @@
             
             function refreshPage(){
                  var form1=document.getElementById("form1");
-                form1.action="/school/PersonalProcess/ViewAllGo";
+                form1.action="${ctx}/PersonalProcess/ViewAllGo";
                 form1.submit();
                 
                 //window.location.reload();
             } 
             function redirect(){
                  var form1=document.getElementById("form1");
-                    form1.action="/school/PersonalProcess/redirect";
+                    form1.action="${ctx}/PersonalProcess/redirect";
                     form1.submit();
                 
                 //window.location.reload();
@@ -373,7 +376,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -387,7 +390,7 @@ for(Cookie cookie : cookies){
 %>
     <body>
 
-        <form name="form1" id="form1"action="/school/StudentProcess/archiveMultiple" method="post">
+        <form name="form1" id="form1"action="${ctx}/StudentProcess/archiveMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
@@ -417,7 +420,7 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/school/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="${ctx}/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${Student.classstudying}"/></td>
                                 <td class="dataText"><fmt:formatDate value="${student.admissiondate}" pattern="yyyy-MM-dd"/></td>
@@ -437,7 +440,7 @@ for(Cookie cookie : cookies){
             <div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/school/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="${ctx}/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -450,7 +453,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/school/PersonalProcessPages&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="${ctx}/PersonalProcessPages&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -459,7 +462,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/school/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="${ctx}/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
             

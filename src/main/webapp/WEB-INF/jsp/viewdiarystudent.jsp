@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,10 +17,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>View Diary Parents</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/school/css/bootstrap3.min.css">
-        <script src="/school/js/jquery.min.js"></script>
-        <script src="/school/js/bootstrap.min.js"></script>
-        <script src="/school/js/popper.min.js"></script>
+<link rel="stylesheet" href="${cssPath}/bootstrap3.min.css">
+        <script src="${jsPath}/jquery.min.js"></script>
+        <script src="${jsPath}/bootstrap.min.js"></script>
+        <script src="${jsPath}/popper.min.js"></script>
 <style type="text/css">
  body {
     font-family: 'Roboto', sans-serif;
@@ -80,7 +83,7 @@
 
   function viewStudentDiary(sid) {
     var form1 = document.getElementById("form1");
-    form1.action = "/school/StudentDiaryProcess/ViewDiaryDetailsParent?id=" + sid;
+    form1.action = "${ctx}/StudentDiaryProcess/ViewDiaryDetailsParent?id=" + sid;
     form1.submit();
   }
 
@@ -103,7 +106,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -165,17 +168,17 @@ for(Cookie cookie : cookies){
 
 				<%-- <div class="d-flex justify-content-between mt-4">
       <c:if test="${currentPage != 1}">
-        <a class="btn btn-primary" href="/school/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a>
+        <a class="btn btn-primary" href="${ctx}/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a>
       </c:if>
       <ul class="pagination">
         <c:forEach begin="1" end="${noOfPages}" var="i">
           <li class="page-item <c:if test='${currentPage == i}'>active</c:if>">
-            <a class="page-link" href="/school/DiaryProcess/viewdiarystudent?page=${i}">${i}</a>
+            <a class="page-link" href="${ctx}/DiaryProcess/viewdiarystudent?page=${i}">${i}</a>
           </li>
         </c:forEach>
       </ul>
       <c:if test="${currentPage lt noOfPages}">
-        <a class="btn btn-primary" href="/school/DiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a>
+        <a class="btn btn-primary" href="${ctx}/DiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a>
       </c:if>
     </div> --%>
   </div>

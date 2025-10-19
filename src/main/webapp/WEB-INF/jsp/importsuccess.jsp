@@ -1,4 +1,9 @@
 <%-- 
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
+    Document   : import file success
     Document   : import file success
     Created on : Sep 08, 2021, 4:55:53 PM
     Author     : Adeeba
@@ -17,15 +22,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
         
         
         
@@ -63,7 +68,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -75,7 +80,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg" >
+    <body style="background-image: url('${backgroundUrl}'); background-image: url('${backgroundFallback}') /* fallback */;" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>

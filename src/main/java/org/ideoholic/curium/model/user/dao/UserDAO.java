@@ -1,146 +1,171 @@
 package org.ideoholic.curium.model.user.dao;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import org.ideoholic.curium.util.Session;
+import org.hibernate.SessionFactory;
+import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
-import org.ideoholic.curium.exceptions.CustomErrorMessage;
-import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
-import org.ideoholic.curium.repositories.LoginRepository;
 import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.QueryUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.util.CollectionUtils;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
 public class UserDAO {
+	 Session session = null;
+	    /** * Hibernate Session Variable */
+	    Transaction transaction = null;
+	    /** * Hibernate Transaction Variable */
+	    SessionFactory sessionFacto;
+	    
+	    private static final Logger logger = LogManager.getLogger(UserDAO.class);
+	    
+	    public UserDAO() {
+	    	//Musaib
+	        //sessionFactory = HibernateUtil.getSessionFactory();
+	        session=HibernateUtil.openCurrentSession();
+	}
 
-    @Autowired
-    private LoginRepository loginRepo;
-
-    @Autowired
-    private QueryUtil queryUtil;
-
-    @Transactional
+	@SuppressWarnings("finally")
 	public Login readUniqueObject(String userName, String password) {
-		Login login = null;
-		try {
-			List<Login> loginList = loginRepo.findByUsernameAndPassword(userName, password);
-			if (!CollectionUtils.isEmpty(loginList)) {
-				login = loginList.get(0);
-				// throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
-			}
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
-			log.debug("In user-dao null pointer exception {}", hibernateException.getMessage());
-			hibernateException.printStackTrace();
-			throw hibernateException;
-		}
-		return login;
+        Login login = null;
+       try{
+           transaction = session.beginTransaction();
+           Query query = session.createQuery("FROM Login as login where login.username= :loginName and login.password= :password");
+           query.setParameter("loginName", userName);
+           query.setParameter("password", password);
+           login = (Login) query.uniqueResult();
+           transaction.commit();
+           
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+           System.out.println("In userdao null pointer exception"+hibernateException);
+           hibernateException.printStackTrace();
+       }finally{
+   			HibernateUtil.closeSession();
+           return login;
+       }}
+
+	public void sessionClose() {
+		HibernateUtil.closeSession();
+		
 	}
 
 	@SuppressWarnings({ "unchecked", "finally" })
 	public int getNoOfStudents(int branchId) {
-		java.util.List<Student> results;
-	    int noOfRecords = 0;
-        Transaction transaction = null;
+		 java.util.List<Student> results = new ArrayList<Student>();
+	        int noOfRecords = 0;
 	        try {
-                Session session = HibernateUtil.openCurrentSession();
 	            transaction = session.beginTransaction();
 
 	            results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0 AND s.branchid="+branchId).list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 
-	        } catch (Exception hibernateException) {
-                if(transaction != null) transaction.rollback();
-                log.error(hibernateException.getMessage(), hibernateException);
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
 	            hibernateException.printStackTrace();
+
 	        } finally {
-                HibernateUtil.closeSession();
+	    			HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
 
 	@SuppressWarnings("unchecked")
 	public int getNoOfStudentsOne(String classStudying, int branchId) {
-		java.util.List<Student> results;
-        Transaction transaction = null;
-	    int noOfRecords = 0;
+		 java.util.List<Student> results = new ArrayList<Student>();
+		 
+	        int noOfRecords = 0;
 	        try {
-                Session session = HibernateUtil.openCurrentSession();
+	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 	            transaction = session.beginTransaction();
 
 	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"'  AND s.archive = 0 AND s.branchid="+branchId+"").list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 
-	        } catch (Exception hibernateException) {
-                if(transaction != null) transaction.rollback();
-                log.error(hibernateException.getMessage(), hibernateException);
+
+
+	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
 	            hibernateException.printStackTrace();
+
 	        } finally {
-                HibernateUtil.closeSession();
+	    			HibernateUtil.closeSession();
 	            return noOfRecords;
 	        }
 	}
 
-	@Transactional
 	public Login readPassword(String currentPassword) {
-       Login login = null;
+        Login login = null;
+        
        try{
-           List<Login> loginList = loginRepo.findByPassword(currentPassword);
-           if(CollectionUtils.isEmpty(loginList)){
-               throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
-           }
-           login = loginList.get(0);
-       }catch (Exception hibernateException) {
-           log.error(hibernateException.getMessage(), hibernateException);
+          // this.session = sessionFactory.openSession();
+           transaction = session.beginTransaction();
+           
+           Query query = session.createQuery("from Login as user where user.password= :password");
+           query.setParameter("password", currentPassword);
+           login = (Login) query.uniqueResult();
+           transaction.commit();
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
            hibernateException.printStackTrace();
-           throw hibernateException;
+       }finally{
+   			HibernateUtil.closeSession();
+           return login;
        }
-        return login;
    }
 
-	@Transactional
 	public Login update(Login login) {
         try {
-            loginRepo.save(login);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            session.update(login);
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
-            throw hibernateException;
+        } finally {
+    			HibernateUtil.closeSession();
+            return login;
         }
-        return login;
    }
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public java.util.List<Receiptinfo> getReceiptDetailsList(String queryMain) {
-		java.util.List<Receiptinfo> feesDetails = new ArrayList<>();
-        Transaction transaction = null;
+	@SuppressWarnings("unchecked")
+	public java.util.List<Feesdetails> getListOfFeesDetails(String queryMain) {
+		java.util.List<Feesdetails> feesDetails = new ArrayList<Feesdetails>();
         try {
-            Session session = HibernateUtil.openCurrentSession();
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            feesDetails = (java.util.List<Feesdetails>) HQLquery.list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        }
+        finally {
+			HibernateUtil.closeSession();
+		 }
+        return feesDetails;
+	}
+
+	@SuppressWarnings("unchecked")
+	public java.util.List<Receiptinfo> getReceiptDetailsList(String queryMain) {
+		java.util.List<Receiptinfo> feesDetails = new ArrayList<Receiptinfo>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(queryMain);
             feesDetails = (java.util.List<Receiptinfo>) HQLquery.list();
             transaction.commit();
-        } catch (Exception hibernateException) {
-            if(transaction != null) transaction.rollback();
-            log.error(hibernateException.getMessage(), hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         }
         finally {
@@ -149,105 +174,97 @@ public class UserDAO {
         return feesDetails;
 	}
 
-	@SuppressWarnings("unchecked")
-	@Transactional
 	public boolean addUser(Login user) {
+		
 		try {
-			int userid = 1;
-			List<Login> loginList = queryUtil.findByClassLimitedTo("select l from Login as l order by l.userid", Login.class, 1);
-
-			user = loginRepo.save(user);
-
-           if(!CollectionUtils.isEmpty(loginList)){
-        	   Login last = loginList.get(0);
-               userid = last.getUserid()+1;
-           }
-           user.setUserid(userid);
-           loginRepo.save(user);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            session.save(user);
+            
+            Query query = session.createQuery("from Login order by userid DESC");
+            query.setMaxResults(1);
+            Login last = (Login) query.uniqueResult();
+            int userid = last.getUserid()+1;
+            Query queryUpdate = session 
+					.createSQLQuery("update login set userid = "+userid+" where username = '"+user.getUsername()+"'");
+			queryUpdate.executeUpdate();
+            transaction.commit();
+           return true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
-            throw hibernateException;
+        }finally {
+			HibernateUtil.closeSession();
 		 }
-		return true;
+		return false;
+		
 	}
 
-	@Transactional
 	public Login getUserDetails(String teacherexternalid) {
 		Login user = new Login();
 		try {
-            List<Login> loginList = loginRepo.findByUsername(teacherexternalid);
-            if(CollectionUtils.isEmpty(loginList)){
-                throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
-            }
-            user = loginList.get(0);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("FROM Login as login where login.username= :loginName");
+            query.setParameter("loginName", teacherexternalid);
+            user = (Login) query.uniqueResult();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
-            throw hibernateException;
-		}
+        } finally {
+			HibernateUtil.closeSession();
+		 }
 		return user;
 	}
 	
-	@Transactional
 	public Login getLoginDetails(String userName, int branchId) {
         Login login = null;
        try{
-           List<Login> loginList = loginRepo.findByBranchIdAndUserName(branchId, userName);
-           if(CollectionUtils.isEmpty(loginList)){
-               throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
-           }
-           login = loginList.get(0);
-       }catch (Exception hibernateException) {
-           log.error(hibernateException.getMessage(), hibernateException);
+           transaction = session.beginTransaction();
+           Query query = session.createQuery("FROM Login as login where login.branch='"+branchId+"' and login.username='"+userName+"'");
+           login = (Login) query.uniqueResult();
+           transaction.commit();
+           
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
            hibernateException.printStackTrace();
-           throw hibernateException;
-       }
-        return login;
-    }
+       }finally{
+   			HibernateUtil.closeSession();
+           return login;
+       }}
 
-	@Transactional
 	public Login getUniqueObject(int userid) {
         Login login = null;
        try{
-           List<Login> loginList = loginRepo.findByUserid(userid);
-           if(CollectionUtils.isEmpty(loginList)){
-               new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
-           }
-           login = loginList.get(0);
-       }catch (Exception hibernateException) {
-           log.error(hibernateException.getMessage(), hibernateException);
-           log.error("In userdao null pointer exception", hibernateException);
+           transaction = session.beginTransaction();
+           Query query = session.createQuery("FROM Login as login where login.userid= :userId");
+           query.setParameter("userId", userid);
+           login = (Login) query.uniqueResult();
+           transaction.commit();
+           
+       }catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+           System.out.println("In userdao null pointer exception"+hibernateException);
            hibernateException.printStackTrace();
-           throw hibernateException;
-       }
-        return login;
-    }
+       }finally{
+   			HibernateUtil.closeSession();
+           return login;
+       }}
 	
 	@SuppressWarnings("unchecked")
 	public java.util.List<Otherreceiptinfo> getOtherReceiptDetailsList(String queryMain) {
-		java.util.List<Otherreceiptinfo> feesDetails = new ArrayList<>();
-        Transaction transaction = null;
+		java.util.List<Otherreceiptinfo> feesDetails = new ArrayList<Otherreceiptinfo>();
         try {
-            Session session = HibernateUtil.openCurrentSession();
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
             transaction = session.beginTransaction();
             Query HQLquery = session.createQuery(queryMain);
             feesDetails = (java.util.List<Otherreceiptinfo>) HQLquery.list();
             transaction.commit();
-        } catch (Exception hibernateException) {
-            if(transaction != null) transaction.rollback();
-            log.error(hibernateException.getMessage(), hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
             hibernateException.printStackTrace();
         }
         finally {
 			HibernateUtil.closeSession();
 		 }
         return feesDetails;
-	}
-	
-	private void rollback() {
-		// Roll back the transaction manually
-		TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 	}
 }

@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.examdetails.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 31 Mar, 2018 10:55:17 AM by Hibernate Tools 4.0.0
 
@@ -8,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,10 +29,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "examschedule")
 public class Examschedule implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idexamschedule", unique = true, nullable = false)
 	private Integer idexamschedule;
 
@@ -58,9 +58,9 @@ public class Examschedule implements java.io.Serializable {
 	private String academicyear;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

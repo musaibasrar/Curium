@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -7,10 +10,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/school/css/bootstrap.min.css">
-        <script src="/school/js/jquery.min.js"></script>
-        <script src="/school/js/bootstrap.min.js"></script>
-        <script src="/school/js/popper.min.js"></script>
+        <link rel="stylesheet" href="${cssPath}/bootstrap.min.css">
+        <script src="${jsPath}/jquery.min.js"></script>
+        <script src="${jsPath}/bootstrap.min.js"></script>
+        <script src="${jsPath}/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -85,7 +88,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/UserProcess/logout";
+                form1.action="${ctx}/UserProcess/logout";
                 form1.submit();
             }
 
@@ -95,7 +98,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -118,21 +121,21 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;width: 170px;">
-								<a target="mainFrame" href="/school/welcomeparent" ><img src="/school/images/curiumheader.png" width="90" height="30"/></a>
+								<a target="mainFrame" href="${ctx}/welcomeparent" ><img src="${imagesPath}/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/school/images/school/header.png"
+							<!-- <td align="left"><img src="${imagesPath}${ctx}/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td align="left" style="padding-left:40px;">
  
-                                                         <a target="mainFrame" href="/school/welcomeparent" style="display: inline-flex; align-items: center;">
-     <img src="/school/images/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
+                                                         <a target="mainFrame" href="${ctx}/welcomeparent" style="display: inline-flex; align-items: center;">
+     <img src="${imagesPath}/home.svg" width="22" height="22" alt="Home" style="margin-right: 4px;" />
      <strong style="font-size: 18px;">Home</strong>
  </a>&nbsp;&nbsp;
  
                                                           <a target="_parent"
-                                                                 href="/school/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
-                                                                         src="/school/images/logout.svg" width="22" height="22" alt="Log Out" 
+                                                                 href="${ctx}/UserProcess/logout" style="display: inline-flex; align-items: center;"><img
+                                                                         src="${imagesPath}/logout.svg" width="22" height="22" alt="Log Out" 
                                                                  /><strong style="font-size: 17px;">Logout</strong></a></td>
 
 

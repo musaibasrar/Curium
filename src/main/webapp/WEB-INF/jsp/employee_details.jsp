@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -15,26 +18,26 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
 
-        <script type="text/javascript" language="JavaScript" src="/school/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="${jsPath}/motionpack.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="${cssPath}/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script  type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.resizable.js"></script>
 
         <style type="text/css">
             <!--
@@ -255,7 +258,7 @@
             
             function updateStaff(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/EmployeeProcess/updateEmployeeDetails?id=<c:out value='${employee.tid}'/>";
+                form1.action="${ctx}/EmployeeProcess/updateEmployeeDetails?id=<c:out value='${employee.tid}'/>";
                 form1.submit();
             }
             
@@ -317,7 +320,7 @@
                                 
                                 function Cancel(){
                                     var form1=document.getElementById("form1");
-                                    form1.action="/school/EmployeeProcess/viewAllEmployee";
+                                    form1.action="${ctx}/EmployeeProcess/viewAllEmployee";
                                     form1.submit();
                                 }
                             </script>
@@ -327,7 +330,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -374,56 +377,103 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows"  style="text-transform:uppercase">
                                 <c:out default="" value="${employee.teachername}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Gender
+                            
+                            <td width="25%"  class="alignLeft" height="50">Father's Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.fathername}" />
+                            </td>
+                        </tr>
+                        
+                        <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Mother's Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.mothername}" />
+                            </td>
+                            
+                            <td width="25%"  class="alignLeft" height="50">Spouse's Name</td>
+                            <td width="25%" class="tablerows"  style="text-transform:uppercase">
+                                <c:out default="" value="${employee.remarks}" />
+                            </td>
+                        </tr>
+                        
+                         <tr>
+                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
+                            <td width="25%" class="tablerows" >
+                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
+                            </td>
+                             <td width="25%"  class="alignLeft" height="50" >Gender
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.gender}" />
                             </td>
+                            
+                        </tr>
+                        
+                        
+                         <tr>
+                       
+                            <td width="25%"  class="alignLeft" height="50">Blood Group</td>
+                            <td width="25%" class="tablerows" >
+                             	<c:out default="" value="${employee.bloodgroup}" />
+                            </td>
+                             <td width="25%"  class="alignLeft" height="50" >Aadhaar No.
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.aadhaarno}" />
+                            </td>
+                            
                         </tr>
                         
                           <tr>
-                        <td  width="25%"  class="alignLeft" height="50">Address
-                            </td>
-                            <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.address}" />
-                            </td>
                         
                             <td  width="25%"  class="alignLeft" height="50" >Contact Number
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.contactnumber}" />
                             </td>
+                            
+                       		 <td width="25%"  class="alignLeft" height="50" >Email
+                            </td>
+                            <td width="25%"  class="tablerows">
+                                <c:out default="" value="${employee.email}" />
+                            </td>
 
                             
                         </tr>
                         
                         <tr>
-                        <td width="25%"  class="alignLeft" height="50" >Email
+                        
+                            <td  width="25%"  class="alignLeft" height="50" >Address
+                            </td>
+                            <td width="25%" class="tablerows" >
+                                <c:out default="" value="${employee.address}" />
+                            </td>
+                            
+                       		 <td width="25%"  class="alignLeft" height="50" >Marital Status
                             </td>
                             <td width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.email}" />
+                                <c:out default="" value="${employee.maritalstatus}" />
                             </td>
-                            <td width="25%"  class="alignLeft" height="50">Date Of Birth</td>
-                            <td width="25%" class="tablerows" >
-                                <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.dateofjoining}"/>
-                            </td>
+
                             
                         </tr>
                         
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50" >Total Experience</td>
-                            <td  width="25%"  class="tablerows">
-                                <c:out default="" value="${employee.totalexperience}" />
-                            </td>
-                            <td width="25%"  class="alignLeft" height="50">Qualification
+                        	<td  width="25%"  class="alignLeft" height="50">Emergency Contact Person
                             </td>
                             <td width="25%" class="tablerows">
-                                <c:out default="" value="${employee.qualification}" />
+                                <c:out default="" value="${employee.emergencyname}" />
                             </td>
+                            <td  width="25%"  class="alignLeft" height="50">Emergency Contact No
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${employee.emergencycontact}" />
+                            </td>
+                            
                         </tr>
                         
-                        
-                        <tr>
+                          <tr>
                         <td width="25%"   class="alignLeft" height="50" >Department</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${employee.department}" />
@@ -440,11 +490,23 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                            <td width="25%" class="alignLeft" height="50" >Father / Guardian Name</td>
-                            <td width="25%" class="tablerows"  >
-                                 <c:out default="" value="${employee.remarks}" />
+                         <td width="25%"  class="alignLeft" height="50">Qualification
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${employee.qualification}" />
                             </td>
                             
+                            <td width="25%"  class="alignLeft" height="50" >Total Experience</td>
+                            <td  width="25%"  class="tablerows">
+                                <c:out default="" value="${employee.totalexperience}" />
+                            </td>
+                           
+                        </tr>
+                        
+                        
+                      
+                        
+                        <tr>
                             <td width="25%" class="alignLeft" height="50" >Date Of Joining &nbsp;</td>
                             <td width="25%" class="tablerows" >
                                 <fmt:formatDate pattern="dd/MM/yyyy" value="${employee.joiningdate}"/>

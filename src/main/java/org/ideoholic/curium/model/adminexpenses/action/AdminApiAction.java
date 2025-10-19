@@ -62,13 +62,13 @@ public class AdminApiAction {
     }
 
     @PostMapping("/deleteMultiple")
-    public ResponseEntity<ResultResponse> deleteMultiple(@RequestBody ExpensesIdDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<ResultResponse> deleteMultiple(ExpensesIdDto dto, @RequestHeader(value = "branchid") String branchId) {
         adminService.deleteMultiple(dto);
         return viewAllExpenses(branchId);
     }
 
     @PostMapping("/viewExpensesBetweenDates")
-    public ResponseEntity<AdminExpenseResponseDto> viewExpensesBetweenDates(@RequestBody AdminExpensesDateDto dto, @RequestHeader(value = "branchid") String branchId) {
+    public ResponseEntity<AdminExpenseResponseDto> viewExpensesBetweenDates(AdminExpensesDateDto dto, @RequestHeader(value = "branchid") String branchId) {
         AdminExpenseResponseDto result = adminService.viewExpensesBetweenDates(dto,branchId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);

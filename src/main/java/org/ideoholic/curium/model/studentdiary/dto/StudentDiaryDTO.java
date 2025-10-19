@@ -3,6 +3,8 @@ package org.ideoholic.curium.model.studentdiary.dto;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 public class StudentDiaryDTO implements java.io.Serializable {
 	

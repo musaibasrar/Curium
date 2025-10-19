@@ -1,39 +1,63 @@
 package org.ideoholic.curium.model.marksdetails.dto;
+import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "markgrade")
-public class MarksGrade implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = false)
-	private Integer id;
-
-	@Column(name = "minpercentage", nullable = false)
+public class MarksGrade implements java.io.Serializable{
+	private int id;
 	private int minpercentage;
-
-	@Column(name = "maxpercentage", nullable = false)
 	private int maxpercentage;
-
-	@Column(name = "status", length = 45)
-	private String status;
-
+    private String status;
+    private int branchid;
+	public MarksGrade() {
+	}
+	public MarksGrade(int id, int minpercentage, int maxpercentage, String status, int branchid) {
+		this.id = id;
+		this.minpercentage = minpercentage;
+		this.maxpercentage = maxpercentage;
+		this.status = status;
+		this.branchid = branchid;
+	}
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+    public int getId() {
+		return this.id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	@Column(name = "minpercentage")
+	public int getMinpercentage() {
+		return this.minpercentage;
+	}
+	public void setMinpercentage(int minpercentage) {
+		this.minpercentage = minpercentage;
+	}
+	@Column(name = "maxpercentage")
+	public int getMaxpercentage() {
+		return this.maxpercentage;
+	}
+	public void setMaxpercentage(int maxpercentage) {
+		this.maxpercentage = maxpercentage;
+	}
+	@Column(name = "status")
+	public String getStatus() {
+		return this.status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	@Column(name = "branchid")
-	private Integer branchid;
-
-}
+	public int getBranchid() {
+		return this.branchid;
+	}
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
+	}
+	}

@@ -5,7 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,29 +23,29 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Book Return</title>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="${cssPath}/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.effects.blind.js"></script>
         
         
         <style type="text/css">
@@ -322,7 +328,7 @@
             
             function getbooks(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/school/LibraryProcess/searchbooks";
+        		form1.action="${ctx}/LibraryProcess/searchbooks";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -434,7 +440,7 @@
         
         function returnBook() {
     		var form1 = document.getElementById("form1");
-    		form1.action = "/school/LibraryProcess/bookReturnByStudent";
+    		form1.action = "${ctx}/LibraryProcess/bookReturnByStudent";
     		form1.method = "POST";
     		form1.submit();
 
@@ -466,7 +472,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

@@ -5,7 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,8 +23,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Book</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -446,17 +452,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/school/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -569,7 +575,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	$(function() {
@@ -766,7 +772,7 @@
         <script type="text/javascript">
 	function issueBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/LibraryProcess/bookIssuedStudent";
+		form1.action = "${ctx}/LibraryProcess/bookIssuedStudent";
 		form1.method = "POST";
 		form1.submit();
 
@@ -788,7 +794,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

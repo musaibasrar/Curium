@@ -173,7 +173,7 @@ public class FeesAction {
 	@GetMapping("/otherfeesCollect")
 	public String otherfeesCollect() {
 		feesActionAdapter.viewOtherFees();
-		feesActionAdapter.viewAllStudentsListOtherFees();
+		feesActionAdapter.viewAllStudentsList();
 		return "otherfeesCollection";
 	}
 	

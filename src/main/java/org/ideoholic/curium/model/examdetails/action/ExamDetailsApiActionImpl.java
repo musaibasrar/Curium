@@ -64,7 +64,7 @@ public class ExamDetailsApiActionImpl implements ExamDetailsApiAction {
         if (!subjectsResponseDto.isSuccess()) {
             throw new CustomResponseException(CustomErrorMessage.ERROR);
         }
-        result.setResultList(subjectsResponseDto.getSubjects());
+        result.setResultList(subjectsResponseDto.getList());
         Currentacademicyear currentacademicyear = yearService.getYear();
 
         if (currentacademicyear == null) {
@@ -144,7 +144,7 @@ public class ExamDetailsApiActionImpl implements ExamDetailsApiAction {
         if (!subjectsResponseDto.isSuccess()) {
             throw new CustomResponseException(CustomErrorMessage.ERROR);
         }
-        result.setList(subjectsResponseDto.getSubjects());
+        result.setList(subjectsResponseDto.getList());
         Currentacademicyear currentacademicyear = yearService.getYear();
 
         if (currentacademicyear == null) {

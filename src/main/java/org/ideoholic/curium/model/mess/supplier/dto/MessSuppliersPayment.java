@@ -1,15 +1,14 @@
 package org.ideoholic.curium.model.mess.supplier.dto;
 
+import static javax.persistence.GenerationType.AUTO;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,44 +23,37 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_supplierpaymentdetails")
 public class MessSuppliersPayment implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "externalid", length = 100)
+	@Column(name = "externalid")
 	private String externalid;
 
 	@Column(name = "supplierid")
 	private Integer supplierid;
 
-	@Column(name = "chequeno", length = 100)
+	@Column(name = "chequeno")
 	private String chequeno;
 
-	@Column(name = "amount", precision = 18, scale = 5)
+	@Column(name = "amount")
 	private Float amount;
 
 	@Column(name = "voucherid")
 	private Integer voucherid;
 
-	@Column(name = "voucheridcleared")
-	private Integer voucheridcleared;
-
-	@Temporal(TemporalType.DATE)
 	@Column(name = "issuedate")
 	private Date issuedate;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "delivereddate")
 	private Date delivereddate;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "cleareddate")
 	private Date cleareddate;
 
-	@Column(name = "status", length = 50)
+	@Column(name = "status")
 	private String status;
 
 	@Column(name = "branchid")

@@ -10,22 +10,26 @@ import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class DiaryService {
-	@Autowired
-	private diaryDAO diarysDao;
-		
+	private String BRANCHID = "branchid";
+	/**
+	 * Size of a byte buffer to read/write file
+	 */
+	private static final int BUFFER_SIZE = 4096;
+
+	
 	public void adddetail() {
+		// TODO Auto-generated method stub
 		Login login = new Login();
 		/*
 		 * String Id=login.getUsername(); Student student = new
@@ -38,6 +42,7 @@ public class DiaryService {
 	}
 
 	public void addDiary(AddDiaryDto addDiaryDto, String branchId, String userLoginId, String currentAcademicYear) {
+		// TODO Auto-generated method stub
 		Diary diary = new Diary();
 
 		if (branchId != null) {
@@ -48,18 +53,20 @@ public class DiaryService {
 			diary.setClasssec(DataUtil.emptyString(classString));
 			diary.setMessage(addDiaryDto.getMessageBody());
 			diary.setSubject(addDiaryDto.getSubject());
-			diary.setBranchid(Integer.parseInt(branchId));
+			diary.setBranchid(branchId);
 			diary.setUserid(Integer.parseInt(userLoginId));
 			diary.setAcademicyear(currentAcademicYear);
 			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
 			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
 			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
-			diary = diarysDao.create(diary);
+			diary = new diaryDAO().create(diary);
 		}
 	}
 
 	public DiaryResponseDto viewDiary(String strPage, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
+		// TODO Auto-generated method stub
+		boolean result = false;
 
 		if (branchId != null) {
 			try {
@@ -68,9 +75,27 @@ public class DiaryService {
 				if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
 					page = Integer.parseInt(strPage);
 				}
-				List<Diary> diaryDetails = diarysDao.readListOfObjects((page - 1) * recordsPerPage,
+				List<Object[]> list = new diaryDAO().readListOfObjects((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(branchId));
-				int noOfRecords = diarysDao.getNoOfRecords(Integer.parseInt(branchId));
+
+				List<Diary> diaryDetails = new ArrayList<Diary>();
+				for (Object[] diaryObject : list) {
+					Diary diary = new Diary();
+
+					diary.setId((Integer) diaryObject[0]);
+					diary.setClasssec((String) diaryObject[1]);
+					diary.setAcademicyear((String) diaryObject[2]);
+					diary.setBranchid((String) diaryObject[3]);
+					diary.setSubject((String) diaryObject[4]);
+					diary.setMessage((String) diaryObject[5]);
+					diary.setStartdate((Date) diaryObject[6]);
+					diary.setEnddate((Date) diaryObject[7]);
+					diary.setCreateddate((Date) diaryObject[8]);
+					diaryDetails.add(diary);
+				}
+
+
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiary(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
@@ -85,23 +110,43 @@ public class DiaryService {
 		}
 		return diaryResponseDto;
 	}
+//viewDiaryparent
 
 
 	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
+		boolean result = false;
 
 		if (branchId != null) {
 			try {
-				Student student = new StudentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
+				Student student = new studentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;
 				if (!"".equalsIgnoreCase(DataUtil.emptyString(studentIdPageDto.getPage()))) {
 					page = Integer.parseInt(studentIdPageDto.getPage());
 				}
-				List<Diary> diaryDetails = diarysDao.readListOfParentObjects((page - 1) * recordsPerPage,
-					 recordsPerPage, Integer.parseInt(branchId), classsec);
-				int noOfRecords = diarysDao.getNoOfRecords(Integer.parseInt(branchId));
+				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
+						recordsPerPage, Integer.parseInt(branchId), classsec);
+
+				List<Diary> diaryDetails = new ArrayList<Diary>();
+				for (Object[] diaryObject : list) {
+					Diary diary = new Diary();
+
+					diary.setId((Integer) diaryObject[0]);
+					diary.setClasssec((String) diaryObject[1]);
+					diary.setAcademicyear((String) diaryObject[2]);
+					diary.setBranchid((String) diaryObject[3]);
+					diary.setSubject((String) diaryObject[4]);
+					diary.setMessage((String) diaryObject[5]);
+					diary.setStartdate((Date) diaryObject[6]);
+					diary.setEnddate((Date) diaryObject[7]);
+					diary.setCreateddate((Date) diaryObject[8]);
+					diaryDetails.add(diary);
+				}
+
+
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiaryparents(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
@@ -118,24 +163,28 @@ public class DiaryService {
 	}
 
 	public void deleteRecord(DairyIdsDto dairyIdsDto) {
+		// TODO Auto-generated method stub
 		String[] idDiary = dairyIdsDto.getIdDiary();
 		if (idDiary != null) {
-			List<Integer> ids = new ArrayList<>();
+			List<Integer> ids = new ArrayList();
 			for (String id : idDiary) {
 				System.out.println("id" + id);
 				ids.add(Integer.valueOf(id));
 			}
-			diarysDao.deleteRecord(ids);
+			new diaryDAO().deleteRecord(ids);
 		}
 	}
 	
 	public DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
 		DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new DiaryDetailsMessageResponseDto();
-		long id = Long.parseLong(studentIdDto.getDiaryId());
-		Diary diary = diarysDao.getMessage(id);
+		boolean result = false;
+		long id = Long.parseLong(studentIdDto.getStudentId());
+		Diary diary = new diaryDAO().getMessage(id);
 		viewDetailsOfDiaryMessageResponseDto.setDiary(diary);
 		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
 
 		return viewDetailsOfDiaryMessageResponseDto;
 	  }
-}
+	}
+
+

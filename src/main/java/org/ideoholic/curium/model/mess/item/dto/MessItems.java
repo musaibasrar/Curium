@@ -1,16 +1,12 @@
 package org.ideoholic.curium.model.mess.item.dto;
 
-import java.util.List;
+import static javax.persistence.GenerationType.AUTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,10 +21,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_items")
 public class MessItems implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
@@ -41,18 +36,16 @@ public class MessItems implements java.io.Serializable {
 	@Column(name = "unitofmeasure")
 	private String unitofmeasure;
 
+	@Column(name = "branchid")
+	private Integer branchid;
+
 	@Column(name = "linkedledgerid")
 	private Integer linkedledgerid;
 
 	@Column(name = "linkedledgeridexpense")
 	private Integer linkedledgeridexpense;
 
-	@Column(name = "branchid")
-	private Integer branchid;
-
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
-	@OneToMany(mappedBy = "messitems")
-	private List<MessStockAvailability> messStockavailableList;
 }

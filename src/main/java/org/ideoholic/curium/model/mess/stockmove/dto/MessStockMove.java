@@ -1,15 +1,14 @@
 package org.ideoholic.curium.model.mess.stockmove.dto;
 
+import static javax.persistence.GenerationType.AUTO;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,27 +23,28 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_stockmoves")
 public class MessStockMove implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "externalid", nullable = false, length = 200)
+	@Column(name = "externalid")
 	private String externalid;
 
-	@Column(name = "quantity", precision = 12)
+	@Column(name = "quantity")
 	private Float quantity;
 
-	@Column(name = "purpose", length = 20)
+	@Column(name = "purpose")
 	private String purpose;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "transactiondate")
 	private Date transactiondate;
 
-	@Column(name = "issuedto", length = 300)
+	@Column(name = "branchid")
+	private Integer branchid;
+
+	@Column(name = "issuedto")
 	private String issuedto;
 
 	@Column(name = "itemid")
@@ -53,13 +53,10 @@ public class MessStockMove implements java.io.Serializable {
 	@Column(name = "stockentryid")
 	private Integer stockentryid;
 
-	@Column(name = "status", length = 100)
+	@Column(name = "status")
 	private String status;
 
-	@Column(name = "branchid")
-	private Integer branchid;
-
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

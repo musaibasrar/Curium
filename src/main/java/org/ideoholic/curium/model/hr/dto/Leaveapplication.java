@@ -1,11 +1,15 @@
 package org.ideoholic.curium.model.hr.dto;
 
+// default package
+// Generated 26 Apr, 2018 8:10:08 PM by Hibernate Tools 4.0.0
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -29,12 +33,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hr_leaveapplication")
 public class Leaveapplication implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idleaveapplication", unique = true, nullable = false)
 	private Integer idleaveapplication;
+
+	@Column(name = "idteacher")
+	private Integer idteacher;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fromdate", length = 10)
@@ -59,22 +65,20 @@ public class Leaveapplication implements java.io.Serializable {
 	@Column(name = "totalleaves")
 	private Integer totalleaves;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "dateofapply")
 	private Date dateofapply;
 
-	@Temporal(TemporalType.DATE)
 	@Column(name = "dateofapproval")
 	private Date dateofapproval;
 
 	@ManyToOne
-	@JoinColumn(name = "idteacher", referencedColumnName = "tid")
+	@JoinColumn(name = "idteacher")
 	private Teacher teacher;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

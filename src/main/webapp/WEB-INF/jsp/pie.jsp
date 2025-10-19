@@ -5,6 +5,9 @@ Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,20 +16,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/school/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-         <link rel="stylesheet" href="/school/css/scss.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <script language="JavaScript" src="${jsPath}/motionpack.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+         <link rel="stylesheet" href="${cssPath}/scss.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/school/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/school/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="${cssPath}/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="${jsPath}/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
         var donut = document.getElementById('donut');
@@ -335,7 +338,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

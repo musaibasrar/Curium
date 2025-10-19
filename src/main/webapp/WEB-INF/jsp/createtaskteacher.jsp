@@ -6,6 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -26,15 +29,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
         <style type="text/css" >
             <!--
             .header {
@@ -160,7 +163,7 @@
         <script type="text/javascript">
             function deleteRecords(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/StudentProcess/archiveMultiple";
+                form1.action="${ctx}/StudentProcess/archiveMultiple";
                form1.submit();
            }
             function filter2 (phrase, _id)
@@ -252,7 +255,7 @@
             
             function saveTask(){
                 var form1=document.getElementById("form1");
-               form1.action="/school/JobProcess/addTask";
+               form1.action="${ctx}/JobProcess/addTask";
                form1.submit();
             }
             
@@ -445,7 +448,7 @@
 						var appointmentDate = appointmentdate.value;
 						var appointmentTime = appointmenttime.value;
 		            	var form1 = document.getElementById("form1");
-		        		form1.action = "/school/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
+		        		form1.action = "${ctx}/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
 		        		form1.method = "POST";
 		        		form1.submit();
 		            }
@@ -455,7 +458,7 @@
 					var assignto = assignto.value;					
 					var form1 = document.getElementById("form1");
 					
-		    		form1.action = "/school/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
+		    		form1.action = "${ctx}/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
 		    		form1.method = "POST";
 		    		form1.submit();
 		        }
@@ -518,7 +521,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

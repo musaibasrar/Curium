@@ -7,9 +7,15 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -21,20 +27,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Employee</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/school/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/school/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -239,9 +245,9 @@
 </style>
 
 
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
-<script src="/school/JavaScript/actb.js"></script>
-<script src="/school/JavaScript/common.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
+<script src="${ctx}/JavaScript/actb.js"></script>
+<script src="${ctx}/JavaScript/common.js"></script>
 
 <script>
 	$(function() {
@@ -533,7 +539,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -578,7 +584,61 @@ for(Cookie cookie : cookies){
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
 							</label></td>
+							
+							
+							<td class="alignRight">Father's Name &nbsp;</td>
+							<td ><label> <input
+									name="fathername" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="fathername" size="36" onblur="validateName();">
+									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
 
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRight">Mother's Name &nbsp;</td>
+							<td><label> <input name="mothername"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="mothername" size="36"
+									>
+							</label></td>
+							
+							<td class="alignRight">Spouse's Name &nbsp;</td>
+							<td><label> <input
+									name="remarks" type="text" class="myclass" id="remarks"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							
+								<td class="alignRight">Date Of Birth &nbsp;</td>
+							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="" pattern="dd-MM-YYYY"/>"
+										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="datepicker" size="36"
+									data-validate="validate(required)">
+							</label></td>
+							
+							
+							
 							<td class="alignRight">Gender &nbsp;</td>
 							<td class="alignLeft">&nbsp;Male<input
 								type="checkbox" value="male" name="gender" id="yes:male"
@@ -596,13 +656,34 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-						<tr>
-
-							<td class="alignRight">Address &nbsp;</td>
-							<td><label> <input name="address"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="myclass" id="address" size="36">
+							<td class="alignRight">Blood Group &nbsp;</td>
+							<td ><label> <input
+									name="bloodgroup" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="bloodgroup" size="36" onblur="validateName();">
+									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
+
+
+							<td class="alignRight">Aadhaar No. &nbsp;</td>
+							<td><label> <input name="aadhaarno"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="aadhaarno" size="36"
+									>
+							</label></td>
+
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 
 							<td class="alignRight">Contact Number &nbsp;</td>
 							<td><label> <input
@@ -610,28 +691,36 @@ for(Cookie cookie : cookies){
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									id="contactnumber" size="36" maxlength="10" minlength="10"/>
 							</label></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
-
+							
+							
 							<td class="alignRight">email &nbsp;</td>
 							<td><label> <input name="email"
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="email" class="myclass" id="email" size="36">
 							</label></td>
-
-							<td class="alignRight">Date Of Birth &nbsp;</td>
-							<td><label> <input name="dateofjoining" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-YYYY"/>"
-										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="myclass" id="datepicker" size="36"
-									data-validate="validate(required)">
+							
+							
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+						
+							<td class="alignRight">Address &nbsp;</td>
+							<td><label> <input name="address"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="address" size="36">
+							</label></td>
+							
+							<td class="alignRight">Marital Status &nbsp;</td>
+							<td><label> <input name="maritalstatus"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="maritalstatus" size="36"
+									>
 							</label></td>
 						</tr>
 
@@ -641,21 +730,23 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
+						
 						<tr>
-							<td class="alignRight">Total Experience &nbsp;</td>
+						
+							<td class="alignRight">Emergency Contact Person &nbsp;</td>
 							<td ><label> <input
-									name="totalexperience" type="text" class="myclass"
+									name="emergencyname" type="text" class="myclass"
 									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									id="totalexperience" size="36" onblur="validateName();">
+									id="emergencyname" size="36" onblur="validateName();">
 									<!-- onkeyup="check(this.value);"  -->
 							</label></td>
 
 
-							<td class="alignRight">Qualification &nbsp;</td>
-							<td><label> <input name="qualification"
+							<td class="alignRight">Emergency Contact No &nbsp;</td>
+							<td><label> <input name="emergencycontact"
 							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="myclass" id="qualification" size="36"
+									type="text" class="myclass" id="emergencycontact" size="36"
 									>
 							</label></td>
 
@@ -715,17 +806,36 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-
-						<td class="alignRight">Father / Guardian Name &nbsp;</td>
-							<td><label> <input
-									name="remarks" type="text" class="myclass" id="remarks"
-									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									size="36" onblur="validateName();"> <!-- onkeyup="check(this.value);"  -->
+							<td class="alignRight">Qualification &nbsp;</td>
+							<td><label> <input name="qualification"
+							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									type="text" class="myclass" id="qualification" size="36"
+									>
 							</label></td>
-							
+						
+						
+							<td class="alignRight">Total Experience &nbsp;</td>
+							<td ><label> <input
+									name="totalexperience" type="text" class="myclass"
+									style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
+									id="totalexperience" size="36" onblur="validateName();">
+									<!-- onkeyup="check(this.value);"  -->
+							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
 
 							<td class="alignRight">Date Of Joining &nbsp;</td>
-							<td><label> <input name="joiningdate" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/YYYY"/>"
+							<td><label> <input name="joiningdate" value="<fmt:formatDate type="date" value="" pattern="dd/MM/YYYY"/>"
 										style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
 									type="text" class="myclass" id="datepickerCD" size="36"
 									data-validate="validate(required)">
@@ -770,6 +880,9 @@ for(Cookie cookie : cookies){
 							
 							
 
+						</tr>
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -1162,13 +1275,13 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addEmployee() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/school/EmployeeProcess/addEmployee";
+								form1.action = "${ctx}/EmployeeProcess/addEmployee";
 								form1.submit();
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/school/EmployeeProcess/viewAllEmployee";
+								form1.action = "${ctx}/EmployeeProcess/viewAllEmployee";
 								form1.submit();
 							}
 

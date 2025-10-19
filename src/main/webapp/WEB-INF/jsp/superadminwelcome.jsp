@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,11 +16,11 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <script src="/school/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/school/css/bootstrap.min.css">
-        <script src="/school/js/jquery.min.js"></script>
-        <script src="/school/js/bootstrap.min.js"></script>
-        <script src="/school/js/popper.min.js"></script>
+        <script src="${jsPath}/Chart.min.js"></script>
+         <link rel="stylesheet" href="${cssPath}/bootstrap.min.css">
+        <script src="${jsPath}/jquery.min.js"></script>
+        <script src="${jsPath}/bootstrap.min.js"></script>
+        <script src="${jsPath}/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
@@ -66,7 +69,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -101,8 +104,8 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Nursing </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=2"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=2"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -128,8 +131,8 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Pharmacy </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=3"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=3"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -157,8 +160,8 @@ for(Cookie cookie : cookies){
         					<td align="center">
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sunrise College of Physiotherapy </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=4"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=4"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -193,8 +196,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of </label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Paramedical Sciences </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=5"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=5"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -222,8 +225,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (B.Sc. Nursing) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=6"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=6"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -253,8 +256,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=7"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=7"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -289,8 +292,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> of Nursing</label>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=8"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=8"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -317,8 +320,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Sri Sai School of Nursing </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=9"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=9"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>
@@ -345,8 +348,8 @@ for(Cookie cookie : cookies){
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Kshatriya School of Nursing </label><br>
         						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> (GNM) </label><br>
         						<a onclick="window.open(this.href,'_blank'); return false;"
-        						 href="/school/UserProcess/authenticateSuperUser?branchid=10"> <img
-									src="/school/images/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
+        						 href="${ctx}/UserProcess/authenticateSuperUser?branchid=10"> <img
+									src="${imagesPath}/login.svg" width="25" height="25" alt="Login" style="vertical-align: bottom;" />Login
 							</a>
         					</td>
         					<td></td>

@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 <head>
@@ -299,7 +304,7 @@
                 displayEventTime: false,
                 editable: false,
                 selectable: false,
-                events: '/school/EventProcess/getEvents',
+                events: '${ctx}/EventProcess/getEvents',
                 
                 // This function transforms each event object before it is rendered
                 eventDataTransform: function(eventData) {

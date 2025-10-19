@@ -5,6 +5,9 @@ Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -13,19 +16,19 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/school/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <script language="JavaScript" src="${jsPath}/motionpack.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/school/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/school/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+        <script src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="${cssPath}/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="${jsPath}/notification/jquery.jnotify.js" type="text/javascript"></script>
 
         <script type="text/javascript">
             var get;
@@ -431,7 +434,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,61 +457,61 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 100%" >
             <h5 style="font-size: 12px"><a href="#">Students</a></h5>
             <div>
-                <a target="mainFrame" href="/school/StudentProcess/viewAll" >View All</a><br/>
-                <a target="mainFrame" href="/school/feesstructure" >Fees Structure</a><br/>
+                <a target="mainFrame" href="${ctx}/StudentProcess/viewAll" >View All</a><br/>
+                <a target="mainFrame" href="${ctx}/feesstructure" >Fees Structure</a><br/>
                 
 
             </div>
             <!-- <h5 style="font-size: 12px"><a href="#">Human Resource</a></h5>
             <div>
-                <a target="mainFrame" href="/school/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
-                <a target="mainFrame" href="/school/EmployeeProcess/addEmployeePage" >Add Employee</a>
-                <a target="mainFrame" href="/school/DepartmentProcess/departmentView" >Add Department</a>
-                <a target="mainFrame" href="/school/PositionProcess/positionView" >Add Position</a>
+                <a target="mainFrame" href="${ctx}/EmployeeProcess/viewAllEmployee" >View Employee List</a><br/>
+                <a target="mainFrame" href="${ctx}/EmployeeProcess/addEmployeePage" >Add Employee</a>
+                <a target="mainFrame" href="${ctx}/DepartmentProcess/departmentView" >Add Department</a>
+                <a target="mainFrame" href="${ctx}/PositionProcess/positionView" >Add Position</a>
 
             </div> -->
 
             <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
             
             <div>
-            	<a target="mainFrame" href="/school/FeesProcess/feesView" >Fees Category</a>
-                <a target="mainFrame" href="/school/FeesProcess/feesCollect" >Fees Collect</a><br/>
+            	<a target="mainFrame" href="${ctx}/FeesProcess/feesView" >Fees Category</a>
+                <a target="mainFrame" href="${ctx}/FeesProcess/feesCollect" >Fees Collect</a><br/>
                 
 
             </div> 
             
             <!-- <h5 style="font-size: 12px"><a href="#" >Administration</a></h5>
             <div>
-                <a target="mainFrame" href="/school/AdminProcess/viewAllExpenses" >Expenses</a><br/>
+                <a target="mainFrame" href="${ctx}/AdminProcess/viewAllExpenses" >Expenses</a><br/>
 
 
             </div> -->
             
             <h5 style="font-size: 12px"><a href="#" >Advance Search</a></h5>
             <div>
-                <a target="mainFrame" href="/school/AdvanceSearch" >Search</a><br/>
+                <a target="mainFrame" href="${ctx}/AdvanceSearch" >Search</a><br/>
 
 
             </div>
 			<!--
             <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
-                <a target="mainFrame" href="/school/Promotion" >Promotions</a><br/>
+                <a target="mainFrame" href="${ctx}/Promotion" >Promotions</a><br/>
 
 
             </div> -->
 
             <!-- <h5 style="font-size: 12px"><a href="#" >Archive</a></h5>
             <div>
-                <a target="mainFrame" href="/school/StudentProcess/archiveViewAll" >Archive Students</a><br/>
+                <a target="mainFrame" href="${ctx}/StudentProcess/archiveViewAll" >Archive Students</a><br/>
 
 
             </div> -->
 
             <!--  <h5 style="font-size: 12px"><a href="#" >Configurations</a></h5>
             <div>
-            	<a target="mainFrame" href="/school/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
-                <a target="mainFrame" href="/school/YearProcess/updateYear" >Academic year</a><br/>
+            	<a target="mainFrame" href="${ctx}/StampFeesProcess/showFeesDetails" >Stamp Fee</a><br/>
+                <a target="mainFrame" href="${ctx}/YearProcess/updateYear" >Academic year</a><br/>
                 
 
             </div> -->
@@ -516,15 +519,15 @@ for(Cookie cookie : cookies){
 
             <h5 style="font-size: 12px"><a href="#" >Extras</a></h5>
             <div >
-               <!--  <a target="mainFrame" href="/school/Backup&Restore" >Backup</a><br/>
-                <a target="mainFrame" href="/school/currentIssue" >Current Issue</a><br/>
-                <a target="mainFrame" href="/school/changePassword" >Change Password</a><br/> -->
-                <a target="mainFrame" href="/school/feesCollectionDetails" >Fees Collection Details</a><br/>
+               <!--  <a target="mainFrame" href="${ctx}/Backup&Restore" >Backup</a><br/>
+                <a target="mainFrame" href="${ctx}/currentIssue" >Current Issue</a><br/>
+                <a target="mainFrame" href="${ctx}/changePassword" >Change Password</a><br/> -->
+                <a target="mainFrame" href="${ctx}/feesCollectionDetails" >Fees Collection Details</a><br/>
             </div>
             
            <!--  <h5 style="font-size: 12px"><a href="#" >Reports</a></h5>
             <div >
-                <a target="mainFrame" href="/school/studentsdetailsreports" >Student Details</a><br/>
+                <a target="mainFrame" href="${ctx}/studentsdetailsreports" >Student Details</a><br/>
                 
             </div>  -->
             

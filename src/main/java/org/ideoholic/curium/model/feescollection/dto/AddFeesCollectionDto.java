@@ -21,12 +21,4 @@ public class AddFeesCollectionDto {
     private String dateOfFeesDetails;
     private String classAndSecDetails;
     private String narrationReceipt;
-    private String[] feesIDS;
-    private String[] feesMonths;
-    private String[] feesAmounts;
-    private String[] feesCat;
-    
-    private String sid;
-    private String id;
-    private String idFees;
 }

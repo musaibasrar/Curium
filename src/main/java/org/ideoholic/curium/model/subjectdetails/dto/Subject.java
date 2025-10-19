@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.subjectdetails.dto;
 
-import java.util.List;
+import static javax.persistence.GenerationType.IDENTITY;
 
 // default package
 // Generated 15 Aug, 2016 12:22:36 AM by Hibernate Tools 4.0.0
@@ -8,12 +8,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.ideoholic.curium.model.marksdetails.dto.Marks;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +25,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "subject")
 public class Subject implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "subid", unique = true, nullable = false)
 	private Integer subid;
 
@@ -42,24 +37,22 @@ public class Subject implements java.io.Serializable {
 	@Column(name = "subjectid")
 	private Integer subjectid;
 
-	@Column(name = "minmarks", precision = 12)
-	private Float minmarks;
+	@Column(name = "minmarks")
+	private float minmarks;
 
-	@Column(name = "maxmarks", precision = 12)
-	private Float maxmarks;
+	@Column(name = "maxmarks")
+	private float maxmarks;
+
+	@Column(name = "branchid")
+	private int branchid;
 
 	@Column(name = "examname", length = 150)
 	private String examname;
 
-	@Column(name = "examclass", length = 50)
+	@Column(name = "examclass", length = 150)
 	private String examclass;
 
-	@OneToMany(mappedBy = "subject")
-	private List<Marks> marksList;
-
-	@Column(name = "branchid")
-	private Integer branchid;
-
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
+
 }

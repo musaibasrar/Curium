@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.hr.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 30 Apr, 2018 6:08:18 PM by Hibernate Tools 4.0.0
 
@@ -8,7 +10,6 @@ import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -28,12 +29,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hr_processsalarydetailsheads")
 public class Processsalarydetailsheads implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idprocesssalarydetailsheads", unique = true, nullable = false)
 	private Integer idprocesssalarydetailsheads;
+
+	@Column(name = "idprocesssalary")
+	private Integer idprocesssalary;
 
 	@Column(name = "payheadname", length = 45)
 	private String payheadname;
@@ -45,13 +48,13 @@ public class Processsalarydetailsheads implements java.io.Serializable {
 	private BigDecimal amount;
 
 	@ManyToOne
-	@JoinColumn(name = "idprocesssalary", referencedColumnName = "idprocesssalarydetails")
+	@JoinColumn(name = "idprocesssalary")
 	private Processsalarydetails processsalarydetails;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

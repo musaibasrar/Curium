@@ -1,59 +1,71 @@
 package org.ideoholic.curium.model.academicyear.dao;
 
-import java.util.List;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import javax.transaction.Transactional;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
-import org.ideoholic.curium.repositories.YearRepository;
-import org.ideoholic.curium.util.QueryUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
+import org.ideoholic.curium.util.HibernateUtil;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
 public class YearDAO {
+	Session session = null;
+	/**
+	 * * Hibernate Session Variable
+	 */
+	Transaction transaction = null;
+	/**
+	 * * Hibernate Transaction Variable
+	 */
+	Transaction transaction1;
 	
-	@Autowired
-    private YearRepository yearRepo;
+	private static final Logger logger = LogManager.getLogger(YearDAO.class);
+	
 
-    @Autowired
-    private QueryUtil queryUtil;
+	public YearDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
 
-    @Transactional
+	@SuppressWarnings("finally")
 	public String create(Currentacademicyear currentacademicyear) {
-		String error = null;
+		String error=null;
 		try {
 			// this.session = sessionFactory.openCurrentSession();
-			yearRepo.save(currentacademicyear);
-
-		} catch (Exception hibernateException) {
-             log.error(hibernateException.getMessage(), hibernateException);
-	            hibernateException.printStackTrace();
-	            throw hibernateException;
-		} 
-		
-		return error;
+			transaction = session.beginTransaction();
+			session.save(currentacademicyear);
+			transaction.commit();
+			
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			error=hibernateException.getMessage();
+		} finally {
+					HibernateUtil.closeSession();
+			return error;
+		}
 	}
 
-    @Transactional
-    public Currentacademicyear showYear() {
+	
+
+	public Currentacademicyear showYear() {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ");
+			currentacademicyear = (Currentacademicyear) query.setCacheable(true).setCacheRegion("commonregion").uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
-			List<Currentacademicyear> ca = queryUtil.runGivenQuery("select ca from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ", Currentacademicyear.class);
-			if(!CollectionUtils.isEmpty(ca)) {
-				currentacademicyear = ca.get(0);
-			}
-		} catch (Exception hibernateException) { 
-			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
-		} 
+		} finally {
+			HibernateUtil.closeSession();
+		}
 		return currentacademicyear;
 	}
+
+	
+	
 
 }

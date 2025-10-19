@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectDto;
@@ -21,7 +20,6 @@ import org.ideoholic.curium.model.subjectdetails.dto.SubjectIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.util.DataUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -36,7 +34,7 @@ public class SubjectDetailsService {
 
 	    try {
 	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchId));
-	        result.setSubjects(list);
+	        result.setList(list);
 
 			result.setSuccess(true);
 	    } catch (Exception e) {

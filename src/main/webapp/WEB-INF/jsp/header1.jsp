@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -150,7 +153,7 @@
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/UserProcess/logout";
+                form1.action="${ctx}/UserProcess/logout";
                 form1.submit();
             }
 
@@ -163,8 +166,8 @@
                     <td height="10" valign="top" background="/images/headerBook.png">
                         <table width="100%" height="137" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <tr>
-                               <td width="234" rowspan="2"><!--<div align="center"><img src="/school/images/school.png" width="200" height="64" /></div> --></td> 
-                                <!-- <td width="548" rowspan="2"><div align="center"><img src="/school/images/SMS.png" width="391" height="92" /></div></td> -->
+                               <td width="234" rowspan="2"><!--<div align="center"><img src="${logoUrl}" width="200" height="64" /></div> --></td>
+                                <!-- <td width="548" rowspan="2"><div align="center"><img src="${imagesPath}/SMS.png" width="391" height="92" /></div></td> -->
                                 <!-- <td width="210" height="104">&nbsp;</td> -->
                             </tr>
                             <tr>
@@ -172,10 +175,10 @@
                                 <td width="150" height="34" background="/images/tab1.png"><table width="153" border="0" align="center" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td width="20">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp</td>
-                                            <td width="40"><a target="mainFrame" href="/school/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="/school/images/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/school/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
-                                            <td width="40"><a target="mainFrame" href="/school/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="/school/images/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
-                                            <td width="40" ><div align="center" ><a target="_parent" href="/school/UserProcess/logout"><img   src="/school/images/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
+                                            <td width="40"><a target="mainFrame" href="${ctx}/StudentProcess/viewAllStudentsWithParents"><div align="center" align="center"><img  alt="View All Studets" src="${imagesPath}/Users.png" width="40" height="30" /> <div id="n1" class="noti_bubble"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="${ctx}/PersonalProcess/viewAll"><div align="center"  align="center"></div></div></a></td>
+                                            <td width="40"><a target="mainFrame" href="${ctx}/UserProcess/dashBoard"><div align="center" align="center"><img  alt="Dash Board" src="${imagesPath}/dashboard.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div></div></a></td>
+                                            <td width="40" ><div align="center" ><a target="_parent" href="${ctx}/UserProcess/logout"><img   src="${imagesPath}/logout_icon.png" width="24" height="24" alt="Log Out" /></a><div class="noti_bubbleEmpty"></div></div></td>
                                         </tr>
                                     </table></td>
                             </tr>

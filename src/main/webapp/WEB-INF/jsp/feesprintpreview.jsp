@@ -5,8 +5,17 @@
 --%>
 
 <%@page import="org.ideoholic.curium.model.personal.dto.PersonalDetails"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page import="java.lang.String"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,34 +26,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Please wait...</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/school/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="${jsPath}/motionpack.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="${cssPath}/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/school/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/school/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="${jsPath}/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -265,7 +274,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/school/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "${ctx}/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -325,7 +334,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -393,7 +402,7 @@ for(Cookie cookie : cookies){
 
     <body class="bodymargin">
        
-        <form action="/school/" method="post" id="form1" class="bodymargin">
+        <form action="${ctx}/" method="post" id="form1" class="bodymargin">
 
            
             <div>

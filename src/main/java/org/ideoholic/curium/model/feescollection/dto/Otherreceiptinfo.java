@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.feescollection.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,85 +10,197 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.ideoholic.curium.model.student.dto.Student;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "otherfee_receiptinfo")
 public class Otherreceiptinfo implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
+	private Integer receiptnumber;
+	private int sid;
+	private Date date;
+	private Long totalamount;
+	private String academicyear;
+	private int branchid;
+	private int cancelreceipt;
+	private int userid;
+	private String branchreceiptnumber;
+	private String paymenttype;
+	private String classsec;
+	private Integer receiptvoucher;
+	private Integer journalvoucher;
+	private Long fine;
+	private Long misc;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "Receiptinfo")
+	private Set<Otherfeescollection> feesCollectionRecords =
+			new HashSet<Otherfeescollection>(0);
+
+	public Otherreceiptinfo() {
+	}
+
+	public Otherreceiptinfo(int sid) {
+		this.sid = sid;
+	}
+
+	public Otherreceiptinfo(int sid, Date date, Long totalamount, String academicyear, Long fine, Long misc,
+			Set<Otherfeescollection> feesCollecionRecords, int branchid, int cancelreceipt, int userid, String branchreceiptnumber,String paymenttype, String classsec,
+			Integer receiptvoucher, Integer journalvoucher) {
+		this.sid = sid;
+		this.date = date;
+		this.totalamount = totalamount;
+		this.academicyear = academicyear;
+		this.feesCollectionRecords = feesCollecionRecords;
+		this.branchid = branchid;
+		this.cancelreceipt = cancelreceipt;
+		this.userid = userid;
+		this.branchreceiptnumber = branchreceiptnumber;
+		this.paymenttype = paymenttype;
+		this.classsec = classsec;
+		this.receiptvoucher = receiptvoucher;
+		this.journalvoucher = journalvoucher;
+		this.fine = fine;
+		this.misc = misc;
+	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "receiptnumber", unique = true, nullable = false)
-	private Integer receiptnumber;
+	public Integer getReceiptnumber() {
+		return this.receiptnumber;
+	}
 
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "sid", referencedColumnName = "sid", nullable = false)
-	private Student student;
+	public void setReceiptnumber(Integer receiptnumber) {
+		this.receiptnumber = receiptnumber;
+	}
+
+	@Column(name = "sid", nullable = false)
+	public int getSid() {
+		return this.sid;
+	}
+
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date", length = 10)
-	private Date date;
+	public Date getDate() {
+		return this.date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 	@Column(name = "totalamount", precision = 10, scale = 0)
-	private Long totalamount;
+	public Long getTotalamount() {
+		return this.totalamount;
+	}
+
+	public void setTotalamount(Long totalamount) {
+		this.totalamount = totalamount;
+	}
 
 	@Column(name = "academicyear", length = 15)
-	private String academicyear;
+	public String getAcademicyear() {
+		return this.academicyear;
+	}
 
-	@Column(name = "cancelreceipt")
-	private int cancelreceipt;
+	public void setAcademicyear(String academicyear) {
+		this.academicyear = academicyear;
+	}
 
-	@Column(name = "branchreceiptnumber", length = 20)
-	private String branchreceiptnumber;
+	public Set<Otherfeescollection> getFeesCollectionRecords() {
+		return feesCollectionRecords;
+	}
 
-	@Column(name = "paymenttype", length = 100)
-	private String paymenttype;
-
-	@Column(name = "classsec", length = 20)
-	private String classsec;
-
-	@Column(name = "receiptvoucher")
-	private Integer receiptvoucher;
-
-	@Column(name = "journalvoucher")
-	private Integer journalvoucher;
-
-	@Column(name = "fine")
-	private Long fine;
-
-	@Column(name = "misc")
-	private Long misc;
-
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "receiptInfo")
-	private Set<Otherfeescollection> feesCollectionRecords = new HashSet<Otherfeescollection>(0);
+	public void setFeesCollectionRecords(Set<Otherfeescollection> feesCollectionRecords) {
+		this.feesCollectionRecords = feesCollectionRecords;
+	}
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	public int getBranchid() {
+	return branchid;
+	}
 
-	@Column(name = "userid")
-	private Integer userid;
+	public void setBranchid(int branchid) {
+	this.branchid = branchid;
+	}
+
+	@Column(name = "cancelreceipt")
+	public int getCancelreceipt() {
+		return cancelreceipt;
+	}
+
+	public void setCancelreceipt(int cancelreceipt) {
+		this.cancelreceipt = cancelreceipt;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getBranchreceiptnumber() {
+		return branchreceiptnumber;
+	}
+
+	public void setBranchreceiptnumber(String branchreceiptnumber) {
+		this.branchreceiptnumber = branchreceiptnumber;
+	}
+
+	public String getPaymenttype() {
+		return paymenttype;
+	}
+
+	public void setPaymenttype(String paymenttype) {
+		this.paymenttype = paymenttype;
+	}
+
+	public String getClasssec() {
+		return classsec;
+	}
+
+	public void setClasssec(String classsec) {
+		this.classsec = classsec;
+	}
+
+	public Integer getReceiptvoucher() {
+		return receiptvoucher;
+	}
+
+	public void setReceiptvoucher(Integer receiptvoucher) {
+		this.receiptvoucher = receiptvoucher;
+	}
+
+	public Integer getJournalvoucher() {
+		return journalvoucher;
+	}
+
+	public void setJournalvoucher(Integer journalvoucher) {
+		this.journalvoucher = journalvoucher;
+	}
 	
-	public int fetchSid() {
-		if (student != null) {
-			return student.getSid();
-		}
-		return 0;
+	public Long getFine() {
+		return fine;
+	}
+
+	public void setFine(Long fine) {
+		this.fine = fine;
+	}
+
+	public Long getMisc() {
+		return misc;
+	}
+
+	public void setMisc(Long misc) {
+		this.misc = misc;
 	}
 }

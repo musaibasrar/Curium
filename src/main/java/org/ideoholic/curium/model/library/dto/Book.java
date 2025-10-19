@@ -1,72 +1,142 @@
 package org.ideoholic.curium.model.library.dto;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "book")
-public class Book implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sid", unique = true, nullable = false)
+public class Book implements java.io.Serializable{
+  
 	private int bid;
-
-	@Column(name = "bookname", length = 200)
 	private String bookname;
+	private String subject;
+	private String author;
+	private String publisher;
+	private String isbn;
+	private int availableQty;
+	private int issuedQty;
+	private String shelf;
+	private int branchid;
+	
+	public Book() {
+	}
+
+	
+
+	public Book(int bid, String bookname, String subject, String author, String publisher, String isbn,
+			int availableQty, int issuedQty, String shelf, int branchid) {
+		super();
+		this.bid = bid;
+		this.bookname = bookname;
+		this.subject = subject;
+		this.author = author;
+		this.publisher = publisher;
+		this.isbn = isbn;
+		this.availableQty = availableQty;
+		this.issuedQty = issuedQty;
+		this.shelf = shelf;
+		this.branchid = branchid;
+	}
+
+
+
+	@Column(name = "bid")
+	public int getBid() {
+		return bid;
+	}
+
+	public void setBid(int bid) {
+		this.bid = bid;
+	}
+
+	
+	@Column(name = "bookname", length = 200)
+	public String getBookname() {
+		return bookname;
+	}
+
+	public void setBookname(String bookname) {
+		this.bookname = bookname;
+	}
 
 	@Column(name = "subject", length = 200)
-	private String subject;
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
 	@Column(name = "author", length = 200)
-	private String author;
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
 	@Column(name = "publisher", length = 200)
-	private String publisher;
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
 
 	@Column(name = "isbn", length = 200)
-	private String isbn;
+	public String getIsbn() {
+		return isbn;
+	}
 
-	@Column(name = "availableqty")
-	private int availableQty;
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
-	@Column(name = "issuedqty")
-	private int issuedQty;
+	
+	 @Column(name = "availableqty")
+	public int getAvailableQty() {
+		return availableQty;
+	}
 
-	@Column(name = "shelf", length = 100)
-	private String shelf;
+	public void setAvailableQty(int availableQty) {
+		this.availableQty = availableQty;
+	}
 
-	@Column(name = "status", length = 50)
-	private String status;
 
-	@Column(name = "bookHolder", length = 200)
-	private String bookHolder;
+	 @Column(name = "issuedqty")
+	public int getIssuedQty() {
+		return issuedQty;
+	}
 
-	@Column(name = "startdate")
-	private Date startdate;
+	public void setIssuedQty(int issuedQty) {
+		this.issuedQty = issuedQty;
+	}
 
-	@Column(name = "enddate")
-	private Date enddate;
+	@Column(name = "shelf",length = 100)
+	public String getShelf() {
+		return shelf;
+	}
 
-	@Column(name = "noofdays", length = 50)
-	private String noofdays;
+	public void setShelf(String shelf) {
+		this.shelf = shelf;
+	}
 
-	@Column(name = "branchid")
-	private Integer branchid;
+
+
+	public int getBranchid() {
+		return branchid;
+	}
+
+
+
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
+	}
+
+	
+
 }

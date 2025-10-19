@@ -1,4 +1,7 @@
 <%@page import="de.tudresden.st.cbse.calendar.appointment.Appointment"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -8,10 +11,10 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/school/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="${cssPath}/screen.css" />
 
 
-<link rel='stylesheet' type='text/css' href='/css/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='${cssPath}/fullcalendar.css' />
 <script type='text/javascript' src='resources/jquery/jquery-1.7.1.min.js'></script>
 <script type='text/javascript' src='resources/jquery/jquery-ui-1.8.17.custom.min.js'></script>
 <script type='text/javascript' src='resources/fullcalendar/fullcalendar.js'></script>
@@ -76,7 +79,7 @@ return value;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -117,7 +120,7 @@ Appointments for
 
 
 <div id="addAppointment">
-<form id="appointment" action="/school/appointment" method="POST">
+<form id="appointment" action="${ctx}/appointment" method="POST">
 <h2>new Appointment</h2>
 
 <font color="red">
@@ -166,11 +169,14 @@ ${errorMessage}
 </div>
 
 </div>
-<footer> TU Dresden, CBSE, SS2012, Christopher Bellmann und Stanley Förster</footer>
+<footer> TU Dresden, CBSE, SS2012, Christopher Bellmann und Stanley Fï¿½rster</footer>
 
 </div>
 </body>
 </html><%@page import="de.tudresden.st.cbse.calendar.appointment.Appointment"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -180,10 +186,10 @@ pageEncoding="ISO-8859-1"%>
 <head>
 <title>CBSE Calendar</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link rel="stylesheet" type="text/css" href="/school/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="${cssPath}/screen.css" />
 
 
-<link rel='stylesheet' type='text/css' href='resources/fullcalendar/fullcalendar.css' />
+<link rel='stylesheet' type='text/css' href='${cssPath}/fullcalendar/fullcalendar.css' />
 <script type='text/javascript' src='resources/jquery/jquery-1.7.1.min.js'></script>
 <script type='text/javascript' src='resources/jquery/jquery-ui-1.8.17.custom.min.js'></script>
 <script type='text/javascript' src='resources/fullcalendar/fullcalendar.js'></script>
@@ -273,7 +279,7 @@ Appointments for
 
 
 <div id="addAppointment">
-<form id="appointment" action="/school/appointment" method="POST">
+<form id="appointment" action="${ctx}/appointment" method="POST">
 <h2>new Appointment</h2>
 
 <font color="red">
@@ -322,7 +328,7 @@ ${errorMessage}
 </div>
 
 </div>
-<footer> TU Dresden, CBSE, SS2012, Christopher Bellmann und Stanley Förster</footer>
+<footer> TU Dresden, CBSE, SS2012, Christopher Bellmann und Stanley Fï¿½rster</footer>
 
 </div>
 </body>

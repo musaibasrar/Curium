@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.account.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 18 Feb, 2018 10:47:48 PM by Hibernate Tools 4.0.0
 
@@ -9,14 +11,11 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,16 +27,17 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountdetailsbalanceid")
 @Entity
 @Table(name = "acc_accountdetailsbalance")
 public class Accountdetailsbalance implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "accountdetailsbalanceid", unique = true, nullable = false)
 	private Integer accountdetailsbalanceid;
+
+	@Column(name = "accountdetailsid")
+	private Integer accountdetailsid;
 
 	@Column(name = "openingbalance", precision = 20, scale = 4)
 	private BigDecimal openingbalance;
@@ -45,9 +45,8 @@ public class Accountdetailsbalance implements java.io.Serializable {
 	@Column(name = "currentbalance", precision = 20, scale = 4)
 	private BigDecimal currentbalance;
 
-	@ManyToOne
-	@JoinColumn(name = "financialid", referencedColumnName = "financialid")
-	private Financialaccountingyear financialAccountingYear;
+	@Column(name = "financialid")
+	private Integer financialid;
 
 	@Column(name = "crdr", length = 40)
 	private String crdr;
@@ -60,9 +59,9 @@ public class Accountdetailsbalance implements java.io.Serializable {
 	private Accountdetails accountDetails;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

@@ -13,44 +13,26 @@ import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.studentdiary.dto.TeacherDetailResponseDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
-import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.teachersperformance.dto.TeacherDetailsDto;
 import org.ideoholic.curium.util.SubjectAverage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class TeacherPerformanceService {
 	 private HttpServletRequest request;
      private HttpServletResponse response;
      private HttpSession httpSession;
      private String BRANCHID = "branchid";
      private String academicyear = "academicyear";
-
-	@Autowired
-	private ExamDetailsDAO examDetailsDao;
-
-	@Autowired
-	private MarksDetailsDAO marksDetaildDao;
-	
-	public SubjectsResponseDto readListOfSubjects(String branchid) {
-		SubjectsResponseDto subjectsResponseDto = new SubjectsResponseDto();
-	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchid));
-	    	subjectsResponseDto.setSubjects(list);
-	    	subjectsResponseDto.setSuccess(true);
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        subjectsResponseDto.setSuccess(false);
-	    }
-		return subjectsResponseDto;
+     
+	public TeacherPerformanceService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+	       this.response = response;
+	       this.httpSession = request.getSession();
 	}
 
-	
 	public TeacherDetailResponseDto getDetailofteacher(TeacherDetailsDto teacherDetailsDto,String branchId) {
 		
 		TeacherDetailResponseDto teacherDetailResponseDto = new TeacherDetailResponseDto();
@@ -59,7 +41,7 @@ public class TeacherPerformanceService {
 		String[] subject = subjectDetails.split("--");
 		String AcademicYear = teacherDetailsDto.getAcademicYear();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
-		List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
+		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 		List<SubjectAverage> subjectaverageList = new ArrayList<SubjectAverage>();
 		
 		
@@ -74,12 +56,12 @@ public class TeacherPerformanceService {
 				String queryMain = "From Parents as parents where";
 				String querySub = "";
 
-					querySub = querySub + " parents.student.classstudying = '"
-							+ classOne + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
+					querySub = querySub + " parents.Student.classstudying = '"
+							+ classOne + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())+" order by parents.Student.admissionnumber ASC";
 
 				if(!"".equalsIgnoreCase(querySub)) {
 					queryMain = queryMain + querySub;
-					searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+					searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 				}
 				
 				//get Student Marks of classone
@@ -87,7 +69,7 @@ public class TeacherPerformanceService {
 				for (Parents student : searchStudentList) {
 					studentIds.add(student.getStudent().getSid());
 				}
-				List<Marks> marksList = marksDetaildDao.readListOfMarksPerSubject(studentIds,Integer.parseInt(subject[0]),exams.getExid());
+				List<Marks> marksList = new  MarksDetailsDAO().readListOfMarksPerSubject(studentIds,Integer.parseInt(subject[0]),exams.getExid());
 				int averageMarks = 0;
 				float sum = 0;
 				int i = marksList.size();

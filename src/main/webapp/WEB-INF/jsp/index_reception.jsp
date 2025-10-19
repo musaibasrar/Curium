@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -60,7 +63,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -74,11 +77,11 @@ for(Cookie cookie : cookies){
 %>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/school/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="${ctx}/header"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/school/left_reception" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/school/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="${ctx}/left_reception" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="${ctx}/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    

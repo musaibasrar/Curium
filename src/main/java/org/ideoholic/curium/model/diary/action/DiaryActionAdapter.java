@@ -1,27 +1,28 @@
 package org.ideoholic.curium.model.diary.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
-import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
-import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
+import org.ideoholic.curium.dto.RequestPageDto;
+import org.ideoholic.curium.model.diary.dto.*;
 import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
-import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 @Service
 public class DiaryActionAdapter {
     @Autowired
     private HttpServletRequest request;
     @Autowired
+    private HttpServletResponse response;
+    @Autowired
     private HttpSession httpSession;
     @Autowired
     private DiaryService diaryService;
+
+    private String BRANCHID = "branchid";
 
     public void addDiary() {
         AddDiaryDto addDiaryDto = new AddDiaryDto();
@@ -34,9 +35,9 @@ public class DiaryActionAdapter {
         addDiaryDto.setStartDate(request.getParameter("startdate"));
 
 
-        diaryService.addDiary(addDiaryDto, httpSession.getAttribute(Constants.BRANCHID).toString(),
-                httpSession.getAttribute(Constants.USERID).toString(),
-                httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        diaryService.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString(),
+                httpSession.getAttribute("userloginid").toString(),
+                httpSession.getAttribute("currentAcademicYear").toString());
 
     }
 
@@ -44,7 +45,7 @@ public class DiaryActionAdapter {
 
         String page = request.getParameter("page");
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(page, httpSession.getAttribute(Constants.BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(page, httpSession.getAttribute(BRANCHID).toString());
 
         request.setAttribute("diary", diaryResponseDto.getDiary());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
@@ -64,7 +65,7 @@ public class DiaryActionAdapter {
         studentIdPageDto.setStudentId(request.getParameter("id"));
         studentIdPageDto.setPage(request.getParameter("page"));
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
@@ -72,7 +73,7 @@ public class DiaryActionAdapter {
     }
     public boolean viewDetailsOfDiaryMessage() {
         StudentIdDto studentIdDto =new StudentIdDto();
-        studentIdDto.setDiaryId(request.getParameter("id").toString());
+        studentIdDto.setStudentId(request.getParameter("id").toString());
         DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = diaryService.viewDetailsOfDiaryMessage(studentIdDto);
         httpSession.setAttribute("diary", viewDetailsOfDiaryMessageResponseDto.getDiary());
         return viewDetailsOfDiaryMessageResponseDto.isSuccess();

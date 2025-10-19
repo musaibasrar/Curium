@@ -25,15 +25,12 @@ public class StudentDiaryActionAdapter {
 
 	    @Autowired
 	    private HttpSession httpSession;
-	    
-	    @Autowired
-	    private StudentDiaryservice studentDiaryservice;
-	    
 	    private String BRANCHID = "branchid";
 	    private String USERLOGINID = "userloginid";
 	    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
 		public void addDiary() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
 			AddStudentDiaryDto addStudentDiaryDto = new AddStudentDiaryDto();
 			addStudentDiaryDto.setStudentId(request.getParameter("studentId"));
 			addStudentDiaryDto.setClassAndSec(request.getParameter("classandsec"));
@@ -44,6 +41,7 @@ public class StudentDiaryActionAdapter {
 		}
 
 		public void viewDiary() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
 			String page = request.getParameter("page");
 			DiaryResponseDto diaryResponseDto = studentDiaryservice.viewDiary(page, httpSession.getAttribute(BRANCHID).toString());
 			request.setAttribute("diary", diaryResponseDto.getDiaryDetails());
@@ -52,6 +50,7 @@ public class StudentDiaryActionAdapter {
 		}
 
 		public void viewDiaryParent() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
 			StudentIdPageDto studentIdPageDto = new StudentIdPageDto();
 	        studentIdPageDto.setStudentId(request.getParameter("id"));
 	        studentIdPageDto.setPage(request.getParameter("page"));
@@ -63,6 +62,7 @@ public class StudentDiaryActionAdapter {
 		}
 
 		public void deleteRecord() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
 			DairyIdsDto dairyIdsDto = new DairyIdsDto();
 	        dairyIdsDto.setIdDiary(request.getParameterValues("id"));
 			studentDiaryservice.deleteRecord(dairyIdsDto);
@@ -70,6 +70,7 @@ public class StudentDiaryActionAdapter {
 		}
 
 		public boolean viewDetailsOfDiaryMessage() {
+			StudentDiaryservice studentDiaryservice = new StudentDiaryservice(request, response);
 			StudentIdDto studentIdDto =new StudentIdDto();
 	        studentIdDto.setStudentId(request.getParameter("id").toString());
 	        DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = studentDiaryservice.viewDetailsOfDiaryMessage(studentIdDto);

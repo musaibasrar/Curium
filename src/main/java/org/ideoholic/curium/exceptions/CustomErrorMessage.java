@@ -17,12 +17,7 @@ public enum CustomErrorMessage {
 	EMPLOYEENOTSAVED(109, "EmployeenotSaved"),
 	BONAFIDEFAILURE(110,"bonafidefailure"),
     FAILUREPROMOTE(111, "promotefailure"),
-    FEEDBACKTHANKYOUFAIL(112,"feedbackthankyoufail"),
-	SENDSMSMERROR(113,"unable to send sms"),
-	ERRORSMS(114, "errorsms"),
-	INVALID_CREDENTIALS(115,"usernameOrPasswordFail"),
-	BACKUPFAILED(116,"BackupFailed"),
-    IMPORTFAILURE(117,"importFailure");
+    FEEDBACKTHANKYOUFAIL(112,"feedbackthankyoufail");
 
 	private final int code;
 	private final String message;

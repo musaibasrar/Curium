@@ -1,30 +1,6 @@
 package org.ideoholic.curium.model.user.service;
 
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -38,83 +14,75 @@ import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.AdvanceSearchDto;
-import org.ideoholic.curium.model.user.dto.DashBoardResponseDto;
-import org.ideoholic.curium.model.user.dto.Login;
-import org.ideoholic.curium.model.user.dto.SearchByDateDto;
-import org.ideoholic.curium.model.user.dto.SearchByDateResponseDto;
-import org.ideoholic.curium.model.user.dto.SearchByParentDto;
-import org.ideoholic.curium.model.user.dto.UserAuthenticationDto;
-import org.ideoholic.curium.model.user.dto.UserAuthenticationResponseDto;
+import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.HibernateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.InputStream;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
+import java.util.Map.Entry;
 
 @Slf4j
-@Service
 public class UserService {
 
-	@Autowired
-    private AdminService adminService;
+	private StandardActionAdapter standardActionAdapter;
+	private AdminService adminService;
+	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
-    @Autowired
-    private FeesCollectionService feesCollectionService;
+	 HttpServletRequest request;
+	    HttpServletResponse response;
+	    HttpSession httpSession;
+	    private Login login;
+	    private String BRANCHID = "branchid";
 
-    @Autowired
-    private UserDAO userDAO;
-    
-    @Autowired
-    private YearDAO yearDao;
+	public UserService(HttpServletRequest request, HttpServletResponse response, StandardActionAdapter standardActionAdapter, AdminService adminService, FeesCollectionActionAdapter feesCollectionActionAdapter) {
+		this.request = request;
+        this.response = response;
+        this.httpSession = request.getSession();
+		this.standardActionAdapter = standardActionAdapter;
+		this.adminService = adminService;
+		this.feesCollectionActionAdapter = feesCollectionActionAdapter;
+	}
 
-	@Autowired
-	private AttendanceDAO attendanceDao;
-	
-	@Autowired
-	private EmployeeDAO employeeDao;
-	
-    @Autowired
-    private HttpServletRequest request;
+	public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
+		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
 
-    @Autowired
-    private HttpServletResponse response;
-    
-    @Autowired
-    private HttpSession httpSession;
+       String userName = dto.getUserName();
+       String password = dto.getPassword();
 
-    public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
-        UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
+       login = new UserDAO().readUniqueObject(userName, password);
 
-        String userName = dto.getUserName();
-        String password = dto.getPassword();
-
-        Login login = userDAO.readUniqueObject(userName, password);
-
-        if (login != null) {
-            Currentacademicyear currentAcademicYear = yearDao.showYear();
+       if (login != null) {
+            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
             String academicyear = "";
-            if (currentAcademicYear != null) {
-                academicyear = currentAcademicYear.getCurrentacademicyear();
+            if(currentAcademicYear!=null){
+            academicyear = currentAcademicYear.getCurrentacademicyear();
             }
-            result.setAcademicYear(academicyear);
-            result.setUserName(login.getUsername());
+			result.setAcademicYear(academicyear);
+			result.setUserName(login.getUsername());
 
-            result.setBranchId(login.getBranch().getIdbranch());
-            result.setBranchName(login.getBranch().getBranchname());
-            result.setBranchCode(login.getBranch().getBranchcode());
-            result.setBranchAddress(login.getBranch().getAddress());
-            result.setBranchContact(login.getBranch().getContact());
+			result.setBranchId(login.getBranch().getIdbranch());
+			result.setBranchName(login.getBranch().getBranchname());
+			result.setBranchCode(login.getBranch().getBranchcode());
+			result.setBranchAddress(login.getBranch().getAddress());
+			result.setBranchContact(login.getBranch().getContact());
 
             String[] userType = login.getUsertype().split("-");
 			result.setUserType(userType[0]);
@@ -155,14 +123,11 @@ public class UserService {
        return result;
    }
 
-    public void logOutUser() {
-        httpSession.invalidate();
-        try {
-            HibernateUtil.closeSession();
-        }catch(Exception ex){
-            log.error(ex.getMessage(), ex);
-        }
-    }
+	public void logOutUser() {
+		httpSession.invalidate();
+        new UserDAO().sessionClose();
+		
+	}
 
 	public DashBoardResponseDto dashBoard(SearchByDateDto dto, String branchId, String currentAcademicYear) {
 		DashBoardResponseDto result = DashBoardResponseDto.builder().build();
@@ -185,8 +150,8 @@ public class UserService {
 
 						classStudying = classStudying + "--" + "%";
 
-						List<Parents> student = new StudentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') AND parents.student.classstudying like '" + classStudying + "'"
-								+ " AND parents.student.archive=0 AND parents.student.passedout=0 AND parents.student.droppedout=0 AND parents.student.leftout=0 AND parents.student.branchid='" + Integer.parseInt(branchId) + "' ");
+						List<Parents> student = new studentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') AND parents.Student.classstudying like '" + classStudying + "'"
+								+ " AND parents.Student.archive=0 AND parents.Student.passedout=0 AND parents.Student.droppedout=0 AND parents.Student.leftout=0 AND parents.Student.branchid='" + Integer.parseInt(branchId) + "' ");
 						totalStudents += student.size();
 						xaxisList.add("\"" + classstudying.getClassdetails() + "\"");
 						if (student.size() > 0) {
@@ -204,11 +169,7 @@ public class UserService {
 				// End Total Teachers
 
 				//Fees Details
-		        ClassesHierarchyDto chDto = ClassesHierarchyDto.builder()
-		                .selectedBranchId(branchId)
-		                .classsecList(Collections.emptyList())
-		                .build();
-				feesCollectionService.getFeesDetailsDashBoard(chDto, branchId, currentAcademicYear); //TODO: After FessCollection becomes @Service, use feesCollectionService.getFeesDetailsDashBoard() instead.
+				feesCollectionActionAdapter.getFeesDetailsDashBoard(); //TODO: After FessCollection becomes @Service, use feesCollectionService.getFeesDetailsDashBoard() instead.
 				//End Fees Details
 
 				//Daily Expenses
@@ -410,99 +371,99 @@ public class UserService {
 				String querySub = "";
 
 				if (!studentname.equalsIgnoreCase("")) {
-					querySub = " AND parents.student.name like '%" + studentname + "%'";
+					querySub = " AND parents.Student.name like '%" + studentname + "%'";
 				}
 
 				if (!classStudying.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.student.classstudying like '" + classStudying + "'";
+					querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
 				}
 
 				if (!gender.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.gender like '" + gender + "%'";
+					querySub = querySub + " AND  parents.Student.gender like '" + gender + "%'";
 				}
 
 				/*
 				 * if(!lastClass.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
-				 * querySub = querySub + " parents.student.stdlaststudied = '"+lastClass+"'";
+				 * querySub = querySub + " parents.Student.stdlaststudied = '"+lastClass+"'";
 				 * }else if(!lastClass.equalsIgnoreCase("")){ querySub = querySub +
-				 * " parents.student.stdlaststudied = '"+lastClass+"'"; }
+				 * " parents.Student.stdlaststudied = '"+lastClass+"'"; }
 				 */
 
 				if (!dateOfBirth.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.student.dateofbirth = '" + dateOfBirth + "'";
+					querySub = querySub + " AND parents.Student.dateofbirth = '" + dateOfBirth + "'";
 				}
 
 
 				if (age != 0) {
-					querySub = querySub + " AND parents.student.age = '" + age + "'";
+					querySub = querySub + " AND parents.Student.age = '" + age + "'";
 				}
 
 				if (!classAdmitted.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.student.classadmittedin like '" + classAdmitted + "'";
+					querySub = querySub + " AND parents.Student.classadmittedin like '" + classAdmitted + "'";
 				}
 				/*
 				 * if(!lastSchool.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){
 				 * querySub = querySub +
-				 * " parents.student.schoollastattended like '%"+lastSchool+"%'"; }else
+				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }else
 				 * if(!lastSchool.equalsIgnoreCase("")){ querySub = querySub +
-				 * " parents.student.schoollastattended like '%"+lastSchool+"%'"; }
+				 * " parents.Student.schoollastattended like '%"+lastSchool+"%'"; }
 				 */
 
 
 				if (!admissionNo.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.student.admissionnumber like '%" + admissionNo + "%'";
+					querySub = querySub + " AND parents.Student.admissionnumber like '%" + admissionNo + "%'";
 				}
 
 				if (!dateOfAdmission.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.student.admissiondate = '" + dateOfAdmission + "'";
+					querySub = querySub + " AND parents.Student.admissiondate = '" + dateOfAdmission + "'";
 				}
 
 				if (!bloodGroup.equalsIgnoreCase("")) {
-					querySub = querySub + " AND parents.student.bloodgroup like '%" + bloodGroup + "%'";
+					querySub = querySub + " AND parents.Student.bloodgroup like '%" + bloodGroup + "%'";
 				}
 
 				if (!nationality.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.nationality like '%" + nationality + "%'";
+					querySub = querySub + " AND  parents.Student.nationality like '%" + nationality + "%'";
 				}
 
 				if (!religion.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.religion like '%" + religion + "%'";
+					querySub = querySub + " AND  parents.Student.religion like '%" + religion + "%'";
 				}
 
 				if (!caste.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.caste like '%" + caste + "%'";
+					querySub = querySub + " AND  parents.Student.caste like '%" + caste + "%'";
 				}
 
 				if (!motherT.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.mothertongue like '%" + motherT + "%'";
+					querySub = querySub + " AND  parents.Student.mothertongue like '%" + motherT + "%'";
 				}
 
 				if (!createdDate.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.createddate = '" + createdDate + "'";
+					querySub = querySub + " AND  parents.Student.createddate = '" + createdDate + "'";
 				}
 
 				if (!remarks.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.remarks like '%" + remarks + "%'";
+					querySub = querySub + " AND  parents.Student.remarks like '%" + remarks + "%'";
 				}
 
 
 				if (!stsNumber.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.sts = '" + stsNumber + "'";
+					querySub = querySub + " AND  parents.Student.sts = '" + stsNumber + "'";
 				}
 
 
 				if (!studentExternalId.equalsIgnoreCase("")) {
-					querySub = querySub + " AND  parents.student.studentexternalid = '" + studentExternalId + "'";
+					querySub = querySub + " AND  parents.Student.studentexternalid = '" + studentExternalId + "'";
 				}
 				/* *
 				 * if(!rte.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("") ){ querySub =
-				 * querySub + " parents.student.rte = '"+rte+"'"; }else
+				 * querySub + " parents.Student.rte = '"+rte+"'"; }else
 				 * if(!rte.equalsIgnoreCase("")){ querySub = querySub +
-				 * " parents.student.rte = '"+rte+"'"; }
+				 * " parents.Student.rte = '"+rte+"'"; }
 				 */
 
-				queryMain = queryMain + querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+				queryMain = queryMain + querySub + " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			}
 
 			result.setResultList(searchStudentList);
@@ -605,9 +566,9 @@ public class UserService {
 
 
 	 			queryMain = queryMain + querySub;
-				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 				log.error("SEARCH QUERY ***** " + queryMain);
-				searchParentsList = new StudentDetailsDAO().getStudentsList(queryMain);
+				searchParentsList = new studentDetailsDAO().getStudentsList(queryMain);
 
 			}
 			result.setResultList(searchParentsList);
@@ -672,7 +633,7 @@ public class UserService {
 				}
 
 				queryMain = queryMain+querySub;
-				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
+				/*queryMain = "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"; */
 				log.error("SEARCH QUERY ***** "+queryMain);
 				feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
 
@@ -687,7 +648,7 @@ public class UserService {
 				fine = fine + receiptinfo.getFine();
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
-				student = new StudentDetailsDAO().readUniqueObjectParents(receiptinfo.fetchSid());
+				student = new studentDetailsDAO().readUniqueObjectParents(receiptinfo.getSid());
 				VoucherEntrytransactions voucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
 				String[] narrationDetails = voucherEntryTransactions.getNarration().split(":");
 				Student ss = student.getStudent();
@@ -737,7 +698,7 @@ public class UserService {
 	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
 		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
 
-		Login login;
+        
         String userName =null;
         String superUserAuth = null;
 

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -249,7 +253,7 @@
                 dayMaxEvents: true,
                 selectLongPressDelay: 100,
                 displayEventTime: false,
-                events: '/school/EventProcess/getEvents',
+                events: '${ctx}/EventProcess/getEvents',
                 eventClassNames: 'custom-event-width',
                 select: function(arg) {
                     openModal(null, arg);
@@ -416,10 +420,10 @@
                 };
 
                 var eventId = document.getElementById('eventId').value;
-                var url = '/school/EventProcess/createEvent';
+                var url = '${ctx}/EventProcess/createEvent';
                 var method = 'POST';
                 if (eventId) {
-                    url = '/school/EventProcess/updateEvent?id=' + eventId;
+                    url = '${ctx}/EventProcess/updateEvent?id=' + eventId;
                 }
 
                 // Convert the data to URL-encoded form data
@@ -461,7 +465,7 @@
             deleteButton.onclick = function() {
                 var eventId = document.getElementById('eventId').value;
                 if (eventId && confirm('Are you sure you want to delete this event?')) {
-                    fetch('/school/EventProcess/deleteEvent?id=' + eventId, {
+                    fetch('${ctx}/EventProcess/deleteEvent?id=' + eventId, {
                         method: 'POST'
                     })
                     .then(response => {

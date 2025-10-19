@@ -1,7 +1,9 @@
 package org.ideoholic.curium.model.feesdetails.service;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -12,6 +14,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -24,34 +32,49 @@ import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class FeesDetailsService {
 	
-	@Autowired
-	private feesDetailsDAO feesDetailsDao;
+	 	private HttpServletRequest request;
+	    private HttpServletResponse response;
+	    private HttpSession httpSession;
+	    private String BRANCHID = "branchid";
+	    private String USERID = "userid";
+	
+	public FeesDetailsService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+       this.response = response;
+       this.httpSession = request.getSession();
+	}
 
-	public Feesdetails addFeesDetails(FeesIdDetailsDto feesIdDetailsDto,String branchid,String userId, String currentyear) {
+
+
+	public Feesdetails addFeesDetails() {
 		
 		Feesdetails feesdetails = new Feesdetails();
-		if(branchid!=null){
+		if(httpSession.getAttribute(BRANCHID)!=null){
 			// Setting the fees details
-			String sid = feesIdDetailsDto.getStudentId();
-			feesdetails.setStudent(new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid)));
-			feesdetails.setDateoffees(DataUtil.emptyString(feesIdDetailsDto.getDateoffees()));
-			feesdetails.setAmountpercat(DataUtil.emptyString(feesIdDetailsDto.getFeesTotalAmount()));
-			feesdetails.setGrandtotal(DataUtil.emptyString(feesIdDetailsDto.getGrandTotalAmount()));
-			feesdetails.setMiscamount(DataUtil.emptyString(feesIdDetailsDto.getMiscellanousamount()));
-			feesdetails.setBalamount(DataUtil.emptyString(feesIdDetailsDto.getBalanceamount()));
-			String currentYear = (String) currentyear;
+			String sid = request.getParameter("studentId");
+			feesdetails.setSid(DataUtil.parseInt(sid));
+			feesdetails.setDateoffees(DataUtil.emptyString(request
+					.getParameter("dateoffees")));
+			feesdetails.setAmountpercat(DataUtil.emptyString(request
+					.getParameter("feesTotalAmount")));
+			feesdetails.setGrandtotal(DataUtil.emptyString(request
+					.getParameter("grandTotalAmount")));
+			feesdetails.setMiscamount(DataUtil.emptyString(request
+					.getParameter("miscellanousamount")));
+			feesdetails.setBalamount(DataUtil.emptyString(request
+					.getParameter("balanceamount")));
+			String currentYear = (String) httpSession.getAttribute("currentYear");
 			feesdetails.setAcademicyear(DataUtil.emptyString(currentYear));
-			feesdetails.setBranchid(Integer.parseInt(branchid));
-			feesdetails.setUserid(Integer.parseInt(userId));
-			feesdetails = feesDetailsDao.create(feesdetails);
+			feesdetails.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			feesdetails.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			feesdetails = new feesDetailsDAO().create(feesdetails);
 		}
 		
 		 return feesdetails;
@@ -71,11 +94,9 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
-					if (receiptInfo != null) {
-						student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
-						feesMap.put(student, receiptInfo);
-					}
+					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
+					feesMap.put(student, receiptInfo);
 				}
 
 			}
@@ -183,8 +204,8 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = feesDetailsDao.readOtherFeesDetails(Integer.parseInt(id));
-					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+					receiptInfo = new feesDetailsDAO().readOtherFeesDetails(Long.parseLong(id));
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
 					feesMap.put(student, receiptInfo);
 				}
 
@@ -223,12 +244,12 @@ public class FeesDetailsService {
 			for (Entry<Parents, Otherreceiptinfo> entry : feeMap.entrySet()) {
 	            
 				data.put(Integer.toString(i),new Object[] { 
-						entry.getKey().fetchStudent().getAdmissionnumber(), 
-						entry.getKey().fetchStudent().getStudentexternalid(), 
-						entry.getKey().fetchStudent().getSts(), 
+						entry.getKey().getStudent().getAdmissionnumber(), 
+						entry.getKey().getStudent().getStudentexternalid(), 
+						entry.getKey().getStudent().getSts(), 
 						entry.getValue().getBranchreceiptnumber(),
-						entry.getKey().fetchStudent().getName(),
-						entry.getKey().fetchStudent().getClassstudying(),
+						entry.getKey().getStudent().getName(),
+						entry.getKey().getStudent().getClassstudying(),
 						entry.getKey().getFathersname(), 
 						entry.getKey().getContactnumber(), 
 						entry.getValue().getDate().toString(),
@@ -300,8 +321,8 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
-					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
+					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
 					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();

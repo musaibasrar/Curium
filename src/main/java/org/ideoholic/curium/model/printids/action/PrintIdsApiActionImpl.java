@@ -81,7 +81,7 @@ public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 	
 	@GetMapping("/generateIdsEmployees")
 	public ResponseEntity<EmployeesWithSalaryResponseDto> generateIdsEmployees(@RequestHeader(value = "branchid") String branchId) {
-		EmployeesWithSalaryResponseDto result = employeeService.viewAllEmployee(branchId);
+		EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
 		return ResponseEntity.ok(result);
 	}
 	

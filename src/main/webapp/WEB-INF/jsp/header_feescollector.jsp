@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -14,10 +17,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/school/css/bootstrap.min.css">
-        <script src="/school/js/jquery.min.js"></script>
-        <script src="/school/js/bootstrap.min.js"></script>
-        <script src="/school/js/popper.min.js"></script>
+        <link rel="stylesheet" href="${cssPath}/bootstrap.min.css">
+        <script src="${jsPath}/jquery.min.js"></script>
+        <script src="${jsPath}/bootstrap.min.js"></script>
+        <script src="${jsPath}/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +95,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/UserProcess/logout";
+                form1.action="${ctx}/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +105,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,39 +128,39 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/school/welcome" >
-								<img src="/school/images/curiumheader.png" width="112" height="41"/>
+								<a target="mainFrame" href="${ctx}/welcome" >
+								<img src="${imagesPath}/curiumheader.png" width="112" height="41"/>
 								</a>
 								</td>
 								
-							<!-- <td align="left"><img src="/school/images/schoolheader.png"
+							<!-- <td align="left"><img src="${imagesPath}/schoolheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/school/left_feescollector"> <img
-									src="/school/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="${ctx}/left_feescollector"> <img
+									src="${imagesPath}/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/school/FeesProcess/feesCollect"> <img
-									src="/school/images/feescollect.svg" width="18" height="18"
+								href="${ctx}/FeesProcess/feesCollect"> <img
+									src="${imagesPath}/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/school/FeesProcess/otherfeesCollect"><img
-									alt="Bus Fee" src="/school/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="${ctx}/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="${imagesPath}/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Bus Fee Collection
 							</a></td>
 
 							<td >
-								<a target="leftFrame" href="/school/reports_feescollector"><img
-									src="/school/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="${ctx}/reports_feescollector"><img
+									src="${imagesPath}/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 								
 							<td ><a target="_parent"
-								href="/school/UserProcess/logout"><img
-									src="/school/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="${ctx}/UserProcess/logout"><img
+									src="${imagesPath}/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

@@ -40,14 +40,8 @@ public class MessStockMoveService {
 	@Autowired
 	private MessItemsService messItemsService;
 
-	@Autowired
-    private AccountDAO accountDao;
 	
-	@Autowired
-	private MessItemsDAO messItemsDao;
 	
-	@Autowired
-	private MessStockEntryDAO messStockEntryDao;
 	
 	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName, String currentAcademicYear,String branchCode) {
 
@@ -216,7 +210,7 @@ public class MessStockMoveService {
 					transactions.setEntrydate(DateUtil.todaysDate());
 					transactions.setNarration("Towards Stock Issue");
 					transactions.setCancelvoucher("no");
-					transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+					transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 					transactions.setBranchid(Integer.parseInt(branchId));
 					transactions.setUserid(Integer.parseInt(userId));
 					
@@ -252,7 +246,7 @@ public class MessStockMoveService {
 						transactionsIncomeCash.setEntrydate(DateUtil.todaysDate());
 						transactionsIncomeCash.setNarration("Towards Sales of Stock");
 						transactionsIncomeCash.setCancelvoucher("no");
-						transactionsIncomeCash.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactionsIncomeCash.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactionsIncomeCash.setBranchid(Integer.parseInt(branchId));
 						transactionsIncomeCash.setUserid(Integer.parseInt(userId));
 						
@@ -279,7 +273,7 @@ public class MessStockMoveService {
 						transactionsIncomeBankTransfer.setEntrydate(DateUtil.todaysDate());
 						transactionsIncomeBankTransfer.setNarration("Towards Sales of Stock");
 						transactionsIncomeBankTransfer.setCancelvoucher("no");
-						transactionsIncomeBankTransfer.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactionsIncomeBankTransfer.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactionsIncomeBankTransfer.setBranchid(Integer.parseInt(branchId));
 						transactionsIncomeBankTransfer.setUserid(Integer.parseInt(userId));
 						
@@ -305,7 +299,7 @@ public class MessStockMoveService {
 						transactionsIncomeCheque.setEntrydate(DateUtil.todaysDate());
 						transactionsIncomeCheque.setNarration("Towards Sales of Stock");
 						transactionsIncomeCheque.setCancelvoucher("no");
-						transactionsIncomeCheque.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactionsIncomeCheque.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactionsIncomeCheque.setBranchid(Integer.parseInt(branchId));
 						transactionsIncomeCheque.setUserid(Integer.parseInt(userId));
 						
@@ -398,7 +392,7 @@ public class MessStockMoveService {
 						float reqQty = Float.parseFloat(issueQuantity);
 						//Query stock entry
 						
-							List<MessStockEntry> messStockEntryList = messStockEntryDao.getItemsStockEntry(Integer.parseInt(StockEntryIds[i])); 
+							List<MessStockEntry> messStockEntryList = new MessStockEntryDAO().getItemsStockEntry(Integer.parseInt(StockEntryIds[i])); 
 								
 								for (MessStockEntry messStockEntry : messStockEntryList) {
 
@@ -461,7 +455,7 @@ public class MessStockMoveService {
 						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards Stock Issue");
 						transactions.setCancelvoucher("no");
-						transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactions.setBranchid(Integer.parseInt(branchId));
 						transactions.setUserid(Integer.parseInt(userId));
 						
@@ -490,7 +484,7 @@ public class MessStockMoveService {
 		
 		 if(branchId!=null){
 			 
-			 messStockEntryList = messItemsDao.getItemsStockEntry();
+			 messStockEntryList = new MessItemsDAO().getItemsStockEntry();
 			 
 			 for (MessStockEntry messStockEntry : messStockEntryList) {
 				 itemIds.add(messStockEntry.getItemid());
@@ -500,7 +494,7 @@ public class MessStockMoveService {
 			 if(!itemIds.isEmpty()) {
 				 
 			 List<MessItems> messItem = new ArrayList<MessItems>();
-			 messItem = messItemsDao.getItemDetailByID(itemIds);
+			 messItem = new MessItemsDAO().getItemDetailByID(itemIds);
 			 
 			 for (MessStockEntry messStockEntry : messStockEntryList) {
 				 	int stockid = messStockEntry.getItemid();
@@ -603,7 +597,7 @@ public class MessStockMoveService {
 
 
 			MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
-			MessStockEntry messStockEntry = messItemsDao.getMessStockEntryByID(messStockMove.getStockentryid());
+			MessStockEntry messStockEntry = new MessItemsDAO().getMessStockEntryByID(messStockMove.getStockentryid());
 			float totalValue = messStockMove.getQuantity() * messStockEntry.getItemunitprice();
 
 			//Pass J.V. : Debit the assets & credit the Expenses
@@ -622,7 +616,7 @@ public class MessStockMoveService {
 			transactions.setEntrydate(DateUtil.todaysDate());
 			transactions.setNarration("Towards Revarsal of Stock Issue");
 			transactions.setCancelvoucher("no");
-			transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(branchId));
 			transactions.setUserid(Integer.parseInt(userId));
 

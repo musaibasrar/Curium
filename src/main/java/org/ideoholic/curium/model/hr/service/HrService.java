@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.hr.service;
 
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -13,8 +14,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
@@ -22,65 +26,34 @@ import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
 import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
 import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.hr.dao.HrDAO;
-import org.ideoholic.curium.model.hr.dto.AdvanceSalaryApprovalDto;
-import org.ideoholic.curium.model.hr.dto.ApplyLeaveDto;
-import org.ideoholic.curium.model.hr.dto.BasicPayDto;
-import org.ideoholic.curium.model.hr.dto.DeleteAdvaceSalaryApprovalDto;
-import org.ideoholic.curium.model.hr.dto.LeaveApprovalsResponseDto;
-import org.ideoholic.curium.model.hr.dto.LeaveDetailsDto;
-import org.ideoholic.curium.model.hr.dto.LeaveIdsDto;
-import org.ideoholic.curium.model.hr.dto.LeaveTypeDto;
-import org.ideoholic.curium.model.hr.dto.LeaveTypeResponseDto;
-import org.ideoholic.curium.model.hr.dto.Leaveapplication;
-import org.ideoholic.curium.model.hr.dto.Leavedetails;
-import org.ideoholic.curium.model.hr.dto.LeavesDetailsResponseDto;
-import org.ideoholic.curium.model.hr.dto.Leavetypemaster;
-import org.ideoholic.curium.model.hr.dto.PayHeadDto;
-import org.ideoholic.curium.model.hr.dto.PayHeadResponseDto;
-import org.ideoholic.curium.model.hr.dto.PayHeadStaffDetailsDto;
-import org.ideoholic.curium.model.hr.dto.Payadvancesalary;
-import org.ideoholic.curium.model.hr.dto.Paybasic;
-import org.ideoholic.curium.model.hr.dto.Payhead;
-import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
-import org.ideoholic.curium.model.hr.dto.Pf;
-import org.ideoholic.curium.model.hr.dto.PfDto;
-import org.ideoholic.curium.model.hr.dto.PfSettingsResponseDto;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
-import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
-import org.ideoholic.curium.model.hr.dto.SalaryDto;
-import org.ideoholic.curium.model.hr.dto.SalaryResponseDto;
-import org.ideoholic.curium.model.hr.dto.SalarySlipResponseDto;
-import org.ideoholic.curium.model.hr.dto.SaveAdvanceSalaryDto;
-import org.ideoholic.curium.model.hr.dto.StaffDetailsDto;
-import org.ideoholic.curium.model.hr.dto.StaffDetailsResponseDto;
+import org.ideoholic.curium.model.hr.dto.*;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+
+
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class HrService {
-	private final HttpServletResponse response;
-	private final EmployeeService employeeService;
-	private final YearDAO yearDao;
-	private final AttendanceDAO attendanceDao;
-	private final HrDAO hrDao;
-	
+	@Autowired
+	private HttpServletResponse response;
+	@Autowired
+	private EmployeeService employeeService;
 	public LeaveTypeResponseDto leaveType(String branchId) {
         LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
 
 		List<Leavetypemaster> list = new ArrayList<>();
 		
 		if(branchId!=null){
-			list = hrDao.readListOfLeaveTypes(Integer.parseInt(branchId));
+			list = new HrDAO().readListOfLeaveTypes(Integer.parseInt(branchId));
 		}
         leaveTypeResponseDto.setLeavetypemaster(list);
 		leaveTypeResponseDto.setSuccess(true);
@@ -95,7 +68,7 @@ public class HrService {
 		leaveMaster.setBranchid(Integer.parseInt(branchId));
 		leaveMaster.setUserid(Integer.parseInt(userId));
 
-		return ResultResponse.builder().success(hrDao.saveLeaveType(leaveMaster)).build();
+		return ResultResponse.builder().success(new HrDAO().saveLeaveType(leaveMaster)).build();
 
 	}
 
@@ -103,7 +76,7 @@ public class HrService {
 		Leavetypemaster leaveType = new Leavetypemaster();
 		leaveType.setIdleavetypemaster(Integer.parseInt(DataUtil.emptyString(dto.getIdLeave())));
 
-		return ResultResponse.builder().success(hrDao.deleteLeaveType(leaveType)).build();
+		return ResultResponse.builder().success(new HrDAO().deleteLeaveType(leaveType)).build();
 
 	}
 
@@ -132,7 +105,7 @@ public class HrService {
 			}
 			
 		}
-		return ResultResponse.builder().success(hrDao.addLeaves(leaveDetailsList)).build();
+		return ResultResponse.builder().success(new HrDAO().addLeaves(leaveDetailsList)).build();
 
 	}
 		return ResultResponse.builder().build();
@@ -141,11 +114,11 @@ public class HrService {
 	public LeavesDetailsResponseDto viewLeavesDetails(String id) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 		try {
-			Currentacademicyear currentYear = yearDao.showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear();
 
 			result.setCurrentAcademicYear(currentYear);
 
-			List<Leavedetails> leaveDetailsList = hrDao.getLeaveDetails(DataUtil.emptyString(id), currentYear.getCurrentacademicyear());
+			List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(id), currentYear.getCurrentacademicyear());
 			result.setLeaveDetailsList(leaveDetailsList);
 
 			if (!leaveDetailsList.isEmpty()) {
@@ -164,7 +137,7 @@ public class HrService {
 	public LeavesDetailsResponseDto leaveDetailsPerYear(LeaveDetailsDto dto) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 
-		List<Leavedetails> leaveDetailsList = hrDao.getLeaveDetails(DataUtil.emptyString(dto.getLeaveDetailsTeachersId()),DataUtil.emptyString(dto.getAcademicYear()));
+		List<Leavedetails> leaveDetailsList = new HrDAO().getLeaveDetails(DataUtil.emptyString(dto.getLeaveDetailsTeachersId()),DataUtil.emptyString(dto.getAcademicYear()));
 		result.setLeaveDetailsList(leaveDetailsList);
 
 		
@@ -178,7 +151,7 @@ public class HrService {
         PayHeadResponseDto result = new PayHeadResponseDto();
 
 		if(currentAcademicYear!=null){
-		List<Payhead> payHeadList = hrDao.getPayHeadList(currentAcademicYear, Integer.parseInt(branchId));
+		List<Payhead> payHeadList = new HrDAO().getPayHeadList(currentAcademicYear, Integer.parseInt(branchId));
 		result.setPayHeadList(payHeadList);
 		result.setSuccess(true);
 		}
@@ -197,7 +170,7 @@ public class HrService {
 		payHead.setBranchid(Integer.parseInt(branchId));
 		payHead.setUserid(Integer.parseInt(userId));
 
-		return ResultResponse.builder().success(hrDao.savePayHead(payHead)).build();
+		return ResultResponse.builder().success(new HrDAO().savePayHead(payHead)).build();
 		}
 		return ResultResponse.builder().build();
 	}
@@ -229,7 +202,7 @@ public class HrService {
 			}
 			
 			
-			return ResultResponse.builder().success(hrDao.addPayHeadStaffDetails(payHeadStaffDetailsList)).build();
+			return ResultResponse.builder().success(new HrDAO().addPayHeadStaffDetails(payHeadStaffDetailsList)).build();
 		}
 		return ResultResponse.builder().build();
 	}
@@ -271,7 +244,7 @@ public class HrService {
 			payBasic.setUserid(Integer.parseInt(userId));
 			payBasicList.add(payBasic);
 		}
-		return ResultResponse.builder().success(hrDao.savePayBasic(payBasicList)).build();
+		return ResultResponse.builder().success(new HrDAO().savePayBasic(payBasicList)).build();
 		
 		}
 		return ResultResponse.builder().build();
@@ -289,7 +262,7 @@ public class HrService {
 			pf.setPaidbymanagement(Integer.parseInt(paidByManagement));
 			pf.setBranchid(Integer.parseInt(branchId));
 			pf.setUserid(Integer.parseInt(userId));
-			hrDao.addPf(pf);
+			new HrDAO().addPf(pf);
 		} catch (Exception e) {
 			return  ResultResponse.builder().build();
 		}
@@ -302,7 +275,7 @@ public class HrService {
 		List<Pf> pf = new ArrayList<>();
 		
 		if(branchId!=null){
-			pf = hrDao.pfSettings(Integer.parseInt(branchId));
+			pf = new HrDAO().pfSettings(Integer.parseInt(branchId));
 		}
 
 		result.setPf(pf);
@@ -322,7 +295,7 @@ public class HrService {
 				for (String id : pfids) {
 					ids.add(Integer.valueOf(id));
 				}
-				hrDao.deletePf(ids);
+				new HrDAO().deletePf(ids);
 			}
 		} catch (Exception e) {
 			return ResultResponse.builder().build();
@@ -348,7 +321,7 @@ public class HrService {
 			payAdvanceSalary.setDate(DateUtil.dateParserUpdateStd(DataUtil.emptyString(dto.getDateAdvance())));
 			payAdvanceSalary.setBranchid(Integer.parseInt(branchId));
 			payAdvanceSalary.setUserid(Integer.parseInt(userId));
-			return ResultResponse.builder().success( hrDao.saveAdvanceSalary(payAdvanceSalary)).build();
+			return ResultResponse.builder().success( new HrDAO().saveAdvanceSalary(payAdvanceSalary)).build();
 		}
 		return ResultResponse.builder().build();
 	}
@@ -359,7 +332,7 @@ public class HrService {
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
 
 		if (branchId != null) {
-			payAdvanceSalary = hrDao.salaryApprovalDispaly(Integer.parseInt(branchId));
+			payAdvanceSalary = new HrDAO().salaryApprovalDispaly(Integer.parseInt(branchId));
 		}
 
 		result.setPayAdvanceSalary(payAdvanceSalary);
@@ -379,7 +352,7 @@ public class HrService {
 		payAdvance.setStatus(DataUtil.emptyString(status));
 		payAdvance.setBranchid(Integer.parseInt(branchId));
 		
-		return ResultResponse.builder().success(hrDao.saveAdvanceSalaryApproval(payAdvance)).build();
+		return ResultResponse.builder().success(new HrDAO().saveAdvanceSalaryApproval(payAdvance)).build();
 		}
 		return ResultResponse.builder().build();
 	}
@@ -389,7 +362,7 @@ public class HrService {
 		if(!idPayAdvanceSalary.equalsIgnoreCase("")){
 		Payadvancesalary payAdvance = new Payadvancesalary();
 		payAdvance.setIdpayadvancesalary(Integer.parseInt(idPayAdvanceSalary));
-		return ResultResponse.builder().success(hrDao.deleteAdvaceSalaryApproval(payAdvance)).build();
+		return ResultResponse.builder().success(new HrDAO().deleteAdvaceSalaryApproval(payAdvance)).build();
 		}
 		return ResultResponse.builder().success(false).build();
 	}
@@ -400,7 +373,7 @@ public class HrService {
 		List<Payadvancesalary> payAdvanceSalary = new ArrayList<>();
 		
 		if(branchId!=null){
-			payAdvanceSalary = hrDao.salaryIssue(Integer.parseInt(branchId));
+			payAdvanceSalary = new HrDAO().salaryIssue(Integer.parseInt(branchId));
 		}
 		result.setPayAdvanceSalary(payAdvanceSalary);
 		result.setSuccess(true);
@@ -434,7 +407,7 @@ public class HrService {
 				leaveApplication.setBranchid(Integer.parseInt(branchId));
 				leaveApplication.setUserid(Integer.parseInt(userId));
 
-				return ResultResponse.builder().success( hrDao.applyLeave(leaveApplication)).build();
+				return ResultResponse.builder().success( new HrDAO().applyLeave(leaveApplication)).build();
 		}
 		
 		
@@ -459,9 +432,9 @@ public class HrService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Currentacademicyear currentAcademicYear = yearDao.showYear();
+				Currentacademicyear currentAcademicYear = new YearDAO().showYear();
 				
-					List<Attendancemaster> staffAttendanceMaster = attendanceDao.getAttendanceMasterDetails(Integer.toString((teacherid)));
+					List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacherid)));
 					if(staffAttendanceMaster != null && !staffAttendanceMaster.isEmpty() && staffAttendanceMaster.get(0).getWeeklyoff() == null){
 						return 0;
 					}
@@ -472,7 +445,7 @@ public class HrService {
 					for (String weekOffS : weeklyOffString) {
 						staffWeeklyOffList.add(Integer.parseInt(weekOffS));
 					}
-					List<Weeklyoff> staffWeekOff = attendanceDao.readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
+					List<Weeklyoff> staffWeekOff = new AttendanceDAO().readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
 					for (Weeklyoff weeklyoff : staffWeekOff) {
 						if(weeklyoff.getWeeklyoffday().equalsIgnoreCase(new SimpleDateFormat("EEEE").format(date))){
 							staffWeeklyOff = true;
@@ -485,7 +458,7 @@ public class HrService {
 						for (String singleHoliday : holidayString) {
 							staffHolidayList.add(Integer.parseInt(singleHoliday));
 						}
-						List<Holidaysmaster> staffHolidays = attendanceDao.readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
+						List<Holidaysmaster> staffHolidays = new AttendanceDAO().readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
 						for (Holidaysmaster holidaysmaster : staffHolidays) {
 							Date fromDateHm = holidaysmaster.getFromdate();
 							Date toDateHm = holidaysmaster.getTodate();
@@ -505,7 +478,7 @@ public class HrService {
 		LeaveApprovalsResponseDto result = new LeaveApprovalsResponseDto();
 
 		if(currentAcademicYear!=null){
-			List<Leaveapplication> listLeaveApplication = hrDao.leaveApprovals(currentAcademicYear, Integer.parseInt(branchId));
+			List<Leaveapplication> listLeaveApplication = new HrDAO().leaveApprovals(currentAcademicYear, Integer.parseInt(branchId));
 			result.setListLeaveApplication(listLeaveApplication);
 			result.setSuccess(true);
 		}
@@ -521,7 +494,7 @@ public class HrService {
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
-			return ResultResponse.builder().success( hrDao.rejectLeave(ids)).build();
+			return ResultResponse.builder().success( new HrDAO().rejectLeave(ids)).build();
 		}
 		
 		return ResultResponse.builder().build();
@@ -536,7 +509,7 @@ public class HrService {
 			for (String id : idleaveapplication) {
 				ids.add(Integer.valueOf(id));
 			}
-			return  ResultResponse.builder().success(hrDao.approveLeave(ids)).build();
+			return  ResultResponse.builder().success(new HrDAO().approveLeave(ids)).build();
 		}
 		
 		return ResultResponse.builder().build();
@@ -565,7 +538,7 @@ public class HrService {
 				
 				//get the basic pay
 			
-				Paybasic basicPay = hrDao.getBasicPay(Integer.parseInt(staffid),currentAcademicYear);
+				Paybasic basicPay = new HrDAO().getBasicPay(Integer.parseInt(staffid),currentAcademicYear);
 				BigDecimal basicPayStaff = basicPay == null? BigDecimal.ZERO : basicPay.getBasicpay();
 
 				
@@ -577,7 +550,7 @@ public class HrService {
 				processSalarydetailsheadList.add(processHeadsBasic);   
 	               
 				// earning/deduction calculations
-				List<Payheadstaffdetails> payheadstaffdetailsList = hrDao.getPayHeadStaff(Integer.parseInt(staffid),currentAcademicYear);
+				List<Payheadstaffdetails> payheadstaffdetailsList = new HrDAO().getPayHeadStaff(Integer.parseInt(staffid),currentAcademicYear);
 					
 				if(!payheadstaffdetailsList.isEmpty()){
 					for (Payheadstaffdetails payheadstaffdetails : payheadstaffdetailsList) {
@@ -647,7 +620,7 @@ public class HrService {
 		}
 		
 		if(!processsalarydetailsList.isEmpty()){
-            return ResultResponse.builder().success(hrDao.processStaffSalary(processsalarydetailsList,processSalarydetailsheadList)).build();
+            return ResultResponse.builder().success(new HrDAO().processStaffSalary(processsalarydetailsList,processSalarydetailsheadList)).build();
 		}
 		
 		}
@@ -658,7 +631,7 @@ public class HrService {
         PayHeadResponseDto result = new PayHeadResponseDto();
 
 		if(currentAcademicYear!=null){
-		List<Payhead> payHeadList = hrDao.getPayHeadListDynamic(payHeadType,currentAcademicYear, Integer.parseInt(branchId));
+		List<Payhead> payHeadList = new HrDAO().getPayHeadListDynamic(payHeadType,currentAcademicYear, Integer.parseInt(branchId));
 		result.setPayHeadList(payHeadList);
 		result.setSuccess(true);
 
@@ -699,7 +672,7 @@ public class HrService {
 
 		if(currentAcademicYear!=null){
 			
-			List<Processsalarydetails> processSalaryDetailsList = hrDao.issueStaffSalary(currentAcademicYear, Integer.parseInt(branchId));
+			List<Processsalarydetails> processSalaryDetailsList = new HrDAO().issueStaffSalary(currentAcademicYear, Integer.parseInt(branchId));
 			result.setProcessSalaryDetailsList(processSalaryDetailsList);
 			
 			if(processSalaryDetailsList.isEmpty()){
@@ -723,10 +696,10 @@ public class HrService {
 			BigDecimal totalEarnings = BigDecimal.ZERO;
 			BigDecimal totalDeductions = BigDecimal.ZERO;
 			
-			Processsalarydetails processSalaryDetails = hrDao.getProcessSalaryDetails(Integer.parseInt(processSalaryId));
+			Processsalarydetails processSalaryDetails = new HrDAO().getProcessSalaryDetails(Integer.parseInt(processSalaryId));
 			result.setProcessSalaryDetails(processSalaryDetails);
 			
-			List<Processsalarydetailsheads> processSalaryHeads = hrDao.getProcessSalaryHeads(Integer.parseInt(processSalaryId));
+			List<Processsalarydetailsheads> processSalaryHeads = new HrDAO().getProcessSalaryHeads(Integer.parseInt(processSalaryId));
 			
 			for (Processsalarydetailsheads processsalarydetailsheads : processSalaryHeads) {
 				
@@ -759,7 +732,7 @@ public class HrService {
 		if(currentAcademicYear!=null){
 			String staffId = dto.getStaffId();
 
-			List<Payheadstaffdetails> payHeadDetailsList = hrDao.getStaffDetails(Integer.parseInt(staffId), currentAcademicYear);
+			List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(staffId), currentAcademicYear);
 			result.setPayHeadDetailsList(payHeadDetailsList);
 			result.setSuccess(true);
 		}
@@ -780,12 +753,12 @@ public class HrService {
 			}
 		}
 		
-		List<Processsalarydetails> processSalaryDetails = hrDao.getStaffinfo(Integer.parseInt(StaffId[0]));
+		List<Processsalarydetails> processSalaryDetails = new HrDAO().getStaffinfo(Integer.parseInt(StaffId[0]));
 		
 		if(processSalaryDetails.isEmpty()){
-				if(hrDao.deletePayHeadStaff(ids))
+				if(new HrDAO().deletePayHeadStaff(ids))
 				{
-					List<Payheadstaffdetails> payHeadDetailsList = hrDao.getStaffDetails(Integer.parseInt(StaffId[0]), currentAcademicYear);
+					List<Payheadstaffdetails> payHeadDetailsList = new HrDAO().getStaffDetails(Integer.parseInt(StaffId[0]), currentAcademicYear);
 
 					result.setPayHeadDetailsList(payHeadDetailsList);
 					result.setSuccess(true);
@@ -799,7 +772,7 @@ public class HrService {
 
 	public boolean checkprocessedStaffSalary(int staffId, String month, String year) {
 			
-		Processsalarydetails processSalaryDetails = hrDao.checkprocessedStaffSalary(staffId,month,Integer.parseInt(year));
+		Processsalarydetails processSalaryDetails = new HrDAO().checkprocessedStaffSalary(staffId,month,year);
 		
 			if(processSalaryDetails!=null){
 				return true;
@@ -819,7 +792,7 @@ public class HrService {
 				ids.add(Integer.valueOf(id));
 
 			}
-			 result.setSuccess(hrDao.issueProcessedSalary(ids));		}
+			 result.setSuccess(new HrDAO().issueProcessedSalary(ids));		}
 
 		issueStaffSalary(currentAcademicYear,branchId);
 		return result;
@@ -835,7 +808,7 @@ public class HrService {
 			for (String id : idProcessSalaryDetails) {
 				ids.add(Integer.valueOf(id));
 			}
-			result.setSuccess(hrDao.cancelProcessedSalary(ids));
+			result.setSuccess(new HrDAO().cancelProcessedSalary(ids));
 		}
 		issueStaffSalary(currentAcademicYear,branchId);
 		return result;
@@ -885,7 +858,7 @@ public ResultResponse updateBasicPayEmployees(BasicPayDto dto, String branchId) 
 			payBasicList.add(payBasic);
 		}
 
-		    ResultResponse.builder().success(hrDao.updatePayBasic(payBasicList)).build();
+		    ResultResponse.builder().success(new HrDAO().updatePayBasic(payBasicList)).build();
 
 		}
 		employeeService.basicpayEmployees(branchId);

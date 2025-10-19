@@ -3,159 +3,204 @@ package org.ideoholic.curium.model.examdetails.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
-import org.ideoholic.curium.repositories.ExamScheduleRepository;
-import org.ideoholic.curium.repositories.ExamsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
 public class ExamDetailsDAO {
-	
-	@Autowired
-	private ExamsRepository examsRepo;
-	
-	@Autowired
-	private ExamScheduleRepository examScheduleRepo;
 
-	@Transactional
+	Session session;
+	Transaction transaction;
+	
+	private static final Logger logger = LogManager.getLogger(ExamDetailsDAO.class);
+	
+	public ExamDetailsDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
+	
+	
+
 	public Exams addExams(Exams exams) {
 		try {
-			examsRepo.save(exams);
-			log.debug("in add3:{}", exams);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(exams);
 
-			throw hibernateException;
+			transaction.commit();
+			System.out.println("in add3");
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return exams;
 		}
-		return exams;
+		
 	}
 
-	@Transactional
+
+
 	public List<Exams> readListOfExams(int branchId) {
 		List<Exams> results = new ArrayList<Exams>();
 		try {
-			// results = (List<Exams>) session.createQuery("From Exams where branchid="+branchId).list();
-			results = examsRepo.findByBranchid(branchId);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<Exams>) session.createQuery("From Exams where branchid="+branchId)
+					.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 
-	@Transactional
+
+
 	public void deleteMultiple(List<Integer> ids) {
 		try {
-			examsRepo.deleteAllById(ids);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("delete from Exams where exid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
-
-			throw hibernateException;
+		}finally {
+			HibernateUtil.closeSession();
 		}
+
 	}
 
-	@Transactional
+
+
 	public boolean addExamSchedule(List<Examschedule> examScheduleList) {
-		try {
-			if (examScheduleList != null) {
-				examScheduleRepo.saveAll(examScheduleList);
-				return true;
-			}
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
 
-			throw hibernateException;
-		}
-		return false;
+			try {
+				transaction = session.beginTransaction();
+				for (Examschedule examschedule : examScheduleList) {
+					session.save(examschedule);
+				}
+				transaction.commit();
+				return true;
+			} catch (Exception e) { transaction.rollback(); logger.error(e);
+				e.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			}
+			return false;
 	}
 
 
-	@Transactional
+
 	public List<Examschedule> readListOfExamSchedule(int branchId) {
+		
 		List<Examschedule> results = new ArrayList<Examschedule>();
 		try {
-			// results = (List<Examschedule>) session.createQuery("From Examschedule where branchid = "+branchId).list();
-			results = examScheduleRepo.findByBranchid(branchId);
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<Examschedule>) session.createQuery("From Examschedule where branchid = "+branchId)
+					.list();
+			transaction.commit();
+
 		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			transaction.rollback(); 
+			logger.error(hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 
 
-	@Transactional
+
 	public void deleteExamSchedule(List<Integer> ids) {
 		try {
-			// Query query = session.createQuery("delete from Examschedule where idexamschedule IN (:ids)");
-			examScheduleRepo.deleteAllById(ids);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("delete from Examschedule where idexamschedule IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
-
-			throw hibernateException;
+		}finally {
+			HibernateUtil.closeSession();
 		}
 	}
 
-	@Transactional
-	public List<Examschedule> getExamScheduleDetails(String academicYear, String classH, String exam, int branchId) {
+	public List<Examschedule> getExamScheduleDetails(String academicYear,
+			String classH, String exam, int branchId) {
 		List<Examschedule> listExamSchedule = new ArrayList<Examschedule>();
 		try {
-			// listExamSchedule = session.createQuery("from Examschedule where classes = '"+classH+"' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
-		    listExamSchedule = examScheduleRepo.findByClassesAndAcademicyearAndExamnameAndBranchidOrderByDateAsc(classH, academicYear, exam, branchId);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			transaction = session.beginTransaction();
+			listExamSchedule = session.createQuery("from Examschedule where classes = '"+classH+"' and academicyear = '"+academicYear+"' and examname = '"+exam+"' and branchid="+branchId+" ORDER BY date ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-			
-			throw e;
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		
 		return listExamSchedule;
 	}
 
 
-	@Transactional
-	public Exams getExamDetails(Integer examid) {
-		Exams exam = null;
-		try {
-			// Query query =  session.createQuery("From Exams where id="+examid);
-			exam = examsRepo.findById(examid).orElse(new Exams());
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
 
-			throw hibernateException;
+	public Exams getExamDetails(Integer examid) {
+		
+		Exams exam = new Exams();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query =  session.createQuery("From Exams where id="+examid);
+			exam = (Exams) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
+		} finally {
+				HibernateUtil.closeSession();
+			return exam;
 		}
-		return exam;
 	}
 	
-	@Transactional
-	public List<Exams> readListOfExams(List<Integer> examIds, int branchId) {
+	public List<Exams> readListOfExams(List<Integer> deeniyatExamIds, int branchId) {
+		
 		List<Exams> results = new ArrayList<Exams>();
-
+		
 		try {
-			// Query query = session.createQuery("From Exams where exid IN (:ids) and branchid="+branchId);
-			results = examsRepo.findByExidInAndBranchid(examIds, branchId);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Exams where exid IN (:ids) and branchid="+branchId);
+			query.setParameterList("ids", deeniyatExamIds);
+			results = (List<Exams>) query.getResultList();
+			transaction.commit();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
-
-			throw hibernateException;
+		}finally {
+			HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
+
 	}
 }

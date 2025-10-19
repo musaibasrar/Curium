@@ -1,4 +1,9 @@
 <%-- 
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
+    Document   : Import File
     Document   : Import File
     Created on : JULY 6, 2021, 02:25:00 PM
     Author     : Adeeba
@@ -15,7 +20,7 @@
 </head>
 <body>
 
-<form id="form1" action="/school/ImportProcess/readFile" method="post"  enctype="multipart/form-data">
+<form id="form1" action="${ctx}/ImportProcess/readFile" method="post"  enctype="multipart/form-data">
 <table width="100%" border="0" align="center">
 <tr>								
 <td><br /><br />

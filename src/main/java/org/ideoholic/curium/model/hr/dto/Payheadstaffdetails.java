@@ -1,11 +1,15 @@
 package org.ideoholic.curium.model.hr.dto;
 
+// default package
+// Generated 22 Apr, 2018 5:13:05 PM by Hibernate Tools 4.0.0
+
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -27,12 +31,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hr_payheadstaffdetails")
 public class Payheadstaffdetails implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idpayheadstaffdetails", unique = true, nullable = false)
 	private Integer idpayheadstaffdetails;
+
+	@Column(name = "idteacher", nullable = false)
+	private int idteacher;
 
 	@Column(name = "value", precision = 20, scale = 4)
 	private BigDecimal value;
@@ -44,17 +50,17 @@ public class Payheadstaffdetails implements java.io.Serializable {
 	private String academicyear;
 
 	@ManyToOne
-	@JoinColumn(name = "idteacher", referencedColumnName = "tid", nullable = false)
+	@JoinColumn(name = "idteacher")
 	private Teacher teacher;
 
 	@ManyToOne
-	@JoinColumn(name = "payheadid", referencedColumnName = "idpayhead")
+	@JoinColumn(name = "payheadid")
 	private Payhead payhead;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

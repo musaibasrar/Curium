@@ -5,7 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,8 +23,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Issue Stock</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 
 <style type="text/css">
 .divCSS {
@@ -445,21 +451,21 @@
 }
 
 </style>
-<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/school/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 	
-	<script src="/school/js/bootstrap.min.js"></script>
-<link href="/school/css/select2.min.css" rel="stylesheet" />
-<script src="/school/js/select2.min.js"></script>
+	<script src="${jsPath}/bootstrap.min.js"></script>
+<link href="${cssPath}/select2.min.css" rel="stylesheet" />
+<script src="${jsPath}/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -554,14 +560,14 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/school/MessItemsMoveProcess/saveStockMove";
+			form1.action = "${ctx}/MessItemsMoveProcess/saveStockMove";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -571,7 +577,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "${ctx}/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -579,21 +585,21 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/AdminProcess/printVoucher";
+		form1.action = "${ctx}/AdminProcess/printVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function approveRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/AdminProcess/approveVoucher";
+		form1.action = "${ctx}/AdminProcess/approveVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
 	
 	function rejectRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/AdminProcess/rejectVoucher";
+		form1.action = "${ctx}/AdminProcess/rejectVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -945,7 +951,7 @@
     	}
     	
     	var form1 = document.getElementById("form1");
-		form1.action="/school/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"&itemsGrandNetDueAmount="+itemsGrandNetDueAmountvalue+"";
+		form1.action="${ctx}/MessItemsMoveProcess/saveStockMove?paymentmethodbanktransfer="+paymentmethodbanktransfer+"&paymentmethodchequetransfer="+paymentmethodchequetransfer+"&paymentmethodcash="+paymentmethodcash+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"&totalcashamount="+totalcashamountvalue+"&totalbanktransferamount="+totalbanktransferamountvalue+"&totalchequetransferamount="+totalchequetransferamountvalue+"&itemsGrandTotalAmountWithoutGST="+itemsTotalAmountWithoutGST+"&itemsGrandNetDueAmount="+itemsGrandNetDueAmountvalue+"";
 		form1.method = "POST";
 		form1.submit();
 		
@@ -1069,7 +1075,7 @@
  	             
  	         }
  			xmlHttp.onreadystatechange = stateChanged;
- 			xmlHttp.open("GET", "/school/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
+ 			xmlHttp.open("GET", "${ctx}/MessItemsMoveProcess/getCustomerLastPrice?customerName="+customerName+"&itemid="+itemId+"",true);
  			xmlHttp.send(null);
  	}
  	
@@ -1402,7 +1408,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1481,7 +1487,7 @@ for(Cookie cookie : cookies){
 										        	
 										        		<option style="color: black;" value="${student.student.name}_${student.student.classstudying}_${student.fathersname}_${student.student.sid}">${student.student.name}&nbsp;&nbsp;/&nbsp;&nbsp;${student.student.classstudying}/&nbsp;&nbsp;${student.fathersname}</option>
 										        	</c:forEach>
-										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="/school/StudentProcess/addNew">New Customer --></a>
+										        </select><!-- &nbsp;&nbsp;<a target="mainFrame" href="${ctx}/StudentProcess/addNew">New Customer --></a>
 									 	</div>
 								</div>
 							</td>

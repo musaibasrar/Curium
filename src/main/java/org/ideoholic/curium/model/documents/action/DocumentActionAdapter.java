@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.documents.action;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
@@ -9,14 +10,14 @@ import org.ideoholic.curium.model.documents.dto.CharacterResponseDto;
 import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
-import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,16 +28,24 @@ public class DocumentActionAdapter {
 	private HttpServletRequest request;
 
 	@Autowired
+	private HttpServletResponse response;
+
+	@Autowired
 	private HttpSession httpSession;
 
 	@Autowired
+	private StandardActionAdapter standardActionAdapter;
+	
+	@Autowired
 	private DocumentService documentService;
+
+	private String BRANCHID = "branchid";
 
 	public boolean exportAdmissionAbstract() {
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
 		ResultResponse response = documentService.exportAdmissionAbstract(studentIdsDto,
-				httpSession.getAttribute(Constants.BRANCHID).toString());
+				httpSession.getAttribute(BRANCHID).toString());
 		return response.isSuccess();
 	}
 
@@ -47,7 +56,7 @@ public class DocumentActionAdapter {
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
 		SearchStudentResponseDto searchStudentResponseDto = documentService.searchForStudents(searchStudentDto,
-				httpSession.getAttribute(Constants.BRANCHID).toString());
+				httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 
 		return searchStudentResponseDto.isSuccess();
@@ -55,7 +64,7 @@ public class DocumentActionAdapter {
 
 	public boolean admissionAbstract() {
 		ParentListResponseDto studentListAaResponseDto = documentService
-				.admissionAbstract(httpSession.getAttribute(Constants.BRANCHID).toString());
+				.admissionAbstract(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListaa", studentListAaResponseDto.getParentsList());
 		return studentListAaResponseDto.isSuccess();
 	}
@@ -66,7 +75,7 @@ public class DocumentActionAdapter {
 		studentNameSearchDto.setNameSearch(request.getParameter("namesearch"));
 		studentNameSearchDto.setClassSearch(request.getParameterValues("classsearch"));
 		SearchStudentResponseDto searchStudentResponseDto = documentService
-				.multiClassSearchAdmissoinReport(studentNameSearchDto, httpSession.getAttribute(Constants.BRANCHID).toString());
+				.multiClassSearchAdmissoinReport(studentNameSearchDto, httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
@@ -75,8 +84,8 @@ public class DocumentActionAdapter {
 		studentNameSearchDto.setNameSearch(request.getParameter("namesearch"));
 		studentNameSearchDto.setClassSearch(request.getParameterValues("classsearch"));
 		SearchStudentResponseDto searchStudentResponseDto = documentService.multiClassSearchPendingAdmissoinReport(
-				studentNameSearchDto, httpSession.getAttribute(Constants.BRANCHID).toString(),
-				httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+				studentNameSearchDto, httpSession.getAttribute(BRANCHID).toString(),
+				httpSession.getAttribute("currentAcademicYear").toString());
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
@@ -94,8 +103,7 @@ public class DocumentActionAdapter {
 	public String generateStudyCertificate() {
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),
-				httpSession.getAttribute("userloginid").toString());
+		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto);
 		if (parentDto != null) {
 			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
 			return "studycertificateprint";
@@ -112,7 +120,7 @@ public class DocumentActionAdapter {
 	}
 
 	public boolean transferCertificate() {
-		ResultResponse resultResponse = documentService.transferCertificate(httpSession.getAttribute(Constants.BRANCHID).toString());
+		ResultResponse resultResponse = documentService.transferCertificate(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListtc", resultResponse.getResultList());
 		return resultResponse.isSuccess();
 	}
@@ -208,23 +216,9 @@ public class DocumentActionAdapter {
 
 	public boolean printTcList() {
 		CharacterDto characterDto = new CharacterDto();
-		characterDto.setSIds(request.getParameterValues("studentIDs"));
-		CharacterResponseDto characterResponseDto = documentService.printTcList(characterDto,httpSession.getAttribute(Constants.BRANCHID).toString());
+		characterDto.setFeesIds(request.getParameterValues("studentIDs"));
+		CharacterResponseDto characterResponseDto = documentService.printTcList(characterDto);
 		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
-		return characterResponseDto.isSuccess();
-	}
-
-	public void viewScDetail() {
-		CharacterResponseDto characterResponseDto = documentService.viewScDetail(httpSession.getAttribute(Constants.BRANCHID).toString());
-		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
-		
-	}
-
-	public boolean printScList() {
-		CharacterDto characterDto = new CharacterDto();
-		characterDto.setSIds(request.getParameterValues("studentIDs"));
-		CharacterResponseDto characterResponseDto = documentService.printScList(characterDto,httpSession.getAttribute(Constants.BRANCHID).toString());
-		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		return characterResponseDto.isSuccess();
 	}
 

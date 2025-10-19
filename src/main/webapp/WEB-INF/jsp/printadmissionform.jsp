@@ -1,3 +1,7 @@
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -54,7 +58,7 @@ input {
 <form method="post"  enctype="multipart/form-data">
 
 	<div align="center">
-		<img alt="Govt Of Karnataka" src="/school/images/Karnatakalogo.png">
+		<img alt="Govt Of Karnataka" src="${imagesPath}/Karnatakalogo.png">
 	</div>
 
 <h2>GOVERNMENT OF KARNATAKA</h2>

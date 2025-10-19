@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
-import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +22,9 @@ public class FeesDetailsActionAdapter {
 
 	    @Autowired
 	    private HttpSession httpSession;
-	    
-	    @Autowired
-	    private FeesDetailsService feesDetailsService;
-	    private String BRANCHID = "branchid";
-	    private String USERID = "userid";
 
 		public boolean exportDataForFees() {
+			FeesDetailsService feesDetailsService = new FeesDetailsService(request, response);
 			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
 			feesIdDetailsDto.setFeesIds(request.getParameterValues("feesIDs"));
 			ResultResponse resultResponse = feesDetailsService.exportDataForFees(feesIdDetailsDto);
@@ -37,6 +32,7 @@ public class FeesDetailsActionAdapter {
 			}
 
 		public boolean exportDataForOtherFees() {
+			FeesDetailsService feesDetailsService = new FeesDetailsService(request, response);
 			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
 			feesIdDetailsDto.setFeesIds(request.getParameterValues("feesIDs"));
 			ResultResponse resultResponse = feesDetailsService.exportDataForOtherFees(feesIdDetailsDto);
@@ -44,6 +40,7 @@ public class FeesDetailsActionAdapter {
 		}
 
 		public boolean printDataForFees() {
+			FeesDetailsService feesDetailsService = new FeesDetailsService(request, response);
 			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
 			feesIdDetailsDto.setFeesIds(request.getParameterValues("feesIDs"));
 			feesIdDetailsDto.setFromDate(request.getParameter("fromdate"));
@@ -57,19 +54,6 @@ public class FeesDetailsActionAdapter {
 			httpSession.setAttribute("daterangefeescollection", dataForFeesResponseDto.getDateRangeFeesCollection());
 			request.setAttribute("feesmap", dataForFeesResponseDto.getFeesMap());
 			return dataForFeesResponseDto.isSuccess();
-		}
-		
-		public void addFeesDetails() {
-			FeesIdDetailsDto feesIdDetailsDto = new FeesIdDetailsDto();
-			feesIdDetailsDto.setStudentId(request.getParameter("studentId"));
-			feesIdDetailsDto.setDateoffees(request.getParameter("dateoffees"));
-			feesIdDetailsDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
-			feesIdDetailsDto.setGrandTotalAmount(request.getParameter("grandTotalAmount"));
-			feesIdDetailsDto.setMiscellanousamount(request.getParameter("miscellanousamount"));
-			feesIdDetailsDto.setBalanceamount(request.getParameter("balanceamount"));
-			feesDetailsService.addFeesDetails(feesIdDetailsDto,httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString(),
-					httpSession.getAttribute("currentYear").toString());
-		
 		}
 
 }

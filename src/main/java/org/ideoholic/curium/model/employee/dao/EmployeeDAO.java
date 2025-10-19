@@ -3,251 +3,332 @@ package org.ideoholic.curium.model.employee.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
-import org.ideoholic.curium.repositories.PaybasicRepository;
-import org.ideoholic.curium.repositories.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.ideoholic.curium.util.HibernateUtil;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
 public class EmployeeDAO {
-	
-	@Autowired
-	private TeacherRepository teacherRepository;
-	
-	@Autowired
-	private PaybasicRepository payBasicRepo;
 
-	@Transactional
+	Session session = null;
+	/**
+	 * * Hibernate Session Variable
+	 */
+	Transaction transaction = null;
+	/**
+	 * * Hibernate Transaction Variable
+	 */
+	Transaction transaction1;
+	//SessionFactory sessionFactory;
+	
+	private static final Logger logger = LogManager.getLogger(EmployeeDAO.class);
+
+	public EmployeeDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
+
+	@SuppressWarnings("finally")
 	public boolean create(Teacher employee) {
 		boolean result = false;
 		try {
-			// Query<Teacher> queryTeacher = session.createQuery("from Teacher where branchid = "+employee.getBranchid()+" order by id DESC");
-			List<Teacher> queryList = teacherRepository.findByBranchidOrderByTidDesc(employee.getBranchid());
-			String externalId = employee.getTeacherexternalid();
-
-			if (queryList.size() > 0) {
-				String tEId = queryList.get(0).getTeacherexternalid();
-				String externalIdNo = tEId.length() > 2 ? tEId.substring(tEId.length() - 2) : tEId;
-				employee.setTeacherexternalid(externalId + String.format("%02d", Integer.parseInt(externalIdNo) + 1));
-			} else {
-				employee.setTeacherexternalid(externalId + String.format("%02d", 1));
-			}
-			teacherRepository.save(employee);
+			transaction = session.beginTransaction();
+			Query<Teacher> queryTeacher = session.createQuery("from Teacher where branchid = "+employee.getBranchid()+" order by id DESC");
+		 	List<Teacher> queryList = queryTeacher.list();
+		 	String externalId = employee.getTeacherexternalid();
+		 	
+		 	if(queryList.size()>0) {
+		 		String tEId = queryList.get(0).getTeacherexternalid();
+			 	String externalIdNo = tEId.length() > 2 ? tEId.substring(tEId.length() - 2) : tEId;
+			 	employee.setTeacherexternalid(externalId+String.format("%02d",Integer.parseInt(externalIdNo)+1));
+		 	}else {
+		 		employee.setTeacherexternalid(externalId+String.format("%02d",1));
+		 	}
+			
+			session.save(employee);
+			transaction.commit();
 			result = true;
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+			HibernateUtil.closeSession();
 		}
 		return result;
 	}
 
-	@Transactional
+	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Teacher> readListOfObjects(int branchId) {
+
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
-			// results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId).list();
-			results = teacherRepository.findByBranchid(branchId);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+
+			transaction = session.beginTransaction();
+			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 	
-	@Transactional
+	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Teacher> readListOfEmployeesBasicPay(int branchId) {
-		List<Teacher> results = new ArrayList<>();
+
+		List<Teacher> results = new ArrayList<Teacher>();
 		try {
-			// List<Paybasic> payList = session.createQuery("From Paybasic").list();
-			List<Paybasic> payList = payBasicRepo.findAll();
-			List<Integer> tidList = new ArrayList<>();
+
+			transaction = session.beginTransaction();
+			List<Paybasic> payList = session.createQuery("From Paybasic").list();
+			List tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
-			// Query query = session.createQuery("From Teacher where branchid="+branchId+" and tid NOT IN (:basicPayList)");
-			results = teacherRepository.findByBranchidAndTidNotIn(branchId, tidList);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			Query query = session.createQuery("From Teacher where branchid="+branchId+" and tid NOT IN (:basicPayList)");
+			query.setParameterList("basicPayList", tidList);
+			results = query.getResultList();
+			transaction.commit();
+		} catch (Exception hibernateException) { 
+			transaction.rollback(); 
+			logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 
-	@Transactional
+	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Teacher> readListOfObjects() {
+
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
-			// results = (List<Teacher>) session.createQuery("From Teacher").list();
-			results = teacherRepository.findAll();
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+
+			transaction = session.beginTransaction();
+			results = (List<Teacher>) session.createQuery("From Teacher")
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 	
-	@Transactional
+	@SuppressWarnings({ "unchecked", "finally" })
 	public List<Teacher> readCurrentTeachers(int branchid) {
-		List<Teacher> results = new ArrayList<>();
+
+		List<Teacher> results = new ArrayList<Teacher>();
 		try {
-			// results = (List<Teacher>) session.createQuery("From Teacher where currentemployee = 1 AND branchid='"+branchid+"'").list();
-			results = teacherRepository.findByCurrentemployeeAndBranchid("1", branchid);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+
+			transaction = session.beginTransaction();
+			results = (List<Teacher>) session.createQuery("From Teacher where currentemployee = 1 AND branchid='"+branchid+"'")
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 	
-	@Transactional
 	public Teacher readUniqueObject(long id) {
-		Teacher employee = null;
+
+		Teacher employee = new Teacher();
 
 		try {
-			// Query query = session.createQuery("From Teacher as employee where employee.tid=" + id);
-			employee = teacherRepository.findById(Long.valueOf(id).intValue()).orElse(new Teacher());
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
 
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Teacher as employee where employee.tid=" + id);
+			employee = (Teacher) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+			HibernateUtil.closeSession();
 		}
 
 		return employee;
 	}
 
-	@Transactional
 	public Teacher update(Teacher employee) {
 		try {
-			teacherRepository.save(employee);
-        } catch (Exception hibernateException) {
-        	log.error(hibernateException.getMessage(), hibernateException);
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.update(employee);
+            transaction.commit();
+            
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-            throw hibernateException;
+        } finally {
+    			HibernateUtil.closeSession();
+            return employee;
         }
-		return employee;
 	}
 
-	@Transactional
-	public void deleteMultiple(List<Integer> ids) {
+	public void deleteMultiple(List ids) {
 		try {
-			// Query query = session.createQuery("delete from Teacher where tid IN (:ids)");
-            teacherRepository.deleteAllById(ids);
-        } catch (Exception hibernateException) {
-        	log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("delete from Teacher where tid IN (:ids)");
+            query.setParameterList("ids", ids);
+            query.executeUpdate();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+        }finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public int getNoOfEmployees(int branchId) {
+
+		List<Teacher> results = new ArrayList<Teacher>();
+		int noOfRecords = 0;
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
+					.list();
+			noOfRecords = results.size();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return noOfRecords;
 		}
 	}
 
-	@Transactional
 	public List<Teacher> readListOfEmployeesByName(String staffName, int branchId) {
 		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
-			// List<Paybasic> payList = session.createQuery("From Paybasic").list();
-			List<Paybasic> payList = payBasicRepo.findAll();
-			List<Integer> tidList = new ArrayList<>();
+			transaction = session.beginTransaction();
+			
+			List<Paybasic> payList = session.createQuery("From Paybasic").list();
+			List tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
-			// Query query = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
-			employee = teacherRepository.findByTeachernameAndBranchidAndTidNotIn(staffName, branchId, tidList);
-
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			Query query = session.createQuery("From Teacher where teachername='"+staffName+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
+			query.setParameterList("basicPayList", tidList);
+			employee = query.getResultList();
+			
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-			throw e;
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return employee;
 	}
-
-	@Transactional
+	
 	public List<Teacher> readListOfEmployeesByDepartment(String staffDepartment, int branchId) {
-		List<Teacher> employee = new ArrayList<>();
+		List<Teacher> employee = new ArrayList<Teacher>();
 		try {
-			// List<Paybasic> payList = session.createQuery("From Paybasic").list();
-			List<Paybasic> payList = payBasicRepo.findAll();
-			List<Integer> tidList = new ArrayList<>();
+			transaction = session.beginTransaction();
+			
+			List<Paybasic> payList = session.createQuery("From Paybasic").list();
+			List tidList = new ArrayList<>();
 			tidList.add(0);
 			for (Paybasic paybasic : payList) {
 				tidList.add(paybasic.getTeacher().getTid());
 			}
-			// Query query = session.createQuery("From Teacher where department='"+staffDepartment+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
-			employee = teacherRepository.findByDepartmentAndBranchidAndTidNotIn(staffDepartment, branchId, tidList);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			Query query = session.createQuery("From Teacher where department='"+staffDepartment+"' and branchid="+branchId+" and tid NOT IN (:basicPayList)");
+			query.setParameterList("basicPayList", tidList);
+			employee = query.getResultList();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-			throw e;
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return employee;
 	}
 
-	@Transactional
 	public List<String> getEmployeeExternalId() {
-		List<String> employeeExtId = new ArrayList<>();
+		List<String> employeeExtId = new ArrayList<String>();
 		try {
-			// employeeExtId = session.createQuery("select teacherexternalid from Teacher").list();
-			employeeExtId = teacherRepository.fetchTeacherexternalid();
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
+			transaction = session.beginTransaction();
+			employeeExtId = session.createQuery("select teacherexternalid from Teacher").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-			throw e;
+		}finally {
+			HibernateUtil.closeSession();
 		}
 		return employeeExtId;
 	}
 
-	@Transactional
 	public void delete(Teacher employee) {
+		
 		try {
-            teacherRepository.delete(employee);
-        } catch (Exception hibernateException) {
-        	log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            session.delete(employee);
+            transaction.commit();
+            
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-            throw hibernateException;
+        }finally {
+			HibernateUtil.closeSession();
 		}
 	}
 
 	public Teacher getEmployeeDetails(String userName) {
-		Teacher employee = null;
+		
+		Teacher employee = new Teacher();
 		try {
-			// Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
-			employee = teacherRepository.findByTeacherexternalid(userName).orElse(new Teacher());
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Teacher as employee where employee.teacherexternalid='"+userName+"'");
+			employee = (Teacher) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+			HibernateUtil.closeSession();
 		}
 		return employee;
 	}
 
 	public List<Paybasic> readListOfEmployeesBasicPayDetails(int branchId) {
-		List<Paybasic> payList = new ArrayList<>();
-		try {
-			// payList = session.createQuery("From Paybasic where branchid="+branchId).list();
-			payList = payBasicRepo.findByBranchid(branchId);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
 
+		List<Paybasic> payList = new ArrayList<Paybasic>();
+		try {
+
+			transaction = session.beginTransaction();
+			payList = session.createQuery("From Paybasic where branchid="+branchId).list();
+			transaction.commit();
+		} catch (Exception hibernateException) { 
+			transaction.rollback(); 
+			logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		} finally {
+				HibernateUtil.closeSession();
+			return payList;
 		}
-		return payList;
 	}
 
 }

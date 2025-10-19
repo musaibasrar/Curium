@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,18 +16,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dash Board</title>
-        <script src="/school/js/Chart.min.js"></script>
-         <link rel="stylesheet" href="/school/css/bootstrap.min.css">
-        <script src="/school/js/jquery.min.js"></script>
-        <script src="/school/js/bootstrap.min.js"></script>
-        <script src="/school/js/popper.min.js"></script>
+        <script src="${jsPath}/Chart.min.js"></script>
+         <link rel="stylesheet" href="${cssPath}/bootstrap.min.css">
+        <script src="${jsPath}/jquery.min.js"></script>
+        <script src="${jsPath}/bootstrap.min.js"></script>
+        <script src="${jsPath}/popper.min.js"></script>
     </head>
     
 	<style type="text/css">
 
 		@font-face {
 		  font-family: "IBMPlexSans";
-  		  src: url("/school/fonts/IBMPlexSans-Regular.ttf");
+  		  src: url("${ctx}/fonts/IBMPlexSans-Regular.ttf");
 		}
 
 		#rcorners1 {
@@ -67,7 +70,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -93,7 +96,7 @@ for(Cookie cookie : cookies){
 	</div> -->
 	
 	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/school/images/school.png"></h2>
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="${logoUrl}"></h2>
 	</div>
 	
 	<div class="row" style="padding-left: 35px;">
@@ -107,13 +110,13 @@ for(Cookie cookie : cookies){
         					 <c:choose>
                                 <c:when test="${todaysAttendance eq 'P'}">
                                     <a target="mainFrame" style="color:#01739d;font-size:24px;"> <img
-									src="/school/images/studentattendance.svg" width="40" height="40"
+									src="${imagesPath}/studentattendance.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:when>
                                 <c:otherwise>
                                     <a target="mainFrame" style="color:#be2900;font-size:24px;"> <img
-									src="/school/images/studentabsent.svg" width="40" height="40"
+									src="${imagesPath}/studentabsent.svg" width="40" height="40"
 									alt="Student Profile" style="vertical-align: bottom;" />Today's Attendance:${todaysAttendance}
 									</a>
                                 </c:otherwise>
@@ -133,8 +136,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/school/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/school/images/studentprofile.svg" width="50" height="50"
+								href="${ctx}/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="${imagesPath}/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
         					</td>
@@ -153,8 +156,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/school/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/school/images/diary.svg" width="50" height="50"
+								href="${ctx}/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="${imagesPath}/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
         					</td>
@@ -172,8 +175,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/school/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/school/images/fees.svg" width="50" height="50"
+								href="${ctx}/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="${imagesPath}/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
         					</td>
@@ -191,8 +194,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/school/MarksDetailsProcess/generateReportParent?id=${username}"> <img
-									src="/school/images/progressreport.svg" width="50" height="50"
+								href="${ctx}/MarksDetailsProcess/generateReportParent?id=${username}"> <img
+									src="${imagesPath}/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
 							</a>
         					</td>
@@ -209,8 +212,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/school/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
-									src="/school/images/logbook.svg" width="50" height="50"
+								href="${ctx}/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+									src="${imagesPath}/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
         					</td>
@@ -227,8 +230,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/school/EventProcess/viewCalendar"> <img
-									src="/school/images/viewcalendar.png" width="50" height="50"
+								href="${ctx}/EventProcess/viewCalendar"> <img
+									src="${imagesPath}/viewcalendar.png" width="50" height="50"
 									alt="calendar" style="vertical-align: bottom;" />Calendar
 							</a>
         					</td>

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -26,21 +25,30 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-@Slf4j
-@Service
 public class ImportFileService {
 
-    XSSFRow row;
+	private static HttpServletRequest request;
+	private static HttpServletResponse response;
+	private HttpSession httpSession;
+	private String BRANCHID = "branchid";
+
+	public ImportFileService(HttpServletRequest request, HttpServletResponse response) {
+
+		this.request = request;
+		this.response = response;
+		this.httpSession = request.getSession();
+	}
+
+	XSSFRow row;
 
 	public ResultResponse readFile(MultipartFile uploadedFiles,String branchId) throws FileNotFoundException, IOException {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
 		List<Login> listParentLogin = new ArrayList<Login>();
-		log.debug("-------------------------------READING THE SPREADSHEET-------------------------------------");
+		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
 					XSSFWorkbook workbookRead = new XSSFWorkbook(uploadedFiles.getInputStream());
 					XSSFSheet spreadsheetRead = workbookRead.getSheetAt(0);
@@ -155,7 +163,7 @@ public class ImportFileService {
 						// +((row.getCell(25).getStringCellValue())+"/"+(row.getCell(26).getStringCellValue())+"/"+(row.getCell(27).getStringCellValue())));
 					}
 
-					log.debug("Values Inserted Successfully");
+					System.out.println("Values Inserted Successfully");
 					
 					for (Parents parent : listParents) {
 						Login login= new Login();

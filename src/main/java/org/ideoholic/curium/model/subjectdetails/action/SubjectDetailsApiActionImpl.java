@@ -82,11 +82,11 @@ public class SubjectDetailsApiActionImpl implements SubjectDetailsApiAction {
         SubjectsExamsResponseDto result = new SubjectsExamsResponseDto();
 
         SubjectsResponseDto responseDto = subjectDetailsService.readListOfSubjects(branchId);
-          result.setSubjects(responseDto.getSubjects());
+          result.setSubjects(responseDto.getList());
           result.setSuccess(responseDto.isSuccess());
 
         responseDto = subjectDetailsService.readListOfSubjectNames(branchId);
-          result.setSubjectNames(responseDto.getSubjects());
+          result.setSubjectNames(responseDto.getList());
           result.setSuccess(result.isSuccess() & responseDto.isSuccess());
 
         ExamsListResponseDto examsListResponseDto = examDetailsService.readListOfExams(branchId);

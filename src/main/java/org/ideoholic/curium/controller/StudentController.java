@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 
 /**
@@ -38,7 +38,7 @@ public class StudentController extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-        List<Student> list = new StudentDetailsDAO().readListOfObjectsForIcon(1);
+        List<Student> list = new studentDetailsDAO().readListOfObjectsForIcon(1);
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         try {

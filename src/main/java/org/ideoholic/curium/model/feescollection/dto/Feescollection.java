@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.feescollection.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 5 Feb, 2018 11:54:01 AM by Hibernate Tools 4.0.0
 
@@ -8,17 +10,10 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,15 +29,20 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "fee_feescollection")
 public class Feescollection implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "feecollectionid", unique = true, nullable = false)
 	private Integer feecollectionid;
 
+	@Column(name = "sfsid", nullable = false)
+	private int sfsid;
+
 	@Column(name = "amountpaid", precision = 10, scale = 0)
 	private Long amountpaid;
+
+	@Column(name = "sid", nullable = false)
+	private int sid;
 
 	@Column(name = "fine", precision = 10, scale = 0)
 	private Long fine;
@@ -51,32 +51,16 @@ public class Feescollection implements java.io.Serializable {
 	@Column(name = "date", length = 10)
 	private Date date;
 
-	@JoinColumn(name = "sfsid", referencedColumnName = "sfsid", nullable = false)
-	@ManyToOne(optional = false)
-	private Studentfeesstructure studentFeeStructure;
-
-	@JoinColumn(name = "sid", referencedColumnName = "sid", nullable = false)
-	@ManyToOne(optional = false)
-	private Student student;
-
-	@JoinColumn(name = "receiptnumber", referencedColumnName = "receiptnumber", nullable = false)
-	@ManyToOne(optional = false)
-	private Receiptinfo receiptInfo;
-
 	@Column(name = "academicyear", length = 45)
 	private String academicyear;
 
+	@Column(name = "receiptnumber", nullable = false)
+	private int receiptnumber;
+
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
-
-	public int fetchSfsid() {
-		if (studentFeeStructure != null) {
-			return studentFeeStructure.getSfsid();
-		}
-		return 0;
-	}
+	private int userid;
 
 }

@@ -1,53 +1,99 @@
 package org.ideoholic.curium.model.feescategory.dto;
 
-import java.util.List;
+import static javax.persistence.GenerationType.IDENTITY;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "otherfee_feescategory")
-public class OtherFeecategory implements java.io.Serializable {
+public class OtherFeecategory implements java.io.Serializable{
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "idfeescategory", unique = true, nullable = false)
 	private Integer idfeescategory;
-
-	@Column(name = "feescategoryname", length = 150)
 	private String feescategoryname;
-
-	@Column(name = "amount")
 	private Integer amount;
-
-	@Column(name = "particularname", length = 150)
 	private String particularname;
-
-	@Column(name = "academicyear", length = 20)
+	private int branchid;
+	private int userid;
 	private String academicyear;
 
+	public OtherFeecategory() {
+	}
+
+	public OtherFeecategory(String feescategoryname, Integer amount, String particularname,
+			int branchid, 	int userid, String academicyear) {
+		this.feescategoryname = feescategoryname;
+		this.amount = amount;
+		this.particularname = particularname;
+		this.branchid = branchid;
+		this.userid = userid;
+		this.academicyear = academicyear;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "idfeescategory", unique = true, nullable = false)
+	public Integer getIdfeescategory() {
+		return this.idfeescategory;
+	}
+
+	public void setIdfeescategory(Integer idfeescategory) {
+		this.idfeescategory = idfeescategory;
+	}
+
+	@Column(name = "feescategory", length = 150)
+	public String getFeescategoryname() {
+		return this.feescategoryname;
+	}
+
+	public void setFeescategoryname(String feescategoryname) {
+		this.feescategoryname = feescategoryname;
+	}
+
+	@Column(name = "amount")
+	public Integer getAmount() {
+		return this.amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	@Column(name = "particularname", length = 150)
+	public String getParticularname() {
+		return particularname;
+	}
+
+	public void setParticularname(String particularname) {
+		this.particularname = particularname;
+	}
+
 	@Column(name = "branchid")
-	private Integer branchid;
+	public int getBranchid() {
+	return branchid;
+	}
 
-	@Column(name = "userid")
-	private Integer userid;
+	public void setBranchid(int branchid) {
+	this.branchid = branchid;
+	}
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "otherfeescategory")
-	private List<Studentotherfeesstructure> otherfeeStudentfeesstructureList;
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+
+	public String getAcademicyear() {
+		return academicyear;
+	}
+
+	public void setAcademicyear(String academicyear) {
+		this.academicyear = academicyear;
+	}
+
 }

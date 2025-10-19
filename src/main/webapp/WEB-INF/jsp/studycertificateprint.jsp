@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -123,7 +126,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/school/images/school.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="${logoUrl}">
 			</td>
 				<td >
 					<br>
@@ -238,7 +241,7 @@ for(Cookie cookie : cookies){
 
 			
 			<tr>
-              <td align="center"><a id="print" href="/school/DocumentsProcess/printStudyCertificate">Print</a></td>
+              <td align="center"><a id="print" href="${ctx}/DocumentsProcess/printStudyCertificate">Print</a></td>
             </tr>
 		</TABLE>
 	</form>

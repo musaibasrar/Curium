@@ -1,10 +1,11 @@
 package org.ideoholic.curium.model.student.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -12,67 +13,160 @@ import javax.persistence.Table;
 
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "otherfee_studentfeesstructure")
 public class Studentotherfeesstructure implements java.io.Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sfsid", unique = true, nullable = false)
 	private Integer sfsid;
-	
-	@ManyToOne(optional = false)
-	@JoinColumn(name = "sid", referencedColumnName = "sid", nullable = false)
-    private Student student;
-	
-	@Column(name = "feesamount", precision = 10, scale = 0)
+	private Integer sid;
+	private Integer idfeescategory;
 	private Long feesamount;
-	
-	@Column(name = "feespaid", precision = 10, scale = 0)
 	private Long feespaid;
-	
-	@Column(name = "academicyear", length = 45)
 	private String academicyear;
-	
-	@Column(name = "concession")
+	private int branchid;
 	private Integer concession;
-	
-	@Column(name = "waiveoff", precision = 10, scale = 0)
 	private Long waiveoff;
-	
-	@Column(name = "totalinstallment")
 	private Integer totalinstallment;
-
-	@Column(name = "concessionnotes")
 	private String concessionnotes;
-
+	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "idfeescategory", referencedColumnName = "idfeescategory")
+    @JoinColumn(name = "idfeescategory")
 	private OtherFeecategory otherfeescategory;
-	
-	@Column(name = "branchid")
-	private Integer branchid;
-	
-	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
-	public int fetchSid() {
-		if (student != null) {
-			return student.getSid();
-		}
-		return 0;
+	public Studentotherfeesstructure() {
 	}
-	
+
+	public Studentotherfeesstructure(Integer sid, Integer idfeescategory,
+			Long feesamount, Long feespaid, String academicyear, int branchid, Integer concession,  Long waiveoff, Integer totalinstallment, int userid, String concessionnotes) {
+		this.sid = sid;
+		this.idfeescategory = idfeescategory;
+		this.feesamount = feesamount;
+		this.academicyear = academicyear;
+		this.branchid = branchid;
+		this.concession = concession;
+		this.feespaid = feespaid;
+		this.waiveoff = waiveoff;
+		this.totalinstallment = totalinstallment;
+		this.userid = userid;
+		this.concessionnotes = concessionnotes;
+	}
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "sfsid", unique = true, nullable = false)
 	public Integer getSfsid() {
-	    return sfsid;
+		return this.sfsid;
 	}
+
+	public void setSfsid(Integer sfsid) {
+		this.sfsid = sfsid;
+	}
+
+	@Column(name = "sid")
+	public Integer getSid() {
+		return this.sid;
+	}
+
+	public void setSid(Integer sid) {
+		this.sid = sid;
+	}
+
+	@Column(name = "idfeescategory")
+	public Integer getIdfeescategory() {
+		return this.idfeescategory;
+	}
+
+	public void setIdfeescategory(Integer idfeescategory) {
+		this.idfeescategory = idfeescategory;
+	}
+
+	@Column(name = "feesamount", precision = 10, scale = 0)
+	public Long getFeesamount() {
+		return this.feesamount;
+	}
+
+	public void setFeesamount(Long feesamount) {
+		this.feesamount = feesamount;
+	}
+
+	@Column(name = "academicyear", length = 45)
+	public String getAcademicyear() {
+		return this.academicyear;
+	}
+
+	public void setAcademicyear(String academicyear) {
+		this.academicyear = academicyear;
+	}
+
+	@Column(name = "branchid")
+	public int getBranchid() {
+	return branchid;
+	}
+
+	public void setBranchid(int branchid) {
+	this.branchid = branchid;
+	}
+
+	@Column(name = "concession")
+        public Integer getConcession() {
+            return this.concession;
+        }
+
+        public void setConcession(Integer concession) {
+            this.concession = concession;
+        }
+
+        @Column(name = "feespaid", precision = 10, scale = 0)
+    	public Long getFeespaid() {
+    		return this.feespaid;
+    	}
+
+    	public void setFeespaid(Long feespaid) {
+    		this.feespaid = feespaid;
+    	}
+
+    	@Column(name = "waiveoff", precision = 10, scale = 0)
+		public Long getWaiveoff() {
+			return waiveoff;
+		}
+
+		public void setWaiveoff(Long waiveoff) {
+			this.waiveoff = waiveoff;
+		}
+
+		@Column(name = "totalinstallment")
+		public Integer getTotalinstallment() {
+			return totalinstallment;
+		}
+
+		public void setTotalinstallment(Integer totalinstallment) {
+			this.totalinstallment = totalinstallment;
+		}
+
+		public int getUserid() {
+			return userid;
+		}
+
+		public void setUserid(int userid) {
+		this.userid = userid;
+		}
+		
+		public String getConcessionnotes() {
+			return concessionnotes;
+		}
+
+		public void setConcessionnotes(String concessionnotes) {
+			this.concessionnotes = concessionnotes;
+		}
+
+		public OtherFeecategory getOtherfeescategory() {
+			return otherfeescategory;
+		}
+
+		public void setOtherfeescategory(OtherFeecategory otherfeescategory) {
+			this.otherfeescategory = otherfeescategory;
+		}
 
 }

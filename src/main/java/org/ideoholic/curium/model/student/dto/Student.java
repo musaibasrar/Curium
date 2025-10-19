@@ -1,40 +1,27 @@
 package org.ideoholic.curium.model.student.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 14 Feb, 2018 12:05:32 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
-import org.ideoholic.curium.model.feescollection.dto.Feescollection;
-import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
-import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
-import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
-import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
-import org.ideoholic.curium.model.marksdetails.dto.Marks;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.pudetails.dto.Pudetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -51,10 +38,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "student", uniqueConstraints = @UniqueConstraint(columnNames = "studentexternalid"))
 public class Student implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "sid", unique = true, nullable = false)
 	private Integer sid;
 
@@ -113,8 +99,10 @@ public class Student implements java.io.Serializable {
 	@Column(name = "createddate", length = 10)
 	private Date createddate = new Date();
 
-	@Lob
-	@Column(name = "studentpic", length = 2147483647)
+	@Column(name = "archive")
+	private Integer archive;
+
+	@Column(name = "studentpic")
 	private String studentpic;
 
 	@Column(name = "studentexternalid", unique = true, nullable = false, length = 45)
@@ -160,27 +148,23 @@ public class Student implements java.io.Serializable {
 	@Column(name = "subsequentprogress", length = 500)
 	private String subsequentprogress;
 
+	@Column(name = "branchid")
+	private int branchid;
+
 	@Column(name = "languagesstudied", length = 80)
 	private String languagesstudied;
 
 	@Column(name = "instructionmediumlastschool", length = 45)
 	private String instructionmediumlastschool;
 
-	@Builder.Default
-	@Column(name = "archive")
-	private Integer archive = 0;
-
-	@Builder.Default
 	@Column(name = "passedout")
-	private Integer passedout = 0;
+	private Integer passedout;
 
-	@Builder.Default
 	@Column(name = "droppedout")
-	private Integer droppedout = 0;
+	private Integer droppedout;
 
-	@Builder.Default
 	@Column(name = "leftout")
-	private Integer leftout = 0;
+	private Integer leftout;
 
 	@Column(name = "semester")
 	private Integer semester;
@@ -203,7 +187,7 @@ public class Student implements java.io.Serializable {
 	@Column(name = "studentscastecertno", length = 25)
 	private String studentscastecertno;
 
-	@Column(name = "studentscaste", length = 45)
+	@Column(name = "studentscaste", length = 15)
 	private String studentscaste;
 
 	@Column(name = "socialcategory", length = 10)
@@ -212,16 +196,16 @@ public class Student implements java.io.Serializable {
 	@Column(name = "belongtobpl")
 	private Integer belongtobpl;
 
-	@Column(name = "bplcardno", length = 25)
+	@Column(name = "bplcardno")
 	private String bplcardno;
 
-	@Column(name = "bhagyalakshmibondnumber", length = 25)
+	@Column(name = "bhagyalakshmibondnumber")
 	private String bhagyalakshmibondnumber;
 
-	@Column(name = "disabilitychild", length = 40)
+	@Column(name = "disabilitychild")
 	private String disabilitychild;
 
-	@Column(name = "sts", length = 30)
+	@Column(name = "sts")
 	private String sts;
 
 	@Column(name = "specialcategory", length = 25)
@@ -242,38 +226,38 @@ public class Student implements java.io.Serializable {
 	@Column(name = "bankifsc", length = 50)
 	private String bankifsc;
 
-	@Lob
-	@Column(name = "studentdoc1", length = 2147483647)
+	@Column(name = "userid")
+	private int userid;
+
+	@Column(name = "studentdoc1")
 	private String studentdoc1;
 
-	@Lob
-	@Column(name = "studentdoc2", length = 2147483647)
+	@Column(name = "studentdoc2")
 	private String studentdoc2;
 
-	@Lob
-	@Column(name = "studentdoc3", length = 2147483647)
+	@Column(name = "studentdoc3")
 	private String studentdoc3;
 
-	@Lob
-	@Column(name = "studentdoc4", length = 2147483647)
+	@Column(name = "studentdoc4")
 	private String studentdoc4;
 
-	@Lob
-	@Column(name = "studentdoc5", length = 2147483647)
+	@Column(name = "studentdoc5")
 	private String studentdoc5;
 
-	@Column(name = "branchid")
-	private Integer branchid;
+	private String lastcourse;
+	private Integer totalmarks;
+	private String lastfirstlanguage;
+	private String lastsecondlanguage;
+	private String lastschooladdress;
+	private String registrationnumber;
 
-	@Column(name = "userid")
-	private Integer userid;
-
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "pudetailsid", referencedColumnName = "idpudetails")
+/*	@ManyToOne(cascade= CascadeType.ALL)
+        @JoinColumn(name="pudetailsid") */
 	private Pudetails pudetails;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "degreedetailsid", referencedColumnName = "iddegreedetails")
+
+/*	@ManyToOne(cascade= CascadeType.ALL)
+	@JoinColumn(name="degreedetailsid") */
 	private Degreedetails degreedetails;
 
 	@Column(name = "yearofadmission", length = 10)
@@ -282,70 +266,8 @@ public class Student implements java.io.Serializable {
 	@Column(name = "promotedyear", length = 10)
 	private String promotedyear;
 
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "attendee")
-	private List<Studentdailyattendance> studentDailyAttendanceList;
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-	private List<Studentotherfeesstructure> studentFeesStructureList;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "student")
-	private List<Feesdetails> feeFeesDetailsList;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "student")
-	private List<ExamRank> examRankList;
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-	private List<Studentfeesstructure> feeStudentFeesStructureList;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "student")
-	private List<Parents> parents;
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-	private List<Feescollection> feesCollectionList;
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-	private List<Otherfeescollection> otherFeesCollectionList;
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-	private List<Receiptinfo> receiptInfoList;
-
-	@JsonIgnore
-	@OneToMany(mappedBy = "student")
-	private List<Marks> marksList;
-
-	@JsonIgnore
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
-	private List<Otherreceiptinfo> otherreceiptinfoList;
-
-	@Transient
-	private String lastcourse;
-	
-	@Transient
-	private Integer totalmarks;
-	
-	@Transient
-	private String lastfirstlanguage;
-	
-	@Transient
-	private String lastsecondlanguage;
-	
-	@Transient
-	private String lastschooladdress;
-	
-	@Transient
-	private String registrationnumber;
-
 	public int fetchAge() {
-		if (age == null) {
+		if(age==null){
 			return 0;
 		}
 		return age;

@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -14,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Receipt Details</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -296,42 +299,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
+<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/school/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/school/js/validation/jquery.ketchup.all.min.js"></script>
+	src="${jsPath}/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="${jsPath}/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -357,11 +360,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function search() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/AccountProcess/viewNextVoucher";
+		form1.action = "${ctx}/AccountProcess/viewNextVoucher";
 		form1.method = "POST";
 		form1.submit();
 
@@ -491,7 +494,7 @@
 	
 	function exportVoucher(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/AccountProcess/exportVoucher";
+		form1.action = "${ctx}/AccountProcess/exportVoucher";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -500,7 +503,7 @@
 		
 		if(confirm('Are you sure, you want to cancel the Receipt Voucher?')){
 			var form1 = document.getElementById("form1");
-			form1.action="/school/AccountProcess/cancelVoucher";
+			form1.action="${ctx}/AccountProcess/cancelVoucher";
 			form1.method = "POST";
 			form1.submit();	
 		}
@@ -510,7 +513,7 @@
 	function printVoucher(){
 		
 			var form1 = document.getElementById("form1");
-			form1.action="/school/AccountProcess/voucherPrint";
+			form1.action="${ctx}/AccountProcess/voucherPrint";
 			form1.method = "POST";
 			form1.submit();	
 	}
@@ -527,7 +530,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -764,7 +767,7 @@ for(Cookie cookie : cookies){
 													
 						<td class="footerTD" colspan="2"> &nbsp;
 						<button id="cancel">Cancel Voucher</button>
-						<%-- <a id="print" href="/school/AccountProcess/voucherPrint?fromdate=<c:out value="${fromdate}"/>&todate=<c:out value="${todate}"/>&vouchertype=<c:out value="${vouchertype}"/>">Print</a> --%>
+						<%-- <a id="print" href="${ctx}/AccountProcess/voucherPrint?fromdate=<c:out value="${fromdate}"/>&todate=<c:out value="${todate}"/>&vouchertype=<c:out value="${vouchertype}"/>">Print</a> --%>
 						&nbsp;&nbsp;&nbsp;<button id="print">Print</button>&nbsp;&nbsp;&nbsp;<button id="export">Export</button>
 						
 						</td>

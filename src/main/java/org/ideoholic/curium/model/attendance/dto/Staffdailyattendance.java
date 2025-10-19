@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.attendance.dto;
 
+// default package
 // Generated 31 Jan, 2018 9:02:38 PM by Hibernate Tools 4.0.0
 
 import java.util.Date;
@@ -27,8 +28,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "att_staffdailyattendance")
 public class Staffdailyattendance implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@Column(name = "attendanceid", unique = true, nullable = false)
 	private int attendanceid;

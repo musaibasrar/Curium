@@ -1,11 +1,17 @@
 package org.ideoholic.curium.model.mess.supplier.dto;
 
+import static javax.persistence.GenerationType.AUTO;
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,41 +26,41 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_suppliers")
 public class MessSuppliers implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-
-	@Column(name = "externalid", length = 110)
+	
+	@Column(name = "externalid")
 	private String externalid;
-
-	@Column(name = "name", length = 100)
+	
+	@Column(name = "name")
 	private String name;
-
-	@Column(name = "contactnumber", length = 12)
+	
+	@Column(name = "contactnumber")
 	private String contactnumber;
-
-	@Column(name = "address", length = 200)
+	
+	@Column(name = "address")
 	private String address;
-
-	@Column(name = "bankaccountno", length = 100)
+	
+	@Column(name = "bankaccountno")
 	private String bankaccountno;
-
-	@Column(name = "ifsccode", length = 20)
+	
+	@Column(name = "ifsccode")
 	private String ifsccode;
-
-	@Column(name = "payto", length = 200)
+	
+	@Column(name = "payto")
 	private String payto;
-
-	@Column(name = "linkedledgerid")
-	private Integer linkedledgerid;
-
+	
 	@Column(name = "branchid")
 	private Integer branchid;
-
+	
+	@Column(name = "linkedledgerid")
+	private Integer linkedledgerid;
+	
 	@Column(name = "userid")
-	private Integer userid;
-
+	private int userid;
+	
+	private boolean success;
 }

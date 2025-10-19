@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
+    pageEncoding="ISO-8859-1"%>
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
@@ -55,21 +60,21 @@
         }
     }
 </style>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/school/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/school/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/school/js/validation/jquery.ketchup.all.min.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="${jsPath}/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+	src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -282,7 +287,7 @@
 	
 	function updateEnquiryForm(){
 		var form1=document.getElementById("form1");
-		form1.action="/school/EnquiryProcess/updateEnquiryDetails?id=<c:out value='${admissionEnquiry.id}'/>";
+		form1.action="${ctx}/EnquiryProcess/updateEnquiryDetails?id=<c:out value='${admissionEnquiry.id}'/>";
 		form1.submit();
 	}
 	

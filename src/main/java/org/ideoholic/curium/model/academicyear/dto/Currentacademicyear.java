@@ -1,12 +1,13 @@
 package org.ideoholic.curium.model.academicyear.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 8 May, 2015 5:04:47 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -26,16 +27,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "currentacademicyear")
 public class Currentacademicyear implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "cayid", unique = true, nullable = false)
 	private Integer cayid;
 
 	@Column(name = "currentacademicyear", length = 100)
 	private String currentacademicyear;
 
-	@Column(name = "userid")
-    private Integer userid;
+
 }

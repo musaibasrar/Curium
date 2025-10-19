@@ -5,18 +5,24 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
 
 <head>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Curium - School ERP</title>
-	<link rel="stylesheet" href="/school/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/school/js/openWindow.js"></script>
+	<link rel="stylesheet" href="${cssPath}/bootstrap3.min.css">
+	<script type="text/javascript" src="${jsPath}/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -112,7 +118,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/school/UserProcess/authenticate";
+                form1.action="${ctx}/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -129,19 +135,19 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/school/index_superadmin','_self');
+                    window.open('${ctx}/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/school/index_admin','_self');
+                    window.open('${ctx}/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/school/index_feescollector','_self');
+                    window.open('${ctx}/index_feescollector','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/school/index_officeadmin','_self');
+                	window.open('${ctx}/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/school/index_marksentry','_self');
+                	window.open('${ctx}/index_marksentry','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/school/loginFail','_self');
+            	window.open('${ctx}/loginFail','_self');
             }
         </script>
         
@@ -151,19 +157,19 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 170px;width: 168px;" alt="ideoholic" src="/school/images/school.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 150px;width: 150px;" alt="ideoholic" src="${imagesPath}${ctx}.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
-						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/school/images/shaheenlogo.png"></h2></span> -->
+						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="${imagesPath}/shaheenlogo.png"></h2></span> -->
 						<h3>Log In</h3>
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>
 					<div class="row">
-						<form action="/school/UserProcess/authenticateUser" id="loginForm" method="post" class="form-group">
+						<form action="${ctx}/UserProcess/authenticateUser" id="loginForm" method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
@@ -185,10 +191,10 @@ form{
 	<!-- Footer -->
 	<div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/school/images/ideoholic.png"> image with a default alignment.</p> --> 
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="${imagesPath}/ideoholic.png"> image with a default alignment.</p> --> 
 			
 			<a href="http://www.ideoholic.com" >
-				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/school/images/ideoholic.png">
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="${imagesPath}/ideoholic.png">
 			</a>
 			
 	</div>

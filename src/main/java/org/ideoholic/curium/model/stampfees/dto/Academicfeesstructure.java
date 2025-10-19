@@ -1,12 +1,13 @@
 package org.ideoholic.curium.model.stampfees.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 12 May, 2015 11:31:40 AM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -23,10 +24,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "fee_academicfeesstructure")
 public class Academicfeesstructure implements java.io.Serializable {
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "feesstructureid", unique = true, nullable = false)
 	private Integer feesstructureid;
 
@@ -43,9 +48,9 @@ public class Academicfeesstructure implements java.io.Serializable {
 	private String academicyear;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

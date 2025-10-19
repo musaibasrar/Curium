@@ -4,6 +4,9 @@ f<%--
     Author     : Musaib
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -15,8 +18,8 @@ f<%--
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Diary Message</title>
-    <link rel="stylesheet" href="/school/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/school/js/openWindow.js"></script>
+    <link rel="stylesheet" href="${cssPath}/bootstrap3.min.css">
+	<script type="text/javascript" src="${jsPath}/openWindow.js"></script>
     <style type="text/css">
         body {
             font-family: 'Roboto', sans-serif;
@@ -81,7 +84,7 @@ f<%--
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -106,7 +109,7 @@ for(Cookie cookie : cookies){
                 <label for="message" style="font-size:20px;">Message</label>
                 <p id="message" class="message-content">${diary.message}</p>
             </div>
-            <form action="/school/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
+            <form action="${ctx}/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
                 <div class="text-center">
                     <input type="submit" value="Back" class="btn">
                 </div>

@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -13,18 +16,18 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Fees Report Export Success</title>
         <style type="text/css" title="currentStyle">
-            @import "/school/css/dataTable/css/demo_page.css";
-            @import "/school/css/dataTable/css/jquery.dataTables.css";
+            @import "${cssPath}/dataTable/css/demo_page.css";
+            @import "${cssPath}/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
         <!--<script type="text/javascript" language="javascript" src="js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
         
 <style type="text/css">
 .divCSS {
@@ -61,7 +64,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/FeesCollection/download";
+                form1.action="${ctx}/FeesCollection/download";
                 form1.submit();
             }
         </script>
@@ -70,7 +73,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -82,7 +85,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/school/images/bg.jpg" >
+    <body background="${imagesPath}/bg.jpg" >
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>

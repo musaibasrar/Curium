@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : student_details
     Created on : Jan 4, 2013, 4:39:24 PM
     Author     : Musaib
@@ -6,46 +6,113 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
+<%-- NO INCLUDE - Testing if ANY include breaks the page --%>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%-- INLINE TENANT GLOBALS - No includes work with this page --%>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="baseUrl" value="${pageContext.request.contextPath}" />
+<c:set var="jsPath" value="${pageContext.request.contextPath}/js" />
+<c:set var="cssPath" value="${pageContext.request.contextPath}/css" />
+<c:set var="imagesPath" value="${pageContext.request.contextPath}/images" />
+<c:set var="assetsPath" value="${pageContext.request.contextPath}/assets" />
+
+<%-- Extract tenant from context path --%>
+<c:set var="tenant" value="${fn:substring(pageContext.request.contextPath, 1, -1)}" />
+<c:if test="${empty tenant}">
+    <c:set var="tenant" value="school" />
+</c:if>
+
+<%-- Smart image URLs --%>
+<c:set var="tenantImagesPath" value="${pageContext.request.contextPath}/tenant-assets/${tenant}/images" />
+<c:set var="commonImagesPath" value="${pageContext.request.contextPath}/images" />
+<c:set var="logoUrl" value="${tenantImagesPath}/logo.png" />
+<c:set var="logoFallback" value="${commonImagesPath}/logo.png" />
+<c:set var="backgroundUrl" value="${tenantImagesPath}/backgroundfront.png" />
+<c:set var="backgroundFallback" value="${commonImagesPath}/backgroundfront.png" />
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details</title>
 
-        <script type="text/javascript" language="JavaScript" src="/school/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
+        <%-- Inline tenant styling --%>
+        <style>
+        :root {
+            --tenant-primary: #2E5C8A;
+            --tenant-secondary: #B8860B;
+            --tenant-accent: #FFD700;
+            --tenant-font: Arial, sans-serif;
+        }
+        </style>
 
-        <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-        <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <%-- Inline JavaScript globals --%>
+        <script>
+        // Context path variables for JavaScript
+        window.CTX_PATH = '${ctx}';
+        window.CONTEXT_PATH = '${contextPath}';
+        window.BASE_URL = '${baseUrl}';
+        window.CSS_PATH = '${cssPath}';
+        window.JS_PATH = '${jsPath}';
+        window.IMAGES_PATH = '${imagesPath}';
+        window.ASSETS_PATH = '${assetsPath}';
 
-        <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/school/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/school/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.trendline.min.js"></script>
+        // Smart image URLs
+        window.LOGO_URL = '${logoUrl}';
+        window.LOGO_FALLBACK = '${logoFallback}';
+        window.BACKGROUND_URL = '${backgroundUrl}';
+        window.BACKGROUND_FALLBACK = '${backgroundFallback}';
+
+        // Simple tenant globals
+        window.tenantGlobals = {
+            tenant: '${tenant}',
+            basePath: '${ctx}',
+            name: 'School Management System',
+            theme: 'default'
+        };
+
+        console.log('🌍 Tenant Globals Loaded (Inline):', window.tenantGlobals);
+        </script>
+
+        <script type="text/javascript" language="JavaScript" src="${jsPath}/motionpack.js"></script>
+        <link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="${cssPath}/graph/jquery.jqplot.css">
+
+        <link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
+        <script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+
+        <script  type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="${jsPath}/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="${jsPath}/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
+
+
+
         .dataText {
                 border-radius:3px;
                 font-family: Tahoma;
@@ -77,8 +144,8 @@
                 text-align: center;
                 background-color: #E3EFFF;
 
-            }       		
-       			 
+            }
+
             <!--
             .dataTextInActive {
                 border-radius:1px;
@@ -103,7 +170,7 @@
                 height: 22px;
                 vertical-align: middle;
                 text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+                background-image: url("${imagesPath}/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
                 background-color:#4b6a84;
@@ -261,7 +328,7 @@
                 border-right-width: thin;
                 border-bottom-width: thin;
                 border-left-width: thin;
-                background-image: url(images/close.JPG);
+                background-image: url(${imagesPath}/images/close.JPG);
                 background-repeat: repeat-y;
                 background-attachment: scroll;
                 background-position: right;
@@ -294,19 +361,19 @@
             }
             -->
         </style>
-        
+
         <script type="text/javascript">
-            
+
             function updateStudent(){
-               
+
                 var form1=document.getElementById("form1");
-                form1.action="/school/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
+                form1.action="${ctx}/StudentProcess/updateStudentDetails?id=<c:out value='${student.sid}'/>&urlbranchid=<c:out value='${student.branchid}'/>";
                 form1.submit();
             }
-            
 
-            
-      
+
+
+
         </script>
 
         <script type="text/javascript">
@@ -354,18 +421,18 @@
             });
             var type='<c:out default="" value="${typeOfUser}"/>';
             function checkUsertype(){
-            	
+
             	if(type == 'reception'){
             		document.getElementById('modify').style.visibility = 'hidden';
             	}
             }
         </script>
-        
+
         <script type="text/javascript">
         	function printPage(){
         		window.print();
         	}
-        	
+
         </script>
 
 
@@ -374,7 +441,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -386,7 +453,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body background="/images/bg.jpg" onload="checkUsertype();">
+    <body background="${imagesPath}/bg.jpg" onload="checkUsertype();">
         <jsp:useBean id="now" class="java.util.Date" />
         <fmt:formatDate var="today" type="date" value="${now}" />
         <form  method="post" id="form1" modelAttribute="studentDto" enctype="multipart/form-data">
@@ -418,7 +485,7 @@ for(Cookie cookie : cookies){
 
                                     });
                                 });
-                                
+
                                 function calIssues(){
                                     var fromIss = document.getElementById("").value;
                                 }
@@ -431,47 +498,47 @@ for(Cookie cookie : cookies){
             <table width="100%">
                 <tr>
                     <td  class="headerTD">NAME: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UID: &nbsp;<c:out value="${student.studentexternalid}" />
-                      
+
 
                     </td>
                 </tr>
 
             </table>
             <div class="accordion" style="width: 100%;height: 100%">
-		
+
                 <h3><a href="#">Student Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
-                    
-                    
+
+
                     <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
                     </td>
                     </tr>
-                    
+
                   	  <tr>
 							<td width="25%"  class="alignLeft" height="50">Application Type&nbsp;</td>
 							<td width="25%" class="tablerows">
 								<c:out default="" value="${student.stream}" />
 							</td>
 							</tr>
-							
+
                     	<tr>
-                         
+
                             <td  width="25%"  class="alignLeft" height="50">Admission Number
                             </td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
-                            
+
                         <td width="25%" class="alignLeft" height="50">STS Number
 								</td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.sts}" />
                             </td>
-                            
+
                         </tr>
 
 					<tr>
@@ -490,7 +557,7 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                                 <%-- <c:out value="${student.dateofbirth}" /> --%>
                                 <fmt:formatDate value="${student.dateofbirth}" pattern="dd/MM/yyyy"/>
-                                
+
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Age
                             </td>
@@ -508,9 +575,9 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows" >
                             	<fmt:formatDate value="${student.admissiondate}" pattern="dd/MM/yyyy"/>
                             </td>
-                        </tr>  
-                        
-                          
+                        </tr>
+
+
                         <tr>
                             <td width="25%"  class="alignLeft" height="50" >Studying in class</td>
                             <td  width="25%"  class="tablerows">
@@ -523,47 +590,47 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows">
 		                            <c:forEach var="splt" items="${fn:split(student.classadmittedin,'--')}">
-								    ${splt} 
+								    ${splt}
 									</c:forEach>
                             </td>
                         </tr>
-                        
-                        
-                        
+
+
+
                          <tr>
                             <td  width="25%"  class="alignLeft" height="50">Blood Group
                             </td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.bloodgroup}" />
                             </td>
-                                                        
+
                             <td  width="25%"  class="alignLeft" height="50" >Nationality
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.nationality}" />
                             </td>
                         </tr>
-                        
+
                         <tr>
                         <td  width="25%"  class="alignLeft" height="50" >Religion
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.religion}" />
                             </td>
-                  <%--           
+                  <%--
                             <td  width="25%"  class="alignLeft" height="50" >Caste
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.caste}" />
                             </td>
  --%>
-                                      
+
                             <td  width="25%"  class="alignLeft" height="50" >Students Caste Certificate No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.studentscastecertno}" />
                             </td>
-                         
+
                         </tr>
                         <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Students Caste
@@ -575,43 +642,43 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.socialcategory}" />
-                            </td>                        
-                        
+                            </td>
+
                         </tr>
-                        
+
                         <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
                             </td>
                             <td width="25%" class="tablerows" >
-                               
-                                <c:if test="${(student.belongtobpl ==0)}">    
+
+                                <c:if test="${(student.belongtobpl ==0)}">
            						  <c:out default="" value="No" />
            						 </c:if>
-                                <c:if test="${(student.belongtobpl ==1)}">    
+                                <c:if test="${(student.belongtobpl ==1)}">
            						  <c:out default="" value="Yes" />
            						 </c:if>
-           						 
+
                             </td>
                             <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bplcardno}" />
-                            </td>                        
-                        
+                            </td>
+
                         </tr>
-                        
+
                         <tr>
                          <td  width="25%"  class="alignLeft" height="50" >Bag No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />
                             </td>
-                            
+
                             <td  width="25%"  class="alignLeft" height="50" >Student's Aadhar Card No.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.disabilitychild}" />
-                            </td>                        
+                            </td>
                         </tr>
                         <tr>
                         <td  width="25%"  class="alignLeft" height="50" >Special Category
@@ -623,82 +690,82 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.mothertongue}" />
-                            </td>                           
+                            </td>
                         </tr>
-                        
+
                         <tr>
-                        
+
                          <td  width="25%"  class="alignLeft" height="50" >RTE
                             </td>
                             <td width="25%" class="tablerows" >
-                               
-                                <c:if test="${(student.rte ==1)}">    
+
+                                <c:if test="${(student.rte ==1)}">
            						  <c:out default="" value="Yes" />
            						 </c:if>
-                                <c:if test="${(student.rte == 0)}">    
+                                <c:if test="${(student.rte == 0)}">
            						  <c:out default="" value="No" />
            						 </c:if>
-           						 
+
                             </td>
-   
+
                             <td  width="25%"  class="alignLeft" height="50">Remarks
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />
-                                
+
                             </td>
                         </tr>
-                        
+
                         <tr>
-                        
+
                              <td  width="25%"  class="alignLeft" height="50">Created Date
                             </td>
                             <td width="25%" class="tablerows">
                                 <%-- <c:out default="" value="${student.createddate}" /> --%>
                                 <fmt:formatDate value="${student.createddate}" pattern="dd/MM/yyyy"/>
                             </td>
-   
+
    							<td  width="25%"  class="alignLeft" height="50">Admission Year
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.yearofadmission}" />
-                                
+
                             </td>
                         </tr>
-                                                
+
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Class of leaving
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.classonleaving}" />
                             </td>
-                            
+
                              <td  width="25%"  class="alignLeft" height="50">Date of leaving the school
                             </td>
                             <td width="25%" class="tablerows">
                                 <fmt:formatDate value="${student.dateleaving}" pattern="dd/MM/yyyy"/>
                             </td>
-                          
-                           
+
+
                         </tr>
-                        
+
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Reason for leaving
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.reasonleaving}" />
                             </td>
-                            
+
                              <td  width="25%"  class="alignLeft" height="50">No. & date of transfer certificate issued
                             </td>
                             <td width="25%" class="tablerows">
                             <c:out default="" value="${student.notcissued}" /> :
                                 <fmt:formatDate value="${student.datetcissued}" pattern="dd/MM/yyyy"/>
                             </td>
-                          
-                           
+
+
                         </tr>
-                        
+
                          <tr>
                             <td  width="25%"  class="alignLeft" height="50">DND Date
                             </td>
@@ -706,8 +773,8 @@ for(Cookie cookie : cookies){
                                 <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>
-                        
-           
+
+
 
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50">
@@ -724,15 +791,15 @@ for(Cookie cookie : cookies){
                     </table>
                 </div>
     </div>
-    
-    
+
+
     <div class="accordion" style="width: 100%;height: 100%">
-		
+
                 <h3><a href="#">Documents</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
-                    
+
                         <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
@@ -741,7 +808,7 @@ for(Cookie cookie : cookies){
                     <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
-                    
+
                     <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
@@ -750,7 +817,7 @@ for(Cookie cookie : cookies){
                     <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
-                    
+
                     <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
@@ -759,7 +826,7 @@ for(Cookie cookie : cookies){
                     <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
                     </td>
                     </tr>
-                    
+
                     <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
@@ -768,7 +835,7 @@ for(Cookie cookie : cookies){
                     <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
                     </td>
                     </tr>
-                    
+
                     <tr>
                     <td>
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
@@ -780,14 +847,14 @@ for(Cookie cookie : cookies){
                     </table>
                 </div>
     </div>
-    
+
     	<div class="accordion" style="width: 100%;height: 100%">
-		
+
                 <h3><a href="#">Previous School Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
-                    
+
                         <tr>
                             <td width="25%"  class="alignLeft" height="50">Transfer Certificate No.
                             </td>
@@ -800,41 +867,41 @@ for(Cookie cookie : cookies){
                                <fmt:formatDate value="${student.dateoftc}" pattern="dd/MM/yyyy"/>
                             </td>
                         </tr>
-                        
+
                          <tr>
                         <td width="25%"   class="alignLeft" height="50" >Previous Class Studied</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.stdlaststudied}" />
                             </td>
-                            
-                            
+
+
                             <td width="25%"   class="alignLeft" height="50" >Previous School Name</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.schoollastattended}" />
                             </td>
                         </tr>
-                        
+
                          <tr>
                         <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.languagesstudied}" />
                             </td>
-                            
-                            
+
+
                             <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.subsequentprogress}" />
                             </td>
                         </tr>
-                        
+
                         <tr>
                        <td width="25%" class="alignLeft" height="50">Previous School Medium of
 								Instruction</td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.mediumofinstruction}" />
                             </td>
-                            
-                            
+
+
                             <td width="25%" class="alignLeft" height="50">Previous School
 								Type </td>
                             <td width="25%" class="tablerows">
@@ -857,28 +924,28 @@ for(Cookie cookie : cookies){
                     </table>
                 </div>
     </div>
-    
+
     <div class="accordion" style="width: 100%;height: 100%">
-		
+
                 <h3><a href="#">Bank Details</a></h3>
                 <div>
 
                     <table  border="0px" width="100%"  id="table1" align="center">
                          <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Bank Name
-                           
+
                             </td>
                             <td width="25%" class="tablerows" >
                               ${student.bankname}
                             </td>
-                            
+
                              <td  width="25%"  class="alignLeft" height="50">Bank IFSC Code
                             </td>
                             <td width="25%" class="tablerows">
                                 ${student.bankifsc}
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50" >Account No.
                             </td>
@@ -886,7 +953,7 @@ for(Cookie cookie : cookies){
                                ${student.accno}
                             </td>
                         </tr>
-                        
+
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50">
                             </td>
@@ -899,11 +966,11 @@ for(Cookie cookie : cookies){
 
                             </td>
                         </tr>
-                        
+
                     </table>
                 </div>
     </div>
-    
+
             <div id="accordion1" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Parent's Details</a></h3>
@@ -923,7 +990,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${parents.mothersname}" />
                             </td>
                         </tr>
-                        
+
                         <tr>
 
                             <td width="25%"  class="alignLeft" height="50">Father's Qualification</td>
@@ -940,7 +1007,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
-                                
+
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
                             </td>
@@ -952,7 +1019,7 @@ for(Cookie cookie : cookies){
                             <td width="25%"  class="alignLeft" height="50">Guardian's name & address</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${student.guardiandetails}" />
-                                
+
                             </td>
                             <td width="25%"  class="alignLeft" height="50" >Annual Income
                             </td>
@@ -975,43 +1042,43 @@ for(Cookie cookie : cookies){
 					<td width="25%" class="alignLeft" height="50">Email</td>
 						<td width="25%" class="tablerows"><c:out default=""
 								value="${parents.email}" /></td>
-								
+
 						<td width="25%" class="alignLeft" height="50">Number Of
 							Dependents</td>
 						<td width="25%" class="tablerows"><c:out default=""
 								value="${parents.noofdependents}" /></td>
 					</tr>
-					
+
 					<tr>
                             <td width="25%"   class="alignLeft" height="50" >Parmanent Address</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.addresspermanent}" />
                             </td>
-                           
-                            
+
+
                             <td  width="25%"  class="alignLeft" height="50">Temporary Address
                             </td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${parents.addresstemporary}" />
                             </td>
-                        
+
                         </tr>
                         <tr>
                             <td width="25%"   class="alignLeft" height="50" >Number Of Dependents</td>
                             <td width="25%" class="tablerows"  >
                                  <c:out default="" value="${parents.noofdependents}" />
-                                
+
                             </td>
                             <td  width="25%"  class="alignLeft" height="50">Notes
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${parents.remarks}" />
-                                
+
                             </td>
 
 
                         </tr>
-                        
+
 
 
                         <tr>
@@ -1028,7 +1095,7 @@ for(Cookie cookie : cookies){
                         </tr>
                     </table>
 
-                    
+
 
                 </div>
 
@@ -1041,7 +1108,7 @@ for(Cookie cookie : cookies){
               <div id="accordion2" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Details</a></h3>
-                
+
                 <div>
 					<div align="center">
 					<h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
@@ -1053,13 +1120,13 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr  >
-                            
+
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Reference Number</th>
                             <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">Total Amount</th>
                             <th title="click to sort" class="headerText">View Details</th>
-                             
+
 
 
                         </tr>
@@ -1073,16 +1140,16 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.key.branchreceiptnumber}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.value}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/school/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="${ctx}/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.key.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                             </tr>
                         </c:forEach>
-                        
-                        
+
+
                     </tbody>
-                   
+
                 </table>
-				
-                    
+
+
 
                 </div>
 
@@ -1095,7 +1162,7 @@ for(Cookie cookie : cookies){
             <div id="accordion3" style="width: 100%;height: 100%">
 
                 <h3><a href="#">Fees Structure</a></h3>
-                
+
                 <div>
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${currentAcademicYear}</h>&nbsp;&nbsp;&nbsp;
@@ -1108,7 +1175,7 @@ for(Cookie cookie : cookies){
 
                     <thead>
                         <tr  >
-                            
+
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
@@ -1123,7 +1190,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
                             <th title="click to sort" class="headerText"></th>
-                             
+
 
 
                         </tr>
@@ -1133,7 +1200,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${feesstructure}" var="feesstructure">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                
+
                               	<td class="dataText"></td>
                                	<td class="dataText"></td>
                                 <td class="dataText"></td>
@@ -1147,13 +1214,13 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesstructure.waiveoff}"/></td>
                             </tr>
                         </c:forEach>
-                        
-                        
+
+
                     </tbody>
-                   
+
                 </table>
-				
-                    
+
+
 
                 </div>
 
@@ -1165,7 +1232,7 @@ for(Cookie cookie : cookies){
             </div>
             <table  width="70%"  id="table11" align="center">
                         <tr>
-                            <td width="30%"> 
+                            <td width="30%">
 
                             </td>
                             <td>
@@ -1180,22 +1247,19 @@ for(Cookie cookie : cookies){
                         </tr>
 
                     </table>
-            <script>
-                typeofrelation();
-            </script>
 
         </form>
         <script>
-        
+
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/StudentProcess/viewAll";
+                form1.action="${ctx}/StudentProcess/viewAll";
                 form1.submit();
             }
-            
+
             function Print(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/StudentProcess/printAdmissionForm";
+                form1.action="${ctx}/StudentProcess/printAdmissionForm";
                 form1.submit();
             }
         </script>

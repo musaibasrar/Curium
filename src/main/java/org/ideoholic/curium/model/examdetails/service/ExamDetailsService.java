@@ -25,11 +25,10 @@ import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.model.examdetails.dto.HallTicketResponseDto;
 import org.ideoholic.curium.model.examdetails.dto.PrintPreviewHallTicketDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,32 +40,31 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ExamDetailsService {
-	
-	@Autowired
-	private ExamDetailsDAO examDetailsDao;
 
-	public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
+    public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
 
-		Exams exams = new Exams();
+        Exams exams = new Exams();
 
-		if (branchId != null) {
+        if (branchId != null) {
 
-			exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
-			exams.setBranchid(Integer.parseInt(branchId));
-			exams = examDetailsDao.addExams(exams);
-		}
-		if (exams == null) {
-			return ResultResponse.builder().success(false).build();
-		}
-		return ResultResponse.builder().success(true).build();
-	}
+            exams.setExamname(DataUtil.emptyString(addExamDto.getExamName()));
+            exams.setBranchid(Integer.parseInt(branchId));
+            exams = new ExamDetailsDAO().addExams(exams);
+
+        }
+        if (exams == null) {
+            return ResultResponse.builder().success(false).build();
+
+        }
+        return ResultResponse.builder().success(true).build();
+    }
 
 
     public ExamsListResponseDto readListOfExams(String branchId) {
         ExamsListResponseDto examsListResponseDto = new ExamsListResponseDto();
         if (branchId != null) {
 
-            List<Exams> exams  = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
+            List<Exams> exams  = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
             examsListResponseDto.setExams(exams);
             examsListResponseDto.setSuccess(true);
             if (exams == null) {
@@ -88,7 +86,7 @@ public class ExamDetailsService {
                 ids.add(Integer.valueOf(id));
 
             }
-            examDetailsDao.deleteMultiple(ids);
+            new ExamDetailsDAO().deleteMultiple(ids);
             return ResultResponse.builder().success(true).build();
         } else {
             return ResultResponse.builder().success(false).build();
@@ -174,7 +172,7 @@ public class ExamDetailsService {
                     examScheduleList.add(examschedule);
                 }
             }
-            result = examDetailsDao.addExamSchedule(examScheduleList);
+            result = new ExamDetailsDAO().addExamSchedule(examScheduleList);
             return ResultResponse.builder().success(result).build();
         }
         return ResultResponse.builder().build();
@@ -187,7 +185,7 @@ public class ExamDetailsService {
 
         if (branchId != null) {
 
-            List<Examschedule> exams = examDetailsDao.readListOfExamSchedule(Integer.parseInt(branchId));
+            List<Examschedule> exams = new ExamDetailsDAO().readListOfExamSchedule(Integer.parseInt(branchId));
             result.setExamschedules(exams);
             result.setSuccess(true);
             if (exams == null) {
@@ -209,7 +207,7 @@ public class ExamDetailsService {
                 ids.add(Integer.valueOf(id));
 
             }
-            examDetailsDao.deleteExamSchedule(ids);
+            new ExamDetailsDAO().deleteExamSchedule(ids);
             return ResultResponse.builder().success(true).build();
         } else {
             return ResultResponse.builder().success(false).build();
@@ -240,7 +238,7 @@ public class ExamDetailsService {
         }
         if (branchId != null) {
 
-            List<Examschedule> examschedules = examDetailsDao.getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(branchId));
+            List<Examschedule> examschedules = new ExamDetailsDAO().getExamScheduleDetails(academicYear, classH, exam, Integer.parseInt(branchId));
             result.setExamschedules(examschedules);
             result.setSuccess(true);
             if (!examschedules.isEmpty()) {
@@ -277,8 +275,8 @@ public class ExamDetailsService {
             classStudying = classStudying + "--" + "%";
 
             if (admNo.equals("")) {
-            	studentList = new StudentDetailsDAO().getReferredList(studentIdsList);
-                //studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.student.classstudying LIKE '" + classStudying + "' and (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') and parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid = " + branchId + " order by parents.student.sid desc");
+            	studentList = new studentDetailsDAO().getReferredList(studentIdsList);
+                //studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");
             } else {
                 Parents parent = new Parents();
                 Student student = new Student();

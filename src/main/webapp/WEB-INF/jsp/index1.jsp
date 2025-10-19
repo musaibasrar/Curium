@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -57,11 +60,11 @@
     </head>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/school/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="${ctx}/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/school/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/school/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="${ctx}/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="${ctx}/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    

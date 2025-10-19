@@ -1,5 +1,23 @@
 package org.ideoholic.curium.model.sendsms.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
+import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
+import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.SMSReportResponse;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,38 +32,29 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
-import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
-import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.SMSReportResponse;
-import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Service
 public class SmsService {
+	
+	 private HttpServletRequest request;
+	    private HttpServletResponse response;
+	    private HttpSession httpSession;
 	    
 	private static DecimalFormat df2 = new DecimalFormat(".##");
+	 private static final Logger logger = LogManager.getLogger(SmsService.class);
+	
+	public SmsService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+        this.response = response;
+        this.httpSession = request.getSession();
+	}
 
 
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
 
 		int noOfRecords = 100;
 		int offset=0;
-		
-		if(branchId!=null){
 		int maxRetries = 3;
 		int attempts = 0;
+		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
 			String addClass =dto.getAddClass();
@@ -53,7 +62,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -68,7 +77,7 @@ public class SmsService {
 				String classStudying = DataUtil.emptyString(conClassStudying);
 				
 				if(!classStudying.equalsIgnoreCase("")){
-					querySub = querySub + "parents.student.classstudying like '"+classStudying+"' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId);
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 				}	
 			}
 			
@@ -78,7 +87,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			log.info("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -104,7 +113,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
@@ -136,7 +145,6 @@ public class SmsService {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
-		log.info("Numbers are *** "+numbers);
 		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
 		if(resultSMS==200){
 			result.setSuccess(true);
@@ -169,7 +177,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			log.info("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -187,7 +195,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
@@ -270,8 +278,8 @@ public class SmsService {
 		// Send data
 		
 		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-		log.info(templateType+": URL "+POST_URL);
-		log.debug(templateType+": URL "+POST_URL);
+		logger.info(templateType+": URL "+POST_URL);
+		System.out.println(templateType+": URL "+POST_URL);
         URL obj = new URL(POST_URL);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
@@ -285,7 +293,7 @@ public class SmsService {
 		// For POST only - END
 
 		responseCode = con.getResponseCode();
-		log.info("POST Response Code :: " + responseCode);
+		logger.info("POST Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { //success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -299,13 +307,13 @@ public class SmsService {
 			in.close();
 
 			// print result
-			log.info(response.toString());
+			logger.info(response.toString());
 		} else {
-			log.error("POST request not worked");
+			logger.info("POST request not worked");
 		}}}
 		catch (Exception e)
 		{
-		log.error("Error SMS "+e);
+		logger.info("Error SMS "+e);
 		}
 		return responseCode;
 	}
@@ -339,6 +347,7 @@ public class SmsService {
 								            attempts++;
 								        }
 								}
+								
 							}
 							
 						}

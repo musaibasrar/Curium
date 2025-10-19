@@ -1,8 +1,15 @@
+/**
+ * 
+ */
 package org.ideoholic.curium.model.feescollection.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
@@ -10,430 +17,533 @@ import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
-import org.ideoholic.curium.repositories.FeesCollectionRepository;
-import org.ideoholic.curium.repositories.OtherReceiptInfoRepository;
-import org.ideoholic.curium.repositories.OtherfeescollectionRepository;
-import org.ideoholic.curium.repositories.ReceiptinfoRepository;
-import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
-import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
-import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
-import org.ideoholic.curium.util.QueryUtil;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
-@RequiredArgsConstructor
+/**
+ * @author Musaib_2
+ *
+ */
 public class feesCollectionDAO {
+	Session session = null;
+    Transaction transaction = null;
+    Transaction transaction1;
+    SessionFactory sessionFactory;
+    
+    private static final Logger logger = LogManager.getLogger(feesCollectionDAO.class);
+
+	public feesCollectionDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
+
+	@SuppressWarnings("finally")
+	public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 Query queryReceipt = session.createQuery("from Receiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
+			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
+			 	
+			 	
+			 	
+			 	if(ReceiptList.size() > 0) {
+			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
+			 		receiptInfo.setBranchreceiptnumber("VS"+String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
+			 	}else {
+			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
+			 	}
+			 	
+			 	//Receipts
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				//
+				
+				// J.V
+				transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactionsIncome);
+				Query queryAccountsIncome = session.createQuery(updateDrAccountIncome);
+				queryAccountsIncome.executeUpdate();
+				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
+				queryqueryAccountsIncome1.executeUpdate();
+				//
+				
+				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
+				session.save(receiptInfo);
+				
+				if(feescollectionList!=null) {
+					
+					for (Feescollection singleFeescollection :  feescollectionList) {
+						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
+						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						query.executeUpdate();
+						 session.save(singleFeescollection);
+					}
+				}
+				
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
+
+	}
+	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Feescollection> readListOfObject(Integer feeid) {
+
+		List<Feescollection> results = new ArrayList<Feescollection>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Feescollection>) session.createQuery("From Feescollection where feesdetailsid="+feeid).list();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public List<Feescollection> getFeesForTheCurrentYear(long id, String currentAcademicYear) {
+		List<Feescollection> results = new ArrayList<Feescollection>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Feescollection>) session.createQuery("From Feescollection where sid='"+id+"' and academicyear = '"+currentAcademicYear+"'").list();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public void createReceipt(Receiptinfo receiptInfo) {
+
+		try {
+			 transaction = session.beginTransaction();
+			 session.save(receiptInfo);
+			 transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+	}
+
+	public Receiptinfo getReceiptInfoDetails(Integer receiptNumber) {
+		
+		Receiptinfo receiptDetails = new Receiptinfo();
+		
+		try {
+			 
+			 transaction = session.beginTransaction();
+			 Query query = session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' ");
+			 receiptDetails = (Receiptinfo) query.uniqueResult();
+			 transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return receiptDetails;
+		
+	}
+
+	public List<Receiptinfo> getReceiptDetailsPerStudent(long id,
+			String currentacademicyear) {
+		List<Receiptinfo> receiptInfo = new ArrayList<Receiptinfo>();
+		try{
+			transaction = session.beginTransaction();
+			receiptInfo = session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return receiptInfo;
+	}
+
+	public List<Feescollection> getFeesCollectionDetails(int receiptId) {
+
+		List<Feescollection> results = new ArrayList<Feescollection>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Feescollection>) session.createQuery("From Feescollection where receiptnumber="+receiptId).list();
+			transaction.commit();
+			
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+
+	public List<Studentfeesstructure> getStudentsFeesStructure(List<Integer> studentids, String currentYear, String searchCriteria) {
+		
+		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
+
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			// results = (List<PersonalDetails>)
+			// session.createQuery("From PersonalDetails p where p.subscriber=1 and  p.archive = 0 order by name desc LIMIT 5 ").list();
+			Query query = session.createQuery("from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'");
+			query.setParameter("ids", studentids);
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 	
-	private final QueryUtil queryUtil;
+	@SuppressWarnings("finally")
+	public boolean createother(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
 
-    private final FeesCollectionRepository feesCollectionRepository;
+		boolean result = false;
+		try {
 
-    private final ReceiptinfoRepository receiptinfoRepository;
+			 transaction = session.beginTransaction();
 
-    private final StudentFeesStructureRepository studentfeesstructureRepository;
+			 Query queryReceipt = session.createQuery("from Otherreceiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
+			 	List<Otherreceiptinfo> ReceiptList = queryReceipt.list();
 
-    private final OtherfeescollectionRepository otherfeescollectionRepository;
+			 	if(ReceiptList.size() > 0) {
+			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
+			 	}else {
+			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
+			 	}
+				/*
+			 	//Receipts
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				//
 
-    private final OtherReceiptInfoRepository otherreceiptinfoRepository;
+				// J.V
+				transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactionsIncome);
+				Query queryAccountsIncome = session.createQuery(updateDrAccountIncome);
+				queryAccountsIncome.executeUpdate();
+				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
+				queryqueryAccountsIncome1.executeUpdate();
+				//
+				*/
+				receiptInfo.setReceiptvoucher(0);
+				receiptInfo.setJournalvoucher(0);
+				session.save(receiptInfo);
 
-    private final StudentOtherFeesStructureRepository studentotherfeesstructureRepository;
-
-    private final VoucherEntryTransactionsRepository voucherEntrytransactionsRepository;
-
-    @Transactional
-    public boolean create(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions,
-                          String updateCrAccount, String updateDrAccount, VoucherEntrytransactions transactionsIncome,
-                          String updateDrAccountIncome, String updateCrAccountIncome) {
-        boolean result = false;
-        try {
-            // Find latest receipt for branch
-            Receiptinfo latestReceipt = receiptinfoRepository.findTopByBranchidOrderByReceiptnumberDesc(receiptInfo.getBranchid());
-			if (latestReceipt != null) {
-				String branchReceiptNo = latestReceipt.getBranchreceiptnumber().substring(2);
-				receiptInfo.setBranchreceiptnumber("VS" + String.format("%06d", Integer.parseInt(branchReceiptNo) + 1));
-			} else {
-				receiptInfo.setBranchreceiptnumber(String.format("%06d", 1));
+			for (Otherfeescollection singleFeescollection :  feescollectionList) {
+				singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
+				Query query = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+				query.executeUpdate();
+				 session.save(singleFeescollection);
 			}
 
-            // Receipts
-            transactions.setNarration(transactions.getNarration().concat(" Receipt no: " + receiptInfo.getBranchreceiptnumber()));
-            voucherEntrytransactionsRepository.save(transactions);
 
-            // session.createQuery(updateDrAccount);
-            queryUtil.runUpdateQuery(updateDrAccount);
-            // session.createQuery(updateCrAccount);
-            queryUtil.runUpdateQuery(updateCrAccount);
+	            transaction.commit();
+	            result = true;
 
-            // J.V
-            transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: " + receiptInfo.getBranchreceiptnumber()));
-            voucherEntrytransactionsRepository.save(transactionsIncome);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 
-            // session.createQuery(updateDrAccountIncome);
-            queryUtil.runUpdateQuery(updateDrAccountIncome);
-            // session.createQuery(updateCrAccountIncome);
-            queryUtil.runUpdateQuery(updateCrAccountIncome);
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
 
-            receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
-            receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
-            receiptinfoRepository.save(receiptInfo);
+	}
 
-            if (feescollectionList != null) {
-                for (Feescollection singleFeescollection : feescollectionList) {
-                    singleFeescollection.setReceiptInfo(receiptInfo);
+	
+	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Otherfeescollection> otherreadListOfObject(Integer feeid) {
 
-                    // session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
-                    Studentfeesstructure sfs = studentfeesstructureRepository.findById(singleFeescollection.fetchSfsid()).orElse(null);
-                    if (sfs != null) {
-                        sfs.setFeespaid(sfs.getFeespaid() + singleFeescollection.getAmountpaid());
-                        studentfeesstructureRepository.save(sfs);
-                    }
-                    feesCollectionRepository.save(singleFeescollection);
-                }
-            }
+		List<Otherfeescollection> results = new ArrayList<Otherfeescollection>();
+		try {
 
-            result = true;
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return result;
-    }
+			transaction = session.beginTransaction();
+			results = (List<Otherfeescollection>) session.createQuery("From Otherfeescollection where feesdetailsid="+feeid).list();
 
-    @Transactional
-    public List<Feescollection> readListOfObject(Integer feeid) {
-    	List<Feescollection> results = new ArrayList<Feescollection>();
-        try {
-        	// session.createQuery("From Feescollection where feesdetailsid="+feeid)
-            // return feescollectionRepository.findByFeesdetailsid(feeid);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return results;
-    }
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 
-    @Transactional
-    public List<Feescollection> getFeesForTheCurrentYear(long id, String currentAcademicYear) {
-        try {
-        	// session.createQuery("From Feescollection where sid='"+id+"' and academicyear = '"+currentAcademicYear+"'").list();
-            return feesCollectionRepository.findByStudent_SidAndAcademicyear(id, currentAcademicYear);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+	
+	public Otherreceiptinfo getOtherReceiptInfoDetails(Integer receiptNumber) {
 
-    @Transactional
-    public void createReceipt(Receiptinfo receiptInfo) {
-        try {
-        	// session.save(receiptInfo);
-            receiptinfoRepository.save(receiptInfo);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+		Otherreceiptinfo receiptDetails = new Otherreceiptinfo();
 
-    @Transactional
-    public Receiptinfo getReceiptInfoDetails(Integer receiptNumber) {
-        try {
-        	// session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' ");
-            return receiptinfoRepository.findById(receiptNumber).orElse(null);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+			try {
 
-    @Transactional
-    public List<Receiptinfo> getReceiptDetailsPerStudent(long id, String currentacademicyear) {
-        try {
-        	// session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-            return receiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            e.printStackTrace();
-            throw e;
-        }
-    }
+				 transaction = session.beginTransaction();
+				 Query query = session.createQuery("from Otherreceiptinfo where receiptnumber = '"+receiptNumber+"' ");
+				 receiptDetails = (Otherreceiptinfo) query.uniqueResult();
+				 transaction.commit();
+			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 
-    @Transactional
-    public List<Feescollection> getFeesCollectionDetails(int receiptId) {
-        try {
-        	// session.createQuery("From Feescollection where receiptnumber="+receiptId).list();
-            return feesCollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+		            hibernateException.printStackTrace();
+		        } finally {
+					HibernateUtil.closeSession();
+				}
+			return receiptDetails;
 
-    @Transactional
-    public List<Studentfeesstructure> getStudentsFeesStructure(List<Integer> studentids, String currentYear, String searchCriteria) {
-        try {
-            // session.createQuery("from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'");
-        	String finalQuery = "from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'";
-            return queryUtil.runGivenQuery(finalQuery, Studentfeesstructure.class);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+		}
+	
+	public List<Otherreceiptinfo> getOtherReceiptDetailsPerStudent(long id,
+			String currentacademicyear) {
+		List<Otherreceiptinfo> receiptInfo = new ArrayList<Otherreceiptinfo>();
+		try{
+			transaction = session.beginTransaction();
+			receiptInfo = session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return receiptInfo;
+	}
+	
+	
+	public List<Otherfeescollection> getOtherFeesCollectionDetails(int receiptId) {
 
-    @Transactional
-    public boolean createother(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList, VoucherEntrytransactions transactions,
-                              String updateCrAccount, String updateDrAccount, VoucherEntrytransactions transactionsIncome,
-                              String updateDrAccountIncome, String updateCrAccountIncome) {
-        boolean result = false;
-        try {
-            // Find latest receipt for branch
-            Otherreceiptinfo latestReceipt = otherreceiptinfoRepository.findTopByBranchidOrderByReceiptnumberDesc(receiptInfo.getBranchid());
+		List<Otherfeescollection> results = new ArrayList<Otherfeescollection>();
+		try {
 
-            if (latestReceipt != null) {
-                receiptInfo.setBranchreceiptnumber(String.format("%03d", Integer.parseInt(latestReceipt.getBranchreceiptnumber()) + 1));
-            } else {
-                receiptInfo.setBranchreceiptnumber(String.format("%03d", 1));
-            }
+			transaction = session.beginTransaction();
+			results = (List<Otherfeescollection>) session.createQuery("From Otherfeescollection where receiptnumber="+receiptId).list();
+			transaction.commit();
+			
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+	
+	public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(long id,
+			String currentacademicyear) {
+		List<Otherreceiptinfo> receiptInfo = new ArrayList<Otherreceiptinfo>();
+		try{
+			transaction = session.beginTransaction();
+			receiptInfo = session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return receiptInfo;
+	}
 
-            // Receipts
-		 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
-            // session.save(transactions);
-            voucherEntrytransactionsRepository.save(transactions);
-            // session.createQuery(updateDrAccount);
-            queryUtil.runUpdateQuery(updateDrAccount);
-            // session.createQuery(updateCrAccount);
-            queryUtil.runUpdateQuery(updateCrAccount);
+	public Studentfeesstructure getStudentFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
+		
+		Studentfeesstructure result = new Studentfeesstructure();
 
-            // J.V
-			transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
-            // session.save(transactionsIncome);
-            voucherEntrytransactionsRepository.save(transactionsIncome);
-            // session.createQuery(updateDrAccountIncome);
-            queryUtil.runUpdateQuery(updateDrAccountIncome);
-            // session.createQuery(updateCrAccountIncome);
-            queryUtil.runUpdateQuery(updateCrAccountIncome);
+		try {
+			transaction = session.beginTransaction();
 
-            receiptInfo.setReceiptvoucher(0);
-            receiptInfo.setJournalvoucher(0);
-            otherreceiptinfoRepository.save(receiptInfo);
+			Query query = session.createQuery("from Studentfeesstructure sfs where sfs.sid="+sid+" and sfs.Feescategory.idfeescategory="+idFeesCategory+" and sfs.academicyear = '"+currentAcademicYear+"'");
+			result = (Studentfeesstructure) query.uniqueResult();
+			transaction.commit();
 
-            for (Otherfeescollection singleFeescollection : feescollectionList) {
-                singleFeescollection.setReceiptInfo(receiptInfo);
-                // session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
-                Studentotherfeesstructure sfs = studentotherfeesstructureRepository.findById(singleFeescollection.fetchSfsid()).orElse(null);
-                if (sfs != null) {
-                    sfs.setFeespaid(sfs.getFeespaid() + singleFeescollection.getAmountpaid());
-                    studentotherfeesstructureRepository.save(sfs);
-                }
-                otherfeescollectionRepository.save(singleFeescollection);
-            }
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
 
-            result = true;
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return result;
-    }
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public boolean createReceiptFromImport(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions, String updateCrAccount,
+			String updateDrAccount, VoucherEntrytransactions transactionsIncome, String updateDrAccountIncome, String updateCrAccountIncome) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 		 	
+			 	//Receipts
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				//
+				
+				// J.V
+				transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactionsIncome);
+				Query queryAccountsIncome = session.createQuery(updateDrAccountIncome);
+				queryAccountsIncome.executeUpdate();
+				Query queryqueryAccountsIncome1 = session.createQuery(updateCrAccountIncome);
+				queryqueryAccountsIncome1.executeUpdate();
+				//
+				
+				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+				receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
+				session.save(receiptInfo);
+				
+				if(feescollectionList!=null) {
+					
+					for (Feescollection singleFeescollection :  feescollectionList) {
+						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
+						Query query = session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						query.executeUpdate();
+						 session.save(singleFeescollection);
+					}
+				}
+				
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
 
-    @Transactional
-    public List<Otherfeescollection> otherreadListOfObject(Integer feeid) {
-    	List<Otherfeescollection> results = new ArrayList<Otherfeescollection>();
-        try {
-        	// session.createQuery("From Otherfeescollection where feesdetailsid="+feeid).list();
-            // return otherfeescollectionRepository.findByFeesdetailsid(feeid);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return results;
-    }
+	}
+	
+	public boolean createOtherReceiptFromImport(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 		 	
+				receiptInfo.setReceiptvoucher(0);
+				receiptInfo.setJournalvoucher(0);
+				session.save(receiptInfo);
+				
+				if(feescollectionList!=null) {
+					
+					for (Otherfeescollection singleFeescollection :  feescollectionList) {
+						singleFeescollection.setReceiptnumber(receiptInfo.getReceiptnumber());
+						Query query = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.getSfsid());
+						query.executeUpdate();
+						 session.save(singleFeescollection);
+					}
+				}
+				
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
 
-    @Transactional
-    public Otherreceiptinfo getOtherReceiptInfoDetails(Integer receiptNumber) {
-        try {
-        	// session.createQuery("from Otherreceiptinfo where receiptnumber = '"+receiptNumber+"' ");
-            return otherreceiptinfoRepository.findById(receiptNumber).orElse(null);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+	}
 
-    @Transactional
-    public List<Otherreceiptinfo> getOtherReceiptDetailsPerStudent(long id, String currentacademicyear) {
-        try {
-        	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-            return otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            e.printStackTrace();
-            throw e;
-        }
-    }
+	public Studentotherfeesstructure getStudentOtherFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
+		
+		Studentotherfeesstructure result = new Studentotherfeesstructure();
 
-    @Transactional
-    public List<Otherfeescollection> getOtherFeesCollectionDetails(int receiptId) {
-        try {
-        	// session.createQuery("From Otherfeescollection where receiptnumber="+receiptId).list();
-            return otherfeescollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+		try {
+			transaction = session.beginTransaction();
 
-    @Transactional
-    public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(long id, String currentacademicyear) {
-        try {
-        	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-            return otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            e.printStackTrace();
-            throw e;
-        }
-    }
+			Query query = session.createQuery("from Studentotherfeesstructure sfs where sfs.sid="+sid+" and sfs.otherfeescategory.idfeescategory="+idFeesCategory+" and sfs.academicyear = '"+currentAcademicYear+"'");
+			result = (Studentotherfeesstructure) query.uniqueResult();
+			transaction.commit();
 
-    @Transactional
-    public Studentfeesstructure getStudentFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
-        try {
-        	// session.createQuery("from Studentfeesstructure sfs where sfs.sid="+sid+" and sfs.Feescategory.idfeescategory="+idFeesCategory+" and sfs.academicyear = '"+currentAcademicYear+"'");
-            return studentfeesstructureRepository.findByStudent_SidAndFeescategory_IdfeescategoryAndAcademicyear(Integer.parseInt(sid), Integer.parseInt(idFeesCategory), currentAcademicYear);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
 
-    @Transactional
-    public boolean createReceiptFromImport(Receiptinfo receiptInfo, List<Feescollection> feescollectionList, VoucherEntrytransactions transactions,
-                                           String updateCrAccount, String updateDrAccount, VoucherEntrytransactions transactionsIncome,
-                                           String updateDrAccountIncome, String updateCrAccountIncome) {
-        boolean result = false;
-        try {
-        	//Receipts
-            transactions.setNarration(transactions.getNarration().concat(" Receipt no: " + receiptInfo.getBranchreceiptnumber()));
-            // session.save(transactions); 
-            voucherEntrytransactionsRepository.save(transactions);
-            // session.createQuery(updateDrAccount); session.createQuery(updateCrAccount);
-            queryUtil.runUpdateQuery(updateDrAccount);
-            queryUtil.runUpdateQuery(updateCrAccount);
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+		}
+	}
+	
+	
+	public boolean modifyFeesPaymentType(String updateDrAccountOld, String updateDrAccountNew, String updateVoucherEntry, String updateReceiptinfoPaymentMethod) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 	
+			 	//Receipts
+				Query queryAccounts1 = session.createQuery(updateDrAccountOld);
+				queryAccounts1.executeUpdate();
+				Query queryqueryAccounts2 = session.createQuery(updateDrAccountNew);
+				queryqueryAccounts2.executeUpdate();
+				Query queryqueryAccounts3 = session.createQuery(updateVoucherEntry);
+				queryqueryAccounts3.executeUpdate();
+				Query queryqueryAccounts4 = session.createQuery(updateReceiptinfoPaymentMethod);
+				queryqueryAccounts4.executeUpdate();
+				//
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
 
-            // J.V
-            transactionsIncome.setNarration(transactionsIncome.getNarration().concat(" Receipt no: " + receiptInfo.getBranchreceiptnumber()));
-            // session.save(transactionsIncome);
-            voucherEntrytransactionsRepository.save(transactionsIncome);
-            // session.createQuery(updateDrAccountIncome); session.createQuery(updateCrAccountIncome);
-            queryUtil.runUpdateQuery(updateDrAccountIncome);
-            queryUtil.runUpdateQuery(updateCrAccountIncome);
+	}
 
-            receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
-            receiptInfo.setJournalvoucher(transactionsIncome.getTransactionsid().intValue());
-            receiptinfoRepository.save(receiptInfo);
-
-            if (feescollectionList != null) {
-                for (Feescollection singleFeescollection : feescollectionList) {
-                    singleFeescollection.setReceiptInfo(receiptInfo);
-
-                    // session.createQuery("update Studentfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
-                    Studentfeesstructure sfs = studentfeesstructureRepository.findById(singleFeescollection.fetchSfsid()).orElse(null);
-                    if (sfs != null) {
-                        sfs.setFeespaid(sfs.getFeespaid() + singleFeescollection.getAmountpaid());
-                        studentfeesstructureRepository.save(sfs);
-                    }
-                    feesCollectionRepository.save(singleFeescollection);
-                }
-            }
-
-            result = true;
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return result;
-    }
-
-    @Transactional
-    public boolean createOtherReceiptFromImport(Otherreceiptinfo receiptInfo, List<Otherfeescollection> feescollectionList) {
-        boolean result = false;
-        try {
-            receiptInfo.setReceiptvoucher(0);
-            receiptInfo.setJournalvoucher(0);
-            otherreceiptinfoRepository.save(receiptInfo);
-
-            if (feescollectionList != null) {
-                for (Otherfeescollection singleFeescollection : feescollectionList) {
-                    singleFeescollection.setReceiptInfo(receiptInfo);
-
-                    // session.createQuery("update Studentotherfeesstructure set feespaid=feespaid+"+singleFeescollection.getAmountpaid()+" where sfsid="+singleFeescollection.fetchSfsid());
-                    Studentotherfeesstructure sfs = studentotherfeesstructureRepository.findById(singleFeescollection.fetchSfsid()).orElse(null);
-                    if (sfs != null) {
-                        sfs.setFeespaid(sfs.getFeespaid() + singleFeescollection.getAmountpaid());
-                        studentotherfeesstructureRepository.save(sfs);
-                    }
-                    otherfeescollectionRepository.save(singleFeescollection);
-                }
-            }
-
-            result = true;
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return result;
-    }
-
-    @Transactional
-    public Studentotherfeesstructure getStudentOtherFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
-        try {
-            return studentotherfeesstructureRepository.findByStudent_SidAndOtherfeescategory_IdfeescategoryAndAcademicyear(
-                Integer.parseInt(sid), Integer.parseInt(idFeesCategory), currentAcademicYear);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-    }
-
-    @Transactional
-    public boolean modifyFeesPaymentType(String updateDrAccountOld, String updateDrAccountNew, String updateVoucherEntry, String updateReceiptinfoPaymentMethod) {
-        boolean result = false;
-        try {
-            // session.createQuery(updateDrAccountOld);
-            // session.createQuery(updateDrAccountNew);
-            // session.createQuery(updateVoucherEntry);
-            // session.createQuery(updateReceiptinfoPaymentMethod);
-            // You should implement these as repository update methods
-
-            // Example (beginner-friendly): If you had a repository method called "updateDrAccountOld", you would call it here.
-            // e.g., voucherEntrytransactionsRepository.updateDrAccountOld(...);
-
-            result = true;
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-        return result;
-    }
 }

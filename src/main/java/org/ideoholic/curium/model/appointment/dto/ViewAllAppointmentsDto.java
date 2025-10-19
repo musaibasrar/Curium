@@ -1,16 +1,12 @@
 package org.ideoholic.curium.model.appointment.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-
 public class ViewAllAppointmentsDto {
     private int page;
-
 }

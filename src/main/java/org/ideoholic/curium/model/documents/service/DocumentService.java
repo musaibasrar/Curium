@@ -32,7 +32,6 @@ import org.ideoholic.curium.model.documents.dto.ParentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.documents.dto.StudentNameSearchDto;
-import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
@@ -41,7 +40,7 @@ import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.service.StandardService;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
@@ -54,9 +53,6 @@ public class DocumentService {
 
 	@Autowired
 	private StandardService standardService;
-	
-	@Autowired
-	private DocumentDAO documentDAO;
 
 	private HttpServletResponse response;
 	
@@ -71,7 +67,7 @@ public class DocumentService {
 		public ResultResponse transferCertificate(String branchid) {
 		if (branchid != null) {
 			try {
-				List<Parents> list = new StudentDetailsDAO()
+				List<Parents> list = new studentDetailsDAO()
 						.getStudentsList("from Parents where branchid = " + Integer.parseInt(branchid));
 				return ResultResponse.builder().success(true).resultList(list).build();
 			} catch (Exception e) {
@@ -118,7 +114,7 @@ public class DocumentService {
 		
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = new StudentDetailsDAO().updateStudent(student);
+		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 
 		 if(updateStudent){
 			 tc.setSid(studentId);
@@ -126,10 +122,10 @@ public class DocumentService {
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
 			 
-			 Transfercertificate transferCertificate = documentDAO.getTransferCertificateDetails(tc.getSid()); 
+			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
-				 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
-				 parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
+				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 transferCertificateResponseDto.setReason(leavingReason); 
 				 transferCertificateResponseDto.setBookNo(bookno);
@@ -161,13 +157,13 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = documentDAO.generateTransferCertificate(tc);
+					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
 			}
 		 }
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
-			 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
-			 parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
+			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 			 transferCertificateResponseDto.setReason(leavingReason); 
 			 transferCertificateResponseDto.setBookNo(bookno);
@@ -299,10 +295,10 @@ public class DocumentService {
 			Parents parents = new Parents();
 			Transfercertificate tc = new Transfercertificate();
 
-			tc = documentDAO.getTransferCertificateDetails(studentId);
+			tc = new DocumentDAO().getTransferCertificateDetails(studentId);
 
-			String getStudentInfo = "from Parents as parents where parents.student.sid=" + studentId;
-			parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
+			String getStudentInfo = "from Parents as parents where parents.Student.sid=" + studentId;
+			parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			tcResponseDto.setParents(parents);
 			tcResponseDto.setTc(tc);
 
@@ -319,7 +315,7 @@ public class DocumentService {
 		ParentListResponseDto studentListAaResponseDto = ParentListResponseDto.builder().build();
 		if(branchid!=null){
 			try {
-				List<Parents> list = new StudentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
+				List<Parents> list = new studentDetailsDAO().getStudentsList("from Parents where branchid = "+Integer.parseInt(branchid.toString()));
 				studentListAaResponseDto.setParentsList(list);
 				
 				 ResultResponse resultResponse = standardService.viewClasses(branchid);
@@ -360,28 +356,28 @@ public class DocumentService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.student.name like '%" + studentname + "%'";
+				querySub = " parents.Student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.student.classstudying like '" + classStudying + "'";
+				querySub = querySub + " AND parents.Student.classstudying like '" + classStudying + "'";
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.student.classstudying like '" + classStudying + "'";
+				querySub = querySub + " parents.Student.classstudying like '" + classStudying + "'";
 			}
 
 			if (!admissionNumber.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.student.admissionnumber = '" + admissionNumber + "'";
+				querySub = querySub + " AND parents.Student.admissionnumber = '" + admissionNumber + "'";
 			} else if (!admissionNumber.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.student.admissionnumber = '" + admissionNumber + "'";
+				querySub = querySub + " parents.Student.admissionnumber = '" + admissionNumber + "'";
 			}
 
 			if (!"".equalsIgnoreCase(querySub)) {
 				queryMain = queryMain + querySub
-						+ " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="
+						+ " AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="
 						+ Integer.parseInt(branchid)
-						+ " order by parents.student.admissionnumber ASC";
+						+ " order by parents.Student.admissionnumber ASC";
 				System.out.println("QUERY*********** " + queryMain);
-				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			}
 			searchStudentResponseDto.setSuccess(true);
 		}
@@ -399,9 +395,9 @@ public class DocumentService {
 		if (studentIdsDto.getStudentIds() != null) {
 			for (String id : studentIdsDto.getStudentIds()) {
 				if (id != null || id != "") {
-					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.student.id = "+id+" order by parents.student.admissionnumber ASC";
+					String queryMain = "From Parents as parents where parents.branchid="+branchid+" AND parents.Student.id = "+id+" order by parents.Student.admissionnumber ASC";
 
-					Parents searchStudentRecords = new StudentDetailsDAO().getStudentRecords(queryMain);
+					Parents searchStudentRecords = new studentDetailsDAO().getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
 				}
 
@@ -675,7 +671,7 @@ public class DocumentService {
 		
 		if(branchid!=null){
 		
-		String queryMain = "From Parents as parents where parents.student.yearofadmission = '"+studentNameSearchDto.getYearOfAdmission()+"' AND ";
+		String queryMain = "From Parents as parents where parents.Student.yearofadmission = '"+studentNameSearchDto.getYearOfAdmission()+"' AND ";
 		String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
 		String[] addClass = studentNameSearchDto.getClassSearch();
 		//String addSec = request.getParameter("secsearch");
@@ -685,7 +681,7 @@ public class DocumentService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -703,21 +699,21 @@ public class DocumentService {
 		String querySub = "";
 
 		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.student.name like '%" + studentname + "%' and parents.student.branchid="+Integer.parseInt(branchid);
+			querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
 		}
 
 		if (!classStudying.equalsIgnoreCase("")
 				&& !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND (parents.student.classstudying like '"
-					+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+			querySub = querySub + " AND (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		} else if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.student.classstudying like '"
-					+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+			querySub = querySub + " (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
-			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 		}
 		
 	}
@@ -735,7 +731,7 @@ public class DocumentService {
 
 		if (branchid != null) {
 
-			String queryMain = "From Parents as parents where parents.student.promotedyear != '" + currentAcademicYear
+			String queryMain = "From Parents as parents where parents.Student.promotedyear != '" + currentAcademicYear
 					+ "' AND ";
 			String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
 			String[] addClass = studentNameSearchDto.getClassSearch();
@@ -746,7 +742,7 @@ public class DocumentService {
 			for (String classOne : addClass) {
 
 				if (i > 0) {
-					conClassStudying.append("' OR parents.student.classstudying LIKE '" + classOne + "--" + "%");
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '" + classOne + "--" + "%");
 				} else {
 					conClassStudying.append(classOne + "--" + "%");
 				}
@@ -763,23 +759,23 @@ public class DocumentService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.student.name like '%" + studentname + "%' and parents.student.branchid="
+				querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="
 						+ Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND (parents.student.classstudying like '" + classStudying
-						+ "') AND parents.student.branchid=" + Integer.parseInt(branchid)
-						+ " order by parents.student.admissionnumber ASC";
+				querySub = querySub + " AND (parents.Student.classstudying like '" + classStudying
+						+ "') AND parents.Student.branchid=" + Integer.parseInt(branchid)
+						+ " order by parents.Student.admissionnumber ASC";
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " (parents.student.classstudying like '" + classStudying
-						+ "') AND parents.student.branchid=" + Integer.parseInt(branchid)
-						+ " order by parents.student.admissionnumber ASC";
+				querySub = querySub + " (parents.Student.classstudying like '" + classStudying
+						+ "') AND parents.Student.branchid=" + Integer.parseInt(branchid)
+						+ " order by parents.Student.admissionnumber ASC";
 			}
 
 			if (!"".equalsIgnoreCase(querySub)) {
 				queryMain = queryMain + querySub;
-				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+				searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
 			}
 
 		}
@@ -803,8 +799,8 @@ public class DocumentService {
 		String characterPage = null;
 		
 		if(studentIds!=null){
-			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
-			Parents parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
+			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
+			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			parentDto = new ParentDto();
 			parentDto.setParents(parents);
 			characterPage = "charactercertificateprint";
@@ -813,34 +809,17 @@ public class DocumentService {
 		return parentDto;
 	}
 	
-		 public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto,String academicyear,String branchId, String userId) {
+		 public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto) {
 			 ParentDto parentDto = null;
 			String[] studentIds = studentIdsDto.getStudentIds();
 			String bonafidePage = null;
-			 StudyCertificate studyCertificate = new StudyCertificate();
 			
 			if(studentIds!=null){
 				String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
-				Parents parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
-				studyCertificate.setName(parents.getStudent().getName());
-				studyCertificate.setFatherName(parents.getFathersname());
-				studyCertificate.setReason("education");
-				studyCertificate.setClassStudying(parents.getStudent().getClassstudying());
-				studyCertificate.setAcademicYear(academicyear);
-				studyCertificate.setBranchId(Integer.parseInt(branchId));
-				studyCertificate.setDateofissues(new Date());
-				studyCertificate.setSid(parents.getStudent().getSid());
-				studyCertificate.setUid(parents.getStudent().getStudentexternalid());
-				studyCertificate.setUserid(Integer.parseInt(userId));
-				boolean success = documentDAO.add(studyCertificate);
-				if(success) {
+				Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				parentDto = new ParentDto();
 				parentDto.setParents(parents);
 				bonafidePage = "studycertificateprint";
-				}
-				else {
-					bonafidePage = "error";
-				}
 			}
 			
 			return parentDto;
@@ -848,12 +827,12 @@ public class DocumentService {
 		 
 		 public CharacterResponseDto viewTcDetail() {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				List<Transfercertificate> tc = documentDAO.getTCertificateDetails();
+				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
 				List<Integer> sid = new ArrayList<Integer>(); 
 				for (Transfercertificate transfercertificate : tc) {
 					sid.add(transfercertificate.getSid());
 				}
-				List<Parents> listofParents = new StudentDetailsDAO().getReferredList(sid);
+				List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
 				
 				for (Parents parents : listofParents) {
 					int studentId = parents.getStudent().getSid();
@@ -875,15 +854,15 @@ public class DocumentService {
 			}
 
 
-			public CharacterResponseDto printTcList(CharacterDto characterDto, String branchId) {
+			public CharacterResponseDto printTcList(CharacterDto characterDto) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				String[] feesIds = characterDto.getSIds();
-				List<Transfercertificate> tc = documentDAO.getTCertificateDetails();
+				String[] feesIds = characterDto.getFeesIds();
+				List<Transfercertificate> tc = new DocumentDAO().getTCertificateDetails();
 				List<Integer> sid = new ArrayList<Integer>(); 
 				for (String id : feesIds) {
 				    sid.add(Integer.parseInt(id));
 				}
-						List<Parents> listofParents = new StudentDetailsDAO().getReferredList(sid);
+						List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
 				
 				for (Parents parents : listofParents) {
 					int studentId = parents.getStudent().getSid();
@@ -901,22 +880,6 @@ public class DocumentService {
 					}
 				}
 				characterResponseDto.setListofParents(listofParents);
-				characterResponseDto.setSuccess(true);
-				return characterResponseDto;
-			}
-
-			public CharacterResponseDto viewScDetail(String branchId) {
-				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				List<StudyCertificate>  studyCertificate = documentDAO.getStudentCertificateList(Integer.parseInt(branchId));
-				characterResponseDto.setStudyCertificate(studyCertificate);
-				return characterResponseDto;
-			}
-
-			public CharacterResponseDto printScList(CharacterDto characterDto, String branchId) {
-				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				String[] sIds = characterDto.getSIds();
-				List<StudyCertificate> listStudyCertificate = documentDAO.getListOfIssuedStudyCertificate(sIds);
-				characterResponseDto.setStudyCertificate(listStudyCertificate);
 				characterResponseDto.setSuccess(true);
 				return characterResponseDto;
 			}

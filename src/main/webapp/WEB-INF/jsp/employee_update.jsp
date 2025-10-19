@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -15,22 +18,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Update</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/school/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/school/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/school/js/validation/jquery.ketchup.all.min.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="${jsPath}/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+	src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -203,62 +206,34 @@
         box-sizing: border-box;
     }
 </style>
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
 
-<script type="text/javascript">
-	document.getElementById("UpdateExecutive").style.display = 'none';
-</script>
+<script src="${ctx}/JavaScript/actb.js"></script>
+<script src="${ctx}/JavaScript/common.js"></script>
 
 
 <script>
 
 	$(function() {
+		
 		$("#datepicker").datepicker({
 			changeYear : true,
 			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepicker" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
 		});
-	});
-	$(function() {
-		$("#datepickeradmn").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$( "#datepickeradmn" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(
-				function() {
-					$("#datepickeradmn").datepicker("option", "showAnim",
-							$(this).val());
-				});
-	});
-	$(function() {
+		
 		$("#datepickerCD").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
-		$( "#datepickerCD" ).datepicker( "option", "dateFormat", "dd/mm/yy" );
 		$("#anim").change(function() {
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
-		});
-	});
-	$(function() {
-		$("#datepickerleaving").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$( "#datepickerleaving" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#datepickerleaving").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 </script>
@@ -307,7 +282,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -320,7 +295,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/school/EmployeeProcess/viewAllEmployee"
+	<form action="${ctx}/EmployeeProcess/viewAllEmployee"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -378,7 +353,67 @@ for(Cookie cookie : cookies){
 									class="textField" id="name" size="30"
 									data-validate="validate(required)">
 							</label></td>
+							
+							
+							<td width="16%" class="alignRight">Father's Name &nbsp;</td>
 
+							<td width="16%" class="alignLeft"><input
+									name="fathername" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.fathername}" />"
+									class="textField" id="fathername" size="30"
+									data-validate="validate(required)">
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Mother's Name &nbsp;</td>
+							<td width="28%">
+								<label><input
+									name="mothername" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.mothername}" />"
+									class="textField" id="mothername" size="30"
+									data-validate="validate(required)">
+							</label></td>
+							
+							
+							<td width="16%" class="alignRight">Spouse's Name &nbsp;</td>
+
+							<td width="16%" class="alignLeft"><input
+									name="remarks" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.remarks}" />"
+									class="textField" id="remarks" size="30"
+									data-validate="validate(required)">
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							
+							<td width="16%" class="alignRight">Date Of Birth &nbsp;</td>
+							<td width="28%"><label> 
+										<input name="dateofjoining"  autocomplete="false"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yyyy"/>"
+									class="textField" id="datepicker" size="30"
+									data-validate="validate(required)">
+							
+						<%-- 	<input name="dateofjoining"
+									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd-MM-yyyy"/>" 
+									class="textField" id="datepicker" size="30"
+									data-validate="validate(required)"> --%>
+							</label></td>
+							
+							
 							<td width="16%" class="alignRight">Gender &nbsp;</td>
 
 							<td width="16%" class="alignLeft">Male<input type="checkbox"
@@ -389,43 +424,54 @@ for(Cookie cookie : cookies){
 								${employee.gender == 'female' ? 'checked' : ''} />
 							</td>
 
+
 						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+
 						<tr>
 							<td><br /></td>
 						</tr>
 
-						<tr>
-							<td width="20%" class="alignRight">Address &nbsp;</td>
-							<td width="28%"><label> <input name="address"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.address}" />"
-									id="address" size="30">
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="16%" class="alignRight">Blood Group &nbsp;</td>
+							<td width="28%">
+								<label><input
+									name="bloodgroup" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.bloodgroup}" />"
+									class="textField" id="bloodgroup" size="30"
+									data-validate="validate(required)">
 							</label></td>
+							
+							
+							<td width="16%" class="alignRight">Aadhaar No. &nbsp;</td>
 
-							<td width="16%" class="alignRight">Contact Number&nbsp;</td>
+							<td width="16%" class="alignLeft"><input
+									name="aadhaarno" type="text" style="text-transform:uppercase"
+									value="<c:out value="${employee.aadhaarno}" />"
+									class="textField" id="aadhaarno" size="30"
+									data-validate="validate(required)">
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
-							<td align="left"><label> <input name="contactnumber"
+						<tr>
+							<td width="20%" class="alignRight">Contact Number &nbsp;</td>
+							<td width="28%"><label> <input name="contactnumber"
 									type="text" class="textField"
 									value="<c:out default="" value="${employee.contactnumber}" />"
 									id="contactnumber" size="30">
 
 							</label></td>
-						</tr>
 
-						<tr>
-							<td><br /></td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
-						<tr>
 							<td width="16%" class="alignRight">Email&nbsp;</td>
 
 							<td align="left"><label> <input name="email"
@@ -434,21 +480,6 @@ for(Cookie cookie : cookies){
 									id="email" size="30">
 
 							</label></td>
-							<td width="20%" class="alignRight">Date Of Birth &nbsp;</td>
-							<td width="28%"><label> 
-										<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd/MM/yy"/>"
-									class="textField" id="datepicker" size="30"
-									onchange="CalculateAge(this)"
-									data-validate="validate(required)">
-							
-						<%-- 	<input name="dateofjoining"
-									type="text" value="<fmt:formatDate value="${employee.dateofjoining}" pattern="dd-MM-yyyy"/>" 
-									class="textField" id="datepicker" size="30"
-									data-validate="validate(required)"> --%>
-							</label></td>
-
-
 						</tr>
 
 						<tr>
@@ -459,25 +490,50 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-
+						
+						
 						<tr>
-
-
-							<td width="16%" class="alignRight">Total Experience&nbsp;</td>
-							<td align="left"><label> <input
-									name="totalexperience" type="text" class="textField"
-									value="<c:out default="" value="${employee.totalexperience}" />"
-									id="totalexperience" size="30"
-									data-validate="validate(required)">
-
-							</label></td>
-							<td width="16%" class="alignRight">Qualification &nbsp;</td>
-
-							<td align="left"><label> <input name="qualification"
+							<td width="20%" class="alignRight">Address &nbsp;</td>
+							<td width="28%"><label> <input name="address"
 									type="text" class="textField"
-									value="<c:out default="" value="${employee.qualification}" />"
-									id="qualification" size="30" data-validate="validate(required)">
+									value="<c:out default="" value="${employee.address}" />"
+									id="address" size="30">
+
+							</label></td>
+							<td width="16%" class="alignRight">Marital Status&nbsp;</td>
+
+							<td align="left"><label> <input name="maritalstatus"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.maritalstatus}" />"
+									id="maritalstatus" size="30">
+
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="20%" class="alignRight">Emergency Contact Person &nbsp;</td>
+							<td width="28%"><label> <input name="emergencyname"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.emergencyname}" />"
+									id="emergencyname" size="30">
+
+							</label></td>
+
+							<td width="16%" class="alignRight">Emergency Contact No&nbsp;</td>
+
+							<td align="left"><label> <input name="emergencycontact"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.emergencycontact}" />"
+									id="emergencycontact" size="30">
 
 							</label></td>
 						</tr>
@@ -543,27 +599,45 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+						
+						<tr>
 
+							<td width="16%" class="alignRight">Qualification &nbsp;</td>
 
+							<td align="left"><label> <input name="qualification"
+									type="text" class="textField"
+									value="<c:out default="" value="${employee.qualification}" />"
+									id="qualification" size="30" data-validate="validate(required)">
+
+							</label></td>
+							
+							<td width="16%" class="alignRight">Total Experience&nbsp;</td>
+							<td align="left"><label> <input
+									name="totalexperience" type="text" class="textField"
+									value="<c:out default="" value="${employee.totalexperience}" />"
+									id="totalexperience" size="30"
+									data-validate="validate(required)">
+
+							</label></td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
 
 
 						<tr>
 
-							<td width="16%" class="alignRight">Father / Guardian Name&nbsp;</td>
-
-							<td align="left"><label> <input name="remarks"
-									type="text" class="textField"
-									value="<c:out default="" value="${employee.remarks}" />"
-									id="remarks" size="30">
-
-							</label></td>
-							
 							<td width="16%" class="alignRight">Date Of Joining &nbsp;</td>
 							<td width="16%"><label> 
 										<input name="joiningdate"
-									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yy"/>"
+									type="text" value="<fmt:formatDate value="${employee.joiningdate}" pattern="dd/MM/yyyy"/>"
 									class="textField" id="datepickerCD" size="30"
-									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 						<tr>
 
@@ -1045,14 +1119,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/school/EmployeeProcess/ViewAllEmployee";
+								form1.action = "${ctx}/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
 							function updateEmployee() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/school/EmployeeProcess/updateEmployee";
+								form1.action = "${ctx}/EmployeeProcess/updateEmployee";
 								form1.submit();
 							}
 							

@@ -13,7 +13,7 @@ import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentMapper;
@@ -586,7 +586,7 @@ public class StudentServiceArchive {
                     String[] concession = request.getParameterValues("feesConcession");
                     String[] totalInstallments = request.getParameterValues("feesCount");
 
-                    List<Integer> ids = new ArrayList<>();
+                    List<Integer> ids = new ArrayList();
                     listOfacademicfessstructure.clear();
                     for (String id : studentIds) {
                         System.out.println("id" + id);
@@ -611,7 +611,7 @@ public class StudentServiceArchive {
 
                             Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
                             Feescategory feescategory = new Feescategory();
-                            studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
+                            studentfeesstructure.setSid(Integer.valueOf(id));
                             feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIdsdiv[0]));
                             studentfeesstructure.setFeescategory(feescategory);
                             studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[Integer.parseInt(feesCategoryIdsdiv[1])]));
@@ -721,15 +721,15 @@ public class StudentServiceArchive {
         student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 
         if (puDetails.getIdpudetails() != null) {
-            new StudentDetailsDAO().updatePuDetails(puDetails);
+            new studentDetailsDAO().updatePuDetails(puDetails);
             student.setPudetails(puDetails);
         }
 
         if (degreeDetails.getIddegreedetails() != null) {
-            new StudentDetailsDAO().updateDegreeDetails(degreeDetails);
+            new studentDetailsDAO().updateDegreeDetails(degreeDetails);
             student.setDegreedetails(degreeDetails);
         }
-        student = new StudentDetailsDAO().update(student);
+        student = new studentDetailsDAO().update(student);
         if (parents.getPid() != null) {
             parents.setStudent(student);
             parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));

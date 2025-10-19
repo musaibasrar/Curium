@@ -1,47 +1,17 @@
 package org.ideoholic.curium.model.account.action;
 
-import java.io.IOException;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
-import org.ideoholic.curium.exceptions.CustomMessageResponseException;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.service.YearService;
-import org.ideoholic.curium.model.account.dto.AccountContraDto;
-import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
-import org.ideoholic.curium.model.account.dto.AccountDto;
-import org.ideoholic.curium.model.account.dto.AccountFinancialYearDto;
-import org.ideoholic.curium.model.account.dto.AccountJournalDto;
-import org.ideoholic.curium.model.account.dto.AccountPaymentDto;
-import org.ideoholic.curium.model.account.dto.AccountReceiptDto;
-import org.ideoholic.curium.model.account.dto.BalanceSheetResponseDto;
-import org.ideoholic.curium.model.account.dto.CancelVoucherDto;
-import org.ideoholic.curium.model.account.dto.CreateAccountResponseDto;
-import org.ideoholic.curium.model.account.dto.CreateVoucherResponseDto;
-import org.ideoholic.curium.model.account.dto.CurrentFinancialYearResponseDto;
-import org.ideoholic.curium.model.account.dto.DayBookDto;
-import org.ideoholic.curium.model.account.dto.DayBookResponseDto;
-import org.ideoholic.curium.model.account.dto.ExportTrialBalanceDto;
-import org.ideoholic.curium.model.account.dto.ExportVoucherDto;
-import org.ideoholic.curium.model.account.dto.IncomeStatementDto;
-import org.ideoholic.curium.model.account.dto.IncomeStatementResponseDto;
-import org.ideoholic.curium.model.account.dto.PrintSearchJournalEntriesDto;
-import org.ideoholic.curium.model.account.dto.SearchJournalEntriesResponseDto;
-import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesDto;
-import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesResponseDto;
-import org.ideoholic.curium.model.account.dto.SearchLedgersEntriesDto;
-import org.ideoholic.curium.model.account.dto.SearchSingleLedgerEntriesResponseDto;
-import org.ideoholic.curium.model.account.dto.TrialBalanceResponseDto;
-import org.ideoholic.curium.model.account.dto.ViewNextVoucherDto;
-import org.ideoholic.curium.model.account.dto.ViewNextVoucherResponseDto;
-import org.ideoholic.curium.model.account.dto.VoucherPrintDto;
-import org.ideoholic.curium.model.account.dto.VoucherPrintResponseDto;
+import org.ideoholic.curium.model.account.dto.*;
 import org.ideoholic.curium.model.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 public class AccountApiActionImpl implements AccountApiAction {
@@ -201,10 +171,6 @@ public class AccountApiActionImpl implements AccountApiAction {
         CreateAccountResponseDto result = accountService.saveAccount(dto, branchId);
         if (result.isSuccess()) {
             return createAccount(branchId);
-        }
-        
-        if(StringUtils.hasLength(result.getMessage())) {
-        	throw new CustomMessageResponseException(result.getMessage());
         }
 
         throw new CustomResponseException(CustomErrorMessage.ERROR);

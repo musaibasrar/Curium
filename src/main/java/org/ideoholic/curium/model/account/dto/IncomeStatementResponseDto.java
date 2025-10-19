@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Map;
 
 @Data
 @Builder
@@ -14,9 +14,9 @@ public class IncomeStatementResponseDto {
     @Builder.Default
     private boolean success = false;
     private BigDecimal income;
-    private List<LedgerAccBalanceDto> incomeLedgersAccount;
+    private Map<Accountdetails,BigDecimal> incomeLedgersAccount;
     private BigDecimal expenses;
-    private List<LedgerAccBalanceDto> expenseLedgersAccount;
+    private Map<Accountdetails,BigDecimal> expenseLedgersAccount;
     private String incomeTotalLabel;
     private String expenseTotalLabel;
     private BigDecimal incomeTotal;

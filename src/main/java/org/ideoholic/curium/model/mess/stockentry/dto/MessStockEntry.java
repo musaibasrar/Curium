@@ -1,18 +1,17 @@
 package org.ideoholic.curium.model.mess.stockentry.dto;
 
+import static javax.persistence.GenerationType.AUTO;
+
 import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,52 +26,49 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_stockentry")
 public class MessStockEntry implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
-	@Column(name = "externalid", nullable = false, length = 200)
+	@Column(name = "externalid")
 	private String externalid;
 
-	@Column(name = "batchno", length = 200)
+	@Column(name = "batchno")
 	private String batchno;
 
-	@Column(name = "quantity", precision = 12)
+	@Column(name = "quantity")
 	private Float quantity;
 
-	@Column(name = "itemunitprice", precision = 18, scale = 5)
+	@Column(name = "itemunitprice")
 	private Float itemunitprice;
+
+	@Column(name = "branchid")
+	private Integer branchid;
 
 	@Column(name = "itemid")
 	private Integer itemid;
 
-	@Column(name = "availablequantity", precision = 12)
+	@Column(name = "availablequantity")
 	private Float availablequantity;
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "invoicedetailsid", unique = true, nullable = false)
 	private MessInvoiceDetails messinvoicedetails;
 
-	@Column(name = "status", length = 100)
+	@Column(name = "status")
 	private String status;
 
-	@Temporal(TemporalType.DATE)
+	@Column(name = "userid")
+	private int userid;
+
 	@Column(name = "receiveddate")
 	private Date receiveddate;
 
-	@Column(name = "sgst", precision = 18, scale = 5)
+	private Integer invoicedetailsid;
 	private Float sgst;
-
-	@Column(name = "cgst", precision = 18, scale = 5)
 	private Float cgst;
 
-	@Column(name = "branchid")
-	private Integer branchid;
-
-	@Column(name = "userid")
-	private Integer userid;
 
 }

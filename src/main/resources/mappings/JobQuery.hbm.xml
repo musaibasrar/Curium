@@ -20,9 +20,6 @@
         <property name="response" type="string">
             <column name="response" length="500" />
         </property>
-        <property name="query" type="string">
-            <column name="query" length="500" />
-        </property>
         <property name="createduserid" type="java.lang.Integer">
             <column name="createduserid"  />
         </property>

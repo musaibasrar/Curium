@@ -1,12 +1,5 @@
 package org.ideoholic.curium.model.enquiry.dao;
 
-import javax.transaction.Transactional;
-
-import org.ideoholic.curium.model.enquiry.dto.Enquiry;
-import org.ideoholic.curium.repositories.EnquiryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
@@ -21,38 +14,49 @@ import org.hibernate.query.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
-public class EnquiryDAO {
-
-	@Autowired
-	private EnquiryRepository enquiryRepo;
-
-	@Transactional
-	public void create(Enquiry enquiry) {
-		try {
-			enquiryRepo.save(enquiry);
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
-
-			throw hibernateException;
-		}
+public class enquiryDAO {
+	Session session = null;
+    /**
+     * * Hibernate Session Variable
+     */
+    Transaction transaction = null;
+    /**
+     * * Hibernate Transaction Variable
+     */
+  
+    SessionFactory sessionFactory;
+    private static final Logger logger = LogManager.getLogger(enquiryDAO.class);
+    
+    public enquiryDAO() {
+		session = HibernateUtil.openCurrentSession();
 	}
-	
+    @SuppressWarnings("finally")
+	public Enquiry create(Enquiry enquiry ) {
+		// TODO Auto-generated method stub
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.save(enquiry);
+            transaction.commit();
+            
+        } catch (Exception hibernateException) { transaction.rollback();
+        logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return enquiry;
+        }
+	}
 	public boolean add(AdmissionEnquiry admissionEnquiry) {
 		boolean result = false;
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.save(admissionEnquiry);
             transaction.commit();
             result = true;
         } catch (Exception hibernateException) { transaction.rollback();
-        log.error(hibernateException.getMessage(), hibernateException);
+        logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -62,16 +66,15 @@ public class EnquiryDAO {
 		
 	}
 	public AdmissionEnquiry getStudentLastEnquiry(int branchId) {
-		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
-		Transaction transaction = null;
+AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+		
 		try {
-			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from AdmissionEnquiry where branchid="+branchId+" order by id desc");
 			query.setMaxResults(1);
 			admissionEnquiry = (AdmissionEnquiry) query.uniqueResult();
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -82,13 +85,12 @@ public class EnquiryDAO {
 	@SuppressWarnings({ "finally", "unchecked" })
 	public List<AdmissionEnquiry> viewEnquiryList(int branchId) {
 		List<AdmissionEnquiry> results = new ArrayList<AdmissionEnquiry>();
-		Transaction transaction = null;
-		try {
-			Session session = HibernateUtil.openCurrentSession();
+        try {
+            
             transaction = session.beginTransaction();
             results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry where branchid="+branchId).list();
             transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -98,14 +100,13 @@ public class EnquiryDAO {
 	}
 	public AdmissionEnquiry getStudentEnquiry(int id) {
     AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
-	Transaction transaction = null;
+		
 		try {
-			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("from AdmissionEnquiry where id="+id);
 			admissionEnquiry = (AdmissionEnquiry) query.uniqueResult(); 
 			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); log.error(e.getMessage(), e);
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -113,14 +114,13 @@ public class EnquiryDAO {
 		return admissionEnquiry;
 	}
 	public void update(AdmissionEnquiry admissionEnquiry) {
-		Transaction transaction = null;
+
 		try {
-			Session session = HibernateUtil.openCurrentSession();
             transaction = session.beginTransaction();
             session.update(admissionEnquiry);
             transaction.commit();
         } catch (Exception hibernateException) { 
-        	transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+        	transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
         } finally {
@@ -130,9 +130,7 @@ public class EnquiryDAO {
 	}
 	public boolean deleteEnquiry(List<Integer> ids) {
 		boolean result =false;
-		Transaction transaction = null;
 		try {
-			Session session = HibernateUtil.openCurrentSession();
 			transaction = session.beginTransaction();
 			
 			
@@ -144,7 +142,7 @@ public class EnquiryDAO {
 			
 			transaction.commit();
 			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}finally {
 			HibernateUtil.closeSession();
@@ -152,6 +150,5 @@ public class EnquiryDAO {
 		return result;
 		
 	}
-
 
 }

@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.hr.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 24 Apr, 2018 1:06:54 AM by Hibernate Tools 4.0.0
 
@@ -8,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -28,10 +29,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hr_pf")
 public class Pf implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idpf", unique = true, nullable = false)
 	private Integer idpf;
 
@@ -46,9 +46,9 @@ public class Pf implements java.io.Serializable {
 	private Date date;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
+	private int userid;
 
 }

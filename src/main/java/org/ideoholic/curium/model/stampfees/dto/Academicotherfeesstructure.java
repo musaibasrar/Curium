@@ -1,44 +1,108 @@
 package org.ideoholic.curium.model.stampfees.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "otherfee_academicfeesstructure")
-public class Academicotherfeesstructure implements java.io.Serializable {
+public class Academicotherfeesstructure implements java.io.Serializable{
+
+
+	/**
+	 * 
+	 */
 	private static final long serialVersionUID = 1L;
+	private Integer feesstructureid;
+	private int sid;
+	private String totalfees;
+	private String paidfees;
+	private String academicyear;
+	private int branchid;
+	private int userid;
+
+	public Academicotherfeesstructure() {
+	}
+
+	public Academicotherfeesstructure(int sid) {
+		this.sid = sid;
+	}
+
+	public Academicotherfeesstructure(int sid, String totalfees, String paidfees,
+			String academicyear,int branchid, int userid) {
+		this.sid = sid;
+		this.totalfees = totalfees;
+		this.paidfees = paidfees;
+		this.academicyear = academicyear;
+		this.branchid = branchid;
+		this.userid = userid;
+	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "feesstructureid", unique = true, nullable = false)
-	private Integer feesstructureid;
+	public Integer getFeesstructureid() {
+		return this.feesstructureid;
+	}
+
+	public void setFeesstructureid(Integer feesstructureid) {
+		this.feesstructureid = feesstructureid;
+	}
 
 	@Column(name = "sid", nullable = false)
-	private Integer sid;
+	public int getSid() {
+		return this.sid;
+	}
+
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
 
 	@Column(name = "totalfees", length = 45)
-	private String totalfees;
+	public String getTotalfees() {
+		return this.totalfees;
+	}
+
+	public void setTotalfees(String totalfees) {
+		this.totalfees = totalfees;
+	}
 
 	@Column(name = "paidfees", length = 45)
-	private String paidfees;
+	public String getPaidfees() {
+		return this.paidfees;
+	}
+
+	public void setPaidfees(String paidfees) {
+		this.paidfees = paidfees;
+	}
 
 	@Column(name = "academicyear", length = 45)
-	private String academicyear;
+	public String getAcademicyear() {
+		return this.academicyear;
+	}
+
+	public void setAcademicyear(String academicyear) {
+		this.academicyear = academicyear;
+	}
 
 	@Column(name = "branchid")
-	private Integer branchid;
-	
-	@Column(name = "userid")
-	private Integer userid;
+	public int getBranchid() {
+	return branchid;
+	}
+
+	public void setBranchid(int branchid) {
+	this.branchid = branchid;
+	}
+
+	public int getUserid() {
+			return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
 }

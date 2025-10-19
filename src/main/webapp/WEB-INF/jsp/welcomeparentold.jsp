@@ -1,4 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
+    pageEncoding="UTF-8"%>
     pageEncoding="UTF-8"%>
 <!DOCTYPEhtml>
 <html>
@@ -97,26 +102,26 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
     
     <div class="col-6" id="f1">
      <i class="fa-solid fa-graduation-cap"></i>
-     <a target="mainFrame" href="/school/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Profile</h5></a>
+     <a target="mainFrame" href="${ctx}/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Profile</h5></a>
      
     </div> 
     
      
     <div class="col-6" id="f3">
     <i class="fa-solid fa-book"></i>
-     <a target="mainFrame" href="/school/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Diary</h5></a>
+     <a target="mainFrame" href="${ctx}/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Student Diary</h5></a>
     </div>
     
   </div> 
   <div class="row">
     <div class="col-6" id="f4">
       <i class="fas fa-money-check-alt"></i>
-     <a target="mainFrame" href="/school/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Fees</h5></a>
+     <a target="mainFrame" href="${ctx}/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}" style="font-size: 12px;"><h5>Fees</h5></a>
     </div> 
    
     <div class="col-6" id="f6">
     <i class="fas fa-check-circle"></i>
-     <a target="mainFrame" href="/school/MarksDetailsProcess/generateReportParent?id=${username}" style="font-size: 12px;">
+     <a target="mainFrame" href="${ctx}/MarksDetailsProcess/generateReportParent?id=${username}" style="font-size: 12px;">
      <h5>Progress Report</h5></a>
     </div>
   </div>

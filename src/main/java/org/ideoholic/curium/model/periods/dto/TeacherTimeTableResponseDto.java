@@ -12,6 +12,6 @@ import java.util.Map;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class TeacherTimeTableResponseDto {
     private String teacherName;
-    private List<Map<String, String>> periodMapList;
+    private List<Map> periodMapList;
     private boolean success;
 }

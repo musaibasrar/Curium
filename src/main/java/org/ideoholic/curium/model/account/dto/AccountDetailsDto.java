@@ -4,19 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AccountDetailsDto {
-    private Integer accountDetailsId;
-    private int accountSubgroupMasterId;
+@Entity
+public class AccountDetailsDto implements java.io.Serializable{
+    private Integer AccountDetailsId;
+    private int AccountSubgroupMasterId;
     private int ssGroupMasterId;
-    private int accountGroupId;
-    private String accountName;
-    private String accountCode;
+    private int AccountGroupId;
+    private String AccountName;
+    private String AccountCode;
     private Accountssgroupmaster accountSSGroupMaster;
     private Accountsubgroupmaster accountSubGroupMaster;
     private Accountgroupmaster accountGroupMaster;
-    private int branchId;
-    private int userId;
+    private int BranchId;
+    private int UserId;
 }

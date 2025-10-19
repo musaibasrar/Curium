@@ -3,45 +3,50 @@ package org.ideoholic.curium.model.teachersperformance.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
-import org.ideoholic.curium.model.studentdiary.dao.StudentDiaryDAO;
-import org.ideoholic.curium.repositories.ExamsRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Component
 public class TeacherPerformanceDAO {
 	
+	Session session;
+	Transaction transaction;
 	
-	@Autowired 
-	private ExamsRepository examsRepo;
+	private static final Logger logger = LogManager.getLogger(TeacherPerformanceDAO.class);
+	
+	
 
-	
-	@Transactional
+	public TeacherPerformanceDAO() {
+		session = HibernateUtil.openCurrentSession();
+		
+	}
+
+
+
 	public List<Exams> getExamsList(int branchid) {
 		List<Exams> results = new ArrayList<Exams>();
 		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<Exams>) session.createQuery("From Exams where branchid="+branchid)
+					.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
-			results = examsRepo.findByBranchid(branchid);
+			hibernateException.printStackTrace();
 
-
-		} catch (Exception hibernateException) { 
-        	log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        } 
-		return results;
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
 	}
 
 	

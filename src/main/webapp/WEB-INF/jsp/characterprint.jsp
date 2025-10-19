@@ -1,4 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -101,8 +104,8 @@ span{
         }
 </style>
 
-	<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Character Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
@@ -114,7 +117,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -134,7 +137,7 @@ for(Cookie cookie : cookies){
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/school/images/school.jpg" width="140" height="140"/></td>
+				<td ><img src="${imagesPath}/school.jpg" width="140" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	ABC English Medium School</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	Misbah Nagar, Ring Road, Shah Jeelani Cross, Gulbarga-585103</h4>
@@ -241,7 +244,7 @@ for(Cookie cookie : cookies){
 		</tr>
 		
 		<!-- 	<tr>
-              <td align="center"><a id="print" href="/school/DocumentsProcess/printCharacterCertificate">Print</a></td>
+              <td align="center"><a id="print" href="${ctx}/DocumentsProcess/printCharacterCertificate">Print</a></td>
             </tr>-->
 		</TABLE>
 	</form>

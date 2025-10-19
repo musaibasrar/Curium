@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.attendance.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 16 Jan, 2018 9:20:32 PM by Hibernate Tools 4.0.0
 
@@ -8,7 +10,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,10 +31,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "att_holidaysmaster")
 public class Holidaysmaster implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "shid", unique = true, nullable = false)
 	private Integer shid;
 

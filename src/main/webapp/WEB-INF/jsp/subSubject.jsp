@@ -5,7 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,8 +22,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>JSP Page</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -278,42 +284,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
+<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/school/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="${jsPath}/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/school/js/validation/jquery.ketchup.all.min.js"></script>
+	src="${jsPath}/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="${jsPath}/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="${jsPath}/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -384,11 +390,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addSubSubjects() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/SubjectDetailsProcess/addSubSubject";
+		form1.action = "${ctx}/SubjectDetailsProcess/addSubSubject";
 		form1.method = "POST";
 		form1.submit();
 
@@ -396,7 +402,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/SubjectDetailsProcess/deleteMultipleSubSubject";
+		form1.action = "${ctx}/SubjectDetailsProcess/deleteMultipleSubSubject";
 		form1.method = "POST";
 		form1.submit();
 
@@ -465,7 +471,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -478,7 +484,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/school/SubjectDetailsProcess/deleteMultipleSubSubject" method="POST">
+	<form id="form1" action="${ctx}/SubjectDetailsProcess/deleteMultipleSubSubject" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
@@ -589,7 +595,7 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/school/images/sort_both.png" /></th>
+							src="${imagesPath}/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Sub Subject&nbsp;</th>
 						</tr>
 				</thead>

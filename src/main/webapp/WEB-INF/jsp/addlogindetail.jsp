@@ -7,9 +7,15 @@
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 <%@ page import="javax.servlet.http.HttpSession"%>
 
 <%@page import="java.util.*"%>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -21,20 +27,20 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Login</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="${cssPath}/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/school/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/school/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.core.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="${jsPath}/datePicker/ui/sliderAccess.js"></script>
+<script src="${jsPath}/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="${jsPath}/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="${cssPath}/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -230,9 +236,9 @@
 </style>
 
 
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
-<script src="/school/JavaScript/actb.js"></script>
-<script src="/school/JavaScript/common.js"></script>
+<script type="text/javascript" src="${jsPath}/datetimepicker_css.js"></script>
+<script src="${ctx}/JavaScript/actb.js"></script>
+<script src="${ctx}/JavaScript/common.js"></script>
 
 <script>
 	$(function() {
@@ -456,7 +462,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	response.sendRedirect("${ctx}/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -609,13 +615,13 @@ for(Cookie cookie : cookies){
 						<script type="text/javascript">
 							function addLoginStaff() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/school/LoginProcess/addLoginStaffDetail";
+								form1.action = "${ctx}/LoginProcess/addLoginStaffDetail";
 								form1.submit();
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/school/EmployeeProcess/viewAllEmployee";
+								form1.action = "${ctx}/EmployeeProcess/viewAllEmployee";
 								form1.submit();
 							}
 

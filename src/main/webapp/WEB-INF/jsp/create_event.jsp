@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<%-- Include tenant globals for property-driven behavior --%>
+<%@ include file="/WEB-INF/jsp/common/_tenant_globals.jsp" %>
+
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 <head>
@@ -135,7 +140,7 @@
                 </div>
             </c:if>
             
-            <form id="eventForm" action="/school/EventProcess/createEvent" method="post" class="needs-validation" novalidate>
+            <form id="eventForm" action="${ctx}/EventProcess/createEvent" method="post" class="needs-validation" novalidate>
                 <div class="form-group">
                     <label for="title" class="form-label">Title *</label>
                     <input type="text" class="form-control" id="title" name="title" required>
@@ -183,7 +188,7 @@
 
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">Create Event</button>
-                    <a href="/school/EventProcess/calendar" class="btn btn-secondary">Cancel</a>
+                    <a href="${ctx}/EventProcess/calendar" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         </div>

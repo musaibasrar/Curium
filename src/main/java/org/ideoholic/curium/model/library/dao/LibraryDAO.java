@@ -1,269 +1,328 @@
 package org.ideoholic.curium.model.library.dao;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.library.dto.Book;
 import org.ideoholic.curium.model.library.dto.BookHistory;
 import org.ideoholic.curium.model.library.dto.BookIssue;
-import org.ideoholic.curium.repositories.BookHistoryRepository;
-import org.ideoholic.curium.repositories.BookIssueRepository;
-import org.ideoholic.curium.repositories.BookRepository;
-import org.ideoholic.curium.util.DateUtil;
-import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.ideoholic.curium.model.library.dto.BooksRequestDto;
+import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
 
-import lombok.RequiredArgsConstructor;
-
-@Component
-@RequiredArgsConstructor
 public class LibraryDAO {
 
-    private final BookRepository bookRepository;
-    private final BookIssueRepository bookIssueRepository;
-    private final BookHistoryRepository bookHistoryRepository;
+	Session session = null;
+    /**
+     * * Hibernate Session Variable
+     */
+    Transaction transaction = null;
+    /**
+     * * Hibernate Transaction Variable
+     */
+  
+    SessionFactory sessionFactory;
+    private static final Logger logger = LogManager.getLogger(LibraryDAO.class);
+    
+    public LibraryDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
 
-    @Transactional
-    public Book create(Book book) {
-        try {
-            // session.save(book);
-            return bookRepository.save(book);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    @Transactional
-    public List<Book> readListOfAvailableBook() {
-        try {
-            // session.createQuery("From Book").list();
-            return bookRepository.findAll();
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Delete Book records (only where issuedqty = 0)
-    @Transactional
-    public void deleteRecord(List<Integer> ids) {
-        try {
-            // session.createQuery("delete from Book as book where issuedqty=0 and book.bid IN (:ids)");
-            for (Integer id : ids) {
-                Optional<Book> bookOpt = bookRepository.findById(id);
-                if (bookOpt.isPresent() && bookOpt.get().getIssuedQty() == 0) {
-                    bookRepository.deleteById(id);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Read list of Book by branchId
-    @Transactional
-    public List<Book> readListOfBook(String branchId) {
-        try {
-            // session.createQuery("From Book where branchid=" + branchId).list();
-            return bookRepository.findByBranchid(Integer.parseInt(branchId));
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Update book after issue (batch update issuedqty, add BookIssue and BookHistory)
-    @Transactional
-    public void updatebookAfterIssue(List<Integer> ids, List<BookHistory> bookHistoryList, List<BookIssue> bookIssueList) {
-        try {
-            // session.createSQLQuery("update book set issuedqty = issuedqty + 1  where bid IN (:ids)");
-            for (Integer id : ids) {
-                bookRepository.findById(id).ifPresent(book -> {
-                	book.setIssuedQty(book.getIssuedQty() + 1);
-                    bookRepository.save(book);
-                });
-            }
-            bookIssueRepository.saveAll(bookIssueList);
-            bookHistoryRepository.saveAll(bookHistoryList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Read list of Books Issued by holder (sid)
-    @Transactional
-    public List<BookIssue> readListOfBooksIssued(String sid) {
-        try {
-            // session.createQuery("From BookIssue where bookHolder='" + sid + "'").list();
-            return bookIssueRepository.findByBookHolder(sid);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Update book after return (batch decrement issuedQty)
-    @Transactional
-	public void updatebookAfterReturn(List<Integer> ids) {
+    @SuppressWarnings("finally")
+	public Book create(Book book) {
 		try {
-			// session.createSQLQuery("update book set issuedQty = issuedQty-1 where bid IN (:ids)");
-			for (Integer id : ids) {
-				bookRepository.findById(id).ifPresent(book -> {
-					book.setIssuedQty(book.getIssuedQty() - 1);
-					bookRepository.save(book);
-				});
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.save(book);
+            transaction.commit();
+            
+        } catch (Exception hibernateException) { transaction.rollback();
+        logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return book;
+        }	}
+
+	public List<Book> readListOfAvailableBook() {
+		List<Book> results = new ArrayList<Book>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<Book>) session.createQuery("From Book").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
+
+	public void deleteRecord(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from Book as book where issuedqty=0 and book.bid IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}	
+		
+	}
+
+	public List<Book> readListOfBook(String branchId) {
+		List<Book> results = new ArrayList<Book>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<Book>) session.createQuery("From Book where branchid="+branchId+"").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+
+	}
+
+	public void updatebookAfterIssue(List<Integer> ids, List<BookHistory> bookHistoryList, List<BookIssue> bookIssueList) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set issuedqty = issuedqty + 1  where bid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			
+			for (BookIssue bookIssue : bookIssueList) {
+				session.save(bookIssue);
 			}
-		} catch (Exception e) {
+			
+			for (BookHistory bookHistory : bookHistoryList) {
+				session.save(bookHistory);
+			}
+			
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
-			throw e;
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
+
+	public List<BookIssue> readListOfBooksIssued(String sid) {
+		List<BookIssue> results = new ArrayList<BookIssue>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<BookIssue>) session.createQuery("From BookIssue where bookHolder='"+sid+"'").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
+
+	public void updatebookAfterReturn( List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
+
+	public Book readDetailsOfBook(int bid) {
+		Book book = new Book();
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("from Book as book where book.bid="
+							+ bid);
+			book = (Book) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		return book;
+	}
+
+	public void updatebookdetail(int bid, String bookname, String subject, String author, String publisher, String isbn,
+			String shelf, int availableQty, int issuedQty) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set bookname = '"+bookname+"' , subject = '"+subject+"' , author = '"+author+"' , publisher = '"+publisher+"' , isbn = '"+isbn+"' , shelf = '"+shelf+"', availableqty='"+availableQty+"', issuedqty='"+issuedQty+"' where bid ='"+bid+"'");
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+
+		
+	}
+
+	public List<BookHistory> readListOfBookHistory(String fromDate, String toDate) {
+		List<BookHistory> results = new ArrayList<BookHistory>();
+        try {
+            
+            transaction = session.beginTransaction();
+            results = (List<BookHistory>) session.createQuery("From BookHistory where issueDate between '"+fromDate+"' and '"+toDate+"'").list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return results;
+        }
+	}
+
+	public BookHistory add(BookHistory bookHistory) {
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(bookHistory);
+			transaction.commit();
+
+		} catch (Exception hibernateException) {
+			transaction.rollback();
+			logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+		} finally {
+			HibernateUtil.closeSession();
+			return bookHistory;
 		}
 	}
 
-    @Transactional
-    public Book readDetailsOfBook(int bid) {
-    	Book book = new Book();
-        try {
-            // session.createQuery("from Book as book where book.bid=" + bid);
-        	book = bookRepository.findById(bid).orElse(null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-        return book;
-    }
+	public void deleteBookHistoryRecord(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from BookHistory as book where book.id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}	
+		
+	}
 
-    @Transactional
-    public void updatebookdetail(int bid, String bookname, String subject, String author, String publisher, String isbn,
-                                String shelf, int availableQty, int issuedQty) {
-        try {
-            // session.createSQLQuery("update book set bookname = '"+bookname+"' , subject = '"+subject+"' , author = '"+author+"' , publisher = '"+publisher+"' , isbn = '"+isbn+"' , shelf = '"+shelf+"', availableqty='"+availableQty+"', issuedqty='"+issuedQty+"' where bid ='"+bid+"'");
-            bookRepository.findById(bid).ifPresent(book -> {
-                book.setBookname(bookname);
-                book.setSubject(subject);
-                book.setAuthor(author);
-                book.setPublisher(publisher);
-                book.setIsbn(isbn);
-                book.setShelf(shelf);
-                book.setAvailableQty(availableQty);
-                book.setIssuedQty(issuedQty);
-                bookRepository.save(book);
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+	public BookIssue add(BookIssue bookIssue) {
+		try {
+			// this.session = sessionFactory.openCurrentSession();
+			transaction = session.beginTransaction();
+			session.save(bookIssue);
+			transaction.commit();
 
-    // Read list of BookHistory between dates
-    @Transactional
-    public List<BookHistory> readListOfBookHistory(String fromDate, String toDate) {
-        try {
-            // session.createQuery("From BookHistory where issueDate between '" + fromDate + "' and '" + toDate + "'").list();
-            return bookHistoryRepository.findByIssueDateBetween(fromDate, toDate);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+		} catch (Exception hibernateException) {
+			transaction.rollback();
+			logger.error(hibernateException);
 
-    @Transactional
-    public BookHistory add(BookHistory bookHistory) {
-        try {
-            // session.save(bookHistory);
-            return bookHistoryRepository.save(bookHistory);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+			hibernateException.printStackTrace();
+		} finally {
+			HibernateUtil.closeSession();
+			return bookIssue;
+		}
+	}
 
-    // Delete BookHistory records by id list
-    @Transactional
-    public void deleteBookHistoryRecord(List<Integer> ids) {
-        try {
-            // session.createQuery("delete from BookHistory as book where book.id IN (:ids)");
-            bookHistoryRepository.deleteAllById(ids);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+	public void updatebookissueAfterReturn(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			
+			
+			Query query = session
+					.createQuery("delete from BookIssue as book where book.id IN (:ids)");
+			query.setParameterList("ids", ids);
+			
+			query.executeUpdate();
+			
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}	
+		
+	}	
+	
+	public void updatebook(String uid, List<Integer> ids, String date) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set status = 'Issued' , bookHolder = '"+uid+"' , startdate = '"+date+"' where bid IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
+	
 
-    @Transactional
-    public BookIssue add(BookIssue bookIssue) {
-        try {
-            // session.save(bookIssue);
-            return bookIssueRepository.save(bookIssue);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
+	public void updateBookOnReturn(List<Integer> bookIds,List<Integer> bookIssueIds,List<Integer> noOfDays,String returnDate) {
+		try {
+			transaction = session.beginTransaction();
+			Query query= session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
+			query.setParameterList("ids", bookIds);
+			query.executeUpdate();
+			
+			Query queryBookIssue = session.createSQLQuery("UPDATE bookissue SET noofdays = :totalDays, returned = 'Yes',actualreturndate='"+returnDate+"' WHERE id = :bookId");
+		    queryBookIssue.setParameter("totalDays", noOfDays);
+		    queryBookIssue.setParameter("bookId", bookIssueIds);
+			queryBookIssue.executeUpdate();
+				
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		
+	}
 
-    // Update BookIssue after return (delete BookIssue by id list)
-    @Transactional
-    public void updatebookissueAfterReturn(List<Integer> ids) {
-        try {
-            // session.createQuery("delete from BookIssue as book where book.id IN (:ids)");
-            bookIssueRepository.deleteAllById(ids);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Update book status and details when issued
-    @Transactional
-    public void updatebook(String uid, List<Integer> ids, String date) {
-        try {
-            // session.createSQLQuery("update book set status = 'Issued', bookHolder = '" + uid + "', startdate = '" + date + "' where bid IN (:ids)");
-            for (Integer id : ids) {
-                bookRepository.findById(id).ifPresent(book -> {
-                    book.setStatus("Issued");
-                    book.setBookHolder(uid);
-                    book.setStartdate(DateUtil.dateParserdd(date));
-                    // Assume startdate is a String, convert as needed for Book entity
-                    // book.setStartdate(...);
-                    bookRepository.save(book);
-                });
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    // Update Book on Return (decrement issuedQty, update BookIssue)
-    @Transactional
-    public void updateBookOnReturn(List<Integer> bookIds, List<Integer> bookIssueIds, List<Integer> noOfDays, String returnDate) {
-        try {
-            // session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
-            for (Integer id : bookIds) {
-                bookRepository.findById(id).ifPresent(book -> {
-                	book.setIssuedQty(book.getIssuedQty() - 1);
-                    bookRepository.save(book);
-                });
-            }
-            // session.createSQLQuery("UPDATE bookissue SET noofdays = :totalDays, returned = 'Yes',actualreturndate='"+returnDate+"' WHERE id = :bookId");
-            for (int i = 0; i < bookIssueIds.size(); i++) {
-                int issueId = bookIssueIds.get(i);
-                int days = noOfDays.get(i);
-                Optional<BookIssue> issueOpt = bookIssueRepository.findById(issueId);
-                if (issueOpt.isPresent()) {
-                    BookIssue issue = issueOpt.get();
-                    issue.setNoOfDays(days);
-                    issue.setReturned("Yes");
-                    // Assume actualReturnDate is a String, convert as needed
-                    // issue.setActualReturnDate(...);
-                    bookIssueRepository.save(issue);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
 }

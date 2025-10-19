@@ -26,9 +26,7 @@ public class MessSuppliersService {
 
 	@Autowired
 	private HttpServletResponse response;
-	
-	@Autowired
-    private AccountDAO accountDao;
+
 
 	public ResultResponse viewSuppliersDetails(String branchId) {
 		
@@ -195,7 +193,7 @@ public class MessSuppliersService {
 				accountDetails.setUserid(Integer.parseInt(userId));
 
 				// Add account balance
-				Financialaccountingyear financialyear = accountDao.getFinancialAccountingYear(Integer.parseInt(branchId));
+				Financialaccountingyear financialyear = new AccountDAO().getFinancialAccountingYear(Integer.parseInt(branchId));
 				Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
 				accountDetailsBalance.setAccountDetails(accountDetails);
 				if (findCrDr(groupName)) {
@@ -203,7 +201,7 @@ public class MessSuppliersService {
 				} else {
 					accountDetailsBalance.setCrdr("Dr");
 				}
-				accountDetailsBalance.setFinancialAccountingYear(financialyear);
+				accountDetailsBalance.setFinancialid(financialyear.getFinancialid());
 				accountDetailsBalance.setOpeningbalance(new BigDecimal(0));
 				accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 				accountDetailsBalance.setEnteredon(new Date());
@@ -214,7 +212,9 @@ public class MessSuppliersService {
 			}
 		} catch (Exception e) {
 			log.error("Error in createLedgerForSupplierAndSave: ", e);
+			result.setSuccess(false);
 			result.setName("An error occurred while creating ledger: " + e.getMessage());
+
 			// You might want to set some error state in the result object here
 		}
 		
@@ -312,7 +312,7 @@ public class MessSuppliersService {
 				transactions.setEntrydate(DateUtil.todaysDate());
 				transactions.setNarration("Towards Payment of supplier '" + supplieridledgerid[2] + "'");
 				transactions.setCancelvoucher("no");
-				transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 				transactions.setBranchid(Integer.parseInt(branchId));
 				transactions.setUserid(Integer.parseInt(userId));
 
@@ -466,7 +466,7 @@ public class MessSuppliersService {
 					transactions.setEntrydate(DateUtil.todaysDate());
 					transactions.setNarration("Towards Payment of supplier '"+supplierName+"' : "+paymentType);
 					transactions.setCancelvoucher("no");
-					transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+					transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 					transactions.setBranchid(Integer.parseInt(branchId));
 					transactions.setUserid(Integer.parseInt(userId));
 
@@ -490,7 +490,7 @@ public class MessSuppliersService {
 					transactionsSupplier.setEntrydate(DateUtil.todaysDate());
 					transactionsSupplier.setNarration("Towards Payment of supplier '"+supplierName+"' : "+paymentType);
 					transactionsSupplier.setCancelvoucher("no");
-					transactionsSupplier.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+					transactionsSupplier.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 					transactionsSupplier.setBranchid(Integer.parseInt(branchId));
 					transactionsSupplier.setUserid(Integer.parseInt(userId));
 
@@ -550,7 +550,7 @@ public class MessSuppliersService {
 						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards reversal of payment to supplier '"+supplierName+"' and voucher # '"+issueVoucherId+"'");
 						transactions.setCancelvoucher("no");
-						transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactions.setBranchid(Integer.parseInt(branchId));
 						transactions.setUserid(Integer.parseInt(userId));
 
@@ -596,7 +596,7 @@ public class MessSuppliersService {
 			 				supplierLedgerId.add(messSuppliers.getLinkedledgerid());
 				}
 			 	
-			 	accountdetailsbalanceList = accountDao.getAccountBalanceDetails(supplierLedgerId, Integer.parseInt(branchId));
+			 	accountdetailsbalanceList = new AccountDAO().getAccountBalanceDetails(supplierLedgerId, Integer.parseInt(branchId));
 			 	
 			 	
 		 }

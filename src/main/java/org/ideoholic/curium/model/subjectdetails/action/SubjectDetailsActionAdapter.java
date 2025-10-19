@@ -1,8 +1,5 @@
 package org.ideoholic.curium.model.subjectdetails.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectDto;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectsResponseDto;
@@ -12,6 +9,9 @@ import org.ideoholic.curium.model.subjectdetails.dto.SubjectsResponseDto;
 import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 @Service
 public class SubjectDetailsActionAdapter {
 
@@ -28,7 +28,7 @@ public class SubjectDetailsActionAdapter {
     public boolean readListOfSubjects() {
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjects(httpSession.getAttribute("branchid").toString());
-        httpSession.setAttribute("listSubject", result.getSubjects());
+        httpSession.setAttribute("listSubject", result.getList());
         return result.isSuccess();
     }
     public boolean addSubject() {
@@ -75,7 +75,7 @@ public class SubjectDetailsActionAdapter {
     public void readListOfSubjectNames() {
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
-        httpSession.setAttribute("listSubjectNames", result.getSubjects());
+        httpSession.setAttribute("listSubjectNames", result.getListSubjectNames());
     }
     
 	public void readListOfSubSubjects() {

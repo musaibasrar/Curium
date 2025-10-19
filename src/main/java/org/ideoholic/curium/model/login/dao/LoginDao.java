@@ -8,6 +8,8 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.branch.dto.Branch;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.library.dto.Book;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;

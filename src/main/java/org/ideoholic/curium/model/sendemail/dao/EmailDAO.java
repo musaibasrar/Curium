@@ -3,39 +3,51 @@ package org.ideoholic.curium.model.sendemail.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.transaction.Transactional;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.ideoholic.curium.util.Session;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.repositories.ParentsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
+import org.ideoholic.curium.util.HibernateUtil;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Component
 public class EmailDAO {
+	Session session = null;
+	/**
+	 * * Hibernate Session Variable
+	 */
+	Transaction transaction = null;
+	/**
+	 * * Hibernate Transaction Variable
+	 */
+	Transaction transaction1;
 	
-	@Autowired
-	private ParentsRepository parentsRepo;
+	private static final Logger logger = LogManager.getLogger(EmailDAO.class);
+	
+	public EmailDAO() {
+		session = HibernateUtil.openCurrentSession();
+	}
 
-	@Transactional
-	public long countEmails(QUERY_TYPE queryType, String classStudying, String branchId) {
+	
+	public long countEmails(String queryMain) {
 		long totalNumbers = 0;
 		try {
-			switch (queryType) {
-			case ALL_PARENTS:
-				totalNumbers = parentsRepo.countAllParentsWithEmail();
-				break;
-			case ALL_PARENTS_WITH_CLASS:
-				totalNumbers = parentsRepo.countParentsWithEmailForGivenClass(classStudying, branchId);
-			}
-		} catch (Exception hibernateException) {
-			log.error(hibernateException.getMessage(), hibernateException);
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("select count(*)" +queryMain+ "AND email IS NOT NULL AND email <> '' ");
+			totalNumbers = (long) query.uniqueResult();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+		}finally {
+			HibernateUtil.closeSession();
 		}
+		// session.close();
 		return totalNumbers;
 	}
 
@@ -44,33 +56,33 @@ public class EmailDAO {
 		return null;
 	}
 
-	@Transactional
-	public List<Parents> readListOfObjectsPaginationALL(QUERY_TYPE queryType, String classStudying, String branchId, int offset, int noOfRecords) {
+	public List<Parents> readListOfObjectsPaginationALL(int offset,
+			int noOfRecords, String queryMain) {
 		List<Parents> results = new ArrayList<Parents>();
 
-		try{
-			switch (queryType) {
-			case ALL_PARENTS:
-				results = parentsRepo.getAllParentsWithEmail(PageRequest.of(offset, noOfRecords)).toList();
-				break;
-			case ALL_PARENTS_WITH_CLASS:
-				results = parentsRepo.getParentsWithEmailForGivenClass(classStudying, branchId, PageRequest.of(offset, noOfRecords)).toList();
-			}
+		try {
+			transaction = session.beginTransaction();
 
-		} catch (Exception hibernateException) { 
-			log.error(hibernateException.getMessage(), hibernateException); 
+			Query query = session
+					.createQuery(queryMain);
+			query.setFirstResult(offset);   
+			query.setMaxResults(noOfRecords);
+			results = query.list();
+			
+			transaction.commit();
+			
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
 		}
-		return results;
 	}
 
-	public static enum QUERY_TYPE {
-		ALL_PARENTS,
-		ALL_PARENTS_WITH_CLASS,
-		NONE
-	}
+	
 	
 
 }

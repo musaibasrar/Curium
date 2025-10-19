@@ -1,12 +1,13 @@
 package org.ideoholic.curium.model.periods.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 // default package
 // Generated 7 Apr, 2018 6:09:10 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,19 +27,17 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "perioddetails")
 public class Perioddetails implements java.io.Serializable {
-	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "idperioddetails", unique = true, nullable = false)
 	private Integer idperioddetails;
 
 	@Column(name = "periods", length = 45)
 	private String periods;
 
-	@ManyToOne
-	@JoinColumn(name = "periodmasterid", referencedColumnName = "idperiodmaster")
-	private Periodmaster periodMaster;
+	@Column(name = "periodmasterid")
+	private Integer periodmasterid;
 
 	@Column(name = "timings", length = 100)
 	private String timings;
@@ -46,16 +45,16 @@ public class Perioddetails implements java.io.Serializable {
 	@Column(name = "days", length = 60)
 	private String days;
 
-	@Column(name = "subject", length = 50)
+	@Column(name = "subject")
 	private String subject;
 
-	@Column(name = "staff", length = 200)
+	@Column(name = "staff")
 	private String staff;
 
 	@Column(name = "branchid")
-	private Integer branchid;
+	private int branchid;
 
 	@Column(name = "userid")
-	private Integer userid;
-
+	private int userid;
+	
 }

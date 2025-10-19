@@ -2,67 +2,92 @@ package org.ideoholic.curium.model.department.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import org.ideoholic.curium.util.Session;
+import org.hibernate.SessionFactory;
+import org.ideoholic.curium.util.Session.Transaction;
+import org.hibernate.query.Query;
+
 import org.ideoholic.curium.model.department.dto.Department;
-import org.ideoholic.curium.repositories.DepartmentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import javax.transaction.Transactional;
+import org.ideoholic.curium.util.HibernateUtil;
 
-@Slf4j
-@Component
 public class departmentDAO {
-    @Autowired
-    private DepartmentRepository departmentRepository;
 
+	
+	Session session = null;
+    /**
+     * * Hibernate Session Variable
+     */
+    Transaction transaction = null;
+    /**
+     * * Hibernate Transaction Variable
+     */
+  
+    SessionFactory sessionFactory;
+    
+    private static final Logger logger = LogManager.getLogger(departmentDAO.class);
 
-	@Transactional
-    public Department create(Department department) {
-
-		try {
-           departmentRepository.save(department);
-            
-        } catch (Exception hibernateException)  {
-            log.error(hibernateException.getMessage(), hibernateException);
-
-            hibernateException.printStackTrace();
-            throw hibernateException;
-
-        }
-        return department;
+	public departmentDAO() {
+		session = HibernateUtil.openCurrentSession();
 	}
 
 
+	@SuppressWarnings("finally")
+	public Department create(Department department) {
+		try {
+            //this.session = sessionFactory.openCurrentSession();
+            transaction = session.beginTransaction();
+            session.save(department);
 
-	@Transactional
-    public List<Department> readListOfObjects(int branchId) {
+
+            transaction.commit();
+            
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            
+            hibernateException.printStackTrace();
+        } finally {
+    			HibernateUtil.closeSession();
+            return department;
+        }
+	}
+
+
+	@SuppressWarnings({ "unchecked", "finally" })
+	public List<Department> readListOfObjects(int branchId) {
 		
 		List<Department> results = new ArrayList<Department>();
         try {
             
-            results = departmentRepository.findByBranchid(branchId);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
+            transaction.commit();
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
             hibernateException.printStackTrace();
-            throw hibernateException;
-        }
-
+        } finally {
+    			HibernateUtil.closeSession();
             return results;
-
+        }
 	}
 
-    @Transactional
-	public boolean  deleteMultiple(List<Integer> ids) {
+
+	public boolean  deleteMultiple(List ids) {
         boolean result = false;
 		try {
-            departmentRepository.deleteAllById(ids);
-            result = true;
-        } catch (Exception hibernateException) { ;
-            log.error(hibernateException.getMessage(), hibernateException);
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("delete from Department where depid IN (:ids)");
+            query.setParameterList("ids", ids);
+            query.executeUpdate();
+            transaction.commit();
+            result= true;
+        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
-        }
+        }finally {
+			HibernateUtil.closeSession();
+		}
 		return result;
 	}
 }
