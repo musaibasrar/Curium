@@ -5,6 +5,8 @@
 
 package org.ideoholic.curium.util;
 
+import org.springframework.util.StringUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -184,5 +186,7 @@ public class DataUtil {
        return mathrandom;
    }
 
-
+    public static String requireNonNullElse(String str, String defaultValue) {
+        return StringUtils.hasLength(str) ? str : defaultValue;
+    }
 }

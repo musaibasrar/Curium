@@ -20,6 +20,9 @@ import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class StandardService {
 
@@ -107,7 +110,7 @@ public class StandardService {
 		ResultResponse result = ResultResponse.builder().build();
 		List<Integer> ids = new ArrayList<>();
 		for (String id : studentIds) {
-			System.out.println("id" + id);
+			log.debug("id" + id);
 			ids.add(Integer.valueOf(id));
 		}
 		if (new StandardDetailsDAO().graduateMultiple(ids)) {
@@ -122,7 +125,7 @@ public class StandardService {
 		ResultResponse result = ResultResponse.builder().build();
 		List<Integer> ids = new ArrayList<>();
 		for (String id : studentIds) {
-			System.out.println("id" + id);
+			log.debug("id" + id);
 			ids.add(Integer.valueOf(id));
 		}
 		if (new StandardDetailsDAO().droppedoutMultiple(ids)) {
@@ -136,7 +139,7 @@ public class StandardService {
 		ResultResponse result = ResultResponse.builder().build();
 		List<Integer> ids = new ArrayList<>();
 		for (String id : studentIds) {
-			System.out.println("id" + id);
+			log.debug("id" + id);
 			ids.add(Integer.valueOf(id));
 
 		}

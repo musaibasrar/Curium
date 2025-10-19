@@ -3,13 +3,7 @@ package org.ideoholic.curium.model.hr.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
+import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.hr.dto.Leaveapplication;
 import org.ideoholic.curium.model.hr.dto.Leavedetails;
@@ -21,622 +15,567 @@ import org.ideoholic.curium.model.hr.dto.Payheadstaffdetails;
 import org.ideoholic.curium.model.hr.dto.Pf;
 import org.ideoholic.curium.model.hr.dto.Processsalarydetails;
 import org.ideoholic.curium.model.hr.dto.Processsalarydetailsheads;
-import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.repositories.LeaveApplicationRepository;
+import org.ideoholic.curium.repositories.LeaveDetailsRepository;
+import org.ideoholic.curium.repositories.LeaveTypeMasterRepository;
+import org.ideoholic.curium.repositories.PayAdvanceSalaryRepository;
+import org.ideoholic.curium.repositories.PayHeadRepository;
+import org.ideoholic.curium.repositories.PayHeadStaffDetailsRepository;
+import org.ideoholic.curium.repositories.PaybasicRepository;
+import org.ideoholic.curium.repositories.PfRepository;
+import org.ideoholic.curium.repositories.ProcessSalaryDetailsHeadsRepository;
+import org.ideoholic.curium.repositories.ProcessSalaryDetailsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class HrDAO {
 
-	
-	Session session = null;
-    /**
-     * * Hibernate Session Variable
-     */
-    Transaction transaction = null;
-    /**
-     * * Hibernate Transaction Variable
-     */
-  
-    SessionFactory sessionFactory;
-    
-    private static final Logger logger = LogManager.getLogger(HrDAO.class);
+    @Autowired
+    private LeaveTypeMasterRepository leaveTypeMasterRepository;
 
-	public HrDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+    @Autowired
+    private LeaveDetailsRepository leaveDetailsRepository;
 
-	public List<Leavetypemaster> readListOfLeaveTypes(int branchId) {
-		
-		List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
+    @Autowired
+    private LeaveApplicationRepository leaveApplicationRepository;
 
-		try {
-            transaction = session.beginTransaction();
-            list = session.createQuery("From Leavetypemaster where branchid="+branchId).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+    @Autowired
+    private PayHeadRepository payHeadRepository;
+
+    @Autowired
+    private PayAdvanceSalaryRepository payAdvanceSalaryRepository;
+
+    @Autowired
+    private PayHeadStaffDetailsRepository payHeadStaffDetailsRepository;
+
+    @Autowired
+    private PaybasicRepository payBasicRepository;
+
+    @Autowired
+    private PfRepository pfRepository;
+
+    @Autowired
+    private ProcessSalaryDetailsRepository processSalaryDetailsRepository;
+
+    @Autowired
+    private ProcessSalaryDetailsHeadsRepository processSalaryDetailsHeadsRepository;
+
+
+    @Transactional
+    public List<Leavetypemaster> readListOfLeaveTypes(int branchId) {
+        List<Leavetypemaster> list = new ArrayList<Leavetypemaster>();
+
+        try {
+            // session.createQuery("From Leavetypemaster where branchid="+branchId).list();
+            list = leaveTypeMasterRepository.findByBranchid(branchId);
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
-		}
+            throw hibernateException;
+        }
         return list;
-	}
+    }
 
-	public boolean saveLeaveType(Leavetypemaster leaveMaster) {
-		
-		try {
-            transaction = session.beginTransaction();
-            session.save(leaveMaster);
-            transaction.commit();
+    @Transactional
+    public boolean saveLeaveType(Leavetypemaster leaveMaster) {
+        try {
+            // session.save(leaveMaster);
+            leaveTypeMasterRepository.save(leaveMaster);
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
 
-	public boolean deleteLeaveType(Leavetypemaster leaveType) {
-		try {
-            transaction = session.beginTransaction();
-            session.delete(leaveType);
-            transaction.commit();
+            throw hibernateException;
+        }
+    }
+
+    @Transactional
+    public boolean deleteLeaveType(Leavetypemaster leaveType) {
+        try {
+            // session.delete(leaveType);
+            leaveTypeMasterRepository.delete(leaveType);
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
 
-	public boolean addLeaves(List<Leavedetails> leaveDetailsList) {
+            throw hibernateException;
+        }
+    }
 
-		try {
-            transaction = session.beginTransaction();
-            for (Leavedetails leavedetails : leaveDetailsList) {
-            	session.save(leavedetails);
-			}
-            transaction.commit();
+    @Transactional
+    public boolean addLeaves(List<Leavedetails> leaveDetailsList) {
+        try {
+            // for (Leavedetails leavedetails : leaveDetailsList) {
+            // session.save(leavedetails);
+            // }
+            leaveDetailsRepository.saveAll(leaveDetailsList);
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
 
-	public List<Leavedetails> getLeaveDetails(String teacherId, String academicYear) {
-		List<Leavedetails> leaveDetailsList = new ArrayList<Leavedetails>();
-		
-		try {
-            transaction = session.beginTransaction();
-            leaveDetailsList = session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+            throw hibernateException;
+        }
+    }
+
+    @Transactional
+    public List<Leavedetails> getLeaveDetails(String teacherId, String academicYear) {
+        List<Leavedetails> leaveDetailsList = new ArrayList<Leavedetails>();
+        try {
+            // session.createQuery("From Leavedetails where idteacher="+teacherId+" and academicyear='"+academicYear+"'").list();
+            leaveDetailsList = leaveDetailsRepository.findByTeacherTidAndAcademicyear(teacherId, academicYear);
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
-		}
-		return leaveDetailsList;
-		
-	}
 
-	public boolean savePayHead(Payhead payHead) {
-		
-		try {
-            transaction = session.beginTransaction();
-            session.save(payHead);
-            transaction.commit();
+            throw hibernateException;
+        }
+        return leaveDetailsList;
+
+    }
+
+    @Transactional
+    public boolean savePayHead(Payhead payHead) {
+        try {
+            // session.save(payHead);
+            payHeadRepository.save(payHead);
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        } finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
 
-	public List<Payhead> getPayHeadList(String academicYear, int branchId) {
-		List<Payhead> payHead = new ArrayList<Payhead>();
-		
-		try {
-			transaction = session.beginTransaction();
-			payHead = session.createQuery("from Payhead where academicyear='"+academicYear+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		
-		return payHead;
-	}
+            throw hibernateException;
+        }
+    }
 
-	public boolean addPayHeadStaffDetails(
-			List<Payheadstaffdetails> payHeadStaffDetailsList) {
-		
-		try {
-			transaction = session.beginTransaction();
-			for (Payheadstaffdetails payheadstaffdetails : payHeadStaffDetailsList) {
-				session.save(payheadstaffdetails);
-			}
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;		
-	}
+    @Transactional
+    public List<Payhead> getPayHeadList(String academicYear, int branchId) {
+        try {
+            // session.createQuery("from Payhead where academicyear='"+academicYear+"' and branchid="+branchId).list();
+            return payHeadRepository.findByAcademicyearAndBranchid(academicYear, branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
-	public boolean savePayBasic(List<Paybasic> payBasicList) {
-			
-			try {
-				transaction = session.beginTransaction();
-				for (Paybasic payBasic : payBasicList) {
-					session.save(payBasic);
-				}
-				transaction.commit();
-				return true;
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
-				e.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			}
-			return false;		
-	}
-
-	public void addPf(Pf pf) {
-
-		try {
-			transaction = session.beginTransaction();
-			session.save(pf);
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		
-	}
-
-	public List<Pf> pfSettings(int branchId) {
-		
-		List<Pf> pf = new ArrayList<Pf>();
-		
-		try {
-			transaction = session.beginTransaction();
-			pf = session.createQuery("From Pf where branchid = "+branchId+" order by date Desc").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return pf;
-	}
-
-	public void deletePf(List ids) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("delete from Pf where idpf IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		
-	}
-
-	public boolean saveAdvanceSalary(Payadvancesalary payAdvanceSalary) {
-
-		try {
-			transaction = session.beginTransaction();
-			session.save(payAdvanceSalary);
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
-
-	public List<Payadvancesalary> salaryApprovalDispaly(int branchId) {
-		
-		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
-		try {
-			transaction = session.beginTransaction();
-			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='apply' and branchid = "+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return payAdvanceSalary;
-	}
-
-	public boolean saveAdvanceSalaryApproval(Payadvancesalary payAdvance) {
-
-		try {
-			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update hr_payadvancesalary set reason = '"+payAdvance.getReason()+"',status = '"+payAdvance.getStatus()+"' where idpayadvancesalary="+payAdvance.getIdpayadvancesalary());
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
-
-	public boolean deleteAdvaceSalaryApproval(Payadvancesalary payAdvance) {
-		try {
-            transaction = session.beginTransaction();
-            session.delete(payAdvance);
-            transaction.commit();
+    @Transactional
+    public boolean addPayHeadStaffDetails(List<Payheadstaffdetails> payHeadStaffDetailsList) {
+        try {
+            // for (Payheadstaffdetails payheadstaffdetails : payHeadStaffDetailsList) {
+            //     session.save(payheadstaffdetails);
+            // }
+            payHeadStaffDetailsRepository.saveAll(payHeadStaffDetailsList);
             return true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
-            hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
 
-	public List<Payadvancesalary> salaryIssue(int branchId) {
-		List<Payadvancesalary> payAdvanceSalary = new ArrayList<Payadvancesalary>();
+    @Transactional
+    public boolean savePayBasic(List<Paybasic> payBasicList) {
+        try {
+            // for (Paybasic payBasic : payBasicList) {
+            //     session.save(payBasic);
+            // }
+            payBasicRepository.saveAll(payBasicList);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void addPf(Pf pf) {
+        try {
+            // session.save(pf);
+            pfRepository.save(pf);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Pf> pfSettings(int branchId) {
+        try {
+            // session.createQuery("From Pf where branchid = "+branchId+" order by date Desc").list();
+            return pfRepository.findByBranchidOrderByDateDesc(branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public void deletePf(List<Integer> ids) {
+        try {
+            // session.createQuery("delete from Pf where idpf IN (:ids)");
+            pfRepository.deleteAllById(ids);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean saveAdvanceSalary(Payadvancesalary payAdvanceSalary) {
+        try {
+            // session.save(payAdvanceSalary);
+            payAdvanceSalaryRepository.save(payAdvanceSalary);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Payadvancesalary> salaryApprovalDispaly(int branchId) {
+        try {
+            // session.createQuery("from Payadvancesalary where status='apply' and branchid = "+branchId).list();
+            return payAdvanceSalaryRepository.findByStatusAndBranchid("apply", branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean saveAdvanceSalaryApproval(Payadvancesalary payAdvance) {
+        try {
+            // Query query= session.createSQLQuery("update hr_payadvancesalary set reason = '"+payAdvance.getReason()+"',status = '"+payAdvance.getStatus()+"' where idpayadvancesalary="+payAdvance.getIdpayadvancesalary());
+            // query.executeUpdate();
+            Payadvancesalary adv = payAdvanceSalaryRepository.findById(payAdvance.getIdpayadvancesalary()).orElse(null);
+            if (adv != null) {
+                adv.setReason(payAdvance.getReason());
+                adv.setStatus(payAdvance.getStatus());
+                payAdvanceSalaryRepository.save(adv);
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean deleteAdvaceSalaryApproval(Payadvancesalary payAdvance) {
+        try {
+            // session.delete(payAdvance);
+            payAdvanceSalaryRepository.delete(payAdvance);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Payadvancesalary> salaryIssue(int branchId) {
+        try {
+            // session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
+            List<String> statuses = new ArrayList<>();
+            statuses.add("approved");
+            statuses.add("rejected");
+            return payAdvanceSalaryRepository.findByBranchidAndStatusIn(branchId, statuses);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean applyLeave(Leaveapplication leaveApplication) {
+        try {
+            // session.save(leaveApplication);
+            leaveApplicationRepository.save(leaveApplication);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Leaveapplication> leaveApprovals(String currentAcademicYear, int branchId) {
+        try {
+            // session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
+            return leaveApplicationRepository.findByAcademicyearAndBranchid(currentAcademicYear, branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+	public boolean rejectLeave(List<Integer> ids) {
 		try {
-			transaction = session.beginTransaction();
-			payAdvanceSalary = session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return payAdvanceSalary;
-	}
-
-	public boolean applyLeave(Leaveapplication leaveApplication) {
-		
-		try {
-			transaction = session.beginTransaction();
-			session.save(leaveApplication);
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
-
-	public List<Leaveapplication> leaveApprovals(String currentAcademicYear, int branchId) {
-		
-		List<Leaveapplication> listLeaveApplication = new ArrayList<Leaveapplication>();
-		
-		try {
-			transaction = session.beginTransaction();
-			listLeaveApplication = session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return listLeaveApplication;
-	}
-
-	public boolean rejectLeave(List ids) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update hr_leaveapplication set status = 'rejected' where idleaveapplication IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-		
-	}
-
-	public boolean approveLeave(List ids) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update hr_leaveapplication set status = 'approved' where idleaveapplication IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception e) { 
-			transaction.rollback(); 
-			logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-		
-	}
-
-	public boolean processStaffSalary(List<Processsalarydetails> processsalarydetailsList, List<Processsalarydetailsheads> processSalarydetailsheadList) {
-
-		try {
-			transaction = session.beginTransaction();
-			for (Processsalarydetails processsalarydetails : processsalarydetailsList) {
-				session.save(processsalarydetails);
-				for (Processsalarydetailsheads processsalarydetailsheads : processSalarydetailsheadList) {
-					processsalarydetailsheads.setProcesssalarydetails(processsalarydetails);
-					session.save(processsalarydetailsheads);
-				}
+			// Query query= session.createSQLQuery("update hr_leaveapplication set status = 'rejected' where idleaveapplication IN (:ids)");
+			for (Integer id : ids) {
+				leaveApplicationRepository.findById(id).map(leaveApplication -> {
+					leaveApplication.setStatus("rejected");
+					return leaveApplicationRepository.save(leaveApplication);
+				});
 			}
-			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
-		return false;
-		
 	}
 
-	public List<Payhead> getPayHeadListDynamic(String payHeadType, String academicYear, int branchId) {
-			List<Payhead> payHead = new ArrayList<Payhead>();
-			
-			try {
-				transaction = session.beginTransaction();
-				payHead = session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"' and branchid="+branchId).list();
-				transaction.commit();
-			} catch (Exception e) { transaction.rollback(); logger.error(e);
-				e.printStackTrace();
-			}finally {
-				HibernateUtil.closeSession();
-			}			
-			return payHead;
-	}
-
-	public Paybasic getBasicPay(int idteacher, String academicYear) {
-		
-		Paybasic basicPay = new Paybasic();
-		
+    @Transactional
+	public boolean approveLeave(List<Integer> ids) {
 		try {
-			transaction = session.beginTransaction();
-			Query query = session.createSQLQueryEntity("select * from hr_paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1",Paybasic.class);
-			basicPay = (Paybasic) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { 
-			transaction.rollback(); 
-			logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return basicPay;
-	}
-
-	public List<Payheadstaffdetails> getPayHeadStaff(int teacherid, String academicYear) {
-		
-		List<Payheadstaffdetails> payHeadStaffList = new ArrayList<Payheadstaffdetails>();
-		
-		try {
-			transaction = session.beginTransaction();
-			payHeadStaffList = session.createQuery("from Payheadstaffdetails where idteacher = "+teacherid+" and academicyear='"+academicYear+"'").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return payHeadStaffList;
-	}
-
-	public List<Processsalarydetails> issueStaffSalary(String academicYear, int branchId) {
-		
-	List<Processsalarydetails> processSalaryDetails = new ArrayList<Processsalarydetails>();
-		
-		try {
-			transaction = session.beginTransaction();
-			processSalaryDetails = session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return processSalaryDetails;
-	}
-
-	public Processsalarydetails getProcessSalaryDetails(int processId) {
-		
-		Processsalarydetails processSalaryDetails = new Processsalarydetails();
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Processsalarydetails where idprocesssalarydetails="+processId+"");
-			processSalaryDetails = (Processsalarydetails) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return processSalaryDetails;
-	}
-
-	public List<Processsalarydetailsheads> getProcessSalaryHeads(int processId) {
-		
-		List<Processsalarydetailsheads> processSalaryHeadsList = new ArrayList<Processsalarydetailsheads>();
-		
-		try {
-			transaction = session.beginTransaction();
-			processSalaryHeadsList = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+"").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return processSalaryHeadsList;
-	}
-
-	public Processsalarydetailsheads getProcessSalaryBasicPay(int processId) {
-		
-		Processsalarydetailsheads processSalaryHeads = new Processsalarydetailsheads();
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+" and payheadname='Basic Pay'");
-			processSalaryHeads = (Processsalarydetailsheads) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return processSalaryHeads;
-	}
-
-	public List<Payheadstaffdetails> getStaffDetails(int staffId, String academicYear) {
-		
-		List<Payheadstaffdetails> PayHeadStaffDetailsList = new ArrayList<Payheadstaffdetails>();
-		
-		try {
-			transaction = session.beginTransaction();
-			PayHeadStaffDetailsList = session.createQuery("from Payheadstaffdetails where idteacher="+staffId+" and academicyear='"+academicYear+"'").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return PayHeadStaffDetailsList;
-	}
-
-	public List<Processsalarydetails> getStaffinfo(int teacherId) {
-
-		List<Processsalarydetails> processSalaryDetails = new ArrayList<Processsalarydetails>();
-		
-		try {
-			transaction = session.beginTransaction();
-			processSalaryDetails = session.createQuery("from Processsalarydetails where teacherid="+teacherId+"").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return processSalaryDetails;
-	}
-
-	public boolean deletePayHeadStaff(List ids) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("delete from Payheadstaffdetails where idpayheadstaffdetails IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-			
-			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
-
-	public Processsalarydetails checkprocessedStaffSalary(int staffId, String month, String year) {
-		
-		Processsalarydetails processSalaryDetails = new Processsalarydetails();
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Processsalarydetails where teacherid="+staffId+" and month='"+month+"' and year='"+year+"'");
-			processSalaryDetails = (Processsalarydetails) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return processSalaryDetails;
-	}
-
-	public boolean issueProcessedSalary(List ids) {
-
-		try {
-			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'ISSUED' where idprocesssalarydetails IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
-
-	public boolean cancelProcessedSalary(List ids) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'CANCELLED' where idprocesssalarydetails IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return false;
-	}
-
-	public boolean updatePayBasic(List<Paybasic> payBasicList) {
-		
-		try {
-			transaction = session.beginTransaction();
-			for (Paybasic payBasic : payBasicList) {
-				session.update(payBasic);
+			// Query query= session.createSQLQuery("update hr_leaveapplication set status = 'approved' where idleaveapplication IN (:ids)");
+			for (Integer id : ids) {
+				leaveApplicationRepository.findById(id).map(leaveApplication -> {
+					leaveApplication.setStatus("approved");
+					return leaveApplicationRepository.save(leaveApplication);
+				});
 			}
-			transaction.commit();
 			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw e;
 		}
-		return false;		
-}
-	
+	}
+
+    @Transactional
+    public boolean processStaffSalary(List<Processsalarydetails> processsalarydetailsList, List<Processsalarydetailsheads> processSalarydetailsheadList) {
+        try {
+            // for (Processsalarydetails processsalarydetails : processsalarydetailsList) {
+            //     session.save(processsalarydetails);
+            //     for (Processsalarydetailsheads processsalarydetailsheads : processSalarydetailsheadList) {
+            //         processsalarydetailsheads.setProcesssalarydetails(processsalarydetails);
+            //         session.save(processsalarydetailsheads);
+            //     }
+            // }
+            for (Processsalarydetails processsalarydetails : processsalarydetailsList) {
+                Processsalarydetails saved = processSalaryDetailsRepository.save(processsalarydetails);
+                for (Processsalarydetailsheads heads : processSalarydetailsheadList) {
+                    heads.setProcesssalarydetails(saved);
+                    processSalaryDetailsHeadsRepository.save(heads);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Payhead> getPayHeadListDynamic(String payHeadType, String academicYear, int branchId) {
+        try {
+            // session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"' and branchid="+branchId).list();
+            return payHeadRepository.findByPayheadtypeAndAcademicyearAndBranchid(payHeadType, academicYear, branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public Paybasic getBasicPay(int idteacher, String academicYear) {
+        try {
+            // Query query = session.createSQLQueryEntity("select * from hr_paybasic where idteacher = "+idteacher+" and academicyear='"+academicYear+"' ORDER BY idpaybasic DESC LIMIT 1",Paybasic.class);
+            // basicPay = (Paybasic) query.uniqueResult();
+            return payBasicRepository.findByTeacherTidAndAcademicyear(idteacher, academicYear);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Payheadstaffdetails> getPayHeadStaff(int teacherid, String academicYear) {
+        try {
+            // session.createQuery("from Payheadstaffdetails where idteacher = "+teacherid+" and academicyear='"+academicYear+"'").list();
+            return payHeadStaffDetailsRepository.findByTeacherTidAndAcademicyear(teacherid, academicYear);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Processsalarydetails> issueStaffSalary(String academicYear, int branchId) {
+        try {
+            // session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"' and branchid="+branchId).list();
+            return processSalaryDetailsRepository.findByAcademicyearAndBranchid(academicYear, branchId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public Processsalarydetails getProcessSalaryDetails(int processId) {
+        try {
+            // Query query = session.createQuery("from Processsalarydetails where idprocesssalarydetails="+processId+"");
+            // processSalaryDetails = (Processsalarydetails) query.uniqueResult();
+            return processSalaryDetailsRepository.findById(processId).orElse(null);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Processsalarydetailsheads> getProcessSalaryHeads(int processId) {
+        try {
+            // session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+"").list();
+            return processSalaryDetailsHeadsRepository.findByProcesssalarydetailsIdprocesssalarydetails(processId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public Processsalarydetailsheads getProcessSalaryBasicPay(int processId) {
+        try {
+            // Query query = session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+" and payheadname='Basic Pay'");
+            // processSalaryHeads = (Processsalarydetailsheads) query.uniqueResult();
+            return processSalaryDetailsHeadsRepository.findByProcesssalarydetailsIdprocesssalarydetailsAndPayheadname(processId, "Basic Pay");
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Payheadstaffdetails> getStaffDetails(int staffId, String academicYear) {
+        try {
+            // session.createQuery("from Payheadstaffdetails where idteacher="+staffId+" and academicyear='"+academicYear+"'").list();
+            return payHeadStaffDetailsRepository.findByTeacherTidAndAcademicyear(staffId, academicYear);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public List<Processsalarydetails> getStaffinfo(int teacherId) {
+        try {
+            // session.createQuery("from Processsalarydetails where teacherid="+teacherId+"").list();
+            return processSalaryDetailsRepository.findByTeacherTid(teacherId);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean deletePayHeadStaff(List<Integer> ids) {
+        try {
+            // Query query = session.createQuery("delete from Payheadstaffdetails where idpayheadstaffdetails IN (:ids)");
+        	payHeadStaffDetailsRepository.deleteAllById(ids);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+	public Processsalarydetails checkprocessedStaffSalary(int staffId, String month, Integer year) {
+        try {
+            // Query query = session.createQuery("from Processsalarydetails where teacherid="+staffId+" and month='"+month+"' and year='"+year+"'");
+            // processSalaryDetails = (Processsalarydetails) query.uniqueResult();
+            return processSalaryDetailsRepository.findByTeacherTidAndMonthAndYear(staffId, month, year);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean issueProcessedSalary(List<Integer> ids) {
+        try {
+            // Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'ISSUED' where idprocesssalarydetails IN (:ids)");
+			for (Integer id : ids) {
+				processSalaryDetailsRepository.findById(id).map(salaryDetails -> {
+					salaryDetails.setStatus("ISSUED");
+					return processSalaryDetailsRepository.save(salaryDetails);
+				});
+			}
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean cancelProcessedSalary(List<Integer> ids) {
+        try {
+            // Query query= session.createSQLQuery("update hr_processsalarydetails set status = 'CANCELLED' where idprocesssalarydetails IN (:ids)");
+			for (Integer id : ids) {
+				processSalaryDetailsRepository.findById(id).map(salaryDetails -> {
+					salaryDetails.setStatus("CANCELLED");
+					return processSalaryDetailsRepository.save(salaryDetails);
+				});
+			}
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
+
+    @Transactional
+    public boolean updatePayBasic(List<Paybasic> payBasicList) {
+        try {
+            // for (Paybasic payBasic : payBasicList) {
+            //     session.update(payBasic);
+            // }
+            payBasicRepository.saveAll(payBasicList);
+            return true;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            throw e;
+        }
+    }
 }

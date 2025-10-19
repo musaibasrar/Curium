@@ -35,6 +35,15 @@ public class MessItemsService {
 
 	@Autowired
 	private MessSuppliersService messSuppliersService;
+	
+	@Autowired
+    private AccountDAO accountDao;
+	
+	@Autowired
+	private MessItemsDAO messItemsDao;
+
+	@Autowired
+	private MessStockEntryDAO messStockEntryDao;
 
 
 	public ResultResponse viewItemDetails(String branchId) {
@@ -44,7 +53,7 @@ public class MessItemsService {
 		List<MessStockAvailability> messStockAvailabilityList = new ArrayList<MessStockAvailability>();
 		
 		 if(branchId!=null){
-			 	messStockAvailabilityList = new MessItemsDAO().getItemsStockAvailability(); 
+			 	messStockAvailabilityList = messItemsDao.getItemsStockAvailability(); 
 		 }
 		 result.setResultList(messStockAvailabilityList);
 		 result.setSuccess(true);
@@ -60,7 +69,7 @@ public class MessItemsService {
 	  
 	  if(branchId!=null)
 	  { 
-		  messStockAvailabilityList = new MessItemsDAO().getItemsStockAvailability();
+		  messStockAvailabilityList = messItemsDao.getItemsStockAvailability();
 		  }
 	  result.setResultList(messStockAvailabilityList); result.setSuccess(true);
 	  return result; 
@@ -91,7 +100,7 @@ public class MessItemsService {
 			 
 			 messStockAvailability.setMessitems(messItems);
 			 
-			 messItems= new MessItemsDAO().addNewItem(messStockAvailability);
+			 messItems= messItemsDao.addNewItem(messStockAvailability);
 			 
 			 if(messItems.getId()!=null) {
 				 result.setItemSave(true);
@@ -136,7 +145,7 @@ public class MessItemsService {
            String[] messId = id.split(":");
            ids.add(Integer.valueOf(messId[0]));
        }
-       boolean result = new MessItemsDAO().deleteItems(ids);
+       boolean result = messItemsDao.deleteItems(ids);
 			resultResponse.setSuccess(result);
 
         }
@@ -167,7 +176,7 @@ public class MessItemsService {
                 messStockAvailability.setMinstock(Integer.parseInt(dto.getRequestParams().get("updateminstock_"+itemId)));
                 messStockAvailabilityList.add(messStockAvailability);
             }
-            boolean result = new MessItemsDAO().updateMultipleItems(messStockAvailabilityList);
+            boolean result = messItemsDao.updateMultipleItems(messStockAvailabilityList);
 			resultResponse.setSuccess(result);
         }
 		resultResponse.setSuccess(true);
@@ -252,7 +261,7 @@ public class MessItemsService {
 						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards New Stock Entry");
 						transactions.setCancelvoucher("no");
-						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactions.setBranchid(Integer.parseInt(branchId));
 						transactions.setUserid(Integer.parseInt(userId));
 						
@@ -281,7 +290,7 @@ public class MessItemsService {
 						transactionTC.setNarration("Towards transportation/labour charges. Ref. No:"+randomString+":"+dto.getSupplierReferenceNo());
 						transactionTC.setCancelvoucher("no");
 						transactionTC.setBranchid(Integer.parseInt(branchId));
-						transactionTC.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactionTC.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactionTC.setUserid(Integer.parseInt(userId));
 
 						// Dr
@@ -292,10 +301,10 @@ public class MessItemsService {
 						String updateTransportationCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+crSupplierLedgerId;
 						
 						//End J.V
-						boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount);
+						boolean result = messItemsDao.addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount);
 						resultResponse.setSuccess(result);
 						}else {
-							boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
+							boolean result = messItemsDao.addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
 							resultResponse.setSuccess(result);
 						}
 				}
@@ -340,7 +349,7 @@ public class MessItemsService {
 						poMaster.setExternalId(branchCode);
 						resultResponse.setSuccess(true);
 					}
-					resultResponse.setSuccess(new MessItemsDAO().addNewOrderDetail(purchaseOrderList,poMaster));
+					resultResponse.setSuccess(messItemsDao.addNewOrderDetail(purchaseOrderList,poMaster));
 			}
 			
 					return resultResponse;
@@ -360,7 +369,7 @@ public class MessItemsService {
 							page = Integer.parseInt(strPage);
 						}
 
-					List<MessInvoiceDetails> invoicelist = new MessItemsDAO().getInvoiceDetailsPagination((page - 1) * recordsPerPage,
+					List<MessInvoiceDetails> invoicelist = messItemsDao.getInvoiceDetailsPagination((page - 1) * recordsPerPage,
 							recordsPerPage, Integer.parseInt(branchId));
 					
 					Map<MessInvoiceDetails,MessSuppliers> invoiceSuppliersMap = new LinkedHashMap<MessInvoiceDetails,MessSuppliers>();
@@ -372,7 +381,7 @@ public class MessItemsService {
 					}
 					result.setInvoiceSuppliersMap(invoiceSuppliersMap);
 					
-					int noOfRecords = new MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(branchId));
+					int noOfRecords = messItemsDao.getTotalNoOfRecords(Integer.parseInt(branchId));
 					int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 					result.setNoOfPages(noOfPages);
 					result.setCurrentPage(page);
@@ -419,7 +428,7 @@ public class MessItemsService {
 
 		public InvoiceDetailsResponseDto getPurchaseOrderDetails() {
 			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
-			List<PoMaster> invoicelist = new MessItemsDAO().getPurchaseOrderMasterDetails();
+			List<PoMaster> invoicelist = messItemsDao.getPurchaseOrderMasterDetails();
 			Map<PoMaster,MessSuppliers> poMasterMap = new LinkedHashMap<PoMaster,MessSuppliers>();
 			for (PoMaster messInvoiceDetails : invoicelist) {
 				MessSuppliers messSuppliers = new MessSuppliers();
@@ -447,16 +456,16 @@ public class MessItemsService {
 				
 				if(!"MOVED".equalsIgnoreCase(stockEntrystatus)) {
 				
-				List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntry(invoiceId);
+				List<MessStockEntry> messStockEntryList = messItemsDao.getMessStockEntry(invoiceId);
 				
-				VoucherEntrytransactions voucherTransaction = new AccountDAO().getVoucherDetails(ivids[1]);
+				VoucherEntrytransactions voucherTransaction = accountDao.getVoucherDetails(ivids[1]);
 				if(voucherTransaction != null) {
 
 					String updateDrAccount = "update Accountdetailsbalance set currentbalance=currentbalance-" + voucherTransaction.getDramount() + " where accountdetailsid=" + voucherTransaction.getDraccountid();
 					String updateCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance-" + voucherTransaction.getCramount() + " where accountdetailsid=" + voucherTransaction.getCraccountid();
 					String cancelVoucher = "update VoucherEntrytransactions set cancelvoucher='yes', vouchercancellationdate='" + todaysDate + "' where transactionsid=" + voucherId;
 
-					new MessItemsDAO().cancelPurchase(invoiceId, messStockEntryList, updateDrAccount, updateCrAccount, cancelVoucher);
+					messItemsDao.cancelPurchase(invoiceId, messStockEntryList, updateDrAccount, updateCrAccount, cancelVoucher);
 
 				}else {
 					log.error("Unable to fetch transaction of {}", ivids[1]);
@@ -473,7 +482,7 @@ public class MessItemsService {
 		public ResultResponse getCurrentStock() {
 			ResultResponse result = ResultResponse.builder().build();
 
-			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStockAvailability();
+			List<MessStockAvailability> messStockAvailability = messItemsDao.getItemsStockAvailability();
 			result.setResultList(messStockAvailability);
 			result.setSuccess(true);
 
@@ -484,7 +493,7 @@ public class MessItemsService {
 		public ResultResponse getBatchStock() {
 			ResultResponse result = ResultResponse.builder().build();
 
-			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getItemsStockEntry();
+			List<MessStockEntry> messStockEntryList = messItemsDao.getItemsStockEntry();
 			result.setResultList(messStockEntryList);
 			result.setSuccess(true);
 
@@ -495,7 +504,7 @@ public class MessItemsService {
 		public ResultResponse getIssuanceStock() {
 			ResultResponse result = ResultResponse.builder().build();
 			
-			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
+			List<MessItems> messItemsList =  messItemsDao.getItemsDetails();
 			result.setResultList(messItemsList);
 			result.setSuccess(true);
 
@@ -547,8 +556,8 @@ public class MessItemsService {
 				messStockItemIds.add(messStockMove.getItemid());
 			}
 			
-			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getMessStockEntryByIdList(messStockMoveIds);
-			List<MessItems> messItemsList = new MessItemsDAO().getItemDetailByID(messStockItemIds);
+			List<MessStockEntry> messStockEntryList = messItemsDao.getMessStockEntryByIdList(messStockMoveIds);
+			List<MessItems> messItemsList = messItemsDao.getItemDetailByID(messStockItemIds);
 			
 			for (MessStockMove messStockMove : messStockMoveList) {
 				
@@ -642,7 +651,7 @@ public class MessItemsService {
 
 			messSuppliersService.viewSuppliersDetails(branchId);
 			
-			List<MessItems> messItemsList =  new MessItemsDAO().getItemsDetails();
+			List<MessItems> messItemsList =  messItemsDao.getItemsDetails();
 			result.setResultList(messItemsList);
 			result.setSuccess(true);
 
@@ -678,7 +687,7 @@ public class MessItemsService {
 				responseDto.setItemSelected("");
 			}
 			
-			List<MessStockEntry> messStockEntryList = new MessItemsDAO().getStockReceivedDetailsReport(queryMain+subQuery);
+			List<MessStockEntry> messStockEntryList = messItemsDao.getStockReceivedDetailsReport(queryMain+subQuery);
 
 			responseDto.setMessStockEntryList(messStockEntryList);
 			responseDto.setTransactionFromDateSelected("From:"+dto.getFromDate());
@@ -693,7 +702,7 @@ public class MessItemsService {
 
 
 		public ResultResponse getCurrentStockToIssue() {
-			List<MessStockAvailability> messStockAvailability = new MessItemsDAO().getItemsStock();
+			List<MessStockAvailability> messStockAvailability = messItemsDao.getItemsStock();
 
 			return ResultResponse
 					.builder()
@@ -706,7 +715,7 @@ public class MessItemsService {
 			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
 
 			//List<PurchaseOrder> purchaseOrderList = new MessItemsDAO().getParticularInvoice(purchaseDto.getExternalId());
-			List<PurchaseOrder> purchaseOrderList = new MessStockEntryDAO().getPurchaseOrderById(purchaseDto.getExternalId());
+			List<PurchaseOrder> purchaseOrderList = messStockEntryDao.getPurchaseOrderById(purchaseDto.getExternalId());
 			invoiceDetailsResponseDto.setPurchaseOrderList(purchaseOrderList);
 			return invoiceDetailsResponseDto;
 			
@@ -720,7 +729,7 @@ public class MessItemsService {
 					System.out.println("id" + id);
 					ids.add(Integer.valueOf(id));
 				}
-				new MessItemsDAO().cancelPurchaseOrder(ids);
+				messItemsDao.cancelPurchaseOrder(ids);
 			}
 			
 		}
@@ -809,7 +818,7 @@ public class MessItemsService {
 							String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+itemsTotalAmount+" where accountdetailsid="+openingStockLedgerId;
 							
 							//End J.V
-							boolean result = new MessItemsDAO().addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
+							boolean result = messItemsDao.addNewStock(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null);
 							resultResponse.setSuccess(result);
 							}
 					}
@@ -830,7 +839,7 @@ public class MessItemsService {
 							page = Integer.parseInt(strPage);
 						}
 
-					List<MessInvoiceDetails> invoicelist = new MessItemsDAO().getInvoiceDetailsPaginationOpeningStock((page - 1) * recordsPerPage,
+					List<MessInvoiceDetails> invoicelist = messItemsDao.getInvoiceDetailsPaginationOpeningStock((page - 1) * recordsPerPage,
 							recordsPerPage, Integer.parseInt(branchId));
 					
 					Map<MessInvoiceDetails,MessSuppliers> invoiceSuppliersMap = new LinkedHashMap<MessInvoiceDetails,MessSuppliers>();
@@ -842,7 +851,7 @@ public class MessItemsService {
 					}
 					result.setInvoiceSuppliersMap(invoiceSuppliersMap);
 					
-					int noOfRecords = new MessItemsDAO().getTotalNoOfRecords(Integer.parseInt(branchId));
+					int noOfRecords = messItemsDao.getTotalNoOfRecords(Integer.parseInt(branchId));
 					int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 					result.setNoOfPages(noOfPages);
 					result.setCurrentPage(page);
@@ -973,10 +982,10 @@ public class MessItemsService {
 						String updateTransportationCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+"+totalAmount+" where accountdetailsid="+crSupplierLedgerId;
 						
 						//End J.V
-						boolean result = new MessItemsDAO().addNewStockFromPO(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount,dto.getExternalId());
+						boolean result = messItemsDao.addNewStockFromPO(messStockEntryList,transactions,updateDrAccount,updateCrAccount,transactionTC,updateTransportationDrAccount,updateTransportationCrAccount,dto.getExternalId());
 						resultResponse.setSuccess(result);
 						}else {
-							boolean result = new MessItemsDAO().addNewStockFromPO(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null,dto.getExternalId());
+							boolean result = messItemsDao.addNewStockFromPO(messStockEntryList,transactions,updateDrAccount,updateCrAccount,null,null,null,dto.getExternalId());
 							resultResponse.setSuccess(result);
 						}
 				}

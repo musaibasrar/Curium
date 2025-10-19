@@ -35,21 +35,23 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 
+@Service
 public class TaskService {
 
+    @Autowired
 	private HttpServletRequest request;
+	@Autowired
 	private HttpServletResponse response;
+	@Autowired
 	private HttpSession httpSession;
-	private static final int BUFFER_SIZE = 4096;
 
-	public TaskService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
+	@Autowired
+	private JobDAO jobDAO;
+	private static final int BUFFER_SIZE = 4096;
 
 	public boolean addQuery() {
 		
@@ -185,7 +187,7 @@ public class TaskService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new JobDAO().cancelQueries(QueryIdsList, userId);
+			result = jobDAO.cancelQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		
@@ -202,8 +204,7 @@ public class TaskService {
 			for (String ids : queryIds) {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
-			
-			result = new JobDAO().inProgressQueries(QueryIdsList, userId);
+			result = jobDAO.inProgressQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		
@@ -375,7 +376,7 @@ public class TaskService {
 		}
 		
 		if(!studentId.isEmpty()) {
-			subQuery = subQuery + "and pq.parent.Student.sid = '"+studentId+"'";
+			subQuery = subQuery + "and pq.parent.student.sid = '"+studentId+"'";
 			httpSession.setAttribute("studentselected", "Student Name:&nbsp;"+studentName);
 		}else {
 			httpSession.setAttribute("studentselected", "");
@@ -563,7 +564,7 @@ public class TaskService {
 		
 		String studentId = request.getParameter("id");
 		
-		String queryMain = "from JobQuery pq where pq.parent.Student.sid = '"+studentId+"'";
+		String queryMain = "from JobQuery pq where pq.parent.student.sid = '"+studentId+"'";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 				
 		JobQueryList = new JobDAO().generateQueriesReport(queryMain);

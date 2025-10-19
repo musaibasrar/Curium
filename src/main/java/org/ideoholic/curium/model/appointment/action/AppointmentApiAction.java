@@ -90,13 +90,13 @@ public class AppointmentApiAction {
 	@PostMapping("/cancelAppointments")
 	private ResponseEntity<ViewAllAppoinmentsResponseDto> cancelAppointments(@RequestBody CancelAppointmentsDto cancelAppointmentsDto, @RequestHeader(value="branchId") String branchId) {
 		appointmentService.cancelAppointments(cancelAppointmentsDto);
-		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(0).build(), branchId);
+		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
 	}
 
 	@PostMapping("/completeAppointments")
 	private ResponseEntity<ViewAllAppoinmentsResponseDto> completeAppointments(@RequestBody CompleteAppointmentsDto completeAppointmentsDto, @RequestHeader(value="branchId") String branchId) {
 		appointmentService.completeAppointments(completeAppointmentsDto);
-		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(0).build(), branchId);
+		return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
 	}
 
 	@RequestMapping(value = "/viewAllAppointments", method = { RequestMethod.GET, RequestMethod.POST })
@@ -114,7 +114,7 @@ public class AppointmentApiAction {
 		ResultResponse result = appointmentService.addAppointment(addAppointmentDto, branchId, currentAcademicYear, userLoginId);
 		if (result.isSuccess()) {
 			studentService.viewAllStudentsParents(page, branchId);
-			employeeService.ViewAllEmployee(branchId);
+			employeeService.viewAllEmployee(branchId);
 			return ResponseEntity.ok(result);
 		} else {
 			throw new CustomResponseException(CustomErrorMessage.ERROR);
@@ -122,10 +122,10 @@ public class AppointmentApiAction {
 	}
 
 	@PostMapping("/updateAppointment")
-	private ResponseEntity<ViewAllAppoinmentsResponseDto> updateAppointment(@RequestBody UpdateAppointmentDto updateAppointmentDto, @RequestHeader(value="branchId") String branchId) {
+	private ResponseEntity<ViewAllAppoinmentsResponseDto> updateAppointment(@RequestBody UpdateAppointmentDto updateAppointmentDto, @RequestHeader(value="branchid") String branchId) {
 		ResultResponse result = appointmentService.updateAppointment(updateAppointmentDto);
 		if (result.isSuccess()) {
-			return viewAllAppointments(ViewAllAppointmentsDto.builder().page(0).build(), branchId);
+			return viewAllAppointments(ViewAllAppointmentsDto.builder().page(1).build(), branchId);
 		} else {
 			throw new CustomResponseException(CustomErrorMessage.ERROR);
 		}

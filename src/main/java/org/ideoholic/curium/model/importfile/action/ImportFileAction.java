@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
-import org.ideoholic.curium.model.importfile.service.ImportFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,16 +33,13 @@ public class ImportFileAction {
 	@Autowired
 	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
-	private String branchId;
-
 	@RequestMapping(value = "/readFile", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String readFile(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 		try {
-			if (importFileActionAdapter.readFile(uploadedFiles,branchId)) {
+			if (importFileActionAdapter.readFile(uploadedFiles)) {
 				return "importfile";
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "importsuccess";
@@ -53,7 +48,7 @@ public class ImportFileAction {
 	 @RequestMapping(value = "/readFileFees", method = RequestMethod.POST, consumes = "multipart/form-data")
 		public String readFileForFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 			try {
-				if (new FeesCollectionService(request, response,null).readFileForOtherFees(uploadedFiles)) {
+				if (feesCollectionActionAdapter.readFileForOtherFees(uploadedFiles)) {
 					return "importfile";
 				}
 				/*
@@ -70,11 +65,10 @@ public class ImportFileAction {
 	 @RequestMapping(value = "/readFileOtherFees", method = RequestMethod.POST, consumes = "multipart/form-data")
 		public String readFileForOtherFees(@RequestParam("fileToImport") MultipartFile uploadedFiles) {
 			try {
-				if (new FeesCollectionService(request, response,null).readFileForOtherFees(uploadedFiles)) {
+				if (feesCollectionActionAdapter.readFileForOtherFees(uploadedFiles)) {
 					return "importfile";
 				}
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return "importsuccess";

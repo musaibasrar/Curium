@@ -14,16 +14,18 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PrintIdsService {
 
-
+    @Autowired
+    private PrintIdsDAO printIdsDAO;
 	
 	public SearchStudentResponseDto searchDetails(SearchStudentDto searchStudentDto,String branchid) {
 		
@@ -52,26 +54,26 @@ public class PrintIdsService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
+				querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+				querySub = querySub + " AND parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 		}
 		    searchStudentResponseDto.setSearchStudentList(searchStudentList);
 			return searchStudentResponseDto;
@@ -92,7 +94,7 @@ public class PrintIdsService {
               
                System.out.println("Value of i is " + i);
                int sid = Integer.valueOf(id);
-               parentsDetails = new PrintIdsDAO().printMultipleIds(id);
+               parentsDetails = printIdsDAO.printMultipleIds(id);
                
                //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
@@ -161,33 +163,33 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
+				querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " AND parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.Student.classstudying like '"
-						+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
 			/*
 			 * queryMain =
-			 * "FROM Parents as parents where  parents.Student.dateofbirth = '2006-04-06'"
+			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 			List<Integer> studentids = new ArrayList<>(); 
 			
 			for (Parents parents : searchStudentList) {
 				studentids.add(parents.getStudent().getSid());
 			}
 			
-			List<Card> cardList = new studentDetailsDAO().getCardDetails(studentids);
+			List<Card> cardList = new StudentDetailsDAO().getCardDetails(studentids);
 			
 			for (Parents parents : searchStudentList) {
 				
@@ -231,7 +233,7 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
          }
         
         if(cardList.size()>0) {
-        	success = new PrintIdsDAO().updateCardValidity(cardList);
+        	success = printIdsDAO.updateCardValidity(cardList);
         }
         }
         

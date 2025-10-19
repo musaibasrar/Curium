@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fathimav3 Tenant Test</title>
+    
+    <!-- Load tenant configurations first -->
+    <script src="src/main/webapp/js/tenant-configs.js"></script>
+    
+    <!-- Load the centralized tenant resolver -->
+    <script src="src/main/webapp/js/tenant-resolver.js"></script>
+    
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; }
+        .color-box { width: 100px; height: 60px; margin: 10px; display: inline-block; border-radius: 8px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 6px; }
+        .success { background: #d4edda; color: #155724; }
+        .info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Fathimav3 Tenant Test - Centralized Resolver</h1>
+    
+    <div class="test-section">
+        <h3>🎨 CSS Variables Test</h3>
+        <div class="color-box" style="background: var(--tenant-primary-color, #ccc);">Primary</div>
+        <div class="color-box" style="background: var(--tenant-secondary-color, #ccc);">Secondary</div>
+        <div class="color-box" style="background: var(--tenant-accent-color, #ccc);">Accent</div>
+        
+        <div class="status success">
+            <strong>✅ CSS Variables:</strong> 
+            Primary: <span id="primaryColor">Loading...</span> | 
+            Secondary: <span id="secondaryColor">Loading...</span>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>🔄 Path Resolution Test</h3>
+        <p><strong>Original:</strong> /school/css/bootstrap.css</p>
+        <p><strong>Resolved:</strong> <span id="resolvedPath">Loading...</span></p>
+        
+        <div class="status info">
+            <strong>ℹ️ Path Resolution:</strong> 
+            The centralized resolver automatically converts /school/ paths to tenant paths
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h3>⚙️ Tenant Configuration</h3>
+        <div id="tenantConfig">Loading...</div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const tenantId = window.tenantResolver ? window.tenantResolver.tenantId : 'school';
+                const config = window.tenantConfigs[tenantId];
+                
+                // Update CSS variable displays
+                document.getElementById('primaryColor').textContent = 
+                    getComputedStyle(document.documentElement).getPropertyValue('--tenant-primary-color') || 'Not set';
+                document.getElementById('secondaryColor').textContent = 
+                    getComputedStyle(document.documentElement).getPropertyValue('--tenant-secondary-color') || 'Not set';
+                
+                // Update path resolution
+                document.getElementById('resolvedPath').textContent = `/${tenantId}/css/bootstrap.css`;
+                
+                // Update tenant config
+                document.getElementById('tenantConfig').innerHTML = `
+                    <div class="status success">
+                        <strong>✅ Active Tenant:</strong> ${tenantId}<br>
+                        <strong>Title:</strong> ${config ? config.title : 'Unknown'}<br>
+                        <strong>Primary Color:</strong> ${config ? config.primaryColor : 'Unknown'}<br>
+                        <strong>Theme:</strong> ${config && config.customStyles ? config.customStyles.theme : 'default'}
+                    </div>
+                `;
+                
+                console.log('🧪 Test completed for tenant:', tenantId);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
+

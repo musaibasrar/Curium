@@ -6,11 +6,14 @@ import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearDto;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class YearService {
 
+	@Autowired
+	private YearDAO yearDAO;
 
 	public ResultResponse saveYear(CurrentAcademicYearDto currentAcademicYearDto) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -19,7 +22,7 @@ public class YearService {
 		currentacademicyear
 				.setCurrentacademicyear(DataUtil.emptyString(currentAcademicYearDto.getCurrentacademicyear()));
 
-		errorService = new YearDAO().create(currentacademicyear);
+		errorService = yearDAO.create(currentacademicyear);
 
 		if (currentacademicyear != null) {
 			result.setSuccess(true);
@@ -34,7 +37,7 @@ public class YearService {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		CurrentAcademicYearResponseDto result = null;
 
-		currentacademicyear = new YearDAO().showYear();
+		currentacademicyear =  yearDAO.showYear();
 		if (currentacademicyear != null) {
 			result = CurrentAcademicYearResponseDto.builder()
 					.currentayid(currentacademicyear.getCayid())
@@ -49,7 +52,7 @@ public class YearService {
 
 	public Currentacademicyear getYear() {
 		try {
-			return new YearDAO().showYear();
+			return yearDAO.showYear();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

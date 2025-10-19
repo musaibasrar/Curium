@@ -45,14 +45,12 @@ public class AttendanceAction {
 
 	String errorPage = "error";
 
-	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/attendanceExport")
 	public String attendanceExport() {
 		standardActionAdapter.viewClasses();
 		return "attendanceexport";
 	}
 
-	//TODO:To be migrated after the StandardAction viewClasses() and StandardService class.
 	@GetMapping("/markAttendance")
 	public String markAttendance() {
 		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {

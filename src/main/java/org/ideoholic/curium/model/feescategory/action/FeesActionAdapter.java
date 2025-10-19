@@ -232,4 +232,10 @@ public class FeesActionAdapter {
     	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
 	}
 	
+	public boolean viewAllStudentsListOtherFees() {
+		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsListOtherFees(httpSession.getAttribute("branchid").toString());
+		request.setAttribute("studentListFeesCollection", parentListResponseDto.getParentsList());
+		return parentListResponseDto.isSuccess();
+	}
+	
 }

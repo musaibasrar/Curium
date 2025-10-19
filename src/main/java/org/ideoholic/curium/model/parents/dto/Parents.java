@@ -1,18 +1,25 @@
 package org.ideoholic.curium.model.parents.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.ideoholic.curium.model.appointment.dto.Appointment;
+import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.student.dto.Student;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,9 +35,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "parents")
 public class Parents implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "pid", unique = true, nullable = false)
 	private Integer pid;
 
@@ -49,59 +57,71 @@ public class Parents implements java.io.Serializable {
 	@Column(name = "professsion", length = 100)
 	private String profession;
 
-	@Column(name = "parentsannualincome")
+	@Column(name = "parentsannualincome", length = 100)
 	private String parentsannualincome;
 
 	@Column(name = "noofdependents")
 	private Integer noofdependents;
 
-	@Column(name = "sid")
-	private Integer sid;
-
-	@Column(name = "tid")
-	private Integer tid;
-
-	@Column(name = "remarks")
-	private String remarks;
-
-	@Column(name = "cocontactnumber")
-	private String contactnumber;
-
-	@Column(name = "contactnumber")
-	private String cocontactnumber;
-
-	@Column(name = "email")
-	private String email;
-
-	@ManyToOne(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinColumn(name = "sid", unique=true, nullable = false)
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "sid", referencedColumnName = "sid", unique = true, nullable = false)
 	private Student student;
 
-	@Column(name = "branchid")
-	private int branchid;
+	@ManyToOne
+	@JoinColumn(name = "tid", referencedColumnName = "tid")
+	private Teacher teacher;
 
-	@Column(name = "fathersqualification")
+	@Column(name = "remarks", length = 500)
+	private String remarks;
+
+	@Column(name = "contactnumber", length = 50)
+	private String cocontactnumber;
+
+	@Column(name = "cocontactnumber", length = 50)
+	private String contactnumber;
+
+	@Column(name = "email", length = 45)
+	private String email;
+
+	@Column(name = "fathersqualification", length = 45)
 	private String fathersqualification;
 
-	@Column(name = "mothersqualification")
+	@Column(name = "mothersqualification", length = 45)
 	private String mothersqualification;
 
-	@Column(name = "motherscastecertno", length = 25)
+	@Column(name = "motherscastecertno", length = 100)
 	private String motherscastecertno;
 
 	@Column(name = "fatherscastecertno", length = 25)
 	private String fatherscastecertno;
 
-	@Column(name = "fatherscaste", length = 25)
+	@Column(name = "fatherscaste", length = 15)
 	private String fatherscaste;
 
-	@Column(name = "motherscaste", length = 25)
+	@Column(name = "motherscaste", length = 15)
 	private String motherscaste;
 
-	@Column(name = "userid")
-	private int userid;
+	@JsonIgnore
+	@OneToMany(mappedBy = "parent")
+	private List<Appointment> appointmentList;
 
+	@Column(name = "branchid")
+	private Integer branchid;
+
+	@Column(name = "userid")
+	private Integer userid;
+
+	@Transient
 	private String emergencycontactno;
+	
+	@Transient
 	private String fatheroccupation;
+	
+	public Student fetchStudent() {
+	      if(this.student != null) {
+	            return student;
+	       }
+	       return new Student();
+	}
 
 }

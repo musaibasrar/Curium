@@ -71,7 +71,7 @@ public class HrApiActionImpl implements HrApiAction {
     }
 
     public ResponseEntity<EmployeesWithSalaryResponseDto> deletePayHead(String branchId) {
-        EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto result = employeeService.viewAllEmployee(branchId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
@@ -139,7 +139,7 @@ public class HrApiActionImpl implements HrApiAction {
     public ResponseEntity<HrDataResponseDto> processSalary(String branchId) {
         HrDataResponseDto result = new HrDataResponseDto();
 
-        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.viewAllEmployee(branchId);
         result.setEmployeeList(viewAllEmployeeResponseDto.getEmployeeList());
         result.setEmployeeListProcessSalary(viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
         result.setSuccess(viewAllEmployeeResponseDto.isSuccess());
@@ -241,7 +241,7 @@ public class HrApiActionImpl implements HrApiAction {
     }
 
     public ResponseEntity<EmployeesWithSalaryResponseDto> advanceSalary(String branchId) {
-        EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto result = employeeService.viewAllEmployee(branchId);
         return ResponseEntity.ok(result);
     }
 
@@ -284,7 +284,7 @@ public class HrApiActionImpl implements HrApiAction {
     public ResponseEntity<HrDataResponseDto> basicPaySettings(String branchId) {
         HrDataResponseDto result = new HrDataResponseDto();
 
-        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.viewAllEmployee(branchId);
         result.setEmployeeList(viewAllEmployeeResponseDto.getEmployeeList());
         result.setEmployeeListProcessSalary(viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
         result.setSuccess(viewAllEmployeeResponseDto.isSuccess());
@@ -320,7 +320,7 @@ public class HrApiActionImpl implements HrApiAction {
     }
     public ResponseEntity<HrDataResponseDto> addPayHeadStaff(String branchId) {
         HrDataResponseDto result = new HrDataResponseDto();
-        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.viewAllEmployee(branchId);
         result.setEmployeeList(viewAllEmployeeResponseDto.getEmployeeList());
         result.setEmployeeListProcessSalary(viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
         result.setSuccess(viewAllEmployeeResponseDto.isSuccess());
@@ -389,7 +389,7 @@ public class HrApiActionImpl implements HrApiAction {
 
     public ResponseEntity<HrDataResponseDto> assignLeave( String branchId) {
         HrDataResponseDto result = new HrDataResponseDto();
-        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.ViewAllEmployee(branchId);
+        EmployeesWithSalaryResponseDto viewAllEmployeeResponseDto = employeeService.viewAllEmployee(branchId);
         result.setEmployeeList(viewAllEmployeeResponseDto.getEmployeeList());
         result.setEmployeeListProcessSalary(viewAllEmployeeResponseDto.getEmployeeListProcessSalary());
         result.setSuccess(viewAllEmployeeResponseDto.isSuccess());

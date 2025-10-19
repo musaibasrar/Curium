@@ -3,11 +3,7 @@ package org.ideoholic.curium.model.enquiry.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.ideoholic.curium.model.enquiry.dao.enquiryDAO;
+import org.ideoholic.curium.model.enquiry.dao.EnquiryDAO;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiryDto;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiryResponseDto;
@@ -15,37 +11,39 @@ import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
 import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class EnquiryService {
-	
+
+	@Autowired
+	private EnquiryDAO enquiryDAO;
 
 	public CertificateResponseDto getCertificate(CertificateDto dto) {
-		CertificateResponseDto certificateResponseDto = CertificateResponseDto.builder().success(false).build();;
-		
-	    String name= dto.getName();
-	    String place= dto.getPlace();
-	    String mobile= dto.getMobile();
-	    String date= dto.getDate();;
-	    certificateResponseDto.setName(name);
-	    certificateResponseDto.setPlace(place);
-	    certificateResponseDto.setMobile(mobile);
-	    certificateResponseDto.setDate(date);
+		CertificateResponseDto certificateResponseDto = CertificateResponseDto.builder().success(false).build();
 
-	    Enquiry enquiry = new Enquiry();
-        
-       	 
-                
-	    enquiry.setName(name);
-	    enquiry.setAddress(place);
-	    enquiry.setMobileno(mobile);
-	          
-                enquiry =  new enquiryDAO().create(enquiry);
-                certificateResponseDto.setSuccess(true);
-				return certificateResponseDto;
-                }
+		String name = dto.getName();
+		String place = dto.getPlace();
+		String mobile = dto.getMobile();
+		String date = dto.getDate();
 
+		certificateResponseDto.setName(name);
+		certificateResponseDto.setPlace(place);
+		certificateResponseDto.setMobile(mobile);
+		certificateResponseDto.setDate(date);
+
+		Enquiry enquiry = new Enquiry();
+
+		enquiry.setName(name);
+		enquiry.setAddress(place);
+		enquiry.setMobileno(mobile);
+
+		enquiryDAO.create(enquiry);
+		certificateResponseDto.setSuccess(true);
+		return certificateResponseDto;
+	}
 
 	public AdmissionEnquiryResponseDto saveEnquiryForm(AdmissionEnquiryDto admissionEnquiryDto) {
 		
@@ -73,7 +71,7 @@ public class EnquiryService {
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
 	    
-	    boolean result = new enquiryDAO().add(admissionEnquiry);
+	    boolean result = new EnquiryDAO().add(admissionEnquiry);
 	    
 	    admissionEnquiryResponseDto.setName(admissionEnquiryDto.getName());
 	    admissionEnquiryResponseDto.setGender(admissionEnquiryDto.getGender());
@@ -106,7 +104,7 @@ public class EnquiryService {
 	public AdmissionEnquiryResponseDto getStudentLastEnquiry(String branchId) {
         
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentLastEnquiry(Integer.parseInt(branchId.toString()));
+		AdmissionEnquiry admissionEnquiry = new EnquiryDAO().getStudentLastEnquiry(Integer.parseInt(branchId.toString()));
 		admissionEnquiryResponseDto.setAdmissionEnquiry(admissionEnquiry);
 		return admissionEnquiryResponseDto;
 	}
@@ -115,7 +113,7 @@ public class EnquiryService {
 	public AdmissionEnquiryResponseDto viewEnquiry(String branchId) {
   
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		List<AdmissionEnquiry> admissionEnquiryList = new enquiryDAO().viewEnquiryList(Integer.parseInt(branchId.toString()));
+		List<AdmissionEnquiry> admissionEnquiryList = new EnquiryDAO().viewEnquiryList(Integer.parseInt(branchId.toString()));
 		admissionEnquiryResponseDto.setAdmissionEnquiryList(admissionEnquiryList);
 		return admissionEnquiryResponseDto;
 	}
@@ -125,7 +123,7 @@ public class EnquiryService {
 
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
 		int id= admissionEnquiryDto.getId();
-		AdmissionEnquiry admissionEnquiry = new enquiryDAO().getStudentEnquiry(id);
+		AdmissionEnquiry admissionEnquiry = new EnquiryDAO().getStudentEnquiry(id);
 		admissionEnquiryResponseDto.setAdmissionEnquiry(admissionEnquiry);
 		return admissionEnquiryResponseDto;
 	}
@@ -157,7 +155,7 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(admissionEnquiryDto.getMobileno());
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
-	    new enquiryDAO().update(admissionEnquiry);
+	    new EnquiryDAO().update(admissionEnquiry);
 	    admissionEnquiryResponseDto.setSuccess(true);
 	    return admissionEnquiryResponseDto;
 		
@@ -169,11 +167,11 @@ public class EnquiryService {
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
 		String[] enquiryIds = admissionEnquiryDto.getEnquiryIds();
 		if (enquiryIds != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : enquiryIds) {
 				ids.add(Integer.parseInt(id));
 			}
-			boolean result = new enquiryDAO().deleteEnquiry(ids);
+			boolean result = new EnquiryDAO().deleteEnquiry(ids);
 			admissionEnquiryResponseDto.setSuccess(result);
 			
 		}
@@ -181,5 +179,5 @@ public class EnquiryService {
 		return admissionEnquiryResponseDto;
 	    }
 
-	}
 
+}

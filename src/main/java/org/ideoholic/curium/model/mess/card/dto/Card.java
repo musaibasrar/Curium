@@ -1,14 +1,15 @@
 package org.ideoholic.curium.model.mess.card.dto;
 
-import static javax.persistence.GenerationType.AUTO;
-
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,22 +25,25 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_card")
 public class Card implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
 	@Column(name = "sid")
 	private Integer sid;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "validfrom")
 	private Date validfrom;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "validto")
 	private Date validto;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

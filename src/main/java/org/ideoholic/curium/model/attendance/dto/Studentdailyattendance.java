@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.attendance.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 22 Jan, 2018 4:35:50 PM by Hibernate Tools 4.0.0
 
@@ -10,10 +8,15 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.ideoholic.curium.model.student.dto.Student;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,19 +34,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "att_studentdailyattendance")
 public class Studentdailyattendance implements java.io.Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "attendanceid", unique = true, nullable = false)
 	private Integer attendanceid;
 
-	@Column(name = "attendeeid", length = 45)
-	private String attendeeid;
+	@ManyToOne
+	@JoinColumn(name = "attendeeid", referencedColumnName = "studentexternalid")
+	private Student attendee;
 
 	@Column(name = "intime", length = 45)
 	private String intime;
@@ -62,9 +62,23 @@ public class Studentdailyattendance implements java.io.Serializable {
 	private String academicyear;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
+
+	public String getAttendeeid() {
+		if (attendee != null) {
+			return attendee.getStudentexternalid();
+		}
+		return "";
+	}
+
+	public void setAttendeeid(String studentexternalid) {
+		if (attendee == null) {
+			attendee = new Student();
+		}
+		attendee.setStudentexternalid(studentexternalid);
+	}
 
 }

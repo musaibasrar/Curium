@@ -14,11 +14,14 @@ import org.ideoholic.curium.model.department.dto.DeleteMultipleDto;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 
 public class DepartmentService {
+    @Autowired
+    private departmentDAO departmentDAO;
 
     public ResultResponse addDepartment(AddDepartmentDto addDepartmentDto, String branchId) {
 
@@ -29,7 +32,7 @@ public class DepartmentService {
             department.setBranchid(Integer.parseInt(branchId));
 
             if (!department.getDepartmentname().equalsIgnoreCase("")) {
-                department = new departmentDAO().create(department);
+                department = departmentDAO.create(department);
                return  ResultResponse.builder().success(true).build();
 
 
@@ -42,7 +45,7 @@ public class DepartmentService {
     public DepartmentResponseDto viewDepartment(String branchId) {
         DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
         try {
-            List<Department> list = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+            List<Department> list = departmentDAO.readListOfObjects(Integer.parseInt(branchId));
             departmentResponseDto.setDepartmentList(list);
 
             departmentResponseDto.setSuccess(true);
@@ -66,7 +69,7 @@ public class DepartmentService {
 
             }
             System.out.println("id length" + departmentIds.length);
-          return ResultResponse.builder().success(new departmentDAO().deleteMultiple(ids)).build();
+          return ResultResponse.builder().success(departmentDAO.deleteMultiple(ids)).build();
         }
         return ResultResponse.builder().build();
     }

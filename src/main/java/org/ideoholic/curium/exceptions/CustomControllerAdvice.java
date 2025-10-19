@@ -19,7 +19,15 @@ public class CustomControllerAdvice {
 
 		return new ResponseEntity<>(new ErrorResponse(status, e.getCode(), e.getMessage()), status);
 	}
+	
+	@ExceptionHandler(CustomMessageResponseException.class)
+	public ResponseEntity<ErrorResponse> handleCustomMessageResponseExceptions(CustomMessageResponseException e) {
 
+		HttpStatus status = HttpStatus.NOT_ACCEPTABLE; // 406
+
+		return new ResponseEntity<>(new ErrorResponse(status, e.getCode(), e.getMessage()), status);
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ErrorResponse> handleExceptions(Exception e) {
 

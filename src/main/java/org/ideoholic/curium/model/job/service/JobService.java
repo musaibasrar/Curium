@@ -45,7 +45,7 @@ import org.ideoholic.curium.model.job.dto.ReportDto;
 import org.ideoholic.curium.model.job.dto.ReportResponseDto;
 import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.task.dto.Task;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -59,11 +59,20 @@ import lombok.extern.slf4j.Slf4j;
 public class JobService {
     @Autowired
 	private HttpServletRequest request;
+    
     @Autowired
     private HttpServletResponse response;
+    
     @Autowired
     private HttpSession httpSession;
-	private static final int BUFFER_SIZE = 4096;
+    
+    @Autowired
+    private JobDAO jobDAO;
+	
+    @Autowired
+    private StudentDetailsDAO studentDetailsDao;
+    
+    private static final int BUFFER_SIZE = 4096;
 
 	
 	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
@@ -130,12 +139,12 @@ public class JobService {
 			//String externalId = Integer.toString(year).concat("_").concat(Integer.toString(month+1)).concat("_");
 			query.setExternalid(queryTitle);
 
-			String resultQuery = new JobDAO().addQuery(query);
+			String resultQuery = jobDAO.addQuery(query);
 
 
 			if(resultQuery!=null) {
 				String[] queryValues = resultQuery.split(":");
-				String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(queryValues[1]));
+				String resultTask =  jobDAO.addTask(taskList,Integer.parseInt(queryValues[1]));
 			}
 
 			String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
@@ -173,10 +182,10 @@ public class JobService {
 					page = Integer.parseInt(strPage);
 				}
 
-				List<JobQuery> list = new JobDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
+				List<JobQuery> list = jobDAO.readListOfObjectsPagination((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId));
 				jobQueryDto.setStudentList(list);
-				int noOfRecords = new JobDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfRecords = jobDAO.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				jobQueryDto.setQueriesList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
@@ -203,7 +212,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().completeQueries(QueryIdsList, userId);
+			result = jobDAO.completeQueries(QueryIdsList, userId);
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
@@ -231,7 +240,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().cancelQueries(QueryIdsList, userId);
+			result = jobDAO.cancelQueries(QueryIdsList, userId);
 			searchStudentResponseDto.setSuccess(result);
 		}
        return searchStudentResponseDto;
@@ -250,7 +259,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().inProgressQueries(QueryIdsList, userId);
+			result = jobDAO.inProgressQueries(QueryIdsList, userId);
 			searchStudentResponseDto.setSuccess(result);
 			
 		}
@@ -266,7 +275,7 @@ public class JobService {
 			try {
 				int queryId = Integer.parseInt(updateQueriesDto.getQueryId());
 
-				JobQuery jobQuery = new JobDAO().viewQueryDetails(queryId);
+				JobQuery jobQuery = jobDAO.viewQueryDetails(queryId);
 				result.setMessage(jobQuery.getResponse());
 				result.setSuccess(true);
 
@@ -288,7 +297,7 @@ public class JobService {
 		boolean result = false;
 		jobQuery = jobQuery.replace("'", "''");
 		response = response.replace("'", "''");
-		result = new JobDAO().updateQueries(queryId, jobQuery, response, userId);
+		result = jobDAO.updateQueries(queryId, jobQuery, response, userId);
 		searchStudentResponseDto.setSuccess(result);
 		return searchStudentResponseDto;
 	}
@@ -308,9 +317,9 @@ public class JobService {
 					page = Integer.parseInt(strPage);
 				}
 
-				List<JobQuery> list = new JobDAO().readListOfObjectsPaginationDepartmentWise((page - 1) * recordsPerPage,
+				List<JobQuery> list = jobDAO.readListOfObjectsPaginationDepartmentWise((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId), employee.getTid());
-				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWise(Integer.parseInt(branchId), employee.getTid());
+				int noOfRecords =  jobDAO.getNoOfRecordsDepartmentWise(Integer.parseInt(branchId), employee.getTid());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				jobQueryDto.setQueriesList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
@@ -348,7 +357,7 @@ public class JobService {
 
 
 		httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
-		return new JobDAO().getNoOfRecordsMonthly(fromDate, toDate);
+		return jobDAO.getNoOfRecordsMonthly(fromDate, toDate);
 	}
 
 	public ReportResponseDto generateQueriesReport(ReportDto reportDto) {
@@ -386,10 +395,11 @@ public class JobService {
 			reportResponseDto.setStaffSelected("");
 		}
 
-		JobQueryList = new JobDAO().generateQueriesReport(queryMain+subQuery);
+		JobQueryList = jobDAO.generateQueriesReport(queryMain+subQuery);
 		reportResponseDto.setJobQueryList(JobQueryList);
 		reportResponseDto.setTransactionFromDateSelected("From:"+request.getParameter("transactiondatefrom"));
 		reportResponseDto.setTransactionToDateSelected("To:"+request.getParameter("transactiondateto"));
+		reportResponseDto.setSuccess(true);
 		return reportResponseDto;
 
 	}
@@ -433,7 +443,7 @@ public class JobService {
 			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
 			String querySub = "";
 			querySub = " pq.createddate between '"+fromDate+"' and '"+toDate+"'";
-			JobQueryList = new JobDAO().generateQueriesReport(queryMain+querySub);
+			JobQueryList = jobDAO.generateQueriesReport(queryMain+querySub);
 
 			totalQueries.add("\"" + JobQueryList.size() + "\"");
 			//Date Format
@@ -455,7 +465,7 @@ public class JobService {
 		String pid = feedbackDto.getNo();
 		String feedbackpoints = feedbackDto.getFeedback();
 
-		result = new JobDAO().feedback(Integer.parseInt(id), pid, feedbackpoints);
+		result = jobDAO.feedback(Integer.parseInt(id), pid, feedbackpoints);
 		searchStudentResponseDto.setSuccess(result);
 		return searchStudentResponseDto;
 	}
@@ -582,10 +592,10 @@ public class JobService {
 
 		String studentId = request.getParameter("id");
 
-		String queryMain = "from JobQuery pq where pq.parent.Student.sid = '"+studentId+"'";
+		String queryMain = "from JobQuery pq where pq.parent.student.sid = '"+studentId+"'";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 
-		JobQueryList = new JobDAO().generateQueriesReport(queryMain);
+		JobQueryList = jobDAO.generateQueriesReport(queryMain);
 
 		httpSession.setAttribute("queryList", JobQueryList);
 	}
@@ -603,7 +613,7 @@ public class JobService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 
-			result = new JobDAO().toDoQueries(QueryIdsList, userId);
+			result = jobDAO.toDoQueries(QueryIdsList, userId);
 			searchStudentResponseDto.setSuccess(result);
 		}
         return searchStudentResponseDto;
@@ -617,7 +627,7 @@ public class JobService {
 		int userId = Integer.parseInt(userLoginId);
 		boolean result = false;
 		remarks = remarks.replace("'", "''");
-		result = new JobDAO().updateQueryRemarks(queryId, remarks, userId);
+		result = jobDAO.updateQueryRemarks(queryId, remarks, userId);
 		searchStudentResponseDto.setSuccess(result);
 		return searchStudentResponseDto;
 	}
@@ -628,7 +638,7 @@ public class JobService {
 		if(branchId!=null){
 
 			int jobId = Integer.parseInt(QueriesDto.getJobId());
-			List<Task> taskDetails = new JobDAO().viewTaksDetails(jobId);
+			List<Task> taskDetails = jobDAO.viewTaksDetails(jobId);
 			jobQueryDto.setTaskList(taskDetails);
 			jobQueryDto.setSuccess(true);
 		}
@@ -649,10 +659,10 @@ public class JobService {
 					page = Integer.parseInt(strPage);
 				}
 
-				List<Task> list = new JobDAO().readListOfObjectsPaginationTask((page - 1) * recordsPerPage,
+				List<Task> list =jobDAO.readListOfObjectsPaginationTask((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchid));
 				jobQueryDto.setTaskList(list);
-				int noOfRecords = new JobDAO().getNoOfRecordsTask(Integer.parseInt(branchid));
+				int noOfRecords = jobDAO.getNoOfRecordsTask(Integer.parseInt(branchid));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				jobQueryDto.setTaskList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
@@ -682,9 +692,9 @@ public class JobService {
 					page = Integer.parseInt(strPage);
 				}
 
-				List<Task> list = new JobDAO().readListOfObjectsPaginationDepartmentWiseTask((page - 1) * recordsPerPage,
+				List<Task> list = jobDAO.readListOfObjectsPaginationDepartmentWiseTask((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId), employee.getTid());
-				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWiseTask(Integer.parseInt(branchId), employee.getTid());
+				int noOfRecords = jobDAO.getNoOfRecordsDepartmentWiseTask(Integer.parseInt(branchId), employee.getTid());
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				jobQueryDto.setTaskList(list);
 				jobQueryDto.setNoOfPages(noOfPages);
@@ -716,7 +726,7 @@ public class JobService {
 			}
 			completed = TaskIdsList.size();
 
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
+			List<Task> listTask = jobDAO.viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -738,7 +748,7 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 
-			result = new JobDAO().completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 
 
@@ -780,7 +790,7 @@ public class JobService {
 			}
 			cancel=taskIdsList.size();
 			log.info("Cancel for the job id "+queriesDto.getJobId());
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
+			List<Task> listTask = jobDAO.viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -812,7 +822,7 @@ public class JobService {
 			}
 
 
-			result = new JobDAO().cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.cancelTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
 				jobQueryDto.setSuccess(true);
@@ -842,7 +852,7 @@ public class JobService {
 			}
 			toDo = taskIdsList.size();
 			log.info("To do for the job id "+queriesDto.getJobId());
-			List<Task> listTask = new JobDAO().viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
+			List<Task> listTask = jobDAO.viewTaksDetails(Integer.parseInt(queriesDto.getJobId()));
 			int length = listTask.size();
 
 			for (Task task : listTask) {
@@ -870,7 +880,7 @@ public class JobService {
 				jobStatus ="In Progress";
 			}
 
-			result = new JobDAO().toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.toDoTasks(taskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
 				jobQueryDto.setSuccess(true);
@@ -896,7 +906,7 @@ public class JobService {
 			for (String ids : taskIds) {
 				taskIdsList.add(Integer.parseInt(ids));
 			}
-			result = new JobDAO().inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(queriesDto.getJobId()));
+			result = jobDAO.inProgressTasks(taskIdsList, userId, "In Progress", Integer.parseInt(queriesDto.getJobId()));
 
 			if(!result.isEmpty()) {
 				jobQueryDto.setSuccess(true);
@@ -959,7 +969,7 @@ public class JobService {
 			//int year = calendar.get(Calendar.YEAR);
 			int month = calendar.get(Calendar.MONTH);
 
-			String resultTask = new JobDAO().addTask(taskList,Integer.parseInt(jobid));
+			String resultTask = jobDAO.addTask(taskList,Integer.parseInt(jobid));
 
 			if(resultTask.equalsIgnoreCase("true")) {
 				result.setSuccess(true);
@@ -1003,7 +1013,7 @@ public class JobService {
 			reportResponseDto.setStudentselected("");
 		}
 
-		taskList = new JobDAO().generateTasksReport(queryMain+subQuery);
+		taskList = jobDAO.generateTasksReport(queryMain+subQuery);
         
 		reportResponseDto.setTaskList(taskList);
 		reportResponseDto.setTransactionFromDateSelected("From:"+reportDto.getTransactionDateFrom());
@@ -1029,7 +1039,7 @@ public class JobService {
 				}
 
 				List<Parents> parentsList = new ArrayList<Parents>();
-				parentsList = new studentDetailsDAO().getReferredList(sidList);
+				parentsList = studentDetailsDao.getReferredList(sidList);
 
 
 				response.setContentType("text/xml");
@@ -1077,10 +1087,11 @@ public class JobService {
 	public JobQueryDto viewOneJobDetails(QueriesDto queriesDto,String branchId) {
 
 		JobQueryDto jobQueryDto = new JobQueryDto();
+		List<JobQuery> jobQueryList = new ArrayList<JobQuery>();
 		if(branchId!=null){
-
 			int jobId = Integer.parseInt(queriesDto.getJobId());
-			List<JobQuery> jobQueryList = new JobDAO().viewOneJobDetails(jobId);
+			JobQuery jobQuery = jobDAO.viewOneJobDetails(jobId);
+			jobQueryList.add(jobQuery);
 			jobQueryDto.setQueriesList(jobQueryList);
 			jobQueryDto.setSuccess(true);
 		}

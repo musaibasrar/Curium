@@ -1,11 +1,10 @@
 package org.ideoholic.curium.model.mess.stockentry.dto;
 
-import static javax.persistence.GenerationType.AUTO;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,9 +25,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_stockavailable")
 public class MessStockAvailability implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
@@ -38,14 +38,21 @@ public class MessStockAvailability implements java.io.Serializable {
 	@Column(name = "minstock")
 	private Integer minstock;
 
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "itemid", referencedColumnName = "id", unique = true, nullable = false)
+	private MessItems messitems;
+
 	@Column(name = "branchid")
 	private Integer branchid;
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "itemid", unique = true, nullable = false)
-	private MessItems messitems;
-
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
+	
+	public Integer fetchMessItemsId() {
+		if(messitems != null) {
+			return messitems.getId();
+		}
+		return null;
+	}
 
 }

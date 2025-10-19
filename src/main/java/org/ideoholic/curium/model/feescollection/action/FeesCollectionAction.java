@@ -3,23 +3,18 @@
  */
 package org.ideoholic.curium.model.feescollection.action;
 
-import org.ideoholic.curium.model.adminexpenses.service.AdminService;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
-import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.action.UserActionAdapter;
-import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @author Musaib_2
@@ -30,26 +25,17 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/FeesCollection")
 public class FeesCollectionAction {
 	
+	    @Autowired
+	    private HttpSession httpSession;
+	
 		@Autowired
-        HttpServletRequest request;
-        
-		@Autowired
-		HttpServletResponse response;
-        
-		@Autowired
-		HttpSession httpSession;
-
-		@Autowired
-		StandardActionAdapter standardActionAdapter;
+		private StandardActionAdapter standardActionAdapter;
 		
 		@Autowired
 		private FeesActionAdapter feesActionAdapter;
 
 		@Autowired
 		private FeesCollectionActionAdapter feesCollectionActionAdapter;
-
-		@Autowired
-		private AdminService adminService;
 
 		@Autowired
 		private UserActionAdapter userActionAdapter;

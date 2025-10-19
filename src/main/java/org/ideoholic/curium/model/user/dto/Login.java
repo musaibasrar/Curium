@@ -1,14 +1,15 @@
 package org.ideoholic.curium.model.user.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 12 Sep, 2014 6:03:29 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.ideoholic.curium.model.branch.dto.Branch;
@@ -26,14 +27,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "login")
 public class Login implements java.io.Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "lid", unique = true, nullable = false)
 	private Integer lid;
 
@@ -46,7 +43,8 @@ public class Login implements java.io.Serializable {
 	@Column(name = "usertype", length = 45)
 	private String usertype;
 
-	@Column(name = "branchid")
+	@ManyToOne
+	@JoinColumn(name = "branchid", referencedColumnName = "idbranch")
 	private Branch branch;
 
 	@Column(name = "userid")

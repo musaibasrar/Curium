@@ -1,13 +1,12 @@
 package org.ideoholic.curium.model.hr.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 21 Apr, 2018 3:19:13 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -25,9 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "payhead", catalog = "school")
 public class Payhead implements java.io.Serializable {
+	private static final long serialVersionUID = -5269998057639326302L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idpayhead", unique = true, nullable = false)
 	private Integer idpayhead;
 

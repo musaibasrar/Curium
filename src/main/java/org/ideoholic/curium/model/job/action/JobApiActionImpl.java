@@ -97,7 +97,7 @@ public class JobApiActionImpl implements JobApiAction {
 
 	@GetMapping("/queryReport")
 	public ResponseEntity<EmployeesWithSalaryResponseDto> queryReport(@RequestHeader(value = "branchid") String branchId) {
-		EmployeesWithSalaryResponseDto result = employeeService.ViewAllEmployee(branchId);
+		EmployeesWithSalaryResponseDto result = employeeService.viewAllEmployee(branchId);
 		return ResponseEntity.ok(result);
 	}
 
@@ -182,7 +182,7 @@ public class JobApiActionImpl implements JobApiAction {
 		if (userType.equalsIgnoreCase("admin")) {
 			EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService.viewDetailsEmployee(empId);
 			employeeResponseDto.copyEmployeeDetailsResponseDto(employeeDetailsResponseDto);
-			EmployeesWithSalaryResponseDto EmployeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
+			EmployeesWithSalaryResponseDto EmployeesWithSalaryResponseDto = employeeService.viewAllEmployee(branchId);
 			employeeResponseDto.copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto);
 		} else if (userType.equalsIgnoreCase("teacher")) {
 			EmployeeDetailsResponseDto employeeDetailsResponseDto = employeeService
@@ -375,7 +375,7 @@ public class JobApiActionImpl implements JobApiAction {
 		EmployeeResponseDto employeeResponseDto = new EmployeeResponseDto();
 
 		if (userType.equalsIgnoreCase("admin")) {
-			EmployeesWithSalaryResponseDto EmployeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
+			EmployeesWithSalaryResponseDto EmployeesWithSalaryResponseDto = employeeService.viewAllEmployee(branchId);
 			employeeResponseDto.copyEmployeesWithSalaryResponseDto(EmployeesWithSalaryResponseDto);
 			JobQueryDto jobQueryDto = jobService.createTask(queriesDto);
 			employeeResponseDto.copyJobQueryDto(jobQueryDto);
@@ -403,7 +403,7 @@ public class JobApiActionImpl implements JobApiAction {
 	@GetMapping("/taskReport")
 	public ResponseEntity<TaskReportResponseDto> taskReport(@RequestHeader(value = "branchid") String branchId) {
 		TaskReportResponseDto viewStudentResponseDto = new TaskReportResponseDto();
-		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.ViewAllEmployee(branchId);
+		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = employeeService.viewAllEmployee(branchId);
 		viewStudentResponseDto.copyEmployeesWithSalaryResponseDto(employeesWithSalaryResponseDto);
 
 		StudentListResponseDto studentListResponseDto = studentService.viewAllStudentsList(branchId);
@@ -434,6 +434,12 @@ public class JobApiActionImpl implements JobApiAction {
 		}
 		return ResponseEntity.ok().build();
 
+	}
+	
+	@GetMapping("/viewMonthly")
+	public ResponseEntity getJobQueryMonthly() {
+		Integer result = jobService.getNoOfRecordsMonthly();
+		return ResponseEntity.ok(result);
 	}
 
 		

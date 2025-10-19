@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.query.Query;
+import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
@@ -16,599 +14,590 @@ import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
 import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
 import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
+import org.ideoholic.curium.repositories.AccountDetailsBalanceRepository;
+import org.ideoholic.curium.repositories.AccountDetailsRepository;
+import org.ideoholic.curium.repositories.AccountGroupMasterRepository;
+import org.ideoholic.curium.repositories.AccountSubGroupMasterRepository;
+import org.ideoholic.curium.repositories.AccountssgroupmasterRepository;
+import org.ideoholic.curium.repositories.FinancialAccountingYearRepository;
+import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.QueryUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
 public class AccountDAO {
-	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
-	Transaction transaction1;
-	private static final Logger logger = LogManager.getLogger(AccountDAO.class);
+	
+	@Autowired
+	private FinancialAccountingYearRepository finAccountRepo;
+	
+	@Autowired
+	private AccountDetailsRepository accountDetailsRepo;
+	
+	@Autowired
+	private AccountDetailsBalanceRepository accountDetailsBalanceRepo;
+	
+	@Autowired
+	private AccountGroupMasterRepository accountGroupMasterRepo;
+	
+	@Autowired
+	private AccountSubGroupMasterRepository accountSubGroupMasterRepo;
+	
+	@Autowired
+	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
+	
+	@Autowired
+	private AccountssgroupmasterRepository accountssgroupmasterRepository;
+	
+	@Autowired
+    private QueryUtil queryUtil;
 
-	public AccountDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
 
-	@SuppressWarnings("finally")
+	@Transactional
 	public boolean create(Financialaccountingyear financialaccountingyear, int branchId) {
 		boolean result = false;
-		Financialaccountingyear financialYear = new Financialaccountingyear();
+		Financialaccountingyear financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Financialaccountingyear where active='yes'  and branchid="+branchId);
-			financialYear = (Financialaccountingyear) query.uniqueResult();
 			if(financialYear!=null && financialYear.getActive().equalsIgnoreCase(financialaccountingyear.getActive())){
 				financialYear.setActive("no");
-				session.update(financialYear);
+				finAccountRepo.save(financialYear);
 			}
-			session.save(financialaccountingyear);
-			transaction.commit();
+			finAccountRepo.save(financialaccountingyear);
 			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			System.out.println(""+hibernateException);
-			
-		} finally {
-			HibernateUtil.closeSession();
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return result;
 	}
 
+	@Transactional
 	public Financialaccountingyear getCurrentFinancialYear(int branchId) {
-		Financialaccountingyear financialYear = new Financialaccountingyear();
+		Financialaccountingyear financialYear;
 		try{
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from Financialaccountingyear where active = 'yes' and branchid="+branchId);
-			financialYear = (Financialaccountingyear) query.uniqueResult();
-			transaction.commit();
-		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
-			System.out.println("error "+hb);
-		}finally {
-			HibernateUtil.closeSession();
+			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
 		return financialYear;
 	}
 
-	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Accountgroupmaster> getListAccountGroupMaster(int branchId) {
-		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
-		
+		List<Accountgroupmaster> accountGroupMaster;
 		try{
-			transaction = session.beginTransaction();
-			accountGroupMaster = session.createQuery("from Accountgroupmaster").list();
-			transaction.commit();
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountGroupMaster = accountGroupMasterRepo.findAll();
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
 		return accountGroupMaster;
 	}
 
+	@Transactional
 	public List<Accountsubgroupmaster> getListAccountSubGroupMaster(int accountGroupMasterId, int branchId) {
 		
-		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
-		
+		List<Accountsubgroupmaster> accountSubGroupMaster;
 		try{
-			transaction = session.beginTransaction();
-			accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
-			transaction.commit();
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
+			Accountgroupmaster accountGroupMaster= accountGroupMasterRepo.findById(accountGroupMasterId).orElse(null);
+			accountSubGroupMaster = accountSubGroupMasterRepo.findByAccountGroupMasterAndBranchid(accountGroupMaster, branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
 		return accountSubGroupMaster;
 	}
 
+	@Transactional
 	public Accountsubgroupmaster createSubGroup(Accountsubgroupmaster accountSubGroupMaster) {
 		try{
-			transaction = session.beginTransaction();
-			session.save(accountSubGroupMaster);
-			transaction.commit();
-		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountSubGroupMasterRepo.save(accountSubGroupMaster);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return accountSubGroupMaster;
 	}
 
+	@Transactional
 	public String saveNewAccount(Accountdetails accountDetails, Accountdetailsbalance accountDetailsBalance) {
 		String result = "false";
 		try{
-			transaction = session.beginTransaction();
-			session.save(accountDetails);
-			session.save(accountDetailsBalance);
-			transaction.commit();
+			accountDetailsRepo.save(accountDetails);
+			accountDetailsBalanceRepo.save(accountDetailsBalance);
 			result = "true";
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-			System.out.println("error "+hb);
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return result;
 		
 	}
 
+	@Transactional
 	public Financialaccountingyear getFinancialAccountingYear(int branchId) {
 		
 		Financialaccountingyear financialYear = new Financialaccountingyear();
-		
-		try {
-			transaction = session.beginTransaction();
-			financialYear = (Financialaccountingyear) session.createQuery("from Financialaccountingyear where active='yes' and branchId="+branchId).uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from Financialaccountingyear where active='yes' and branchId="+branchId).uniqueResult();
+			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		
 		return financialYear;
 	}
 
+	@Transactional
 	public String saveAccountBalance(Accountdetailsbalance accountDetailsBalance) {
 		String result = "false";
 		try{
-			transaction = session.beginTransaction();
-			session.save(accountDetailsBalance);
-			transaction.commit();
+			accountDetailsBalanceRepo.save(accountDetailsBalance);
 			result = "true";
-		}catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return result;
 	}
 
+	
 	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(List<Integer> accountIds, int branchId) {
-
-		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
+		List<Accountdetailsbalance> accountDetails;
 		try{
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (:accountIds) and branchid="+branchId);
-			query.setParameterList("accountIds", accountIds);
-			accountDetails = query.getResultList();
-			transaction.commit();
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (:accountIds) and branchid="+branchId);
+			accountDetails = accountDetailsBalanceRepo.findAllByBranchIdAndAccountIdsIn(branchId, accountIds);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
 		}
 		
 		return accountDetails;
 	}
 
+	@Transactional
 	public List<Accountdetailsbalance> getAccountdetailsbalance(int branchId) {
 
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
+
 		try{
-			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance where branchid="+branchId).list();
-			transaction.commit();
-		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// session.createQuery("from Accountdetailsbalance where branchid="+branchId).list();
+			accountDetails = accountDetailsBalanceRepo.findByBranchid(branchId);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
-		
+
 		return accountDetails;
 	}
 	
+	@Transactional
 	public boolean deleteMultipleAccounts(List<Integer> balanceIds, List<Integer> accountdetailsIds) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid IN (:balanceids)");
-			query.setParameterList("balanceids", balanceIds);
-			Query query2 = session.createQuery("delete from Accountdetails where accountdetailsid IN (:accountids)");
-			query2.setParameterList("accountids", accountdetailsIds);
-			query.executeUpdate();
-			query2.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		boolean result;
+		try{
+			// session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid IN (:balanceids)");
+			accountDetailsBalanceRepo.deleteAllById(balanceIds);
+			// session.createQuery("delete from Accountdetails where accountdetailsid IN (:accountids)");
+			accountDetailsRepo.deleteAllById(accountdetailsIds);
+			result = true;
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		
-		return false;
+		return result;
 	}
 
+	@Transactional
 	public boolean saveVoucher(VoucherEntrytransactions transactions) {
-		
+		boolean result = false;
 		try{
-			transaction = session.beginTransaction();
-			session.save(transactions);
-			transaction.commit();
-			return true;
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			voucherEntryTransactionsRepo.save(transactions);
+			result = true;
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 	
 	public boolean saveVoucherwithAccUpdate(VoucherEntrytransactions transactions, String drAmount, String crAmount) {
-		
+		boolean result = false;
 		try{
-			transaction = session.beginTransaction();
-			session.save(transactions);
-			Query query = session.createQuery(drAmount);
-			query.executeUpdate();
-			Query query1 = session.createQuery(crAmount);
-			query1.executeUpdate();
-			transaction.commit();
-			return true;
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// Query query = session.createQuery(drAmount); query.executeUpdate();
+			// Query query1 = session.createQuery(crAmount); query.executeUpdate();
+			queryUtil.runUpdateQuery(drAmount);
+			queryUtil.runUpdateQuery(crAmount);
+			voucherEntryTransactionsRepo.save(transactions);
+			result = true;
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 
 	
 	public List<Accountdetailsbalance> getAccountBalanceDetails(List<Integer> accountIds, int branchId) {
 		
 		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
+
 		try {
-			transaction = session.beginTransaction();
+			// .createQuery("from Accountdetailsbalance where accountdetailsid IN (:ids) and branchid="+branchId);
 			
+			List<Accountdetails> accountdetailslist = new ArrayList<Accountdetails>();
+			for(Integer accountId : accountIds) {
+				Accountdetails accountdetails= accountDetailsRepo.findById(accountId).orElse(null);
+				accountdetailslist.add(accountdetails);
+			}
 			
-			Query query = session
-					.createQuery("from Accountdetailsbalance where accountdetailsid IN (:ids) and branchid="+branchId);
-			query.setParameterList("ids", accountIds);
-			accountDetailsBalance = query.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountDetailsBalance = accountDetailsBalanceRepo.findByAccountDetailsInAndBranchid(accountdetailslist, branchId);
+
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
 		return accountDetailsBalance;
 	}
 
+	@Transactional
 	public void updateAccountCurrentBalance(BigDecimal currentBalance, Integer accountId) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+
+		try{
+			// session.createQuery("update Accountdetailsbalance set currentbalance='"+currentBalance+"' where accountdetailsid="+accountId);
+			Accountdetails accountdetails= accountDetailsRepo.findById(accountId).orElse(null);
+			Accountdetailsbalance accountdetailsbalance = accountDetailsBalanceRepo.findByAccountDetails(accountdetails);
+			accountdetailsbalance.setCurrentbalance(currentBalance);
+			accountDetailsBalanceRepo.save(accountdetailsbalance);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		
+
 	}
 
+	@Transactional
 	public List<Accountdetailsbalance> getAccountdetailsbalanceBankCash(int branchId) {
-		
+
 		List<Accountdetailsbalance> accountDetails = new ArrayList<Accountdetailsbalance>();
-		
+
 		try{
-			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSSGroupMaster.ssgroupmasterid IN (1,2) and branchid="+branchId).list();
-			transaction.commit();																						   											
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountSSGroupMaster.ssgroupmasterid IN (1,2) and branchid="+branchId).list();
+			accountDetails = accountDetailsBalanceRepo.findBankCashAccountDetailsByBranch(branchId);
+		}catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
+
 		}
 		return accountDetails;
 	}
 
+	@Transactional
 	public List<VoucherEntrytransactions> getVoucherEntryTransactions(String fromDate, String toDate, Integer financialYear, int branchId, int voucherType) {
 		
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
-		try {
-			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}	finally {
-			HibernateUtil.closeSession();
+		try{
+			Date fromdate = DateUtil.indiandateParser(fromDate);
+			Date todate = DateUtil.indiandateParser(toDate);
+			// session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and vouchertype="+voucherType+" and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findVoucherEntries(fromdate, todate, financialYear, branchId, voucherType);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}	
 		return voucherEntrytransactions;
 	}
 	
 	public List<VoucherEntrytransactions> getCancelledVoucherEntryTransactions(Integer financialYear, int branchId) {
-		
+
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
-		try {
-			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}	finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from VoucherEntrytransactions where financialyear='"+financialYear+"'and cancelvoucher='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findCancelledVoucherEntryTransactions(financialYear, branchId);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}	
 		return voucherEntrytransactions;
 	}
 	
+	@Transactional
 	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int accNo, int branchId) {
+
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
-		try {
-			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and (draccountid='"+accNo+"' or craccountid='"+accNo+"') and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}		
+		try{
+			Date fromdate = DateUtil.datePars(fromDate);
+			Date todate = DateUtil.datePars(toDate);
+			//voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and (draccountid='"+accNo+"' or craccountid='"+accNo+"') and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findTransactionsBetweenDates(fromdate, todate, accNo, branchId);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
+		}	
 		return voucherEntrytransactions;
 	}
 
+	@Transactional
 	public String getAccountName(Integer accountid) {
 		Accountdetails accountDetails = new Accountdetails();
 		String accountName = null;
-		try {
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
-			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
+		try{
+			// session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
+			accountDetails = accountDetailsRepo.findById(accountid).orElse(null);
 			accountName = accountDetails.getAccountname();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return accountName;
 	}
 
 
+	@Transactional
 	public boolean checkInTransactions(Integer accountId) {
-		
-		VoucherEntrytransactions rTransactions = new VoucherEntrytransactions();
-		
-		
-		try {
-			transaction = session.beginTransaction();
-
-			Query receipt = session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			rTransactions = (VoucherEntrytransactions) receipt.uniqueResult();
-			transaction.commit();
-
-			if(rTransactions != null){
-				return true;
-			}
-			
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		boolean result = false;
+		try{
+			// session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
+			result = voucherEntryTransactionsRepo.existsByDraccountidOrCraccountid(accountId);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 
 	public boolean deleteMultipleAccounts(Integer balanceId, Integer accountId) {
 		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid ="+balanceId);
-			Query query2 = session.createQuery("delete from Accountdetails where accountdetailsid ="+accountId);
-			query.executeUpdate();
-			query2.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		boolean result = false;
+		try{
+			// session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid ="+balanceId);
+			accountDetailsBalanceRepo.deleteById(balanceId);
+			// session.createQuery("delete from Accountdetails where accountdetailsid ="+accountId);
+			accountDetailsRepo.deleteById(accountId);
+			result = true;
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		
-		return false;
+		return result;
 	}
 
 	public VoucherEntrytransactions getVoucherDetails(String id) {
 		
 		VoucherEntrytransactions voucherTransactions = new VoucherEntrytransactions();
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from VoucherEntrytransactions where transactionsid='"+id+"'");
-			voucherTransactions = (VoucherEntrytransactions) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from VoucherEntrytransactions where transactionsid='"+id+"'");
+			int vid = Integer.parseInt(id);
+			voucherTransactions = voucherEntryTransactionsRepo.findByTransactionsid(vid);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return voucherTransactions;
 	}
 
+	@Transactional
 	public boolean updateAccountsWithVoucherCancel(String updateDrAccount, String updateCrAccount, String cancelVoucher) {
-		
+		boolean result = false;
 		try {
-			transaction = session.beginTransaction();
-			Query updateDr = session.createQuery(updateDrAccount);
-			updateDr.executeUpdate();
-			Query updateCr = session.createQuery(updateCrAccount);
-			updateCr.executeUpdate();
-			Query cancelVoucherQuery = session.createQuery(cancelVoucher);
-			cancelVoucherQuery.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			// session.createQuery(updateDrAccount); updateDr.executeUpdate();
+			queryUtil.runUpdateQuery(updateDrAccount);
+			// session.createQuery(updateCrAccount); updateCr.executeUpdate();
+			queryUtil.runUpdateQuery(updateCrAccount);
+			// session.createQuery(cancelVoucher); cancelVoucherQuery.executeUpdate();
+			queryUtil.runUpdateQuery(cancelVoucher);
+
+			result = true;
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			throw hibernateException;
 		}
-		return false;
+		return result;
 	}
 
+	@Transactional
 	public boolean cancelVoucher(String id) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id);
-			query.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		boolean result = false;
+		try{
+			// session.createQuery("update VoucherEntrytransactions set cancelvoucher='yes' where transactionsid="+id);
+			int transactionId = Integer.parseInt(id);
+			voucherEntryTransactionsRepo.cancelVoucher(transactionId);
+			result = true;
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
-		return false;
 		
+		return result;
 	}
 
 	public Accountdetails getAccountDetails(int accountid) {
 		Accountdetails accountDetails = new Accountdetails();
-		try {
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
-			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from Accountdetails where accountdetailsid ="+accountid);
+			accountDetails = accountDetailsRepo.findById(accountid).orElse(null);
+		} catch (Exception hibernateException) { 
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            throw hibernateException;
 		}
 		return accountDetails;
 	}
 
+	@Transactional
 	public Accountdetails checkAccountDetails(String accountName, String accountCode, int branchId) {
 		Accountdetails accountDetails = new Accountdetails();
-		try {
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("from Accountdetails where (accountname = '"+accountName+"' or accountcode='"+accountCode+"') and branchid="+branchId+"");
-			accountDetails = (Accountdetails) query.uniqueResult(); 
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from Accountdetails where (accountname = '"+accountName+"' or accountcode='"+accountCode+"') and branchid="+branchId+"");
+			accountDetails = accountDetailsRepo.findAccountDetails(accountName, accountCode, branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
 
 	public List<Accountdetails> getAccountdetails(int branchId) {
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
-		try {
-			transaction = session.beginTransaction();
-			accountDetails =  session.createQuery("from Accountdetails where branchid = "+branchId+" order by accountcode ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from Accountdetails where branchid = "+branchId+" order by accountcode ASC").list();
+			accountDetails = accountDetailsRepo.findByBranchidOrderByAccountcodeAsc(branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
 
+	@Transactional
 	public List<Accountssgroupmaster> getListAccountSSGroupMaster(int accountSubGroupMasterId, int branchId) {
 		
 		List<Accountssgroupmaster> accountSubGroupMaster = new ArrayList<Accountssgroupmaster>();
 		
 		try{
-			transaction = session.beginTransaction();
-			accountSubGroupMaster = session.createQuery("from Accountssgroupmaster where subgroupmasterid = '"+accountSubGroupMasterId+"' and branchid ="+branchId).list();
-			transaction.commit();
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// session.createQuery("from Accountssgroupmaster where subgroupmasterid = '"+accountSubGroupMasterId+"' and branchid ="+branchId).list();
+			accountSubGroupMaster = accountssgroupmasterRepository.findBySubgroupmasteridAndBranchid(accountSubGroupMasterId, branchId);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		
 		return accountSubGroupMaster;
 	}
 
+	@Transactional
 	public Accountssgroupmaster createSSGroup(Accountssgroupmaster accountSSGroupMaster) {
 		try{
-			transaction = session.beginTransaction();
-			session.save(accountSSGroupMaster);
-			transaction.commit();
-		}catch (Exception hb) {  transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			accountssgroupmasterRepository.save(accountSSGroupMaster);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountSSGroupMaster;
 	}
 
+	@Transactional
 	public List<Accountdetails> getLedgerAccountdetails(int branchId) {
 		
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		
 		try{
-			transaction = session.beginTransaction();
-			accountDetails = session.createQuery("from Accountdetails as accdetails where accdetails.branchid="+branchId).list();
-			transaction.commit();																						   											
-		}catch (Exception hb) { transaction.rollback(); logger.error(hb);
-			hb.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+			// session.createQuery("from Accountdetails as accdetails where accdetails.branchid="+branchId).list();
+			accountDetails = accountDetailsRepo.findByBranchid(branchId);
+		}catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
 
+	@Transactional
 	public List<Accountdetails> getAccountdetailsIncomeExpense(int branchId) {
 		
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
-		try {
-			transaction = session.beginTransaction();												  	
-			accountDetails =  session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
+		try{
+			// session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
+			accountDetails =  accountDetailsRepo.findIncomeAndExpenseAccountsByBranchId(branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
 		}
 		return accountDetails;
 	}
 	
+	@Transactional
 	public List<VoucherEntrytransactions> getVoucherDetailsByNarration(String supplierreferenceno) {
 		
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
 		
-		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
-			voucherTransactions = query.list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
+		try{
+			// session.createQuery("from VoucherEntrytransactions where narration like '%"+supplierreferenceno+"%'");
+			voucherTransactions = voucherEntryTransactionsRepo.findByNarrationLike(supplierreferenceno);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;		
+			}
 		return voucherTransactions;
 	}
-	
+
+	@Transactional
 	public List<VoucherEntrytransactions> getAllVoucherEntryTransactionsBetweenDates(String fromDate, String toDate, int branchId) {
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+
 		try {
-			transaction = session.beginTransaction();
-			voucherEntrytransactions = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}		
+			// session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC").list();
+			Date fromdate = DateUtil.datePars(fromDate);
+			Date todate = DateUtil.datePars(toDate);
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findByAllVoucherEntryTransactionsBetweenDates(fromdate,todate,branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();;
+			throw hibernateException;
+
+		}
 		return voucherEntrytransactions;
 	}
 

@@ -28,13 +28,9 @@ public class UserAction {
 	@Autowired
 	private HttpSession httpSession;
 	@Autowired
-	private StandardActionAdapter standardActionAdapter;
-	@Autowired
-	private AdminService adminService;
-	@Autowired
-	private FeesCollectionActionAdapter feesCollectionActionAdapter;
-	@Autowired
 	private UserActionAdapter userActionAdapter;
+	@Autowired
+	private UserService userService;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -111,7 +107,7 @@ public class UserAction {
 
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logOutUser(Model model) {
-		new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter).logOutUser();
+		userService.logOutUser();
 		model.addAttribute("logout", true);
 		return "login";
 	}

@@ -1,13 +1,14 @@
 package org.ideoholic.curium.model.mess.stockentry.dto;
 
-import static javax.persistence.GenerationType.AUTO;
-
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -23,9 +24,10 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "mess_invoicedetails")
 public class MessInvoiceDetails implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 
@@ -41,9 +43,6 @@ public class MessInvoiceDetails implements java.io.Serializable {
 	@Column(name = "invoicetotal")
 	private Float invoicetotal;
 
-	@Column(name = "externalid")
-	private Integer branchid;
-
 	@Column(name = "entrydate", length = 10)
 	private Date entrydate;
 
@@ -56,7 +55,13 @@ public class MessInvoiceDetails implements java.io.Serializable {
 	@Column(name = "voucherid")
 	private Integer voucherid;
 
+	@Column(name = "branchid")
+	private Integer branchid;
+
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
+
+	@OneToMany(mappedBy = "messinvoicedetails")
+	private List<MessStockEntry> messStockEntryList;
 
 }

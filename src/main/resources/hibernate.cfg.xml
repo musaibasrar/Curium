@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
 		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory name="multibranch">
+	<session-factory>
 
 		<!-- <property name="hibernate.multiTenancy">SCHEMA</property>
             <property name="hibernate.tenant_identifier_resolver">com.model.multitenant.SchemaResolver</property>
@@ -50,7 +50,8 @@
 
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="current_session_context_class">thread</property>
-		<!-- <mapping class="com.model.user.dto.Login"/> -->
+		
+		<!-- <mapping class="com.model.user.dto.Login"/>
 		<mapping resource="mappings/Login.hbm.xml"></mapping>
 		<mapping resource="mappings/Parents.hbm.xml"></mapping>
 		<mapping resource="mappings/Student.hbm.xml"></mapping>

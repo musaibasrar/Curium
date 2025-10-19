@@ -100,7 +100,7 @@ public class MessSuppliersAction {
 		return "supplierpayment";
 	}
 
-	//TODO : This need refactoring in order to return JSON Response.
+	// TODO : This need refactoring in order to return JSON Response.
 	@GetMapping("/getSupplierBalance")
 	public void getSupplierBalance() {
 		try {
@@ -133,12 +133,11 @@ public class MessSuppliersAction {
 
 	@GetMapping("/viewSuppliers")
 	public String viewSuppliers() {
-		if(messSuppliersActionAdapter.viewSuppliersDetails()){
+		if (messSuppliersActionAdapter.viewSuppliersDetails()) {
 			return "addsuppliers";
-		}
-		else
+		} else
 			return "error";
-	    }
+	}
 
 	@PostMapping("/addSuppliers")
 	public String addSuppliers() {

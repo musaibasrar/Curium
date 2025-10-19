@@ -21,11 +21,13 @@ public class EmailActionAdapter {
 
     @Autowired
     private HttpSession httpSession;
+    
+    @Autowired
+    private EmailService emailService;
 
     private String BRANCHID = "branchid";
 
     public boolean sendAllEmail() {
-        EmailService emailService = new EmailService(request, response);
 
         SendAllEmailDto dto = new SendAllEmailDto();
         dto.setAddClass(request.getParameter("addclass"));

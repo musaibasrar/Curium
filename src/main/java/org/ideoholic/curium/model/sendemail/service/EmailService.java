@@ -7,49 +7,43 @@ import org.apache.commons.mail.SimpleEmail;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendemail.dao.EmailDAO;
+import org.ideoholic.curium.model.sendemail.dao.EmailDAO.QUERY_TYPE;
 import org.ideoholic.curium.model.sendemail.dto.SendAllEmailDto;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Properties;
+
 @Slf4j
+@Service
 public class EmailService {
+	private final String SUCCESS = "Success";
 	
-	    private HttpServletRequest request;
-	    private HttpServletResponse response;
-	    private HttpSession httpSession;
+	@Autowired
+	private EmailDAO emailDao;
 	    
 	private static DecimalFormat df2 = new DecimalFormat(".##");
-
-	public EmailService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
 
 
 	public ResultResponse sendAllEmail(SendAllEmailDto dto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
-
+		QUERY_TYPE queryType = QUERY_TYPE.NONE;
 		int noOfRecords = 100;
 		int offset=0;
 
 		try {
 			if (branchId != null) {
 
-				String queryMain = "From Parents as parents where ";
-				String querySub = "";
 				String addClass = dto.getAddClass();
 				String addSec = dto.getAddSec();
 				String conClassStudying = "";
 
 				if (addClass.contains("ALL")) {
-					querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
+					queryType = QUERY_TYPE.ALL_PARENTS;
 				} else {
 					if (!addClass.equalsIgnoreCase("")) {
 
@@ -64,19 +58,17 @@ public class EmailService {
 					String classStudying = DataUtil.emptyString(conClassStudying);
 
 					if (!classStudying.equalsIgnoreCase("")) {
-						querySub = querySub + "parents.Student.classstudying like '" + classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.branchid=" + Integer.parseInt(branchId);
+						queryType = QUERY_TYPE.ALL_PARENTS_WITH_CLASS;
 					}
 				}
 
-				queryMain = queryMain + querySub;
-
-				double totalEmails = new EmailDAO().countEmails(queryMain);
+				double totalEmails = emailDao.countEmails(queryType, conClassStudying, branchId);
 				int iterations = (int) Math.ceil(totalEmails / 100);
 
-				log.error("main query:" + queryMain);
+				log.error("query type:{}", queryType);
 
 				for (int i = 0; i < iterations; i++) {
-					List<Parents> parentsEmails = new EmailDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+					List<Parents> parentsEmails = emailDao.readListOfObjectsPaginationALL(queryType, conClassStudying, branchId, offset, noOfRecords);
 
 					String emails = null;
 					StringBuilder sbN = new StringBuilder();
@@ -89,25 +81,26 @@ public class EmailService {
 						emails = sbN.toString();
 						emails = emails.substring(0, emails.length() - 1);
 						log.error("emails are *** " + emails);
-						result.setSuccess(sendEmail(emails, DataUtil.emptyString(dto.getSubject()), DataUtil.emptyString(dto.getMessageBody())));
+						String emailResult = sendEmail(emails, DataUtil.emptyString(dto.getSubject()), DataUtil.emptyString(dto.getMessageBody()));
+						if(emailResult.equals(SUCCESS))	result.setSuccess(true);
+						result.setMessage(emailResult);
 					}
 
 					offset = offset + 100;
 				}
 			}
-			result.setSuccess(false);
 		}catch (Exception e){
 			e.printStackTrace();
-			result.setSuccess(true);
+			result.setMessage(e.getMessage());
+			result.setSuccess(false);
 		}
         return result;
 		
 	}
 
 	
-	private boolean sendEmail(String emails, String subject,
-			String message) {
-		boolean result = false;
+	private String sendEmail(String emails, String subject, String message) {
+		String result = SUCCESS;
 		try {
 			Properties properties = new Properties();
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -131,9 +124,9 @@ public class EmailService {
 			email.addTo(emails);
 						
 			email.send();
-			result = true;
 		} catch (Exception e) {
-			System.out.println(""+e);
+			log.error(e.getMessage(), e);
+			result = e.getMessage();
 		}
 		
 		return result;

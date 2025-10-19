@@ -1,15 +1,27 @@
 package org.ideoholic.curium.model.multitenant;
-import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 
-public class SchemaResolver implements CurrentTenantIdentifierResolver {
- 
+import java.util.Map;
+
+import org.hibernate.cfg.AvailableSettings;
+import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SchemaResolver implements CurrentTenantIdentifierResolver, HibernatePropertiesCustomizer {
+
 	@Override
 	public String resolveCurrentTenantIdentifier() {
-		return "school"; //TODO: Implement service to identify tenant like: userService.getCurrentlyAuthUser().getTenantId();
+		return TenantContext.getCurrentTenant();
 	}
- 
+
 	@Override
 	public boolean validateExistingCurrentSessions() {
-		return false;
+		return true;
+	}
+
+	@Override
+	public void customize(Map<String, Object> hibernateProperties) {
+		hibernateProperties.put(AvailableSettings.MULTI_TENANT_IDENTIFIER_RESOLVER, this);
 	}
 }

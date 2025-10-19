@@ -1,6 +1,6 @@
 package org.ideoholic.curium.model.examdetails.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import java.util.List;
 
 // default package
 // Generated 19 Aug, 2016 8:15:22 PM by Hibernate Tools 4.0.0
@@ -8,8 +8,13 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
+import org.ideoholic.curium.model.marksdetails.dto.Marks;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,20 +30,25 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "exams")
 public class Exams implements java.io.Serializable {
-
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
+    private static final long serialVersionUID = 1L;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "exid", unique = true, nullable = false)
 	private Integer exid;
-
-	@Column(name = "examname", length = 45)
+    
+    @Column(name = "examname", length = 45)
 	private String examname;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
+    @OneToMany(mappedBy = "exams")
+    private List<ExamRank> examrankList;
 
+    @OneToMany(mappedBy = "exam")
+    private List<Marks> marksList;
 }

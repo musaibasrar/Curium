@@ -9,4 +9,5 @@ import lombok.Data;
 public class StudentIdDto {
     private String studentId;
     private String academicYear;
+    private String diaryId;
 }

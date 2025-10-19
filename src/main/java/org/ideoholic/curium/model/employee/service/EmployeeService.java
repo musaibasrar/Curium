@@ -1,12 +1,26 @@
 package org.ideoholic.curium.model.employee.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.*;
+import org.ideoholic.curium.model.employee.dto.BasicPayEmployeesDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeListDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.SearchEmployeeDto;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewAllRelationsResponseDto;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
@@ -15,7 +29,6 @@ import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
@@ -26,19 +39,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class EmployeeService {
 
 	@Autowired
-	private HttpServletRequest request;
+	private UserDAO userDao;
+
 	@Autowired
-    private HttpServletResponse response;
+	private UserService userService;
+	
+	@Autowired
+	private departmentDAO departmentDAO;
+	
+	@Autowired
+	private PrintIdsDAO printIdsDAO;
+	
+	@Autowired
+	private EmployeeDAO employeeDao;
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -149,8 +169,8 @@ public class EmployeeService {
 		employee.setTeacherexternalid(branchCode);
 		employee.setBranchid(Integer.parseInt(branchId));
 
-		if(new EmployeeDAO().create(employee)){
-			if(new UserService(request, response,null,null,null).addUser(employee, branchId)){
+		if(employeeDao.create(employee)){
+			if(userService.addUser(employee, branchId)){
 				return ResultResponse.builder().success(true).build();
 			}else{
 				new EmployeeDAO().delete(employee);
@@ -159,13 +179,13 @@ public class EmployeeService {
 		
 		return ResultResponse.builder().build();
 	}
-//TODO: Naming Convention error in this method, method name should start from small alphabet.
-	public EmployeesWithSalaryResponseDto ViewAllEmployee(String branchId) {
+
+	public EmployeesWithSalaryResponseDto viewAllEmployee(String branchId) {
 		EmployeesWithSalaryResponseDto employeesWithSalaryResponseDto = new EmployeesWithSalaryResponseDto();
 		
 		boolean result = false;
     try {
-    	List<Teacher> list = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+    	List<Teacher> list = employeeDao.readListOfObjects(Integer.parseInt(branchId));
     	employeesWithSalaryResponseDto.setEmployeeList(list);
     	employeesWithSalaryResponseDto.setEmployeeListProcessSalary(list);
     	employeesWithSalaryResponseDto.setSuccess(true);
@@ -177,11 +197,10 @@ public class EmployeeService {
 
 	public EmployeeDetailsResponseDto viewDetailsEmployee(String empId) {
 		EmployeeDetailsResponseDto employeeDetailsResponseDto = new EmployeeDetailsResponseDto();
-		 boolean result = false;
 	        try {
 	            long id = Long.parseLong(empId);
-	            Teacher employee = new EmployeeDAO().readUniqueObject(id);
-	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	            Teacher employee = employeeDao.readUniqueObject(id);
+	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
 	            	employeeDetailsResponseDto.setEmployee(employee);
@@ -388,7 +407,7 @@ public class EmployeeService {
 			e.printStackTrace();
 		}
 		
-		employee = new EmployeeDAO().update(employee);
+		employee = employeeDao.update(employee);
 
         return employee;
 	}
@@ -396,21 +415,21 @@ public class EmployeeService {
 	public void deleteMultiple(EmployeeIdsDto employeeIdsDto) {
 		 String[] employeeIds = employeeIdsDto.getEmployeeIds();
 		 if(employeeIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : employeeIds) {
-	            System.out.println("id" + id);
+	            log.debug("id:{}", id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + employeeIds.length);
-	        new EmployeeDAO().deleteMultiple(ids);
+	        log.debug("id length:{}", employeeIds.length);
+	        employeeDao.deleteMultiple(ids);
 		 }
 	}
 
 	public ViewAllRelationsResponseDto viewAllRelations(String branchId) {
 		ViewAllRelationsResponseDto viewAllRelationsResponseDto = new ViewAllRelationsResponseDto();
 		if(branchId!=null) {
-			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+			List<Department> listDepartment =departmentDAO.readListOfObjects(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListDepartment(listDepartment);
 	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListPosition(listPosition);
@@ -448,17 +467,17 @@ public class EmployeeService {
 		
 		if(branchId!=null){
 			if(staffName!=""){
-				employeeList = new EmployeeDAO().readListOfEmployeesByName(staffName, Integer.parseInt(branchId));
+				employeeList = employeeDao.readListOfEmployeesByName(staffName, Integer.parseInt(branchId));
 			}else if(staffDepartment!=""){
 				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(branchId));
 			}else {
-				employeeList = new EmployeeDAO().readListOfEmployeesBasicPay(Integer.parseInt(branchId));
+				employeeList = employeeDao.readListOfEmployeesBasicPay(Integer.parseInt(branchId));
 			}
 		}
 		
 		employeeListDto.setEmployeeList(employeeList);
 		
-		ViewAllEmployee(branchId);
+		viewAllEmployee(branchId);
 
 		return employeeListDto;
 	}
@@ -478,7 +497,7 @@ public class EmployeeService {
 		DepartmentResponseDto departmentResponseDto = new DepartmentResponseDto();
 		
 		if(branchId!=null) {
-			List<Department> listDepartment = new departmentDAO().readListOfObjects(Integer.parseInt(branchId));
+			List<Department> listDepartment = departmentDAO.readListOfObjects(Integer.parseInt(branchId));
 	        departmentResponseDto.setDepartmentList(listDepartment);
 		}
 		return departmentResponseDto;
@@ -497,9 +516,9 @@ public class EmployeeService {
 	      for (String id : studentIDs) {
 
 	          
-	           System.out.println("Value of i is " + i);
+	    	  log.debug("Value of i is:{}", i);
 	           int sid = Integer.valueOf(id);
-	           teacherDetails = new PrintIdsDAO().printMultipleIdsEmployee(id);
+	           teacherDetails = printIdsDAO.printMultipleIdsEmployee(id);
 	           
 	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
@@ -541,7 +560,7 @@ public class EmployeeService {
 
 	        try {
 	            Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
-	            Login employeeLogin = new UserDAO().getUserDetails(employee.getTeacherexternalid());
+	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {
 					result.setEmployee(employee);

@@ -1,94 +1,80 @@
 package org.ideoholic.curium.model.marksdetails.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.student.dto.Student;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "examrank")
-public class ExamRank implements java.io.Serializable,Comparable<ExamRank>{
+public class ExamRank implements java.io.Serializable, Comparable<ExamRank> {
+	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	private Integer sid;
-	private Integer examid;
-	private float marksobtained;
-	private String academicyear;
+
+	@Column(name = "marksobtained", length = 12)
+	private Float marksobtained;
+
+	@Column(name = "status", length = 20)
 	private String status;
-	private int rank;
-	private int branchid;
-	private int userid;
-	public ExamRank() {
-	}
-	public ExamRank(Integer id, Integer sid, Integer examid, float marksobtained, String academicyear, String status,
-			int rank, int branchid, int userid) {
-		this.id = id;
-		this.sid = sid;
-		this.examid = examid;
-		this.marksobtained = marksobtained;
-		this.academicyear = academicyear;
-		this.status = status;
-		this.rank = rank;
-		this.branchid = branchid;
-		this.userid = userid;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
-	public Integer getSid() {
-		return sid;
-	}
-	public void setSid(Integer sid) {
-		this.sid = sid;
-	}
-	public Integer getExamid() {
-		return examid;
-	}
-	public void setExamid(Integer examid) {
-		this.examid = examid;
-	}
-	public float getMarksobtained() {
-		return marksobtained;
-	}
-	public void setMarksobtained(float marksobtained) {
-		this.marksobtained = marksobtained;
-	}
-	public String getAcademicyear() {
-		return academicyear;
-	}
-	public void setAcademicyear(String academicyear) {
-		this.academicyear = academicyear;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public int getRank() {
-		return rank;
-	}
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
-	public int getBranchid() {
-		return branchid;
-	}
-	public void setBranchid(int branchid) {
-		this.branchid = branchid;
-	}
-	public int getUserid() {
-		return userid;
-	}
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
+
+	@Column(name = "rank")
+	private Integer rank;
+
+	@Column(name = "academicyear", length = 20)
+	private String academicyear;
+
+	@ManyToOne
+	@JoinColumn(name = "examid", referencedColumnName = "exid")
+	private Exams exams;
+
+	@ManyToOne
+	@JoinColumn(name = "sid", referencedColumnName = "sid")
+	private Student student;
+
+	@Column(name = "branchid")
+	private Integer branchid;
+
+	@Column(name = "userid")
+	private Integer userid;
+
 	@Override
 	public int compareTo(ExamRank examRank) {
-		 float marksObtained = ((ExamRank) examRank).getMarksobtained();
-	        return Double.compare(marksObtained, this.marksobtained);
+		float marksObtained = ((ExamRank) examRank).getMarksobtained();
+		return Double.compare(marksObtained, this.marksobtained);
 	}
 	
+	public int fetchExamid() {
+		if (exams != null) {
+			exams.getExid();
+		}
+		return 0;
+	}
+
+	public int fetchSid() {
+		if (student != null) {
+			return student.getSid();
+		}
+		return 0;
+	}
 
 }

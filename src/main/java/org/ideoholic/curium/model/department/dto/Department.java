@@ -1,13 +1,12 @@
 package org.ideoholic.curium.model.department.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 16 Jan, 2015 12:53:36 PM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -29,7 +28,7 @@ import lombok.NoArgsConstructor;
 public class Department implements java.io.Serializable {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "depid", unique = true, nullable = false)
 	private Integer depid;
 

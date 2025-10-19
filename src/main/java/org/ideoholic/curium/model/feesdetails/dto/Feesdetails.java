@@ -1,15 +1,18 @@
 package org.ideoholic.curium.model.feesdetails.dto;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 // default package
 // Generated 11 Feb, 2015 9:12:09 AM by Hibernate Tools 4.0.0
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.ideoholic.curium.model.student.dto.Student;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,14 +27,16 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "fee_feesdetails")
 public class Feesdetails implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "feesdetailsid", unique = true, nullable = false)
 	private Integer feesdetailsid;
 
-	@Column(name = "sid")
-	private Integer sid;
+	@ManyToOne
+	@JoinColumn(name = "sid", referencedColumnName = "sid")
+	private Student student;
 
 	@Column(name = "dateoffees", length = 100)
 	private String dateoffees;

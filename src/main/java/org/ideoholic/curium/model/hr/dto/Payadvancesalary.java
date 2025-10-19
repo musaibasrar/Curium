@@ -1,20 +1,18 @@
 package org.ideoholic.curium.model.hr.dto;
 
-// default package
-// Generated 24 Apr, 2018 11:34:11 PM by Hibernate Tools 4.0.0
-
-import static javax.persistence.GenerationType.IDENTITY;
-
 import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.ideoholic.curium.model.employee.dto.Teacher;
 
@@ -32,14 +30,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "hr_payadvancesalary")
 public class Payadvancesalary implements java.io.Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "idpayadvancesalary", unique = true, nullable = false)
 	private Integer idpayadvancesalary;
-
-	@Column(name = "idteacher")
-	private Integer idteacher;
 
 	@Column(name = "year", length = 45)
 	private String year;
@@ -66,19 +62,20 @@ public class Payadvancesalary implements java.io.Serializable {
 	private String status;
 
 	@ManyToOne
-	@JoinColumn(name = "idteacher")
+	@JoinColumn(name = "idteacher", referencedColumnName = "tid")
 	private Teacher teacher;
 
 	@Column(name = "reason", length = 500)
 	private String reason;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "date", length = 10)
 	private Date date;
 
 	@Column(name = "branchid")
-	private int branchid;
+	private Integer branchid;
 
 	@Column(name = "userid")
-	private int userid;
+	private Integer userid;
 
 }

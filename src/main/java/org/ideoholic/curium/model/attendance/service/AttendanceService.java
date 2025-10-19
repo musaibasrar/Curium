@@ -1,35 +1,10 @@
 package org.ideoholic.curium.model.attendance.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Map.Entry;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -47,37 +22,50 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+
+@Slf4j
+@Service
 public class AttendanceService {
-	
+
+		@Autowired
 	 	private HttpServletRequest request;
+
+		@Autowired
 	    private HttpServletResponse response;
-	    private HttpSession httpSession;
+		
+		@Autowired
+		private YearDAO yearDao;
+		
+		@Autowired
+		private AttendanceDAO attendanceDao;
+
+		@Autowired
+		private EmployeeDAO employeeDao;
+		
 	    private static final int BUFFER_SIZE = 4096;
-	    private String CURRENTACADEMICYEAR = "currentAcademicYear";
-	    private String BRANCHID = "branchid";
-	    
-	    private static final Logger logger = LogManager.getLogger(AttendanceService.class);
-	    
-	    public AttendanceService(){
-	    }
-	    
-	public AttendanceService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
+
 
 	public ResultResponse viewAllHolidays(String branchId, String currentAcademicYear) {
 		//remove it after testing
 		//httpSession.setAttribute("currentAcademicYear", "2017/18");
 		ResultResponse result = ResultResponse.builder().build();
 		if(currentAcademicYear!=null){
-		List<Holidaysmaster> list = new AttendanceDAO().readListOfHolidays(currentAcademicYear, Integer.parseInt(branchId));
+		List<Holidaysmaster> list = attendanceDao.readListOfHolidays(currentAcademicYear, Integer.parseInt(branchId));
 			result.setResultList(list);
 			result.setSuccess(true);
 		}
@@ -101,7 +89,7 @@ public class AttendanceService {
 			holidayMaster.setHolidayname(holidayName[i]);
 			holidayMaster.setAcademicyear(currentAcademicYear);
 			holidayMaster.setBranchid(Integer.parseInt(branchId));
-			result.setSuccess(new AttendanceDAO().saveHolidays(holidayMaster));
+			result.setSuccess(attendanceDao.saveHolidays(holidayMaster));
 		}
 			}catch(Exception e){
 			e.printStackTrace();	
@@ -111,6 +99,7 @@ public class AttendanceService {
 	}
 
 	public ResultResponse addWeekOff(WeekOffDto weekOffDto, String branchId, String currentAcademicYear) {
+		boolean success = true;
 		Weeklyoff weeklyOff = new Weeklyoff();
 		String[] weekOff = weekOffDto.getWeekOff();
 		if(weekOff!=null){
@@ -118,15 +107,12 @@ public class AttendanceService {
 			weeklyOff.setWeeklyoffday(weekOff[i]);
 			weeklyOff.setAcademicyear(currentAcademicYear);
 			weeklyOff.setBranchid(Integer.parseInt(branchId));
-			return ResultResponse
-					.builder()
-					.success(new AttendanceDAO().saveWeeklyOff(weeklyOff))
-					.build();
+			success &= attendanceDao.saveWeeklyOff(weeklyOff);
 		}
 		}
 		return ResultResponse
 				.builder()
-				.success(false)
+				.success(success)
 				.build();
 	}
 
@@ -139,7 +125,7 @@ public class AttendanceService {
 		}
 		return ResultResponse
 				.builder()
-				.success(new AttendanceDAO().deleteMultiple(holidayIds))
+				.success(attendanceDao.deleteMultiple(holidayIds))
 				.build() ;
 		}
 		return ResultResponse
@@ -151,7 +137,7 @@ public class AttendanceService {
 	public ResultResponse viewAllWeekOffs(String branchId, String currentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
 		if(currentAcademicYear!=null){
-			List<Weeklyoff> weekOffList = new AttendanceDAO().readListOfWeekOff(currentAcademicYear, Integer.parseInt(branchId));
+			List<Weeklyoff> weekOffList = attendanceDao.readListOfWeekOff(currentAcademicYear, Integer.parseInt(branchId));
 				result.setResultList(weekOffList);
 				result.setSuccess(true);
 			}
@@ -189,19 +175,19 @@ public class AttendanceService {
 		attendanceMaster.setBranchid(Integer.parseInt(branchId));
 		return ResultResponse
 				.builder()
-				.success(new AttendanceDAO().addAttendanceMaster(attendanceMaster))
+				.success(attendanceDao.addAttendanceMaster(attendanceMaster))
 				.build();
 		
 		/*List<Integer> weeklyOffList = new ArrayList<Integer>();
 		for (String weekoff : weeklyOff) {
 			weeklyOffList.add(Integer.parseInt(weekoff));
 		}
-		List<Weeklyoff> weekOffList = new AttendanceDAO().readListOfWeeklyOff(weeklyOffList,httpSession.getAttribute("currentAcademicYear").toString());
+		List<Weeklyoff> weekOffList = attendanceDao.readListOfWeeklyOff(weeklyOffList,httpSession.getAttribute("currentAcademicYear").toString());
 		List<Integer> holidaysIntList = new ArrayList<Integer>();
 		for (String holidaysString : holidays) {
 			holidaysIntList.add(Integer.parseInt(holidaysString));
 		}
-		List<Holidaysmaster> holidaysList = new AttendanceDAO().readListOfholidays(holidaysIntList,httpSession.getAttribute("currentAcademicYear").toString());
+		List<Holidaysmaster> holidaysList = attendanceDao.readListOfholidays(holidaysIntList,httpSession.getAttribute("currentAcademicYear").toString());
 		 */
 	
 	}
@@ -240,7 +226,7 @@ public class AttendanceService {
 		}
 		return ResultResponse
 				.builder()
-				.success(new AttendanceDAO().addAttendanceMaster(attendanceMasterList))
+				.success(attendanceDao.addAttendanceMaster(attendanceMasterList))
 				.build();
 	}
 
@@ -252,7 +238,7 @@ public class AttendanceService {
 		
 		Date todaysDate = new Date();
 		List<String> staffExternalId = new EmployeeDAO().getEmployeeExternalId();
-		List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011", Integer.parseInt(branchId));
+		List<Attendancemaster> studentAttendanceMaster = attendanceDao.getAttendanceMasterDetails("00011", Integer.parseInt(branchId));
 		String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
 		List<Integer> studentWeeklyOffList = new ArrayList<Integer>();
 		boolean studentWeeklyOff = false;
@@ -260,7 +246,7 @@ public class AttendanceService {
 		for (String weekOffS : weeklyOffString) {
 			studentWeeklyOffList.add(Integer.parseInt(weekOffS));
 		}
-		List<Weeklyoff> studentWeekOff = new AttendanceDAO().readListOfWeeklyOff(studentWeeklyOffList, currentAcademicYear, Integer.parseInt(branchId));
+		List<Weeklyoff> studentWeekOff = attendanceDao.readListOfWeeklyOff(studentWeeklyOffList, currentAcademicYear, Integer.parseInt(branchId));
 		
 		String today = new SimpleDateFormat("EEEE").format(todaysDate);
 		for (Weeklyoff weeklyoff : studentWeekOff) {
@@ -274,7 +260,7 @@ public class AttendanceService {
 		for (String singleHoliday : holidayString) {
 			studentHolidayList.add(Integer.parseInt(singleHoliday));
 		}
-		List<Holidaysmaster> studentHolidays = new AttendanceDAO().readListOfholidays(studentHolidayList, currentAcademicYear, Integer.parseInt(branchId));
+		List<Holidaysmaster> studentHolidays = attendanceDao.readListOfholidays(studentHolidayList, currentAcademicYear, Integer.parseInt(branchId));
 		for (Holidaysmaster holidaysmaster : studentHolidays) {
 			Date fromDate = holidaysmaster.getFromdate();
 			Date toDate = holidaysmaster.getTodate();
@@ -368,15 +354,15 @@ public class AttendanceService {
 		       		            }
 		                }
 		        } catch (FileUploadException e) {
-		        	logger.error(e);
+		        	log.error("file upload error"+ e);
 		        }
 		
 			if(!listStudentAttendance.isEmpty()){
-				result.setSuccess(new AttendanceDAO().saveStudentAttendance(listStudentAttendance));
+				result.setSuccess(attendanceDao.saveStudentAttendance(listStudentAttendance));
 			}
 			
 			if(!listStaffAttendance.isEmpty()){
-				result.setSuccess(new AttendanceDAO().saveStaffAttendance(listStaffAttendance));
+				result.setSuccess(attendanceDao.saveStaffAttendance(listStaffAttendance));
 			}
 		}
 		return result;
@@ -393,7 +379,7 @@ public class AttendanceService {
 				        	return true;
 				        }
 					} catch (Exception e) {
-						logger.info("checktimings "+e);
+						log.info("checktimings "+e);
 					}
 					
 		return false;
@@ -424,18 +410,18 @@ public class AttendanceService {
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parent.Student.name like '%" + studentname + "%'";
+				querySub = " parent.student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " parent.Student.classstudying like '" + classStudying
-						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0  AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = " parent.student.classstudying like '" + classStudying
+						+ "'  AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0  AND parent.student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + " AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0 AND parent.student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 
 			List<Parents> newStudentList = new ArrayList<Parents>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
@@ -443,7 +429,7 @@ public class AttendanceService {
 			String searchdate = DateUtil.dateFromatConversionSlash(attendanceDetailsDto.getSearchDate());
 			for (Parents student : searchStudentList) {
 
-				List<Studentdailyattendance> studentsAttendance = new AttendanceDAO().readListOfStudentAttendance(currentAcademicYear, searchdate,student.getStudent().getStudentexternalid(), Integer.parseInt(branchId));
+				List<Studentdailyattendance> studentsAttendance = attendanceDao.readListOfStudentAttendance(currentAcademicYear, searchdate,student.getStudent().getStudentexternalid(), Integer.parseInt(branchId));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
 					newStudentList.add(student);
 					newStudentDailyAttendance.add(studentDailyAttendance);
@@ -457,7 +443,7 @@ public class AttendanceService {
 			result.setSuccess(true);
 
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 
 		result.setStudentList(studentList);
 
@@ -466,7 +452,7 @@ public class AttendanceService {
 
 	public ResultResponse viewAttendance(String branchId) {
 			ResultResponse result = ResultResponse.builder().build();
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 		result.setResultList(studentList);
 			if(!studentList.isEmpty()){
 				result.setSuccess(true);
@@ -489,7 +475,7 @@ public class AttendanceService {
 			String toDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getToDate());
 
 			List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalId, fromDate, toDate, currentAcademicYear, Integer.parseInt(branchId));
+			studentDailyAttendance = attendanceDao.getStudentDailyAttendance(studentExternalId, fromDate, toDate, currentAcademicYear, Integer.parseInt(branchId));
 
 			result.setStudentDailyAttendance(studentDailyAttendance);
 			result.setStudentName(attendanceDetailsMonthlyDto.getStudentName());
@@ -522,7 +508,7 @@ public class AttendanceService {
 			result.setTotalAbsent(absentDays);
 			result.setSuccess(true);
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 		result.setStudentList(studentList);
 
 		return result;
@@ -545,7 +531,7 @@ public class AttendanceService {
 			}
 			return ResultResponse
 					.builder()
-					.success(new AttendanceDAO().updateStudentAttendanceDetails(attendanceIdsList,studentAttendanceStatusList,currentAcademicYear))
+					.success(attendanceDao.updateStudentAttendanceDetails(attendanceIdsList,studentAttendanceStatusList,currentAcademicYear))
 					.build();
 		}
 		return ResultResponse
@@ -598,7 +584,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				String toDateAtt = DateUtil.dateFromatConversionSlash(attendanceGraphDto.getToDate());
 				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendanceGraph(studentExternalIdGraph, fromDateAtt, toDateAtt, currentAcademicYear, Integer.parseInt(branchId));
+				studentDailyAttendance = attendanceDao.getStudentDailyAttendanceGraph(studentExternalIdGraph, fromDateAtt, toDateAtt, currentAcademicYear, Integer.parseInt(branchId));
 				
 				int absentDays = 0;
 				
@@ -628,14 +614,14 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			result.setSuccess(true);
 						
 		}
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = new StudentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
 
 		result.setStudentList(studentList);
 
 		return result;
 	}
 
-	public boolean viewStudentAttendanceDetailsMonthlyGraphOLD() {
+	/*public boolean viewStudentAttendanceDetailsMonthlyGraphOLD() {
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
 			
@@ -652,8 +638,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			Calendar cEnd = Calendar.getInstance();
 			cEnd.setTime(toDate);
 			cEnd.set(Calendar.DAY_OF_MONTH, cEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
-			/*dateTemp = cEnd.getTime();
-			Timestamp toTimestamp = new Timestamp(dateTemp.getTime());*/
+			*//*dateTemp = cEnd.getTime();
+			Timestamp toTimestamp = new Timestamp(dateTemp.getTime());*//*
 			int diffYear = Math.abs(cStart.get(Calendar.YEAR) - cEnd.get(Calendar.YEAR));
 			int diffMonth = diffYear * 12 + Math.abs(cStart.get(Calendar.MONTH) - cEnd.get(Calendar.MONTH));
 			int monthsDiff = cStart.get(Calendar.MONTH) - cEnd.get(Calendar.MONTH);
@@ -673,7 +659,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				String toDateAtt = DateUtil.dateFromatConversionSlash(request.getParameter("tomonthlyattendance"));
 				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentExternalIdGraph, fromDateAtt, toDateAtt, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				studentDailyAttendance = attendanceDao.getStudentDailyAttendance(studentExternalIdGraph, fromDateAtt, toDateAtt, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				mapStudentDailyAttendance.put(i, studentDailyAttendance);
 				
 				cStart.add(Calendar.MONTH, +1);
@@ -704,7 +690,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		request.setAttribute("studentList", studentList);
 		
 		return true;
-	}
+	}*/
 
 	public StudentAttendanceDetailsMarkResponseDto viewStudentAttendanceDetailsMark(StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto, String branchId, String currentAcademicYear) {
 		
@@ -732,18 +718,18 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
-				querySub = " parent.Student.name like '%" + studentname + "%'";
+				querySub = " parent.student.name like '%" + studentname + "%'";
 			}
 
 			if (!classStudying.equalsIgnoreCase("")) {
-				querySub = " parent.Student.classstudying like '" + classStudying
-						+ "'  AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = " parent.student.classstudying like '" + classStudying
+						+ "'  AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0 AND parent.student.branchid="+Integer.parseInt(branchId);
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parent.Student.archive=0 and parent.Student.passedout=0 AND parent.Student.droppedout=0 and parent.Student.leftout=0 AND parent.Student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + " AND parent.student.archive=0 and parent.student.passedout=0 AND parent.student.droppedout=0 and parent.student.leftout=0 AND parent.student.branchid="+Integer.parseInt(branchId);
 			}
 
 			queryMain = queryMain + querySub;
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
 
 			result.setStudentListAttendance(searchStudentList);
 			result.setAttendanceClass(conClassStudying.replace("--"," ").replace("%", ""));
@@ -777,22 +763,22 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
-					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+
+			String res = attendanceDao.checkAndMarkStudentAttendance(studentDailyAttendanceList);
 			result.setMessage(res);
 			
 				if(res!=null) {
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList);
+						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
 					}
 			}
 		}
 		return result;
 	}
 	
-	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -800,10 +786,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			        try {
 						properties.load(inputStream);
 					} catch (IOException e) {
-						logger.info("send SMS "+e);
+						log.info("send SMS "+e);
 					}
         
-        	String attendanceClass = request.getParameter("attendanceclass");
+        	String attendanceClass = dto.getAttendanceClass();
         	String absentMessage = null;
         	StringBuilder sbN = new StringBuilder();
         	String numbers = null;
@@ -812,10 +798,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         	for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				  
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
-        				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
+        				List<Parents> parentDetails = new StudentDetailsDAO().getStudentsList("from Parents as parents where parents.student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-            			new SmsService(request, response).sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
+            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {
 						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }
@@ -846,9 +832,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
-			Currentacademicyear currentAcademicYear = new YearDAO().showYear();
-			List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011");
+			List<Student> studentList = new StudentDetailsDAO().getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
+			Currentacademicyear currentAcademicYear = yearDao.showYear();
+			List<Attendancemaster> studentAttendanceMaster = attendanceDao.getAttendanceMasterDetails("00011");
 			String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
 			List<Integer> studentWeeklyOffList = new ArrayList<Integer>();
 			boolean studentWeeklyOff = false;
@@ -856,7 +842,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			for (String weekOffS : weeklyOffString) {
 				studentWeeklyOffList.add(Integer.parseInt(weekOffS));
 			}
-			List<Weeklyoff> studentWeekOff = new AttendanceDAO().readListOfWeeklyOff(studentWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
+			List<Weeklyoff> studentWeekOff = attendanceDao.readListOfWeeklyOff(studentWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
 			
 			String today = new SimpleDateFormat("EEEE").format(todaysDate);
 			for (Weeklyoff weeklyoff : studentWeekOff) {
@@ -870,7 +856,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			for (String singleHoliday : holidayString) {
 				studentHolidayList.add(Integer.parseInt(singleHoliday));
 			}
-			List<Holidaysmaster> studentHolidays = new AttendanceDAO().readListOfholidays(studentHolidayList, currentAcademicYear.getCurrentacademicyear());
+			List<Holidaysmaster> studentHolidays = attendanceDao.readListOfholidays(studentHolidayList, currentAcademicYear.getCurrentacademicyear());
 			for (Holidaysmaster holidaysmaster : studentHolidays) {
 				Date fromDate = holidaysmaster.getFromdate();
 				Date toDate = holidaysmaster.getTodate();
@@ -894,7 +880,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 						listStudentAttendance.add(studentDailyAttendance);
 				}
 			}
-			new AttendanceDAO().markDailyAttendanceJob(listStudentAttendance);
+			attendanceDao.markDailyAttendanceJob(listStudentAttendance);
 	}
 
 	public ResultResponse exportMonthlyData(ExportMonthlyDataDto exportMonthlyDataDto, String branchId, String currentAcademicYear) {
@@ -930,7 +916,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(branchId);
 		}
 		queryMain = queryMain + querySub;
-		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
+		List<Student> searchStudentList = new StudentDetailsDAO().getListStudents(queryMain);
 
 
 		Date monthOf = DateUtil.dateParserddmmyyyy(exportMonthlyDataDto.getMonthOf());
@@ -950,7 +936,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         String startDateAtt = sdf.format(TimestampFrom);
         String endDateAtt = sdf.format(Timestampto);
         
-		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(currentAcademicYear, startDateAtt, endDateAtt, searchStudentList, Integer.parseInt(branchId));
+		Map<String,List<Studentdailyattendance>> studentsAttendance = attendanceDao.readListOfStudentAttendanceExport(currentAcademicYear, startDateAtt, endDateAtt, searchStudentList, Integer.parseInt(branchId));
 
 		try {
 			result = exportDataToExcel(studentsAttendance, monthOf);
@@ -1054,10 +1040,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		// getFile(name, path);
 	}
 
-	public boolean downloadFile() {
-		
+	public ResultResponse downloadFile() {
 
-		boolean result = false;
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx");
@@ -1089,18 +1074,19 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
+			return result;
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error("" + e);
+			result.setSuccess(false);
 		}
 		return result;
-		
 		}
 
 	public ResultResponse viewAttendanceStaff(String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 		if(branchId!=null){
-			List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+			List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 			result.setResultList(staffList);
 				if(!staffList.isEmpty()){
 					result.setSuccess(true);
@@ -1116,7 +1102,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		StaffAttendanceDetailsResponseDto result = StaffAttendanceDetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
-		List<Teacher> searchStaffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+		List<Teacher> searchStaffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 		
 		List<Teacher> newStaffList = new ArrayList<Teacher>();
 		List<Staffdailyattendance> newStaffDailyAttendance = new ArrayList<Staffdailyattendance>();
@@ -1125,7 +1111,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Timestamp timestamp = new Timestamp(searchdate.getTime());
 		for (Teacher teacher : searchStaffList) {
 
-			List<Staffdailyattendance> staffAttendance = new AttendanceDAO().readListOfStaffAttendance(currentAcademicYear, timestamp,teacher.getTeacherexternalid(), Integer.parseInt(branchId));
+			List<Staffdailyattendance> staffAttendance = attendanceDao.readListOfStaffAttendance(currentAcademicYear, timestamp,teacher.getTeacherexternalid(), Integer.parseInt(branchId));
 			for (Staffdailyattendance staffDailyAttendance : staffAttendance) {
 					newStaffList.add(teacher);
 					newStaffDailyAttendance.add(staffDailyAttendance);
@@ -1137,7 +1123,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		result.setStaffDailyAttendanceDate(newStaffDailyAttendance);
 		result.setSearchedDate(attendanceDetailsDto.getSearchDate());
 		
-			List<Teacher> staffDetailsList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+			List<Teacher> staffDetailsList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 
 			result.setStaffList(staffDetailsList);
 			result.setSuccess(true);
@@ -1146,9 +1132,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
+	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto, String currentAcademicYear) {
 		
-		if(updateStaffAttendanceDetailsDto.getCurrentAcademicYear()!=null){
+		if(currentAcademicYear!=null){
 			String[] attendanceIds = updateStaffAttendanceDetailsDto.getAttendanceIds();
 			String[] studentAttendanceStatus = updateStaffAttendanceDetailsDto.getStudentAttendanceStatus();
 			List<Integer> attendanceIdsList = new ArrayList<Integer>();
@@ -1163,7 +1149,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			}
 			return ResultResponse
 					.builder()
-					.success(new AttendanceDAO().updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList))
+					.success(attendanceDao.updateStaffAttendanceDetails(attendanceIdsList,staffAttendanceStatusList))
 					.build();
 		}
 		return ResultResponse
@@ -1183,7 +1169,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			Timestamp toTimestamp = new Timestamp(toDate.getTime());
 			
 			List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
-			staffDailyAttendance = new AttendanceDAO().getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
+			staffDailyAttendance = attendanceDao.getStaffDailyAttendance(staffExternalId, fromTimestamp, toTimestamp, currentAcademicYear, Integer.parseInt(branchId));
 
 			result.setStaffDailyAttendance(staffDailyAttendance);
 			result.setStaffName(attendanceDto.getNameOfStaff());
@@ -1216,15 +1202,15 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			result.setSuccess(true);
 		}
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+		List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 
 		result.setStaffList(staffList);
 		return result;
 	}
 
-	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
+	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto, String branchId, String currentAcademicYear) {
 		ResultResponse result = null;
-		if(markStaffAttendanceDto.getCurrentAcademicYear()!=null){
+		if(currentAcademicYear!=null){
 			String[] attendanceIds = markStaffAttendanceDto.getAttendanceIds();
 			String[] staffAttendanceStatus = markStaffAttendanceDto.getStaffAttendanceStatus();
 			String[] inTime = markStaffAttendanceDto.getInTime();
@@ -1251,20 +1237,21 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				staffDailyAttendance.setIntime(inTimeList.get(i));
 				staffDailyAttendance.setOuttime(outTimeList.get(i));
 				staffDailyAttendance.setDate(new Date());
-				staffDailyAttendance.setAcademicyear(markStaffAttendanceDto.getCurrentAcademicYear());
-				staffDailyAttendance.setBranchid(markStaffAttendanceDto.getBranchId());
+				staffDailyAttendance.setAcademicyear(currentAcademicYear);
+				staffDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				staffdailyattendanceList.add(staffDailyAttendance);
 			}
 			result = ResultResponse
 					.builder()
-					.success((new AttendanceDAO().checkStaffAttendance(staffdailyattendanceList)))
+					.success((attendanceDao.checkStaffAttendance(staffdailyattendanceList)))
 					.build();
 		}
 		return result;
 	}
 
 	public ResultResponse exportMonthlyDataStaff(MonthlyDataStaffDto monthlyDataStaffDto, String branchId, String currentAcademicYear) {
-		
+		ResultResponse result = ResultResponse.builder().build();
+
 		if(currentAcademicYear!=null){
 			
 		Date monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
@@ -1279,29 +1266,25 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
 		
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects(Integer.parseInt(branchId));
+		List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 		
-		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
+		Map<String,List<Staffdailyattendance>> staffsAttendance = attendanceDao.readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
 		try {
-			ResultResponse
-					.builder()
-					.success(exportDataToExcelStaff(staffsAttendance,monthOf))
-					.build();
+			result.setSuccess(true);
+			return exportDataToExcelStaff(staffsAttendance,monthOf);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result.setSuccess(false);
 		}
 		}
-		return ResultResponse
-				.builder()
-				.success(false)
-				.build();
+		return result;
 	}
 
-	private boolean exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
+	private ResultResponse exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
 
-		boolean writeSucees = false;
+		ResultResponse result = ResultResponse.builder().build();
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
 		int numberOfDays = cStart.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -1377,21 +1360,20 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx"));
 				workbook.write(out);
 				out.close();
-				writeSucees = true;
+				result.setSuccess(true);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return writeSucees;
+		return result;
 		// getFile(name, path);
 	}
 
-	public boolean downloadFileStaff() {
+	public ResultResponse downloadFileStaff() {
 		
 
-		boolean result = false;
+		ResultResponse result = ResultResponse.builder().build();
 		try {
-
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
@@ -1421,9 +1403,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error("" + e);
+			e.printStackTrace();
 		}
 		return result;
 		
@@ -1439,12 +1422,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		List<Teacher> staffList = new EmployeeDAO().readListOfObjects();
-		Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+		List<Teacher> staffList = employeeDao.readListOfObjects();
+		Currentacademicyear currentAcademicYear = yearDao.showYear();
 		List<Staffdailyattendance> listStaffAttendance = new ArrayList<Staffdailyattendance>();
 		
 		for (Teacher teacher : staffList) {
-			List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacher.getTid())));
+			List<Attendancemaster> staffAttendanceMaster = attendanceDao.getAttendanceMasterDetails(Integer.toString((teacher.getTid())));
 			String[] weeklyOffString = staffAttendanceMaster.get(0).getWeeklyoff().split(",");
 			List<Integer> staffWeeklyOffList = new ArrayList<Integer>();
 			boolean staffWeeklyOff = false;
@@ -1452,7 +1435,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			for (String weekOffS : weeklyOffString) {
 				staffWeeklyOffList.add(Integer.parseInt(weekOffS));
 			}
-			List<Weeklyoff> staffWeekOff = new AttendanceDAO().readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
+			List<Weeklyoff> staffWeekOff = attendanceDao.readListOfWeeklyOff(staffWeeklyOffList, currentAcademicYear.getCurrentacademicyear());
 			String today = new SimpleDateFormat("EEEE").format(todaysDate);
 			for (Weeklyoff weeklyoff : staffWeekOff) {
 				if(weeklyoff.getWeeklyoffday().equalsIgnoreCase(new SimpleDateFormat("EEEE").format(todaysDate))){
@@ -1466,7 +1449,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				for (String singleHoliday : holidayString) {
 					staffHolidayList.add(Integer.parseInt(singleHoliday));
 				}
-				List<Holidaysmaster> staffHolidays = new AttendanceDAO().readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
+				List<Holidaysmaster> staffHolidays = attendanceDao.readListOfholidays(staffHolidayList, currentAcademicYear.getCurrentacademicyear());
 				for (Holidaysmaster holidaysmaster : staffHolidays) {
 					Date fromDate = holidaysmaster.getFromdate();
 					Date toDate = holidaysmaster.getTodate();
@@ -1488,18 +1471,23 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 		}
 		if(!listStaffAttendance.isEmpty()){
-			new AttendanceDAO().markDailyAttendanceJobStaff(listStaffAttendance);
+			attendanceDao.markDailyAttendanceJobStaff(listStaffAttendance);
 		}
 		
 }
 
-	public ResultResponse attendanceSummaryReport(String branchId, String attendanceDate) {
-		
-		ResultResponse result = ResultResponse.builder().build();
-		String date = DateUtil.dateFromatConversionSlash(attendanceDate);
+	public StudentAttendanceMonthlyResponseDto attendanceSummaryReport(StudentAttendanceDetailsDto dto, String branchId) {
+
+		StudentAttendanceMonthlyResponseDto result = StudentAttendanceMonthlyResponseDto.builder().success(false).build();
+		String date = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
 		int present = 0;
 		int absent = 0;
-		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().getStudentAttendance(date);
+		int totalNoofStudents = 0;
+		List<Studentdailyattendance> listStudentAttendance = attendanceDao.getStudentAttendance(date);
+		
+		List<Student> studentsList = new StudentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+		totalNoofStudents = studentsList.size();
+
 		for (Studentdailyattendance listStudent : listStudentAttendance) {
 			String attendancestatus = listStudent.getAttendancestatus();
 			if (attendancestatus.equals("P")) {
@@ -1508,11 +1496,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				absent = absent + 1;
 			}
 		}
-		request.setAttribute("present", present);
-		request.setAttribute("absent", absent);
+		result.setTotalPresent(present);
+		result.setTotalAbsent(absent);
+		result.setTotalNoofStudents(totalNoofStudents);
+		result.setAttendanceDate(dto.getDateOfAttendance());
 		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	    List<Classsec> secList = new ArrayList<Classsec>();
-	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
 		
 	    for(Classsec classdetail : classsecList) {
 	    	String classDetails =classdetail.getClassdetails(); 
@@ -1539,12 +1528,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				String classStudying = classsec.getClassdetails()+"--";
 				
 	    		for (Classsec section : secList) {
-					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
+					List<Student> studentList = new StudentDetailsDAO().getListStudents("From Student where classstudying = '"+classStudying+""+section.getSection()+"'");
 					List<String> studentExternalIdList = new ArrayList<String>();
 					for (Student students : studentList) {
 						studentExternalIdList.add(students.getStudentexternalid());
 					}
-					List<Studentdailyattendance> listStudentClassAttendance = new AttendanceDAO().getStudentClassAttendance(date,studentExternalIdList);
+					List<Studentdailyattendance> listStudentClassAttendance = attendanceDao.getStudentClassAttendance(date,studentExternalIdList);
 					for (Studentdailyattendance listStudent : listStudentClassAttendance) {
 						String attendancestatus = listStudent.getAttendancestatus();
 						if (attendancestatus.equals("P")) {
@@ -1570,12 +1559,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				}
 	    		
 	    		if(!classAttendancePushed) {
-					List<Student> studentList = new studentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
+					List<Student> studentList = new StudentDetailsDAO().getListStudents("From Student where classstudying like '"+classStudying+"%'");
 					List<String> studentExternalIdList = new ArrayList<String>();
 					for (Student students : studentList) {
 						studentExternalIdList.add(students.getStudentexternalid());
 					}
-					List<Studentdailyattendance> listStudentClassAttendance = new AttendanceDAO().getStudentClassAttendance(date,studentExternalIdList);
+					List<Studentdailyattendance> listStudentClassAttendance = attendanceDao.getStudentClassAttendance(date,studentExternalIdList);
 					for (Studentdailyattendance listStudent : listStudentClassAttendance) {
 						String attendancestatus = listStudent.getAttendancestatus();
 						if (attendancestatus.equals("P")) {
@@ -1597,7 +1586,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 	    	
 	    	List<String> classSecAttendanceList = Arrays.asList(classSecAttendance);
-	    	result.setResultList(classSecAttendanceList);
+	    	result.setClassSecAttendanceList(classSecAttendanceList);
 			if(!classSecAttendanceList.isEmpty()){
 				result.setSuccess(true);
 				return result;

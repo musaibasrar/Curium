@@ -17,11 +17,12 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class FeesDetailsResponseDto {
     private List<Receiptinfo> receiptInfo;
+    private List<Otherreceiptinfo> otherReceiptInfo;
     private List<Studentfeesstructure> feesStructure;
-    private long totalSum;
-    private long totalFeesAmount;
-    private long dueAmount;
-    private long totalFeesConcession;
+    private Long totalSum;
+    private Long totalFeesAmount;
+    private Long dueAmount;
+    private Long totalFeesConcession;
     private String academicPerYear;
     private String currentAcademicYear;
     private List<Studentotherfeesstructure> otherFeesStructure;

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -153,9 +154,18 @@ public class AccountActionAdapter {
 		incomeStatementDto.setToDate(request.getParameter("todate"));
 
 		IncomeStatementResponseDto responseDto =  accountService.getIncomeStatement(incomeStatementDto, httpSession.getAttribute(BRANCHID).toString());
+		Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<>();
+		Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<>();
+		for(LedgerAccBalanceDto accBalanceDto: responseDto.getIncomeLedgersAccount()) {
+			incomeLedgersAccount.put(accBalanceDto.getAccountdetails(), accBalanceDto.getBalance());
+		}
+		for(LedgerAccBalanceDto accBalanceDto: responseDto.getExpenseLedgersAccount()) {
+			expenseLedgersAccount.put(accBalanceDto.getAccountdetails(), accBalanceDto.getBalance());
+		}
+
 		request.setAttribute("income", responseDto.getIncome());
-		request.setAttribute("incomeledgersaccount", responseDto.getIncomeLedgersAccount());
-		request.setAttribute("expensesledgersaccount", responseDto.getExpenseLedgersAccount());
+		request.setAttribute("incomeledgersaccount", incomeLedgersAccount);
+		request.setAttribute("expenseledgersaccount", expenseLedgersAccount);
 		request.setAttribute("expenses", responseDto.getExpenses());
 		request.setAttribute("incometotallabel", responseDto.getIncomeTotalLabel());
 		request.setAttribute("expensetotallabel", responseDto.getExpenseTotalLabel());

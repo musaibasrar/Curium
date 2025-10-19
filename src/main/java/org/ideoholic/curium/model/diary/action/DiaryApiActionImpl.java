@@ -50,7 +50,7 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 	@RequestMapping(value = "/viewdiarystudent", method = { RequestMethod.GET, RequestMethod.POST })
 	public ResponseEntity<DiaryResponseDto> viewdiarystudent(@RequestHeader(value = "branchid") String branchId, @RequestParam(value="page")
 			String page) {
-		DiaryResponseDto result = diaryService.viewDiary(branchId, page);
+		DiaryResponseDto result = diaryService.viewDiary(page, branchId);
 		return ResponseEntity.ok(result);
 	}
 

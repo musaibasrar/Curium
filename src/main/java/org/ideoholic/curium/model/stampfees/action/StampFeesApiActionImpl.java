@@ -137,7 +137,7 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 			@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
 		FeescategoryResponseDto result = stampFeesService.advanceSearchForStampFees(searchStudentDto, branchId,
-				currentAcademicYear);
+				currentAcademicYear, branchId);
 		return ResponseEntity.ok(result);
 	}
 

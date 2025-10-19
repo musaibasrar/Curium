@@ -2,92 +2,67 @@ package org.ideoholic.curium.model.department.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
-
+import lombok.extern.slf4j.Slf4j;
 import org.ideoholic.curium.model.department.dto.Department;
-import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.repositories.DepartmentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import javax.transaction.Transactional;
 
+@Slf4j
+@Component
 public class departmentDAO {
-
-	
-	Session session = null;
-    /**
-     * * Hibernate Session Variable
-     */
-    Transaction transaction = null;
-    /**
-     * * Hibernate Transaction Variable
-     */
-  
-    SessionFactory sessionFactory;
-    
-    private static final Logger logger = LogManager.getLogger(departmentDAO.class);
-
-	public departmentDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+    @Autowired
+    private DepartmentRepository departmentRepository;
 
 
-	@SuppressWarnings("finally")
-	public Department create(Department department) {
+	@Transactional
+    public Department create(Department department) {
+
 		try {
-            //this.session = sessionFactory.openCurrentSession();
-            transaction = session.beginTransaction();
-            session.save(department);
-
-
-            transaction.commit();
+           departmentRepository.save(department);
             
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            
+        } catch (Exception hibernateException)  {
+            log.error(hibernateException.getMessage(), hibernateException);
+
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return department;
+            throw hibernateException;
+
         }
+        return department;
 	}
 
 
-	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Department> readListOfObjects(int branchId) {
+
+	@Transactional
+    public List<Department> readListOfObjects(int branchId) {
 		
 		List<Department> results = new ArrayList<Department>();
         try {
             
-            transaction = session.beginTransaction();
-            results = (List<Department>) session.createQuery("From Department where branchid="+branchId).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            results = departmentRepository.findByBranchid(branchId);
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return results;
+            throw hibernateException;
         }
+
+            return results;
+
 	}
 
-
-	public boolean  deleteMultiple(List ids) {
+    @Transactional
+	public boolean  deleteMultiple(List<Integer> ids) {
         boolean result = false;
 		try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("delete from Department where depid IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-            result= true;
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+            departmentRepository.deleteAllById(ids);
+            result = true;
+        } catch (Exception hibernateException) { ;
+            log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
-		}
+            throw hibernateException;
+        }
 		return result;
 	}
 }
