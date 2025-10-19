@@ -46,6 +46,9 @@ public class MessStockMoveService {
 	@Autowired
 	private MessItemsDAO messItemsDao;
 	
+	@Autowired
+	private MessStockEntryDAO messStockEntryDao;
+	
 	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName, String currentAcademicYear,String branchCode) {
 
 	MoveStockResponseDto results = MoveStockResponseDto.builder().build();
@@ -395,7 +398,7 @@ public class MessStockMoveService {
 						float reqQty = Float.parseFloat(issueQuantity);
 						//Query stock entry
 						
-							List<MessStockEntry> messStockEntryList = new MessStockEntryDAO().getItemsStockEntry(Integer.parseInt(StockEntryIds[i])); 
+							List<MessStockEntry> messStockEntryList = messStockEntryDao.getItemsStockEntry(Integer.parseInt(StockEntryIds[i])); 
 								
 								for (MessStockEntry messStockEntry : messStockEntryList) {
 

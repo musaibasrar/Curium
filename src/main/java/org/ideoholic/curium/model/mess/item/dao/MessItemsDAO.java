@@ -35,14 +35,14 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MessItemsDAO {
 
-    private QueryUtil queryUtil;
-    private PoMasterRepository poMasterRepository;
-    private MessItemsRepository messItemsRepository;
-    private PurchaseOrderRepository purchaseOrderRepository;
-    private MessStockEntryRepository messStockEntryRepository;
-    private MessInvoiceDetailsRepository messInvoiceDetailsRepository;
-    private MessStockAvailabilityRepository messStockAvailabilityRepository;
-    private VoucherEntryTransactionsRepository voucherEntryTransactionsRepository;
+    private final QueryUtil queryUtil;
+    private final PoMasterRepository poMasterRepository;
+    private final MessItemsRepository messItemsRepository;
+    private final PurchaseOrderRepository purchaseOrderRepository;
+    private final MessStockEntryRepository messStockEntryRepository;
+    private final MessInvoiceDetailsRepository messInvoiceDetailsRepository;
+    private final MessStockAvailabilityRepository messStockAvailabilityRepository;
+    private final VoucherEntryTransactionsRepository voucherEntryTransactionsRepository;
 
 
     @Transactional
@@ -94,7 +94,7 @@ public class MessItemsDAO {
             	messStockAvailabilityRepository.deleteByMessitems_IdIn(ids);
 
                 // Query queryMI = session.createQuery("delete from MessItems where id IN (:ids)");
-                messItemsRepository.deleteByIdIn(ids);
+                messItemsRepository.deleteAllByIdInBatch(ids);
 
                 result = true;
             }

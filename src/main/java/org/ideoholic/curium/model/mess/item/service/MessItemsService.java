@@ -42,6 +42,9 @@ public class MessItemsService {
 	@Autowired
 	private MessItemsDAO messItemsDao;
 
+	@Autowired
+	private MessStockEntryDAO messStockEntryDao;
+
 
 	public ResultResponse viewItemDetails(String branchId) {
 
@@ -712,7 +715,7 @@ public class MessItemsService {
 			InvoiceDetailsResponseDto invoiceDetailsResponseDto = InvoiceDetailsResponseDto.builder().success(false).build();
 
 			//List<PurchaseOrder> purchaseOrderList = new MessItemsDAO().getParticularInvoice(purchaseDto.getExternalId());
-			List<PurchaseOrder> purchaseOrderList = new MessStockEntryDAO().getPurchaseOrderById(purchaseDto.getExternalId());
+			List<PurchaseOrder> purchaseOrderList = messStockEntryDao.getPurchaseOrderById(purchaseDto.getExternalId());
 			invoiceDetailsResponseDto.setPurchaseOrderList(purchaseOrderList);
 			return invoiceDetailsResponseDto;
 			

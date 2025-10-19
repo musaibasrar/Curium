@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface MessItemsRepository extends JpaRepository<MessItems, Integer> {
 	List<MessItems> findAllByOrderByIdDesc();
+	
+	List<MessItems> findAllByOrderByIdAsc();
 
 	List<MessItems> findByIdInOrderByIdDesc(List<Integer> ids);
-
-	void deleteByIdIn(List<Integer> ids);
 
 	@Modifying
 	@Query("UPDATE MessItems m SET m.name = :name, m.unitofmeasure = :unitOfMeasure WHERE m.id = :id")
