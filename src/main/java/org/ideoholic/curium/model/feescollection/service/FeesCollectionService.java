@@ -2006,12 +2006,16 @@ public class FeesCollectionService {
 				                    tuitionFeesCash += amountPaid;
 				                }else if (feesCategoryName.contains("tc charges")) {
 				                    tcChargesCash += amountPaid;
+				                }else if (feesCategoryName.contains("cbse registration fee")) {
+				                    CBSERegistrationFeeCash += amountPaid;
 				                } 
 						}else if(cashOrBank.contains("Bank") || cashOrBank.contains("Cheque")) {
 							 if (feesCategoryName.contains("tuition fee") || feesCategoryName.contains("monthly fee")) {
 								 tuitionFeesBank += amountPaid;
 				                } else if (feesCategoryName.contains("tc charges")) {
 				                    tcChargesCash += amountPaid;
+				                }else if (feesCategoryName.contains("cbse registration fee")) {
+				                    CBSERegistrationFeeCash += amountPaid;
 				                }
 						}
 			            
@@ -2087,6 +2091,7 @@ public class FeesCollectionService {
 		            
 		            String cashOrBank = receiptinfo.getPaymenttype();
 		            String feesCategoryName = studentfeesSingle.getOtherfeescategory().getFeescategoryname().trim().toLowerCase();
+		            System.out.println("Fees Category Name "+feesCategoryName);
 		            double amountPaid = feescollectionSingle.getAmountpaid();
 
 		            if (cashOrBank.contains("Cash")) {

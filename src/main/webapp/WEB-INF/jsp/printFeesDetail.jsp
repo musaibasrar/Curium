@@ -385,7 +385,7 @@
 		</TABLE>
 		</div>
 		<br>
-		<div style="border: 1px solid;border-radius: 15px">
+		<%-- <div style="border: 1px solid;border-radius: 15px">
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
@@ -506,7 +506,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td>
 				</tr>
 			</c:forEach>
 			
@@ -594,7 +594,7 @@
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
-		</div>
+		</div> --%>
 	</form>
 	
 	</div>

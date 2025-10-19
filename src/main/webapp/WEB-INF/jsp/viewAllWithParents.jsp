@@ -443,9 +443,10 @@ for(Cookie cookie : cookies){
                     </tbody>
                     <tfoot><tr>
                             <td  class="footerTD" colspan="2" >
-                              <c:if test="${userType == 'principal'}">
+                            <input value="Archive" type="submit" id="delete"/>
+                              <%-- <c:if test="${userType == 'principal'}">
                             <input value="Archive" type="submit" id="delete"/> </td>
-                    		 </c:if>
+                    		 </c:if> --%>
                         </tr></tfoot>
                 </table>
 

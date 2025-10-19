@@ -349,6 +349,16 @@
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		
+		$('#myTableFeesCat').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
 	});
 </script>
 <script type="text/javascript">
@@ -430,6 +440,36 @@
 				$('.chcktbl:not(:checked)').attr('disabled', true);
 			} else {
 				$('.chcktbl:not(:checked)').attr('disabled', false);
+			}
+		});
+		
+		$('#chckHeadfeescat').click(function() {
+			var length = $('.chcktblfeescat:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktblfeescat:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktblfeescat:checked').attr('checked', false);
+				} else {
+					$('.chcktblfeescat:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktblfeescat').click(function() {
+			var length = $('.chcktblfeescat:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktblfeescat:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktblfeescat:not(:checked)').attr('disabled', false);
 			}
 		});
 
@@ -621,24 +661,40 @@ for(Cookie cookie : cookies){
                     
                     		<tr>
 							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td>
-							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
-							</label>
-							</td>
+							
 							
 						</tr>
 											
 						<tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
 							<td id="feescat">
-							<div style="overflow:scroll;width:420px; height: 100px;">
-							<c:forEach items="${feescategory}" var="feescategory">
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
-									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
-									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</label><br>
+							<div style="overflow:scroll;width:420px; height: 250px;">
+									<table width="100%" border="0" style="border-color: #4b6a84;"	id="myTableFeesCat">
+		
+										<thead>
+											<tr>
+												<th class="headerText"><input type="checkbox" id="chckHeadfeescat" /></th>
+												<th title="click to sort" class="headerText">Fees Category</th>
+											</tr>
+										</thead>
+		
+											<tbody>
+																			
+												<c:forEach items="${feescategory}" var="feescategory" varStatus="status">
 							
-								</c:forEach>
+													<tr class="trClass" style="border-color: #000000" border="1"
+														cellpadding="1" cellspacing="1">
+															<td class="dataText"><input type="checkbox"
+															id="<c:out value="${feescategory.idfeescategory}"/>" class="chcktblfeescat"
+															name="studentIDs"
+															value="<c:out value="${feescategory.idfeescategory}"/>" /></td> 
+															<td class="dataText" style="text-align: left;">
+																<label class="labelClass" style="font-weight: bold;color:#325F6D"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+															</td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
 								</div>
 							</td>
 							

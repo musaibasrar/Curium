@@ -233,7 +233,8 @@ public class FeesCollectionAction {
 		 
 		 @PostMapping("/searchFeesDueHeadWiseReport")
 	        public String searchFeesDueHeadWiseReport() {
-	            new FeesCollectionService(request, response).getFeesReport();
+	            //new FeesCollectionService(request, response).getFeesReport();
+			 	new FeesCollectionService(request, response).getFeesReportDue();
 	            return "feesdueheadwisereport";
 	        }
 		 

@@ -202,7 +202,7 @@ public class StudentAction {
 			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
 			if (branchId.equalsIgnoreCase("1")) {
 				return "student_details";
-			} else if (branchId.equalsIgnoreCase("2")) {
+			} else if (branchId.equalsIgnoreCase("2") && !httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
 				return "student_details";
 			} else if (branchId.equalsIgnoreCase("3")) {
 				return "student_details";
@@ -211,6 +211,8 @@ public class StudentAction {
 			} else if (branchId.equalsIgnoreCase("5")) {
 				return "student_details";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+				return "student_details_withoutmodify";
+			}else if (branchId.equalsIgnoreCase("2") && httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
 				return "student_details_withoutmodify";
 			}
 			return "student_details";

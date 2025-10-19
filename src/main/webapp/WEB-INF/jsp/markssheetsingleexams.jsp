@@ -279,6 +279,10 @@ for(Cookie cookie : cookies){
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
                             </tr>
                             
+                            <tr style="border-color:#000000">
+                                <td class="namedetails"><label>Academic Year: ${academicyear}</label></td>
+                             </tr>
+                            
                            <!-- <tr>
                             <td><br></td>
                             </tr> -->

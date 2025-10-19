@@ -813,7 +813,7 @@ for(Cookie cookie : cookies){
 					</tr>
 					</c:if>
 					
-					<c:if test="${TCChargesCash>0}">
+					<%-- <c:if test="${TCChargesCash>0}">
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 						<td class="dataText">TC Charges Cash</td>
 						<td class="dataText">${TCChargesCash}</td>
@@ -839,14 +839,15 @@ for(Cookie cookie : cookies){
 						<td class="dataText">CBSE Registration Fee Cash</td>
 						<td class="dataText">${CBSERegistrationFeeCash}</td>
 					</tr>
-					</c:if>
+					</c:if> --%>
 					
 					
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 							<td  class="dataText" style="text-align: right;">Grand Total
 							</td>
 							<td  class="dataText" style="text-align: center;font-weight: bold;">
-							<fmt:formatNumber type="currency"  value="${TotalFeesByCash+TCChargesCash+LibraryFeesCash+CompartmentalExamFeeCash+CBSERegistrationFeeCash}" />
+							<%-- <fmt:formatNumber type="currency"  value="${TotalFeesByCash+TCChargesCash+LibraryFeesCash+CompartmentalExamFeeCash+CBSERegistrationFeeCash}" /> --%>
+							<fmt:formatNumber type="currency"  value="${TotalFeesByCash}" />
 							</td>
 					</tr>
 				</tbody>	

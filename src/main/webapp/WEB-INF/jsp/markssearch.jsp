@@ -787,7 +787,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 											<c:set var="marksobtained" value="A" />
 									</c:if>
 							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${marksobtained}" />"
-								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
+								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65 || event.charCode == 69"
 								maxlength="4"
 							><%-- <input type="text"
 								id="studentMarks" 

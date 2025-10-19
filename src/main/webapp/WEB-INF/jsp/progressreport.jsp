@@ -564,7 +564,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-						
+								
 						<tr>
 							<td class="alignRightFields">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
@@ -580,6 +580,25 @@ for(Cookie cookie : cookies){
 										<option>2028/29</option>
 								</select>
 
+							</label> 
+                        
+                        </td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr><tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="12%" align="left">
+                                        <label> Term 1<input
+								type="checkbox" value="term1" name="terms" id="yes:at"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Term 2<input
+								type="checkbox" value="term2" name="terms" id="no:at"
+								onclick="noCheck(this.id)" />
 							</label> 
                         
                         </td>

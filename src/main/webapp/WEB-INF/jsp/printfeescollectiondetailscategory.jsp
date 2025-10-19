@@ -400,7 +400,7 @@
 					</tr>
 					</c:if>
 					
-					<c:if test="${TCChargesCash>0}">
+					<%-- <c:if test="${TCChargesCash>0}">
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 					<td class="datatd"><c:out value="2" /></td>
 						<td class="datatd">TC Charges Cash</td>
@@ -430,7 +430,7 @@
 						<td class="datatd">CBSE Registration Fee Cash</td>
 						<td class="datatd">${CBSERegistrationFeeCash}</td>
 					</tr>
-					</c:if>
+					</c:if> --%>
 					
 					
 					<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
@@ -438,7 +438,8 @@
 							<td  class="datatd" style="text-align: right;">Grand Total
 							</td>
 							<td  class="datatd" style="text-align: center;font-weight: bold;">
-							<fmt:formatNumber type="currency"  value="${TotalFeesByCash+TCChargesCash+LibraryFeesCash+CompartmentalExamFeeCash+CBSERegistrationFeeCash}" />
+							<%-- <fmt:formatNumber type="currency"  value="${TotalFeesByCash+TCChargesCash+LibraryFeesCash+CompartmentalExamFeeCash+CBSERegistrationFeeCash}" /> --%>
+							<fmt:formatNumber type="currency"  value="${TotalFeesByCash}" />
 							</td>
 					</tr>
 				</tbody>	
