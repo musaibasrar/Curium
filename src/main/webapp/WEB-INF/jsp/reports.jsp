@@ -428,6 +428,8 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="${ctx}/FeesProcess/feesOutstanding" style="font-size: 12px;">Fees Outstanding</a>
+            				<a target="mainFrame" href="${ctx}/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Bus Fees Receipts</a>
+
             			</td>
             		</tr>
                 </table>
@@ -702,6 +704,7 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="${ctx}/DocumentsProcess/getScDetail" style="font-size: 12px;">Study Certificate Report</a>
+            				 <a target="mainFrame" href="${ctx}/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
             			</td>
             		</tr>
             		

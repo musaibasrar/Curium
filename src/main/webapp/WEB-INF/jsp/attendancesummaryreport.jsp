@@ -367,6 +367,13 @@
     
 }
 </style>
+
+<link rel="stylesheet" href="${ctx}/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="${ctx}/js/datePicker/jquery-1.7.1.js"></script>
+
+<link rel="stylesheet" href="${cssPath}/validation/jquery.ketchup.css">
+<script type="text/javascript" src="${jsPath}/datePicker/jquery-1.7.1.js"></script>
+
 <script type="text/javascript"
 	src="${jsPath}/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
