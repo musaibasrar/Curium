@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.documents.action;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,6 +20,7 @@ import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -248,6 +251,21 @@ public class DocumentActionAdapter {
 			return "articleprint";
 		}
 		return null;
+	}
+
+	public void printAdmissionAbstract() {
+
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = documentService.printAdmissionAbstract(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+	    if(printMultipleEmployeesResponseDto.isSuccess()) {
+	    	  httpSession.setAttribute("iInitial", printMultipleEmployeesResponseDto.getInitialValue());
+	    	  httpSession.setAttribute("endValue", printMultipleEmployeesResponseDto.getEndValue());
+	    	  for (Map.Entry<String, String> entry : printMultipleEmployeesResponseDto.getResultParams().entrySet()) {
+	                httpSession.setAttribute(entry.getKey(), entry.getValue());
+	            }
+	    }
+		
 	}
 
 }
