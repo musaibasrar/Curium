@@ -94,7 +94,7 @@ public class DocumentActionAdapter {
 	public String generateStudyCertificate() {
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute(BRANCHID).toString(),
+		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),
 				httpSession.getAttribute("userloginid").toString());
 		if (parentDto != null) {
 			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
@@ -215,7 +215,7 @@ public class DocumentActionAdapter {
 	}
 
 	public void viewScDetail() {
-		CharacterResponseDto characterResponseDto = documentService.viewScDetail(httpSession.getAttribute(BRANCHID).toString());
+		CharacterResponseDto characterResponseDto = documentService.viewScDetail(httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		
 	}
@@ -223,9 +223,21 @@ public class DocumentActionAdapter {
 	public boolean printScList() {
 		CharacterDto characterDto = new CharacterDto();
 		characterDto.setSIds(request.getParameterValues("studentIDs"));
-		CharacterResponseDto characterResponseDto = documentService.printScList(characterDto,httpSession.getAttribute(BRANCHID).toString());
+		CharacterResponseDto characterResponseDto = documentService.printScList(characterDto,httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		return characterResponseDto.isSuccess();
+	}
+	
+	public String generateArticle() {
+
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
+		if (parentDto != null) {
+			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+			return "articleprint";
+		}
+		return null;
 	}
 
 }
