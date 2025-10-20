@@ -542,7 +542,7 @@ function printAdmissionAbstract() {
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/roshan/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 
