@@ -140,6 +140,10 @@
                 <td class="highlight"><fmt:formatNumber value="${exammarks.percentage}" type="number" maxFractionDigits="1"/></td>
               </tr>
               <tr>
+                <td class="highlight">Grade</td>
+                <td class="highlight"><fmt:formatNumber value="${exammarks.resultclass}" type="number" maxFractionDigits="1"/></td>
+              </tr>
+              <tr>
                 <td class="highlight">Remarks</td>
                 <td class="highlight"></td>
               </tr>

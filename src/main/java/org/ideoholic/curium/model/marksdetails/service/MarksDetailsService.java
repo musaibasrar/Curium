@@ -1190,7 +1190,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(student.getBranchid());
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 
 			//for (int i = 0; i < studentIds.length; i++) {
@@ -1209,7 +1209,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 				float totalMarks = 0;
 
 				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(student.getSid(), currentAcademicYear, exam.getExid());
-				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId), examClass[0], exam.getExamname());
+				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(student.getBranchid(), examClass[0], exam.getExamname());
 
 
 				for (Marks marks : marksDetailsList) {
@@ -1223,7 +1223,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 						for (Subject sub : subjectList) {
 
 							int marksSubid = marks.getSubid();
-							int subjectId = sub.getSubjectid();
+							int subjectId = sub.getSubid();
 
 							if (marksSubid == subjectId) {
 
