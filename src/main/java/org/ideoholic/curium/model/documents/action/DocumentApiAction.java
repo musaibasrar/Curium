@@ -70,7 +70,7 @@ public interface DocumentApiAction {
 	
 	public ResponseEntity<SearchStudentResponseDto> searchStudentsForStudyCertificate(@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId);
 
-	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId);
+	public ResponseEntity<ParentDto> generateStudyCertificate(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "userid") String userId);
 	
 	public ResponseEntity<SearchStudentResponseDto> searchStudentsForCharacter(@RequestBody SearchStudentDto searchStudentDto, @RequestHeader(value = "branchid") String branchId);
 
