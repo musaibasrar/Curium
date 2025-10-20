@@ -4,6 +4,7 @@ import lombok.Data;
 
 import java.util.List;
 
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 
 @Data
@@ -13,4 +14,5 @@ public class EmployeeDetailsResponseDto {
     private boolean success;
     private List<String> classTeacher;
     private List<String> classesTeaching;
+    private List<Teacher> employeeList;
 }

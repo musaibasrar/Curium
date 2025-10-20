@@ -317,6 +317,20 @@
                     return false;
 
                 });
+                
+                $("#archive").button({
+                    icons:{
+                        primary: "ui-icon-trash"
+                    }
+                }).click(function(){
+                	if (confirm('Are you sure you want to archive?')) {
+                		archiveRecords();
+            			}
+                    
+                    return false;
+
+                });
+                
                 $(".querybutton").button({
                     icons:{
                         primary: "ui-icon-pencil"
@@ -359,6 +373,14 @@
                 
 
             });
+            
+            function archiveRecords(){
+                var form1=document.getElementById("form1");
+               form1.action="/vision/EmployeeProcess/archiveMultipleEmployee";
+               form1.submit();
+               
+               //window.location.reload();
+           } 
             
             function refreshPage(){
                  var form1=document.getElementById("form1");
@@ -437,7 +459,8 @@ for(Cookie cookie : cookies){
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><input value="Delete" type="submit" id="delete"/> </td>
+                            <td  class="footerTD" colspan="2" ><!-- <input value="Delete" type="submit" id="delete"/> -->
+                            <input value="Archive" type="submit" id="archive"/> </td>
                     
                         </tr></tfoot>
                 </table>
