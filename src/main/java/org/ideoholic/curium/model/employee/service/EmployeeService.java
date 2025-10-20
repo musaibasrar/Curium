@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.employee.service;
 
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
@@ -13,6 +14,8 @@ import org.ideoholic.curium.model.position.dto.Position;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
@@ -39,6 +42,7 @@ public class EmployeeService {
 	private HttpServletRequest request;
 	@Autowired
     private HttpServletResponse response;
+	
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -553,5 +557,53 @@ public class EmployeeService {
 				result.setSuccess(false);
 	        }
 	        return result;
+	}
+	public void archiveMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
+		String[] employeeIds = employeeIdsDto.getEmployeeIds();
+
+		if (employeeIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : employeeIds) {
+				ids.add(Integer.valueOf(id));
+
+			}
+			new EmployeeDAO().archiveMultipleEmployee(ids);
+		}
+		
+	}
+	public EmployeeDetailsResponseDto viewAllEmployeeArchive(String branchId) {
+		EmployeeDetailsResponseDto result = new EmployeeDetailsResponseDto();
+
+		try {
+			List<Teacher> list = new EmployeeDAO().readListOfEmployeeArchive(Integer.parseInt(branchId));
+			result.setEmployeeList(list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public void restoreMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
+		String[] employeeIds = employeeIdsDto.getEmployeeIds();
+		if (employeeIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : employeeIds) {
+				ids.add(Integer.parseInt(id));
+			}
+			new EmployeeDAO().restoreMultipleEmployee(ids);
+		}
+		
+	}
+	public void  deleteMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
+		String[] employeeIds = employeeIdsDto.getEmployeeIds();
+		if (employeeIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : employeeIds) {
+				ids.add(Integer.parseInt(id));
+				
+			}
+			new EmployeeDAO().deleteMultiple(ids);
+		}
+		
 	}
 }
