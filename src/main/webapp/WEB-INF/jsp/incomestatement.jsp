@@ -419,7 +419,7 @@
 	
 	function printIncomeStatements(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/AccountProcess/printIncomeStatements";
+		form1.action = "/awami/AccountProcess/printIncomeStatements";
 		form1.method = "POST";
 		form1.submit();
 	}

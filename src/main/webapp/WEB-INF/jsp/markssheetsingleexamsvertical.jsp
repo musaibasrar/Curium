@@ -468,7 +468,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><img src="/vision/images/principalsignature.png" width="60" height="28"/></td>
+							<td><img src="/awami/images/principalsignature.png" width="60" height="28"/></td>
 						</tr>
 				<tr>
 				<td></td>
