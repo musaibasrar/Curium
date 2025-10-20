@@ -865,5 +865,4 @@ public Student readUniqueStudent(String HQLquery) {
 	 }
     return student;
 }
-
 }
