@@ -156,7 +156,7 @@ public class feesCollectionDAO {
     }
 
     @Transactional
-    public List<Receiptinfo> getReceiptDetailsPerStudent(long id, String currentacademicyear) {
+    public List<Receiptinfo> getReceiptDetailsPerStudent(Integer id, String currentacademicyear) {
         try {
         	// session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
             return receiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);

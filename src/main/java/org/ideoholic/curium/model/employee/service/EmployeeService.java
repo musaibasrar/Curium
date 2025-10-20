@@ -173,7 +173,7 @@ public class EmployeeService {
 			if(userService.addUser(employee, branchId)){
 				return ResultResponse.builder().success(true).build();
 			}else{
-				new EmployeeDAO().delete(employee);
+				employeeDao.delete(employee);
 			}
 		}
 		
@@ -469,7 +469,7 @@ public class EmployeeService {
 			if(staffName!=""){
 				employeeList = employeeDao.readListOfEmployeesByName(staffName, Integer.parseInt(branchId));
 			}else if(staffDepartment!=""){
-				employeeList = new EmployeeDAO().readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(branchId));
+				employeeList = employeeDao.readListOfEmployeesByDepartment(staffDepartment, Integer.parseInt(branchId));
 			}else {
 				employeeList = employeeDao.readListOfEmployeesBasicPay(Integer.parseInt(branchId));
 			}
@@ -487,7 +487,7 @@ public class EmployeeService {
 		List<Paybasic> employeeList = new ArrayList<Paybasic>();
 		
 		if(branchId!=null){
-				employeeList = new EmployeeDAO().readListOfEmployeesBasicPayDetails(Integer.parseInt(branchId));
+				employeeList = employeeDao.readListOfEmployeesBasicPayDetails(Integer.parseInt(branchId));
 		}
 		basicPayEmployeesDto.setBasicPay(employeeList);
 		return basicPayEmployeesDto;
@@ -559,7 +559,7 @@ public class EmployeeService {
 		EmployeeDetailsResponseDto result = new EmployeeDetailsResponseDto();
 
 	        try {
-	            Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
+	            Teacher employee = employeeDao.getEmployeeDetails(userName);
 	            Login employeeLogin = userDao.getUserDetails(employee.getTeacherexternalid());
 	           
 	            if (employee.getTid() != null) {

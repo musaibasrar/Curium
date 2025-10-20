@@ -9,20 +9,18 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.repositories.PaybasicRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class EmployeeDAO {
 	
-	@Autowired
-	private TeacherRepository teacherRepository;
-	
-	@Autowired
-	private PaybasicRepository payBasicRepo;
+	private final PaybasicRepository payBasicRepo;
+	private final TeacherRepository teacherRepository;
 
 	@Transactional
 	public boolean create(Teacher employee) {

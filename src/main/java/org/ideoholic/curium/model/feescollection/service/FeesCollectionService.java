@@ -448,7 +448,7 @@ public class FeesCollectionService {
 	private FeesDetailsResponseDto getFeesDetails(String sid, String academicYear) {
 		FeesDetailsResponseDto result = new FeesDetailsResponseDto();
 		try {
-			long id = Long.parseLong(sid);
+			Integer id = Integer.parseInt(sid);
 			
 			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);
 			result.setReceiptInfo(rinfo);
@@ -1015,7 +1015,7 @@ public class FeesCollectionService {
 		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 		
 		try {
-			long id = Long.parseLong(dto.getStudentId());
+			Integer id = Integer.parseInt(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
 			
 			//Currentacademicyear currentYear = new YearDAO().showYear();

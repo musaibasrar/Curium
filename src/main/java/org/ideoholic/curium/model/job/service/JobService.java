@@ -72,6 +72,9 @@ public class JobService {
     @Autowired
     private StudentDetailsDAO studentDetailsDao;
     
+	@Autowired
+	private EmployeeDAO employeeDao;
+    
     private static final int BUFFER_SIZE = 4096;
 
 	
@@ -308,7 +311,7 @@ public class JobService {
 		if(branchId!=null){
 
 			//String[] loginDetails = httpSession.getAttribute("usertypedetails").toString().split("-");
-			Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
+			Teacher employee = employeeDao.getEmployeeDetails(userName);
 
 			try {
 				int page = 1;
@@ -683,7 +686,7 @@ public class JobService {
 		if(branchId!=null){
 
 			//String[] loginDetails = httpSession.getAttribute("usertypedetails").toString().split("-");
-			Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
+			Teacher employee = employeeDao.getEmployeeDetails(userName);
 
 			try {
 				int page = 1;

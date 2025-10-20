@@ -646,6 +646,7 @@ public class FeesService {
 
 		   OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = new OtherFeesCategoryResponseDto();
            boolean result = false;
+           List<OtherFeecategory> list = new ArrayList<>();
 
            if(branchid!=null){
         	   String[] currentYear = currentAcademicYear.split("/");
@@ -653,17 +654,16 @@ public class FeesService {
         	   int cYear2 = Integer.parseInt(currentYear[1])+1;
         	   String nextYear = ""+cYear+"/"+cYear2+"";
         		try {
-                          List<OtherFeecategory> list = feesCategoryDao.readListOfOtherFeeObjects(Integer.parseInt(branchid),currentAcademicYear,nextYear);
-                          otherFeesCategoryResponseDto.setOtherFeesCategory(list);
+                          list = feesCategoryDao.readListOfOtherFeeObjects(Integer.parseInt(branchid),currentAcademicYear,nextYear);
                           //httpSession.setAttribute("otherfeescategory", list);
-                          otherFeesCategoryResponseDto.setSuccess(true);
                           result = true;
                   } catch (Exception e) {
                       e.printStackTrace();
-                      otherFeesCategoryResponseDto.setSuccess(false);
                       result = false;
                   }
            }
+          otherFeesCategoryResponseDto.setOtherFeesCategory(list);
+          otherFeesCategoryResponseDto.setSuccess(result);
           return otherFeesCategoryResponseDto;
   }
 	   
