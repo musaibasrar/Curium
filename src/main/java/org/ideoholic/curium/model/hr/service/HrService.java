@@ -59,6 +59,7 @@ import org.ideoholic.curium.model.hr.dto.StaffDetailsDto;
 import org.ideoholic.curium.model.hr.dto.StaffDetailsResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -73,6 +74,7 @@ public class HrService {
 	private final YearDAO yearDao;
 	private final AttendanceDAO attendanceDao;
 	private final HrDAO hrDao;
+	private final EmployeeDAO employeeDao;
 	
 	public LeaveTypeResponseDto leaveType(String branchId) {
         LeaveTypeResponseDto leaveTypeResponseDto = new LeaveTypeResponseDto();
@@ -421,7 +423,7 @@ public class HrService {
 			leaveApplication.setFromdate(DateUtil.dateParserUpdateStd(dto.getFromDate()));
 			leaveApplication.setTodate(DateUtil.dateParserUpdateStd(dto.getToDate()));
 			String userName = username;
-				Teacher teacher = new EmployeeDAO().getEmployeeDetails(userName);
+				Teacher teacher = employeeDao.getEmployeeDetails(userName);
 				Teacher addTeacher = new Teacher();
 				addTeacher.setTid(teacher.getTid());
 				leaveApplication.setTeacher(addTeacher);

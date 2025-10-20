@@ -404,7 +404,7 @@ public class StudentService {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		Map<Receiptinfo,String> receiptNarration = new HashMap<Receiptinfo, String>();
 		try {
-			long id = Long.parseLong(studentId);
+			Integer id = Integer.parseInt(studentId);
 
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
@@ -1061,7 +1061,7 @@ public class StudentService {
 
 		try {
 
-			long id = Long.parseLong(dto.getStudentId());
+			Integer id = Integer.parseInt(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
 
 			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);

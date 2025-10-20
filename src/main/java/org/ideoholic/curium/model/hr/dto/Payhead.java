@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "payhead", catalog = "school")
+@Table(name = "hr_payhead", catalog = "school")
 public class Payhead implements java.io.Serializable {
 	private static final long serialVersionUID = -5269998057639326302L;
 

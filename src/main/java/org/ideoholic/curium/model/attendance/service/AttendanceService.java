@@ -237,7 +237,7 @@ public class AttendanceService {
 		if(currentAcademicYear!=null){
 		
 		Date todaysDate = new Date();
-		List<String> staffExternalId = new EmployeeDAO().getEmployeeExternalId();
+		List<String> staffExternalId = employeeDao.getEmployeeExternalId();
 		List<Attendancemaster> studentAttendanceMaster = attendanceDao.getAttendanceMasterDetails("00011", Integer.parseInt(branchId));
 		String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
 		List<Integer> studentWeeklyOffList = new ArrayList<Integer>();
