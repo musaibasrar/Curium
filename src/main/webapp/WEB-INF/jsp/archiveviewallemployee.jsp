@@ -25,15 +25,15 @@
             @import "css/dataTable/css/demo_page.css";
             @import "css/dataTable/css/jquery.dataTables.css";
         </style>
-        <link rel="stylesheet" href="/brainystars/css/datePicker/jquery-ui-1.8.17.custom.css">
-        <link rel="stylesheet" href="/brainystars/css/datePicker/demos.css">
-        <!--<script type="text/javascript" language="javascript" src="/brainystars/js/dataTable/jquery.js"></script>-->
-        <script type="text/javascript" src="/brainystars/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" language="javascript" src="/brainystars/js/dataTable/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/brainystars/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.17.custom.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <!--<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.js"></script>-->
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
         <style type="text/css" >
             <!--
             .header {
@@ -207,8 +207,15 @@
         </script>
         <script type="text/javascript">
             function deleteRecords(){
+                
                 var form1=document.getElementById("form1");
-                 
+                form1.action="/vision/EmployeeProcess/deleteMultipleEmployee";
+               form1.submit();
+                
+            }
+            function restoreRecords(){
+                var form1=document.getElementById("form1");
+                 form1.action="/vision/EmployeeProcess/restoreMultiple";
                 form1.submit();
             }
             function filter2 (phrase, _id)
@@ -310,32 +317,25 @@
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                	if (confirm('Are you sure you want to delete?')) {
-                		deleteRecords();
-            			}
+                	if(confirm('Are you sure,you want to delete?')){
+                		deleteRecords();	
+                	}
                     
                     return false;
 
                 });
-                
-                $("#archive").button({
+                $("#restore").button({
                     icons:{
                         primary: "ui-icon-trash"
                     }
                 }).click(function(){
-                	if (confirm('Are you sure you want to archive?')) {
-                		archiveRecords();
-            			}
+                	if(confirm('Are you sure,you want to restore?')){
+                		restoreRecords();	
+                	}
                     
                     return false;
 
                 });
-                
-                $(".querybutton").button({
-                    icons:{
-                        primary: "ui-icon-pencil"
-                    }
-                })
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -374,40 +374,14 @@
 
             });
             
-            function archiveRecords(){
-                var form1=document.getElementById("form1");
-               form1.action="/vision/EmployeeProcess/archiveMultipleEmployee";
-               form1.submit();
-               
-               //window.location.reload();
-           } 
             
-            function refreshPage(){
-                 var form1=document.getElementById("form1");
-                form1.action="/brainystars/PersonalProcess/ViewAllGo";
-                form1.submit();
-                
-                //window.location.reload();
-            } 
-            function redirect(){
-                 var form1=document.getElementById("form1");
-                    form1.action="/brainystars/PersonalProcess/redirect";
-                    form1.submit();
-                
-                //window.location.reload();
-            } 
-            function createQuery(tid,branchid){
-                var form1=document.getElementById("form1");
-               form1.action="/brainystars/JobProcess/CreateQuery?id="+tid+"&urlbranchid="+branchid+"";
-               form1.submit();
-            }
         </script>
     </head>
-      <%
+    <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/brainystars/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -421,11 +395,11 @@ for(Cookie cookie : cookies){
 %>
     <body  >
 
-        <form name="form1" id="form1"action="/brainystars/EmployeeProcess/deleteMultiple" method="post">
+        <form name="form1" id="form1"action="/vision/StudentProcess/restoreMultiple" method="post">
             <div style="overflow: hidden">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">View All Employees</td>
+                        <td  class="headerTD">View All Archive Students</td>
                     </tr>
 
                     
@@ -439,7 +413,6 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Contact Number</th>
                             <th title="click to sort" class="headerText">Department&nbsp;</th>
-                            <th title="click to sort" class="headerText">Assignment</th>
                              
 
 
@@ -447,20 +420,19 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${employeeList}" var="employee">
+                        <c:forEach items="${studentListArchive}" var="Employee">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/brainystars/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
-                                <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
-                                <td class="dataText"><c:out value="${employee.department}"/></td>
-                                <td class="dataText"><button id="query_${employee.tid}" class="querybutton" onclick="createQuery(${employee.tid},${employee.branchid})">Create Assignment</button></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${Employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${Employee.tid}"/>"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${Employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${Employee.contactnumber}"/></a></td>
+                                <td class="dataText"><c:out value="${Employee.department}"/></td>
                             </tr>
                         </c:forEach>
                     </tbody>
                     <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><!-- <input value="Delete" type="submit" id="delete"/> -->
-                            <input value="Archive" type="submit" id="archive"/> </td>
+                            <td  class="footerTD" colspan="2" ><input value="Restore" type="submit" id="restore"/> &nbsp; &nbsp; &nbsp; &nbsp;
+                            <button id="delete">Delete</button> 
                     
                         </tr></tfoot>
                 </table>
@@ -470,7 +442,7 @@ for(Cookie cookie : cookies){
             <div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/brainystars/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/vision/PersonalProcessPages&page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -483,7 +455,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/brainystars/PersonalProcessPages&page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/vision/PersonalProcessPages&page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -492,7 +464,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/brainystars/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/vision/PersonalProcessPages&page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
             
