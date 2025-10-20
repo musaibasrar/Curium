@@ -113,7 +113,7 @@ public class DiaryService {
 //viewDiaryparent
 
 
-	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
+	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
