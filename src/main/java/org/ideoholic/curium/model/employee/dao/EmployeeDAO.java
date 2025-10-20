@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 
 public class EmployeeDAO {
@@ -69,7 +70,7 @@ public class EmployeeDAO {
 		try {
 
 			transaction = session.beginTransaction();
-			results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId)
+			results = (List<Teacher>) session.createQuery("From Teacher where currentemployee = 1 AND branchid="+branchId)
 					.list();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -329,6 +330,62 @@ public class EmployeeDAO {
 				HibernateUtil.closeSession();
 			return payList;
 		}
+	}
+
+	public void archiveMultipleEmployee(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Teacher set currentemployee = 0  where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		
+	}
+
+	public List<Teacher> readListOfEmployeeArchive(int branchId) {
+		List<Teacher> results = new ArrayList<Teacher>();
+
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+
+			results = (List<Teacher>) session.createQuery(
+					"FROM Teacher t where t.currentemployee = 0 and branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion")
+					.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+
+	}
+
+	public void restoreMultipleEmployee(List<Integer> ids) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("update Teacher set currentemployee = 1  where id IN (:ids)");
+			query.setParameterList("ids", ids);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		 }
+		
 	}
 
 }
