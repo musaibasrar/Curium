@@ -848,6 +848,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/abc/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
