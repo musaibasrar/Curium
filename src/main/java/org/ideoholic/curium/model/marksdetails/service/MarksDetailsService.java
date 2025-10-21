@@ -573,7 +573,7 @@ public class MarksDetailsService {
 			String[] studentIds = dto.getStudentIds();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
-			String presentDate = dto.getNoofpresentday();
+			String presentDate = dto.getTotalDaysPresent();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
@@ -1656,7 +1656,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String examC = dto.getExamClass();
 		String[] examClass = examC.split("--");
 		List<Integer> examIds = new ArrayList<Integer>();
-		String presentDate = dto.getNoofpresentday();
+		String presentDate = dto.getTotalDaysPresent();
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		for (String examId : dto.getExamIds()) {
@@ -1695,8 +1695,6 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			result.setTotalDays(totalDays);
 			result.setTotalpresent(totalPresent);
 			result.setTotalabsent(absentDays);
-			
-
 			
 			markssheet.setParents(studentDetails);
 			
