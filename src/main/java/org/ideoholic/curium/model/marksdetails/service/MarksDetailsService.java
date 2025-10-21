@@ -585,7 +585,7 @@ public class MarksDetailsService {
 			String[] studentIds = dto.getStudentIds();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
-			String presentDate = dto.getNoofpresentday();
+			String presentDate = dto.getTotalDaysPresent();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
@@ -1668,6 +1668,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String examC = dto.getExamClass();
 		String[] examClass = examC.split("--");
 		List<Integer> examIds = new ArrayList<Integer>();
+		String presentDate = dto.getTotalDaysPresent();
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		for (String examId : dto.getExamIds()) {
@@ -1689,6 +1690,31 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			Map<Integer, String> subjectGradeMap = new HashMap<>();
 			
 			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+			
+			List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+			studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
+					DateUtil.indiandateParser(presentDate));
+			int absentDays = 0;
+			int totalDays = 0;
+			int totalPresent = 0;
+			
+			for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
+				
+				totalDays++;
+				if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+					absentDays++;
+				}
+				
+			}
+			
+			if(!studentDailyAttendance.isEmpty()){
+				totalPresent = totalDays - absentDays;
+			}
+			
+			result.setTotalDays(totalDays);
+			result.setTotalpresent(totalPresent);
+			result.setTotalabsent(absentDays);
+			
 			markssheet.setParents(studentDetails);
 			
 			for (Exams exam : examsList) {
