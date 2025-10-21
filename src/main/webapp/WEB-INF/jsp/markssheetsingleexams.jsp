@@ -422,6 +422,18 @@ for(Cookie cookie : cookies){
                     
 		</TABLE>
 		</div>
+		
+		
+		<table>
+			<tr><td><br></td></tr>
+			<tr>
+			<td style="font-weight:bold;">Total Days:&emsp;&emsp;</td><td style="font-weight:bold;">${totaldays}</td>
+			<td style="font-weight:bold;">&emsp;&emsp;Total Present:&emsp;&emsp;</td><td style="font-weight:bold;">${totalpresent}</td>
+			<td style="font-weight:bold;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Total Absent:&emsp;&emsp;</td><td style="font-weight:bold;">${totalabsent}</td>
+			</tr>
+			</table>
+		
+		
 		<br><br><br>
                                  
                         </c:forEach>
