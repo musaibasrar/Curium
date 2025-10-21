@@ -94,7 +94,7 @@ public class TaskService {
 			 		String externalId = Integer.toString(year).concat("_").concat(Integer.toString(month+1)).concat("_");
 			 		query.setExternalid(externalId);
 			 		
-					String resultQuery = new JobDAO().addQuery(query);
+					String resultQuery = jobDAO.addQuery(query);
 					String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
 									
 					if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
@@ -132,10 +132,10 @@ public class TaskService {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
 
-				List<JobQuery> list = new JobDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
+				List<JobQuery> list = jobDAO.readListOfObjectsPagination((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
+				int noOfRecords = jobDAO.getNoOfRecords(Integer.parseInt(httpSession.getAttribute("branchid").toString()));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				request.setAttribute("queryList", list);
 				request.setAttribute("noOfPages", noOfPages);
@@ -161,7 +161,7 @@ public class TaskService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new JobDAO().completeQueries(QueryIdsList, userId);
+			result = jobDAO.completeQueries(QueryIdsList, userId);
 			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
 			
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
@@ -217,7 +217,7 @@ public class TaskService {
 			
 			int queryId = Integer.parseInt(request.getParameter("id"));
 			
-			JobQuery JobQuery = new JobDAO().viewQueryDetails(queryId);
+			JobQuery JobQuery = jobDAO.viewQueryDetails(queryId);
 			
 			PrintWriter out = response.getWriter(); 
 			response.setContentType("text/xml");
@@ -284,7 +284,7 @@ public class TaskService {
 			boolean result = false;
 			JobQuery = JobQuery.replace("'", "''");
 			response = response.replace("'", "''");
-			result = new JobDAO().updateQueries(queryId, JobQuery, response, userId);
+			result = jobDAO.updateQueries(queryId, JobQuery, response, userId);
 			request.setAttribute("querystatus",result);
 		}
 
@@ -303,10 +303,10 @@ public class TaskService {
 						page = Integer.parseInt(request.getParameter("page"));
 					}
 
-				List<JobQuery> list = new JobDAO().readListOfObjectsPaginationDepartmentWise((page - 1) * recordsPerPage,
+				List<JobQuery> list = jobDAO.readListOfObjectsPaginationDepartmentWise((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(httpSession.getAttribute("branchid").toString()), Integer.parseInt(loginid));
 				request.setAttribute("studentList", list);
-				int noOfRecords = new JobDAO().getNoOfRecordsDepartmentWise(Integer.parseInt(httpSession.getAttribute("branchid").toString()), Integer.parseInt(loginid));
+				int noOfRecords = jobDAO.getNoOfRecordsDepartmentWise(Integer.parseInt(httpSession.getAttribute("branchid").toString()), Integer.parseInt(loginid));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				request.setAttribute("queryList", list);
 				request.setAttribute("noOfPages", noOfPages);
@@ -344,7 +344,7 @@ public class TaskService {
 				
 				
 				httpSession.setAttribute("Currentmonth", Currentmonth+"'s");
-			    return new JobDAO().getNoOfRecordsMonthly(fromDate, toDate);
+			    return jobDAO.getNoOfRecordsMonthly(fromDate, toDate);
 	}
 
 	public void generateQueriesReport() {
@@ -382,7 +382,7 @@ public class TaskService {
 			httpSession.setAttribute("studentselected", "");
 		}
 		
-		JobQueryList = new JobDAO().generateQueriesReport(queryMain+subQuery);
+		JobQueryList = jobDAO.generateQueriesReport(queryMain+subQuery);
 		
 		httpSession.setAttribute("parentquerylist", JobQueryList);
 		httpSession.setAttribute("transactionfromdateselected", "From:"+request.getParameter("transactiondatefrom"));
@@ -429,7 +429,7 @@ public class TaskService {
 			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
 			String querySub = "";
 			querySub = " pq.createddate between '"+fromDate+"' and '"+toDate+"'";
-			JobQueryList = new JobDAO().generateQueriesReport(queryMain+querySub);
+			JobQueryList = jobDAO.generateQueriesReport(queryMain+querySub);
 			
 			totalQueries.add("\"" + JobQueryList.size() + "\"");
 			//Date Format
@@ -450,7 +450,7 @@ public class TaskService {
 		String pid = request.getParameter("no");
 		String feedbackpoints = request.getParameter("feedback");
 		
-		result = new JobDAO().feedback(Integer.parseInt(id), pid, feedbackpoints);
+		result = jobDAO.feedback(Integer.parseInt(id), pid, feedbackpoints);
 		
 		return result;
 	}
@@ -567,7 +567,7 @@ public class TaskService {
 		String queryMain = "from JobQuery pq where pq.parent.student.sid = '"+studentId+"'";
 		List<JobQuery> JobQueryList = new ArrayList<JobQuery>();
 				
-		JobQueryList = new JobDAO().generateQueriesReport(queryMain);
+		JobQueryList = jobDAO.generateQueriesReport(queryMain);
 		
 		httpSession.setAttribute("queryList", JobQueryList);
 	}
@@ -584,7 +584,7 @@ public class TaskService {
 				QueryIdsList.add(Integer.parseInt(ids));
 			}
 			
-			result = new JobDAO().toDoQueries(QueryIdsList, userId);
+			result = jobDAO.toDoQueries(QueryIdsList, userId);
 			request.setAttribute("querystatus",result);
 		}
 		
@@ -597,7 +597,7 @@ public class TaskService {
 		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
 		boolean result = false;
 		remarks = remarks.replace("'", "''");
-		result = new JobDAO().updateQueryRemarks(queryId, remarks, userId);
+		result = jobDAO.updateQueryRemarks(queryId, remarks, userId);
 		request.setAttribute("querystatus",result);
 	}
 }
