@@ -25,6 +25,7 @@ import org.ideoholic.curium.repositories.StudentDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.WeeklyoffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -605,31 +606,14 @@ public class AttendanceDAO {
 		return attendance;
 	}
 	
-	/*
-	 * public List<Studentdailyattendance> getStudentTotalAttendance( String
-	 * studentExternalId, String currentAcademicYear, int branchId) {
-	 * List<Studentdailyattendance> studentDailyAttendance = new
-	 * ArrayList<Studentdailyattendance>(); try { transaction =
-	 * session.beginTransaction(); studentDailyAttendance =
-	 * session.createQuery("from Studentdailyattendance  where  academicyear = '"
-	 * +currentAcademicYear+"' and attendeeid = '"
-	 * +studentExternalId+"' and branchid="+branchId).list(); transaction.commit();
-	 * } catch (Exception e) { transaction.rollback(); logger.error(e); // TODO:
-	 * handle exception }finally { HibernateUtil.closeSession(); } return
-	 * studentDailyAttendance; }
-	 */
-	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Studentdailyattendance> getStudentTotalAttendanceDateWise(String studentexternalid,
 			String currentAcademicYear, int branchid, Date datePresent) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-		    Transaction transaction = null;
-		    Session session = HibernateUtil.openCurrentSession();
 
 		    try {
-		        transaction = session.beginTransaction();
-
-		        // Query: from start (no lower bound) till given date
-		        studentDailyAttendance = session.createQuery(
+		    	
+		        /* studentDailyAttendance = session.createQuery(
 		                "from Studentdailyattendance " +
 		                "where date <= :datePresent " +
 		                "and academicyear = :currentAcademicYear " +
@@ -639,14 +623,13 @@ public class AttendanceDAO {
 		                .setParameter("currentAcademicYear", currentAcademicYear)
 		                .setParameter("studentexternalid", studentexternalid)
 		                .setParameter("branchid", branchid)
-		                .list();
+		                .list(); */
+		    	studentDailyAttendance = studentDailyAttendanceRepository.fetchStudentTotalAttendaceDateWise(datePresent, currentAcademicYear, studentexternalid, branchid);
 
-		        transaction.commit();
 		    } catch (Exception e) {
-		        if (transaction != null) transaction.rollback();
-		        logger.error("Error while fetching student attendance", e);
-		    } finally {
-		        HibernateUtil.closeSession();
+		    	TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	            log.error(e.getMessage(), e);
+	            e.printStackTrace();
 		    }
 		return studentDailyAttendance;
 	}

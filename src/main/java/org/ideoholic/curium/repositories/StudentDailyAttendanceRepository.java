@@ -1,6 +1,7 @@
 package org.ideoholic.curium.repositories;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,4 +35,11 @@ public interface StudentDailyAttendanceRepository extends JpaRepository<Studentd
 
     @Query("SELECT s FROM Studentdailyattendance s WHERE s.attendee.studentexternalid = :userName AND s.date = :date")
     Studentdailyattendance findByAttendeeIdAndDate(@Param("userName") String userName, @Param("date") LocalDate date);
+
+    @Query("SELECT s FROM Studentdailyattendance s WHERE date <= :datePresent AND academicyear = :currentAcademicYear AND attendee.studentexternalid = :studentExternalId AND branchid = :branchId")
+	List<Studentdailyattendance> fetchStudentTotalAttendaceDateWise(
+			@Param("datePresent")Date datePresent,
+			@Param("currentAcademicYear")String currentAcademicYear, 
+			@Param("studentExternalId")String studentExternalId, 
+			@Param("branchId")int branchId);
 }
