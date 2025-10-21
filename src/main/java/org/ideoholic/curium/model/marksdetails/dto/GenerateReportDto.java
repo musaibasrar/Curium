@@ -10,5 +10,5 @@ public class GenerateReportDto {
     private String studentUID;
     private String examDetailsID;
     private String[] examIds;
-    private String noofpresentday;
+    private String totalDaysPresent;
 }
