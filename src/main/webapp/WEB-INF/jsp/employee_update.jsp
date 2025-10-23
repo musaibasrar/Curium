@@ -665,7 +665,6 @@ for(Cookie cookie : cookies){
 													        </c:otherwise>
 													    </c:choose>
 													</c:forEach>
-
 													</div>
 										</td>
 
