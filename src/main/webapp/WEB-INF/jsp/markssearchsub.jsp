@@ -735,11 +735,11 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">Marks</th>
-						<th title="click to sort" class="headerText">A1</th>
-						<th title="click to sort" class="headerText">A2</th>
-						<th title="click to sort" class="headerText">A3</th>
-						<th title="click to sort" class="headerText">A4</th>
+						<th title="click to sort" class="headerText">CW/HW</th>
+						<th title="click to sort" class="headerText">Activity</th>
+						<th title="click to sort" class="headerText">PPT</th>
+						<!-- <th title="click to sort" class="headerText">A4</th> -->
+						<th title="click to sort" class="headerText">Theory</th>
 					</tr>
 				</thead>
 
@@ -760,7 +760,8 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 										value="${Parents.key.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.key.student.classstudying}" /></td>
-								<c:forEach items="${Parents.value}" var="marksobtained">
+								<c:forEach items="${Parents.value}" var="marksobtained"  varStatus="loop">
+								 <c:if test="${loop.index != 3}">
 							<td class="dataText">
 									<c:if test="${marksobtained.value <= 100}">
 											<c:set var="marksscored" value="${marksobtained.value}" />
@@ -775,6 +776,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								 <input type="hidden" id="marksid" name="marksid" value="<c:out value="${marksobtained.key}" />">
 								 
 								 </td>
+								 </c:if>
 								 </c:forEach>
 
 

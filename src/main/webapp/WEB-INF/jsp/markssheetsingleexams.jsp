@@ -317,37 +317,118 @@ for(Cookie cookie : cookies){
                              	<c:forEach items="${Parents.exammarks}" var="exammarks" begin="${beginloop}" end= "${endloop}" step="1">
                                 <td>
                                 	<table style=" border-collapse: collapse;width: 100%;border: 1px solid black;">
+												<tr style="border: 1px solid black;text-align: center;">
+												    <th style="border: 1px solid black;text-align: center;">Subject</th>
+												    <th style="border: 1px solid black;text-align: center;">Total Marks</th>
+												    <th style="border: 1px solid black;text-align: center;">Obtained Marks</th>
+												    <th style="border: 1px solid black;text-align: center;">Grade</th>
+												</tr>
 											<c:forEach items="${exammarks.subMarks}" var="submarks" >
 	                                	<tr style="border: 1px solid black;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-<%-- (${dateParts[2]}) --%>-(${dateParts[1]})</td>
+	                                		<td style="border: 1px solid black;text-align: left;">
+	                                		<c:set var="marksParts" value="${fn:split(dateParts[0],'/')}" />
+	                                		<c:set var="markTotal" value="${marksParts[1] + 0.0}" />
+	                                		<c:set var="markTotalObtained" value="${marksParts[0] + 0.0}" />
+	                                		<fmt:formatNumber value="${markTotal}" maxFractionDigits="0"/>
+	                                		</td>
+	                                		<td style="border: 1px solid black;text-align: left;"><fmt:formatNumber value="${markTotalObtained}" maxFractionDigits="0"/></td>
+	                                		<td style="border: 1px solid black;text-align: left;"><c:choose>
+													    <%-- 90 - 100 --%>
+													    <c:when test="${markTotalObtained >= 90}">
+													        A+
+													    </c:when>
+													    
+													    <%-- 85 - 89 --%>
+													    <c:when test="${markTotalObtained >= 85}">
+													        A
+													    </c:when>
+													    
+													    <%-- 80 - 84 --%>
+													    <c:when test="${markTotalObtained >= 80}">
+													       A
+													    </c:when>
+													    
+													    <%-- 75 - 79 --%>
+													    <c:when test="${markTotalObtained >= 75}">
+													        B+
+													    </c:when>
+													    
+													    <%-- 70 - 74 --%>
+													    <c:when test="${markTotalObtained >= 70}">
+													        B
+													    </c:when>
+													    
+													    <%-- 65 - 69 --%>
+													    <c:when test="${markTotalObtained >= 65}">
+													        C+
+													    </c:when>
+													    
+													    <%-- 60 - 64 --%>
+													    <c:when test="${markTotalObtained >= 60}">
+													        C
+													    </c:when>
+													    
+													    <%-- 55 - 59 --%>
+													    <c:when test="${markTotalObtained >= 55}">
+													        D+
+													    </c:when>
+													    
+													    <%-- 50 - 54 --%>
+													    <c:when test="${markTotalObtained >= 50}">
+													        D
+													    </c:when>
+													    
+													    <%-- 40 - 49 --%>
+													    <c:when test="${markTotalObtained >= 40}">
+													        E
+													    </c:when>
+													    
+													    <%-- 0 - 39 (Catch-all for anything below 40) --%>
+													    <c:otherwise>
+													        F
+													    </c:otherwise>
+													</c:choose>
+													
+													</td>
 	                                	</tr>
 	                                </c:forEach>
-	                                		<tr style="border-top: 1px solid black;">
-	                                			<td style="border: 1px solid black;text-align: left;">Total Marks Obtained</td>
-	                                			<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
+	                                		
+	                                		<tr style="border: 0px solid black;">
+                            					<td style="border: 0px solid black;text-align: left;"><br></td>
+                            					<td style="border: 0px solid black;text-align: left;"><br></td>
+                            					<td style="border: 0px solid black;text-align: left;"><br></td>
 	                                		</tr>
+	                                		
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Total Marks</td>
-                            					<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
+                            					<td colspan="3" style="border: 1px solid black;text-align: left;"><fmt:formatNumber value="${exammarks.totalMarks}" maxFractionDigits="0"/></td>
 	                                		</tr>
+	                                		
 	                                		<tr style="border: 1px solid black;">
-                            					<td style="border: 1px solid black;text-align: left;">Percentage</td>
-                            					<td style="border: 1px solid black;text-align: left;">
-                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
-	                                		</tr>	
+                            					<td style="border: 1px solid black;text-align: left;">Obtained Marks</td>
+                            					<td colspan="3" style="border: 1px solid black;text-align: left;font-weight: bold;"><fmt:formatNumber value="${exammarks.totalMarksObtained}" maxFractionDigits="0"/></td>
+	                                		</tr>
+	                                			                                		
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Grade</td>
-                            					<td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
+                            					<td colspan="3" style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
 	                                		</tr>  
+	                                		
+	                                		<tr style="border: 1px solid black;">
+                            					<td style="border: 1px solid black;text-align: left;">Percentage</td>
+                            					<td colspan="3" style="border: 1px solid black;text-align: left;">
+                            					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" />%</td>
+	                                		</tr>	
+	                                		
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Rank</td>
-                            					<td style="border: 1px solid black;text-align: left;">${exammarks.rank}</td>
+                            					<td colspan="3" style="border: 1px solid black;text-align: left;">${exammarks.rank}</td>
 	                                		</tr> 
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
-                            					<td style="border: 1px solid black;text-align: left;"></td>
+                            					<td colspan="3" style="border: 1px solid black;text-align: left;"></td>
 	                                		</tr>                                                           	
 	                                	</table>
                                 </td>

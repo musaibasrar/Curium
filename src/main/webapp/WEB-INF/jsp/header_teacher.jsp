@@ -139,12 +139,12 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 							
-							<td>
+							<!--<td>
 							<a target="leftFrame" href="/pips/reports_teacher"><img
 									src="/pips/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
-							</td>
+							</td>-->
 
 							<!-- <td><a target="mainFrame"
 								href="/pips/FeesProcess/feesCollect"> <img

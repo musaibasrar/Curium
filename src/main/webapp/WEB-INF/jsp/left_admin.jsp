@@ -658,24 +658,24 @@ for(Cookie cookie : cookies){
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
+<!--             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/pips/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/pips/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/pips/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks</a>
             			</td>
             		</tr>
-            		<tr>
+<!--             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/pips/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
-            		</tr>
+            		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/pips/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
+            				<a target="mainFrame" href="/pips/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>

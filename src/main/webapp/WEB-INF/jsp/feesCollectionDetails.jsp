@@ -766,7 +766,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/>${feesdetails.value.student.fathersname}</td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/pips/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
 

@@ -216,7 +216,21 @@ public class AttendanceAction {
 	public String viewAttendance() {
 
 		if (attendanceActionAdapter.viewAttendance()) {
-			standardActionAdapter.viewClasses();
+			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+				standardActionAdapter.viewClasses();
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				standardActionAdapter.viewClasses();
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+				standardActionAdapter.viewClasses();
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+				standardActionAdapter.viewClasses();
+			}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+				standardActionAdapter.viewClassesForTeacher();
+			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+				standardActionAdapter.viewClasses();
+			} else {
+				standardActionAdapter.viewClasses();
+			}
 			return "viewattendance";
 		}
 		return errorPage;

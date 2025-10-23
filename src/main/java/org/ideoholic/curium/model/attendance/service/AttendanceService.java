@@ -385,12 +385,15 @@ public class AttendanceService {
 			String addClass = attendanceDetailsDto.getAddClass();
 			String addSec = attendanceDetailsDto.getAddSec();
 			String conClassStudying = "";
-
-			if (!addClass.equalsIgnoreCase("")) {
+			
+			if (!addClass.equalsIgnoreCase("") && !addClass.contains("--")) {
 
 				conClassStudying = addClass+"--" +"%";
 
+			}else if(addClass.contains("--")) {
+				conClassStudying = addClass;
 			}
+			
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
 				conClassStudying = conClassStudying+"--"+addSec+"%";
@@ -694,10 +697,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			String addSec = attendanceDetailsMarkDto.getAddSec();
 			String conClassStudying = "";
 
-			if (!addClass.equalsIgnoreCase("")) {
+			if (!addClass.equalsIgnoreCase("") && !addClass.contains("--")) {
 
 				conClassStudying = addClass+"--" +"%";
 
+			}else if(addClass.contains("--")) {
+				conClassStudying = addClass;
 			}
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;

@@ -697,11 +697,11 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">A1</th>
-						<th title="click to sort" class="headerText">A2</th>
-						<th title="click to sort" class="headerText">A3</th>
-						<th title="click to sort" class="headerText">A4</th>
-						<th title="click to sort" class="headerText">Written</th>
+						<th title="click to sort" class="headerText">CW/HW<br>5</th>
+						<th title="click to sort" class="headerText">Activity<br>5</th>
+						<th title="click to sort" class="headerText">PPT<br>10</th>
+						<!-- <th title="click to sort" class="headerText">A4</th> -->
+						<th title="click to sort" class="headerText">Theory<br>80</th>
 					</tr>
 				</thead>
 
@@ -748,16 +748,17 @@ for(Cookie cookie : cookies){
 								onkeyup="checkMandatory();" value="0" style="width: 50px;border-radius:4px;"
 								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
 								maxlength="3"
-								 /></td>
+								 />
 								 
-								 <td class="dataText"><input type="text"
+								 <input type="hidden"
 								id="studentMarksA4" 
 								name="studentMarksA4"
 								onkeyup="checkMandatory();" value="0" style="width: 50px;border-radius:4px;"
 								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
 								maxlength="3"
-								 /></td>
-								 
+								 />
+								 </td>
+								 								 
 								  <td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"

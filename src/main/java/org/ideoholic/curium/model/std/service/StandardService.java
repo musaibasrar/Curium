@@ -257,6 +257,15 @@ public class StandardService {
 						
 		if (classTeacherList.size() > 0) {
 			for (String className : classTeacherList) {
+
+				Classsec classRow = new Classsec();
+				classRow.setClassdetails(className);
+				classRow.setSection(""); // or null
+				classRow.setBranchid(Integer.parseInt(branchId));
+				// classRow.setUserid(userid); // Set your actual user ID
+				finalClasssecList.add(classRow);
+			}
+			/*for (String className : classTeacherList) {
 				String cleanedClass = className.replaceAll("--.*$", "").trim();
 
 				Classsec classRow = new Classsec();
@@ -288,7 +297,7 @@ public class StandardService {
 				sectionRow.setSection(section.trim());
 				sectionRow.setBranchid(Integer.parseInt(branchId));
 				finalClasssecList.add(sectionRow);
-			}
+			}*/
 
 		} else {
 			List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));

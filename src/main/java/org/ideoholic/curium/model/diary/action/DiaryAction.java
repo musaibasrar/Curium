@@ -30,7 +30,21 @@ public class DiaryAction {
 	
 	@GetMapping("/getdiarystudent")
 	public String getdiarystudent() {
-		standardActionAdapter.viewClasses();
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+			standardActionAdapter.viewClasses();
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+			standardActionAdapter.viewClasses();
+		}  else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("teacher")) {
+			standardActionAdapter.viewClassesForTeacherMarksEntry();
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			standardActionAdapter.viewClasses();
+		} else {
+			standardActionAdapter.viewClasses();
+		}
 		return "diary";
 	}
 	

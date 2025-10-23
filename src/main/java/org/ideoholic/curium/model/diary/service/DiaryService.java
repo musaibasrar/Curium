@@ -48,9 +48,15 @@ public class DiaryService {
 		if (branchId != null) {
 
 			String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
-			String classString = addDiaryDto.getAddClass() + "--" + secString;
+			String classSecString = null;
+			String classString = addDiaryDto.getAddClass();
+			if(!classString.contains("--")) {
+				classSecString = addDiaryDto.getAddClass() + "--" + secString;
+			}else{
+				classSecString = classString;
+			}
 
-			diary.setClasssec(DataUtil.emptyString(classString));
+			diary.setClasssec(DataUtil.emptyString(classSecString));
 			diary.setMessage(addDiaryDto.getMessageBody());
 			diary.setSubject(addDiaryDto.getSubject());
 			diary.setBranchid(branchId);

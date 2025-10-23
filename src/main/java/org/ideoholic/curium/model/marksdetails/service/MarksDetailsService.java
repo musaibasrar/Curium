@@ -78,7 +78,14 @@ public class MarksDetailsService {
 		String[] studentsMarks = dto.getStudentsMarks();
 		String[] examidName = dto.getExam().split("__");
 		String subject = dto.getSubject();
-		String classSelected = dto.getClassSearch();
+		String classSelected = null;
+		String selectedClass = dto.getClassSearch();
+		if(selectedClass.contains("--")) {
+			String[] classOnly = selectedClass.split("--");
+			classSelected = classOnly[0];
+		}else {
+			classSelected = selectedClass;
+		}
 		System.out.println("the subject id is " + subject + ", and exam id is " + examidName[0]);
 		int sizeOfArray = 0;
 		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
@@ -352,13 +359,18 @@ public class MarksDetailsService {
 		String addClass = dto.getAddClass();
 		String addSec = dto.getAddSec();
 		String conClassStudying = "";
-		String conClassStudyingEquals = "";
-
-		if (!addClass.equalsIgnoreCase("")) {
+		String conClassSearch = "";
+		
+		if (!addClass.equalsIgnoreCase("") && !addClass.contains("--")) {
 
 			conClassStudying = addClass+"--" +"%";
 
+		}else if(addClass.contains("--")) {
+			conClassStudying = addClass;
+			String[] classSearch = addClass.split("--");
+			conClassSearch = classSearch[0];
 		}
+		
 		if (!addSec.equalsIgnoreCase("")) {
 			conClassStudying = addClass;
 			conClassStudying = conClassStudying+"--"+addSec+"%";
@@ -400,7 +412,7 @@ public class MarksDetailsService {
 		String subject = dto.getSubject();
 
 		String[] examIdName = exam.split(":");
-		Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId), addClass, examIdName[1], Integer.parseInt(subject));
+		Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchId), conClassSearch, examIdName[1], Integer.parseInt(subject));
 		int subjectDetailsId = subjectDetails.getSubid();
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
@@ -1663,6 +1675,13 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			MarksSheet markssheet = new MarksSheet();
 			ExamRank examrank = new ExamRank();
 			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			
+			Map<Integer, Float> subjectObtainedMarksMap = new HashMap<>();
+			Map<Integer, Float> subjectMinMarksMap = new HashMap<>();
+			Map<Integer, Float> subjectMaxMarksMap = new HashMap<>();
+			Map<Integer, String> subjectNameMap = new HashMap<>();
+			Map<Integer, String> subjectGradeMap = new HashMap<>();
+			
 			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 			markssheet.setParents(studentDetails);
 			
@@ -1691,32 +1710,68 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 								
 								int marksSubid = marks.getSubid();
 								int subjectId = sub.getSubid();
+								int marksSubSubjectId = marks.getSubsubjectid();
 								
 								if(marksSubid == subjectId) {
 									
 									float marksObtained = marks.getMarksobtained();
-									float minMarks = sub.getMinmarks();
-									float maxMarks = sub.getMaxmarks();
 									
-									if( marksObtained < minMarks) {
-										
-										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
-										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
-									}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
-										
-										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P"+"_"+marks.getSubgrade());
-										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
-									}else if(marksObtained == 999) {
-										subMarks.put(sub.getSubjectname(), " _AB");
-									}
+									subjectObtainedMarksMap.merge(subjectId, marksObtained, Float::sum);
 									
-									totalMarks = totalMarks+sub.getMaxmarks();
-									
-									
+									// Store Max Marks (assuming 'maxMarks' in 'Subject' object is the max for the *entire* subject,
+					                // or you need to sum the max marks from all components if available in the 'Marks' object).
+					                // For simplicity, I'll assume total max marks is calculated elsewhere or in a separate pass.
+					                // We'll update totalMarks once per subject later.
+					                if (!subjectMaxMarksMap.containsKey(subjectId)) {
+					                    subjectMaxMarksMap.put(subjectId, sub.getMaxmarks());
+					                    totalMarks = totalMarks + sub.getMaxmarks();
+					                }
+
+					                // Store other details, usually only needed from the Theory component (subsubjectid == 0)
+					                if (marksSubSubjectId == 0) {
+					                    subjectMinMarksMap.put(subjectId, sub.getMinmarks());
+					                    subjectNameMap.put(subjectId, sub.getSubjectname());
+					                    subjectGradeMap.put(subjectId, marks.getSubgrade());
+					                }
+					                
+					                // Special case for Absent (marksObtained == 999) on the THEORY part.
+					                if (marksObtained == 999 && marksSubSubjectId == 0) {
+					                     // Since we're merging, a single 999 will mess up the total.
+					                     // A better approach is to handle the final result status AFTER aggregation.
+					                     subjectObtainedMarksMap.put(subjectId, 999f); // Use 999 to denote AB for the subject
+					                }
 								}
 							}
 					}
 					
+				}
+				
+				for (Map.Entry<Integer, Float> entry : subjectObtainedMarksMap.entrySet()) {
+				    int subjectId = entry.getKey();
+				    float finalObtainedMarks = entry.getValue();
+				    String subjectName = subjectNameMap.getOrDefault(subjectId, "UNKNOWN_SUBJECT");
+				    
+				    // Safety check for subject details
+				    if (subjectName.equals("UNKNOWN_SUBJECT")) continue;
+				    
+				    float minMarks = subjectMinMarksMap.getOrDefault(subjectId, 0f); // Default to 0 for safety
+				    float maxMarks = subjectMaxMarksMap.getOrDefault(subjectId, 0f); // Default to 0 for safety
+				    String subGrade = subjectGradeMap.getOrDefault(subjectId, "");
+				    
+				    // Handle Absent (999) case first
+				    if (finalObtainedMarks == 999f) {
+				        subMarks.put(subjectName, " _AB");
+				    } 
+				    // Handle Fail condition (based on combined marks)
+				    else if (finalObtainedMarks < minMarks) {
+				        subMarks.put(subjectName, finalObtainedMarks + "/" + maxMarks + "" + "_F");
+				        totalObtainedMarks = totalObtainedMarks + finalObtainedMarks;
+				    } 
+				    // Handle Pass condition
+				    else if (finalObtainedMarks >= minMarks && finalObtainedMarks <= maxMarks) {
+				        subMarks.put(subjectName, finalObtainedMarks + "/" + maxMarks + "" + "_P" + "_" + subGrade);
+				        totalObtainedMarks = totalObtainedMarks + finalObtainedMarks;
+				    }
 				}
 				
 				if(present) {
@@ -1808,12 +1863,15 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	String addSec = dto.getAddSec();
 	String conClassStudying = "";
 	String conClassStudyingEquals = "";
-
-	if (!addClass.equalsIgnoreCase("")) {
+	
+	if (!addClass.equalsIgnoreCase("")  && !addClass.contains("--")) {
 
 		conClassStudying = addClass+"--" +"%";
 
+	}else if(addClass.contains("--")) {
+		conClassStudying = addClass;
 	}
+	
 	if (!addSec.equalsIgnoreCase("")) {
 		conClassStudying = addClass;
 		conClassStudying = conClassStudying+"--"+addSec+"%";
@@ -1973,7 +2031,7 @@ private List<Marks> prepareSubSubjectMarks(String subSubjectName, String[] stude
         Subject subjectDetails, int examId,
         String academicYear, String userId, String branchId) {
 		
-		SubSubject subSubject = new SubjectDetailsDAO().readSubSubject(Integer.parseInt(branchId), subjectDetails.getSubid(), subSubjectName);
+		SubSubject subSubject = new SubjectDetailsDAO().readSubSubject(Integer.parseInt(branchId), subjectDetails.getSubjectid(), subSubjectName);
 		if (subSubject == null) return Collections.emptyList();
 		
 		return buildMarksList(studentIds, marksArray, subjectDetails, examId, academicYear, userId, branchId, Collections.emptyList(), subSubject.getId());

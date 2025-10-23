@@ -2463,8 +2463,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    double receiptNumber = receiptCell.getNumericCellValue();
-				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
+				                	String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
@@ -2472,8 +2472,10 @@ public class FeesCollectionService {
 					        List<List<Row>> groupedRowsArray = new ArrayList<>(groupedData.values());
 					        
 					        // Print or use the grouped data as needed
+					        int counter=1;
 					        for (List<Row> group : groupedRowsArray) {
-					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getNumericCellValue());
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue() + " Counter: "+counter);
+					            counter++;
 					            String amountPayingClub = null;
 					            String sfsId = null;
 					            
@@ -2526,11 +2528,11 @@ public class FeesCollectionService {
 						        dto.setDateOfFeesDetails(group.get(0).getCell(2).getStringCellValue());
 						        dto.setClassAndSecDetails(studentDetails[1]);
 						        dto.setPaymentMethod(group.get(0).getCell(5).getStringCellValue());
-						        dto.setAckNo(DataUtil.emptyString(group.get(0).getCell(6).getStringCellValue()));
-						        dto.setTransferDate(DataUtil.emptyString(group.get(0).getCell(7).getStringCellValue()));
+						        dto.setAckNo("");
+						        dto.setTransferDate("");
 						        //dto.setTransferBankName(row.getCell(2).getStringCellValue());
-						        dto.setChequeNo(DataUtil.emptyString(group.get(0).getCell(8).getStringCellValue()));
-						        dto.setChequeDate(DataUtil.emptyString(group.get(0).getCell(9).getStringCellValue()));
+						        dto.setChequeNo("");
+						        dto.setChequeDate("");
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
