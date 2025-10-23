@@ -195,7 +195,7 @@ ${studentdetailsbonafide.student.admissionnumber}
 <table align="center">
 <tr><td><br></td></tr>
 <tr><td>
-Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;ASMA SUHA
+Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;${studentdetailsbonafide.student.name}
 </td></tr>
 <tr><td><br></td></tr>
 <tr><td><br></td></tr>
