@@ -264,7 +264,6 @@ for(Cookie cookie : cookies){
 					
 				<tr>
 				<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}"/>
-				<c:out value="${yearParts[0]}" /> - <c:out value="${yearParts[1]}" />
 					<td class="dataTextBoldCenter" style="width: 100%">HALL TICKET for the Academic Year <c:out value="${yearParts[0]}" /> - <c:out value="${yearParts[1]}" /><br>${examname}
 					</td>
 				</tr>
