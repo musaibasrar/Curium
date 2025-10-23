@@ -763,7 +763,7 @@ for(Cookie cookie : cookies){
 							<td >
 								<div class="holiday box">
 								 								
-								<span style="font-size: 16px;">Dear parents, school will be closed on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">due to</span> <span style="font-weight: bold;color: red">Reason</span>
+								<span style="font-size: 16px;">Dear Parents, A warm regard from school. This is to inform you that there will be holiday on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;"> on the account of </span> <span style="font-weight: bold;color: red">Reason</span>
 								<br><br>
 								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
 								<br><br>

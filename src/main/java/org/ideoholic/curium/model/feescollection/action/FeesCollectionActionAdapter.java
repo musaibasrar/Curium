@@ -528,13 +528,13 @@ public class FeesCollectionActionAdapter {
     }
 
 	public void getFeesReportOutstanding() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYearArray(request.getParameterValues("academicyear"));
         dto.setAddClass(request.getParameterValues("classsearch"));
         													  	
-        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
     }
 }

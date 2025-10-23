@@ -38,7 +38,7 @@ public class EmployeeDAO {
 		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
-			Query<Teacher> queryTeacher = session.createQuery("from Teacher where branchid = "+employee.getBranchid()+" order by id DESC");
+			Query<Teacher> queryTeacher = session.createQuery("from Teacher order by id DESC");
 		 	List<Teacher> queryList = queryTeacher.list();
 		 	String externalId = employee.getTeacherexternalid();
 		 	

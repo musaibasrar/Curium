@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Marks Entry</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/littleflower/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/littleflower/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -227,7 +227,7 @@
 	font-weight: normal;
 	width: auto;
 	height: 27px;
-	vertical-align: text-top;
+	vertical-align: middle;
 	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -296,42 +296,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/littleflower/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/littleflower/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/littleflower/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/littleflower/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/littleflower/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/littleflower/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/littleflower/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -357,11 +357,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/littleflower/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForMarksSub() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MarksDetailsProcess/searchForMarksSub";
+		form1.action = "/littleflower/MarksDetailsProcess/searchForMarksSub";
 		form1.method = "POST";
 		form1.submit();
 
@@ -461,7 +461,7 @@ function checkMandatoryandSubmit(){
     		alert('Select the student(s) to update the marks');
     	}else{
     		var form1 = document.getElementById("form1");
-    		form1.action = "/vision/MarksDetailsProcess/addMarksSubSubject";
+    		form1.action = "/littleflower/MarksDetailsProcess/addMarksSubSubject";
     		form1.method = "POST";
     		form1.submit();
 
@@ -471,6 +471,45 @@ function checkMandatoryandSubmit(){
     
    
         </script>
+<script>
+function updateHeaders(selectElement) {
+    const selectedOption = selectElement.selectedOptions[0];
+    const selectedSubject = selectedOption.getAttribute("data-name").trim();
+
+    const a1 = document.getElementById("a1");
+    const a2 = document.getElementById("a2");
+    const a3 = document.getElementById("a3");
+    const a4 = document.getElementById("a4");
+
+    // Reset default
+    a1.textContent = "A1";
+    a2.textContent = "A2";
+    a3.textContent = "A3";
+    a4.textContent = "A4";
+
+    // Subject groups
+    const languageSubjects = ["English", "Kannada", "Urdu", "Hindi", "Deeniyat"];
+    const stemSubjects = ["Maths", "Science", "Social"];
+    const evsSubjects = ["EVS"];
+
+    if (languageSubjects.includes(selectedSubject)) {
+        a1.textContent = "Reading";
+        a2.textContent = "Writing";
+        a3.textContent = "Listening";
+        a4.textContent = "Speaking";
+    } else if (stemSubjects.includes(selectedSubject)) {
+        a1.textContent = "Concept";
+        a2.textContent = "Activity";
+        a3.textContent = "Tables";
+        a4.textContent = "Mental Ability";
+    } else if (evsSubjects.includes(selectedSubject)) {
+        a1.textContent = "Observation";
+        a2.textContent = "Identification";
+        a3.textContent = "Activity";
+        a4.textContent = "Project";
+    }
+}
+</script>
 
 
 
@@ -479,7 +518,7 @@ function checkMandatoryandSubmit(){
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/littleflower/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -492,7 +531,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/MarksDetailsProcess/addMarksSubSubject" method="POST">
+	<form id="form1" action="/littleflower/MarksDetailsProcess/addMarksSubSubject" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -602,13 +641,13 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="30%" class="alignRight">Subject &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
+									<select name="subject" id="subject" onchange="updateHeaders(this)"
 									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listSubjectNames}" var="listSubject">
 
-											<option value="${listSubject.subjectid}">
+											<option value="${listSubject.subjectid}" data-name="${listSubject.subjectname}">
 												<c:out value="${listSubject.subjectname}" />
 											</option>
 
@@ -697,10 +736,10 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">A1</th>
-						<th title="click to sort" class="headerText">A2</th>
-						<th title="click to sort" class="headerText">A3</th>
-						<th title="click to sort" class="headerText">A4</th>
+						<th title="click to sort" class="headerText" id="a1">A1</th>
+						<th title="click to sort" class="headerText" id="a2">A2</th>
+						<th title="click to sort" class="headerText" id="a3">A3</th>
+						<th title="click to sort" class="headerText" id="a4">A4</th>
 						<th title="click to sort" class="headerText">Written</th>
 					</tr>
 				</thead>
@@ -786,6 +825,5 @@ for(Cookie cookie : cookies){
 
 
 	</form>
-
 </body>
 </html>
