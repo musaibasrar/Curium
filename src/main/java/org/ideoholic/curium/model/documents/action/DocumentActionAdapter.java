@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.documents.action;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,6 +19,7 @@ import org.ideoholic.curium.model.documents.service.DocumentService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,7 +97,7 @@ public class DocumentActionAdapter {
 	public String generateStudyCertificate() {
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString(),httpSession.getAttribute(BRANCHID).toString(),
+		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),
 				httpSession.getAttribute("userloginid").toString());
 		if (parentDto != null) {
 			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
@@ -215,7 +218,7 @@ public class DocumentActionAdapter {
 	}
 
 	public void viewScDetail() {
-		CharacterResponseDto characterResponseDto = documentService.viewScDetail(httpSession.getAttribute(BRANCHID).toString());
+		CharacterResponseDto characterResponseDto = documentService.viewScDetail(httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		
 	}
@@ -223,7 +226,7 @@ public class DocumentActionAdapter {
 	public boolean printScList() {
 		CharacterDto characterDto = new CharacterDto();
 		characterDto.setSIds(request.getParameterValues("studentIDs"));
-		CharacterResponseDto characterResponseDto = documentService.printScList(characterDto,httpSession.getAttribute(BRANCHID).toString());
+		CharacterResponseDto characterResponseDto = documentService.printScList(characterDto,httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		return characterResponseDto.isSuccess();
 	}
@@ -238,6 +241,21 @@ public class DocumentActionAdapter {
 			return "articleprint";
 		}
 		return null;
+	}
+
+	public void printAdmissionAbstract() {
+
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = documentService.printAdmissionAbstract(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+	    if(printMultipleEmployeesResponseDto.isSuccess()) {
+	    	  httpSession.setAttribute("iInitial", printMultipleEmployeesResponseDto.getInitialValue());
+	    	  httpSession.setAttribute("endValue", printMultipleEmployeesResponseDto.getEndValue());
+	    	  for (Map.Entry<String, String> entry : printMultipleEmployeesResponseDto.getResultParams().entrySet()) {
+	                httpSession.setAttribute(entry.getKey(), entry.getValue());
+	            }
+	    }
+		
 	}
 
 }
