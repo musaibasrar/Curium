@@ -43,7 +43,6 @@
         <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.highlighter.min.js"></script>
         <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.dragable.min.js"></script>
         <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.trendline.min.js"></script>
-
         <style type="text/css">
         .dataText {
                 border-radius:3px;
