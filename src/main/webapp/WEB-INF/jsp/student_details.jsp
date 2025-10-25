@@ -15,7 +15,6 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details</title>
-
         <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
         <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
@@ -738,7 +737,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc1.jpg" href="/abc/data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
+                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -747,7 +746,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc2.jpg" href="/abc/data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
+                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -756,7 +755,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc3.jpg" href="/abc/data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
+                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -765,7 +764,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc4.jpg" href="/abc/data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
+                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
                     </td>
                     </tr>
                     
@@ -774,7 +773,7 @@ for(Cookie cookie : cookies){
                     <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="studentdoc5.jpg" href="/abc/data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
+                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
                     </td>
                     </tr>
                     </table>
@@ -1073,8 +1072,6 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${receiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
-                                 
-
                             </tr>
                         </c:forEach>
                         
