@@ -629,7 +629,6 @@ for(Cookie cookie : cookies){
 
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/abc/printstudentdetailsotherfeesstructure'">Print</button>
-
                                         </td>
 
                                     </tr>

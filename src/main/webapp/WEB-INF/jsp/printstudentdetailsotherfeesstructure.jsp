@@ -260,10 +260,24 @@
                 
             </table>
             
-            
+            <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
             <div id="accordion" style="width: 100%;height: 100%">
 
                 <div>
+                
+					<div align="center">
+				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
+				<%-- <h class="dataTextFees">Total fees : Rs.  ${totalfees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total fees paid : Rs.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Due Amount : </h>
+                <h class="dataTextDueFees"> Rs.  ${dueamount}</h> --%>
+                </div>
                 
                 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
@@ -364,8 +378,15 @@
 
             </tr>
 		</TABLE>
-				
-				
+                                <%-- <td class="datatd" style="text-align: right;font-weight: bold;">${totalfees}</td> --%>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${sumoffees}</td>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${totalfeesconcession}</td>
+                                <td class="datatd" style="text-align: right;font-weight: bold;">${dueamount}</td>
+                    	</tr>
+                    
+                    </tfoot>
+                   
+                </table>
                 </div>
             </div>
         </form>

@@ -640,5 +640,4 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
-	
 }
