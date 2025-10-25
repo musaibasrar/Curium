@@ -162,6 +162,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
         httpSession.setAttribute("grandTotal", responseDto.getGrandTotal());
+        request.setAttribute("narrationreceipt", responseDto.getNarration());
     }
 
     public void getotherStampFees() {
@@ -464,6 +465,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("receiptdate", responseDto.getReceiptDate());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
+        request.setAttribute("narrationreceipt", responseDto.getNarration());
     }
 
     public Otherreceiptinfo addother() {
