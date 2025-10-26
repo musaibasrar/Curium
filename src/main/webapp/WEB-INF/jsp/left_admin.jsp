@@ -605,6 +605,11 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/jrs/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/jrs/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
             			</td>
             		</tr>
@@ -665,17 +670,17 @@ for(Cookie cookie : cookies){
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
+            				 <a target="mainFrame" href="/jrs/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/jrs/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
+            				<a target="mainFrame" href="/jrs/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
             			</td>
             		</tr> -->
             		<!-- <tr>
@@ -817,18 +822,18 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
+            				 <a target="mainFrame" href="/jrs/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EventProcess/create" style="font-size: 12px;">Create Event</a>
+            				 <a target="mainFrame" href="/jrs/EventProcess/create" style="font-size: 12px;">Create Event</a>
             			</td>
             		</tr> -->
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
+            				<a target="mainFrame" href="/jrs/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
             			</td>
             		</tr>
             		
