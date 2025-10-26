@@ -238,5 +238,17 @@ public class DocumentActionAdapter {
 		request.setAttribute("studentscissued", characterResponseDto.getStudyCertificate());
 		return characterResponseDto.isSuccess();
 	}
+	
+	public String generateArticle() {
+
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
+		if (parentDto != null) {
+			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+			return "articleprint";
+		}
+		return null;
+	}
 
 }
