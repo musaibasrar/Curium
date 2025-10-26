@@ -368,7 +368,8 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/abc/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/abc/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
                 <a target="mainFrame" href="/abc/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a><br/>
-                   <a target="mainFrame" href="/abc/DocumentsProcess/hallticketinfo" style="font-size: 12px;">Hall Ticket Info</a>
+               <!--  <a target="mainFrame" href="/abc/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a><br/> -->
+                 <a target="mainFrame" href="/abc/DocumentsProcess/hallticketinfo" style="font-size: 12px;">Hall Ticket Info</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
