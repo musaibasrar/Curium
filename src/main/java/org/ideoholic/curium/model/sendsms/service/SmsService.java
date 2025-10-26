@@ -56,7 +56,8 @@ public class SmsService {
 
 		int noOfRecords = 100;
 		int offset=0;
-		
+		int maxRetries = 3;
+		int attempts = 0;
 		if(branchId!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
@@ -121,7 +122,15 @@ public class SmsService {
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
 						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
+						while (attempts < maxRetries) {
+						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    
+						    if (resultSMS == 200) {
+						        break; // success, exit loop
+						    }
+						    
+						    attempts++; // retry if not successful
+						}
 					}
 					
 				offset = offset+100;
