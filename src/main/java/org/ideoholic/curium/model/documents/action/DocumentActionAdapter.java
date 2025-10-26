@@ -198,6 +198,21 @@ public class DocumentActionAdapter {
 		ResultResponse resultResponse=documentService.downlaodFile();
 		return resultResponse.isSuccess();
 	}
+	
+	public void viewTcDetail() {
+
+		CharacterResponseDto characterResponseDto = documentService.viewTcDetail();
+		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		
+	}
+
+	public boolean printTcList() {
+		CharacterDto characterDto = new CharacterDto();
+		characterDto.setFeesIds(request.getParameterValues("studentIDs"));
+		CharacterResponseDto characterResponseDto = documentService.printTcList(characterDto);
+		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		return characterResponseDto.isSuccess();
+	}
 
 	public boolean addHallTicketInfo() {
 			HallTicketInfoDto hallTicketInfoDto = new HallTicketInfoDto();

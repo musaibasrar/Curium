@@ -2,11 +2,14 @@ package org.ideoholic.curium.model.documents.dao;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -65,7 +68,6 @@ public class DocumentDAO {
 		return tc;
 	}
 	
-	
 	public boolean addHallTicketInfo(Map<Integer, String> mapOfHallTicket) {
  		boolean result = false;
  		try {
@@ -87,5 +89,19 @@ public class DocumentDAO {
  		}
  		return result;
  	}
-	
+
+	public List<Transfercertificate> getTCertificateDetails() {
+		List<Transfercertificate> tc = new ArrayList<Transfercertificate>();
+		try {
+			transaction = session.beginTransaction();
+			tc = session.createQuery("from Transfercertificate").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return tc;
+	}
+
 }
