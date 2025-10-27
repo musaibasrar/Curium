@@ -37,7 +37,7 @@ for(Cookie cookie : cookies){
       				<td height="200px;" width="100px;"></td>
           			<td>
           			<p style="text-transform: uppercase;color: #143160;font-weight: bolder;">Welcome, <label style="color: #93051f;"><c:out default="" value="${username}"/> </label></p><br><br>
-          			
+          			<p style="color: #93051f; font-weight: bolder;">${branchname}</p><br><br>
           			<p style="color: #143160;font-weight: bolder;">You can navigate your way through CURIUM using: </p><br><br>
 					
 					

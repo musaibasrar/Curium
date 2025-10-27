@@ -695,22 +695,15 @@ public class UserService {
 		
 	}
 
-	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
+	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strBranchId) {
 		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
 
         
         String userName =null;
-        String superUserAuth = null;
-
         
         	if(strUserName!=null) {
         		userName = strUserName;
 	        }
-        
-        	if(strSuperUserAuth!=null) {
-	        	superUserAuth = DataUtil.emptyString(strSuperUserAuth);
-	        }
-        
         if(userName != null) {
         	int branchId = Integer.parseInt(strBranchId);
         	login = new UserDAO().getLoginDetails(userName, branchId);

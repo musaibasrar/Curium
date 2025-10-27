@@ -125,7 +125,7 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/sanmarg/welcome" >
+								<a target="mainFrame" href="/sanmarg/welcomeall" >
 								<img src="/sanmarg/images/curiumheader.png" width="112" height="41"/>
 								</a>
 								</td>

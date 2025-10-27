@@ -15,8 +15,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	 <title>Curium - School ERP</title>
-	<link rel="stylesheet" href="/vasu/css/bootstrap3.min.css">
-	<script type="text/javascript" src="/vasu/js/openWindow.js"></script>
+	<link rel="stylesheet" href="/sanmarg/css/bootstrap3.min.css">
+	<script type="text/javascript" src="/sanmarg/js/openWindow.js"></script>
 	
 	<style type="text/css">
 	.main-content{
@@ -112,7 +112,7 @@ form{
             function redirect(){
                 
                 var form1=document.getElementById("form1");
-                form1.action="/vasu/UserProcess/authenticate";
+                form1.action="/sanmarg/UserProcess/authenticate";
                 form1.submit();
             }
         </script>
@@ -129,19 +129,19 @@ form{
             if(flag1){
             	
             	if(type=='superadmin'){
-                    window.open('/vasu/index_superadmin','_self');
+                    window.open('/sanmarg/index_superadmin','_self');
                 }else if(type=='admin'){
-                    window.open('/vasu/index_admin','_self');
+                    window.open('/sanmarg/index_admin','_self');
                 }else if(type=='feescollector'){
-                    window.open('/vasu/index_feescollector','_self');
+                    window.open('/sanmarg/index_feescollector','_self');
                 }else if(type=='officeadmin'){
-                	window.open('/vasu/index_officeadmin','_self');
+                	window.open('/sanmarg/index_officeadmin','_self');
                 }else if(type=='marksentry'){
-                	window.open('/vasu/index_marksentry','_self');
+                	window.open('/sanmarg/index_marksentry','_self');
                 }
             }
             else if(!flag1){
-            	window.open('/vasu/loginFail','_self');
+            	window.open('/sanmarg/loginFail','_self');
             }
         </script>
         
@@ -151,7 +151,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 120px;width: 108px;" alt="ideoholic" src="/vasu/images/sanmarg.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 120px;width: 108px;" alt="ideoholic" src="/sanmarg/images/sanmarg.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>
@@ -163,7 +163,7 @@ form{
 						<p align="center" style="color: red;font-size: 10px;">Please enter correct username and password</p>
 					</div>
 					<div class="row">
-						<form action="/vasu/UserProcess/authenticateUser" id="loginForm" method="post" class="form-group">
+						<form action="/sanmarg/UserProcess/authenticateUser" id="loginForm" method="post" class="form-group">
 							<div class="row">
 								<input type="text" name="loginName" id="loginName" class="form__input" placeholder="Username">
 							</div>
@@ -185,10 +185,10 @@ form{
 	<!-- Footer -->
 	<div class="container-fluid text-center footer">
 		<p>
-			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/vasu/images/ideoholic.png"> image with a default alignment.</p> --> 
+			<!-- <p>An <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/sanmarg/images/ideoholic.png"> image with a default alignment.</p> --> 
 			
 			<a href="http://www.ideoholic.com" >
-				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/vasu/images/ideoholic.png">
+				Powered by <img border="0" style="vertical-align: text-bottom;" alt="ideoholic" src="/sanmarg/images/ideoholic.png">
 			</a>
 			
 	</div>

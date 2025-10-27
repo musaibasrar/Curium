@@ -640,4 +640,9 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
+	
+	@GetMapping("/welcomeall")
+	public String getWelcomeAll() {
+		return "welcomeall";
+	}
 }
