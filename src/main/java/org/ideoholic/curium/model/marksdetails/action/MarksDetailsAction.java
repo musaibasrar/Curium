@@ -348,4 +348,26 @@ public class MarksDetailsAction {
 		}
 	}
 	
+	@GetMapping("/finalExamReport")
+	public String finalExamReport() {
+		standardActionAdapter.viewClasses();
+		return "finalexamreport";
+	}
+	
+
+	@PostMapping("/searchForFinalReport")
+	public String searchForFinalReport() {
+		marksDetailsActionAdapter.Search();
+		return "finalexamreport";
+	}
+	
+	@PostMapping("/generatefinalexamReport")
+	public String generatefinalexamReport() {
+		if (marksDetailsActionAdapter.generateFinalExamReport()) {
+			return "finalexammarkssheet";
+		} else {
+			return "error";
+		}
+	}
+	
 }
