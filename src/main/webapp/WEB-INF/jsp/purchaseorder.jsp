@@ -18,8 +18,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Purchase Order</title>
-<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<link rel="stylesheet" href="/sanmarg/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sanmarg/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -407,17 +407,17 @@
 }
 
 </style>
-<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/sanmarg/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/sanmarg/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/abc/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/sanmarg/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/sanmarg/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/sanmarg/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/sanmarg/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/sanmarg/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -503,7 +503,7 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/sanmarg/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	
 	function saveInventory() {
@@ -511,7 +511,7 @@
 		var form1 = document.getElementById("form1");
 		
 		if(form1.checkValidity()) {
-			form1.action = "/abc/MessItemsProcess/savePurchaseOrder";
+			form1.action = "/sanmarg/MessItemsProcess/savePurchaseOrder";
 			form1.method = "POST";
 			form1.submit();
 		}
@@ -521,7 +521,7 @@
 	function cancelPurchase() {
 			
 				var form1 = document.getElementById("form1");
-				form1.action = "/abc/MessItemsProcess/cancelPurchaseOrder";
+				form1.action = "/sanmarg/MessItemsProcess/cancelPurchaseOrder";
 				form1.method = "POST";
 				form1.submit();
 			
@@ -857,7 +857,7 @@
         	             
         	         }
         			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/abc/stockentry/mrvDetails?invoicedetailsid="+externalId+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);
+        			xmlHttp.open("GET", "/sanmarg/stockentry/mrvDetails?invoicedetailsid="+externalId+"&entrydate="+date+"&supplierreferenceno="+supplierrefno+"&suppliername="+name+"&invoicetotal="+invoicetotal+"",true);
         			xmlHttp.send(null);
 
         		
@@ -941,7 +941,7 @@
         	             
         	         }
         			xmlHttp.onreadystatechange = stateChangedSSGroup;
-        			xmlHttp.open("GET", "/abc/stockentry/purchaseMrvDetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&suppliername="+name+"",true);
+        			xmlHttp.open("GET", "/sanmarg/stockentry/purchaseMrvDetails?invoicedetailsid="+invoicedetailsid+"&entrydate="+date+"&suppliername="+name+"",true);
         			xmlHttp.send(null);
 
         		
@@ -992,7 +992,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sanmarg/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -1144,7 +1144,7 @@ for(Cookie cookie : cookies){
 						  <td class="dataText"><c:out value="${polist.key.id}" /></td>
 						  <td class="dataText"><c:out value="${polist.value.name}" /></td>
 						  <td class="dataText"><a href="#" onclick="openPopup('<c:out value="${polist.key.externalId}"/>','<c:out value="${polist.key.entryDate}"/>','<c:out value="${polist.value.name}"/>')">View Detail</a></td>
-						  <td class="dataText"><a href="/abc/MessItemsProcess/receivePurchaseOrder?id=<c:out value='${polist.key.externalId}'/>">Receive</a></td>
+						  <td class="dataText"><a href="/sanmarg/MessItemsProcess/receivePurchaseOrder?id=<c:out value='${polist.key.externalId}'/>">Receive</a></td>
 						</tr>
 					</c:forEach>
 
@@ -1168,7 +1168,7 @@ for(Cookie cookie : cookies){
 				<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/abc/MessItemsProcess/purchaseItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/sanmarg/MessItemsProcess/purchaseItems?page=${currentPage - 1}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1181,7 +1181,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/abc/MessItemsProcess/purchaseItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/sanmarg/MessItemsProcess/purchaseItems?page=${i}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1190,7 +1190,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/abc/MessItemsProcess/purchaseItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/sanmarg/MessItemsProcess/purchaseItems?page=${currentPage + 1}">Next</a></td>
                 </c:if>
                     </div>
 

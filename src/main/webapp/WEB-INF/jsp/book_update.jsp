@@ -19,22 +19,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Book</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/sanmarg/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sanmarg/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/sanmarg/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/sanmarg/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/sanmarg/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/sanmarg/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/sanmarg/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/sanmarg/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/sanmarg/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/sanmarg/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/sanmarg/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+	src="/sanmarg/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/sanmarg/css/datePicker/demos.css">
 
 
 
@@ -245,10 +245,10 @@
 
 
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/sanmarg/js/datetimepicker_css.js"></script>
 
-<script src="/vision/JavaScript/actb.js"></script>
-<script src="/vision/JavaScript/common.js"></script>
+<script src="/sanmarg/JavaScript/actb.js"></script>
+<script src="/sanmarg/JavaScript/common.js"></script>
 
 
 
@@ -295,7 +295,7 @@
 <script type="text/javascript">
 	function saveBook() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/LibraryProcess/saveBook";
+		form1.action = "/sanmarg/LibraryProcess/saveBook";
 		form1.method = "POST";
 		form1.submit();
 
@@ -331,7 +331,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/sanmarg/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -506,14 +506,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/vision/LibraryProcess/viewbooks";
+								form1.action = "/sanmarg/LibraryProcess/viewbooks";
 								form1.submit();
 							}
 
 							function updateBookDetail() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/vision/LibraryProcess/updateBook";
+								form1.action = "/sanmarg/LibraryProcess/updateBook";
 								form1.submit();
 							}
 							</script>
