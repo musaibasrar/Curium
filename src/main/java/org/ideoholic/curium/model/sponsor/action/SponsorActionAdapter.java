@@ -82,4 +82,11 @@ public class SponsorActionAdapter {
 		
 	}
 
+	public void getFeesStructuredBySponsor() {
+		SponsorDto sponsorDto = new SponsorDto();
+	    sponsorDto.setName(request.getParameter("sponsorname"));
+		 SponsorResponseDto sponsorResponseDto = sponsorService.getFeesStructuredBySponsor(httpSession.getAttribute(BRANCHID).toString(),sponsorDto);
+		 request.setAttribute("sponsordetaillist", sponsorResponseDto.getMapOfSponsors());
+	}
+
 }
