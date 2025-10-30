@@ -100,7 +100,9 @@ public class SmsService {
 							}
 						}
 						numbers=sbN.toString();
-						numbers = numbers.substring(0, numbers.length()-1);
+						if (numbers != null && numbers.length() > 0) {
+						    numbers = numbers.substring(0, numbers.length() - 1);
+						}
 						log.info("Numbers are *** "+numbers);
 						
 						String SMSTempType = dto.getSmsTempType();

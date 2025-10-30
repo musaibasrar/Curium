@@ -841,8 +841,8 @@ public class DocumentService {
 						int tcSid = transferCert.getSid();
 						if(studentId==tcSid) {
 							Student student = parents.getStudent();
-							student.setNotcissued(transferCert.getNoofissues());
-							student.setNooftc(transferCert.getTcid());
+							student.setNotcissued(transferCert.getNoofissues().toString());
+							student.setNooftc(transferCert.getTcid().toString());
 							student.setDatetcissued(transferCert.getDateofissues());
 							parents.setStudent(student);
 						}
@@ -871,8 +871,8 @@ public class DocumentService {
 						int tcSid = transferCert.getSid();
 						if(studentId==tcSid) {
 							Student student = parents.getStudent();
-							student.setNotcissued(transferCert.getNoofissues());
-							student.setNooftc(transferCert.getTcid());
+							student.setNotcissued(transferCert.getNoofissues().toString());
+							student.setNooftc(transferCert.getTcid().toString());
 							student.setDatetcissued(transferCert.getDateofissues());
 							parents.setStudent(student);
 						}

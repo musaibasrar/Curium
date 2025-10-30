@@ -736,6 +736,7 @@ for(Cookie cookie : cookies){
             								<option value="festival">Festival</option>
             								<option value="scienceexhibition">Science Exhibition</option>
             								<option value="feesreminder">Fees Reminder</option>
+            			       		                <option value="vacation">Vacation</option>
             								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
 							
@@ -799,6 +800,19 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
 								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
 								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+    							</div>
+    							
+    							<div class="vacation box">
+    								<span style="font-size: 16px;">Dear parents,<span style="font-weight: bold;color: red">Holiday Name</span> Holiday have been declared from <span style="font-weight: bold;color: red">Start Date</span> to <span style="font-weight: bold;color: red">End Date</span>. School will reopen on <span style="font-weight: bold;color: red">Reopening Date</span></span>
+								<br><br>
+								<label style="color: red;">Holiday Name:&nbsp;&nbsp;</label><input type="text" id="vacationvar1" name="vacationvar1" maxlength="25">
+								<br><br>	
+								<label style="color: red;">Start Date:&nbsp;&nbsp;</label><input type="text" id="vacationvar2" name="vacationvar2" maxlength="25">
+								<br><br>
+								<label style="color: red;">End Date:&nbsp;&nbsp;</label><input type="text" id="vacationvar3" name="vacationvar3" maxlength="25">
+								<br><br>
+								<label style="color: red;">Reopening Date:&nbsp;&nbsp;</label><input type="text" id="vacationvar4" name="vacationvar4" maxlength="25">
+								<br><br>
     							</div>
 							
 							</td>
