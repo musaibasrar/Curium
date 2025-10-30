@@ -866,7 +866,7 @@ public Student readUniqueStudent(String HQLquery) {
     return student;
 }
 
-public List<Student> getSponsoredStudent(List<Integer> sIds) {
+public List<Student> getStudentsListByIds(List<Integer> sIds) {
 	List<Student> sponseredList = new ArrayList<Student>();
 	try {
 		transaction = session.beginTransaction();

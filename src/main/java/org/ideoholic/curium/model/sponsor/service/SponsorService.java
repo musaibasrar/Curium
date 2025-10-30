@@ -133,7 +133,7 @@ public class SponsorService {
 		for (Studentfeesstructure studentfeesstructure : list) {
 			sIds.add(studentfeesstructure.getSid());
 		}
-		List<Student> listStudent = new studentDetailsDAO().getSponsoredStudent(sIds);
+		List<Student> listStudent = new studentDetailsDAO().getStudentsListByIds(sIds);
 		for (Student student : listStudent) {
 			for (Studentfeesstructure studentfeesstructure : list) {
 				int sids = student.getSid();

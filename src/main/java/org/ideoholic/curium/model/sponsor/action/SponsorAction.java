@@ -66,8 +66,8 @@ public class SponsorAction {
 		}
 	}
 	
-	@GetMapping("/sponsonlistdetail")
-	public String sponsonlistdetail() {
+	@GetMapping("/sponsorlistdetail")
+	public String sponsorlistdetail() {
 		sponsorActionAdapter.viewAllSponsor();
 		return "sponsorlist";
 	}

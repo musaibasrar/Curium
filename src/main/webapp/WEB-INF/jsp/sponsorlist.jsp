@@ -681,14 +681,14 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${sponsordetaillist}" var="sponsor">
+                        <c:forEach items="${sponsordetaillist}" var="sponsor" varStatus="temp">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
 								id="<c:out value="${sponsor.key.sid}"/>" class="chcktbl"
 								name="feesIDs"
 								value="<c:out value="${sponsor.key.sid}"/>" /></td>
-                                <td  class="dataText"><c:out value="${sponsor.key.name}"/></td>
+                                <td  class="dataText"><c:out value="${temp.index + 1}"/></td>
                                 <td  class="dataText"><c:out value="${sponsor.key.name}"/></td>
                                 <td  class="dataText"><c:out value="${sponsor.key.classstudying}"/></td>
                                 <td  class="dataText"><c:out value="${sponsor.value.feescategory.feescategoryname}"/></td>
@@ -706,10 +706,11 @@ for(Cookie cookie : cookies){
 									name="fileName" type="text" class="myclass" id="fileName"
 									size="20">
 							</label> -->
-							<input value="Print" style="width: 35px;"
+							<!-- <input value="Print" style="width: 35px;"
 							id="print"/>
 						<input value="Export"
-							type="submit" id="export"/></td>
+							type="submit" id="export"/> -->
+							&emsp;&emsp;</td>
 							
 							
 
