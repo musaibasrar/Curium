@@ -44,6 +44,9 @@ public class MessItemsService {
 
 	@Autowired
 	private MessStockEntryDAO messStockEntryDao;
+	
+	@Autowired
+	private MessStockMoveDAO messStockMoveDao;
 
 
 	public ResultResponse viewItemDetails(String branchId) {
@@ -98,7 +101,7 @@ public class MessItemsService {
 			 messStockAvailability.setMinstock(DataUtil.parseInt(dto.getMinStock()));
 			 messStockAvailability.setUserid(Integer.parseInt(userId));
 			 
-			 messStockAvailability.setMessitems(messItems);
+			 messStockAvailability.setMessItems(messItems);
 			 
 			 messItems= messItemsDao.addNewItem(messStockAvailability);
 			 
@@ -172,7 +175,7 @@ public class MessItemsService {
                 messItems.setName(dto.getRequestParams().get("updateitemname_"+itemId));
                 messItems.setUnitofmeasure(dto.getRequestParams().get("updateunitofmeasure_"+itemId));
                 messItems.setId(DataUtil.parseInt(itemId));
-                messStockAvailability.setMessitems(messItems);
+                messStockAvailability.setMessItems(messItems);
                 messStockAvailability.setMinstock(Integer.parseInt(dto.getRequestParams().get("updateminstock_"+itemId)));
                 messStockAvailabilityList.add(messStockAvailability);
             }
@@ -544,7 +547,7 @@ public class MessItemsService {
 				responseDto.setItemSelected("");
 			}
 			
-			List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain+subQuery);
+			List<MessStockMove> messStockMoveList = messStockMoveDao.getStockMoveDetailsReport(queryMain+subQuery);
 			
 			if(!messStockMoveList.isEmpty()) {
 				

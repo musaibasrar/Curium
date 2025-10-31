@@ -49,6 +49,9 @@ public class MessStockMoveService {
 	@Autowired
 	private MessStockEntryDAO messStockEntryDao;
 	
+	@Autowired
+	private MessStockMoveDAO messStockMoveDao;
+	
 	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName, String currentAcademicYear,String branchCode) {
 
 	MoveStockResponseDto results = MoveStockResponseDto.builder().build();
@@ -319,7 +322,7 @@ public class MessStockMoveService {
 					
 					
 					
-					boolean result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount,transactionsIncomeCash,transactionsIncomeBankTransfer,transactionsIncomeCheque,updateDrAccountIncomeCash,updateCrAccountIncomeCash,updateDrAccountIncomeBankTransfer,updateCrAccountIncomeBankTransfer,updateDrAccountIncomeCheque,updateCrAccountIncomeCheque,messStockMoveInfo);
+					boolean result = messStockMoveDao.moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount,transactionsIncomeCash,transactionsIncomeBankTransfer,transactionsIncomeCheque,updateDrAccountIncomeCash,updateCrAccountIncomeCash,updateDrAccountIncomeBankTransfer,updateCrAccountIncomeBankTransfer,updateDrAccountIncomeCheque,updateCrAccountIncomeCheque,messStockMoveInfo);
 					
 						if(result) {
 							//request.setAttribute("billdetails", messStockMovesList);;
@@ -350,7 +353,7 @@ public class MessStockMoveService {
 							results.setBillGrandTotal(grandTotal);
 
 							//Get Bill No
-							MessStockMove msm = new MessStockMoveDAO().getMessStockMoveMaxRow();
+							MessStockMove msm = messStockMoveDao.getMessStockMoveMaxRow();
 							int billNo = 0;
 							if(msm!=null) {
 								billNo = msm.getId() + 1;
@@ -471,7 +474,7 @@ public class MessStockMoveService {
 						BigDecimal crAmountReceipt = totalValue;
 						String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerId;
 						
-						//important result = new MessStockMoveDAO().moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount);
+						//important result = messStockMoveDao.moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount);
 					}
 		
 						messItemsService.viewItemDetails(branchId);
@@ -572,9 +575,9 @@ public class MessStockMoveService {
 								page = Integer.parseInt(strPage);
 							}
 
-						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails((page - 1) * recordsPerPage,
+						messStockMoveList = messStockMoveDao.getStockMoveDetails((page - 1) * recordsPerPage,
 									recordsPerPage, Integer.parseInt(branchId));
-						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(Integer.parseInt(branchId));
+						int noOfRecords = messStockMoveDao.getNoOfRecordsStockMove(Integer.parseInt(branchId));
 						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 						result.setNoOfPages(noOfRecords);
 						result.setCurrentPage(page);
@@ -602,7 +605,7 @@ public class MessStockMoveService {
 		for (String stockmoveids : smIds) {
 
 
-			MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
+			MessStockMove messStockMove = messStockMoveDao.getStockMoveDetails(Integer.parseInt(stockmoveids));
 			MessStockEntry messStockEntry = messItemsDao.getMessStockEntryByID(messStockMove.getStockentryid());
 			float totalValue = messStockMove.getQuantity() * messStockEntry.getItemunitprice();
 
@@ -632,7 +635,7 @@ public class MessStockMoveService {
 			BigDecimal crAmountReceipt = BigDecimal.valueOf(totalValue);
 			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+crAmountReceipt+" where accountdetailsid="+crStockLedgerIdExpense;
 
-			boolean result = new MessStockMoveDAO().cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
+			boolean result = messStockMoveDao.cancelStockMove(messStockMove,transactions,updateDrAccount,updateCrAccount);
 			resultResponse.setSuccess(result);
 
 		}
@@ -657,7 +660,7 @@ public class MessStockMoveService {
 
 		if(!customerName.isEmpty() && !itemid.isEmpty() ) {
 
-			List<MessStockMove> messStockMove = new MessStockMoveDAO().getCustomerLastPrices(custDetails[0]+"_"+custDetails[1], itemid, Integer.parseInt(branchId));
+			List<MessStockMove> messStockMove = messStockMoveDao.getCustomerLastPrices(custDetails[0]+"_"+custDetails[1], itemid, Integer.parseInt(branchId));
 
 			String priceList = "";
 			String priceListFirst = "";
@@ -718,7 +721,7 @@ public class MessStockMoveService {
 			
 			try {
 								
-				List<Object[]> list = new MessStockMoveDAO().readStockDueDetails(conClassStudying,Integer.parseInt(branchId));
+				List<Object[]> list = messStockMoveDao.readStockDueDetails(conClassStudying,Integer.parseInt(branchId));
 				
 	            for(Object[] parentdetails: list){
 	            	Parents parent = new Parents();
@@ -749,7 +752,7 @@ public class MessStockMoveService {
 		DuesResponseDto duesResponseDto = new DuesResponseDto();
 		List<MessStockMoveInfo> messStockMoveInfoDuesList = new ArrayList<MessStockMoveInfo>();
 		List<MessStockMoveInfo> messStockMoveInfoList = new ArrayList<MessStockMoveInfo>();
-		messStockMoveInfoList = new MessStockMoveDAO().getTotalDue();
+		messStockMoveInfoList = messStockMoveDao.getTotalDue();
 		for(MessStockMoveInfo messStockMoveInfo : messStockMoveInfoList) {
 			if(messStockMoveInfo.getDue()!=0)
 			{
@@ -765,7 +768,7 @@ public class MessStockMoveService {
 		 String duePaid = stockMoveIdsDto.getDuePaid();
 		 double duePaidDouble = Double.parseDouble(duePaid);
 		Long dueAmount = (long) duePaidDouble;
-		new MessStockMoveDAO().updateDue(id, dueAmount);
+		messStockMoveDao.updateDue(id, dueAmount);
 		
 	}
 
@@ -805,13 +808,13 @@ public class MessStockMoveService {
 		billResponseDto.setItemsGrandTotalAmountWOGST(itemsGrandTotalAmountWOGST);
 		billResponseDto.setSumCgst(sumCgst);
 		billResponseDto.setSumSgst(sumSgst);
-		new MessStockMoveDAO().messTaxInvoiceSave(messTaxInvoiceList);
+		messStockMoveDao.messTaxInvoiceSave(messTaxInvoiceList);
 		return billResponseDto;
 	}
 
 	public BillResponseDto getTaxInvoiceDetail() {
 		BillResponseDto billResponseDto = new BillResponseDto();
-		List<MessTaxInvoice> messTaxInvoice = new MessStockMoveDAO().getTaxInvoiceDetail();
+		List<MessTaxInvoice> messTaxInvoice = messStockMoveDao.getTaxInvoiceDetail();
 		billResponseDto.setMessTaxInvoice(messTaxInvoice);
 				return billResponseDto;
 	}

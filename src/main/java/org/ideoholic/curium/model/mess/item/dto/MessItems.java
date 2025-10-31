@@ -53,6 +53,6 @@ public class MessItems implements java.io.Serializable {
 	@Column(name = "userid")
 	private Integer userid;
 
-	@OneToMany(mappedBy = "messitems")
+	@OneToMany(mappedBy = "messItems")
 	private List<MessStockAvailability> messStockavailableList;
 }
