@@ -199,7 +199,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;His Date of Birth is &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;"> <c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+					<span style="font-weight: bold;text-transform: capitalize;"> <fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 					and Religion is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:200px;"> <c:out value="${studentdetailsbonafide.student.religion}" /></span></h3>
 				</td>
 			</tr>
