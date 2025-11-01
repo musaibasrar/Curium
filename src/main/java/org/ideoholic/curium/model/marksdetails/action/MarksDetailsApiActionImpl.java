@@ -199,4 +199,28 @@ public class MarksDetailsApiActionImpl implements MarksDetailsApiAction{
             throw new CustomResponseException(CustomErrorMessage.ERROR);
         }
     }
+    
+    @GetMapping("/finalExamReport")
+	public ResponseEntity<ResultResponse> finalExamReport(@RequestHeader(value = "branchid") String branchId) {
+    	ResultResponse result = standardService.viewClasses(branchId);
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping("/searchForFinalReport")
+	public ResponseEntity<SearchStudentResponseDto> searchForFinalReport(@RequestBody SearchStudentExamDto dto, @RequestHeader(value = "branchid") String branchId) {
+		SearchStudentResponseDto result =  marksDetailsService.Search(dto,branchId);
+		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping("/generatefinalexamReport")
+	public ResponseEntity<GenerateReportResponseDto> generatefinalexamReport(@RequestBody GenerateReportDto dto, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear,@RequestHeader(value = "branchid") String branchId)
+	{
+		GenerateReportResponseDto result = marksDetailsService.generateFinalExamReport(dto,currentAcademicYear,branchId); 
+		if (result.isSuccess()) {
+			return ResponseEntity.ok(result);
+		} else {
+			 throw new CustomResponseException(CustomErrorMessage.ERROR);
+		}
+	}
+	
 }
