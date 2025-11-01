@@ -2137,4 +2137,125 @@ public ResultResponse updateMarksSub(MarksUpdateDto dto, String strCurrentAcadem
 	return result;
 }
 
+public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, String currentAcademicYear, String branchId) {
+	GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
+	
+	
+	if(currentAcademicYear!=null){
+		
+		String[] studentIds = dto.getStudentIds();
+		String examC = dto.getExamClass();
+		String[] examClass = examC.split("--");
+		String examName = dto.getExamName();
+		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+		List<ExamRank> examRankList = new ArrayList<ExamRank>();
+
+		for (int i = 0; i < studentIds.length; i++) {
+			MarksSheet markssheet = new MarksSheet();
+			ExamRank examrank = new ExamRank();
+			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+			markssheet.setParents(studentDetails);
+			
+			for (Exams exam : examsList) {
+				String examNamed = exam.getExamname();
+				if(examName.equalsIgnoreCase(examNamed))
+				{
+				ExamsMarks examMarks = new ExamsMarks();
+				examMarks.setExamName(exam.getExamname());
+				boolean present = false;
+				Map<String,String> subMarks = new HashMap<String, String>();
+				float totalObtainedMarks = 0;
+				float totalMarks = 0;
+				float totalMinMarks = 0;
+				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid());
+				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
+				
+				
+				for (Marks marks : marksDetailsList) {
+						
+						int examId = exam.getExid();
+						int marksExamId = marks.getExamid();
+						
+					if( examId == marksExamId) {
+								present = true;
+								
+							for (Subject sub : subjectList) {
+								
+								int marksSubid = marks.getSubid();
+								int subjectId = sub.getSubid();
+								
+								if(marksSubid == subjectId) {
+									
+									
+									float marksObtained = marks.getMarksobtained();
+									float minMarks = sub.getMinmarks();
+									float maxMarks = sub.getMaxmarks();
+									
+									if( marksObtained < minMarks) {
+										
+										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"/F");
+										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+									}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
+										
+										subMarks.put(sub.getSubjectname(), Float.toString(sub.getMaxmarks())+"/"+sub.getMinmarks()+"/"+marks.getMarksobtained()+""+"/P"+"/"+marks.getSubgrade());
+										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+									}else if(marksObtained == 999) {
+										subMarks.put(sub.getSubjectname(), " _AB");
+									}
+									
+									totalMarks = totalMarks+sub.getMaxmarks();
+									totalMinMarks = totalMinMarks+sub.getMinmarks();
+									
+								}
+							}
+					}
+					
+				}
+				
+				if(present) {
+					examMarks.setTotalMarks(totalMarks);
+					examMarks.setTotalMinMarks(totalMinMarks);
+					examMarks.setTotalMarksObtained(totalObtainedMarks);
+					double d = (totalObtainedMarks*100.0)/totalMarks;
+					examMarks.setPercentage(d);
+					examMarks.setSubMarks(subMarks);
+					//here
+                    int mypercent= (int)Math.round(d);
+					List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(Integer.parseInt(branchId));
+					for (MarksGrade marksGrade : marksGradeDetailsList) {
+						if( mypercent >= marksGrade.getMinpercentage() && mypercent <= marksGrade.getMaxpercentage())	
+						{
+							examMarks.setResultclass(marksGrade.getStatus());
+							examrank.setStatus(marksGrade.getStatus());
+						}
+						
+					}
+					ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),currentAcademicYear,Integer.parseInt(branchId));
+					if(examRank!=null) {
+					examMarks.setRank(examRank.getRank());
+					}
+					examMarksList.add(examMarks);
+					
+				}
+			}
+			}
+			markssheet.setExammarks(examMarksList);
+			marksSheetList.add(markssheet);
+			result.setSuccess(true);
+			
+		}
+		
+		int size = examsList.size();
+		int endLoop = size/5;
+		result.setEndLoop(endLoop+1);
+		result.setMarksSheetList(marksSheetList);
+		result.setExamName(examName);
+				}
+	
+	return result;
+
+}
+
 }
