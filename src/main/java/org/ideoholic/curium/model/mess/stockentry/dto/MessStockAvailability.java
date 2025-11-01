@@ -40,7 +40,7 @@ public class MessStockAvailability implements java.io.Serializable {
 
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "itemid", referencedColumnName = "id", unique = true, nullable = false)
-	private MessItems messitems;
+	private MessItems messItems;
 
 	@Column(name = "branchid")
 	private Integer branchid;
@@ -49,8 +49,8 @@ public class MessStockAvailability implements java.io.Serializable {
 	private Integer userid;
 	
 	public Integer fetchMessItemsId() {
-		if(messitems != null) {
-			return messitems.getId();
+		if(messItems != null) {
+			return messItems.getId();
 		}
 		return null;
 	}

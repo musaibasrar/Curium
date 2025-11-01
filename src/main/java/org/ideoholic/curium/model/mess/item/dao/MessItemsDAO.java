@@ -78,7 +78,7 @@ public class MessItemsDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
         }
-        return messStockAvailability.getMessitems();
+        return messStockAvailability.getMessItems();
     }
 
     @Transactional
@@ -86,12 +86,12 @@ public class MessItemsDAO {
         boolean result = false;
         try {
             // Query queryStock = session.createQuery("from MessStockAvailability msa where msa.availablestock > 0 and msa.messitems.id IN (:ids) ");
-            List<MessStockAvailability> stocklist = messStockAvailabilityRepository.findByAvailablestockGreaterThanAndMessitems_IdIn(0.0f, ids);
+            List<MessStockAvailability> stocklist = messStockAvailabilityRepository.findByAvailablestockGreaterThanAndMessItems_IdIn(0.0f, ids);
 
             if (stocklist.isEmpty()) {
                 // Query queryMSA = session.createQuery("delete from MessStockAvailability msa where msa.messitems.id IN (:ids)");
                 // messStockAvailabilityRepository.deleteByMessitems_IdIn(ids);
-            	messStockAvailabilityRepository.deleteByMessitems_IdIn(ids);
+            	messStockAvailabilityRepository.deleteByMessItems_IdIn(ids);
 
                 // Query queryMI = session.createQuery("delete from MessItems where id IN (:ids)");
                 messItemsRepository.deleteAllByIdInBatch(ids);
@@ -112,10 +112,10 @@ public class MessItemsDAO {
         try {
             for (MessStockAvailability items : messStockAvailabilityList) {
                 // Query query = session.createQuery("update MessItems set name = '"+items.getMessitems().getName()+"', unitofmeasure = '"+items.getMessitems().getUnitofmeasure()+"' where id="+items.getMessitems().getId());
-                messItemsRepository.updateNameAndUnitofmeasureById(items.getMessitems().getName(), items.getMessitems().getUnitofmeasure(), items.getMessitems().getId());
+                messItemsRepository.updateNameAndUnitofmeasureById(items.getMessItems().getName(), items.getMessItems().getUnitofmeasure(), items.getMessItems().getId());
 
                 // Query queryMessStock = session.createQuery("update MessStockAvailability set minstock = '"+items.getMinstock()+"' where itemid="+items.getMessitems().getId());
-                messStockAvailabilityRepository.updateMinstockByItemid(items.getMinstock(), items.getMessitems().getId());
+                messStockAvailabilityRepository.updateMinstockByItemid(items.getMinstock(), items.getMessItems().getId());
             }
             result = true;
         } catch (HibernateException hibernateException) {
@@ -207,7 +207,7 @@ public class MessItemsDAO {
         List<MessStockAvailability> results = new ArrayList<>();
         try {
             // session.createQuery("From MessStockAvailability ms order by ms.messitems.name ASC").setCacheable(true).setCacheRegion("commonregion").list();
-            results = messStockAvailabilityRepository.findAllOrderByMessitems();
+            results = messStockAvailabilityRepository.findAllOrderByMessItems();
         } catch (Exception hibernateException) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             log.error(hibernateException.getMessage(), hibernateException);
@@ -352,7 +352,7 @@ public class MessItemsDAO {
         List<MessStockAvailability> results = new ArrayList<>();
         try {
             // session.createQuery("From MessStockAvailability ms where availablestock > 0 order by ms.messitems.name ASC").setCacheable(true).setCacheRegion("commonregion").list();
-            results = messStockAvailabilityRepository.findByAvailablestockGreaterThanOrderByMessitems_NameAsc(0.0f);
+            results = messStockAvailabilityRepository.findByAvailablestockGreaterThanOrderByMessItems_NameAsc(0.0f);
         } catch (Exception hibernateException) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             log.error(hibernateException.getMessage(), hibernateException);
