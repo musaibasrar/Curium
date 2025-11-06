@@ -215,7 +215,7 @@ public class DocumentService {
 				 student.setSid(studentId);
 					new studentDetailsDAO().updateStudentDuplicate(student);
 					transferCertificateString = new DocumentDAO().updateTransferCertificate(tc);
-					/* return "studentexists"; */
+					return "studentexists";
 			 }else {
 				 	student.setReasonleaving(leavingReason);
 					student.setSid(studentId);
