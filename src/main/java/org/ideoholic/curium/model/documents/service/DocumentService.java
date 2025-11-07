@@ -961,6 +961,7 @@ public class DocumentService {
 					Student student = parents.getStudent();
 					student.setNotcissued(transferCert.getNoofissues());
 					student.setNooftc(transferCert.getTcid());
+					student.setDatetcissued(transferCert.getDateofissues());
 					parents.setStudent(student);
 				}
 				
@@ -1046,6 +1047,7 @@ public class DocumentService {
 					Student student = parents.getStudent();
 					student.setNotcissued(transferCert.getNoofissues());
 					student.setNooftc(transferCert.getTcid());
+					student.setDatetcissued(transferCert.getDateofissues());
 					parents.setStudent(student);
 				}
 				

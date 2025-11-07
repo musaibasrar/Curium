@@ -576,4 +576,14 @@ public class JspController {
 	public String getDayBook() {
 		return "daybook";
 	}
+	
+	@GetMapping("/leftsettings_marksentry")
+	public String getLeftSettingsMarksEntry() {
+		return "leftsettings_marksentry";
+	}
+	
+	@GetMapping("/reports_marksentry")
+	public String getReportsMarksEntry() {
+		return "reports_marksentry";
+	}
 }

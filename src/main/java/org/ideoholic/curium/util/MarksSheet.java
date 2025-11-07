@@ -11,17 +11,22 @@ public class MarksSheet  implements java.io.Serializable {
     List<FinalTermMarks> finaltermmarks;
     List<ExamsMarks> otherexammarks;
     String overallresult;
-    
+    int totalDays;
+    int totalPresent;
+    int totalAbsent;    
     
     public MarksSheet() {
     }
 
-    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult) {
+    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent) {
         this.parents = parents;
         this.exammarks = exammarks;
         this.finaltermmarks = finaltermmarks;
         this.otherexammarks = otherexammarks;
         this.overallresult = overallresult;
+        this.totalDays = totalDays;
+        this.totalPresent = totalPresent;
+        this.totalAbsent = totalAbsent;
     }
 
 
@@ -65,6 +70,30 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setOverallresult(String overallresult) {
 		this.overallresult = overallresult;
+	}
+
+	public int getTotalDays() {
+		return totalDays;
+	}
+
+	public void setTotalDays(int totalDays) {
+		this.totalDays = totalDays;
+	}
+
+	public int getTotalPresent() {
+		return totalPresent;
+	}
+
+	public void setTotalPresent(int totalPresent) {
+		this.totalPresent = totalPresent;
+	}
+
+	public int getTotalAbsent() {
+		return totalAbsent;
+	}
+
+	public void setTotalAbsent(int totalAbsent) {
+		this.totalAbsent = totalAbsent;
 	}
 	
   }

@@ -409,6 +409,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Father Name&nbsp;</th>
                             <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
+                            <th title="click to sort" class="headerText">Issue Date</th>
                             <th title="click to sort" class="headerText">No. of issue</th>
                              
 
@@ -426,6 +427,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${parent.student.name}"/></td>
                                 <td class="dataText"><c:out value="${parent.fathersname}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${parent.student.classstudying}"/></td>
+                                <td id="studyclass" class="dataText"><c:out value="${parent.student.datetcissued}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${parent.student.notcissued}"/></td>
 
 

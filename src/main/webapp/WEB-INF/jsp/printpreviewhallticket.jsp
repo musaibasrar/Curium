@@ -335,7 +335,7 @@ for(Cookie cookie : cookies){
 							<td><br><br></td>
 							<td></td>
 							<td></td>
-							<td><img src="/shatabdi/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td><img src="/shatabdi/images/principalsignature.png" width="60" height="50"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 						</tr>
 				<tr>
 				<td></td>

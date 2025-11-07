@@ -216,6 +216,20 @@ span{
 		window.print();
 		}
         </script> -->
+        
+        <style>
+    /* Ensure tables don't exceed the page width */
+    .marksheet-container {
+        width: 100%;
+        max-width: 21cm; /* Width of A4 page */
+        margin: 0 auto; /* Center the table */
+        font-family: Arial, sans-serif;
+    }
+    /* Styles for all tables */
+    table { border-collapse: collapse; border-color: #4b6a84; }
+    th, td { border: 1px solid black; padding: 2px 4px; text-align: center; }
+    .header-bg { background-color: #b5ffe6; }
+</style>
 	<title> </title>
         
 </head>
@@ -244,27 +258,27 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
               <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">
-				<table align="center">
+				<table width="100%" align="center">
 				
 					<tr>
 					<td>
-					School Code-65109&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;REPORT CARD&emsp;&emsp;&emsp;&emsp;&emsp;
+					School Code-65109&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
 						CBSE Affiliation No.-330113</td>
 					</tr>
 					<tr>
 					
-						<td style="font-family: bold;font-size:35px;text-transform:uppercase;vertical-align: middle;
-						display: flex; align-items: center;">
-						<img src="/shatabdi/images/shatabdi.png" width="42" height="50"/>${branchname},Gaya
+						<td style="font-weight: bold;font-size: 35px;text-transform: uppercase;display: flex;justify-content: center;align-items: center;text-align: center;vertical-align: middle;">
+						<img src="/shatabdi/images/shatabdi.png" width="42" height="50"/><label style="padding-left: 20px;padding-right: 20px;">${branchname},Gaya</label>
 						<img src="/shatabdi/images/cbselogo.png" width="42" height="47"/></td>
 						
 					</tr>
 					
 					<tr>
-						<td  style="font-family: bold;">
+						<td  style="font-family: bold;background-color: #b5ffe6;">
 						<c:set var="dataSubParts" value="${fn:split(currentAcademicYear,'/')}" />
 						<%-- Academic Year: ${dataSubParts[0]}-${dataSubParts[1]} --%>
-						Academic Year: ${academicyear}
+						Academic Year: ${academicyear}<br>
+						REPORT CARD						
 						</td>
 					</tr>
 				</table>
@@ -284,11 +298,13 @@ for(Cookie cookie : cookies){
 								<p style="margin-bottom: 0px;margin-top: 0px;">Roll No.</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">Class & sec</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">DOB</p>
-								<p style="margin-bottom: 0px;margin-top: 0px;">Attendance</p></td>
+								<p style="margin-bottom: 0px;margin-top: 0px;">Attendance</p>
+								</td>
 								<td colspan="4" style="text-align: left;"><p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.sts}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">${examclass}<%-- ${Parents.parents.student.classstudying} --%></p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
-								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.remarks}</p></td>
+								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.remarks}</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">Total Days:&nbsp;${Parents.totalDays}&nbsp;Total Present:&nbsp;${Parents.totalPresent}&nbsp;Total Absent:&nbsp;${Parents.totalAbsent}</td>
 							<%-- <td colspan="2" style="text-align:left;"><p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.admissionnumber}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
@@ -298,7 +314,156 @@ for(Cookie cookie : cookies){
 					</table>
 								<c:choose>
 									<c:when test="${examterm == 'term1'}">
-												<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
+									
+									<table width="100%">
+								        <thead>
+								            <tr>
+								                <th width="15%" class="header-bg" style="font-size: 14px;">Scholastic Areas</th>
+								                <th width="85%" class="header-bg" style="font-size: 16px;">Term 1</th>
+								            </tr>
+								        </thead>
+								    </table>
+								    
+								    <table width="15%" style="float: left;">
+									        <thead>
+									            <tr>
+									                <th class="header-bg" style="font-size: 12px;">Subject&nbsp;</th>
+									            </tr>
+									        </thead>
+									        <tbody>
+									            <tr>
+									                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
+									                    <td>
+									                        <table width="100%">
+									                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
+									                                <tr class="header-bg">
+									                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+									                                    <td style="text-align: left; font-size: 10px;">${submarks.key}</td>
+									                                </tr>
+									                            </c:forEach>
+									                        </table>
+									                    </td>
+									                </c:forEach>
+									            </tr>
+									        </tbody>
+									    </table>
+									    
+									    <table width="85%" style="float: left;">
+									        <thead>
+									            <tr style="background-color: #b5ffe6">
+									                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="5" step="1">
+									                    <th style="font-size: 12px; width: <c:out value="${100 / 6}"/>%;">
+									                        <c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
+									                        <c:out value="${examParts[1]}"/>
+									                    </th>
+									                </c:forEach>
+									            </tr>
+									        </thead>
+									        <tbody>
+									            <tr>
+									                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="5" step="1">
+									                    <td>
+									                        <table width="100%">
+									                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
+									                                <tr>
+									                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+									                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
+									                                    <td style="text-align: center; font-size: 12px;">${dataSubParts[0]}</td>
+									                                </tr>
+									                            </c:forEach>
+									                        </table>
+									                    </td>
+									                </c:forEach>
+									            </tr>
+									        </tbody>
+									    </table>
+
+    
+										<%-- 		<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
+								    <thead>
+								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
+								            <th style="border: 1px solid black;background-color: #b5ffe6;"><c:out value="Scholastic Areas"/></th>
+								        </tr>
+								    </thead>
+								</table>
+										<table width="85%" border="0" style="border-color: #4b6a84;float: left;">
+								        <thead>
+								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
+								                <th style="border: 1px solid black;font-size: 18px;background-color: #b5ffe6;">Term 1</th>
+								                <!-- <th style="border: 1px solid black;">Grade</th> -->
+								            </tr>
+								        </thead>
+								</table> --%>
+					
+					<%-- <table width="15%" border="0" style="border-color: #4b6a84;float: left;">
+								    <thead>
+								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
+								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;"><c:out value="Subject"/>&nbsp;</th>
+								        </tr>
+								    </thead>
+								    
+								    <tbody>
+								        <tr>
+								            <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
+								                <td>
+								                    <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
+								                        <c:forEach items="${exammarks.subMarks}" var="submarks" >
+								                            <tr style="border: 1px solid black;font-size: 18px;background-color: #b5ffe6;">
+								                                <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+								                                <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
+								                            </tr>
+								                        </c:forEach>
+								                        <!-- <tr style="border-top: 1px solid black;font-size: 18px;">
+								                            <td style="border: 1px solid black;text-align: left;">Total</td>
+								                        </tr> -->
+								                    </table>
+								                </td>
+								            </c:forEach>
+								        </tr>
+								    </tbody>
+								</table>
+								
+								<c:set var = "beginloop" value = "0"/>
+								<c:set var = "endloop" value = "2"/>
+								<c:forEach begin="0" end="${endloop}" step="1">
+								    <table width="85%" border="0" style="border-color: #4b6a84;float: left;">
+								        <thead>
+								            <tr style="border: 1px solid black;text-align: center;background-color: #b5ffe6">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "5" step="1">
+								                    <th style="border: 1px solid black;font-size: 12px;">
+								                    <c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
+								                    <c:out value="${examParts[1]}"/></th>
+								                </c:forEach>
+								                <!-- <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/40)</th> -->
+								                <!-- <th style="border: 1px solid black;">Grade</th> -->
+								            </tr>
+								        </thead>
+								        
+								        <tbody>
+								            <tr>
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "5" step="1">
+								                    <td>
+								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
+								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
+								                                <tr style="border: 1px solid black;font-size: 18px;">
+								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
+								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
+								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
+								                                </tr>
+								                            </c:forEach>
+								                            <tr style="border-top: 1px solid black;font-size: 18px;">
+								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
+								                            </tr>
+								                        </table>
+								                    </td>
+								                </c:forEach>
+								            </tr>
+								        </tbody>
+								    </table> --%>
+									</c:when>
+									<c:when test="${examterm == 'term2'}">
+										
+								<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
 								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
 								            <th style="border: 1px solid black;"><c:out value="Scholastic Areas"/></th>
@@ -308,16 +473,17 @@ for(Cookie cookie : cookies){
 										<table width="85%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <th style="border: 1px solid black;font-size: 18px;">Term 1</th>
+								                <th style="border: 1px solid black;font-size: 18px;">Term 2</th>
 								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
 								</table>
+								
 					
-					<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
+							<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
 								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								            <th style="border: 1px solid black;font-size: 14px;"><c:out value="Subject"/>&nbsp;</th>
+								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;"><c:out value="Subject"/><br/>&nbsp;</th>
 								        </tr>
 								    </thead>
 								    
@@ -379,136 +545,6 @@ for(Cookie cookie : cookies){
 								            </tr>
 								        </tbody>
 								    </table>
-								    
-								    
-					<!-- <table width="100%" align="center" style="border:1px solid black;margin-top: 90px;">
-							
-						<tr>	
-							<td style="background-color:#A9A9A9;text-align:left"></td>
-						</tr>		
-					</table> 			    
-								</table>-->
-									</c:when>
-									<c:when test="${examterm == 'term2'}">
-										
-								<table width="42%" border="0" style="border-color: #4b6a84;float: left;">
-								        <thead>
-								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <th style="border: 1px solid black;font-size: 18px;">Term 2</th>
-								                <!-- <th style="border: 1px solid black;">Grade</th> -->
-								            </tr>
-								        </thead>
-								</table>
-								
-					
-							<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
-								    <thead>
-								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								            <th style="border: 1px solid black;font-size: 14px;"><c:out value="Subject"/><br/>&nbsp;</th>
-								        </tr>
-								    </thead>
-								    
-								    <tbody>
-								        <tr>
-								            <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
-								                <td>
-								                    <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                        <c:forEach items="${exammarks.subMarks}" var="submarks" >
-								                            <tr style="border: 1px solid black;font-size: 18px;">
-								                                <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-								                            </tr>
-								                        </c:forEach>
-								                        <!-- <tr style="border-top: 1px solid black;font-size: 18px;">
-								                            <td style="border: 1px solid black;text-align: left;">Total</td>
-								                        </tr> -->
-								                    </table>
-								                </td>
-								            </c:forEach>
-								        </tr>
-								    </tbody>
-								</table>
-								
-								<%-- <c:set var = "beginloop" value = "0"/>
-								<c:set var = "endloop" value = "2"/>
-								<c:forEach begin="0" end="${endloop}" step="1"> --%>
-								    <table width="42%" border="0" style="border-color: #4b6a84;float: left;">
-								        <thead>
-								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "5" step="1">
-								                    <th style="border: 1px solid black;font-size: 12px;">
-								                    <c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
-								                    <c:out value="${examParts[1]}"/></th>
-								                </c:forEach>
-								                <!-- <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/40)</th> -->
-								                <!-- <th style="border: 1px solid black;">Grade</th> -->
-								            </tr>
-								        </thead>
-								        
-								        <tbody>
-								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end= "5" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <%-- <tr style="border-top: 1px solid black;font-size: 18px;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								            </tr>
-								        </tbody>
-								    </table>
-								    
-								    <table width="42%" border="0" style="border-color: #4b6a84;float: left;">
-								        <thead>
-								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="6" end= "11" step="1">
-								                    <th style="border: 1px solid black;font-size: 12px;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
-								                    <c:out value="${examParts[1]}"/></th>
-								                </c:forEach>
-								               <!--  <th style="border: 1px solid black;font-size: 9px;">Obtained<br>Marks<br>(100/60)</th> -->
-								                <!-- <th style="border: 1px solid black;">Grade</th> -->
-								            </tr>
-								        </thead>
-								        
-								        <tbody>
-								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="6" end= "11" step="1">
-								                    <td>
-								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
-								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
-								                                <tr style="border: 1px solid black;font-size: 18px;">
-								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
-								                                </tr>
-								                            </c:forEach>
-								                            <%-- <tr style="border-top: 1px solid black;font-size: 18px;">
-								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr> --%>
-								                        </table>
-								                    </td>
-								                </c:forEach>
-								            </tr>
-								        </tbody>
-								    </table>
-								    
-								    
-					<table width="100%" align="center" style="border:1px solid black;margin-top: 90px;">
-							
-						<tr>	
-							<td style="background-color:#A9A9A9;text-align:left"></td>
-						</tr>		
-					</table>			    
-								</table>
 									</c:when>
 									<c:otherwise >
 										<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
@@ -539,7 +575,7 @@ for(Cookie cookie : cookies){
 					<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
 								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								            <th style="border: 1px solid black;font-size: 14px;"><c:out value="Subject"/><br/>&nbsp;</th>
+								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;"><c:out value="Subject"/><br/>&nbsp;</th>
 								        </tr>
 								    </thead>
 								    
@@ -678,12 +714,135 @@ for(Cookie cookie : cookies){
 								
 </div>
 
+<c:if test="${examterm == 'term1'}">
+				<TABLE id="dataTable" width="100%" border="0"
+					style="page-break-inside: avoid; border-collapse: collapse;">
+
+					<tr>
+						<td colspan="13"
+							style="border-left: solid white; border-right: solid white"><br></td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black;background-color: #b5ffe6;">Co-Scholastic
+							Areas:Term-1[on a 3-point(A-C)grading scale]</td>
+							<td 
+							style="border: 1px solid black; text-align: center;background-color: #b5ffe6;">Grade</td>
+					</tr>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Work-education(or
+							pre-vocational)</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Art Education</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Health and
+							Physical Education</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Discipline</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="13"
+							style="border-left: solid white; border-right: solid white"><br></td>
+					</tr>
+					
+					<tr>
+						<td colspan="13"
+							style="border-left: solid white; border-right: solid white"><br></td>
+					</tr>
+					</table>
+					
+					<TABLE id="dataTable" width="100%" border="0"
+					style="page-break-inside: avoid; border-collapse: collapse;">
+
+				<tr>
+					<td></td>
+					<td align="left">
+					Place:&nbsp;<br><br>
+					Date:&nbsp;</td>	
+					<td align="centre">Signature<br><br>Class Teacher</td>
+					<td align="centre">Signature<br><br>Principal</td>
+				</tr>
+                    
+		</TABLE>
+					
+				
+				</c:if>
+				
+				
+				<c:if test="${examterm == 'term2'}">
+				<TABLE id="dataTable" width="100%" border="0"
+					style="page-break-inside: avoid; border-collapse: collapse;">
+
+					<tr>
+						<td colspan="13"
+							style="border-left: solid white; border-right: solid white"><br></td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Co-Scholastic
+							Areas:Term-2[on a 3-point(A-C)grading scale]</td>
+							<td 
+							style="border: 1px solid black; text-align: center;">Grade</td>
+					</tr>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Work-education(or
+							pre-vocational)</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Art Education</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Health and
+							Physical Education</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td style="border: 1px solid black">Discipline</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+					</tr>
+					<tr>
+						<td colspan="13"
+							style="border-left: solid white; border-right: solid white"><br></td>
+					</tr>
+					
+					<tr>
+						<td colspan="13"
+							style="border-left: solid white; border-right: solid white"><br></td>
+					</tr>
+					</table>
+					
+					<TABLE id="dataTable" width="100%" border="0"
+					style="page-break-inside: avoid; border-collapse: collapse;">
+
+				<tr>
+					<td></td>
+					<td align="left">
+					Place:&nbsp;<br><br>
+					Date:&nbsp;</td>	
+					<td align="centre">Signature<br><br>Class Teacher</td>
+					<td align="centre">Signature<br><br>Principal</td>
+				</tr>
+                    
+		</TABLE>
+					
+				
+				</c:if>
+
 <c:if test="${examterm == 'term1term2'}">
 <div style="display: flex; justify-content: center;">
     <table width="15%" border="0" style="border-color: #4b6a84;">
         <thead>
             <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-                <th style="border: 1px solid black;font-size: 14px;"><c:out value="Subject"/>&nbsp;</th>
+                <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;"><c:out value="Subject"/>&nbsp;</th>
             </tr>
         </thead>
         
@@ -742,11 +901,6 @@ for(Cookie cookie : cookies){
         </tbody>
     </table>
 </div>
-			</c:if>					    
-								    
-								    
-								    
-
 				<TABLE id="dataTable" width="100%" border="0"
 					style="page-break-inside: avoid; border-collapse: collapse;">
 
@@ -776,9 +930,9 @@ for(Cookie cookie : cookies){
 					</tr>
 					<tr>
 						<td colspan="6"
-							style="border: 1px solid black; text-align: right;">Grade</td>
+							style="border: 1px solid black; text-align: center;">Grade</td>
 						<td colspan="7"
-							style="border: 1px solid black; text-align: right;">Grade</td>
+							style="border: 1px solid black; text-align: center;">Grade</td>
 					</tr>
 					<tr>
 						<td colspan="5" style="border: 1px solid black">Work-education(or
@@ -808,9 +962,9 @@ for(Cookie cookie : cookies){
 					</tr>
 					<tr>
 						<td colspan="6"
-							style="border: 1px solid black; text-align: right;">Grade</td>
+							style="border: 1px solid black; text-align: center;">Grade</td>
 						<td colspan="7"
-							style="border: 1px solid black; text-align: right;">Grade</td>
+							style="border: 1px solid black; text-align: center;">Grade</td>
 					</tr>
 					<tr>
 						<td colspan="5" style="border: 1px solid black">Discipline
@@ -946,15 +1100,10 @@ for(Cookie cookie : cookies){
 						<td>FAIR</td>
 						</tr>
 				</table>
+				</c:if>
 				</div>
 			</c:forEach>
-			<table>
-			<tr>
-			<td style="font-weight:bold;">Total Days:&emsp;&emsp;</td><td style="font-weight:bold;">${totalDays}</td>
-			<td style="font-weight:bold;">&emsp;&emsp;Total Present:&emsp;&emsp;</td><td style="font-weight:bold;">${totalpresent}</td>
-			<td style="font-weight:bold;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Total Absent:&emsp;&emsp;</td><td style="font-weight:bold;">${totalabsent}</td>
-			</tr>
-			</table>
+		
 			
 			<button value="Print" id="printwindow" name="printwindow" onclick="printWindow();">Print</button>
 	</form>

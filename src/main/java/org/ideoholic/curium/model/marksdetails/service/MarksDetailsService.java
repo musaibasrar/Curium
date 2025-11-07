@@ -641,9 +641,9 @@ public class MarksDetailsService {
 					totalPresent = totalDays - absentDays;
 				}
 				
-				request.setAttribute("totalDays", totalDays);
-				request.setAttribute("totalpresent", totalPresent);
-				request.setAttribute("totalabsent", absentDays);
+				markssheet.setTotalPresent(totalPresent);
+				markssheet.setTotalAbsent(absentDays);
+				markssheet.setTotalDays(totalDays);
 				markssheet.setParents(studentDetails);
 				
 				
@@ -691,25 +691,35 @@ public class MarksDetailsService {
 											
 											switch (examId) {
 											case 1:
-												marksObtained = marks.getMarksobtained()/10;
-												minMarks = sub.getMinmarks()/10;
-												maxMarks = sub.getMaxmarks()/10;
+												marksObtained = marks.getMarksobtained()/5;
+												minMarks = sub.getMinmarks()/5;
+												maxMarks = sub.getMaxmarks()/5;
 												
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
+													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), " _AB");
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 												}
 												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+												
 												
 												break;
 											case 7:
@@ -721,17 +731,28 @@ public class MarksDetailsService {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = totalObtainedMarks+marksObtained;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = totalObtainedMarks+marksObtained;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
+													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), " _AB");
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}
 												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+												
 												
 												break;
 											case 8:
@@ -743,17 +764,27 @@ public class MarksDetailsService {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
+													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), " _AB");
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 												}
 												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+												
 												
 												break;
 
@@ -766,26 +797,36 @@ public class MarksDetailsService {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
-													subMarks.put(sub.getSubjectname(), " _AB");
+													marksObtained = 0;
+													subMarks.put(sub.getSubjectname(), "AB/"+maxMarks+""+"_AB");
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 												}
 												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+												
 											}
 											
 											// Update individual subject marks
-						                    String markEntry = marksObtained + "/" + maxMarks + ((marksObtained < sub.getMinmarks()) ? "_F" : "_P");
-						                    subMarks.put(sub.getSubjectname(), markEntry);
+						                    //String markEntry = marksObtained + "/" + maxMarks + ((marksObtained < sub.getMinmarks()) ? "_F" : "_P");
+						                    //subMarks.put(sub.getSubjectname(), markEntry);
 
 						                    // Add to total marks
-						                    totalObtainedMarks += marksObtained;
-						                    totalMarks += maxMarks;
+						                   // totalObtainedMarks += marksObtained;
+						                   // totalMarks += maxMarks;
 
 						                    // **Summation Logic**
 						                    subjectTotalMarksTermOne.put(sub.getSubjectname(),subjectTotalMarksTermOne.getOrDefault(sub.getSubjectname(), 0f) + marksObtained
@@ -918,18 +959,27 @@ public class MarksDetailsService {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
+													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), " _AB");
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 												}
-												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
-												
 												break;
 											case 9:
 												marksObtained = 5;
@@ -962,18 +1012,27 @@ public class MarksDetailsService {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
+													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), " _AB");
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 												}
-												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
-												
 												break;
 
 											default:
@@ -985,27 +1044,30 @@ public class MarksDetailsService {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_F");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Float.toString(marksObtained)+"/"+maxMarks+""+"_P");
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
 												}else if(marksObtained == 999) {
+													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), " _AB");
+													
+													totalMarks = totalMarks+maxMarks;
+													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 												}
 												
-												totalMarks = totalMarks+maxMarks;
-												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
 											}
-											
-											// Update individual subject marks
-						                    String markEntry = marksObtained + "/" + maxMarks + ((marksObtained < sub.getMinmarks()) ? "_F" : "_P");
-						                    subMarks.put(sub.getSubjectname(), markEntry);
-
-						                    // Add to total marks
-						                    totalObtainedMarks += marksObtained;
-						                    totalMarks += maxMarks;
-
 						                    // **Summation Logic**
 						                    subjectTotalMarksTermTwo.put(sub.getSubjectname(),subjectTotalMarksTermTwo.getOrDefault(sub.getSubjectname(), 0f) + marksObtained
 						                    );

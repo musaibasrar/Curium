@@ -250,13 +250,14 @@
             <table class="datatable" style="border-collapse: collapse; width: 100%; border: 1px solid #000;">
             <thead>
  				 <tr>
- 				 		    <th style="border: 1px solid #000;">UID</th>
-                            <th style="border: 1px solid #000;">TCID</th>
+ 				 		    <!-- <th style="border: 1px solid #000;">UID</th> -->
+                            <th style="border: 1px solid #000;">TC ID</th>
                             <th style="border: 1px solid #000;">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th style="border: 1px solid #000;">Father Name&nbsp;</th>
-                            <th style="border: 1px solid #000;">Contact&nbsp;</th>
-                            <th style="border: 1px solid #000;">Class & Sec&nbsp;</th>
-                            <th style="border: 1px solid #000;">No. of issue</th> 				
+                            <!-- <th style="border: 1px solid #000;">Contact&nbsp;</th> -->
+                            <th style="border: 1px solid #000;">Class&nbsp;</th>
+                            <th style="border: 1px solid #000;">No. of Issue</th>
+                            <th style="border: 1px solid #000;">Date of Issue</th> 				
                              </tr>
  			 </thead>
 			<tbody>
@@ -264,13 +265,16 @@
 					<c:forEach items="${studenttcissued}" var="parent" varStatus="status">
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-                                <td  class="dataTextInActive"  style="border: 1px solid #000;"><c:out value="${parent.student.studentexternalid}"/></td>
+                                <%-- <td  class="dataTextInActive"  style="border: 1px solid #000;"><c:out value="${parent.student.studentexternalid}"/></td> --%>
                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.student.nooftc}"/></td>
                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.student.name}"/></td>
                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.fathersname}"/></td>
-                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.contactnumber}"/></td>
-                                <td id="studyclass"  style="border: 1px solid #000;" class="dataText"><c:out value="${parent.student.classstudying}"/></td>
+                                 <%-- <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.contactnumber}"/></td> --%>
+                                <td id="studyclass"  style="border: 1px solid #000;" class="dataText">
+                                <c:set var="splitArray" value="${fn:split(parent.student.classstudying, '--')}" />
+                                <c:out value="${splitArray[0]}"/></td>
                                 <td id="studyclass"   style="border: 1px solid #000;" class="dataText"><c:out value="${parent.student.notcissued}"/></td>
+                                <td id="studyclass"   style="border: 1px solid #000;" class="dataText"><c:out value="${parent.student.datetcissued}"/></td>
 						</tr>
 						
 					</c:forEach>
