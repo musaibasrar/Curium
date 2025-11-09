@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentFeesStructureRepository extends JpaRepository<Studentfeesstructure, Integer> {
 
+	// Find fee structures for a student and a set of feescategory ids
 	List<Studentfeesstructure> findByStudentSidAndFeescategoryIdfeescategoryIn(Integer sid, List<Integer> feescat);
 	
+	// Find fee structures for a student and academic year
 	List<Studentfeesstructure> findByStudentSidAndAcademicyear(Integer sid, String academicYear);
 
 	List<Studentfeesstructure> findByStudent_SidInAndAcademicyear(List<Integer> studentids, String academicYear);
@@ -25,4 +27,10 @@ public interface StudentFeesStructureRepository extends JpaRepository<Studentfee
     @Modifying
     @Query("delete from Studentfeesstructure s where s.student.sid = :sid and s.sfsid in :ids")
     void deleteBySidAndSfsidIn(@Param("sid") int sid, @Param("ids") List<Integer> ids);
+    
+    // Find by sfsid
+    List<Studentfeesstructure> findBySfsid(Integer sfsid);
+
+    // Used in addStudentfeesstructure to find existing record for combination of student, feescategory and year
+    List<Studentfeesstructure> findByStudentSidAndFeescategoryIdfeescategoryAndAcademicyear(Integer sid, Integer feescategoryId, String academicyear);
 }

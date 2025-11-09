@@ -28,6 +28,8 @@ import lombok.extern.slf4j.Slf4j;
 public class LibraryService {
 	
 	private final LibraryDAO libraryDao;
+	
+	private final StudentDetailsDAO studentDetailsDao;
 
 	public ResultResponse addBook(BookDto bookDto, String branchId) {
 
@@ -285,7 +287,7 @@ public class LibraryService {
 		
 		if (branchid != null) {
 		try {
-			List<Parents> list = new StudentDetailsDAO()
+			List<Parents> list = studentDetailsDao
 					.getStudentsList("from Parents as parents where parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.student.branchid = " + Integer.parseInt(branchid));
 			return ResultResponse.builder().success(true).resultList(list).build();
 		} catch (Exception e) {

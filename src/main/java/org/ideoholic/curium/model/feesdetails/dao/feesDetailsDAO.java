@@ -60,6 +60,8 @@ public class feesDetailsDAO {
 	private OtherReceiptInfoRepository otherReceiptInfoRepo;
 	@Autowired
 	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepository;
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 	
        
 
@@ -457,7 +459,7 @@ public class feesDetailsDAO {
 					}
 
 					for (String id : studentIds) {
-						Student student = new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(id));
+						Student student = studentDetailsDao.readUniqueObject(DataUtil.parseInt(id));
 						for(int i=0; i < feesCategoryIds.length ; i++){
 							String[] feesCategoryIdsdiv = 	feesCategoryIds[i].split("--");
 							

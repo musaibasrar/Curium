@@ -34,6 +34,9 @@ public class FeesDetailsService {
 	
 	@Autowired
 	private feesDetailsDAO feesDetailsDao;
+	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 
 	public Feesdetails addFeesDetails(FeesIdDetailsDto feesIdDetailsDto,String branchid,String userId, String currentyear) {
 		
@@ -41,7 +44,7 @@ public class FeesDetailsService {
 		if(branchid!=null){
 			// Setting the fees details
 			String sid = feesIdDetailsDto.getStudentId();
-			feesdetails.setStudent(new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(sid)));
+			feesdetails.setStudent(studentDetailsDao.readUniqueObject(DataUtil.parseInt(sid)));
 			feesdetails.setDateoffees(DataUtil.emptyString(feesIdDetailsDto.getDateoffees()));
 			feesdetails.setAmountpercat(DataUtil.emptyString(feesIdDetailsDto.getFeesTotalAmount()));
 			feesdetails.setGrandtotal(DataUtil.emptyString(feesIdDetailsDto.getGrandTotalAmount()));
@@ -73,7 +76,7 @@ public class FeesDetailsService {
 					
 					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
 					if (receiptInfo != null) {
-						student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+						student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
 						feesMap.put(student, receiptInfo);
 					}
 				}
@@ -184,7 +187,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = feesDetailsDao.readOtherFeesDetails(Integer.parseInt(id));
-					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+					student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(student, receiptInfo);
 				}
 
@@ -301,7 +304,7 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
-					student = new StudentDetailsDAO().readUniqueObjectParents(receiptInfo.fetchSid());
+					student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
 					feesMap.put(receiptInfo, student);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();

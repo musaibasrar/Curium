@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.studentdiary.service;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +25,9 @@ public class StudentDiaryservice {
 	
 	@Autowired
 	private StudentDiaryDAO studentDiaryDAO;
+	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 	  
       /**
        * Size of a byte buffer to read/write file
@@ -105,7 +107,7 @@ public class StudentDiaryservice {
          
          if(branchId!=null){
                  try {
-			         Student student = new StudentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
+			         Student student = studentDetailsDao.readploginUniqueObject(studentIdPageDto.getStudentId());
 			         String classsec = student.getClassstudying();
                 	 int page = 1;
      				int recordsPerPage = 100;

@@ -32,6 +32,16 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
 			@Param("branchId") String branchId, Pageable pageable);
 
 	Parents findByStudentSid(@Param("sid") Integer sid);
-	
+
 	List<Parents> findByStudentSidIn(List<Integer> ids);
+	
+	
+	@Query("SELECT parents FROM Parents AS parents WHERE parents.student.archive=0 AND parents.student.passedout=0 "
+			+ "AND parents.student.droppedout=0 AND parents.student.leftout=0 AND parents.branchid=:branchId "
+			+ "ORDER BY parents.student.sid desc")
+	Page<Parents> findActiveParentsByBranchId(@Param("branchId") Integer branchId, Pageable pageable);
+
+	@Query("SELECT parents FROM Parents AS parents WHERE parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 "
+			+ "AND parents.student.leftout=0 ORDER BY parents.student.name ASC")
+	Page<Parents> findAllActiveParentsByBranchId(Pageable pageable);
 }

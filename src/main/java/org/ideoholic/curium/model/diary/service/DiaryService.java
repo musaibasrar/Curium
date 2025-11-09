@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.diary.service;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +7,8 @@ import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -24,6 +23,9 @@ import org.springframework.stereotype.Service;
 public class DiaryService {
 	@Autowired
 	private diaryDAO diarysDao;
+	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 		
 	public void adddetail() {
 		Login login = new Login();
@@ -92,7 +94,7 @@ public class DiaryService {
 
 		if (branchId != null) {
 			try {
-				Student student = new StudentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
+				Student student = studentDetailsDao.readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
 				int page = 1;
 				int recordsPerPage = 100;
