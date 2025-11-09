@@ -146,7 +146,7 @@ public class MultiTenantConnectionProviderImpl
             if (dataSourceConfig == null) {
                 log.warn("DataSourceConfig is null; using local defaults for baseHikariConfig");
                 baseHikariConfig.setDriverClassName("org.mariadb.jdbc.Driver");
-                baseHikariConfig.setJdbcUrl("jdbc:mariadb://localhost:3306/"); // tenant appended at runtime
+                baseHikariConfig.setJdbcUrl("jdbc:mariadb://fineractmysql:3306/"); // tenant appended at runtime
                 baseHikariConfig.setUsername("root");
                 baseHikariConfig.setPassword("root");
                 
@@ -254,7 +254,7 @@ public class MultiTenantConnectionProviderImpl
             String username;
             String password;
             if (dataSourceConfig == null) {
-                jdbcUrl = "jdbc:mariadb://localhost:3306/" + tenant;
+                jdbcUrl = "jdbc:mariadb://fineractmysql:3306/" + tenant;
 				log.trace("Static Driver URL:{}", jdbcUrl);
                 username = "root";
                 password = "root";

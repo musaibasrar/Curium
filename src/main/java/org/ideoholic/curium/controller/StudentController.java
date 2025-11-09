@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -22,6 +23,10 @@ import org.ideoholic.curium.model.student.dto.Student;
  */
 public class StudentController extends HttpServlet {
 
+	// Autowired is not going to work as this controller is not annotated as controller
+	// Not sure if this controller is being used
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -38,7 +43,7 @@ public class StudentController extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         
-        List<Student> list = new StudentDetailsDAO().readListOfObjectsForIcon(1);
+        List<Student> list = studentDetailsDao.readListOfObjectsForIcon(1);
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         try {

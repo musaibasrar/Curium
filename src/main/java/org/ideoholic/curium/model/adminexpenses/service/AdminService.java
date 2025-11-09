@@ -32,6 +32,9 @@ public class AdminService {
 	
 	@Autowired
 	private AdminDetailsDAO adminDetailsDao;
+	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 
 	public ResultResponse addExpenses(AdminExpensesDto adminexpensesdto, String userId, String branchId) {
 
@@ -266,7 +269,7 @@ public class AdminService {
 		int totalBoys = 0, totalGirls = 0;
 		List<String> boysGirls = new ArrayList<>();
 
-		List<Student> studentsList = new StudentDetailsDAO().getListStudents(
+		List<Student> studentsList = studentDetailsDao.getListStudents(
 				"From Student as student where student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid = "
 						+ branchId + " order by name ASC");
 

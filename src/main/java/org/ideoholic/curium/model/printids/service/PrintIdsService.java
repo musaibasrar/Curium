@@ -26,6 +26,9 @@ public class PrintIdsService {
 
     @Autowired
     private PrintIdsDAO printIdsDAO;
+    
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 	
 	public SearchStudentResponseDto searchDetails(SearchStudentDto searchStudentDto,String branchid) {
 		
@@ -73,7 +76,7 @@ public class PrintIdsService {
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
 		    searchStudentResponseDto.setSearchStudentList(searchStudentList);
 			return searchStudentResponseDto;
@@ -182,14 +185,14 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 			List<Integer> studentids = new ArrayList<>(); 
 			
 			for (Parents parents : searchStudentList) {
 				studentids.add(parents.getStudent().getSid());
 			}
 			
-			List<Card> cardList = new StudentDetailsDAO().getCardDetails(studentids);
+			List<Card> cardList = studentDetailsDao.getCardDetails(studentids);
 			
 			for (Parents parents : searchStudentList) {
 				

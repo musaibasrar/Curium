@@ -37,6 +37,9 @@ public class TeacherPerformanceService {
 	@Autowired
 	private MarksDetailsDAO marksDetaildDao;
 	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
+	
 	public SubjectsResponseDto readListOfSubjects(String branchid) {
 		SubjectsResponseDto subjectsResponseDto = new SubjectsResponseDto();
 	    try {
@@ -79,7 +82,7 @@ public class TeacherPerformanceService {
 
 				if(!"".equalsIgnoreCase(querySub)) {
 					queryMain = queryMain + querySub;
-					searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+					searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 				}
 				
 				//get Student Marks of classone

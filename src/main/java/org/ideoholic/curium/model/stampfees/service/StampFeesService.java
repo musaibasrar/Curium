@@ -22,7 +22,6 @@ import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
 import org.ideoholic.curium.model.stampfees.dto.StampFeesDto;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
@@ -39,6 +38,9 @@ public class StampFeesService {
 
 	@Autowired
     private AccountDAO accountDao;
+	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
 
 	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
@@ -78,7 +80,7 @@ public class StampFeesService {
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
-			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
 		
 	}
@@ -137,7 +139,7 @@ public class StampFeesService {
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
-			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
 		
 	}
@@ -174,7 +176,7 @@ public class StampFeesService {
 			 * ;
 			 */
 			System.out.println("SEARCH QUERY ***** " + queryMain);
-			searchParentsList = new StudentDetailsDAO()
+			searchParentsList = studentDetailsDao
 					.getStudentsList(queryMain);
 		}
 		
@@ -216,7 +218,7 @@ public class StampFeesService {
 				
 				Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 				Feescategory feescategory = new Feescategory();
-				studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(DataUtil.parseInt(id)));
+				studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(DataUtil.parseInt(id)));
 				feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 				studentfeesstructure.setFeescategory(feescategory);
 				studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
@@ -256,7 +258,7 @@ public class StampFeesService {
 			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
 			Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 			Feescategory feescategory = new Feescategory();
-			studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
+			studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(Integer.valueOf(id)));
 			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 			studentfeesstructure.setFeescategory(feescategory);
 			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
@@ -299,7 +301,7 @@ public class StampFeesService {
 		
 		// End J.V
 		new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
-		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		//studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
 		}
@@ -392,7 +394,7 @@ public class StampFeesService {
 				
 			Studentotherfeesstructure studentfeesstructure = new Studentotherfeesstructure();   
 			OtherFeecategory feescategory = new OtherFeecategory();
-			studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
+			studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(Integer.valueOf(id)));
 			feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 			studentfeesstructure.setOtherfeescategory(feescategory);
 			studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
@@ -413,7 +415,7 @@ public class StampFeesService {
 		}
 
 		new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
-		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		//studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
 		}
@@ -466,7 +468,7 @@ public class StampFeesService {
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
-			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
 		otherFeescategoryResponseDto.setSearchStudentList(searchStudentList);
 
@@ -604,7 +606,7 @@ public class StampFeesService {
 
     		if(!"".equalsIgnoreCase(querySub)) {
     			queryMain = queryMain + querySub;
-    			searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+    			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
     		}
     		
     	}

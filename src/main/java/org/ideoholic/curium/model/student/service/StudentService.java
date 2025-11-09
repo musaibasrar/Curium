@@ -150,7 +150,7 @@ public class StudentService {
 		
 		if("Admission".equalsIgnoreCase(student.getStream())) {
 			 
-			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where stream='Admission' order by sid desc");
+			Student studentDB = studentDetailsDao.readUniqueStudent("From Student where stream='Admission' order by sid desc");
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
@@ -171,7 +171,7 @@ public class StudentService {
 			
 		}else if("Registration".equalsIgnoreCase(student.getStream())) {
 			
-			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where stream='Registration' order by sid desc");
+			Student studentDB = studentDetailsDao.readUniqueStudent("From Student where stream='Registration' order by sid desc");
 			
 			
 			if(studentDB!=null) {
@@ -186,7 +186,7 @@ public class StudentService {
 			student.setDroppedout(1);
 			student.setLeftout(1);
 		}else if("Alumni".equalsIgnoreCase(student.getStream())) {
-			Student studentDB = new StudentDetailsDAO().readUniqueStudent("From Student where stream='Alumni' order by sid desc");
+			Student studentDB = studentDetailsDao.readUniqueStudent("From Student where stream='Alumni' order by sid desc");
 			
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
@@ -297,7 +297,7 @@ public class StudentService {
 							
 							Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
 							Feescategory feescategory = new Feescategory();
-							studentfeesstructure.setStudent(new StudentDetailsDAO().readUniqueObject(Integer.valueOf(id)));
+							studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(Integer.valueOf(id)));
 							feescategory.setIdfeescategory(Integer.parseInt(feesCategoryIdsdiv[0]));
 							studentfeesstructure.setFeescategory(feescategory);
 							studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[Integer.parseInt(feesCategoryIdsdiv[1])]));
@@ -342,7 +342,7 @@ public class StudentService {
 
 					// End J.V
 					new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
-					//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+					//studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 				}
 			}
@@ -385,9 +385,9 @@ public class StudentService {
 				page = Integer.parseInt(pages);
 			}
 
-			List<Parents> list = new StudentDetailsDAO().readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
+			List<Parents> list = studentDetailsDao.readListOfObjectsPaginationALL((page - 1) * recordsPerPage,
 				recordsPerPage, Integer.parseInt(branchId));
-			int noOfRecords = new StudentDetailsDAO().getNoOfRecords(Integer.parseInt(branchId));
+			int noOfRecords = studentDetailsDao.getNoOfRecords(Integer.parseInt(branchId));
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 			result.setParentsList(list);
 			result.setNoOfPages(noOfPages);
@@ -425,7 +425,7 @@ public class StudentService {
 				receiptNarration.put(receiptinfo, rNarration[0]);
 			}
 			result.setReceiptNarrationMap(receiptNarration);
-			List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
+			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
 			long totalFineAmount = 0l;
@@ -510,7 +510,7 @@ public class StudentService {
 
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
-			Student student = new StudentDetailsDAO().readploginUniqueObject(studentId);
+			Student student = studentDetailsDao.readploginUniqueObject(studentId);
 			Parents parents = new parentsDetailsDAO().readploginUniqueObject(studentId);
 
 
@@ -519,7 +519,7 @@ public class StudentService {
 
 			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
 			result.setReceiptInfo(rinfo);
-			List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
+			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
 			long totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
 				totalSum = totalSum + receiptInfoSingle.getTotalamount();
@@ -590,7 +590,7 @@ public class StudentService {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().build();
 		try {
 			Long id = Long.parseLong(studentId);
-			Student student = new StudentDetailsDAO().readUniqueObject(id);
+			Student student = studentDetailsDao.readUniqueObject(id);
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
 			/*httpSession.setAttribute("studentfromservice",student);
@@ -892,15 +892,15 @@ public class StudentService {
 		student.setUserid(studentDto.getUserid());
 
 		if(puDetails.getIdpudetails()!=null) {
-			new StudentDetailsDAO().updatePuDetails(puDetails);
+			studentDetailsDao.updatePuDetails(puDetails);
 			student.setPudetails(puDetails);
 		}
 
 		if(degreeDetails.getIddegreedetails()!=0) {
-			new StudentDetailsDAO().updateDegreeDetails(degreeDetails);
+			studentDetailsDao.updateDegreeDetails(degreeDetails);
 			student.setDegreedetails(degreeDetails);
 		}
-		student = new StudentDetailsDAO().update(student);
+		student = studentDetailsDao.update(student);
 		if (pid != "") {
 			parents.setStudent(student);
 			parents.setBranchid(Integer.parseInt(strBranchId));
@@ -918,7 +918,7 @@ public class StudentService {
 
 			try {
 
-				List<Student> list = new StudentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+				List<Student> list = studentDetailsDao.readListOfStudents(Integer.parseInt(branchId));
 				result.setStudentList(list);
 				result.setSuccess(true);
 			} catch (Exception e) {
@@ -939,7 +939,7 @@ public class StudentService {
 				ids.add(Integer.valueOf(id));
 
 			}
-			new StudentDetailsDAO().archiveMultiple(ids);
+			studentDetailsDao.archiveMultiple(ids);
 		}
 	}
 
@@ -948,7 +948,7 @@ public class StudentService {
 		StudentAttendanceDetailsResponseDto result = StudentAttendanceDetailsResponseDto.builder().success(false).build();
 
 		try {
-			List<Student> list = new StudentDetailsDAO().readListOfStudentsArchive(Integer.parseInt(branchId));
+			List<Student> list = studentDetailsDao.readListOfStudentsArchive(Integer.parseInt(branchId));
 			result.setStudentList(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -969,7 +969,7 @@ public class StudentService {
 					iddetails.add(Integer.valueOf(iddetailsarray[1]));
 				}
 			}
-			new StudentDetailsDAO().deleteMultiple(ids,iddetails);
+			studentDetailsDao.deleteMultiple(ids,iddetails);
 		}
 	}
 
@@ -982,7 +982,7 @@ public class StudentService {
 				ids.add(Integer.valueOf(iddetailsarray[0]));
 			}
 			log.debug("id length" + studentIds.length);
-			new StudentDetailsDAO().restoreMultiple(ids);
+			studentDetailsDao.restoreMultiple(ids);
 		}
 	}
 
@@ -1000,7 +1000,7 @@ public class StudentService {
 			studentList.add(student);
 		}
 
-		result.setSuccess(new StudentDetailsDAO().promoteMultiple(studentList, classStudying, currentAcademicYear, Integer.parseInt(branchId)));
+		result.setSuccess(studentDetailsDao.promoteMultiple(studentList, classStudying, currentAcademicYear, Integer.parseInt(branchId)));
 
 		return result;
 	}
@@ -1024,7 +1024,7 @@ public class StudentService {
 				 * Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				 */
 
-				List<Object[]> list = new StudentDetailsDAO().readListOfObjectsPagination((page - 1) * recordsPerPage,
+				List<Object[]> list = studentDetailsDao.readListOfObjectsPagination((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId));
 
 				List<Parents> parentDetails = new ArrayList<>();
@@ -1042,7 +1042,7 @@ public class StudentService {
 					parentDetails.add(parent);
 				}
 
-				int noOfRecords = new StudentDetailsDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfRecords = studentDetailsDao.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				result.setParentsList(parentDetails);
 				result.setNoOfPages(noOfPages);
@@ -1066,7 +1066,7 @@ public class StudentService {
 
 			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);
 			result.setReceiptInfo(rinfo);
-			List<Studentfeesstructure> feesstructure = new StudentDetailsDAO().getStudentFeesStructure(id, academicYear);
+			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, academicYear);
 
 			long totalSum = 0l;
 			for (Receiptinfo receiptInfoSingle : rinfo) {
@@ -1108,10 +1108,10 @@ public class StudentService {
 					String querySub = " parents.student.id = "+id+" order by parents.student.admissionnumber ASC";
 					queryMain = queryMain + querySub;
 
-					List<Parents> searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+					List<Parents> searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 					result.setResultList(searchStudentList);
 
-					Parents searchStudentRecords = new StudentDetailsDAO().getStudentRecords(queryMain);
+					Parents searchStudentRecords = studentDetailsDao.getStudentRecords(queryMain);
 					listOfStudentRecords.add(searchStudentRecords);
 				}
 
@@ -1221,7 +1221,7 @@ public class StudentService {
 
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
-			Parents parents = new StudentDetailsDAO().getStudentRecords(getStudentInfo);
+			Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
 			result.setParents(parents);
 			result.setSuccess(true);
 			result.setMessage("bonafidecertificateprint");
@@ -1300,9 +1300,9 @@ public class StudentService {
 			if (pages != null) {
 				page = Integer.parseInt(pages);
 			}
-			List<Parents> list = new StudentDetailsDAO().readListStudentsSuperAdmin((page - 1) * recordsPerPage,
+			List<Parents> list = studentDetailsDao.readListStudentsSuperAdmin((page - 1) * recordsPerPage,
 				recordsPerPage);
-			int noOfRecords = new StudentDetailsDAO().getNoOfRecords();
+			int noOfRecords = studentDetailsDao.getNoOfRecords();
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 			result.setStudentList(list);
 			result.setNoOfPages(noOfPages);
@@ -1351,7 +1351,7 @@ public class StudentService {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
 			Long id = Long.parseLong(studentId);
-			Student student = new StudentDetailsDAO().readUniqueObject(id);
+			Student student = studentDetailsDao.readUniqueObject(id);
 			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
 
 			/*httpSession.setAttribute("studentfromservice",student);
@@ -1447,7 +1447,7 @@ public class StudentService {
 
 			List<Otherreceiptinfo> rinfo = feesCollectionDAO.getOtherReceiptDetailsPerStudent(id,academicYear);
 			result.setReceiptInfo(rinfo);
-			List<Studentotherfeesstructure> otherfeesstructure = new StudentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+			List<Studentotherfeesstructure> otherfeesstructure = studentDetailsDao.getStudentOtherFeesStructure(id, academicYear);
 
 			long totalSum = 0l;
 			for (Otherreceiptinfo receiptInfoSingle : rinfo) {

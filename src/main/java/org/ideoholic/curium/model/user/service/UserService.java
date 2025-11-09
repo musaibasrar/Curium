@@ -81,6 +81,9 @@ public class UserService {
 	@Autowired
 	private EmployeeDAO employeeDao;
 	
+	@Autowired
+	private StudentDetailsDAO studentDetailsDao;
+	
     @Autowired
     private HttpServletRequest request;
 
@@ -182,7 +185,7 @@ public class UserService {
 
 						classStudying = classStudying + "--" + "%";
 
-						List<Parents> student = new StudentDetailsDAO().getStudentsList("FROM Parents as parents where (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') AND parents.student.classstudying like '" + classStudying + "'"
+						List<Parents> student = studentDetailsDao.getStudentsList("FROM Parents as parents where (parents.student.promotedyear='" + academicYear + "' or parents.student.yearofadmission='" + academicYear + "') AND parents.student.classstudying like '" + classStudying + "'"
 								+ " AND parents.student.archive=0 AND parents.student.passedout=0 AND parents.student.droppedout=0 AND parents.student.leftout=0 AND parents.student.branchid='" + Integer.parseInt(branchId) + "' ");
 						totalStudents += student.size();
 						xaxisList.add("\"" + classstudying.getClassdetails() + "\"");
@@ -499,7 +502,7 @@ public class UserService {
 				 */
 
 				queryMain = queryMain + querySub + " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-				searchStudentList = new StudentDetailsDAO().getStudentsList(queryMain);
+				searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 			}
 
 			result.setResultList(searchStudentList);
@@ -604,7 +607,7 @@ public class UserService {
 	 			queryMain = queryMain + querySub;
 				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 				log.error("SEARCH QUERY ***** " + queryMain);
-				searchParentsList = new StudentDetailsDAO().getStudentsList(queryMain);
+				searchParentsList = studentDetailsDao.getStudentsList(queryMain);
 
 			}
 			result.setResultList(searchParentsList);
@@ -684,7 +687,7 @@ public class UserService {
 				fine = fine + receiptinfo.getFine();
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
-				student = new StudentDetailsDAO().readUniqueObjectParents(receiptinfo.fetchSid());
+				student = studentDetailsDao.readUniqueObjectParents(receiptinfo.fetchSid());
 				VoucherEntrytransactions voucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
 				String[] narrationDetails = voucherEntryTransactions.getNarration().split(":");
 				Student ss = student.getStudent();
