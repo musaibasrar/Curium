@@ -611,5 +611,20 @@ public class AccountDAO {
 		}		
 		return voucherEntrytransactions;
 	}
+	
+	public List<Accountdetails> getAccountdetailsIncomeExpenseReserve(int branchId) {
+		
+		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+		try {
+			transaction = session.beginTransaction();												  	
+			accountDetails =  session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 or accdetails.accountGroupMaster.accountgroupid = 3 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
+			transaction.commit();
+		} catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return accountDetails;
+	}
 
 }

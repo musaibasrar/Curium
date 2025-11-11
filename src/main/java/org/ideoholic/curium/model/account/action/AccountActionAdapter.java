@@ -156,11 +156,15 @@ public class AccountActionAdapter {
 		request.setAttribute("income", responseDto.getIncome());
 		request.setAttribute("incomeledgersaccount", responseDto.getIncomeLedgersAccount());
 		request.setAttribute("expensesledgersaccount", responseDto.getExpenseLedgersAccount());
+		request.setAttribute("reserveledgersaccount", responseDto.getReserveLedgersAccount());
 		request.setAttribute("expenses", responseDto.getExpenses());
+		request.setAttribute("reserve", responseDto.getReserve());
 		request.setAttribute("incometotallabel", responseDto.getIncomeTotalLabel());
 		request.setAttribute("expensetotallabel", responseDto.getExpenseTotalLabel());
+		request.setAttribute("reservetotallabel", responseDto.getReserveTotalLabel());
 		request.setAttribute("incometotal", responseDto.getIncomeTotal());
 		request.setAttribute("expensetotal", responseDto.getExpenseTotal());
+		request.setAttribute("reservetotal", responseDto.getReserveTotal());
 		request.setAttribute("fromdate", responseDto.getFromDate());
 		request.setAttribute("todate", responseDto.getToDate());
 		request.setAttribute("profitlabel", responseDto.getProfitLabel());

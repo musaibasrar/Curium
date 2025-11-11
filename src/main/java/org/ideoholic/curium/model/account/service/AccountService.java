@@ -1189,7 +1189,7 @@ public class AccountService {
 					int branchId = Integer.parseInt(strBranchId);
 
 				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
-				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpense(branchId);
+				accountsDetails = new AccountDAO().getAccountdetailsIncomeExpenseReserve(branchId);
 
 				Map<Accountdetails,BigDecimal> accountBalanceMap = new LinkedHashMap<Accountdetails,BigDecimal>();
 
@@ -1201,6 +1201,11 @@ public class AccountService {
 				//Group 2
 				BigDecimal totalExpense = BigDecimal.ZERO;
 				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
+				
+				//Group 3
+				BigDecimal totalReserves = BigDecimal.ZERO;
+				Map<Accountdetails,BigDecimal> reservesLedgerAccount = new HashMap<Accountdetails, BigDecimal>();
+				
 
 				for (Accountdetails accountDetails : accountsDetails) {
 
@@ -1211,12 +1216,19 @@ public class AccountService {
 						BigDecimal totalAmount = getTotalBalance(accountDetails,voucherTransactions);
 
 						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
-
+						System.out.println("*********** "+accountDetails.getAccountname().toLowerCase()+"************ "+groupId);
 						switch(groupId){
+						
+						case 3:
+								totalReserves = totalReserves.add(totalAmount);
+								reservesLedgerAccount.put(accountDetails, totalAmount);
+							break;
 
 						case 4:
-								totalIncome = totalIncome.add(totalAmount);
-								incomeLedgersAccount.put(accountDetails, totalAmount);
+								if(!accountDetails.getAccountname().toLowerCase().contains("unearned")) {
+									totalIncome = totalIncome.add(totalAmount);
+									incomeLedgersAccount.put(accountDetails, totalAmount);
+								}
 								break;
 						case 5:
 								totalExpense = totalExpense.add(totalAmount);
@@ -1235,11 +1247,16 @@ public class AccountService {
 		//group 2
 		result.setExpenses(totalExpense);
 		result.setExpenseLedgersAccount(expenseLedgersAccount);
+		
+		//group 3
+	     result.setReserve(totalReserves);
+		 result.setReserveLedgersAccount(reservesLedgerAccount);
 
 		result.setIncomeTotalLabel("TOTAL");
 		result.setExpenseTotalLabel("TOTAL");
 		result.setIncomeTotal(totalIncome);
 		result.setExpenseTotal(totalExpense);
+		result.setReserveTotal(totalReserves);
 
 		result.setFromDate(fromDate);
 		result.setToDate(toDate);

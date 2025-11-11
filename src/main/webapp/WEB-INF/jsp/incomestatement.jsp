@@ -634,6 +634,51 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
+						<tr class="trClass" style="border-color: #000000";background-color:white border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right;background-color:white" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;background-color:white" width="50%"></td>
+							<td class="dataTextInActive" style="text-align: right;background-color:white" width="30%"></td>
+
+						</tr>
+						
+						
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right;background-color:white" width="20%"></td>
+							<td  class="headerTD">Equity</td>
+							<td class="dataTextInActive" style="text-align: right;background-color:white" width="30%"></td>
+
+						</tr>
+						
+											
+						<c:forEach items="${reserveledgersaccount}" var="reserveledgersaccount">
+
+						<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right" width="20%"><c:out value="${reserveledgersaccount.key.accountcode}" /></td>
+							<td class="dataText" style="text-align: right" width="50%"><c:out value="${reserveledgersaccount.key.accountname}" /></td>
+							<td class="dataText" style="text-align: right" width="30%"><c:out value="${reserveledgersaccount.value}" /></td>
+
+						</tr>
+					</c:forEach>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1">
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%"></td>
+
+						</tr>
+					
+					<tr class="trClass" style="border-color: #000000" border="1"
+							cellpadding="1" cellspacing="1" >
+							<td class="dataText" style="text-align: right" width="20%"></td>
+							<td class="dataTextInActive" style="text-align: right;height: 20px;" width="50%"><c:out value="${reservetotallabel}" /></td>
+							<td class="dataTextInActive" style="text-align: right" width="30%"><c:out value="${reservetotal}" /></td>
+
+						</tr>
+						
 				</tbody>
 				<tfoot>
 					<tr>

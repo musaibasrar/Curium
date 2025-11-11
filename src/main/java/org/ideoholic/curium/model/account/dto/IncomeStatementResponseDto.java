@@ -27,4 +27,8 @@ public class IncomeStatementResponseDto {
     private BigDecimal totalProfit;
     private String lossLabel;
     private BigDecimal totalLoss;
+    private Map<Accountdetails,BigDecimal> reserveLedgersAccount;
+    private BigDecimal reserve;
+    private BigDecimal reserveTotal;
+    private String reserveTotalLabel;
 }
