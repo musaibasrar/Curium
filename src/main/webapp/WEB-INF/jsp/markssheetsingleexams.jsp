@@ -353,6 +353,21 @@ for(Cookie cookie : cookies){
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
                             					<td style="border: 1px solid black;text-align: left;"></td>
+	                                		</tr>    
+	                                		<tr style="border: 1px solid black;">
+                            					<td style="border: 1px solid black;text-align: left;">Attendance</td>
+                            					<td style="border: 1px solid black;text-align: left;">
+                            					<table>
+														<tr>
+																<td style="text-align: left;">Total Days:</td><td>${totaldays}</td>
+														</tr>
+														<tr>
+																<td style="text-align: left;">Total Present:</td><td>${totalpresent}</td>
+														</tr>
+														<tr>
+																<td style="text-align: left;">Total Absent:</td><td>${totalabsent}</td>
+														</tr>
+												</table>
 	                                		</tr>                                                           	
 	                                	</table>
                                 </td>
@@ -429,14 +444,14 @@ for(Cookie cookie : cookies){
 		</div>
 		
 		
-		<table>
+		<%-- <table>
 			<tr><td><br></td></tr>
 			<tr>
 			<td style="font-weight:bold;">Total Days:&emsp;&emsp;</td><td style="font-weight:bold;">${totaldays}</td>
 			<td style="font-weight:bold;">&emsp;&emsp;Total Present:&emsp;&emsp;</td><td style="font-weight:bold;">${totalpresent}</td>
 			<td style="font-weight:bold;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Total Absent:&emsp;&emsp;</td><td style="font-weight:bold;">${totalabsent}</td>
 			</tr>
-			</table>
+			</table> --%>
 		
 		
 		<br><br><br>
