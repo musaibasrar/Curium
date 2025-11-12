@@ -354,6 +354,16 @@
 			getIncomeStatement();
 		});
 		$("#effect").hide();
+		
+		$("#print").button({
+			icons : {
+				primary : "ui-icon-print"
+			}
+		}).click(function() {
+			printIncomeStatements();
+			return false;
+		});
+		
 	});
 	
 
@@ -388,9 +398,9 @@
 		$("#fromdate").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			yearRange: "-50:+10"
+			yearRange: "-50:+10",
+			dateFormat: 'dd-mm-yy'
 		});
-		$( "#fromdate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#fromdate").datepicker("option", "showAnim", $(this).val());
 		});
@@ -398,14 +408,22 @@
 		$("#todate").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			yearRange: "-50:+10"
+			yearRange: "-50:+10",
+			dateFormat: 'dd-mm-yy'
 		});
-		$( "#todate" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 		$("#anim").change(function() {
 			$("#todate").datepicker("option", "showAnim", $(this).val());
 		});
 	});
 
+	
+	function printIncomeStatements(){
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/AccountProcess/printIncomeStatements";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
 
 </script>
 <script type="text/javascript" src="/iqra/js/datetimepicker_css.js"></script>
@@ -448,15 +466,15 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 						<td width="20%" class="alignRight">From Date(MM/DD/YYYY)&nbsp;</td>
-							<td width="28%"><label> <input name="fromdate" autocomplete="off"
+							<td width="28%"><label> <input name="fromdate" value="${fromdate}" autocomplete="off"
 									type="text" 
 									class="textField" id="fromdate" size="36" 
 									data-validate="validate(required)">
 							</label></td>
 							
 							<td width="20%" class="alignRight">To Date(MM/DD/YYYY)&nbsp;</td>
-							<td width="28%"><label> <input name="todate" autocomplete="off"
-									type="text" 
+							<td width="28%"><label> <input name="todate" value="${todate}" autocomplete="off"
+									type="text"
 									class="textField" id="todate" size="36"
 									data-validate="validate(required)">
 							</label></td>
@@ -683,7 +701,7 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 						<td class="footerTD" colspan="3"><input 
-							type="hidden"  id="delete" />
+							type="button"  value="Print" id="print" />
 							</td>
 							
 
