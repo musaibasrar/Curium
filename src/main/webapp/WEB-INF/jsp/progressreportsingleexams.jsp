@@ -373,7 +373,7 @@
 		
 		
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MarksDetailsProcess/generateReportSingleExamsVertical";
+		form1.action = "/iqra/MarksDetailsProcess/generateReportSingleExamsVertical";
 		form1.method = "POST";
 		form1.submit();
 
