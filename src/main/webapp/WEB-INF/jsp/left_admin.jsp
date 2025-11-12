@@ -605,6 +605,11 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/iqra/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/iqra/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
             			</td>
             		</tr>
@@ -665,17 +670,17 @@ for(Cookie cookie : cookies){
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
+            				 <a target="mainFrame" href="/iqra/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/iqra/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
+            				<a target="mainFrame" href="/iqra/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
             			</td>
             		</tr> -->
             		<!-- <tr>

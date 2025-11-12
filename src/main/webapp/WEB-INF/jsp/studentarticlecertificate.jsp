@@ -1,6 +1,6 @@
 <%--
-    Document   : Marks Search
-    Created on : SEP 23, 2017, 5:52:28 PM
+    Document   : studentsdetailsbonafide
+    Created on : Jul 09, 2016, 12:10:28 AM
     Author     : Musaib
 --%>
 
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Marks Search</title>
+<title>Article 371</title>
 <link rel="stylesheet" href="/iqra/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/iqra/css/datePicker/demos.css">
 <style type="text/css">
@@ -358,14 +358,9 @@
 
 <script type="text/javascript" src="/iqra/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-	function searchForMarksSub() {
-		
-		var examName = document.getElementById("exam").options[document.getElementById("exam").selectedIndex].text;
-		var subName = document.getElementById("subject").options[document.getElementById("subject").selectedIndex].text;
-		document.getElementById('subjectselected').value = subName;
-		document.getElementById('examselected').value = examName;
+	function searchStudentsForBonafide() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/iqra/MarksDetailsProcess/viewMarksSub";
+		form1.action = "/iqra/DocumentsProcess/searchStudentsForArticle";
 		form1.method = "POST";
 		form1.submit();
 
@@ -374,7 +369,7 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForMarksSub();
+			searchStudentsForBonafide();
 		});
 		
 
@@ -392,23 +387,15 @@
 	});
 	
 	$(function() {
-		$("#updateMarks").button({
+		$("#export").button({
 			icons : {
 				primary : "ui-icon-trash"
 			}
-		});
-		$("#delete").button({
-            icons:{
-                primary: "ui-icon-trash"
-            }
-        }).click(function(){
-        	if(confirm('Are you sure,you want to delete?')){
-        		deleteRecords();	
-        	}
-            
-            return false;
+		}).click(function() {
+			deleteRecords();
+			return false;
 
-        });
+		});
 		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
@@ -443,62 +430,180 @@
 
 	});
 	
-	function deleteRecords() {
+	function deleteFeesStamp(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/iqra/MarksDetailsProcess/deleteMultiple";
+		form1.action = "/iqra/StampFeesProcess/delete";
 		form1.method = "POST";
 		form1.submit();
-
 	}
 </script>
 
 
 <script type="text/javascript">
-    
-    function checkMandatory(){
-    	
-    	if(document.getElementById("exam").value == ""){
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}
-    	
-    }
-    
-function checkMandatoryandSubmit(){
-    	
-			var checkBox = document.getElementsByName("studentIDs");
-			var resultCheckBox=true;			
-			for(var i=0; i<checkBox.length; i++){
-				if(checkBox[i].checked){
-					resultCheckBox=false;
-				}
-			}
-			
-    	if(document.getElementById("exam").value == ""){
-    		
-    		alert('Please enter the exam field');	
-    	}else if(document.getElementById("subject").value == ""){
-    		alert('Please enter the subject');
-    	}else if(resultCheckBox){
-    		alert('Select the student(s) to update the marks');
-    	}else{
-    		var form1 = document.getElementById("form1");
-    		form1.action = "/iqra/MarksDetailsProcess/addMarks";
-    		form1.method = "POST";
-    		form1.submit();
+        
+        function calculateGrandTotal() {
+            var sum = 0.0;
+            var column2 = $('.feesFullAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            
+            $('#feesTotalAmount').val(sum.toPrecision(6));
 
-    	}
-    	
+        }
+        $(document).ready(function() {
+            
+            
+            $("#dataTable").keyup(function(){
+                
+                var sum = 0.0;
+                var totalSum=0.0;
+                var column2 = $('.feesFullAmount')
+                jQuery.each(column2,function(){
+                    sum += parseFloat($(this).val());
+                });
+                
+                $('#feesTotalAmount').val(sum.toPrecision(6));
+                
+            });
+            $("#dataTable").click(function(){
+                
+                var sum = 0.0;
+                var totalSum=0.0;
+                var column2 = $('.feesFullAmount')
+                jQuery.each(column2,function(){
+                    sum += parseFloat($(this).val());
+                });
+                
+                $('#feesTotalAmount').val(sum.toPrecision(6));
+               
+            });
+
+
+        });
+        
+    
+        
+        $(function() {
+            
+            var addFeesCatButtonID="#addFeesCat";
+            var removeFeesCatButtonID="#removeFeesCat";
+            $( addFeesCatButtonID )
+            .button({
+                icons: {
+                    primary: "ui-icon-plus"
+                }
+            })
+            .click(function() {
+                addRow();
+                return false;
+            });
+            $(removeFeesCatButtonID)
+            .button({
+                icons: {
+                    primary: "ui-icon-minus"
+                }
+            })
+            .click(function() {
+                deleteRow('dataTable');
+                return false;
+            });            
+
+        });
+        
+        function SelectAll(id)
+        {
+        	
+            document.getElementById("feesCount_"+id).focus();
+            document.getElementById("feesCount_"+id).select();
+        }
+
+        function calculate(value2) {
+
+        	var feesCount=document.getElementById("feesCount_"+value2).value;
+        	
+        	if(feesCount === ''){
+        		
+        		document.getElementById("feesCount_"+value2).value = 1;
+        	}
+        	
+            //var val1=value1.value;
+            var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+            var feesCount=document.getElementById("feesCount_"+value2).value;
+            var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+            
+                final1.value=(feesCat*feesCount).toPrecision(6);
+           
+        }
+       
+    function selectAllRow(tableID){
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+        if(rowCount==1){
+            var row = table.rows[0];
+            var chkbox = row.cells[0].childNodes[0];
+            chkbox.checked=false;
+            alert('No records to select');
+        }
+        for(var i=1; i<rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[0].childNodes[0];
+            chkbox.checked=true;
+        }
     }
     
-   
+    function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            if(rowCount==1){
+                alert('No records to delete');
+            }
+            for(var i=1; i<rowCount-1; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+           
+            
+            var sum = 0.0;
+            var totalSum=0.0;
+            var column2 = $('.feesAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            totalSum=sum;
+            
+            $('#feesTotalAmount').val(totalSum.toPrecision(6));
+            
+            calculateGrandTotal();
+            //$('#grandTotalAmount').val(0);
+        }catch(e) {
+            alert(e);
+        }
+    }
+    
+	function fileCheck() {
+		
+		if (document.getElementById("fileName").value.length == 0)
+
+		{
+			document.getElementById("fileName").style.background = 'red';
+			alert("Enter The File Name ");
+		}
+
+	}
+
         </script>
 
 
 
 </head>
- <%
+  <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -515,7 +620,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/iqra/MarksDetailsProcess/updateMarksSub" method="POST">
+	<form id="form1" action="/iqra/DocumentsProcess/GenerateArticle" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -524,7 +629,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Update Marks</a></li>
+					<li><a href="#tabs-1">Article 371 Certificate</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -548,115 +653,39 @@ for(Cookie cookie : cookies){
 
 						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> 
-												<select name="classsearch"
-									id="classsearch" style="width: 120px;">
+							<td width="70%"><label> <select name="classsearch"
+									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
 										</c:forEach>
-										</select></label>
-										
-										 <label> 
-									<select name="secsearch" id="secsearch"
-									style="width: 110px;">
+								</select>
+
+							</label> <label> <select name="secsearch" id="secsearch"
+									style="width: 120px">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
+											</option>
+										</c:if>	
 										</c:forEach>
+
 								</select>
 							</label>
 						</tr>
 
-
-				<tr>
-							<td><br /></td>
-						</tr>
-
-<tr>
-						<td class="alignRightFields">Subject &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
-									style="width: 240px" ">
-										<option selected></option>
-
-										<c:forEach items="${listSubject}" var="listSubject">
-
-											<option value="${listSubject.subjectid}">
-												<c:out value="${listSubject.subjectname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-						
-						</tr>						
-						
 						<tr>
 							<td><br /></td>
 
 						</tr>
-						
-						<tr>
-						<td class="alignRightFields">Exam &nbsp;</td>
-							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="exam" id="exam"
-									style="width: 240px">
-										<option selected></option>
 
-										<c:forEach items="${listExam}" var="listExam">
-
-											<option value="${listExam.exid}:${listExam.examname}">
-												<c:out value="${listExam.examname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						
-						
-						
-						
-						<tr>
-							<!-- <td class="alignRightFields">Subject &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="subjectidselected" type="hidden" class="myclass" id="subjectidselected"
-									size="36" value='<c:out value="${subjectid}"></c:out>'>
-							</label></td>
-							
-						</tr>
-						
-						<tr>
-							<!-- <td class="alignRightFields">Exam &nbsp;</td> -->
-							<td width="12%" align="left"><label> <input
-									name="examidselected" type="hidden" class="myclass" id="examidselected"
-									size="36" value='<c:out value="${examid}"></c:out>'>
-							</label></td>
-							
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr><tr>
-							<td><br /></td>
-						</tr>
-						
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
@@ -666,54 +695,15 @@ for(Cookie cookie : cookies){
 								<button id="search">Search</button>
 							</td>
 						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
 
-						</tr>
-						
-					
+
 						<tr>
 							<td><br /></td>
 						</tr>
-						
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						
-						
-						<tr>
-							<td><br /></td>
-						</tr>
+
 					</table>
 					
-					<table>
-					<tr>
-							<td class="alignRightFields">Subject &nbsp;</td>
-							
-							
-							<td ><label> <input style="border: none;
-border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
-									readonly="readonly"  name="subjectselected" type="text" class="myclass" id="subjectselected"
-									size="36" value='<c:out value="${subjectselected}"></c:out>'>
-							</label></td>
-							
-							
-							<td class="alignRightFields">Exam &nbsp;&nbsp;</td>
-							<td ><label> <input style="border: none;
-border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
-									name="examselected" type="text" class="myclass" id="examselected"
-									size="36" value='<c:out value="${examselected}"></c:out>'>
-							</label></td>
-							
-						</tr>
-					</table>
+					
 
 				</div>
 			</div>
@@ -730,65 +720,50 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 
 				<thead>
 					<tr>
-						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">UID</th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class</th>
-						<th title="click to sort" class="headerText">Marks</th>
-						<th title="click to sort" class="headerText">A1</th>
-						<th title="click to sort" class="headerText">A2</th>
-						<th title="click to sort" class="headerText">A3</th>
-						<th title="click to sort" class="headerText">A4</th>
+						<th title="click to sort" class="headerText">Class &
+							Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father's Name</th>
+						<th title="click to sort" class="headerText">Mother's Name</th>	
+						<th title="click to sort" class="headerText">Admission Date</th>
+
+
+
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentmarkmap}" var="Parents" varStatus="status">
+					<c:forEach items="${searchStudentList}" var="Parents">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText" style="display: none;"><input type="checkbox"
-								id="<c:out value="${Parents.key.student.sid}"/>" class="chcktbl" checked
+							<td class="dataText"><input type="checkbox"
+								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.key.student.sid}"/>" /></td>
-								<td class="dataTextInActive"><a class="dataTextInActive"
-								><c:out
-										value="${Parents.key.student.studentexternalid}" /></a></td>
-								<td class="dataTextInActive"><a class="dataTextInActive"
-								><c:out
-										value="${Parents.key.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
-							<td class="dataText"><c:out value="${Parents.key.student.classstudying}" /></td>
-								<c:forEach items="${Parents.value}" var="marksobtained">
-							<td class="dataText">
-									<c:if test="${marksobtained.value <= 100}">
-											<c:set var="marksscored" value="${marksobtained.value}" />
-									</c:if>
-									<c:if test="${marksobtained.value > 100}">
-											<c:set var="marksscored" value="A" />
-									</c:if>
-							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${marksscored}" />"
-								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
-								maxlength="4" style="width: 50px;border-radius:4px;"
-							>
-								 <input type="hidden" id="marksid" name="marksid" value="<c:out value="${marksobtained.key}" />">
-								 
-								 </td>
-								 </c:forEach>
-
-
+								value="<c:out value="${Parents.student.sid}"/>" /></td>
+							<td class="dataText"><c:out
+										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.fathersname}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.mothersname}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.student.admissiondate}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-					
-						<td class="footerTD" colspan="2"><input value="Update"
-							type="submit" id="updateMarks" />
-							<!-- &nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button> -->
-							<!-- <input value="Delete Stamp Fees"
-							type="submit" id="deleteStamp" /> --></td>
+													
+						<td class="footerTD" colspan="2"> &nbsp;
+						<input value="Generate Certificate"
+							type="submit" id="export"/></td>
+							
 							
 
 					</tr>
