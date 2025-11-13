@@ -12,9 +12,7 @@ import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
-import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.stampfees.dto.Academicotherfeesstructure;
-import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.repositories.AcademicFeesStructureRepository;
 import org.ideoholic.curium.repositories.AcademicOtherFeesStructureRepository;
@@ -29,35 +27,26 @@ import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class FeesCategoryDAO {
 
-	@Autowired
-	private FeesCategoryRepository feesCatRepo;
-	@Autowired
-	private FeesCollectionRepository feescollectionRepo;
-	@Autowired
-	private StudentFeesStructureRepository studentFeesStructureRepo;
-	@Autowired
-	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
-	@Autowired
-	private AcademicFeesStructureRepository academicfeesstructureRepo;
-	@Autowired
-	private OtherFeecategoryRepository otherFeecategoryRepo;
-	@Autowired
-	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
-	@Autowired
-	private AcademicOtherFeesStructureRepository academicotherfeesstructureRepo;
-	@Autowired
-	private OtherfeescollectionRepository otherfeescollectionRepo;
-	@Autowired
-	private QueryUtil queryUtil;
+	private final FeesCategoryRepository feesCatRepo;
+	private final FeesCollectionRepository feescollectionRepo;
+	private final StudentFeesStructureRepository studentFeesStructureRepo;
+	private final VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
+	private final AcademicFeesStructureRepository academicfeesstructureRepo;
+	private final OtherFeecategoryRepository otherFeecategoryRepo;
+	private final StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
+	private final AcademicOtherFeesStructureRepository academicotherfeesstructureRepo;
+	private final OtherfeescollectionRepository otherfeescollectionRepo;
+	private final QueryUtil queryUtil;
 	
 	@Transactional
 	public List<Feescategory> readListOfObjects(int branchId, String academicYear) {
@@ -288,10 +277,10 @@ public class FeesCategoryDAO {
 	@Transactional
 	public List <Feescategory> getfeecategoryofstudent(String classname, String searchYear, String branchId)
 	{
-		List <Feescategory> result= new ArrayList();
+		List <Feescategory> result= new ArrayList<>();
 		try {
 			//Query query = session.createQuery("from Feescategory where particularname like '"+classname+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
-			result = feesCatRepo.findFeecategoryOfStudent(classname, searchYear, branchId);
+			result = feesCatRepo.findFeecategoryOfStudent(classname, searchYear, Integer.parseInt(branchId));
 		}  catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
