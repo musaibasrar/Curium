@@ -79,10 +79,7 @@ public class StudentDetailsDAO {
 			}
 			int page = offset / noOfRecords;
 			Pageable pageable = PageRequest.of(page, noOfRecords);
-			List<List<Object[]>> fetchResult = studentRepo.findExistingStudentDetailsByBranchIdPageable(branchId, pageable).toList();
-			if (!CollectionUtils.isEmpty(fetchResult)) {
-				results = fetchResult.get(0);
-			}
+			results = studentRepo.findExistingStudentDetailsByBranchIdPageable(branchId, pageable).getContent();
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error(hibernateException.getMessage(), hibernateException);

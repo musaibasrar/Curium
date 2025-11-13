@@ -13,10 +13,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Integer> {
 
-	@Query("SELECT s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname from "
-			+ "Student s JOIN Parents f ON s.sid=f.student.sid where s.archive = 0 AND s.branchid=:branchId ORDER BY s.sid DESC")
-	List<Student> findAllValidStudents(@Param("branchId") String branchId);
-
 	List<Student> findByClassstudying(String classStudying);
 
 	@Query("SELECT s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, "
@@ -47,7 +43,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 			+ "from Parents p join p.student s "
 			+ "where s.archive = 0 and s.passedout = 0 and s.droppedout = 0 and s.leftout = 0 and s.branchid = :branchId "
 			+ "ORDER BY s.name ASC")
-	Page<List<Object[]>> findExistingStudentDetailsByBranchIdPageable(Integer branchId, Pageable pageable);
+	Page<Object[]> findExistingStudentDetailsByBranchIdPageable(@Param("branchId") Integer branchId, Pageable pageable);
 
 	Long countByArchiveAndPassedoutAndDroppedoutAndLeftoutAndBranchid(Integer archive, Integer passedOut, Integer droppedOut, Integer leftOut, Integer branchId);
 

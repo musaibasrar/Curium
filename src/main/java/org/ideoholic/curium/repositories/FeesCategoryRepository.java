@@ -17,7 +17,7 @@ public interface FeesCategoryRepository extends JpaRepository<Feescategory, Inte
 	           "WHERE f.particularname LIKE CONCAT(:classname, '--%') " +
 	           "AND f.academicyear = :searchYear " +
 	           "AND f.branchid = :branchId")
-	    List<Feescategory> findFeecategoryOfStudent(String classname, String searchYear, String branchId);
+	    List<Feescategory> findFeecategoryOfStudent(@Param("classname") String className, @Param("searchYear") String searchYear, @Param("branchId") Integer branchId);
 	
 	List<Feescategory> findByBranchidAndAcademicyearIn(int branchId, List<String> academicYears);
 
