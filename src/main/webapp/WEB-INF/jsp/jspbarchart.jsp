@@ -556,7 +556,7 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 500000,
+                                max: 1000000,
                                 stepSize: 20000
                                }
                         

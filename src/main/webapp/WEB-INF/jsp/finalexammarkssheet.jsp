@@ -131,21 +131,29 @@ footer p {
 <body style="border-style:dotted;">
     <div>
      <c:forEach items="${markssheetlist}" var="Parents">
-    <table align="center" width="700px;" style="border:none;margin-bottom:0px;">
-        <%-- ${branchname} --%>
-        <tr><td style="border:none;text-align:right;padding:0px;"><img border="0" style="vertical-align: text-bottom;height: 120px;width: 135px;" alt="ideoholic" src="/alalmas/images/alalmas.png"></td>
-        <td style="border:none;text-align:center;padding:0px;"><img border="0" style="height: 180px;width: 600px;" alt="logo" src="/alalmas/images/header.png"></td>
-       
-        </tr>
-       
-        <tr><td style="border:none;"></td><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
-        English and Shoba-E-Hifz and IIT Foundation Course
-        </td></tr>
-        <tr><td style="border:none;"></td><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
-        Marks Card<br> ${examname} (${currentAcademicYear})
-        </td></tr>
-        </table>
-        <section class="student-info" style="margin-bottom:0px;">
+			<table align="center"
+				style="border: none; margin-bottom: 0; text-align: center;">
+				<tr>
+					<td style="border: none; padding: 0; text-align: center;"><img
+						src="/alalmas/images/alalmas.png" alt="ideoholic"
+						style="height: 120px; width: 135px; vertical-align: middle; margin-right: 10px;">
+						<img src="/alalmas/images/header.png" alt="logo"
+						style="height: 180px; width: 600px; vertical-align: middle;">
+					</td>
+				</tr>
+				<tr>
+					<td
+						style="font-size: 15px; font-weight: bold; text-align: center; border: none; padding: 0;">
+						English and Shoba-E-Hifz and IIT Foundation Course</td>
+				</tr>
+				<tr>
+					<td
+						style="font-size: 15px; font-weight: bold; text-align: center; border: none; padding: 0;">
+						Marks Card<br> ${examname} (${currentAcademicYear})
+					</td>
+				</tr>
+			</table>
+			<section class="student-info" style="margin-bottom:0px;">
     <div class="student-details">
         <p><strong style="color:red">STUDENT NAME:</strong><strong style="color:blue;text-transform:uppercase;"> ${Parents.parents.student.name}</strong></p>
         <p><strong style="color:red">FATHER NAME:</strong><strong style="color:blue;text-transform:uppercase;"> ${Parents.parents.fathersname}</strong></p>
@@ -164,7 +172,32 @@ footer p {
             </thead>
             <tbody>
             <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
-             <c:forEach items="${exammarks.subMarks}" var="submarks" >
+             
+             <c:set var="subjectOrder" value="1st LANGUAGE ENGLISH,2nd LANGUAGE KANNADA,3rd LANGUAGE URDU,HINDI,MATHEMATICS,E.V.S,SOCIAL SCIENCE,ARABIC/DEENIYATH" />
+			 <c:set var="subjectList" value="${fn:split(subjectOrder, ',')}" />
+
+			<c:forEach var="subject" items="${subjectList}">
+			    <c:forEach var="submarks" items="${exammarks.subMarks}">
+			        <c:if test="${submarks.key == subject}">
+			            <tr>
+			                <td style="color:red;padding:0px;">${submarks.key}</td>
+			                <c:set var="dateParts" value="${fn:split(submarks.value,'/')}" />
+			                <td style="padding:0px;text-align:center;">
+			                    <fmt:formatNumber value="${dateParts[0]}" maxFractionDigits="0"/>
+			                </td>
+			                <td style="padding:0px;text-align:center;">
+			                    <fmt:formatNumber value="${dateParts[1]}" maxFractionDigits="0"/>
+			                </td>
+			                <td style="padding:0px;text-align:center;">
+			                    <fmt:formatNumber value="${dateParts[2]}" maxFractionDigits="0"/>
+			                </td>
+			            </tr>
+			        </c:if>
+			    </c:forEach>
+			</c:forEach>
+             
+             
+            <%--  <c:forEach items="${exammarks.subMarks}" var="submarks" >
                 <tr>
                     <td style="color:red;padding:0px;">${submarks.key}</td>
                      <c:set var="dateParts" value="${fn:split(submarks.value,'/')}" />
@@ -172,7 +205,7 @@ footer p {
                     <td style="padding:0px;text-align:center;"><fmt:formatNumber value="${dateParts[1]}" maxFractionDigits="0"/></td>
                     <td style="padding:0px;text-align:center;"><fmt:formatNumber value="${dateParts[2]}" maxFractionDigits="0"/></td>
                 </tr>
-                </c:forEach>
+                </c:forEach> --%>
                
                 
                 <tr>
