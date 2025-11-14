@@ -43,6 +43,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StudentServiceArchive {
 	private final StudentDetailsDAO studentDetailsDao;
+	private final UserDAO userDao;
 
 	private final HttpSession httpSession;
     private final HttpServletRequest request;
@@ -566,7 +567,7 @@ public class StudentServiceArchive {
         branch.setIdbranch(branchid);
         login.setBranch(branch);
         login.setUsertype("parents");
-        new UserDAO().addUser(login);
+        userDao.addUser(login);
     }
 
 

@@ -59,4 +59,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	Student findByStudentexternalid(String studentExternalId);
 
 	List<Student> findByArchiveAndPassedoutAndDroppedoutAndLeftout(Integer archive, Integer passedOut, Integer droppedOut, Integer leftOut);
+
+	@Query("SELECT count(s) FROM Student s where s.classstudying LIKE :classStudying% OR s.classstudying = classStudying "
+			+ "AND s.archive = :archive AND s.branchid=:branchId")
+	Integer countNumberOfStudentInClass(@Param("classStudying")String classStudying, @Param("archive")Integer archive, @Param("branchId")Integer branchId);
 }

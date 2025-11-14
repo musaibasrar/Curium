@@ -519,7 +519,7 @@ public class FeesCollectionService {
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = studentDetailsDao.readUniqueObject(rinfo.fetchSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.fetchSid());
-			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
+			Login userLogin = userDao.getUniqueObject(rinfo.getUserid());
 			result.setParents(parents);
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
@@ -684,7 +684,7 @@ public class FeesCollectionService {
 			
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
-			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			feesDetailsList = userDao.getReceiptDetailsList(queryMain);
 			
 	}
 			long sumOfFees = 0l;
@@ -958,14 +958,14 @@ public class FeesCollectionService {
 			queryMainDaily = queryMainDaily+querySubDaily;
 			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMainDaily);
-			feesDetailsListDaily = new UserDAO().getReceiptDetailsList(queryMainDaily);
+			feesDetailsListDaily = userDao.getReceiptDetailsList(queryMainDaily);
 			
 			// Monthly Fees
 			    querySubMonthly = " feesdetails.date between '"+TimestampFrom+"' AND '"+Timestampto+"'";
 			    queryMainMonthly = queryMainMonthly+querySubMonthly;
 			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMainMonthly);
-			feesDetailsListMonthly = new UserDAO().getReceiptDetailsList(queryMainMonthly);
+			feesDetailsListMonthly = userDao.getReceiptDetailsList(queryMainMonthly);
 			
 				}
 			long sumOfFeesDaily = 0l;
@@ -1548,7 +1548,7 @@ public class FeesCollectionService {
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = studentDetailsDao.readUniqueObject(rinfo.fetchSid());
 			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.fetchSid());
-			Login userLogin = new UserDAO().getUniqueObject(rinfo.getUserid());
+			Login userLogin = userDao.getUniqueObject(rinfo.getUserid());
 			result.setParents(parents);
 			result.setStudent(student);
 			result.setReceiptDate(reDate);
@@ -1691,7 +1691,7 @@ public class FeesCollectionService {
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
+			feesDetailsList = userDao.getOtherReceiptDetailsList(queryMain);
 			
 	}
 			long sumOfFees = 0l;
@@ -1971,7 +1971,7 @@ public class FeesCollectionService {
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 			System.out.println("SEARCH QUERY ***** "+queryMain);
-			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+			feesDetailsList = userDao.getReceiptDetailsList(queryMain);
 			
 //Other Fees Details
 
@@ -1992,7 +1992,7 @@ public class FeesCollectionService {
 				queryMainOtherFees = queryMainOtherFees+querySubOtherFees;
 				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 				System.out.println("SEARCH QUERY ***** "+queryMainOtherFees);
-				otherFeesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMainOtherFees);
+				otherFeesDetailsList = userDao.getOtherReceiptDetailsList(queryMainOtherFees);
 
 			//End Other Fees Details
 
@@ -2370,7 +2370,7 @@ public class FeesCollectionService {
 			
 			queryMain = queryMain+querySub;
 			/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
-			feesDetailsList = new UserDAO().getOtherReceiptDetailsList(queryMain);
+			feesDetailsList = userDao.getOtherReceiptDetailsList(queryMain);
 			
 	}
 			long sumOfFees = 0l;
