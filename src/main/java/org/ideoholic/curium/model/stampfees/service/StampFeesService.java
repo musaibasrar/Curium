@@ -41,6 +41,9 @@ public class StampFeesService {
 	
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
+	
+	@Autowired
+	private FeesCategoryDAO feesCategoryDao;
 
 	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
@@ -429,7 +432,7 @@ public class StampFeesService {
 			
 			String className = searchStudentDto.getClassSearch();
         	
-            List<OtherFeecategory> otherFeecategoryList= new FeesCategoryDAO().getOtherFeeCategory(className,currentAcademicYear,branchid);
+            List<OtherFeecategory> otherFeecategoryList= feesCategoryDao.getOtherFeeCategory(className,currentAcademicYear,branchid);
             otherFeescategoryResponseDto.setOtherFeesCategory(otherFeecategoryList);
   		
     		
@@ -484,7 +487,7 @@ public class StampFeesService {
         if(branchid!=null){
         	String className = searchStudentDto.getClassSearch();
         	
-            List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(className,currentAcademicYear,branchId);
+            List<Feescategory> feecategoryList= feesCategoryDao.getfeecategoryofstudent(className,currentAcademicYear,branchId);
             feescategoryResponseDto.setFeescategory(feecategoryList);
   		
     		

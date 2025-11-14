@@ -692,7 +692,7 @@ public class FeesService {
                 	   feesOtherCategoryList.add(otherFeescategorynew);
                    }
            		}
-           		boolean result =  new FeesCategoryDAO().createOtherFeescategory(feesOtherCategoryList);
+           		boolean result =  feesCategoryDao.createOtherFeescategory(feesOtherCategoryList);
                 
            }
    }
@@ -705,7 +705,7 @@ public class FeesService {
               log.debug("id:{}", id);
               ids.add(Integer.valueOf(id));
           }
-          new FeesCategoryDAO().odeleteMultiple(ids);
+          feesCategoryDao.odeleteMultiple(ids);
            }
   }
 	   
@@ -819,7 +819,7 @@ public class FeesService {
 	                        }
 
 	               }
-	           new FeesCategoryDAO().applyotherConcession(concessionList,studentId);
+	                feesCategoryDao.applyotherConcession(concessionList,studentId);
 	           studentIdDto.setStudentId(studentId);
 	           return studentIdDto;
 	        }
@@ -1023,7 +1023,7 @@ public class FeesService {
 		        		searchYear = yearofAdmissionStr;
 		        	}
 		        	
-		            List<OtherFeecategory> feecategoryList= new FeesCategoryDAO().getOtherFeeCategory(classname,searchYear,branchid);
+		            List<OtherFeecategory> feecategoryList= feesCategoryDao.getOtherFeeCategory(classname,searchYear,branchid);
 		            otherFeesCategoryResponseDto.setOtherFeesCategory(feecategoryList);
 
 		            Locale indiaLocale = new Locale("en", "IN");

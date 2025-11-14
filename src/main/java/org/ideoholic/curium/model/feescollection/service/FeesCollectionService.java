@@ -105,6 +105,8 @@ public class FeesCollectionService {
 	
 	private final feesCollectionDAO feesCollectionDAO;
 	
+	private final FeesCategoryDAO feesCategoryDao;
+	
     private final HttpServletRequest request;
 	private final HttpServletResponse response;
 	private final HttpSession httpSession;
@@ -2234,7 +2236,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new FeesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],currentAcademicYear,branchId);
+			List<Feescategory> feecategoryList= feesCategoryDao.getfeecategoryofstudent(dto.getAddClass()[0],currentAcademicYear,branchId);
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
@@ -3057,7 +3059,7 @@ public class FeesCollectionService {
 				for (String academicYear : academicYearArray) {
 					
 					//Get Fees Category
-						List<Feescategory> feesCategoryList = new FeesCategoryDAO().readListOfObjects(Integer.parseInt(branchId) , academicYear);
+						List<Feescategory> feesCategoryList = feesCategoryDao.readListOfObjects(Integer.parseInt(branchId) , academicYear);
 					//End Get Fees Category
 					
 				
