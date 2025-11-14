@@ -73,7 +73,7 @@ public class MarksDetailsActionAdapter {
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
-        dto.setNoofpresentday(request.getParameter("dateforattendance"));
+        dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
@@ -202,7 +202,7 @@ public class MarksDetailsActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamIds(request.getParameterValues("examslist"));
-        dto.setNoofpresentday(request.getParameter("dateforattendance"));
+        dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
@@ -283,10 +283,9 @@ public class MarksDetailsActionAdapter {
 
 	        return resultResponse.isSuccess();
 	    }
-	  
-	  public boolean generateFinalExamReport() {
 
-	        GenerateReportDto dto = new GenerateReportDto();
+	public boolean generateFinalExamReport() {
+		 GenerateReportDto dto = new GenerateReportDto();
 	        dto.setStudentIds(request.getParameterValues("studentIDs"));
 	        dto.setExamClass(request.getParameter("examclass"));
 	        dto.setExamName(request.getParameter("examname"));
@@ -296,5 +295,5 @@ public class MarksDetailsActionAdapter {
 	        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 	        request.setAttribute("examname", responseDto.getExamName());
 	        return responseDto.isSuccess();
-	    }
+	}
 }

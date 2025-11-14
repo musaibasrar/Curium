@@ -2137,8 +2137,7 @@ public ResultResponse updateMarksSub(MarksUpdateDto dto, String strCurrentAcadem
 	return result;
 }
 
-public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, String currentAcademicYear, String branchId){
-
+public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, String currentAcademicYear, String branchId) {
 	GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
 	
 	
@@ -2258,6 +2257,5 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 	return result;
 
 }
-
 
 }
