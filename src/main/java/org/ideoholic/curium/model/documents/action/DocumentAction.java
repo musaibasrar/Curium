@@ -262,5 +262,32 @@ public class DocumentAction {
 			  }
 	  
 	  }
+	  
+	  @GetMapping("/studentsArticleCertificate")
+		public String studentsArticleCertificate() {
+			standardActionAdapter.viewClasses(); 
+			return "studentarticlecertificate";
+		}
+	  
+	  @PostMapping("/searchStudentsForArticle")
+		public String searchStudentsForArticle() {
+		  stampFeesActionAdapter.advanceSearch();
+			return "studentarticlecertificate";
+		}
+	  
+	  @PostMapping("/GenerateArticle")
+		public String generateArticle() {
+			String result = documentActionAdapter.generateArticle();
+			if (result != null) {
+				return result;
+			} else {
+				return "error";
+			}
+		}
+	  
+	  @GetMapping("/printArticleCertificate")
+		public String printArticleCertificate() {
+			return "articlecertificateprint";
+		}
 	 
 }

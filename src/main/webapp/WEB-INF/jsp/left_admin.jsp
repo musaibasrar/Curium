@@ -605,6 +605,11 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/alalmas/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/alalmas/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
             			</td>
             		</tr>
