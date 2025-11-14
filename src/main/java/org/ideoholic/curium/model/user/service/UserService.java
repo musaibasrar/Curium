@@ -73,7 +73,7 @@ public class UserService {
     private FeesCollectionService feesCollectionService;
 
     @Autowired
-    private UserDAO userDAO;
+    private UserDAO userDao;
     
     @Autowired
     private YearDAO yearDao;
@@ -99,7 +99,7 @@ public class UserService {
         String userName = dto.getUserName();
         String password = dto.getPassword();
 
-        Login login = userDAO.readUniqueObject(userName, password);
+        Login login = userDao.readUniqueObject(userName, password);
 
         if (login != null) {
             Currentacademicyear currentAcademicYear = yearDao.showYear();
@@ -273,7 +273,7 @@ public class UserService {
 			todaysDate = new SimpleDateFormat("YYYY-MM-dd").format(date);
 			String querySub = "";
 			querySub = " feesdetails.date = '" + todaysDate + "'";
-			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+			feesDetailsList = userDao.getReceiptDetailsList(queryMain + querySub);
 			BigDecimal sumOfFees = BigDecimal.ZERO;
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
@@ -327,7 +327,7 @@ public class UserService {
 			toDate = new SimpleDateFormat("YYYY-MM-dd").format(enddayofmonth);
 			String querySub = "";
 			querySub = " feesdetails.date between '" + fromDate + "' AND '" + toDate + "'";
-			feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain + querySub);
+			feesDetailsList = userDao.getReceiptDetailsList(queryMain + querySub);
 			BigDecimal sumOfFees = BigDecimal.ZERO;
 			for (Receiptinfo receiptinfo : feesDetailsList) {
 				BigDecimal fee = new BigDecimal(receiptinfo.getTotalamount());
@@ -564,11 +564,11 @@ public class UserService {
         String newPassword = dto.getNewPassword();
         String confirmNewPassword = dto.getConfirmNewPassword();
         
-        login = new UserDAO().readPassword(currentPassword);
+        login = userDao.readPassword(currentPassword);
         
         if (login != null && newPassword.equals(confirmNewPassword)) {
             login.setPassword(newPassword);  
-            login = new UserDAO().update(login);
+            login = userDao.update(login);
 			result.setSuccess(true);
         } else {
 			result.setSuccess(false);
@@ -674,7 +674,7 @@ public class UserService {
 				queryMain = queryMain+querySub;
 				/*queryMain = "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"; */
 				log.error("SEARCH QUERY ***** "+queryMain);
-				feesDetailsList = new UserDAO().getReceiptDetailsList(queryMain);
+				feesDetailsList = userDao.getReceiptDetailsList(queryMain);
 
 			}
 			long sumOfFees = 0l;
@@ -730,7 +730,7 @@ public class UserService {
 		branch.setIdbranch(Integer.parseInt(branchId));
 		user.setBranch(branch);
 		
-		return new UserDAO().addUser(user);
+		return userDao.addUser(user);
 		
 	}
 
@@ -752,7 +752,7 @@ public class UserService {
         
         if(userName != null) {
         	int branchId = Integer.parseInt(strBranchId);
-        	login = new UserDAO().getLoginDetails(userName, branchId);
+        	login = userDao.getLoginDetails(userName, branchId);
 
        if (login != null) {
     	   
