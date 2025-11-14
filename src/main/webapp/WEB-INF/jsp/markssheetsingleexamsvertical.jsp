@@ -216,7 +216,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/greatindiaacademy/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -233,7 +233,7 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
 	<table style="page-break-inside: avoid;border-collapse: collapse;">
 			<tr>
-				<td style="padding-left: 200px;"><img src="/vision/images/vision.jpg" width="72" height="80"/></td>
+				<td style="padding-left: 200px;"><img src="/greatindiaacademy/images/greatindiaacademy.jpg" width="72" height="80"/></td>
 				<td>
 				<label class="dataTextBoldCenter">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label>
@@ -468,7 +468,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td><img src="/vision/images/principalsignature.png" width="60" height="28"/></td>
+							<td><img src="/greatindiaacademy/images/principalsignature.png" width="60" height="28"/></td>
 						</tr>
 				<tr>
 				<td></td>
