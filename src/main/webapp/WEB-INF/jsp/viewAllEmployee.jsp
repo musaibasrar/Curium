@@ -376,7 +376,7 @@
             
             function archiveRecords(){
                 var form1=document.getElementById("form1");
-               form1.action="/vision/EmployeeProcess/archiveMultipleEmployee";
+               form1.action="/alalmas/EmployeeProcess/archiveMultipleEmployee";
                form1.submit();
                
                //window.location.reload();

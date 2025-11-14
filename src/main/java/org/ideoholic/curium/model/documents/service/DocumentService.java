@@ -50,6 +50,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
 
 @Service
 public class DocumentService {
@@ -327,9 +328,6 @@ public class DocumentService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-		else {
-		studentListAaResponseDto.setSuccess(false);
 		}
 		return studentListAaResponseDto;
 	
@@ -993,4 +991,5 @@ public class DocumentService {
 				characterResponseDto.setSuccess(true);
 				return characterResponseDto;
 			}
+			 
 }

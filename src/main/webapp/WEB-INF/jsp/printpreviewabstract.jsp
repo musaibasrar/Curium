@@ -10,34 +10,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Admission Abstract</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/roshan/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/roshan/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/roshan/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/alalmas/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/alalmas/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alalmas/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/roshan/css/datePicker/demos.css">
-        <script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/alalmas/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alalmas/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/roshan/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/alalmas/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/alalmas/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -279,7 +279,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/roshan/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "/alalmas/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -338,7 +338,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/roshan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alalmas/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -450,7 +450,7 @@ for(Cookie cookie : cookies){
 
     <body class="bodymargin">
        
-        <form action="/roshan/" method="post" id="form1" class="bodymargin">
+        <form action="/alalmas/" method="post" id="form1" class="bodymargin">
 			
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
@@ -492,21 +492,6 @@ for(Cookie cookie : cookies){
 </table>
 	    
 	    <table>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
 <tr>
 <td><br></td>
 </tr>
@@ -654,25 +639,11 @@ for(Cookie cookie : cookies){
 <tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td>
 </tr><tr><td><br></td></tr><tr><td><br></td></tr> <tr><td><br></td></tr> <tr><td><br></td></tr>
 </table>
-<table>
-<tr>
-<td><br></td></tr>
-<tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td>
-</tr><tr><td><br></td></tr><tr><td><br></td></tr> <tr><td><br></td></tr> <tr><td><br></td></tr>
-</table>
 
-<table>
-<tr>
-<td><br></td></tr>
-<tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td>
-</tr><tr><td><br></td></tr><tr><td><br></td></tr> <tr><td><br></td></tr> <tr><td><br></td></tr>
-</table>
-<table>
-<tr>
-<td><br></td></tr>
-<tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td></tr><tr><td><br></td>
-</tr><tr><td><br></td></tr><tr><td><br></td></tr> <tr><td><br></td></tr> <tr><td><br></td></tr>
-</table>
+
+
+
+
 
 <div style="background-color: white; border-radius: 5px;margin: 20px;border:1px solid black;">
   <div  style="margin-bottom: 5px;">
@@ -692,14 +663,14 @@ for(Cookie cookie : cookies){
   
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Standard last studied</p></td>
   
-    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">No. and date<br>Transfer Certificate</p></td>
+    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">No. and date Transfer Certificate</p></td>
   
-  <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Standard to which<br> Admitted with section </p></td>
+  <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">Standard to which Admitted with section </p></td>
   
-    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Date of admission</p></td>
+    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">Date of admission</p></td>
   
-    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Subsequent progress of<br>
-    the pupil in school<br>every year from the<br>date of admission<br>(class to be noted)</p></td>
+    <td  class="abstract"  style="font-size:12px;transform:rotate(270deg);margin:0px;padding:0px;">Subsequent progress of
+    the pupil in school every year from the date of admission</td>
   
    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Class of leaving</p></td>
    
@@ -707,7 +678,7 @@ for(Cookie cookie : cookies){
     
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Reason for leaving</p></td>
    
-    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">No. and date of Transfer<br>Certified issued</p></td>
+    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">No. and date of Transfer Certified issued</p></td>
     <td  class="abstract"  style="font-size:12px;"><p>Remarks<br></p></td>
   
   </tr>
@@ -757,7 +728,7 @@ for(Cookie cookie : cookies){
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/roshan/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/alalmas/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 

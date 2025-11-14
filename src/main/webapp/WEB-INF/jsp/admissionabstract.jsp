@@ -517,8 +517,6 @@
         
          <script type="text/javascript">
 	$(function() {
-
-		
 		$("#print").button().click(function() {
 			printAdmissionAbstract();
 
@@ -542,13 +540,12 @@ function printAdmissionAbstract() {
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/roshan/StudentProcess/viewAll";
+								form1.action = "/alalmas/StudentProcess/viewAll";
 								form1.submit();
 							}
 
 							
 						</script>
-
 
 </head>
   <%
@@ -716,11 +713,7 @@ for(Cookie cookie : cookies){
 						<input value="Export"
 							type="submit" id="export"/>
 							<input value="Print"
-							type="submit" id="print"/>
-							</td>
-							
-							
-
+							type="submit" id="print"/></td>
 					</tr>
 				</tfoot>
 			</table>
