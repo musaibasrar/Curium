@@ -1,0 +1,30 @@
+version: '3.3'
+
+services:
+  curium_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: curium-application-service
+    ports:
+      - "8123:8080"  # Map internal port 8080 to external port 9001
+    networks:
+      - curium_default
+    environment:
+      SPRING_APPLICATION_NAME: curium_service
+      SPRING_DATASOURCE_DRIVERCLASSNAME: org.mariadb.jdbc.Driver
+      SPRING_DATASOURCE_PASSWORD: root
+      # Use the MariaDB container's network alias / container name on the shared Docker network.
+      SPRING_DATASOURCE_JDBC_URL: jdbc:mariadb://curium_mysql:3306/
+      SPRING_DATASOURCE_USERNAME: root
+	  SPRING_CONTEXT_PATH: /school
+
+networks:
+  curium_default:
+    external: true
+
+
+# Stop the application using: docker-compose down
+# Start the application without build using: docker-compose up -d
+# Start the application with build using: docker-compose up --build -d
+# To remove any dangling images created during build: docker rmi $(docker images -f "dangling=true" -q)
