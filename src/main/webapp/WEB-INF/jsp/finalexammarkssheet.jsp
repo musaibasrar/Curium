@@ -128,9 +128,10 @@ footer p {
     </script>
     
 </head>
-<body style="border-style:dotted;">
-    <div>
+<body>
+	 <button id="print" type="button" onclick="printAndHide()">Print</button>
      <c:forEach items="${markssheetlist}" var="Parents">
+     <div style="border-style:dotted;padding:10px;">
 			<table align="center"
 				style="border: none; margin-bottom: 0; text-align: center;">
 				<tr>
@@ -268,11 +269,33 @@ footer p {
         <tr><td style="border: 0px solid #ddd;"><br></td></tr>
         </table>
         <footer>
-            <p>Parent's Signature &emsp; &emsp; &emsp; &emsp; &emsp;Class Teacher's Signature &emsp; &emsp; &emsp; &emsp; &emsp;Principal's Signature</p>
+            <!--<p>Parent's Signature &emsp; &emsp; &emsp; &emsp; &emsp;Class Teacher's Signature &emsp; &emsp; &emsp; &emsp; &emsp;Principal's Signature</p>-->
         </footer>
+      <TABLE id="dataTable" width="100%" 
+       style="page-break-inside: avoid; border-collapse: collapse; border: none; margin: 0 auto;">
+    
+    <tr>
+        <td style="border: none;"></td>
+        <td align="center" style="border: none;">
+            <!-- <img src="class_teacher_sign.png" alt="Class Teacher Signature" height="50" /> -->
+        </td>
+        <td align="center" style="border: none;text-align:center;">
+            <img src="/alalmas/images/hm.png" alt="Head Master Signature" height="40" />
+        </td>
+    </tr>
+
+    <!-- Label Row -->
+    <tr>
+        <td align="center" style="border: none;text-align:center;">Parent's Signature</td>
+        <td align="center" style="border: none;text-align:center;">Class Teacher</td>
+        <td align="center" style="border: none;text-align:center;">Head Master</td>
+    </tr>
+
+</TABLE>
+
+        </div>
+        <br>
                                     </c:forEach>
-    </div>
-    <button id="print" type="button" onclick="printAndHide()">Print</button>
     
 </body>
 </html>

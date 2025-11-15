@@ -289,12 +289,4 @@ public class DocumentAction {
 		public String printArticleCertificate() {
 			return "articlecertificateprint";
 		}
-	  
-	  @PostMapping("/printAdmissionAbstract")
-		public String printAdmissionAbstract() {
-
-			documentActionAdapter.printAdmissionAbstract();
-			return "printpreviewabstract";
-		}
-	 
 }
