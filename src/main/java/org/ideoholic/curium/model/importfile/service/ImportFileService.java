@@ -26,12 +26,16 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Service
 public class ImportFileService {
+	
+	@Autowired
+	private parentsDetailsDAO parentsDetailsDao;
 
     XSSFRow row;
 
@@ -168,6 +172,6 @@ public class ImportFileService {
 						listParentLogin.add(login);
 					}
 					
-		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
+		return ResultResponse.builder().success(parentsDetailsDao.createMultiple(listParents,listParentLogin)).build();
 	}
 }

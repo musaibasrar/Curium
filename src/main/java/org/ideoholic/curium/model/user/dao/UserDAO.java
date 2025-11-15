@@ -128,7 +128,7 @@ public class UserDAO {
 	public boolean addUser(Login user) {
 		try {
 			int userid = 1;
-			Login lastAddedUser = loginRepo.findTopByOrderByUserid().orElse(null);
+			Login lastAddedUser = loginRepo.findTopByOrderByUseridDesc().orElse(null);
 
 			user = loginRepo.save(user);
 

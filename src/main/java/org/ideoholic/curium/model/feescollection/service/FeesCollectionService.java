@@ -107,6 +107,8 @@ public class FeesCollectionService {
 	
 	private final FeesCategoryDAO feesCategoryDao;
 	
+	private final parentsDetailsDAO parentsDetailsDao;
+	
     private final HttpServletRequest request;
 	private final HttpServletResponse response;
 	private final HttpSession httpSession;
@@ -180,7 +182,7 @@ public class FeesCollectionService {
 						.readUniqueObject(sid);
 
 				result.setStudent(student);
-				Parents parents = new parentsDetailsDAO().readUniqueObject(sid);
+				Parents parents = parentsDetailsDao.readUniqueObject(sid);
 
 				result.setParents(parents);
 				Feesdetails feesdetails =  feesDetailsDao
@@ -518,7 +520,7 @@ public class FeesCollectionService {
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = studentDetailsDao.readUniqueObject(rinfo.fetchSid());
-			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.fetchSid());
+			Parents parents = parentsDetailsDao.readUniqueObject(rinfo.fetchSid());
 			Login userLogin = userDao.getUniqueObject(rinfo.getUserid());
 			result.setParents(parents);
 			result.setStudent(student);
@@ -1336,7 +1338,7 @@ public class FeesCollectionService {
 				Student student = studentDetailsDao
 						.readUniqueObject(sid);
 				httpSession.setAttribute("student", student);
-				Parents parents = new parentsDetailsDAO().readUniqueObject(sid);
+				Parents parents = parentsDetailsDao.readUniqueObject(sid);
 				httpSession.setAttribute("parents", parents);
 				Feesdetails feesdetails = new feesDetailsDAO()
 						.readUniqueObject(idFees);
@@ -1547,7 +1549,7 @@ public class FeesCollectionService {
 			Date receiptDate = rinfo.getDate();
 			String reDate = new SimpleDateFormat("dd/MM/yyyy").format(receiptDate);
 			Student student = studentDetailsDao.readUniqueObject(rinfo.fetchSid());
-			Parents parents = new parentsDetailsDAO().readUniqueObject(rinfo.fetchSid());
+			Parents parents = parentsDetailsDao.readUniqueObject(rinfo.fetchSid());
 			Login userLogin = userDao.getUniqueObject(rinfo.getUserid());
 			result.setParents(parents);
 			result.setStudent(student);

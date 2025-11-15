@@ -90,6 +90,8 @@ public class StudentService {
 
 	private final feesCollectionDAO feesCollectionDAO;
 	
+	private final parentsDetailsDAO parentsDetailsDao;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -216,7 +218,7 @@ public class StudentService {
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(branchId));
 		parents.setUserid(Integer.parseInt(userId));
-		parents = new parentsDetailsDAO().create(parents);
+		parents = parentsDetailsDao.create(parents);
 
 		if (parents != null) {
 			String[] yearofAdmission = parents.getStudent().getYearofadmission().split("/");
@@ -406,7 +408,7 @@ public class StudentService {
 		try {
 			Integer id = Integer.parseInt(studentId);
 
-			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
+			Parents parents = parentsDetailsDao.readUniqueObject(id);
 
 			/*httpSession.setAttribute("studentfromservice",student);
 			httpSession.setAttribute("parentsfromservice",parents);
@@ -511,7 +513,7 @@ public class StudentService {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
 			Student student = studentDetailsDao.readploginUniqueObject(studentId);
-			Parents parents = new parentsDetailsDAO().readploginUniqueObject(studentId);
+			Parents parents = parentsDetailsDao.readploginUniqueObject(studentId);
 
 
 			Currentacademicyear currentYear = yearDao.showYear();
@@ -591,7 +593,7 @@ public class StudentService {
 		try {
 			Long id = Long.parseLong(studentId);
 			Student student = studentDetailsDao.readUniqueObject(id);
-			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
+			Parents parents = parentsDetailsDao.readUniqueObject(id);
 
 			/*httpSession.setAttribute("studentfromservice",student);
 			httpSession.setAttribute("parentsfromservice",parents);
@@ -906,7 +908,7 @@ public class StudentService {
 			parents.setBranchid(Integer.parseInt(strBranchId));
 			parents.setUserid(Integer.parseInt(userId));
 
-			parents = new parentsDetailsDAO().update(parents);
+			parents = parentsDetailsDao.update(parents);
 		}
 		return student;
 	}
@@ -1352,7 +1354,7 @@ public class StudentService {
 		try {
 			Long id = Long.parseLong(studentId);
 			Student student = studentDetailsDao.readUniqueObject(id);
-			Parents parents = new parentsDetailsDAO().readUniqueObject(id);
+			Parents parents = parentsDetailsDao.readUniqueObject(id);
 
 			/*httpSession.setAttribute("studentfromservice",student);
 			httpSession.setAttribute("parentsfromservice",parents);

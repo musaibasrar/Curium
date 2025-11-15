@@ -22,5 +22,6 @@ public interface LoginRepository extends JpaRepository<Login, Integer> {
     @Query("FROM Login as login where login.branch.idbranch=:branchId and login.username=:userName")
     List<Login> findByBranchIdAndUserName(@Param("branchId")Integer branchId, @Param("userName")String userName);
     
-    Optional<Login> findTopByOrderByUserid();
+    Optional<Login> findTopByOrderByUseridDesc();
+
 }

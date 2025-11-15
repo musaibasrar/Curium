@@ -32,16 +32,16 @@ public class PrintIdsDAO {
 
 	@Transactional
 	public Parents printMultipleIds(String id) {
-		 Parents parentsDetails = new Parents();
-			       try {
-	                    int sid = Integer.valueOf(id);
-	                    parentsDetails = parentsRepository.findByStudentSid(sid);
-	        } catch (Exception hibernateException) { 
-	        	log.error(hibernateException.getMessage(), hibernateException);
-	            hibernateException.printStackTrace();
-	            throw hibernateException;
-	        }       
-	        return parentsDetails;
+		Parents parentsDetails;
+		try {
+			int sid = Integer.valueOf(id);
+			parentsDetails = parentsRepository.findByStudentSid(sid).orElse(new Parents());
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			throw hibernateException;
+		}
+		return parentsDetails;
 	}
 	
 	@Transactional	

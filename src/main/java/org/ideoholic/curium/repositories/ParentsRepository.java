@@ -1,6 +1,7 @@
 package org.ideoholic.curium.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.springframework.data.domain.Page;
@@ -44,4 +45,11 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
 	@Query("SELECT parents FROM Parents AS parents WHERE parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 "
 			+ "AND parents.student.leftout=0 ORDER BY parents.student.name ASC")
 	Page<Parents> findAllActiveParentsByBranchId(Pageable pageable);
+	
+    @Query("FROM Parents p WHERE p.student.sid = :sid")
+    Optional<Parents> findByStudentSid(@Param("sid") long sid);
+
+    // Fetch by Student External ID
+    @Query("FROM Parents p WHERE p.student.studentexternalid = :externalId")
+    Optional<Parents> findByStudentExternalId(@Param("externalId") String externalId);
 }
