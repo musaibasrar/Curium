@@ -18,4 +18,5 @@ public class FeesCategoryDto {
 		private String amount;
 		private String categoryYear;
 		private int totalInstallments;
+		private String[] months;
 }
