@@ -32,4 +32,6 @@ public interface MessInvoiceDetailsRepository extends JpaRepository<MessInvoiceD
 	@Modifying
 	@Query("UPDATE MessInvoiceDetails m SET m.voucherid = :voucherId WHERE m.id = :id")
 	void updateVoucherIdByInvoiceId(@Param("voucherId") Integer voucherId, @Param("id") Integer id);
+
+	List<MessInvoiceDetails> findBySuppliersidIn(List<Integer> supplierIds);
 }
