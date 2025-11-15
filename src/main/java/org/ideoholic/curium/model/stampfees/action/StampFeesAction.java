@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.stampfees.service.StampFeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,7 +36,7 @@ public class StampFeesAction {
 	
 	@Autowired
 	private StampFeesActionAdapter stampFeesActionAdapter;
-
+	
 	@PostMapping("/searchForFees")
 	public String searchForFees() {
 		stampFeesActionAdapter.advanceSearch();
@@ -102,6 +103,15 @@ public class StampFeesAction {
 	public String advanceSearchForStampFees() {
 		stampFeesActionAdapter.advanceSearchForStampFees();
 		return "stampfees";
+	}
+	
+	@GetMapping("/showFeesDetailsAllStudents")
+	public String showFeesDetailsAllStudents() {
+		//feesActionAdapter.viewFees();
+		yearActionAdapter.getYear();
+		feesActionAdapter.viewAllStudentsList();
+		feesActionAdapter.viewFees();
+		return "stampfeesallstudents";
 	}
 	
 }
