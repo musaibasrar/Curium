@@ -48,6 +48,9 @@ public class MessItemsService {
 	@Autowired
 	private MessStockMoveDAO messStockMoveDao;
 
+	@Autowired
+	private MessSuppliersDAO messSuppliersDao;
+
 
 	public ResultResponse viewItemDetails(String branchId) {
 
@@ -379,7 +382,7 @@ public class MessItemsService {
 					
 					for (MessInvoiceDetails messInvoiceDetails : invoicelist) {
 						MessSuppliers messSuppliers = new MessSuppliers();
-						messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSuppliersid());
+						messSuppliers = messSuppliersDao.getMessSupplierById(messInvoiceDetails.getSuppliersid());
 						invoiceSuppliersMap.put(messInvoiceDetails, messSuppliers);
 					}
 					result.setInvoiceSuppliersMap(invoiceSuppliersMap);
@@ -435,7 +438,7 @@ public class MessItemsService {
 			Map<PoMaster,MessSuppliers> poMasterMap = new LinkedHashMap<PoMaster,MessSuppliers>();
 			for (PoMaster messInvoiceDetails : invoicelist) {
 				MessSuppliers messSuppliers = new MessSuppliers();
-				messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSupplierId());
+				messSuppliers = messSuppliersDao.getMessSupplierById(messInvoiceDetails.getSupplierId());
 				poMasterMap.put(messInvoiceDetails, messSuppliers);
 			}
 			invoiceDetailsResponseDto.setPoMasterMap(poMasterMap);
@@ -849,7 +852,7 @@ public class MessItemsService {
 					
 					for (MessInvoiceDetails messInvoiceDetails : invoicelist) {
 						MessSuppliers messSuppliers = new MessSuppliers();
-						messSuppliers = new MessSuppliersDAO().getMessSupplierById(messInvoiceDetails.getSuppliersid());
+						messSuppliers = messSuppliersDao.getMessSupplierById(messInvoiceDetails.getSuppliersid());
 						invoiceSuppliersMap.put(messInvoiceDetails, messSuppliers);
 					}
 					result.setInvoiceSuppliersMap(invoiceSuppliersMap);

@@ -29,13 +29,16 @@ public class MessSuppliersService {
 	
 	@Autowired
     private AccountDAO accountDao;
+	
+	@Autowired
+	private MessSuppliersDAO messSuppliersDao;
 
 	public ResultResponse viewSuppliersDetails(String branchId) {
 		
 		List<MessSuppliers> messSuppliersList = new ArrayList<MessSuppliers>();
 		
 		 if(branchId!=null){
-			 	messSuppliersList =	new MessSuppliersDAO().getSupplierDetails();
+			 	messSuppliersList =	messSuppliersDao.getSupplierDetails();
 		 }
 		 
 		 return ResultResponse
@@ -53,7 +56,7 @@ public class MessSuppliersService {
 	  
 	  if(branchId!=null)
 	  { 
-		  messSuppliersList = new MessSuppliersDAO().getSupplierDetails();
+		  messSuppliersList = messSuppliersDao.getSupplierDetails();
 	  }
 	  
 	  return ResultResponse .builder() .resultList(messSuppliersList)
@@ -80,7 +83,7 @@ public class MessSuppliersService {
 			 messSuppliers.setLinkedledgerid(1);
 			 messSuppliers = createLedgerForSupplierAndSave(messSuppliers, branchId, userId);
 			 
-			 /*messSuppliers= new MessSuppliersDAO().addNewSuppplier(messSuppliers);*/
+			 /*messSuppliers= messSuppliersDao.addNewSuppplier(messSuppliers);*/
 			 
 			 if(messSuppliers.getId()!=null) {
 				 result.setSupplierSave(true);
@@ -112,7 +115,7 @@ public class MessSuppliersService {
            
        		}
        		
-       boolean result = new MessSuppliersDAO().deleteSuppliers(messList);
+       boolean result = messSuppliersDao.deleteSuppliers(messList);
        resultResponse.setSuccess(result);
         
         }
@@ -145,7 +148,7 @@ public class MessSuppliersService {
                 
             }
             
-            boolean result = new MessSuppliersDAO().updateMultipleSuppliers(messList);
+            boolean result = messSuppliersDao.updateMultipleSuppliers(messList);
             resultResponse.setSuccess(result);
         }
 		return resultResponse;
@@ -209,7 +212,7 @@ public class MessSuppliersService {
 				accountDetailsBalance.setEnteredon(new Date());
 				accountDetailsBalance.setBranchid(Integer.parseInt(branchId));
 				accountDetailsBalance.setUserid(Integer.parseInt(userId));
-				result = new MessSuppliersDAO().addNewSupplier(accountDetails, accountDetailsBalance, messSuppliers);
+				result = messSuppliersDao.addNewSupplier(accountDetails, accountDetailsBalance, messSuppliers);
 
 			}
 		} catch (Exception e) {
@@ -243,7 +246,7 @@ public class MessSuppliersService {
         
 		if(!supplierId.isEmpty()) {
 			
-			Accountdetailsbalance accountDetailsBalance =  new MessSuppliersDAO().getSupplierBalance(supplieridledgerid[1]);
+			Accountdetailsbalance accountDetailsBalance =  messSuppliersDao.getSupplierBalance(supplieridledgerid[1]);
 			NumberFormat currency  = NumberFormat.getCurrencyInstance(indiaLocale);
 		        
 		        try {
@@ -321,7 +324,7 @@ public class MessSuppliersService {
 				String updateCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+" + amount + " where accountdetailsid=" + drPasId;
 
 
-				boolean result = new MessSuppliersDAO().saveIssueCheque(messSuppliersPayment, transactions, updateCrAccount, updateDrAccount);
+				boolean result = messSuppliersDao.saveIssueCheque(messSuppliersPayment, transactions, updateCrAccount, updateDrAccount);
 
 				resultResponse.setSuccess(result);
 			}
@@ -368,9 +371,9 @@ public class MessSuppliersService {
 				page = Integer.parseInt(strPage);
 			}
 
-			List<MessSuppliersPayment> supplierPaymentlist = new MessSuppliersDAO().readListOfSuppliersPaymentPagination((page - 1) * recordsPerPage,
+			List<MessSuppliersPayment> supplierPaymentlist = messSuppliersDao.readListOfSuppliersPaymentPagination((page - 1) * recordsPerPage,
 					recordsPerPage, Integer.parseInt(branchId));
-			int noOfRecords = new MessSuppliersDAO().getNoOfSuppliersPaymentDetails(Integer.parseInt(branchId));
+			int noOfRecords = messSuppliersDao.getNoOfSuppliersPaymentDetails(Integer.parseInt(branchId));
 			int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 			result.setSupplierPaymentList(supplierPaymentlist);
 			result.setNoOfPages(noOfPages);
@@ -407,7 +410,7 @@ public class MessSuppliersService {
 				}
 
 
-				boolean result = new MessSuppliersDAO().updateSupplierPaymentDelivered(messSuppliersPaymentList);
+				boolean result = messSuppliersDao.updateSupplierPaymentDelivered(messSuppliersPaymentList);
 				resultResponse.setSuccess(result);
 			}
 		}catch (Exception e) {
@@ -497,7 +500,7 @@ public class MessSuppliersService {
 					String updateDrAccountSupplier = "update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+crPasId;
 					String updateCrAccountSupplier = "update Accountdetailsbalance set currentbalance=currentbalance-"+amount+" where accountdetailsid="+drSupplierLedgerId;
 
-					boolean result = new MessSuppliersDAO().updateSupplierPayment(messSuppliersPayment,transactions,updateCrAccount,updateDrAccount,transactionsSupplier,updateCrAccountSupplier,updateDrAccountSupplier);
+					boolean result = messSuppliersDao.updateSupplierPayment(messSuppliersPayment,transactions,updateCrAccount,updateDrAccount,transactionsSupplier,updateCrAccountSupplier,updateDrAccountSupplier);
 					resultResponse.setSuccess(result);
 				}
 
@@ -526,7 +529,7 @@ public class MessSuppliersService {
 					String status = dto.getRequestParams().get("status_"+supId);
 
 					if("DELIVERED".equalsIgnoreCase(status)) {
-						new MessSuppliersDAO().updateSupplierPaymentToIssueed("update MessSuppliersPayment set status='ISSUED' where id="+supId+"");
+						messSuppliersDao.updateSupplierPaymentToIssueed("update MessSuppliersPayment set status='ISSUED' where id="+supId+"");
 					}else if("ISSUED".equalsIgnoreCase(status)) {
 						String issueVoucherId = dto.getRequestParams().get("issuevoucherid_"+supId);
 						String chequeAmount = dto.getRequestParams().get("chequeamount_"+supId);
@@ -560,7 +563,7 @@ public class MessSuppliersService {
 
 						String updateMessSupplierPayment = "update MessSuppliersPayment set status='CANCELLED' where id="+supId+"";
 
-						boolean result = new MessSuppliersDAO().reverseIssueCheque(updateMessSupplierPayment,transactions,updateCrAccount,updateDrAccount);
+						boolean result = messSuppliersDao.reverseIssueCheque(updateMessSupplierPayment,transactions,updateCrAccount,updateDrAccount);
 
 						resultResponse.setSuccess(result);
 
@@ -588,7 +591,7 @@ public class MessSuppliersService {
 
 		
 		 if(branchId!=null){
-			 	messSuppliersList =	new MessSuppliersDAO().getSupplierDetails();
+			 	messSuppliersList =	messSuppliersDao.getSupplierDetails();
 			 	
 			 	List<Integer> supplierLedgerId = new ArrayList<>();
 			 	

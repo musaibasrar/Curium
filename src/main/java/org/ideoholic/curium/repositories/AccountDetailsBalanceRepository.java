@@ -5,6 +5,7 @@ import java.util.List;
 import org.ideoholic.curium.model.account.dto.Accountdetails;
 import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -28,4 +29,9 @@ public interface AccountDetailsBalanceRepository extends JpaRepository<Accountde
 			+ "AND a.branchid = :branchId")
 	List<Accountdetailsbalance> findBankCashAccountDetailsByBranch(@Param("branchId") int branchId);
 
+    @Modifying
+    @Query("delete from Accountdetailsbalance a where a.accountDetails.accountdetailsid IN :ids")
+    int deleteByAccountdetailsidIn(@Param("ids") List<Integer> ids);
+
+    Accountdetailsbalance findByAccountDetails_Accountdetailsid(Integer accountdetailsid);
 }
