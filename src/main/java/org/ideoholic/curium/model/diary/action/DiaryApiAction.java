@@ -24,8 +24,7 @@ public interface DiaryApiAction {
 	 ResponseEntity<DiaryResponseDto> viewdiarystudent(@RequestHeader(value = "branchid") String branchId, @RequestParam(value="page")
 			String page) ;
 
-	 ResponseEntity<DiaryResponseDto> viewDiaryStudentParent(@RequestBody StudentIdPageDto studentIdPageDto,
-			@RequestHeader(value = "branchid") String branchId);
+	 ResponseEntity<DiaryResponseDto> viewDiaryStudentParent(@RequestBody StudentIdPageDto studentIdPageDto);
 
 	 ResponseEntity<DiaryResponseDto> deleteRecord(@RequestBody DairyIdsDto dairyIdsDto,
 			@RequestHeader(value = "branchid") String branchId,@RequestParam(value="page")
