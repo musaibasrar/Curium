@@ -364,20 +364,21 @@ for(Cookie cookie : cookies){
 				<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">10.&nbsp;&nbsp;Whether failed if so Once/Twice in the same Class &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:550px;"><c:out value="${failpass}" /> </span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:550px;">No </span>
 					</h3>
 				</td>
 			</tr>
 			
 			<tr>
 			<td class="dataTextBoldLeft">
+			<c:set var="subject" value="${fn:split(subjects, ',')}" />
 					<h3 style="font-weight: normal;">11.&nbsp;&nbsp;Subject studied: &nbsp;&nbsp;
 					(i). &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${firstsubject}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${subject[0]}" /></span>
 					(ii). &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"> <c:out value="${secondsubject}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"> <c:out value="${subject[1]}" /></span>
 					(iii). &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${thirdsubject}" /> </span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${subject[2]}" /> </span>
 					
 					</h3>
 				</td>
@@ -387,11 +388,11 @@ for(Cookie cookie : cookies){
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;
 					(iv). &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${Fourthsubject}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${subject[3]}" /></span>
 					(v). &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"> <c:out value="${Fifthsubject}" /></span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"> <c:out value="${subject[4]}" /></span>
 					(vi). &nbsp;&nbsp;
-					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${sixthsubject}" /> </span>
+					<span style="font-weight: bold;border-bottom-style: dotted;width:150px;"><c:out value="${subject[5]}" /> </span>
 					
 					</h3>
 				</td>
@@ -401,7 +402,6 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">12.&nbsp;&nbsp;Whether qualified for Promotion to the higher Class
-					
 					</h3>
 				</td>
 				</tr>
@@ -424,7 +424,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">14.&nbsp;&nbsp;Any concession available of,if so,the nature of such concession &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"> <c:out value="${concession}" /> </span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"> No </span>
 					</h3>
 				</td>
 			</tr>
@@ -445,7 +445,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">17.&nbsp;&nbsp;Whether NCC cadet/Boy Scout/Girl Scout (detail may be given) &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"> <c:out value="${ncc}" /></span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:450px;"> No</span>
 					</h3>
 				</td>
 			</tr>
@@ -457,7 +457,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;(mention achievement level threrein) &nbsp;&nbsp;
-					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:650px;"><c:out value="${game}" /> </span>
+					<span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:650px;">Yes </span>
 					</h3>
 				</td>
 			</tr>
