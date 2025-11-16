@@ -34,6 +34,7 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -42,6 +43,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class StudentServiceArchive {
+
+	private final parentsDetailsDAO parentsDetailsDao;
 	private final StudentDetailsDAO studentDetailsDao;
 	private final UserDAO userDao;
 
@@ -535,7 +538,7 @@ public class StudentServiceArchive {
         parents.setStudent(student);
         parents.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
         parents.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
-        parents = new parentsDetailsDAO().create(parents);
+        parents = parentsDetailsDao.create(parents);
 
         if(parents!=null){
             result=true;
@@ -739,7 +742,7 @@ public class StudentServiceArchive {
             parents.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
             parents.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
 
-            parents = new parentsDetailsDAO().update(parents);
+            parents = parentsDetailsDao.update(parents);
         }
         String stId = student.getSid().toString();
         int branchId = student.getBranchid();
