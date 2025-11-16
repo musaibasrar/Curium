@@ -133,7 +133,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/awami/StudentProcess/ViewDetailsbyexternalid?id=${Parents.student.studentexternalid}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/awami/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${branchid}"> <img
 									src="/awami/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
@@ -153,7 +153,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/awami/DiaryProcess/viewDiaryStudentParent?id=${Parents.student.studentexternalid}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/awami/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}"> <img
 									src="/awami/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
@@ -172,7 +172,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/awami/StudentProcess/ViewFeesDetailsbyexternalid?id=${Parents.student.studentexternalid}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/awami/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${branchid}"> <img
 									src="/awami/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
@@ -191,7 +191,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/awami/MarksDetailsProcess/generateReportParent?id=${Parents.student.studentexternalid}"> <img
+								href="/awami/MarksDetailsProcess/generateReportParent?id=${username}"> <img
 									src="/awami/images/progressreport.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Progress Report
 							</a>
@@ -209,7 +209,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/awami/StudentDiaryProcess/viewDiaryStudentParent?id=${Parents.student.studentexternalid}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/awami/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}"> <img
 									src="/awami/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>

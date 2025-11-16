@@ -274,9 +274,8 @@ public class StudentActionAdapter {
     public boolean viewDetailsbySidStudent() {
 
         String studentId = request.getParameter("id");
-        String studentBranchId = request.getParameter("urlbranchid");
 
-        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId, studentBranchId);
+        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId,  httpSession.getAttribute(Constants.BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());

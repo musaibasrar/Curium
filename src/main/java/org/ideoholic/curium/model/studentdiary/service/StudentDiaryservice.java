@@ -95,9 +95,8 @@ public class StudentDiaryservice {
 //viewDiaryparent
 	
 		
-	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto) {
+	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
-		String branchId = studentIdPageDto.getStudentBranchId();
          if(branchId!=null){
                  try {
 			         Student student = new studentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
