@@ -39,6 +39,7 @@ import lombok.extern.slf4j.Slf4j;
 public class PeriodService {
 	
 	private final YearDAO yearDao;
+	private final PeriodDAO periodDao;
     private final StandardService standardService;
     private final EmployeeService employeeService;
     private final SubjectDetailsService subjectDetailsService;
@@ -65,7 +66,7 @@ public class PeriodService {
            ResultResponse classSecs = standardService.viewClasses(branchId);
            result.setClassSecs(classSecs.getResultList());
 
-           List<Periodmaster> periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
+           List<Periodmaster> periodMaster = periodDao.getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
            result.setPeriodMaster(periodMaster);
        } catch (Exception e) {
            return result;
@@ -135,7 +136,7 @@ public class PeriodService {
 		periodMaster.setBranchid(Integer.parseInt(branchId));
 		periodMaster.setUserid(Integer.parseInt(userId));
 
-		result.setSuccess(new PeriodDAO().save(periodMaster,periodMap));
+		result.setSuccess(periodDao.save(periodMaster,periodMap));
 
 		return result;
 	}
@@ -146,10 +147,10 @@ public class PeriodService {
 
         if(periodMasterId !=null){
 		
-			Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterId);
+			Periodmaster periodMaster = periodDao.getTimeTable(periodMasterId);
 			result.setPeriodMaster(periodMaster);
 			
-			List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterId);
+			List<Perioddetails> periodD= periodDao.getTimeTablePeriodDetails(periodMasterId);
 			result.setPeriodDetails(periodD);
 			
 			Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<>();
@@ -227,7 +228,7 @@ public class PeriodService {
 			for (String id : periodMasterid) {
 				ids.add(Integer.valueOf(id));
 			}
-			result.setSuccess(new PeriodDAO().deletePeriods(ids));
+			result.setSuccess(periodDao.deletePeriods(ids));
 			return result;
 		}
 		
@@ -246,7 +247,7 @@ public class PeriodService {
             Currentacademicyear currentYear = yearDao.showYear();
             result.setCurrentYear(currentYear.getCurrentacademicyear());
 
-            periodMaster = new PeriodDAO().getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
+            periodMaster = periodDao.getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
             result.setPeriodMaster(periodMaster);
         }
 
@@ -269,11 +270,11 @@ public class PeriodService {
 		Map<String,String> sundayMap = new HashMap<>();
 		
 		if(branchId!=null){
-            List<Perioddetails> periodDetailsList = new PeriodDAO().getPeriodDetailsForTeacher(teacherName);
+            List<Perioddetails> periodDetailsList = periodDao.getPeriodDetailsForTeacher(teacherName);
 			
 			for (Perioddetails perioddetails : periodDetailsList) {
 				
-				Periodmaster periodMaster = new PeriodDAO().getTimeTable(perioddetails.getPeriodMaster().getIdperiodmaster().toString());
+				Periodmaster periodMaster = periodDao.getTimeTable(perioddetails.getPeriodMaster().getIdperiodmaster().toString());
 				
 				if("monday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
@@ -340,10 +341,10 @@ public class PeriodService {
 		try {
 			if(periodMasterId !=null){
 
-				Periodmaster periodMaster = new PeriodDAO().getTimeTable(periodMasterId);
+				Periodmaster periodMaster = periodDao.getTimeTable(periodMasterId);
 				result.setPeriodMaster(periodMaster);
 
-				List<Perioddetails> periodD= new PeriodDAO().getTimeTablePeriodDetails(periodMasterId);
+				List<Perioddetails> periodD= periodDao.getTimeTablePeriodDetails(periodMasterId);
 				result.setPeriodDetails(periodD);
 
 				Map<String,List<Perioddetails>> periodMap = new LinkedHashMap<>();
@@ -504,7 +505,7 @@ public class PeriodService {
 		Set<Perioddetails> setPeriodDetails = new HashSet<>(periodDetailsList);
 		periodMaster.setPeriodDetails(setPeriodDetails);
 
-		result.setSuccess(new PeriodDAO().update(periodMaster));
+		result.setSuccess(periodDao.update(periodMaster));
 
 		return result;
 	}
