@@ -59,6 +59,9 @@ public class EmployeeService {
 	
 	@Autowired
 	private EmployeeDAO employeeDao;
+	
+	@Autowired
+	private positionDAO positionDao;
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -431,7 +434,7 @@ public class EmployeeService {
 		if(branchId!=null) {
 			List<Department> listDepartment =departmentDAO.readListOfObjects(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListDepartment(listDepartment);
-	        List<Position> listPosition = new positionDAO().readListOfObjects(Integer.parseInt(branchId));
+	        List<Position> listPosition = positionDao.readListOfObjects(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListPosition(listPosition);
 	        List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListClasssec(classsecList);
