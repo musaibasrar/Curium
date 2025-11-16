@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +37,12 @@ public class QueryUtil {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List runGivenQueryWithPagination(String query, Class clazz, int offset, int limit) {
 		return entityManager.createQuery(query, clazz).setFirstResult(offset).setMaxResults(limit).getResultList();
+	}
+	
+	public Long runGivenQueryForCount(String jpQuery) {
+		TypedQuery<Long> q = entityManager.createQuery(jpQuery, Long.class);
+		q.setParameter("status", "ACTIVE");         // set your parameters
+		return q.getSingleResult();           // returns 0 if no rows
 	}
 
 	/**

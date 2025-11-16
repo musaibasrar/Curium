@@ -3,32 +3,20 @@ package org.ideoholic.curium.model.sendsms.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
-
 import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.util.QueryUtil;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
 public class SmsDAO {
-	Session session = null;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction = null;
-	/**
-	 * * Hibernate Transaction Variable
-	 */
-	Transaction transaction1;
-	
-	private static final Logger logger = LogManager.getLogger(SmsDAO.class);	
 
-	public SmsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+	private final QueryUtil queryUtil;
 
 	public long countNumbers(String queryMain) {
 		long totalNumbers = 0;
@@ -36,16 +24,15 @@ public class SmsDAO {
 			// this.session =
 			// HibernateUtil.getSessionFactory().openCurrentSession();
 
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("select count(*)" + queryMain
-					+ "AND contactnumber IS NOT NULL and contactnumber <> '' ");
-			totalNumbers = (long) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
+			// Query query = session.createQuery("select count(*)" + queryMain + "AND contactnumber IS NOT NULL and contactnumber <> '' ");
+			String finalQuery = "select count(*)" + queryMain + "AND contactnumber IS NOT NULL and contactnumber <> '' ";
+
+			totalNumbers = queryUtil.runGivenQueryForCount(finalQuery);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+
 			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
 		}
 		return totalNumbers;
 	}
@@ -55,28 +42,23 @@ public class SmsDAO {
 		return null;
 	}
 
-	public List<Object> readListOfObjectsPaginationALL(int offset,
-			int noOfRecords, String queryMain) {
+	@SuppressWarnings("unchecked")
+	public List<Object> readListOfObjectsPaginationALL(int offset, int noOfRecords, String queryMain) {
 		List<Object> results = new ArrayList<Object>();
 
 		try {
-			transaction = session.beginTransaction();
+			// Query query = session.createQuery(queryMain);
+			// query.setFirstResult(offset);
+			// query.setMaxResults(noOfRecords);
+			// results = query.list();
+			results = queryUtil.runGivenQueryWithPagination(queryMain, Object.class, offset, noOfRecords);
 
-			Query query = session.createQuery(queryMain);
-			query.setFirstResult(offset);
-			query.setMaxResults(noOfRecords);
-			results = query.list();
-
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
 		}
+		return results;
 	}
 
 }
