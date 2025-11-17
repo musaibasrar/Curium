@@ -184,10 +184,10 @@ public class DataUtil {
        return mathrandom;
    }
      
-    public static String classToWord(String lowerClass ) {
+    public static String classInWord(String classToWord ) {
     	
           String classinword = null;
-    	 switch (lowerClass) {
+    	 switch (classToWord) {
 			case "Nursery":
 				classinword = "Class Nursery";
 				break;
