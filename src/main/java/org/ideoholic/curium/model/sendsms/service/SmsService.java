@@ -23,17 +23,23 @@ import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class SmsService {
+	
+	private final SmsDAO smsDao;
 	    
 	private static DecimalFormat df2 = new DecimalFormat(".##");
 
@@ -74,14 +80,14 @@ public class SmsService {
 			
 			queryMain = queryMain+querySub;
 
-			double totalNumbers = new SmsDAO().countNumbers(queryMain);
+			double totalNumbers = smsDao.countNumbers(queryMain);
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
 			log.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
-				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+				List<Object> pContacts = smsDao.readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
 
 				//List<Parents> parentsContacts = (List<Parents>) Parents.class.cast(pContacts); 
 				
@@ -165,14 +171,14 @@ public class SmsService {
 					
 			queryMain = queryMain+querySub+ " AND teacher.branchid="+Integer.parseInt(branchId);
 
-			double totalNumbers = new SmsDAO().countNumbers(queryMain);
+			double totalNumbers = smsDao.countNumbers(queryMain);
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
 			log.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
-				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
+				List<Object> teacherContacts = smsDao.readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
 				
 				//List<Teacher> teachersContact = (List<Teacher>) Teacher.class.cast(teacherContacts); 
 						
