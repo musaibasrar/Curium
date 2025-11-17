@@ -1226,7 +1226,6 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 				List<Marks> marksDetailsList = marksDetailsDao.readMarksforStudent(student.getSid(), currentAcademicYear, exam.getExid());
 				List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId), examClass[0], exam.getExamname());
 
-
 				for (Marks marks : marksDetailsList) {
 
 					int examId = exam.getExid();
@@ -1238,7 +1237,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 						for (Subject sub : subjectList) {
 
 							int marksSubid = marks.getSubid();
-							int subjectId = sub.getSubjectid();
+							int subjectId = sub.getSubid();
 
 							if (marksSubid == subjectId) {
 

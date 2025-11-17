@@ -92,7 +92,7 @@ public class DiaryService {
 	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 
-		if (branchId != null) {
+		if (studentIdPageDto.getStudentBranchId() != null) {
 			try {
 				Student student = studentDetailsDao.readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
