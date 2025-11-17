@@ -322,5 +322,21 @@ public class StandardDetailsDAO {
 	}
 
     }
+
+	public Classhierarchy getClassHierarchy(String classStuDying, int branchId) {
+		Classhierarchy classhierarchy = new Classhierarchy();
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Classhierarchy where lowerclass = '"+classStuDying+"' and branchid="+branchId+"");
+			classhierarchy = (Classhierarchy) query.uniqueResult();
+			query.executeUpdate();
+			  transaction.commit();
+	    } catch (Exception hibernateException) {transaction.rollback();
+	            hibernateException.printStackTrace();
+	    }finally {
+			HibernateUtil.closeSession();
+		}
+		return classhierarchy;
+	}
 	
 }

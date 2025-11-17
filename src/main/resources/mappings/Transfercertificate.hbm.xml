@@ -36,5 +36,23 @@
 		<property name="bookno" type="java.lang.Integer">
             <column name="bookno" />
         </property>
+         <property name="lastExam" type="string">
+            <column name="lastexam" length="45" />
+        </property>
+         <property name="schoolDuesPaid" type="string">
+            <column name="schoolduespaid" length="45" />
+        </property>
+         <property name="concession" type="string">
+            <column name="concession" length="45" />
+        </property>
+         <property name="totalWorkingDays" type="string">
+            <column name="totalworkingdays" length="45" />
+        </property>
+         <property name="totalDaysPresent" type="string">
+            <column name="totaldayspresent" length="45" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="remarks" length="45" />
+        </property>
     </class>
 </hibernate-mapping>

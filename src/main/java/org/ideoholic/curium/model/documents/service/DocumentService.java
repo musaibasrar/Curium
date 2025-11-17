@@ -31,6 +31,8 @@ import org.ideoholic.curium.model.documents.dao.DocumentDAO;
 import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.parents.dto.Parents;
+import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
+import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
@@ -83,7 +85,7 @@ public class DocumentService {
 		String leavingReason = DataUtil.emptyString(request.getParameter("reason"));
 		//String bookno = DataUtil.emptyString(request.getParameter("bookno"));
 		String caste = DataUtil.emptyString(request.getParameter("caste"));
-		String classinword = DataUtil.emptyString(request.getParameter("classinword"));
+		//String classinword = DataUtil.emptyString(request.getParameter("classinword"));
 		String lastexam = DataUtil.emptyString(request.getParameter("lastexam"));
 		String failpass = DataUtil.emptyString(request.getParameter("failpass"));
 		String firstsubject = DataUtil.emptyString(request.getParameter("firstsubject"));
@@ -92,8 +94,8 @@ public class DocumentService {
 		String Fourthsubject = DataUtil.emptyString(request.getParameter("Fourthsubject"));
 		String Fifthsubject = DataUtil.emptyString(request.getParameter("Fifthsubject"));
 		String sixthsubject = DataUtil.emptyString(request.getParameter("sixthsubject"));
-		String pinfig = DataUtil.emptyString(request.getParameter("pinfig"));
-		String pinword = DataUtil.emptyString(request.getParameter("pinword"));
+		//String pinfig = DataUtil.emptyString(request.getParameter("pinfig"));
+		//String pinword = DataUtil.emptyString(request.getParameter("pinword"));
 		String dues = DataUtil.emptyString(request.getParameter("dues"));
 		String concession = DataUtil.emptyString(request.getParameter("concession"));
 		String workingdays = DataUtil.emptyString(request.getParameter("workingdays"));
@@ -106,6 +108,7 @@ public class DocumentService {
 		Date dateOfTc = DateUtil.dateParserUpdateStd(request.getParameter("dateoftc"));
 		String studentStatus = DataUtil.emptyString(request.getParameter("studentstatus"));
 		
+		
 		int tcno = 348;
 		int bookno = 0;
 		student.setReasonleaving(leavingReason);
@@ -113,7 +116,8 @@ public class DocumentService {
 		 //boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 Transfercertificate tcLastRow = new DocumentDAO().getTCLastRow();
 		 if(tcLastRow != null) {
-			tcno = tcLastRow.getTcid()+1;
+				/* tcno = tcLastRow.getTcid()+1; */
+			 tcno = tcLastRow.getTcid();
 			bookno = tcLastRow.getBookno()+1;
 		 }
 			 tc.setSid(studentId);
@@ -122,6 +126,12 @@ public class DocumentService {
 			 tc.setBookno(bookno);
 			 tc.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			 tc.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
+			 tc.setLastExam(lastexam);
+			 tc.setConcession(concession);
+			 tc.setSchoolDuesPaid(dues);
+			 tc.setTotalWorkingDays(workingdays);
+			 tc.setTotalDaysPresent(present);
+			 tc.setRemarks(Remarks);
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
@@ -132,64 +142,19 @@ public class DocumentService {
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 String[] classStudying = parents.getStudent().getClassstudying().split("--");
-				 
-				 switch (classStudying[0]) {
-				case "Nursery":
-					classinword = "Class Nursery";
-					break;
-				case "L.K.G":
-					classinword = "Class Lower Kindergarten";
-					break;
-				case "U.K.G":
-					classinword = "Class Upper Kindergarten";
-					break;
-				case "I":
-					classinword = "Class First";
-					break;
-				case "II":
-					classinword = "Class Second";
-					break;
-				case "III":
-					classinword = "Class Third";
-					break;
-				case "IV":
-					classinword = "Class Fourth";
-					break;
-				case "V":
-					classinword = "Class Fifth";
-					break;
-				case "VI":
-					classinword = "Class Sixth";
-					break;
-				case "VII":
-					classinword = "Class Seventh";
-					break;
-				case "VIII":
-					classinword = "Class Eighth";
-					break;
-				case "IX":
-					classinword = "Class Nighth";
-					break;
-				case "X":
-					classinword = "Class Tenth";
-					break;
-				case "XI_SC":
-					classinword = "Class Eleventh";
-					break;
-				case "XII_SC":
-					classinword = "Class Twelfth";
-					break;
-				default:
-					break;
-				}
-				 request.setAttribute("leavingReason", leavingReason);
+				 String classinword = new DataUtil().classInWord(classStudying[0]);
+				 String classStuDying = classStudying[0];
+				 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStuDying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				 String clschy = classhierarchy.getUpperclass();
+				 String pinword =  new DataUtil().classInWord(clschy);
+				    request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("bookno", bookno);
 					request.setAttribute("tcno", tcno);
 					request.setAttribute("caste", caste);
 					request.setAttribute("classinword", classinword);
-					request.setAttribute("lastexam", lastexam);
+					request.setAttribute("lastexam", transferCertificate.getLastExam());
 					request.setAttribute("failpass", failpass);
 					request.setAttribute("firstsubject", firstsubject);
 					request.setAttribute("secondsubject", secondsubject);
@@ -197,17 +162,19 @@ public class DocumentService {
 					request.setAttribute("Fourthsubject", Fourthsubject);
 					request.setAttribute("Fifthsubject", Fifthsubject);
 					request.setAttribute("sixthsubject", sixthsubject);
-					request.setAttribute("pinfig", pinfig);
+					request.setAttribute("pinfig", clschy);
 					request.setAttribute("pinword", pinword);
-					request.setAttribute("dues", dues);
-					request.setAttribute("concession",concession);
-					request.setAttribute("workingdays", workingdays);
-					request.setAttribute("present", present);
+					request.setAttribute("dues", transferCertificate.getSchoolDuesPaid());
+					request.setAttribute("concession",transferCertificate.getConcession());
+					request.setAttribute("workingdays", transferCertificate.getTotalWorkingDays());
+					request.setAttribute("present", transferCertificate.getTotalDaysPresent());
 					request.setAttribute("ncc", ncc);
 					request.setAttribute("game", game);
 					request.setAttribute("conduct", conduct);
 					request.setAttribute("datecert", datecert);
-					request.setAttribute("Remarks", Remarks);
+					request.setAttribute("Remarks", transferCertificate.getRemarks());
+					request.setAttribute("subjects", parents.getStudent().getLanguagesstudied());
+					System.out.println(parents.getStudent().getLanguagesstudied());
 					
 				 request.setAttribute("dateinword", dateinword);
 				 request.setAttribute("studentdetails", parents);
@@ -231,60 +198,14 @@ public class DocumentService {
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-			 
 			 String[] classStudying = parents.getStudent().getClassstudying().split("--");
-			 
-			 switch (classStudying[0]) {
-			case "Nursery":
-				classinword = "Class Nursery";
-				break;
-			case "L.K.G":
-				classinword = "Class Lower Kindergarten";
-				break;
-			case "U.K.G":
-				classinword = "Class Upper Kindergarten";
-				break;
-			case "I":
-				classinword = "Class First";
-				break;
-			case "II":
-				classinword = "Class Second";
-				break;
-			case "III":
-				classinword = "Class Third";
-				break;
-			case "IV":
-				classinword = "Class Fourth";
-				break;
-			case "V":
-				classinword = "Class Fifth";
-				break;
-			case "VI":
-				classinword = "Class Sixth";
-				break;
-			case "VII":
-				classinword = "Class Seventh";
-				break;
-			case "VIII":
-				classinword = "Class Eighth";
-				break;
-			case "IX":
-				classinword = "Class Nighth";
-				break;
-			case "X":
-				classinword = "Class Tenth";
-				break;
-			case "XI_SC":
-				classinword = "Class Eleventh";
-				break;
-			case "XII_SC":
-				classinword = "Class Twelfth";
-				break;
-			default:
-				break;
-			}
-			 
-			 request.setAttribute("leavingReason", leavingReason);
+			 String classinword = new DataUtil().classInWord(classStudying[0]);
+			 String classStuDying = classStudying[0];
+			 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStuDying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			 String clschy = classhierarchy.getUpperclass();
+			 String pinword =  new DataUtil().classInWord(clschy);
+			 tcno = tcLastRow.getTcid()+1;
+			    request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
 				request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("bookno", bookno);
@@ -299,7 +220,7 @@ public class DocumentService {
 				request.setAttribute("Fourthsubject", Fourthsubject);
 				request.setAttribute("Fifthsubject", Fifthsubject);
 				request.setAttribute("sixthsubject", sixthsubject);
-				request.setAttribute("pinfig", pinfig);
+				request.setAttribute("pinfig", clschy);
 				request.setAttribute("pinword", pinword);
 				request.setAttribute("dues", dues);
 				request.setAttribute("concession",concession);
@@ -310,7 +231,8 @@ public class DocumentService {
 				request.setAttribute("conduct", conduct);
 				request.setAttribute("datecert", datecert);
 				request.setAttribute("Remarks", Remarks);
-				
+				request.setAttribute("subjects", parents.getStudent().getLanguagesstudied());
+				System.out.println(parents.getStudent().getLanguagesstudied());
 			 request.setAttribute("dateinword", dateinword);
 			 request.setAttribute("studentdetails", parents);
 			 request.setAttribute("tcdetails", tc);

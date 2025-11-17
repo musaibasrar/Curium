@@ -30,12 +30,20 @@ public class Transfercertificate implements java.io.Serializable {
 	private int branchid;
 	private int userid;
 	private Integer bookno;
+	private String lastExam;
+	private String schoolDuesPaid;
+	private String concession;
+	private String totalWorkingDays;
+	private String totalDaysPresent;
+	private String remarks;
 
 	public Transfercertificate() {
 	}
 
 	public Transfercertificate(String applicationstatus, Integer noofissues,
-			Date dateofissues, String generalconduct, String progress, Integer sid, int branchid, int userid, int bookno) {
+			Date dateofissues, String generalconduct, String progress, Integer sid, int branchid, int userid, int bookno,
+			String lastExam, String schoolDuesPaid, String concession, String totalWorkingDays, String totalDaysPresent,
+			String remarks) {
 		this.applicationstatus = applicationstatus;
 		this.noofissues = noofissues;
 		this.dateofissues = dateofissues;
@@ -45,6 +53,12 @@ public class Transfercertificate implements java.io.Serializable {
 		this.branchid = branchid;
 		this.userid = userid;
 		this.bookno = bookno;
+		this.lastExam = lastExam;
+		this.schoolDuesPaid = schoolDuesPaid;
+		this.concession = concession;
+		this.totalWorkingDays = totalWorkingDays;
+		this.totalDaysPresent = totalDaysPresent;
+		this.remarks = remarks;
 	}
 
 	@Id
@@ -138,4 +152,58 @@ public class Transfercertificate implements java.io.Serializable {
 		this.bookno = bookno;
 	}
 
+	@Column(name = "lastexam", length = 45)
+	public String getLastExam() {
+		return lastExam;
+	}
+
+	public void setLastExam(String lastExam) {
+		this.lastExam = lastExam;
+	}
+
+	@Column(name = "schoolduespaid", length = 45)
+	public String getSchoolDuesPaid() {
+		return schoolDuesPaid;
+	}
+
+	public void setSchoolDuesPaid(String schoolDuesPaid) {
+		this.schoolDuesPaid = schoolDuesPaid;
+	}
+
+	@Column(name = "concession", length = 45)
+	public String getConcession() {
+		return concession;
+	}
+
+	public void setConcession(String concession) {
+		this.concession = concession;
+	}
+
+	@Column(name = "totalworkingdays", length = 45)
+	public String getTotalWorkingDays() {
+		return totalWorkingDays;
+	}
+
+	public void setTotalWorkingDays(String totalWorkingDays) {
+		this.totalWorkingDays = totalWorkingDays;
+	}
+
+	@Column(name = "totaldayspresent", length = 45)
+	public String getTotalDaysPresent() {
+		return totalDaysPresent;
+	}
+
+	public void setTotalDaysPresent(String totalDaysPresent) {
+		this.totalDaysPresent = totalDaysPresent;
+	}
+
+	@Column(name = "remarks", length = 45)
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	
 }
