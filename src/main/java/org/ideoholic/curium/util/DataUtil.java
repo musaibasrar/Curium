@@ -184,7 +184,7 @@ public class DataUtil {
        return mathrandom;
    }
      
-    public static String classInWord(String lowerClass ) {
+    public static String classToWord(String lowerClass ) {
     	
           String classinword = null;
     	 switch (lowerClass) {

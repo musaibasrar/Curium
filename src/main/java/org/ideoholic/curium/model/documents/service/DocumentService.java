@@ -142,24 +142,11 @@ public class DocumentService {
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 String[] classStudying = parents.getStudent().getClassstudying().split("--");
-				 String classinword = new DataUtil().classInWord(classStudying[0]);
-					/*
-					 * switch (classStudying[0]) { case "Nursery": classinword = "Class Nursery";
-					 * break; case "L.K.G": classinword = "Class Lower Kindergarten"; break; case
-					 * "U.K.G": classinword = "Class Upper Kindergarten"; break; case "I":
-					 * classinword = "Class First"; break; case "II": classinword = "Class Second";
-					 * break; case "III": classinword = "Class Third"; break; case "IV": classinword
-					 * = "Class Fourth"; break; case "V": classinword = "Class Fifth"; break; case
-					 * "VI": classinword = "Class Sixth"; break; case "VII": classinword =
-					 * "Class Seventh"; break; case "VIII": classinword = "Class Eighth"; break;
-					 * case "IX": classinword = "Class Nighth"; break; case "X": classinword =
-					 * "Class Tenth"; break; case "XI_SC": classinword = "Class Eleventh"; break;
-					 * case "XII_SC": classinword = "Class Twelfth"; break; default: break; }
-					 */
+				 String classinword = new DataUtil().classToWord(classStudying[0]);
 				 String classStuDying = classStudying[0];
 				 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStuDying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				 String clschy = classhierarchy.getUpperclass();
-				 String pinword =  new DataUtil().classInWord(clschy);
+				 String pinword =  new DataUtil().classToWord(clschy);
 				    request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
@@ -211,64 +198,12 @@ public class DocumentService {
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
 			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
-			 
-			 //String[] classStudying = parents.getStudent().getClassstudying().split("--");
-			 
-			/* switch (classStudying[0]) {
-			case "Nursery":
-				classinword = "Class Nursery";
-				break;
-			case "L.K.G":
-				classinword = "Class Lower Kindergarten";
-				break;
-			case "U.K.G":
-				classinword = "Class Upper Kindergarten";
-				break;
-			case "I":
-				classinword = "Class First";
-				break;
-			case "II":
-				classinword = "Class Second";
-				break;
-			case "III":
-				classinword = "Class Third";
-				break;
-			case "IV":
-				classinword = "Class Fourth";
-				break;
-			case "V":
-				classinword = "Class Fifth";
-				break;
-			case "VI":
-				classinword = "Class Sixth";
-				break;
-			case "VII":
-				classinword = "Class Seventh";
-				break;
-			case "VIII":
-				classinword = "Class Eighth";
-				break;
-			case "IX":
-				classinword = "Class Nighth";
-				break;
-			case "X":
-				classinword = "Class Tenth";
-				break;
-			case "XI_SC":
-				classinword = "Class Eleventh";
-				break;
-			case "XII_SC":
-				classinword = "Class Twelfth";
-				break;
-			default:
-				break;
-			}*/
 			 String[] classStudying = parents.getStudent().getClassstudying().split("--");
-			 String classinword = new DataUtil().classInWord(classStudying[0]);
+			 String classinword = new DataUtil().classToWord(classStudying[0]);
 			 String classStuDying = classStudying[0];
 			 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStuDying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			 String clschy = classhierarchy.getUpperclass();
-			 String pinword =  new DataUtil().classInWord(clschy);
+			 String pinword =  new DataUtil().classToWord(clschy);
 			 tcno = tcLastRow.getTcid()+1;
 			    request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);
