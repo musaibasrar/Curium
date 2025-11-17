@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.repositories.PaybasicRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
+import org.ideoholic.curium.util.HibernateUtil;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -52,7 +53,7 @@ public class EmployeeDAO {
 		List<Teacher> results = new ArrayList<Teacher>();
 		try {
 			// results = (List<Teacher>) session.createQuery("From Teacher where branchid="+branchId).list();
-			results = teacherRepository.findByBranchid(branchId);
+			results = teacherRepository.findByCurrentemployeeAndBranchid("1",branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
@@ -246,6 +247,60 @@ public class EmployeeDAO {
 			throw hibernateException;
 		}
 		return payList;
+	}
+
+	public void archiveMultipleEmployee(List<Integer> ids) {
+		try {
+			List<Teacher> archiveTeachers = teacherRepository.findAllById(ids);
+			
+			for (Teacher teacher : archiveTeachers) {
+				teacher.setCurrentemployee("0");
+				teacherRepository.save(teacher);
+			}
+			//Query query = session.createQuery("update Teacher set currentemployee = 0  where id IN (:ids)");
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+			throw hibernateException;
+		}
+		
+	}
+
+	public List<Teacher> readListOfEmployeeArchive(int branchId) {
+		List<Teacher> results = new ArrayList<Teacher>();
+
+		try {
+			results = teacherRepository.findByCurrentemployeeAndBranchid("0", branchId);
+			//results = (List<Teacher>) session.createQuery("FROM Teacher t where t.currentemployee = 0 and branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion").list();
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+			throw hibernateException;
+		}
+		return results;
+
+	}
+
+	public void restoreMultipleEmployee(List<Integer> ids) {
+		try {
+			
+			
+			List<Teacher> restoreTeachers = teacherRepository.findAllById(ids);
+			
+			for (Teacher teacher : restoreTeachers) {
+				teacher.setCurrentemployee("1");
+				teacherRepository.save(teacher);
+			}
+			//Query query = session.createQuery("update Teacher set currentemployee = 1  where id IN (:ids)");
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+			throw hibernateException;
+		}
+		
 	}
 
 }

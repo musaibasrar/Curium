@@ -577,4 +577,52 @@ public class EmployeeService {
 	        }
 	        return result;
 	}
+	public void archiveMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
+		String[] employeeIds = employeeIdsDto.getEmployeeIds();
+
+		if (employeeIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : employeeIds) {
+				ids.add(Integer.valueOf(id));
+
+			}
+			employeeDao.archiveMultipleEmployee(ids);
+		}
+		
+	}
+	public EmployeeDetailsResponseDto viewAllEmployeeArchive(String branchId) {
+		EmployeeDetailsResponseDto result = new EmployeeDetailsResponseDto();
+
+		try {
+			List<Teacher> list = employeeDao.readListOfEmployeeArchive(Integer.parseInt(branchId));
+			result.setEmployeeList(list);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	public void restoreMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
+		String[] employeeIds = employeeIdsDto.getEmployeeIds();
+		if (employeeIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : employeeIds) {
+				ids.add(Integer.parseInt(id));
+			}
+			employeeDao.restoreMultipleEmployee(ids);
+		}
+		
+	}
+	public void  deleteMultipleEmployee(EmployeeIdsDto employeeIdsDto) {
+		String[] employeeIds = employeeIdsDto.getEmployeeIds();
+		if (employeeIds != null) {
+			List<Integer> ids = new ArrayList();
+			for (String id : employeeIds) {
+				ids.add(Integer.parseInt(id));
+				
+			}
+			employeeDao.deleteMultiple(ids);
+		}
+		
+	}
 }
