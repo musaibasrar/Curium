@@ -60,7 +60,13 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	List<Student> findByArchiveAndPassedoutAndDroppedoutAndLeftout(Integer archive, Integer passedOut, Integer droppedOut, Integer leftOut);
 
-	@Query("SELECT count(s) FROM Student s where s.classstudying LIKE :classStudying% OR s.classstudying = classStudying "
+	@Query("SELECT count(s) FROM Student s where s.classstudying LIKE :classStudying OR s.classstudying = classStudying "
 			+ "AND s.archive = :archive AND s.branchid=:branchId")
-	Integer countNumberOfStudentInClass(@Param("classStudying")String classStudying, @Param("archive")Integer archive, @Param("branchId")Integer branchId);
+	Integer countNumberOfStudentInClass(@Param("classStudying") String classStudying, @Param("archive") Integer archive, @Param("branchId") Integer branchId);
+	
+	List<Student> findByArchive(Integer archive);
+	
+	// For LIKE: use @Query for "LIKE 'classStudying %'"
+    @Query("SELECT s FROM Student s WHERE s.classstudying LIKE :classStudying AND s.archive = :archive")
+    List<Student> findByClassstudyingLikeAndArchive(@Param("classStudying") String classstudyingLike, @Param("archive") Integer archive);
 }

@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.user.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -34,9 +35,9 @@ public class UserDAO {
 	public Login readUniqueObject(String userName, String password) {
 		Login login = null;
 		try {
-			List<Login> loginList = loginRepo.findByUsernameAndPassword(userName, password);
-			if (!CollectionUtils.isEmpty(loginList)) {
-				login = loginList.get(0);
+			Optional<Login> loginFromDb = loginRepo.findByUsernameAndPassword(userName, password);
+			if (loginFromDb.isPresent()) {
+				login = loginFromDb.get();
 				// throw new CustomResponseException(CustomErrorMessage.INVALID_CREDENTIALS);
 			}
 		} catch (Exception hibernateException) {
@@ -71,7 +72,7 @@ public class UserDAO {
 		try {
 
 			// results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"' AND s.archive = 0 AND s.branchid="+branchId+"").list();
-			noOfRecords = studentRepo.countNumberOfStudentInClass(classStudying, 0, branchId);
+			noOfRecords = studentRepo.countNumberOfStudentInClass(classStudying + " %", 0, branchId);
 
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
