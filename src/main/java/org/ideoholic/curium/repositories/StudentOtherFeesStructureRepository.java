@@ -25,4 +25,6 @@ public interface StudentOtherFeesStructureRepository extends JpaRepository<Stude
     // Find other-fee structures by sfsid
     List<Studentotherfeesstructure> findBySfsid(Integer sfsid);
 
+    @Query("SELECT s FROM Studentotherfeesstructure s WHERE s.student.sid = :sid AND s.otherfeescategory.idfeescategory = :idFeesCategory AND s.academicyear = :academicYear")
+    Studentotherfeesstructure findBySidAndIdfeescategoryAndAcademicyear(@Param("sid") int sid, @Param("idFeesCategory")  Integer idFeesCategory, @Param("academicYear")  String academicYear);
 }

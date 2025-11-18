@@ -6,5 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AcademicOtherFeesStructureRepository extends JpaRepository<Academicotherfeesstructure, Integer> {
+	Academicotherfeesstructure findBySidAndAcademicyear(Integer sid, String academicYear);
 
+	void deleteBySidInAndAcademicyear(java.util.List<Integer> sids, String academicYear);
 }

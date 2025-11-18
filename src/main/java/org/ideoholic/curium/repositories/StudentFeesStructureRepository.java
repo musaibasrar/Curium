@@ -32,5 +32,11 @@ public interface StudentFeesStructureRepository extends JpaRepository<Studentfee
     List<Studentfeesstructure> findBySfsid(Integer sfsid);
 
     // Used in addStudentfeesstructure to find existing record for combination of student, feescategory and year
-    List<Studentfeesstructure> findByStudentSidAndFeescategoryIdfeescategoryAndAcademicyear(Integer sid, Integer feescategoryId, String academicyear);
+    List<Studentfeesstructure> findByStudentSidAndFeescategoryIdfeescategoryAndAcademicyear(Integer sid, Integer feescategoryId, String academicYear);
+    
+    void deleteBySidInAndAcademicyear(List<Integer> sids, String academicyear);
+
+    // sid = student.getSid(); idfeescategory = student.getFeescategory().getIdfeescategory();
+    @Query("SELECT s FROM Studentfeesstructure s WHERE s.student.sid = :sid AND s.feescategory.idfeescategory = :idfeescategory AND s.academicyear = :academicyear")
+	Studentfeesstructure findBySidAndIdfeescategoryAndAcademicyear(@Param("sid") int sid, @Param("idfeescategory") Integer idFeesCategory, @Param("academicyear") String academicYear);
 }
