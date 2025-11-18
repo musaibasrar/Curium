@@ -7,21 +7,21 @@
 <html>
     <head>
     <title>Update Enquiry Form</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/sac/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sac/css/validation/jquery.ketchup.css">
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/sac/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/sac/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/sac/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/sac/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/sac/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/sac/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/sac/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/sac/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/sac/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+	src="/sac/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/sac/css/datePicker/demos.css">
 
 <style>
    td{
@@ -232,7 +232,7 @@
 	
 	function updateEnquiryForm(){
 		var form1=document.getElementById("form1");
-		form1.action="/vision/EnquiryProcess/updateEnquiryFormDetails?id=<c:out value='${admissionEnquiry.id}'/>";
+		form1.action="/sac/EnquiryProcess/updateEnquiryFormDetails?id=<c:out value='${admissionEnquiry.id}'/>";
 		form1.submit();
 	}
 	
