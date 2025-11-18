@@ -92,6 +92,8 @@ public class StudentService {
 	
 	private final parentsDetailsDAO parentsDetailsDao;
 	
+	private final StampFeesDAO stampFeesDao;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -343,7 +345,7 @@ public class StudentService {
 					String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 
 					// End J.V
-					new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+					stampFeesDao.addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
 					//studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 				}
