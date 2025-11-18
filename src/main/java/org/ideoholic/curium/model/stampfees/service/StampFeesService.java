@@ -35,10 +35,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class StampFeesService {
-
+	
 	@Autowired
     private AccountDAO accountDao;
 	
+	@Autowired
+	private StampFeesDAO stampFeesDao;
+
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
 	
@@ -214,7 +217,7 @@ public class StampFeesService {
 			int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
 			
 			//check whether the fees category is already stamped 
-			Studentfeesstructure result = new StampFeesDAO().getStudentFeesStructure(Integer.parseInt(id),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
+			Studentfeesstructure result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(id),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
 			// END
 			
 			if(result==null) {
@@ -303,7 +306,7 @@ public class StampFeesService {
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 		
 		// End J.V
-		new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		stampFeesDao.addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
 		//studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
@@ -346,7 +349,7 @@ public class StampFeesService {
 	            
 	        }
 	        System.out.println("id length" + studentIds.length);
-	        new StampFeesDAO().deleteMultiple(ids,currentYear);
+	        stampFeesDao.deleteMultiple(ids,currentYear);
 		
 	}
 		}
@@ -417,7 +420,7 @@ public class StampFeesService {
 
 		}
 
-		new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
+		stampFeesDao.addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
 		//studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}

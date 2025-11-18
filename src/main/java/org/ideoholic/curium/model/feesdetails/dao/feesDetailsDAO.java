@@ -62,7 +62,8 @@ public class feesDetailsDAO {
 	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepository;
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
-	
+	@Autowired
+	private StampFeesDAO stampFeesDao;	
        
 
 	 @Transactional
@@ -482,7 +483,7 @@ public class feesDetailsDAO {
 
 
 					}
-					new StampFeesDAO().addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
+					stampFeesDao.addotherStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure);
 
 				}
 			}

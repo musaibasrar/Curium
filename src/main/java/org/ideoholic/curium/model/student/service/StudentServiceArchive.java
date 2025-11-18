@@ -46,6 +46,7 @@ public class StudentServiceArchive {
 
 	private final parentsDetailsDAO parentsDetailsDao;
 	private final StudentDetailsDAO studentDetailsDao;
+	private final StampFeesDAO stampFeesDao;
 	private final UserDAO userDao;
 
 	private final HttpSession httpSession;
@@ -662,7 +663,7 @@ public class StudentServiceArchive {
                     String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 
                     // End J.V
-                    new StampFeesDAO().addStampFees(listOfacademicfessstructure,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+                    stampFeesDao.addStampFees(listOfacademicfessstructure,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
                     //studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
 
                 }
