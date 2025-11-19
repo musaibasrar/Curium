@@ -3,324 +3,279 @@ package org.ideoholic.curium.model.std.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.std.dto.Classhierarchy;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.repositories.ClassHierarchyRepository;
+import org.ideoholic.curium.repositories.ClasssecRepository;
+import org.ideoholic.curium.repositories.ParentsRepository;
+import org.ideoholic.curium.repositories.StudentRepository;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
+@RequiredArgsConstructor
 public class StandardDetailsDAO {
 
-	Session session = null;
-    /**
-     * * Hibernate Session Variable
-     */
-    Transaction transaction = null;
-    /**
-     * * Hibernate Transaction Variable
-     */
-    Transaction transaction1;
-    SessionFactory sessionFactory;
 
-    private static final Logger logger = LogManager.getLogger(StandardDetailsDAO.class);
-    
-	public StandardDetailsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
+	private final StudentRepository studentRepository;
 
-	@SuppressWarnings("finally")
+	private final ParentsRepository parentsRepository;
+
+	private final ClasssecRepository classsecRepository;
+	
+	private final ClassHierarchyRepository classhierarchyRepository;
+
+	@Transactional
 	public Classsec create(Classsec classsec) {
-		 try {
-	            transaction = session.beginTransaction();
-	            session.save(classsec);
-	            transaction.commit();
-	        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-	            
-	            hibernateException.printStackTrace();
-	        } finally {
-	    			HibernateUtil.closeSession();
-	            return classsec;
-	        }
+		try {
+			// Original: session.save(classsec);
+			classsecRepository.save(classsec);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return classsec;
 	}
 
-    public List<Classsec> viewClasses(int branchId) {
-        
-        List<Classsec> classsecList = new ArrayList<Classsec>();
-        try {
-            transaction = session.beginTransaction();
-            classsecList = session.createQuery("From Classsec where branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return classsecList;
-        }
-    }
-
-    public void deleteMultiple(List ids) {
-
-        try {
-                transaction = session.beginTransaction();
-                Query query = session.createQuery("delete from Classsec where stdrdid IN (:ids)");
-                query.setParameterList("ids", ids);
-                query.executeUpdate();
-                transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-                hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+	@Transactional(readOnly = true)
+	public List<Classsec> viewClasses(int branchId) {
+		List<Classsec> classsecList = new ArrayList<>();
+		try {
+			// Original: session.createQuery("From Classsec where branchid="+branchId)
+			classsecList = classsecRepository.findByBranchid(branchId);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 		}
-    }
+		return classsecList;
+	}
 
+	@Transactional
+	public void deleteMultiple(List<Integer> ids) {
+		try {
+			// Original: session.createQuery("delete from Classsec where stdrdid IN (:ids)")
+			classsecRepository.deleteAllById(ids);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+	}
+
+	@Transactional
 	public void createClassHierarchy(Classhierarchy classHierarchy) {
-		 try {
-	            transaction = session.beginTransaction();
-	            session.save(classHierarchy);
-	            transaction.commit();
-	        } catch (Exception hibernateException) { 
-	        	transaction.rollback(); 
-	        	logger.error(hibernateException);
-	            hibernateException.printStackTrace();
-	        } finally {
-				HibernateUtil.closeSession();
-			}
+		try {
+			// Original: session.save(classHierarchy);
+			classhierarchyRepository.save(classHierarchy);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
 	}
 
-	public void deleteClassHierarchy(List ids) {
-
-        try {
-                transaction = session.beginTransaction();
-                Query query = session.createQuery("delete from Classhierarchy where idclasshierarchy IN (:ids)");
-                query.setParameterList("ids", ids);
-                query.executeUpdate();
-                transaction.commit();
-        } catch (Exception hibernateException) { 
-        		transaction.rollback(); 
-        		logger.error(hibernateException);
-                hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+	@Transactional
+	public void deleteClassHierarchy(List<Integer> ids) {
+		try {
+			// Original: session.createQuery("delete from Classhierarchy where idclasshierarchy IN (:ids)")
+			classhierarchyRepository.deleteAllById(ids);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 		}
-    }
+	}
 
+	@Transactional(readOnly = true)
 	public List<Classhierarchy> viewClassHierarchy(int branchid) {
-        
-        List<Classhierarchy> classHierarchyList = new ArrayList<Classhierarchy>();
-        try {
-            transaction = session.beginTransaction();
-            classHierarchyList = session.createQuery("From Classhierarchy where branchid="+branchid).list();
-            transaction.commit();
-        } catch (Exception hibernateException) { 
-        	transaction.rollback(); 
-        	logger.error(hibernateException);
-            hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
+		List<Classhierarchy> classHierarchyList = new ArrayList<>();
+		try {
+			// Original: session.createQuery("From Classhierarchy where branchid=" + branchid)
+			classHierarchyList = classhierarchyRepository.findByBranchid(branchid);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 		}
-        return classHierarchyList;
-    }
+		return classHierarchyList;
+	}
 
-	@SuppressWarnings("finally")
-	public boolean graduateMultiple(List ids) {
+	@Transactional
+	public boolean graduateMultiple(List<Integer> ids) {
 		boolean result = false;
 		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("update Student set passedout = 1  where id IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
+			// Original: session.createQuery("update Student set passedout = 1 where id IN (:ids)")
+			for (Integer studentId : ids) {
+				studentRepository.findById(studentId).ifPresent(student -> {
+					student.setPassedout(1);
+					studentRepository.save(student);
+				});
+			}
 			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 			result = false;
-		} finally {
-				HibernateUtil.closeSession();
-			return result;
 		}
-		
+		return result;
+	}
+
+	@Transactional
+	public boolean droppedoutMultiple(List<Integer> ids) {
+		boolean result = false;
+		try {
+			// Original: session.createQuery("update Student set droppedout = 1 where id IN (:ids)")
+			for (Integer studentId : ids) {
+				studentRepository.findById(studentId).ifPresent(student -> {
+					student.setDroppedout(1);
+					studentRepository.save(student);
+				});
 			}
-
-	@SuppressWarnings("finally")
-	public boolean droppedoutMultiple(List ids) {
-		boolean result = false;
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("update Student set droppedout = 1  where id IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
 			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-		hibernateException.printStackTrace();
-		result = false;
-	} finally {
-			HibernateUtil.closeSession();
-		return result;
-	}
-	
-		}
-
-	@SuppressWarnings("finally")
-	public boolean leftoutMultiple(List ids) {
-		boolean result = false;
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("update Student set leftout = 1  where id IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-			result = true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-		hibernateException.printStackTrace();
-		result = false;
-	} finally {
-			HibernateUtil.closeSession();
-		return result;
-	}
-	
-		}
-	
-	public List<Student> readListOfStudentsGraduated() {
-        List<Student> results = new ArrayList<Student>();
-
-        try {
-                // this.session =
-                // HibernateUtil.getSessionFactory().openCurrentSession();
-                transaction = session.beginTransaction();
-
-                results = (List<Student>) session.createQuery(
-                                "FROM Student s where s.passedout = 1 order by s.admissionnumber DESC")
-                                .list();
-                transaction.commit();
-
-        } catch (Exception hibernateException) {transaction.rollback();
-                hibernateException.printStackTrace();
-
-        } finally {
-                HibernateUtil.closeSession();
-                return results;
-        }
-	}
-
-	public List<Student> readListOfStudentsDropped() {
-        List<Student> results = new ArrayList<Student>();
-
-        try {
-                // this.session =
-                // HibernateUtil.getSessionFactory().openCurrentSession();
-                transaction = session.beginTransaction();
-
-                results = (List<Student>) session.createQuery(
-                                "FROM Student s where s.droppedout = 1 order by s.admissionnumber DESC")
-                                .list();
-                transaction.commit();
-
-        } catch (Exception hibernateException) {transaction.rollback();
-                hibernateException.printStackTrace();
-
-        } finally {
-                HibernateUtil.closeSession();
-                return results;
-        }
-	}
-	
-	public void restoreMultipleGraduate(List ids) {
-        try {
-            transaction = session.beginTransaction();
-            Query query = session
-                            .createQuery("update Student set passedout = 0  where id IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-    } catch (Exception hibernateException) {transaction.rollback();
-            hibernateException.printStackTrace();
-    }finally {
-		HibernateUtil.closeSession();
-	}
-
-	}
-
-    public void restoreMultipleDroppedout(List ids) {
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("update Student set droppedout = 0  where id IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-    } catch (Exception hibernateException) {transaction.rollback();
-            hibernateException.printStackTrace();
-    }finally {
-		HibernateUtil.closeSession();
-	}
-
-    }
-    
-	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Parents> getStudentsByClass(String classofStd, int branchId, String currentAcademicYear) {
-		java.util.List<Parents> results = new ArrayList<Parents>();
-		try {
-			// this.session =
-			// HibernateUtil.getSessionFactory().openCurrentSession();
-			transaction = session.beginTransaction();
-			results = (java.util.List<Parents>) session.createQuery("From Parents p where p.student.branchid="+branchId+" AND p.student.classstudying LIKE '"+classofStd+"%' AND p.student.archive=0 AND p.student.passedout=0 AND p.student.droppedout=0 and p.student.leftout=0 and (p.student.promotedyear != '"+currentAcademicYear+"' OR p.student.promotedyear is NULL)").list();
-			transaction.commit();
-
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
 
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
+	@Transactional
+	public boolean leftoutMultiple(List<Integer> ids) {
+		boolean result = false;
+		try {
+			// Original: session.createQuery("update Student set leftout = 1 where id IN (:ids)")
+			for (Integer studentId : ids) {
+				studentRepository.findById(studentId).ifPresent(student -> {
+					student.setLeftout(1);
+					studentRepository.save(student);
+				});
+			}
+			result = true;
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Student> readListOfStudentsGraduated() {
+		List<Student> results = new ArrayList<Student>();
+		try {
+			// Original: session.createQuery("FROM Student s where s.passedout = 1 order by s.admissionnumber DESC")
+			results = studentRepository.findStudentsGraduated();
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return results;
+	}
+
+	@Transactional(readOnly = true)
+	public List<Student> readListOfStudentsDropped() {
+		List<Student> results = new ArrayList<Student>();
+		try {
+			// Original: session.createQuery("FROM Student s where s.droppedout = 1 order by s.admissionnumber DESC")
+			results = studentRepository.findStudentsDropped();
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return results;
+	}
+
+	@Transactional
+	public void restoreMultipleGraduate(List<Integer> ids) {
+		try {
+			// Original: session.createQuery("update Student set passedout = 0 where id IN (:ids)")
+			for (Integer studentId : ids) {
+				studentRepository.findById(studentId).ifPresent(student -> {
+					student.setPassedout(0);
+					studentRepository.save(student);
+				});
+			}
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 		}
 	}
 
+	@Transactional
+	public void restoreMultipleDroppedout(List<Integer> ids) {
+		try {
+			// Original: session.createQuery("update Student set droppedout = 0 where id IN (:ids)")
+			for (Integer studentId : ids) {
+				studentRepository.findById(studentId).ifPresent(student -> {
+					student.setDroppedout(0);
+					studentRepository.save(student);
+				});
+			}
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+	}
+
+	@Transactional(readOnly = true)
+	public List<Parents> getStudentsByClass(String classofStd, int branchId, String currentAcademicYear) {
+		List<Parents> results = new ArrayList<Parents>();
+		try {
+			// Original: "From Parents p where p.student.branchid="+branchId+" AND p.student.classstudying LIKE '"+classofStd+"%' AND p.student.archive=0 AND p.student.yearofadmission = '"+currentAcademicYear+"'"
+			results = parentsRepository.findByClassAndBranchAndYear(classofStd + "%", branchId, currentAcademicYear);
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return results;
+	}
+
+	@Transactional(readOnly = true)
 	public List<Student> readListOfStudentsLeft() {
-        List<Student> results = new ArrayList<Student>();
-
-        try {
-                // this.session =
-                // HibernateUtil.getSessionFactory().openCurrentSession();
-                transaction = session.beginTransaction();
-
-                results = (List<Student>) session.createQuery(
-                                "FROM Student s where s.leftout = 1 order by s.admissionnumber DESC")
-                                .list();
-                transaction.commit();
-
-        } catch (Exception hibernateException) {transaction.rollback();
-                hibernateException.printStackTrace();
-
-        } finally {
-                HibernateUtil.closeSession();
-                return results;
-        }
+		List<Student> results = new ArrayList<Student>();
+		try {
+			// Original: session.createQuery("FROM Student s where s.leftout = 1 order by s.admissionnumber DESC")
+			results = studentRepository.findStudentsLeft();
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return results;
 	}
 
-	public void restoreMultipleLeftout(List ids) {
-        try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("update Student set leftout = 0  where id IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-    } catch (Exception hibernateException) {transaction.rollback();
-            hibernateException.printStackTrace();
-    }finally {
-		HibernateUtil.closeSession();
+	@Transactional
+	public void restoreMultipleLeftout(List<Integer> ids) {
+		try {
+			// Original: session.createQuery("update Student set leftout = 0 where id IN (:ids)")
+			for (Integer studentId : ids) {
+				studentRepository.findById(studentId).ifPresent(student -> {
+					student.setLeftout(0);
+					studentRepository.save(student);
+				});
+			}
+		} catch (Exception hibernateException) {
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
 	}
-
-    }
-	
 }

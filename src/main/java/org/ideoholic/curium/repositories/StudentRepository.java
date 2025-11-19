@@ -69,4 +69,14 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 	// For LIKE: use @Query for "LIKE 'classStudying %'"
     @Query("SELECT s FROM Student s WHERE s.classstudying LIKE :classStudying AND s.archive = :archive")
     List<Student> findByClassstudyingLikeAndArchive(@Param("classStudying") String classstudyingLike, @Param("archive") Integer archive);
+
+    @Query("FROM Student s WHERE s.passedout = 1 ORDER BY s.admissionnumber DESC")
+    List<Student> findStudentsGraduated();
+
+    @Query("FROM Student s WHERE s.droppedout = 1 ORDER BY s.admissionnumber DESC")
+    List<Student> findStudentsDropped();
+
+    @Query("FROM Student s WHERE s.leftout = 1 ORDER BY s.admissionnumber DESC")
+    List<Student> findStudentsLeft();
+
 }

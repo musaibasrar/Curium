@@ -18,6 +18,7 @@ import org.ideoholic.curium.model.std.dto.UpperLowerClassDto;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class StandardService {
 
+	@Autowired
+	private StandardDetailsDAO standardDetailsDao;
+	
 	public ResultResponse createClass(ClassDto classDto, String branchId, String userId) {
 		if (branchId != null) {
 			Classsec classsec = new Classsec();
@@ -33,7 +37,7 @@ public class StandardService {
 			classsec.setSection(DataUtil.emptyString(classDto.getSection()));
 			classsec.setBranchid(Integer.parseInt(branchId));
 			classsec.setUserid(Integer.parseInt(userId));
-			new StandardDetailsDAO().create(classsec);
+			standardDetailsDao.create(classsec);
 			ResultResponse result = viewClasses(branchId);
 			result.setSuccess(true);
 			return result;
@@ -46,7 +50,7 @@ public class StandardService {
 	public ResultResponse viewClasses(String branchId) {
 
 		if (branchId != null) {
-			List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+			List<Classsec> classsecList = standardDetailsDao.viewClasses(Integer.parseInt(branchId));
 			return ResultResponse.builder().resultList(classsecList).success(true).build();
 		}
 
@@ -60,7 +64,7 @@ public class StandardService {
 			for (String id : classIds) {
 				ids.add(Integer.valueOf(id));
 			}
-			new StandardDetailsDAO().deleteMultiple(ids);
+			standardDetailsDao.deleteMultiple(ids);
 			ResultResponse result = viewClasses(branchId);
 			return result;
 		}
@@ -75,7 +79,7 @@ public class StandardService {
 			classHierarchy.setUpperclass(DataUtil.emptyString(dto.getUpperClass()));
 			classHierarchy.setBranchid(Integer.parseInt(branchId));
 			classHierarchy.setUserid(Integer.parseInt(userId));
-			new StandardDetailsDAO().createClassHierarchy(classHierarchy);
+			standardDetailsDao.createClassHierarchy(classHierarchy);
 			return viewClasses(branchId);
 		}
 		return ResultResponse.builder().success(false).build();
@@ -88,7 +92,7 @@ public class StandardService {
 			for (String id : classIds) {
 				ids.add(Integer.valueOf(id));
 			}
-			new StandardDetailsDAO().deleteClassHierarchy(ids);
+			standardDetailsDao.deleteClassHierarchy(ids);
 			return viewClasses(branchId);
 		}
 		return ResultResponse.builder().success(false).build();
@@ -97,7 +101,7 @@ public class StandardService {
 	public ResultResponse viewClassHierarchy(String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 		if (branchId != null) {
-			List<Classhierarchy> classHierarchy = new StandardDetailsDAO()
+			List<Classhierarchy> classHierarchy = standardDetailsDao
 					.viewClassHierarchy(Integer.parseInt(branchId));
 			result.setResultList(classHierarchy);
 		}
@@ -113,7 +117,7 @@ public class StandardService {
 			log.debug("id" + id);
 			ids.add(Integer.valueOf(id));
 		}
-		if (new StandardDetailsDAO().graduateMultiple(ids)) {
+		if (standardDetailsDao.graduateMultiple(ids)) {
 			result.setSuccess(true);
 		}
 		return result;
@@ -128,7 +132,7 @@ public class StandardService {
 			log.debug("id" + id);
 			ids.add(Integer.valueOf(id));
 		}
-		if (new StandardDetailsDAO().droppedoutMultiple(ids)) {
+		if (standardDetailsDao.droppedoutMultiple(ids)) {
 			result.setSuccess(true);
 		}
 		return result;
@@ -143,7 +147,7 @@ public class StandardService {
 			ids.add(Integer.valueOf(id));
 
 		}
-		if (new StandardDetailsDAO().leftoutMultiple(ids)) {
+		if (standardDetailsDao.leftoutMultiple(ids)) {
 			result.setSuccess(true);
 		}
 		return result;
@@ -154,7 +158,7 @@ public class StandardService {
 		ResultResponse result = ResultResponse.builder().build();
 
 		try {
-			List<Student> list = new StandardDetailsDAO().readListOfStudentsGraduated();
+			List<Student> list = standardDetailsDao.readListOfStudentsGraduated();
 			result.setResultList(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -168,7 +172,7 @@ public class StandardService {
 		ResultResponse result = ResultResponse.builder().build();
 
 		try {
-			List<Student> list = new StandardDetailsDAO().readListOfStudentsDropped();
+			List<Student> list = standardDetailsDao.readListOfStudentsDropped();
 			result.setResultList(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -185,7 +189,7 @@ public class StandardService {
 				ids.add(Integer.valueOf(id));
 
 			}
-			new StandardDetailsDAO().restoreMultipleGraduate(ids);
+			standardDetailsDao.restoreMultipleGraduate(ids);
 		}
 	}
 
@@ -197,7 +201,7 @@ public class StandardService {
 				ids.add(Integer.valueOf(id));
 
 			}
-			new StandardDetailsDAO().restoreMultipleDroppedout(ids);
+			standardDetailsDao.restoreMultipleDroppedout(ids);
 		}
 	}
 
@@ -211,7 +215,7 @@ public class StandardService {
 				if (classofStd != null) {
 					classofStd = classofStd + "--";
 				}
-				List<Parents> studentList = new StandardDetailsDAO().getStudentsByClass(classofStd,
+				List<Parents> studentList = standardDetailsDao.getStudentsByClass(classofStd,
 						Integer.parseInt(branchId), currentAcademicYear);
 				result.setResultList(studentList);
 				result.setSuccess(true);
@@ -227,7 +231,7 @@ public class StandardService {
 
 		ResultResponse result = ResultResponse.builder().build();
 		try {
-			List<Student> list = new StandardDetailsDAO().readListOfStudentsLeft();
+			List<Student> list = standardDetailsDao.readListOfStudentsLeft();
 			result.setResultList(list);
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -243,7 +247,7 @@ public class StandardService {
 			for (String id : studentIds) {
 				ids.add(Integer.valueOf(id));
 			}
-			new StandardDetailsDAO().restoreMultipleLeftout(ids);
+			standardDetailsDao.restoreMultipleLeftout(ids);
 		}
 	}
 
@@ -276,7 +280,7 @@ public class StandardService {
 
 			finalClasssecList = new ArrayList<>(uniqueByClassdetails.values());
 
-			List<Classsec> classList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+			List<Classsec> classList = standardDetailsDao.viewClasses(Integer.parseInt(branchId));
 			List<String> dbSections = classList.stream()
 					.filter(c -> c.getClassdetails() == null || c.getClassdetails().trim().isEmpty())
 					.filter(c -> c.getSection() != null && !c.getSection().trim().isEmpty()).map(Classsec::getSection)
@@ -291,7 +295,7 @@ public class StandardService {
 			}
 
 		} else {
-			List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+			List<Classsec> classsecList = standardDetailsDao.viewClasses(Integer.parseInt(branchId));
 			return ResultResponse.builder().resultList(classsecList).success(true).build();
 		}
 		return ResultResponse.builder().resultList(finalClasssecList).success(true).build();
