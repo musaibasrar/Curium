@@ -28,8 +28,8 @@
     text-align:center;
 }
         </style>
-	<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/littleflower/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Article 371 Certificate</title>
         <script type="text/javascript">
              window.onload = function(){
@@ -42,7 +42,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/littleflower/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -60,7 +60,7 @@ for(Cookie cookie : cookies){
 	<table align="center">
 <tr>
 <td style="text-align:center;">
-<img src="/vision/images/Karnatakalogo.png" width="80" height="69"/>
+<img src="/littleflower/images/Karnatakalogo.png" width="80" height="69"/>
 </td>
 </tr>
 <tr>

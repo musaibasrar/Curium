@@ -2189,6 +2189,24 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 								
 								if(marksSubid == subjectId) {
 									
+									List<SubSubject> subSubjectList = new MarksDetailsDAO().readListOfSubSubject(subjectId);
+									List<Integer> subSubjectIds = new ArrayList<Integer>();
+									for (SubSubject subSubject : subSubjectList) {
+										subSubjectIds.add(subSubject.getId());
+									}
+									List<Marks> marksDetailsListSubSubject = new MarksDetailsDAO().readSubSubjectMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid(),subSubjectIds);
+									String subSubjectMarks = "";
+									for (Marks examsSubSubjectMarks : marksDetailsListSubSubject) {
+										if(subSubjectMarks=="") {
+											subSubjectMarks= Float.toString(examsSubSubjectMarks.getMarksobtained());
+										}else {
+											subSubjectMarks=subSubjectMarks+"/"+Float.toString(examsSubSubjectMarks.getMarksobtained());	
+										}
+										
+									}
+									if(subSubjectMarks!="") {
+										subSubjectMarks = subSubjectMarks+"/";
+									}
 									
 									float marksObtained = marks.getMarksobtained();
 									float minMarks = sub.getMinmarks();
@@ -2196,14 +2214,14 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 									
 									if( marksObtained < minMarks) {
 										
-										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"/F");
+										subMarks.put(sub.getSubjectname(), subSubjectMarks+Float.toString(marks.getMarksobtained())+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+"/F"+"/"+marks.getSubgrade());
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 										
-										subMarks.put(sub.getSubjectname(), Float.toString(sub.getMaxmarks())+"/"+sub.getMinmarks()+"/"+marks.getMarksobtained()+""+"/P"+"/"+marks.getSubgrade());
+										subMarks.put(sub.getSubjectname(), subSubjectMarks+Float.toString(marks.getMarksobtained())+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+"/P"+"/"+marks.getSubgrade());
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if(marksObtained == 999) {
-										subMarks.put(sub.getSubjectname(), " _AB");
+										subMarks.put(sub.getSubjectname(), subSubjectMarks+"AB"+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+""+"/"+marks.getSubgrade());
 									}
 									
 									totalMarks = totalMarks+sub.getMaxmarks();

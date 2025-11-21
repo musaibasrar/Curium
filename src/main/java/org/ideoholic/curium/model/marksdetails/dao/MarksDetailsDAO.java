@@ -15,6 +15,7 @@ import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.marksdetails.dto.MarksGrade;
 import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
+import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.util.HibernateUtil;
 
 public class MarksDetailsDAO {
@@ -144,7 +145,7 @@ public class MarksDetailsDAO {
 			try {
 
 				transaction = session.beginTransaction();
-				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' and examid = '"+examId+"' ORDER BY examid,subid ASC");
+				Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' and examid = '"+examId+"' and subsubjectid=0 ORDER BY examid,subid ASC");
 				results = query.list();
 				transaction.commit();
 			} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
@@ -404,5 +405,43 @@ public class MarksDetailsDAO {
 		}
 		return false;
 	}
+
+	public List<SubSubject> readListOfSubSubject(int subjectId) {
+		
+		List<SubSubject> results = new ArrayList<SubSubject>();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session
+					.createQuery("From SubSubject where subjectid = "+subjectId+" ORDER BY id ASC");
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+		
+	}
 	
+	
+	public List<Marks> readSubSubjectMarksforStudent(int id, String currentAcademicYear, int examId, List<Integer> SubSubjectId) {
+		List<Marks> results = new ArrayList<Marks>();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Marks where sid = '"+id+"' and academicyear = '"+currentAcademicYear+"' and examid = '"+examId+"' and subsubjectid IN (:subSubjectIds) ORDER BY subsubjectid ASC");
+			query.setParameterList("subSubjectIds", SubSubjectId);
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 }

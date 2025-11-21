@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -363,6 +365,19 @@ public class MarksDetailsAction {
 	@PostMapping("/generatefinalexamReport")
 	public String generatefinalexamReport() {
 		if (marksDetailsActionAdapter.generateFinalExamReport()) {
+			String classStudying = request.getAttribute("classsearch").toString();
+			String examName = request.getAttribute("examname").toString().trim().toLowerCase();
+			String[] primary = {"1","2","3","4","5"};
+			String[] high = {"6","7","8","9","10"};
+			if(Arrays.asList(primary).contains(classStudying) && examName.contains("formative assessment")) {
+				return "faonetofive";
+			}else if(Arrays.asList(high).contains(classStudying) && examName.contains("formative assessment")) {
+				return "fasixtonine";
+			}else if(Arrays.asList(primary).contains(classStudying) && examName.contains("summative assessment")) {
+				return "saonetofive";
+			}else if(Arrays.asList(high).contains(classStudying) && examName.contains("summative assessment")) {
+				return "sasixtonine";
+			}
 			return "finalexammarkssheet";
 		} else {
 			return "error";

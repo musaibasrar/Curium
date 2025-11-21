@@ -289,11 +289,12 @@ public class MarksDetailsActionAdapter {
 	        dto.setStudentIds(request.getParameterValues("studentIDs"));
 	        dto.setExamClass(request.getParameter("examclass"));
 	        dto.setExamName(request.getParameter("examname"));
-	       
+	        String[] classSearch = request.getParameter("examclass").split("--");
 	        GenerateReportResponseDto responseDto = marksDetailsService.generateFinalExamReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
 	        request.setAttribute("endloop", responseDto.getEndLoop());
 	        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 	        request.setAttribute("examname", responseDto.getExamName());
+	        request.setAttribute("classsearch", classSearch[0]);
 	        return responseDto.isSuccess();
 	}
 }
