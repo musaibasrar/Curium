@@ -113,11 +113,11 @@ public class DiaryService {
 //viewDiaryparent
 
 
-	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto) {
+	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
-		if (studentIdPageDto.getStudentBranchId() != null) {
+		if (branchId != null) {
 			try {
 				Student student = new studentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
@@ -127,7 +127,7 @@ public class DiaryService {
 					page = Integer.parseInt(studentIdPageDto.getPage());
 				}
 				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(studentIdPageDto.getStudentBranchId()), classsec);
+						recordsPerPage, Integer.parseInt(branchId), classsec);
 
 				List<Diary> diaryDetails = new ArrayList<Diary>();
 				for (Object[] diaryObject : list) {
@@ -146,7 +146,7 @@ public class DiaryService {
 				}
 
 
-				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(studentIdPageDto.getStudentBranchId()));
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiaryparents(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
