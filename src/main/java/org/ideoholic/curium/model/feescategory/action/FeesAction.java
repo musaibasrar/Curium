@@ -130,6 +130,7 @@ public class FeesAction {
 	public String viewFees() {
 		feesActionAdapter.viewFees();
 		standardActionAdapter.viewClasses();
+		feesActionAdapter.getFeesMonths();
 		return "feesCategory";
 	}
 
