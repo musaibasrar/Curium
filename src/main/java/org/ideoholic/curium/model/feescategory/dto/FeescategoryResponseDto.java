@@ -26,6 +26,6 @@ public class FeescategoryResponseDto {
 	private String feesDueSearchYear;
 	private String feesDueSearchClass;
 	private boolean success;
-	
+	private String feesMonths;
 	
 }

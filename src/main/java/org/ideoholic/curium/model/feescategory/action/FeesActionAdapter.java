@@ -232,5 +232,11 @@ public class FeesActionAdapter {
     	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
     	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
 	}
+
+	public void getFeesMonths() {
+		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+		feescategoryResponseDto = feesService.getFeesMonths(httpSession.getAttribute(BRANCHID).toString());
+    	request.setAttribute("feesmonths", feescategoryResponseDto.getFeesMonths());
+	}
 	
 }
