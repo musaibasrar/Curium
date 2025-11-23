@@ -109,8 +109,15 @@ public class StampFeesAction {
 	public String showFeesDetailsAllStudents() {
 		//feesActionAdapter.viewFees();
 		yearActionAdapter.getYear();
-		feesActionAdapter.viewAllStudentsList();
-		feesActionAdapter.viewFees();
+		standardActionAdapter.viewClasses();
+		//feesActionAdapter.viewAllStudentsList();
+		//feesActionAdapter.viewFees();
+		return "stampfeesallstudents";
+	}
+	
+	@PostMapping("/advanceSearchForStampFeesByCategory")
+	public String advanceSearchForStampFeesByCategory() {
+		stampFeesActionAdapter.advanceSearchForStampFeesByCategory();
 		return "stampfeesallstudents";
 	}
 	
