@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>stamp fees all</title>
+<title>Stamp Fees All</title>
 <link rel="stylesheet" href="/sac/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/sac/css/datePicker/demos.css">
 
@@ -340,7 +340,7 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
-			"sScrollY" : "380px",
+			"sScrollY" : "500px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
@@ -715,30 +715,105 @@
 			}
 		});
 	}); 
-	 
-	 function toggleFeesCount(allCheckbox) {
-		    var checkboxes = document.querySelectorAll('.chcktblStamp');
-		    var totalAmount = 0;
-
-		    checkboxes.forEach(function(checkbox, index) {
-		        var feesCountInput = document.getElementById('feesCount_' + (index + 1));
-		        var feesAmountInput = document.getElementById('hiddenfees_full_amount_' + (index + 1));
-		        
-		        if (allCheckbox.checked) {
-		            feesCountInput.value = '1';
-		            totalAmount += parseFloat(feesAmountInput.value || 0);
-		        } else {
-		            feesCountInput.value = '0';
-		        }
-
-		        calculate(index + 1);
-		    });
-
-		    // Set the total amount field based on checkbox state
-		    document.getElementById('feesTotalAmount').value = allCheckbox.checked ? totalAmount.toFixed(2) : '0.00';
-		}
-	
         </script>
+        
+		<script>
+			function updateTotalAmount() {
+			    var totalAmount = 0;
+			    
+			    // Select all the full amount inputs (the "Fees Total Amount" column)
+			    var fullAmountInputs = document.querySelectorAll('.feesFullAmount');
+			    
+			    fullAmountInputs.forEach(function(input) {
+			        // Get the index from the input's ID (e.g., '1' from 'hiddenfees_full_amount_1')
+			        var index = input.id.split('_').pop(); 
+			        
+			        // Find the corresponding checkbox for this row
+			        var checkbox = document.getElementById('feesIDS_' + index);
+			        
+			        // Only sum the amount if the individual checkbox is currently selected
+			        if (checkbox && checkbox.checked) {
+			            var amount = parseFloat(input.value || 0);
+			            totalAmount += amount; 
+			        }
+			    });
+			
+			    // Update the final total display field, formatted to 2 decimal places
+			    document.getElementById('feesTotalAmount').value = totalAmount.toFixed(2);
+			}
+			
+			function calculate(index) {
+			    var amountInput = document.getElementById('hiddenfees_amount_' + index); // Base Fee Amount
+			    var countInput = document.getElementById('feesCount_' + index);        // No. of Installments
+			    var fullAmountInput = document.getElementById('hiddenfees_full_amount_' + index); // Row Total Output
+			    var checkbox = document.getElementById('feesIDS_' + index);            // Individual Checkbox
+			
+			    var baseAmount = parseFloat(amountInput.value || 0);
+			    var installmentCount = parseInt(countInput.value || 0);
+			    
+			    // Ensure the count is non-negative
+			    if (installmentCount < 0) installmentCount = 0;
+			    
+			    // If the checkbox is UNCHECKED, the installment count and final amount should be 0.
+			    if (!checkbox.checked) {
+			        installmentCount = 0;
+			        countInput.value = '0';
+			    }
+			
+			    var rowTotal = baseAmount * installmentCount;
+			    
+			    // Update the row's total amount input
+			    fullAmountInput.value = rowTotal.toFixed(2);
+			    
+			    // Call the central function to refresh the grand total
+			    updateTotalAmount(); 
+			}
+			
+			function updateFeesCount(index) {
+			    var checkbox = document.getElementById('feesIDS_' + index);
+			    var countInput = document.getElementById('feesCount_' + index);
+			
+			    if (checkbox.checked) {
+			        // When checked, set count to 1 (or prompt for installments)
+			        countInput.value = '1';
+			    } else {
+			        // When unchecked, set count to 0
+			        countInput.value = '0';
+			    }
+			
+			    // Trigger calculation for the row
+			    calculate(index);
+			}
+			
+			function toggleFeesCount(allCheckbox) {
+			    var checkboxes = document.querySelectorAll('.chcktblStamp');
+			    
+			    checkboxes.forEach(function(checkbox, index) {
+			        var feesCountInput = document.getElementById('feesCount_' + (index + 1));
+			        
+			        // 1. Explicitly set the state of the individual checkbox
+			        checkbox.checked = allCheckbox.checked; 
+			
+			        // 2. Set the installment count based on the 'All' state
+			        if (allCheckbox.checked) {
+			            // When 'All' is checked, set count to 1 (or the original default)
+			            feesCountInput.value = '1'; 
+			        } else {
+			            // When 'All' is unchecked, set count to 0
+			            feesCountInput.value = '0'; 
+			        }
+			
+			        // 3. Trigger the calculation for the individual row, which updates the grand total
+			        calculate(index + 1);
+			    });
+			
+			}
+			
+			document.addEventListener('DOMContentLoaded', function() {
+			    updateTotalAmount();
+			});
+			
+			</script>
         <script>
 			function searchTable() {
 			    let input = document.getElementById("tableSearch");
@@ -761,6 +836,18 @@
 			        trs[i].style.display = rowMatch ? "" : "none";
 			    }
 			}
+			
+			  // Toggle every checkbox with name="classesSearch" when master is clicked
+			  function toggleAll(source) {
+			    var checkboxes = document.getElementsByName('classesSearch');
+			    for (var i = 0; i < checkboxes.length; i++) {
+			      if (!checkboxes[i].disabled) {
+			        checkboxes[i].checked = source.checked;
+			      }
+			    }
+			    // remove indeterminate state if any
+			    source.indeterminate = false;
+			  }
 		</script>
         
 
@@ -791,13 +878,98 @@ for(Cookie cookie : cookies){
 
 				</ul>
 				<div id="tabs-1">
+						
+						<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+						
+						<tr>
+							<td width="10%" class="alignRight">Fees Category &nbsp;</td>
+							<td width="70%"><label> <input id="feescategorysearch" style="width: 210px;border-radius: 4px;background: white;height: 28px;"
+									name="feescategorysearch" type="text" class="textField" size="30">
+
+							</label></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr></tr>
+						<tr>
+						
+						<td width="16%" class="alignRight">Class &nbsp;
+							</td>
+
+							<td width="8%">
+									<label style="font-weight: bold; color:#325F6D; margin-right:12px;">
+								      <input type="checkbox" id="selectAll" onclick="toggleAll(this)">
+								      Select All
+								    </label>
+							 <label> 
+							 
+							 <c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+										
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classesSearch" onchange="updateSelectAll()" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+							
+								<%-- <select name="fromclass" id="fromclass"
+									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select> --%>
+								
+							</label>
+							&nbsp;<label style="font-weight: bold;color:#325F85;display: none;">To Class &nbsp;</label>
+							
+							<label>
+							<select name="toclass" id="toclass"
+									style="width: 120px;display: none;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+													<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}">
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label>
+							
+							</td>
+							
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+					</table>
+					<table id="table2" width="100%" border="0" align="center">
+						<tr>
+							<td>
+								<button id="search">Search</button>
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+					</table>
 					
-						<div style="overflow:scroll;width:750px; height: 250px;">
+						<div style="overflow:scroll;height: 250px;display: block;" >
 						<c:set var="feesInitialTotal" value="0" />
 						<input type="text" id="tableSearch" placeholder="Search..." 
        							onkeyup="searchTable()" 
        							style="margin-bottom:10px; padding:5px; width: 250px;">
-							<table id="dataTable">
+							<table id="dataTable" style="width: 100%">
 							
 							<thead>
 								<tr>
@@ -845,11 +1017,13 @@ for(Cookie cookie : cookies){
    			        				</td>
    			        				
    			        			</tr>
-   			        			
+   			        			<tr>
+									<td><br /></td>
+								</tr>
    			        			</c:forEach>
    			        			</tbody>
    			        				
-   			        		 <tfoot><tr><td colspan="4" align="right">Total</td><td align="center"><input type="text" name="feesTotalAmount" id=feesTotalAmount value="${feesInitialTotal}" /></td></tr>
+   			        		 <tfoot><tr><td colspan="4" align="right"><label style="font-weight: bold;">Total</label></td><td align="left"><input type="text" name="feesTotalAmount" id=feesTotalAmount value="${feesInitialTotal}" /></td></tr>
    			        		 </tfoot>
    			        		 </table>
    			        		 </div>
@@ -883,7 +1057,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentListFeesCollection}" var="Parents">
+					<c:forEach items="${searchStudentList}" var="Parents">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
