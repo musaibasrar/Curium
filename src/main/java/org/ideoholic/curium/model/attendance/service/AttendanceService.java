@@ -63,6 +63,9 @@ public class AttendanceService {
 		@Autowired
 		private SmsService smsService;
 		
+		@Autowired
+		private StandardDetailsDAO standardDetailsDao;
+		
 	    private static final int BUFFER_SIZE = 4096;
 
 
@@ -1506,7 +1509,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		result.setTotalAbsent(absent);
 		result.setTotalNoofStudents(totalNoofStudents);
 		result.setAttendanceDate(dto.getDateOfAttendance());
-		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+		List<Classsec> classsecList = standardDetailsDao.viewClasses(Integer.parseInt(branchId));
 	    List<Classsec> secList = new ArrayList<Classsec>();
 		
 	    for(Classsec classdetail : classsecList) {

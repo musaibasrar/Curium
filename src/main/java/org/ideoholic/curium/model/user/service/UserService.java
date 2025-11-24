@@ -92,6 +92,9 @@ public class UserService {
     
     @Autowired
     private HttpSession httpSession;
+    
+	@Autowired
+	private StandardDetailsDAO standardDetailsDao;
 
     public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
         UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
@@ -172,7 +175,7 @@ public class UserService {
 			if (branchId != null) {
 
 				//List<Branch> branchList = new BranchDAO().readListOfObjects();
-				List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
+				List<Classsec> classsecList = standardDetailsDao.viewClasses(Integer.parseInt(branchId));
 				List<String> xaxisList = new LinkedList<>();
 				List<String> yaxisList = new LinkedList<>();
 				int totalStudents = 0;

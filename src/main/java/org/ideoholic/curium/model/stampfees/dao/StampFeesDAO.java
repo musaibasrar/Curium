@@ -192,7 +192,7 @@ public class StampFeesDAO {
     public void deleteMultiple(java.util.List<Integer> ids, String currentYear) {
         try {
 			// Query query = session.createQuery("delete from Studentfeesstructure as sfs where sfs.sid IN (:ids) and sfs.academicyear='"+currentYear+"'");
-            studentFeesStructureRepo.deleteBySidInAndAcademicyear(ids, currentYear);
+            studentFeesStructureRepo.deleteByStudent_SidInAndAcademicyear(ids, currentYear);
             // Query query2 = session.createQuery("delete from Academicfeesstructure where sid IN (:ids) and academicyear='"+currentYear+"'");
             academicFeesStructureRepo.deleteBySidInAndAcademicyear(ids, currentYear);            
         } catch (Exception ex) {

@@ -76,7 +76,8 @@ public class FeesService {
 			@Autowired
 			private StudentDetailsDAO studentDetailsDao;
 			
-			
+			@Autowired
+			private StandardDetailsDAO standardDetailsDao;
             /**
              * Size of a byte buffer to read/write file
              */
@@ -865,7 +866,7 @@ public class FeesService {
 	            
 	        	int diff = Integer.parseInt(currentAcademicYear[0])-Integer.parseInt(yearofAdmission[0]);
 	        	//Get the Class for yearofadmission
-	        	List<Classhierarchy> classHierarchyList = new StandardDetailsDAO().viewClassHierarchy(Integer.parseInt(branchid));
+	        	List<Classhierarchy> classHierarchyList = standardDetailsDao.viewClassHierarchy(Integer.parseInt(branchid));
 	        	
 	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
 	        	int j=0;

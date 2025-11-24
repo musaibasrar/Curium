@@ -52,4 +52,10 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
     // Fetch by Student External ID
     @Query("FROM Parents p WHERE p.student.studentexternalid = :externalId")
     Optional<Parents> findByStudentExternalId(@Param("externalId") String externalId);
+
+    @Query("FROM Parents p WHERE p.student.branchid = :branchId AND p.student.classstudying LIKE :classofStd " + 
+            "AND p.student.archive = 0 AND p.student.yearofadmission = :currentAcademicYear")
+     List<Parents> findByClassAndBranchAndYear(@Param("classofStd") String classofStd, 
+                                               @Param("branchId") int branchId, 
+                                               @Param("currentAcademicYear") String currentAcademicYear);
 }

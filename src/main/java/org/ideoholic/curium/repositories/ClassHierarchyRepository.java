@@ -13,4 +13,6 @@ public interface ClassHierarchyRepository extends JpaRepository<Classhierarchy, 
 
 	List<Classhierarchy> findByLowerclass(String classStudying);
 
+	List<Classhierarchy> findByBranchid(Integer branchid);
+
 }
