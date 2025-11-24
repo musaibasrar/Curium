@@ -916,7 +916,7 @@ public class DocumentService {
 			public CharacterResponseDto printScList(CharacterDto characterDto, String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
 				String[] sIds = characterDto.getSIds();
-				List<StudyCertificate> listStudyCertificate = documentDAO.getListOfIssuedStudyCertificate(sIds);
+				List<StudyCertificate> listStudyCertificate = documentDAO.getListOfIssuedStudyCertificate(sIds, Integer.parseInt(branchId));
 				characterResponseDto.setStudyCertificate(listStudyCertificate);
 				characterResponseDto.setSuccess(true);
 				return characterResponseDto;

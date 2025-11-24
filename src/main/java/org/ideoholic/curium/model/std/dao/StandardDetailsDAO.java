@@ -11,7 +11,7 @@ import org.ideoholic.curium.repositories.ClassHierarchyRepository;
 import org.ideoholic.curium.repositories.ClasssecRepository;
 import org.ideoholic.curium.repositories.ParentsRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -19,7 +19,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
+@Component
 @RequiredArgsConstructor
 public class StandardDetailsDAO {
 

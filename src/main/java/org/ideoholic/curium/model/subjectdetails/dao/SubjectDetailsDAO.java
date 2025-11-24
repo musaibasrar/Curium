@@ -1,307 +1,238 @@
-/**
- * 
- */
 package org.ideoholic.curium.model.subjectdetails.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
-import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
-import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.repositories.SubSubjectRepository;
+import org.ideoholic.curium.repositories.SubjectMasterRepository;
+import org.ideoholic.curium.repositories.SubjectRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Musaib_2
  *
  */
+@Slf4j
+@Component
+@RequiredArgsConstructor
 public class SubjectDetailsDAO {
 
-	Session session;
-	/**
-	 * * Hibernate Session Variable
-	 */
-	Transaction transaction;
-	
-	private static final Logger logger = LogManager.getLogger(SubjectDetailsDAO.class);
-	
-	public SubjectDetailsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
-	
-	@SuppressWarnings({ "unchecked", "finally" })
-	public List<Subject> readListOfSubjects(int branchId, String examClass) {
-		
-		List<Subject> results = new ArrayList<Subject>();
-		try {
+    private final SubjectRepository subjectRepo;
+    private final SubSubjectRepository subSubjectRepo;
+    private final SubjectMasterRepository subjectmasterRepo;
 
-			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject where examclass = '"+examClass+"' and branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
 
-	public Subject addSubject(Subject subject) {
-		try {
-			// this.session = sessionFactory.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(subject);
+    @Transactional
+    public List<Subject> readListOfSubjects(int branchId, String examClass) {
+        List<Subject> results = new ArrayList<>();
+        try {
+            // session.createQuery("From Subject where examclass = '"+examClass+"' and branchid="+branchId).list();
+            results = subjectRepo.findByExamclassAndBranchid(examClass, branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 
-			transaction.commit();
-			
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return subject;
-		}
-		
-	}
+    @Transactional
+    public Subject addSubject(Subject subject) {
+        try {
+            // session.save(subject);
+            return subjectRepo.save(subject);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subject;
+    }
 
-	public void deleteMultiple(List ids) {
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from Subject where subid IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		 }
-		
-	}
+    @Transactional
+    public void deleteMultiple(List<Integer> ids) {
+        try {
+            // session.createQuery("delete from Subject where subid IN (:ids)").setParameterList("ids", ids).executeUpdate();
+            subjectRepo.deleteBySubidIn(ids);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+    }
 
-	public Subject getSubjectDetails(Integer subid) {
-		
-		Subject subject = new Subject();
-		try {
+    @Transactional
+    public Subject getSubjectDetails(Integer subid) {
+        Subject subject = new Subject();
+        try {
+            // session.createQuery("From Subject where id="+subid)
+            Subject found = subjectRepo.findBySubid(subid);
+            if(found != null) subject = found;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+        }
+        return subject;
+    }
 
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("From Subject where id="+subid);
-			subject = (Subject) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) {
-			transaction.rollback(); 
-			logger.error(hibernateException);
-		} finally {
-				HibernateUtil.closeSession();
-			return subject;
-		}
-	}
+    @Transactional
+    public Subjectmaster addSubjectMaster(Subjectmaster subject) {
+        try {
+            // session.save(subject);
+            return subjectmasterRepo.save(subject);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+            return subject;
+        }
+    }
 
-	public Subjectmaster addSubjectMaster(Subjectmaster subject) {
-		try {
-			// this.session = sessionFactory.openCurrentSession();
-			transaction = session.beginTransaction();
-			session.save(subject);
+    @Transactional
+    public List<Subjectmaster> readListOfSubjectNames(int branchId) {
+        List<Subjectmaster> results = new ArrayList<>();
+        try {
+            // session.createQuery("From Subjectmaster where branchid="+branchId)
+            results = subjectmasterRepo.findByBranchid(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 
-			transaction.commit();
-			
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return subject;
-		}
-		
-	}
+    @Transactional
+    public void deleteMultipleSubjects(List<Integer> ids) {
+        try {
+            // session.createQuery("delete from Subjectmaster where subjectid IN (:ids)").setParameterList("ids", ids).executeUpdate();
+            subjectmasterRepo.deleteBySubjectidIn(ids);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+    }
 
-	public List<Subjectmaster> readListOfSubjectNames(int branchId) {
-		
-		List<Subjectmaster> results = new ArrayList<Subjectmaster>();
-		try {
+    @Transactional
+    public List<Subject> readAllSubjects(int branchId) {
+        List<Subject> results = new ArrayList<>();
+        try {
+            // session.createQuery("From Subject where branchid="+branchId)
+            results = subjectRepo.findByBranchid(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 
-			transaction = session.beginTransaction();
-			results = (List<Subjectmaster>) session.createQuery("From Subjectmaster where branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
+    @Transactional
+    public List<Subject> readAllSubjectsClassWise(int branchId, String examClass, String examName) {
+        List<Subject> results = new ArrayList<>();
+        try {
+            // session.createQuery("From Subject where examclass='"+examClass+"' and examname='"+examName+"' and branchid="+branchId)
+            results = subjectRepo.fetchByExamSubject(examClass, examName, branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 
-	public void deleteMultipleSubjects(List ids) {
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from Subjectmaster where subjectid IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		 }
-		
-	}
+    @Transactional
+    public List<Subjectmaster> readListOfSubjectMasterNames(int branchId) {
+        List<Subjectmaster> results = new ArrayList<>();
+        try {
+            // session.createQuery("From Subjectmaster where branchid="+branchId)
+            results = subjectmasterRepo.findByBranchid(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 
-	public List<Subject> readAllSubjects(int branchId) {
-		
-		List<Subject> results = new ArrayList<Subject>();
-		try {
+    @Transactional
+    public Subject readSubjectByExam(int branchId, String examClass, String examName, int subId) {
+        Subject results = new Subject();
+        try {
+            // session.createQuery("From Subject where examclass='"+examClass+"' and subjectid='"+subId+"' and examname='"+examName+"' and branchid="+branchId)
+            Subject found = subjectRepo.fetchByExamNameSubject(examClass, subId, examName, branchId);
+            if(found != null) results = found;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+        }
+        return results;
+    }
 
-			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject where branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
-	
-	
-	public List<Subject> readAllSubjectsClassWise(int branchId, String examClass, String examName) {
-		
-		List<Subject> results = new ArrayList<Subject>();
-		try {
+    @Transactional
+    public SubSubject readSubSubject(int branchId, int subjectId, String subSubject) {
+        SubSubject subsubject = new SubSubject();
+        try {
+            // session.createQuery("From SubSubject where subjectid='"+subjectId+"' and subsubjectname='"+subSubject+"'  and branchid = "+branchId+"");
+            SubSubject found = subSubjectRepo.fetchSubSubjects(subjectId, subSubject, branchId);
+            if(found != null) subsubject = found;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subsubject;
+    }
 
-			transaction = session.beginTransaction();
-			results = (List<Subject>) session.createQuery("From Subject where examclass='"+examClass+"' and examname='"+examName+"' and branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
-	
-	public List<Subjectmaster> readListOfSubjectMasterNames(int branchId) {
-		
-		List<Subjectmaster> results = new ArrayList<Subjectmaster>();
-		try {
+    @Transactional
+    public List<SubSubject> readListOfSubSubject(int branchId) {
+        List<SubSubject> results = new ArrayList<>();
+        try {
+            // session.createQuery("From SubSubject where branchid="+branchId)
+            results = subSubjectRepo.findByBranchid(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 
-			transaction = session.beginTransaction();
-			results = (List<Subjectmaster>) session.createQuery("From Subjectmaster where branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
-	
-	public Subject readSubjectByExam(int branchId, String examClass, String examName, int subId) {
-		
-		Subject results = new Subject();
-		try {
+    @Transactional
+    public boolean addSubSubject(List<SubSubject> subSubjectList) {
+        boolean result = false;
+        try {
+            /*
+                for (SubSubject subSubject : subSubjectList) { session.save(subSubject); }
+            */
+            subSubjectRepo.saveAll(subSubjectList);
+            result = true;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return result;
+    }
 
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Subject where examclass='"+examClass+"' and subjectid='"+subId+"' and examname='"+examName+"' and branchid="+branchId);
-			results = (Subject) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
-
-	public SubSubject readSubSubject(int branchId, int subjectId, String subSubject) {
-		SubSubject subsubject = new SubSubject();
-		try {
-
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From SubSubject where subjectid='"+subjectId+"' and subsubjectname='"+subSubject+"'  and branchid = "+branchId+"");
-			subsubject = (SubSubject) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return subsubject;
-		}
-	}
-
-	public List<SubSubject> readListOfSubSubject(int branchId) {
-		
-		List<SubSubject> results = new ArrayList<SubSubject>();
-		try {
-
-			transaction = session.beginTransaction();
-			results = (List<SubSubject>) session.createQuery("From SubSubject where branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
-
-	public boolean addSubSubject(List<SubSubject> subSubjectList) {
-		boolean result=false;
-		try {
-			// this.session = sessionFactory.openCurrentSession();
-			transaction = session.beginTransaction();
-			
-			for (SubSubject subSubject : subSubjectList) {
-				session.save(subSubject);
-			}
-			transaction.commit();
-			result=true;
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return result;
-		}
-		
-	}
-
-	public void deleteMultipleSubSubject(List<Integer> ids) {
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from SubSubject where subjectid IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		 }
-		
-	}
-
+    @Transactional
+    public void deleteMultipleSubSubject(List<Integer> ids) {
+        try {
+            // session.createQuery("delete from SubSubject where subjectid IN (:ids)").setParameterList("ids", ids).executeUpdate();
+            subSubjectRepo.deleteBySubjectidIn(ids);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+    }
 }

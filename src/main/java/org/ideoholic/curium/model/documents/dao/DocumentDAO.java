@@ -95,14 +95,13 @@ public class DocumentDAO {
 
 
 
-	@SuppressWarnings("unchecked")
-	public List<StudyCertificate> getListOfIssuedStudyCertificate(String[] sIds) {
+	public List<StudyCertificate> getListOfIssuedStudyCertificate(String[] sIds, Integer branchId) {
 		List<Integer> ids = Arrays.stream(sIds)
                 .map(Integer::valueOf)
                 .toList();
 		List<StudyCertificate> sc = new ArrayList<StudyCertificate>();
 		try {
-			sc = studyCertificateRepo.findAllByStudentIdsIn(ids);
+			sc = studyCertificateRepo.findAllByStudentIdsIn(ids, branchId);
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
