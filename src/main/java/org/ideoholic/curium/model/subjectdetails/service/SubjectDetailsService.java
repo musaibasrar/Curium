@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubjectDto;
@@ -30,12 +29,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SubjectDetailsService {
+	
+	@Autowired
+	private SubjectDetailsDAO subjectDetailsDao;
 
 	public SubjectsResponseDto readListOfSubjects(String branchId) {
 		SubjectsResponseDto result = new SubjectsResponseDto();
 
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchId));
+	    	List<Subject> list = subjectDetailsDao.readAllSubjects(Integer.parseInt(branchId));
 	        result.setSubjects(list);
 
 			result.setSuccess(true);
@@ -63,7 +65,7 @@ public class SubjectDetailsService {
 			subject.setExamclass(DataUtil.emptyString(clsCat));
 			subject.setBranchid(Integer.parseInt(branchId));
 			subject.setUserid(Integer.parseInt(userLoginId));
-			subject = new SubjectDetailsDAO().addSubject(subject);
+			subject = subjectDetailsDao.addSubject(subject);
 			
 		}
 		}
@@ -105,7 +107,7 @@ public class SubjectDetailsService {
 
 	        }
 	        System.out.println("id length" + examIds.length);
-	        new SubjectDetailsDAO().deleteMultiple(ids);
+	        subjectDetailsDao.deleteMultiple(ids);
 	        result = true;
 			return  ResultResponse.builder().success(result).build();
 	}else {
@@ -122,7 +124,7 @@ public class SubjectDetailsService {
 			subject.setSubjectname(DataUtil.emptyString(subjectDto.getSubjectName()));
 			subject.setBranchid(Integer.parseInt(branchId));
 			subject.setUserid(Integer.parseInt(userLoginId));
-			subject = new SubjectDetailsDAO().addSubjectMaster(subject);
+			subject = subjectDetailsDao.addSubjectMaster(subject);
 			 
 			if(subject == null){
 				result=false;
@@ -137,7 +139,7 @@ public class SubjectDetailsService {
 	public SubjectsResponseDto readListOfSubjectNames(String branchId) {
 		SubjectsResponseDto result = new SubjectsResponseDto();
 	    try {
-	    	List<Subjectmaster> list = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	    	List<Subjectmaster> list = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
 			result.setListSubjectNames(list);
 			result.setSuccess(true);
 	    } catch (Exception e) {
@@ -157,7 +159,7 @@ public class SubjectDetailsService {
 
 	        }
 	        System.out.println("id length" + examIds.length);
-	        new SubjectDetailsDAO().deleteMultipleSubjects(ids);
+	        subjectDetailsDao.deleteMultipleSubjects(ids);
 	        result = true;
 			 return ResultResponse.builder().success(result).build();
 	}else{
@@ -171,8 +173,8 @@ public class SubjectDetailsService {
 		
 		SubSubjectsResponseDto result = new SubSubjectsResponseDto();
 	    try {
-	    	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
-	    	List<SubSubject> subSubjectList = new SubjectDetailsDAO().readListOfSubSubject(Integer.parseInt(branchId));
+	    	List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+	    	List<SubSubject> subSubjectList = subjectDetailsDao.readListOfSubSubject(Integer.parseInt(branchId));
 	    	 Map<Integer, String> subjectIdNameMap = subjectList.stream()
 	    	            .collect(Collectors.toMap(
 	    	                Subjectmaster::getSubjectid,
@@ -215,7 +217,7 @@ public class SubjectDetailsService {
 				subSubjectList.add(subSubject);
 			}
 			
-			result = new SubjectDetailsDAO().addSubSubject(subSubjectList);
+			result = subjectDetailsDao.addSubSubject(subSubjectList);
 			
 			return ResultResponse.builder().success(result).build();
 		}
@@ -234,7 +236,7 @@ public class SubjectDetailsService {
 
 	        }
 	        System.out.println("id length" + subIds.length);
-	        new SubjectDetailsDAO().deleteMultipleSubSubject(ids);
+	        subjectDetailsDao.deleteMultipleSubSubject(ids);
 	        result = true;
 			return  ResultResponse.builder().success(result).build();
 	}else {

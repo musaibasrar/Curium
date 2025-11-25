@@ -65,6 +65,9 @@ public class EmployeeService {
 	
 	@Autowired
 	private StandardDetailsDAO standardDetailsDao;
+	
+	@Autowired
+	private SubjectDetailsDAO subjectDetailsDao;
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
@@ -459,7 +462,7 @@ public class EmployeeService {
 	        	        viewAllRelationsResponseDto.setSectionList(sectionList);
 	        
 	        
-	        List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
+	        List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListSubjectMaster(subjectList);
 		}
 		return viewAllRelationsResponseDto;

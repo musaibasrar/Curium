@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
@@ -25,11 +21,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TeacherPerformanceService {
-	 private HttpServletRequest request;
-     private HttpServletResponse response;
-     private HttpSession httpSession;
-     private String BRANCHID = "branchid";
-     private String academicyear = "academicyear";
 
 	@Autowired
 	private ExamDetailsDAO examDetailsDao;
@@ -40,10 +31,13 @@ public class TeacherPerformanceService {
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
 	
+	@Autowired
+	private SubjectDetailsDAO subjectDetailsDao;
+	
 	public SubjectsResponseDto readListOfSubjects(String branchid) {
 		SubjectsResponseDto subjectsResponseDto = new SubjectsResponseDto();
 	    try {
-	    	List<Subject> list = new SubjectDetailsDAO().readAllSubjects(Integer.parseInt(branchid));
+	    	List<Subject> list = subjectDetailsDao.readAllSubjects(Integer.parseInt(branchid));
 	    	subjectsResponseDto.setSubjects(list);
 	    	subjectsResponseDto.setSuccess(true);
 	    } catch (Exception e) {
@@ -60,7 +54,7 @@ public class TeacherPerformanceService {
 		String[] classsec = teacherDetailsDto.getClasssec();
 		String subjectDetails = teacherDetailsDto.getSubjectDetails();
 		String[] subject = subjectDetails.split("--");
-		String AcademicYear = teacherDetailsDto.getAcademicYear();
+		String academicYear = teacherDetailsDto.getAcademicYear();
 		List<Parents> searchStudentList = new ArrayList<Parents>();
 		List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 		List<SubjectAverage> subjectaverageList = new ArrayList<SubjectAverage>();
