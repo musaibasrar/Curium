@@ -640,4 +640,24 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
+	
+	@GetMapping("/index_accountant")
+	public String getIndexAccountant() {
+		return "index_accountant";
+	}
+
+	@GetMapping("/header_accountant")
+	public String getHeaderAccountant() {
+		return "header_accountant";
+	}
+	
+	@GetMapping("/left_accountant")
+	public String getLeftAccountant() {
+		return "left_accountant";
+	}
+	
+	@GetMapping("/leftsettings_accountant")
+	public String getLeftSettingsAccountant() {
+		return "leftsettings_accountant";
+	}
 }
