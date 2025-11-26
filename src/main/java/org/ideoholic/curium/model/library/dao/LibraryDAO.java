@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.library.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import org.ideoholic.curium.repositories.BookRepository;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.RequiredArgsConstructor;
 
@@ -30,19 +32,22 @@ public class LibraryDAO {
             return bookRepository.save(book);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return book;
     }
 
     @Transactional
     public List<Book> readListOfAvailableBook() {
+    	List<Book> result = new ArrayList<>();
         try {
             // session.createQuery("From Book").list();
             return bookRepository.findAll();
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     // Delete Book records (only where issuedqty = 0)
@@ -58,20 +63,22 @@ public class LibraryDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
     // Read list of Book by branchId
     @Transactional
     public List<Book> readListOfBook(String branchId) {
+    	List<Book> result = new ArrayList<>();
         try {
             // session.createQuery("From Book where branchid=" + branchId).list();
             return bookRepository.findByBranchid(Integer.parseInt(branchId));
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     // Update book after issue (batch update issuedqty, add BookIssue and BookHistory)
@@ -89,20 +96,22 @@ public class LibraryDAO {
             bookHistoryRepository.saveAll(bookHistoryList);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
     // Read list of Books Issued by holder (sid)
     @Transactional
     public List<BookIssue> readListOfBooksIssued(String sid) {
+    	List<BookIssue> result = new ArrayList<>();
         try {
             // session.createQuery("From BookIssue where bookHolder='" + sid + "'").list();
             return bookIssueRepository.findByBookHolder(sid);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     // Update book after return (batch decrement issuedQty)
@@ -118,7 +127,7 @@ public class LibraryDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -130,7 +139,7 @@ public class LibraryDAO {
         	book = bookRepository.findById(bid).orElse(null);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return book;
     }
@@ -153,20 +162,22 @@ public class LibraryDAO {
             });
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
     // Read list of BookHistory between dates
     @Transactional
     public List<BookHistory> readListOfBookHistory(String fromDate, String toDate) {
+    	List<BookHistory> result = new ArrayList<>();
         try {
             // session.createQuery("From BookHistory where issueDate between '" + fromDate + "' and '" + toDate + "'").list();
             return bookHistoryRepository.findByIssueDateBetween(fromDate, toDate);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -176,8 +187,9 @@ public class LibraryDAO {
             return bookHistoryRepository.save(bookHistory);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return bookHistory;
     }
 
     // Delete BookHistory records by id list
@@ -188,7 +200,7 @@ public class LibraryDAO {
             bookHistoryRepository.deleteAllById(ids);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
@@ -199,8 +211,9 @@ public class LibraryDAO {
             return bookIssueRepository.save(bookIssue);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return bookIssue;
     }
 
     // Update BookIssue after return (delete BookIssue by id list)
@@ -211,7 +224,7 @@ public class LibraryDAO {
             bookIssueRepository.deleteAllById(ids);
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
@@ -232,7 +245,7 @@ public class LibraryDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
@@ -263,7 +276,7 @@ public class LibraryDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 }

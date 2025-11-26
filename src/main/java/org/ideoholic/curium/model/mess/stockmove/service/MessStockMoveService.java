@@ -79,7 +79,7 @@ public class MessStockMoveService {
 			String paymentmethodbanktransfer = dto.getPaymentMethodBankTransfer();
 			String paymentmethodchequetransfer = dto.getPaymentMethodChequeTransfer();
 			String paymentmethodcash = dto.getPaymentMethodCash();
-			String ackNo = dto.getAckNo();;
+			String ackNo = dto.getAckNo();
 			String ackNoVoucherNarration = "";
 			String transferDate = dto.getTransferDate();
 			String transferBankname = dto.getTransferBankName();
@@ -325,7 +325,7 @@ public class MessStockMoveService {
 					boolean result = messStockMoveDao.moveStockSave(messStockMovesList,transactions,updateDrAccount,updateCrAccount,transactionsIncomeCash,transactionsIncomeBankTransfer,transactionsIncomeCheque,updateDrAccountIncomeCash,updateCrAccountIncomeCash,updateDrAccountIncomeBankTransfer,updateCrAccountIncomeBankTransfer,updateDrAccountIncomeCheque,updateCrAccountIncomeCheque,messStockMoveInfo);
 					
 						if(result) {
-							//request.setAttribute("billdetails", messStockMovesList);;
+							//request.setAttribute("billdetails", messStockMovesList);
 							results.setBillList(billList);
 							results.setBillDetailsTransactionDate(dto.getTransactionDate());
 							results.setBillDetailsStudentName(custDetails[0]);

@@ -323,7 +323,7 @@ public class StudentService {
 					//Pass J.V. : credit the Fees as income & debit the cash
 
 					int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
-					int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));;
+					int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
 
 					VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 
@@ -421,7 +421,7 @@ public class StudentService {
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());;
+			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
 			result.setReceiptInfo(rinfo);
 			for (Receiptinfo receiptinfo : rinfo) {
 				VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
@@ -521,7 +521,7 @@ public class StudentService {
 			Currentacademicyear currentYear = yearDao.showYear();
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
-			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
+			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());
 			result.setReceiptInfo(rinfo);
 			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(student.getSid(), currentYear.getCurrentacademicyear());
 			long totalSum = 0l;

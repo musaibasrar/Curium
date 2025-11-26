@@ -132,7 +132,7 @@ public class MessSuppliersActionAdapter {
         Map<String, String> allRequestParameter = new HashMap<>();
         Enumeration<String> enumeration = request.getParameterNames();
         while (enumeration.hasMoreElements()){
-            String fieldName = enumeration.nextElement();;
+            String fieldName = enumeration.nextElement();
             String fieldValue = request.getParameter(fieldName);
             allRequestParameter.put(fieldName, fieldValue);
         }

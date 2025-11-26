@@ -2,12 +2,16 @@ package org.ideoholic.curium.model.department.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.extern.slf4j.Slf4j;
+
+import javax.transaction.Transactional;
+
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.repositories.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import javax.transaction.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
@@ -26,7 +30,7 @@ public class departmentDAO {
             log.error(hibernateException.getMessage(), hibernateException);
 
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
         }
         return department;
@@ -35,20 +39,20 @@ public class departmentDAO {
 
 
 	@Transactional
-    public List<Department> readListOfObjects(int branchId) {
-		
-		List<Department> results = new ArrayList<Department>();
-        try {
-            
-            results = departmentRepository.findByBranchid(branchId);
-        } catch (Exception hibernateException) {
-            log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        }
+	public List<Department> readListOfObjects(int branchId) {
 
-            return results;
+		List<Department> results = new ArrayList<>();
+		try {
+
+			results = departmentRepository.findByBranchid(branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+
+		return results;
 
 	}
 
@@ -61,7 +65,7 @@ public class departmentDAO {
         } catch (Exception hibernateException) { ;
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return result;
 	}

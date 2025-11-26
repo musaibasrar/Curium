@@ -284,7 +284,7 @@ public class StampFeesService {
 		//Pass J.V. : credit the Fees as income & debit the cash
 		
 		int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchid));
-		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));;
+		int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));
 		
 		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 		

@@ -208,7 +208,7 @@ public class JobService {
 		String[] QueryIds = queriesDto.getQueryIds();
 		int userId = Integer.parseInt(userLoginId);
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
-		List<JobQuery> result = new ArrayList<JobQuery>();;
+		List<JobQuery> result = new ArrayList<JobQuery>();
 
 		if(QueryIds!=null) {
 			for (String ids : QueryIds) {

@@ -78,7 +78,6 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -2363,7 +2362,7 @@ public class FeesCollectionService {
 			}
 			
 			if(!fromDate.equalsIgnoreCase("")  && !toDate.equalsIgnoreCase("")){
-				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";;
+				querySub = " feesdetails.date between '"+fromDate+"' AND '"+toDate+"'";
 				result.setDateFromCancel(fromDate);
 				result.setDateToCancel(toDate);
 				result.setDayOneCancel("");
@@ -2894,7 +2893,7 @@ public class FeesCollectionService {
 					Otherfeescollection feesCollect = new Otherfeescollection();
 					String[] studentSfsIdamount = studentSfsIds[i].split("_");
 					Studentotherfeesstructure studentSFS = feesCollectionDAO.getStudentOtherFeesStructure(sid, studentSfsIds[i],currentAcademicYear);
-					feesCollect.setOtherFeesStructure(studentDetailsDao.getStudentOtherFeesStructureDetails(studentSFS.getSfsid()));
+					feesCollect.setOtherFeesStructure(studentDetailsDao.getStudentOtherFeesStructureDetails(studentSFS.fetchSfsid()));
 					feesCollect.setAmountpaid((long)(DataUtil.parseDouble(amountPaying[i])));
 					feesCollect.setStudent(student);
 					feesCollect.setFine(Long.parseLong("0"));

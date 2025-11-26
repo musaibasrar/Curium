@@ -9,8 +9,8 @@ import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.repositories.PaybasicRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +43,7 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -57,7 +57,7 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -78,7 +78,7 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -105,7 +105,7 @@ public class EmployeeDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -121,7 +121,7 @@ public class EmployeeDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 		return employee;
@@ -135,7 +135,7 @@ public class EmployeeDAO {
         	log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return employee;
 	}
@@ -148,7 +148,7 @@ public class EmployeeDAO {
         } catch (Exception hibernateException) {
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -169,7 +169,7 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return employee;
 	}
@@ -190,7 +190,7 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return employee;
 	}
@@ -204,7 +204,7 @@ public class EmployeeDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return employeeExtId;
 	}
@@ -217,7 +217,7 @@ public class EmployeeDAO {
         	log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -230,7 +230,7 @@ public class EmployeeDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return employee;
 	}
@@ -244,7 +244,7 @@ public class EmployeeDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return payList;
 	}
@@ -262,7 +262,7 @@ public class EmployeeDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 	}
@@ -277,7 +277,7 @@ public class EmployeeDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 
@@ -298,7 +298,7 @@ public class EmployeeDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 	}

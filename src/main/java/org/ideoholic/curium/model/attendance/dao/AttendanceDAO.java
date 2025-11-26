@@ -57,7 +57,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 		return holidayMaster;
@@ -71,8 +71,9 @@ public class AttendanceDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
 	@Transactional
@@ -83,8 +84,9 @@ public class AttendanceDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
 	@Transactional
@@ -95,8 +97,9 @@ public class AttendanceDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
 	@Transactional
@@ -107,7 +110,7 @@ public class AttendanceDAO {
 			}catch (Exception e) {
 				log.error(e.getMessage(), e);
 				e.printStackTrace();
-				throw e;
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			}
 		return weeklyOff;
 	}
@@ -120,29 +123,27 @@ public class AttendanceDAO {
 		}catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return weeklyOff;
 
 	}
 
 	@Transactional
-	public List<Weeklyoff> readListOfWeeklyOff(List<Integer> weeklyOffList,
-			String academicYear) {
+	public List<Weeklyoff> readListOfWeeklyOff(List<Integer> weeklyOffList, String academicYear) {
 		List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
-		try{
+		try {
 
-			weeklyOff = weeklyoffRepo.findByAcademicyearAndWidIn(academicYear,weeklyOffList);
+			weeklyOff = weeklyoffRepo.findByAcademicyearAndWidIn(academicYear, weeklyOffList);
 
-		}catch (Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw  e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
-	return weeklyOff;
-
+		return weeklyOff;
 	}
 
 	@Transactional
@@ -154,13 +155,14 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return List.of();
     }
 
 	@Transactional
 	public List<Holidaysmaster> readListOfholidays(List<Integer> holidaysIntList, String currentAcademicYear) {
-		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
+		List<Holidaysmaster> holidayMaster = new ArrayList<>();
 		try{
 			// session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and shid IN (:ids) ");
 			holidayMaster = holidayMasterRepo.findByAcademicyearAndShidIn(currentAcademicYear, holidaysIntList);
@@ -168,7 +170,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw  e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 		return holidayMaster;
@@ -184,8 +186,9 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
 	@Transactional
@@ -198,8 +201,9 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
             
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
 
@@ -214,7 +218,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentAttendanceMaster;
 	}
@@ -228,7 +232,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentAttendanceMaster;
 	}
@@ -260,8 +264,9 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 		
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
 	@Transactional
@@ -276,7 +281,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 			
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentDailyAttendance;
 	}
@@ -295,27 +300,29 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentDailyAttendance;
 	}
 
 	@Transactional
-	public boolean updateStudentAttendanceDetails(List<Integer> attendanceIdsList, List<String> studentAttendanceStatusList, String academicYear) {
+	public boolean updateStudentAttendanceDetails(List<Integer> attendanceIdsList,
+			List<String> studentAttendanceStatusList, String academicYear) {
 		try {
 			for (int i = 0; i < attendanceIdsList.size(); i++) {
 
-				//Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
+				// Query query = session.createQuery("update Studentdailyattendance set attendancestatus = '"+studentAttendanceStatusList.get(i)+"' where attendanceid = '"+attIn+"'");
 				studentDailyAttendanceRepository.updateAttendanceStatusById(attendanceIdsList.get(i), studentAttendanceStatusList.get(i));
 			}
 			return true;
 
-		}catch (Exception e) {
-		log.error(e.getMessage(), e);
-		e.printStackTrace();
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
 
-		throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
 	@Transactional
@@ -330,7 +337,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentDailyAttendance;
 	}
@@ -357,27 +364,28 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return "failure-Attendance marking failed.";
 	}
 
 	@Transactional
 	public boolean markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
 		boolean result = true;
 
-		try{
-
+		try {
 			for (Studentdailyattendance student : studentDailyAttendance) {
 				// Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getAttendeeid()+"' and academicyear='"+student.getAcademicyear()+"' and date=CURDATE()");
-				Studentdailyattendance studentSingle = studentDailyAttendanceRepository.findByAttendeeStudentexternalidAndDateAndAcademicyear(student.getAttendeeid(), LocalDate.now(), student.getAcademicyear())
+				Studentdailyattendance studentSingle = studentDailyAttendanceRepository
+						.findByAttendeeStudentexternalidAndDateAndAcademicyear(student.getAttendeeid(), LocalDate.now(), student.getAcademicyear())
 						.orElse(studentDailyAttendanceRepository.save(student));
-				if(studentSingle != null) {
+				if (studentSingle != null) {
 					result &= true;
 				}
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -403,7 +411,7 @@ public class AttendanceDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 			
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return mapStudentAttendance;
 	}
@@ -429,8 +437,9 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
 	@Transactional
@@ -448,7 +457,7 @@ public class AttendanceDAO {
 			log.debug("column " + e);
 			e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return staffDailyAttendance;
 	}
@@ -470,8 +479,9 @@ public class AttendanceDAO {
 			log.debug("error "+e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
 	@Transactional
@@ -485,7 +495,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return staffDailyAttendance;
 	}
@@ -514,7 +524,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return result;
 	}
@@ -536,7 +546,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return mapStaffAttendance;
 		
@@ -557,7 +567,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 	}
 
@@ -571,7 +581,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return studentdailyattendance;
 	}
@@ -586,7 +596,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return studentdailyattendance;
 	}
@@ -601,7 +611,7 @@ public class AttendanceDAO {
             log.error(e.getMessage(), e);
             e.printStackTrace();
 
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 		return attendance;
 	}

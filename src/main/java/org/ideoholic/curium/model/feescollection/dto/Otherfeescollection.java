@@ -66,7 +66,7 @@ public class Otherfeescollection implements java.io.Serializable {
 	
 	public Integer fetchSfsid() {
 		if (otherFeesStructure != null) {
-			return otherFeesStructure.getSfsid();
+			return otherFeesStructure.fetchSfsid();
 		}
 		return 0;
 	}

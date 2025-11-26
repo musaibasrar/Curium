@@ -749,7 +749,7 @@ public class HrService {
 			result.setDeductionsMap(deductionsMap);
 			result.setTotalEarnings(totalEarnings);
 			result.setTotalDeductions(totalDeductions);
-			result.setNetPay(String.valueOf(processSalaryDetails.getNetpayment()));
+			result.setNetPay(processSalaryDetails != null ? String.valueOf(processSalaryDetails.getNetpayment()) : "ZERO");
 			result.setSuccess(true);
 		}
 		return result;

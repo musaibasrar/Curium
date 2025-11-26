@@ -1,22 +1,15 @@
 package org.ideoholic.curium.model.appointment.dao;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
-import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.repositories.AppointmentRepository;
 import org.ideoholic.curium.util.DateUtil;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
-import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +17,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -66,24 +60,22 @@ public class AppointmentDAO {
 	}
 
 	@Transactional
-	public List<Appointment> readListOfObjectsPagination(int offset,
-														 int noOfRecords, int branchId) {
+	public List<Appointment> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
 
-		List<Appointment> results = new ArrayList<Appointment>();
-
+		List<Appointment> results = new ArrayList<>();
 		try {
 
 			int pageNumber = (noOfRecords > 0) ? offset / noOfRecords : 0;
 			Pageable pageable = PageRequest.of(pageNumber, noOfRecords, Sort.by(Sort.Direction.DESC, "id"));
 			Page<Appointment> page = appointmentRepo.findByBranchidOrderByIdDesc(branchId, pageable);
-			return page.getContent();
+			results = page.getContent();
 
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
-
+		return results;
 	}
 
 	@Transactional
@@ -97,7 +89,7 @@ public class AppointmentDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return noOfRecords;
@@ -115,7 +107,7 @@ public class AppointmentDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return noOfRecords;
@@ -125,7 +117,7 @@ public class AppointmentDAO {
 	@Transactional
 	public boolean completeAppointments(List<Integer> appointmentIdsList) {
 
-		boolean result;
+		boolean result = false;
 
 		try {
 
@@ -142,7 +134,7 @@ public class AppointmentDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -162,7 +154,7 @@ public class AppointmentDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return appointments;
 	}
@@ -180,7 +172,7 @@ public class AppointmentDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return noOfRecords;
@@ -199,7 +191,7 @@ public class AppointmentDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return noOfRecords;
@@ -217,7 +209,7 @@ public class AppointmentDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return noOfRecords;
@@ -235,7 +227,7 @@ public class AppointmentDAO {
 
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return noOfRecords;
 	}
@@ -253,7 +245,7 @@ public class AppointmentDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return noOfRecords;
@@ -273,7 +265,7 @@ public class AppointmentDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return results;
@@ -304,7 +296,7 @@ public class AppointmentDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return result;

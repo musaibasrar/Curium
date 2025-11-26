@@ -9,6 +9,7 @@ import org.ideoholic.curium.repositories.YearRepository;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +34,7 @@ public class YearDAO {
 		} catch (Exception hibernateException) {
              log.error(hibernateException.getMessage(), hibernateException);
 	            hibernateException.printStackTrace();
-	            throw hibernateException;
+	            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		} 
 		
 		return error;
@@ -51,7 +52,7 @@ public class YearDAO {
 		} catch (Exception hibernateException) { 
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		} 
 		return currentacademicyear;
 	}

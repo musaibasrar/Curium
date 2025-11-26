@@ -1,25 +1,20 @@
 package org.ideoholic.curium.model.enquiry.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
-import org.ideoholic.curium.model.enquiry.dto.Enquiry;
-import org.ideoholic.curium.repositories.EnquiryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
-import org.ideoholic.curium.model.diary.dto.Diary;
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.enquiry.dto.AdmissionEnquiry;
 import org.ideoholic.curium.model.enquiry.dto.Enquiry;
+import org.ideoholic.curium.repositories.EnquiryRepository;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +33,7 @@ public class EnquiryDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 	

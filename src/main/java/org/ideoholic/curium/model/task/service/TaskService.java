@@ -154,7 +154,7 @@ public class TaskService {
 		String[] QueryIds = request.getParameterValues("queryids");
 		int userId = Integer.parseInt(httpSession.getAttribute("userloginid").toString());
 		List<Integer> QueryIdsList = new ArrayList<Integer>();
-		List<JobQuery> result = new ArrayList<JobQuery>();;
+		List<JobQuery> result = new ArrayList<JobQuery>();
 		
 		if(QueryIds!=null) {
 			for (String ids : QueryIds) {

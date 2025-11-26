@@ -25,6 +25,7 @@ import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -70,21 +71,21 @@ public class AccountDAO {
 			result = true;
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
 
 	@Transactional
 	public Financialaccountingyear getCurrentFinancialYear(int branchId) {
-		Financialaccountingyear financialYear;
+		Financialaccountingyear financialYear = new Financialaccountingyear();
 		try{
 			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return financialYear;
@@ -92,13 +93,13 @@ public class AccountDAO {
 
 	@Transactional
 	public List<Accountgroupmaster> getListAccountGroupMaster(int branchId) {
-		List<Accountgroupmaster> accountGroupMaster;
+		List<Accountgroupmaster> accountGroupMaster = new ArrayList<>();
 		try{
 			accountGroupMaster = accountGroupMasterRepo.findAll();
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return accountGroupMaster;
@@ -107,7 +108,7 @@ public class AccountDAO {
 	@Transactional
 	public List<Accountsubgroupmaster> getListAccountSubGroupMaster(int accountGroupMasterId, int branchId) {
 		
-		List<Accountsubgroupmaster> accountSubGroupMaster;
+		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<>();
 		try{
 			// accountSubGroupMaster = session.createQuery("from Accountsubgroupmaster where accountgroupid = '"+accountGroupMasterId+"' and branchid ="+branchId).list();
 			Accountgroupmaster accountGroupMaster= accountGroupMasterRepo.findById(accountGroupMasterId).orElse(null);
@@ -115,7 +116,7 @@ public class AccountDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return accountSubGroupMaster;
@@ -128,7 +129,7 @@ public class AccountDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountSubGroupMaster;
 	}
@@ -142,8 +143,8 @@ public class AccountDAO {
 			result = "true";
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 		
@@ -158,8 +159,8 @@ public class AccountDAO {
 			financialYear = finAccountRepo.findByActiveAndBranchid("yes", branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return financialYear;
@@ -173,22 +174,22 @@ public class AccountDAO {
 			result = "true";
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
 
 	
 	public List<Accountdetailsbalance> getAccountdetailsbalanceExBC(List<Integer> accountIds, int branchId) {
-		List<Accountdetailsbalance> accountDetails;
+		List<Accountdetailsbalance> accountDetails = new ArrayList<>();
 		try{
 			// session.createQuery("from Accountdetailsbalance as accdetails where accdetails.accountDetails.accountGroupMaster.accountgroupid IN (:accountIds) and branchid="+branchId);
 			accountDetails = accountDetailsBalanceRepo.findAllByBranchIdAndAccountIdsIn(branchId, accountIds);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return accountDetails;
@@ -204,8 +205,8 @@ public class AccountDAO {
 			accountDetails = accountDetailsBalanceRepo.findByBranchid(branchId);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 		return accountDetails;
@@ -213,7 +214,7 @@ public class AccountDAO {
 	
 	@Transactional
 	public boolean deleteMultipleAccounts(List<Integer> balanceIds, List<Integer> accountdetailsIds) {
-		boolean result;
+		boolean result = false;
 		try{
 			// session.createQuery("delete from Accountdetailsbalance where accountdetailsbalanceid IN (:balanceids)");
 			accountDetailsBalanceRepo.deleteAllById(balanceIds);
@@ -223,7 +224,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -237,7 +238,7 @@ public class AccountDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -254,7 +255,7 @@ public class AccountDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -278,7 +279,7 @@ public class AccountDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return accountDetailsBalance;
@@ -296,7 +297,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 	}
@@ -312,7 +313,7 @@ public class AccountDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 		}
 		return accountDetails;
@@ -330,7 +331,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}	
 		return voucherEntrytransactions;
 	}
@@ -344,7 +345,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}	
 		return voucherEntrytransactions;
 	}
@@ -361,7 +362,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}	
 		return voucherEntrytransactions;
 	}
@@ -377,7 +378,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountName;
 	}
@@ -392,7 +393,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -409,7 +410,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return result;
@@ -425,7 +426,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return voucherTransactions;
 	}
@@ -445,7 +446,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -461,7 +462,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return result;
@@ -475,7 +476,7 @@ public class AccountDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountDetails;
 	}
@@ -488,8 +489,8 @@ public class AccountDAO {
 			accountDetails = accountDetailsRepo.findAccountDetails(accountName, accountCode, branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountDetails;
 	}
@@ -501,8 +502,8 @@ public class AccountDAO {
 			accountDetails = accountDetailsRepo.findByBranchidOrderByAccountcodeAsc(branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountDetails;
 	}
@@ -517,8 +518,8 @@ public class AccountDAO {
 			accountSubGroupMaster = accountssgroupmasterRepository.findBySubgroupmasteridAndBranchid(accountSubGroupMasterId, branchId);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return accountSubGroupMaster;
@@ -530,8 +531,8 @@ public class AccountDAO {
 			accountssgroupmasterRepository.save(accountSSGroupMaster);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountSSGroupMaster;
 	}
@@ -546,8 +547,8 @@ public class AccountDAO {
 			accountDetails = accountDetailsRepo.findByBranchid(branchId);
 		}catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountDetails;
 	}
@@ -561,8 +562,8 @@ public class AccountDAO {
 			accountDetails =  accountDetailsRepo.findIncomeAndExpenseAccountsByBranchId(branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return accountDetails;
 	}
@@ -577,9 +578,9 @@ public class AccountDAO {
 			voucherTransactions = voucherEntryTransactionsRepo.findByNarrationLike(supplierreferenceno);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;		
-			}
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
 		return voucherTransactions;
 	}
 
@@ -594,9 +595,8 @@ public class AccountDAO {
 			voucherEntrytransactions = voucherEntryTransactionsRepo.findByAllVoucherEntryTransactionsBetweenDates(fromdate,todate,branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();;
-			throw hibernateException;
-
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return voucherEntrytransactions;
 	}

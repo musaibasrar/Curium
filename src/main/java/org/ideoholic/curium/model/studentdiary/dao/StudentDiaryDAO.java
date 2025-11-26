@@ -6,17 +6,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiary;
 import org.ideoholic.curium.model.studentdiary.dto.StudentDiaryProjection;
 import org.ideoholic.curium.repositories.StudentDiaryRepository;
-import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,7 +33,7 @@ public class StudentDiaryDAO {
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } 
 		 return diary;
 	}
@@ -51,7 +48,7 @@ public class StudentDiaryDAO {
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;       
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();       
         }
         return results;
 	}
@@ -66,7 +63,7 @@ public class StudentDiaryDAO {
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;       
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();       
         }
         return results;
 	}
@@ -81,7 +78,7 @@ public class StudentDiaryDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;   
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();   
 
 		} 
 		return noOfRecords;
@@ -96,7 +93,7 @@ public class StudentDiaryDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return noOfRecords;
 	}
@@ -109,7 +106,7 @@ public class StudentDiaryDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -123,7 +120,7 @@ public class StudentDiaryDAO {
 		}  catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return diary;
 	}
