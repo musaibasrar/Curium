@@ -28,6 +28,7 @@ import org.ideoholic.curium.util.QueryUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -59,7 +60,7 @@ public class FeesCategoryDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -72,7 +73,7 @@ public class FeesCategoryDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return feescategory;
 	}
@@ -86,7 +87,7 @@ public class FeesCategoryDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 	}
@@ -123,7 +124,7 @@ public class FeesCategoryDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException; 
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly(); 
 		}
 	}
 
@@ -169,7 +170,7 @@ public class FeesCategoryDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -229,7 +230,7 @@ public class FeesCategoryDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 	
@@ -243,7 +244,7 @@ public class FeesCategoryDAO {
         } catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } 
         return results;
 	}
@@ -255,7 +256,7 @@ public class FeesCategoryDAO {
         } catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } 
 		 return ofeescategory;
 	}
@@ -269,7 +270,7 @@ public class FeesCategoryDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 	}
@@ -284,7 +285,7 @@ public class FeesCategoryDAO {
 		}  catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -311,7 +312,7 @@ public class FeesCategoryDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -325,7 +326,7 @@ public class FeesCategoryDAO {
         }catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } 
         return results;
 	}
@@ -341,7 +342,7 @@ public class FeesCategoryDAO {
         } catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         } 
 		 return result;
 	}
@@ -361,7 +362,7 @@ public class FeesCategoryDAO {
 		}  catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 	

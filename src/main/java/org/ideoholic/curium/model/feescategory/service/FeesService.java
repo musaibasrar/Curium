@@ -254,7 +254,7 @@ public class FeesService {
                                   List<Studentfeesstructure> sfs = studentDetailsDao.getStudentFeesStructureDetails(Integer.valueOf(test[0]));
                                   
                           		int drFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchid));
-                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));;
+                          		int crAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchid));
 
                           		VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 
@@ -363,7 +363,7 @@ public class FeesService {
                             BigDecimal grandTotalConcessionApply = new BigDecimal(con.getConcession());
                             if(grandTotalConcessionApply.compareTo(BigDecimal.ZERO)==1) {
                     		int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
-                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));;
+                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
                     		
                     		VoucherEntrytransactions transactionsApply = new VoucherEntrytransactions();
                     		
@@ -566,7 +566,7 @@ public class FeesService {
                             BigDecimal grandTotalConcessionApply = new BigDecimal(con.getConcession());
                             if(grandTotalConcessionApply.compareTo(BigDecimal.ZERO)==1) {
                     		int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
-                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));;
+                    		int drAccount = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
                     		
                     		VoucherEntrytransactions transactionsApply = new VoucherEntrytransactions();
                     		

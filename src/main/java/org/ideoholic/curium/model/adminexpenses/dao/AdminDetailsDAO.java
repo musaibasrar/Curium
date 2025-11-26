@@ -5,15 +5,12 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
 import org.ideoholic.curium.repositories.AdminExpensesRepository;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,7 +49,7 @@ public class AdminDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -71,7 +68,7 @@ public class AdminDetailsDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 	}
@@ -89,7 +86,7 @@ public class AdminDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
             
             hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
 
         return adminExpenses;
@@ -107,7 +104,7 @@ public class AdminDetailsDAO {
 				log.error(hibernateException.getMessage(), hibernateException);
 				
 				hibernateException.printStackTrace();
-				throw hibernateException;
+				TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 
 			}
 			return results;
@@ -130,7 +127,7 @@ public class AdminDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-	        throw hibernateException;
+	        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 	}
@@ -149,7 +146,7 @@ public class AdminDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 
 	}

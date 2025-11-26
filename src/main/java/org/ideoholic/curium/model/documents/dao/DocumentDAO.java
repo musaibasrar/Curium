@@ -12,6 +12,7 @@ import org.ideoholic.curium.repositories.StudyCertificateRepository;
 import org.ideoholic.curium.repositories.TransferCertificateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -34,7 +35,7 @@ public class DocumentDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return status;
 	}
@@ -49,7 +50,7 @@ public class DocumentDAO {
 		}  catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return tc;
 	}
@@ -62,7 +63,7 @@ public class DocumentDAO {
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return tc;
 	}
@@ -74,7 +75,7 @@ public class DocumentDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return status;
 	}
@@ -88,7 +89,7 @@ public class DocumentDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return sc;
 	}
@@ -105,7 +106,7 @@ public class DocumentDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return sc;
 

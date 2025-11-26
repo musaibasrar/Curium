@@ -532,7 +532,7 @@ public class EmployeeService {
 	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
 	           if (teacherDetails != null) {
-				   result.getResultParams().put("staffId"+ i,  teacherDetails.getTeacherexternalid());;
+				   result.getResultParams().put("staffId"+ i,  teacherDetails.getTeacherexternalid());
 				   result.getResultParams().put("teachername" + i , teacherDetails.getTeachername());
 				   result.getResultParams().put("guardian" + i , teacherDetails.getRemarks());
 				   result.getResultParams().put("contactnumber" + i , teacherDetails.getContactnumber());

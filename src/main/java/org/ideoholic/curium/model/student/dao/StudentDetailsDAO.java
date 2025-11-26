@@ -600,7 +600,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return cardDetailsList;
 	}
@@ -617,7 +617,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -634,7 +634,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -668,7 +668,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -685,7 +685,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentFeesStructure;
 	}
@@ -704,7 +704,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -721,7 +721,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 			
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -738,7 +738,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 			
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return detailsList;
 	}
@@ -756,7 +756,7 @@ public class StudentDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return student;
 	}

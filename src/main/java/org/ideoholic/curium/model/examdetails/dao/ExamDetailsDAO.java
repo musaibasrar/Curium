@@ -11,6 +11,7 @@ import org.ideoholic.curium.repositories.ExamScheduleRepository;
 import org.ideoholic.curium.repositories.ExamsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -33,7 +34,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return exams;
 	}
@@ -48,7 +49,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -61,7 +62,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -76,7 +77,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return false;
 	}
@@ -92,7 +93,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}
@@ -107,7 +108,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	}
 
@@ -121,7 +122,7 @@ public class ExamDetailsDAO {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
 			
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		
 		return listExamSchedule;
@@ -138,7 +139,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return exam;
 	}
@@ -154,7 +155,7 @@ public class ExamDetailsDAO {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
 
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return results;
 	}

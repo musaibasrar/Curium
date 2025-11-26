@@ -20,6 +20,7 @@ import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -100,7 +101,7 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -114,21 +115,23 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
 
     @Transactional
     public List<Feescollection> getFeesForTheCurrentYear(long id, String currentAcademicYear) {
+    	List<Feescollection> result = new ArrayList<>();
         try {
         	// session.createQuery("From Feescollection where sid='"+id+"' and academicyear = '"+currentAcademicYear+"'").list();
-            return feesCollectionRepository.findByStudent_SidAndAcademicyear(id, currentAcademicYear);
+        	result =  feesCollectionRepository.findByStudent_SidAndAcademicyear(id, currentAcademicYear);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -139,57 +142,65 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
     @Transactional
     public Receiptinfo getReceiptInfoDetails(Integer receiptNumber) {
+    	Receiptinfo result = new Receiptinfo();
         try {
         	// session.createQuery("from Receiptinfo where receiptnumber = '"+receiptNumber+"' ");
-            return receiptinfoRepository.findById(receiptNumber).orElse(null);
+        	result = receiptinfoRepository.findById(receiptNumber).orElse(new Receiptinfo());
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Receiptinfo> getReceiptDetailsPerStudent(Integer id, String currentacademicyear) {
+    	List<Receiptinfo> result = new ArrayList<>();
         try {
         	// session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-            return receiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
+        	result = receiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Feescollection> getFeesCollectionDetails(int receiptId) {
+    	List<Feescollection> result = new ArrayList<>();
         try {
         	// session.createQuery("From Feescollection where receiptnumber="+receiptId).list();
-            return feesCollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
+        	result = feesCollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Studentfeesstructure> getStudentsFeesStructure(List<Integer> studentids, String currentYear, String searchCriteria) {
+    	List<Studentfeesstructure> result = new ArrayList<>();
         try {
             // session.createQuery("from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'");
         	String finalQuery = "from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'";
-            return queryUtil.runGivenQuery(finalQuery, Studentfeesstructure.class);
+        	result = queryUtil.runGivenQuery(finalQuery, Studentfeesstructure.class);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -244,7 +255,7 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -258,69 +269,79 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
 
     @Transactional
     public Otherreceiptinfo getOtherReceiptInfoDetails(Integer receiptNumber) {
+    	Otherreceiptinfo result = new Otherreceiptinfo();
         try {
         	// session.createQuery("from Otherreceiptinfo where receiptnumber = '"+receiptNumber+"' ");
-            return otherreceiptinfoRepository.findById(receiptNumber).orElse(null);
+        	result = otherreceiptinfoRepository.findById(receiptNumber).orElse(null);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Otherreceiptinfo> getOtherReceiptDetailsPerStudent(long id, String currentacademicyear) {
+    	List<Otherreceiptinfo> result = new ArrayList<>();
         try {
         	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-            return otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
+        	result = otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Otherfeescollection> getOtherFeesCollectionDetails(int receiptId) {
+    	List<Otherfeescollection> result = new ArrayList<>();
         try {
         	// session.createQuery("From Otherfeescollection where receiptnumber="+receiptId).list();
-            return otherfeescollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
+        	result = otherfeescollectionRepository.findByReceiptInfo_Receiptnumber(receiptId);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(long id, String currentacademicyear) {
+    	List<Otherreceiptinfo> result = new ArrayList<>();
         try {
         	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-            return otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
+        	result = otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public Studentfeesstructure getStudentFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
+    	Studentfeesstructure result = null;
         try {
         	// session.createQuery("from Studentfeesstructure sfs where sfs.sid="+sid+" and sfs.Feescategory.idfeescategory="+idFeesCategory+" and sfs.academicyear = '"+currentAcademicYear+"'");
-            return studentfeesstructureRepository.findByStudent_SidAndFeescategory_IdfeescategoryAndAcademicyear(Integer.parseInt(sid), Integer.parseInt(idFeesCategory), currentAcademicYear);
+        	result = studentfeesstructureRepository.findByStudent_SidAndFeescategory_IdfeescategoryAndAcademicyear(Integer.parseInt(sid), Integer.parseInt(idFeesCategory), currentAcademicYear);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -367,7 +388,7 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -398,21 +419,23 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
 
     @Transactional
     public Studentotherfeesstructure getStudentOtherFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
+    	Studentotherfeesstructure result = new Studentotherfeesstructure();
         try {
             return studentotherfeesstructureRepository.findByStudent_SidAndOtherfeescategory_IdfeescategoryAndAcademicyear(
                 Integer.parseInt(sid), Integer.parseInt(idFeesCategory), currentAcademicYear);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -432,7 +455,7 @@ public class feesCollectionDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }

@@ -13,6 +13,7 @@ import org.ideoholic.curium.repositories.ParentsRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,14 +33,14 @@ public class PrintIdsDAO {
 
 	@Transactional
 	public Parents printMultipleIds(String id) {
-		Parents parentsDetails;
+		Parents parentsDetails = null;
 		try {
 			int sid = Integer.valueOf(id);
 			parentsDetails = parentsRepository.findByStudentSid(sid).orElse(new Parents());
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-			throw hibernateException;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return parentsDetails;
 	}
@@ -58,13 +59,13 @@ public class PrintIdsDAO {
 	                    cardRepo.save(existingCard);
 	                }
 	            }
-	            result = true;;
+	            result = true;
 	        }
 			
 		catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
@@ -78,7 +79,7 @@ public Teacher printMultipleIdsEmployee(String id) {
      } catch (Exception hibernateException) { 
      	log.error(hibernateException.getMessage(), hibernateException);
         hibernateException.printStackTrace();
-        throw hibernateException;
+        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
      } 	      
      return teacherDetails;
 }

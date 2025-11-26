@@ -27,6 +27,7 @@ import org.ideoholic.curium.repositories.ProcessSalaryDetailsHeadsRepository;
 import org.ideoholic.curium.repositories.ProcessSalaryDetailsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -75,7 +76,7 @@ public class HrDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return list;
     }
@@ -90,8 +91,9 @@ public class HrDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
 
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -104,8 +106,9 @@ public class HrDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
 
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -120,8 +123,9 @@ public class HrDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
 
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -134,7 +138,7 @@ public class HrDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
 
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return leaveDetailsList;
 
@@ -150,20 +154,23 @@ public class HrDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
 
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
     public List<Payhead> getPayHeadList(String academicYear, int branchId) {
+    	List<Payhead> result = new ArrayList<>();
         try {
             // session.createQuery("from Payhead where academicyear='"+academicYear+"' and branchid="+branchId).list();
             return payHeadRepository.findByAcademicyearAndBranchid(academicYear, branchId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -177,8 +184,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -192,8 +200,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -204,20 +213,22 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
     @Transactional
     public List<Pf> pfSettings(int branchId) {
+    	List<Pf> result = new ArrayList<>();
         try {
             // session.createQuery("From Pf where branchid = "+branchId+" order by date Desc").list();
             return pfRepository.findByBranchidOrderByDateDesc(branchId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -228,7 +239,7 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
     }
 
@@ -241,20 +252,23 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
     public List<Payadvancesalary> salaryApprovalDispaly(int branchId) {
+    	List<Payadvancesalary> result = new ArrayList<>();
         try {
             // session.createQuery("from Payadvancesalary where status='apply' and branchid = "+branchId).list();
             return payAdvanceSalaryRepository.findByStatusAndBranchid("apply", branchId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -273,8 +287,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -286,12 +301,14 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
     public List<Payadvancesalary> salaryIssue(int branchId) {
+    	List<Payadvancesalary> result = new ArrayList<>();
         try {
             // session.createQuery("from Payadvancesalary where status='approved' or status='rejected' and branchid="+branchId).list();
             List<String> statuses = new ArrayList<>();
@@ -301,8 +318,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -314,20 +332,23 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
     public List<Leaveapplication> leaveApprovals(String currentAcademicYear, int branchId) {
+    	List<Leaveapplication> result = new ArrayList<>();
         try {
             // session.createQuery("from Leaveapplication where academicyear='"+currentAcademicYear+"' and branchid="+branchId).list();
             return leaveApplicationRepository.findByAcademicyearAndBranchid(currentAcademicYear, branchId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -344,8 +365,9 @@ public class HrDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
     @Transactional
@@ -362,8 +384,9 @@ public class HrDAO {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
-			throw e;
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return false;
 	}
 
     @Transactional
@@ -387,20 +410,23 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
     public List<Payhead> getPayHeadListDynamic(String payHeadType, String academicYear, int branchId) {
+    	List<Payhead> result = new ArrayList<>();
         try {
             // session.createQuery("from Payhead where payheadtype='"+payHeadType+"' and academicyear='"+academicYear+"' and branchid="+branchId).list();
             return payHeadRepository.findByPayheadtypeAndAcademicyearAndBranchid(payHeadType, academicYear, branchId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -412,32 +438,37 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return null;
     }
 
     @Transactional
     public List<Payheadstaffdetails> getPayHeadStaff(int teacherid, String academicYear) {
+    	List<Payheadstaffdetails> result = new ArrayList<>();
         try {
             // session.createQuery("from Payheadstaffdetails where idteacher = "+teacherid+" and academicyear='"+academicYear+"'").list();
             return payHeadStaffDetailsRepository.findByTeacherTidAndAcademicyear(teacherid, academicYear);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Processsalarydetails> issueStaffSalary(String academicYear, int branchId) {
+    	List<Processsalarydetails> result = new ArrayList<>();
         try {
             // session.createQuery("from Processsalarydetails where academicyear='"+academicYear+"' and branchid="+branchId).list();
             return processSalaryDetailsRepository.findByAcademicyearAndBranchid(academicYear, branchId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -449,20 +480,23 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return null;
     }
 
     @Transactional
     public List<Processsalarydetailsheads> getProcessSalaryHeads(int processId) {
+    	List<Processsalarydetailsheads> result = new ArrayList<>();
         try {
             // session.createQuery("from Processsalarydetailsheads where idprocesssalary="+processId+"").list();
             return processSalaryDetailsHeadsRepository.findByProcesssalarydetailsIdprocesssalarydetails(processId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -474,32 +508,37 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return null;
     }
 
     @Transactional
     public List<Payheadstaffdetails> getStaffDetails(int staffId, String academicYear) {
+    	List<Payheadstaffdetails> result = new ArrayList<>();
         try {
             // session.createQuery("from Payheadstaffdetails where idteacher="+staffId+" and academicyear='"+academicYear+"'").list();
             return payHeadStaffDetailsRepository.findByTeacherTidAndAcademicyear(staffId, academicYear);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
     public List<Processsalarydetails> getStaffinfo(int teacherId) {
+    	List<Processsalarydetails> result = new ArrayList<>();
         try {
             // session.createQuery("from Processsalarydetails where teacherid="+teacherId+"").list();
             return processSalaryDetailsRepository.findByTeacherTid(teacherId);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return result;
     }
 
     @Transactional
@@ -511,8 +550,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -524,8 +564,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return null;
     }
 
     @Transactional
@@ -542,8 +583,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -560,8 +602,9 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 
     @Transactional
@@ -575,7 +618,8 @@ public class HrDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 }

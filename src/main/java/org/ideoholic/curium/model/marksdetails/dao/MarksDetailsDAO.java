@@ -33,10 +33,11 @@ public class MarksDetailsDAO {
 
     @Transactional
     public String addMarks(List<Marks> marksList) {
-        String output = "success";
+        String output = "failure";
         try {
             // session.save(marks);
             marksRepository.saveAll(marksList);
+            output = "success";
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -55,7 +56,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -69,7 +70,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -84,7 +85,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -100,7 +101,7 @@ public class MarksDetailsDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             result = false;
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -114,7 +115,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -128,7 +129,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -142,7 +143,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -166,7 +167,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -180,7 +181,7 @@ public class MarksDetailsDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return ex;
     }
@@ -194,7 +195,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -208,7 +209,7 @@ public class MarksDetailsDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return exmaRankList;
     }
@@ -228,7 +229,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return result;
     }
@@ -242,7 +243,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -256,7 +257,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -270,7 +271,7 @@ public class MarksDetailsDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return results;
     }
@@ -291,7 +292,7 @@ public class MarksDetailsDAO {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             output = "Duplicate";
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
         return output;
     }
@@ -312,7 +313,8 @@ public class MarksDetailsDAO {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             log.info(e.getLocalizedMessage(), e);
-            throw e;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
+        return false;
     }
 }

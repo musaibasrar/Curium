@@ -641,7 +641,7 @@ public class StudentServiceArchive {
                     //Pass J.V. : credit the Fees as income & debit the cash
 
                     int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-                    int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));;
+                    int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
 
                     VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 

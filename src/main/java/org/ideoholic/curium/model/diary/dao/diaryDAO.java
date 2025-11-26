@@ -6,17 +6,14 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.diary.dto.Diary;
 import org.ideoholic.curium.repositories.DiaryRepository;
 import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.QueryUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Component;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,20 +23,17 @@ public class diaryDAO {
 	@Autowired
     private DiaryRepository diaryRepo;
 
-    @Autowired
-    private QueryUtil queryUtil;
-    
     @Transactional
 	public Diary create(Diary diary) {
 		try {
 			diaryRepo.save(diary);
-            
-        } catch (Exception hibernateException) { 
-        	log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            throw hibernateException;
-        } 
-		 return diary;
+
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return diary;
 	}
     @Transactional
 	public  List<Diary>  readListOfObjects(int offset, int noOfRecords, int branchId) {
@@ -52,7 +46,7 @@ public class diaryDAO {
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;       
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();       
             } 
         return results;
 	}
@@ -65,23 +59,22 @@ public class diaryDAO {
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;       
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();       
         }
         return results;
 	}
 	
 	@Transactional
 	public int getNoOfRecords(int branchId) {
-		List<Diary> results = new ArrayList<Diary>();
 		Long noOfRecords = 0L;
 		try {
 			noOfRecords = diaryRepo.countByBranchid(branchId);
-		} catch (Exception hibernateException) { 
+		} catch (Exception hibernateException) {
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;   
-
-		} 		return noOfRecords.intValue();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return noOfRecords.intValue();
 	}
 
 	@Transactional
@@ -93,7 +86,7 @@ public class diaryDAO {
 		}catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 	
 	}
@@ -108,7 +101,7 @@ public class diaryDAO {
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-            throw hibernateException;
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}finally {
 			HibernateUtil.closeSession();
 		 }
