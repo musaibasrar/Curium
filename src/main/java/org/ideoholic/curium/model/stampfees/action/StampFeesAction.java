@@ -121,4 +121,10 @@ public class StampFeesAction {
 		return "stampfeesallstudents";
 	}
 	
+	@PostMapping("/applyFeesAll")
+	public String applyFeesAll() {
+		stampFeesActionAdapter.addFeesStampAll();
+		return "feesstampsuccess";
+	}
+	
 }
