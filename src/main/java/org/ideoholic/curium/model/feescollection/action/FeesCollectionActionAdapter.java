@@ -456,9 +456,9 @@ public class FeesCollectionActionAdapter {
 
     public PreviewResponseDto preview() {
         PreviewDto dto = new PreviewDto();
-        dto.setSid(Long.parseLong(request.getParameter("sid")));
+        dto.setSid(Integer.parseInt(request.getParameter("sid")));
         dto.setId(Integer.parseInt(request.getParameter("id")));
-        dto.setIdFees(Long.parseLong(request.getParameter("id")));
+        dto.setIdFees(Integer.parseInt(request.getParameter("id")));
 
         PreviewResponseDto result = feesCollectionService.preview(dto);
         httpSession.setAttribute("feescollection", result.getFeesCollections());

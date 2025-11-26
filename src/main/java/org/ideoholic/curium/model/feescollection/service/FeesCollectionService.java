@@ -171,9 +171,9 @@ public class FeesCollectionService {
 
 	public PreviewResponseDto preview(PreviewDto dto) {
 		PreviewResponseDto result = new PreviewResponseDto();
-		 long sid=dto.getSid();
+		 int sid=dto.getSid();
 		 int id=dto.getId();
-		 long idFees=dto.getIdFees();
+		 int idFees=dto.getIdFees();
 		    List<Feescollection> list = feesCollectionDAO.readListOfObject(id);
 
 				result.setFeesCollections(list);
@@ -547,7 +547,7 @@ public class FeesCollectionService {
 		DetailsResponseDto result = DetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
-			long sid=DataUtil.parseLong(sId);
+			int sid=DataUtil.parseInt(sId);
 			int receiptNo = DataUtil.parseInt(strReceiptNo);
 			 
 			Receiptinfo rinfo = feesCollectionDAO.getReceiptInfoDetails(receiptNo);
@@ -917,16 +917,14 @@ public class FeesCollectionService {
 		String Currentmonth = null;        
 		
 		if(strBranchId!=null){
-		
-
-	        if(branchId!=null) {
-	        	String[] branchIdName = branchId.split(":");
-	        	idBranch = Integer.parseInt(branchIdName[0]);
-				result.setBranchIdName(branchIdName[1]);
+			if (branchId != null) {
+				String[] branchIdName = branchId.split(":");
+				idBranch = Integer.parseInt(branchIdName[0]);
+				if (branchIdName.length > 1) result.setBranchIdName(branchIdName[1]);
 				result.setBranchName("Branch Name:");
-	        }else {
-	        	idBranch = Integer.parseInt(strBranchId);
-	        }
+			} else {
+				idBranch = Integer.parseInt(strBranchId);
+			}
 	        
 		String queryMainDaily ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 		String queryMainMonthly ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
@@ -1329,18 +1327,16 @@ public class FeesCollectionService {
 
 	public void otherpreview() {
 
-		 long sid=DataUtil.parseLong(request.getParameter("sid"));	
-		 int id=DataUtil.parseInt(request.getParameter("id"));
-		 long idFees=DataUtil.parseLong(request.getParameter("id"));
+		 Integer sid=DataUtil.parseInt(request.getParameter("sid"));	
+		 Integer id=DataUtil.parseInt(request.getParameter("id"));
+		 Integer idFees=DataUtil.parseInt(request.getParameter("id"));
 		    List<Otherfeescollection> list = feesCollectionDAO.otherreadListOfObject(id);
 				httpSession.setAttribute("feescollection", list);
-				Student student = studentDetailsDao
-						.readUniqueObject(sid);
+				Student student = studentDetailsDao.readUniqueObject(sid);
 				httpSession.setAttribute("student", student);
 				Parents parents = parentsDetailsDao.readUniqueObject(sid);
 				httpSession.setAttribute("parents", parents);
-				Feesdetails feesdetails = new feesDetailsDAO()
-						.readUniqueObject(idFees);
+				Feesdetails feesdetails = new feesDetailsDAO().readUniqueObject(idFees);
 				NumberToWord toWord = new NumberToWord();
 				String grandTotal = "";
 				if(feesdetails.getGrandtotal() != null || !feesdetails.getGrandtotal().equalsIgnoreCase("")){
@@ -1717,7 +1713,7 @@ public class FeesCollectionService {
 		DetailsResponseDto result = DetailsResponseDto.builder().build();
 		
 		if(currentAcademicYear!=null){
-			long sid=DataUtil.parseLong(sId);
+			int sid=DataUtil.parseInt(sId);
 			int receiptNo = DataUtil.parseInt(strReceiptNo);
 			 
 			Otherreceiptinfo rinfo = feesCollectionDAO.getOtherReceiptInfoDetails(receiptNo);

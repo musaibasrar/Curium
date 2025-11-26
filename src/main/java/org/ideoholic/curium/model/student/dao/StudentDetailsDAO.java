@@ -108,13 +108,12 @@ public class StudentDetailsDAO {
 	}
 
 	@Transactional
-	public Student readUniqueObject(long id) {
+	public Student readUniqueObject(Integer id) {
 		Student student = null;
 		try {
 			// original:
 			// Query query = session.createQuery("FROM Student as student WHERE student.sid=" + id);
-			int intId = (int) id;
-			student = studentRepo.findById(intId).orElse(null);
+			student = studentRepo.findById(id).orElse(null);
 		} catch (Exception hibernateException) { 
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error(hibernateException.getMessage(), hibernateException);

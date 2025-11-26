@@ -94,12 +94,11 @@ public class feesDetailsDAO {
         }
 
         @Transactional
-        public Feesdetails readUniqueObject(Long feesDetailsid) {
-        	     int feesDetailsId = feesDetailsid.intValue();
+        public Feesdetails readUniqueObject(Integer feesDetailsid) {
                  Feesdetails feesdetails = new Feesdetails();
                 try {
                 	 // Query query = session.createQuery("From Feesdetails as feesdetails where feesdetails.feesdetailsid=" + feesDetailsid);
-                	feesdetails = feesDetailsRepo.findById(feesDetailsId).orElse(null);
+                	feesdetails = feesDetailsRepo.findById(feesDetailsid).orElse(null);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
