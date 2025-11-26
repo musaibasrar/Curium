@@ -615,34 +615,53 @@ for(Cookie cookie : cookies){
 							
 										<div class="checkbox-container">
 													   <c:forEach items="${classList}" var="classItem">
-    
-														    <c:choose>
-														        <c:when test="${not empty sectionList}">
-														            <c:forEach items="${sectionList}" var="sectionItem">
-														                <c:set var="classSec" value="${classItem}--${sectionItem}" />
-														                <div class="checkbox-item">
-														                    <label>
-														                        <input type="checkbox" name="classteacher"
-														                               value="${classSec}"
-														                               <c:if test="${fn:contains(classteacherList, classSec)}">checked</c:if> />
-														                        ${classSec}
-														                    </label>
-														                </div>
-														            </c:forEach>
-														        </c:when>
-														
-														        <c:otherwise>
-														            <div class="checkbox-item">
-														                <label>
-														                    <input type="checkbox" name="classteacher"
-														                           value="${classItem}"
-														                           <c:if test="${fn:contains(classteacherList, classItem)}">checked</c:if> />
-														                    ${classItem}
-														                </label>
-														            </div>
-														        </c:otherwise>
-														    </c:choose>
-														</c:forEach>
+
+													   	 <c:choose>
+													        <c:when test="${not empty sectionList}">
+													            <c:forEach items="${sectionList}" var="sectionItem">
+													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+													
+													                <!-- reset flag -->
+													                <c:set var="isChecked" value="false" />
+													                <!-- loop through classteacherList to check for exact match -->
+													                <c:forEach items="${classteacherList}" var="item">
+													                    <c:if test="${item eq classSec}">
+													                        <c:set var="isChecked" value="true" />
+													                    </c:if>
+													                </c:forEach>
+													
+													                <div class="checkbox-item">
+													                    <label>
+													                        <input type="checkbox" name="classteacher"
+													                               value="${classSec}"
+													                               <c:if test="${isChecked}">checked</c:if> />
+													                        ${classSec}
+													                    </label>
+													                </div>
+													            </c:forEach>
+													        </c:when>
+													
+													        <c:otherwise>
+													            <!-- reset flag -->
+													            <c:set var="isChecked" value="false" />
+													            <!-- loop through classteacherList to check for exact match -->
+													            <c:forEach items="${classteacherList}" var="item">
+													                <c:if test="${item eq classItem}">
+													                    <c:set var="isChecked" value="true" />
+													                </c:if>
+													            </c:forEach>
+													
+													            <div class="checkbox-item">
+													                <label>
+													                    <input type="checkbox" name="classteacher"
+													                           value="${classItem}"
+													                           <c:if test="${isChecked}">checked</c:if> />
+													                    ${classItem}
+													                </label>
+													            </div>
+													        </c:otherwise>
+													    </c:choose>
+													</c:forEach>
 													</div>
 							</label></td>
 
@@ -652,16 +671,26 @@ for(Cookie cookie : cookies){
 
 							<td width="28%"><label> <div class="checkbox-container">
 													    <c:forEach items="${classList}" var="classItem">
-													    
-													    <c:choose>
+
+													   	 <c:choose>
 													        <c:when test="${not empty sectionList}">
 													            <c:forEach items="${sectionList}" var="sectionItem">
 													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+													
+													                <!-- reset flag -->
+													                <c:set var="isChecked" value="false" />
+													                <!-- loop through classesteachingList to check for exact match -->
+													                <c:forEach items="${classesteachingList}" var="item">
+													                    <c:if test="${item eq classSec}">
+													                        <c:set var="isChecked" value="true" />
+													                    </c:if>
+													                </c:forEach>
+													
 													                <div class="checkbox-item">
 													                    <label>
 													                        <input type="checkbox" name="classesteaching"
 													                               value="${classSec}"
-													                               <c:if test="${fn:contains(classesteachingList, classSec)}">checked</c:if> />
+													                               <c:if test="${isChecked}">checked</c:if> />
 													                        ${classSec}
 													                    </label>
 													                </div>
@@ -669,11 +698,20 @@ for(Cookie cookie : cookies){
 													        </c:when>
 													
 													        <c:otherwise>
+													            <!-- reset flag -->
+													            <c:set var="isChecked" value="false" />
+													            <!-- loop through classesteachingList to check for exact match -->
+													            <c:forEach items="${classesteachingList}" var="item">
+													                <c:if test="${item eq classItem}">
+													                    <c:set var="isChecked" value="true" />
+													                </c:if>
+													            </c:forEach>
+													
 													            <div class="checkbox-item">
 													                <label>
 													                    <input type="checkbox" name="classesteaching"
 													                           value="${classItem}"
-													                           <c:if test="${fn:contains(classesteachingList, classItem)}">checked</c:if> />
+													                           <c:if test="${isChecked}">checked</c:if> />
 													                    ${classItem}
 													                </label>
 													            </div>
