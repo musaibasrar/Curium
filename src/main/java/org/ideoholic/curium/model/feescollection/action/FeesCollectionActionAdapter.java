@@ -133,12 +133,12 @@ public class FeesCollectionActionAdapter {
 
         FeesDetailsResponseDto responseDto = feesCollectionService.getFeesDetails(dto);
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
-        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
-        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
-        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
-        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
-        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
-        httpSession.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
+        request.setAttribute("feesstructure", responseDto.getFeesStructure());
+        request.setAttribute("sumoffees", responseDto.getTotalSum());
+        request.setAttribute("dueamount", responseDto.getDueAmount());
+        request.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        request.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        request.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
 
     }
 
