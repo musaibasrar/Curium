@@ -20,14 +20,13 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Component
 public class PrintIdsDAO {
-	
 
 	@Autowired
 	private ParentsRepository parentsRepository;
-	
+
 	@Autowired
 	private TeacherRepository teacherRepository;
-	
+
 	@Autowired
 	private CardRepository cardRepo;
 
@@ -44,44 +43,44 @@ public class PrintIdsDAO {
 		}
 		return parentsDetails;
 	}
-	
-	@Transactional	
-    public boolean updateCardValidity(List<Card> cardList) {
-		
+
+	@Transactional
+	public boolean updateCardValidity(List<Card> cardList) {
+
 		boolean result = false;
-		 try {
-	            for (Card card : cardList) {
-	            	Optional<Card> cardDetail = cardRepo.findById(card.getSid());
-	                if (cardDetail.isPresent()) {
-	                    Card existingCard = cardDetail.get();
-	                    existingCard.setValidfrom(card.getValidfrom());
-	                    existingCard.setValidto(card.getValidto());
-	                    cardRepo.save(existingCard);
-	                }
-	            }
-	            result = true;
-	        }
-			
-		catch (Exception hibernateException) { 
-        	log.error(hibernateException.getMessage(), hibernateException);
-            hibernateException.printStackTrace();
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		try {
+			for (Card card : cardList) {
+				Optional<Card> cardDetail = cardRepo.findById(card.getSid());
+				if (cardDetail.isPresent()) {
+					Card existingCard = cardDetail.get();
+					existingCard.setValidfrom(card.getValidfrom());
+					existingCard.setValidto(card.getValidto());
+					cardRepo.save(existingCard);
+				}
+			}
+			result = true;
+		}
+
+		catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return result;
 	}
 
-@Transactional
-public Teacher printMultipleIdsEmployee(String id) {
-	Teacher teacherDetails = new Teacher();
-    try {
-                 int sid = Integer.valueOf(id);
-                 teacherDetails = teacherRepository.findById(sid).orElse(null);
-     } catch (Exception hibernateException) { 
-     	log.error(hibernateException.getMessage(), hibernateException);
-        hibernateException.printStackTrace();
-        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-     } 	      
-     return teacherDetails;
-}
+	@Transactional
+	public Teacher printMultipleIdsEmployee(String id) {
+		Teacher teacherDetails = new Teacher();
+		try {
+			int sid = Integer.valueOf(id);
+			teacherDetails = teacherRepository.findById(sid).orElse(null);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return teacherDetails;
+	}
 
 }

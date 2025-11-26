@@ -408,104 +408,110 @@ public class StudentService {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		Map<Receiptinfo,String> receiptNarration = new HashMap<Receiptinfo, String>();
 		try {
-			Integer id = Integer.parseInt(studentId);
+			if (StringUtils.hasLength(studentId)) {
+				Integer id = Integer.parseInt(studentId);
 
-			Parents parents = parentsDetailsDao.readUniqueObject(id);
+				Parents parents = parentsDetailsDao.readUniqueObject(id);
 
-			/*httpSession.setAttribute("studentfromservice",student);
-			httpSession.setAttribute("parentsfromservice",parents);
-			httpSession.setAttribute("idofstudentfromservice",id);*/
+				/*httpSession.setAttribute("studentfromservice",student);
+				httpSession.setAttribute("parentsfromservice",parents);
+				httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = yearDao.showYear();
-			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
+				Currentacademicyear currentYear = yearDao.showYear();
+				result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
-			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
-			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
-			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
-			result.setReceiptInfo(rinfo);
-			for (Receiptinfo receiptinfo : rinfo) {
-				VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
-				String[] rNarration = VoucherEntryTransactions.getNarration().split(":");
-				receiptNarration.put(receiptinfo, rNarration[0]);
-			}
-			result.setReceiptNarrationMap(receiptNarration);
-			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
+				//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
+				//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
+				List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,
+						currentYear.getCurrentacademicyear());
+				result.setReceiptInfo(rinfo);
+				for (Receiptinfo receiptinfo : rinfo) {
+					VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO()
+							.getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
+					String[] rNarration = VoucherEntryTransactions.getNarration().split(":");
+					receiptNarration.put(receiptinfo, rNarration[0]);
+				}
+				result.setReceiptNarrationMap(receiptNarration);
+				List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id,
+						currentYear.getCurrentacademicyear());
 
-			long totalSum = 0l;
-			long totalFineAmount = 0l;
-			long totalMiscAmount = 0l;
-			for (Receiptinfo receiptInfoSingle : rinfo) {
-				totalSum = totalSum + receiptInfoSingle.getTotalamount()-receiptInfoSingle.getFine()-receiptInfoSingle.getMisc();
-				totalFineAmount = receiptInfoSingle.getFine();
-				totalMiscAmount = receiptInfoSingle.getMisc();
-			}
-
-			long totalFeesAmount = 0l;
-			long totalFeesConcession = 0l;
-			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
-				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
-				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
-			}
-
-			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
-			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
-			//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
-			if (parents == null) {
-				result.setSuccess(false);
-			} else {
-				result.setStudent(parents.getStudent());
-				String classStudying = parents.getStudent().getClassstudying();
-				if (!classStudying.equalsIgnoreCase("")) {
-					String[] classParts = classStudying.split("--");
-					result.setClassStudying(classStudying);
-					result.setClassParts(classParts[0]);
-					result.setSecStudying("");
-					if(classParts.length>1) {
-						result.setSecStudying(classParts[1]);
-					}
-
-				} else {
-					result.setClassStudying(classStudying);
-					result.setSecStudying("");
+				long totalSum = 0l;
+				long totalFineAmount = 0l;
+				long totalMiscAmount = 0l;
+				for (Receiptinfo receiptInfoSingle : rinfo) {
+					totalSum = totalSum + receiptInfoSingle.getTotalamount() - receiptInfoSingle.getFine()
+							- receiptInfoSingle.getMisc();
+					totalFineAmount = receiptInfoSingle.getFine();
+					totalMiscAmount = receiptInfoSingle.getMisc();
 				}
 
-				String classAdmitted = parents.getStudent().getClassadmittedin();
+				long totalFeesAmount = 0l;
+				long totalFeesConcession = 0l;
+				for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+					totalFeesAmount = totalFeesAmount + studentfeesstructureSingle.getFeesamount()
+							- studentfeesstructureSingle.getWaiveoff() - studentfeesstructureSingle.getConcession();
+					totalFeesConcession = totalFeesConcession + studentfeesstructureSingle.getConcession();
+				}
+				//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
+				//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
+				//String dueAmount = new feesDetailsDAO().dueAmount(id, currentYear.getCurrentacademicyear());
+				if (parents == null) {
+					result.setSuccess(false);
+				} else {
+					result.setStudent(parents.getStudent());
+					String classStudying = parents.getStudent().getClassstudying();
+					if (!classStudying.equalsIgnoreCase("")) {
+						String[] classParts = classStudying.split("--");
+						result.setClassStudying(classStudying);
+						result.setClassParts(classParts[0]);
+						result.setSecStudying("");
+						if (classParts.length > 1) {
+							result.setSecStudying(classParts[1]);
+						}
 
-				if (!classAdmitted.equalsIgnoreCase("")) {
-
-					String[] classAdmittedParts = classAdmitted.split("--");
-					result.setClassAdm(classAdmittedParts[0]);
-					result.setSecAdm("");
-					if(classAdmittedParts.length>1) {
-						result.setSecAdm(classAdmittedParts[1]);
+					} else {
+						result.setClassStudying(classStudying);
+						result.setSecStudying("");
 					}
 
-				} else {
-					result.setClassAdm(classAdmitted);
-					result.setSecAdm("");
+					String classAdmitted = parents.getStudent().getClassadmittedin();
+
+					if (!classAdmitted.equalsIgnoreCase("")) {
+
+						String[] classAdmittedParts = classAdmitted.split("--");
+						result.setClassAdm(classAdmittedParts[0]);
+						result.setSecAdm("");
+						if (classAdmittedParts.length > 1) {
+							result.setSecAdm(classAdmittedParts[1]);
+						}
+
+					} else {
+						result.setClassAdm(classAdmitted);
+						result.setSecAdm("");
+					}
+
+					// httpSession.setAttribute("feesdetails", feesdetails);
+
+					result.setParents(parents);
+					result.setFeesStructure(feesstructure);
+					result.setTotalSum(totalSum);
+					result.setDueAmount(totalFeesAmount - totalSum);
+					result.setTotalFeesAmount(totalFeesAmount);
+					result.setAcademicPerYear(currentYear.getCurrentacademicyear());
+					result.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
+					result.setTotalFeesConcession(totalFeesConcession);
+					result.setTotalFineAmount(totalFineAmount);
+					result.setTotalMiscAmount(totalMiscAmount);
+					result.setSuccess(true);
 				}
-
-				//httpSession.setAttribute("feesdetails", feesdetails);
-
-				result.setParents(parents);
-				result.setFeesStructure(feesstructure);
-				result.setTotalSum(totalSum);
-				result.setDueAmount(totalFeesAmount-totalSum);
-				result.setTotalFeesAmount(totalFeesAmount);
-				result.setAcademicPerYear(currentYear.getCurrentacademicyear());
-				result.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
-				result.setTotalFeesConcession(totalFeesConcession);
-				result.setTotalFineAmount(totalFineAmount);
-				result.setTotalMiscAmount(totalMiscAmount);
+				ResultResponse classsec = standardService.viewClasses(branchId);
+				result.setClassSec(classsec.getResultList());
 				result.setSuccess(true);
 			}
-			ResultResponse classsec = standardService.viewClasses(branchId);
-			result.setClassSec(classsec.getResultList());
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.setSuccess(false);
 		}
-		result.setSuccess(true);
 		return result;
 	}
 	//code for viewDetailsbySidOfStudent
@@ -593,7 +599,7 @@ public class StudentService {
 	public StudentDetailsResponseDto otherviewDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().build();
 		try {
-			Long id = Long.parseLong(studentId);
+			Integer id = Integer.parseInt(studentId);
 			Student student = studentDetailsDao.readUniqueObject(id);
 			Parents parents = parentsDetailsDao.readUniqueObject(id);
 
@@ -1354,7 +1360,7 @@ public class StudentService {
 	public StudentDetailsResponseDto viewOtherFeesDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
 		try {
-			Long id = Long.parseLong(studentId);
+			Integer id = Integer.parseInt(studentId);
 			Student student = studentDetailsDao.readUniqueObject(id);
 			Parents parents = parentsDetailsDao.readUniqueObject(id);
 

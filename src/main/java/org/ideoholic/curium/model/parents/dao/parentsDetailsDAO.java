@@ -43,7 +43,7 @@ public class parentsDetailsDAO {
      * Read a unique Parents object by student id.
      */
     @Transactional(readOnly = true)
-    public Parents readUniqueObject(long id) {
+    public Parents readUniqueObject(Integer id) {
         Parents parents = new Parents();
         try {
             // Old: Query query = session.createQuery("from Parents as parents where parents.student.sid=" + id);

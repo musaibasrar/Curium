@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class PreviewDto {
-    private Long sid;
+    private Integer sid;
     private Integer id;
-    private Long idFees;
+    private Integer idFees;
 }

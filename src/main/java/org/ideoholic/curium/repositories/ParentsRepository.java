@@ -32,7 +32,7 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
 	Page<Parents> getParentsWithEmailForGivenClass(@Param("classStudying") String classStudying,
 			@Param("branchId") String branchId, Pageable pageable);
 
-	Parents findByStudentSid(@Param("sid") Integer sid);
+	Optional<Parents> findByStudentSid(@Param("sid") Integer sid);
 
 	List<Parents> findByStudentSidIn(List<Integer> ids);
 	
@@ -46,9 +46,6 @@ public interface ParentsRepository extends JpaRepository<Parents, Integer> {
 			+ "AND parents.student.leftout=0 ORDER BY parents.student.name ASC")
 	Page<Parents> findAllActiveParentsByBranchId(Pageable pageable);
 	
-    @Query("FROM Parents p WHERE p.student.sid = :sid")
-    Optional<Parents> findByStudentSid(@Param("sid") long sid);
-
     // Fetch by Student External ID
     @Query("FROM Parents p WHERE p.student.studentexternalid = :externalId")
     Optional<Parents> findByStudentExternalId(@Param("externalId") String externalId);
