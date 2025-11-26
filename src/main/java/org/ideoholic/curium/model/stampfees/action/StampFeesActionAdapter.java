@@ -113,4 +113,17 @@ public class StampFeesActionAdapter {
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		httpSession.setAttribute("searchStudentList", feescategoryResponseDto.getSearchStudentList());
 	}
+
+	public void addFeesStampAll() {
+		StampFeesDto stampFeesDto = new StampFeesDto();
+		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
+		stampFeesDto.setFeesTotalAmount(request.getParameter("feesTotalAmount"));
+		stampFeesDto.setFeesCategoryIds(request.getParameterValues("feesIDS"));
+		stampFeesDto.setFeesAmount(request.getParameterValues("feesFullCat"));
+		stampFeesDto.setConcession(request.getParameterValues("feesConcession"));
+		stampFeesDto.setTotalInstallments(request.getParameterValues("feesCount"));
+		stampFeesDto.setFeesYears(request.getParameterValues("feesYears"));
+		stampFeesService.addFeesStampAll(stampFeesDto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
+		
+	}
 }
