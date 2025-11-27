@@ -64,7 +64,7 @@ public class PrintIdsAction {
 	public String printPreview() {
 
 		printIdsActionAdapter.printMultiple();
-		return "printpreview";
+		return "school/printpreview";
 	}
 	
 	@GetMapping("/generateIdsEmployees")
