@@ -865,4 +865,21 @@ public Student readUniqueStudent(String HQLquery) {
 	 }
     return student;
 }
+
+public List<Student> getStudentsListByIds(List<Integer> sIds) {
+	List<Student> sponseredList = new ArrayList<Student>();
+	try {
+		transaction = session.beginTransaction();
+		Query query = session
+				.createQuery("From Student as student where student.sid IN (:ids)");
+		query.setParameterList("ids", sIds);
+		sponseredList = query.list();
+		transaction.commit();
+	} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		hibernateException.printStackTrace();
+	}finally {
+		HibernateUtil.closeSession();
+	 }
+	return sponseredList;
+}
 }

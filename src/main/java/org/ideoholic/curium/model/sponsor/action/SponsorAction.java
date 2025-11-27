@@ -13,7 +13,7 @@ public class SponsorAction {
 	
 	@Autowired
 	private SponsorActionAdapter sponsorActionAdapter;
-
+	
 	
 	@GetMapping("/addSponsorPage")
 	public String addSponsorPage() {
@@ -65,7 +65,17 @@ public class SponsorAction {
 			return "error";
 		}
 	}
+	
+	@GetMapping("/sponsorlistdetail")
+	public String sponsorlistdetail() {
+		sponsorActionAdapter.viewAllSponsor();
+		return "sponsorlist";
+	}
 
-
+	@PostMapping("/searchSponsoredStudent")
+	public String searchSponsoredStudent() {
+		sponsorActionAdapter.getFeesStructuredBySponsor();
+		return "sponsorlist";
+	}
 
 }

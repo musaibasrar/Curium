@@ -1,9 +1,12 @@
 package org.ideoholic.curium.model.sponsor.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -14,6 +17,9 @@ import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
 import org.ideoholic.curium.model.sponsor.dto.SponsorResponseDto;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.springframework.stereotype.Service;
@@ -116,5 +122,30 @@ public class SponsorService {
 
 		return ResultResponse.builder().success(false).build();
 	}
+
+	public SponsorResponseDto getFeesStructuredBySponsor(String branchid, SponsorDto sponsorDto) {
+		SponsorResponseDto sponsorResponseDto = new SponsorResponseDto();
+		Map<Student, Studentfeesstructure> mapOfSponsors = new HashMap<Student, Studentfeesstructure>();
+		String sponsorName =  sponsorDto.getName();
+		int branchId = Integer.parseInt(branchid);
+		List<Studentfeesstructure> list = new SponsorDao().getFeesStructuredBySponsor(branchId,sponsorName);
+		List<Integer> sIds = new ArrayList<Integer>(); 
+		for (Studentfeesstructure studentfeesstructure : list) {
+			sIds.add(studentfeesstructure.getSid());
+		}
+		List<Student> listStudent = new studentDetailsDAO().getStudentsListByIds(sIds);
+		for (Student student : listStudent) {
+			for (Studentfeesstructure studentfeesstructure : list) {
+				int sids = student.getSid();
+				int sidf = studentfeesstructure.getSid();
+				if(sids==sidf) {
+			mapOfSponsors.put(student, studentfeesstructure);
+		}
+		
+	    }
+		}	
+		sponsorResponseDto.setMapOfSponsors(mapOfSponsors);
+		return sponsorResponseDto;
+	}	
 
 }
