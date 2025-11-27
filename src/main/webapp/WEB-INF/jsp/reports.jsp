@@ -427,6 +427,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/jrs/FeesProcess/feesOutstanding" style="font-size: 12px;">Fees Outstanding</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/jrs/SponserProcess/sponsorlistdetail" style="font-size: 12px;">Sponsor List</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             

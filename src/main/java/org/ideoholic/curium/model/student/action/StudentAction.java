@@ -68,7 +68,6 @@ public class StudentAction {
 	@GetMapping("/addNew")
 	public String addNew() {
 		standardActionAdapter.viewClasses();
-		sponsorActionAdapter.viewSponsor();
 		ResultResponse result = studentActionAdapter.addNew();
 		if(result.isSuccess()){
 			return result.getMessage();
@@ -115,6 +114,7 @@ public class StudentAction {
 	@GetMapping("/ViewFeesStructure")
 	public String ViewFeesStructure() {
 		if (studentActionAdapter.viewDetailsOfStudent()) {
+			sponsorActionAdapter.viewSponsor();
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 				return "student_details_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
