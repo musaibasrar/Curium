@@ -993,7 +993,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="employeedoc5delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc5}"/>" alt="Staff's Doc5" style="width: 200px;height: 200px;">
+                    <img src="data:image;base64,<c/jrslue="${employee.employeedoc5}"/>" alt="Staff's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="employeedoc5" accept="image/*" >

@@ -10,6 +10,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -596,7 +597,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
-                            <th title="click to sort" class="headerText">Concession Reason&nbsp;</th>
+                            <th title="click to sort" class="headerText">Sponsor&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
                     </thead>
@@ -621,7 +622,21 @@ for(Cookie cookie : cookies){
                                 name="concession:${feesstructure.sfsid}" class="concession"
                                 value="${feesstructure.concession}"></td>
                                 <td class="dataText">
-	                                <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}">		
+                                <div class="container">
+										<div class="row">
+										        <select name="concessionnotes:${feesstructure.sfsid}"	id="concessionnotes:${feesstructure.sfsid}" style="font-size: 13px;width: 125px;"  class="form-control select2" required>
+										        	<option value="${feesstructure.concessionnotes}">
+										        	<c:set var="splitConcessionNotes" value="${fn:split(feesstructure.concessionnotes, '_')}" />
+										        	${splitConcessionNotes[1]}</option>
+										        	<option></option>
+										        	<c:forEach items="${sponsorlist}" var="sponor">
+										        	
+										        		<option style="color: black;" value="${sponor.id}_${sponor.name}">${sponor.name}</option>
+										        	</c:forEach>
+										        </select></a>
+									 	</div>
+								</div>
+	                                <%-- <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}"> --%>		
                                 </td>
                                 <td class="dataText">
                                 
@@ -651,7 +666,7 @@ for(Cookie cookie : cookies){
                                              <button id="waiveoff">Waive Off</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="applyconcession">Apply Concession</button>
+                                             <button id="applyconcession">Apply Sponsor</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/jrs/printstudentdetailsfeesstructure'">Print</button>
