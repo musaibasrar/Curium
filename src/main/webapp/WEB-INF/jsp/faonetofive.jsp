@@ -31,6 +31,25 @@ td, tr, table {
             <tr>
                 <td style="color: white; text-align: center; font-weight: bold;">${examname}</td>
             </tr>
+            
+        </table>
+        <table align="center" style="border: 0px;">
+         <tr style="border: 0px;">
+               <td style=" text-align: left; font-weight: bold;border: 0px;">Name </td>
+               <td style=" text-align: left; font-weight: bold;border: 0px;">${Parents.parents.student.name}</td>
+         </tr>
+         <tr style="border: 0px;">
+               <td style=" text-align: left; font-weight: bold;border: 0px;">Father's Name&emsp;&emsp;&emsp;&emsp; </td>
+               <td style=" text-align: left; font-weight: bold;border: 0px;">${Parents.parents.fathersname}</td>
+         </tr>
+         <tr style="border: 0px;">
+               <td style=" text-align: left; font-weight: bold;border: 0px;">Class </td>
+               <td style=" text-align: left; font-weight: bold;border: 0px;">${Parents.parents.student.classstudying}</td>
+         </tr>
+          <tr style="border: 0px;">
+               <td style=" text-align: left; font-weight: bold;border: 0px;">UID </td>
+               <td style=" text-align: left; font-weight: bold;border: 0px;">${Parents.parents.student.studentexternalid}</td>
+         </tr>
         </table>
         
         <table width="100%" style="margin-top: 5px; border-collapse: collapse;">
