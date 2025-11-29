@@ -523,6 +523,11 @@
 			printAdmissionAbstract();
 
 		});
+		
+		$("#singleprint").button().click(function() {
+			printSinglePageAdmissionAbstract();
+
+		});
 
 		$(".cancel").button().click(function() {
 			Cancel();
@@ -539,6 +544,15 @@ function printAdmissionAbstract() {
 	form1.submit();
 
 }
+
+function printSinglePageAdmissionAbstract() {
+	var form1 = document.getElementById("form1");
+	form1.action = "/vision/DocumentsProcess/printSinglePageAdmissionAbstract";
+	form1.method = "POST";
+	form1.submit();
+
+}
+
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
@@ -715,7 +729,9 @@ for(Cookie cookie : cookies){
 						<input value="Export"
 							type="submit" id="export"/>
 							<input value="Print"
-							type="submit" id="print"/></td>
+							type="submit" id="print"/>
+							<input value="Single Print"
+							type="submit" id="singleprint"/></td>
 							
 							
 
