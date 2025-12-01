@@ -57,6 +57,7 @@ public class MarksDetailsAction {
 	@PostMapping("/searchForReport")
 	public String searchForReport() {
 		new MarksDetailsService(request, response).Search();
+		new MarksDetailsService(request, response).getStartDate();
 		return "progressreport";
 	}
 

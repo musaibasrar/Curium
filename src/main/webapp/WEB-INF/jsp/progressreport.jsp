@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -437,6 +438,19 @@
 	
 	
 </script>
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#datepicker").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	</script>
 
 </head>
   <%
@@ -461,6 +475,10 @@ for(Cookie cookie : cookies){
 			<button id="add">Add Department</button>
 			<br />
 		</div> -->
+		<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -583,6 +601,7 @@ for(Cookie cookie : cookies){
 							</label> 
                         
                         </td>
+                        
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -605,8 +624,22 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr><tr>
-							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignRightFields">Start Date</td><td><label> <input name="startdate"
+									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
+									value="${startDateStr}"
+									data-validate="validate(required)">
+							</label></td>
+						</tr>
+						<tr><td><br></td></tr>
+						<tr>
+							<td class="alignRightFields">End Date</td><td><label> <input name="enddate"
+							        type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
+									data-validate="validate(required)"
+									/>
+							</label></td>
 						</tr>
 						
 						
