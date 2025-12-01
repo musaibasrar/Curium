@@ -288,5 +288,12 @@ public class DocumentAction {
 			documentActionAdapter.printAdmissionAbstract();
 			return "printpreviewabstract";
 		}
+	  
+	  @PostMapping("/printSinglePageAdmissionAbstract")
+		public String printSinglePageAdmissionAbstract() {
+
+			documentActionAdapter.printAdmissionAbstract();
+			return "printpreviewabstractsinglepage";
+		}
 	 
 }
