@@ -947,6 +947,7 @@ public class DocumentService {
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("fathersname" + i + "", parentsDetails.getFathersname());
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("mothersname" + i + "", parentsDetails.getMothersname());
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("classsection" + i + "", parentsDetails.getStudent().getClassstudying());
+		            	   printMultipleEmployeesResponseDto.getResultParams().put("studentpic" + i + "", parentsDetails.getStudent().getStudentpic());
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("contactnumber" + i + "", parentsDetails.getContactnumber());
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("address" + i + "", parentsDetails.getAddresspermanent());
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("dateofbirth" + i + "", DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateofbirth()));
@@ -959,6 +960,7 @@ public class DocumentService {
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("nationality" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getNationality()));
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("caste" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getCaste()));
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("gender" + i + "",parentsDetails.getStudent().getGender());
+		            	   printMultipleEmployeesResponseDto.getResultParams().put("sts" + i + "",parentsDetails.getStudent().getSts());
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("mothertongue" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getMothertongue()));
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("schoollastattended" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getSchoollastattended()));
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("stdlastattended" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getStdlaststudied()));
