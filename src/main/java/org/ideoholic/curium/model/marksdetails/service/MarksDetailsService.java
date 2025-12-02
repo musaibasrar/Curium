@@ -6,10 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -17,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,10 +49,12 @@ import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.FinalTermMarks;
 import org.ideoholic.curium.util.MarksSheet;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 
 public class MarksDetailsService {
@@ -561,48 +569,32 @@ public class MarksDetailsService {
 			
 			String[] studentIds = request.getParameterValues("studentIDs");
 			String examC = request.getParameter("examclass");
+			String endC = request.getParameter("enddate");
 			String academicYear = request.getParameter("academicyear");
 			String[] examClass = examC.split("--");
 			String[] terms = request.getParameterValues("terms");
-			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
-			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			//List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			String[] subjectListOtherExamIds = new DataUtil().getPropertiesValue("OtherExamsSubjects"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
 			List<Integer> subjectListOtherExam = new ArrayList<Integer>();	
 			Map<String,Double> subMarksTermOne = new HashMap<String, Double>();
 			Map<String,Double> subMarksTermTwo = new HashMap<String, Double>();
-			
-			
-			// Start Exam One
 			String[] examIdsTermOne = new DataUtil().getPropertiesValue("TermOneExams"+httpSession.getAttribute(BRANCHID).toString()).split(",");
 			List<Integer> termOneExamIds = new ArrayList<Integer>();
-			
 			for (String id : examIdsTermOne) {
 			    termOneExamIds.add(Integer.parseInt(id));
 			}
-			
 			List<Exams> examsListTermOne = new ExamDetailsDAO().readListOfExams(termOneExamIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
 			Map<Integer, Integer> examTermOneOrderMap = new HashMap<>();
 			for (int i = 0; i < termOneExamIds.size(); i++) {
 				examTermOneOrderMap.put(termOneExamIds.get(i), i); // examId -> index in properties file
 			}
-
-			// Sort examsList based on order in examOrderMap
 			Collections.sort(examsListTermOne, Comparator.comparingInt(exam -> examTermOneOrderMap.getOrDefault(exam.getExid(), Integer.MAX_VALUE)));
-			//End Exam One
-			
-			// Start Exam Two
 			String[] examIdsTermTwo = new DataUtil().getPropertiesValue("TermTwoExams"+httpSession.getAttribute(BRANCHID).toString()).split(",");
 			List<Integer> termTwoExamIds = new ArrayList<Integer>();
-			
 			for (String id : examIdsTermTwo) {
 			    termTwoExamIds.add(Integer.parseInt(id));
 			}
-			
 			List<Exams> examsListTermTwo = new ExamDetailsDAO().readListOfExams(termTwoExamIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			
 			Map<Integer, Integer> examTermTwoOrderMap = new HashMap<>();
 			for (int i = 0; i < termTwoExamIds.size(); i++) {
 				examTermTwoOrderMap.put(termTwoExamIds.get(i), i); // examId -> index in properties file
@@ -623,30 +615,58 @@ public class MarksDetailsService {
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+				String startDateStr = request.getParameter("startdate");
+				Date startDate = new DateUtil().indiandateParser(startDateStr);
+				Date endDate = new DateUtil().indiandateParser(endC);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String startDateyy=sdf.format(startDate);
+				String endDateyy=sdf.format(endDate);
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),startDateyy,endDateyy);
+				 List<Holidaysmaster> holidaysMasterList = new MarksDetailsDAO().getListofHolidays(startDate,endDate);
+				 int holidayCount = 0;
+				 for(Holidaysmaster holiday:holidaysMasterList) {
+					 Date strtDate = holiday.getFromdate();
+					    Date endhDate = holiday.getTodate();
+					    long diffInMillis = endhDate.getTime() - strtDate.getTime();
+					    int totalHolidays = (int) TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+					    totalHolidays = totalHolidays + 1;
+					    holidayCount += totalHolidays;
+				 }
+				try {
+					startDate = sdf.parse(sdf.format(startDate));
+					endDate = sdf.parse(sdf.format(endDate));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				long diffInMillies = endDate.getTime() - startDate.getTime();
+				long totaLDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1; // +1 to include start date
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(startDate);
+				int sundayCount = 0;
+				while (!cal.getTime().after(endDate)) {
+				    if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				        sundayCount++;
+				    }
+				    cal.add(Calendar.DATE, 1);
+				}
+
+				int workingDays = (int) (totaLDays - (sundayCount + holidayCount));
 				int absentDays = 0;
 				int totalDays = 0;
 				int totalPresent = 0;
-				
 				for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
-					
-					totalDays++;
 					if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
 						absentDays++;
 					}
+					if(("P").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+						totalPresent++;
+					}
 					
 				}
-				
-				if(!studentDailyAttendance.isEmpty()){
-					totalPresent = totalDays - absentDays;
-				}
-				
 				markssheet.setTotalPresent(totalPresent);
 				markssheet.setTotalAbsent(absentDays);
-				markssheet.setTotalDays(totalDays);
+				markssheet.setTotalDays(workingDays);
 				markssheet.setParents(studentDetails);
-				
-				
 				/// Term One
 				Map<String, Float> subjectTotalMarksTermOne = new HashMap<>();
 				
@@ -2424,6 +2444,11 @@ public boolean generateReportSingleExams() {
 	}
 
 	return result;
+}
+
+public void getStartDate() {
+	String startDateSr = new DataUtil().getPropertiesValue("startdate");
+	request.setAttribute("startDateStr", startDateSr);
 }
 
 

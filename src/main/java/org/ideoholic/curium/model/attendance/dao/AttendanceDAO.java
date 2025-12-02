@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -617,18 +618,40 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 		return studentdailyattendance;
 	}
 
-	public List<Studentdailyattendance> getStudentDailyAttendance(String studenId, String academicYear) {
-		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-		try{
-			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance where attendeeid = '"+studenId+"' and academicyear='"+academicYear+"'" ).list();;
-			transaction.commit();
-		}catch (Exception e) { transaction.rollback(); logger.error(e);
-			System.out.println(""+e);
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return studentDailyAttendance;
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studentId, String academicYear, String startDateyy, String endDateyy) {
+
+	    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
+
+	    try {
+	        transaction = session.beginTransaction();
+	        
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	        Date startDate = formatter.parse(startDateyy);
+	        Date endDate = formatter.parse(endDateyy);
+
+	        String hql = "FROM Studentdailyattendance " +
+	                     "WHERE attendeeid = :studentId " +
+	                     "AND academicyear = :academicYear " +
+	                     "AND date BETWEEN :startDate AND :endDate";
+
+	        Query query = session.createQuery(hql);
+	        query.setParameter("studentId", studentId);
+	        query.setParameter("academicYear", academicYear);
+	        query.setParameter("startDate", startDate);
+	        query.setParameter("endDate", endDate);
+
+	        studentDailyAttendance = query.list();
+	        transaction.commit();
+
+	    } catch (Exception e) {
+	        if(transaction != null) transaction.rollback();
+	        logger.error(e);
+	        e.printStackTrace();
+	    } finally {
+	        HibernateUtil.closeSession();
+	    }
+	    return studentDailyAttendance;
 	}
+
 
 }
