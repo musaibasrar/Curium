@@ -869,7 +869,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/StampFeesProcess/applyFeesAll" method="POST">
+	<form id="form1" action="/greatindiaacademy/StampFeesProcess/applyFeesAll" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
