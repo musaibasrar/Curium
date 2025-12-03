@@ -6,10 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -18,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +34,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
@@ -593,38 +599,64 @@ public class MarksDetailsService {
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
-				/*
-				 *  studentDailyAttendance = new
-				 * AttendanceDAO().getStudentTotalAttendance(studentDetails.getStudent().
-				 * getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
-				 */
-				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
-						DateUtil.indiandateParser(presentDate));
+				String startDateStr = dto.getStartDate();
+				String endC = dto.getEndDate();
+				Date startDate = new DateUtil().indiandateParser(startDateStr);
+				Date endDate = new DateUtil().indiandateParser(endC);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String startDateyy=sdf.format(startDate);
+				String endDateyy=sdf.format(endDate);
+				String academicYear = currentAcademicYear;
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear,startDateyy,endDateyy);
+				System.out.println(studentDailyAttendance);
+				//calculate total holidays
+				 List<Holidaysmaster> holidaysMasterList = new MarksDetailsDAO().getListofHolidays(startDate,endDate);
+				 int holidayCount = 0;
+				 for(Holidaysmaster holiday:holidaysMasterList) {
+					 Date strtDate = holiday.getFromdate();
+					    Date endhDate = holiday.getTodate();
+					    long diffInMillis = endhDate.getTime() - strtDate.getTime();
+					    int totalHolidays = (int) TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+					    totalHolidays = totalHolidays + 1;
+					    holidayCount += totalHolidays;
+				 }
+				try {
+					startDate = sdf.parse(sdf.format(startDate));
+					endDate = sdf.parse(sdf.format(endDate));
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				System.out.println(holidayCount);
+				long diffInMillies = endDate.getTime() - startDate.getTime();
+				long totalDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1; // +1 to include start date
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(startDate);
+				int sundayCount = 0;
+				while (!cal.getTime().after(endDate)) {
+				    if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				        sundayCount++;
+				    }
+				    cal.add(Calendar.DATE, 1);
+				}
+				int workingDays = (int) (totalDays - (sundayCount + holidayCount));
 				int absentDays = 0;
-				int totalDays = 0;
 				int totalPresent = 0;
 				
 				for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
 					
-					totalDays++;
 					if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
 						absentDays++;
+					}
+					else if(("P").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+						totalPresent++;
 					}
 					
 				}
 				
-				if(!studentDailyAttendance.isEmpty()){
-					totalPresent = totalDays - absentDays;
-				}
-				
-				result.setTotalDays(totalDays);
-				result.setTotalpresent(totalPresent);
-				result.setTotalabsent(absentDays);
-				
-
-
+				markssheet.setTotalPresent(totalPresent);
+				markssheet.setTotalAbsent(absentDays);
+				markssheet.setTotalDays(workingDays);
 				markssheet.setParents(studentDetails);
 				
 				for (Exams examOne : examsList) {
@@ -2257,6 +2289,13 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 	
 	return result;
 
+}
+
+public GenerateReportResponseDto getStartDate() {
+	GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
+	String startDate = new DataUtil().getPropertiesValue("startdate");
+	result.setStartDate(startDate);
+	return result;
 }
 
 }
