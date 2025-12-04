@@ -113,23 +113,27 @@ public class FeesService {
                 if(branchid!=null){
                 	
                 	String[] classesFeesCat = feesCategoryDto.getFromClass();
-                	List<Feescategory> feesCategoryList = new ArrayList<Feescategory>();
-                	
-                	for (String feeCat : classesFeesCat) {
-                		Feescategory feescategorynew = new Feescategory();
-                		feescategorynew.setFeescategoryname(DataUtil.emptyString(feesCategoryDto.getFeesCategory()));
-                		feescategorynew.setParticularname(DataUtil.emptyString(feeCat)+"--");
-                		feescategorynew.setAmount(DataUtil.parseInt(feesCategoryDto.getAmount()));
-                		feescategorynew.setBranchid(Integer.parseInt(branchid));
-                		feescategorynew.setUserid(Integer.parseInt(userlogin));
-                		feescategorynew.setAcademicyear(DataUtil.emptyString(feesCategoryDto.getCategoryYear()));
-                		feescategorynew.setTotalinstallments(feesCategoryDto.getTotalInstallments());
-                        if(!feescategorynew.getFeescategoryname().equalsIgnoreCase("") && !feescategorynew.getParticularname().equalsIgnoreCase("") && feescategorynew.getAmount() != 0 ){
-                        	feesCategoryList.add(feescategorynew);
-                        }
-                		}
-                	boolean result =  feesCategoryDao.create(feesCategoryList);
-                	
+					if (classesFeesCat != null) {
+						List<Feescategory> feesCategoryList = new ArrayList<Feescategory>();
+
+						for (String feeCat : classesFeesCat) {
+							Feescategory feescategorynew = new Feescategory();
+							feescategorynew
+									.setFeescategoryname(DataUtil.emptyString(feesCategoryDto.getFeesCategory()));
+							feescategorynew.setParticularname(DataUtil.emptyString(feeCat) + "--");
+							feescategorynew.setAmount(DataUtil.parseInt(feesCategoryDto.getAmount()));
+							feescategorynew.setBranchid(Integer.parseInt(branchid));
+							feescategorynew.setUserid(Integer.parseInt(userlogin));
+							feescategorynew.setAcademicyear(DataUtil.emptyString(feesCategoryDto.getCategoryYear()));
+							feescategorynew.setTotalinstallments(feesCategoryDto.getTotalInstallments());
+							if (!feescategorynew.getFeescategoryname().equalsIgnoreCase("")
+									&& !feescategorynew.getParticularname().equalsIgnoreCase("")
+									&& feescategorynew.getAmount() != 0) {
+								feesCategoryList.add(feescategorynew);
+							}
+						}
+						boolean result = feesCategoryDao.create(feesCategoryList);
+					}
                         /*
                           Feescategory feescategory = new Feescategory();
                           feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));

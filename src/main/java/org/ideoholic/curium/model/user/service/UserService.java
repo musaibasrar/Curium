@@ -5,7 +5,6 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -131,7 +130,7 @@ public class UserService {
 			response.addCookie(cookie);
 			
 			if(userType[0].equalsIgnoreCase("parents")) {
-				LocalDate currentDate = LocalDate.now();
+				Date currentDate = Calendar.getInstance().getTime();
 				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
 			       if(attendance != null) {
 				   result.setAttendanceStatus(attendance.getAttendancestatus());

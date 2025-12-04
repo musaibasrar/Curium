@@ -1,6 +1,5 @@
 package org.ideoholic.curium.repositories;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StaffDailyAttendanceRepository extends JpaRepository<Staffdailyattendance, Integer> {
 
-    Optional<Staffdailyattendance> findByAttendeeidAndDateAndAcademicyear(String attendeeid, LocalDate date, String academicyear);
+    Optional<Staffdailyattendance> findByAttendeeidAndDateAndAcademicyear(String attendeeid, Date date, String academicyear);
 
     List<Staffdailyattendance> findByDateAndAcademicyearAndAttendeeidAndBranchid(Date date, String academicyear, String attendeeid, int branchid);
 
