@@ -1,8 +1,8 @@
 package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +23,7 @@ import org.ideoholic.curium.repositories.HolidaysMasterRepository;
 import org.ideoholic.curium.repositories.StaffDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.StudentDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.WeeklyoffRepository;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -248,7 +249,7 @@ public class AttendanceDAO {
 				Studentdailyattendance existingAttendance = studentDailyAttendanceRepository
 						.findByAttendeeStudentexternalidAndDateAndAcademicyear(
 								studentdailyattendance.getAttendeeid().toString(),
-								LocalDate.now(),
+								Calendar.getInstance().getTime(),
 								studentdailyattendance.getAcademicyear()
 						).map(attendance -> {
 							// session.createSQLQuery("update Studentdailyattendance set attendancestatus = " + "'"+studentdailyattendance.getAttendancestatus()+"' where attendanceid = " + "'"+studentDailyAttendanceDetails.getAttendanceid()+"'");
@@ -294,7 +295,7 @@ public class AttendanceDAO {
 		try{
 			// studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
 			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
-					LocalDate.parse(fromTimestamp), LocalDate.parse(toTimestamp), currentAcademicYear,
+					DateUtil.dateParserdd(fromTimestamp), DateUtil.dateParserdd(toTimestamp), currentAcademicYear,
 					studentExternalId, branchId);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -332,7 +333,11 @@ public class AttendanceDAO {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 		try{
 			//studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalIdGraph+"' and branchid="+branchId).list();
-  			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(LocalDate.parse(timestampFrom),LocalDate.parse(timestampto),currentAcademicYear, studentExternalIdGraph, branchId);
+  			studentDailyAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
+  					DateUtil.dateParserdd(timestampFrom),
+  					DateUtil.dateParserdd(timestampto),
+  					currentAcademicYear,
+  					studentExternalIdGraph, branchId);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			e.printStackTrace();
@@ -351,7 +356,7 @@ public class AttendanceDAO {
 				//Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 
 				Optional<Studentdailyattendance> existingAttendance = studentDailyAttendanceRepository
-						.findByAttendeeStudentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), LocalDate.now(), studentDailyAttendance.getAcademicyear());
+						.findByAttendeeStudentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), Calendar.getInstance().getTime(), studentDailyAttendance.getAcademicyear());
 
 				if (existingAttendance.isPresent()) {
 					return "error-Can't Mark the attendance twice!!!";
@@ -377,7 +382,7 @@ public class AttendanceDAO {
 			for (Studentdailyattendance student : studentDailyAttendance) {
 				// Query query = session.createQuery("from Studentdailyattendance where attendeeid = '"+student.getAttendeeid()+"' and academicyear='"+student.getAcademicyear()+"' and date=CURDATE()");
 				Studentdailyattendance studentSingle = studentDailyAttendanceRepository
-						.findByAttendeeStudentexternalidAndDateAndAcademicyear(student.getAttendeeid(), LocalDate.now(), student.getAcademicyear())
+						.findByAttendeeStudentexternalidAndDateAndAcademicyear(student.getAttendeeid(), Calendar.getInstance().getTime(), student.getAcademicyear())
 						.orElse(studentDailyAttendanceRepository.save(student));
 				if (studentSingle != null) {
 					result &= true;
@@ -404,7 +409,7 @@ public class AttendanceDAO {
 				// studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
 				mapStudentAttendance.put(student.getName(), studentAttendance);
 				studentAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
-						LocalDate.parse(timestampFrom), LocalDate.parse(timestampto), currentAcademicYear,
+						DateUtil.dateParserdd(timestampFrom), DateUtil.dateParserdd(timestampto), currentAcademicYear,
 						student.getStudentexternalid(), branchId);
 			}
 		}catch (Exception e) {
@@ -422,7 +427,7 @@ public class AttendanceDAO {
             for (Staffdailyattendance staffdailyattendance : listStaffAttendance) {
             	// session.createQuery("from Staffdailyattendance  where attendeeid='"+staffdailyattendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffdailyattendance.getAcademicyear()+"'");
                 Staffdailyattendance existingAttendance = staffDailyAttendanceRepository
-                        .findByAttendeeidAndDateAndAcademicyear(staffdailyattendance.getAttendeeid(),LocalDate.now(), staffdailyattendance.getAcademicyear()).orElse(null);
+                        .findByAttendeeidAndDateAndAcademicyear(staffdailyattendance.getAttendeeid(),Calendar.getInstance().getTime(), staffdailyattendance.getAcademicyear()).orElse(null);
                 
                 if (existingAttendance == null) {
                     staffDailyAttendanceRepository.save(staffdailyattendance);
@@ -508,7 +513,7 @@ public class AttendanceDAO {
 	        for (Staffdailyattendance staffDailyAttendance : staffDailyAttendanceList) {
 				// session.createQuery("from Staffdailyattendance  where attendeeid='"+staffDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+staffDailyAttendance.getAcademicyear()+"'");
 	            Staffdailyattendance existingAttendance = staffDailyAttendanceRepository
-	                    .findByAttendeeidAndDateAndAcademicyear(staffDailyAttendance.getAttendeeid(), LocalDate.now(), staffDailyAttendance.getAcademicyear()).orElse(null);
+	                    .findByAttendeeidAndDateAndAcademicyear(staffDailyAttendance.getAttendeeid(), Calendar.getInstance().getTime(), staffDailyAttendance.getAcademicyear()).orElse(null);
 
 	            if (existingAttendance == null) {
 	                staffDailyAttendanceRepository.save(staffDailyAttendance);
@@ -558,7 +563,7 @@ public class AttendanceDAO {
 		try{
 			for (Staffdailyattendance staff : listStaffAttendance) {
 				// session.createQuery("from Staffdailyattendance where attendeeid = '"+staff.getAttendeeid()+"' and academicyear='"+staff.getAcademicyear()+"' and date=CURDATE()");
-				Staffdailyattendance staffSingle = staffDailyAttendanceRepository.findByAttendeeidAndDateAndAcademicyear(staff.getAttendeeid(), LocalDate.now(), staff.getAcademicyear()).orElse(null);
+				Staffdailyattendance staffSingle = staffDailyAttendanceRepository.findByAttendeeidAndDateAndAcademicyear(staff.getAttendeeid(), Calendar.getInstance().getTime(), staff.getAcademicyear()).orElse(null);
 				if(staffSingle == null){
 					staffDailyAttendanceRepository.save(staff);
 				}
@@ -602,7 +607,7 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
-	public Studentdailyattendance getStudentTodaysAttendance(String userName, LocalDate currentDate) {
+	public Studentdailyattendance getStudentTodaysAttendance(String userName, Date currentDate) {
 		Studentdailyattendance attendance = new Studentdailyattendance();
 		try{
 			// session.createQuery("from Studentdailyattendance  where attendeeid = '"+userName+"' and date = '"+currentDate+"'");

@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.studentdiary.dto;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 
 public interface StudentDiaryProjection {
