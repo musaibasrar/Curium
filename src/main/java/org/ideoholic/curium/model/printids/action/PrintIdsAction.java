@@ -30,7 +30,7 @@ public class PrintIdsAction {
 	public String updateCardValidity() {
 
 		printIdsActionAdapter.updateCardValidity();
-		return "cardvalidity";
+		return "school/cardvalidity";
 
 	}
 
@@ -38,26 +38,26 @@ public class PrintIdsAction {
 	public String searchDetailsCardValidity() {
 
 		printIdsActionAdapter.searchDetailsCardValidity();
-		return "cardvalidity";
+		return "school/cardvalidity";
 	}
 
 	@GetMapping("/cardValidity")
 	public String cardValidity() {
 		standardActionAdapter.viewClasses();
-		return "cardvalidity";
+		return "school/cardvalidity";
 	}
 
 	@GetMapping("/generateIds")
 	public String generateIds() {
 		standardActionAdapter.viewClasses();
-		return "generateids";
+		return "school/generateids";
 	}
 
 	@PostMapping("/searchDetails")
 	public String searchDetails() {
 
 		printIdsActionAdapter.searchDetails();
-		return "generateids";
+		return "school/generateids";
 	}
 
 	@PostMapping("/printPreview")
@@ -70,13 +70,13 @@ public class PrintIdsAction {
 	@GetMapping("/generateIdsEmployees")
 	public String generateIdsEmployees() {
 		 employeeActionAdapter.ViewAllEmployee();
-		return "generateidsemployee";
+		return "school/generateidsemployee";
 	}
 	
 	@PostMapping("/printpreviewemployee")
 	public String printpreviewemployee() {
 		 employeeActionAdapter.printMultipleEmployees();
-		 return "printpreviewemployee";
+		 return "school/printpreviewemployee";
 	}
 	
 }
