@@ -30,7 +30,7 @@ public class PrintIdsAction {
 	public String updateCardValidity() {
 
 		printIdsActionAdapter.updateCardValidity();
-		return "school/cardvalidity";
+		return "cardvalidity";
 
 	}
 
@@ -38,13 +38,13 @@ public class PrintIdsAction {
 	public String searchDetailsCardValidity() {
 
 		printIdsActionAdapter.searchDetailsCardValidity();
-		return "school/cardvalidity";
+		return "cardvalidity";
 	}
 
 	@GetMapping("/cardValidity")
 	public String cardValidity() {
 		standardActionAdapter.viewClasses();
-		return "school/cardvalidity";
+		return "cardvalidity";
 	}
 
 	@GetMapping("/generateIds")
