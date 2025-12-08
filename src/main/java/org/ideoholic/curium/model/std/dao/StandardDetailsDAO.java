@@ -323,11 +323,11 @@ public class StandardDetailsDAO {
 
     }
 
-	public Classhierarchy getClassHierarchy(String classStuDying, int branchId) {
+	public Classhierarchy getClassHierarchy(String classStudying, int branchId) {
 		Classhierarchy classhierarchy = new Classhierarchy();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Classhierarchy where lowerclass = '"+classStuDying+"' and branchid="+branchId+"");
+			Query query = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"' and branchid="+branchId+"");
 			classhierarchy = (Classhierarchy) query.uniqueResult();
 			query.executeUpdate();
 			  transaction.commit();

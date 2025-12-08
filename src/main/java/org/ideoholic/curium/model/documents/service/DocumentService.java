@@ -136,6 +136,7 @@ public class DocumentService {
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
 				 int noOfIssues = transferCertificate.getNoofissues();
+				 int tcNumber = transferCertificate.getTcid();
 				 tc.setNoofissues(noOfIssues+1);
 				 
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
@@ -143,15 +144,14 @@ public class DocumentService {
 				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
 				 String[] classStudying = parents.getStudent().getClassstudying().split("--");
 				 String classinword = new DataUtil().classInWord(classStudying[0]);
-				 String classStuDying = classStudying[0];
-				 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStuDying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				 String clschy = classhierarchy.getUpperclass();
-				 String pinword =  new DataUtil().classInWord(clschy);
+				 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStudying[0],Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				 String classPromoted = classhierarchy.getUpperclass();
+				 String pinword =  new DataUtil().classInWord(classPromoted);
 				    request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("bookno", bookno);
-					request.setAttribute("tcno", tcno);
+					request.setAttribute("tcno", tcNumber);
 					request.setAttribute("caste", caste);
 					request.setAttribute("classinword", classinword);
 					request.setAttribute("lastexam", transferCertificate.getLastExam());
@@ -162,7 +162,7 @@ public class DocumentService {
 					request.setAttribute("Fourthsubject", Fourthsubject);
 					request.setAttribute("Fifthsubject", Fifthsubject);
 					request.setAttribute("sixthsubject", sixthsubject);
-					request.setAttribute("pinfig", clschy);
+					request.setAttribute("pinfig", classPromoted);
 					request.setAttribute("pinword", pinword);
 					request.setAttribute("dues", transferCertificate.getSchoolDuesPaid());
 					request.setAttribute("concession",transferCertificate.getConcession());
