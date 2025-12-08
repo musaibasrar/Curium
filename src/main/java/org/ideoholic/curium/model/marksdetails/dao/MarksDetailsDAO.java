@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.marksdetails.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -9,6 +10,7 @@ import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
 import org.hibernate.query.Query;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
@@ -350,6 +352,33 @@ public class MarksDetailsDAO {
 			return results;
 		}
 		
+	}
+	
+	public List<Holidaysmaster> getListofHolidays(Date startDate,Date endDate) {
+	    List<Holidaysmaster> results = new ArrayList<Holidaysmaster>();
+	    Transaction transaction = null;
+
+	    try {
+	        transaction = session.beginTransaction();
+
+	        Query query = session.createQuery(
+	            "FROM Holidaysmaster WHERE todate >= :startDate and fromdate <= :endDate"
+	        );
+
+	        query.setParameter("startDate", startDate);
+	        query.setParameter("endDate", endDate);
+
+	        results = query.list();
+	        transaction.commit();
+
+	    } catch (Exception e) {
+	        if (transaction != null) transaction.rollback();
+	        e.printStackTrace();
+	    } finally {
+	        HibernateUtil.closeSession();
+	    }
+
+	    return results;
 	}
 	
 }
