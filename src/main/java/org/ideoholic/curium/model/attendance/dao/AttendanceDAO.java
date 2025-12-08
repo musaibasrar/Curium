@@ -306,23 +306,7 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	/*public List<Studentdailyattendance> getStudentDailyAttendance(
-			String studentExternalId, String fromTimestamp,
-			String toTimestamp, String currentAcademicYear, int branchId) {
-		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-		try {
-			transaction = session.beginTransaction();
-			studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			// TODO: handle exception
-		}finally {
-			HibernateUtil.closeSession();
-		}
-		return studentDailyAttendance;
-	}*/
-	
-	public List<Studentdailyattendance> getStudentDailyAttendance(String studentId, String academicYear, String startDateyy, String endDateyy) {
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studentExternalId, String startDate, String endDate, String academicYear, int branchId) {
 
 	    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 
@@ -330,8 +314,6 @@ public class AttendanceDAO {
 	        transaction = session.beginTransaction();
 
 	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-	        Date startDate = formatter.parse(startDateyy);
-	        Date endDate = formatter.parse(endDateyy);
 
 	        String hql = "FROM Studentdailyattendance " +
 	                     "WHERE attendeeid = :studentId " +
@@ -339,10 +321,10 @@ public class AttendanceDAO {
 	                     "AND date BETWEEN :startDate AND :endDate";
 
 	        Query query = session.createQuery(hql);
-	        query.setParameter("studentId", studentId);
+	        query.setParameter("studentId", studentExternalId);
 	        query.setParameter("academicYear", academicYear);
-	        query.setParameter("startDate", startDate);
-	        query.setParameter("endDate", endDate);
+	        query.setParameter("startDate", formatter.parse(startDate));
+	        query.setParameter("endDate", formatter.parse(endDate));
 
 	        studentDailyAttendance = query.list();
 	        transaction.commit();
