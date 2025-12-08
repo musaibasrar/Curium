@@ -111,7 +111,7 @@ public class DocumentAction {
 	public String printTransferCertificate() {
 		
 		if(documentActionAdapter.printTransferCertificate()){
-			return "transfercertificateprint";
+			return "school/transfercertificateprint";
 		}
         return error;
 	}
@@ -122,9 +122,9 @@ public class DocumentAction {
 		String result = documentActionAdapter.generateTransferCertificate();
 		
 		if("true".equalsIgnoreCase(result)){
-			return "transfercertificatepreview";
+			return "school/transfercertificatepreview";
 		}else if("studentexists".equalsIgnoreCase(result)){
-			return "transfercertificatepreviewduplicate";
+			return "school/transfercertificatepreviewduplicate";
 		}
 		return error;
 	}
@@ -132,7 +132,7 @@ public class DocumentAction {
 	@GetMapping("/transferCertificate")
 	public String transferCertificate() {
 		if(documentActionAdapter.transferCertificate()){
-			return "transfercertificate";
+			return "school/transfercertificate";
 		}
         return error;
 	}
