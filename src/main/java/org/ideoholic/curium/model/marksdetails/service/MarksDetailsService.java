@@ -2283,6 +2283,7 @@ public boolean generateReportSingleExams() {
 		
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String examC = request.getParameter("examclass");
+		String[] examIds = request.getParameterValues("examIds");
 		String[] examClass = examC.split("--");
 		String academicYear = request.getParameter("academicyear");
 		String[] excludedSubjects = new DataUtil().getPropertiesValue("excludedsubjectids"+httpSession.getAttribute(BRANCHID).toString()).split(",");
@@ -2294,6 +2295,7 @@ public boolean generateReportSingleExams() {
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<String> examsIdsList = Arrays.asList(examIds);
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 		List<ExamRank> examRankList = new ArrayList<ExamRank>();
 
@@ -2306,7 +2308,8 @@ public boolean generateReportSingleExams() {
 			markssheet.setParents(studentDetails);
 			
 			for (Exams exam : examsList) {
-					
+				String examid = exam.getExid().toString();
+				 if(examsIdsList.contains(examid)) {
 				ExamsMarks examMarks = new ExamsMarks();
 				examMarks.setExamName(exam.getExamname());
 				boolean present = false;
@@ -2398,7 +2401,7 @@ public boolean generateReportSingleExams() {
 					examRankList.add(examrank);*/
 					
 				}
-				
+			}
 			}
 			markssheet.setExammarks(examMarksList);
 			marksSheetList.add(markssheet);
