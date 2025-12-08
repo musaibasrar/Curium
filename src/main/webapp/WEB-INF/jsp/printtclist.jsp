@@ -252,6 +252,7 @@
  				 <tr>
  				 		    <!-- <th style="border: 1px solid #000;">UID</th> -->
                             <th style="border: 1px solid #000;">TC ID</th>
+                            <th style="border: 1px solid #000;">Admission No.</th>
                             <th style="border: 1px solid #000;">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th style="border: 1px solid #000;">Father Name&nbsp;</th>
                             <!-- <th style="border: 1px solid #000;">Contact&nbsp;</th> -->
@@ -267,6 +268,7 @@
 							cellpadding="1" cellspacing="1">
                                 <%-- <td  class="dataTextInActive"  style="border: 1px solid #000;"><c:out value="${parent.student.studentexternalid}"/></td> --%>
                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.student.nooftc}"/></td>
+                                <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.student.admissionnumber}"/></td>
                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.student.name}"/></td>
                                 <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.fathersname}"/></td>
                                  <%-- <td class="dataText"  style="border: 1px solid #000;"><c:out value="${parent.contactnumber}"/></td> --%>

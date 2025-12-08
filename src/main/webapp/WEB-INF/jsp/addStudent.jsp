@@ -1187,7 +1187,9 @@ $(document).ready(function() {
 							 <td>
                                         <label> <select name="yearofadmission" id="yearofadmission" required
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()" >
-										<option selected>2025/26</option>
+										<option selected>${currentAcademicYear}</option>
+										<option>2026/27</option>
+										<option>2025/26</option>
 										<option>2024/25</option>
 										<option>2023/24</option>
 										<option>2022/23</option>
@@ -1883,7 +1885,7 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Languages Studied &nbsp;</td>
+							<td class="alignLeft">Subjects Studied &nbsp;</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass"

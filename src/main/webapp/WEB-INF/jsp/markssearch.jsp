@@ -664,11 +664,12 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 240px;border-radius: 4px;background: white;height: 28px;" >
 										<option></option>
-										<option>2024/25</option>
-										<option>2025/26</option>
+										<option selected>${currentAcademicYear}</option>
 										<option>2026/27</option>
-										<option>2027/28</option>
-										<option>2028/29</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
 								</select>
 
 							</label> 
@@ -756,6 +757,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 					<tr>
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Roll No.</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Marks</th>
@@ -777,6 +779,9 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
+										<td class="dataTextInActive"><a class="dataTextInActive"
+								><c:out
+										value="${Parents.student.sts}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
 							<td class="dataText">

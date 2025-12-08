@@ -666,11 +666,11 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 240px;border-radius: 4px;background: white;height: 28px;" >
 										<option>${currentAcademicYear}</option>
-										<option>2024/25</option>
-										<option>2025/26</option>
 										<option>2026/27</option>
-										<option>2027/28</option>
-										<option>2028/29</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
 								</select>
 
 							</label> 
@@ -706,6 +706,7 @@ for(Cookie cookie : cookies){
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
+						<th title="click to sort" class="headerText">Roll No.</th>
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Admission Type</th>
 						<th title="click to sort" class="headerText">Name</th>
@@ -725,6 +726,9 @@ for(Cookie cookie : cookies){
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
+										<td class="dataTextInActive"><a class="dataTextInActive"
+								><c:out
+										value="${Parents.student.sts}" /></a></td>
 							<td class="dataText">
 								<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
 						    		${splt} 

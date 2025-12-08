@@ -819,7 +819,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                          <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
+                        <td width="25%"   class="alignLeft" height="50" >Subjects Studied</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.languagesstudied}" />
                             </td>

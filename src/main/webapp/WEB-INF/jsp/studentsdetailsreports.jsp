@@ -585,6 +585,8 @@ for(Cookie cookie : cookies){
 								<label> <select name="academicyear" id="academicyear" required
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
+										<option selected>${currentAcademicYear}</option>
+										<option>2026/27</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
 										<option>2023/24</option>
@@ -665,8 +667,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Contact Number</th>
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
-							<th title="click to sort" class="headerText">Promoted Year</th>
-							<th title="click to sort" class="headerText">Admission Year</th>
+						<th title="click to sort" class="headerText">Roll No.</th>
+						<th title="click to sort" class="headerText">Promoted Year</th>
+						<th title="click to sort" class="headerText">Admission Year</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
 						<th title="click to sort" class="headerText">Photo</th>
 
@@ -693,6 +696,8 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${Parents.contactnumber}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>
+									<td class="dataText"><c:out
+									value="${Parents.student.sts}" /></td>
 									<td class="dataText"><c:out
 									value="${Parents.student.promotedyear}" /></td>
 									<td class="dataText"><c:out

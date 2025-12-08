@@ -678,7 +678,7 @@ for(Cookie cookie : cookies){
 							
 							<label> 
 									<select name="classsec" id="classsec"
-									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;pointer-events: none;">
 										<option selected>${classstudying}</option>
 										<option></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1009,6 +1009,8 @@ for(Cookie cookie : cookies){
 							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
+										<option selected>${currentAcademicYear}</option>
+										<option>2026/27</option>
 										<option>2025/26</option>
 										<option>2024/25</option>
 										<option>2023/24</option>
@@ -1701,7 +1703,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Languages Studied</td>
+							<td class="alignLeft">Subjects Studied</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass" style="text-transform:capitalize;"

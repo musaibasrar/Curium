@@ -651,10 +651,12 @@ for(Cookie cookie : cookies){
                                          <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
 									style="width: 120px">
 										<option selected>${currentAcademicYear}</option>
-										<option>2023/24</option>
-										<option>2024/25</option>
-										<option>2025/26</option>
 										<option>2026/27</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
+										<option>2021/22</option>
 										</select>
                               </label>
                         </td>

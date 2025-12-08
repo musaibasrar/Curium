@@ -406,6 +406,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">TCID</th>
+                            <th title="click to sort" class="headerText">Admission No.</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
                             <th title="click to sort" class="headerText">Father Name&nbsp;</th>
                             <th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
@@ -424,6 +425,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${parent.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${parent.student.sid}"/>"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${parent.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${parent.student.studentexternalid}"/></a></td>
                                 <td class="dataText"><c:out value="${parent.student.nooftc}"/></td>
+                                <td class="dataText"><c:out value="${parent.student.admissionnumber}"/></td>
                                 <td class="dataText"><c:out value="${parent.student.name}"/></td>
                                 <td class="dataText"><c:out value="${parent.fathersname}"/></td>
                                 <td id="studyclass" class="dataText"><c:out value="${parent.student.classstudying}"/></td>

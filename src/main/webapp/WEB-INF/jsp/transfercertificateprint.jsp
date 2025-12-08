@@ -472,7 +472,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h4 style="font-weight: normal;">19.&nbsp;&nbsp;Genaral conduct &nbsp;&nbsp;
+					<h4 style="font-weight: normal;">19.&nbsp;&nbsp;General conduct &nbsp;&nbsp;
 					<span style="font-weight: bold;border-bottom-style: dotted;width:650px;"></span>
 					</h4>
 				</td>

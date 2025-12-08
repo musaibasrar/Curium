@@ -573,15 +573,36 @@ for(Cookie cookie : cookies){
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 130px;border-radius: 4px;background: white;height: 20px;" >
 										<option></option>
-										<option>2024/25</option>
-										<option>2025/26</option>
+										<option selected>${currentAcademicYear}</option>
 										<option>2026/27</option>
-										<option>2027/28</option>
-										<option>2028/29</option>
+										<option>2025/26</option>
+										<option>2024/25</option>
+										<option>2023/24</option>
+										<option>2022/23</option>
 								</select>
 
 							</label> 
                         
+                        </td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr><tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Exam&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td width="12%" align="left">
+                                        <c:forEach items="${listExam}" var="exam">
+										    <label style="display:block;">
+										        <input type="checkbox"
+										               name="examIds"
+										               value="${exam.exid}">
+										        <c:out value="${exam.examname}" />
+										    </label>
+										</c:forEach>
                         </td>
 						</tr>
 						<tr>

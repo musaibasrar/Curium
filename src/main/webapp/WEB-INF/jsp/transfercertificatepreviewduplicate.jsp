@@ -448,8 +448,8 @@ for(Cookie cookie : cookies){
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">19.&nbsp;&nbsp;Genaral conduct &nbsp;&nbsp;
-					 <span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:740px;"><c:out value="${conduct}" /> </span>
+					<h3 style="font-weight: normal;">19.&nbsp;&nbsp;General conduct &nbsp;&nbsp;
+					 <span class="rightside"style="font-weight: bold;border-bottom-style: dotted;width:740px;">Good<%-- <c:out value="${conduct}" /> --%> </span>
 					</h3>
 				</td>
 			</tr>
