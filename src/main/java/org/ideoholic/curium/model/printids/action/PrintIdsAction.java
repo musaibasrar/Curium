@@ -50,14 +50,14 @@ public class PrintIdsAction {
 	@GetMapping("/generateIds")
 	public String generateIds() {
 		standardActionAdapter.viewClasses();
-		return "school/generateids";
+		return "generateids";
 	}
 
 	@PostMapping("/searchDetails")
 	public String searchDetails() {
 
 		printIdsActionAdapter.searchDetails();
-		return "school/generateids";
+		return "generateids";
 	}
 
 	@PostMapping("/printPreview")
