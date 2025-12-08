@@ -270,11 +270,16 @@ for(Cookie cookie : cookies){
 								<p style="margin-bottom: 0px;margin-top: 0px;">Roll No.</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">Class & sec</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">DOB</p>
-								<p style="margin-bottom: 0px;margin-top: 0px;">Attendance</p></td>
+								<p style="margin-bottom: 0px;margin-top: 0px;">Total Days</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">Present Days</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">Absent Days</p></td>
 								<td colspan="4" style="text-align: left;"><p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.sts}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
-								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.remarks}</p></td>
+								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.remarks}</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.totalDays}</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.totalPresent}</p>
+								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.totalAbsent}</p></td>
 							<%-- <td colspan="2" style="text-align:left;"><p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.admissionnumber}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
