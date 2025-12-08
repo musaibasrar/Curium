@@ -234,20 +234,94 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-                        	<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
-                        		
-			<tr>
-				<td><img src="/shatabdi/images/shatabdi.jpg" width="67" height="80"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">A Senior Secondary School<br></label>
-				<label class="addressLine">Affiliated to CBSE., Delhi, Affiliation No-330113<br></label>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="70" height="70"/></td>
-			</tr>
-		</table>
+                        		<table width="100%" align="center">
+				
+					<tr>
+					<td>
+					School Code-65109&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+						CBSE Affiliation No.-330113</td>
+					</tr>
+					
+
+						<tr>
+						    <td colspan="2" style="text-align: center; padding: 10px 0;">
+						        
+						        <table style="width: 80%; margin: 0 auto; border-collapse: collapse; border: none;">
+						            <tr>
+						                <td style="width: 15%; text-align: right; padding-right: 15px; border: none; vertical-align: middle;">
+						                    <img src="/shatabdi/images/shatabdi.png" width="58" height="70" style="vertical-align: middle;"/>
+						                </td>
+						
+						                <td style="width: 70%; text-align: center; vertical-align: top; padding: 0; border: none;">
+						                    
+						                    <label style="font-size: 20px; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 5px;">
+						                        ${branchname},Gaya
+						                    </label>
+						                    
+						                    <label style="font-size: 12px; display: block;">A Senior Secondary School</label>
+						                    <label style="font-size: 12px; display: block;">Affiliated to CBSE., Delhi, Affiliation No-330113</label>
+						                    <label style="font-size: 12px; display: block;">${branchaddress}</label>
+						                    <label style="font-size: 12px; display: block;">Contact: ${branchcontact}</label>
+						                    
+						                </td>
+						
+						                <td style="width: 15%; text-align: left; padding-left: 15px; border: none; vertical-align: middle;">
+						                    <img src="/shatabdi/images/cbselogo.png" width="63" height="70" style="vertical-align: middle;"/>
+						                </td>
+						            </tr>
+						        </table>
+						        
+						    </td>
+						</tr>
+					
+					<tr>
+						<td  style="font-family: bold;background-color: #b5ffe6;">
+						<c:set var="dataSubParts" value="${fn:split(currentAcademicYear,'/')}" />
+						<%-- Academic Year: ${dataSubParts[0]}-${dataSubParts[1]} --%>
+						Academic Year: ${academicyear}<br>
+						REPORT CARD						
+						</td>
+					</tr>
+				</table>
+
+				<table align="center" width="100%" style="border-collapse: collapse; border: 1px solid black; font-family: Arial, sans-serif; font-size: 14px;">
+				    <tr>
+				        <td style="width: 15%; text-align: left; padding: 4px; border-right: 1px solid black; font-weight: bold; vertical-align: top;">
+				            <div style="margin-bottom: 3px;">Scholar No.</div>
+				            <div style="margin-bottom: 3px;">Name</div>
+				            <div style="margin-bottom: 3px;">Father Name</div>
+				            <div style="margin-bottom: 3px;">Mother Name</div>
+				        </td>
+				        
+				        <td style="width: 25%; text-align: left; padding: 4px; border-right: 1px solid black; vertical-align: top;">
+				            <div style="margin-bottom: 3px;">${Parents.parents.student.admissionnumber}</div>
+				            <div style="margin-bottom: 3px; text-transform: capitalize;">${Parents.parents.student.name}</div>
+				            <div style="margin-bottom: 3px; text-transform: capitalize;">${Parents.parents.fathersname}</div>
+				            <div style="margin-bottom: 3px; text-transform: capitalize;">${Parents.parents.mothersname}</div>
+				        </td>
+				        
+				        <td style="width: 15%; text-align: left; padding: 4px 10px 4px 10px; border-right: 1px solid black; font-weight: bold; vertical-align: top;">
+				            <div style="margin-bottom: 3px;">Roll No.</div>
+				            <div style="margin-bottom: 3px;">Class & Sec</div>
+				            <div style="margin-bottom: 3px;">DOB</div>
+				            <div style="margin-bottom: 3px;">Attendance:</div> 
+				        </td>
+				        
+				        <td style="width: 35%; text-align: left; padding: 4px; border-right: 1px solid black; vertical-align: top;">
+				            <div style="margin-bottom: 3px;">${Parents.parents.student.sts}</div>
+				            <div style="margin-bottom: 3px;">${Parents.parents.student.classstudying}</div>
+				            <div style="margin-bottom: 3px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></div>
+				            
+				            <div style="margin-bottom: 3px; font-size: 12px; line-height: 1.2;">
+				                Total Days: ${Parents.totalDays} | Present: ${Parents.totalPresent} | Absent: ${Parents.totalAbsent}
+				            </div>
+				        </td>
+				        
+				        <td style="width: 10%; text-align: center; padding: 4px;">
+				            <img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80" style="display: block; margin: 0 auto; border: 1px solid #ccc;"/>
+				        </td>
+				    </tr>
+				</table>
 
 			<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
                 <tr>
@@ -259,35 +333,7 @@ for(Cookie cookie : cookies){
 
 			
 
-			<table style="border-collapse: collapse;margin-left: auto;margin-right: auto;">
-											
-                            <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                ${examclass}
-                                </td>
-                                
-                             </tr>
-                             
-                             
-                             
-                             <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.parents.student.admissionnumber}"/></td>
-                                <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
-									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
-                            </tr>
-                            
-                            <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Academic Year: ${academicyear}</label></td>
-                             </tr>
-                            
-                           <!-- <tr>
-                            <td><br></td>
-                            </tr> -->
-                            
-                            </table>
+			
                             
                             <%-- <table style=" border-collapse: collapse;width: 30%;float: left">
                             	<tr>

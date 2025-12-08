@@ -182,6 +182,7 @@ public class MarksDetailsAction {
 	@PostMapping("/searchForReportSingleExams")
 	public String searchForReportSingleExams() {
 		new MarksDetailsService(request, response).Search();
+		new MarksDetailsService(request, response).getStartDate();
 		return "progressreportsingleexams";
 	}
 	
