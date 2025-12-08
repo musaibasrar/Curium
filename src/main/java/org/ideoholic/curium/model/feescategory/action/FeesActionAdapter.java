@@ -171,7 +171,8 @@ public class FeesActionAdapter {
 	public void getFeeCategory() throws IOException {
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
-    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+    	String feesCategories = request.getParameter("feescategories");
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),feesCategories);
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 
