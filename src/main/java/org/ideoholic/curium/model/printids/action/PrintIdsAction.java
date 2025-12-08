@@ -70,7 +70,7 @@ public class PrintIdsAction {
 	@GetMapping("/generateIdsEmployees")
 	public String generateIdsEmployees() {
 		 employeeActionAdapter.ViewAllEmployee();
-		return "school/generateidsemployee";
+		return "generateidsemployee";
 	}
 	
 	@PostMapping("/printpreviewemployee")
