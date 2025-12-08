@@ -227,8 +227,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	
 	@GetMapping("/searchfeecategory")
 	public ResponseEntity<FeescategoryResponseDto> searchFeeCategory(@RequestParam(value="classname")
-	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid) throws IOException {
-				FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmissionStr,yearofAdmissionStr,branchid);
+	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid,@RequestHeader(value = "feescategories") String feesCategories) throws IOException {
+				FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmissionStr,yearofAdmissionStr,branchid,feesCategories);
 			if(feescategoryResponseDto.isSuccess()) {
 				return ResponseEntity.ok(feescategoryResponseDto);
 			}
