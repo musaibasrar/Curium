@@ -609,7 +609,7 @@ public class MarksDetailsService {
 				String  startDateFormatted=sdf.format(startDate);
 				String endDateFormatted=sdf.format(endDate);
 				String academicYear = currentAcademicYear;
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted,endDateFormatted);
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), startDateFormatted, endDateFormatted, academicYear, Integer.parseInt(branchId));
 				 List<Holidaysmaster> holidaysMasterList = new MarksDetailsDAO().getListofHolidays(startDate,endDate);
 				 int holidayCount = 0;
 				 for(Holidaysmaster holiday:holidaysMasterList) {
