@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.attendance.dao;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -305,7 +306,7 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	public List<Studentdailyattendance> getStudentDailyAttendance(
+	/*public List<Studentdailyattendance> getStudentDailyAttendance(
 			String studentExternalId, String fromTimestamp,
 			String toTimestamp, String currentAcademicYear, int branchId) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
@@ -319,6 +320,41 @@ public class AttendanceDAO {
 			HibernateUtil.closeSession();
 		}
 		return studentDailyAttendance;
+	}*/
+	
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studentId, String academicYear, String startDateyy, String endDateyy) {
+
+	    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
+
+	    try {
+	        transaction = session.beginTransaction();
+
+	        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+	        Date startDate = formatter.parse(startDateyy);
+	        Date endDate = formatter.parse(endDateyy);
+
+	        String hql = "FROM Studentdailyattendance " +
+	                     "WHERE attendeeid = :studentId " +
+	                     "AND academicyear = :academicYear " +
+	                     "AND date BETWEEN :startDate AND :endDate";
+
+	        Query query = session.createQuery(hql);
+	        query.setParameter("studentId", studentId);
+	        query.setParameter("academicYear", academicYear);
+	        query.setParameter("startDate", startDate);
+	        query.setParameter("endDate", endDate);
+
+	        studentDailyAttendance = query.list();
+	        transaction.commit();
+
+	    } catch (Exception e) {
+	        if(transaction != null) transaction.rollback();
+	        logger.error(e);
+	        e.printStackTrace();
+	    } finally {
+	        HibernateUtil.closeSession();
+	    }
+	    return studentDailyAttendance;
 	}
 
 	public boolean updateStudentAttendanceDetails(List<Integer> attendanceIdsList, List<String> studentAttendanceStatusList, String academicYear) {
