@@ -56,7 +56,7 @@ public class ExamDetailsAction {
     public String printPreviewHallTicket() {
 
         examDetailsActionAdapter.printPreviewHallTicket();
-        return "printpreviewhallticket";
+        return "school/printpreviewhallticket";
     }
 
     @PostMapping("/searchHallTicketDetails")
