@@ -448,7 +448,7 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;font-family:Times New Roman;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
       
@@ -458,11 +458,10 @@ for(Cookie cookie : cookies){
 
   <div>
  <table align="center">
- <tr><td><br></td></tr>
- <tr><td><br></td></tr>
+ 
  <tr>
  <td>
- <img src="/daralmajd/images/daralmajd.png" width="150" height="150"/>
+ <img src="/daralmajd/images/daralmajd.png" width="160" height="160"/>
  </td>
  </tr>
  </table>
@@ -471,22 +470,25 @@ for(Cookie cookie : cookies){
 	</div>
     <table align="center" style="text-align:center;font-weight:bold">
   <tr>
-  <td>Education for both the worlds</td>
+  <td style="font-size:14px;">Education for both the worlds</td>
   </tr>
   <tr>
-  <td>Shar a bab ibrahim</td>
+  <td style="font-size:14px;">Shar a bab ibrahim</td>
   </tr>
   <tr>
-  <td>Nuzla Sharqeyyah</td>
+  <td style="font-size:14px;">Nuzla Sharqeyyah</td>
   </tr>
    <tr>
-  <td>P.O. Box NO: 448</td>
+  <td style="font-size:14px;">P.O. Box NO: 448</td>
   </tr>
   <tr>
-  <td>Jeddah 22335 Saudi Arabia</td>
+  <td style="font-size:14px;">Jeddah 22335 </td>
+  </tr>
+   <tr>
+  <td style="font-size:14px;">Kingdom of Saudi Arabia</td>
   </tr>
   <tr>
-  <td>0126332334/0500457744</td>
+  <td style="font-size:14px;">0126332334/0500457744</td>
   </tr>
 </table>
 

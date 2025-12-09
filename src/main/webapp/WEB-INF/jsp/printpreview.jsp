@@ -459,50 +459,40 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;font-family:Times New Roman;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
-      <tr><td><br></td></tr>
+      <tr><td style="text-align:center;padding:0px;"><img src="/daralmajd/images/daralmajd.png" width="80" height="80"/></td></tr>
   
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:red">
-    DAR AL MAJD<br>INTERNATIONAL SCHOOL<%-- ${branchname} --%> </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-    <%--<p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p> --%></td></tr>
-    <tr><td><br></td></tr>
-    <tr><td><br></td></tr>
-    
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900;">
+    DAR AL MAJD<br>INTERNATIONAL SCHOOL<%-- ${branchname} --%> </p>
+    </td></tr>
    </table>
   </div>
 
   <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+ <table align="center">
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
  <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/daralmajd/images/daralmajd.png" width="72" height="72"/>
+ <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:88px;width:70px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
  </td>
  </tr>
  </table>
    </div>
    <div align="center">
-   <p style="font-size:15px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
+   <p style="font-size:15px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;font-weight:bold;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table align="center" style="text-align:center">
+ 
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="font-size:14px;">GRADE:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+   <tr>
+     <td style="font-size:14px;">ADMN.NO.<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
+  </tr>
+   <tr>
+    <td style="font-size:14px;font-weight:bold;"><%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
  <%--  <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
@@ -517,8 +507,7 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr> --%>
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    <td><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
  <!--  <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
