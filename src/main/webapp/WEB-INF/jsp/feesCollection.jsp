@@ -14,30 +14,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Fees Collection</title>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -271,7 +271,8 @@
 				text-transform: capitalize;
 				border-radius: 4px;
 			}
-
+			tr.trClass:focus-within { background: #90CCB8; }
+			
         </style>
         <script type="text/javascript">
             /**
@@ -549,7 +550,7 @@
          *
          */
          
-         $(function(){
+/*          $(function(){
             
              $('#chckHead').click(function () {
                  var length = $('.chcktb2:checked').length;
@@ -583,7 +584,7 @@
                  }
              });
 
-         });
+         }); */
          
         function deleteRow(tableID) {
             try {
@@ -777,7 +778,7 @@
             	}
             	
             	var form1 = document.getElementById("form1");
-        		form1.action="/abc/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+        		form1.action="/vision/FeesCollection/feesAdd?paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
         		form1.method = "POST";
         		form1.submit();
         		
@@ -785,7 +786,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action="/abc/FeesCollection/StampFees";
+        		form1.action="/vision/FeesCollection/StampFees";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -904,23 +905,65 @@
             }
             
         </script>
-    </head>
+
+		<script>
+		function calculate(index, isChecked) {
+		    var feesdueamount = parseInt(document.getElementById("dueamount_" + index).value, 10) || 0;
+		    var feescatamountInput = document.getElementById("amountpaying_" + index);
+		    var feescatamount = parseInt(feescatamountInput.value, 10) || 0;
+		    var grandTotalAmountInput = document.getElementById("grandTotalAmount");
+		    var totaldueamountInput = document.getElementById("totaldueamount");
+
+		    var grandAmount = parseInt(grandTotalAmountInput.value, 10) || 0;
+		    var dueAmount = parseInt(totaldueamountInput.value, 10) || 0;
+
+		    if (isChecked) {
+		        // Add the due amount to grand total and subtract from total due
+		        grandAmount += feesdueamount;
+		        dueAmount -= feesdueamount;
+		        feescatamountInput.value = feesdueamount;
+		    } else {
+		        // Subtract whatever was filled as amount paying from grand total, and add it back to due
+		        grandAmount -= feescatamount;
+		        dueAmount += feescatamount;
+		        feescatamountInput.value = 0;
+		    }
+
+		    grandTotalAmountInput.value = grandAmount;
+		    totaldueamountInput.value = dueAmount;
+		}
+		
+		function toggleAllChecks(headCheckbox) {
+			  document.querySelectorAll('.chcktb2').forEach(function(cb) {
+			    cb.checked = headCheckbox.checked;
+			    // Get index from value attribute: e.g., "sfsid_3" → index = 3
+			    var parts = cb.value.split('_');
+			    var index = parts[1]; // if your value is like "sfsid_3"
+			    calculate(index, cb.checked);
+			  });
+			}
+	</script>
+
+</head>
     <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
+    //allow access only if session exists
+    String user = null;
+    if (session.getAttribute("userAuth") == null) {
+    	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+    } else
+    	user = (String) session.getAttribute("userAuth");
+    String userName = null;
+    String sessionID = null;
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+    	for (Cookie cookie : cookies) {
+    		if (cookie.getName().equals("user"))
+    	userName = cookie.getValue();
+    		if (cookie.getName().equals("JSESSIONID"))
+    	sessionID = cookie.getValue();
+    	}
+    }
+    %>
     <body>
         <form id="form1" method="post">
             
@@ -1047,16 +1090,17 @@ for(Cookie cookie : cookies){
 
 				<thead>
                     <tr >
-                    	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                    	<th class="headerText"><input type="checkbox" id="chckHead" onclick="toggleAllChecks(this)"/></th>
                         <td class="headerText">Fees Category</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
-                        <td class="headerText">Amount Due to be paid</td>
+                        <td class="headerText">Amount Paying</td>
                         <!-- <td class="headerText">Fine</td> -->
 
                     </tr>
                 </thead>
 
 				<tbody>
+					<c:set var="totalfeesdue" value="${0}" />
 					<c:forEach items="${studentfeesdetails}" var="studentfeesdetails" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
@@ -1064,10 +1108,12 @@ for(Cookie cookie : cookies){
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
+								onclick="calculate(${status.index},this.checked)"
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
+							<c:set var="totalfeesdue" value="${totalfeesdue + studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
@@ -1131,16 +1177,32 @@ for(Cookie cookie : cookies){
 						</tr>
 					</c:forEach>
 				</tbody>
-				<tfoot>
-                    
-                    <tr>
+				<%-- <tfoot>
 
-                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
+						<tr>
+							<td colspan="3" align="right"><strong>Total Due:</strong></td>
+							<td align="center"><b><input type="text" name="totaldueamount" id="totaldueamount" value="${totalfeesdue}" readonly /></b></td>
+						</tr>
+
+						<tr>
+                        <td colspan="3" align="right"><b>Total Paying&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
-                </tfoot>
+                </tfoot> --%>
 			</table>
-			<table>
+				<div id="summaryBar"
+					style="position: fixed; bottom: 10px; right: 30px; width: 45vw; /* Half of viewport with padding */ min-width: 300px; max-width: 600px; padding: 12px 24px; background: #f9f9f9; border: 2px solid #3f4d5a; border-radius: 7px; box-shadow: 0 2px 8px #3f4d5a33; z-index: 100; text-align: left;">
+					<span style="margin-right: 36px;font-weight: bold;font-size: 15px;"> <strong>Total
+							Due:</strong> <input type="text" name="totaldueamount" id="totaldueamount"
+						value="${totalfeesdue}" readonly
+						style="width: 90px; font-weight: bold; text-align: left;" />
+					</span> <span style="font-weight: bold;font-size: 15px;"> <strong>Total Amount Paying:</strong> <input
+						type="text" name="grandTotalAmount" id="grandTotalAmount"
+						value="0" readonly
+						style="width: 90px; font-weight: bold; text-align: left;" />
+					</span>
+				</div>
+				<table>
 					<tr>
 						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
                         <td align="left"><label><textarea  name="narrationreceipt"
@@ -1183,7 +1245,7 @@ for(Cookie cookie : cookies){
             
               
             <input type="button" value="submit" id="submitbtn"/>
-            
+            <br><br><br><br>
             
             <div id="dialogpaymentmethod" title="Payment Method">
 				
