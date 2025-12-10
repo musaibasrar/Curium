@@ -94,7 +94,7 @@ public class MarksDetailsAction {
 	@PostMapping("/generateReport")
 	public String generateReport() {
 		if (marksDetailsActionAdapter.generateReport()) {
-			return "markssheet";
+			return "school/markssheet";
 		} else {
 			return "error";
 		}
@@ -241,7 +241,7 @@ public class MarksDetailsAction {
 	@PostMapping("/generateReportSingleExams")
 	public String generateReportSingleExams() {
 		if (marksDetailsActionAdapter.generateReportSingleExams()) {
-			return "markssheetsingleexams";
+			return "school/markssheetsingleexams";
 		} else {
 			return "error";
 		}
