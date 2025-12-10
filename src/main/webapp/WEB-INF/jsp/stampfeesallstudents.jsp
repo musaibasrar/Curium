@@ -366,7 +366,7 @@
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/StampFeesProcess/advanceSearchForStampFeesByCategory";
+		form1.action = "/sac/StampFeesProcess/advanceSearchForStampFeesByCategory";
 		form1.method = "POST";
 		form1.submit();
 
@@ -869,7 +869,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/StampFeesProcess/applyFeesAll" method="POST">
+	<form id="form1" action="/sac/StampFeesProcess/applyFeesAll" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
