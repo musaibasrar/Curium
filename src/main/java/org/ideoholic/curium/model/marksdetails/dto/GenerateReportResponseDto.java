@@ -16,4 +16,7 @@ public class GenerateReportResponseDto {
     @Builder.Default
     private boolean success = false;
     private String examName;
+    private int totalDays;
+    private int totalpresent;
+    private int totalabsent;
 }
