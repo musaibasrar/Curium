@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -677,22 +678,42 @@ for(Cookie cookie : cookies){
   
 							<div style="display: flex; gap: 40px;">
 						            
-						            <div>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="January"> January</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="February"> February</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="March"> March</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="April"> April</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="May"> May</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="June"> June</label><br>
-						            </div>
-						            <div>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="July"> July</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="August"> August</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="September"> September</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="October"> October</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="November"> November</label><br>
-						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="December"> December</label>
-						            </div>
+										<c:set var="selectedMonths" value="${feesmonths}" />
+										<c:if test="${empty selectedMonths}">
+										  <c:set var="selectedMonths" value="" />
+										</c:if>
+										
+										<c:set var="monthsArray" value="${fn:split(selectedMonths, ',')}" />
+										<c:set var="size" value="${fn:length(monthsArray)}" />
+										
+										<c:choose>
+										  <c:when test="${size >= 6}">
+										    <c:set var="end1" value="5" />
+										  </c:when>
+										  <c:otherwise>
+										    <c:set var="end1" value="${size - 1}" />
+										  </c:otherwise>
+										</c:choose>
+										
+										<div class="months">
+										  <!-- first column -->
+										  <div>
+										    <c:forEach var="m" items="${monthsArray}" begin="0" end="${end1}">
+										      <label><input type="checkbox" name="months" value="${fn:trim(m)}"> ${fn:trim(m)}</label><br>
+										    </c:forEach>
+										  </div>
+										
+										  <!-- second column (only if there are more items beyond the first column) -->
+										  <div>
+										    <c:if test="${size > end1 + 1}">
+										      <c:set var="begin2" value="${end1 + 1}" />
+										      <c:set var="end2" value="${size - 1}" />
+										      <c:forEach var="m" items="${monthsArray}" begin="${begin2}" end="${end2}">
+										        <label><input type="checkbox" name="months" value="${fn:trim(m)}"> ${fn:trim(m)}</label><br>
+										      </c:forEach>
+										    </c:if>
+										  </div>
+										</div>
 						
 						        </div>
 									

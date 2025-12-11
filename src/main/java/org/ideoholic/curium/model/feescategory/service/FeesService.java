@@ -1031,4 +1031,11 @@ public class FeesService {
 		        }
 		        return otherFeesCategoryResponseDto;
 		    }
+
+
+		public FeescategoryResponseDto getFeesMonths(String branchId) {
+			FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+			feescategoryResponseDto.setFeesMonths(new DataUtil().getPropertiesValue("feesmonths"+branchId));
+			return feescategoryResponseDto;
+		}
 }
