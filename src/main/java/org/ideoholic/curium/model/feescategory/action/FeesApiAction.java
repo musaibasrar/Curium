@@ -72,7 +72,7 @@ public interface FeesApiAction {
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
 	ResponseEntity<FeescategoryResponseDto> searchFeeCategory(@RequestParam(value="classname")
-	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid) throws IOException;
+	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid,@RequestHeader(value = "feescategories") String feesCategories) throws IOException;
 
 		
     ResponseEntity<StudentIdDto> applyotherConcession(@RequestBody ConcessionDto concessionDto);
