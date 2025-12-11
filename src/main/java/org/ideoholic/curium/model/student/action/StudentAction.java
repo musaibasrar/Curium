@@ -65,9 +65,9 @@ public class StudentAction {
 		standardActionAdapter.viewClasses();
 		ResultResponse result = studentActionAdapter.addNew();
 		if(result.isSuccess()){
-			return result.getMessage();
+			return  "school/addStudent";
 		}
-		return "error";
+		return  "sessiontimeout";
 	}
 
 	@PostMapping("/download")
