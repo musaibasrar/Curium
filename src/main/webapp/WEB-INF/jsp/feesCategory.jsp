@@ -449,6 +449,92 @@
          
      }
 </script>
+
+<script type="text/javascript">
+  // Toggle every checkbox with name="fromclass" when master is clicked
+  function toggleAll(source) {
+    var checkboxes = document.getElementsByName('fromclass');
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (!checkboxes[i].disabled) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+    // remove indeterminate state if any
+    source.indeterminate = false;
+  }
+
+  // Keep the master checkbox state (checked / unchecked / indeterminate) in sync
+  function updateSelectAll() {
+    var checkboxes = document.getElementsByName('fromclass');
+    var selectAll = document.getElementById('selectAll');
+    var total = 0, checked = 0;
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].disabled) continue;
+      total++;
+      if (checkboxes[i].checked) checked++;
+    }
+    if (total === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else if (checked === total) {
+      selectAll.checked = true;
+      selectAll.indeterminate = false;
+    } else if (checked === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else {
+      selectAll.checked = false;
+      selectAll.indeterminate = true; // partial selection
+    }
+  }
+
+  // Optional: initialize master checkbox on page load
+  document.addEventListener('DOMContentLoaded', updateSelectAll);
+</script>
+
+
+<script type="text/javascript">
+  // Toggle every checkbox with name="months" when master is clicked
+  function toggleAllMonths(source) {
+    var checkboxes = document.getElementsByName('months');
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (!checkboxes[i].disabled) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+    source.indeterminate = false;
+  }
+
+  // Keep the months master checkbox state in sync (checked / unchecked / indeterminate)
+  function updateSelectAllMonths() {
+    var checkboxes = document.getElementsByName('months');
+    var selectAll = document.getElementById('selectAllMonths');
+    var total = 0, checked = 0;
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].disabled) continue;
+      total++;
+      if (checkboxes[i].checked) checked++;
+    }
+    if (!selectAll) return;
+    if (total === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else if (checked === total) {
+      selectAll.checked = true;
+      selectAll.indeterminate = false;
+    } else if (checked === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else {
+      selectAll.checked = false;
+      selectAll.indeterminate = true;
+    }
+  }
+
+  // Initialize months master checkbox on page load as well
+  document.addEventListener('DOMContentLoaded', updateSelectAllMonths);
+</script>
+
 </head>
 <%
 //allow access only if session exists
@@ -502,12 +588,16 @@ for(Cookie cookie : cookies){
 							</td>
 
 							<td width="8%">
+									<label style="font-weight: bold; color:#325F6D; margin-right:12px;">
+								      <input type="checkbox" id="selectAll" onclick="toggleAll(this)">
+								      Select All
+								    </label>
 							 <label> 
 							 
 							 <c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" value="${classdetailslist.classdetails}">
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" onchange="updateSelectAll()" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>	
 							</c:forEach>
@@ -575,7 +665,42 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
+						
+						<tr  id="monthsRow" style="display:none;">
+							<td width="10%" class="alignRight">Months &nbsp;</td>
+						<td width="70%">
+						
+							<label style="font-weight: bold; margin-right: 12px;color:#325F6D;">
+							    <input type="checkbox" id="selectAllMonths" onclick="toggleAllMonths(this)">
+							    Select All Months
+	      				   </label>
+  
+							<div style="display: flex; gap: 40px;">
+						            
+						            <div>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="January"> January</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="February"> February</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="March"> March</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="April"> April</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="May"> May</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="June"> June</label><br>
+						            </div>
+						            <div>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="July"> July</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="August"> August</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="September"> September</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="October"> October</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="November"> November</label><br>
+						                <label style="color:#325F6D;"><input type="checkbox" name="months" value="December"> December</label>
+						            </div>
+						
+						        </div>
+									
+							</td>
+						</tr>		
+						<tr  id="monthsRowAdditionalSpace" style="display:none;">
+							<td><br /></td>
+						</tr>
 						<tr></tr>
 
 						<tr>
