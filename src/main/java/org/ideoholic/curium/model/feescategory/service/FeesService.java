@@ -685,7 +685,7 @@ public class FeesService {
            }
   }
 	   
-	   public FeescategoryResponseDto getFeeCategory(String classname,String yearofAdmissionStr,String currentAcademicYearStr,String branchid) throws IOException {
+	   public FeescategoryResponseDto getFeeCategory(String classname,String yearofAdmissionStr,String currentAcademicYearStr,String branchid, String feesCategories) throws IOException {
 
 		   FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 	        if(branchid!=null){
@@ -742,14 +742,30 @@ buffer.append("<table id='dataTable' style='width:100%; border-collapse:collapse
 // ---------------------- BODY LOOP -------------------------
 for(int i = 0; i < feecategoryList.size(); i++) {
 
-    int totalAmountPerCategory = feecategoryList.get(i).getTotalinstallments() * feecategoryList.get(i).getAmount();
+    int totalAmountPerCategory = 0;
     grandTotalAmount += totalAmountPerCategory;
+    boolean checkFeesCat = false;
+    String checkBoxChecked = "";
+    for (String category : feesCategories.split(",")) {
+    	String feesCategoryName = feecategoryList.get(i).getFeescategoryname().toLowerCase();
+    	String feeCat = category.toLowerCase();
+        if (feesCategoryName.contains(feeCat)) {
+        	checkFeesCat = true;
+        	totalAmountPerCategory=feecategoryList.get(i).getTotalinstallments() * feecategoryList.get(i).getAmount();
+        	break;
+        }
+    }
+    
+    if(checkFeesCat) {
+    	checkBoxChecked= " checked";
+    }
 
     buffer.append("<tr style='height:26px;'>")
     
     // Column 1 – Fee Category checkbox
     .append("<td style='text-align:center;'>")
-    .append("<input type='checkbox' checked class='chcktbl' name='feescategory'")
+    .append("<input type='checkbox' class='chcktbl' name='feescategory'")
+    .append(checkBoxChecked)
     .append(" id='feesCat_").append(i).append("'")
     .append(" value='").append(feecategoryList.get(i).getIdfeescategory()).append("--").append(i).append("'")
     .append(" onclick='updateFeesCategory(").append(i).append(")'/></td> ")
@@ -773,7 +789,7 @@ for(int i = 0; i < feecategoryList.size(); i++) {
           // Column 4 – No. of installments
           .append("<td>")
           .append("<input type='text' size='18' required")
-          .append(" value='").append(feecategoryList.get(i).getTotalinstallments()).append("'")
+          .append(" value='").append(checkFeesCat ? feecategoryList.get(i).getTotalinstallments() : "0").append("'")
           .append(" name='feesCount' id='feesCount_").append(i).append("'")
           .append(" onkeyup='calculate(").append(i).append(")' onclick='calculate(").append(i).append(")'/>")
           .append("<input type='hidden' name='totalinstallmentsactual' id='totalinstallmentsactual_").append(i).append("' value='").append(feecategoryList.get(i).getTotalinstallments()).append("'/>")
