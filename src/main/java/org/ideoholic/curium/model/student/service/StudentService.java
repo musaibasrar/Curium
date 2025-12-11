@@ -1285,8 +1285,6 @@ public class StudentService {
 
 		if(branchId!=null){
 			result.setSuccess(true);
-			result.setMessage("addStudent");
-			return result;
            /* if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) || "3".equalsIgnoreCase(branchId)) {
                 return "addStudent.jsp";
             }else if("4".equalsIgnoreCase(branchId)) {
@@ -1295,7 +1293,6 @@ public class StudentService {
                 return "addStudentDC.jsp";
             }*/
 		}
-		result.setMessage("sessiontimeout");
 		return result;
 	}
 
