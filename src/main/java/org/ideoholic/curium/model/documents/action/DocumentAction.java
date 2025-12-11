@@ -289,4 +289,12 @@ public class DocumentAction {
 		public String printArticleCertificate() {
 			return "articlecertificateprint";
 		}
+	  
+	  @PostMapping("/printSinglePageAdmissionAbstract")
+		public String printSinglePageAdmissionAbstract() {
+
+			documentActionAdapter.printAdmissionAbstract();
+			return "printpreviewabstractsinglepage";
+		}
+	 
 }
