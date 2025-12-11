@@ -14,6 +14,7 @@ public class ExamsMarks implements Serializable,Comparable<ExamsMarks>{
 	double percentage;
     String resultclass;
     Integer rank;
+    float totalMinMarks;
     
 	public ExamsMarks() {
 	}

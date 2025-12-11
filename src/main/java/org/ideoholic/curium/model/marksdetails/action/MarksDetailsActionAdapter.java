@@ -283,10 +283,9 @@ public class MarksDetailsActionAdapter {
 
 	        return resultResponse.isSuccess();
 	    }
-	  
-	  public boolean generateFinalExamReport() {
 
-	        GenerateReportDto dto = new GenerateReportDto();
+	public boolean generateFinalExamReport() {
+		 GenerateReportDto dto = new GenerateReportDto();
 	        dto.setStudentIds(request.getParameterValues("studentIDs"));
 	        dto.setExamClass(request.getParameter("examclass"));
 	        dto.setExamName(request.getParameter("examname"));
@@ -296,5 +295,5 @@ public class MarksDetailsActionAdapter {
 	        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 	        request.setAttribute("examname", responseDto.getExamName());
 	        return responseDto.isSuccess();
-	    }
+	}
 }

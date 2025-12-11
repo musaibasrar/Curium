@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marks Card Single Exam (2020-21)</title>
+    <title>Marks Card Single Exam</title>
     <link rel="stylesheet" href="styles.css">
     <style>
     body {
@@ -25,7 +25,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("/childrenandglobal/images/childrenandglobal${branchid}.png") no-repeat center;
+    background: url("/vision/images/vision${branchid}.png") no-repeat center;
     background-size: contain;
     opacity: 0.1; /* Adjust transparency */
     z-index: -1;
@@ -73,7 +73,7 @@ table {
 }
 
 table th, table td {
-    border: 1px solid black;
+    border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
@@ -131,27 +131,22 @@ footer p {
 <body style="border-style:dotted;">
     <div>
      <c:forEach items="${markssheetlist}" var="Parents">
-    <table align="center" width="700px;" style="border:none;margin-bottom:0px;">
-        <%-- ${branchname} --%>
-        <tr><td rowspan="2" style="border:none;text-align:right;padding:0px;"><img border="0" style="vertical-align: text-bottom;height: 70px;width: 70px;" alt="ideoholic" src="/childrenandglobal/images/childrenandglobal${branchid}.png"></td>
-        <td style="border:none;text-align:center;padding:0px;">
-        <h1><%-- ${branchname} --%>CHILDREN SCHOOL</h1></td>
-       
-        </tr>
-       
-        
-        <tr><td style="font-size:15px;font-weight:bold;text-align:center;border:none;padding:0px;">
-        Marks Card<br> ${examname} (${currentAcademicYear})
-        </td></tr>
-        </table>
-        <section class="student-info" style="margin-bottom:0px;">
-    <div class="student-details">
-        <p><strong style="color:red">STUDENT NAME:</strong><strong style="color:blue;text-transform:uppercase;"> ${Parents.parents.student.name}</strong></p>
-        <p><strong style="color:red">FATHER NAME:</strong><strong style="color:blue;text-transform:uppercase;"> ${Parents.parents.fathersname}</strong></p>
-        <p><strong style="color:red">CLASS:</strong><strong style="color:blue"><c:set var="dateClassParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" /> ${dateClassParts[0]}</strong></p>
-        <p><strong style="color:red">SECTION:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
-        <p><strong style="color:red">ROLL NO.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
+       <header style="display: flex; align-items: center; gap: 15px;">
+    <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/vision/images/vision${branchid}.png">
+    <div style="background-color:blue;color:white;border-radius:10px;">
+        <h1 style="text-transform:Uppercase;">${branchname}</h1>
     </div>
+</header>
+ <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
+        <section class="student-info">
+    <div class="student-details">
+        <p><strong style="color:red">Student Name:</strong><strong style="color:blue"> ${Parents.parents.student.name}</strong></p>
+        <p><strong style="color:red">Father Name:</strong><strong style="color:blue"> ${Parents.parents.fathersname}</strong></p>
+        <p><strong style="color:red">Class:</strong><strong style="color:blue"><c:set var="dateClassParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" /> ${dateClassParts[0]}</strong></p>
+        <p><strong style="color:red">Section:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
+        <p><strong style="color:red">Roll No.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
+    </div>
+    <%-- <img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/> --%>
 </section>        <table>
             <thead>
                 <tr>

@@ -354,7 +354,6 @@ public class MarksDetailsAction {
 		return "finalexamreport";
 	}
 	
-
 	@PostMapping("/searchForFinalReport")
 	public String searchForFinalReport() {
 		marksDetailsActionAdapter.Search();
