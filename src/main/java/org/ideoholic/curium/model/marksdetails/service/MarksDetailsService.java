@@ -2203,7 +2203,7 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 										subMarks.put(sub.getSubjectname(), Float.toString(sub.getMaxmarks())+"/"+sub.getMinmarks()+"/"+marks.getMarksobtained()+""+"/P"+"/"+marks.getSubgrade());
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if(marksObtained == 999) {
-										subMarks.put(sub.getSubjectname(), " _AB");
+										subMarks.put(sub.getSubjectname(), Float.toString(sub.getMaxmarks())+"/"+sub.getMinmarks()+"/AB"+"/ "+"/"+marks.getSubgrade());
 									}
 									
 									totalMarks = totalMarks+sub.getMaxmarks();

@@ -165,21 +165,21 @@ footer p {
 </section>        <table>
             <thead>
                 <tr>
-                    <th>Subjects</th>
-                    <th>Max. Marks</th>
-                    <th>Min. Marks</th>
-                    <th>Marks Obt.</th>
+                    <th style="text-align:center;">Subjects</th>
+                    <th style="text-align:center;">Max. Marks</th>
+                    <th style="text-align:center;">Min. Marks</th>
+                    <th style="text-align:center;">Marks Obt.</th>
                 </tr>
             </thead>
             <tbody>
             <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="0" step="1">
              
-             <c:set var="subjectOrder" value="1st LANGUAGE ENGLISH,2nd LANGUAGE KANNADA,3rd LANGUAGE URDU,HINDI,MATHEMATICS,E.V.S,SOCIAL SCIENCE,ARABIC/DEENIYATH" />
+             <c:set var="subjectOrder" value="1st LANGUAGE ENGLISH,2nd LANGUAGE KANNADA,3rd LANGUAGE URDU,HINDI,MATHEMATICS,SCIENCE,SOCIAL SCIENCE,SOCIAL,ARABIC/DEENIYATH,E.V.S," />
 			 <c:set var="subjectList" value="${fn:split(subjectOrder, ',')}" />
 
 			<c:forEach var="subject" items="${subjectList}">
 			    <c:forEach var="submarks" items="${exammarks.subMarks}">
-			        <c:if test="${submarks.key == subject}">
+			        <c:if test="${fn:trim(submarks.key) == fn:trim(subject)}">
 			            <tr>
 			                <td style="color:red;padding:0px;">${submarks.key}</td>
 			                <c:set var="dateParts" value="${fn:split(submarks.value,'/')}" />
@@ -190,7 +190,18 @@ footer p {
 			                    <fmt:formatNumber value="${dateParts[1]}" maxFractionDigits="0"/>
 			                </td>
 			                <td style="padding:0px;text-align:center;">
-			                    <fmt:formatNumber value="${dateParts[2]}" maxFractionDigits="0"/>
+			                   <c:catch var="parseError">
+								  <fmt:parseNumber value="${fn:trim(dateParts[2])}" var="parsedNumber" />
+								</c:catch>
+								
+								<c:choose>
+								  <c:when test="${empty parseError}">
+								    <fmt:formatNumber value="${parsedNumber}" maxFractionDigits="0" />
+								  </c:when>
+								  <c:otherwise>
+								    ${dateParts[2]}
+								  </c:otherwise>
+								</c:choose>
 			                </td>
 			            </tr>
 			        </c:if>
