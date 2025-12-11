@@ -20,4 +20,5 @@ public class GenerateReportResponseDto {
     private int totalpresent;
     private int totalabsent;
     private String examName;
+    private String startDate;
 }
