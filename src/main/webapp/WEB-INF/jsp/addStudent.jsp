@@ -280,13 +280,6 @@
 
 
 <script type="text/javascript" src="/noblewisdom/js/datetimepicker_css.js"></script>
-
-<script src="/noblewisdom/JavaScript/actb.js"></script>
-<script src="/noblewisdom/JavaScript/common.js"></script>
-
-
-
-
 <script>
 	$(function() {
 		$("#datepicker").datepicker({
@@ -582,7 +575,22 @@
     function searchfeecategory() {
     	var addClass=document.getElementById('addclass').value;
     	var yoa=document.getElementById('yearofadmission').value;
-    	
+   		const feesCategories = document.getElementsByName('feescategories');
+   		const feesCategoriesTransport = document.getElementById('transport');
+   		
+        const checkedFeesCategoryValues = [];
+        
+        for (let i = 0; i < feesCategories.length; i++) {
+            const checkbox = feesCategories[i];
+            if (checkbox.checked) {
+                checkedFeesCategoryValues.push(checkbox.value);
+            }
+        }
+        
+        if (feesCategoriesTransport.value !== 'Select') {
+            checkedFeesCategoryValues.push(feesCategoriesTransport.value);
+        }
+        
     	if (!addClass) {
             console.warn("Class is not selected. Skipping search.");
             return;
@@ -596,7 +604,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/noblewisdom/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -892,7 +900,7 @@ $(document).ready(function() {
             }
 
 			
-			document.addEventListener('DOMContentLoaded', function() {
+			/* document.addEventListener('DOMContentLoaded', function() {
 			    updateTotalAmount();
 			});
 			
@@ -918,7 +926,7 @@ $(document).ready(function() {
 			
 			    // Update the final total display field, formatted to 2 decimal places
 			    document.getElementById('feesTotalAmount').value = totalAmount;
-			}
+			} */
         </script>
 </head>
 <%
@@ -1073,10 +1081,17 @@ $(document).ready(function() {
 									name="place" type="text" class="myclass" id="place" size="36">
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
-							<td ><label><input name="dateofadmission" autocomplete="false"
-									type="text" class="myclass" id="dateofadmission" size="36"
-									data-validate="validate(required)"> </label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
+							<td ><label>
+							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
+								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+								&nbsp;Transport <select name="feescategories" id="transport">
+										        <option value="Select">-- Select --</option>
+										        <option value="Malmal">Malmal</option>
+										        <option value="Madhubani">Madhubani</option>
+										        <option value="xyz">xyz</option>
+										    </select>
+								</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -1456,6 +1471,11 @@ $(document).ready(function() {
 									class="myclass" id="datepickerDND" size="36"
 									data-validate="validate(required)">
 							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
+							<td ><label><input name="dateofadmission" autocomplete="false"
+									type="text" class="myclass" id="dateofadmission" size="36"
+									data-validate="validate(required)"> </label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
