@@ -478,7 +478,7 @@ for(Cookie cookie : cookies){
             		</tr>
             				<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/finalExamReport" style="font-size: 12px;">Final Exam Marks Card</a>
+            				 <a target="mainFrame" href="/noblewisdom/MarksDetailsProcess/finalExamReport" style="font-size: 12px;">Final Exam Marks Card</a>
             			</td>
             		</tr>
             		<tr>
