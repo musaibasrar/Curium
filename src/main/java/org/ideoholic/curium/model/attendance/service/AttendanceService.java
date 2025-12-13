@@ -1,6 +1,28 @@
 package org.ideoholic.curium.model.attendance.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -15,7 +37,34 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
-import org.ideoholic.curium.model.attendance.dto.*;
+import org.ideoholic.curium.model.attendance.dto.AttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
+import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
+import org.ideoholic.curium.model.attendance.dto.HolidayIdsDto;
+import org.ideoholic.curium.model.attendance.dto.HolidaysDto;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
+import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.MonthlyDataStaffDto;
+import org.ideoholic.curium.model.attendance.dto.StaffAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.StaffAttendanceDetailsResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StaffAttendanceMasterDto;
+import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsMarkDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsMarkResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceGraphDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceGraphResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMasterDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMonthlyDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMonthlyResponseDto;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
+import org.ideoholic.curium.model.attendance.dto.StudentsAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.UpdateStaffAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.ViewStaffAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.ViewStaffAttendanceResponseDto;
+import org.ideoholic.curium.model.attendance.dto.WeekOffDto;
+import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -29,14 +78,7 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -1472,6 +1514,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		String date = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
 		int present = 0;
 		int absent = 0;
+		int totalNoofStudents = 0;
+		
+		List<Student> studentsList = new studentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+		totalNoofStudents = studentsList.size();
 		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().getStudentAttendance(date);
 		for (Studentdailyattendance listStudent : listStudentAttendance) {
 			String attendancestatus = listStudent.getAttendancestatus();
@@ -1483,6 +1529,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		}
 		result.setTotalPresent(present);
 		result.setTotalAbsent(absent);
+		result.setTotalNoOfStudents(totalNoofStudents);
+		result.setAttendanceDate(dto.getDateOfAttendance());
 		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	    List<Classsec> secList = new ArrayList<Classsec>();
 	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
