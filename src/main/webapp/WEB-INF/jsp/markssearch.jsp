@@ -764,7 +764,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 									</c:if>
 							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${marksobtained}" />"
 								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
-								maxlength="3"
+								maxlength="4"
 							><%-- <input type="text"
 								id="studentMarks" 
 								name="studentMarks"

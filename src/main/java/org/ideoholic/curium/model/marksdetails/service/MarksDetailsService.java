@@ -403,8 +403,8 @@ public class MarksDetailsService {
 		request.setAttribute("newMarksDetails", newMarksDetails);
 		request.setAttribute("subjectselected", request.getParameter("subjectselected"));
 		request.setAttribute("examselected", request.getParameter("examselected"));
-		request.setAttribute("subjectid", subject);
-		request.setAttribute("examid", exam);
+		request.setAttribute("subjectid", subjectDetailsId);
+		request.setAttribute("examid", examIdName[0]);
 		/*
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
 		 * "Marks details "+marksDetails.get(i).getMarksobtained()); }
@@ -493,7 +493,7 @@ public class MarksDetailsService {
 					marks.setExamid(examid);
 					marks.setSubid(subid);
 					marks.setSid(studentId);
-					marks.setMarksobtained(Integer.parseInt(marksObtained));
+					marks.setMarksobtained(Float.parseFloat(marksObtained));
 					String currentAcademicYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
 					String currentYear = currentAcademicYear;
 					marks.setAcademicyear(currentYear);
@@ -590,7 +590,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
