@@ -5,6 +5,7 @@ import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsRespons
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
+import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.*;
@@ -18,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +41,7 @@ public class StudentActionAdapter {
 
     @Autowired
     private StudentService studentService;
-
+    
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -354,4 +357,9 @@ public class StudentActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
+
+	public void searchListOfParent() throws IOException {
+		 studentService.getParentList(httpSession.getAttribute(BRANCHID).toString());
+		
+	}
 }

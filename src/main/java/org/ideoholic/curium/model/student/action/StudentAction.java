@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.student.action;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -338,6 +340,11 @@ public class StudentAction {
 		} else {
 			return "student_details_other_feesstructure";
 		}
+	}
+	
+	@GetMapping("/searchListOfParent")
+	public void searchListOfParent() throws IOException {
+				studentActionAdapter.searchListOfParent();
 	}
 	
 }

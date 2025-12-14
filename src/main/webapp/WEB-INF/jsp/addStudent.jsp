@@ -929,6 +929,65 @@ $(document).ready(function() {
 			    document.getElementById('feesTotalAmount').value = totalAmount;
 			} */
         </script>
+        <script>
+        /* ================== SECOND AJAX : Parent List ================== */
+
+        var xmlHttpParent;   // ✅ different variable
+        var parentCount;
+
+        function searchListOfParent() {
+
+            var addClass = document.getElementById('addclass').value;
+
+            if (!addClass) {
+                console.warn("Class is not selected. Skipping search.");
+                return;
+            }
+
+            if (typeof XMLHttpRequest != "undefined") {
+                xmlHttpParent = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                xmlHttpParent = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlHttpParent.onreadystatechange = stateChangedParent;
+            xmlHttpParent.open(
+                "GET",
+                "/vision/StudentProcess/searchListOfParent",
+                true
+            );
+            xmlHttpParent.send(null);
+        }
+
+        /* ✅ Separate callback */
+        function stateChangedParent() {
+
+            if (xmlHttpParent.readyState === 4 && xmlHttpParent.status === 200) {
+
+                // Load dropdown / parent list
+                document.getElementById("parentDiv").innerHTML =
+                    xmlHttpParent.responseText;
+            }
+        }
+
+        /* Optional helper (if needed) */
+        function GetXmlHttpObjectParent() {
+            var xmlhttp = null;
+            try {
+                xmlhttp = new XMLHttpRequest();
+            } catch (e) {
+                try {
+                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlhttp;
+        }
+
+    
+</script>
+        
 </head>
 <%
 	//allow access only if session exists
@@ -1456,6 +1515,25 @@ $(document).ready(function() {
 							<td ><label><input name="dateofadmission" autocomplete="false"
 									type="text" class="myclass" id="dateofadmission" size="36"
 									data-validate="validate(required)"> </label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+										
+							<td class="alignLeft">Sibling &nbsp;</td>
+							<td ><label> <input
+								type="checkbox"
+								onchange="searchListOfParent();" />
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Parents&nbsp;</td>
+							<td ><label id="parentDiv"><input name="dateofadmission" autocomplete="false"
+									type="text" class="myclass" id="dateofadmission" size="36"
+									>	 </label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
