@@ -478,6 +478,17 @@
             	
             }
             
+            function validateForm() {
+    		    const graduated = document.getElementById('yes:studentstatus').checked;
+    		    const leftout = document.getElementById('no:studentstatus').checked;
+
+    		    if (!graduated && !leftout) {
+    		      alert("Please select either 'Graduated' or 'Left Out'.");
+    		      return false;
+    		    }
+    		    return true;
+    		  }
+            
         </script>
     </head>
       <%
@@ -604,7 +615,20 @@ for(Cookie cookie : cookies){
                      <tr>
                     <td> Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
                     </tr>
-                    
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    	<td>Student Status: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    	
+                    	<td  height="30">&nbsp;Graduated<input
+								type="checkbox" value="passedout" name="studentadmissionstatus" id="yes:studentstatus"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Left Out<input
+								type="checkbox" value="leftout" name="studentadmissionstatus" id="no:studentstatus"
+								onclick="noCheck(this.id)" />
+
+							</td>
+							</tr>
                     </table>
                     <tr>
                     <td><br></td>
