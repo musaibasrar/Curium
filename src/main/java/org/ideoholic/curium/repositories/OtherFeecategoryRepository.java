@@ -17,4 +17,20 @@ public interface OtherFeecategoryRepository extends JpaRepository<OtherFeecatego
 	            @Param("academicYear") String academicYear,
 	            @Param("nextYear") String nextYear);
 
+	    /**
+	     * Replicates HQL:
+	     * "from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'"
+	     *
+	     * Usage: pass className, searchYear and branchId exactly as before.
+	     */
+	    @Query("SELECT o FROM OtherFeecategory o " +
+	           "WHERE o.particularname LIKE CONCAT(:className, '--%') " +
+	           "AND o.academicyear = :searchYear " +
+	           "AND o.branchid = :branchId")
+	    List<OtherFeecategory> findByClassNamePrefixAndAcademicYearAndBranchId(
+	        @Param("className") String className,
+	        @Param("searchYear") String searchYear,
+	        @Param("branchId") String branchId
+	    );
+
 }

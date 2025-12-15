@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
@@ -23,10 +22,7 @@ import org.ideoholic.curium.repositories.OtherfeescollectionRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
@@ -366,47 +362,39 @@ public class FeesCategoryDAO {
 		}
 	}
 	
-	@SuppressWarnings("finally")
+	@Transactional
 	public boolean createOtherFeescategory(List<OtherFeecategory> feesCategoryList) {
-		boolean result = false;
-		Transaction transaction = null;
-		try {
-			Session session = HibernateUtil.openCurrentSession();
-            transaction = session.beginTransaction();
-            for (OtherFeecategory feescategory : feesCategoryList) {
-            	session.save(feescategory);
-			}
-            transaction.commit();
-            result = true;
-        } catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
-            return result;
-        }
+	    boolean result = false;
+	    try {
+	        // Session session = HibernateUtil.openCurrentSession();
+	        // transaction = session.beginTransaction();
+	        for (OtherFeecategory feescategory : feesCategoryList) {
+	            // session.save(feescategory);
+	            otherFeecategoryRepo.save(feescategory);
+	        }
+	        // transaction.commit();
+	        result = true;
+	    } catch (Exception hibernateException) {
+	        log.error(hibernateException.getMessage(), hibernateException);
+	        hibernateException.printStackTrace();
+	        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	    }
+	    return result;
 	}
 
+	@Transactional
 	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, String branchId) {
-		Transaction transaction = null;
-		List <OtherFeecategory> result= new ArrayList();
+		List <OtherFeecategory> result= new ArrayList<>();
 		try {
-			Session session = HibernateUtil.openCurrentSession();
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
-			result=query.list();
-			transaction.commit();
+			// Query query = session.createQuery("from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");
+			result = otherFeecategoryRepo.findByClassNamePrefixAndAcademicYearAndBranchId(className, searchYear, branchId);
 
-		} catch (Exception hibernateException) { transaction.rollback(); log.error(hibernateException.getMessage(), hibernateException);
-
+		}  catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
 			hibernateException.printStackTrace();
-
-		} finally {
-				HibernateUtil.closeSession();
-			return result;
-
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return result;
 	}
 
 }
