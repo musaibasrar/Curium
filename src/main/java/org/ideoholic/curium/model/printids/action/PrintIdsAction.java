@@ -76,7 +76,7 @@ public class PrintIdsAction {
 	@PostMapping("/printpreviewemployee")
 	public String printpreviewemployee() {
 		 employeeActionAdapter.printMultipleEmployees();
-		 return "printpreviewemployee";
+		 return "school/printpreviewemployee";
 	}
 	
 }
