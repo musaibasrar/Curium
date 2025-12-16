@@ -2006,7 +2006,7 @@ private List<Marks> prepareSubSubjectMarks(String subSubjectName, String[] stude
         Subject subjectDetails, int examId,
         String academicYear, String userId, String branchId) {
 		
-		SubSubject subSubject = new SubjectDetailsDAO().readSubSubject(Integer.parseInt(branchId), subjectDetails.getSubid(), subSubjectName);
+		SubSubject subSubject = new SubjectDetailsDAO().readSubSubject(Integer.parseInt(branchId), subjectDetails.getSubjectid(), subSubjectName);
 		if (subSubject == null) return Collections.emptyList();
 		
 		return buildMarksList(studentIds, marksArray, subjectDetails, examId, academicYear, userId, branchId, Collections.emptyList(), subSubject.getId());
