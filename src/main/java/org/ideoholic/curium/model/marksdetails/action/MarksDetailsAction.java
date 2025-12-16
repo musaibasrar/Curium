@@ -90,6 +90,7 @@ public class MarksDetailsAction {
 	@PostMapping("/searchForReport")
 	public String searchForReport() {
 		marksDetailsActionAdapter.Search();
+		marksDetailsActionAdapter.getStartDate();
 		return "progressreport";
 	}
 	

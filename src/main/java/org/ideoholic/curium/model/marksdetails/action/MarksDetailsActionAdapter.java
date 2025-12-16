@@ -74,6 +74,8 @@ public class MarksDetailsActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
         dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
+        dto.setEndDate(request.getParameter("enddate")); 
+        dto.setStartDate(request.getParameter("startdate"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
@@ -296,5 +298,11 @@ public class MarksDetailsActionAdapter {
 	        request.setAttribute("examname", responseDto.getExamName());
 	        request.setAttribute("classsearch", classSearch[0]);
 	        return responseDto.isSuccess();
+	}
+
+	public void getStartDate() {
+		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate();
+		request.setAttribute("startDateStr", responseDto.getStartDate());
+		
 	}
 }
