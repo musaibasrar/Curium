@@ -11,7 +11,7 @@ import org.ideoholic.curium.model.std.dto.Classsec;
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
 public class SubjectsResponseDto {
     private List<Subject> subjects;
-    private List<Subjectmaster> listSubjectNames;
+    private List<Subjectmaster> subjectMasters;
     private boolean success;
     private List<Classsec> classSecs;
 }

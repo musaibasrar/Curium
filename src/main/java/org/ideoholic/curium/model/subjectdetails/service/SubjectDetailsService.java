@@ -23,10 +23,13 @@ import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Musaib_2
  *
  */
+@Slf4j
 @Service
 public class SubjectDetailsService {
 	
@@ -100,13 +103,13 @@ public class SubjectDetailsService {
 		String[] examIds = subjectIdsDto.getSubjectIds();
 		boolean result;
 		 if(examIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : examIds) {
-	            System.out.println("id" + id);
+	        	log.debug("id:{}", id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + examIds.length);
+	        log.debug("id length:{}", examIds.length);
 	        subjectDetailsDao.deleteMultiple(ids);
 	        result = true;
 			return  ResultResponse.builder().success(result).build();
@@ -140,7 +143,7 @@ public class SubjectDetailsService {
 		SubjectsResponseDto result = new SubjectsResponseDto();
 	    try {
 	    	List<Subjectmaster> list = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
-			result.setListSubjectNames(list);
+			result.setSubjectMasters(list);
 			result.setSuccess(true);
 	    } catch (Exception e) {
 	        e.printStackTrace();
@@ -152,13 +155,13 @@ public class SubjectDetailsService {
 		String[] examIds = subjectIdsDto.getSubjectIds();
 		boolean result;
 		 if(examIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : examIds) {
-	            System.out.println("id" + id);
+	            log.debug("id:{}", id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + examIds.length);
+	        log.debug("id length:{}", examIds.length);
 	        subjectDetailsDao.deleteMultipleSubjects(ids);
 	        result = true;
 			 return ResultResponse.builder().success(result).build();
@@ -191,7 +194,7 @@ public class SubjectDetailsService {
 	                          .add(sub.getSubsubjectname());
 	                }
 	            }
-	            
+	        
 			result.setSubSubjectMap(subjectSubSubjectMap);
 			result.setSuccess(true);
 	    } catch (Exception e) {
@@ -201,7 +204,7 @@ public class SubjectDetailsService {
 	}
 
 	public ResultResponse addSubSubject(SubSubjectDto subSubjectDto, String branchId, String userLoginId) {
-		List<SubSubject> subSubjectList = new ArrayList<SubSubject>();
+		List<SubSubject> subSubjectList = new ArrayList<>();
 		boolean result= true;
 		
 		if(branchId!=null){
@@ -229,13 +232,13 @@ public class SubjectDetailsService {
 		String[] subIds = subjectIdsDto.getSubjectIds();
 		boolean result;
 		 if(subIds!=null){
-	        List<Integer> ids = new ArrayList();
+	        List<Integer> ids = new ArrayList<>();
 	        for (String id : subIds) {
-	            System.out.println("id" + id);
+	        	log.debug("id{}", id);
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        System.out.println("id length" + subIds.length);
+	        log.debug("id length:{}", subIds.length);
 	        subjectDetailsDao.deleteMultipleSubSubject(ids);
 	        result = true;
 			return  ResultResponse.builder().success(result).build();
