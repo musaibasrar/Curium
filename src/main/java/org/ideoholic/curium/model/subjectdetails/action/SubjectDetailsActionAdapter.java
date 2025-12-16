@@ -75,7 +75,7 @@ public class SubjectDetailsActionAdapter {
     public void readListOfSubjectNames() {
 
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
-        httpSession.setAttribute("listSubjectNames", result.getSubjects());
+        httpSession.setAttribute("listSubjectNames", result.getSubjectMasters());
     }
     
 	public void readListOfSubSubjects() {
@@ -83,7 +83,7 @@ public class SubjectDetailsActionAdapter {
         SubjectsResponseDto result = subjectDetailsService.readListOfSubjectNames(httpSession.getAttribute("branchid").toString());
         SubSubjectsResponseDto resultSubSubject = subjectDetailsService.readListOfSubSubjects(httpSession.getAttribute("branchid").toString());
         httpSession.setAttribute("subjectsubsubjectmap", resultSubSubject.getSubSubjectMap());
-        httpSession.setAttribute("listSubjectNames", result.getListSubjectNames());
+        httpSession.setAttribute("listSubjectNames", result.getSubjectMasters());
     }
 	
 	public boolean addSubSubject() {
