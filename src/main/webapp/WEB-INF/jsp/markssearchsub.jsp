@@ -739,7 +739,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 						<c:choose>
 						    <c:when test="${subjectselected == 'English' 
 						        or subjectselected == 'Kannada' 
-						        or subjectselected == 'Urdu' 
+						        or subjectselected == 'Urdu/Hindi' 
 						        or subjectselected == 'Hindi' 
 						        or subjectselected == 'Deeniyat'}">
 						        <th class="headerText">Reading</th>
@@ -788,8 +788,11 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 										value="${Parents.key.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.key.student.classstudying}" /></td>
+							
+							<c:choose>
+    							<c:when test="${not empty Parents.value}">
 								<c:forEach items="${Parents.value}" var="marksobtained">
-							<td class="dataText">
+									<td class="dataText">
 									<c:if test="${marksobtained.value <= 100}">
 											<c:set var="marksscored" value="${marksobtained.value}" />
 									</c:if>
@@ -804,6 +807,15 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								 
 								 </td>
 								 </c:forEach>
+								 </c:when>
+								 <c:otherwise>
+								 		<td class="dataText"></td>
+								        <td class="dataText"></td>
+								        <td class="dataText"></td>
+								        <td class="dataText"></td>
+								        <td class="dataText"></td>
+								    </c:otherwise>
+								 </c:choose>
 
 
 						</tr>
