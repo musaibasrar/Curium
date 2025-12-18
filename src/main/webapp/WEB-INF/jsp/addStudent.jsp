@@ -1083,13 +1083,54 @@ $(document).ready(function() {
 							
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
-							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
-								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
-								&nbsp;Transport <select name="feescategories" id="transport">
+							
+							          Admission Fee<input type="checkbox" value="Admission Fee" name="feescategories" id="Admission Fee"/>
+							          Tuition Fee<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
+								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/><br>
+								
+								Annual Fee<input type="checkbox" value="Annual Fee" name="feescategories" id="Annual Fee"/>
+								Security Deposit<input type="checkbox" value="Security Deposit" name="feescategories" id="Security Deposit"/>
+								Transport Security<input type="checkbox" value="Transport Security" name="feescategories" id="Transport Security"/><br>
+								Bed Charges<input type="checkbox" value="Bed Charges" name="feescategories" id="Bed Charges"/>
+								
+								
+								&nbsp;Transport <select name="feescategories"  style="width: 60px;border-radius: 4px;background: white;height: 28px;" id="transport">
 										        <option value="Select">-- Select --</option>
-										        <option value="Malmal">Malmal</option>
-										        <option value="Madhubani">Madhubani</option>
-										        <option value="xyz">xyz</option>
+										       <option value="Aghawa">Aghawa</option>
+											<option value="Badi Mureth">Badi Mureth</option>
+											<option value="Baluatol">Baluatol</option>
+											<option value="Basopatti">Basopatti</option>
+											<option value="Bhagwanpur">Bhagwanpur</option>
+											<option value="Bhaiya Patthi">Bhaiya Patthi</option>
+											<option value="Bhalni">Bhalni</option>
+											<option value="Bhalni Kapariya">Bhalni Kapariya</option>
+											<option value="Champa">Champa</option>
+											<option value="Dostpur">Dostpur</option>
+											<option value="Dumriyahi">Dumriyahi</option>
+											<option value="Ghuski Patti">Ghuski Patti</option>
+											<option value="Harpur Neem Chowk">Harpur Neem Chowk</option>
+											<option value="Islampur">Islampur</option>
+											<option value="Kaluahi">Kaluahi</option>
+											<option value="Kamal pur haat">Kamal pur haat</option>
+											<option value="Kapariya">Kapariya</option>
+											<option value="Koraya Patti">Koraya Patti</option>
+											<option value="Kutti Pokhar">Kutti Pokhar</option>
+											<option value="Labtoliya">Labtoliya</option>
+											<option value="Loha (Gachcha chuwk)">Loha (Gachcha chuwk)</option>
+											<option value="Madan Chowk">Madan Chowk</option>
+											<option value="Madhepur">Madhepur</option>
+											<option value="Malmal">Malmal</option>
+											<option value="Mana Patty">Mana Patty</option>
+											<option value="Manmohan">Manmohan</option>
+											<option value="Mureth">Mureth</option>
+											<option value="Naraila">Naraila</option>
+											<option value="Parsa">Parsa</option>
+											<option value="Phent">Phent</option>
+											<option value="Pursolia">Pursolia</option>
+											<option value="Qadam Chowk">Qadam Chowk</option>
+											<option value="Qazyahi">Qazyahi</option>
+											<option value="Raadh">Raadh</option>
+
 										    </select>
 								</label></td>
 						</tr>

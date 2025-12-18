@@ -183,7 +183,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -326,7 +326,7 @@
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+		<%-- <TABLE width="100%" border="0">
 			<tr>
 			
 			<td><hr width="100%"></td>
@@ -352,7 +352,7 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
@@ -526,7 +526,7 @@
 			
 			</table>
 			
-		<TABLE width="100%" border="0">
+		<%-- <TABLE width="100%" border="0">
 			 <tr>
 			
 			<td><hr width="100%"></td>
@@ -552,7 +552,7 @@
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
-			</table>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">

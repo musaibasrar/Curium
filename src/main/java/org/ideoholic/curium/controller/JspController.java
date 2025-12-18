@@ -660,4 +660,9 @@ public class JspController {
 	public String getLeftSettingsAccountant() {
 		return "leftsettings_accountant";
 	}
+	
+	@GetMapping("/reports_accountant")
+	public String getReportsAccountant() {
+		return "reports_accountant";
+	}
 }

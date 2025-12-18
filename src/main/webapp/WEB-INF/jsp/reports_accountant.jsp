@@ -290,6 +290,48 @@ for(Cookie cookie : cookies){
         <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
 
         <div id="container" style="width: 95%" >
+        
+        		<h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/greatindiaacademy/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/greatindiaacademy/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
+            			</td>
+            		</tr>
+            		
+                </table>
+            </div>
             
             
             
