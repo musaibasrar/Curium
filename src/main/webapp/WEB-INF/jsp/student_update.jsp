@@ -578,7 +578,7 @@ for(Cookie cookie : cookies){
 									id="admnno" size="30" data-validate="validate(required)">
 
 							</label></td>
-							<td class="alignLeft" style="padding-left: 20px;">STS Number &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">GR. No.&nbsp;</td>
 
 									<td width="16%"><label> <input
 											name="sts" type="text" class="myclass"
@@ -906,7 +906,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">IREGNO.
 								&nbsp;</td>
 								<td>
 										<input
@@ -983,10 +983,10 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 
-							<td class="alignLeft">RTE &nbsp;</td>
-							<td height="30">&nbsp;Yes<input
+							<td class="alignLeft">Student Type &nbsp;</td>
+							<td height="30">&nbsp;Residential<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;Non-Residential<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
 							</td>

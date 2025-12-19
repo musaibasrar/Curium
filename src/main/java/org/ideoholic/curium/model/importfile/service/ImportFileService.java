@@ -19,9 +19,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -45,6 +47,7 @@ public class ImportFileService {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
+		List<Login> listParentLogin = new ArrayList<Login>();
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
 					XSSFWorkbook workbookRead = new XSSFWorkbook(uploadedFiles.getInputStream());
@@ -87,19 +90,52 @@ public class ImportFileService {
 						//student.setSts(row.getCell(1).getStringCellValue());
 						student.setStudentexternalid(row.getCell(1).getStringCellValue());
 						student.setName(row.getCell(2).getStringCellValue());
-						//student.setGender(row.getCell(3).getStringCellValue());
-						/*
-						 * student.setDateofbirth(DateUtil.simpleDateParser(
-						 * (row.getCell(16).getStringCellValue()) + "/" +
-						 * (row.getCell(17).getStringCellValue()) + "/" +
-						 * (row.getCell(18).getStringCellValue())));
-						 */
-						//student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
+						student.setGender(row.getCell(3).getStringCellValue());
+						
+						
+						Cell dayCell = row.getCell(16);
+						Cell monthCell = row.getCell(17);
+						Cell yearCell = row.getCell(18);
+
+						if (dayCell != null && monthCell != null && yearCell != null &&
+						    !dayCell.toString().trim().isEmpty() &&
+						    !monthCell.toString().trim().isEmpty() &&
+						    !yearCell.toString().trim().isEmpty()) {
+
+						    String dobStr = dayCell.toString().trim() + "/" +
+						                    monthCell.toString().trim() + "/" +
+						                    yearCell.toString().trim();
+
+						    student.setDateofbirth(DateUtil.simpleDateParser(dobStr));
+						} else {
+						    // Allow empty DOB
+						    student.setDateofbirth(null);
+						}
+
+						student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
 						//student.setPlaceofbirth(row.getCell(6).getRawValue());
-						student.setAdmissiondate(DateUtil.simpleDateParser(
-								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
-										+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(48).getStringCellValue());
+						Cell admissionDayCell = row.getCell(19);
+						Cell admissionMonthCell = row.getCell(20);
+						Cell admissionYearCell = row.getCell(21);
+
+						if (admissionDayCell != null && admissionMonthCell != null && admissionYearCell != null &&
+						    admissionDayCell.getCellType() != CellType.BLANK &&
+						    admissionMonthCell.getCellType() != CellType.BLANK &&
+						    admissionYearCell.getCellType() != CellType.BLANK) {
+
+						    String admissionDateStr =
+						            admissionDayCell.getStringCellValue() + "/" +
+						            admissionMonthCell.getStringCellValue() + "/" +
+						            admissionYearCell.getStringCellValue();
+
+						    student.setAdmissiondate(
+						            DateUtil.simpleDateParser(admissionDateStr)
+						    );
+						} else {
+						    student.setAdmissiondate(null);
+						}
+
+						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(47).getStringCellValue());
 						
 						student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
 						//student.setBloodgroup(row.getCell(9).getStringCellValue());
@@ -120,7 +156,8 @@ public class ImportFileService {
 						// student.setTotalmarks(Integer.parseInt(row.getCell(40).getStringCellValue()));
 						// student.setPercentage(row.getCell(41).getStringCellValue());
 						//student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
-						student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
+						student.setUserid(2);
+						student.setRte(Integer.parseInt(row.getCell(51).getStringCellValue()));
 						student.setBhagyalakshmibondnumber(row.getCell(50).getStringCellValue());
 						//student.setSts(row.getCell(49).getStringCellValue());
 
@@ -146,7 +183,7 @@ public class ImportFileService {
 						//parent.setMotherscastecertno(row.getCell(36).getStringCellValue());
 						// parent.setProfession(row.getCell(36).getStringCellValue());
 						//parent.setMothersqualification(row.getCell(52).getStringCellValue());
-						//parent.setCocontactnumber(row.getCell(37).getStringCellValue());
+						parent.setCocontactnumber(row.getCell(30).getStringCellValue());
 						//parent.setFatherscastecertno(row.getCell(47).getStringCellValue());
 						//parent.setMotherscastecertno(row.getCell(48).getStringCellValue());
 						//parent.setAddresspermanent(row.getCell(54).getStringCellValue()+"-"+row.getCell(55).getStringCellValue()+"-"+row.getCell(56).getStringCellValue()+"-"+row.getCell(57).getStringCellValue()+"-"+row.getCell(58).getStringCellValue());
@@ -159,9 +196,20 @@ public class ImportFileService {
 						// System.out.println("date of birth***"
 						// +((row.getCell(25).getStringCellValue())+"/"+(row.getCell(26).getStringCellValue())+"/"+(row.getCell(27).getStringCellValue())));
 					}
+					
+					for (Parents parent : listParents) {
+						Login login= new Login();
+						Branch branch = new Branch();
+						login.setUsername(parent.getStudent().getStudentexternalid());
+						login.setPassword(parent.getContactnumber());
+						branch.setIdbranch(parent.getBranchid());
+						login.setBranch(branch);
+						login.setUsertype("parents");
+						listParentLogin.add(login);
+					}
 
 					System.out.println("Values Inserted Successfully");
 
-		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents)).build();
+		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
 	}
 }

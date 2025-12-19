@@ -466,7 +466,7 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.admissionnumber}" />
                             </td>
                             
-                        <td width="25%" class="alignLeft" height="50">STS Number
+                        <td width="25%" class="alignLeft" height="50">GR. No.
 								</td>
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.sts}" />
@@ -601,7 +601,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Bag No.
+                         <td  width="25%"  class="alignLeft" height="50" >IREGNO.
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />
@@ -628,15 +628,15 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
-                         <td  width="25%"  class="alignLeft" height="50" >RTE
+                         <td  width="25%"  class="alignLeft" height="50" >Student Type
                             </td>
                             <td width="25%" class="tablerows" >
                                
                                 <c:if test="${(student.rte ==1)}">    
-           						  <c:out default="" value="Yes" />
+           						  <c:out default="" value="Residentail" />
            						 </c:if>
                                 <c:if test="${(student.rte == 0)}">    
-           						  <c:out default="" value="No" />
+           						  <c:out default="" value="Non-Residentail" />
            						 </c:if>
            						 
                             </td>

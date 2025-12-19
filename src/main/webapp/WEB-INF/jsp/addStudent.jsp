@@ -1310,7 +1310,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Number&nbsp;</td>
+							<td class="alignLeft" >IREGNO&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1385,12 +1385,12 @@ $(document).ready(function() {
 
 						<tr>
 						
-							<td class="alignLeft"  >RTE
+							<td class="alignLeft"  >Student Type
 										&nbsp;</td>
 
-									<td  >&nbsp;Yes<input
+									<td  >&nbsp;Residential<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Non-Residential<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
 										</td>

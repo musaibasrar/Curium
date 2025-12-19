@@ -1,9 +1,19 @@
 package org.ideoholic.curium.model.sendsms.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Properties;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
@@ -14,47 +24,24 @@ import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
+import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Properties;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Service
 public class SmsService {
 	
-	 private HttpServletRequest request;
-	    private HttpServletResponse response;
-	    private HttpSession httpSession;
-	    
-	private static DecimalFormat df2 = new DecimalFormat(".##");
-	 private static final Logger logger = LogManager.getLogger(SmsService.class);
-	
-	public SmsService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
-
-
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
 
 		int noOfRecords = 100;
 		int offset=0;
 		int maxRetries = 3;
 		int attempts = 0;
-		if(httpSession.getAttribute("branchid")!=null){
+		if(branchId!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
 			String addClass =dto.getAddClass();
@@ -62,7 +49,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -77,7 +64,7 @@ public class SmsService {
 				String classStudying = DataUtil.emptyString(conClassStudying);
 				
 				if(!classStudying.equalsIgnoreCase("")){
-					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
 				}	
 			}
 			
@@ -87,7 +74,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			logger.info("main query:"+queryMain);
+			log.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -113,7 +100,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						logger.info("Numbers are *** "+numbers);
+						log.info("Numbers are *** "+numbers);
 						
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
@@ -177,7 +164,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			logger.info("main query:"+queryMain);
+			log.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -195,7 +182,7 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						logger.info("Numbers are *** "+numbers);
+						log.info("Numbers are *** "+numbers);
 						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
@@ -221,7 +208,7 @@ public class SmsService {
 	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
-	        	
+
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
@@ -267,53 +254,62 @@ public class SmsService {
 	        templatemessage = templatemessage.replace("var4", var4);
 		// Construct data
 		String phonenumbers=numbers;
-		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(templatemessage, "UTF-8");
-		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&apikey=" + apikey;
-		data +="&peid=" + peid;
-		data +="&templateid=" + templateid;
+		
+		String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?";
+		 StringBuilder sgcPostContent = new StringBuilder(POST_URL);
+         sgcPostContent.append("APIKey=").append(URLEncoder.encode(apikey, "UTF-8"));
+         sgcPostContent.append("&senderid=").append(URLEncoder.encode(smssender, "UTF-8"));
+         sgcPostContent.append("&channel=").append(URLEncoder.encode("trans", "UTF-8"));
+         sgcPostContent.append("&DCS=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&flashsms=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&number=").append(URLEncoder.encode(phonenumbers, "UTF-8"));
+         sgcPostContent.append("&text=").append(URLEncoder.encode(templatemessage, "UTF-8"));
+         sgcPostContent.append("&route=").append(URLEncoder.encode("04", "UTF-8"));
+         sgcPostContent.append("&DLTTemplateId=").append(URLEncoder.encode(templateid, "UTF-8"));
+         sgcPostContent.append("&PEID=").append(URLEncoder.encode(peid, "UTF-8"));
+				
 		// Send data
 		
-		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-		logger.info(templateType+": URL "+POST_URL);
-		System.out.println(templateType+": URL "+POST_URL);
-        URL obj = new URL(POST_URL);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+		//String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?"+data;
+		log.info(templateType+": URL "+POST_URL);
+		log.debug(templateType+": URL "+POST_URL);
+        URL obj = new URL(sgcPostContent.toString());
+        URLConnection myURLConnection = obj.openConnection();
+        myURLConnection.connect();
 
 		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
+        BufferedReader reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+        
+        String output;
+        while ((output = reader.readLine()) != null) {
+            System.out.println("OUTPUT: " + output);
+            
+         // Check if ErrorCode is present
+            int errorCodeIndex = output.indexOf("\"ErrorCode\":\"");
+            if (errorCodeIndex != -1) {
+                int start = errorCodeIndex + "\"ErrorCode\":\"".length();
+                int end = output.indexOf("\"", start);
+                String errorCode = output.substring(start, end);
 
-		responseCode = con.getResponseCode();
-		logger.info("POST Response Code :: " + responseCode);
+                if ("000".equals(errorCode)) {
+                	responseCode=200;
+                } else {
+                    System.out.println("❌ Message not sent. ErrorCode: " + errorCode);
+                }
+            } else {
+                System.out.println("⚠️ Invalid response format: ErrorCode not found.");
+            }
+        }
 
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
+        // Close reader
+        reader.close();
 
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			// print result
-			logger.info(response.toString());
 		} else {
-			logger.info("POST request not worked");
-		}}}
+			log.error("POST request not worked");
+		}}
 		catch (Exception e)
 		{
-		logger.info("Error SMS "+e);
+			log.error("Error SMS "+e);
 		}
 		return responseCode;
 	}

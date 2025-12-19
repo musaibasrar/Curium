@@ -1,35 +1,10 @@
 package org.ideoholic.curium.model.attendance.service;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Map.Entry;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -51,26 +26,31 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.Map.Entry;
+
+@Slf4j
+@Service
 public class AttendanceService {
-	
+
+		@Autowired
 	 	private HttpServletRequest request;
+
+		@Autowired
 	    private HttpServletResponse response;
-	    private HttpSession httpSession;
 	    private static final int BUFFER_SIZE = 4096;
-	    private String CURRENTACADEMICYEAR = "currentAcademicYear";
-	    private String BRANCHID = "branchid";
 	    
-	    private static final Logger logger = LogManager.getLogger(AttendanceService.class);
-	    
-	    public AttendanceService(){
-	    }
-	    
-	public AttendanceService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-        this.response = response;
-        this.httpSession = request.getSession();
-	}
+	    @Autowired
+	    private SmsService smsService;
 
 	public ResultResponse viewAllHolidays(String branchId, String currentAcademicYear) {
 		//remove it after testing
@@ -111,6 +91,7 @@ public class AttendanceService {
 	}
 
 	public ResultResponse addWeekOff(WeekOffDto weekOffDto, String branchId, String currentAcademicYear) {
+		boolean success = true;
 		Weeklyoff weeklyOff = new Weeklyoff();
 		String[] weekOff = weekOffDto.getWeekOff();
 		if(weekOff!=null){
@@ -118,15 +99,12 @@ public class AttendanceService {
 			weeklyOff.setWeeklyoffday(weekOff[i]);
 			weeklyOff.setAcademicyear(currentAcademicYear);
 			weeklyOff.setBranchid(Integer.parseInt(branchId));
-			return ResultResponse
-					.builder()
-					.success(new AttendanceDAO().saveWeeklyOff(weeklyOff))
-					.build();
+			success &= new AttendanceDAO().saveWeeklyOff(weeklyOff);
 		}
 		}
 		return ResultResponse
 				.builder()
-				.success(false)
+				.success(success)
 				.build();
 	}
 
@@ -368,7 +346,7 @@ public class AttendanceService {
 		       		            }
 		                }
 		        } catch (FileUploadException e) {
-		        	logger.error(e);
+		        	log.error("file upload error"+ e);
 		        }
 		
 			if(!listStudentAttendance.isEmpty()){
@@ -393,7 +371,7 @@ public class AttendanceService {
 				        	return true;
 				        }
 					} catch (Exception e) {
-						logger.info("checktimings "+e);
+						log.info("checktimings "+e);
 					}
 					
 		return false;
@@ -635,7 +613,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public boolean viewStudentAttendanceDetailsMonthlyGraphOLD() {
+	/*public boolean viewStudentAttendanceDetailsMonthlyGraphOLD() {
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
 			
@@ -652,8 +630,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			Calendar cEnd = Calendar.getInstance();
 			cEnd.setTime(toDate);
 			cEnd.set(Calendar.DAY_OF_MONTH, cEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
-			/*dateTemp = cEnd.getTime();
-			Timestamp toTimestamp = new Timestamp(dateTemp.getTime());*/
+			*//*dateTemp = cEnd.getTime();
+			Timestamp toTimestamp = new Timestamp(dateTemp.getTime());*//*
 			int diffYear = Math.abs(cStart.get(Calendar.YEAR) - cEnd.get(Calendar.YEAR));
 			int diffMonth = diffYear * 12 + Math.abs(cStart.get(Calendar.MONTH) - cEnd.get(Calendar.MONTH));
 			int monthsDiff = cStart.get(Calendar.MONTH) - cEnd.get(Calendar.MONTH);
@@ -704,7 +682,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		request.setAttribute("studentList", studentList);
 		
 		return true;
-	}
+	}*/
 
 	public StudentAttendanceDetailsMarkResponseDto viewStudentAttendanceDetailsMark(StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto, String branchId, String currentAcademicYear) {
 		
@@ -785,14 +763,14 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList);
+						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
 					}
 			}
 		}
 		return result;
 	}
 	
-	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -800,10 +778,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			        try {
 						properties.load(inputStream);
 					} catch (IOException e) {
-						logger.info("send SMS "+e);
+						log.info("send SMS "+e);
 					}
         
-        	String attendanceClass = request.getParameter("attendanceclass");
+        	String attendanceClass = dto.getAttendanceClass();
         	String absentMessage = null;
         	StringBuilder sbN = new StringBuilder();
         	String numbers = null;
@@ -815,7 +793,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-            			new SmsService(request, response).sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
+        				smsService.sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {
 						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }
@@ -1054,10 +1032,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		// getFile(name, path);
 	}
 
-	public boolean downloadFile() {
-		
+	public ResultResponse downloadFile() {
 
-		boolean result = false;
+		ResultResponse result = ResultResponse.builder().build();
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx");
@@ -1089,12 +1066,13 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
+			return result;
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error("" + e);
+			result.setSuccess(false);
 		}
 		return result;
-		
 		}
 
 	public ResultResponse viewAttendanceStaff(String branchId) {
@@ -1146,9 +1124,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
+	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto, String currentAcademicYear) {
 		
-		if(updateStaffAttendanceDetailsDto.getCurrentAcademicYear()!=null){
+		if(currentAcademicYear!=null){
 			String[] attendanceIds = updateStaffAttendanceDetailsDto.getAttendanceIds();
 			String[] studentAttendanceStatus = updateStaffAttendanceDetailsDto.getStudentAttendanceStatus();
 			List<Integer> attendanceIdsList = new ArrayList<Integer>();
@@ -1222,9 +1200,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
+	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto, String branchId, String currentAcademicYear) {
 		ResultResponse result = null;
-		if(markStaffAttendanceDto.getCurrentAcademicYear()!=null){
+		if(currentAcademicYear!=null){
 			String[] attendanceIds = markStaffAttendanceDto.getAttendanceIds();
 			String[] staffAttendanceStatus = markStaffAttendanceDto.getStaffAttendanceStatus();
 			String[] inTime = markStaffAttendanceDto.getInTime();
@@ -1251,8 +1229,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				staffDailyAttendance.setIntime(inTimeList.get(i));
 				staffDailyAttendance.setOuttime(outTimeList.get(i));
 				staffDailyAttendance.setDate(new Date());
-				staffDailyAttendance.setAcademicyear(markStaffAttendanceDto.getCurrentAcademicYear());
-				staffDailyAttendance.setBranchid(markStaffAttendanceDto.getBranchId());
+				staffDailyAttendance.setAcademicyear(currentAcademicYear);
+				staffDailyAttendance.setBranchid(Integer.parseInt(branchId));
 				staffdailyattendanceList.add(staffDailyAttendance);
 			}
 			result = ResultResponse
@@ -1264,7 +1242,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 
 	public ResultResponse exportMonthlyDataStaff(MonthlyDataStaffDto monthlyDataStaffDto, String branchId, String currentAcademicYear) {
-		
+		ResultResponse result = ResultResponse.builder().build();
+
 		if(currentAcademicYear!=null){
 			
 		Date monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
@@ -1284,24 +1263,20 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
 		try {
-			ResultResponse
-					.builder()
-					.success(exportDataToExcelStaff(staffsAttendance,monthOf))
-					.build();
+			result.setSuccess(true);
+			return exportDataToExcelStaff(staffsAttendance,monthOf);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			result.setSuccess(false);
 		}
 		}
-		return ResultResponse
-				.builder()
-				.success(false)
-				.build();
+		return result;
 	}
 
-	private boolean exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
+	private ResultResponse exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
 
-		boolean writeSucees = false;
+		ResultResponse result = ResultResponse.builder().build();
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
 		int numberOfDays = cStart.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -1377,21 +1352,20 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx"));
 				workbook.write(out);
 				out.close();
-				writeSucees = true;
+				result.setSuccess(true);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return writeSucees;
+		return result;
 		// getFile(name, path);
 	}
 
-	public boolean downloadFileStaff() {
+	public ResultResponse downloadFileStaff() {
 		
 
-		boolean result = false;
+		ResultResponse result = ResultResponse.builder().build();
 		try {
-
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
@@ -1421,9 +1395,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 			inStream.close();
 			outStream.close();
-			result = true;
+			result.setSuccess(true);
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error("" + e);
+			e.printStackTrace();
 		}
 		return result;
 		
@@ -1493,16 +1468,15 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 }
 
-	public ResultResponse attendanceSummaryReport(String branchId, String attendanceDate) {
-		
-		ResultResponse result = ResultResponse.builder().build();
-		String date = DateUtil.dateFromatConversionSlash(attendanceDate);
-		Date attdate = DateUtil.indiandateParser(attendanceDate);
+	public StudentAttendanceMonthlyResponseDto attendanceSummaryReport(StudentAttendanceDetailsDto dto, String branchId) {
+
+		StudentAttendanceMonthlyResponseDto result = StudentAttendanceMonthlyResponseDto.builder().success(false).build();
+		String date = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
 		int present = 0;
 		int absent = 0;
 		int totalNoofStudents = 0;
 		
-		List<Student> studentsList = new studentDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		List<Student> studentsList = new studentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
 		totalNoofStudents = studentsList.size();
 		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().getStudentAttendance(date);
 		for (Studentdailyattendance listStudent : listStudentAttendance) {
@@ -1513,10 +1487,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				absent = absent + 1;
 			}
 		}
-		request.setAttribute("present", present);
-		request.setAttribute("absent", absent);
-		request.setAttribute("totalnoofstudents", totalNoofStudents);
-		request.setAttribute("attendancedate", attdate);
+		result.setTotalPresent(present);
+		result.setTotalAbsent(absent);
+		result.setTotalNoOfStudents(totalNoofStudents);
+		result.setAttendanceDate(dto.getDateOfAttendance());
 		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	    List<Classsec> secList = new ArrayList<Classsec>();
 	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
@@ -1604,7 +1578,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 	    	
 	    	List<String> classSecAttendanceList = Arrays.asList(classSecAttendance);
-	    	result.setResultList(classSecAttendanceList);
+	    	result.setClassSecAttendanceList(classSecAttendanceList);
 			if(!classSecAttendanceList.isEmpty()){
 				result.setSuccess(true);
 				return result;
