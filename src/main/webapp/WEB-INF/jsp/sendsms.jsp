@@ -736,7 +736,7 @@ for(Cookie cookie : cookies){
             								<option value="festival">Festival</option>
             								<option value="scienceexhibition">Science Exhibition</option>
             								<option value="feesreminder">Fees Reminder</option>
-            								<!-- <option value="feesreminder">Fees Reminder</option> -->
+            								<option value="ptm">PTM</option>
 								</select>
 							
 							</label></td>
@@ -799,6 +799,13 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
 								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
 								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+    							</div>
+    							
+    							<div class="ptm box">
+    								<span style="font-size: 16px;">Dear Parents, Parent Teacher meeting is scheduled on </span><span style="font-weight: bold;color: red">Date</span>
+								<br><br>
+								<label style="color: red;">Date:&nbsp;&nbsp;</label><input type="text" id="ptmvar1" name="ptmvar1" maxlength="27">
+								<br><br>
     							</div>
 							
 							</td>

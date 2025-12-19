@@ -258,20 +258,22 @@ for(Cookie cookie : cookies){
 
                 </tr>
             </TABLE>
-            
-            <table width="100%" style="border-collapse: collapse;">
-					
-				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
-			</table>
 
-			<table style=" border-collapse: collapse;width: 100%;">
+				<table width="100%" style="border-collapse: collapse;">
+					<tr>
+						<td style="width: 140px; text-align: left;">UID No:
+							${Parents.student.studentexternalid}</td>
+						<td class="dataTextBoldCenter" style="text-align: center;">
+							Hall Ticket<br>${examname}
+						</td>
+						<td style="width: 140px;">
+							<!-- empty cell to balance alignment --> &nbsp;
+						</td>
+					</tr>
+				</table>
+
+
+				<table style=" border-collapse: collapse;width: 100%;">
 											
                             <tr style="border-color:#000000">
                                 <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label></td>
@@ -333,13 +335,13 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
+							<td align="right" style="padding-right: 30px;"><img src="/patriswamy/images/principalsignature.png" width="60" height="28"/></td>
 						</tr>
 				<tr>
 				<td></td>
-				<td align="left">Accountant</td>	
-					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
+				<td align="left"></td>	
+					<td align="centre"></td>
+					<td align="right" style="padding-right: 30px;">Principal</td>
 					</tr>
                     
 		</TABLE>

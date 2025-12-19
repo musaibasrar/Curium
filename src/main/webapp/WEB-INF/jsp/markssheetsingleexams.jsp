@@ -321,26 +321,28 @@ for(Cookie cookie : cookies){
 	                                	<tr style="border: 1px solid black;">
 	                                		<c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 	                                		<td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
-	                                		<td style="border: 1px solid black;text-align: left;">${dateParts[0]}-<%-- (${dateParts[2]}) --%>-(${dateParts[1]})</td>
+	                                		<td style="border: 1px solid black;text-align: left;">
+	                                		<c:set var="marksParts" value="${fn:split(dateParts[0],'/')}" />
+	                                		<fmt:formatNumber value="${marksParts[0]}" type="number" minFractionDigits="0" maxFractionDigits="0"/>/<fmt:formatNumber value="${marksParts[1]}" type="number" minFractionDigits="0" maxFractionDigits="0"/>-<%-- (${dateParts[2]}) --%>-(${dateParts[1]})</td>
 	                                	</tr>
 	                                </c:forEach>
 	                                		<tr style="border-top: 1px solid black;">
 	                                			<td style="border: 1px solid black;text-align: left;">Total Marks Obtained</td>
-	                                			<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
+	                                			<td style="border: 1px solid black;text-align: left;"><fmt:formatNumber value="${exammarks.totalMarksObtained}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
 	                                		</tr>
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Total Marks</td>
-                            					<td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
+                            					<td style="border: 1px solid black;text-align: left;"><fmt:formatNumber value="${exammarks.totalMarks}" type="number" minFractionDigits="0" maxFractionDigits="0"/></td>
 	                                		</tr>
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Percentage</td>
                             					<td style="border: 1px solid black;text-align: left;">
                             					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
 	                                		</tr>	
-	                                		<tr style="border: 1px solid black;">
+	                                		<%-- <tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Grade</td>
                             					<td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
-	                                		</tr>  
+	                                		</tr>   --%>
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Rank</td>
                             					<td style="border: 1px solid black;text-align: left;">${exammarks.rank}</td>

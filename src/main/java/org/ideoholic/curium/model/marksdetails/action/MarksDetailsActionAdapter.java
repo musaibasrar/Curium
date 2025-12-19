@@ -203,7 +203,7 @@ public class MarksDetailsActionAdapter {
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
-
+        request.setAttribute("examclass", dto.getExamClass().replace("--", ""));
         return responseDto.isSuccess();
     }
 
