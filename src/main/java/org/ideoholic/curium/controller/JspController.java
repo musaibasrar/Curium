@@ -309,17 +309,17 @@ public class JspController {
 	
 	@GetMapping("/header_officeadmin")
 	public String getHeaderOfficeAdmin() {
-		return "header_officeadmin";
+		return "school/header_officeadmin";
 	}
 	
 	@GetMapping("/index_officeadmin")
 	public String getIndexOfficeAdmin() {
-		return "index_officeadmin";
+		return "school/index_officeadmin";
 	}
 	
 	@GetMapping("/left_officeadmin")
 	public String getLeftOfficeAdmin() {
-		return "left_officeadmin";
+		return "school/left_officeadmin";
 	}
 	
 	@GetMapping("/leftsettings_officeadmin")
@@ -449,17 +449,17 @@ public class JspController {
 	
 	@GetMapping("/index_feescollector")
 	public String getIndexFeescollector() {
-		return "index_feescollector";
+		return "school/index_feescollector";
 	}
 	
 	@GetMapping("/header_feescollector")
 	public String getHeaderFeescollector() {
-		return "header_feescollector";
+		return "school/header_feescollector";
 	}
 	
 	@GetMapping("/left_feescollector")
 	public String getLeftFeescollector() {
-		return "left_feescollector";
+		return "school/left_feescollector";
 	}
 	
 	@GetMapping("/reports_feescollector")
@@ -639,5 +639,10 @@ public class JspController {
 	@GetMapping("/printstudentdetailsotherfeesstructure")
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
+	}
+	
+	@GetMapping("/roll")
+	public String getRoll() {
+		return "school/roll";
 	}
 }
