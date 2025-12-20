@@ -249,7 +249,7 @@
                 dayMaxEvents: true,
                 selectLongPressDelay: 100,
                 displayEventTime: false,
-                events: '/vision/EventProcess/getEvents',
+                events: '/beaconias/EventProcess/getEvents',
                 eventClassNames: 'custom-event-width',
                 select: function(arg) {
                     openModal(null, arg);
@@ -416,10 +416,10 @@
                 };
 
                 var eventId = document.getElementById('eventId').value;
-                var url = '/vision/EventProcess/createEvent';
+                var url = '/beaconias/EventProcess/createEvent';
                 var method = 'POST';
                 if (eventId) {
-                    url = '/vision/EventProcess/updateEvent?id=' + eventId;
+                    url = '/beaconias/EventProcess/updateEvent?id=' + eventId;
                 }
 
                 // Convert the data to URL-encoded form data
@@ -461,7 +461,7 @@
             deleteButton.onclick = function() {
                 var eventId = document.getElementById('eventId').value;
                 if (eventId && confirm('Are you sure you want to delete this event?')) {
-                    fetch('/vision/EventProcess/deleteEvent?id=' + eventId, {
+                    fetch('/beaconias/EventProcess/deleteEvent?id=' + eventId, {
                         method: 'POST'
                     })
                     .then(response => {
