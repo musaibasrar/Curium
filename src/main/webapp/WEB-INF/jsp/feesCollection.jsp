@@ -945,22 +945,22 @@
 	</script>
 
 </head>
-    <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/littleflower/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
+	  <%
+			//allow access only if session exists
+			String user = null;
+			if(session.getAttribute("userAuth") == null){
+				response.sendRedirect("/littleflower/UserProcess/sessionTimeOut");
+			}else user = (String) session.getAttribute("userAuth");
+			String userName = null;
+			String sessionID = null;
+			Cookie[] cookies = request.getCookies();
+			if(cookies !=null){
+			for(Cookie cookie : cookies){
+				if(cookie.getName().equals("user")) userName = cookie.getValue();
+				if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+			}
+			}
+	%>
     <body>
         <form id="form1" method="post">
             

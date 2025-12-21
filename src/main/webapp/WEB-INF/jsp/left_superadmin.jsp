@@ -651,14 +651,24 @@ for(Cookie cookie : cookies){
             <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
+					<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/littleflower/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            				 <a target="mainFrame" href="/littleflower/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks SA</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/littleflower/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				 <a target="mainFrame" href="/littleflower/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks FA</a>
+            			</td>
+            		</tr>
+					<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/littleflower/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks SA</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks FA</a>
             			</td>
             		</tr>
             		<!-- <tr>
