@@ -57,6 +57,12 @@
     mvn spring-boot:run
     Access it at: http://localhost:8080
 
+### Web Interface (JSP)
+The application uses JavaServer Pages (JSP) to display the user interface.
+
+*   **Folder Location**: All screen files are located under the resources in `/WEB-INF/jsp/`.
+*   **File Extension**: The system automatically adds `.jsp` to the end of view names that are returned from a Controller.
+
 ## 📖 Usage
 
 1. Login with admin credentials
