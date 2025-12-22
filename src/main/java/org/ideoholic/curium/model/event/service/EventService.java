@@ -7,22 +7,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.model.event.dao.EventDAO;
 import org.ideoholic.curium.model.event.dto.Event;
 import org.ideoholic.curium.model.event.dto.EventDTO;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class EventService {
     
-    private static final Logger logger = LogManager.getLogger(EventService.class);
+    private final EventDAO eventDao;
 
     
     public List<Map<String, Object>> getEvents(LocalDateTime start, LocalDateTime end, String branchId, String userId) {
-        List<Event> events = new EventDAO().getEvents(start, end, branchId, userId);
+        List<Event> events = eventDao.getEvents(start, end, branchId, userId);
         List<EventDTO> eventDTOs = new ArrayList<>();
         List<Map<String, Object>> eventMap = new ArrayList<>();
         
@@ -59,16 +61,14 @@ public class EventService {
         return eventMap;
     }
     
-    @Transactional(readOnly = true)
     public EventDTO getEventById(Long id) {
-        Event event = new EventDAO().getEventById(id);
+        Event event = eventDao.getEventById(id);
         if (event != null) {
             return convertToDTO(event);
         }
         return null;
     }
     
-    @Transactional
     public boolean createEvent(EventDTO eventDTO, String branchid, String userId) {
         try {
             Event event = convertToEntity(eventDTO);
@@ -76,37 +76,35 @@ public class EventService {
             event.setUpdatedAt(LocalDateTime.now());
             event.setBranchid(Integer.parseInt(branchid));
             event.setUserid(Integer.parseInt(userId));
-            return new EventDAO().saveEvent(event);
+            return eventDao.saveEvent(event);
         } catch (Exception e) {
-            logger.error("Error creating event", e);
+            log.error("Error creating event", e);
             return false;
         }
     }
     
-    @Transactional
     public boolean updateEvent(Long id, EventDTO eventDTO, String branchid, String userId) {
         try {
-            Event existingEvent = new EventDAO().getEventById(id);
+            Event existingEvent = eventDao.getEventById(id);
             if (existingEvent != null) {
                 updateEventFromDTO(existingEvent, eventDTO);
                 existingEvent.setUpdatedAt(LocalDateTime.now());
                 existingEvent.setBranchid(Integer.parseInt(branchid));
                 existingEvent.setUserid(Integer.parseInt(userId));
-                return new EventDAO().updateEvent(existingEvent);
+                return eventDao.updateEvent(existingEvent);
             }
             return false;
         } catch (Exception e) {
-            logger.error("Error updating event", e);
+        	log.error("Error updating event", e);
             return false;
         }
     }
     
-    @Transactional
     public boolean deleteEvent(Long id) {
         try {
-            return new EventDAO().deleteEvent(id);
+            return eventDao.deleteEvent(id);
         } catch (Exception e) {
-            logger.error("Error deleting event", e);
+        	log.error("Error deleting event", e);
             return false;
         }
     }
