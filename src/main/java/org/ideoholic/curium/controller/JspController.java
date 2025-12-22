@@ -641,8 +641,8 @@ public class JspController {
 		return "printstudentdetailsotherfeesstructure";
 	}
 	
-	@GetMapping("/roll")
-	public String getRoll() {
-		return "school/roll";
+	@GetMapping("/role")
+	public String getRole() {
+		return "school/role";
 	}
 }

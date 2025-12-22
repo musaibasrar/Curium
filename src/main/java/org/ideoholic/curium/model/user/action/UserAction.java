@@ -88,7 +88,7 @@ public class UserAction {
 		// ModelAndView model = new ModelAndView("/");
 		if (userActionAdapter.authenticateUser()) {
 			model.addAttribute("login_success", true);
-			return "school/roll";
+			return "school/role";
 		} else {
 			model.addAttribute("login_success", false);
 			return "login";
