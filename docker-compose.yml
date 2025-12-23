@@ -8,16 +8,26 @@ services:
     container_name: curium-application-service
     ports:
       - "8123:8080"  # Map internal port 8080 to external port 9001
+	  - "9090:9090"  # Actuator Management Port
     networks:
       - curium_default
     environment:
       SPRING_APPLICATION_NAME: curium_service
       SPRING_DATASOURCE_DRIVERCLASSNAME: org.mariadb.jdbc.Driver
       SPRING_DATASOURCE_PASSWORD: root
+
+	  # DB pool parameters
+	  MINIMUM_POOL_NAME: Curium-Pool-1
+	  MAXIMUM_POOL_SIZE: 10
+	  MINIMUM_POOL_SIZE: 2
+
       # Use the MariaDB container's network alias / container name on the shared Docker network.
       SPRING_DATASOURCE_JDBC_URL: jdbc:mariadb://curium_mysql:3306/
       SPRING_DATASOURCE_USERNAME: root
 	  SPRING_CONTEXT_PATH: /school
+	  # Pass Actuator config as environment variables (overrides application.properties)
+	  MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: health,info,loggers
+	  MANAGEMENT_SERVER_PORT: 9090
 
 networks:
   curium_default:

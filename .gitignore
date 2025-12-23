@@ -9,6 +9,9 @@ target/*
 build/*
 
 # Log file
+logs/
+/logs/
+logs/*
 *.log
 
 # BlueJ files
