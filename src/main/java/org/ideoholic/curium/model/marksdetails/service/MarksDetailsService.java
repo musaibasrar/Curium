@@ -2215,9 +2215,10 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 							for (Subject sub : subjectList) {
 								
 								int marksSubid = marks.getSubid();
-								int subjectId = sub.getSubid();
+								int subId = sub.getSubid();
+								int subjectId = sub.getSubjectid();
 								
-								if(marksSubid == subjectId) {
+								if(marksSubid == subId) {
 									
 									List<SubSubject> subSubjectList = new MarksDetailsDAO().readListOfSubSubject(subjectId);
 									List<Integer> subSubjectIds = new ArrayList<Integer>();
@@ -2225,8 +2226,28 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 										subSubjectIds.add(subSubject.getId());
 									}
 									List<Marks> marksDetailsListSubSubject = new MarksDetailsDAO().readSubSubjectMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid(),subSubjectIds);
-									String subSubjectMarks = "";
+									
+									Map<Integer, Float> subSubjectMarksMap = new HashMap<>();
+									
 									for (Marks examsSubSubjectMarks : marksDetailsListSubSubject) {
+										subSubjectMarksMap.put(examsSubSubjectMarks.getSubsubjectid(), examsSubSubjectMarks.getMarksobtained());
+									}
+									
+									StringBuilder subSubjectMarksBuilder = new StringBuilder();
+
+									for (Integer subSubjectId : subSubjectIds) {
+									    if (subSubjectMarksMap.containsKey(subSubjectId)) {
+									    	subSubjectMarksBuilder.append(subSubjectMarksMap.get(subSubjectId));
+									    } else {
+									    	subSubjectMarksBuilder.append("0"); // empty for missing marks
+									    }
+									    subSubjectMarksBuilder.append("/");
+									}
+
+									
+									String finalSubSubjectMarks = subSubjectMarksBuilder.toString();
+									
+									/*for (Marks examsSubSubjectMarks : marksDetailsListSubSubject) {
 										if(subSubjectMarks=="") {
 											subSubjectMarks= Float.toString(examsSubSubjectMarks.getMarksobtained());
 										}else {
@@ -2234,9 +2255,9 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 										}
 										
 									}
-									if(subSubjectMarks!="") {
+									if(!subSubjectMarks.equalsIgnoreCase("")) {
 										subSubjectMarks = subSubjectMarks+"/";
-									}
+									}*/
 									
 									float marksObtained = marks.getMarksobtained();
 									float minMarks = sub.getMinmarks();
@@ -2244,14 +2265,14 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 									
 									if( marksObtained < minMarks) {
 										
-										subMarks.put(sub.getSubjectname(), subSubjectMarks+Float.toString(marks.getMarksobtained())+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+"/F"+"/"+marks.getSubgrade());
+										subMarks.put(sub.getSubjectname(), finalSubSubjectMarks+Float.toString(marks.getMarksobtained())+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+"/F"+"/"+marks.getSubgrade());
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 										
-										subMarks.put(sub.getSubjectname(), subSubjectMarks+Float.toString(marks.getMarksobtained())+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+"/P"+"/"+marks.getSubgrade());
+										subMarks.put(sub.getSubjectname(), finalSubSubjectMarks+Float.toString(marks.getMarksobtained())+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+"/P"+"/"+marks.getSubgrade());
 										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 									}else if(marksObtained == 999) {
-										subMarks.put(sub.getSubjectname(), subSubjectMarks+"AB"+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+""+"/"+marks.getSubgrade());
+										subMarks.put(sub.getSubjectname(), finalSubSubjectMarks+"AB"+"/"+sub.getMinmarks()+"/"+sub.getMaxmarks()+""+""+"/"+marks.getSubgrade());
 									}
 									
 									totalMarks = totalMarks+sub.getMaxmarks();
