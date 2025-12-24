@@ -494,12 +494,20 @@
             ];
          $(function() {
             $( "#studentname").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentId").val( ui.item.id );
-                    
-                    
+            	minLength: 1,
+            	source: function(request, response) {
+            	      var term = $.trim(request.term);
+            	      if (!term) { response([]); return; }
+            	      var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+            	      var matches = $.grep(students, function(item) {
+            	        // check any fields you want to be searchable
+            	        return matcher.test(item.name)
+            	            || matcher.test(item.value)
+            	            || matcher.test(item.regno)
+            	            || matcher.test(item.admissionno)
+            	            || matcher.test(item.fathername);
+            	      });
+            	      response(matches);
                 },
                 focus: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
