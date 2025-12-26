@@ -3,26 +3,26 @@ package org.ideoholic.curium.model.login.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ideoholic.curium.model.diary.dao.diaryDAO;
-import org.ideoholic.curium.model.library.dao.LibraryDAO;
-import org.ideoholic.curium.model.library.dto.Book;
-import org.ideoholic.curium.model.library.dto.BooksResponseDto;
+import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.login.dao.LoginDao;
 import org.ideoholic.curium.model.login.dto.LoginDto;
 import org.ideoholic.curium.model.login.dto.LoginResponseDto;
-import org.springframework.stereotype.Service;
 import org.ideoholic.curium.model.user.dto.Login;
-import org.ideoholic.curium.model.branch.dto.Branch;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class LoginService {
+	
+	@Autowired
+	private LoginDao loginDao;
 
 	public LoginResponseDto viewLoginDetails(String branchId) {
 		LoginResponseDto loginResponseDto = new LoginResponseDto();
 
 		if (branchId != null) {
 			try {
-				List<Login> list = new LoginDao().readListOfLoginDetail(branchId);
+				List<Login> list = loginDao.readListOfLoginDetail(branchId);
 				loginResponseDto.setLoginList(list);
 				loginResponseDto.setSuccess(true);
 			} catch (Exception e) {
@@ -36,11 +36,11 @@ public class LoginService {
 	public void deleteRecord(LoginDto loginDto) {
 		String[] idsLogin = loginDto.getIdLogin();
 		if (idsLogin != null) {
-			List<Integer> ids = new ArrayList();
+			List<Integer> ids = new ArrayList<>();
 			for (String id : idsLogin) {
 				ids.add(Integer.valueOf(id));
 			}
-			new LoginDao().deleteRecord(ids);
+			loginDao.deleteRecord(ids);
 		}
 		
 	}
@@ -52,7 +52,7 @@ public class LoginService {
 		int lid = Integer.parseInt(lgId);
 		if (branchId != null) {
 			try {
-				Login login = new LoginDao().readDetailsOfLogin(lid);
+				Login login = loginDao.readDetailsOfLogin(lid);
 				loginResponseDto.setLogin(login);
 				loginResponseDto.setSuccess(true);
 			} catch (Exception e) {
@@ -70,14 +70,14 @@ public class LoginService {
 		login.setUsername(loginDto.getUserName());
 		login.setPassword(loginDto.getPassWord());
 		login.setUsertype(loginDto.getUserType());
-		boolean result = new LoginDao().updateDetailsOfLogin(login);
+		boolean result = loginDao.updateDetailsOfLogin(login);
 		loginResponseDto.setSuccess(result);
 		return loginResponseDto;
 	}
 
 	public LoginResponseDto readListOfBranchId() {
 		LoginResponseDto loginResponseDto = new LoginResponseDto();
-		List<Branch> branch = new LoginDao().readListOfBranchId();
+		List<Branch> branch =loginDao.readListOfBranchId();
 		loginResponseDto.setBranch(branch);
 		return loginResponseDto;
 	}
@@ -91,7 +91,7 @@ public class LoginService {
 		login.setUsername(loginDto.getUserName());
 		login.setPassword(loginDto.getPassWord());
 		login.setUsertype(loginDto.getUserType());
-		boolean result = new LoginDao().saveLoginDetail(login);
+		boolean result = loginDao.saveLoginDetail(login);
 		loginResponseDto.setSuccess(result);
 		return loginResponseDto;
 	}
