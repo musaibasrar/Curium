@@ -266,7 +266,7 @@ for(Cookie cookie : cookies){
 						    ${splt} 
 							</c:forEach>
                                 </td>
-                                
+                                <td class="namedetails"><label>UID:&nbsp;&nbsp;&nbsp;</label>${Parents.parents.student.studentexternalid}</td>
                              </tr>
                              
                              
@@ -413,7 +413,10 @@ for(Cookie cookie : cookies){
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
 						<tr>
-							<td><br></td>
+						    <td></td>
+							<td align="left"></td>
+							<td align="centre"><img src="/patriswamy/images/principalsignature.png" width="60" height="28"/></td>
+							<td align="centre"></td>
 						</tr>
 				<tr>
 					<td></td>
@@ -424,7 +427,7 @@ for(Cookie cookie : cookies){
                     
 		</TABLE>
 		</div>
-		<br><br><br>
+		<br><br>
                                  
                         </c:forEach>
 			

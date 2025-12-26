@@ -594,6 +594,22 @@ for(Cookie cookie : cookies){
                                 
                             </td>
                         </tr>
+                        
+                        
+                         <tr>
+                        
+                             <td  width="25%"  class="alignLeft" height="50">College Name
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.remarks}" />
+                            </td>
+   
+   							<td  width="25%"  class="alignLeft" height="50">
+                            </td>
+                            <td width="25%" class="tablerows" >
+                            
+                            </td>
+                        </tr>
                                                 
 
                         <tr>

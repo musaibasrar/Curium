@@ -738,6 +738,7 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Student Name</th>
+                             <th title="click to sort" class="headerText">F/Name</th>
                             <th title="click to sort" class="headerText">Class</th>
                             <th title="click to sort" class="headerText">Receipt No.</th>
                             <th title="click to sort" class="headerText">Fee</th>
@@ -761,6 +762,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
+                                 <td  class="dataText"><c:out value="${feesdetails.value.fathersname}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
