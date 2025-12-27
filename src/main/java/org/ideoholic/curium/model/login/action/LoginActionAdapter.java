@@ -1,12 +1,12 @@
 package org.ideoholic.curium.model.login.action;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.login.dto.LoginDto;
 import org.ideoholic.curium.model.login.dto.LoginResponseDto;
 import org.ideoholic.curium.model.login.service.LoginService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,23 +15,16 @@ public class LoginActionAdapter {
 	
 	@Autowired
     private HttpServletRequest request;
-    
-	@Autowired
-	private HttpServletResponse response;
 
     @Autowired
     private HttpSession httpSession;
-
-    private String BRANCHID = "branchid";
-    
-    private String USERID = "userid";
 	
 	@Autowired
 	private LoginService loginService;
 
 	public boolean viewLogin() {
 
-		LoginResponseDto result = loginService.viewLoginDetails(httpSession.getAttribute(BRANCHID).toString());
+		LoginResponseDto result = loginService.viewLoginDetails(httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("logindetail", result.getLoginList());
 		return result.isSuccess();
 
@@ -47,7 +40,7 @@ public class LoginActionAdapter {
 
 	public boolean viewLoginDetail() {
 		
-		LoginResponseDto result = loginService.viewLoginDetail(request.getParameter("id"), httpSession.getAttribute(BRANCHID).toString());
+		LoginResponseDto result = loginService.viewLoginDetail(request.getParameter("id"), httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("logindetail", result.getLogin());
 		return result.isSuccess();
 		
@@ -70,6 +63,7 @@ public class LoginActionAdapter {
 		loginDto.setUserName(request.getParameter("username"));
 		loginDto.setPassWord(request.getParameter("password"));
 		loginDto.setUserType(request.getParameter("usertype"));
+		loginDto.setBranchid(httpSession.getAttribute(Constants.BRANCHID).toString());
 		LoginResponseDto result = loginService.addLoginStaffDetail(loginDto);
 		return result.isSuccess();
 	}
