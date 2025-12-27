@@ -73,7 +73,7 @@ public class MarksDetailsActionAdapter {
         GenerateReportDto dto = new GenerateReportDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
-        dto.setNoofpresentday(request.getParameter("dateforattendance"));
+        dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
@@ -202,11 +202,15 @@ public class MarksDetailsActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamIds(request.getParameterValues("examslist"));
+        dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
         request.setAttribute("examclass", dto.getExamClass().replace("--", ""));
+        request.setAttribute("totaldays", responseDto.getTotalDays());
+		request.setAttribute("totalpresent", responseDto.getTotalpresent());
+		request.setAttribute("totalabsent", responseDto.getTotalabsent());
         return responseDto.isSuccess();
     }
 
