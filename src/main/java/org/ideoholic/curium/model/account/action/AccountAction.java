@@ -296,4 +296,16 @@ public class AccountAction {
 		accountActionAdapter.getDayBook();
 		return "daybook";
 	}
+	
+	@PostMapping("/rpStatement")
+	public String rpStatement() {
+		accountActionAdapter.getRPStatement();
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpStatementPrint")
+	public String rpStatementPrint() {
+		accountActionAdapter.getRPStatement();
+		return "rpstatementprint";
+	}
 }
