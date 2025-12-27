@@ -666,4 +666,13 @@ public class JspController {
 		return "leftsettings_reception";
 	}
 	
+	@GetMapping("/receiptpayment")
+	public String receiptpayment() {
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpstatementprint")
+	public String rpstatementprint() {
+		return "rpstatementprint";
+	}
 }
