@@ -15,22 +15,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Employee Update</title>
-<link rel="stylesheet" href="/patriswamy/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/patriswamy/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/patriswamy/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/patriswamy/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/patriswamy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/patriswamy/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/patriswamy/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/patriswamy/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/patriswamy/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/patriswamy/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/patriswamy/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -203,7 +203,7 @@
         box-sizing: border-box;
     }
 </style>
-<script type="text/javascript" src="/patriswamy/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	document.getElementById("UpdateExecutive").style.display = 'none';
@@ -307,7 +307,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/patriswamy/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -320,7 +320,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/patriswamy/EmployeeProcess/viewAllEmployee"
+	<form action="/vision/EmployeeProcess/viewAllEmployee"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -565,9 +565,6 @@ for(Cookie cookie : cookies){
 									class="textField" id="datepickerCD" size="30"
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
-									</label>
-									</td>
-									</tr>
 						<tr>
 
 							<td></td>
@@ -604,7 +601,6 @@ for(Cookie cookie : cookies){
 													</c:forEach>
 
 							</label></td>
-							</tr>
 						<tr>
 
 							<td></td>
@@ -620,115 +616,114 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="16%" class="alignRight">Class Teacher&nbsp;</td>
 
-							<td width="28%"><label>
-							
-													<div class="checkbox-container">
+							<td width="28%"><div class="checkbox-container">
 													   <c:forEach items="${classList}" var="classItem">
-											    <c:choose>
-											        <c:when test="${not empty sectionList}">
-											            <c:forEach items="${sectionList}" var="sectionItem">
-											                <c:set var="classSec" value="${classItem} ${sectionItem}" />
-											                
-											                <!-- reset flag -->
-											                <c:set var="isChecked" value="false" />
-											                <!-- loop through teaching list to see if it matches -->
-											                <c:forEach items="${classteacherList}" var="item">
-											                    <c:if test="${item eq classSec}">
-											                        <c:set var="isChecked" value="true" />
-											                    </c:if>
-											                </c:forEach>
-											
-											                <div class="checkbox-item">
-											                    <label>
-											                        <input type="checkbox" name="classteacher"
-											                               value="${classSec}"
-											                               <c:if test="${isChecked}">checked</c:if> />
-											                        ${classSec}
-											                    </label>
-											                </div>
-											            </c:forEach>
-											        </c:when>
-											
-											        <c:otherwise>
-											            <!-- reset flag -->
-											            <c:set var="isChecked" value="false" />
-											            <!-- loop through teaching list -->
-											            <c:forEach items="${classteacherList}" var="item">
-											                <c:if test="${item eq classItem}">
-											                    <c:set var="isChecked" value="true" />
-											                </c:if>
-											            </c:forEach>
-											
-											            <div class="checkbox-item">
-											                <label>
-											                    <input type="checkbox" name="classteacher"
-											                           value="${classItem}"
-											                           <c:if test="${isChecked}">checked</c:if> />
-											                    ${classItem}
-											                </label>
-											            </div>
-											        </c:otherwise>
-											    </c:choose>
-											</c:forEach>
-													</div>
 
-							</label></td>
+													   	 <c:choose>
+													        <c:when test="${not empty sectionList}">
+													            <c:forEach items="${sectionList}" var="sectionItem">
+													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+													
+													                <!-- reset flag -->
+													                <c:set var="isChecked" value="false" />
+													                <!-- loop through classteacherList to check for exact match -->
+													                <c:forEach items="${classteacherList}" var="item">
+													                    <c:if test="${item eq classSec}">
+													                        <c:set var="isChecked" value="true" />
+													                    </c:if>
+													                </c:forEach>
+													
+													                <div class="checkbox-item">
+													                    <label>
+													                        <input type="checkbox" name="classteacher"
+													                               value="${classSec}"
+													                               <c:if test="${isChecked}">checked</c:if> />
+													                        ${classSec}
+													                    </label>
+													                </div>
+													            </c:forEach>
+													        </c:when>
+													
+													        <c:otherwise>
+													            <!-- reset flag -->
+													            <c:set var="isChecked" value="false" />
+													            <!-- loop through classteacherList to check for exact match -->
+													            <c:forEach items="${classteacherList}" var="item">
+													                <c:if test="${item eq classItem}">
+													                    <c:set var="isChecked" value="true" />
+													                </c:if>
+													            </c:forEach>
+													
+													            <div class="checkbox-item">
+													                <label>
+													                    <input type="checkbox" name="classteacher"
+													                           value="${classItem}"
+													                           <c:if test="${isChecked}">checked</c:if> />
+													                    ${classItem}
+													                </label>
+													            </div>
+													        </c:otherwise>
+													    </c:choose>
+													</c:forEach>
+													</div>
+										</td>
 
 
 
 							<td width="20%" class="alignRight">Classes Teaching &nbsp;</td>
 
-							<td width="28%"><label> <div class="checkbox-container">
-											<c:forEach items="${classList}" var="classItem">
-											    <c:choose>
-											        <c:when test="${not empty sectionList}">
-											            <c:forEach items="${sectionList}" var="sectionItem">
-											                <c:set var="classSec" value="${classItem} ${sectionItem}" />
-											                
-											                <!-- reset flag -->
-											                <c:set var="isChecked" value="false" />
-											                <!-- loop through teaching list to see if it matches -->
-											                <c:forEach items="${classesteachingList}" var="item">
-											                    <c:if test="${item eq classSec}">
-											                        <c:set var="isChecked" value="true" />
-											                    </c:if>
-											                </c:forEach>
-											
-											                <div class="checkbox-item">
-											                    <label>
-											                        <input type="checkbox" name="classesteaching"
-											                               value="${classSec}"
-											                               <c:if test="${isChecked}">checked</c:if> />
-											                        ${classSec}
-											                    </label>
-											                </div>
-											            </c:forEach>
-											        </c:when>
-											
-											        <c:otherwise>
-											            <!-- reset flag -->
-											            <c:set var="isChecked" value="false" />
-											            <!-- loop through teaching list -->
-											            <c:forEach items="${classesteachingList}" var="item">
-											                <c:if test="${item eq classItem}">
-											                    <c:set var="isChecked" value="true" />
-											                </c:if>
-											            </c:forEach>
-											
-											            <div class="checkbox-item">
-											                <label>
-											                    <input type="checkbox" name="classesteaching"
-											                           value="${classItem}"
-											                           <c:if test="${isChecked}">checked</c:if> />
-											                    ${classItem}
-											                </label>
-											            </div>
-											        </c:otherwise>
-											    </c:choose>
-											</c:forEach>
-									</div>
+							<td width="28%">
+									<div class="checkbox-container">
+													    <c:forEach items="${classList}" var="classItem">
 
-							</label></td>
+													   	 <c:choose>
+													        <c:when test="${not empty sectionList}">
+													            <c:forEach items="${sectionList}" var="sectionItem">
+													                <c:set var="classSec" value="${classItem}--${sectionItem}" />
+													
+													                <!-- reset flag -->
+													                <c:set var="isChecked" value="false" />
+													                <!-- loop through classesteachingList to check for exact match -->
+													                <c:forEach items="${classesteachingList}" var="item">
+													                    <c:if test="${item eq classSec}">
+													                        <c:set var="isChecked" value="true" />
+													                    </c:if>
+													                </c:forEach>
+													
+													                <div class="checkbox-item">
+													                    <label>
+													                        <input type="checkbox" name="classesteaching"
+													                               value="${classSec}"
+													                               <c:if test="${isChecked}">checked</c:if> />
+													                        ${classSec}
+													                    </label>
+													                </div>
+													            </c:forEach>
+													        </c:when>
+													
+													        <c:otherwise>
+													            <!-- reset flag -->
+													            <c:set var="isChecked" value="false" />
+													            <!-- loop through classesteachingList to check for exact match -->
+													            <c:forEach items="${classesteachingList}" var="item">
+													                <c:if test="${item eq classItem}">
+													                    <c:set var="isChecked" value="true" />
+													                </c:if>
+													            </c:forEach>
+													
+													            <div class="checkbox-item">
+													                <label>
+													                    <input type="checkbox" name="classesteaching"
+													                           value="${classItem}"
+													                           <c:if test="${isChecked}">checked</c:if> />
+													                    ${classItem}
+													                </label>
+													            </div>
+													        </c:otherwise>
+													    </c:choose>
+													</c:forEach>
+													</div>
+							</td>
 						</tr>
 
 
@@ -1088,14 +1083,14 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById(form1);
-								form1.action = "/patriswamy/EmployeeProcess/ViewAllEmployee";
+								form1.action = "/vision/EmployeeProcess/ViewAllEmployee";
 								form1.submit();
 							}
 
 							function updateEmployee() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/patriswamy/EmployeeProcess/updateEmployee";
+								form1.action = "/vision/EmployeeProcess/updateEmployee";
 								form1.submit();
 							}
 							
