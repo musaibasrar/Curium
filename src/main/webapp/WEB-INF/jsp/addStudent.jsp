@@ -1240,6 +1240,18 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
+							<td class="alignLeft"> College Name &nbsp;</td>
+							<td ><label> <input name="remarks"
+							style="text-transform:capitalize;"
+									type="text" class="myclass" id="remarks" size="36">
+
+							</label></td>
+
+							<td  class="alignLeft" style="padding-left: 20px;"></td>
+							<td></td>
+						</tr>
+						
+						<tr>
 							<td><br /></td>
 						</tr>
 						<tr>
