@@ -1058,17 +1058,10 @@ $(document).ready(function() {
 									onchange="CalculateAge(this)"
 									data-validate="validate(required)">
 							</label></td>
-
-							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
-							<td><label> <input
-									name="age" type="text" class="myclass" id="age" size="36"
-									>
-							</label></td>
-
-
-						
-
-
+							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
+							<td ><label>
+							          College<input type="checkbox" value="college" name="feescategories" id="college"/>
+								</label></td>
 					<!-- 	<tr>
 
 							<td  class="alignLeft">Place Of Birth, Tq,
@@ -1082,17 +1075,7 @@ $(document).ready(function() {
 									type="text" class="myclass" id="dateofadmission" size="36"
 									data-validate="validate(required)"> </label></td>
 						</tr> -->
-							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
-							<td ><label>
-							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
-								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
-								&nbsp;Transport <select name="feescategories" id="transport">
-										        <option value="Select">-- Select --</option>
-										        <option value="Malmal">Malmal</option>
-										        <option value="Madhubani">Madhubani</option>
-										        <option value="xyz">xyz</option>
-										    </select>
-								</label></td>
+							
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -1243,7 +1226,7 @@ $(document).ready(function() {
 									id="disabilitychild" size="36">
 
 							</label></td>
-							<td  class="alignLeft" >Mother Tongue &nbsp;</td>
+							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
 							<td >
 								 <label> <select name="motherT"
 									 id="motherT"
@@ -1333,8 +1316,11 @@ $(document).ready(function() {
 									type="text" class="myclass" id="remarks" size="36">
 
 							</label></td>
-							<td  class="alignLeft" style="padding-left: 20px;"></td>
-							<td></td>
+							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
+							<td><label> <input
+									name="age" type="text" class="myclass" id="age" size="36"
+									>
+							</label></td>
 						</tr>
 						
 						<tr>
