@@ -850,7 +850,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
+            				 <a target="mainFrame" href="/patriswamy/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
             			</td>
             		</tr>
                 </table>

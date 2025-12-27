@@ -353,6 +353,7 @@ for(Cookie cookie : cookies){
             <div>
                 <a target="mainFrame" href="/patriswamy/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/patriswamy/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/patriswamy/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
