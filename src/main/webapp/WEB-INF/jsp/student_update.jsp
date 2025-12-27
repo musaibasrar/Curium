@@ -888,7 +888,18 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 					
+                         <tr>
+								<td class="alignLeft"> College Name &nbsp;</td>
+								<td><label> <input name="remarks"
+									type="text" class="myclass" id="studentscaste" value="${student.remarks}" size="30">
 
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;"> &nbsp;</td>
+							<td><label>
+							</label></td>
+
+							</tr>
 
 
 					</table>
