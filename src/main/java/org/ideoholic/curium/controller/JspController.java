@@ -641,28 +641,13 @@ public class JspController {
 		return "printstudentdetailsotherfeesstructure";
 	}
 	
-	@GetMapping("/header_exams")
-	public String getHeaderExams() {
-		return "header_exams";
+	@GetMapping("/receiptpayment")
+	public String receiptpayment() {
+		return "receiptsandpayments";
 	}
 	
-	@GetMapping("/index_exams")
-	public String getIndexExams() {
-		return "index_exams";
-	}
-	
-	@GetMapping("/left_exams")
-	public String getLeftExams() {
-		return "left_exams";
-	}
-	
-	@GetMapping("/leftsettings_exams")
-	public String getLeftSettingsExams() {
-		return "leftsettings_exams";
-	}
-	
-	@GetMapping("/reports_exams")
-	public String getReportsExams() {
-		return "reports_exams";
+	@GetMapping("/rpstatementprint")
+	public String rpstatementprint() {
+		return "rpstatementprint";
 	}
 }
