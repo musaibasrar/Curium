@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reports</title>
-        <script language="JavaScript" src="/bright/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bright/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bright/css/datePicker/demos.css">
+        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/bright/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/bright/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/bright/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/bright/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/bright/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/bright/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/bright/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/bright/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/bright/css/font-awesome.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/vision/css/font-awesome.css">
         
         
         <style>
@@ -269,7 +269,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bright/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -297,37 +297,37 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
+            				 <a target="mainFrame" href="/vision/ClassProcess/viewGraduated" style="font-size: 12px;">Graduated Student</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
+            				 <a target="mainFrame" href="/vision/ClassProcess/viewLeftOut" style="font-size: 12px;">Former Students</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
+            				 <a target="mainFrame" href="/vision/ClassProcess/viewDropped" style="font-size: 12px;">Dropped Out Students</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/studentsRegistrationReports" style="font-size: 12px;">Registration Report</a>
             			</td>
             		</tr>
             		
@@ -341,85 +341,85 @@ for(Cookie cookie : cookies){
             	
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/feessummary" style="font-size: 12px;">Fees Summary</a>
+            				 <a target="mainFrame" href="/vision/feessummary" style="font-size: 12px;">Fees Summary</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/vision/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
             			</td>
             		</tr>
             		
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
+            				 <a target="mainFrame" href="/vision/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bright/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				<a target="mainFrame" href="/vision/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bright/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/vision/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/otherfeesReport" style="font-size: 12px;">Bus Fees Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
+            				 <a target="mainFrame" href="/vision/otherfeesCollectionDetails" style="font-size: 12px;">Bus Fees Collection Details</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
+            				 <a target="mainFrame" href="/vision/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bright/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
+            				<a target="mainFrame" href="/vision/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Bus Fees Receipts</a>
             			</td>
             		</tr>
             		<tr>
@@ -437,7 +437,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/vision/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -450,7 +450,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            				 <a target="mainFrame" href="/vision/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -463,17 +463,17 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/progressReportSingleExams" style="font-size: 12px;">Marks Card</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
             			</td>
             		</tr>
             				<tr>
@@ -483,12 +483,12 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bright/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
+            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
             			</td>
             		</tr>
                 </table>
@@ -500,27 +500,32 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            				 <a target="mainFrame" href="/vision/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/bright/incomestatement" style="font-size: 12px;">Income Statement</a>
+            				<a target="mainFrame" href="/vision/incomestatement" style="font-size: 12px;">Income Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bright/daybook" style="font-size: 12px;">Day Book</a>
+            				<a target="mainFrame" href="/vision/receiptpayment" style="font-size: 12px;">R & P Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				<a target="mainFrame" href="/vision/daybook" style="font-size: 12px;">Day Book</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bright/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            				 <a target="mainFrame" href="/vision/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/vision/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr>
                 </table>
@@ -532,7 +537,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
+            				 <a target="mainFrame" href="/vision/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
             			</td>
             		</tr>
                 </table>
@@ -543,7 +548,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/bookhistory" style="font-size: 12px;">Books Issue Report</a>
+            				 <a target="mainFrame" href="/vision/bookhistory" style="font-size: 12px;">Books Issue Report</a>
             			</td>
             		</tr>
             		
@@ -556,19 +561,19 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
+            				 <a target="mainFrame" href="/vision/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
+            				 <a target="mainFrame" href="/vision/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Unpaid Receipts</a>
+            				 <a target="mainFrame" href="/vision/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Unpaid Receipts</a>
             			</td>
             		</tr>
                 </table>
@@ -581,22 +586,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            				 <a target="mainFrame" href="/vision/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            				 <a target="mainFrame" href="/vision/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/bright/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            				<a target="mainFrame" href="/vision/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/bright/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            				 <a target="mainFrame" href="/vision/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
             	</table>
@@ -608,7 +613,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
+            				 <a target="mainFrame" href="/vision/TeachersPerformanceProcess/SearchTeachers" style="font-size: 12px;">Subject Performance</a>
             			</td>
             		</tr>
             		
@@ -624,7 +629,7 @@ for(Cookie cookie : cookies){
 					<td
 						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
 						<a target="mainFrame"
-						href="/bright/JobProcess/queryReport"
+						href="/vision/JobProcess/queryReport"
 						style="font-size: 12px;">Assignment Report</a>
 					</td>
 				</tr>
@@ -641,7 +646,7 @@ for(Cookie cookie : cookies){
 					<td
 						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
 						<a target="mainFrame"
-						href="/bright/JobProcess/taskReport"
+						href="/vision/JobProcess/taskReport"
 						style="font-size: 12px;">Tasks Report</a>
 					</td>
 				</tr>
@@ -655,7 +660,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
+            				 <a target="mainFrame" href="/vision/AttendanceProcess/attendanceReport" style="font-size: 12px;">Attendance Report</a>
             			</td>
             		</tr>
             		
@@ -671,7 +676,7 @@ for(Cookie cookie : cookies){
 					<td
 						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
 						<a target="mainFrame"
-						href="/bright/AppointmentProcess/appointmentReport"
+						href="/vision/AppointmentProcess/appointmentReport"
 						style="font-size: 12px;">Appointments Report</a>
 					</td>
 				</tr>
@@ -684,7 +689,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/bright/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
+            				 <a target="mainFrame" href="/vision/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
             			</td>
             		</tr>
             		
@@ -699,6 +704,11 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/vision/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/vision/DocumentsProcess/getScDetail" style="font-size: 12px;">Study Certificate Report</a>
             			</td>
             		</tr>
             		
