@@ -624,6 +624,7 @@ public class MarksDetailsService {
 				Date startDate = DateUtil.indiandateParser(dto.getStartDate());
 				Date endDate = DateUtil.indiandateParser(dto.getEndDate());
 				String academicYear = currentAcademicYear;
+				
 				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDate, endDate);
 				 List<Holidaysmaster> holidaysMasterList = marksDetailsDao.getListofHolidays(startDate,endDate);
 				 int holidayCount = 0;

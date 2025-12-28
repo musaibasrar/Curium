@@ -42,5 +42,5 @@ public interface StudentDailyAttendanceRepository extends JpaRepository<Studentd
 			@Param("studentExternalId")String studentExternalId, 
 			@Param("branchId")int branchId);
     
-    List<Studentdailyattendance> findByAttendeeIdAndAcademicYearAndDateBetween(Long attendeeId, String academicYear,Date startDate, Date endDate);
+    List<Studentdailyattendance> findByAttendeeIdAndAcademicYearAndDateBetween(String attendeeId, String academicYear,String startDate, String endDate);
 }

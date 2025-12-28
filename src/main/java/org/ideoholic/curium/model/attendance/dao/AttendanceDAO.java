@@ -306,13 +306,13 @@ public class AttendanceDAO {
 	}*/
 	
 	@Transactional
-	public List<Studentdailyattendance> getStudentDailyAttendance(String studentId, String academicYear, Date startDate, Date endDate) {
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studentExternalId, String startDate, String endDate, String academicYear, int branchId) {
 
 	    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 
 	    try {
 	        //String hql = "FROM Studentdailyattendance WHERE attendeeid = :studentId AND academicyear = :academicYear AND date BETWEEN :startDate AND :endDate";
-	        studentDailyAttendance = studentDailyAttendanceRepository.findByAttendeeIdAndAcademicYearAndDateBetween(Long.parseLong(studentId), academicYear, startDate, endDate);
+	        studentDailyAttendance = studentDailyAttendanceRepository.findByAttendeeIdAndAcademicYearAndDateBetween(studentExternalId, academicYear, startDate, endDate);
 
 	    }catch (Exception e) {
 			log.error(e.getMessage(), e);
