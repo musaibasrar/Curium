@@ -135,6 +135,7 @@ public class FeesActionAdapter {
 		feesCategoryDto.setAmount(request.getParameter("amount"));
 		feesCategoryDto.setCategoryYear(request.getParameter("categoryyear"));
 		feesCategoryDto.setTotalInstallments(Integer.parseInt(request.getParameter("totalinstallments")));
+		feesCategoryDto.setMonths(request.getParameterValues("months"));
 		feesService.addFeesParticular(feesCategoryDto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
 	}
 
@@ -165,7 +166,8 @@ public class FeesActionAdapter {
 	public void getFeeCategory() throws IOException {
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
-    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+    	String feesCategories = request.getParameter("feescategories");
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),feesCategories);
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 
@@ -225,6 +227,12 @@ public class FeesActionAdapter {
     	String yearofAdmission = request.getParameter("yearofadmission");
     	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
     	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
+	}
+
+	public void getFeesMonths() {
+		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+		feescategoryResponseDto = feesService.getFeesMonths(httpSession.getAttribute(Constants.BRANCHID).toString());
+    	request.setAttribute("feesmonths", feescategoryResponseDto.getFeesMonths());
 	}
 	
 	public boolean viewAllStudentsListOtherFees() {

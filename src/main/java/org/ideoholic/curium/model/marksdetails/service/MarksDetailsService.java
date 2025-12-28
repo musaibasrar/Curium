@@ -6,10 +6,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
@@ -18,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +34,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
@@ -532,6 +538,7 @@ public class MarksDetailsService {
 					marks.setExam(exams);
 					marks.setSubject(subjectDetails);
 					marks.setStudent(studentDetailsDao.readUniqueObject(studentId));
+					marks.setSubsubjectid(0);
 					marks.setMarksobtained(Float.parseFloat(marksObtained));
 					String currentAcademicYear = strCurrentAcademicYear;
 					String currentYear = currentAcademicYear;
@@ -587,7 +594,7 @@ public class MarksDetailsService {
 			String[] studentIds = dto.getStudentIds();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
-			String presentDate = dto.getNoofpresentday();
+			String presentDate = dto.getTotalDaysPresent();
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
@@ -611,31 +618,53 @@ public class MarksDetailsService {
 				 * AttendanceDAO().getStudentTotalAttendance(studentDetails.getStudent().
 				 * getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
 				 */
-				
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
-						DateUtil.indiandateParser(presentDate));
+				Date startDate = DateUtil.indiandateParser(dto.getStartDate());
+				Date endDate = DateUtil.indiandateParser(dto.getEndDate());
+				String  startDateFormatted= DateUtil.dateParserddMMYYYY(startDate);
+				String endDateFormatted=DateUtil.dateParserddMMYYYY(endDate);
+				String academicYear = currentAcademicYear;
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted, endDateFormatted, Integer.parseInt(branchId));
+				 List<Holidaysmaster> holidaysMasterList = marksDetailsDao.getListofHolidays(startDate,endDate);
+				 int holidayCount = 0;
+				 for(Holidaysmaster holiday:holidaysMasterList) {
+					 Date strtDate = holiday.getFromdate();
+					    Date endhDate = holiday.getTodate();
+					    long diffInMillis = endhDate.getTime() - strtDate.getTime();
+					    int totalHolidays = (int) TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+					    totalHolidays = totalHolidays + 1;
+					    holidayCount += totalHolidays;
+				 }
+				
+				long diffInMillies = endDate.getTime() - startDate.getTime();
+				long totalDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1; // +1 to include start date
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(startDate);
+				int sundayCount = 0;
+				while (!cal.getTime().after(endDate)) {
+				    if (cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
+				        sundayCount++;
+				    }
+				    cal.add(Calendar.DATE, 1);
+				}
+				int workingDays = (int) (totalDays - (sundayCount + holidayCount));
 				int absentDays = 0;
-				int totalDays = 0;
 				int totalPresent = 0;
 				
 				for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
 					
-					totalDays++;
 					if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
 						absentDays++;
+					}
+					else if(("P").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+						totalPresent++;
 					}
 					
 				}
 				
-				if(!studentDailyAttendance.isEmpty()){
-					totalPresent = totalDays - absentDays;
-				}
-				
-				result.setTotalDays(totalDays);
-				result.setTotalpresent(totalPresent);
-				result.setTotalabsent(absentDays);
-				
+				markssheet.setTotalPresent(totalPresent);
+				markssheet.setTotalAbsent(absentDays);
+				markssheet.setTotalDays(workingDays);
 				markssheet.setParents(studentDetails);
 				
 				for (Exams examOne : examsList) {
@@ -1667,6 +1696,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String examC = dto.getExamClass();
 		String[] examClass = examC.split("--");
 		List<Integer> examIds = new ArrayList<Integer>();
+		String presentDate = dto.getTotalDaysPresent();
 		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		for (String examId : dto.getExamIds()) {
@@ -1681,6 +1711,31 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			ExamRank examrank = new ExamRank();
 			List<ExamsMarks> examMarksList = new ArrayList<>();
 			Parents studentDetails = studentDetailsDao.readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+			
+			List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+			studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(studentDetails.getStudent().getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId),
+					DateUtil.indiandateParser(presentDate));
+			int absentDays = 0;
+			int totalDays = 0;
+			int totalPresent = 0;
+			
+			for (Studentdailyattendance dailyattendance : studentDailyAttendance) {
+				
+				totalDays++;
+				if(("A").equalsIgnoreCase(dailyattendance.getAttendancestatus())){
+					absentDays++;
+				}
+				
+			}
+			
+			if(!studentDailyAttendance.isEmpty()){
+				totalPresent = totalDays - absentDays;
+			}
+			
+			result.setTotalDays(totalDays);
+			result.setTotalpresent(totalPresent);
+			result.setTotalabsent(absentDays);
+			
 			markssheet.setParents(studentDetails);
 			
 			for (Exams exam : examsList) {
@@ -2119,6 +2174,134 @@ public ResultResponse updateMarksSub(MarksUpdateDto dto, String strCurrentAcadem
 		}
 	}
 
+	return result;
+}
+
+public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, String currentAcademicYear, String branchId) {
+	GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
+	
+	
+	if(currentAcademicYear!=null){
+		
+		String[] studentIds = dto.getStudentIds();
+		String examC = dto.getExamClass();
+		String[] examClass = examC.split("--");
+		String examName = dto.getExamName();
+		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+		List<ExamRank> examRankList = new ArrayList<ExamRank>();
+
+		for (int i = 0; i < studentIds.length; i++) {
+			MarksSheet markssheet = new MarksSheet();
+			ExamRank examrank = new ExamRank();
+			List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
+			Parents studentDetails = studentDetailsDao.readUniqueObjectParents(Integer.parseInt(studentIds[i]));
+			markssheet.setParents(studentDetails);
+			
+			for (Exams exam : examsList) {
+				String examNamed = exam.getExamname();
+				if(examName.equalsIgnoreCase(examNamed))
+				{
+				ExamsMarks examMarks = new ExamsMarks();
+				examMarks.setExamName(exam.getExamname());
+				boolean present = false;
+				Map<String,String> subMarks = new HashMap<String, String>();
+				float totalObtainedMarks = 0;
+				float totalMarks = 0;
+				float totalMinMarks = 0;
+				List<Marks> marksDetailsList = marksDetailsDao.readMarksforStudent(Integer.parseInt(studentIds[i]),currentAcademicYear,exam.getExid());
+				List<Subject> subjectList = subjectDetailsDao.readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],exam.getExamname());
+				
+				
+				for (Marks marks : marksDetailsList) {
+						
+						int examId = exam.getExid();
+						int marksExamId = marks.getExamid();
+						
+					if( examId == marksExamId) {
+								present = true;
+								
+							for (Subject sub : subjectList) {
+								
+								int marksSubid = marks.getSubid();
+								int subjectId = sub.getSubid();
+								
+								if(marksSubid == subjectId) {
+									
+									
+									float marksObtained = marks.getMarksobtained();
+									float minMarks = sub.getMinmarks();
+									float maxMarks = sub.getMaxmarks();
+									
+									if( marksObtained < minMarks) {
+										
+										subMarks.put(sub.getSubjectname(), Float.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"/F");
+										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+									}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
+										
+										subMarks.put(sub.getSubjectname(), Float.toString(sub.getMaxmarks())+"/"+sub.getMinmarks()+"/"+marks.getMarksobtained()+""+"/P"+"/"+marks.getSubgrade());
+										totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
+									}else if(marksObtained == 999) {
+										subMarks.put(sub.getSubjectname(), " _AB");
+									}
+									
+									totalMarks = totalMarks+sub.getMaxmarks();
+									totalMinMarks = totalMinMarks+sub.getMinmarks();
+									
+								}
+							}
+					}
+					
+				}
+				
+				if(present) {
+					examMarks.setTotalMarks(totalMarks);
+					examMarks.setTotalMinMarks(totalMinMarks);
+					examMarks.setTotalMarksObtained(totalObtainedMarks);
+					double d = (totalObtainedMarks*100.0)/totalMarks;
+					examMarks.setPercentage(d);
+					examMarks.setSubMarks(subMarks);
+					//here
+                    int mypercent= (int)Math.round(d);
+					List<MarksGrade> marksGradeDetailsList = marksDetailsDao.readMarksGrade(Integer.parseInt(branchId));
+					for (MarksGrade marksGrade : marksGradeDetailsList) {
+						if( mypercent >= marksGrade.getMinpercentage() && mypercent <= marksGrade.getMaxpercentage())	
+						{
+							examMarks.setResultclass(marksGrade.getStatus());
+							examrank.setStatus(marksGrade.getStatus());
+						}
+						
+					}
+					ExamRank examRank = marksDetailsDao.getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),currentAcademicYear,Integer.parseInt(branchId));
+					if(examRank!=null) {
+					examMarks.setRank(examRank.getRank());
+					}
+					examMarksList.add(examMarks);
+					
+				}
+			}
+			}
+			markssheet.setExammarks(examMarksList);
+			marksSheetList.add(markssheet);
+			result.setSuccess(true);
+			
+		}
+		
+		int size = examsList.size();
+		int endLoop = size/5;
+		result.setEndLoop(endLoop+1);
+		result.setMarksSheetList(marksSheetList);
+		result.setExamName(examName);
+				}
+	
+	return result;
+
+}
+
+public GenerateReportResponseDto getStartDate(String branchId) {
+	GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
+	String startDate = new DataUtil().getPropertiesValue("startdate"+branchId);
+	result.setStartDate(startDate);
 	return result;
 }
 

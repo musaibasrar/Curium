@@ -11,6 +11,8 @@ import org.ideoholic.curium.repositories.PaybasicRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.HibernateUtil;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -302,5 +304,4 @@ public class EmployeeDAO {
 		}
 		
 	}
-
 }

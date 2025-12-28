@@ -7,6 +7,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
@@ -394,6 +395,53 @@ public class FeesCategoryDAO {
 			hibernateException.printStackTrace();
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
+		return result;
+	}
+	
+	@Transactional
+	public List <Feescategory> getFeecategoryByName(String[] classNames, SearchStudentDto searchStudentDto,
+			String branchId)
+	{
+		List <Feescategory> result= new ArrayList();
+		/*try {
+			transaction = session.beginTransaction();
+			StringBuilder hql = new StringBuilder(
+				    "FROM Feescategory f WHERE f.academicyear = :year AND f.branchid = :branchId AND f. f.feescategoryname LIKE :feesCategoryName AND("
+				);
+			
+			for (int i = 0; i < classNames.length; i++) {
+			    hql.append(" f.particularname LIKE :particularname").append(i);
+			    if (i < classNames.length - 1) {
+			        hql.append(" OR ");
+			    }
+			}
+
+			hql.append(" )");
+
+			Query query = session.createQuery(hql.toString());
+			query.setParameter("year", searchStudentDto.getAcademicyear());
+			query.setParameter("branchId", Integer.parseInt(branchId));
+			query.setParameter("feesCategoryName", "%"+searchStudentDto.getNameSearch()+"%");
+
+			for (int i = 0; i < classNames.length; i++) {
+			    query.setParameter("particularname" + i, "%" + classNames[i] + "%");
+			}
+			
+			queryUtil.runGivenQuery(query, getClass())
+			
+			//Query query = session.createQuery("from Feescategory where academicyear = '"+searchStudentDto.getCategoryYear()+"' and feescategoryname like '%"+searchStudentDto.getNameSearch()+"%'  and branchid='"+branchId+"'");
+			result=query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return result;
+
+		}*/
 		return result;
 	}
 

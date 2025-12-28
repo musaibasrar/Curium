@@ -514,7 +514,54 @@
            
         });
         </script>
+        
+         <script type="text/javascript">
+	$(function() {
 
+		
+		$("#print").button().click(function() {
+			printAdmissionAbstract();
+
+		});
+		
+		$("#singleprint").button().click(function() {
+			printSinglePageAdmissionAbstract();
+
+		});
+
+		$(".cancel").button().click(function() {
+			Cancel();
+
+		});
+					
+	});
+</script>
+<script type="text/javascript">
+function printAdmissionAbstract() {
+	var form1 = document.getElementById("form1");
+	form1.action = "/school/DocumentsProcess/printAdmissionAbstract";
+	form1.method = "POST";
+	form1.submit();
+
+}
+
+function printSinglePageAdmissionAbstract() {
+	var form1 = document.getElementById("form1");
+	form1.action = "/school/DocumentsProcess/printSinglePageAdmissionAbstract";
+	form1.method = "POST";
+	form1.submit();
+
+}
+
+
+							function Cancel() {
+								var form1 = document.getElementById("form1");
+								form1.action = "/school/StudentProcess/viewAll";
+								form1.submit();
+							}
+
+							
+						</script>
 
 </head>
   <%
@@ -680,7 +727,11 @@ for(Cookie cookie : cookies){
 						<td class="footerTD" colspan="2"> &nbsp;
 						
 						<input value="Export"
-							type="submit" id="export"/></td>
+							type="submit" id="export"/>
+							<input value="Print"
+							type="submit" id="print"/>
+							<input value="Single Print"
+							type="submit" id="singleprint"/></td>
 							
 							
 

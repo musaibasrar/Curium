@@ -74,6 +74,8 @@ public class MarksDetailsActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
         dto.setNoofpresentday(request.getParameter("dateforattendance"));
+        dto.setEndDate(request.getParameter("enddate")); 
+        dto.setStartDate(request.getParameter("startdate"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
@@ -202,10 +204,14 @@ public class MarksDetailsActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamIds(request.getParameterValues("examslist"));
+        dto.setNoofpresentday(request.getParameter("dateforattendance"));
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+        request.setAttribute("totaldays", responseDto.getTotalDays());
+		request.setAttribute("totalpresent", responseDto.getTotalpresent());
+		request.setAttribute("totalabsent", responseDto.getTotalabsent());
 
         return responseDto.isSuccess();
     }
@@ -279,4 +285,23 @@ public class MarksDetailsActionAdapter {
 
 	        return resultResponse.isSuccess();
 	    }
+
+	public boolean generateFinalExamReport() {
+		 GenerateReportDto dto = new GenerateReportDto();
+	        dto.setStudentIds(request.getParameterValues("studentIDs"));
+	        dto.setExamClass(request.getParameter("examclass"));
+	        dto.setExamName(request.getParameter("examname"));
+	       
+	        GenerateReportResponseDto responseDto = marksDetailsService.generateFinalExamReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+	        request.setAttribute("endloop", responseDto.getEndLoop());
+	        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+	        request.setAttribute("examname", responseDto.getExamName());
+	        return responseDto.isSuccess();
+	}
+
+	public void getStartDate() {
+		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate(httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("startDateStr", responseDto.getStartDate());
+		
+	}
 }

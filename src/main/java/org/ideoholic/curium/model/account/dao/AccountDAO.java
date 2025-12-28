@@ -601,4 +601,18 @@ public class AccountDAO {
 		return voucherEntrytransactions;
 	}
 
+	@Transactional
+	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDatesByIds(String fromDate, String toDate,	List<Integer> accountIds, int branchId) {
+		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
+		try {
+			//Query query = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and (draccountid IN (:accountIds) or craccountid IN (:accountIds))  and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC");
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findByAllVoucherEntryTransactionsBetweenDatesByIds(fromDate,toDate,accountIds,branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return voucherEntrytransactions;
+	}
+
 }

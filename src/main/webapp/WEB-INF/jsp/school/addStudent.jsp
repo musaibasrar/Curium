@@ -20,8 +20,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Add Student</title>
-<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
+
+ <style type="text/css" title="currentStyle">
+            @import "/school/css/dataTable/css/demo_page.css";
+            @import "/school/css/dataTable/css/jquery.dataTables.css";
+        </style>
 
 <script type="text/javascript"
 	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -36,9 +39,8 @@
 <script type="text/javascript"
 	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
 <link rel="stylesheet" href="/school/css/datePicker/demos.css">
-
-
-
+<script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -240,6 +242,10 @@
 	color: #325f6d;
 }
 -->
+.dataTables_filter {
+    float: left;
+    text-align: left;
+}
 </style>
 
 <script type="text/javascript">
@@ -274,11 +280,6 @@
 
 
 <script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
-
-<script src="/school/JavaScript/actb.js"></script>
-<script src="/school/JavaScript/common.js"></script>
-
-
 
 
 <script>
@@ -576,7 +577,22 @@
     function searchfeecategory() {
     	var addClass=document.getElementById('addclass').value;
     	var yoa=document.getElementById('yearofadmission').value;
-    	
+   		const feesCategories = document.getElementsByName('feescategories');
+   		const feesCategoriesTransport = document.getElementById('transport');
+   		
+        const checkedFeesCategoryValues = [];
+        
+        for (let i = 0; i < feesCategories.length; i++) {
+            const checkbox = feesCategories[i];
+            if (checkbox.checked) {
+                checkedFeesCategoryValues.push(checkbox.value);
+            }
+        }
+        
+        if (feesCategoriesTransport.value !== 'Select') {
+            checkedFeesCategoryValues.push(feesCategoriesTransport.value);
+        }
+        
     	if (!addClass) {
             console.warn("Class is not selected. Skipping search.");
             return;
@@ -590,16 +606,37 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/school/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/school/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
     
-	function stateChanged() {
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
-		}
-	}
+    function stateChanged() {
+        if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+
+            document.getElementById("feescat").innerHTML = xmlHttp.responseText; // Load table
+
+            // Now initialize DataTable after table is loaded in DOM
+            setTimeout(() => {
+                if ($("#dataTable").length) {
+                	$(document).ready(function() {
+                        $('#dataTable').dataTable( {
+                        	"bPaginate" : false,
+                			"bLengthChange" : false,
+                			"bFilter" : true,
+                			"bSort" : false,
+                			"bInfo" : true,
+                			"bAutoWidth" : false
+                            
+                        } );
+                    } );
+                } else {
+                    console.error("Table not found #dataTable");
+                }
+            }, 100); // small delay ensures table is rendered
+        }
+    }
+
 	function GetXmlHttpObject() {
 		var xmlHttp = null;
 		try {
@@ -657,7 +694,6 @@ $(function() {
 	$('.chcktbl').click(function() {
 		var length = $('.chcktbl:checked').length;
 		var trLength = $('.labelClass').length;
-		alert(tdLength);
 		if (length > trLength) {
 			$('.chcktbl:not(:checked)').attr('disabled', true);
 		} else {
@@ -685,7 +721,6 @@ $(function() {
 	$('.chcktblotherfees').click(function() {
 		var length = $('.chcktblotherfees:checked').length;
 		var trLength = $('.labelClass').length;
-		alert(tdLength);
 		if (length > trLength) {
 			$('.chcktblotherfees:not(:checked)').attr('disabled', true);
 		} else {
@@ -695,21 +730,34 @@ $(function() {
 });
 </script>
 <script>
-function calculate(value2) {
-	var feesCount=document.getElementById("feesCount_"+value2).value;
-	//alert("hii", value2);
-	 var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
-	 //alert("hii", value2);
-     var feesCount=document.getElementById("feesCount_"+value2).value;
-     var final1=document.getElementById("hiddenfees_full_amount_"+value2);
-     	
-     	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
-     	//feesConcession (direct amount)
-        final1.value=feesCat*feesCount;
-     	//final1.value=feesCat;
-         calculateGrandTotal();
-   
-}
+	function calculate(value2) {
+		
+	
+	    var amountInput = document.getElementById('hiddenfees_amount_' + value2); // Base Fee Amount
+	    var countInput = document.getElementById('feesCount_' + value2);        // No. of Installments
+	    var fullAmountInput = document.getElementById('hiddenfees_full_amount_' + value2); // Row Total Output
+	    var checkbox = document.getElementById('feesCat_' + value2);            // Individual Checkbox
+	
+	    var baseAmount = parseFloat(amountInput.value || 0);
+	    var installmentCount = parseInt(countInput.value || 0);
+	    
+	    // Ensure the count is non-negative
+	    if (installmentCount < 0) installmentCount = 0;
+	    
+	    // If the checkbox is UNCHECKED, the installment count and final amount should be 0.
+	    if (!checkbox.checked) {
+	        installmentCount = 0;
+	        countInput.value = '0';
+	    }
+	
+	    var rowTotal = baseAmount * installmentCount;
+	    
+	    // Update the row's total amount input
+	    fullAmountInput.value = rowTotal;
+	    
+	    // Call the central function to refresh the grand total
+	    calculateGrandTotal(); 
+	}
 function calculateGrandTotal() {
 	
 	
@@ -804,26 +852,6 @@ $(document).ready(function() {
 });
 </script>
 <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable( {
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 2000,
-                    "aoColumnDefs":[
-                        { 'bSortable': false, 'aTargets': [ 0 ] }
-                    ]
-                    
-                } );
-            } );
-            
             function updateFeesCategory(value2){
             	
             	
@@ -855,6 +883,52 @@ $(document).ready(function() {
                 	calculateGrandTotal();
                 }
             }
+            
+            function toggleFeesCount(allCheckbox) {
+                var checkboxes = document.querySelectorAll('.chcktbl');
+
+                checkboxes.forEach(function(checkbox) {
+                	var actualIndex = checkbox.id.split("_")[1];
+                    var feesCountInput = document.getElementById('feesCount_' + (actualIndex));
+
+                    checkbox.checked = allCheckbox.checked;
+
+                    if (!allCheckbox.checked) {
+                    	feesCountInput.value = '0';
+                    } 
+                    updateFeesCategory(actualIndex);
+                    //calculate(index);
+                });
+            }
+
+			
+			/* document.addEventListener('DOMContentLoaded', function() {
+			    updateTotalAmount();
+			});
+			
+			function updateTotalAmount() {
+			    var totalAmount = 0;
+			    
+			    // Select all the full amount inputs (the "Fees Total Amount" column)
+			    var fullAmountInputs = document.querySelectorAll('.feesFullAmount');
+			    
+			    fullAmountInputs.forEach(function(input) {
+			        // Get the index from the input's ID (e.g., '1' from 'hiddenfees_full_amount_1')
+			        var index = input.id.split('_').pop(); 
+			        
+			        // Find the corresponding checkbox for this row
+			        var checkbox = document.getElementById('feesCat_' + index);
+			        
+			        // Only sum the amount if the individual checkbox is currently selected
+			        if (checkbox && checkbox.checked) {
+			            var amount = parseFloat(input.value || 0);
+			            totalAmount += amount; 
+			        }
+			    });
+			
+			    // Update the final total display field, formatted to 2 decimal places
+			    document.getElementById('feesTotalAmount').value = totalAmount;
+			} */
         </script>
 </head>
 <%
@@ -1009,10 +1083,17 @@ $(document).ready(function() {
 									name="place" type="text" class="myclass" id="place" size="36">
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
-							<td ><label><input name="dateofadmission" autocomplete="false"
-									type="text" class="myclass" id="dateofadmission" size="36"
-									data-validate="validate(required)"> </label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
+							<td ><label>
+							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
+								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+								&nbsp;Transport <select name="feescategories" id="transport">
+										        <option value="Select">-- Select --</option>
+										        <option value="Malmal">Malmal</option>
+										        <option value="Madhubani">Madhubani</option>
+										        <option value="xyz">xyz</option>
+										    </select>
+								</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -1371,6 +1452,11 @@ $(document).ready(function() {
 									class="myclass" id="datepickerDND" size="36"
 									data-validate="validate(required)">
 							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Date of admission&nbsp;</td>
+							<td ><label><input name="dateofadmission" autocomplete="false"
+									type="text" class="myclass" id="dateofadmission" size="36"
+									data-validate="validate(required)"> </label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -2210,24 +2296,22 @@ $(document).ready(function() {
 						
 						<div id="fragment-7">
 						
-						<table style="width: auto;height: auto;" align="center">
-								
-							<tr>
-							<td style="font-weight: bold;color:#325F6D">Stamp Fee: &nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td>
-							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
-							</label>
-							</td>
+						<!-- <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable1">
+											<tr>
+												<td><label class="labelClass"
+													style="font-weight: bold; color: #325F6D"> <input
+														type="checkbox" id="chckHead" onclick="toggleFeesCount(this)"/>All
+												</label></td>
+
+											</tr>
+						</table> -->
+						
+						<div style="overflow:scroll;width:auto; height: auto;" id="feescat">
+						
+						</div>				
+						
+							<table style="width: auto;height: auto;" align="center">
 							
-						</tr>
-											
-						<tr>
-							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
-							<td id="feescat">
-							
-							</td>
-							
-						</tr>
 						 <tr>
 							<td><br /></td>
 						</tr>
