@@ -619,13 +619,12 @@ public class MarksDetailsService {
 				 * getStudentexternalid(), currentAcademicYear,Integer.parseInt(branchId));
 				 */
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				String startDateStr = dto.getStartDate();
-				String endDateStr = dto.getEndDate();
 				Date startDate = DateUtil.indiandateParser(dto.getStartDate());
 				Date endDate = DateUtil.indiandateParser(dto.getEndDate());
+				String  startDateFormatted= DateUtil.dateParserddMMYYYY(startDate);
+				String endDateFormatted=DateUtil.dateParserddMMYYYY(endDate);
 				String academicYear = currentAcademicYear;
-				
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDate, endDate);
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted, endDateFormatted, Integer.parseInt(branchId));
 				 List<Holidaysmaster> holidaysMasterList = marksDetailsDao.getListofHolidays(startDate,endDate);
 				 int holidayCount = 0;
 				 for(Holidaysmaster holiday:holidaysMasterList) {

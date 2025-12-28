@@ -25,6 +25,7 @@ import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -184,8 +185,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	}
 	
 	public ResponseEntity<FeescategoryResponseDto> searchFeeCategory(@RequestParam(value="classname")
-	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr, String branchid) throws IOException {
-				FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmissionStr,yearofAdmissionStr,branchid);
+	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid,@RequestHeader(value = "feescategories") String feesCategories) throws IOException {
+				FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmissionStr,yearofAdmissionStr,branchid,feesCategories);
 			if(feescategoryResponseDto.isSuccess()) {
 				return ResponseEntity.ok(feescategoryResponseDto);
 			}
