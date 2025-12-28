@@ -227,6 +227,12 @@ public class FeesActionAdapter {
     	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
     	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
 	}
+
+	public void getFeesMonths() {
+		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+		feescategoryResponseDto = feesService.getFeesMonths(httpSession.getAttribute(Constants.BRANCHID).toString());
+    	request.setAttribute("feesmonths", feescategoryResponseDto.getFeesMonths());
+	}
 	
 	public boolean viewAllStudentsListOtherFees() {
 		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsListOtherFees(httpSession.getAttribute(Constants.BRANCHID).toString());
