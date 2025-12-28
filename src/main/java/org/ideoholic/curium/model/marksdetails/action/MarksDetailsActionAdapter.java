@@ -300,7 +300,7 @@ public class MarksDetailsActionAdapter {
 	}
 
 	public void getStartDate() {
-		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate();
+		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("startDateStr", responseDto.getStartDate());
 		
 	}

@@ -601,19 +601,17 @@ public class AccountDAO {
 		return voucherEntrytransactions;
 	}
 
+	@Transactional
 	public List<VoucherEntrytransactions> getVoucherEntryTransactionsBetweenDatesByIds(String fromDate, String toDate,	List<Integer> accountIds, int branchId) {
 		List<VoucherEntrytransactions> voucherEntrytransactions = new ArrayList<VoucherEntrytransactions>();
 		try {
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and (draccountid IN (:accountIds) or craccountid IN (:accountIds))  and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC");
-			query.setParameterList("accountIds", accountIds);
-			voucherEntrytransactions = query.getResultList();
-			transaction.commit();
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}		
+			//Query query = session.createQuery("from VoucherEntrytransactions where transactiondate BETWEEN '"+fromDate+"' and '"+toDate+"' and (draccountid IN (:accountIds) or craccountid IN (:accountIds))  and cancelvoucher!='yes' and branchid = "+branchId+" order by transactionsid ASC");
+			voucherEntrytransactions = voucherEntryTransactionsRepo.findByAllVoucherEntryTransactionsBetweenDatesByIds(fromDate,toDate,accountIds,branchId);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
 		return voucherEntrytransactions;
 	}
 

@@ -710,14 +710,14 @@ public void addFeesStampAll(StampFeesDto stampFeesDto,String currentAcademicYear
 				if(studentIdClass[1].equalsIgnoreCase(feesCatAndIndex[2])) {
 					
 				//check whether the fees category is already stamped 
-				Studentfeesstructure result = new StampFeesDAO().getStudentFeesStructure(Integer.parseInt(studentIdClass[0]),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
+				Studentfeesstructure result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(studentIdClass[0]),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
 				// END
 				
 				if(result==null) {
 					
 					Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 					Feescategory feescategory = new Feescategory();
-					studentfeesstructure.setSid(Integer.valueOf(studentIdClass[0]));
+					studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(Integer.valueOf(studentIdClass[0])));
 					feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
 					studentfeesstructure.setFeescategory(feescategory);
 					studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[feesCatIndex]));
@@ -774,7 +774,7 @@ public void addFeesStampAll(StampFeesDto stampFeesDto,String currentAcademicYear
 		String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 		
 		// End J.V
-		new StampFeesDAO().addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+		stampFeesDao.addStampFees(listOfacademicfessstructure,currentAcademicYear,listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
 		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
