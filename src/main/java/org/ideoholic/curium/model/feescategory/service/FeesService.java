@@ -7,7 +7,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -113,10 +115,11 @@ public class FeesService {
                 if(branchid!=null){
                 	
                 	String[] classesFeesCat = feesCategoryDto.getFromClass();
+                	List<Feescategory> feesCategoryList = new ArrayList<>();
 					if (classesFeesCat != null) {
-						List<Feescategory> feesCategoryList = new ArrayList<Feescategory>();
 
 						for (String feeCat : classesFeesCat) {
+						if (feesCategoryDto.getMonths()==null) {
 							Feescategory feescategorynew = new Feescategory();
 							feescategorynew
 									.setFeescategoryname(DataUtil.emptyString(feesCategoryDto.getFeesCategory()));
@@ -131,9 +134,29 @@ public class FeesService {
 									&& feescategorynew.getAmount() != 0) {
 								feesCategoryList.add(feescategorynew);
 							}
+						} else if (feesCategoryDto.getMonths().length > 1) {
+							
+							for (String monthlyFees : feesCategoryDto.getMonths()) {
+								
+								Feescategory feescategorynew = new Feescategory();
+								feescategorynew.setFeescategoryname(monthlyFees+" "+DataUtil.emptyString(feesCategoryDto.getFeesCategory()));
+								feescategorynew.setParticularname(DataUtil.emptyString(feeCat) + "--");
+								feescategorynew.setAmount(DataUtil.parseInt(feesCategoryDto.getAmount()));
+								feescategorynew.setBranchid(Integer.parseInt(branchid));
+								feescategorynew.setUserid(Integer.parseInt(userlogin));
+								feescategorynew.setAcademicyear(DataUtil.emptyString(feesCategoryDto.getCategoryYear()));
+								feescategorynew.setTotalinstallments(feesCategoryDto.getTotalInstallments());
+								if (!feescategorynew.getFeescategoryname().equalsIgnoreCase("")
+										&& !feescategorynew.getParticularname().equalsIgnoreCase("")
+										&& feescategorynew.getAmount() != 0) {
+									feesCategoryList.add(feescategorynew);
+								}
+							
+							}
 						}
-						boolean result = feesCategoryDao.create(feesCategoryList);
 					}
+                	boolean result =  feesCategoryDao.create(feesCategoryList);
+                	
                         /*
                           Feescategory feescategory = new Feescategory();
                           feescategory.setFeescategoryname(DataUtil.emptyString(request.getParameter("feescategory")));
@@ -151,6 +174,7 @@ public class FeesService {
                                 feescategory =  new FeesCategoryDAO().create(feescategory);
                         }*/
                 }
+              }
         }
 
 
@@ -181,7 +205,8 @@ public class FeesService {
 					student.setClassstudying((String) parentdetails[2]);
 					student.setStudentexternalid((String) parentdetails[3]);
 					student.setAdmissionnumber((String) parentdetails[4]);
-					parent.setFathersname((String) parentdetails[5]);
+					student.setAdmissiondate((Date)parentdetails[5]);
+					parent.setFathersname((String) parentdetails[6]);
 					parent.setStudent(student);
 					parentDetails.add(parent);
 				}

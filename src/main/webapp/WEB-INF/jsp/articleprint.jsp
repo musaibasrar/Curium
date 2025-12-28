@@ -28,15 +28,15 @@
     text-align:center;
 }
         </style>
-	<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Article 371 Certificate</title>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/school/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -54,7 +54,7 @@ for(Cookie cookie : cookies){
 	<table align="center">
 <tr>
 <td style="text-align:center;">
-<img src="/vision/images/Karnatakalogo.png" width="80" height="69"/>
+<img src="/school/images/Karnatakalogo.png" width="80" height="69"/>
 </td>
 </tr>
 <tr>
@@ -257,7 +257,7 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> District
 </td></tr>
 <tr>
-              <td align="center"><a id="print" href="/vision/DocumentsProcess/printArticleCertificate">Print</a></td>
+              <td align="center"><a id="print" href="/school/DocumentsProcess/printArticleCertificate">Print</a></td>
             </tr>
 </table>
 	
