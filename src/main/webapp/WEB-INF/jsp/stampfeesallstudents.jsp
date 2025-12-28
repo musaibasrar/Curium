@@ -15,8 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stamp Fees all</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/school/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -366,7 +366,7 @@
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/StampFeesProcess/advanceSearchForStampFeesByCategory";
+		form1.action = "/school/StampFeesProcess/advanceSearchForStampFeesByCategory";
 		form1.method = "POST";
 		form1.submit();
 
@@ -869,7 +869,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/StampFeesProcess/applyFeesAll" method="POST">
+	<form id="form1" action="/school/StampFeesProcess/applyFeesAll" method="POST">
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
