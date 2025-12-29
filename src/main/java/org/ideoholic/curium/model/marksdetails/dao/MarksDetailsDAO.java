@@ -330,7 +330,7 @@ public class MarksDetailsDAO {
 	    try {
 
 	        //Query query = session.createQuery("FROM Holidaysmaster WHERE todate >= :startDate and fromdate <= :endDate");
-	        results = holidayMasterRepository.findByToDateGreaterThanEqualAndFromDateLessThanEqual(startDate, endDate);
+	        results = holidayMasterRepository.findByTodateGreaterThanEqualAndFromdateLessThanEqual(startDate, endDate);
 
 	    } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);

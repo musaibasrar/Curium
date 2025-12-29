@@ -16,6 +16,6 @@ public interface HolidaysMasterRepository extends JpaRepository<Holidaysmaster, 
 
 	List<Holidaysmaster> findByAcademicyearAndShidIn(String academicyear, List<Integer> holidaysIntList);
 	
-	List<Holidaysmaster> findByToDateGreaterThanEqualAndFromDateLessThanEqual(Date fromDate,Date toDate);
+	List<Holidaysmaster> findByTodateGreaterThanEqualAndFromdateLessThanEqual(Date fromDate,Date toDate);
 
 }
