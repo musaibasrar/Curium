@@ -340,7 +340,6 @@ public class FeesService {
 
 			String[] addClass = request.getParameterValues("classsearch");
 			String addSec = request.getParameter("secsearch");
-			//String conClassStudying = "";
 			StringBuffer conClassStudying = new StringBuffer();
 
 			int i = 0;
@@ -355,16 +354,6 @@ public class FeesService {
 				i++;
 			}
 		
-
-			/*if (addClass.length>0) {
-
-				conClassStudying = addClass+"--" +"%";
-
-			}
-			if (!addSec.equalsIgnoreCase("")) {
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}*/
 
 			String classStudying = DataUtil.emptyString(conClassStudying.toString());
 			String querySub = "";
