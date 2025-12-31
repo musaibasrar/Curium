@@ -338,11 +338,25 @@ public class FeesService {
 			String studentname = DataUtil.emptyString(request
 					.getParameter("namesearch"));
 
-			String addClass = request.getParameter("classsearch");
+			String[] addClass = request.getParameterValues("classsearch");
 			String addSec = request.getParameter("secsearch");
-			String conClassStudying = "";
+			//String conClassStudying = "";
+			StringBuffer conClassStudying = new StringBuffer();
 
-			if (!addClass.equalsIgnoreCase("")) {
+			int i = 0;
+			for (String classOne : addClass) {
+				
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+				
+				i++;
+			}
+		
+
+			/*if (addClass.length>0) {
 
 				conClassStudying = addClass+"--" +"%";
 
@@ -350,9 +364,9 @@ public class FeesService {
 			if (!addSec.equalsIgnoreCase("")) {
 				conClassStudying = addClass;
 				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}
+			}*/
 
-			String classStudying = DataUtil.emptyString(conClassStudying);
+			String classStudying = DataUtil.emptyString(conClassStudying.toString());
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {

@@ -171,6 +171,7 @@ public class Studentfeesstructure implements java.io.Serializable {
 		this.userid = userid;
 		}
 
+		@Column(name = "concessionby", length = 45)
 		public String getConcessionby() {
 			return concessionby;
 		}
