@@ -312,7 +312,7 @@ public class AttendanceDAO {
 
 	    try {
 	        //String hql = "FROM Studentdailyattendance WHERE attendeeid = :studentId AND academicyear = :academicYear AND date BETWEEN :startDate AND :endDate";
-	        studentDailyAttendance = studentDailyAttendanceRepository.findByAttendeeIdAndAcademicYearAndDateBetween(studentExternalId, academicYear, startDate, endDate);
+	        studentDailyAttendance = studentDailyAttendanceRepository.findByAttendee_studentexternalidAndAcademicyearAndDateBetween(studentExternalId, academicYear, startDate, endDate);
 
 	    }catch (Exception e) {
 			log.error(e.getMessage(), e);
