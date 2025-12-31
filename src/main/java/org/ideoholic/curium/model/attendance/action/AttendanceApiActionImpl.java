@@ -63,7 +63,7 @@ public class AttendanceApiActionImpl implements AttendanceApiAction {
     }
 
     public ResponseEntity<ResultResponse> markStaffAttendance(MarkStaffAttendanceDto dto, String branchId, String currentAcademicYear) {
-        ResultResponse result = attendanceService.markStaffAttendance(dto, branchId, currentAcademicYear);
+        ResultResponse result = attendanceService.markStaffAttendance(dto);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
@@ -87,7 +87,7 @@ public class AttendanceApiActionImpl implements AttendanceApiAction {
     }
 
     public ResponseEntity<ResultResponse> updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto dto, String currentAcademicYear) {
-        ResultResponse result = attendanceService.updateStaffAttendanceDetails(dto, currentAcademicYear);
+        ResultResponse result = attendanceService.updateStaffAttendanceDetails(dto);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

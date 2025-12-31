@@ -34,7 +34,7 @@ public class AttendanceActionAdapter {
         markStaffAttendanceDto.setInTime(request.getParameterValues("intime"));
         markStaffAttendanceDto.setOutTime(request.getParameterValues("outtime"));
 
-        ResultResponse resultResponse = attendanceService.markStaffAttendance(markStaffAttendanceDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = attendanceService.markStaffAttendance(markStaffAttendanceDto);
 
         return resultResponse.isSuccess();
     }
@@ -45,7 +45,7 @@ public class AttendanceActionAdapter {
         updateStaffAttendanceDetailsDto.setAttendanceIds(request.getParameterValues("attandanceIDs"));
         updateStaffAttendanceDetailsDto.setStudentAttendanceStatus(request.getParameterValues("staffAttendanceStatus"));
 
-        ResultResponse resultResponse = attendanceService.updateStaffAttendanceDetails(updateStaffAttendanceDetailsDto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = attendanceService.updateStaffAttendanceDetails(updateStaffAttendanceDetailsDto);
 
         return resultResponse.isSuccess();
     }

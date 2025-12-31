@@ -1,10 +1,36 @@
 package org.ideoholic.curium.model.feescollection.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -15,7 +41,24 @@ import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
-import org.ideoholic.curium.model.feescollection.dto.*;
+import org.ideoholic.curium.model.feescollection.dto.AddFeesCollectionDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.DetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesCategoryDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesCategoryResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDashboardResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesReportDto;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
+import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StampFeeDto;
+import org.ideoholic.curium.model.feescollection.dto.StampFeeResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesDto;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
@@ -24,49 +67,37 @@ import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
+import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.*;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.util.*;
-
 public class FeesCollectionService {
 
-	private StandardActionAdapter standardActionAdapter;
+	private StandardService standardService;
+	private SmsService smsService;
 
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
-	private String CURRENTACADEMICYEAR = "currentAcademicYear";
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
-	private String username = "username";
 	
 	private static final int BUFFER_SIZE = 4096;
 
 	public FeesCollectionService(HttpServletRequest request,
-			HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
+			HttpServletResponse response, StandardService standardService, SmsService smsService) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
-		this.standardActionAdapter = standardActionAdapter;
+		this.standardService = standardService;
+		this.smsService = smsService;
 	}
 
 	public Feescollection add(Feesdetails feesdetails) {
@@ -378,7 +409,7 @@ public class FeesCollectionService {
 				getFeesDetails(sid,dto.getAcademicYear());
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
 				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
-				new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				new SmsService().sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 			
@@ -776,7 +807,9 @@ public class FeesCollectionService {
 		if (strBranchId != null) {
 
 			String queryMain = "From Parents as parents where parents.Student.branchid="+Integer.parseInt(strBranchId)+" AND ";
-			standardActionAdapter.viewClasses();
+			ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(Constants.BRANCHID).toString());
+	        httpSession.setAttribute("classdetailslist", resultResponse.getResultList());
+	     // standardActionAdapter.viewClasses();
 			List<Classsec> classList = dto.getClasssecList();
 			
 			
@@ -1437,7 +1470,7 @@ public class FeesCollectionService {
 				getFeesDetails(sid,dto.getAcademicYear());
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
 				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
-				new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				new SmsService().sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 
@@ -2168,7 +2201,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
@@ -2245,6 +2278,13 @@ public class FeesCollectionService {
 				}
 				if(defaulterFeesstructure.size()>0) {
 					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(defaulterFeesstructure);
+					studentFeesReport.setDueAmount(totalDue);
+					studentFeesReportList.add(studentFeesReport);
+				}else {
+					Parents parent = parents;
+					parent.setAddresstemporary("Fee Not Available");
+					studentFeesReport.setParents(parent);
 					studentFeesReport.setStudentFeesStructure(defaulterFeesstructure);
 					studentFeesReport.setDueAmount(totalDue);
 					studentFeesReportList.add(studentFeesReport);
@@ -2408,7 +2448,6 @@ public class FeesCollectionService {
 		ResultResponse result = ResultResponse.builder().success(false).build();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
-		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 		XSSFRow row;
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
@@ -2502,7 +2541,7 @@ public class FeesCollectionService {
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
-						        Receiptinfo receiptinfo = feesCollectionService.addImport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
+						        Receiptinfo receiptinfo = addImport(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute("username").toString());
 					            i++;
 					        }
 
@@ -2668,7 +2707,6 @@ public class FeesCollectionService {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
-		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 		XSSFRow row;
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
@@ -2763,7 +2801,7 @@ public class FeesCollectionService {
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
-						        Otherreceiptinfo receiptinfo = feesCollectionService.addImportOtherFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
+						        Otherreceiptinfo receiptinfo = addImportOtherFees(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.USERNAME).toString());
 					            i++;
 					        }
 

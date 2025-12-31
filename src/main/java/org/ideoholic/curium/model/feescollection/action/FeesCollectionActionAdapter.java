@@ -521,7 +521,7 @@ public class FeesCollectionActionAdapter {
     }
 
 	public void getFeesReportOutstanding() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYearArray(request.getParameterValues("academicyear"));

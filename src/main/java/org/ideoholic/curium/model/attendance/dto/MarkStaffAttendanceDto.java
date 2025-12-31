@@ -8,4 +8,6 @@ public class MarkStaffAttendanceDto {
     private String[] staffAttendanceStatus;
     private String[] inTime;
     private String[] outTime;
+    private Integer branchId;
+    private String currentAcademicYear;
 }

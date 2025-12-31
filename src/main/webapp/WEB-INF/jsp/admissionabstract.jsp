@@ -534,7 +534,7 @@
 <script type="text/javascript">
 function printAdmissionAbstract() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/DocumentsProcess/printAdmissionAbstract";
+	form1.action = "/brainystars/DocumentsProcess/printAdmissionAbstract";
 	form1.method = "POST";
 	form1.submit();
 
@@ -542,7 +542,7 @@ function printAdmissionAbstract() {
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/vision/StudentProcess/viewAll";
+								form1.action = "/brainystars/StudentProcess/viewAll";
 								form1.submit();
 							}
 

@@ -10,6 +10,7 @@ import org.hibernate.query.Query;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.util.HibernateUtil;
 
+
 public class YearDAO {
 	Session session = null;
 	/**
