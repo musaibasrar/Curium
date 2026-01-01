@@ -1981,7 +1981,7 @@ public class StudentService {
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
 			List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getotherReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());
-			request.setAttribute("receiptinfo",rinfo);
+			request.setAttribute("otherreceiptinfo",rinfo);
 			List<Studentotherfeesstructure> feesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
@@ -2085,6 +2085,45 @@ public class StudentService {
 			}
 		}
 
+		return result;
+	}
+
+	public boolean viewOtherfeesStructurePerYear() {
+		boolean result = false;
+		
+		try {
+
+		    long id = Long.parseLong(request.getParameter("id"));
+                    String academicYear = request.getParameter("academicyear");
+                    
+                    List<Otherreceiptinfo> rinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,academicYear);
+                    request.setAttribute("otherreceiptinfo",rinfo);
+                    List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO().getStudentOtherFeesStructure(id, academicYear);
+                    
+                    long totalSum = 0l;
+                    for (Otherreceiptinfo   receiptInfoSingle : rinfo) {
+                            totalSum = totalSum + receiptInfoSingle.getTotalamount();
+                    }
+                    
+                    long totalFeesAmount = 0l;
+        			long totalFeesConcession = 0l;
+        			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+        				totalFeesAmount = totalFeesAmount+studentotherfeesstructureSingle.getFeesamount()-studentotherfeesstructureSingle.getWaiveoff()-studentotherfeesstructureSingle.getConcession();
+        				totalFeesConcession = totalFeesConcession+studentotherfeesstructureSingle.getConcession();
+        			}
+        			
+                            httpSession.setAttribute("feesstructure", otherfeesstructure);
+                            httpSession.setAttribute("sumoffees", totalSum);
+                            httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
+                            httpSession.setAttribute("totalfees", totalFeesAmount);
+                            httpSession.setAttribute("academicPerYear", academicYear);
+                            httpSession.setAttribute("totalfeesconcession", totalFeesConcession);
+
+			result = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 	

@@ -530,23 +530,28 @@ public class MessStockMoveService {
 		
 		List<Bill> messStockMoveList = new ArrayList<Bill>();
 		boolean result = false;
+		String fromDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondatefrom"));
+		String toDate = DateUtil.dateFromatConversionSlash(request.getParameter("transactiondateto"));
 		
 		 if(httpSession.getAttribute(BRANCHID)!=null){
 			 
 					try {
 						int page = 1;
-						int recordsPerPage = 50;
+						int recordsPerPage = 1000;
 							if (!"".equalsIgnoreCase(DataUtil.emptyString(request.getParameter("page")))) {
 								page = Integer.parseInt(request.getParameter("page"));
 							}
 
-						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails((page - 1) * recordsPerPage,
+						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails(fromDate, toDate, (page - 1) * recordsPerPage,
 									recordsPerPage, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())); 	
-						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(fromDate, toDate, Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 						request.setAttribute("noOfPages", noOfPages);
 						request.setAttribute("currentPage", page);
-						
+						request.setAttribute("fromdate", DateUtil.datePars(request.getParameter("transactiondatefrom")));
+						request.setAttribute("todate", DateUtil.datePars(request.getParameter("transactiondateto")));
+						request.setAttribute("transactiondatefromselected", request.getParameter("transactiondatefrom"));
+						request.setAttribute("transactiondatetoselected", request.getParameter("transactiondateto"));
 						result = true;
 					} catch (Exception e) {
 						e.printStackTrace();

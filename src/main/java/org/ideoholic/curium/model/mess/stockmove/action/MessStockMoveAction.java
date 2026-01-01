@@ -88,7 +88,7 @@ public class MessStockMoveAction {
 
 	}
 	
-	@GetMapping("/billsReport")
+	@RequestMapping(value = "/generateBillsReport", method = { RequestMethod.GET, RequestMethod.POST })
 	public String billsReport() {
 		    	
     	new MessStockMoveService(request, response).viewStockMoveDetails();

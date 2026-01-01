@@ -437,7 +437,7 @@
 			"bLengthChange" : false,
 			"bFilter" : true,
 			"bSort" : true,
-			"bInfo" : false,
+			"bInfo" : true,
 			"bAutoWidth" : false
 		});
 	});
@@ -490,16 +490,26 @@
 		});
 	});
 	$(function() {
-		$("#transactiondate").datepicker({
+		$("#transactiondatefrom").datepicker({
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
-			$("#transactiondate").datepicker("option", "showAnim", $(this).val());
+			$("#transactiondatefrom").datepicker("option", "showAnim", $(this).val());
+		});
+		$("#transactiondateto").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#transactiondateto").datepicker("option", "showAnim", $(this).val());
 		});
 	});
+	
 </script>
 <script type="text/javascript" src="/roshan/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
@@ -545,6 +555,38 @@
 		form1.submit();
 	}
 	
+	function generateBillsReport() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/roshan/MessItemsMoveProcess/generateBillsReport";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
+	 $(function(){
+		 
+		 $("#generatereport").button({
+             icons:{
+                 primary: "ui-icon-document"
+             }
+         }).click(function(){
+             generateBillsReport();
+             return false;
+
+         });
+		 
+		 $("#print").button({
+             icons:{
+                 primary: "ui-icon-print"
+             }
+         }).click(function(){
+             printRecords();
+             return false;
+
+         });
+		 
+         
+     });
+	 
 	$(function() {
 
 		$("#tabs").tabs();
@@ -829,11 +871,73 @@ for(Cookie cookie : cookies){
 		
 		<div class="alert-box success" id="div1">Items has been cancelled successfully!!!&nbsp;&nbsp;&nbsp;<button class="button" id="1" onclick="closediv(this.id);">OK</button></div>
 		<div class="alert-box failure" id="div2">Items cancellation failed, please try again!!!&nbsp;&nbsp;&nbsp;<button class="buttonred" id="2" onclick="closediv(this.id);">OK</button></div>
+		<div style="height: 28px">
+			<button id="add">Parameters</button>
+			<br />
+		</div>
+
+		<div id="effect" class="ui-widget-content ui-corner-all">
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabs-1">Filter</a></li>
+
+				</ul>
+				<div id="tabs-1">
+				
+					<table style="margin-left: auto;margin-right: auto;">
+					
+						<tr>
+							<td><br><br></td>
+						</tr>
+						
+						<tr>
+						<td class="alignRight">From Date&nbsp;</td>
+							<td><label> <input type="text"  name="transactiondatefrom"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transactiondatefrom" autocomplete="false" required
+									data-validate="validate(required)">
+							</label></td>
+							
+							<td class="alignRight" style="padding-left: 20px;">To Date&nbsp;</td>
+							<td><label> <input type="text"  name="transactiondateto"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transactiondateto" autocomplete="false" required
+									data-validate="validate(required)">
+							</label></td>
+							
+							</tr>
+							<tr>
+							<td><br /></td>
+	
+							</tr>
+						
+						<tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+					</table>
+					
+						<div align="center">
+						<p>
+						<label><button id="generatereport">Generate Report</button></label></p>
+						
+									
+					</div>
+					
+					</div>
+				</div>
+				
+				
+			</div>
+		
 		
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">Bills Report</td>
+					<td class="headerTD">Bills Report<br>${transactiondatefromselected} to ${transactiondatetoselected}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
@@ -900,7 +1004,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/issueItems?page=${currentPage - 1}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/generateBillsReport?page=${currentPage - 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -913,7 +1017,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/roshan/MessItemsMoveProcess/issueItems?page=${i}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/roshan/MessItemsMoveProcess/generateBillsReport?page=${i}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -922,7 +1026,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/issueItems?page=${currentPage + 1}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/roshan/MessItemsMoveProcess/generateBillsReport?page=${currentPage + 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Next</a></td>
                 </c:if>
                     </div>
                     

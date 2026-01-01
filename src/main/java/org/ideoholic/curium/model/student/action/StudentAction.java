@@ -257,5 +257,11 @@ public class StudentAction {
 			return "viewAll";
 		}
 	}
+	
+	@PostMapping("/otherFeesStructurePerYear")
+	public String otherFeesStructurePerYear() {
+		new StudentService(request, response).viewOtherfeesStructurePerYear();
+		return "student_details_other_feesstructure";
+	}
 
 }
