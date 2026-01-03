@@ -104,12 +104,12 @@ This is to certify that Sri/Smt  <span style="font-weight: bold;text-transform: 
 <td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
 <c:out value="${studentdetailsbonafide.fathersname}" />
-</span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+</span>  has been studied in<b> ${branchname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 </td>
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period mentioned below:-
+Taluka<b> Aurad(B) </b>District <b> Bidar </b> During the Period mentioned below:-
 </td>
 </tr>
 <tr><td><br></td></tr>
@@ -123,7 +123,7 @@ SL No.
 Class/Level
 </th >
 <th class="borderset">
-From Which to which date
+From Which date to which date
 </th>
 <th class="borderset">
 Reference of Document
@@ -143,7 +143,7 @@ Reference of Document
 								</c:forEach>								
 </td>
 <td class="borderset" style="text-align:center;">
-From ${studentdetailsbonafide.student.yearofadmission} to ${studentdetailsbonafide.student.promotedyear}
+From ${studentdetailsbonafide.student.admissiondate} to ${studentdetailsbonafide.student.dateleaving}
 
 </td>
 <td class="borderset" style="text-align:center;">
