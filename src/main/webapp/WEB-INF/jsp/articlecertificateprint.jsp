@@ -100,20 +100,20 @@ Rules for Issue Certificate, 2013]</b>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
+This is to certify that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
 <c:out value="${studentdetailsbonafide.student.name}" />
 </span>   D/O,S/O</td>
 </tr>
 <tr>
 <td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:250px;">
 <c:out value="${studentdetailsbonafide.fathersname}" />
-</span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+</span>  has been studied in<b> ${branchname}</b>
 </td>
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period Noted below:-
+Taluka<b>  Aurad(B) </b>District <b> Bidar </b> During the Period Noted below:-
 </td>
 </tr>
 </table>
@@ -126,7 +126,7 @@ SL No.
 Class/Level
 </th >
 <th class="borderset">
-From Which to which date
+From Which date to which date
 </th>
 <th class="borderset">
 Reference of Document
@@ -146,7 +146,7 @@ Reference of Document
 								</c:forEach>
 </td>
 <td class="borderset" style="text-align:center;">
-From ${studentdetailsbonafide.student.yearofadmission} to ${studentdetailsbonafide.student.promotedyear}
+From ${studentdetailsbonafide.student.admissiondate} to ${studentdetailsbonafide.student.dateleaving}
 
 </td>
 <td class="borderset">
@@ -198,7 +198,7 @@ ${studentdetailsbonafide.student.admissionnumber}
 <table align="center">
 <tr><td><br></td></tr>
 <tr><td>
-Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
+Place: </td><td>Name:&nbsp;&nbsp;
 </td></tr>
 <tr><td>
 <br>
@@ -216,7 +216,7 @@ Date:<input name="dateofcr" type="text" class="textField" style="border: none;bo
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >
 </td>
 <td>
-Head of Institution 
+Head of the Institution 
 </td>
 </tr>
 <tr>
