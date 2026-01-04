@@ -1,35 +1,28 @@
 package org.ideoholic.curium.model.student.action;
 
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
-import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
-import org.ideoholic.curium.model.student.dto.CreateStudentDto;
-import org.ideoholic.curium.model.student.dto.PromoteMultipleDto;
-import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.model.student.dto.StudentDetailsResponseDto;
-import org.ideoholic.curium.model.student.dto.StudentDto;
-import org.ideoholic.curium.model.student.dto.StudentIdDto;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
-import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.student.dto.*;
 import org.ideoholic.curium.model.student.service.StudentService;
-import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class StudentActionAdapter {
@@ -37,10 +30,21 @@ public class StudentActionAdapter {
     private HttpServletRequest request;
 
     @Autowired
+    private HttpServletResponse response;
+
+    @Autowired
     private HttpSession httpSession;
 
     @Autowired
+    private StandardActionAdapter standardActionAdapter;
+
+    @Autowired
     private StudentService studentService;
+
+    private String CURRENTACADEMICYEAR = "currentAcademicYear";
+    private String BRANCHID = "branchid";
+    private String USERID = "userloginid";
+
 
     public void viewAllStudentsSuperAdmin() {
 
@@ -52,7 +56,7 @@ public class StudentActionAdapter {
 
     public ResultResponse addNew() {
 
-        ResultResponse resultResponse = studentService.addNew(httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse resultResponse = studentService.addNew(httpSession.getAttribute(BRANCHID).toString());
 
         return resultResponse;
     }
@@ -95,7 +99,7 @@ public class StudentActionAdapter {
 
         String page = request.getParameter("page");
 
-        ParentListResponseDto responseDto = studentService.viewAllStudentsParents(page, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ParentListResponseDto responseDto = studentService.viewAllStudentsParents(page, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", responseDto.getParentsList());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", responseDto.getPage());
@@ -116,7 +120,7 @@ public class StudentActionAdapter {
         }
         dto.setRequestParams(allRequestParameters);
 
-        ResultResponse resultResponse = studentService.promoteMultiple(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse resultResponse = studentService.promoteMultiple(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
@@ -166,7 +170,7 @@ public class StudentActionAdapter {
         student.setOtherFeesConcession(request.getParameterValues("otherFeesConcession"));
         student.setOtherTotalInstallments(request.getParameterValues("otherFeesCount"));
 
-        ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
         return resultResponse.isSuccess();
     }
@@ -175,7 +179,7 @@ public class StudentActionAdapter {
         StudentIdsDto dto = new StudentIdsDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
-        ResultResponse resultResponse = studentService.exportDataForStudents(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse resultResponse = studentService.exportDataForStudents(dto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("searchStudentList", resultResponse.getResultList());
 
         return resultResponse.isSuccess();
@@ -234,7 +238,7 @@ public class StudentActionAdapter {
         studentDto.setApplicationtype(request.getParameter("applicationtype"));
         studentDto.setStream(request.getParameter("stream"));
 
-        Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("branchcode").toString());
+        Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("branchcode").toString());
 
         String stId = student.getSid().toString();
 		int branchId = student.getBranchid();
@@ -245,7 +249,7 @@ public class StudentActionAdapter {
 
         String studentId = request.getParameter("id");
 
-        StudentDetailsResponseDto responseDto = studentService.viewDetailsOfStudent(studentId,  httpSession.getAttribute(Constants.BRANCHID).toString());
+        StudentDetailsResponseDto responseDto = studentService.viewDetailsOfStudent(studentId,  httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -275,7 +279,7 @@ public class StudentActionAdapter {
 
         String studentId = request.getParameter("id");
 
-        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId, httpSession.getAttribute(Constants.BRANCHID).toString());
+        StudentDetailsResponseDto responseDto = studentService.viewDetailsbySidStudent(studentId, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -300,7 +304,7 @@ public class StudentActionAdapter {
 
         String studentId = request.getParameter("id");
 
-        StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId, httpSession.getAttribute(Constants.BRANCHID).toString());
+        StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -323,7 +327,7 @@ public class StudentActionAdapter {
 
     public boolean viewAllStudentsList(){
 
-        StudentListResponseDto result = studentService.viewAllStudentsList(httpSession.getAttribute(Constants.BRANCHID).toString());
+        StudentListResponseDto result = studentService.viewAllStudentsList(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());
 
         return result.isSuccess();
@@ -331,7 +335,7 @@ public class StudentActionAdapter {
 
     public boolean viewStudentsParentsPerBranch(){
 
-        StudentListResponseDto response = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(Constants.BRANCHID).toString());
+        StudentListResponseDto response = studentService.viewStudentsParentsPerBranch(httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", response.getParentDetails());
 
         return response.isSuccess();
@@ -352,4 +356,12 @@ public class StudentActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
+    
+    public void checkDuplicateStudent()  throws IOException {
+    	
+		String aadhaarNo = request.getParameter("aadhaarnumber");
+		String studentName = request.getParameter("studentname");
+		String dob = request.getParameter("dob");
+		studentService.checkDuplicateStudent(aadhaarNo, studentName, DateUtil.dateFromatConversionSlash(dob));
+	}
 }
