@@ -2,9 +2,11 @@ package org.ideoholic.curium.model.student.dao;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -22,6 +24,7 @@ import org.ideoholic.curium.repositories.PuDetailsRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
+import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -756,6 +759,23 @@ public class StudentDetailsDAO {
 			hibernateException.printStackTrace();
 
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return student;
+	}
+	
+	@Transactional
+	public Student checkDuplicateStudent(String aadhaarNo, String studentName, Date dob) {
+		
+
+		Student student = new Student();
+		try {
+			// original:
+			// Query query = session.createQuery("from Student as student where (student.name='"+studentName+"' and dateofbirth='"+dob+"') or student.disabilitychild='"+aadhaarNo+"'");
+			student = studentRepo.findByNameAndDateofbirthOrDisabilitychild(studentName, dob, aadhaarNo);
+		} catch (Exception hibernateException) { 
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
 		}
 		return student;
 	}
