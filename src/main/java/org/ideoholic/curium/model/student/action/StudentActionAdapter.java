@@ -18,6 +18,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -354,4 +356,12 @@ public class StudentActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
+    
+    public void checkDuplicateStudent()  throws IOException {
+    	
+		String aadhaarNo = request.getParameter("aadhaarnumber");
+		String studentName = request.getParameter("studentname");
+		String dob = request.getParameter("dob");
+		studentService.checkDuplicateStudent(aadhaarNo, studentName, DateUtil.dateFromatConversionSlash(dob));
+	}
 }
