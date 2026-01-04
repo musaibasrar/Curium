@@ -1482,28 +1482,12 @@ public class StudentService {
 		return result;
 	}
 		
-public void checkDuplicateStudent(String aadhaarNo, String studentName, Date dob) throws IOException {
-			
-			Student student = studentDetailsDao.checkDuplicateStudent(aadhaarNo, studentName, dob);
-				PrintWriter out = response.getWriter(); 
-				response.setContentType("text/xml");
-			        response.setHeader("Cache-Control", "no-cache");
-			        try {
-			        	
-			        	if(student!= null){
-			        		String buffer = "<label style='color:red;'>Student Already Exist</label>";
-				        	response.getWriter().println(buffer);
-			        	}else{
-			        		String buffer = "<label></label>";
-				        	response.getWriter().println(buffer);
-			        	}
-			        	
-			        } catch (Exception e) {
-			            out.write("<label></label>");
-			        } finally {
-			            out.flush();
-			            out.close();
-			        }
-			}
-
-}
+	public boolean checkDuplicateStudent(String aadhaarNo, String studentName, Date dob) throws IOException {
+				
+				Student student = studentDetailsDao.checkDuplicateStudent(aadhaarNo, studentName, dob);
+				if(student!= null){
+					return true;
+				}
+				return false;
+				}
+	}

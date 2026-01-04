@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.student.action;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
@@ -371,6 +372,28 @@ public class StudentActionAdapter {
 		String aadhaarNo = request.getParameter("aadhaarnumber");
 		String studentName = request.getParameter("studentname");
 		String dob = request.getParameter("dob");
-		studentService.checkDuplicateStudent(aadhaarNo, studentName, DateUtil.dateParserddmmyyyy(dob));
+		boolean result = studentService.checkDuplicateStudent(aadhaarNo, studentName, DateUtil.dateParserddmmyyyy(dob));
+		
+		PrintWriter out = response.getWriter(); 
+		
+			response.setContentType("text/xml");
+	        response.setHeader("Cache-Control", "no-cache");
+	        try {
+	        	
+	        	if(result){
+	        		String buffer = "<label style='color:red;'>Student Already Exist</label>";
+		        	response.getWriter().println(buffer);
+	        	}else{
+	        		String buffer = "<label></label>";
+		        	response.getWriter().println(buffer);
+	        	}
+	        	
+	        } catch (Exception e) {
+	            out.write("<label></label>");
+	        } finally {
+	            out.flush();
+	            out.close();
+	        }
+		
 	}
 }
