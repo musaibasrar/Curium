@@ -115,12 +115,11 @@ public class DocumentService {
 		String datecert = DataUtil.emptyString(transferCertificateDto.getDateCert());
 		String Remarks = DataUtil.emptyString(transferCertificateDto.getRemarks());
 		Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
+		String studentAdmissionStatus = DataUtil.emptyString(transferCertificateDto.getStudentAdmissionStatus());
 		
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = new studentDetailsDAO().updateStudent(student);
 		 
-		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
@@ -161,9 +160,9 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc);
+					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc,student,studentAdmissionStatus);
 			}
-		 }
+		 
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
