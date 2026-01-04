@@ -561,23 +561,6 @@ public class studentDetailsDAO {
 		}
 	}
 
-	public boolean updateStudent(Student student) {
-		
-		try {
-			transaction = session.beginTransaction();
-			Query queryUpdate = session
-					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"'  where sid = '"+student.getSid()+"'");
-			queryUpdate.executeUpdate();
-			transaction.commit();
-			return true;
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
-			e.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		 }
-		return false;
-	}
-
     public void updatePuDetails(Pudetails puDetails) {
         try {
             // this.session = sessionFactory.openCurrentSession();
@@ -865,4 +848,22 @@ public Student readUniqueStudent(String HQLquery) {
 	 }
     return student;
 }
+
+public Student checkDuplicateStudent(String aadhaarNo, String studentName, String dob) {
+	Student student = new Student();
+	try {
+		transaction = session.beginTransaction();
+		Query query = session
+				.createQuery("from Student as student where (student.name='"+studentName+"' and dateofbirth='"+dob+"') or student.disabilitychild='"+aadhaarNo+"'");
+		student = (Student) query.uniqueResult();
+		transaction.commit();
+	} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		
+		hibernateException.printStackTrace();
+	}finally {
+		HibernateUtil.closeSession();
+	 }
+	return student;
+}
+
 }
