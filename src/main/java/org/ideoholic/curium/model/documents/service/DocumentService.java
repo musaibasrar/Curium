@@ -87,7 +87,6 @@ public class DocumentService {
 
 	public TransferCertificateResponseDto generateTransferCertificate(TransferCertificateDto transferCertificateDto) {
 		TransferCertificateResponseDto transferCertificateResponseDto = new TransferCertificateResponseDto();
-		Student student = new Student();
 		Parents parents = new Parents();
 		Transfercertificate tc = new Transfercertificate();
 		String transferCertificateString = null;
@@ -120,6 +119,7 @@ public class DocumentService {
 		Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
 		String studentAdmissionStatus = DataUtil.emptyString(transferCertificateDto.getStudentAdmissionStatus());
 		
+		Student student = studentDetailsDao.readUniqueObject(studentId);
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
 		
@@ -178,7 +178,7 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = new DocumentDAO().generateTransferCertificate(tc,student);
+					transferCertificateString = documentDAO.generateTransferCertificate(tc,student);
 			}
 		 
 		 
