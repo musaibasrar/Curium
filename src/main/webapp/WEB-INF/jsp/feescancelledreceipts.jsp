@@ -711,7 +711,7 @@ for(Cookie cookie : cookies){
 								name="feesIDs"
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/noblewisdom/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/noblewisdom/FeesCollection/UndoFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-undo" style="color:#1b5605;font-size: 18px;"></i></a></td>

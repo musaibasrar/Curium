@@ -1148,14 +1148,14 @@ $(document).ready(function() {
 							
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
-							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
-								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
-								&nbsp;Transport <select name="feescategories" id="transport">
+							          Tuition Fee<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
+								&nbsp;Term Fee<input type="checkbox" value="Hostel" name="feescategories" id="term"/>
+								<!-- &nbsp;Transport <select name="feescategories" id="transport">
 										        <option value="Select">-- Select --</option>
 										        <option value="Malmal">Malmal</option>
 										        <option value="Madhubani">Madhubani</option>
 										        <option value="xyz">xyz</option>
-										    </select>
+										    </select> -->
 								</label></td>
 						</tr>
 						<tr>
