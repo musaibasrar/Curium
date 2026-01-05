@@ -48,10 +48,12 @@ public class UserActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
         dto.setModeOfPayment(request.getParameter("modeofpayment"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
         
         String dayOne = httpSession.getAttribute("dayone") == null ? null : httpSession.getAttribute("dayone").toString();
         String dayFrom = httpSession.getAttribute("datefrom") == null ? null : httpSession.getAttribute("dayone").toString();
         String dateTo = httpSession.getAttribute("dateto") == null ? null : httpSession.getAttribute("dayone").toString();
+        
 
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), dayOne, dayFrom, dateTo);
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
