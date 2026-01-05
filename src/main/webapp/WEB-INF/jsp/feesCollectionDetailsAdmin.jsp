@@ -892,6 +892,17 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;Academic Year:</td>
+							<td ><label>
+                                         <select name="academicyear" id="academicyear"
+									style="width: 120px">
+										<option selected></option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
+										</select>
+                              </label></td>
+							
 						</tr>
 							
 						<tr>
