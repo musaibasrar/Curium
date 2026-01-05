@@ -15,4 +15,5 @@ public class SearchByDateDto {
     private String fromDate;
     private String oneDay;
     private String modeOfPayment;
+    private String academicYear;
 }
