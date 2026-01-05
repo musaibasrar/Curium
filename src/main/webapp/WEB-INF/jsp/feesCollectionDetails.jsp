@@ -675,7 +675,16 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label></td>
-							
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;Academic Year:</td>
+							<td ><label>
+                                         <select name="academicyear" id="academicyear"
+									style="width: 240px">
+										<option selected></option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
+										</select>
+                              </label></td>
 						</tr>
 							
 						<tr>
@@ -766,7 +775,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/>${feesdetails.value.student.fathersname}</td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/abc/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
 
