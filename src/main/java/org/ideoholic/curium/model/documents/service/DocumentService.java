@@ -87,7 +87,6 @@ public class DocumentService {
 
 	public TransferCertificateResponseDto generateTransferCertificate(TransferCertificateDto transferCertificateDto) {
 		TransferCertificateResponseDto transferCertificateResponseDto = new TransferCertificateResponseDto();
-		Student student = new Student();
 		Parents parents = new Parents();
 		Transfercertificate tc = new Transfercertificate();
 		String transferCertificateString = null;
@@ -118,12 +117,27 @@ public class DocumentService {
 		String datecert = DataUtil.emptyString(transferCertificateDto.getDateCert());
 		String Remarks = DataUtil.emptyString(transferCertificateDto.getRemarks());
 		Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
+		String studentAdmissionStatus = DataUtil.emptyString(transferCertificateDto.getStudentAdmissionStatus());
 		
+		Student student = studentDetailsDao.readUniqueObject(studentId);
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
-		 boolean updateStudent = studentDetailsDao.updateStudent(student);
+		
+			switch (studentAdmissionStatus) {
+		
+			    case "passedout":
+			        student.setPassedout(1);
+			        break;
+		
+			    case "leftout":
+			        student.setLeftout(1);
+			        break;
+		
+			    default:
+			        break;
+			}
+
 		 
-		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
 			 tc.setDateofissues(dateOfTc);
@@ -164,9 +178,9 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = documentDAO.generateTransferCertificate(tc);
+					transferCertificateString = documentDAO.generateTransferCertificate(tc,student);
 			}
-		 }
+		 
 		 
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;

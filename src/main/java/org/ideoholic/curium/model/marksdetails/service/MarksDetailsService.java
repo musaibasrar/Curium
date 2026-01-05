@@ -621,8 +621,9 @@ public class MarksDetailsService {
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 				Date startDate = DateUtil.indiandateParser(dto.getStartDate());
 				Date endDate = DateUtil.indiandateParser(dto.getEndDate());
-				String  startDateFormatted= DateUtil.dateParserddMMYYYY(startDate);
-				String endDateFormatted=DateUtil.dateParserddMMYYYY(endDate);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String  startDateFormatted=sdf.format(startDate);
+				String endDateFormatted=sdf.format(endDate);
 				String academicYear = currentAcademicYear;
 				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted, endDateFormatted, Integer.parseInt(branchId));
 				 List<Holidaysmaster> holidaysMasterList = marksDetailsDao.getListofHolidays(startDate,endDate);
@@ -635,7 +636,6 @@ public class MarksDetailsService {
 					    totalHolidays = totalHolidays + 1;
 					    holidayCount += totalHolidays;
 				 }
-				
 				long diffInMillies = endDate.getTime() - startDate.getTime();
 				long totalDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1; // +1 to include start date
 				Calendar cal = Calendar.getInstance();
