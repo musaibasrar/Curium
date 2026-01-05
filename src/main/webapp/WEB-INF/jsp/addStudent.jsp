@@ -1084,12 +1084,40 @@ $(document).ready(function() {
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
 							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
-								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
-								&nbsp;Transport <select name="feescategories" id="transport">
+								<!-- &nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>-->
+								&nbsp;Transport <select name="feescategories" id="transport" style="width: 140px;border-radius: 4px;background: white;height: 28px;">
 										        <option value="Select">-- Select --</option>
-										        <option value="Malmal">Malmal</option>
-										        <option value="Madhubani">Madhubani</option>
-										        <option value="xyz">xyz</option>
+										        <option value="SAPAHI">SAPAHI</option>
+											<option value="GARAHAIYA">GARAHAIYA</option>
+											<option value="BHANDAR">BHANDAR</option>
+											<option value="DAUD NAGAR">DAUD NAGAR</option>
+											<option value="MURLI">MURLI</option>
+											<option value="MOHAMMADPUR">MOHAMMADPUR</option>
+											<option value="PAKARIYA">PAKARIYA</option>
+											<option value="LAHSUNIA">LAHSUNIA</option>
+											<option value="KHORIPAKAR">KHORIPAKAR</option>
+											<option value="JAMUA">JAMUA</option>
+											<option value="BILHARDE">BILHARDE</option>
+											<option value="TAKIYA TOLA">TAKIYA TOLA</option>
+											<option value="CHAKWA">CHAKWA</option>
+											<option value="JHITKAHI">JHITKAHI</option>
+											<option value="DHAKA">DHAKA</option>
+											<option value="BARHARWA FATEH MD">BARHARWA FATEH MD</option>
+											<option value="AMWA TOLA">AMWA TOLA</option>
+											<option value="BAREWA">BAREWA</option>
+											<option value="HARUHANI">HARUHANI</option>
+											<option value="KUSMAHWA">KUSMAHWA</option>
+											<option value="PANDRI">PANDRI</option>
+											<option value="CHANDANBARA">CHANDANBARA</option>
+											<option value="BARASHANKAR MOHAMMADPUR">BARASHANKAR MOHAMMADPUR</option>
+											<option value="RUPAULIYA GOPI">RUPAULIYA GOPI</option>
+											<option value="ORAIYA">ORAIYA</option>
+											<option value="SAPAHI BIRTA TOLA">SAPAHI BIRTA TOLA</option>
+											<option value="GAMAHARIYA">GAMAHARIYA</option>
+											<option value="SORPANIA">SORPANIA</option>
+											<option value="SUGIYA">SUGIYA</option>
+											<option value="SORPANIYA">SORPANIYA</option>
+											<option value="CHAKNAGARI">CHAKNAGARI</option>
 										    </select>
 								</label></td>
 						</tr>
