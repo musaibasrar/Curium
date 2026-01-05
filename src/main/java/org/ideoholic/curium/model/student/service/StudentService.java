@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -1480,5 +1481,13 @@ public class StudentService {
 		}
 		return result;
 	}
-
-}
+		
+	public boolean checkDuplicateStudent(String aadhaarNo, String studentName, Date dob) throws IOException {
+				
+				Student student = studentDetailsDao.checkDuplicateStudent(aadhaarNo, studentName, dob);
+				if(student!= null){
+					return true;
+				}
+				return false;
+				}
+	}

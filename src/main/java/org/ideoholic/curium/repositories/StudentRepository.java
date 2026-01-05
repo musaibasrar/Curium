@@ -1,6 +1,8 @@
 package org.ideoholic.curium.repositories;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.ideoholic.curium.model.student.dto.Student;
 import org.springframework.data.domain.Page;
@@ -79,4 +81,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("FROM Student s WHERE s.leftout = 1 ORDER BY s.admissionnumber DESC")
     List<Student> findStudentsLeft();
 
+    Student findByNameAndDateofbirthOrDisabilitychild(String name, Date dateOfBirth, String aadhaarNo);
 }
