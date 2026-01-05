@@ -45,6 +45,7 @@ public class UserActionAdapter {
         dto.setFromDate(request.getParameter("fromdate"));
         dto.setOneDay(request.getParameter("oneday"));
         dto.setModeOfPayment(request.getParameter("modeofpayment"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
 
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute("dayone"), httpSession.getAttribute("datefrom"), httpSession.getAttribute("dateto"));
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
