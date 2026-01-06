@@ -384,6 +384,7 @@ public class StudentService {
 
 	public StudentDetailsResponseDto viewDetailsOfStudent(String studentId, String branchId) {
 		StudentDetailsResponseDto result = StudentDetailsResponseDto.builder().success(false).build();
+		Map<Receiptinfo,String> receiptNarration = new HashMap<Receiptinfo, String>();
 		try {
 			long id = Long.parseLong(studentId);
 
@@ -400,6 +401,12 @@ public class StudentService {
 			//httpSession.setAttribute("feesdetailsfromservice",feesdetails);
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(id,currentYear.getCurrentacademicyear());;
 			result.setReceiptInfo(rinfo);
+			for (Receiptinfo receiptinfo : rinfo) {
+				VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
+				String[] rNarration = VoucherEntryTransactions.getNarration().split(":");
+				receiptNarration.put(receiptinfo, rNarration[0]);
+			}
+			result.setReceiptNarrationMap(receiptNarration);
 			List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(id, currentYear.getCurrentacademicyear());
 
 			long totalSum = 0l;
