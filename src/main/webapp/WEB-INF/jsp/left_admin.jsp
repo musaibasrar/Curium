@@ -778,12 +778,12 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
+            				 <a target="mainFrame" href="/dolphin/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
+            				 <a target="mainFrame" href="/dolphin/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
             			</td>
             		</tr>
                 </table>
