@@ -565,6 +565,24 @@ for(Cookie cookie : cookies){
 				
 					<table>
 						<tr>
+							<td style="font-weight: bold;color:#325F6D">Student Type &nbsp;</td>
+							<td><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
 							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
