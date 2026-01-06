@@ -107,8 +107,11 @@ public interface StudentMapper {
 
     @Mapping(target = "dateofbirth", expression = "java(DateUtil.indiandateParser(studentDto.getDateofbirth()))")
     Student mapStudent(StudentDto studentDto);
+
     Parents mapParent(StudentDto studentDto);
+
     Pudetails mapPudetails(StudentDto studentDto);
+
     Degreedetails mapDegreedetails(StudentDto studentDto);
 
     StudentDto mapStudentDto(Student student);

@@ -1,6 +1,10 @@
 package org.ideoholic.curium.model.parents.dto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,6 +21,8 @@ import javax.persistence.Transient;
 
 import org.ideoholic.curium.model.appointment.dto.Appointment;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.family.dto.Family;
+import org.ideoholic.curium.model.family.dto.FamilyMember;
 import org.ideoholic.curium.model.student.dto.Student;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -110,6 +116,20 @@ public class Parents implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private Integer userid;
+	
+	/**
+	 * FamilyMember rows where this parent is a member.
+	 * From these rows you can find the family and then the student members (offsprings).
+	 */
+	@JsonIgnore
+	@OneToMany(mappedBy = "parent")
+	private List<FamilyMember> familyMembers;
+
+	/**
+	 * Transient convenience list of offsprings (computed).
+	 */
+	@Transient
+	private List<Student> offsprings;
 
 	@Transient
 	private String emergencycontactno;
@@ -124,4 +144,32 @@ public class Parents implements java.io.Serializable {
 	       return new Student();
 	}
 
+	/**
+	 * Compute offsprings (students) by traversing FamilyMember -> Family -> members.
+	 * Removes duplicates and only returns Student members.
+	 * For high-volume access prefer a direct JPQL query
+	 */
+	public List<Student> fetchOffspringsFromFamilies() {
+		if (this.offsprings != null) {
+			return this.offsprings;
+		}
+		if (this.familyMembers == null || this.familyMembers.isEmpty()) {
+			return Collections.emptyList();
+		}
+		Set<Student> result = new LinkedHashSet<>();
+		for (FamilyMember fm : this.familyMembers) {
+			Family fam = fm.getFamily();
+			if (fam == null || fam.getMembers() == null) {
+				continue;
+			}
+			for (FamilyMember member : fam.getMembers()) {
+				Student s = member.getStudent();
+				if (s != null) {
+					result.add(s);
+				}
+			}
+		}
+		this.offsprings = new ArrayList<>(result);
+		return this.offsprings;
+	}
 }
