@@ -470,7 +470,7 @@
 	 function addRow() {
         var rowCount = document.getElementById('dataTable').rows.length;    
         var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='Period-1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
-        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubjectNames}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
         var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
         var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
         var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+"</tr>");
@@ -482,7 +482,7 @@
 	 function addRowNew() {
 	        var rowCount = document.getElementById('dataTable').rows.length;    
 	        var col1="<td width='16%' height='30' class='alignLeft'><label><select name='periods' id='periods' style='width: 180px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option></select></label></td>";
-	        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
+	        var col2="<td width='16%' height='30' class='alignLeft'><label><select name='subject' id='subject'	style='width: 240px' > <option selected></option> <c:forEach items='${listSubjectNames}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label></td>";
 	        var col3="<td class='dataTextInActive'><label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 60px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
 	        var col4="<td class='dataTextInActive'><label> <select name='periodendtimehr' id='periodendtimehr' style='width: 60px'><option selected value='00'>Hour</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select></label><label> <select name='periodendtimemin' id='periodendtimemin' style='width: 80px'><option selected value='00'>Minuts</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodendtimeam' id='periodendtimeam' style='width: 60px'><option selected>AM</option><option value='AM'>AM</option><option value='PM'>PM</option></select></label></td>";
 	        var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+"</tr>");
@@ -496,7 +496,7 @@
 	        var newCol;
 	        for(i=0;i<count;i++){
 	        	var col1="<th class='timeth'><label><select name='periods' id='periods' style='width: 80px'><option selected value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option><option value='leisure'>Leisure</option></select></label><br><br>"
-	        	+"<label><select name='subject' id='subject' style='width: 80px'><option selected></option><c:forEach items='${listSubject}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label><br><br>"
+	        	+"<label><select name='subject' id='subject' style='width: 80px'><option selected></option><c:forEach items='${listSubjectNames}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label><br><br>"
 	        	+"<label><select name='staff' id='staff' style='width: 80px'><option selected></option><c:forEach items='${employeeList}' var='employeeList'><option value='${employeeList.teachername}'><c:out value='${employeeList.teachername}' /></option></c:forEach></select></label><br><br>"
 	        	+"<label> <select name='periodstarttimehr' id='periodstarttimehr' style='width: 40px'><option selected value='00'>Hr</option><option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option></select> <select name='periodstarttimemin' id='periodstarttimemin' style='width: 40px'><option selected value='00'>Min</option><option value='00'>00</option><option value='05'>05</option><option value='10'>10</option><option value='15'>15</option><option value='20'>20</option><option value='25'>25</option><option value='30'>30</option><option value='35'>35</option><option value='40'>40</option><option value='45'>45</option><option value='50'>50</option><option value='55'>55</option></select> <select name='periodstarttimeam' id='periodstarttimeam' style='width: 40px'><option selected></option><option value='AM'>AM</option><option value='PM'>PM</option></select></label><br>"
 	        	+"<label>TO</label><br>"
@@ -828,12 +828,14 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Academic Year&nbsp;</td>
 							<td width="70%"><label>    
                               
-                             <select name="academicyear" id="academicyear" style="width: 180px">
+                             <select name="academicyear" id="academicyear" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
 										
 										<option selected value="${currentYear}">${currentYear}(Current Year)</option>
-										<c:forEach var="year" items="${previousAcademicYears}">
-        										<option value="${year}">${year}</option>
-    									</c:forEach>
+										<option value="2015/16">2015/16</option>
+										<option value="2016/17">2016/17</option>
+										<option value="2017/18">2017/18</option>
+										<option value="2018/19">2018/19</option>
+										<option value="2019/20">2019/20</option>
 										
 							 </select>
 
@@ -855,7 +857,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Total Number Of Periods(including breaks)&nbsp;</td>
 							<td width="70%">
                                         <label> <select name="totalperiods" id="totalperiods" onchange="getColumns()" required
-									style="width: 180px">
+									style="width: 186px;border-radius: 4px;background: white;height: 28px;">
 										<option selected ></option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -875,14 +877,14 @@ for(Cookie cookie : cookies){
 							
 							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Duration Of a Period</label>
 							<label> <select name="periodduration" id="periodduration" required
-									style="width: 80px">
+									style="width: 80px;border-radius: 4px;background: white;height: 28px;">
 										<option selected value="00">Hour</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
 								</select>
 							</label>
 							<label> <select name="perioddurationmin" id="perioddurationmin" required
-									style="width: 80px">
+									style="width: 80px;border-radius: 4px;background: white;height: 28px;">
 										<option selected value="00">Minuts</option>
 										<option value="00">00</option>
 										<option value="05">05</option>
@@ -911,20 +913,30 @@ for(Cookie cookie : cookies){
 						<tr>
     <td class="alignRightFields">Class & Section&nbsp;</td>
     <td width="70%">
-        <c:forEach items="${classdetailslist}" var="classdetails">
-            <!-- Check if the current item is a class -->
-            <c:if test="${classdetails.classdetails != ''}">
-                <c:forEach items="${classdetailslist}" var="sectiondetails">
-                    <!-- Check if the current item is a section -->
-                    <c:if test="${sectiondetails.section != ''}">
-                        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
-                            <input type="checkbox" name="fromclass" value="${classdetails.classdetails}--${sectiondetails.section}">
-                            ${classdetails.classdetails} ${sectiondetails.section}
-                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    </c:if>
-                </c:forEach>
-            </c:if>
-        </c:forEach>
+       <label> <select name="addclass" required
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" >
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+
+							</label> <label> <select name="addsec" id="addsec" style="width: 70px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label>
     </td>
 
 </tr>
@@ -942,7 +954,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Day Start Time &nbsp;</td>
 							<td width="70%">
                                         <label> <select name="daystarttime" id="daystarttime" required
-									style="width: 60px">
+									style="width: 60px;border-radius: 4px;background: white;height: 28px;">
 										<option selected >Hour</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -959,7 +971,7 @@ for(Cookie cookie : cookies){
 										
 								</select>
 								<select name="daystartminutes" id="daystartminutes" required
-									style="width: 60px">
+									style="width: 60px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>Minuts</option>
 										<option value="00">00</option>
 										<option value="05">05</option>
@@ -976,7 +988,7 @@ for(Cookie cookie : cookies){
 										
 								</select>
 								<select name="daystartam" id="daystartam" required
-									style="width: 60px">
+									style="width: 60px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>AM</option>
 										<option value="AM">AM</option>
 										<option value="PM">PM</option>
@@ -987,7 +999,7 @@ for(Cookie cookie : cookies){
 							
 							<label class="extraLabels">&nbsp;&nbsp;&nbsp;&nbsp;Day End Time<label>
 							<label> <select name="dayendtime" id="dayendtime" required
-									style="width: 60px">
+									style="width: 60px;border-radius: 4px;background: white;height: 28px;">
 										<option selected >Hour</option>
 										<option value="1">1</option>
 										<option value="2">2</option>
@@ -1005,7 +1017,7 @@ for(Cookie cookie : cookies){
 								</select>
 							</label>
 							<label> <select name="dayendminutes" id="dayendminutes" required
-									style="width: 80px">
+									style="width: 60px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>Minuts</option>
 										<option value="00">00</option>
 										<option value="05">05</option>
