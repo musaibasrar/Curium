@@ -68,7 +68,7 @@ for(Cookie cookie : cookies){
 </tr>
 <tr style="border:0px;">
 <td style="font-size:20px;font-weight:bold;border:0px;">
-School Name:-<span style="border-bottom: 2px dashed #000;"> ${branchname}	MANGALGI, TQ CHITGUPPA,	DIST. BIDAR</span>
+School Name:-<span style="border-bottom: 2px dashed #000;"> ${branchname},  Near Gawan Chowk Main Road, Bidar - 585401</span>
 </td>
 </tr>
 </table>
@@ -150,7 +150,7 @@ Income</td>
 </tr>
 <tr style="border:0px;"><td style="border:0px;"><br></td><td style="border:0px;"></td><td style="border:0px;"></td></tr>
 <tr style="border:0px;">
-<td style="border:0px;">Place:	- Mangalgi</td>
+<td style="border:0px;">Place:	- Bidar</td>
 <td style="border:0px;"></td>
 <td style="border:0px;"></td>
 </tr>
