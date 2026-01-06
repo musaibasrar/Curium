@@ -1,10 +1,15 @@
 package org.ideoholic.curium.model.student.dto;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 // default package
 // Generated 14 Feb, 2018 12:05:32 AM by Hibernate Tools 4.0.0
 
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -24,6 +29,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
+import org.ideoholic.curium.model.family.dto.Family;
+import org.ideoholic.curium.model.family.dto.FamilyMember;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherfeescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
@@ -325,6 +332,21 @@ public class Student implements java.io.Serializable {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private List<Otherreceiptinfo> otherreceiptinfoList;
+	
+	/**
+	 * FamilyMember rows where this student is a member.
+	 * This is the entry point to find siblings via Family -> members.
+	 */
+	@JsonIgnore
+	@OneToMany(mappedBy = "student")
+	private List<FamilyMember> familyMembers;
+
+	/**
+	 * Transient cached list of siblings (computed from familyMembers).
+	 * Keep this transient so DB schema is not changed.
+	 */
+	@Transient
+	private List<Student> siblings;
 
 	@Transient
 	private String lastcourse;
@@ -349,5 +371,34 @@ public class Student implements java.io.Serializable {
 			return 0;
 		}
 		return age;
+	}
+
+	/**
+	 * Compute siblings by traversing FamilyMember -> Family -> members.
+	 * Removes duplicates and excludes this student.
+	 * This is safe (doesn't alter DB); for large datasets prefer a JPQL query (examples below).
+	 */
+	public List<Student> fetchSiblingsFromFamilies() {
+		if (this.siblings != null) {
+			return this.siblings;
+		}
+		if (this.familyMembers == null || this.familyMembers.isEmpty()) {
+			return Collections.emptyList();
+		}
+		Set<Student> result = new LinkedHashSet<>();
+		for (FamilyMember fm : this.familyMembers) {
+			Family fam = fm.getFamily();
+			if (fam == null || fam.getMembers() == null) {
+				continue;
+			}
+			for (FamilyMember member : fam.getMembers()) {
+				Student s = member.getStudent();
+				if (s != null && !s.getSid().equals(this.sid)) {
+					result.add(s);
+				}
+			}
+		}
+		this.siblings = new ArrayList<>(result);
+		return this.siblings;
 	}
 }
