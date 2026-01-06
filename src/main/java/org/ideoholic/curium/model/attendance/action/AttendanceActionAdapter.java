@@ -329,11 +329,24 @@ public class AttendanceActionAdapter {
         StudentsAttendanceDto dto = new StudentsAttendanceDto();
         dto.setAttendanceClass(request.getParameter("attendanceclass"));
 
-        attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
+        attendanceService.sendSMSAbsentees(studentDailyAttendanceList);
     }
 
 	public boolean searchStudentAttendanceDetailsMarkSelectedDate() {
 		request.setAttribute("dateofattendanceselected", request.getParameter("dateofattendancemark"));
         return true;
+    }
+
+	public boolean markStudentsAttendanceMonthly() {
+
+        StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
+        attendanceDto.setAttendanceIds(request.getParameterValues("externalIDs"));
+        attendanceDto.setStudentAttendanceStatus(request.getParameterValues("studentAttendanceStatus"));
+        attendanceDto.setDateofAttendance(DateUtil.simpleDateParser(request.getParameter("dateofattendance")));
+        
+        ResultResponse resultResponse = attendanceService.markStudentsAttendanceMonthly(attendanceDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("attendanceresult", resultResponse.getMessage());
+
+        return resultResponse.isSuccess();
     }
 }

@@ -269,7 +269,7 @@
 .dataText {
 	border-radius: 3px;
 	font-family: Tahoma;
-	color: #4b6a84;
+	color: #ffffff;
 	font-size: 13px;
 	letter-spacing: normal;
 	text-align: center;
@@ -345,6 +345,38 @@
 }
 
 </style>
+
+<style>
+        .headerText {
+            font-weight: bold;
+            text-align: center;
+            background-color: #4b6a84;
+        }
+        .dataText {
+            text-align: center;
+            white-space: nowrap;
+        }
+        /* Freeze first two columns */
+        .freeze-col {
+            position: sticky;
+            left: 0;
+            z-index: 2;
+            background-color: #4b6a84;
+        }
+        .freeze-col-2 {
+            position: sticky;
+            left: 100px;
+            z-index: 2;
+            background-color: #4b6a84;
+        }
+        /* Ensure header cells stick too */
+        .freeze-header {
+            z-index: 3;
+        }
+        .sunday {
+            background-color: red;
+        }
+    </style>    
 <style>
 #button {
 	
@@ -411,6 +443,42 @@
 	
 </script>
 
+<style>
+        .headerText {
+            font-weight: bold;
+            text-align: center;
+            background-color: #4b6a84; /* Background color for better visibility */
+        }
+        .dataText {
+            text-align: center;
+        }
+        /* Freeze first two columns */
+        .freeze-col {
+            position: sticky;
+            left: 0;
+            z-index: 2; /* Ensure columns appear above the rest of the content */
+            background-color: #4b6a84; /* Background color for better visibility */
+        }
+        .freeze-col-2 {
+            position: sticky;
+            left: 100px; /* Adjust this value based on the width of your first column */
+            z-index: 2;
+            background-color: #4b6a84;
+        }
+        /* Ensure header cells stick too */
+        .freeze-header {
+            position: sticky;
+            top: 0;
+            z-index: 3; /* Ensure header appears above the content */
+            background-color: #4b6a84; /* Background color for better visibility */
+        }
+        
+        #update:hover {
+    background-color: #eb6000; /* Hover background color */
+}
+        
+    </style>
+    
 <script type="text/javascript" src="/dolphin/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
@@ -451,7 +519,6 @@
 		form1.action = "/dolphin/AttendanceProcess/searchStudentAttendanceDetailsMark";
 		form1.method = "POST";
 		form1.submit();
-
 	}
 	
 	$(function() {
@@ -499,7 +566,7 @@
 	
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/dolphin/AttendanceProcess/markStudentsAttendance";
+		form1.action = "/dolphin/AttendanceProcess/markStudentsAttendanceMonthly";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -510,15 +577,15 @@
 
 <script type="text/javascript">
 					
-					var attendanceresult='<c:out default="" value="${attendanceresult}"/>';
-					var splitMessage = attendanceresult.split('-');
+					var attedanceresult='<c:out default="" value="${attedanceresult}"/>';
+					var splitMessage = attedanceresult.split('-');
 					
-		            if(attendanceresult.includes("success")){
+		            if(attedanceresult.includes("success")){
 		            	 $(function(){
 		            		 $( "div.success" ).html(splitMessage[1]);
 		            		 $( "div.success" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            	 });
-		            	 }else if(attendanceresult.includes("error")){
+		            	 }else if(attedanceresult.includes("error")){
 		            	  $(function(){
 		            		 $( "div.failure" ).html(splitMessage[1]);
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
@@ -530,9 +597,9 @@
 		        			changeYear : true,
 		        			changeMonth : true,
 		        			dateFormat: 'dd/mm/yy',
-		        			yearRange: "-1:+1"
+		        			yearRange: "0:+1"
 		        		});
-		        		$("#dateofattendance").change(
+		        		$("#anim").change(
 		        				function() {
 		        					$("#dateofattendance").datepicker("option", "showAnim",
 		        							$(this).val());
@@ -549,6 +616,131 @@
 		            }
         </script>
 
+
+<script>
+//Function to generate the attendance table
+function generateTable() {
+    var table = document.getElementById("attendanceTable");
+    var tbody = table.getElementsByTagName("tbody")[0];
+    var tfoot = table.getElementsByTagName("tfoot")[0];
+
+    // Get the date from the input field
+    var dateString = document.getElementById("dateofattendance").value;
+    var dateParts = dateString.split("/");
+    var day = parseInt(dateParts[0], 10);
+    var month = parseInt(dateParts[1], 10) - 1; // Month is zero-based in JavaScript Date
+    var year = parseInt(dateParts[2], 10);
+
+    // Create header row
+    var theadRow = document.createElement("tr");
+    var headers = ["Admission Number", "Name"].concat(getDaysArrayWithoutSundays(year, month));
+    for (var i = 0; i < headers.length; i++) {
+        var th = document.createElement("th");
+        th.className = "headerText freeze-header";
+        if (i === 0) th.className += " freeze-col";
+        if (i === 1) th.className += " freeze-col-2";
+        th.textContent = headers[i];
+        theadRow.appendChild(th);
+    }
+    table.getElementsByTagName("thead")[0].appendChild(theadRow);
+
+    // Create body rows
+    <%-- JSP logic to iterate over the student list --%>
+    <c:forEach items="${StudentListAttendance}" var="attendanceList" varStatus="status">
+        var row = document.createElement("tr");
+        row.className = "trClass";
+        var admissionNumberCell = document.createElement("td");
+        admissionNumberCell.className = "dataText freeze-col";
+        admissionNumberCell.textContent = "${attendanceList.student.admissionnumber}";
+        row.appendChild(admissionNumberCell);
+
+        var nameCell = document.createElement("td");
+        nameCell.className = "dataText freeze-col-2";
+        nameCell.textContent = "${attendanceList.student.name}";
+        row.appendChild(nameCell);
+
+        var daysOfMonth = getDaysArrayWithoutSundays(year, month);
+        for (var j = 0; j < daysOfMonth.length; j++) {
+            var attendanceCell = document.createElement("td");
+            attendanceCell.className = "dataText";
+            // Add name attribute to inputs and include student ID and date
+            var input = document.createElement("input");
+            input.type = "text";
+            input.style.textTransform = "uppercase";
+            input.size = "2";
+            input.readOnly = true;
+            input.value = "P";
+            input.maxLength = "1";
+            input.name = "attendance[" + "${attendanceList.student.studentexternalid}" + "][" + daysOfMonth[j] + "]";
+            input.onclick = function() { toggleAttendance(this); };
+            attendanceCell.appendChild(input);
+            row.appendChild(attendanceCell);
+        }
+
+        tbody.appendChild(row);
+    </c:forEach>
+
+    // Add submit button to footer
+    var footerRow = document.createElement("tr");
+    var footerCell = document.createElement("td");
+    footerCell.colSpan = headers.length;
+    var submitButton = document.createElement("button");
+    submitButton.id = "update";
+    submitButton.textContent = "Submit";
+    
+ // Apply custom styles to the button
+    submitButton.style.backgroundColor = "#4b6a84"; // Background color
+    submitButton.style.color = "#ffffff"; // Text color
+    submitButton.style.border = "none"; // Remove border
+    submitButton.style.padding = "10px 20px"; // Padding
+    submitButton.style.borderRadius = "4px"; // Rounded corners
+    submitButton.style.fontSize = "16px"; // Font size
+    submitButton.style.fontWeight = "bold"; // Font weight
+    submitButton.style.cursor = "pointer"; // Pointer cursor on hover
+    
+    // Attach the updateRecords function
+    submitButton.onclick = function(e) {
+        e.preventDefault();
+        updateRecords();
+    };
+    footerCell.appendChild(submitButton);
+    footerRow.appendChild(footerCell);
+    tfoot.appendChild(footerRow);
+}
+
+function getDaysArrayWithoutSundays(year, month) {
+    var date = new Date(year, month, 1);
+    var days = [];
+    while (date.getMonth() === month) {
+        if (date.getDay() !== 0) { // Ignore Sundays (0 = Sunday)
+            days.push(date.getDate());
+        }
+        date.setDate(date.getDate() + 1);
+    }
+    return days;
+}
+
+function toggleAttendance(element) {
+    if (element.value === "P") {
+        element.value = "A";
+    } else {
+        element.value = "P";
+    }
+}
+
+// Ensuring the document is ready before generating the table
+$(document).ready(function() {
+    generateTable();
+});
+
+// Function to submit the form
+function updateRecords() {
+    var form1 = document.getElementById("form1");
+    form1.action = "/dolphin/AttendanceProcess/markStudentsAttendance";
+    form1.method = "POST";
+    form1.submit();
+}
+</script>
 
 
 </head>
@@ -618,29 +810,12 @@ for(Cookie cookie : cookies){
 
 						</tr>
 						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<tdclass="alignRight"></td>
-							<td>&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
 						
-						<tr>
+						<tr style="display: none;">
 							<td class="alignRightFields">Date &nbsp;</td>
 							<td align="left"><label> <input
 									name="dateofattendance" type="text" class="textField"
-									id="dateofattendance" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" readonly="readonly" data-validate="validate(required)"/>
+									id="dateofattendance" size="25" value="${dateofattendanceselected}" data-validate="validate(required)"/>
 							</label></td>
 							
 						</tr>
@@ -649,8 +824,22 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
+						<tr>
+
+							<td class="alignRight"></td>
+							<td><button id="search">Search</button>
+								
+							</td>
+						</tr>
 
 
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
 						
 
 					</table>
@@ -666,17 +855,23 @@ for(Cookie cookie : cookies){
 						</td>
 				</tr>
 			</table>
-			<table width="100%" border="0" style="border-color: #4b6a84;"
+			
+			<body>
+    <table width="100%" border="0" style="border-color: #4b6a84;" id="attendanceTable">
+        <thead></thead>
+        <tbody></tbody>
+        <tfoot></tfoot>
+    </table>
+</body>
+			<%-- <table width="100%" border="0" style="border-color: #4b6a84;"
 				id="myTable">
 
 				<thead>
 					<tr>
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
-						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name</th>
-						<th title="click to sort" class="headerText">Attendance Status</th>
-						<th title="click to sort" class="headerText">Father Name</th>
+						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Attendance Status&nbsp;</th>
 					</tr>
 				</thead>
 
@@ -686,18 +881,15 @@ for(Cookie cookie : cookies){
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText" style="display: none;"><input type="checkbox" checked="checked" 
-								id="<c:out value="${attendanceList.student.studentexternalid}"/>" class="chcktbl"
+								id="<c:out value="${attendanceList.studentexternalid}"/>" class="chcktbl"
 								name="externalIDs"
-								value="<c:out value="${attendanceList.student.studentexternalid},${status.index}"/>" /></td>
-								<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.student.studentexternalid}" /></a></td>
+								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${attendanceList.student.name}" /></td>
+										value="${attendanceList.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${attendanceList.name}" /></td>
 							<td class="dataText">
 							<input type="text" id="studentAttendanceStatus" name="studentAttendanceStatus" style="text-transform:uppercase" size="2" readonly="readonly" value="P" maxlength="1" onclick="markabsent(this);">
 							</td>
-							<td class="dataText"><c:out value="${attendanceList.fathersname}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -712,7 +904,14 @@ for(Cookie cookie : cookies){
 
 					</tr>
 				</tfoot>
-			</table>
+			</table> --%>
+			
+            <!-- Attendance Table -->
+            <table width="100%" border="0" id="attendanceTable">
+                <thead></thead>
+                <tbody></tbody>
+                <tfoot></tfoot>
+            </table>
 
 		</div>
 

@@ -299,7 +299,16 @@ public class AttendanceAction {
 		
 		if (attendanceActionAdapter.searchStudentAttendanceDetailsMarkSelectedDate()) {
 			standardActionAdapter.viewClasses();
-			return "attendancemark";
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
+	@PostMapping("/markStudentsAttendanceMonthly")
+	public String markStudentsAttendanceMonthly() {
+
+		if (attendanceActionAdapter.markStudentsAttendanceMonthly()) {
+			return "attendancemarkmonthly";
 		}
 		return errorPage;
 	}
