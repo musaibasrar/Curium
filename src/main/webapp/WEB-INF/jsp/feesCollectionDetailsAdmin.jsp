@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -300,6 +301,26 @@
     border-color: #ebccd1;
     display: none;
 }
+
+.successpaymenttype {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    display: none;
+}
+
+.failurepaymenttype {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    display: none;
+}
+
+.small-button {
+    font-size: 8px;
+    padding: 2px 6px;
+    height: auto; /* optional */
+}
 </style>
 <style>
 #button {
@@ -343,17 +364,26 @@
 <script type="text/javascript"
 	src="/dolphin/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
-	});
+$(document).ready(function() {
+    $('#myTable').dataTable( {
+        "sScrollY": "380px",
+        "scrollCollapse": true,
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bSort": true,
+        "bInfo": true,
+        "bStateSave": false,
+        "bProcessing": false,
+        "bServerSide": false,
+        "bAutoWidth": false,
+        "iDisplayLength": 2000,
+        "aoColumnDefs":[
+            { 'bSortable': false, 'aTargets': [ 0 ] }
+        ]
+        
+    } );
+} );
 </script>
 <script type="text/javascript">
 	function select(id, name) {
@@ -454,6 +484,12 @@
             return false;
 
         });
+ 		
+ 		$(".button").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).addClass("small-button");
  		
          $('#chckHead').click(function () {
              var length = $('.chcktbl:checked').length;
@@ -566,6 +602,51 @@
 		$("#anim").change(function() {
 			$("#datepickerto").datepicker("option", "showAnim", $(this).val());
 		});
+		
+		 $("#chequedate").datepicker({
+ 			changeYear : true,
+ 			changeMonth : true,
+ 			dateFormat: 'dd/mm/yy',
+ 			yearRange: "-50:+0"
+ 		});
+ 		$("#anim").change(function() {
+ 			$("#chequedate").datepicker("option", "showAnim", $(this).val());
+ 		});
+ 		
+		 $("#transferdate").datepicker({
+    			changeYear : true,
+    			changeMonth : true,
+    			dateFormat: 'dd/mm/yy',
+    			yearRange: "-50:+0"
+    		});
+    		$("#anim").change(function() {
+    			$("#transferdate").datepicker("option", "showAnim", $(this).val());
+    		});
+		
+		$("#submitbtn").button().click(function(){
+         	 $( "#dialogpaymentmethod" ).dialog( "open" );
+              return false;
+
+          });
+          
+          $(function() {
+              $( "#dialogpaymentmethod" ).dialog({
+                  autoOpen: false,
+                  height: 230,
+                  width: 550,
+                  modal: true,
+                  buttons: {
+                      OK: function() {
+                      	
+                      			submitfees(document.getElementById("cashpayment"),document.getElementById("banktransfer"),
+                      					document.getElementById("chequetransfer"), document.getElementById("ackno"), 
+                      			document.getElementById("transferdate"), document.getElementById("transferbankname"),
+                      			document.getElementById("chequeno"), document.getElementById("chequedate"), document.getElementById("chequebankname"));
+                          		$( this ).dialog( "close" );
+                   		   }
+                  }
+              });
+          });
 	});
 </script>
 
@@ -583,7 +664,139 @@
 		            		 $( "div.failure" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
 		            		 });
 		            	 }
+		            
+				var updatereceiptpaymentmethod = '<c:out default="" value="${updatereceiptpaymentmethod}"/>';
+		            
+		            if(updatereceiptpaymentmethod == "true"){
+		            	 $(function(){
+		            		 $( "div.successpaymenttype" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            	 });
+		            	 }else if(updatereceiptpaymentmethod == "false"){
+		            	  $(function(){
+		            		 $( "div.failurepaymenttype" ).fadeIn( 800 ).delay( 2000 ).fadeOut( 1400 );
+		            		 });
+		            	 }
+		            
+		            
+		            
+		            function openPaymentDialog(receiptnumber) {
+		                // Set the hidden field with the selected receipt number
+		                document.getElementById("selectedReceiptnumber").value = receiptnumber;
+
+		                // Open the dialog (assuming you're using jQuery UI Dialog or similar)
+		                $("#dialogpaymentmethod").dialog("open");
+		            }
             
+		            
+		            function selectPayment(id){
+		            	
+		            	
+		            	if(id == 'cashpayment'){
+		            		
+		            		
+		            		document.getElementById('onlinechequeack').style.display = "none";
+		            		document.getElementById('onlinechequedate').style.display = "none";
+		            		document.getElementById('onlinechequebank').style.display = "none";
+		            		
+		            		document.getElementById('onlinetransferack').style.display = "none";
+		            		document.getElementById('onlinetransferdate').style.display = "none";
+		            		document.getElementById('onlinetransferbank').style.display = "none";
+		            		
+		            		document.getElementById('ackno').style.display = '';
+		            		document.getElementById('transferdate').style.display = '';
+		            		document.getElementById('transferbankname').style.display = '';
+		            		document.getElementById('chequeno').style.display = '';
+		            		document.getElementById('chequedate').style.display = '';
+		            		document.getElementById('chequebankname').style.display = '';
+		            		
+		            			
+		            	}else if(id == 'banktransfer'){
+		            		
+		            		
+		            		document.getElementById('onlinechequeack').style.display = "none";
+		            		document.getElementById('onlinechequedate').style.display = "none";
+		            		document.getElementById('onlinechequebank').style.display = "none";
+		            		
+		            		document.getElementById('onlinetransferack').style.display = '';
+		            		document.getElementById('onlinetransferdate').style.display = '';
+		            		document.getElementById('onlinetransferbank').style.display = '';
+		            		
+		            		
+		            		document.getElementById('chequeno').style.display = '';
+		            		document.getElementById('chequedate').style.display = '';
+		            		document.getElementById('chequebankname').style.display = '';
+		            		
+		            		
+		            	}else if(id == 'chequetransfer'){
+		            		
+		            		document.getElementById('onlinechequeack').style.display = '';
+		            		document.getElementById('onlinechequedate').style.display = '';
+		            		document.getElementById('onlinechequebank').style.display = '';
+		            		
+		            		document.getElementById('onlinetransferack').style.display = "none";
+		            		document.getElementById('onlinetransferdate').style.display = "none";
+		            		document.getElementById('onlinetransferbank').style.display = "none";
+		            		
+		            		document.getElementById('ackno').style.display = '';
+		            		document.getElementById('transferdate').style.display = '';
+		            		document.getElementById('transferbankname').style.display = '';
+		            	}
+		            	
+		            }
+		            
+		            
+		            function submitfees(cashpayment,banktransfer,chequetransfer,ackno,transferdate,transferbankname,chequeno,chequedate,chequebankname){
+		            	
+		            	var paymentmethodvalue = '';
+		            	var cashpaymentvalue = '';
+		            	var acknovalue = '';
+		            	var transferdatevalue = '';
+		            	var transferbanknamevalue = '';
+		            	var chequenovalue = '';
+		            	var chequedatevalue = '';
+		            	var chequebanknamevalue = '';
+		            	
+		            	if(banktransfer.checked == true ){
+		            		paymentmethodvalue = 'banktransfer';
+		            	}
+		            	
+		            	if(chequetransfer.checked == true){
+		            		paymentmethodvalue = 'chequetransfer';
+		            	}
+		            	
+		            	if(cashpayment.checked == true){
+		            		paymentmethodvalue = 'cashpayment';
+		            	}
+		            	
+		            	if(ackno!=null){
+		            		acknovalue = ackno.value;
+		            	}
+		            	
+		            	if(transferdate!=null){
+		            		transferdatevalue = transferdate.value;
+		            	}
+		            	
+		            	if(transferbankname!=null){
+		            		transferbanknamevalue = transferbankname.value;
+		            	}
+		            	if(chequeno!=null){
+		            		chequenovalue = chequeno.value;
+		            	}
+		            	if(chequedate!=null){
+		            		chequedatevalue = chequedate.value;
+		            	}
+		            	if(chequebankname!=null){
+		            		chequebanknamevalue = chequebankname.value;
+		            	}
+		            	
+		            	var receiptnumber = document.getElementById("selectedReceiptnumber").value;
+		            	
+		            	var form1 = document.getElementById("form1");
+		        		form1.action="/vision/FeesCollection/feesPaymentTypeModify?receiptnumber="+receiptnumber+"&paymentmethod="+paymentmethodvalue+"&ackno="+acknovalue+"&transferdate="+transferdatevalue+"&transferbankname="+transferbanknamevalue+"&chequeno="+chequenovalue+"&chequedate="+chequedatevalue+"&chequebankname="+chequebanknamevalue+"";
+		        		form1.method = "POST";
+		        		form1.submit();
+		        		
+		            }
         </script>
         
 </head>
@@ -610,6 +823,8 @@ for(Cookie cookie : cookies){
 		<div class="alert-box success">Receipt has been cancelled successfully!!!</div>
 		<div class="alert-box failure">Receipt cancellation failed, Please try again!!!</div>
 		
+		<div class="alert-box successpaymenttype">Receipt payment method has been updated successfully!!!</div>
+		<div class="alert-box failurepaymenttype">Receipt payment method update failed! Please try again!!!</div>
 		
 		<div style="height: 28px">
 			<button id="add">Search Fees Collection Details</button>
@@ -724,7 +939,9 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD"><label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
+					<td class="headerTD">
+					<input type="hidden" id="selectedReceiptnumber" name="receiptnumber" />
+					<label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
 					
@@ -746,7 +963,9 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Misc</th>
                             <th title="click to sort" class="headerText">Narration</th>
                             <th title="click to sort" class="headerText">Grand Total</th>
+                            <th title="click to sort" class="headerText">Payment Mode</th>
                             <th title="click to sort" class="headerText">View Details</th>
+                            <th title="click to sort" class="headerText">Modify</th>
                             <th title="click to sort" class="headerText">Cancel Receipt</th>
 
 
@@ -756,7 +975,7 @@ for(Cookie cookie : cookies){
                     <tbody>
                         <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
 
-                            <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            <tr class="trClass" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
 								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
@@ -770,8 +989,10 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/dolphin/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/dolphin/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.key.paymenttype}"/></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
+                                <td  class="dataText"> <a href="javascript:void(0);" class="dataTextInActive" onclick="openPaymentDialog('<c:out value="${feesdetails.key.receiptnumber}"/>')"> <i class="fa fa-edit" style="color: #004080; font-size: 16px;"></i></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/CancelFeesReceipt?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>&receiptid=<c:out value='${feesdetails.key.receiptvoucher}'/>&journalid=<c:out value='${feesdetails.key.journalvoucher}'/>"><i class="fa fa-times" style="color:#93051f;font-size: 18px;"></i></a></td>
                             </tr>
                         </c:forEach>
                     </tbody>
@@ -797,7 +1018,117 @@ for(Cookie cookie : cookies){
 			</table>
 
 		</div>
-
+	<div id="dialogpaymentmethod" title="Payment Method">
+				
+           		 
+           		 <table style="width: auto;height: auto;">
+						
+						<tr>
+							<td>Payment method &nbsp;</td>
+						
+							<td>
+							
+								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
+								<label for="cashpayment">Cash</label>
+									
+								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">
+								<label for="banktransfer">Bank Transfer</label>
+								
+								<input type="radio" id="chequetransfer" name="paymentmethod" value="chequetransfer" onclick="selectPayment(this.id)">
+								<label for="chequetransfer">Cheque</label>							
+							
+							</td>
+							
+							
+						</tr>
+						
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr id="onlinetransferack" style="display: none;">
+							<td></td>
+						
+							<td>
+								Acknowledgement # &nbsp;<input type="text" id="ackno" name="ackno" style="width: 175px;">														
+							</td>
+							
+						</tr>
+						<tr id="onlinetransferdate" style="display: none;">
+							<td></td>
+						
+							<td>
+							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text"  name="transferdate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="transferdate" autocomplete="false" required
+									data-validate="validate(required)">
+								
+							</td>
+							
+						</tr>
+						
+						<tr id="onlinetransferbank" style="display: none;">
+							<td></td>
+						
+							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
+											<option value="bank">Bank</option>
+								</select>
+							
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+						
+						<tr>
+							<td><br></td>
+						</tr>
+						<tr id="onlinechequeack" style="display: none;">
+							<td></td>
+						
+							<td>
+								Cheque # &nbsp;<input type="text" id="chequeno" name="chequeno" style="width: 175px;">														
+							</td>
+							
+						</tr>
+						<tr id="onlinechequedate" style="display: none;">
+							<td></td>
+						
+							<td>
+							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="text"  name="chequedate"
+									class="textField" style="font-size: 14px;"
+									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
+									id="chequedate" autocomplete="false" required
+									data-validate="validate(required)">
+								
+							</td>
+							
+						</tr>
+						
+						<tr id="onlinechequebank" style="display: none;">
+							<td></td>
+						
+							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<label>
+									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
+											<option value="bank">Bank</option>
+								</select>
+							
+							</label>
+							
+							</td>
+							
+						</tr>
+						
+					</table>
+			</div>
 
 	</form>
 
