@@ -3,12 +3,12 @@ package org.ideoholic.curium.model.sendsms.service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
@@ -20,6 +20,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 import org.springframework.stereotype.Service;
@@ -308,31 +309,40 @@ public class SmsService {
 		int resultSMS=0;
 
 		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
-
+		String[] studentIds = dto.getStudentIds();
 		String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
 					if(!studentFeesReportList.isEmpty()){
 						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
-							
-							String phoneNo = studentFeesReport.getParents().getContactnumber();
-							if(phoneNo!=null && !phoneNo.isEmpty()) {
-								char[] contactNo = phoneNo.toCharArray();
-								
-								if(contactNo.length == 10) {
-									sbN.append(studentFeesReport.getParents().getContactnumber());
-									sbN.append(",");
+							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
+								String phoneNo = studentFeesReport.getParents().getContactnumber();
+								if(phoneNo!=null && !phoneNo.isEmpty()) {
+									char[] contactNo = phoneNo.toCharArray();
+									
+									if(contactNo.length == 10) {
+										sbN.append(studentFeesReport.getParents().getContactnumber());
+										sbN.append(",");
+									}
 								}
+								
+								numbers=sbN.toString();
+								numbers = numbers.substring(0, numbers.length()-1);
+								log.info("Numbers are *** "+numbers);
+								
+								long dueAmount = 0l;
+								for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
+									dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
+								}
+								
+								
+								String SMSTempType = "feesreminderwithdueamount";
+								String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
+								
+								resultSMS = sendSMS(numbers,message,SMSTempType);
 							}
+							
 						}
-						numbers=sbN.toString();
-						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
-						
-						String SMSTempType = "feesreminder";
-						String message = "deadline";
-						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
 					}
 					
 			if(resultSMS==200){
