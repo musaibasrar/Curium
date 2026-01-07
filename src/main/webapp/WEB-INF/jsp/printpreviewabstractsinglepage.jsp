@@ -28,7 +28,7 @@ font-weight:bold;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/dolphin/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -41,7 +41,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
- <form action="/vision/" method="post" id="form1" class="bodymargin">
+ <form action="/dolphin/" method="post" id="form1" class="bodymargin">
  
  <%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
