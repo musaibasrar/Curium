@@ -645,4 +645,14 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
+	
+	@GetMapping("/receiptpayment")
+	public String receiptpayment() {
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpstatementprint")
+	public String rpstatementprint() {
+		return "rpstatementprint";
+	}
 }
