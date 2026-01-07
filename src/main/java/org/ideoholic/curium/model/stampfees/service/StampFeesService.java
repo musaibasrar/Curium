@@ -600,4 +600,60 @@ public class StampFeesService {
         return feescategoryResponseDto;
 	}
 
+	public FeescategoryResponseDto advanceSearchForStampFeesByCategory(SearchStudentDto searchStudentDto,String branchid){
+		
+		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+
+        if(branchid!=null){
+        	String[] className = searchStudentDto.getClassesSearch();
+       
+            List<Feescategory> feecategoryList= new feesCategoryDAO().getFeecategoryByName(className,searchStudentDto,branchid);
+            feescategoryResponseDto.setFeescategory(feecategoryList);
+    		
+    		// Get Student Details
+    		
+    		List<Parents> searchStudentList = new ArrayList<Parents>();
+    		
+    		if(branchid!=null){
+    		
+    		String queryMain = "From Parents as parents where";
+    		String[] addClass = searchStudentDto.getClassesSearch();
+    		String querySub = "";
+    		String classStudying = "";
+
+				if (addClass.length>0) {
+					StringBuilder sb = new StringBuilder();
+
+					for (int i = 0; i < addClass.length; i++) {
+
+					    sb.append(" parents.Student.classstudying LIKE '%")
+					      .append(addClass[i])
+					      .append("%' ");
+
+					    if (i < addClass.length - 1) {
+					        sb.append(" OR ");
+					    }
+					}
+
+					classStudying = sb.toString();
+	    		}
+
+	    		if (!classStudying.equalsIgnoreCase("")) {
+	    			querySub = classStudying+"  AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    		}
+				
+
+    		if(!"".equalsIgnoreCase(querySub)) {
+    			queryMain = queryMain + querySub;
+    			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+    		}
+    		
+    	}
+    		
+    		feescategoryResponseDto.setSearchStudentList(searchStudentList);
+
+        }
+        return feescategoryResponseDto;
+	}
+
 }
