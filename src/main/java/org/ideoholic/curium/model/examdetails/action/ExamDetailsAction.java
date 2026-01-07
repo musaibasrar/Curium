@@ -5,6 +5,7 @@ package org.ideoholic.curium.model.examdetails.action;
 
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
 import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -45,7 +46,9 @@ public class ExamDetailsAction {
     private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
     @Autowired
     private StudentActionAdapter studentActionAdapter;
-
+    @Autowired
+    private FeesCollectionActionAdapter feesCollectionActionAdapter;
+    
     private String error = "error";
 
 
@@ -61,8 +64,8 @@ public class ExamDetailsAction {
 
         examDetailsActionAdapter.getExamScheduleDetails();
         examDetailsActionAdapter.readListOfExams();
-        //subjectDetailsActionAdapter.readListOfSubjects();
-
+        subjectDetailsActionAdapter.readListOfSubjects();
+        feesCollectionActionAdapter.getDefaultersReport();
         return "generatehallticket";
     }
 
@@ -80,9 +83,9 @@ public class ExamDetailsAction {
         result = yearActionAdapter.getYear();
         if (!result)
             return error;
-        result = studentActionAdapter.viewAllStudentsList();
+        /*result = studentActionAdapter.viewAllStudentsList();
         if (!result)
-            return error;
+            return error;*/
 
         return "generatehallticket";
     }
