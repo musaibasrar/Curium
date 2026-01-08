@@ -1582,4 +1582,51 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		}
 		return result;
 		}
+	
+	
+	public ResultResponse markStudentsAttendanceMonthly(StudentsAttendanceDto attendanceDto, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
+
+		if(currentAcademicYear!=null){
+			
+			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
+			String dateOfAttendance = DateUtil.dateParserddMMYYYY(attendanceDto.getDateofAttendance()) ;
+			    Map<String, String[]> parameterMap = request.getParameterMap();
+
+			    for (String key : parameterMap.keySet()) {
+			        if (key.startsWith("attendance[")) {
+			            // Extract admission number and day
+			            String admissionNumber = key.substring(key.indexOf("[") + 1, key.indexOf("]"));
+			            String day = key.substring(key.lastIndexOf("[") + 1, key.lastIndexOf("]"));
+			            String value = request.getParameter(key);
+			            
+			            String formattedNumber = String.format("%2d", Integer.parseInt(day));
+			            
+			            // Ensure the formatted number has the correct length
+			            if (formattedNumber.length() > 2) {
+			                formattedNumber = formattedNumber.substring(formattedNumber.length() - 2);
+			            }
+
+			            String dateOfAttendanceNewDate = formattedNumber + dateOfAttendance.substring(2);
+			            Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+			            studentDailyAttendance.setAttendeeid(admissionNumber);
+			            studentDailyAttendance.setAttendancestatus(value);
+			            studentDailyAttendance.setIntime("00:00");
+			            studentDailyAttendance.setDate(DateUtil.simpleDateParser(dateOfAttendanceNewDate));
+			            studentDailyAttendance.setAcademicyear(currentAcademicYear);
+			            studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
+			            studentDailyAttendanceList.add(studentDailyAttendance);
+			        }
+			    }
+					
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			result.setMessage(res);
+			
+				if(res!=null) {
+					result.setSuccess(true);
+				}
+			}
+		
+		return result;
+	}
 }
