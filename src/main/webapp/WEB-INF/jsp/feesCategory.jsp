@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -449,6 +450,93 @@
          
      }
 </script>
+
+<script type="text/javascript">
+  // Toggle every checkbox with name="fromclass" when master is clicked
+  function toggleAll(source) {
+    var checkboxes = document.getElementsByName('fromclass');
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (!checkboxes[i].disabled) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+    // remove indeterminate state if any
+    source.indeterminate = false;
+  }
+
+  // Keep the master checkbox state (checked / unchecked / indeterminate) in sync
+  function updateSelectAll() {
+    var checkboxes = document.getElementsByName('fromclass');
+    var selectAll = document.getElementById('selectAll');
+    var total = 0, checked = 0;
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].disabled) continue;
+      total++;
+      if (checkboxes[i].checked) checked++;
+    }
+    if (total === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else if (checked === total) {
+      selectAll.checked = true;
+      selectAll.indeterminate = false;
+    } else if (checked === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else {
+      selectAll.checked = false;
+      selectAll.indeterminate = true; // partial selection
+    }
+  }
+
+  // Optional: initialize master checkbox on page load
+  document.addEventListener('DOMContentLoaded', updateSelectAll);
+</script>
+
+
+<script type="text/javascript">
+  // Toggle every checkbox with name="months" when master is clicked
+  function toggleAllMonths(source) {
+    var checkboxes = document.getElementsByName('months');
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (!checkboxes[i].disabled) {
+        checkboxes[i].checked = source.checked;
+      }
+    }
+    source.indeterminate = false;
+  }
+
+  // Keep the months master checkbox state in sync (checked / unchecked / indeterminate)
+  function updateSelectAllMonths() {
+    var checkboxes = document.getElementsByName('months');
+    var selectAll = document.getElementById('selectAllMonths');
+    var total = 0, checked = 0;
+    for (var i = 0; i < checkboxes.length; i++) {
+      if (checkboxes[i].disabled) continue;
+      total++;
+      if (checkboxes[i].checked) checked++;
+    }
+    if (!selectAll) return;
+    if (total === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else if (checked === total) {
+      selectAll.checked = true;
+      selectAll.indeterminate = false;
+    } else if (checked === 0) {
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+    } else {
+      selectAll.checked = false;
+      selectAll.indeterminate = true;
+    }
+  }
+
+  // Initialize months master checkbox on page load as well
+  document.addEventListener('DOMContentLoaded', updateSelectAllMonths);
+</script>
+
+
 </head>
 <%
 //allow access only if session exists
@@ -478,11 +566,22 @@ for(Cookie cookie : cookies){
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Details</a></li>
-
 				</ul>
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+						<tr>
+							<td width="10%" class="alignRight">Fees Type&nbsp;</td>
+							<td width="70%"><label> <div>
+									    <label><input type="radio" name="feestype" value="Yearly" id="yearly"  checked>Yearly</label><br>
+									    <label><input type="radio" name="feestype" value="Monthly" id="monthly"> Monthly</label><br>
+									</div>
+
+							</label></td>
+						</tr>
+							<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Fees Category &nbsp;</td>
 							<td width="70%"><label> <input id="feescategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;"
@@ -502,12 +601,16 @@ for(Cookie cookie : cookies){
 							</td>
 
 							<td width="8%">
+									<label style="font-weight: bold; color:#325F6D; margin-right:12px;">
+								      <input type="checkbox" id="selectAll" onclick="toggleAll(this)">
+								      Select All
+								    </label>
 							 <label> 
 							 
 							 <c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" value="${classdetailslist.classdetails}">
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="fromclass" onchange="updateSelectAll()" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>	
 							</c:forEach>
@@ -573,6 +676,63 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
+							<td><br /></td>
+						</tr>
+						
+						
+						<tr  id="monthsRow" style="display:none;">
+							<td width="10%" class="alignRight">Months &nbsp;</td>
+						<td width="70%">
+						
+							<label style="font-weight: bold; margin-right: 12px;color:#325F6D;">
+							    <input type="checkbox" id="selectAllMonths" onclick="toggleAllMonths(this)">
+							    Select All Months
+	      				   </label>
+  
+							<div style="display: flex; gap: 40px;">
+						            
+										<c:set var="selectedMonths" value="${feesmonths}" />
+										<c:if test="${empty selectedMonths}">
+										  <c:set var="selectedMonths" value="" />
+										</c:if>
+										
+										<c:set var="monthsArray" value="${fn:split(selectedMonths, ',')}" />
+										<c:set var="size" value="${fn:length(monthsArray)}" />
+										
+										<c:choose>
+										  <c:when test="${size >= 6}">
+										    <c:set var="end1" value="5" />
+										  </c:when>
+										  <c:otherwise>
+										    <c:set var="end1" value="${size - 1}" />
+										  </c:otherwise>
+										</c:choose>
+										
+										<div class="months">
+										  <!-- first column -->
+										  <div>
+										    <c:forEach var="m" items="${monthsArray}" begin="0" end="${end1}">
+										      <label><input type="checkbox" name="months" value="${fn:trim(m)}"> ${fn:trim(m)}</label><br>
+										    </c:forEach>
+										  </div>
+										
+										  <!-- second column (only if there are more items beyond the first column) -->
+										  <div>
+										    <c:if test="${size > end1 + 1}">
+										      <c:set var="begin2" value="${end1 + 1}" />
+										      <c:set var="end2" value="${size - 1}" />
+										      <c:forEach var="m" items="${monthsArray}" begin="${begin2}" end="${end2}">
+										        <label><input type="checkbox" name="months" value="${fn:trim(m)}"> ${fn:trim(m)}</label><br>
+										      </c:forEach>
+										    </c:if>
+										  </div>
+										</div>
+						
+						        </div>
+									
+							</td>
+						</tr>		
+						<tr  id="monthsRowAdditionalSpace" style="display:none;">
 							<td><br /></td>
 						</tr>
 
@@ -692,6 +852,29 @@ for(Cookie cookie : cookies){
 
 
 	</form>
+	<script>
+    const yearly = document.getElementById("yearly");
+    const monthly = document.getElementById("monthly");
+    const monthsRow = document.getElementById("monthsRow");
+    const monthsRowAdditional = document.getElementById("monthsRowAdditionalSpace");
 
+    function toggleMonths() {
+        if (monthly.checked) {
+            monthsRow.style.display = "table-row";
+            monthsRowAdditional.style.display = "table-row";
+            yearly.checked = false;
+        } else {
+            monthsRow.style.display = "none";
+            monthsRowAdditional.style.display = "none";
+            yearly.checked = true;
+        }
+    }
+
+    yearly.addEventListener("change", toggleMonths);
+    monthly.addEventListener("change", toggleMonths);
+
+    // Initialize on page load
+    toggleMonths();
+</script>
 </body>
 </html>

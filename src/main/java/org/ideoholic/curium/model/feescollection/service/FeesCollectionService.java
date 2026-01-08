@@ -1336,7 +1336,7 @@ public class FeesCollectionService {
 				httpSession.setAttribute("student", student);
 				Parents parents = parentsDetailsDao.readUniqueObject(sid);
 				httpSession.setAttribute("parents", parents);
-				Feesdetails feesdetails = new feesDetailsDAO().readUniqueObject(idFees);
+				Feesdetails feesdetails = feesDetailsDao.readUniqueObject(idFees);
 				NumberToWord toWord = new NumberToWord();
 				String grandTotal = "";
 				if(feesdetails.getGrandtotal() != null || !feesdetails.getGrandtotal().equalsIgnoreCase("")){

@@ -760,6 +760,11 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 										value="${Parents.key.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.key.student.classstudying}" /></td>
+								
+							<c:choose>
+    							<c:when test="${not empty Parents.value}">
+    								<c:set var="totalColumns" value="5" />
+								<c:set var="printedCount" value="0" />
 								<c:forEach items="${Parents.value}" var="marksobtained">
 							<td class="dataText">
 									<c:if test="${marksobtained.value <= 100}">
@@ -775,10 +780,24 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								 <input type="hidden" id="marksid" name="marksid" value="<c:out value="${marksobtained.key}" />">
 								 
 								 </td>
+								 <c:set var="printedCount" value="${printedCount + 1}" />
 								 </c:forEach>
-
-
-						</tr>
+								 <c:forEach begin="${printedCount + 1}" end="${totalColumns}">
+										<td class="dataText">
+											<%-- <input type="text"	name="studentMarks" value="" onkeypress="return (event.charCode >= 48 && event.charCode <=57) || event.charCode == 65"
+											maxlength="4" style="width: 50px; border-radius: 4px;" /> <input
+											type="hidden" name="marksid" value="" /> --%></td>
+									</c:forEach>
+								 </c:when>
+								<c:otherwise>
+									<!-- fallback when Parents.value is null -->
+									<td class="dataText"><input type="text"
+										name="studentMarks" value="" maxlength="4"
+										style="width: 50px; border-radius: 4px;" /> <input
+										type="hidden" name="marksid" value="" /></td>
+								</c:otherwise>
+								</c:choose>	
+							</tr>
 					</c:forEach>
 				</tbody>
 				<tfoot>

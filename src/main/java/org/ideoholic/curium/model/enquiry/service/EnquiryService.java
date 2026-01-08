@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.enquiry.dto.Enquiry;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 
 @Service
@@ -39,6 +40,8 @@ public class EnquiryService {
 		enquiry.setName(name);
 		enquiry.setAddress(place);
 		enquiry.setMobileno(mobile);
+		enquiry.setBranchId(extractIntId(dto.getBranchId()));
+		enquiry.setUserId(extractIntId(dto.getUserId()));
 
 		enquiryDAO.create(enquiry);
 		certificateResponseDto.setSuccess(true);
@@ -70,8 +73,10 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(admissionEnquiryDto.getMobileno());
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
+	    admissionEnquiry.setBranchId(extractIntId(admissionEnquiryDto.getBranchId()));
+	    admissionEnquiry.setUserId(extractIntId(admissionEnquiryDto.getUserId()));
 	    
-	    boolean result = new EnquiryDAO().add(admissionEnquiry);
+	    boolean result = enquiryDAO.add(admissionEnquiry);
 	    
 	    admissionEnquiryResponseDto.setName(admissionEnquiryDto.getName());
 	    admissionEnquiryResponseDto.setGender(admissionEnquiryDto.getGender());
@@ -95,7 +100,7 @@ public class EnquiryService {
 	    admissionEnquiryResponseDto.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiryResponseDto.setNotes(admissionEnquiryDto.getNotes());
 	    
-	    admissionEnquiryResponseDto.setSuccess(true);
+	    admissionEnquiryResponseDto.setSuccess(result);
 	    
 		return admissionEnquiryResponseDto;
 	}
@@ -104,7 +109,7 @@ public class EnquiryService {
 	public AdmissionEnquiryResponseDto getStudentLastEnquiry(String branchId) {
         
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		AdmissionEnquiry admissionEnquiry = new EnquiryDAO().getStudentLastEnquiry(Integer.parseInt(branchId.toString()));
+		AdmissionEnquiry admissionEnquiry = enquiryDAO.getStudentLastEnquiry(Integer.parseInt(branchId.toString()));
 		admissionEnquiryResponseDto.setAdmissionEnquiry(admissionEnquiry);
 		return admissionEnquiryResponseDto;
 	}
@@ -113,7 +118,7 @@ public class EnquiryService {
 	public AdmissionEnquiryResponseDto viewEnquiry(String branchId) {
   
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		List<AdmissionEnquiry> admissionEnquiryList = new EnquiryDAO().viewEnquiryList(Integer.parseInt(branchId.toString()));
+		List<AdmissionEnquiry> admissionEnquiryList = enquiryDAO.viewEnquiryList(Integer.parseInt(branchId.toString()));
 		admissionEnquiryResponseDto.setAdmissionEnquiryList(admissionEnquiryList);
 		return admissionEnquiryResponseDto;
 	}
@@ -123,7 +128,7 @@ public class EnquiryService {
 
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
 		int id= admissionEnquiryDto.getId();
-		AdmissionEnquiry admissionEnquiry = new EnquiryDAO().getStudentEnquiry(id);
+		AdmissionEnquiry admissionEnquiry = enquiryDAO.getStudentEnquiry(id);
 		admissionEnquiryResponseDto.setAdmissionEnquiry(admissionEnquiry);
 		return admissionEnquiryResponseDto;
 	}
@@ -132,7 +137,7 @@ public class EnquiryService {
 	public AdmissionEnquiryResponseDto updateEnquiry(AdmissionEnquiryDto admissionEnquiryDto) {
 		
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = new AdmissionEnquiryResponseDto();
-		AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
+		AdmissionEnquiry admissionEnquiry = enquiryDAO.getStudentEnquiry(admissionEnquiryDto.getId());
 		admissionEnquiry.setId(admissionEnquiryDto.getId());
 		admissionEnquiry.setName(admissionEnquiryDto.getName());
 	    admissionEnquiry.setGender(admissionEnquiryDto.getGender());
@@ -155,7 +160,13 @@ public class EnquiryService {
 	    admissionEnquiry.setMobileno(admissionEnquiryDto.getMobileno());
 	    admissionEnquiry.setAcademicYear(admissionEnquiryDto.getAcademicYear());
 	    admissionEnquiry.setNotes(admissionEnquiryDto.getNotes());
-	    new EnquiryDAO().update(admissionEnquiry);
+	    Integer branchId = extractIntId(admissionEnquiryDto.getBranchId());
+	    if(branchId != null && !branchId.equals(0)) {
+	    	admissionEnquiry.setBranchId(branchId);
+	    }
+	    admissionEnquiry.setUserId(extractIntId(admissionEnquiryDto.getUserId()));
+
+	    enquiryDAO.update(admissionEnquiry);
 	    admissionEnquiryResponseDto.setSuccess(true);
 	    return admissionEnquiryResponseDto;
 		
@@ -171,13 +182,20 @@ public class EnquiryService {
 			for (String id : enquiryIds) {
 				ids.add(Integer.parseInt(id));
 			}
-			boolean result = new EnquiryDAO().deleteEnquiry(ids);
+			boolean result = enquiryDAO.deleteEnquiry(ids);
 			admissionEnquiryResponseDto.setSuccess(result);
-			
-		}
-		
-		return admissionEnquiryResponseDto;
-	    }
 
+		}
+
+		return admissionEnquiryResponseDto;
+	}
+
+	private Integer extractIntId(String id) {
+		Integer branch = 0;
+		if(StringUtils.hasLength(id)) {
+			branch = Integer.valueOf(id);
+		}
+		return branch;
+	}
 
 }

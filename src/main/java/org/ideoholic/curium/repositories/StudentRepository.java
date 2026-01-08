@@ -1,6 +1,8 @@
 package org.ideoholic.curium.repositories;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.ideoholic.curium.model.student.dto.Student;
 import org.springframework.data.domain.Page;
@@ -20,7 +22,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 			+ "WHERE s.archive = 0 AND s.branchid = :branchId " + "ORDER BY s.sid DESC")
 	List<Object[]> findStudentDetailsByBranchId(@Param("branchId") Integer branchId);
 
-	@Query("SELECT s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname "
+	@Query("SELECT s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, s.admissiondate, p.fathersname "
 			+ "FROM Student s JOIN s.parents p "
 			+ "WHERE s.sid IN (SELECT f.student.sid FROM Studentfeesstructure f WHERE f.branchid = :branchId)")
 	List<Object[]> findStudentsByBranchId(@Param("branchId") Integer branchId);
@@ -79,4 +81,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Query("FROM Student s WHERE s.leftout = 1 ORDER BY s.admissionnumber DESC")
     List<Student> findStudentsLeft();
 
+    Student findByNameAndDateofbirthOrDisabilitychild(String name, Date dateOfBirth, String aadhaarNo);
 }

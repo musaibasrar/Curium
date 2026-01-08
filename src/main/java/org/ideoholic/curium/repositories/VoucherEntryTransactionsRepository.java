@@ -42,4 +42,8 @@ public interface VoucherEntryTransactionsRepository extends JpaRepository<Vouche
 	@Query("from VoucherEntrytransactions where transactiondate BETWEEN :fromDate and :toDate and cancelvoucher!='yes' and branchid = :branchId order by transactionsid ASC")
 	List<VoucherEntrytransactions> findByAllVoucherEntryTransactionsBetweenDates(@Param("fromDate") Date fromDate,
 			@Param("toDate") Date toDate, @Param("branchId") int branchId);
+	
+	@Query("SELECT v FROM VoucherEntrytransactions v WHERE v.transactiondate BETWEEN :fromDate AND :toDate AND (v.draccountid IN :accountIds OR v.craccountid IN :accountIds) AND v.cancelvoucher <> 'yes' AND v.branchid = :branchId ORDER BY v.transactionsid ASC")
+	List<VoucherEntrytransactions> findByAllVoucherEntryTransactionsBetweenDatesByIds(@Param("fromDate") String fromDate,
+			@Param("toDate") String toDate , @Param("accountIds") List<Integer> accountIds, @Param("branchId") int branchId);
 }

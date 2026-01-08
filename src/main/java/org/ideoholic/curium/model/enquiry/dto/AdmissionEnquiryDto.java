@@ -1,7 +1,5 @@
 package org.ideoholic.curium.model.enquiry.dto;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data
@@ -30,5 +28,7 @@ public class AdmissionEnquiryDto {
 	private String mobileno;
 	private String notes;
 	private String[] enquiryIds;
+    private String branchId;
+    private String userId;
 
 }

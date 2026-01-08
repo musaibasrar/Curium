@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.repositories.StudyCertificateRepository;
 import org.ideoholic.curium.repositories.TransferCertificateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,16 @@ public class DocumentDAO {
 	
 	@Autowired
     private StudyCertificateRepository studyCertificateRepo;
+	
+	@Autowired
+    private StudentRepository studentRepo;
 
 	@Transactional 
-	public String generateTransferCertificate(Transfercertificate tc) {
+	public String generateTransferCertificate(Transfercertificate tc, Student student) {
 		String status = "false";
 		try {
 			transferCertificateRepo.save(tc);
+			studentRepo.save(student);
 			status = "true";
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);

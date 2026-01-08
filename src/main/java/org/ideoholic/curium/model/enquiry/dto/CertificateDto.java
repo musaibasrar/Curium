@@ -8,4 +8,6 @@ public class CertificateDto {
     private String place;
     private String mobile;
     private String date;
+    private String branchId;
+    private String userId;
 }

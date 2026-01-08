@@ -287,8 +287,7 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	@Transactional
-	public List<Studentdailyattendance> getStudentDailyAttendance(
+	/*public List<Studentdailyattendance> getStudentDailyAttendance(
 			String studentExternalId, String fromTimestamp,
 			String toTimestamp, String currentAcademicYear, int branchId) {
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
@@ -304,6 +303,24 @@ public class AttendanceDAO {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 		}
 		return studentDailyAttendance;
+	}*/
+	
+	@Transactional
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studentExternalId , String academicYear, String startDate, String endDate, int branchId) {
+
+	    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
+
+	    try {
+	        //String hql = "FROM Studentdailyattendance WHERE attendeeid = :studentId AND academicyear = :academicYear AND date BETWEEN :startDate AND :endDate";
+	        studentDailyAttendance = studentDailyAttendanceRepository.findByAttendee_studentexternalidAndAcademicyearAndDateBetween(studentExternalId, academicYear, startDate, endDate);
+
+	    }catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+			
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+	    return studentDailyAttendance;
 	}
 
 	@Transactional

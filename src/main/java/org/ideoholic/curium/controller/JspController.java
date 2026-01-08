@@ -644,5 +644,15 @@ public class JspController {
 	@GetMapping("/role")
 	public String getRole() {
 		return "school/role";
+  }
+
+	@GetMapping("/receiptpayment")
+	public String receiptpayment() {
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpstatementprint")
+	public String rpstatementprint() {
+		return "rpstatementprint";
 	}
 }

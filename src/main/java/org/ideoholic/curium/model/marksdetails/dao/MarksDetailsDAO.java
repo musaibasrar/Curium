@@ -1,13 +1,16 @@
 package org.ideoholic.curium.model.marksdetails.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
 import org.ideoholic.curium.model.marksdetails.dto.MarksGrade;
 import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.repositories.ExamRankRepository;
+import org.ideoholic.curium.repositories.HolidaysMasterRepository;
 import org.ideoholic.curium.repositories.MarksGradeRepository;
 import org.ideoholic.curium.repositories.MarksRepository;
 import org.ideoholic.curium.repositories.SubjectGradeRepository;
@@ -30,6 +33,8 @@ public class MarksDetailsDAO {
     private final ExamRankRepository examRankRepository;
 
     private final SubjectGradeRepository subjectGradeRepository;
+    
+    private final HolidaysMasterRepository holidayMasterRepository;
 
     @Transactional
     public String addMarks(List<Marks> marksList) {
@@ -317,4 +322,23 @@ public class MarksDetailsDAO {
         }
         return false;
     }
+	
+    @Transactional
+	public List<Holidaysmaster> getListofHolidays(Date startDate,Date endDate) {
+	    List<Holidaysmaster> results = new ArrayList<Holidaysmaster>();
+
+	    try {
+
+	        //Query query = session.createQuery("FROM Holidaysmaster WHERE todate >= :startDate and fromdate <= :endDate");
+	        results = holidayMasterRepository.findByTodateGreaterThanEqualAndFromdateLessThanEqual(startDate, endDate);
+
+	    } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+
+	    return results;
+	}
+
 }

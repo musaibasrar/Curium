@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,6 +33,8 @@ import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsRespons
 import org.ideoholic.curium.model.branch.dto.Branch;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.documents.dto.StudentDetailsDto;
+import org.ideoholic.curium.model.family.dao.FamilyDao;
+import org.ideoholic.curium.model.family.dto.Family;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -94,6 +97,10 @@ public class StudentService {
 	
 	private final StampFeesDAO stampFeesDao;
 	
+	private final feesDetailsDAO feesDetailsDao;
+	
+	private final FamilyDao familyDao;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
 
@@ -104,6 +111,14 @@ public class StudentService {
 
 	public ResultResponse addStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
+		
+		Family family = null; 
+		if (StringUtils.hasLength(createStudentDto.getParentId())) {
+			family = familyDao.findParentsFamily(Integer.parseInt(createStudentDto.getParentId()));
+		} else {
+			family = new Family();
+			family.setName(UUID.randomUUID().toString());
+		}
 
 		Student student = StudentMapper.INSTANCE.mapStudent(createStudentDto);
 		Parents parents = StudentMapper.INSTANCE.mapParent(createStudentDto);
@@ -222,6 +237,9 @@ public class StudentService {
 		parents.setUserid(Integer.parseInt(userId));
 		parents = parentsDetailsDao.create(parents);
 
+		familyDao.addParentToFamily(family, parents);
+		familyDao.addStudentToFamily(family, student);
+
 		if (parents != null) {
 			String[] yearofAdmission = parents.getStudent().getYearofadmission().split("/");
 			String setYear = null;
@@ -235,7 +253,7 @@ public class StudentService {
 			}
 
 			stampFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
-			new feesDetailsDAO().stampOtherFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
+			feesDetailsDao.stampOtherFees(parents.getStudent().getSid(),setYear, createStudentDto, strCurrentAcademicYear, branchId, userId);
 			createParentLogin(parents.getStudent().getStudentexternalid(),parents.getContactnumber(),parents.getBranchid());
 			result.setSuccess(true);
 			return result;
@@ -1480,5 +1498,13 @@ public class StudentService {
 		}
 		return result;
 	}
+		
+	public boolean checkDuplicateStudent(String aadhaarNo, String studentName, Date dob) throws IOException {
 
+		Student student = studentDetailsDao.checkDuplicateStudent(aadhaarNo, studentName, dob);
+		if (student != null) {
+			return true;
+		}
+		return false;
+	}
 }

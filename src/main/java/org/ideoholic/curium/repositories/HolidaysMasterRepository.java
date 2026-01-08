@@ -1,5 +1,6 @@
 package org.ideoholic.curium.repositories;
 
+import java.util.Date;
 import java.util.List;
 
 import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
@@ -14,5 +15,7 @@ public interface HolidaysMasterRepository extends JpaRepository<Holidaysmaster, 
 	List<Holidaysmaster> findByAcademicyearAndShidInAndBranchid(String academicyear,	List<Integer> holidaysIntList, int branchId);
 
 	List<Holidaysmaster> findByAcademicyearAndShidIn(String academicyear, List<Integer> holidaysIntList);
+	
+	List<Holidaysmaster> findByTodateGreaterThanEqualAndFromdateLessThanEqual(Date fromDate,Date toDate);
 
 }

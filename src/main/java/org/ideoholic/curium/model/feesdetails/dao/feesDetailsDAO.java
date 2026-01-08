@@ -34,34 +34,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class feesDetailsDAO {
 	
-	@Autowired
-    private FeesdetailsRepository feesDetailsRepo;
-	@Autowired
-    private FeesCategoryRepository feesCategoryRepository;
-	@Autowired
-    private ReceiptinfoRepository receiptinfoRepo;
-	@Autowired
-    private AcademicFeesStructureRepository academicfeesstructureRepo;
-	@Autowired
-	private QueryUtil queryUtil;
-	@Autowired
-	private StudentRepository studentRepo;
-	@Autowired
-	private StudentFeesStructureRepository studentFeesStructureRepo;
-	@Autowired
-	private OtherReceiptInfoRepository otherReceiptInfoRepo;
-	@Autowired
-	private StudentOtherFeesStructureRepository studentOtherFeesStructureRepository;
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
-	@Autowired
-	private StampFeesDAO stampFeesDao;	
+	private final QueryUtil queryUtil;
+	private final StampFeesDAO stampFeesDao;	
+	private final StudentRepository studentRepo;
+	private final StudentDetailsDAO studentDetailsDao;
+    private final FeesdetailsRepository feesDetailsRepo;
+    private final ReceiptinfoRepository receiptinfoRepo;
+    private final FeesCategoryRepository feesCategoryRepo;
+    private final OtherReceiptInfoRepository otherReceiptInfoRepo;
+	private final StudentFeesStructureRepository studentFeesStructureRepo;
+	private final AcademicFeesStructureRepository academicfeesstructureRepo;
+	private final StudentOtherFeesStructureRepository studentOtherFeesStructureRepo;
        
 
 	 @Transactional
@@ -70,7 +61,7 @@ public class feesDetailsDAO {
                 List<Feescategory> results = new ArrayList<Feescategory>();
         try {
             
-        	results = feesCategoryRepository.findAll();
+        	results = feesCategoryRepo.findAll();
         }catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -188,9 +179,9 @@ public class feesDetailsDAO {
                 try {
                     //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 
-                                //Query query =  session.createQuery(queryMain);
-                                //results =  (String) query.uniqueResult();
-                                results =  queryUtil.runGivenQueryForSingleResult(queryMain,String.class).toString();
+                    //Query query =  session.createQuery(queryMain);
+                    //results =  (String) query.uniqueResult();
+                    results =  queryUtil.runGivenQueryForSingleResult(queryMain,String.class).toString();
                                 
                   
                 } catch (Exception hibernateException) { 
@@ -208,7 +199,6 @@ public class feesDetailsDAO {
                    
                 	// Query queryTotalFees =  session.createQuery("select totalfees From Academicfeesstructure as afs where afs.sid=" + id +"and afs.academicyear='"+currentYear+"'");
                     results =  academicfeesstructureRepo.getTotalFees(sid, currentYear);          
-                               
                                 
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
@@ -223,13 +213,13 @@ public class feesDetailsDAO {
                 List<Object[]> results = new ArrayList<Object[]>();
 
                 try {
-                       // Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname from Student s JOIN Parents p ON s.sid=p.student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                       // Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, s.admissiondate, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+
                 	results= studentRepo.findStudentsByBranchId(branchId);
                 } catch (Exception hibernateException) { 
                 	log.error(hibernateException.getMessage(), hibernateException);
                     hibernateException.printStackTrace();
                     TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-
                 }
                 return results;
         }
@@ -366,10 +356,10 @@ public class feesDetailsDAO {
                     
                     for (Otherfeescollection feescoll : feesCollection) {
                     	//Query queryStudentFS = session.createQuery("update Studentotherfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.fetchSfsid());
-                    	Studentotherfeesstructure studentotherfeesstructure = studentOtherFeesStructureRepository.findById(feescoll.fetchSfsid()).orElse(null);
+                    	Studentotherfeesstructure studentotherfeesstructure = studentOtherFeesStructureRepo.findById(feescoll.fetchSfsid()).orElse(null);
 						if(studentotherfeesstructure != null) {
                     	   studentotherfeesstructure.setFeespaid(studentotherfeesstructure.getFeespaid() - feescoll.getAmountpaid());
-                    	   studentOtherFeesStructureRepository.save(studentotherfeesstructure);
+                    	   studentOtherFeesStructureRepo.save(studentotherfeesstructure);
 					    }
                     	
 					}

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
@@ -68,6 +70,10 @@ public class EmployeeService {
 	
 	@Autowired
 	private SubjectDetailsDAO subjectDetailsDao;
+
+	@Autowired
+	private HttpServletResponse response;
+	
 
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
