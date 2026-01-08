@@ -122,31 +122,18 @@ form{
       
     <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
         <script type="text/javascript">
-            var flag1=<c:out default="" value="${login_success}"/>;
-            var type='<c:out default="" value="${userType}"/>';
+        document.addEventListener("DOMContentLoaded", function () {
+        var loginSuccessProvided = "${login_success}" !== "";
 
+        if (loginSuccessProvided) {
+            var flag1 = ${login_success == true ? 'true' : 'false'};
 
-            if(flag1){
-            	
-            	if(type=='superadmin'){
-                    window.open('/school/index_superadmin','_self');
-                }else if(type=='admin'){
-                    window.open('/school/index_admin','_self');
-                }else if(type=='feescollector'){
-                    window.open('/school/index_feescollector','_self');
-                }else if(type=='officeadmin'){
-                	window.open('/school/index_officeadmin','_self');
-                }else if(type=='teacher'){
-                	window.open('/school/index_teacher','_self');
-                }else if(type=='marksentry'){
-                	window.open('/school/index_marksentry','_self');
-                }else if(type=='parents'){
-                	window.open('/school/index_parents','_self');
-                }
+            if(!flag1){
+            	 document.getElementById("loginfailmessage").style.display = "block";
             }
-            else if(!flag1){
-            	window.open('/school/loginFail','_self');
-            }
+        }
+        });
+
         </script>
         
         
@@ -155,13 +142,14 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 170px;width: 168px;" alt="ideoholic" src="/school/images/school.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height:140px;width:120px;" alt="ideoholic" src="/school/images/school.png"></h2>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
 					<div class="row">
 						<!-- <span class="company__logo"><h2><img border="0" style="vertical-align: text-bottom;height: 50px;width: 73px;" alt="ideoholic" src="/school/images/shaheenlogo.png"></h2></span> -->
 						<h3>Log In</h3>
+						<p id="loginfailmessage" style="display:none;color:red;font-size:10px;text-align:center;"> Please enter correct username and password</p>
 					</div>
 					<div class="row">
 						<form action="/school/UserProcess/authenticateUser" id="loginForm"  method="post" class="form-group">
