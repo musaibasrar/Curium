@@ -11,6 +11,7 @@ import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +45,7 @@ public class SmsActionAdapter {
         dto.setDepartment(request.getParameter("department"));
         dto.setMessageBodyStaff(request.getParameter("messagebodystaff"));
 
-        ResultResponse resultResponse = smsService.sendStaffSMS(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse resultResponse = smsService.sendStaffSMS(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         return resultResponse.isSuccess();
     }

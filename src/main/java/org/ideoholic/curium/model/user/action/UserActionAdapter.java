@@ -19,6 +19,7 @@ import org.ideoholic.curium.model.user.dto.UserAuthenticationDto;
 import org.ideoholic.curium.model.user.dto.UserAuthenticationResponseDto;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,7 +54,7 @@ public class UserActionAdapter {
         String dayFrom = httpSession.getAttribute("datefrom") == null ? null : httpSession.getAttribute("dayone").toString();
         String dateTo = httpSession.getAttribute("dateto") == null ? null : httpSession.getAttribute("dayone").toString();
 
-        SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), dayOne, dayFrom, dateTo);
+        SearchByDateResponseDto responseDto = userService.searchByDate(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID), dayOne, dayFrom, dateTo);
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
         httpSession.setAttribute("branchname", responseDto.getBranchName());
         httpSession.setAttribute("dayone", responseDto.getDayOne());
@@ -73,7 +74,7 @@ public class UserActionAdapter {
         dto.setMothersName(request.getParameter("mothersname"));
         dto.setContactNumber(request.getParameter("contactnumber"));
 
-        ResultResponse resultResponse = userService.advanceSearchByParents(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse resultResponse = userService.advanceSearchByParents(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("studentList", resultResponse.getResultList());
     }
 
@@ -107,7 +108,7 @@ public class UserActionAdapter {
         dto.setSts(request.getParameter("sts"));
         dto.setUId(request.getParameter("uid"));
 
-        ResultResponse resultResponse = userService.advanceSearch(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse resultResponse = userService.advanceSearch(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("searchStudentList", resultResponse.getResultList());
 
     }
@@ -119,7 +120,7 @@ public class UserActionAdapter {
         dto.setToDate(request.getParameter("todate"));
         dto.setFromDate(request.getParameter("fromdate"));
 
-        DashBoardResponseDto responseDto = userService.dashBoard(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        DashBoardResponseDto responseDto = userService.dashBoard(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
         request.setAttribute("totalteachers", responseDto.getTeacherSize());
         DailyExpensesResponseDto dailyExpenses = responseDto.getDailyExpensesResponseDto();
         if (dailyExpenses != null) {

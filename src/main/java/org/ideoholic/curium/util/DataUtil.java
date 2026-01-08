@@ -5,15 +5,16 @@
 
 package org.ideoholic.curium.util;
 
-import org.springframework.util.StringUtils;
-
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -189,4 +190,12 @@ public class DataUtil {
     public static String requireNonNullElse(String str, String defaultValue) {
         return StringUtils.hasLength(str) ? str : defaultValue;
     }
+
+	public static String getSessionAttributeOrElseNull(HttpSession session, String paramName) {
+		Object obj = session.getAttribute(paramName);
+		if (obj == null) {
+			return null;
+		}
+		return requireNonNullElse(obj.toString(), null);
+	}
 }

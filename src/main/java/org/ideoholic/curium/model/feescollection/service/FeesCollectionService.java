@@ -75,11 +75,13 @@ import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.RequiredArgsConstructor;
@@ -112,14 +114,7 @@ public class FeesCollectionService {
 	private final HttpServletResponse response;
 	private final HttpSession httpSession;
 
-	private String CURRENTACADEMICYEAR = "currentAcademicYear";
-	private String BRANCHID = "branchid";
-	private String USERID = "userloginid";
-	private String username = "username";
-	
 	private static final int BUFFER_SIZE = 4096;
-
-
 
 	public Feescollection add(Feesdetails feesdetails) {
 
@@ -212,80 +207,81 @@ public class FeesCollectionService {
 	public StampFeeResponseDto getStampFees(StampFeeDto dto, String currentAcademicYear) {
 		StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 
-		if(currentAcademicYear!=null){
-		String academicYear = dto.getAcademicYear();
+		if(StringUtils.hasLength(currentAcademicYear) && StringUtils.hasLength(dto.getId())) {
+			String academicYear = dto.getAcademicYear();
 			
-		int id = Integer.parseInt(dto.getId());
-		List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, academicYear);
-		//List<Feescollection> feesCollection = feesCollectionDAO.getFeesForTheCurrentYear(id, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
-		Map<Studentfeesstructure,Long> feesMap = new LinkedHashMap<Studentfeesstructure, Long>();
-		
-		for (Map.Entry<Studentfeesstructure, Long> feescollection2 : feesMap.entrySet()) {
-			Studentfeesstructure sf = feescollection2.getKey();
-			sf.getFeescategory().getFeescategoryname();
-		}
-		
-		for (Studentfeesstructure singleFeesStructure : feesstructure) {
-			Long totalAmountPerCategory = 0L;
-			/*for (Feescollection singleFeescollection : feesCollection) {
+			int id = Integer.parseInt(dto.getId());
+			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, academicYear);
+			//List<Feescollection> feesCollection = feesCollectionDAO.getFeesForTheCurrentYear(id, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
+			Map<Studentfeesstructure,Long> feesMap = new LinkedHashMap<Studentfeesstructure, Long>();
+			
+			for (Map.Entry<Studentfeesstructure, Long> feescollection2 : feesMap.entrySet()) {
+				Studentfeesstructure sf = feescollection2.getKey();
+				sf.getFeescategory().getFeescategoryname();
+			}
+			
+			for (Studentfeesstructure singleFeesStructure : feesstructure) {
+				Long totalAmountPerCategory = 0L;
+				/*for (Feescollection singleFeescollection : feesCollection) {
 				
-				if(singleFeescollection.getSfsid() == singleFeesStructure.getSfsid()){
-					totalAmountPerCategory = totalAmountPerCategory + singleFeescollection.getAmountpaid();
-				}
+					if(singleFeescollection.getSfsid() == singleFeesStructure.getSfsid()){
+						totalAmountPerCategory = totalAmountPerCategory + singleFeescollection.getAmountpaid();
+					}
 				
-			}*/
-			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
-			
-				if(totalDueAmount>0) {
-					feesMap.put(singleFeesStructure,totalDueAmount);
+				}*/
+				Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid()
+						- singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
+	
+				if (totalDueAmount > 0) {
+					feesMap.put(singleFeesStructure, totalDueAmount);
 				}
+	
+			}
 			
-		}
-		
-		//previous  10 years
-				String[] parts = academicYear.split("/");
-				int startYear = Integer.parseInt(parts[0]);
-
-				List<String> academicYears = new ArrayList<>();
-				for (int i = 1; i <= 10; i++) {
-				    int year1 = startYear - i;
-				    int year2 = year1 + 1;
-				    academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
-				}
-		Map<Studentfeesstructure,Long> feesMapPreviousYear = new LinkedHashMap<Studentfeesstructure, Long>();
-		 for (String previousAcademicYear : academicYears) {
-		List<Studentfeesstructure> feesstructurePreviousYear = studentDetailsDao.getStudentFeesStructure(id, previousAcademicYear);
-		//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-		
-		for (Studentfeesstructure singleFeesStructure : feesstructurePreviousYear) {
-			Long totalAmountPerCategory = 0L;
-			/*for (Feescollection singleFeescollection : feesCollection) {
+			//previous  10 years
+			String[] parts = academicYear.split("/");
+			int startYear = Integer.parseInt(parts[0]);
+	
+			List<String> academicYears = new ArrayList<>();
+			for (int i = 1; i <= 10; i++) {
+				int year1 = startYear - i;
+				int year2 = year1 + 1;
+				academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
+			}
+			Map<Studentfeesstructure,Long> feesMapPreviousYear = new LinkedHashMap<Studentfeesstructure, Long>();
+			 for (String previousAcademicYear : academicYears) {
+			List<Studentfeesstructure> feesstructurePreviousYear = studentDetailsDao.getStudentFeesStructure(id, previousAcademicYear);
+			//List<Feescollection> feesCollection = new feesCollectionDAO().getFeesForTheCurrentYear(id, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+			
+			for (Studentfeesstructure singleFeesStructure : feesstructurePreviousYear) {
+				Long totalAmountPerCategory = 0L;
+				/*for (Feescollection singleFeescollection : feesCollection) {
 				
-				if(singleFeescollection.getSfsid() == singleFeesStructure.getSfsid()){
-					totalAmountPerCategory = totalAmountPerCategory + singleFeescollection.getAmountpaid();
-				}
+					if(singleFeescollection.getSfsid() == singleFeesStructure.getSfsid()){
+						totalAmountPerCategory = totalAmountPerCategory + singleFeescollection.getAmountpaid();
+					}
 				
-			}*/
-			long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
-			
-				if(totalDueAmount>0) {
-					feesMapPreviousYear.put(singleFeesStructure,totalDueAmount);
+				}*/
+				long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid()
+						- singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
+	
+				if (totalDueAmount > 0) {
+					feesMapPreviousYear.put(singleFeesStructure, totalDueAmount);
 				}
-			
-		}
-		 }
-		//request.setAttribute("admnoDetails", request.getParameter("admno"));
-		result.setPreviousYearFeesMap(feesMapPreviousYear);
-		//result.setPreviousYear(previousYear);
-		result.setFeesMap(feesMap);
-		result.setStudentNameDetails(dto.getStudentName());
-		result.setAdmNoDetails(dto.getAdmissionNo());
-		result.setClassAndSecDetails(dto.getClassAndSec());
-		result.setStudentIdDetails(dto.getStudentId());
-		result.setDateOfFeesDetails(dto.getDateOfFees());
-		result.setFatherName(dto.getFatherName());
-		result.setSuccess(true);
-		
+	
+			}
+			 }
+			//request.setAttribute("admnoDetails", request.getParameter("admno"));
+			result.setPreviousYearFeesMap(feesMapPreviousYear);
+			//result.setPreviousYear(previousYear);
+			result.setFeesMap(feesMap);
+			result.setStudentNameDetails(dto.getStudentName());
+			result.setAdmNoDetails(dto.getAdmissionNo());
+			result.setClassAndSecDetails(dto.getClassAndSec());
+			result.setStudentIdDetails(dto.getStudentId());
+			result.setDateOfFeesDetails(dto.getDateOfFees());
+			result.setFatherName(dto.getFatherName());
+			result.setSuccess(true);
 		}
 		return result;
 	}
@@ -719,7 +715,6 @@ public class FeesCollectionService {
 		ResultResponse result = ResultResponse.builder().success(true).build();
 
 
-		String academicYear = dto.getAcademicYear();
 		String[] feesCat = dto.getFeesCat();
 		
 		//Get Students
@@ -837,7 +832,7 @@ public class FeesCollectionService {
 		if (strBranchId != null) {
 
 			String queryMain = "From Parents as parents where parents.student.branchid="+Integer.parseInt(strBranchId)+" AND ";
-			ResultResponse resultResponse = standardService.viewClasses(httpSession.getAttribute(BRANCHID).toString());
+			ResultResponse resultResponse = standardService.viewClasses(strBranchId);
 			result.setClasssecList(resultResponse.getResultList());
 			List<Classsec> classList = dto.getClasssecList();
 			
@@ -1014,25 +1009,27 @@ public class FeesCollectionService {
 		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 		
 		try {
-			Integer id = Integer.parseInt(dto.getStudentId());
 			String academicYear = dto.getAcademicYear();
-			
-			//Currentacademicyear currentYear = new YearDAO().showYear();
-			//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
-			
-			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);
-			result.setReceiptInfo(rinfo);
-			List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, academicYear);
-			
-			long totalSum = 0l;
-			for (Receiptinfo receiptInfoSingle : rinfo) {
-				totalSum = totalSum + receiptInfoSingle.getTotalamount();
-			}
-			
-			long totalFeesAmount = 0l;
-			for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
-				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
-			}
+			String studentId = dto.getStudentId();
+			if(StringUtils.hasLength(studentId) && StringUtils.hasLength(academicYear)) {
+				Integer id = Integer.parseInt(studentId);
+				
+				//Currentacademicyear currentYear = new YearDAO().showYear();
+				//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+				
+				List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);
+				result.setReceiptInfo(rinfo);
+				List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructure(id, academicYear);
+				
+				long totalSum = 0l;
+				for (Receiptinfo receiptInfoSingle : rinfo) {
+					totalSum = totalSum + receiptInfoSingle.getTotalamount();
+				}
+				
+				long totalFeesAmount = 0l;
+				for (Studentfeesstructure studentfeesstructureSingle : feesstructure) {
+					totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
+				}
 
 				result.setFeesStructure(feesstructure);
 				result.setTotalSum(totalSum);
@@ -1041,7 +1038,7 @@ public class FeesCollectionService {
 				result.setAcademicPerYear(academicYear);
 				result.setCurrentAcademicYear(academicYear);
 				result.setSuccess(true);
-
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -2728,7 +2725,7 @@ public class FeesCollectionService {
 		return receiptInfo;
 	}
 	
-	public boolean readFileForOtherFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
+	public boolean readFileForOtherFees(MultipartFile uploadedFiles, String currentAcademicYear, String branchId, String userId, String userName) throws FileNotFoundException, IOException{
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
@@ -2826,7 +2823,7 @@ public class FeesCollectionService {
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            
-						        Otherreceiptinfo receiptinfo = addImportOtherFees(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString());
+						        Otherreceiptinfo receiptinfo = addImportOtherFees(dto, currentAcademicYear, branchId, userId, userName);
 					            i++;
 					        }
 
@@ -3093,5 +3090,3 @@ public class FeesCollectionService {
 		return result;
 	  }
 }
-
-

@@ -179,10 +179,10 @@ public class FeesService {
 
 
 		public void deleteMultiple(IdFeescategoryDto idFeescategoryDto) {
-			String[] idfeescategory = idFeescategoryDto.getIdFeesCategory();
-			if (idfeescategory != null) {
+			String[] idFeesCategory = idFeescategoryDto.getIdFeesCategory();
+			if (idFeesCategory != null) {
 				List<Integer> ids = new ArrayList<>();
-				for (String id : idfeescategory) {
+				for (String id : idFeesCategory) {
 					log.debug("id:{}", id);
 					ids.add(Integer.valueOf(id));
 				}
@@ -262,7 +262,7 @@ public class FeesService {
         public StudentIdDto deleteFeesCategory(ConcessionDto concessionDto,String branchid,String userid) {
                 
         	     StudentIdDto studentIdDto = new StudentIdDto();
-                 String[] idfeescategory = concessionDto.getSfsid();
+                 String[] idFeesCategory = concessionDto.getSfsid();
                  List<Integer> sfsId = new ArrayList<>();
                  List<Integer> feesCatId = new ArrayList<>();
                  List<VoucherEntrytransactions> transactionsList = new ArrayList<VoucherEntrytransactions>();
@@ -271,9 +271,9 @@ public class FeesService {
                  
                  String studentId = concessionDto.getId();
                  
-                 if(idfeescategory!=null){
+                 if(idFeesCategory!=null){
                          
-                         for (String string : idfeescategory) {
+                         for (String string : idFeesCategory) {
                                  String[] test = string.split("_");
                                  sfsId.add(Integer.valueOf(test[0]));
                                  feesCatId.add(Integer.valueOf(test[1]));
@@ -356,7 +356,7 @@ public class FeesService {
     public StudentIdDto waiveOffFees(ConcessionDto concessionDto, String academicYear, String branchId, String userId) {
         
     	StudentIdDto studentIdDto = new StudentIdDto();
-        String[] idfeescategory = concessionDto.getSfsid();
+        String[] idFeesCategory = concessionDto.getSfsid();
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
@@ -367,9 +367,9 @@ public class FeesService {
         
         String studentId = concessionDto.getId();
         
-        if(idfeescategory!=null){
+        if(idFeesCategory!=null){
                 
-                for (String string : idfeescategory) {
+                for (String string : idFeesCategory) {
                 	
                 		Concession con = new Concession();
                 		String[] test = string.split("_");
@@ -521,7 +521,7 @@ public class FeesService {
 	public StudentIdDto applyConcession(ConcessionDto concessionDto, String academicYear, String branchId, String userId) {
 		
 		StudentIdDto studentIdDto = new StudentIdDto();
-        String[] idfeescategory = concessionDto.getSfsid();
+        String[] idFeesCategory = concessionDto.getSfsid();
         List<Integer> sfsId = new ArrayList<Integer>();
         List<Integer> feesCatId = new ArrayList<Integer>();
         List<String> consession = new ArrayList<String>();
@@ -534,9 +534,9 @@ public class FeesService {
         List<String> updateCrAccountApplyList = new ArrayList<String>();
         String studentId = concessionDto.getId();
         
-        if(idfeescategory!=null){
+        if(idFeesCategory!=null){
                 
-                for (String string : idfeescategory) {
+                for (String string : idFeesCategory) {
                 	
                 		Concession con = new Concession();
                 		String[] test = string.split("_");
@@ -728,10 +728,10 @@ public class FeesService {
    }
 	   
 	   public void odeleteMultiple(IdFeescategoryDto idFeescategoryDto) {
-           String[] idfeescategory = idFeescategoryDto.getIdFeesCategory();
-           if(idfeescategory!=null){
+           String[] idFeesCategory = idFeescategoryDto.getIdFeesCategory();
+           if(idFeesCategory!=null){
           List<Integer> ids = new ArrayList<>();
-          for (String id : idfeescategory) {
+          for (String id : idFeesCategory) {
               log.debug("id:{}", id);
               ids.add(Integer.valueOf(id));
           }
@@ -900,7 +900,7 @@ response.getWriter().println(buffer.toString());
 	   public StudentIdDto applyotherConcession(ConcessionDto concessionDto) {
 
 		   StudentIdDto studentIdDto = new StudentIdDto();
-	        String[] idfeescategory = concessionDto.getSfsid();
+	        String[] idFeesCategory = concessionDto.getSfsid();
 	        List<Integer> sfsId = new ArrayList<Integer>();
 	        List<Integer> feesCatId = new ArrayList<Integer>();
 	        List<String> consession = new ArrayList<String>();
@@ -908,9 +908,9 @@ response.getWriter().println(buffer.toString());
 
 	        String studentId = concessionDto.getId();
 
-	        if(idfeescategory!=null){
+	        if(idFeesCategory!=null){
 
-	                for (String string : idfeescategory) {
+	                for (String string : idFeesCategory) {
 
 	                		Concession con = new Concession();
 	                		String[] test = string.split("_");
@@ -1069,15 +1069,15 @@ response.getWriter().println(buffer.toString());
 		public StudentIdDto deleteOtherFeesCategory(ConcessionDto concessionDto) {
             
 			StudentIdDto studentIdDto = new StudentIdDto();
-            String[] idfeescategory = concessionDto.getSfsid();
+            String[] idFeesCategory = concessionDto.getSfsid();
             List<Integer> sfsId = new ArrayList<>();
             List<Integer> feesCatId = new ArrayList<>();
             
             String studentId = concessionDto.getId();
             
-            if(idfeescategory!=null){
+            if(idFeesCategory!=null){
                     
-                    for (String string : idfeescategory) {
+                    for (String string : idFeesCategory) {
                             String[] test = string.split("_");
                             sfsId.add(Integer.valueOf(test[0]));
                             feesCatId.add(Integer.valueOf(test[1]));

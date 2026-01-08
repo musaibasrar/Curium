@@ -24,8 +24,10 @@ import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class FeesActionAdapter {
@@ -57,7 +59,7 @@ public class FeesActionAdapter {
 			concessionDto.setRequestParams(allRequestParameters);
 
 		
-			StudentIdDto studentIdDto = feesService.applyConcession(concessionDto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+			StudentIdDto studentIdDto = feesService.applyConcession(concessionDto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 			 String studentId = studentIdDto.getStudentId();
 			 return studentId;
 			 
@@ -69,7 +71,7 @@ public class FeesActionAdapter {
 		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
 		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
-		SearchFeesResponseDto searchFeesResponseDto = feesService.searchFeesWaiveofforConcessionReport(searchStudentDto,waiveoff,httpSession.getAttribute(Constants.BRANCHID).toString());
+		SearchFeesResponseDto searchFeesResponseDto = feesService.searchFeesWaiveofforConcessionReport(searchStudentDto,waiveoff,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		httpSession.setAttribute("currentyearfromservice",searchFeesResponseDto.getCurrentYearFromService());
 		httpSession.setAttribute("studentsfeesstructuredetailswaiveoff", searchFeesResponseDto.getStudentsFeesStructureDetailsWaiveoff());
 		httpSession.setAttribute("studentsfeesstructuredetailsconcession", searchFeesResponseDto.getStudentsFeesStructureDetailsConcession());
@@ -89,14 +91,14 @@ public class FeesActionAdapter {
 			concessionDto.setRequestParams(allRequestParameters);
 
 		
-			StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+			StudentIdDto studentIdDto = feesService.waiveOffFees(concessionDto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 			 String studentId = studentIdDto.getStudentId();
 			 return studentId;
 
 	}
 
 	public boolean viewFees() {
-		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFees(httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFees(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
 		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 		return feescategoryResponseDto.isSuccess();
 	}
@@ -105,7 +107,7 @@ public class FeesActionAdapter {
 		ConcessionDto concessionDto = new ConcessionDto();
 		concessionDto.setSfsid(request.getParameterValues("sfsid"));
 		concessionDto.setId(request.getParameter("id"));
-		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+		StudentIdDto studentIdDto = feesService.deleteFeesCategory(concessionDto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 		String studentId  = studentIdDto.getStudentId();
 		return studentId;
 	}
@@ -118,7 +120,7 @@ public class FeesActionAdapter {
 	}
 
 	public boolean viewAllStudentsList() {
-		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsList(httpSession.getAttribute(Constants.BRANCHID).toString());
+		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsList(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("studentListFeesCollection", parentListResponseDto.getParentsList());
 		return parentListResponseDto.isSuccess();
 	}
@@ -134,9 +136,15 @@ public class FeesActionAdapter {
 		feesCategoryDto.setFeesCategory(request.getParameter("feescategory"));
 		feesCategoryDto.setAmount(request.getParameter("amount"));
 		feesCategoryDto.setCategoryYear(request.getParameter("categoryyear"));
-		feesCategoryDto.setTotalInstallments(Integer.parseInt(request.getParameter("totalinstallments")));
+		String installments = request.getParameter("totalinstallments");
+		if (StringUtils.hasLength(installments)) {
+			feesCategoryDto.setTotalInstallments(Integer.parseInt(installments));
+		} else {
+			feesCategoryDto.setTotalInstallments(1);
+		}
+
 		feesCategoryDto.setMonths(request.getParameterValues("months"));
-		feesService.addFeesParticular(feesCategoryDto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+		feesService.addFeesParticular(feesCategoryDto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 	}
 
 	public void odeleteMultiple() {
@@ -151,14 +159,14 @@ public class FeesActionAdapter {
 		otherFeecategoryDto.setFeesCategory(request.getParameter("feescategory"));
 		otherFeecategoryDto.setAmount(request.getParameter("amount"));
 		otherFeecategoryDto.setCategoryYearOf(request.getParameter("categoryyearof"));
-		feesService.addOtherFeesParticular(otherFeecategoryDto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+		feesService.addOtherFeesParticular(otherFeecategoryDto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 		
 	}
 
 	public boolean viewOtherFees() {
 		OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = feesService.viewOtherFees(
-		httpSession.getAttribute(Constants.BRANCHID).toString(),
-		httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+		DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+		DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
 		httpSession.setAttribute("otherfeescategory", otherFeesCategoryResponseDto.getOtherFeesCategory());
 		return otherFeesCategoryResponseDto.isSuccess();
 	}
@@ -167,7 +175,7 @@ public class FeesActionAdapter {
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
     	String feesCategories = request.getParameter("feescategories");
-    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),feesCategories);
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategory(classname,yearofAdmission,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),feesCategories);
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 
@@ -191,14 +199,14 @@ public class FeesActionAdapter {
 	public void getFeeCategoryHeadWise() throws IOException {
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
-    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
     	httpSession.setAttribute("feesduesearchyear", feescategoryResponseDto.getFeesDueSearchYear());
     	httpSession.setAttribute("feesduesearchclass", feescategoryResponseDto.getFeesDueSearchClass());
 	}
 
 	public void getDndReport() {
-		SearchStudentResponseDto searchStudentResponseDto = feesService.getDndReport(httpSession.getAttribute(Constants.BRANCHID).toString());
+		SearchStudentResponseDto searchStudentResponseDto = feesService.getDndReport(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("dndStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
@@ -213,7 +221,7 @@ public class FeesActionAdapter {
 	public void viewFeesYearly() throws IOException {
 		FeesCategoryDto feesCategoryDto = new FeesCategoryDto();
 		String academicYear =request.getParameter("year");
-		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(academicYear,httpSession.getAttribute(Constants.BRANCHID).toString());
+		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(academicYear,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		 httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 
@@ -225,18 +233,18 @@ public class FeesActionAdapter {
 	public void getOtherFeeCategory()  throws IOException{
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
-    	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+    	OtherFeesCategoryResponseDto feescategoryResponseDto = feesService.getOtherFeeCategory(classname,yearofAdmission,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
     	httpSession.setAttribute("otherfeescategory", feescategoryResponseDto.getOtherFeesCategory());
 	}
 
 	public void getFeesMonths() {
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
-		feescategoryResponseDto = feesService.getFeesMonths(httpSession.getAttribute(Constants.BRANCHID).toString());
+		feescategoryResponseDto = feesService.getFeesMonths(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
     	request.setAttribute("feesmonths", feescategoryResponseDto.getFeesMonths());
 	}
 	
 	public boolean viewAllStudentsListOtherFees() {
-		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsListOtherFees(httpSession.getAttribute(Constants.BRANCHID).toString());
+		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsListOtherFees(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("studentListFeesCollection", parentListResponseDto.getParentsList());
 		return parentListResponseDto.isSuccess();
 	}

@@ -7,6 +7,7 @@ import org.ideoholic.curium.model.login.dto.LoginDto;
 import org.ideoholic.curium.model.login.dto.LoginResponseDto;
 import org.ideoholic.curium.model.login.service.LoginService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +25,7 @@ public class LoginActionAdapter {
 
 	public boolean viewLogin() {
 
-		LoginResponseDto result = loginService.viewLoginDetails(httpSession.getAttribute(Constants.BRANCHID).toString());
+		LoginResponseDto result = loginService.viewLoginDetails(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("logindetail", result.getLoginList());
 		return result.isSuccess();
 
@@ -40,7 +41,7 @@ public class LoginActionAdapter {
 
 	public boolean viewLoginDetail() {
 		
-		LoginResponseDto result = loginService.viewLoginDetail(request.getParameter("id"), httpSession.getAttribute(Constants.BRANCHID).toString());
+		LoginResponseDto result = loginService.viewLoginDetail(request.getParameter("id"), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("logindetail", result.getLogin());
 		return result.isSuccess();
 		
@@ -63,7 +64,7 @@ public class LoginActionAdapter {
 		loginDto.setUserName(request.getParameter("username"));
 		loginDto.setPassWord(request.getParameter("password"));
 		loginDto.setUserType(request.getParameter("usertype"));
-		loginDto.setBranchid(httpSession.getAttribute(Constants.BRANCHID).toString());
+		loginDto.setBranchid(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		LoginResponseDto result = loginService.addLoginStaffDetail(loginDto);
 		return result.isSuccess();
 	}

@@ -530,15 +530,15 @@ public class StudentServiceArchive {
         student.setLeftout(0);
         //DataUtil.generateString(5)
         student.setStudentexternalid(httpSession.getAttribute("branchcode").toString());
-        student.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-        student.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+        student.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
+        student.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
         puDetails.setOptionalsubjects(optional.toString());
         puDetails.setCompulsorysubjects(compulsory.toString());
         student.setPudetails(puDetails);
         student.setDegreedetails(degreeDetails);
         parents.setStudent(student);
-        parents.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-        parents.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+        parents.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
+        parents.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
         parents = parentsDetailsDao.create(parents);
 
         if(parents!=null){
@@ -601,10 +601,10 @@ public class StudentServiceArchive {
                         academicfessstructure = new Academicfeesstructure();
                         academicfessstructure.setSid(Integer.valueOf(id));
                         academicfessstructure.setAcademicyear(setYear);
-                        academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+                        academicfessstructure.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
                         academicfessstructure.setTotalfees(feesTotalAmount);
                         grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
-                        academicfessstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
+                        academicfessstructure.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
                         academicfessstructure.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 
                         listOfacademicfessstructure.add(academicfessstructure);
@@ -627,8 +627,8 @@ public class StudentServiceArchive {
                             studentfeesstructure.setWaiveoff((long) 0);
                             studentfeesstructure.setTotalinstallment(Integer.parseInt(totalInstallments[Integer.parseInt(feesCategoryIdsdiv[1])]));
                             studentfeesstructure.setAcademicyear(setYear);
-                            studentfeesstructure.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-                            studentfeesstructure.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+                            studentfeesstructure.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
+                            studentfeesstructure.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
                             studentfeesstructure.setConcession(Integer.parseInt(concession[Integer.parseInt(feesCategoryIdsdiv[1])]));
                             listOfstudentfeesstructure.add(studentfeesstructure);
                         }
@@ -640,8 +640,8 @@ public class StudentServiceArchive {
                     //Accounts
                     //Pass J.V. : credit the Fees as income & debit the cash
 
-                    int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-                    int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
+                    int crFees = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
+                    int drAccount = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
 
                     VoucherEntrytransactions transactions = new VoucherEntrytransactions();
 
@@ -654,17 +654,17 @@ public class StudentServiceArchive {
                     transactions.setEntrydate(DateUtil.todaysDate());
                     transactions.setNarration("Towards Fees Stamp");
                     transactions.setCancelvoucher("no");
-                    transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString())).getFinancialid());
-                    transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-                    transactions.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+                    transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID))).getFinancialid());
+                    transactions.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
+                    transactions.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
 
                     String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+drAccount;
 
                     String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotal+" where accountdetailsid="+crFees;
 
                     // End J.V
-                    stampFeesDao.addStampFees(listOfacademicfessstructure,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
-                    //studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+                    stampFeesDao.addStampFees(listOfacademicfessstructure,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),listOfstudentfeesstructure,transactions,updateDrAccount,updateCrAccount);
+                    //studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
 
                 }
             }
@@ -725,7 +725,7 @@ public class StudentServiceArchive {
         }
 
         //student.setArchive(0);
-        student.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
+        student.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
         student.setUserid(Integer.parseInt(httpSession.getAttribute("userloginid").toString()));
 
         if (puDetails.getIdpudetails() != null) {
@@ -740,8 +740,8 @@ public class StudentServiceArchive {
         student = studentDetailsDao.update(student);
         if (parents.getPid() != null) {
             parents.setStudent(student);
-            parents.setBranchid(Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
-            parents.setUserid(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+            parents.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
+            parents.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
 
             parents = parentsDetailsDao.update(parents);
         }
