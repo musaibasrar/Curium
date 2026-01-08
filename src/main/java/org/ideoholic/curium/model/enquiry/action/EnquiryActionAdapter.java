@@ -9,6 +9,7 @@ import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
 import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
 import org.ideoholic.curium.model.enquiry.service.EnquiryService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,8 +27,8 @@ public class EnquiryActionAdapter {
 
 	public void getCertificate() {
 		
-		String branchId = httpSession.getAttribute(Constants.BRANCHID).toString();
-		String userId = httpSession.getAttribute(Constants.USERID).toString();
+		String branchId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID);
+		String userId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID);
 
 		CertificateDto dto = new CertificateDto();
 		dto.setName(request.getParameter("subject"));
@@ -45,8 +46,8 @@ public class EnquiryActionAdapter {
 	}
 
 	public boolean saveEnquiryForm() {
-		String branchId = httpSession.getAttribute(Constants.BRANCHID).toString();
-		String userId = httpSession.getAttribute(Constants.USERID).toString();
+		String branchId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID);
+		String userId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID);
 		
 		AdmissionEnquiryDto admissionEnquiryDto = new AdmissionEnquiryDto();
 		admissionEnquiryDto.setName(request.getParameter("name"));
@@ -102,7 +103,7 @@ public class EnquiryActionAdapter {
 	public void getStudentLastEnquiry() {
 
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService
-				.getStudentLastEnquiry(httpSession.getAttribute(Constants.BRANCHID).toString());
+				.getStudentLastEnquiry(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("admissionEnquiry", admissionEnquiryResponseDto.getAdmissionEnquiry());
 
 	}
@@ -110,7 +111,7 @@ public class EnquiryActionAdapter {
 	public void viewEnquiry() {
 
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService
-				.viewEnquiry(httpSession.getAttribute(Constants.BRANCHID).toString());
+				.viewEnquiry(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("admissionEnquiryList", admissionEnquiryResponseDto.getAdmissionEnquiryList());
 
 	}
@@ -125,8 +126,8 @@ public class EnquiryActionAdapter {
 	}
 
 	public boolean updateEnquiry() {
-		String branchId = httpSession.getAttribute(Constants.BRANCHID).toString();
-		String userId = httpSession.getAttribute(Constants.USERID).toString();
+		String branchId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID);
+		String userId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID);
 
 		AdmissionEnquiryDto admissionEnquiryDto = new AdmissionEnquiryDto();
 		admissionEnquiryDto.setId(Integer.parseInt(request.getParameter("id")));

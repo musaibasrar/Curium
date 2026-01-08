@@ -29,6 +29,7 @@ import org.ideoholic.curium.model.hr.dto.StaffDetailsDto;
 import org.ideoholic.curium.model.hr.dto.StaffDetailsResponseDto;
 import org.ideoholic.curium.model.hr.service.HrService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class HrActionAdapter {
 
     public boolean leaveType() {
 
-        LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(httpSession.getAttribute(Constants.BRANCHID).toString());
+        LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         httpSession.setAttribute("leavetypemaster", leaveTypeResponseDto.getLeavetypemaster());
 
         return leaveTypeResponseDto.isSuccess();
@@ -55,7 +56,7 @@ public class HrActionAdapter {
 
         LeaveTypeDto dto = new LeaveTypeDto();
         dto.setLeaveTypeName(request.getParameter("leavetypename"));
-        ResultResponse resultResponse =  hrService.saveLeaveType(dto,httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+        ResultResponse resultResponse =  hrService.saveLeaveType(dto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return resultResponse.isSuccess();
 
@@ -74,8 +75,8 @@ public class HrActionAdapter {
         dto.setTotalLeaves(request.getParameterValues("totalleaves"));
         dto.setStaff(request.getParameterValues("employeeIDs"));
 
-        ResultResponse resultResponse = hrService.addLeaves(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString() ,httpSession.getAttribute(Constants.BRANCHID).toString(),
-                httpSession.getAttribute(Constants.USERID).toString());
+        ResultResponse resultResponse = hrService.addLeaves(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR) ,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return resultResponse.isSuccess();
 
@@ -112,7 +113,7 @@ public class HrActionAdapter {
 
     public void payHead() {
 
-        PayHeadResponseDto result = hrService.payHead(httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+        PayHeadResponseDto result = hrService.payHead(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         request.setAttribute("payheadlist", result.getPayHeadList());
     }
@@ -125,9 +126,9 @@ public class HrActionAdapter {
         dto.setDescription(request.getParameter("description"));
 
         ResultResponse result = hrService.savePayHead(dto,
-        httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),
-        httpSession.getAttribute(Constants.BRANCHID).toString(),
-        httpSession.getAttribute(Constants.USERID).toString());
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
         return result.isSuccess();
     }
     public boolean addPayHeadStaffDetails() {
@@ -139,9 +140,9 @@ public class HrActionAdapter {
          dto.setAmountPer(request.getParameter("amtper"));
 
         ResultResponse result = hrService.addPayHeadStaffDetails(dto,
-                    httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),
-                    httpSession.getAttribute(Constants.BRANCHID).toString(),
-                    httpSession.getAttribute(Constants.USERID).toString());
+                    DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),
+                    DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+                    DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return result.isSuccess();
 
@@ -157,9 +158,9 @@ public class HrActionAdapter {
 
 
         ResultResponse result = hrService.addBasicPay(dto,
-                httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),
-                httpSession.getAttribute(Constants.BRANCHID).toString(),
-                httpSession.getAttribute(Constants.USERID).toString());
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return result.isSuccess();
     }
@@ -171,13 +172,13 @@ public class HrActionAdapter {
             dto.setDate(request.getParameter("datepf"));
 
             hrService.addPf(dto,
-                    httpSession.getAttribute(Constants.BRANCHID).toString(),
-                    httpSession.getAttribute(Constants.USERID).toString());
+                    DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+                    DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
     }
     public void pfSettings() {
 
-        PfSettingsResponseDto result = hrService.pfSettings(httpSession.getAttribute(Constants.BRANCHID).toString());
+        PfSettingsResponseDto result = hrService.pfSettings(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         request.setAttribute("pflist", result.getPf());
     }
@@ -202,8 +203,8 @@ public class HrActionAdapter {
         dto.setDateAdvance(request.getParameter("dateadvance"));
 
         ResultResponse result = hrService.saveAdvanceSalary(dto,
-                httpSession.getAttribute(Constants.BRANCHID).toString(),
-                httpSession.getAttribute(Constants.USERID).toString());
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
 
 
@@ -212,7 +213,7 @@ public class HrActionAdapter {
     }
     public void salaryApprovalDispaly() {
 
-        SalaryResponseDto result = hrService.salaryApprovalDispaly(httpSession.getAttribute(Constants.BRANCHID).toString());
+        SalaryResponseDto result = hrService.salaryApprovalDispaly(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         request.setAttribute("payadvancesalarylist", result.getPayAdvanceSalary());
     }
@@ -233,13 +234,13 @@ public class HrActionAdapter {
         dto.setReason(request.getParameter("reason_"+dto.getPaymentAdvance()));
         dto.setStatus(request.getParameter("status_"+dto.getPaymentAdvance()));
 
-        ResultResponse result = hrService.saveAdvanceSalaryApproval(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse result = hrService.saveAdvanceSalaryApproval(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         return result.isSuccess();
     }
     public boolean salaryIssue() {
 
-        SalaryResponseDto result = hrService.salaryIssue(httpSession.getAttribute(Constants.BRANCHID).toString());
+        SalaryResponseDto result = hrService.salaryIssue(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("salaryissue",result.getPayAdvanceSalary() );
 
 
@@ -255,19 +256,19 @@ public class HrActionAdapter {
         dto.setToDate(request.getParameter("todate"));
 
         ResultResponse result = hrService.applyLeave(dto,
-        httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),
         httpSession.getAttribute(Constants.USERAUTH).toString(),
-        httpSession.getAttribute(Constants.USERNAME).toString(),
-        httpSession.getAttribute(Constants.BRANCHID).toString(),
-        httpSession.getAttribute(Constants.USERID).toString());
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERNAME),
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+        DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return result.isSuccess();
     }
     public boolean leaveApprovals() {
 
         LeaveApprovalsResponseDto result = hrService.leaveApprovals(
-                httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),
-                httpSession.getAttribute(Constants.BRANCHID).toString());
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         request.setAttribute("leaveapplicationlist", result.getListLeaveApplication());
 
@@ -298,20 +299,20 @@ public class HrActionAdapter {
         dto.setYear(request.getParameter("year"));
         dto.setDateProcess(request.getParameter("dateprocess"));
 
-        ResultResponse result = hrService.processStaffSalary(dto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
+        ResultResponse result = hrService.processStaffSalary(dto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return result.isSuccess();
     }
     public void getPayHead() throws IOException {
 
 
-        PayHeadResponseDto result = hrService.getPayHead(request.getParameter("payHeadType"),httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+        PayHeadResponseDto result = hrService.getPayHead(request.getParameter("payHeadType"),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("payheadlistdynamic", result.getPayHeadList());
 
     }
     public boolean issueStaffSalary() {
 
-        SalaryResponseDto result = hrService.issueStaffSalary(httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+        SalaryResponseDto result = hrService.issueStaffSalary(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("processsalarydetailslist", result.getProcessSalaryDetailsList());
 
         return result.isSuccess();
@@ -331,7 +332,7 @@ public class HrActionAdapter {
         StaffDetailsDto dto = new StaffDetailsDto();
         dto.setStaffId(request.getParameter("staffid"));
 
-        StaffDetailsResponseDto result = hrService.getStaffDetails(dto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        StaffDetailsResponseDto result = hrService.getStaffDetails(dto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
 
         request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
     }
@@ -340,7 +341,7 @@ public class HrActionAdapter {
         SalaryDto dto = new SalaryDto();
         dto.setStaffids(request.getParameterValues("teacherid"));
         dto.setIdPayHeadStaffDetails(request.getParameterValues("idpayheadstaffdetails"));
-        StaffDetailsResponseDto result = hrService.deletePayHeadStaff(dto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        StaffDetailsResponseDto result = hrService.deletePayHeadStaff(dto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
         request.setAttribute("payheaddetailslist", result.getPayHeadDetailsList());
         return result.isSuccess();
     }
@@ -349,7 +350,7 @@ public class HrActionAdapter {
         SalaryDto dto = new SalaryDto();
         dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
 
-        ResultResponse result = hrService.issueProcessedSalary(dto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse result = hrService.issueProcessedSalary(dto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         return result.isSuccess();
     }
@@ -358,7 +359,7 @@ public class HrActionAdapter {
         SalaryDto dto = new SalaryDto();
         dto.setIdProcessSalaryDetails(request.getParameterValues("idprocesssalarydetails"));
 
-        ResultResponse result = hrService.cancelProcessedSalary(dto,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse result = hrService.cancelProcessedSalary(dto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         return result.isSuccess();
     }
     public void updateBasicPayEmployees() {
@@ -371,7 +372,7 @@ public class HrActionAdapter {
         dto.setOverTime(request.getParameterValues("overtime"));
         dto.setAcademicYear(request.getParameterValues("academicyear"));
 
-        ResultResponse result = hrService.updateBasicPayEmployees(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        ResultResponse result = hrService.updateBasicPayEmployees(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("basicpayupdate", result.isSuccess());
     }
 

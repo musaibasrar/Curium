@@ -11,6 +11,7 @@ import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +35,9 @@ public class DiaryActionAdapter {
         addDiaryDto.setStartDate(request.getParameter("startdate"));
 
 
-        diaryService.addDiary(addDiaryDto, httpSession.getAttribute(Constants.BRANCHID).toString(),
-                httpSession.getAttribute(Constants.USERID).toString(),
-                httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+        diaryService.addDiary(addDiaryDto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID),
+                DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
 
     }
 
@@ -44,7 +45,7 @@ public class DiaryActionAdapter {
 
         String page = request.getParameter("page");
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(page, httpSession.getAttribute(Constants.BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiary(page, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
         request.setAttribute("diary", diaryResponseDto.getDiary());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
@@ -64,7 +65,7 @@ public class DiaryActionAdapter {
         studentIdPageDto.setStudentId(request.getParameter("id"));
         studentIdPageDto.setPage(request.getParameter("page"));
         
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());

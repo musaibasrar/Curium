@@ -12,6 +12,7 @@ import org.ideoholic.curium.model.library.dto.BooksRequestDto;
 import org.ideoholic.curium.model.library.dto.BooksResponseDto;
 import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,13 +46,13 @@ public class LibraryActionAdapter {
 				.bookname(request.getParameter("bookname"))
 				.build();
 		
-		return libraryService.addBook(bookDto, httpSession.getAttribute(Constants.BRANCHID).toString())
+		return libraryService.addBook(bookDto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID))
 				.isSuccess();		
 	}
 
 	public boolean viewBooks() {
 
-		BooksResponseDto result = libraryService.viewBooks(httpSession.getAttribute(Constants.BRANCHID).toString());
+		BooksResponseDto result = libraryService.viewBooks(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		httpSession.setAttribute("book", result.getBooksList());
 
 		return result.isSuccess();
@@ -66,7 +67,7 @@ public class LibraryActionAdapter {
 
 	public boolean viewBooksAvailable() {
 		
-		BooksResponseDto result = libraryService.viewBooksAvailable(httpSession.getAttribute(Constants.BRANCHID).toString());
+		BooksResponseDto result = libraryService.viewBooksAvailable(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		
 		httpSession.setAttribute("availablebooklist", result.getAvailableList());
 		httpSession.setAttribute("issuedbooklist", result.getIssuedList());
@@ -121,7 +122,7 @@ public class LibraryActionAdapter {
 
 	public boolean viewBookdetails() {
 		
-		BooksResponseDto response = libraryService.viewBookdetails(request.getParameter("id"), httpSession.getAttribute(Constants.BRANCHID).toString());
+		BooksResponseDto response = libraryService.viewBookdetails(request.getParameter("id"), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		
 		httpSession.setAttribute("book", response.getBook());
 		
@@ -154,7 +155,7 @@ public class LibraryActionAdapter {
 				BooksHistoryRequestDto.builder()
 				.dateOfIssueFrom(DateUtil.dateFromatConversionSlash(request.getParameter("fromdate")))
 				.dateOfIssueTo(DateUtil.dateFromatConversionSlash(request.getParameter("todate")))
-				.build(), httpSession.getAttribute(Constants.BRANCHID).toString());
+				.build(), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 
 		request.setAttribute("bookhistorylist", response.getBooksHistoryList());
 		return response.isSuccess();
@@ -163,7 +164,7 @@ public class LibraryActionAdapter {
 
 	public boolean getActiveStudentsWithParents() {
 
-		ResultResponse resultResponse = libraryService.getActiveStudentsWithParents(httpSession.getAttribute(Constants.BRANCHID).toString());
+		ResultResponse resultResponse = libraryService.getActiveStudentsWithParents(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
 		request.setAttribute("studentListtc", resultResponse.getResultList());
 		return resultResponse.isSuccess();
 	}
