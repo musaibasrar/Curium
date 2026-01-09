@@ -103,7 +103,15 @@ public class StudentAction {
 	@PostMapping("/feesStructurePerYear")
 	public String feesStructurePerYear() {
 		studentActionAdapter.viewfeesStructurePerYear();
-		return "student_details_feesstructure";
+		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+			return "student_details_feesstructure_admin";
+		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_feesstructure_admin";
+		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_feesstructure";
+		} else {
+			return "student_details_feesstructure";
+		}
 	}
 
 	@GetMapping("/ViewFeesStructure")

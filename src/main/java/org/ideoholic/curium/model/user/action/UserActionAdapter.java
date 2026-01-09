@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdap
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.model.user.service.UserService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +37,7 @@ public class UserActionAdapter {
 
 
     public void searchByDate() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         SearchByDateDto dto  = new SearchByDateDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -58,7 +59,7 @@ public class UserActionAdapter {
     }
 
     public void advanceSearchByParents() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         SearchByParentDto dto = new SearchByParentDto();
         dto.setFathersName(request.getParameter("fathersname"));
@@ -70,7 +71,7 @@ public class UserActionAdapter {
     }
 
     public boolean backupData(String fileName) {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         ResultResponse resultResponse = userService.backupData(fileName);
         request.setAttribute("Backuplocation", resultResponse.getMessage());
@@ -79,7 +80,7 @@ public class UserActionAdapter {
     }
 
     public void advanceSearch() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         AdvanceSearchDto dto = new AdvanceSearchDto();
         dto.setName(request.getParameter("name"));
@@ -107,7 +108,7 @@ public class UserActionAdapter {
     }
 
     public void dashBoard() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         SearchByDateDto dto = new SearchByDateDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -129,7 +130,7 @@ public class UserActionAdapter {
     }
 
     public boolean authenticateUser() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         UserAuthenticationDto dto = new UserAuthenticationDto();
         dto.setUserName(request.getParameter("loginName"));
@@ -154,11 +155,11 @@ public class UserActionAdapter {
     }
 
     public boolean authenticateMultiUser() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         String branchId = request.getParameter(BRANCHID);
 
-        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), branchId);
         httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
         httpSession.setAttribute("username", responseDto.getUserName());
         httpSession.setAttribute("branchid", responseDto.getBranchId());
@@ -178,7 +179,7 @@ public class UserActionAdapter {
     }
 
     public boolean ChangePassword() {
-        UserService userService = new UserService(request, response, standardActionAdapter, adminService, feesCollectionActionAdapter);
+        UserService userService = new UserService(request, response, standardActionAdapter,adminService, feesCollectionActionAdapter);
 
         UserAuthenticationDto dto = new UserAuthenticationDto();
         dto.setCurrentPassword(request.getParameter("currentpassword"));

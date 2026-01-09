@@ -8,6 +8,7 @@ import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
+import org.ideoholic.curium.model.login.action.LoginActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.action.UserActionAdapter;
 import org.ideoholic.curium.model.user.service.UserService;
@@ -53,6 +54,9 @@ public class FeesCollectionAction {
 
 		@Autowired
 		private UserActionAdapter userActionAdapter;
+		
+		@Autowired
+		private LoginActionAdapter loginActionAdapter;
 
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
@@ -321,5 +325,13 @@ public class FeesCollectionAction {
 	        public String searchFeesReportOutstanding() {
 	            feesCollectionActionAdapter.getFeesReportOutstanding();
 	            return "feesoutstanding";
+	        }
+		  
+		  @PostMapping("/searchFeesReportOutstandingFeesAllBranches")
+	        public String searchFeesReportOutstandingFeesAllBranches() {
+	            feesCollectionActionAdapter.getFeesReportOutstandingFeesAllBranches();
+	            standardActionAdapter.viewClasses();
+	    		loginActionAdapter.readListOfBranchId();
+	            return "allbranchesfeesoutstanding";
 	        }
 }

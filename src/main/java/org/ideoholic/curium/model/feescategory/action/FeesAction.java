@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.login.action.LoginActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.action.StudentActionAdapter;
 import org.ideoholic.curium.model.student.service.StudentService;
@@ -31,6 +32,8 @@ public class FeesAction {
 	private FeesActionAdapter feesActionAdapter;
 	@Autowired
 	private StudentActionAdapter studentActionAdapter;
+	@Autowired
+	private LoginActionAdapter loginActionAdapter;
 
 	@PostMapping("/applyConcession")
 	public String applyConcession() {
@@ -276,5 +279,12 @@ public class FeesAction {
 		standardActionAdapter.viewClasses();
 		feesActionAdapter.viewFees();
 		return "feesoutstanding";
+	}
+	
+	@GetMapping("/allBranchesFeesOutstanding")
+	public String allBranchesFeesOutstanding() {
+		standardActionAdapter.viewClasses();
+		loginActionAdapter.readListOfBranchId();
+		return "allbranchesfeesoutstanding";
 	}
 }

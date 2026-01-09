@@ -31,22 +31,22 @@
 	font-weight: bold;
     }
 </style>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/alfarooq/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/alfarooq/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/alfarooq/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/alfarooq/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/alfarooq/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/alfarooq/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/alfarooq/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/alfarooq/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/alfarooq/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+	src="/alfarooq/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/alfarooq/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -250,7 +250,7 @@
 <script type="text/javascript">
 	function saveEnquiryForm() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/EnquiryProcess/saveEnquiryForm";
+		form1.action = "/alfarooq/EnquiryProcess/saveEnquiryForm";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -272,10 +272,10 @@
 	}
 </script>
 
-	<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+	<script type="text/javascript" src="/alfarooq/js/datetimepicker_css.js"></script>
 
-	<script src="/vision/JavaScript/actb.js"></script>
-	<script src="/vision/JavaScript/common.js"></script>
+	<script src="/alfarooq/JavaScript/actb.js"></script>
+	<script src="/alfarooq/JavaScript/common.js"></script>
 
 
 
@@ -374,7 +374,7 @@
 		//allow access only if session exists
 		String user = null;
 		if (session.getAttribute("userAuth") == null) {
-			response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+			response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
 		} else
 			user = (String) session.getAttribute("userAuth");
 		String userName = null;

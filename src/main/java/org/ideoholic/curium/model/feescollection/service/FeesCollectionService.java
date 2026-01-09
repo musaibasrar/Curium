@@ -2203,7 +2203,7 @@ public class FeesCollectionService {
 
 		//Get Fees Categories if fetched empty
 		if(dto.getFeesCat()==null) {
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getAddClass()[0],httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString());
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
@@ -2829,6 +2829,100 @@ public class FeesCollectionService {
 					
 					//Get Fees Category
 						List<Feescategory> feesCategoryList = new feesCategoryDAO().readListOfObjects(Integer.parseInt(branchId) , academicYear);
+					//End Get Fees Category
+					
+				
+				List<Integer> feesCatList = new ArrayList<>(); 
+				for (Feescategory feescat : feesCategoryList) {
+					feesCatList.add(feescat.getIdfeescategory());
+				}
+				List<Studentfeesstructure> feesstructureMain = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				
+				
+				for (Studentfeesstructure studentFeesStructure : feesstructureMain) {
+					Long dueAmount =0l;
+					dueAmount = dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid()-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff());
+					if(dueAmount>0) {
+						feesStructureList.add(studentFeesStructure);
+					}
+				}
+				
+			}
+				
+				if (feesStructureList.size() > 0) {
+					
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesStructureList);
+					
+					studentFeesReportList.add(studentFeesReport);
+					
+				}
+
+			}	
+			result.setResultList(studentFeesReportList);
+			result.setSuccess(true);
+		
+		return result;
+	  }
+	
+	
+	public ResultResponse getFeesReportOutsandingFeesAllBranches(FeesReportDto dto, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
+		
+		String[] academicYearArray = dto.getAcademicYearArray();
+		
+		//Get Students
+		
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(dto!=null){
+		
+		String queryMain = "From Parents as parents where";
+		String[] addClass = dto.getAddClass();
+		StringBuffer conClassStudying = new StringBuffer();
+
+			int i = 0;
+			for (String classOne : addClass) {
+				
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+				
+				i++;
+			}
+		
+		String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		String querySub = "";
+
+		if (!classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 order by parents.Student.admissionnumber ASC";
+		}
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		//End Students
+		
+		List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+		
+			for (Parents parents : searchStudentList) {
+				
+				StudentFeesReport studentFeesReport = new StudentFeesReport();
+				
+				long id = parents.getStudent().getSid();
+				
+				List<Studentfeesstructure> feesStructureList = new ArrayList<Studentfeesstructure>();
+				
+				for (String academicYear : academicYearArray) {
+					
+					//Get Fees Category
+						List<Feescategory> feesCategoryList = new feesCategoryDAO().readListOfObjects(dto.getBranchId() , academicYear);
 					//End Get Fees Category
 					
 				
