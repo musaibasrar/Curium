@@ -68,7 +68,7 @@ public class FeesActionAdapter {
 	public void searchFeesWaiveofforConcessionReport(String waiveoff) {
 		SearchStudentDto searchStudentDto = new SearchStudentDto();
 		searchStudentDto.setNameSearch(request.getParameter("namesearch"));
-		searchStudentDto.setClassSearch(request.getParameter("classsearch"));
+		searchStudentDto.setClassesSearch(request.getParameterValues("classsearch"));
 		searchStudentDto.setSecSearch(request.getParameter("secsearch"));
 		searchStudentDto.setAcademicyear(request.getParameter("academicyear"));
 		SearchFeesResponseDto searchFeesResponseDto = feesService.searchFeesWaiveofforConcessionReport(searchStudentDto,waiveoff,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
