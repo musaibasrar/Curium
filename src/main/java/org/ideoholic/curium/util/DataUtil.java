@@ -112,7 +112,7 @@ public class DataUtil {
    public static String dateFromatConversionDash(String ddmmyyyy) {
 	   String date = null;
 	   
-	   if(ddmmyyyy!=null) {
+	   if(StringUtils.hasLength(ddmmyyyy)) {
 		   String[] dateToConvert = ddmmyyyy.split("-");
 		   date = dateToConvert[2]+"-"+dateToConvert[1]+"-"+dateToConvert[0];
 	   }
@@ -124,7 +124,7 @@ public class DataUtil {
    public static String dateFromatConversionSlash(String ddmmyyyy) {
 	   String date = null;
 	   
-	   if(ddmmyyyy!=null) {
+	   if(StringUtils.hasLength(ddmmyyyy)) {
 		   String[] dateToConvert = ddmmyyyy.split("/");
 		   date = dateToConvert[2]+"/"+dateToConvert[1]+"/"+dateToConvert[0];
 	   }
@@ -135,7 +135,7 @@ public class DataUtil {
    public static String dateFromatConversionSlashToNoSlash(String ddmmyyyy) {
 	   String date = null;
 	   
-	   if(ddmmyyyy!=null) {
+	   if(StringUtils.hasLength(ddmmyyyy)) {
 		   String[] dateToConvert = ddmmyyyy.split("/");
 		   date = dateToConvert[2]+""+dateToConvert[1]+""+dateToConvert[0];
 	   }
@@ -146,7 +146,7 @@ public class DataUtil {
    public static String dateFromatConversionDashToSlash(String ddmmyyyy) {
 	   String date = "";
 	   
-	   if(!ddmmyyyy.equalsIgnoreCase("")) {
+	   if(StringUtils.hasLength(ddmmyyyy)) {
 		   String[] dateToConvert = ddmmyyyy.split("-");
 		   date = dateToConvert[2]+"/"+dateToConvert[1]+"/"+dateToConvert[0];
 	   }
