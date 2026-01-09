@@ -1115,7 +1115,7 @@ for(Cookie cookie : cookies){
 								name="studentsfsids" 
 								onclick="calculate(${status.index},this.checked)"
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.feescategory.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<c:set var="totalfeesdue" value="${totalfeesdue + studentfeesdetails.value}" />
@@ -1167,7 +1167,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsidspy" 
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
-							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;color:white;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}(${studentfeesdetails.key.feescategory.academicyear})" /></a><input name="idfeescategory" type="hidden" id="idfeescategorypy" value="${studentfeesdetails.key.idfeescategory}" /></td>
+							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;color:white;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}(${studentfeesdetails.key.feescategory.academicyear})" /></a><input name="idfeescategory" type="hidden" id="idfeescategorypy" value="${studentfeesdetails.key.feescategory.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;color:white;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
 							<input type="hidden" id="dueamountpy_${status.index}" value="${studentfeesdetails.value}"/>
