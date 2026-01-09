@@ -351,9 +351,9 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/vision/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
-                <a target="mainFrame" href="/vision/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/alfarooq/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/alfarooq/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/alfarooq/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
