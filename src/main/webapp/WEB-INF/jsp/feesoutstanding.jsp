@@ -594,13 +594,17 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 				
 					<table>
+					<tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead" /></td>
+						</tr>
 						<tr>
 							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
 							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox" class = "chcktbl"  name="classsearch" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>	
 							</c:forEach>
