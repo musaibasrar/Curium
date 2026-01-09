@@ -388,21 +388,23 @@ public class FeesService {
 			String queryMain = "From Parents as parents where";
 			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
 
-			String addClass = searchStudentDto.getClassSearch();
+			String[] addClass = searchStudentDto.getClassesSearch();
 			String addSec = searchStudentDto.getSecSearch();
-			String conClassStudying = "";
+			StringBuilder conClassStudying = new StringBuilder();
+			
+			int i = 0;
+			for (String classOne : addClass) {
 
-			if (!addClass.equalsIgnoreCase("")) {
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
 
-				conClassStudying = addClass+"--" +"%";
-
+				i++;
 			}
-			if (!addSec.equalsIgnoreCase("")) {
-				conClassStudying = addClass;
-				conClassStudying = conClassStudying+"--"+addSec+"%";
-			}
 
-			String classStudying = DataUtil.emptyString(conClassStudying);
+			String classStudying = DataUtil.emptyString(conClassStudying.toString());
 			String querySub = "";
 
 			if (!studentname.equalsIgnoreCase("")) {
