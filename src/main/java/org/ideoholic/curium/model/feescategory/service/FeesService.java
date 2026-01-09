@@ -415,7 +415,7 @@ public class FeesService {
 
 			String[] addClass = searchStudentDto.getClassesSearch();
 			String addSec = searchStudentDto.getSecSearch();
-			StringBuffer conClassStudying = new StringBuffer();
+			StringBuilder conClassStudying = new StringBuilder();
 			
 			int i = 0;
 			for (String classOne : addClass) {
