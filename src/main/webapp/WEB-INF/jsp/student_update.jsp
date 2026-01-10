@@ -895,8 +895,30 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 
-							<td class="alignLeft" style="padding-left: 20px;"> &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">College Code &nbsp;</td>
+							<td><label> <input name="schoollastattended"
+									type="text" class="myclass" id="studentscaste" value="${student.schoollastattended}" size="30">
+							</label></td>
+
+							</tr>
+							<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+
+							<td><br /></td>
+						</tr>
+							 <tr>
+								<td class="alignLeft">  Language Offered in Part-I: &nbsp;</td>
+								<td><label> <input name="languagesstudied"
+									type="text" class="myclass" id="studentscaste" value="${student.languagesstudied}" size="30">
+
+							</label></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Optional subjects offered in Part-II &nbsp;</td>
 							<td><label>
+							<input name="subsequentprogress"
+									type="text" class="myclass" id="studentscaste" value="${student.subsequentprogress}" size="30">
 							</label></td>
 
 							</tr>
