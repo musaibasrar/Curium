@@ -121,7 +121,6 @@ public class DocumentService {
 		
 		Student student = studentDetailsDao.readUniqueObject(studentId);
 		student.setReasonleaving(leavingReason);
-		student.setSid(studentId);
 		
 			switch (studentAdmissionStatus) {
 		
