@@ -183,7 +183,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine">${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
@@ -383,7 +383,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>

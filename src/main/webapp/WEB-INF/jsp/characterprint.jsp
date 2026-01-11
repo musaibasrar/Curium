@@ -136,9 +136,9 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td ><img src="/bba/images/bba.jpg" width="245" height="140"/></td>
 				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	ABC English Medium School</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	Misbah Nagar, Ring Road, Shah Jeelani Cross, Gulbarga-585103</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">Phone No.9886049555&nbsp;&nbsp;&nbsp;</h6>
+				<h1 style="margin-bottom:0px;">${branchname}</h1>
+				<h4 style="margin-top:0px;margin-bottom:0px;">${branchaddress}</h4>
+				<h6 style="margin-top:0px; margin-bottom:0px;">${branchcontact}&nbsp;&nbsp;&nbsp;</h6>
 				</td>
 			</tr>
 		
