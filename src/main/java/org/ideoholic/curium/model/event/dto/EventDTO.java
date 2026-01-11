@@ -14,6 +14,6 @@ public class EventDTO {
     private String location;
     private String color;
     private boolean allDay;
-    private String createdBy;
+    private String createdBy;	
     private String branchId;
 } 
