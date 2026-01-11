@@ -312,67 +312,106 @@ public class FeesCollectionService {
 			//Pass Receipt : Credit the student Fees Receivable & debit the cash
 			
 			BigDecimal onlyTotalFee = new BigDecimal(receiptInfo.getTotalamount()-receiptInfo.getFine()-receiptInfo.getMisc());	
+			BigDecimal onlyTotalFineMiscFee = new BigDecimal(receiptInfo.getFine()+receiptInfo.getMisc());	
+			
+			if(onlyTotalFee.compareTo(BigDecimal.ZERO) > 0) {
 				
-			int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
-			int drAccount = 0;
-			
-			if("cashpayment".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(userName+Integer.parseInt(branchId));
-			}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(branchId));
-			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
-				drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(branchId));
-			} 
-			
-			
-			VoucherEntrytransactions transactions = new VoucherEntrytransactions();
-			
-			transactions.setDraccountid(drAccount);
-			transactions.setCraccountid(crFees);
-			transactions.setDramount(onlyTotalFee);
-			transactions.setCramount(onlyTotalFee);
-			transactions.setVouchertype(4);
-			transactions.setTransactiondate(receiptInfo.getDate());
-			transactions.setEntrydate(DateUtil.todaysDate());
-			transactions.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
-			transactions.setCancelvoucher("no");
-			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
-			transactions.setBranchid(Integer.parseInt(branchId));
-			transactions.setUserid(Integer.parseInt(userId));
-			
-			String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccount;
+				int crFees = getLedgerAccountId("studentfeesreceivable"+Integer.parseInt(branchId));
+				int drAccount = 0;
+				
+				if("cashpayment".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(userName+Integer.parseInt(branchId));
+				}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(branchId));
+				}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(branchId));
+				} 
+				
+				
+				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+				
+				transactions.setDraccountid(drAccount);
+				transactions.setCraccountid(crFees);
+				transactions.setDramount(onlyTotalFee);
+				transactions.setCramount(onlyTotalFee);
+				transactions.setVouchertype(4);
+				transactions.setTransactiondate(receiptInfo.getDate());
+				transactions.setEntrydate(DateUtil.todaysDate());
+				transactions.setNarration(dto.getNarrationReceipt()+": Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+				transactions.setCancelvoucher("no");
+				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+				transactions.setBranchid(Integer.parseInt(branchId));
+				transactions.setUserid(Integer.parseInt(userId));
+				
+				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+drAccount;
+	
+				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+crFees;
+				
+				// End Receipt
+				
+				//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
+				
+				int crFeesIncome = getLedgerAccountId("studentfeesincome"+Integer.parseInt(branchId));
+				int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
+				
+				VoucherEntrytransactions transactionsIncome = new VoucherEntrytransactions();
+				
+				transactionsIncome.setDraccountid(drAccountIncome);
+				transactionsIncome.setCraccountid(crFeesIncome);
+				transactionsIncome.setDramount(onlyTotalFee);
+				transactionsIncome.setCramount(onlyTotalFee);
+				transactionsIncome.setVouchertype(1);
+				transactionsIncome.setTransactiondate(receiptInfo.getDate());
+				transactionsIncome.setEntrydate(DateUtil.todaysDate());
+				transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+				transactionsIncome.setCancelvoucher("no");
+				transactionsIncome.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+				transactionsIncome.setBranchid(Integer.parseInt(branchId));
+				transactionsIncome.setUserid(Integer.parseInt(userId));
+				
+				String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
+	
+				String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFeesIncome;
+				
+				// End J.V
+				  
+				createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+			}else if(onlyTotalFineMiscFee.compareTo(BigDecimal.ZERO) > 0){
+				int crFees = getLedgerAccountId("otherincome"+Integer.parseInt(branchId));
+				int drAccount = 0;
+				
+				if("cashpayment".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(userName+Integer.parseInt(branchId));
+				}else if("banktransfer".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(transferBankname+Integer.parseInt(branchId));
+				}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
+					drAccount = getLedgerAccountId(chequeBankname+Integer.parseInt(branchId));
+				} 
+				
+				
+				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+				
+				transactions.setDraccountid(drAccount);
+				transactions.setCraccountid(crFees);
+				transactions.setDramount(onlyTotalFineMiscFee);
+				transactions.setCramount(onlyTotalFineMiscFee);
+				transactions.setVouchertype(1);
+				transactions.setTransactiondate(receiptInfo.getDate());
+				transactions.setEntrydate(DateUtil.todaysDate());
+				transactions.setNarration(dto.getNarrationReceipt()+": Towards Fine/Misc Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+				transactions.setCancelvoucher("no");
+				transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+				transactions.setBranchid(Integer.parseInt(branchId));
+				transactions.setUserid(Integer.parseInt(userId));
+				
+				String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFineMiscFee+" where accountdetailsid="+drAccount;
 
-			String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+crFees;
-			
-			// End Receipt
-			
-			//Pass J.V. : Credit the student Fees as Income & debit the unearned revenue
-			
-			int crFeesIncome = getLedgerAccountId("studentfeesincome"+Integer.parseInt(branchId));
-			int drAccountIncome = getLedgerAccountId("unearnedstudentfeesincome"+Integer.parseInt(branchId));
-			
-			VoucherEntrytransactions transactionsIncome = new VoucherEntrytransactions();
-			
-			transactionsIncome.setDraccountid(drAccountIncome);
-			transactionsIncome.setCraccountid(crFeesIncome);
-			transactionsIncome.setDramount(onlyTotalFee);
-			transactionsIncome.setCramount(onlyTotalFee);
-			transactionsIncome.setVouchertype(1);
-			transactionsIncome.setTransactiondate(receiptInfo.getDate());
-			transactionsIncome.setEntrydate(DateUtil.todaysDate());
-			transactionsIncome.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
-			transactionsIncome.setCancelvoucher("no");
-			transactionsIncome.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
-			transactionsIncome.setBranchid(Integer.parseInt(branchId));
-			transactionsIncome.setUserid(Integer.parseInt(userId));
-			
-			String updateDrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance-"+onlyTotalFee+" where accountdetailsid="+drAccountIncome;
-
-			String updateCrAccountIncome="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFee+" where accountdetailsid="+crFeesIncome;
-			
-			// End J.V
-			  
-			createFeesCollection = new feesCollectionDAO().create(receiptInfo,feescollection,transactions,updateDrAccount,updateCrAccount, transactionsIncome, updateDrAccountIncome,updateCrAccountIncome);
+				String updateCrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+onlyTotalFineMiscFee+" where accountdetailsid="+crFees;
+				
+				// End Receipt
+							  
+				createFeesCollection = new feesCollectionDAO().create(receiptInfo,transactions,updateDrAccount,updateCrAccount);
+			}
 			
 			if(createFeesCollection) {
 				getFeesDetails(sid,dto.getAcademicYear());
