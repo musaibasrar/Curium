@@ -246,6 +246,8 @@ public class AccountDAO {
 	public boolean saveVoucherwithAccUpdate(VoucherEntrytransactions transactions, String drAmount, String crAmount) {
 		boolean result = false;
 		try{
+			// session.save(transactions);
+			voucherEntryTransactionsRepo.save(transactions);
 			// Query query = session.createQuery(drAmount); query.executeUpdate();
 			// Query query1 = session.createQuery(crAmount); query.executeUpdate();
 			queryUtil.runUpdateQuery(drAmount);
