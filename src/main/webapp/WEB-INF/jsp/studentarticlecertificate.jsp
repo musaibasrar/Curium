@@ -1,6 +1,6 @@
 <%--
-    Document   : Fees Outstanding
-    Created on : MAR 24, 2020, 12:58:28 PM
+    Document   : studentsdetailsbonafide
+    Created on : Jul 09, 2016, 12:10:28 AM
     Author     : Musaib
 --%>
 
@@ -12,9 +12,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Outstanding</title>
-<link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bba/css/datePicker/demos.css">
+<title>Article 371</title>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -91,6 +91,28 @@
 	font-weight: bold;
 }
 
+.alignRightFields {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.alignSearch {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -99,6 +121,12 @@
 	vertical-align: middle;
 	font-style: normal;
 	color: #325F6D;
+}
+
+.footerTD {
+	border-radius: 6px;
+	background-color: #4b6a84;
+	text-align: left;
 }
 
 .alignCentreMultiple {
@@ -190,6 +218,7 @@
 
 .headerText {
 	border-radius: 3px;
+	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
@@ -260,58 +289,48 @@
 	font-weight: bold;
 	height: 22px;
 }
-.footerTD{
-                border-radius:6px;
-                background-color:#4b6a84;
-
-
-                text-align: left;
-
-
-            }
 </style>
 <style>
 #button {
 	
 }
 </style>
-<link rel="stylesheet" href="/bba/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/bba/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bba/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bba/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bba/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/bba/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/bba/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/ScrollableGridPlugin.js"></script>
-
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -337,20 +356,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/bba/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
-
-	function searchForStudents() {
+	function searchStudentsForBonafide() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bba/FeesCollection/searchFeesReportOutstanding";
-		form1.method = "POST";
-		form1.submit();
-
-	}
-	
-	function sendSMS() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/bba/SMSProcess/sendSMSFeesDueReminder";
+		form1.action = "/vision/DocumentsProcess/searchStudentsForArticle";
 		form1.method = "POST";
 		form1.submit();
 
@@ -359,22 +369,9 @@
 	$(function() {
 
 		$("#search").button().click(function() {
-			searchForStudents();
+			searchStudentsForBonafide();
 		});
 		
-		/* $("#sendsms").button().click(function() {
-			sendSMS();
-			return false;
-
-		}); */
-	      $("#sendsms").button({
-	             icons:{
-	                 primary: "ui-icon-mail-closed"
-	             }
-	         }).click(function(){
-	        	 sendSMS();	
-	         	});
-	             
 
 	});
 
@@ -392,15 +389,17 @@
 	$(function() {
 		$("#export").button({
 			icons : {
-				primary : "ui-icon-transferthick-e-w"
+				primary : "ui-icon-trash"
 			}
-		});
-	});
+		}).click(function() {
+			deleteRecords();
+			return false;
 
-	$(function() {
+		});
+		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.labelClass').length;
+			var trLength = $('.trClass').length;
 			if (length > 0) {
 				$('.chcktbl:checked').attr('checked', false);
 				this.checked = false;
@@ -415,10 +414,9 @@
 			}
 
 		});
-		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
-			var trLength = $('.labelClass').length;
+			var trLength = $('.trClass').length;
 			alert(tdLength);
 			if (length > trLength) {
 
@@ -428,49 +426,31 @@
 			}
 		});
 
-	});
-	
-	
-	
-	$(function() {
-		$('#chckHeadSMS').click(function() {
-			var length = $('.chcktblSMS:checked').length;
-			var trLength = $('.labelClass').length;
-			if (length > 0) {
-				$('.chcktblSMS:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktblSMS:checked').attr('checked', false);
-				} else {
-					$('.chcktblSMS:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		
-		$('.chcktblSMS').click(function() {
-			var length = $('.chcktblSMS:checked').length;
-			var trLength = $('.labelClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktblSMS:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktblSMS:not(:checked)').attr('disabled', false);
-			}
-		});
+		$("#go").button()
 
 	});
 	
+	function deleteFeesStamp(){
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/StampFeesProcess/delete";
+		form1.method = "POST";
+		form1.submit();
+	}
 </script>
 
 
 <script type="text/javascript">
         
-      
+        function calculateGrandTotal() {
+            var sum = 0.0;
+            var column2 = $('.feesFullAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            
+            $('#feesTotalAmount').val(sum.toPrecision(6));
+
+        }
         $(document).ready(function() {
             
             
@@ -501,7 +481,61 @@
 
 
         });
+        
     
+        
+        $(function() {
+            
+            var addFeesCatButtonID="#addFeesCat";
+            var removeFeesCatButtonID="#removeFeesCat";
+            $( addFeesCatButtonID )
+            .button({
+                icons: {
+                    primary: "ui-icon-plus"
+                }
+            })
+            .click(function() {
+                addRow();
+                return false;
+            });
+            $(removeFeesCatButtonID)
+            .button({
+                icons: {
+                    primary: "ui-icon-minus"
+                }
+            })
+            .click(function() {
+                deleteRow('dataTable');
+                return false;
+            });            
+
+        });
+        
+        function SelectAll(id)
+        {
+        	
+            document.getElementById("feesCount_"+id).focus();
+            document.getElementById("feesCount_"+id).select();
+        }
+
+        function calculate(value2) {
+
+        	var feesCount=document.getElementById("feesCount_"+value2).value;
+        	
+        	if(feesCount === ''){
+        		
+        		document.getElementById("feesCount_"+value2).value = 1;
+        	}
+        	
+            //var val1=value1.value;
+            var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+            var feesCount=document.getElementById("feesCount_"+value2).value;
+            var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+            
+                final1.value=(feesCat*feesCount).toPrecision(6);
+           
+        }
+       
     function selectAllRow(tableID){
         var table = document.getElementById(tableID);
         var rowCount = table.rows.length;
@@ -518,46 +552,53 @@
         }
     }
     
+    function deleteRow(tableID) {
+        try {
+            var table = document.getElementById(tableID);
+            var rowCount = table.rows.length;
+            if(rowCount==1){
+                alert('No records to delete');
+            }
+            for(var i=1; i<rowCount-1; i++) {
+                var row = table.rows[i];
+                var chkbox = row.cells[0].childNodes[0];
+                if(null != chkbox && true == chkbox.checked) {
+                    table.deleteRow(i);
+                    rowCount--;
+                    i--;
+                }
+            }
+           
+            
+            var sum = 0.0;
+            var totalSum=0.0;
+            var column2 = $('.feesAmount')
+            jQuery.each(column2,function(){
+                sum += parseFloat($(this).val());
+            });
+            totalSum=sum;
+            
+            $('#feesTotalAmount').val(totalSum.toPrecision(6));
+            
+            calculateGrandTotal();
+            //$('#grandTotalAmount').val(0);
+        }catch(e) {
+            alert(e);
+        }
+    }
     
-    var xmlHttp;
-    var count;
-    function getFeesCategory() {
+	function fileCheck() {
+		
+		if (document.getElementById("fileName").value.length == 0)
 
-		var selected=document.getElementById('academicyear').value;
-			
-			 if (typeof XMLHttpRequest != "undefined") {
-				 xmlHttp = new XMLHttpRequest();
-	            
-	         } else if (window.ActiveXObject) {
-	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	             
-	         }
-			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/bba/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
-			xmlHttp.send(null);
-	}
-    
-	function stateChanged() {
-
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
+		{
+			document.getElementById("fileName").style.background = 'red';
+			alert("Enter The File Name ");
 		}
-	}
-	function GetXmlHttpObject() {
-		var xmlHttp = null;
-		try {
-			xmlHttp = new XMLHttpRequest();
-		} catch (e) {
-			try {
-				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
-			} catch (e) {
-				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-		}
-		return xmlHttp;
+
 	}
 
-    </script>
+        </script>
 
 
 
@@ -566,7 +607,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bba/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -579,7 +620,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/bba/FeesCollection/exportDataForStudentsFeesReport" method="POST">
+	<form id="form1" action="/vision/DocumentsProcess/GenerateArticle" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -588,67 +629,63 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Outstanding</a></li>
+					<li><a href="#tabs-1">Article 371 Certificate</a></li>
 
 				</ul>
 				<div id="tabs-1">
-				
-					<table>
+					<table width="100%" border="0" align="center" cellpadding="0"
+						cellspacing="0" id="table1" style="display: block">
+
 						<tr>
-							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Name &nbsp;</td>
+							<td width="12%" align="left"><label> <input
+									name="namesearch" type="text" class="myclass" id="namesearch"
+									size="36"">
+							</label></td>
 							
-							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
-										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</c:if>	
-							</c:forEach>
-								<label style="visibility: hidden;"> <select name="secsearch" id="secsearch">
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+
+
+						<tr>
+							<td class="alignRightFields">Class &nbsp;</td>
+							<td width="70%"><label> <select name="classsearch"
+									id="classsearch" style="width: 150px">
 										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+											<option value="${classdetailslist.classdetails}" >
+												<c:out value="${classdetailslist.classdetails}" />
+											</option>
+										</c:if>	
+										</c:forEach>
+								</select>
+
+							</label> <label> <select name="secsearch" id="secsearch"
+									style="width: 120px">
+										<option selected></option>
+
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.section != '')}">
 											<option value="${classdetailslist.section}">
 												<c:out value="${classdetailslist.section}" />
 											</option>
 										</c:if>	
-										</c:forEach></td>
+										</c:forEach>
+
+								</select>
+							</label>
 						</tr>
-						
-							<tr>
+
+						<tr>
 							<td><br /></td>
 
 						</tr>
-					
-					
-						<tr>
-                    
-                        <td style="font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp;</td> 
-                        
-                        	<td>
-							<c:forEach var="year" items="${previousAcademicYears}">
-							    <label style="display:block;">
-							        <input type="checkbox" name="academicyear" value="${year}"
-							               onchange="getFeesCategory()" /> ${year}
-							    </label>
-							</c:forEach>
 
-                        </td>
-                        
-                    </tr>
-                    
-                     <tr>
-						<td><br></td>
-                    </tr>
-					</table>
-					
-					
-					<table>
-                    
-                    <tr>
-						<td><br></td>
-                    </tr>
-                    
 						<tr>
 
 							<td width="30%" class="alignRight"></td>
@@ -663,8 +700,9 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-		
+
 					</table>
+					
 					
 
 				</div>
@@ -682,93 +720,53 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHeadSMS" /></th>
-						<th title="click to sort" class="headerText">Sl.No</th>
-						<th title="click to sort" class="headerText">UID</th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
-						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
-						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
-						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Class &
+							Sec&nbsp;</th>
+						<th title="click to sort" class="headerText">Father's Name</th>
+						<th title="click to sort" class="headerText">Mother's Name</th>	
+						<th title="click to sort" class="headerText">Admission Date</th>
+
+
+
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:set var="TotalPaidAmount" value="0" />
-					<c:set var="TotalDueAmount" value="0" />
-					<c:set var="TotalSum" value="0" />
-					
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
+					<c:forEach items="${searchStudentList}" var="Parents">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktblSMS"
+								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
-								<td class="dataText"><c:out
-										value="${status.index+1}" /></td>
-										<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
+								value="<c:out value="${Parents.student.sid}"/>" /></td>
 							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
+										value="${Parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out
-									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
-							<td class="dataText">
-									<c:set var="DueAmount" value="0" />
-									<c:set var="TotalAmount" value="0" />
-								<c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
-									<table>
-										<tr>
-											<td style="width: 160px;" align="right">
-												${studentfeescatagorydetails.feescategory.feescategoryname}/${studentfeescatagorydetails.feescategory.academicyear}:&nbsp;&nbsp;&nbsp;	
-											</td>
-											<td align="left">
-												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
-											</td>
-										</tr>
-									</table>
-									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
-									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-									
-									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
-									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-								</c:forEach>
-							</td>
-							<td class="dataText">
-									<table>
-										<tr>
-											<td style="width: 160px;" align="right">
-												${DueAmount}<%-- /${TotalAmount} --%>&nbsp;&nbsp;&nbsp;	
-											</td>
-										</tr>
-									</table>
-							</td>
+									value="${Parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.fathersname}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.mothersname}" /></td>
+							<td class="dataText"><c:out
+									value="${Parents.student.admissiondate}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
-				
 				<tfoot>
-				
-				<tr>
-                    
-                    <td  class="footerTD" colspan="9" >
-                    
-                    		<button value="Export" type="submit" id="export">Export</button>
-                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
-                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                             &nbsp;&nbsp;&nbsp;&nbsp;
-                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount }</label>
-                            </td>
-                   </tr>
-                   
+					<tr>
+													
+						<td class="footerTD" colspan="2"> &nbsp;
+						<input value="Generate Certificate"
+							type="submit" id="export"/></td>
+							
+							
+
+					</tr>
 				</tfoot>
 			</table>
 
