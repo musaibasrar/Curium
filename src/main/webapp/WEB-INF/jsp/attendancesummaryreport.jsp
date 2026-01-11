@@ -332,6 +332,37 @@
 	
 }
 </style>
+
+<style>
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #attendancereport, #attendancereport * {
+    visibility: visible;
+  }
+   #attendancereport {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    margin: 0;
+  } 
+ 
+}
+</style>
+<style>
+@media print {
+    #attendancereport h1,
+    #attendancereport h3 {
+        display: block !important;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    
+}
+</style>
+
 <link rel="stylesheet" href="/bba/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/bba/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -474,6 +505,18 @@
 	   } */
 </script>
 
+<script>
+$(function() {
+
+	$("#print").button().click(function() {
+		printMyTable();
+	});
+});
+function printMyTable() {
+  window.print();
+}
+</script>
+
 </head>
 <%
 //allow access only if session exists
@@ -583,6 +626,13 @@ for(Cookie cookie : cookies){
 						</tr>
 
 					</table>
+					
+					
+					                                 <div id="attendancereport" class="alignRightFields">
+					                                <h1 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${branchname}</h1>
+					                                <h3 style="display:none;">&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					                                
+					                                Daily Attendance Report &emsp;Date: &nbsp;&nbsp; <fmt:formatDate value="${attendancedate}" pattern="dd/MM/yyyy"/></h3>
 								                    <table id="mytable"  style="border-collapse: collapse;width: 50%;border: 2px solid black;margin-left:215px;">
 								                    <thead>
 								                    <th style="text-align: center;border-collapse: collapse;border: 1px solid black;">Class</td>
@@ -600,7 +650,18 @@ for(Cookie cookie : cookies){
 								                        </c:forEach>
 								                        </tbody>
 								                    </table>
+								                     <h3 style="display:none;">&emsp;&emsp;&emsp;Present: &emsp;${present}&emsp;&emsp;&emsp;Absent:&emsp;${absent}&emsp;&emsp;&emsp;Total:&emsp;${totalnoofstudents}
+					                                
+					                                </h3>               
 				</div>
+				
+				 <table>
+								                    <tr></tr><br></td></tr>
+								                    <tr><td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+								                    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; <button id="print">Print</button>
+								                     </td></tr>
+								                     </table>
+				
 			</div>
 		</div>
 	</form>
