@@ -56,7 +56,7 @@ public class feesCollectionDAO {
             Receiptinfo latestReceipt = receiptinfoRepository.findTopByBranchidOrderByReceiptnumberDesc(receiptInfo.getBranchid());
 			if (latestReceipt != null) {
 				String branchReceiptNo = latestReceipt.getBranchreceiptnumber().substring(2);
-				receiptInfo.setBranchreceiptnumber("VS" + String.format("%06d", Integer.parseInt(branchReceiptNo) + 1));
+				receiptInfo.setBranchreceiptnumber(String.format("%06d", Integer.parseInt(branchReceiptNo) + 1));
 			} else {
 				receiptInfo.setBranchreceiptnumber(String.format("%06d", 1));
 			}
@@ -450,6 +450,41 @@ public class feesCollectionDAO {
 
             // Example (beginner-friendly): If you had a repository method called "updateDrAccountOld", you would call it here.
             // e.g., voucherEntrytransactionsRepository.updateDrAccountOld(...);
+
+            result = true;
+        } catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+        return result;
+    }
+    
+    @Transactional
+    public boolean create(Receiptinfo receiptInfo, VoucherEntrytransactions transactions,
+                          String updateCrAccount, String updateDrAccount) {
+        boolean result = false;
+        try {
+            // Find latest receipt for branch
+            Receiptinfo latestReceipt = receiptinfoRepository.findTopByBranchidOrderByReceiptnumberDesc(receiptInfo.getBranchid());
+			if (latestReceipt != null) {
+				String branchReceiptNo = latestReceipt.getBranchreceiptnumber().substring(2);
+				receiptInfo.setBranchreceiptnumber(String.format("%06d", Integer.parseInt(branchReceiptNo) + 1));
+			} else {
+				receiptInfo.setBranchreceiptnumber(String.format("%06d", 1));
+			}
+
+            // Receipts
+            transactions.setNarration(transactions.getNarration().concat(" Receipt no: " + receiptInfo.getBranchreceiptnumber()));
+            voucherEntrytransactionsRepository.save(transactions);
+
+            // session.createQuery(updateDrAccount);
+            queryUtil.runUpdateQuery(updateDrAccount);
+            // session.createQuery(updateCrAccount);
+            queryUtil.runUpdateQuery(updateCrAccount);
+
+            receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+            receiptinfoRepository.save(receiptInfo);
 
             result = true;
         } catch (Exception hibernateException) {
