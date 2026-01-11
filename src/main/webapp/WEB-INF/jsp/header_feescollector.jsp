@@ -140,6 +140,12 @@ for(Cookie cookie : cookies){
 							</td>
 							
 							<td><a target="mainFrame"
+								href="/iqra/StudentProcess/addNew"> <img
+									src="/iqra/images/student_header.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+							</a></td>
+							
+							<td><a target="mainFrame"
 								href="/iqra/FeesProcess/feesCollect"> <img
 									src="/iqra/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection

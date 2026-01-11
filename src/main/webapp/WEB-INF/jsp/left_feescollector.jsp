@@ -452,7 +452,7 @@ for(Cookie cookie : cookies){
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<!--<tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/iqra/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
@@ -461,8 +461,8 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/iqra/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
-            		</tr>-->
-            		<tr>
+            		</tr>
+            		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/iqra/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
@@ -471,7 +471,7 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/iqra/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
-            		</tr>
+            		</tr> -->
                 </table>
             </div>
              
@@ -490,40 +490,10 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/iqra/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
             			</td>
             		</tr>
-            		 <!--  <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/iqra/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/iqra/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr> -->
                 </table>
             </div> 
             
-            <!-- <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -532,11 +502,9 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div> -->
+            </div>
             
-            
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -551,7 +519,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/iqra/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
@@ -560,28 +528,8 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/iqra/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/iqra/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/iqra/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
                 </table>
-            </div> -->
+            </div>
             
               <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -596,140 +544,8 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/iqra/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/iqra/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr> -->
                 </table>
             </div>
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            
-                 <!--  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-             <!-- <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            
-               
-            <!--   <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/iqra/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
             
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
@@ -757,165 +573,6 @@ for(Cookie cookie : cookies){
             		</tr> -->
                 </table>
             </div>
-            
-           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/iqra/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/iqra/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/iqra/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/iqra/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/iqra/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
-            <div >
-                <a target="mainFrame" href="/iqra/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/iqra/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div> -->
-            
-            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
-        	
-        	<div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
-            			</td>
-            		</tr> -->
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div>
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
-              
-              <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/iqra/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/iqra/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/iqra/sendemail" style="font-size: 12px;">Email</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-              <!--  <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/iqra/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            
-           <!--  <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/iqra/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				 </table>
-            </div>
-             -->
             </div>
                    
             

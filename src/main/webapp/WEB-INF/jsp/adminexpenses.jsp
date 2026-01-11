@@ -806,7 +806,8 @@ for(Cookie cookie : cookies){
 
 				</tbody>
 					<tfoot>
-						<tr>
+						 <c:if test="${(userType == 'admin')}">
+			    			<tr>
                             <!-- <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button>  -->
                     		<td class="footerTD"  colspan="8">
                     		<button id="print">Print</button> 
@@ -818,6 +819,8 @@ for(Cookie cookie : cookies){
                     		<button id="delete">Cancel</button>
                     		</td>
                         </tr>
+		   				</c:if>
+						
                     </tfoot>
 			</table>
 
