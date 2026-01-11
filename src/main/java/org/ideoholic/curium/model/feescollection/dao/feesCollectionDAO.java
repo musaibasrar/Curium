@@ -54,7 +54,7 @@ public class feesCollectionDAO {
 			 	
 			 	if(ReceiptList.size() > 0) {
 			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
-			 		receiptInfo.setBranchreceiptnumber("VS"+String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
+			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
 			 	}else {
 			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
 			 	}
@@ -533,6 +533,50 @@ public class feesCollectionDAO {
 				Query queryqueryAccounts4 = session.createQuery(updateReceiptinfoPaymentMethod);
 				queryqueryAccounts4.executeUpdate();
 				//
+	            transaction.commit();
+	            result = true;
+			 
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+	            
+	            hibernateException.printStackTrace();
+	        } finally {
+				HibernateUtil.closeSession();
+			}
+		return result;
+
+	}
+	
+	@SuppressWarnings("finally")
+	public boolean create(Receiptinfo receiptInfo, VoucherEntrytransactions transactions, String updateCrAccount,
+			String updateDrAccount) {
+		 
+		boolean result = false;
+		try {
+			 
+			 transaction = session.beginTransaction();
+			
+			 Query queryReceipt = session.createQuery("from Receiptinfo where branchid = "+receiptInfo.getBranchid()+" order by receiptnumber DESC");
+			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
+			 	
+			 	if(ReceiptList.size() > 0) {
+			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
+			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
+			 	}else {
+			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
+			 	}
+			 	
+			 	//Receipts
+			 	transactions.setNarration(transactions.getNarration().concat(" Receipt no: "+receiptInfo.getBranchreceiptnumber()));
+				session.save(transactions);
+				Query queryAccounts = session.createQuery(updateDrAccount);
+				queryAccounts.executeUpdate();
+				Query queryqueryAccounts1 = session.createQuery(updateCrAccount);
+				queryqueryAccounts1.executeUpdate();
+				//
+				
+				receiptInfo.setReceiptvoucher(transactions.getTransactionsid().intValue());
+				session.save(receiptInfo);
+				
 	            transaction.commit();
 	            result = true;
 			 
