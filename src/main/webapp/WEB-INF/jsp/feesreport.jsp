@@ -435,6 +435,40 @@
 
 	});
 	
+	$(function() {
+		$('#chckHead1').click(function() {
+			var length = $('.chcktbl1:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktbl1:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktbl1:checked').attr('checked', false);
+				} else {
+					$('.chcktbl1:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktbl1').click(function() {
+			var length = $('.chcktbl:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktbl1:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktbl1:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+	
+	
 </script>
 
 
@@ -565,12 +599,39 @@ for(Cookie cookie : cookies){
 				
 					<table>
 						<tr>
+							<td style="font-weight: bold;color:#325F6D">Student Type &nbsp;</td>
+							<td><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						<tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead1" /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
 							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							
-							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
+							<td>
+							<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox" class = "chcktbl1"  name="classsearch" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>	
 							</c:forEach>
