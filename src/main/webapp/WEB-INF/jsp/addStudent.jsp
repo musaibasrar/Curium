@@ -1328,8 +1328,44 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
+						</tr><tr>
+                         <td class="alignLeft" >College code
+								&nbsp;</td>
+							<td><label> <input
+									name="lastschool" type="text" class="myclass" id="lastschool"
+									style="text-transform:capitalize;"
+									size="36" >
+							</label></td>
+							<td class="alignLeft">Language Offered in Part-I &nbsp;</td>
 
+							<td><label> <input
+									name="languagesstudied" type="text" class="myclass" id="languagesstudied"
+									style="text-transform:capitalize;"
+									size="36" >
+							</label></td>
+							</tr>
+								<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft"> Optional subjects offered in Part-II &nbsp;</td>
+							<td ><label>
+							<input
+									name="progress" type="text" class="myclass" id="progress"
+									style="text-transform:capitalize;"
+									size="36" > 
+
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;"></td>
+							<td></td>
+						</tr>
+						
+							
+							
 
 						<div>
 							<table width="100%">

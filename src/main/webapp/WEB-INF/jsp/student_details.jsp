@@ -604,26 +604,28 @@ for(Cookie cookie : cookies){
                                 <c:out default="" value="${student.remarks}" />
                             </td>
    
-   							<td  width="25%"  class="alignLeft" height="50">
+   							<td  width="25%"  class="alignLeft" height="50"> Language Offered in Part-I:
                             </td>
-                            <td width="25%" class="tablerows" >
-                            
+                            <td width="25%" class="tablerows">
+                             <c:out default="" value="${student.languagesstudied}" />
                             </td>
                         </tr>
                                                 
 
                         <tr>
-                            <td  width="25%"  class="alignLeft" height="50">
+                            <td  width="25%"  class="alignLeft" height="50">College code
                             </td>
                             <td width="25%" class="tablerows" >
-
+                             <c:out default="" value="${student.schoollastattended}" />
                             </td>
                             <td  width="25%"  class="alignLeft" height="50">
+                             Optional subjects offered in Part-II
                             </td>
-                            <td width="25%" class="tablerows">
-
+                            <td width="25%" class="tablerows" >
+                             <c:out default="" value="${student.subsequentprogress}" />
                             </td>
                         </tr>
+                        
                     </table>
                 </div>
     </div>
