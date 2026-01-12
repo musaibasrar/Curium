@@ -456,8 +456,13 @@ public static String dateFromatConversionSlash(String ddmmyyyy) {
 	   String date = null;
 	   
 	   if(ddmmyyyy!=null) {
-		   String[] dateToConvert = ddmmyyyy.split("/");
-		   date = dateToConvert[2]+"-"+dateToConvert[1]+"-"+dateToConvert[0];
+		   String s = ddmmyyyy.trim();
+		    if (!s.isEmpty() && !"null".equalsIgnoreCase(s) && s.contains("/")) {
+		        String[] parts = s.split("/");
+		        if (parts.length >= 3) {
+		            date = parts[2] + "-" + parts[1] + "-" + parts[0];
+		        }
+		    }
 	   }
 	   
 	   return date;
