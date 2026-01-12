@@ -645,6 +645,7 @@ public class UserService {
 				String fromDate = DataUtil.emptyString(dto.getFromDate());
 				String oneDay = DataUtil.emptyString(dto.getOneDay());
 				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
+				String academicYear = DataUtil.emptyString(dto.getAcademicYear());
 
 				String querySub = "";
 
@@ -671,6 +672,10 @@ public class UserService {
 
 				if(!modeOfPayment.equalsIgnoreCase("")){
 					querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				}
+				
+				if(!academicYear.equalsIgnoreCase("")){
+					querySub = querySub+" and feesdetails.academicyear = '"+academicYear+"'" ;
 				}
 
 				queryMain = queryMain+querySub;
