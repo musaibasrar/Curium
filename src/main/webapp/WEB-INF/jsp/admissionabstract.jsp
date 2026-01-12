@@ -539,7 +539,7 @@
 <script type="text/javascript">
 function printAdmissionAbstract() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/DocumentsProcess/printAdmissionAbstract";
+	form1.action = "/bba/DocumentsProcess/printAdmissionAbstract";
 	form1.method = "POST";
 	form1.submit();
 
@@ -547,7 +547,7 @@ function printAdmissionAbstract() {
 
 function printSinglePageAdmissionAbstract() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/DocumentsProcess/printSinglePageAdmissionAbstract";
+	form1.action = "/bba/DocumentsProcess/printSinglePageAdmissionAbstract";
 	form1.method = "POST";
 	form1.submit();
 
@@ -556,7 +556,7 @@ function printSinglePageAdmissionAbstract() {
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/vision/StudentProcess/viewAll";
+								form1.action = "/bba/StudentProcess/viewAll";
 								form1.submit();
 							}
 

@@ -22,8 +22,8 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/vision/css/dataTable/css/demo_page.css";
-            @import "/vision/css/dataTable/css/jquery.dataTables.css";
+            @import "/bba/css/dataTable/css/demo_page.css";
+            @import "/bba/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
@@ -37,10 +37,10 @@
 <script src="/bba/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script src="/bba/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/bba/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/bba/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/bba/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -608,7 +608,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/bba/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -976,7 +976,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			"/bba/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),

@@ -1,25 +1,40 @@
 package org.ideoholic.curium.model.feescollection.action;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.feescollection.dto.*;
+import org.ideoholic.curium.model.feescollection.dto.AddFeesCollectionDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsDto;
+import org.ideoholic.curium.model.feescollection.dto.CancelledReceiptsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.DetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesCategoryDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesCategoryResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDashboardResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.FeesReportDto;
+import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StampFeeDto;
+import org.ideoholic.curium.model.feescollection.dto.StampFeeResponseDto;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesDto;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
+import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.List;
-import org.ideoholic.curium.util.Constants;
 
 @Service
 public class FeesCollectionActionAdapter {
@@ -523,7 +538,7 @@ public class FeesCollectionActionAdapter {
     }
 
 	public void getFeesReportOutstanding() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYearArray(request.getParameterValues("academicyear"));
