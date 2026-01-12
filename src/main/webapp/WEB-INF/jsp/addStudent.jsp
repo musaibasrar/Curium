@@ -1061,6 +1061,13 @@ $(document).ready(function() {
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
 							          College<input type="checkbox" value="college" name="feescategories" id="college"/>
+							          <label style="display: none;">&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+								&nbsp;Transport <select name="feescategories" id="transport">
+										        <option value="Select">-- Select --</option>
+										        <option value="Malmal">Malmal</option>
+										        <option value="Madhubani">Madhubani</option>
+										        <option value="xyz">xyz</option>
+										    </select></label>
 								</label></td>
 					<!-- 	<tr>
 

@@ -180,7 +180,7 @@ for(Cookie cookie : cookies){
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
 					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing STS<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+					bearing STS<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.sts}" /></span>
 					</h3>
 				</td>
 			
@@ -188,7 +188,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate type="date" value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 			</h3>
 			</td>
 			</tr>
