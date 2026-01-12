@@ -6,4 +6,5 @@ import lombok.Data;
 public class StudentIdPageDto {
     private String studentId;
     private String page;
+    private String studentBranchId;
 }
