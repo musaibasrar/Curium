@@ -30,5 +30,5 @@ public class AdmissionEnquiryDto {
 	private String mobileno;
 	private String notes;
 	private String[] enquiryIds;
-
+	private int branchId;
 }
