@@ -33,5 +33,6 @@ public class AdmissionEnquiryResponseDto {
 	private AdmissionEnquiry admissionEnquiry;
 	private List<AdmissionEnquiry> admissionEnquiryList;
 	private boolean success;
+	private int branchId;
 
 }
