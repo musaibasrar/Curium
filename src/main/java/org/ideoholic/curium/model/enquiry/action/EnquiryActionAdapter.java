@@ -72,7 +72,7 @@ public class EnquiryActionAdapter {
 		admissionEnquiryDto.setAddress(request.getParameter("address"));
 		admissionEnquiryDto.setNotes(request.getParameter("notes"));
 		admissionEnquiryDto.setMobileno(request.getParameter("contactno"));
-		admissionEnquiryDto.setBranchId(branchId);
+		admissionEnquiryDto.setBranchId(DataUtil.parseInt(request.getParameter("branchid")));
 		admissionEnquiryDto.setUserId(userId);
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.saveEnquiryForm(admissionEnquiryDto);
 
@@ -97,6 +97,7 @@ public class EnquiryActionAdapter {
 		request.setAttribute("address", admissionEnquiryResponseDto.getAddress());
 		request.setAttribute("notes", admissionEnquiryResponseDto.getNotes());
 		request.setAttribute("contactno", admissionEnquiryResponseDto.getMobileno());
+		request.setAttribute("branchid", admissionEnquiryResponseDto.getBranchId());
 		return admissionEnquiryResponseDto.isSuccess();
 	}
 
@@ -153,11 +154,10 @@ public class EnquiryActionAdapter {
 		admissionEnquiryDto.setAddress(request.getParameter("address"));
 		admissionEnquiryDto.setNotes(request.getParameter("notes"));
 		admissionEnquiryDto.setMobileno(request.getParameter("contactno"));
-		admissionEnquiryDto.setBranchId(branchId);
+		admissionEnquiryDto.setBranchId(DataUtil.parseInt(request.getParameter("branchid")));
 		admissionEnquiryDto.setUserId(userId);
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.updateEnquiry(admissionEnquiryDto);
 		return admissionEnquiryResponseDto.isSuccess();
-
 	}
 
 	public void deleteEnquiry() {
