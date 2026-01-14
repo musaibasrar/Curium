@@ -696,4 +696,9 @@ public class JspController {
 	public String rpstatementprint() {
 		return "rpstatementprint";
 	}
+	
+	@GetMapping("/enquiryformonline")
+	public String enquiryFormOnline() {
+		return "enquiryformonline";
+	}
 }
