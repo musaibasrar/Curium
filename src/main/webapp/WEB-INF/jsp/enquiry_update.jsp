@@ -199,27 +199,6 @@
 	color: #000000;
 }
 
-/* Styling for the tab heading to match addStudent page */
-#tabs ul li a {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
-    color: #325F6D;
-    text-decoration: none;
-    padding: 8px 12px;
-}
-
-#tabs ul li {
-    display: inline;
-    margin-right: 5px;
-}
-
-#tabs ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    border-bottom: 1px solid #5d7e9b;
-}
 </style>
 
 <script type="text/javascript">
@@ -284,7 +263,10 @@
 				<div id="fragment-1">
 					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 						<tr>
-							<td><br /></td>
+							<td>
+							<input type="hidden" value="<c:out value="${admissionEnquiry.branchId}"/>" id="branchid" name="branchid">
+							
+							<br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -454,6 +436,7 @@
 							<td><br /></td>
 						</tr>
 						<tr align="center">
+							<td class="alignRight">&nbsp;</td>
 							<td class="alignRight">&nbsp;</td>
 							<td align="center">
 								<button id="modify" class="save">Update</button>
