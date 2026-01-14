@@ -68,5 +68,15 @@ public class EnquiryAction {
 			return viewEnquiry();
 	}
 	
+	@PostMapping("/saveEnquiryFormOnline")
+	public String saveEnquiryFormOnline() {
+		if(enquiryActionAdapter.saveEnquiryForm()) {
+			return "enquiryformonlinesaved";
+		}else {
+			return "error";
+		}
+		
+	}
+	
 
 }
