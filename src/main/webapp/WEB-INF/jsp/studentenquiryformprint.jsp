@@ -289,7 +289,7 @@
 </script>
     </head>
    <body>
-    <form method="post" id="form1">
+    <form id="form1">
         <div>
 			<div id="tabs">
 				<ul>
@@ -297,7 +297,8 @@
 				</ul>
 				
 				<div id="fragment-1">
-					<div class="title">vision Group of Institutions</div>
+					<div class="title"><img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/vision/images/vision.png"></div>
+					<div class="title">${branchname}</div>
 					<div class="subtitle">Admission Enquiry Form - ${admissionEnquiry.academicYear}</div>
 					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
 						<tr>
@@ -441,7 +442,7 @@
 						<tr align="center">
 							<td class="alignRight">&nbsp;</td>
 							<td align="center">
-								<button onclick="window.print()" id="print">Print</button>
+								<button type="button" onclick="window.print()" id="print">Print</button>
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<button id="modify">Modify</button>
 							</td>
