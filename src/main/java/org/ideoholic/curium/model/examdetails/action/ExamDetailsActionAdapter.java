@@ -124,4 +124,18 @@ public class ExamDetailsActionAdapter {
         request.setAttribute("examschedulelist", result.getExamscheduleList());
         request.setAttribute("urlbranchid", result.getUrlbranchid());
     }
+    
+    public void readListOfStudentsForHallTicket() {
+    			
+    	PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
+    			 
+    	printPreviewHallTicketDto.setShowFees(request.getParameter("showfees"));
+    	printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
+    	printPreviewHallTicketDto.setClasses(request.getParameterValues("classsearch"));
+    	printPreviewHallTicketDto.setClassAndSec(request.getParameter("secsearch"));
+    	
+    	ResultResponse resultResponse = examDetailsService.getStudentsForHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+    	httpSession.setAttribute("studentslistforhallticket", resultResponse.getResultList());
+    			
+    	}
 }
