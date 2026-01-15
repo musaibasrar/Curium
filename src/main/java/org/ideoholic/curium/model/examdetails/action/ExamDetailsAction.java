@@ -65,7 +65,7 @@ public class ExamDetailsAction {
         examDetailsActionAdapter.getExamScheduleDetails();
         examDetailsActionAdapter.readListOfExams();
         subjectDetailsActionAdapter.readListOfSubjects();
-        feesCollectionActionAdapter.getDefaultersReport();
+        examDetailsActionAdapter.readListOfStudentsForHallTicket();
         return "generatehallticket";
     }
 
