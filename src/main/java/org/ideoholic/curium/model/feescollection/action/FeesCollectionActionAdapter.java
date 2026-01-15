@@ -126,13 +126,12 @@ public class FeesCollectionActionAdapter {
 
         FeesDetailsResponseDto responseDto = feesCollectionService.getFeesDetails(dto);
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
-        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
-        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
-        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
-        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
-        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
-        httpSession.setAttribute(Constants.CURRENTACADEMICYEAR, responseDto.getCurrentAcademicYear());
-
+        request.setAttribute("feesstructure", responseDto.getFeesStructure());
+        request.setAttribute("sumoffees", responseDto.getTotalSum());
+        request.setAttribute("dueamount", responseDto.getDueAmount());
+        request.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+        request.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+        request.setAttribute("currentAcademicYear", responseDto.getCurrentAcademicYear());
     }
 
     public void previewFeesDetails() {
@@ -528,13 +527,13 @@ public class FeesCollectionActionAdapter {
     }
 
 	public void getFeesReportOutstanding() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response,  standardService, smsService);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYearArray(request.getParameterValues("academicyear"));
         dto.setAddClass(request.getParameterValues("classsearch"));
         													  	
-        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
     }
 }
