@@ -513,128 +513,121 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-1">Hall Ticket</a></li>
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
-
-						<tr>
-							<td><br/></td>
-						</tr>
-                            <tr>
-
-                                <td class="alignLeft" >
-                                    
-                                    Academic Year*&nbsp;&nbsp;&nbsp;&nbsp; 
-
-                                
-                                    <label>
-                                        <label> <select name="academicyear" id="academicyear"
-									style="width: 180px">
-										<option selected value="${currentYear}">${currentYear}(Current Year)</option>
-										<!-- <option value="2015/16">2015/16</option>
-										<option value="2016/17">2016/17</option>
-										<option value="2017/18">2017/18</option>
-										<option value="2018/19">2018/19</option>
-										<option value="2019/20">2019/20</option> -->
-										
-								</select>
-
-							</label> 
-                                    </label>
-
-                                </td>
-
-
-                            </tr>
-                            
-                            <tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-
-						</tr>
-									
-						
-						<tr>
-						
-						<td width="16%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Class &nbsp;&nbsp;&nbsp;&nbsp;
-							 <label> <select name="classsearch" id="classsearch"
-									style="width: 180px">
-										<option selected>${selectedclass}</option>
+					<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" id="table1" style="display: block;">
+					  <tbody>
+					    <tr>
+					      <td colspan="2"><br/></td>
+					    </tr>
+					
+					    <tr>
+					      <!-- left: label column -->
+					      <td class="alignLeft" style="width:5%; vertical-align: middle; padding: 6px 8px;">
+					        Academic Year*
+					      </td>
+					
+					      <!-- right: input column -->
+					      <td style="width:60%; vertical-align: middle; padding: 6px 8px;">
+					        <select name="academicyear" id="academicyear" style="width: 180px">
+					          <option selected value="${currentYear}">${currentYear}(Current Year)</option>
+					          <!-- <option value="2015/16">2015/16</option>
+					          <option value="2016/17">2016/17</option>
+					          <option value="2017/18">2017/18</option>
+					          <option value="2018/19">2018/19</option>
+					          <option value="2019/20">2019/20</option> -->
+					        </select>
+					      </td>
+					    </tr>
+					
+					    <tr>
+					      <td colspan="2"><br/></td>
+					    </tr>
+					
+					    <tr>
+					      <td class="alignLeft" style="vertical-align: middle; padding: 6px 8px;">
+					        Class
+					      </td>
+					      <td style="vertical-align: middle; padding: 6px 8px;">
+					        <select name="classsearch" id="classsearch" style="width: 95px">
+					          <option selected>${selectedclass}</option>
+					          <c:forEach items="${classdetailslist}" var="classdetailslist">
+					            <c:if test="${(classdetailslist.classdetails != '')}">
+					              <option value="${classdetailslist.classdetails}">
+					                <c:out value="${classdetailslist.classdetails}" />
+					              </option>
+					            </c:if>
+					          </c:forEach>
+					        </select>
+					        <select name="secsearch" id="secsearch"
+									style="width: 80px">
+										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-											<option value="${classdetailslist.classdetails}" >
-												<c:out value="${classdetailslist.classdetails}" />
+										<c:if test="${(classdetailslist.section != '')}">
+											<option value="${classdetailslist.section}">
+												<c:out value="${classdetailslist.section}" />
 											</option>
 										</c:if>	
 										</c:forEach>
-								</select> 
-							</label>
-							<div style="display: none;">
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							OR
-							&nbsp;&nbsp;&nbsp;&nbsp;
-							
-							Student Details: &nbsp;&nbsp;&nbsp;&nbsp;
-							<label><input type="text" name="stddetails" id="stddetails" value="${selectedstudentname/selectedclassandsec}" style="width: 220px">
-							<input type="hidden" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
-							<input type="hidden" name="classandsec" id="classandsec" value="${selectedclassandsec}" style="width: 180px">
-							<input type="hidden" name="studentName" id="studentName" value="${selectedstudentname}" style="width: 180px">
-							</label>
-							</div>
-							</td>
-						</tr>
-						
-						<tr>
-							<td><br /></td>
 
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-								
-								<tr>
-						<td width="80%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Exam &nbsp;&nbsp;&nbsp;&nbsp;
-							<label>
-									<select name="exam" id="exam"
-									style="width: 180px">
-										<option selected>${selectedexam}</option>
-
-										<c:forEach items="${examdetails}" var="listExam">
-
-											<option value="${listExam.examname}">
-												<c:out value="${listExam.examname}" />
-											</option>
-
-
-										</c:forEach>
-
-								</select></td>
-						</tr>
-										
+								</select>
+					        <div style="display: none; margin-top: 8px;">
+					          OR
+					          Student Details:
+					          <input type="text" name="stddetails" id="stddetails" value="${selectedstudentname/selectedclassandsec}" style="width: 220px">
+					          <input type="hidden" name="admno" id="admno" value="${selectedadmissionno}" style="width: 180px">
+					          <input type="hidden" name="classandsec" id="classandsec" value="${selectedclassandsec}" style="width: 180px">
+					          <input type="hidden" name="studentName" id="studentName" value="${selectedstudentname}" style="width: 180px">
+					        </div>
+					      </td>
+					    </tr>
 					
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr><tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td width="60%" class="alignLeft">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Search</button>
-							</td>
-						</tr>
-						
+					    <tr>
+					      <td colspan="2"><br/></td>
+					    </tr>
+					
+					    <tr>
+					      <td class="alignLeft" style="vertical-align: middle; padding: 6px 8px;">
+					        Exam
+					      </td>
+					      <td style="vertical-align: middle; padding: 6px 8px;">
+					        <select name="exam" id="exam" style="width: 180px">
+					          <option selected>${selectedexam}</option>
+					          <c:forEach items="${examdetails}" var="listExam">
+					            <option value="${listExam.examname}">
+					              <c:out value="${listExam.examname}" />
+					            </option>
+					          </c:forEach>
+					        </select>
+					      </td>
+					    </tr>
+					
+					    <tr>
+					      <td colspan="2"><br/></td>
+					    </tr>
+					
+					    <tr>
+					      <td class="alignLeft" style="vertical-align: middle; padding: 6px 8px;">
+					        Show Fees
+					      </td>
+					      <td style="vertical-align: middle; padding: 6px 8px;">
+					        <label><input type="checkbox" value="showfees" name="showfees" id="showfees" /></label>
+					      </td>
+					    </tr>
+					
+					    <tr>
+					      <td colspan="2"><br/></td>
+					    </tr>
+					
+					    <tr>
+					      <td></td>
+					      <td style="vertical-align: middle; padding: 6px 8px;">
+					        <button id="search">Search</button>
+					      </td>
+					    </tr>
+					
+					    <tr>
+					      <td colspan="2"><br/></td>
+					    </tr>
+					  </tbody>
 					</table>
 				</div>
 			</div>
@@ -660,7 +653,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
 						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
-						<th title="click to sort" class="headerText">Status</th>
+						<th title="click to sort" class="headerText">Fees Due</th>
 					</tr>
 				</thead>
 
@@ -669,24 +662,24 @@ for(Cookie cookie : cookies){
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
 					
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
+					<c:forEach items="${studentslistforhallticket}" var="studentslistforhallticket" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktbl"
+								id="<c:out value="${studentslistforhallticket.parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
+								value="<c:out value="${studentslistforhallticket.parents.student.sid}"/>" /></td>
 								<%-- <td class="dataText"><c:out
 										value="${status.index+1}" /></td> --%>
 							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
+										value="${studentslistforhallticket.parents.student.admissionnumber}" /></a></td>
+							<td class="dataText"><c:out value="${studentslistforhallticket.parents.student.name}" /></td>
 							<td class="dataText"><c:out
-									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.addresstemporary}" /></td>
+									value="${studentslistforhallticket.parents.student.classstudying}" /></td>
+							<td class="dataText"><c:out value="${studentslistforhallticket.parents.fathersname}" /></td>
+							<td class="dataText"><c:out value="${studentslistforhallticket.parents.contactnumber}" /></td>
+							<td class="dataText"><c:out value="${studentslistforhallticket.dueAmount}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
