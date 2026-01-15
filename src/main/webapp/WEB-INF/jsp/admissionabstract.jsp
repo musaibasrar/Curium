@@ -547,7 +547,7 @@ function printAdmissionAbstract() {
 
 function printSinglePageAdmissionAbstract() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/DocumentsProcess/printSinglePageAdmissionAbstract";
+	form1.action = "/skps/DocumentsProcess/printSinglePageAdmissionAbstract";
 	form1.method = "POST";
 	form1.submit();
 
