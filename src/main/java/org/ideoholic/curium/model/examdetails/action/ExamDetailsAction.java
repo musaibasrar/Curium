@@ -46,8 +46,6 @@ public class ExamDetailsAction {
     private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
     @Autowired
     private StudentActionAdapter studentActionAdapter;
-    @Autowired
-    private FeesCollectionActionAdapter feesCollectionActionAdapter;
     
     private String error = "error";
 
@@ -65,7 +63,7 @@ public class ExamDetailsAction {
         examDetailsActionAdapter.getExamScheduleDetails();
         examDetailsActionAdapter.readListOfExams();
         subjectDetailsActionAdapter.readListOfSubjects();
-        feesCollectionActionAdapter.getDefaultersReport();
+        examDetailsActionAdapter.readListOfStudentsForHallTicket();
         return "generatehallticket";
     }
 
