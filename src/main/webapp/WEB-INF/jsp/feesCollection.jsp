@@ -271,7 +271,8 @@
 				text-transform: capitalize;
 				border-radius: 4px;
 			}
-
+			tr.trClass:focus-within { background: #90CCB8; }
+			
         </style>
         <script type="text/javascript">
             /**
@@ -549,7 +550,7 @@
          *
          */
          
-         $(function(){
+/*          $(function(){
             
              $('#chckHead').click(function () {
                  var length = $('.chcktb2:checked').length;
@@ -583,7 +584,7 @@
                  }
              });
 
-         });
+         }); */
          
         function deleteRow(tableID) {
             try {
@@ -904,7 +905,46 @@
             }
             
         </script>
-    </head>
+
+		<script>
+		function calculate(index, isChecked) {
+		    var feesdueamount = parseInt(document.getElementById("dueamount_" + index).value, 10) || 0;
+		    var feescatamountInput = document.getElementById("amountpaying_" + index);
+		    var feescatamount = parseInt(feescatamountInput.value, 10) || 0;
+		    var grandTotalAmountInput = document.getElementById("grandTotalAmount");
+		    var totaldueamountInput = document.getElementById("totaldueamount");
+
+		    var grandAmount = parseInt(grandTotalAmountInput.value, 10) || 0;
+		    var dueAmount = parseInt(totaldueamountInput.value, 10) || 0;
+
+		    if (isChecked) {
+		        // Add the due amount to grand total and subtract from total due
+		        grandAmount += feesdueamount;
+		        dueAmount -= feesdueamount;
+		        feescatamountInput.value = feesdueamount;
+		    } else {
+		        // Subtract whatever was filled as amount paying from grand total, and add it back to due
+		        grandAmount -= feescatamount;
+		        dueAmount += feescatamount;
+		        feescatamountInput.value = 0;
+		    }
+
+		    grandTotalAmountInput.value = grandAmount;
+		    totaldueamountInput.value = dueAmount;
+		}
+		
+		function toggleAllChecks(headCheckbox) {
+			  document.querySelectorAll('.chcktb2').forEach(function(cb) {
+			    cb.checked = headCheckbox.checked;
+			    // Get index from value attribute: e.g., "sfsid_3" → index = 3
+			    var parts = cb.value.split('_');
+			    var index = parts[1]; // if your value is like "sfsid_3"
+			    calculate(index, cb.checked);
+			  });
+			}
+	</script>
+
+</head>
     <%
 //allow access only if session exists
 String user = null;
@@ -1047,7 +1087,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
                     <tr >
-                    	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                    	<th class="headerText"><input type="checkbox" id="chckHead" onclick="toggleAllChecks(this)"/></th>
                         <td class="headerText">Fees Category</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
                         <td class="headerText">Amount Paying</td>
@@ -1057,6 +1097,7 @@ for(Cookie cookie : cookies){
                 </thead>
 
 				<tbody>
+					<c:set var="totalfeesdue" value="${0}" />
 					<c:forEach items="${studentfeesdetails}" var="studentfeesdetails" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
@@ -1064,10 +1105,12 @@ for(Cookie cookie : cookies){
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
+								onclick="calculate(${status.index},this.checked)"
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
 							<c:out value="${studentfeesdetails.key.feesamount}/${studentfeesdetails.value}" />
+							<c:set var="totalfeesdue" value="${totalfeesdue + studentfeesdetails.value}" />
 							<input type="hidden" id="dueamount_${status.index}" value="${studentfeesdetails.value}"/>
 							</td>
 							<td class="dataText" align="center">
@@ -1131,16 +1174,32 @@ for(Cookie cookie : cookies){
 						</tr>
 					</c:forEach>
 				</tbody>
-				<tfoot>
-                    
-                    <tr>
+				<%-- <tfoot>
 
-                        <td colspan="3" align="right"><b>Total&nbsp;&nbsp;</b></td>
+						<tr>
+							<td colspan="3" align="right"><strong>Total Due:</strong></td>
+							<td align="center"><b><input type="text" name="totaldueamount" id="totaldueamount" value="${totalfeesdue}" readonly /></b></td>
+						</tr>
+
+						<tr>
+                        <td colspan="3" align="right"><b>Total Paying&nbsp;&nbsp;</b></td>
                         <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
                     </tr>
-                </tfoot>
+                </tfoot> --%>
 			</table>
-			<table>
+				<div id="summaryBar"
+					style="position: fixed; bottom: 10px; right: 30px; width: 45vw; /* Half of viewport with padding */ min-width: 300px; max-width: 600px; padding: 12px 24px; background: #f9f9f9; border: 2px solid #3f4d5a; border-radius: 7px; box-shadow: 0 2px 8px #3f4d5a33; z-index: 100; text-align: left;">
+					<span style="margin-right: 36px;font-weight: bold;font-size: 15px;"> <strong>Total
+							Due:</strong> <input type="text" name="totaldueamount" id="totaldueamount"
+						value="${totalfeesdue}" readonly
+						style="width: 90px; font-weight: bold; text-align: left;" />
+					</span> <span style="font-weight: bold;font-size: 15px;"> <strong>Total Amount Paying:</strong> <input
+						type="text" name="grandTotalAmount" id="grandTotalAmount"
+						value="0" readonly
+						style="width: 90px; font-weight: bold; text-align: left;" />
+					</span>
+				</div>
+				<table>
 					<tr>
 						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
                         <td align="left"><label><textarea  name="narrationreceipt"
@@ -1183,7 +1242,7 @@ for(Cookie cookie : cookies){
             
               
             <input type="button" value="submit" id="submitbtn"/>
-            
+            <br><br><br><br>
             
             <div id="dialogpaymentmethod" title="Payment Method">
 				
