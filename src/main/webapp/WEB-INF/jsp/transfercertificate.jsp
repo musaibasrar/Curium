@@ -586,12 +586,12 @@ for(Cookie cookie : cookies){
                     <td >Whether failed if so Once/Twice in the same Class:</td><td> <input  type="text" name="failpass" id="failpass" style="width: 200px" /></td>    
                     </tr>
                     <tr>
-                    <td >Subject Studied - First Subject: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px" /></td>
-                    <td >Second Subject:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px" /></td>    
+                    <td >Exam Name: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px" /></td>
+                    <td >MONTH & YEAR:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px" /></td>    
                     </tr>
                     <tr>
-                    <td >Third Subject: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="thirdsubject" id="thirdsubject" style="width: 200px" /></td>
-                    <td >Fourth Subject:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fourthsubject" id="Fourthsubject" style="width: 200px" /></td>    
+                    <td >REG. NO: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="thirdsubject" id="thirdsubject" style="width: 200px" /></td>
+                    <td >RESULT:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fourthsubject" id="Fourthsubject" style="width: 200px" /></td>    
                     </tr>
                     <tr>
                     <td>Fifth Subject: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fifthsubject" id="Fifthsubject" style="width: 200px" /></td>
@@ -623,6 +623,14 @@ for(Cookie cookie : cookies){
                     </tr>
                      <tr>
                     <td>Any other Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
+                    <td>College Name:&nbsp;&nbsp;&nbsp;&nbsp;</td><td>  <select name="collegename"
+									 id="collegename"
+									style="width: 200px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>PATRISWAMY SCIENCE PU COLLEGE, AURAD (B) - 585326</option>
+										<option>SRI SATHYAM PU COLLEGE AURAD (B)-585326</option>
+										<option>NALANDA COMPOSITE PRE-UNIVERSITY <br>COLLEGE AURAD (B)-585326</option>
+								</select></td>    
                     </tr>
                     </table>
                     <tr>

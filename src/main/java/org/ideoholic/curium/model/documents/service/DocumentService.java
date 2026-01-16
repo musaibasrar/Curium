@@ -113,6 +113,7 @@ public class DocumentService {
 		String conduct = DataUtil.emptyString(transferCertificateDto.getConduct());
 		String datecert = DataUtil.emptyString(transferCertificateDto.getDateCert());
 		String Remarks = DataUtil.emptyString(transferCertificateDto.getRemarks());
+		String Collegename = DataUtil.emptyString(transferCertificateDto.getCollegename());
 		Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
 		
 		student.setReasonleaving(leavingReason);
@@ -157,6 +158,7 @@ public class DocumentService {
 				 transferCertificateResponseDto.setRemarks(Remarks);
 				 transferCertificateResponseDto.setParents(parents);
 				 transferCertificateResponseDto.setTc(tc);
+				 transferCertificateResponseDto.setCollegename(Collegename);
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
@@ -195,6 +197,7 @@ public class DocumentService {
 			 transferCertificateResponseDto.setRemarks(Remarks);
 			 transferCertificateResponseDto.setParents(parents);
 			 transferCertificateResponseDto.setTc(tc);
+			 transferCertificateResponseDto.setCollegename(Collegename);
 			 transferCertificateResponseDto.setStatus(TransferStatus.TCNEW);
 			 return transferCertificateResponseDto;
 		 }

@@ -43,5 +43,6 @@ public class TransferCertificateResponseDto {
 		private String dateCert;
 		private String Remarks;
 		private String dateInWord;
+		private String collegename;
 		private Date dateOfTc;
 }
