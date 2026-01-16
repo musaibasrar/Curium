@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.feesdetails.service.FeesDetailsService;
 import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,10 @@ public class FeesDetailsAction {
 	
 	@Autowired
 	private FeesDetailsActionAdapter feesDetailsActionAdapter;
+	
+	@Autowired
+	private FeesCollectionActionAdapter feesCollectionActionAdapter;
+
 
 	@PostMapping("/download")
 	public String downloadFile() {
@@ -74,6 +79,22 @@ public class FeesDetailsAction {
 		}else{
 			return "error";
 		}
+		
+	}
+	
+	@PostMapping("/printDataForFeesReport")
+	public String printFeesReportData() {
+		
+	         feesCollectionActionAdapter.getFeesReport();
+			return "printfeesReportdetails";
+		
+	}
+	
+	@PostMapping("/printDataForFeesReportdue")
+	public String printFeesReportDueData() {
+		
+		 feesCollectionActionAdapter.getFeesReportDue();
+			return "printfeesDueReportdetails";
 		
 	}
 	
