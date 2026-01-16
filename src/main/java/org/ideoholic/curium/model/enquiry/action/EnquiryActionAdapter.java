@@ -157,7 +157,6 @@ public class EnquiryActionAdapter {
 		admissionEnquiryDto.setUserId(userId);
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.updateEnquiry(admissionEnquiryDto);
 		return admissionEnquiryResponseDto.isSuccess();
-
 	}
 
 	public void deleteEnquiry() {

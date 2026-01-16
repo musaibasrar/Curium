@@ -30,5 +30,4 @@ public class AdmissionEnquiryDto {
 	private String[] enquiryIds;
     private String branchId;
     private String userId;
-
 }
