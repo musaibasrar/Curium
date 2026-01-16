@@ -37,5 +37,6 @@ public class TransferCertificateDto {
     private String Remarks;
     private String dateOfTc;
     private String collegename;
+    private String studentAdmissionStatus;
 
 }

@@ -290,7 +290,10 @@
 			changeYear : true,
 			changeMonth : true,
 			dateFormat: 'dd/mm/yy',
-			yearRange: "-50:+0"
+			yearRange: "-50:+0",
+			onSelect: function () {
+				searchStudentDuplicate();
+		    }
 		});
 		$("#anim").change(function() {
 			$("#datepicker").datepicker("option", "showAnim", $(this).val());
@@ -932,6 +935,68 @@ $(document).ready(function() {
 			    document.getElementById('feesTotalAmount').value = totalAmount;
 			} */
         </script>
+        
+        <script>
+	var xmlHttp2;
+
+	function searchStudentDuplicate() {
+		
+		var studentName = document.getElementById('name').value;
+		var dob = document.getElementById('datepicker').value;
+		var aadhaarNumber = document.getElementById('disabilitychild').value;
+		var finalDob = null;
+		var finalAadhaar = null;
+		
+		// Student name is mandatory
+		if (!studentName || studentName.trim() === "") {
+		    console.warn("Student name missing. Skipping duplicate check.");
+		    return;
+		}
+
+		// Priority: Aadhaar
+		if (aadhaarNumber && aadhaarNumber.trim() !== "") {
+		    if (!/^\d{12}$/.test(aadhaarNumber)) {
+		        console.warn("Invalid Aadhaar number.");
+		        return;
+		    }
+		    finalAadhaar = aadhaarNumber.trim();
+		} 
+		// Fallback: Name + DOB
+		else if (dob && dob.trim() !== "") {
+		    finalDob = dob.trim();
+		} 
+		else {
+		    console.warn("Either Aadhaar or DOB is required.");
+		    return;
+		}
+
+		if (typeof XMLHttpRequest != "undefined") {
+			xmlHttp2 = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			xmlHttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
+		xmlHttp2.open(
+			"GET",
+			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
+			+ "&studentname=" + encodeURIComponent(studentName)
+			+ "&dob=" + encodeURIComponent(finalDob),
+			true
+		);
+		xmlHttp2.send(null);
+	}
+
+	function stateChangedStudentDuplicate() {
+		if (xmlHttp2.readyState == 4 || xmlHttp2.readyState == "complete") {
+			document.getElementById("duplicatestudentmsgaadhaar").innerHTML = xmlHttp2.responseText;
+			document.getElementById("duplicatestudentmsgname").innerHTML = xmlHttp2.responseText;
+			document.getElementById("duplicatestudentmsgdob").innerHTML = xmlHttp2.responseText;
+		}
+	}
+</script>
+
 </head>
 <%
 	//allow access only if session exists
@@ -1027,9 +1092,9 @@ $(document).ready(function() {
 							<td class="alignLeft">Student Name* &nbsp;</td>
 							<td ><label> <input
 									name="name" type="text" class="myclass" id="name" size="36" required
-									style="text-transform:capitalize;"
+									style="text-transform:capitalize;"  onblur="searchStudentDuplicate()"
 									required>
-							</label></td>
+							</label><div id="duplicatestudentmsgname"></div></td>
 
 							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
 							<td  height="30" class="alignLeft">&nbsp;Male<input
@@ -1055,12 +1120,46 @@ $(document).ready(function() {
 							<td class="alignLeft">Date Of Birth &nbsp;</td>
 							<td ><label> <input name="dateofbirth"
 									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
-									onchange="CalculateAge(this)"
+									onchange="CalculateAge(this)" onblur="searchStudentDuplicate()"
 									data-validate="validate(required)">
+							</label><div id="duplicatestudentmsgdob"></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
+							<td><label> <input
+									name="age" type="text" class="myclass" id="age" size="36"
+									>
 							</label></td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+
+							<td  class="alignLeft">Place Of Birth, Tq,
+								Dist.&nbsp;</td>
+							<td><label> <input
+							style="text-transform:capitalize;"
+									name="place" type="text" class="myclass" id="place" size="36">
+							</label></td>
+							
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
 							          College<input type="checkbox" value="college" name="feescategories" id="college"/>
+							          <label style="display: none;">&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+								&nbsp;Transport <select name="feescategories" id="transport">
+										        <option value="Select">-- Select --</option>
+										        <option value="Malmal">Malmal</option>
+										        <option value="Madhubani">Madhubani</option>
+										        <option value="xyz">xyz</option>
+										    </select></label>
 								</label></td>
 					<!-- 	<tr>
 
@@ -1218,14 +1317,14 @@ $(document).ready(function() {
 						</tr>
 						
 						<tr>
-							
 							<td  class="alignLeft" >Student's Aadhar Card No.&nbsp;</td>
 							<td ><label> <input
 									name="disabilitychild" type="text" class="myclass"
 									style="text-transform:capitalize;"
 									id="disabilitychild" size="36">
 
-							</label></td>
+							</label><div id="duplicatestudentmsgaadhaar"></div></td>
+						
 							<td  class="alignLeft" style="padding-left: 20px;">Mother Tongue &nbsp;</td>
 							<td >
 								 <label> <select name="motherT"
