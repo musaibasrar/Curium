@@ -979,7 +979,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			"/patriswamy/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),
@@ -1319,7 +1319,7 @@ $(document).ready(function() {
 						<tr>
 							<td  class="alignLeft" >Student's Aadhar Card No.&nbsp;</td>
 							<td ><label> <input
-									name="disabilitychild" type="text" class="myclass"
+									name="disabilitychild" type="text" class="myclass" onblur="searchStudentDuplicate()"
 									style="text-transform:capitalize;"
 									id="disabilitychild" size="36">
 
@@ -1435,7 +1435,7 @@ $(document).ready(function() {
 									style="text-transform:capitalize;"
 									size="36" >
 							</label></td>
-							<td class="alignLeft">Language Offered in Part-I &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Language Offered in Part-I &nbsp;</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass" id="languagesstudied"
