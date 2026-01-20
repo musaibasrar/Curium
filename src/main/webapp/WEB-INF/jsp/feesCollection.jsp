@@ -45,15 +45,24 @@
                 font-size: 11px;
                 font-weight: bold;
             }
+            .dataTextFeesCollection {
+			border-radius: 3px;
+			font-family: Tahoma;
+			color: #4b6a84;
+			font-size: 12px;
+			letter-spacing: normal;
+			text-align: center;
+			background-color: #E3EFFF;
+		}
             .dataTextInActive {
                 border-radius:1px;
                 font-family: Tahoma;
-                color: #4b6a84;
+                color: #eb6000;
                 font-size: 12px;
                 font-weight: bold;
                 letter-spacing: normal;
                 text-align: center;
-                vertical-align: top;
+                vertical-align: middle;
                 text-decoration:none;
             }
             .headerText {
@@ -68,6 +77,20 @@
                 vertical-align: middle;
                 text-align: center;
                 font-size: 16px;
+                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
+            }
+            .headerTextPopup {
+                border-radius:3px;
+                font-family: Tahoma;
+                font-size: 12px;
+                background-color: #4b6a84;
+                color: #FFFFFF;
+                font-weight: normal;
+                width: auto ;
+                height: 22px;
+                vertical-align: middle;
+                text-align: center;
+                font-size: 12px;
                 background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
             }
             .headerTD{
@@ -827,6 +850,27 @@
                        });
                    });
                    
+                   
+                   $("#feescollectionbtn").on("click",function(){
+                    	 $( "#dialogfeescollection" ).dialog( "open" );
+                         return false;
+
+                     });
+                     
+                     $(function() {
+                         $( "#dialogfeescollection" ).dialog({
+                             autoOpen: false,
+                             height: 230,
+                             width: 550,
+                             modal: true,
+                             buttons: {
+                                 OK: function() {
+                                     		$( this ).dialog( "close" );
+                              		   }
+                             }
+                         });
+                     });
+                   
                    $("#transferdate").datepicker({
            			changeYear : true,
            			changeMonth : true,
@@ -1237,6 +1281,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Father Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fatherNameDetails" id="fatherNameDetails" value="${fatherNameDetails}" class="myclass" readonly style="border: none;"/></td>
+                    	<td class="alignLeft">Fees Collection&nbsp;&nbsp;&nbsp;<a class="dataTextInActive" href="#" id="feescollectionbtn"/>View Details</a></td>
                     </tr>
                     <tr>
 						<td><br></td>
@@ -1408,6 +1453,38 @@ for(Cookie cookie : cookies){
               
             <input type="button" value="submit" id="submitbtn"/>
             <br><br><br><br>
+            
+            <div id="dialogfeescollection" title="Fees Collection Details">
+                                             
+                   <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+                    <thead>
+                        <tr>
+                            <th title="click to sort" class="headerTextPopup">Date of fees</th>
+                            <th title="click to sort" class="headerTextPopup">Reference Number</th>
+                            <th title="click to sort" class="headerTextPopup">Total Amount</th>
+                            <th title="click to sort" class="headerTextPopup">View Details</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <c:forEach items="${receiptinfo}" var="receiptinfo">
+
+                            <tr style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                                
+                                <td  class="dataTextFeesCollection"><c:out value="${receiptinfo.date}"/></a></td>
+                                <td  class="dataTextFeesCollection"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
+                                <td class="dataTextFeesCollection"><c:out value="${receiptinfo.totalamount}"/></td>
+                                <td  class="dataTextFeesCollection"><a class="dataTextInActive" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                 
+
+                            </tr>
+                        </c:forEach>
+                        
+                        
+                    </tbody>
+                   
+                </table>
+                </div>
             
             <div id="dialogpaymentmethod" title="Payment Method">
 				
