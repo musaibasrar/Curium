@@ -132,7 +132,7 @@ for(Cookie cookie : cookies){
 			</td>
 				<td >
 					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
+					<h2 style="margin-bottom:0px;">${collegename}</h2>
 					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
 					
 				</td>

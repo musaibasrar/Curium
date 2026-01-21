@@ -84,7 +84,7 @@ span{
     display:inline-block;
     border-bottom:2px solid black;
     padding-bottom:1px;
-    width: 300px;
+    //width: 300px;
     font-weight: normal;
     text-align:center;
 }
@@ -94,15 +94,35 @@ span{
 float:right;
 }
 </style>
-	<script type="text/javascript" src="/alfarooq/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/alfarooq/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	<script type="text/javascript" src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        
         <title>Study Certificate</title>
+ <script>
+ $(function() {
+
+		
+		$(".printStudyCertificate").button().click(function() {
+			printStudyCertificate();
+
+		});
+
+		
+					
+	});
+ function printStudyCertificate(){
+     	var form1 = document.getElementById("form1");
+ 		form1.action = "/patriswamy/DocumentsProcess/printStudyCertificate";
+ 		form1.method = "POST";
+ 		form1.submit();
+     }
+ </script>
 </head>
 <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
+	response.sendRedirect("/patriswamy/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -116,7 +136,7 @@ for(Cookie cookie : cookies){
 %>
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
+	<form id="form1" method="post" class="bodymargin">
 		<br>
 		<table align="center">
 			
@@ -127,7 +147,14 @@ for(Cookie cookie : cookies){
 			</td>
 				<td >
 					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
+					<h2 style="margin-bottom:0px;"><select name="collegename"
+									 id="collegename"
+									style="width: 500px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>PATRISWAMY SCIENCE PU COLLEGE, AURAD (B) - 585326</option>
+										<option>SRI SATHYAM PU COLLEGE AURAD (B)-585326</option>
+										<option>NALANDA COMPOSITE PRE-UNIVERSITY <br>COLLEGE AURAD (B)-585326</option>
+								</select></h2>
 					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
 					
 				</td>
@@ -238,7 +265,7 @@ for(Cookie cookie : cookies){
 
 			
 			<tr>
-              <td align="center"><a id="print" href="/patriswamy/DocumentsProcess/printStudyCertificate">Print</a></td>
+              <td align="center"><button class="printStudyCertificate"  >Print</button></td>
             </tr>
 		</TABLE>
 	</form>
