@@ -365,10 +365,22 @@ public class MarksDetailsDAO {
 			
 			List<Marks> allMarks = new ArrayList<>();
 			allMarks.addAll(marksList);
-			allMarks.addAll(marksListA1);
-			allMarks.addAll(marksListA2);
-			allMarks.addAll(marksListA3);
-			allMarks.addAll(marksListA4);
+			
+			if (!marksListA1.isEmpty()) {
+			    allMarks.addAll(marksListA1);
+			}
+
+			if (!marksListA2.isEmpty()) {
+			    allMarks.addAll(marksListA2);
+			}
+
+			if (!marksListA3.isEmpty()) {
+			    allMarks.addAll(marksListA3);
+			}
+
+			if (!marksListA4.isEmpty()) {
+			    allMarks.addAll(marksListA4);
+			}
 
 			for (Marks marks : allMarks) {
 			    session.save(marks);

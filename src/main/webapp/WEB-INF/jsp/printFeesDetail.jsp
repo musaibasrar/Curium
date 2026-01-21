@@ -180,9 +180,9 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td>&nbsp;&nbsp;<img src="/littleflower/images/littleflower.jpg" width="75" height="75" style="margin:5px;"/></td>
+				<td>&nbsp;&nbsp;<img src="/littleflower/images/littleflower.jpg" width="56" height="50" style="margin:5px;"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-family: ">${branchname}</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-family: "><img src="/littleflower/images/littleflowerschoolname.png" width="391" height="25" /></label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">${branchcontact}</label>
 				</td>

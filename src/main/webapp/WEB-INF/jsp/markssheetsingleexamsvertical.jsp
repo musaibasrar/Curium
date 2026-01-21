@@ -235,7 +235,7 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td style="padding-left: 200px;"><img src="/littleflower/images/littleflower.jpg" width="72" height="80"/></td>
 				<td>
-				<label class="dataTextBoldCenter">${branchname}</label><br>
+				<label class="dataTextBoldCenter"><img src="/littleflower/images/littleflowerschoolname.png" width="391" height="25" /></label><br>
 				<label class="addressLine">${branchaddress}</label>
 				</td>
 			</tr>

@@ -804,7 +804,8 @@ for(Cookie cookie : cookies){
     							</div>
 								
     							<div class="feesreminder box">
-    								<span style="font-size: 16px;">Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">End Date</span>.Please ignore if already paid.</span>
+    								<span style="font-size: 16px;">
+    								Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">End Date</span>.Please ignore if already paid.</span>
 								<br><br>
 								<label style="color: red;">End Date:&nbsp;&nbsp;</label><input type="text" id="feesremindervar1" name="feesremindervar1" maxlength="9">
 								<input type="hidden" id="feesremindervar1" name="feesremindervar1" maxlength="30">

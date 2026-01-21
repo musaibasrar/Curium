@@ -268,6 +268,7 @@ public class MarksDetailsActionAdapter {
         request.setAttribute("subjectid", responseDto.getSubject());
         request.setAttribute("examid", responseDto.getExam());
         request.setAttribute("studentmarkmap", responseDto.getStudentsMarksMap());
+        request.setAttribute("classsearchselected", request.getParameter("classsearch"));
         return responseDto.isSuccess();
 
     }
