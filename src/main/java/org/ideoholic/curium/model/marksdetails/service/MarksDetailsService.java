@@ -600,11 +600,8 @@ public class MarksDetailsService {
 				List<ExamsMarks> otherExamMarksList = new ArrayList<ExamsMarks>();
 				Parents studentDetails = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentIds[i]));
 				List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-				String startDateStr = dto.getStartDate();
-				String endDateStr = dto.getEndDate();
-				DateUtil dateUtil = new DateUtil();
-				Date startDate = dateUtil.indiandateParser(startDateStr);
-				Date endDate = dateUtil.indiandateParser(endDateStr);
+				Date startDate = DateUtil.indiandateParser(dto.getStartDate());
+				Date endDate = DateUtil.indiandateParser(dto.getEndDate());
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String  startDateFormatted=sdf.format(startDate);
 				String endDateFormatted=sdf.format(endDate);
@@ -620,12 +617,6 @@ public class MarksDetailsService {
 					    totalHolidays = totalHolidays + 1;
 					    holidayCount += totalHolidays;
 				 }
-				try {
-					startDate = sdf.parse(sdf.format(startDate));
-					endDate = sdf.parse(sdf.format(endDate));
-				} catch (ParseException e) {
-					e.printStackTrace();
-				}
 				long diffInMillies = endDate.getTime() - startDate.getTime();
 				long totalDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1; // +1 to include start date
 				Calendar cal = Calendar.getInstance();
@@ -1973,16 +1964,31 @@ public ResultResponse addMarksSubSubject(MarksUpdateDto dto, String branchId, St
 	
 	
     List<Marks> mainMarksList = buildMarksList(studentIds, studentsMarks, subjectDetails, examId, currentYear, userId, branchId, subjectGradeDetailsList, 0);
+    List<Marks> marksListA1 = new ArrayList<Marks>();
+    List<Marks> marksListA2 = new ArrayList<Marks>();
+    List<Marks> marksListA3 = new ArrayList<Marks>();
+    List<Marks> marksListA4 = new ArrayList<Marks>();
     
-    List<Marks> marksListA1 = prepareSubSubjectMarks("A1", studentIds, studentsMarksA1, subjectDetails, examId, currentYear, userId, branchId);
-    List<Marks> marksListA2 = prepareSubSubjectMarks("A2", studentIds, studentsMarksA2, subjectDetails, examId, currentYear, userId, branchId);
-    List<Marks> marksListA3 = prepareSubSubjectMarks("A3", studentIds, studentsMarksA3, subjectDetails, examId, currentYear, userId, branchId);
-    List<Marks> marksListA4 = prepareSubSubjectMarks("A4", studentIds, studentsMarksA4, subjectDetails, examId, currentYear, userId, branchId);
-
-    if (marksListA1.isEmpty() || marksListA2.isEmpty() || marksListA3.isEmpty() || marksListA4.isEmpty()) {
+    if(studentsMarksA1!=null) {
+    	marksListA1 = prepareSubSubjectMarks("A1", studentIds, studentsMarksA1, subjectDetails, examId, currentYear, userId, branchId);
+    }
+    
+    if(studentsMarksA2!=null) {
+    	marksListA2 = prepareSubSubjectMarks("A2", studentIds, studentsMarksA2, subjectDetails, examId, currentYear, userId, branchId);
+    }
+    
+    if(studentsMarksA3!=null) {
+    	marksListA3 = prepareSubSubjectMarks("A3", studentIds, studentsMarksA3, subjectDetails, examId, currentYear, userId, branchId);
+    }
+    
+    if(studentsMarksA4!=null) {
+    	marksListA4 = prepareSubSubjectMarks("A4", studentIds, studentsMarksA4, subjectDetails, examId, currentYear, userId, branchId);
+    }
+    
+    /*f (marksListA1.isEmpty() || marksListA2.isEmpty() || marksListA3.isEmpty() || marksListA4.isEmpty()) {
         result.setMessage("Skipped: One or more sub-subject marks missing");
         return result;
-    }
+    }*/
 
 		String output = new MarksDetailsDAO().addMarksSubSubject(mainMarksList,marksListA1,marksListA2,marksListA3,marksListA4);
 		

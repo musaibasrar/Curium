@@ -737,30 +737,64 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Marks</th>
 						<c:choose>
-						    <c:when test="${subjectselected == 'English' 
-						        or subjectselected == 'Kannada' 
-						        or subjectselected == 'Urdu/Hindi' 
-						        or subjectselected == 'Hindi' 
-						        or subjectselected == 'Deeniyat'}">
-						        <th class="headerText">Reading</th>
-						        <th class="headerText">Writing</th>
-						        <th class="headerText">Listening</th>
-						        <th class="headerText">Speaking</th>
+						    <c:when test="${classsearchselected == '8' or classsearchselected == '9' or classsearchselected == '10'}">
+						        <th class="headerText">A1(15)</th>
+						        <th class="headerText">A2(15)</th>
 						    </c:when>
-						    <c:when test="${subjectselected == 'Maths' 
-						        or subjectselected == 'Science' 
-						        or subjectselected == 'Social'}">
-						        <th class="headerText">Concept</th>
-						        <th class="headerText">Activity</th>
-						        <th class="headerText">Tables</th>
+						
+						    <c:when test="${(subjectselected == 'English'
+						                      or subjectselected == 'Kannada'
+						                      or subjectselected == 'Urdu/Hindi'
+						                      or subjectselected == 'Hindi'
+						                      or subjectselected == 'Deeniyat')
+						                     and (classsearchselected == '1' or classsearchselected == '2' or classsearchselected == '3' or classsearchselected == '4' or classsearchselected == '5')}">
+						        <th class="headerText">Reading-(10)</th>
+						        <th class="headerText">Writing-(10)</th>
+						        <th class="headerText">Listening-(10)</th>
+						        <th class="headerText">Speaking-(10)</th>
+						    </c:when>
+						
+						    <c:when test="${(subjectselected == 'English'
+						                      or subjectselected == 'Kannada'
+						                      or subjectselected == 'Urdu/Hindi'
+						                      or subjectselected == 'Hindi'
+						                      or subjectselected == 'Deeniyat')
+						                     and (classsearchselected == '6' or classsearchselected == '7')}">
+						        <th class="headerText">A-1/W W-(10)</th>
+						        <th class="headerText">A-2/L C-(10)</th>
+						        <th class="headerText">A-3/C D S-(10)</th>
+						        <th class="headerText">A-4/Op A-(10)</th>
+						    </c:when>
+						
+						    <c:when test="${(subjectselected == 'Maths'
+						                      or subjectselected == 'Mathematics'
+						                      or subjectselected == 'Science'
+						                      or subjectselected == 'Social')
+						                     and (classsearchselected == '1' or classsearchselected == '2' or classsearchselected == '3' or classsearchselected == '4' or classsearchselected == '5')}">
+						        <th class="headerText">Concept-(10)</th>
+						        <th class="headerText">Activity-(10)</th>
+						        <th class="headerText">Tables-(10)</th>
 						        <th class="headerText">Mental Ability</th>
 						    </c:when>
-						    <c:when test="${subjectselected == 'EVS'}">
+						
+						    <c:when test="${(subjectselected == 'Maths'
+						                      or subjectselected == 'Mathematics'
+						                      or subjectselected == 'Science'
+						                      or subjectselected == 'Social')
+						                     and (classsearchselected == '6' or classsearchselected == '7')}">
+						        <th class="headerText">A-1/R W D-(10)</th>
+						        <th class="headerText">A-2/G P-(10)</th>
+						        <th class="headerText">A-3/M C Qs-(10)</th>
+						        <th class="headerText">A-4/OP A-(10)</th>
+						    </c:when>
+						
+						    <c:when test="${subjectselected == 'EVS' or subjectselected == 'E.V.S'}">
 						        <th class="headerText">Observation</th>
 						        <th class="headerText">Identification</th>
 						        <th class="headerText">Activity</th>
 						        <th class="headerText">Project</th>
 						    </c:when>
+						
 						    <c:otherwise>
 						        <th class="headerText">A1</th>
 						        <th class="headerText">A2</th>
@@ -792,9 +826,18 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 							<c:choose>
 								
     							<c:when test="${not empty Parents.value}">
-    							<c:set var="totalColumns" value="5" />
-								<c:set var="printedCount" value="0" />
-								
+    							<c:choose>
+									    <c:when test="${classsearchselected == '8' or classsearchselected == '9' or classsearchselected == '10'}">
+									    <input type="text" id="marksidHello" name="marksidHello" value="Hello HI">
+									       <c:set var="totalColumns" value="2" />
+											<c:set var="printedCount" value="0" />
+									    </c:when>
+									    <c:otherwise>
+			    							<c:set var="totalColumns" value="5" />
+											<c:set var="printedCount" value="0" />
+										</c:otherwise>	
+										
+								</c:choose>
 								<c:forEach items="${Parents.value}" var="marksobtained">
 									<td class="dataText">
 									<c:if test="${marksobtained.value <= 100}">

@@ -480,7 +480,8 @@ function updateHeaders(selectElement) {
     const a2 = document.getElementById("a2");
     const a3 = document.getElementById("a3");
     const a4 = document.getElementById("a4");
-
+    
+    const classSelected = document.getElementById("classsearchselected").value;
     // Reset default
     a1.textContent = "A1";
     a2.textContent = "A2";
@@ -488,27 +489,86 @@ function updateHeaders(selectElement) {
     a4.textContent = "A4";
 
     // Subject groups
-    const languageSubjects = ["English", "Kannada", "Urdu", "Hindi", "Deeniyat"];
-    const stemSubjects = ["Maths", "Science", "Social"];
-    const evsSubjects = ["EVS"];
+    const languageSubjects = ["English", "Kannada", "Urdu/Hindi", "Deeniyat"];
+    const stemSubjects = ["Mathematics", "Science", "Social"];
+    const evsSubjects = ["E.V.S"];
+    const classArrayPrimary = ["1","2","3","4","5"];
+    const classArrayHigh = ["6","7"];
+    const classArrayHighSecondary = ["8","9","10"];
 
     if (languageSubjects.includes(selectedSubject)) {
-        a1.textContent = "Reading";
-        a2.textContent = "Writing";
-        a3.textContent = "Listening";
-        a4.textContent = "Speaking";
+    	
+    	if(classArrayPrimary.includes(classSelected)){
+    		a1.textContent = "Reading-(10)";
+            a2.textContent = "Writing-(10)";
+            a3.textContent = "Listening-(10)";
+            a4.textContent = "Speaking-(10)";
+    	}else if(classArrayHigh.includes(classSelected)){
+    		a1.textContent = "A-1/W W-(10)";
+            a2.textContent = "A-2/L C-(10)";
+            a3.textContent = "A-3/C D S-(10)";
+            a4.textContent = "A-4/Op A-(10)";
+    	}
+    	
+        
     } else if (stemSubjects.includes(selectedSubject)) {
-        a1.textContent = "Concept";
-        a2.textContent = "Activity";
-        a3.textContent = "Tables";
-        a4.textContent = "Mental Ability";
+    	
+    	if(classArrayPrimary.includes(classSelected)){
+	        a1.textContent = "Concept-(10)";
+	        a2.textContent = "Activity-(10)";
+	        a3.textContent = "Tables-(10)";
+	        a4.textContent = "Mental Ability";
+    	}else if (classArrayHigh.includes(classSelected)){
+    		a1.textContent = "A-1/R W D-(10)";
+	        a2.textContent = "A-2/G P-(10)";
+	        a3.textContent = "A-3/M C Qs-(10)";
+	        a4.textContent = "A-4/OP A-(10)";
+    	}
+    	
     } else if (evsSubjects.includes(selectedSubject)) {
         a1.textContent = "Observation";
         a2.textContent = "Identification";
         a3.textContent = "Activity";
         a4.textContent = "Project";
     }
+    
+    if(classArrayHighSecondary.includes(classSelected)){
+		a1.textContent = "A1(15)";
+        a2.textContent = "A2(15)";
+        document.getElementById("a3").style.display = "none";
+        document.getElementById("a4").style.display = "none";
+        hideColumnClass('col-a3');
+        hideColumnClass('col-a4');
+	}else {
+		  showColumnClass('col-a3');
+		  showColumnClass('col-a4');
+		}
 }
+
+	function hideColumnClass(colClass) {
+		  document.querySelectorAll('.' + colClass).forEach(el => {
+		    // hide the cell/header
+		    el.style.display = 'none';
+	
+		    // disable all form controls inside the cell so they are NOT submitted
+		    el.querySelectorAll('input, select, textarea, button').forEach(inp => {
+		      // preserve original name if you later want to restore it
+		      if (inp.name && !inp.dataset.origName) inp.dataset.origName = inp.name;
+		      inp.disabled = true;
+		    });
+		  });
+		}
+		
+	function showColumnClass(colClass) {
+		  document.querySelectorAll('.' + colClass).forEach(el => {
+		    el.style.display = '';
+		    el.querySelectorAll('input, select, textarea, button').forEach(inp => {
+		      inp.disabled = false;
+		      // optionally restore name if you removed it elsewhere
+		      if (inp.dataset.origName) inp.name = inp.dataset.origName;
+		    });
+		  });
+		}
 </script>
 
 
@@ -781,7 +841,7 @@ for(Cookie cookie : cookies){
 								maxlength="3"
 								 /></td>
 								 
-								 <td class="dataText"><input type="text"
+								 <td class="dataText col-a3"><input type="text"
 								id="studentMarksA3" 
 								name="studentMarksA3"
 								onkeyup="checkMandatory();" value="0" style="width: 50px;border-radius:4px;"
@@ -789,7 +849,7 @@ for(Cookie cookie : cookies){
 								maxlength="3"
 								 /></td>
 								 
-								 <td class="dataText"><input type="text"
+								 <td class="dataText col-a4"><input type="text"
 								id="studentMarksA4" 
 								name="studentMarksA4"
 								onkeyup="checkMandatory();" value="0" style="width: 50px;border-radius:4px;"

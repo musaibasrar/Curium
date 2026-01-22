@@ -152,7 +152,7 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td ><img src="/littleflower/images/littleflower.jpg" width="158" height="140"/></td>
 				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	${branchname}</h1>
+				<h1 style="margin-bottom:0px;">	<img src="/littleflower/images/littleflowerschoolname.png" width="391" height="25" /></h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	${branchaddress}</h4>
 				<h6 style="margin-top:0px; margin-bottom:0px;">${branchcontact}</h6>
 				</td>

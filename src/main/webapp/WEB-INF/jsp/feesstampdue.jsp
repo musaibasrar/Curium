@@ -525,11 +525,15 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 				
 					<table>
+					<tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead" /></td>
+						</tr>
 						<tr>
-							<td>Class &nbsp;&nbsp;&nbsp;&nbsp;</td>
+							<td style="font-weight: bold;color:#325F6D">Class &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;</td>
 							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
-										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
+										<input type="checkbox" class = "chcktbl"   name="classsearch" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}
 										</c:if>	
 							</c:forEach>
@@ -555,7 +559,7 @@ for(Cookie cookie : cookies){
 					
 						<tr>
                     
-                        <td style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
+                        <td style="width: 45%;font-weight: bold;color:#325F6D">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
                         	   <label>
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 120px">

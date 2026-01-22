@@ -63,6 +63,9 @@ public class FeesCollectionActionAdapter {
         dto.setStudentType(request.getParameter("studenttype"));
         ResultResponse resultResponse = feesCollectionService.getFeesReport(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+        request.setAttribute("selectedClassList", dto.getAddClass());
+        request.setAttribute("selectedFeesCategoryList", dto.getFeesCat());
+
     }
 
     public void undoFeesReceipt() {
@@ -317,6 +320,8 @@ public class FeesCollectionActionAdapter {
 
         ResultResponse resultResponse = feesCollectionService.getFeesReportDue(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+        request.setAttribute("selectedFeesCategoryList", dto.getFeesCat());
+        request.setAttribute("selectedClassList", dto.getAddClass());
     }
 
     public void getFeesStampDueReport() {

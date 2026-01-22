@@ -355,6 +355,13 @@
 		form1.submit();
 
 	}
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/FeesDetails/printDataForFeesReportdue";
+		form1.method = "POST";
+		form1.submit();
+}
 
 	$(function() {
 
@@ -395,6 +402,16 @@
 				primary : "ui-icon-transferthick-e-w"
 			}
 		});
+	});
+	
+	$(function() {
+		$("#print").button({
+			 icons : {
+				primary : "ui-icon-print"
+			} 
+		}).click(function(){
+			printRecords();	
+     	});
 	});
 
 	$(function() {
@@ -464,6 +481,42 @@
 		});
 
 	});
+	
+	
+	$(function() {
+		$('#chckHead1').click(function() {
+			var length = $('.chcktbl1:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktbl1:checked').attr('checked', false);
+				this.checked = false;
+
+			} else {
+				if (this.checked == false) {
+					$('.chcktbl1:checked').attr('checked', false);
+				} else {
+					$('.chcktbl1:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktbl1').click(function() {
+			var length = $('.chcktbl:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktbl1:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktbl1:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+	
+
 	
 </script>
 
@@ -594,26 +647,47 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 				
 					<table>
-						<tr>
-							<td style="font-weight: bold;color:#325F6D">Class: &nbsp;&nbsp;&nbsp;&nbsp;</td>
-							
-							<td><c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-										
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
-										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</c:if>	
-							</c:forEach>
-								<label style="visibility: hidden;"> <select name="secsearch" id="secsearch">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<option value="${classdetailslist.section}">
-												<c:out value="${classdetailslist.section}" />
-											</option>
-										</c:if>	
-										</c:forEach></td>
+					<tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead1" /></td>
 						</tr>
+						<tr>
+    <td style="font-weight:bold;color:#325F6D">Class:</td>
+    <td>
+
+        <c:forEach items="${classdetailslist}" var="item">
+
+            <!-- build Class--Section -->
+            <c:set var="classSec" value="${item.classdetails}" />
+
+            <!-- reset checked flag -->
+            <c:set var="isChecked" value="false" />
+
+            <!-- keep checked after search -->
+            <c:forEach items="${selectedClassList}" var="selected">
+                <c:if test="${selected eq classSec}">
+                    <c:set var="isChecked" value="true" />
+                </c:if>
+            </c:forEach>
+
+            <c:if test="${not empty item.classdetails}">
+                <label class="labelClass"
+                       style="font-weight:bold;color:#325F6D; display:inline-block; margin-right:15px;">
+                    <input type="checkbox"
+                           class="chcktbl1"
+                           name="classsearch"
+                           value="${classSec}"
+                           <c:if test="${isChecked}">checked</c:if>
+                           onclick="syncSelectAll()" />
+                    ${classSec}
+                </label>
+            </c:if>
+
+        </c:forEach>
+
+    </td>
+</tr>
+
 						
 							<tr>
 							<td><br /></td>
@@ -653,20 +727,42 @@ for(Cookie cookie : cookies){
 						</tr>
 											
 						<tr>
-							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
-							<td id="feescat">
-							<div style="overflow:scroll;width:420px; height: 100px;">
-							<c:forEach items="${feescategory}" var="feescategory">
-										<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
-									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
-									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</label><br>
-							
-								</c:forEach>
-								</div>
-							</td>
-							
-						</tr>
+    <td></td>
+    <td id="feescat">
+        <div style="overflow:scroll;width:420px;height:100px;">
+
+            <c:forEach items="${feescategory}" var="item">
+
+                <!-- reset checked flag -->
+                <c:set var="isChecked" value="false" />
+
+                <!-- keep checked after search -->
+                <c:forEach items="${selectedFeesCategoryList}" var="selected">
+                    <c:if test="${selected eq item.idfeescategory}">
+                        <c:set var="isChecked" value="true" />
+                    </c:if>
+                </c:forEach>
+
+                <label class="labelClass" style="font-weight:bold;color:#325F6D">
+                    <input type="checkbox"
+                           name="feescategory"
+                           class="chcktbl"
+                           value="${item.idfeescategory}"
+                           <c:if test="${isChecked}">checked</c:if>
+                           onclick="syncFeesSelectAll()" />
+                    ${item.feescategoryname} :
+                </label>
+
+                <label style="font-weight:bold;color:#eb6000">
+                    ${item.particularname}
+                </label>
+                <br/>
+
+            </c:forEach>
+
+        </div>
+    </td>
+</tr>
 						 <tr>
 							<td><br /></td>
 
@@ -771,6 +867,8 @@ for(Cookie cookie : cookies){
 									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
 									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+								    <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
+								    <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
 								</c:forEach>
 							</td>
 							<td class="dataText">
@@ -792,12 +890,12 @@ for(Cookie cookie : cookies){
                     
                     <td  class="footerTD" colspan="9" >
                     
-                    		<button value="Export" type="submit" id="export">Export</button>
+                    		<button value="Export" type="submit" id="export">Export</button>&nbsp;&nbsp;<button value="Print" id="print">Print</button>
                     		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;
-                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount }</label>
+                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (${TotalDueper}%)</label>
                             </td>
                    </tr>
                    
