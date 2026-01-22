@@ -257,6 +257,7 @@
 						<th class="datath">Student Name</th>
 						<th class="datath">Class</th>
 						<th class="datath">Father Name</th>
+						<th class="datath">Contact</th>
 						 <th></th> 
 				       	<th class="datath">Fees Summary</th>
  				 </tr>
@@ -274,6 +275,7 @@
 							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.student.classstudying}" /></td>
 							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.fathersname}" /></td>
+							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.contactnumber}" /></td>
 							 <td width="0px;"> 
 									<c:set var="DueAmount" value="0" />
 									<c:set var="TotalAmount" value="0" />
