@@ -172,8 +172,9 @@ public class DocumentAction {
 		}
 	}
 
-	@GetMapping("/printStudyCertificate")
+	@PostMapping("/printStudyCertificate")
 	public String printStudyCertificate() {
+		documentActionAdapter.printStudyCertificate();
 		return "studycertprint";
 	}
 	

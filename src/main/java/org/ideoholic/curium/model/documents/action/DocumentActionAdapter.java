@@ -261,4 +261,9 @@ public class DocumentActionAdapter {
 		
 	}
 
+	public void printStudyCertificate() {
+		request.setAttribute("collegename", request.getParameter("collegename"));
+		
+	}
+
 }
