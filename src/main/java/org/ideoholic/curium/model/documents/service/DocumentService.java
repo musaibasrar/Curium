@@ -996,11 +996,6 @@ public class DocumentService {
 		        return printMultipleEmployeesResponseDto;
 			}
 
-			public TransferCertificateResponseDto printStudyCertificate(TransferCertificateDto transferCertificateDto) {
-				TransferCertificateResponseDto transferCertificateResponseDto = new TransferCertificateResponseDto();
-				String collegeName = transferCertificateDto.getCollegename();
-				transferCertificateResponseDto.setCollegename(collegeName);
-				return transferCertificateResponseDto;
-			}
+			
 			 
 }

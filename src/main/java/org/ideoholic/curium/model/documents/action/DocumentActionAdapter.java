@@ -262,10 +262,7 @@ public class DocumentActionAdapter {
 	}
 
 	public void printStudyCertificate() {
-		TransferCertificateDto transferCertificateDto = new TransferCertificateDto();
-		transferCertificateDto.setCollegename(request.getParameter("collegename"));
-		TransferCertificateResponseDto transferCertificateResponseDto = documentService.printStudyCertificate(transferCertificateDto);
-		request.setAttribute("collegename", transferCertificateResponseDto.getCollegename());
+		request.setAttribute("collegename", request.getParameter("collegename"));
 		
 	}
 
