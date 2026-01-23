@@ -398,6 +398,10 @@ public static String getStringDate(Date dateofbirth) {
 
 public static String dateParserddMMYYYY(Date date) {
 	
+	if (date == null) {
+        return "";
+    }
+	
 	String datefinal = null;
 	try {
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
