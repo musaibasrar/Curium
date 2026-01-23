@@ -17,4 +17,6 @@ public class StudentAttendanceMonthlyResponseDto {
     private int totalAbsent;
     private List<String> classSecAttendanceList;
     private List<Student> studentList;
+    private int totalNoOfStudents;
+    private String attendanceDate;
 }
