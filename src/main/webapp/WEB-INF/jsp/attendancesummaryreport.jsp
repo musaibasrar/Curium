@@ -363,8 +363,8 @@
 }
 </style>
 
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/daralmajd/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/daralmajd/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/daralmajd/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
