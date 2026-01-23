@@ -12,6 +12,7 @@ import org.hibernate.query.Query;
 
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 
@@ -386,6 +387,43 @@ public class EmployeeDAO {
 			HibernateUtil.closeSession();
 		 }
 		
+	}
+	
+	public java.util.List<Teacher> getTeachersList(String query) {
+		java.util.List<Teacher> teachers = new ArrayList<Teacher>();
+        try {
+            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
+
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(query);
+            teachers = (java.util.List<Teacher>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
+            transaction.commit();
+        } catch (Exception hibernateException) {
+        	transaction.rollback(); 
+        	logger.error(hibernateException);
+            hibernateException.printStackTrace();
+        }finally {
+			HibernateUtil.closeSession();
+		 }
+        return teachers;
+	}
+	
+	public Teacher getTeacherRecord(String queryMain) {
+		Teacher teacher = new Teacher();
+        try {
+            transaction = session.beginTransaction();
+            Query HQLquery = session.createQuery(queryMain);
+            teacher = (Teacher) HQLquery.setCacheable(true).setCacheRegion("commonregion").uniqueResult();
+            transaction.commit();
+        } catch (Exception hibernateException) {
+        	transaction.rollback(); 
+        	logger.error(hibernateException);
+            hibernateException.printStackTrace();
+        }
+        finally {
+			HibernateUtil.closeSession();
+		 }
+        return teacher;
 	}
 
 }
