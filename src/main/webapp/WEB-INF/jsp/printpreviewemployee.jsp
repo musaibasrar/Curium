@@ -8,7 +8,7 @@
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+        <title>staff Id Card</title> 
 
         <script type="text/javascript" language="JavaScript" src="/daralmajd/js/motionpack.js"></script>
         <link rel="stylesheet" href="/daralmajd/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -457,10 +457,55 @@ for(Cookie cookie : cookies){
                         <%!                        
                             int i = 1;
                         %>
-			<c:if test="${limit < iInitial}">	
-	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<c:if test="${limit < iInitial}">
+			
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;font-family:Times New Roman;">
   <div class="table-container" style="margin-bottom: 5px;">
+  <table width="100%">
+      <tr><td style="text-align:center;padding:0px;"><img src="/daralmajd/images/daralmajd.png" width="80" height="80"/></td></tr>
+  
+  <tr align="center"><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900;">
+    DAR AL MAJD<br>INTERNATIONAL SCHOOL<%-- ${branchname} --%> </p>
+    </td></tr>
+   </table>
+  </div>
+
+  <div class="table-container" style=" ">
+ <table align="center">
+ <tr>
+ <td>
+ <img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:88px;width:70px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
+ </td>
+ </tr>
+ </table>
+   </div>
+   <div align="center">
+   <p style="font-size:15px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;font-weight:bold;">&nbsp;&nbsp;  <%= request.getSession().getAttribute("teachername" + i + "")%></p>
+	</div>
+    <table align="center" style="text-align:center">
+ 
+ <%--  <tr>
+    <td style="font-size:10px;"><label style="font-weight:bold;">F/NAME:</label>&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
+  </tr> --%>
+   <tr>
+     <td style="font-size:10px;"><label style="font-weight:bold;">DESIGNATION:</label>&nbsp;<%= request.getSession().getAttribute("designation" + i + "")%></td>
+  </tr>
+   <tr>
+    <td style="font-size:10px;"><label style="font-weight:bold;">MOBILE No.:</label>&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+  </tr>
+   <tr>
+    <td style="font-size:10px;"><label style="font-weight:bold;">ADDRESS:</label>&nbsp;<%= request.getSession().getAttribute("Address" + i + "") %></td>
+  </tr>
+ 
+ 
+</table>
+
+
+</div>	
+	    
+			<%--<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
     <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname}</p></td></tr><tr><td style="text-align:center;padding:0px;">
@@ -526,7 +571,7 @@ for(Cookie cookie : cookies){
 <div>
 principal&nbsp;&nbsp;&nbsp;</div>
 </div>
-</div>
+</div> --%>
  </c:if>
    <% i = i + 1;%>
                         <c:set var="limit" value="${limit+1}"/>
