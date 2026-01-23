@@ -15,8 +15,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Stamp Fees all</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/daralmajd/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/daralmajd/css/datePicker/demos.css">
 
 <style type="text/css">
 <!--
@@ -366,7 +366,7 @@
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/daralmajd/StampFeesProcess/advanceSearchForStampFees";
+		form1.action = "/daralmajd/StampFeesProcess/advanceSearchForStampFeesByCategory";
 		form1.method = "POST";
 		form1.submit();
 
@@ -739,7 +739,7 @@
 			    });
 			
 			    // Update the final total display field, formatted to 2 decimal places
-			    document.getElementById('feesTotalAmount').value = totalAmount.toFixed(2);
+			    document.getElementById('feesTotalAmount').value = totalAmount;
 			}
 			
 			function calculate(index) {
@@ -763,7 +763,7 @@
 			    var rowTotal = baseAmount * installmentCount;
 			    
 			    // Update the row's total amount input
-			    fullAmountInput.value = rowTotal.toFixed(2);
+			    fullAmountInput.value = rowTotal;
 			    
 			    // Call the central function to refresh the grand total
 			    updateTotalAmount(); 
@@ -869,7 +869,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/daralmajd/StampFeesProcess/applyFees" method="POST">
+	<form id="form1" action="/daralmajd/StampFeesProcess/applyFeesAll" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -951,19 +951,22 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-
-					</table>
-					<table id="table2" width="100%" border="0" align="center">
 						<tr>
-							<td>
-								<button id="search">Search</button>
-							</td>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td width="10%" class="alignRight">&nbsp;</td>
+							<td width="70%"><button id="search">Search</button></td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 							<td><br /></td>
 						</tr>
 					</table>
-					
 						<div style="overflow:scroll;height: 250px;display: block;" >
 						<c:set var="feesInitialTotal" value="0" />
 						<input type="text" id="tableSearch" placeholder="Search..." 
@@ -996,7 +999,7 @@ for(Cookie cookie : cookies){
 												style="font-weight: bold; color: #325F6D"> <input
 													type="checkbox" name="feesIDS"
 													id="feesIDS_${status.index+1}" class="chcktblStamp" checked="checked"
-													value="${feescategory.idfeescategory}_${status.index}"
+													value="${feescategory.idfeescategory}_${status.index}_${feescategory.particularname}"
 													onclick="updateFeesCount(${status.index+1});calculate(${status.index+1})"
 													size="18"> ${feescategory.feescategoryname} :
 											</label> <input type="hidden" class="feesStatus" name="feesStatuses"
@@ -1061,10 +1064,12 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
+							<td class="dataText">
+							<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '--')}" />
+								<input type="checkbox"
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${Parents.student.sid}"/>" /></td>
+								value="<c:out value="${Parents.student.sid}_${classstudying[0]}--"/>" /></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/daralmajd/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
@@ -1079,7 +1084,7 @@ for(Cookie cookie : cookies){
 									</c:forEach>
 							<td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="dd/MM/yyyy" /></td>
 						 	<td class="dataText">
-						 		<c:set var="classstudying" value="${fn:split(Parents.student.classstudying, '--')}" />
+						 		
 						 		<c:set var="classadmitted" value="${fn:split(Parents.student.classadmittedin, '--')}" />
 						 		 <c:choose>
                                 <c:when test="${classstudying[0] == classadmitted[0]}">
