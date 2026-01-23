@@ -100,5 +100,22 @@ public class EmployeeAction {
 		employeeActionAdapter. deleteMultipleEmployee();
 		return archiveViewAll();
 	}
+	
+	@PostMapping("/exportDataForEmployees")
+	public String exportDataForEmployees() {
+	    if (employeeActionAdapter.exportDataForEmployees()) {
+	        return "employeeexportsuccess";
+	    } else {
+	        return "exportfailure";
+	    }
+	}
+
+	@PostMapping("/downloadEmployees")
+	public String downloadEmployees() {
+	    if (employeeActionAdapter.downlaodFile()) {
+	        return "exportsuccess";
+	    }
+	    return "exportfailure";
+	}
 
 }
