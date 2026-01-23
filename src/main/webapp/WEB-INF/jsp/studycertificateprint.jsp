@@ -143,19 +143,19 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 84px;" alt="logo" src="/patriswamy/images/patriswamy.png">
+			<!-- <img border="0" style="vertical-align: text-bottom;height: 100px;width: 84px;" alt="logo" src="/patriswamy/images/patriswamy.png"> -->
 			</td>
 				<td >
 					<br>
 					<h2 style="margin-bottom:0px;"><select name="collegename"
 									 id="collegename"
 									style="width: 500px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
+										<option selected>Select College Name</option>
 										<option>PATRISWAMY SCIENCE PU COLLEGE, AURAD (B) - 585326</option>
 										<option>SRI SATHYAM PU COLLEGE AURAD (B)-585326</option>
 										<option>NALANDA COMPOSITE PRE-UNIVERSITY <br>COLLEGE AURAD (B)-585326</option>
 								</select></h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					<%-- <h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3> --%>
 					
 				</td>
 			</tr>
@@ -171,7 +171,7 @@ for(Cookie cookie : cookies){
 			<td></td>
 			
 			</tr>
-			<tr>
+			<%-- <tr>
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
@@ -179,7 +179,7 @@ for(Cookie cookie : cookies){
 					</h3>
 				</td>
 			</tr>
-			
+			 --%>
 			<tr>
 			
 				<td class="dataTextBoldLeft">
@@ -252,7 +252,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-					<span style="font-weight: bold;text-transform: capitalize;width:400px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
+					<span style=";text-transform: capitalize;width:600px;border-bottom:0px solid black;text-align:right;">&nbsp;&nbsp;&nbsp;&nbsp;Signature of&emsp;&emsp;&emsp;<br>Head of the Institution</span>
 					</h3>
 				</td>
 			</tr>
