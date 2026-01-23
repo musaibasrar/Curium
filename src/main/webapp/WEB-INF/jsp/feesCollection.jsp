@@ -445,33 +445,42 @@
                     totalSum = sum + miscamount + fineamount;
                     $('#grandTotalAmount').val(totalSum);
                 });
-                $("#dataTable").click(function(){
-                    var fineamount=parseFloat($("#fineamount").val());
-                    var miscamount=parseFloat($("#miscamount").val());
+                $("#myTable").click(function(){
+                    var fineamount = parseFloat($("#fineamount").val());
+                    var miscamount = parseFloat($("#miscamount").val());
                     var sum = 0.0;
-                    var totalSum=0.0;
-                    var column2 = $('.feesAmount')
-                    jQuery.each(column2,function(){
-                        sum += parseFloat($(this).val());
+                    var totalSum = 0.0;
+                    var amountp = $('.amountpaying');
+                    jQuery.each(amountp, function(){
+                        sum += parseFloat($(this).val() || 0);
                     });
-                    if(sum>=1){
-                		var vat = (sum * 15) / 100;
-                    	if(vat<1 || isNaN(vat)){
-                    		document.getElementById("miscamount").value = 0;
-                    		miscamount=0;
-                    		document.getElementById("misc").checked = false;
-                    	 }else{
-                    		 document.getElementById("miscamount").value = vat;
-                    		 miscamount=vat;
-                    		 document.getElementById("misc").checked = true;
-                    	 }
-                	}
-                    totalSum=sum+fineamount+miscamount;
-                    $('#feesTotalAmount').val(sum.toPrecision(6));
-                    
+
+                    // Calculate VAT only on Tuition Fees
+                    var tuitionSum = 0.0;
+                    jQuery.each(amountp, function() {
+                        var row = $(this).closest('tr');
+                        var feesCategory = row.find('td:eq(1)').text().trim().toLowerCase();
+                        if (feesCategory.includes('tuition')) {
+                            tuitionSum += parseFloat($(this).val() || 0);
+                        }
+                    });
+
+                    var vat = 0.0;
+                    if (tuitionSum >= 1) {
+                        vat = (tuitionSum * 15) / 100;
+                        vat = Math.round(vat * 100) / 100;
+                        $("#miscamount").val(vat);
+                        miscamount = vat;
+                        $("#misc").prop("checked", true);
+                    } else {
+                        $("#miscamount").val(0);
+                        miscamount = 0;
+                        $("#misc").prop("checked", false);
+                    }
+
+                    totalSum = sum + miscamount + fineamount;
                     $('#grandTotalAmount').val(totalSum);
-                   
-                });
+               });
 
                 // Add click handler for VAT checkbox
                 $("#misc").click(function() {
@@ -1456,7 +1465,7 @@ for(Cookie cookie : cookies){
             
             <div id="dialogfeescollection" title="Fees Collection Details">
                                              
-                   <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+                   <table   width="100%"  border="0" style="border-color:#4b6a84;">
                     <thead>
                         <tr>
                             <th title="click to sort" class="headerTextPopup">Date of fees</th>
@@ -1474,7 +1483,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataTextFeesCollection"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataTextFeesCollection"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
                                 <td class="dataTextFeesCollection"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextFeesCollection"><a class="dataTextInActive" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextFeesCollection"><a class="dataTextInActive" target="_blank" href="/daralmajd/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>

@@ -851,8 +851,18 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/daralmajd/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="_parent" href="/daralmajd/UserProcess/multiUser?branchid=2" style="font-size: 12px;">Switch 1</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="_parent" href="/daralmajd/UserProcess/multiUser?branchid=3" style="font-size: 12px;">Switch 2</a>
             			</td>
             		</tr>
                 </table>

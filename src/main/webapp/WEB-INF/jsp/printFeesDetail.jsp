@@ -362,14 +362,14 @@ www.daralmajdschool.com</div>
 					<c:set var="itemTotal" value="${itemTotal + receiptinfo.fine}" />
 					</td>
 					<td>0.00</td>
-					<td> <c:out value="${receiptinfo.fine}" />
+					<%-- <td> <c:out value="${receiptinfo.fine}" />
 					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (receiptinfo.fine)}" />
 					</td>
 					<td>
 					0.00
-					<%-- <fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" /> --%>
-					</td>
+					<fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" />
+					</td> --%>
 					<td>${receiptinfo.fine}
 					<c:set var="itemTotalNet" value="${itemTotalNet + receiptinfo.fine}" />
 					</td>
@@ -629,14 +629,14 @@ www.daralmajdschool.com</div>
 					<c:set var="itemTotal" value="${itemTotal + receiptinfo.fine}" />
 					</td>
 					<td>0.00</td>
-					<td> <c:out value="${receiptinfo.fine}" />
+					<%-- <td> <c:out value="${receiptinfo.fine}" />
 					 <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (receiptinfo.fine)}" />
 					</td>
 					<td>
 					0.00
-					<%-- <fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" /> --%>
-					</td>
+					<fmt:formatNumber value="${receiptinfo.fine * 0.15}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+					<c:set var="itemVatTotal" value="${itemVatTotal + (receiptinfo.fine * 0.15)}" />
+					</td> --%>
 					<td>${receiptinfo.fine}
 					<c:set var="itemTotalNet" value="${itemTotalNet + receiptinfo.fine}" />
 					</td>

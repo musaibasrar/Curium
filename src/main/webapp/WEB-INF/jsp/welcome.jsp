@@ -18,6 +18,7 @@
         <script src="/daralmajd/js/jquery.min.js"></script>
         <script src="/daralmajd/js/bootstrap.min.js"></script>
         <script src="/daralmajd/js/popper.min.js"></script>
+         <link rel="stylesheet" href="/daralmajd/css/font-awesome.css">
     </head>
     
 	<style type="text/css">
@@ -109,6 +110,7 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td height="150px;"></td>
 				<td>
+				<br><br>
 					<p
 						style="text-transform: uppercase; color: #143160; font-weight: bolder;">
 						Welcome, <label style="color: #93051f;"><c:out default=""
@@ -116,33 +118,18 @@ for(Cookie cookie : cookies){
 					</p>
 					<c:set var="branch" value="${branchid - 1}" />
 					<p style="color: #93051f; font-weight: bolder;">${branchname}-${branch}</p>
+					<br><br>
+					<p style="color: #143160;font-weight: bolder;">You can navigate your way through CURIUM using: </p><br><br>
+					
+					
+					<i class="fa fa-arrow-up" style="font-size:28px;color:#1b5605;"></i>&nbsp;&nbsp;<label style="color: #1b5605;">The shortcuts at the top</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					<i class="fa fa-arrow-left" style="font-size:28px;color:#086d7c;"></i>&nbsp;&nbsp;<label style="color: #086d7c;">The menu to the left</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<i class="fa fa-bar-chart" style="font-size:28px;color:#93051f;"></i>&nbsp;&nbsp;<label style="color: #93051f;">DashBoard at the top right</label>
 				</td>
 
 			</tr>
 
 		</table>
 	</div>
-
-	<div class="container">
-  <div class="row justify-content-center text-center py-5">
-    <div class="col-12 col-sm-6 col-md-4 mb-4">
-      <div id="rcorners1" class="p-3 border rounded shadow">
-        <label style="font-family: Tahoma; font-weight: bolder; color: #5E87B0; font-size: 18px;">Branch One</label><br>
-        <a target="_parent" href="/daralmajd/UserProcess/multiUser?branchid=2">
-          <img src="/daralmajd/images/login.svg" width="25" height="25" alt="Login" /> Login
-        </a>
-      </div>
-    </div>
-    <div class="col-12 col-sm-6 col-md-4 mb-4">
-      <div id="rcorners1" class="p-3 border rounded shadow">
-        <label style="font-family: Tahoma; font-weight: bolder; color: #5E87B0; font-size: 18px;">Branch Two</label><br>
-        <a target="_parent" href="/daralmajd/UserProcess/multiUser?branchid=3">
-          <img src="/daralmajd/images/login.svg" width="25" height="25" alt="Login" /> Login
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
 </body>    
 </html>

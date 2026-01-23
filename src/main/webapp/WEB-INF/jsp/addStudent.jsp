@@ -579,7 +579,7 @@
     	var addClass=document.getElementById('addclass').value;
     	var yoa=document.getElementById('yearofadmission').value;
    		const feesCategories = document.getElementsByName('feescategories');
-   		const feesCategoriesTransport = document.getElementById('transport');
+   		//const feesCategoriesTransport = document.getElementById('transport');
    		
         const checkedFeesCategoryValues = [];
         
@@ -590,9 +590,9 @@
             }
         }
         
-        if (feesCategoriesTransport.value !== 'Select') {
+        /* if (feesCategoriesTransport.value !== 'Select') {
             checkedFeesCategoryValues.push(feesCategoriesTransport.value);
-        }
+        } */
         
     	if (!addClass) {
             console.warn("Class is not selected. Skipping search.");
@@ -975,7 +975,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			"/daralmajd/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),
@@ -1149,13 +1149,13 @@ $(document).ready(function() {
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
 							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
-								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+								<!-- &nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
 								&nbsp;Transport <select name="feescategories" id="transport">
 										        <option value="Select">-- Select --</option>
 										        <option value="Malmal">Malmal</option>
 										        <option value="Madhubani">Madhubani</option>
 										        <option value="xyz">xyz</option>
-										    </select>
+										    </select> -->
 								</label></td>
 						</tr>
 						<tr>

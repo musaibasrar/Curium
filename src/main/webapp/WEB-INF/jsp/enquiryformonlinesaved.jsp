@@ -136,7 +136,7 @@
     <div class="wrap">
         <div class="card">
             <div class="logo">
-                <img border="0" alt="logo" src="/vision/images/vision.png">
+                <img border="0" alt="logo" src="/daralmajd/images/daralmajd.png">
             </div>
 
             <div class="status" role="status" aria-live="polite">
