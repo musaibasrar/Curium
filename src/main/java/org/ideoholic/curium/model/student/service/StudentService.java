@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -1497,5 +1498,29 @@ public class StudentService {
 		}
 		return result;
 	}
+		
+public void checkDuplicateStudent(String aadhaarNo, String studentName, String dob) throws IOException {
+			
+			Student student = new studentDetailsDAO().checkDuplicateStudent(aadhaarNo, studentName, dob);
+				PrintWriter out = response.getWriter(); 
+				response.setContentType("text/xml");
+			        response.setHeader("Cache-Control", "no-cache");
+			        try {
+			        	
+			        	if(student!= null){
+			        		String buffer = "<label style='color:red;'>Student Already Exist</label>";
+				        	response.getWriter().println(buffer);
+			        	}else{
+			        		String buffer = "<label></label>";
+				        	response.getWriter().println(buffer);
+			        	}
+			        	
+			        } catch (Exception e) {
+			            out.write("<label></label>");
+			        } finally {
+			            out.flush();
+			            out.close();
+			        }
+			}
 
 }
