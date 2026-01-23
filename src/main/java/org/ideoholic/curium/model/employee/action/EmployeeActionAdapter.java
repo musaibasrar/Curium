@@ -208,4 +208,18 @@ public class EmployeeActionAdapter {
 		
 	}
 
+	public boolean exportDataForEmployees() {
+	    EmployeeIdsDto dto = new EmployeeIdsDto();
+	    dto.setEmployeeIds(request.getParameterValues("employeeIDs"));
+
+	    ResultResponse resultResponse = employeeService.exportDataForEmployees(dto, httpSession.getAttribute(BRANCHID).toString());
+	    request.setAttribute("searchEmployeeList", resultResponse.getResultList());
+
+	    return resultResponse.isSuccess();
+	}
+
+	public boolean downlaodFile() {
+	    ResultResponse resultResponse = employeeService.downlaodFile();
+	    return resultResponse.isSuccess();
+	}
 }
