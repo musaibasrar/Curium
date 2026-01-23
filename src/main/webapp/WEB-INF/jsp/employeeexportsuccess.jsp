@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/vision/StudentProcess/download";
+                form1.action="/vision/EmployeeProcess/downloadEmployees";
                 form1.submit();
             }
         </script>
