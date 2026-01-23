@@ -1,24 +1,49 @@
 package org.ideoholic.curium.model.employee.service;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.codec.binary.Base64;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
 import org.ideoholic.curium.model.department.dao.departmentDAO;
 import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.department.dto.DepartmentResponseDto;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.*;
+import org.ideoholic.curium.model.employee.dto.BasicPayEmployeesDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeListDto;
+import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.SearchEmployeeDto;
+import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.employee.dto.ViewAllRelationsResponseDto;
 import org.ideoholic.curium.model.hr.dto.Paybasic;
 import org.ideoholic.curium.model.position.dao.positionDAO;
 import org.ideoholic.curium.model.position.dto.Position;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
@@ -28,13 +53,6 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 @Service
 public class EmployeeService {
 
@@ -43,7 +61,8 @@ public class EmployeeService {
 	@Autowired
     private HttpServletResponse response;
 	
-
+	private static final int BUFFER_SIZE = 4096;
+	
 	public ResultResponse addEmployee(MultipartFile[] listOfFiles, EmployeeDto employeeDto, String branchId, String branchCode) {
 		Teacher employee = new Teacher();
 		
@@ -606,5 +625,177 @@ public class EmployeeService {
 			new EmployeeDAO().deleteMultiple(ids);
 		}
 		
+	}
+	
+	public ResultResponse exportDataForEmployees(EmployeeIdsDto dto, String branchId) {
+	    ResultResponse result = ResultResponse.builder().build();
+	    List<Teacher> listOfEmployeeRecords = new ArrayList<>();
+
+	    String[] employeeIds = dto.getEmployeeIds();
+	    if (employeeIds != null) {
+	        for (String id : employeeIds) {
+	            if (id != null && !id.isEmpty()) {
+	                String query = "From Teacher as t where t.branchid=" + Integer.parseInt(branchId) + " and t.tid = " + id;
+	                // implement employeeDao.getEmployeesList(query) and employeeDao.getEmployeeRecord(query) similar to studentDetailsDao
+	                List<Teacher> list = new EmployeeDAO().getTeachersList(query);
+	                result.setResultList(list);
+	                Teacher record = new EmployeeDAO().getTeacherRecord(query);
+	                listOfEmployeeRecords.add(record);
+	            }
+	        }
+	        try {
+	            if (exportDataToExcel(listOfEmployeeRecords)) {
+	                result.setSuccess(true);
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return result;
+	}
+
+	public boolean exportDataToExcel(List<Teacher> teacherList) throws Exception {
+
+	    boolean writeSuccess = false;
+
+	    try {
+	        // Creating an excel file
+	        XSSFWorkbook workbook = new XSSFWorkbook();
+	        XSSFSheet sheet = workbook.createSheet("Employees");
+
+	        Map<String, Object[]> data = new HashMap<String, Object[]>();
+	        Map<String, Object[]> headerData = new HashMap<String, Object[]>();
+
+	        // Header: include all fields from Teacher.java
+	        headerData.put("Header", new Object[] {
+	        		"Sl.No.",
+	                "Teacher External ID",
+	                "Teacher Name",
+	                "Designation",
+	                "Date Of Joining",
+	                "Salary",
+	                "Department",
+	                "Qualification",
+	                "Total Experience",
+	                "Address",
+	                "Contact Number",
+	                "Email",
+	                "Remarks",
+	                "Gender",
+	                "Joining Date",
+	                "Leaving Date",
+	                "Bank Name",
+	                "Bank Branch",
+	                "Bank IFSC",
+	                "Account No",
+	                "Current Employee",
+	                "Class Teacher",
+	                "Classes Teaching",
+	                "Subjects Teaching"
+	        });
+
+	        int i = 1;
+	        for (Teacher t : teacherList) {
+	            data.put(Integer.toString(i), new Object[] {
+	            		i,
+	            		DataUtil.emptyString(t.getTeacherexternalid()),
+	                    DataUtil.emptyString(t.getTeachername()),
+	                    DataUtil.emptyString(t.getDesignation()),
+	                    DateUtil.dateParserddMMYYYY(t.getDateofjoining()),
+	                    DataUtil.emptyString(t.getSalary()),
+	                    DataUtil.emptyString(t.getDepartment()),
+	                    DataUtil.emptyString(t.getQualification()),
+	                    DataUtil.emptyString(t.getTotalexperience()),
+	                    DataUtil.emptyString(t.getAddress()),
+	                    DataUtil.emptyString(t.getContactnumber()),
+	                    DataUtil.emptyString(t.getEmail()),
+	                    DataUtil.emptyString(t.getRemarks()),
+	                    DataUtil.emptyString(t.getGender()),
+	                    DateUtil.dateParserddMMYYYY(t.getJoiningdate()),
+	                    DateUtil.dateParserddMMYYYY(t.getLeavingdate()),
+	                    DataUtil.emptyString(t.getBankname()),
+	                    DataUtil.emptyString(t.getBankbranch()),
+	                    DataUtil.emptyString(t.getBankifsc()),
+	                    DataUtil.emptyString(t.getAccno()),
+	                    DataUtil.emptyString(t.getCurrentemployee()),
+	                    DataUtil.emptyString(t.getClassteacher()),
+	                    DataUtil.emptyString(t.getClassesteaching()),
+	                    DataUtil.emptyString(t.getSubjectsteaching())
+	            });
+	            i++;
+	        }
+
+	        // Write header row
+	        Row headerRow = sheet.createRow(0);
+	        Object[] objArrHeader = headerData.get("Header");
+	        int cellnum1 = 0;
+	        for (Object obj : objArrHeader) {
+	            Cell cell = headerRow.createCell(cellnum1++);
+	            if (obj instanceof String)
+	                cell.setCellValue((String) obj);
+	        }
+
+	        // Write data rows
+	        Set<String> keyset = data.keySet();
+	        int rownum = 1;
+	        for (String key : keyset) {
+	            Row row = sheet.createRow(rownum++);
+	            Object[] objArr = data.get(key);
+	            int cellnum = 0;
+	            for (Object obj : objArr) {
+	                Cell cell = row.createCell(cellnum++);
+	                if (obj instanceof Date)
+	                    cell.setCellValue((Date) obj);
+	                else if (obj instanceof Boolean)
+	                    cell.setCellValue((Boolean) obj);
+	                else if (obj instanceof String)
+	                    cell.setCellValue((String) obj);
+	                else if (obj instanceof Double)
+	                    cell.setCellValue((Double) obj);
+	                else if (obj instanceof Long)
+	                    cell.setCellValue((Long) obj);
+	            }
+	        }
+
+	        // Save to temp file (matches other patterns in repo)
+	        FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir") + "/employeesdetails.xlsx"));
+	        workbook.write(out);
+	        out.close();
+
+	        writeSuccess = true;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        throw e;
+	    }
+
+	    return writeSuccess;
+	}
+
+	public ResultResponse downlaodFile() {
+	    ResultResponse result = ResultResponse.builder().build();
+	    try {
+	        File downloadFile = new File(System.getProperty("java.io.tmpdir") + "/employeesdetails.xlsx");
+	        FileInputStream inStream = new FileInputStream(downloadFile);
+
+	        String mimeType = "application/vnd.ms-excel";
+	        response.setContentType(mimeType);
+
+	        String headerKey = "Content-Disposition";
+	        String headerValue = String.format("attachment; filename=\"%s\"", "employeesdetails.xlsx");
+	        response.setHeader(headerKey, headerValue);
+
+	        OutputStream outStream = response.getOutputStream();
+	        byte[] buffer = new byte[BUFFER_SIZE];
+	        int bytesRead;
+	        while ((bytesRead = inStream.read(buffer)) != -1) {
+	            outStream.write(buffer, 0, bytesRead);
+	        }
+	        inStream.close();
+	        outStream.close();
+	        result.setSuccess(true);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return result;
 	}
 }
