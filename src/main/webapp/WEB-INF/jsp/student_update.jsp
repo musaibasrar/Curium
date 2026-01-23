@@ -803,7 +803,7 @@ for(Cookie cookie : cookies){
 							<label>
 								<select name="mothertongue" onblur="validateNameContact();"
 									id="mothertongue" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
-										<option selected></option>
+										<option selected>${student.mothertongue}</option>
 										<option>Kannada</option>
 										<option>Hindi</option>
 										<option>Urdu</option>
