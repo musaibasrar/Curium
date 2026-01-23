@@ -849,7 +849,7 @@
 		 		return false;
 		 	}
 		 	
-		 	if(payment>dueAmount){
+		 	/* if(payment>dueAmount){
 		 		duePayment.value = 0;
 		 		document.getElementById(sfsid).checked = false; 
 		 		alert('Amount Due to be paid must be equals to Due Amount');
@@ -859,7 +859,7 @@
 		 		document.getElementById(sfsid).checked = false; 
 		 		alert('Amount Due to be paid must be equals to Due Amount');
 		 		return false;
-		 	}
+		 	} */
 		 	
 		 	if(payment<1 || isNaN(payment)){
 		 		duePayment.value = 0;

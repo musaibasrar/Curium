@@ -261,7 +261,7 @@ www.daralmajdschool.com</div>
             <thead>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
-                    <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
+                    <th>Fee Paid <span class="arabic">قيمة الرسوم<br></span></th>
                     <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
                     <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>
@@ -529,7 +529,7 @@ www.daralmajdschool.com</div>
             <thead>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
-                    <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
+                    <th>Fee Paid <span class="arabic">قيمة الرسوم<br></span></th>
                     <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
                     <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>

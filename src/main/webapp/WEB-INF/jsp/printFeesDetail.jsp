@@ -260,7 +260,7 @@ www.daralmajdschool.com</div>
             <thead>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
-                    <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
+                    <th>Fee Paid <span class="arabic">قيمة الرسوم<br></span></th>
                     <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
                     <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>
@@ -409,13 +409,13 @@ www.daralmajdschool.com</div>
 
 			<tr style="line-height: 1;">
 				<td class="headerText">
-					Total Fees: SR. ${totalfees}
+					Total Fees: SR. <fmt:formatNumber value="${totalfees}" type="number" minFractionDigits="2" maxFractionDigits="2"/>
 				</td>
 				<td class="headerText">
-					Total fees paid : SR.  ${sumoffees}
+					Total fees paid : SR.  <fmt:formatNumber value="${sumoffees}" type="number" minFractionDigits="2" maxFractionDigits="2"/>
 				</td>
 				<td class="headerText">
-				 Total fees Due : SR.  ${dueamount} 
+				 Total fees Due : SR.  <fmt:formatNumber value="${dueamount}" type="number" minFractionDigits="2" maxFractionDigits="2"/> 
 				</td>
 				
 			</tr style="line-height: 1;"> 
@@ -527,7 +527,7 @@ www.daralmajdschool.com</div>
             <thead>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
-                    <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
+                    <th>Fee Paid <span class="arabic">قيمة الرسوم<br></span></th>
                     <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
                     <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>

@@ -577,12 +577,12 @@ for(Cookie cookie : cookies){
                                 </table>
 					<div align="center">
 				<h class="dataTextFees">Academic Year : ${academicPerYear}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Grand Total Fees : SR. ${grandtotalfeesamount}</h>&nbsp;&nbsp;&nbsp;
-				<h class="dataTextFees">Total Final Fees : SR. ${totalfees}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total Fees paid : SR.  ${sumoffees}</h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Grand Total Fees : SR. <fmt:formatNumber value="${grandtotalfeesamount}" type="number" minFractionDigits="2" maxFractionDigits="2"/></h>&nbsp;&nbsp;&nbsp;
+				<h class="dataTextFees">Total Final Fees : SR. <fmt:formatNumber value="${totalfees}" type="number" minFractionDigits="2" maxFractionDigits="2"/></h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees paid : SR.  <fmt:formatNumber value="${sumoffees}" type="number" minFractionDigits="2" maxFractionDigits="2"/></h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Fees Due : </h>
-                <h class="dataTextDueFees"> SR.  ${dueamount}</h>&nbsp;&nbsp;&nbsp;
-                <h class="dataTextFees">Total Fees Concession : SR.  ${totalfeesconcession}</h>
+                <h class="dataTextDueFees"> SR.  <fmt:formatNumber value="${dueamount}" type="number" minFractionDigits="2" maxFractionDigits="2"/></h>&nbsp;&nbsp;&nbsp;
+                <h class="dataTextFees">Total Fees Concession : SR.  <fmt:formatNumber value="${totalfeesconcession}" type="number" minFractionDigits="2" maxFractionDigits="2"/></h>
                 </div>
                     <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
 

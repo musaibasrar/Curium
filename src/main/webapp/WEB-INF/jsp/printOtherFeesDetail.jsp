@@ -251,9 +251,9 @@ www.daralmajdschool.com</div>
             <thead>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
-                    <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
-                    <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
-                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th>
+                    <th>Fee Paid <span class="arabic">قيمة الرسوم<br></span></th>
+                    <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
+                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <!-- <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>
                     <th>Net Amount<br>(Incl. VAT) <span class="arabic"><br>المجموع شامل الضريبة</span></th> -->
                 </tr>
@@ -288,15 +288,15 @@ www.daralmajdschool.com</div>
 							</c:choose>
 
 						</td>
-                    <td>${feescatmap.key.feesamount}
-                    <c:set var="itemTotal" value="${itemTotal + feescatmap.key.feesamount}" />
+                    <td>${feescatmap.value}
+                    <c:set var="itemTotal" value="${itemTotal + feescatmap.value}" />
                     </td>
-                    <td>${feescatmap.key.concession}
+                    <%-- <td>${feescatmap.key.concession}
                     <c:set var="itemTotalDisc" value="${itemTotalDisc + feescatmap.key.concession}" />
                     </td>
                     <td>${feescatmap.key.feesamount-feescatmap.key.concession}
                     <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (feescatmap.key.feesamount-feescatmap.key.concession)}" />
-                    </td>
+                    </td> --%>
                     <%-- <td>
                     	
                     <c:if test="${applyVAT==1}">
@@ -372,15 +372,15 @@ www.daralmajdschool.com</div>
                     <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
+                  <!--   <td>0.00</td>
+                    <td>0.00</td> -->
                 </tr>
                 </c:if>
                 <tr>
                     <td>TOTAL<span class="arabic">الإجمالي</span></td>
                     <td><fmt:formatNumber value="${itemTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <%-- <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td> --%>
                     <%-- <td><fmt:formatNumber value="${itemVatTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
                     <td><fmt:formatNumber value="${itemTotalNet}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td> --%>
                 </tr>
@@ -508,9 +508,9 @@ www.daralmajdschool.com</div>
             <thead>
                 <tr>
                     <th>Particulars <span class="arabic"><br>البيان</span></th>
-                    <th>Fee Amount <span class="arabic">قيمة الرسوم<br></span></th>
-                    <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
-                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th>
+                    <th>Fee Paid <span class="arabic">قيمة الرسوم<br></span></th>
+                    <!-- <th>Discount Amount <span class="arabic">مبلغ الخصم<br></span></th>
+                    <th>Amount <br>(After Discount) <span class="arabic"><br>المبلغ بعد الخصم</span></th> -->
                     <!-- <th>VAT (15%) <span class="arabic"><br>نسبة الضريبة</span></th>
                     <th>Net Amount<br>(Incl. VAT) <span class="arabic"><br>المجموع شامل الضريبة</span></th> -->
                 </tr>
@@ -545,15 +545,15 @@ www.daralmajdschool.com</div>
 							</c:choose>
 
 						</td>
-                    <td>${feescatmap.key.feesamount}
-                    <c:set var="itemTotal" value="${itemTotal + feescatmap.key.feesamount}" />
+                    <td>${feescatmap.value}
+                    <c:set var="itemTotal" value="${itemTotal + feescatmap.value}" />
                     </td>
-                    <td>${feescatmap.key.concession}
+                    <%-- <td>${feescatmap.key.concession}
                     <c:set var="itemTotalDisc" value="${itemTotalDisc + feescatmap.key.concession}" />
                     </td>
                     <td>${feescatmap.key.feesamount-feescatmap.key.concession}
                     <c:set var="itemTotalAfterDisc" value="${itemTotalAfterDisc + (feescatmap.key.feesamount-feescatmap.key.concession)}" />
-                    </td>
+                    </td> --%>
                     <%-- <td>
                     	
                     <c:if test="${applyVAT==1}">
@@ -629,15 +629,15 @@ www.daralmajdschool.com</div>
                     <td>0.00</td>
                     <td>0.00</td>
                     <td>0.00</td>
-                    <td>0.00</td>
-                    <td>0.00</td>
+                  <!--   <td>0.00</td>
+                    <td>0.00</td> -->
                 </tr>
                 </c:if>
                 <tr>
                     <td>TOTAL<span class="arabic">الإجمالي</span></td>
                     <td><fmt:formatNumber value="${itemTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
-                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <%-- <td><fmt:formatNumber value="${itemTotalDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
+                    <td><fmt:formatNumber value="${itemTotalAfterDisc}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td> --%>
                     <%-- <td><fmt:formatNumber value="${itemVatTotal}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td>
                     <td><fmt:formatNumber value="${itemTotalNet}" type="number" maxFractionDigits="2" minFractionDigits="2" /></td> --%>
                 </tr>
@@ -649,12 +649,13 @@ www.daralmajdschool.com</div>
             Net Amount Payable in words: SAR <label style="text-transform: capitalize;">${grandTotal}</label>
         </div>
         
-        <TABLE width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
-			 <tr style="line-height: 1;">
+		<TABLE width="100%" border="0">
+			<tr>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
 			</tr>
+
 			<tr style="line-height: 1;">
 				<td class="headerText">
 					Total Fees: SR. ${totalfees}
