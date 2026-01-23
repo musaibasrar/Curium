@@ -128,61 +128,55 @@
 
 	
 
-</head>
-
-
-
-
         @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  1cm;
-             margin-right: 1cm;
-             margin-bottom: 1cm;
-             margin-top: 1cm;
-        }
 
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 1px ;
-                margin-right: 1px;
-            }
-        }
+    @page {
+        size: 105mm 148.5mm;   /* A6 size */
+        margin: 5mm;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Hide everything except receipt */
+    body * {
+        visibility: hidden;
+    }
+
+    #receipt, #receipt * {
+        visibility: visible;
+    }
+
+    #receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 105mm;
+        height: 120mm;
+        box-sizing: border-box;
+        font-size: 11px; /* adjust if needed */
+        overflow: hidden;
+    }
+}
     </style>
 
-
+</head>
 
 
 <body style="text-align: center" class="bodymargin">
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 	<div style="display: flex;">
-			<div style="border: 1px solid;border-radius: 15px; width: 100%;">
+			<div style="border: 1px solid;border-radius: 15px; width: 100%;" id="receipt" >
 			
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
 				<td>&nbsp;&nbsp;<img src="/littleflower/images/littleflower.jpg" width="56" height="50" style="margin:5px;"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-family: "><img src="/littleflower/images/littleflowerschoolname.png" width="391" height="25" /></label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-family: "><img src="/littleflower/images/littleflowerschoolname.png" width="260" height="17" /></label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">${branchcontact}</label>
 				</td>
