@@ -1375,13 +1375,11 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Student Type&nbsp;</td>
-								<td>&nbsp;Residential<input
-								type="checkbox" value="1" name="bhagyalakshmibondnumber" id="res:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Day Scholar<input
-								type="checkbox" value="0" name="bhagyalakshmibondnumber" id="day:bpl"
-								onclick="noCheck(this.id);" />
-
+							<td class="alignLeft" >Number&nbsp;</td>
+								<td><input
+									name="bhagyalakshmibondnumber" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="bhagyalakshmibondnumber" size="36">
 							</td>
 							<td  class="alignLeft" style="padding-left: 20px;">Student's Aadhaar Card No.&nbsp;</td>
 							<td ><label> <input onkeyup="searchStudentDuplicate()"
@@ -1452,12 +1450,12 @@ $(document).ready(function() {
 
 						<tr>
 						
-							<td class="alignLeft"  >RTE
+							<td class="alignLeft"  >Student Type
 										&nbsp;</td>
 
-									<td  >&nbsp;Yes<input
+									<td  >&nbsp;Residential<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Day Scholar<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
 										</td>

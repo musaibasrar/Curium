@@ -2499,8 +2499,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    double receiptNumber = receiptCell.getNumericCellValue();
-				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
+				                	String receiptNumber = receiptCell.getStringCellValue();
+				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
@@ -2509,7 +2509,7 @@ public class FeesCollectionService {
 					        
 					        // Print or use the grouped data as needed
 					        for (List<Row> group : groupedRowsArray) {
-					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getNumericCellValue());
+					            System.out.println("Receipt Number: " + group.get(0).getCell(0).getStringCellValue());
 					            String amountPayingClub = null;
 					            String sfsId = null;
 					            
@@ -2564,7 +2564,7 @@ public class FeesCollectionService {
 						        dto.setPaymentMethod(group.get(0).getCell(5).getStringCellValue());
 						        dto.setAckNo(DataUtil.emptyString(group.get(0).getCell(6).getStringCellValue()));
 						        dto.setTransferDate(DataUtil.emptyString(group.get(0).getCell(7).getStringCellValue()));
-						        //dto.setTransferBankName(row.getCell(2).getStringCellValue());
+						        dto.setTransferBankName("Bank");
 						        dto.setChequeNo(DataUtil.emptyString(group.get(0).getCell(8).getStringCellValue()));
 						        dto.setChequeDate(DataUtil.emptyString(group.get(0).getCell(9).getStringCellValue()));
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));

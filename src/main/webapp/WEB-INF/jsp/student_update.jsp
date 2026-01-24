@@ -880,15 +880,15 @@ for(Cookie cookie : cookies){
 						
 						
 							<tr>
-								<td class="alignLeft">Belong to BPL &nbsp;</td>
-								<td height="30">&nbsp;Yes<input
+								<td class="alignLeft">Study Mode&nbsp;</td>
+								<td height="30">&nbsp;Offline<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;Online<input
 								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
 								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;">State
 								&nbsp;</td>
 							<td><label> <input
 									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
@@ -906,7 +906,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Number
 								&nbsp;</td>
 								<td>
 										<input
@@ -983,10 +983,10 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 
-							<td class="alignLeft">RTE &nbsp;</td>
-							<td height="30">&nbsp;Yes<input
+							<td class="alignLeft">Student Type &nbsp;</td>
+							<td height="30">&nbsp;Residential<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;Day Scholar<input
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
 							</td>

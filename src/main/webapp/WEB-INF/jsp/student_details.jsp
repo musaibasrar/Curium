@@ -580,19 +580,19 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
+                         <td  width="25%"  class="alignLeft" height="50" >Study Mode
                             </td>
                             <td width="25%" class="tablerows" >
                                
                                 <c:if test="${(student.belongtobpl ==0)}">    
-           						  <c:out default="" value="No" />
+           						  <c:out default="" value="Offline" />
            						 </c:if>
                                 <c:if test="${(student.belongtobpl ==1)}">    
-           						  <c:out default="" value="Yes" />
+           						  <c:out default="" value="Online" />
            						 </c:if>
            						 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
+                            <td  width="25%"  class="alignLeft" height="50" >State
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bplcardno}" />
@@ -601,7 +601,7 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Bag No.
+                         <td  width="25%"  class="alignLeft" height="50" >Number
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.bhagyalakshmibondnumber}" />
@@ -628,15 +628,15 @@ for(Cookie cookie : cookies){
                         
                         <tr>
                         
-                         <td  width="25%"  class="alignLeft" height="50" >RTE
+                         <td  width="25%"  class="alignLeft" height="50" >Student Type
                             </td>
                             <td width="25%" class="tablerows" >
                                
-                                <c:if test="${(student.rte ==1)}">    
-           						  <c:out default="" value="Yes" />
+                                 <c:if test="${(student.rte ==1)}">    
+           						  <c:out default="" value="Residentail" />
            						 </c:if>
                                 <c:if test="${(student.rte == 0)}">    
-           						  <c:out default="" value="No" />
+           						  <c:out default="" value="Day Scholar" />
            						 </c:if>
            						 
                             </td>
