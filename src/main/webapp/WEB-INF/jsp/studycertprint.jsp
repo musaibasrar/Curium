@@ -128,12 +128,12 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 84px;" alt="logo" src="/patriswamy/images/patriswamy.png">
-			</td>
+			<!-- <img border="0" style="vertical-align: text-bottom;height: 100px;width: 84px;" alt="logo" src="/patriswamy/images/patriswamy.png">
+ -->			</td>
 				<td >
 					<br>
 					<h2 style="margin-bottom:0px;">${collegename}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					<%-- <h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3> --%>
 					
 				</td>
 			</tr>
@@ -150,14 +150,14 @@ for(Cookie cookie : cookies){
 			<td></td>
 			
 			</tr>
-			<tr>
+			<%-- <tr>
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
 					</h3>
 				</td>
-			</tr>
+			</tr> --%>
 			
 			<tr>
 			
@@ -231,7 +231,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style="font-weight: bold;text-transform: capitalize;width:200px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
+					<span style="text-transform: capitalize;width:500px;border-bottom:0px solid black;text-align:right;">&nbsp;&nbsp;&nbsp;&nbsp;Signature of&emsp;&emsp;&emsp;<br>Head of the Institution</span>
 					</h3>
 				</td>
 			</tr>
