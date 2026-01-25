@@ -3,6 +3,8 @@ package org.ideoholic.curium.model.family.dao;
 import java.util.Collections;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.ideoholic.curium.model.family.dto.Family;
 import org.ideoholic.curium.model.family.dto.FamilyMember;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -25,12 +27,20 @@ public class FamilyDao {
 		return familyMemberRepo.findSiblingsByStudentSid(studentSid);
 	}
 	
+	@Transactional
 	public FamilyMember addStudentToFamily(Family family, Student student) {
+		if (family.getId() == null) {
+			family = familyRepo.save(family);
+		}
 		FamilyMember familyMember = familyMemberRepo.save(new FamilyMember(family, student));
 		return familyMember;
 	}
 	
+	@Transactional
 	public FamilyMember addParentToFamily(Family family, Parents parent) {
+		if (family.getId() == null) {
+			family = familyRepo.save(family);
+		}
 		FamilyMember familyMember = familyMemberRepo.save(new FamilyMember(family, parent));
 		return familyMember;
 	}
