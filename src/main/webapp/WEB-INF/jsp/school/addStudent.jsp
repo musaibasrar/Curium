@@ -977,7 +977,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			"/school/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),

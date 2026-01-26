@@ -171,7 +171,7 @@ public class StudentService {
 			 
 			Student studentDB = studentDetailsDao.readUniqueStudent("From Student where stream='Admission' order by sid desc");
 			
-			if(studentDB!=null) {
+			if(studentDB!=null && studentDB.getSid()!=null) {
 	        	String UID = studentDB.getStudentexternalid();
 	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
 	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
