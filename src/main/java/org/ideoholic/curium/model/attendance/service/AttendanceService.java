@@ -435,10 +435,10 @@ public class AttendanceService {
 			List<Parents> newStudentList = new ArrayList<Parents>();
 			List<Studentdailyattendance> newStudentDailyAttendance = new ArrayList<Studentdailyattendance>();
 
-			String searchdate = DateUtil.dateFromatConversionSlash(attendanceDetailsDto.getSearchDate());
+			Date searchdate = DateUtil.simpleDateParser(attendanceDetailsDto.getSearchDate());
 			for (Parents student : searchStudentList) {
 
-				List<Studentdailyattendance> studentsAttendance = attendanceDao.readListOfStudentAttendance(currentAcademicYear, searchdate,student.getStudent().getStudentexternalid(), Integer.parseInt(branchId));
+				List<Studentdailyattendance> studentsAttendance = attendanceDao.readListOfStudentAttendance(searchdate, currentAcademicYear,student.getStudent().getStudentexternalid(), Integer.parseInt(branchId));
 				for (Studentdailyattendance studentDailyAttendance : studentsAttendance) {
 					newStudentList.add(student);
 					newStudentDailyAttendance.add(studentDailyAttendance);
