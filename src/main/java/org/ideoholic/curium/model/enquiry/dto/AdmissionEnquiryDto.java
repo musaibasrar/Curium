@@ -28,6 +28,6 @@ public class AdmissionEnquiryDto {
 	private String mobileno;
 	private String notes;
 	private String[] enquiryIds;
-    private String branchId;
+    private int branchId;
     private String userId;
 }
