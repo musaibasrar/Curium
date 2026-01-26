@@ -375,8 +375,8 @@ public class AttendanceDAO {
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 
 				//Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
-	            Student managed = studentRepository.findByStudentexternalid(studentDailyAttendance.getAttendeeid());
-	            studentDailyAttendance.setAttendee(managed);
+	            Student student = studentRepository.findByStudentexternalid(studentDailyAttendance.getAttendeeid());
+	            studentDailyAttendance.setAttendee(student);
 				Optional<Studentdailyattendance> existingAttendance = studentDailyAttendanceRepository
 						.findByAttendeeStudentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), studentDailyAttendance.getDate(), studentDailyAttendance.getAcademicyear());
 
