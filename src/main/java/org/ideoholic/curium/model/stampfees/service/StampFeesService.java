@@ -486,6 +486,7 @@ public class StampFeesService {
     		String conClassStudying = "";
     		String querySub = "";
     		String classStudying = "";
+    		String academicYear = searchStudentDto.getCategoryYear();
 
     		switch (studentType) {
 			case "Active":
@@ -500,7 +501,7 @@ public class StampFeesService {
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
 	    		if (!studentname.equalsIgnoreCase("")) {
-	    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid);
+	    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND (parents.Student.yearofadmission='"+academicYear+"' OR parents.Student.promotedyear='"+academicYear+"') AND parents.Student.branchid="+Integer.parseInt(branchid);
 	    		}
 
 	    		if (!classStudying.equalsIgnoreCase("")
@@ -509,7 +510,7 @@ public class StampFeesService {
 	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0";
 	    		} else if (!classStudying.equalsIgnoreCase("")) {
 	    			querySub = querySub + " parents.Student.classstudying like '"
-	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND (parents.Student.yearofadmission='"+academicYear+"' OR parents.Student.promotedyear='"+academicYear+"') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
 	    		}
 				break;
 			case "InActive":
