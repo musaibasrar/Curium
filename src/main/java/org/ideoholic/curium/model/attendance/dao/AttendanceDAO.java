@@ -22,6 +22,7 @@ import org.ideoholic.curium.repositories.AttendanceMasterRepository;
 import org.ideoholic.curium.repositories.HolidaysMasterRepository;
 import org.ideoholic.curium.repositories.StaffDailyAttendanceRepository;
 import org.ideoholic.curium.repositories.StudentDailyAttendanceRepository;
+import org.ideoholic.curium.repositories.StudentRepository;
 import org.ideoholic.curium.repositories.WeeklyoffRepository;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,9 @@ public class AttendanceDAO {
 	
 	@Autowired
 	private StaffDailyAttendanceRepository staffDailyAttendanceRepository;
+	
+	@Autowired
+	private StudentRepository studentRepository;
 
 	@Transactional
 	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear, int branchId) {
@@ -271,7 +275,7 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
-	public List<Studentdailyattendance> readListOfStudentAttendance(String currentAcademicYear, String date, String studentExternalId, int branchId) {
+	public List<Studentdailyattendance> readListOfStudentAttendance(Date date, String currentAcademicYear, String studentExternalId, int branchId) {
 
 		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
 
@@ -371,9 +375,10 @@ public class AttendanceDAO {
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 
 				//Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
-
+	            Student student = studentRepository.findByStudentexternalid(studentDailyAttendance.getAttendeeid());
+	            studentDailyAttendance.setAttendee(student);
 				Optional<Studentdailyattendance> existingAttendance = studentDailyAttendanceRepository
-						.findByAttendeeStudentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), Calendar.getInstance().getTime(), studentDailyAttendance.getAcademicyear());
+						.findByAttendeeStudentexternalidAndDateAndAcademicyear(studentDailyAttendance.getAttendeeid(), studentDailyAttendance.getDate(), studentDailyAttendance.getAcademicyear());
 
 				if (existingAttendance.isPresent()) {
 					return "error-Can't Mark the attendance twice!!!";
