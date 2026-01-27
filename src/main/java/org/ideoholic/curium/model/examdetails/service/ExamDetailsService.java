@@ -26,7 +26,7 @@ import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
 import org.ideoholic.curium.model.examdetails.dto.Examschedule;
 import org.ideoholic.curium.model.examdetails.dto.HallTicketResponseDto;
 import org.ideoholic.curium.model.examdetails.dto.PrintPreviewHallTicketDto;
-import org.ideoholic.curium.model.feescategory.dao.feesCategoryDAO;
+import org.ideoholic.curium.model.feescategory.dao.FeesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -53,6 +53,9 @@ public class ExamDetailsService {
 	
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
+	
+	@Autowired
+	private FeesCategoryDAO feesCategoryDAO;
 
 	public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
 
@@ -368,7 +371,7 @@ public class ExamDetailsService {
 
 		if(!"".equalsIgnoreCase(querySub)) {
 			queryMain = queryMain + querySub;
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
 
 		//End Students
@@ -376,7 +379,7 @@ public class ExamDetailsService {
 		if(dto.getShowFees()!=null && dto.getShowFees().equalsIgnoreCase("showfees")) {
 			
 		// Start Fees Categories
-			List<Feescategory> feecategoryList= new feesCategoryDAO().getfeecategoryofstudent(dto.getClasses()[0], currentAcademicYear, branchId);
+			List<Feescategory> feecategoryList= feesCategoryDAO.getfeecategoryofstudent(dto.getClasses()[0], currentAcademicYear, branchId);
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
@@ -401,9 +404,9 @@ public class ExamDetailsService {
 
 				StudentFeesReport studentFeesReport = new StudentFeesReport();
 
-				long id = parents.getStudent().getSid();
+				int id = parents.getStudent().getSid();
 
-				List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id,feesCatList);
+				List<Studentfeesstructure> feesstructure = studentDetailsDao.getStudentFeesStructurebyFeesCategory(id,feesCatList);
 				List<Studentfeesstructure> defaulterFeesstructure = new ArrayList<Studentfeesstructure>();
 				Long totalDue = 0l;
 
