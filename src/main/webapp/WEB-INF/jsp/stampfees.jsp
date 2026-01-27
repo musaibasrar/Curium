@@ -990,6 +990,8 @@ for(Cookie cookie : cookies){
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
 						<th title="click to sort" class="headerText">Admission Type</th>
+						<th title="click to sort" class="headerText">Admission Year</th>
+						<th title="click to sort" class="headerText">Promoted Year</th>
 					</tr>
 				</thead>
 
@@ -1028,8 +1030,8 @@ for(Cookie cookie : cookies){
                                 </c:otherwise>
                             </c:choose>
 						 	</td>
-
-
+							<td class="dataText"><c:out value="${Parents.student.yearofadmission}" /></td>
+							<td class="dataText"><c:out value="${Parents.student.promotedyear}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
