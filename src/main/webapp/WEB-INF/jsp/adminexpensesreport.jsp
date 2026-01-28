@@ -451,7 +451,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/alalmas/AdminProcess/printVoucher";
+		form1.action="/alalmas/AdminProcess/printAllExpenses";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -623,13 +623,13 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td class="alignLeft">From Date:  &nbsp;&nbsp;</td>
-							<td ><label> <input name="fromdate"
+							<td ><label> <input name="fromdate" value="${expensesfromdate}"
 									type="text" class="textField" id="datepickerfromdate" size="20"
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
 									data-validate="validate(required)">
 							</label></td>
 							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;To Date:</td>
-							<td ><label> <input name="todate"
+							<td ><label> <input name="todate" value="${expensestodate}"
 									type="text" class="textField" id="datepickertodate" size="20"
 									style="text-transform:uppercase;height: 30px;font-size: 16px;font-weight: bold;border-radius: 5px"
 									data-validate="validate(required)">
@@ -685,7 +685,8 @@ for(Cookie cookie : cookies){
 		<div style="overflow: scroll; height: 600px">
 			<table width="100%">
 				<tr>
-					<td class="headerTD">View All Expenses</td>
+					<td class="headerTD">View All Expenses<br>
+					${expensesfromdate} to ${expensestodate}</td>
 				</tr>
 			</table>
 			<table width="100%" border="0" style="border-color: #4b6a84;"
