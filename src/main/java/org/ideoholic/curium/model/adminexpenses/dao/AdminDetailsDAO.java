@@ -192,7 +192,32 @@ public class AdminDetailsDAO {
 
 	}
 
-	
+	public List<Adminexpenses> readAllExpenses(List<Integer> expenseIdList, String  branchId) {
+		
+
+		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
+
+		try {
+			// this.session =
+			// HibernateUtil.getSessionFactory().openCurrentSession();
+			transaction = session.beginTransaction();
+			
+			Query query = session.createQuery("From Adminexpenses where idAdminExpenses IN (:ids) and branchid="+branchId);
+			query.setParameterList("ids", expenseIdList);
+			results = query.list();
+
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+		
+}	
 	
 
 }

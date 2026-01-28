@@ -5,11 +5,14 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.dao.AdminDetailsDAO;
@@ -347,6 +350,8 @@ public class AdminService {
 			}
 			adminExpenseResponseDto.setAdminexpenses(adminExpenseList);
 			adminExpenseResponseDto.setSumofexpenses(sumOfExpenses.toPlainString());
+			adminExpenseResponseDto.setDatefrom(adminExpensesDateDto.getFromdate());
+			adminExpenseResponseDto.setDateto(adminExpensesDateDto.getTodate());
 			adminExpenseResponseDto.setSuccess(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -355,4 +360,32 @@ public class AdminService {
 
 		return adminExpenseResponseDto;
 	}
+	
+	public AdminExpenseResponseDto printAllExpenses(AdminExpensesDateDto expenseiddto, String branchId) {
+		AdminExpenseResponseDto adminExpenseResponseDto = new AdminExpenseResponseDto();
+			try {
+				List<Integer> expenseIdList = new ArrayList<Integer>();
+				
+				for (String id : expenseiddto.getExpensesIds()) {
+				    expenseIdList.add(Integer.parseInt(id));
+				}
+				
+	        	List<Adminexpenses> adminExpense = new AdminDetailsDAO().readAllExpenses(expenseIdList,branchId);
+	        	BigDecimal sumOfExpenses = BigDecimal.ZERO;
+				for (Adminexpenses expenseAdmin : adminExpense) {
+					BigDecimal fee = new BigDecimal(expenseAdmin.getPriceofitem());
+					sumOfExpenses = sumOfExpenses.add(fee);
+				}
+	        	adminExpenseResponseDto.setAdminexpenses(adminExpense);
+				adminExpenseResponseDto.setSumofexpenses(sumOfExpenses.toPlainString());
+				adminExpenseResponseDto.setDatefrom(expenseiddto.getFromdate());
+				adminExpenseResponseDto.setDateto(expenseiddto.getTodate());
+				adminExpenseResponseDto.setSuccess(true);
+				
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            adminExpenseResponseDto.setSuccess(false);
+	        }
+			 return adminExpenseResponseDto; 
+		}
 }
