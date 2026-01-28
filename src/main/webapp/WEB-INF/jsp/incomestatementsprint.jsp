@@ -214,7 +214,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/sky/images/sky.png" width="80" height="80"/>
+				<img src="/sky/images/sky.png" width="71" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>

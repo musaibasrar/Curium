@@ -136,7 +136,7 @@
     <div class="wrap">
         <div class="card">
             <div class="logo">
-                <img border="0" alt="logo" src="/sky/images/sky.png">
+                <img border="0" alt="logo" style="vertical-align: text-bottom;height: 110px;width: 95px;" src="/sky/images/sky.png">
             </div>
 
             <div class="status" role="status" aria-live="polite">

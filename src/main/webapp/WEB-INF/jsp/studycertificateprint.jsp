@@ -123,7 +123,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/sky/images/sky.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 89px;" alt="logo" src="/sky/images/sky.png">
 			</td>
 				<td >
 					<br>
