@@ -203,22 +203,22 @@
 
 </style>
 
-<link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bba/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/sky/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/sky/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-    src="/bba/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/bba/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/bba/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/bba/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/bba/js/validation/jquery.ketchup.all.min.js"></script>
+    src="/sky/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/sky/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/sky/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/sky/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/sky/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/sky/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/sky/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/sky/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/sky/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-    src="/bba/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/bba/css/datePicker/demos.css">
+    src="/sky/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/sky/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -247,7 +247,7 @@
     function saveEnquiryForm() {
         var form1 = document.getElementById("form1");
         if(form1.checkValidity()) {
-        form1.action = "/bba/EnquiryProcess/saveEnquiryFormOnline";
+        form1.action = "/sky/EnquiryProcess/saveEnquiryFormOnline";
         form1.method = "POST";
         form1.submit();
         }
@@ -270,10 +270,10 @@
     }
 </script>
 
-    <script type="text/javascript" src="/bba/js/datetimepicker_css.js"></script>
+    <script type="text/javascript" src="/sky/js/datetimepicker_css.js"></script>
 
-    <script src="/bba/JavaScript/actb.js"></script>
-    <script src="/bba/JavaScript/common.js"></script>
+    <script src="/sky/JavaScript/actb.js"></script>
+    <script src="/sky/JavaScript/common.js"></script>
 
 
 
@@ -375,7 +375,7 @@
                 <div id="tabs">
                     <div class="card-header">
                         <div class="card-logo">
-                            <img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/bba/images/bba.png">
+                            <img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/sky/images/sky.png">
                         </div>
                         <div class="card-title">Admission Enquiry Form</div>
                     </div>

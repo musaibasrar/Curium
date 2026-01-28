@@ -8,6 +8,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
@@ -104,7 +105,7 @@ public class parentsDetailsDAO {
 	}
 
 		@SuppressWarnings("finally")
-	public boolean createMultiple(List<Parents> parents) {
+	public boolean createMultiple(List<Parents> parents, List<Login> listParentLogin) {
 		
 			boolean result = false;
 		 try {
