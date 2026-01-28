@@ -1,7 +1,8 @@
 package org.ideoholic.curium.model.adminexpenses.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.dto.ResultResponse;
@@ -68,9 +69,7 @@ public class AdminActionAdapter {
 
 		Adminexpenses adminExpense = adminService.printVoucher(expenseiddto,httpSession.getAttribute("branchid").toString());
 
-		if (adminExpense != null) {
-			httpSession.setAttribute("adminexpenses", adminExpense);
-		}
+			request.setAttribute("adminexpenses", adminExpense);
 	}
 
 	public void searchExpensesbydate() {
@@ -103,6 +102,8 @@ public class AdminActionAdapter {
 		
 		httpSession.setAttribute("adminexpenses", adminExpenseResponseDto.getAdminexpenses());
 		httpSession.setAttribute("sumofexpenses", adminExpenseResponseDto.getSumofexpenses());
+		httpSession.setAttribute("expensesfromdate", adminExpenseResponseDto.getDatefrom());
+		httpSession.setAttribute("expensestodate", adminExpenseResponseDto.getDateto());
 		return adminExpenseResponseDto.isSuccess();
 	}
 	
@@ -118,6 +119,19 @@ public class AdminActionAdapter {
 		ResultResponse resultResponse = adminService.viewAllExpenses(httpSession.getAttribute("branchid").toString());
 		httpSession.setAttribute("adminexpenses", resultResponse.getResultList());
 		return resultResponse.isSuccess();
+	}
+	
+	public void printAllExpenses() {
+
+		AdminExpensesDateDto adminExpensesDateDto = new AdminExpensesDateDto();
+		adminExpensesDateDto.setExpensesIds(request.getParameterValues("expensesIDs"));
+		adminExpensesDateDto.setTodate(request.getParameter("todate"));
+		adminExpensesDateDto.setFromdate(request.getParameter("fromdate"));
+
+		AdminExpenseResponseDto adminExpenseResponseDto = adminService.printAllExpenses(adminExpensesDateDto,httpSession.getAttribute("branchid").toString());
+			request.setAttribute("expensesfromdate", adminExpenseResponseDto.getDatefrom());
+			request.setAttribute("expensestodate", adminExpenseResponseDto.getDateto());
+			request.setAttribute("adminexpenseslist", adminExpenseResponseDto.getAdminexpenses());
 	}
 
 

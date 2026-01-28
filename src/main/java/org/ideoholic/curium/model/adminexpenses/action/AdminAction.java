@@ -91,7 +91,13 @@ public class AdminAction {
 	}
 
 	
-
+	@PostMapping("/printAllExpenses")
+	public String printAllExpenses() { 
+		
+		adminActionAdapter.printAllExpenses();
+		return "printexpenses";
+		
+    }
 	
 
 }
