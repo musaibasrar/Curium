@@ -724,7 +724,7 @@ public class MessStockMoveService {
 		MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
 		String[] messStockMoveBillNo = messStockMove.getExternalid().split("_");
 		String[] custDetails = messStockMove.getIssuedto().split("_");
-		String queryMain = "from MessStockMove msm where msm.externalid like '%_"+messStockMoveBillNo[1]+"'";
+		String queryMain = "from MessStockMove msm where msm.externalid like '%\\_"+messStockMoveBillNo[1]+"'";
 		List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain);
 		
 		//BILL DETAILS
