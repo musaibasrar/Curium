@@ -385,4 +385,18 @@ public class MarksDetailsAction {
 		}
 	}
 	
+	@PostMapping("/printMarksReport")
+	public String printMarksReport() {
+		    marksDetailsActionAdapter.viewMarks();
+			marksDetailsActionAdapter.getSubjectExams();
+		return "examMarksReport";
+	}
+	
+	@PostMapping("/printMarksReportSub")
+	public String printMarksReportSub() {
+		    marksDetailsActionAdapter.viewMarksSub();
+			marksDetailsActionAdapter.getSubjectExams();
+		return "examMarksReportSub";
+	}
+	
 }
