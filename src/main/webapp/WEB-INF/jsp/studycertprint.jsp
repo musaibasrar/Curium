@@ -230,7 +230,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp; </span>
+					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;AURAD (B)&nbsp;&nbsp; </span>
 					<span style="text-transform: capitalize;width:500px;border-bottom:0px solid black;text-align:right;">&nbsp;&nbsp;&nbsp;&nbsp;Signature of&emsp;&emsp;&emsp;<br>Head of the Institution</span>
 					</h3>
 				</td>
