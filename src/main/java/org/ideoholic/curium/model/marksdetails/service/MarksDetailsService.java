@@ -431,7 +431,7 @@ public class MarksDetailsService {
 		result.setSubjectSelected(dto.getSubjectSelected());
 		result.setExamSelected(dto.getExamSelected());
 		result.setSubject(Integer.toString(subjectDetailsId));
-		result.setExam(examIdName[0]);
+		result.setExam(exam);
 		result.setSuccess(true);
 		/*
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
@@ -2118,7 +2118,7 @@ public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
 	result.setSubjectSelected(dto.getSubjectSelected());
 	result.setExamSelected(dto.getExamSelected());
 	result.setSubject(Integer.toString(subjectDetailsId));
-	result.setExam(examIdName[0]);
+	result.setExam(exam);
 	result.setSuccess(true);
 	/*
 	 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
