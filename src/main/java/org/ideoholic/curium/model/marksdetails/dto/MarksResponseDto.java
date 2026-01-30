@@ -18,6 +18,9 @@ public class MarksResponseDto {
     private String examSelected;
     private String subject;
     private String exam;
+    private String classSelected;
+    private String sectionSelected;
+    private String studentName;
     Map<Parents,Map<Integer,Float>> studentsMarksMap;
     @Builder.Default
     private boolean success = false;

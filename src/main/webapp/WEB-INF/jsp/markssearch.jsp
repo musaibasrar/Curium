@@ -377,6 +377,10 @@
 			searchForMarks();
 		});
 		
+		$("#print").button().click(function() {
+			printMarksReport();
+		});
+		
 
 	});
 
@@ -446,6 +450,14 @@
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/vision/MarksDetailsProcess/deleteMultiple";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
+	function printMarksReport() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/MarksDetailsProcess/printMarksReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -534,7 +546,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
+									name="namesearch" type="text" class="myclass" id="namesearch" value="${studentname}"
 									size="36"">
 							</label></td>
 							
@@ -551,7 +563,7 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> 
 												<select name="classsearch"
 									id="classsearch" style="width: 120px;">
-										<option selected></option>
+										<option selected value="${classselected}">${classselected}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
@@ -564,7 +576,7 @@ for(Cookie cookie : cookies){
 										 <label> 
 									<select name="secsearch" id="secsearch"
 									style="width: 110px;">
-										<option selected></option>
+										<option selected value="${sectionselected}">${sectionselected}</option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.section != '')}">
@@ -587,7 +599,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="subject" id="subject"
 									style="width: 240px" ">
-										<option selected></option>
+										<option selected value="${subjectid}">${subjectselected}</option>
 
 										<c:forEach items="${listSubject}" var="listSubject">
 
@@ -612,7 +624,7 @@ for(Cookie cookie : cookies){
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="exam" id="exam"
 									style="width: 240px">
-										<option selected></option>
+										<option selected value="${examidname}">${examselected}</option>
 
 										<c:forEach items="${listExam}" var="listExam">
 
@@ -647,7 +659,7 @@ for(Cookie cookie : cookies){
 							<!-- <td class="alignRightFields">Exam &nbsp;</td> -->
 							<td width="12%" align="left"><label> <input
 									name="examidselected" type="hidden" class="myclass" id="examidselected"
-									size="36" value='<c:out value="${examid}"></c:out>'>
+									size="36" value='<c:out value="${examidname}"></c:out>'>
 							</label></td>
 							
 						</tr>
@@ -706,7 +718,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:b
 							
 							
 							<td class="alignRightFields">Exam &nbsp;&nbsp;</td>
-							<td ><label> <input style="border: none;
+							<td ><label><input  /> <input style="border: none;
 border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
 									name="examselected" type="text" class="myclass" id="examselected"
 									size="36" value='<c:out value="${examselected}"></c:out>'>
@@ -789,6 +801,8 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 					
 						<td class="footerTD" colspan="2"><input value="Update"
 							type="submit" id="updateMarks" />
+							<input value="Print"
+							type="submit" id="print" />
 							<!-- &nbsp; &nbsp; &nbsp; &nbsp;<button id="delete">Delete</button> -->
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
