@@ -148,7 +148,10 @@ public class MarksDetailsActionAdapter {
         request.setAttribute("subjectselected", responseDto.getSubjectSelected());
         request.setAttribute("examselected", responseDto.getExamSelected());
         request.setAttribute("subjectid", responseDto.getSubject());
-        request.setAttribute("examid", responseDto.getExam());
+        request.setAttribute("examidname", responseDto.getExam());
+        request.setAttribute("classselected", dto.getAddClass());
+        request.setAttribute("sectionselected", dto.getAddSec());
+        request.setAttribute("studentname", dto.getStudentName());
 
         return responseDto.isSuccess();
 
@@ -266,7 +269,10 @@ public class MarksDetailsActionAdapter {
         request.setAttribute("subjectselected", responseDto.getSubjectSelected());
         request.setAttribute("examselected", responseDto.getExamSelected());
         request.setAttribute("subjectid", responseDto.getSubject());
-        request.setAttribute("examid", responseDto.getExam());
+        request.setAttribute("examidname", responseDto.getExam());
+        request.setAttribute("classselected", dto.getAddClass());
+        request.setAttribute("sectionselected", dto.getAddSec());
+        request.setAttribute("studentname", dto.getStudentName());
         request.setAttribute("studentmarkmap", responseDto.getStudentsMarksMap());
         return responseDto.isSuccess();
 
