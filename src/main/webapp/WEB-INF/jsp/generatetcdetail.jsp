@@ -6,19 +6,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Generate TC Detail</title>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/readmodelschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/readmodelschool/css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script type="text/javascript" src="/readmodelschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/readmodelschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/readmodelschool/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/readmodelschool/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/readmodelschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/readmodelschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/readmodelschool/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/readmodelschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/readmodelschool/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/readmodelschool/css/datePicker/demos.css">
 
 
 
@@ -252,7 +252,7 @@
 }
         </style>
 
-        <script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+        <script type="text/javascript" src="/readmodelschool/js/datetimepicker_css.js"></script>
 
         <script type="text/javascript">
         
@@ -270,7 +270,7 @@
             function generateDetail() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/vision/DocumentsProcess/tcDetail";
+                form1.action = "/readmodelschool/DocumentsProcess/tcDetail";
                
                 form1.submit();
                 
@@ -286,7 +286,7 @@
                     <div align="center">
                     <br/><br/>
                    <!--  <p class="alignRightHeader">Generate TC Detail</p> -->
-                  <img alt="" src="/vision/images/loading.gif">
+                  <img alt="" src="/readmodelschool/images/loading.gif">
                     
                     </div>
                             
