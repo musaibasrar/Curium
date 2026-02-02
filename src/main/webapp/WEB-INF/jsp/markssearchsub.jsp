@@ -750,6 +750,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 				<thead>
 					<tr>
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -771,6 +772,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								id="<c:out value="${Parents.key.student.sid}"/>" class="chcktbl" checked
 								name="studentIDs"
 								value="<c:out value="${Parents.key.student.sid}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								><c:out
 										value="${Parents.key.student.studentexternalid}" /></a></td>
