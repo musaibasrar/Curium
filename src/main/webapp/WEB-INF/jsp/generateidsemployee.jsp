@@ -477,13 +477,14 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						 <th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Contact Number</th>
 					</tr>
 				</thead>
 
 				<tbody>
-					<c:forEach items="${employeeList}" var="employees">
+					<c:forEach items="${employeeList}" var="employees" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -491,6 +492,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${employees.tid}"/>" class="chcktbl"
 								name="employeeIDs"
 								value="<c:out value="${employees.tid}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/abc/EmployeeProcess/ViewDetails&id=<c:out value='${employee.tid}'/>"><c:out
 										value="${employees.teachername}" /></a></td>
