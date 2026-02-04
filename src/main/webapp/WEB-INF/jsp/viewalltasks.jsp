@@ -628,6 +628,7 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr>
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th class="headerText">Sl No</th>
                             <th class="headerText">UID</th>
                             <th class="headerText">Assignment</th>
                             <th class="headerText">Staff</th>
@@ -652,7 +653,7 @@ for(Cookie cookie : cookies){
                                     <td class="dataText"><input type="checkbox" id = "<c:out value="${task.id}"/>" class = "chcktbl"  name="taskids"  value="<c:out value="${task.id}"/>"/></td>
                                 </c:otherwise>
                            		 </c:choose>
-                            	
+                            	 <td class="dataText" align="center">${status.index + 1}</td>
                             	<td class="dataText"><c:out value="${task.id}"/> <input type="hidden" id="jobid" name="jobid" value="${task.jobquery.id}">
                             	<input type="hidden" id="username" name="username" value="${username}"> </td>
                             	<c:if test="${task.status == 'To Do' }">
