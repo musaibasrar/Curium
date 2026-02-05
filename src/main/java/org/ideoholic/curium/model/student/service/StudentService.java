@@ -444,8 +444,7 @@ public class StudentService {
 						currentYear.getCurrentacademicyear());
 				result.setReceiptInfo(rinfo);
 				for (Receiptinfo receiptinfo : rinfo) {
-					VoucherEntrytransactions VoucherEntryTransactions = new AccountDAO()
-							.getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
+					VoucherEntrytransactions VoucherEntryTransactions = accountDao.getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
 					String[] rNarration = VoucherEntryTransactions.getNarration().split(":");
 					receiptNarration.put(receiptinfo, rNarration[0]);
 				}

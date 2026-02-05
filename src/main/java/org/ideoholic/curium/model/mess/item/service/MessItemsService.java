@@ -815,7 +815,7 @@ public class MessItemsService {
 							transactions.setEntrydate(DateUtil.todaysDate());
 							transactions.setNarration("Towards Opening Stock Entry");
 							transactions.setCancelvoucher("no");
-							transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+							transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 							transactions.setBranchid(Integer.parseInt(branchId));
 							transactions.setUserid(Integer.parseInt(userId));
 							
@@ -948,7 +948,7 @@ public class MessItemsService {
 						transactions.setEntrydate(DateUtil.todaysDate());
 						transactions.setNarration("Towards New Stock Entry");
 						transactions.setCancelvoucher("no");
-						transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactions.setBranchid(Integer.parseInt(branchId));
 						transactions.setUserid(Integer.parseInt(userId));
 						
@@ -977,7 +977,7 @@ public class MessItemsService {
 						transactionTC.setNarration("Towards transportation/labour charges. Ref. No:"+randomString+":"+dto.getSupplierReferenceNo());
 						transactionTC.setCancelvoucher("no");
 						transactionTC.setBranchid(Integer.parseInt(branchId));
-						transactionTC.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+						transactionTC.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 						transactionTC.setUserid(Integer.parseInt(userId));
 
 						// Dr

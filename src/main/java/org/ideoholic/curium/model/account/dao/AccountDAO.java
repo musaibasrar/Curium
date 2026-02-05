@@ -27,35 +27,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class AccountDAO {
 	
-	@Autowired
-	private FinancialAccountingYearRepository finAccountRepo;
+	private final FinancialAccountingYearRepository finAccountRepo;
 	
-	@Autowired
-	private AccountDetailsRepository accountDetailsRepo;
+	private final AccountDetailsRepository accountDetailsRepo;
 	
-	@Autowired
-	private AccountDetailsBalanceRepository accountDetailsBalanceRepo;
+	private final AccountDetailsBalanceRepository accountDetailsBalanceRepo;
 	
-	@Autowired
-	private AccountGroupMasterRepository accountGroupMasterRepo;
+	private final AccountGroupMasterRepository accountGroupMasterRepo;
 	
-	@Autowired
-	private AccountSubGroupMasterRepository accountSubGroupMasterRepo;
+	private final AccountSubGroupMasterRepository accountSubGroupMasterRepo;
 	
-	@Autowired
-	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
+	private final VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
 	
-	@Autowired
-	private AccountssgroupmasterRepository accountssgroupmasterRepository;
+	private final AccountssgroupmasterRepository accountssgroupmasterRepository;
 	
-	@Autowired
-    private QueryUtil queryUtil;
+    private final QueryUtil queryUtil;
 
 
 	@Transactional

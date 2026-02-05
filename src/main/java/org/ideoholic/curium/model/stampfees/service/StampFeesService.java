@@ -765,7 +765,7 @@ public void addFeesStampAll(StampFeesDto stampFeesDto,String currentAcademicYear
 		transactions.setEntrydate(DateUtil.todaysDate());
 		transactions.setNarration("Towards Fees Stamp");
 		transactions.setCancelvoucher("no");
-		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+		transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(branchid));
 		transactions.setUserid(Integer.parseInt(userid));
 		

@@ -1933,7 +1933,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 	        }
 			
 				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
-				accountsDetails = new AccountDAO().getLedgerAccountdetails(Integer.parseInt(branchId));
+				accountsDetails = accountDao.getLedgerAccountdetails(Integer.parseInt(branchId));
 				
 				//Group 1
 				BigDecimal totalIncomeCash = BigDecimal.ZERO;
@@ -1950,7 +1950,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				for (Accountdetails accountDetails : accountsDetails) {
 					int accountId = accountDetails.getAccountdetailsid();
 					if(!excludeIncomeLedgerRP.contains(accountId)) {
-					List<VoucherEntrytransactions> voucherTransactions = new AccountDAO().getVoucherEntryTransactionsBetweenDates(dto.getFromDate(), dto.getToDate(), accountDetails.getAccountdetailsid(), Integer.parseInt(branchId));
+					List<VoucherEntrytransactions> voucherTransactions = accountDao.getVoucherEntryTransactionsBetweenDates(dto.getFromDate(), dto.getToDate(), accountDetails.getAccountdetailsid(), Integer.parseInt(branchId));
 					
 					if(!voucherTransactions.isEmpty()) {
 					
@@ -2037,7 +2037,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			
 			
 			
-			List<VoucherEntrytransactions> voucherTransactionsCash = new AccountDAO().getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), todaysDate, cashLedgeridRP, Integer.parseInt(branchId));
+			List<VoucherEntrytransactions> voucherTransactionsCash = accountDao.getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), todaysDate, cashLedgeridRP, Integer.parseInt(branchId));
 			
 			for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsCash) {
 				int drAccount = voucherEntrytransactions.getDraccountid();
@@ -2050,7 +2050,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				}
 			}
 					
-			List<VoucherEntrytransactions> voucherTransactionsBank = new AccountDAO().getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), todaysDate, bankLedgeridRP, Integer.parseInt(branchId));
+			List<VoucherEntrytransactions> voucherTransactionsBank = accountDao.getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), todaysDate, bankLedgeridRP, Integer.parseInt(branchId));
 			
 			for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsBank) {
 				int drAccount = voucherEntrytransactions.getDraccountid();
@@ -2065,7 +2065,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			
 			
 			
-			List<VoucherEntrytransactions> voucherTransactionsCashContra = new AccountDAO().getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), dto.getToDate(), cashLedgeridRP, Integer.parseInt(branchId));
+			List<VoucherEntrytransactions> voucherTransactionsCashContra = accountDao.getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), dto.getToDate(), cashLedgeridRP, Integer.parseInt(branchId));
 			
 			for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsCashContra) {
 				int drAccount = voucherEntrytransactions.getDraccountid();
@@ -2079,7 +2079,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				}
 			}
 			
-			List<VoucherEntrytransactions> voucherTransactionsBankCreditEntries = new AccountDAO().getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), dto.getToDate(), bankLedgeridRP, Integer.parseInt(branchId));
+			List<VoucherEntrytransactions> voucherTransactionsBankCreditEntries = accountDao.getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), dto.getToDate(), bankLedgeridRP, Integer.parseInt(branchId));
 			
 			for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsBankCreditEntries) {
 				int crAccount = voucherEntrytransactions.getCraccountid();
@@ -2092,7 +2092,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			List<Integer> accountids = new ArrayList<Integer>();
 			accountids.addAll(cashLedgeridRP);
 			accountids.addAll(bankLedgeridRP);
-			List<Accountdetailsbalance> accountDetailsBalanceList = new AccountDAO().getAccountBalanceDetails(accountids, Integer.parseInt(branchId));
+			List<Accountdetailsbalance> accountDetailsBalanceList = accountDao.getAccountBalanceDetails(accountids, Integer.parseInt(branchId));
 			BigDecimal cashBalance = BigDecimal.ZERO;
 			BigDecimal bankBalance = BigDecimal.ZERO;
 			
