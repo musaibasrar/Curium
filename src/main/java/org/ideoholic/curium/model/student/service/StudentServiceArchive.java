@@ -47,6 +47,7 @@ public class StudentServiceArchive {
 	private final parentsDetailsDAO parentsDetailsDao;
 	private final StudentDetailsDAO studentDetailsDao;
 	private final StampFeesDAO stampFeesDao;
+	private final AccountDAO accountDao;
 	private final UserDAO userDao;
 
 	private final HttpSession httpSession;
@@ -654,7 +655,7 @@ public class StudentServiceArchive {
                     transactions.setEntrydate(DateUtil.todaysDate());
                     transactions.setNarration("Towards Fees Stamp");
                     transactions.setCancelvoucher("no");
-                    transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID))).getFinancialid());
+                    transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID))).getFinancialid());
                     transactions.setBranchid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID)));
                     transactions.setUserid(Integer.parseInt(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID)));
 

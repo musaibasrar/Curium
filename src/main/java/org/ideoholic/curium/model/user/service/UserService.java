@@ -81,6 +81,9 @@ public class UserService {
 	private EmployeeDAO employeeDao;
 	
 	@Autowired
+	private AccountDAO accountDao;
+	
+	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
 	
     @Autowired
@@ -695,7 +698,7 @@ public class UserService {
 				misc = misc + receiptinfo.getMisc();
 				Parents student = new Parents();
 				student = studentDetailsDao.readUniqueObjectParents(receiptinfo.fetchSid());
-				VoucherEntrytransactions voucherEntryTransactions = new AccountDAO().getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
+				VoucherEntrytransactions voucherEntryTransactions = accountDao.getVoucherDetails(receiptinfo.getReceiptvoucher().toString());
 				String[] narrationDetails = voucherEntryTransactions.getNarration().split(":");
 				Student ss = student.getStudent();
 				ss.setRemarks(narrationDetails[0]);
