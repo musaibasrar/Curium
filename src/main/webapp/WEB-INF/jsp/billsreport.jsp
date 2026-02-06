@@ -842,6 +842,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Issue Date</th>
 						<th title="click to sort" class="headerText">Bill No.</th>
 						<th title="click to sort" class="headerText">Student Name</th>
@@ -856,10 +857,11 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${messstockmovelist}" var="stockmovelist">
+					<c:forEach items="${messstockmovelist}" var="stockmovelist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${stockmovelist.id}"/>" class = "chcktbl"  name="stockmoveid"  value="<c:out value="${stockmovelist.id}"/>"/></td>
+						  <td class="dataText" align="center">${status.index + 1}</td>
 						  <td class="dataText" style="width: 10%;"><input type="text"  style="background-color: #E3EFFF;border-style: none;color: #4B6A84;text-align: center;" name="transactiondate_${stockmovelist.id}" value="<fmt:formatDate value="${stockmovelist.transactiondate}" pattern="dd/MM/yyyy"/>" readonly></td>
 							<c:set var="itemparts" value="${fn:split(stockmovelist.externalid, '_')}" />
 						  <td class="dataText" style="text-align: center"><c:out value="${itemparts[1]}" /></td>

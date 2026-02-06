@@ -582,6 +582,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Account Description&nbsp;</th>
@@ -593,7 +594,7 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 				<fmt:setLocale value="en_IN" scope="session"/>
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
+					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -604,6 +605,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${ledgertransactions.key.transactionsid}"/>" />
 								
 							</td>
+							<td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataTextInActive"><c:out value="${ledgertransactions.key.transactionsid}" />
 							</td>
 							<td class="dataText"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>

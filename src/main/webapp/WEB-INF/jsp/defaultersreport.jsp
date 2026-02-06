@@ -725,6 +725,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -742,7 +743,7 @@ for(Cookie cookie : cookies){
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
 					<c:set var="TotalDueAsonToday" value="0" />
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
 						
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -750,6 +751,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+							<td class="dataText" align="center">${status.index + 1}</td>	
 								<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
