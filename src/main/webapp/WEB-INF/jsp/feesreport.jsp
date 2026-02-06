@@ -127,14 +127,12 @@
 	border-radius: 3px;
 	width: 10px;
 	font-family: Tahoma;
-	font-size: 14px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
 	font-weight: Bold;
 	width: auto;
 	height: 24px;
 	vertical-align: text-top;
-	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
@@ -233,10 +231,10 @@
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
-	font-weight: normal;
+	font-weight: bold;
 	width: auto;
 	height: 27px;
-	vertical-align: text-top;
+	/* vertical-align: text-top; */
 	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -350,6 +348,16 @@
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		
+		$('#myTableFeesCat').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
 	});
 </script>
 <script type="text/javascript">
@@ -417,7 +425,7 @@
 	$(function() {
 		$("#export").button({
 			icons : {
-				primary : "ui-icon-trash"
+				primary : "ui-icon-transferthick-e-w"
 			}
 		});
 	});
@@ -762,8 +770,19 @@ for(Cookie cookie : cookies){
 						<tr>
     <td></td>
     <td id="feescat">
-        <div style="overflow:scroll;width:420px;height:100px;">
+    
+        <div style="overflow:scroll;width:420px; height:250px;">
 
+    <table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
+
+        <thead>
+            <tr>
+                <th class="headerText">Select</th>
+                <th class="headerText">Fees Details</th>
+            </tr>
+        </thead>
+
+        <tbody>
             <c:forEach items="${feescategory}" var="item">
 
                 <!-- reset checked flag -->
@@ -776,24 +795,36 @@ for(Cookie cookie : cookies){
                     </c:if>
                 </c:forEach>
 
-                <label class="labelClass" style="font-weight:bold;color:#325F6D">
-                    <input type="checkbox"
-                           name="feescategory"
-                           class="chcktbl"
-                           value="${item.idfeescategory}"
-                           <c:if test="${isChecked}">checked</c:if>
-                           onclick="syncFeesSelectAll()" />
-                    ${item.feescategoryname} :
-                </label>
+                <tr>
+                    <td class="dataText" style="background-color:white;">
 
-                <label style="font-weight:bold;color:#eb6000">
-                    ${item.particularname}
-                </label>
-                <br/>
+                        <input type="checkbox"
+                               name="feescategory"
+                               class="chcktbl"
+                               value="${item.idfeescategory}"
+                               <c:if test="${isChecked}">checked</c:if>
+                               onclick="syncFeesSelectAll()" />
+
+                    </td>
+
+                    <td class="dataText"
+                        style="font-weight:bold;color:#325F6D;background-color:white;text-align:left">
+
+                        ${item.feescategoryname} :
+                        <span style="color:#eb6000;">
+                            ${item.particularname}
+                        </span>
+
+                    </td>
+                </tr>
 
             </c:forEach>
+        </tbody>
 
-        </div>
+    </table>
+
+</div>
+
     </td>
 </tr>
 											
@@ -941,13 +972,12 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-					
-					<td colspan="3"  class="footerTD" style="textalign:left"> <input value="Export"
-							type="submit" id="export"/>&nbsp;&nbsp;<input value="Print" style="width: 35px;"
-							id="print"/>
+					&nbsp;&nbsp;
+					<td colspan="3"  class="footerTD" style="textalign:left"> <button value="Export" type="submit" id="export">Export</button>
+					&nbsp;&nbsp;<button value="Print" id="print">Print</button>
 							</td>
 													
-						<td class="footerTD" colspan="5" >
+						<td class="footerTD" style="text-align: center" colspan="5" >
 						 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
