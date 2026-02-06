@@ -540,6 +540,7 @@ for(Cookie cookie : cookies){
 						 <td class="dataText" align="center">${status.index + 1}</td>
 						  <c:if test="${currentstocklist.availablestock > currentstocklist.minstock}">
 						  <td class="dataText"><div class="squareinstock"></div></td>
+						  <td class="dataText" align="center">${status.index + 1}</td>
 						   <td class="dataTextLeft"><span><c:out value="${currentstocklist.messitems.name}" /></span></td>
 						  <td class="dataTextLeft"><c:out value="${currentstocklist.availablestock}" />&nbsp;&nbsp;<c:out value="${currentstocklist.messitems.unitofmeasure}" /></td>
 						  <td class="dataTextLeft"><c:out value="In Stock" /></td>
