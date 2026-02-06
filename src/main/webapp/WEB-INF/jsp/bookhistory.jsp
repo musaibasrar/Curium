@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Book History</title>
-<link rel="stylesheet" href="/hira/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/hira/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -296,41 +296,41 @@
 	
 }
 </style>
-<script type="text/javascript" src="/hira/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/hira/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/hira/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/hira/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/hira/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -345,7 +345,7 @@
 	});
 </script>
 
-<script type="text/javascript" src="/hira/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -415,7 +415,7 @@
 	function searchBookHistory(){
 	    
 	    var form1=document.getElementById("form1");
-	    form1.action="/hira/LibraryProcess/searchBookHistory";
+	    form1.action="/vision/LibraryProcess/searchBookHistory";
 	    form1.method = "POST";
 	   form1.submit();
 	    
@@ -424,7 +424,7 @@
 	function deleteBookHistory(){
 	    
 	    var form1=document.getElementById("form1");
-	    form1.action="/hira/LibraryProcess/deleteBookHistory";
+	    form1.action="/vision/LibraryProcess/deleteBookHistory";
 	    form1.method = "POST";
 	   form1.submit();
 	    
@@ -444,7 +444,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/hira/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -522,6 +522,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Book Name</th>
 						<th title="click to sort" class="headerText">UID&nbsp;</th>
 						<th title="click to sort" class="headerText">Student Name</th>
@@ -532,7 +533,7 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${bookhistorylist}" var="book">
+					<c:forEach items="${bookhistorylist}" var="book" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -540,7 +541,8 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${book.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${book.id}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/hira/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
+								<td class="dataText" align="center">${status.index + 1}</td>
+							<td class="dataText"><a class="dataTextInActive" href="/vision/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
 							<td class="dataText"><c:out value="${book.uid}" /></td>
 							<td class="dataText"><c:out value="${book.studentName}" /></td>
 							<td class="dataText"><c:out value="${book.issueDate}" /></td>
