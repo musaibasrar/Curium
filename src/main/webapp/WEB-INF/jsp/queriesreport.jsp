@@ -686,6 +686,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
                         <tr>
+                            <th class="headerText">Sl No</th>
                         	<th title="click to sort" class="headerText">UID</th>
                         	<th title="click to sort" class="headerText">Assignment Title</th>
                             <th title="click to sort" class="headerText">Staff</th>
@@ -698,8 +699,9 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${parentquerylist}" var="query">
+                        <c:forEach items="${parentquerylist}" var="query" varStatus="status">
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
+                            <td class="dataText" align="center">${status.index + 1}</td>
                             <td class="dataText"><c:out value="${query.id}"/></td>
                             <td class="dataText"><c:out value="${query.externalid}"/></td>
                             <td class="dataText">

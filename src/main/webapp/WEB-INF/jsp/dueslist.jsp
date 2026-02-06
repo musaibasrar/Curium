@@ -941,6 +941,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Student Name</th>
 						<th title="click to sort" class="headerText">Branch Receipt Number&nbsp;</th>
@@ -953,7 +954,7 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${dueslist}" var="dueslist">
+					<c:forEach items="${dueslist}" var="dueslist" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -961,6 +962,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${diary.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${diary.id}"/>" /></td>
+							<td class="dataText" align="center">${status.index + 1}</td>	
 							<td class="dataText"><c:out value="${dueslist.date}" /></td>
 							<td class="dataText"><c:out value="${dueslist.studentName}" /></td>
 							<td class="dataText"><c:out value="${dueslist.branchreceiptnumber}" /></td>
