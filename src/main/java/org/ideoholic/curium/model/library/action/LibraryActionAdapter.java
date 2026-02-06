@@ -16,6 +16,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class LibraryActionAdapter {
@@ -33,14 +34,17 @@ public class LibraryActionAdapter {
     private LibraryService libraryService;
 
 	public boolean addBook() {
-
+		String availableQty = request.getParameter("availableQty");
+		String issuedQty = request.getParameter("issuedQty");
+		int availableQtyInt = StringUtils.hasLength(availableQty) ? Integer.parseInt(availableQty) : 0;
+		int issuedQtyInt = StringUtils.hasLength(issuedQty) ? Integer.parseInt(issuedQty) : 0;
 		BookDto bookDto = BookDto.builder()
 				.subject(request.getParameter("subject"))
 				.author(request.getParameter("author"))
 				.publisher(request.getParameter("publisher"))
 				.isbn(request.getParameter("isbn"))
-				.availableqty(Integer.parseInt(request.getParameter("availableQty")))
-				.issuedqty(Integer.parseInt(request.getParameter("issuedQty")))
+				.availableqty(availableQtyInt)
+				.issuedqty(issuedQtyInt)
 			//	.bookHolder(request.getParameter("bookholder"))
 				.shelf(request.getParameter("shelfe"))
 				.bookname(request.getParameter("bookname"))

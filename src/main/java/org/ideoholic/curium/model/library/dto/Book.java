@@ -25,7 +25,7 @@ public class Book implements java.io.Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "sid", unique = true, nullable = false)
+	@Column(name = "bid", unique = true, nullable = false)
 	private int bid;
 
 	@Column(name = "bookname", length = 200)
