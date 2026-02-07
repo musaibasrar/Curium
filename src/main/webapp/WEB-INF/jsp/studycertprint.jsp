@@ -2,244 +2,222 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
+<!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<title>Study Certificate</title>
 
-<style type="text/css">
-<!--
-.headerText {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: center;
-}
-
-.headerTextLeft {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: left;
-}
-
-.dataTextBold {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataTextBoldLeft {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 14px;
-	letter-spacing: normal;
-	text-align: left;
-}
-
-.dataTextBoldCenter {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 18px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataText {
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
--->
-
-span{
-    display:inline-block;
-    border-bottom:2px solid black;
-    padding-bottom:1px;
-    width: 300px;
-    font-weight: normal;
-    text-align:center;
-}
-</style>
 <style>
-.rightside{
-float:right;
+/* Reset */
+*{
+    box-sizing: border-box;
 }
+
+body{
+    font-family: "Times New Roman", serif;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+}
+
+/* Force EXACT A4 */
+@page{
+    size: A4;
+    margin: 15mm;
+}
+
+/* Certificate wrapper */
+.certificate{
+    width: 100%;
+    height: 267mm; /* 297mm - (15mm top + 15mm bottom) */
+    padding: 10mm 12mm;
+    border: 2px solid #000;
+}
+
+/* Header */
+.header{
+    text-align: center;
+}
+
+.header h3{
+    font-size: 18px;
+    margin: 3px 0;
+}
+
+.header h2{
+    font-size: 22px;
+    margin: 4px 0;
+}
+
+.header p{
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+/* Date */
+.top-right{
+    text-align: right;
+    font-size: 14px;
+    margin-top: 6px;
+}
+
+/* Title */
+.title{
+    text-align: center;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 20px 0;
+}
+
+/* Main content */
+.content{
+    font-size: 16px;
+    line-height: 30px;
+    text-align: justify;
+}
+
+/* Underline values */
+.line{
+    display: inline-block;
+    min-width: 220px;
+    border-bottom: 1px solid #000;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Footer table */
+.footer{
+    width: 100%;
+    margin-top: 60px;
+}
+
+.footer td{
+    font-size: 16px;
+    vertical-align: bottom;
+}
+
+/* Principal signature */
+.signature{
+    text-align: right;
+}
+
+/* Counter signed section */
+.counter{
+    margin-top: 35px;
+    font-size: 15px;
+}
+
+/* Hide buttons while printing */
+@media print{
+    button, .print-btn{
+        display: none !important;
+    }
+
+    body{
+        margin: 0;
+    }
+}
+
+
 </style>
-	<script type="text/javascript" src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        
         <title>Study Certificate</title>
-         <script type="text/javascript">
-             window.onload = function(){
-            	 window.print();
-             }
-        </script>
+ 
+ <script type="text/javascript" src="/patriswamy/js/datePicker/jquery-1.7.1.js"></script>
+ <script type="text/javascript" src="/patriswamy/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+ <title>Study Certificate</title>
+  <script type="text/javascript">
+      window.onload = function(){
+     	 window.print();
+      }
+ </script>
+ 
 </head>
-<%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alfarooq/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
-<body style="text-align: center" class="bodymargin">
-	<jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
-		<br>
-		<table align="center">
-			
-			
-			<tr>
-			<td>
-			<!-- <img border="0" style="vertical-align: text-bottom;height: 100px;width: 84px;" alt="logo" src="/patriswamy/images/patriswamy.png">
- -->			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${collegename}</h2>
-					<%-- <h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3> --%>
-					
-				</td>
-			</tr>
-			<tr><td></td><td>
-					<h2><u>STUDY CERTIFICATE</u></h2></td></tr>
-			</table>
-			<table align="center">
-			
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<%-- <tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
-					</h3>
-				</td>
-			</tr> --%>
-			
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:410px;"> <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">Son/Daughter of &nbsp;&nbsp;
-					<span  style="font-weight: bold;text-transform: capitalize;width:315px;"> <c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					&nbsp;&nbsp;Was a bonafide student
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">  of this institute/college during the year from &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:130px;"> <c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">
-					 studying from<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">During the period his character is found to be Good/Satisfactory. 
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;His Date of Birth is &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:150px"> <c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
-					and Religion is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:200px;"> <c:out value="${studentdetailsbonafide.student.religion}" /></span></h3>
-				</td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;"> 
-					caste is <span style="font-weight: bold;text-transform: capitalize;width:150px"> <c:out value="${studentdetailsbonafide.student.caste}" /></span>
-					as per his/her admission Register No. <span style="font-weight: bold;text-transform: capitalize;width:190px;"></span></h3>
-				</td>
-			</tr>
-			
-			<tr>
-			<td class="dataTextBoldLeft">
-			<br><br>
-				Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>
-			
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;AURAD (B)&nbsp;&nbsp; </span>
-					<span style="text-transform: capitalize;width:500px;border-bottom:0px solid black;text-align:right;">&nbsp;&nbsp;&nbsp;&nbsp;Signature of&emsp;&emsp;&emsp;<br>Head of the Institution</span>
-					</h3>
-				</td>
-			</tr>
-			
-		</table>
-		
+
+<body>
+<jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<form id="form1" method="post" class="bodymargin">
+
+<div class="certificate">
+<br>
+<br>
+<br>
+
+
+    <div class="header">
+        <h3>ARUNODAYA VIDHYA VIKAS TRUST</h3>
+        <h2>${collegename}</h2>
+        <p>(Recognized by the PUE Board, Bangalore)</p>
+        <p>College Code: FF0207 &nbsp;&nbsp; Phone No: 8884106686 / 9739819534</p>
+    </div>
+
+    <div class="top-right">
+        Date: <strong><input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></strong>
+    </div>
+
+    <div class="title">
+        STUDY CERTIFICATE
+    </div>
+
+    <div class="content">
+        This is to certify that Sri/Kum. 
+        <span class="line"><c:out value="${studentdetailsbonafide.student.name}" /></span><br>
+
+        S/O 
+        <span class="line"> <c:out value="${studentdetailsbonafide.fathersname}" /></span> 
+        has studied from 
+        <span class="line"><c:out value="${studentdetailsbonafide.student.classadmittedin}" />1<sup>st</sup> YEAR</span><br>
+
+        standard to 
+        <span class="line"><c:out value="${studentdetailsbonafide.student.classstudying}" /> 2<sup>nd</sup> YEAR</span> 
+        standard in our institute,<br>
+
+        from 
+        <span class="line"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span> 
+        to 
+        <span class="line"><c:out value="${studentdetailsbonafide.student.promotedyear}" /></span> 
+        academic years.
+        <br><br>
+
+        As per the admission register of the institute.  
+        The above details are true and correct to the best of my knowledge.
+    </div>
+    <br>
+<br>
+<br>
+    <table class="footer">
+        <tr>
+            <td>
+                Institution Seal
+            </td>
+            <td class="signature">
+                Signature of Principal<br><br>
+                Name: <strong>AKHIL</strong>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+
+
+    <div style="margin-top:40px;font-size:15px;">
+        COUNTER SIGNED BY ME<br>
+        Address, Seal & Office Telephone Number<br>
+        Of the Block Educational Office / DDPI<br>
+        Mobile Number
+    </div>
+
+</div>
+
 
 		
-	</form>
+		</form>
 </body>
 </html>
