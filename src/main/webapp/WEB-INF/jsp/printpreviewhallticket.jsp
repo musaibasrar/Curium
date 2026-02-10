@@ -18,7 +18,7 @@
 <!--
 .headerText {
 	width: 10px;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	font-size: 12px;
 	color: #FFFFFF;
 	font-weight: normal;
@@ -30,7 +30,7 @@
 
 .headerTextLeft {
 	width: 10px;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	font-size: 12px;
 	color: #FFFFFF;
 	font-weight: normal;
@@ -42,7 +42,7 @@
 
 .dataTextBold {
 	font-weight: bold;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -51,7 +51,7 @@
 
 .dataTextBoldLeft {
 	font-weight: normal;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -59,8 +59,8 @@
 }
 
 .dataTextBoldCenter {
-	font-weight: normal;
-	font-family: Tahoma;
+	font-weight: bold;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -69,7 +69,7 @@
 
 .addressLine{
 	font-weight: normal;
-	font-family: ariel;
+	font-family: "Times New Roman", Times;
 	color: black;
 	font-size: 7px;
 	letter-spacing: normal;
@@ -77,7 +77,7 @@
 }
 
 .dataText {
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -190,7 +190,7 @@ span{
         }
         
         .datatable {
-    font-family: arial, sans-serif;
+    font-family: "Times New Roman", Times, sans-serif;
     border-collapse: collapse;
     width: 100%;
     font-size: 8px;
@@ -288,12 +288,6 @@ for(Cookie cookie : cookies){
                     <td><img src="/daralmajd/images/daralmajd.jpg" width="30" height="30"/></td>
                     <td align="center">
                         <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-                        <label class="addressLine">${branchaddress}</label><br>
-                        <label class="addressLine">Contact: ${branchcontact}</label>
-                    </td>
-                    <td align="right">
-                        <img src="data:image;base64,<c:out value='${Parents.student.studentpic}'/>"
-                             width="30" height="30"/>
                     </td>
                 </tr>
             </table>
@@ -303,8 +297,13 @@ for(Cookie cookie : cookies){
             <!-- ===== TITLE ===== -->
             <table width="100%">
                 <tr>
+                	<td width="30%"></td>
                     <td class="dataTextBoldCenter">
                         Hall Ticket<br>${examname}
+                    </td>
+                    <td align="right">
+                        <img src="data:image;base64,<c:out value='${Parents.student.studentpic}'/>"
+                             width="30" height="30"/>
                     </td>
                 </tr>
             </table>
@@ -335,6 +334,7 @@ for(Cookie cookie : cookies){
                     <th class="datath">Day</th>
                     <th class="datath">Subject</th>
                     <th class="datath">Time</th>
+                    <th class="datath">Sign</th>
                 </tr>
                 </thead>
 
@@ -349,6 +349,7 @@ for(Cookie cookie : cookies){
                         </td>
                         <td class="datatd">${schedule.subject}</td>
                         <td class="datatd">${schedule.starttime} - ${schedule.endtime}</td>
+                        <td class="datatd"></td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -358,9 +359,9 @@ for(Cookie cookie : cookies){
 
             <table width="100%">
                 <tr>
-                    <td>Accountant</td>
-                    <td align="center">Class Teacher</td>
-                    <td align="right">Principal</td>
+                    <td style="font-weight: bold;">Accountant</td>
+                    <td style="font-weight: bold;align-content: center;">Class Teacher</td>
+                    <td style="font-weight: bold;align-content: center;">Principal</td>
                 </tr>
             </table>
 
