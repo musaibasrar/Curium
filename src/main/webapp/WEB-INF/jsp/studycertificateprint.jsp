@@ -135,7 +135,7 @@ body{
 <div class="certificate">
 
     <div class="header">
-        <h3>ARUNODAYA VIDHYA VIKAS TRUST</h3>
+        
         <h2><select name="collegename"
 									 id="collegename"
 									style="width: 500px;border-radius: 4px;background: white;height: 28px;">
@@ -144,8 +144,7 @@ body{
 										<option>SRI SATHYAM PU COLLEGE AURAD (B)-585326</option>
 										<option>NALANDA COMPOSITE PRE-UNIVERSITY <br>COLLEGE AURAD (B)-585326</option>
 								</select></h2>
-        <p>(Recognized by the PUE Board, Bangalore)</p>
-        <p>College Code: FF0207 &nbsp;&nbsp; Phone No: 8884106686 / 9739819534</p>
+       
     </div>
 
     <div class="top-right">
@@ -159,21 +158,41 @@ body{
 
     <div class="content">
         This is to certify that Sri/Kum. 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.name}" /></span><br>
+         <input name="studentname"
+									type="text" class="myclass"
+									value="<c:out value="${studentdetailsbonafide.student.name}" />" id="studentname"
+									size="30">
+        <br>
 
         S/O 
-        <span class="line"> <c:out value="${studentdetailsbonafide.fathersname}" /></span> 
+        
+         <input name="fathersname"
+									type="text" class="myclass"
+									value="<c:out value="${studentdetailsbonafide.fathersname}" />" id="fathersname"
+									size="30"> 
         has studied from 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.classadmittedin}" />1<sup>st</sup> YEAR</span><br>
+        <input name="studiedfrom"
+									type="text" class="myclass"
+									value="<c:out value="${studentdetailsbonafide.student.classadmittedin}" />" id="studiedfrom"
+									size="30"><br>
 
         standard to 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.classstudying}" /> 2<sup>nd</sup> YEAR</span> 
+        <input name="studiedfrom"
+									type="text" class="myclass"
+									value="<c:out value="${studentdetailsbonafide.student.classstudying}" />" id="studiedfrom"
+									size="30">  YEAR
         standard in our institute,<br>
 
         from 
-        <span class="line"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span> 
+         <input name="fromyear"
+									type="text" class="myclass"
+									value="<c:out value="${studentdetailsbonafide.student.yearofadmission}" />" id="studiedfrom"
+									size="30"> 
         to 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.promotedyear}" /></span> 
+       <input name="toyear"
+									type="text" class="myclass"
+									value="<c:out value="${studentdetailsbonafide.student.promotedyear}" />" id="studiedfrom"
+									size="30">
         academic years.
         <br><br>
 
@@ -188,7 +207,7 @@ body{
             </td>
             <td class="signature">
                 Signature of Principal<br><br>
-                Name: <strong>AKHIL</strong>
+                Name: <strong>&emsp;&emsp;&emsp;</strong>
             </td>
         </tr>
     </table>
