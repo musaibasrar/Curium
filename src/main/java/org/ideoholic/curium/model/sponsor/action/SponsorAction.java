@@ -25,10 +25,7 @@ public class SponsorAction {
 		{
 		return "sponsorsaved";
 		}
-		else
-		{
-			return "error";
-		}
+		return "error";
 	}
 	
 	@RequestMapping(value = "/ViewAllSponsor", method = { RequestMethod.GET, RequestMethod.POST })
