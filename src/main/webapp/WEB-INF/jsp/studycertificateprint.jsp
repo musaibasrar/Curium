@@ -177,9 +177,9 @@ body{
 									size="30"><br>
 
         standard to 
-        <input name="studiedfrom"
+        <input name="studiedto"
 									type="text" class="myclass"
-									value="<c:out value="${studentdetailsbonafide.student.classstudying}" />" id="studiedfrom"
+									value="<c:out value="${studentdetailsbonafide.student.classstudying}" />" id="studiedto"
 									size="30">  YEAR
         standard in our institute,<br>
 

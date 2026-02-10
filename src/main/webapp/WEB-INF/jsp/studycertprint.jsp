@@ -173,7 +173,7 @@ body{
         <span class="line"><c:out value="${studiedfrom}" /> </span><br>
 
         standard to 
-        <span class="line"><c:out value="${studiedfrom}" />  </span> 
+        <span class="line"><c:out value="${studiedto}" />  </span> 
         standard in our institute,<br>
 
         from 
