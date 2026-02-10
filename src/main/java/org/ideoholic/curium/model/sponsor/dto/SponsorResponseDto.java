@@ -12,11 +12,8 @@ import lombok.Data;
 public class SponsorResponseDto {
 
 	 private List<Sponsor> list;
-	    
-	    private Sponsor sponsor;
-	    
-	    private boolean success;
-	    
-	    private Map<Student, Studentfeesstructure> mapOfSponsors;
+	 private Sponsor sponsor;
+	 private boolean success;
+	 private Map<Student, Studentfeesstructure> mapOfSponsors;
 	
 }
