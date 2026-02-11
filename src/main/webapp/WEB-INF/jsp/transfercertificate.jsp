@@ -278,6 +278,7 @@
                 classandsec:'<c:out default="0" value="${parents.student.classstudying}" />',
                 classadmittedin:'<c:out default="0" value="${parents.student.classadmittedin}" />',
                 id:'<c:out default="0" value="${parents.student.sid}" />',
+                studentname:'<c:out default="0" value="${parents.student.name}" />',
                 
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
@@ -296,7 +297,7 @@
                 select: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
                     $( "#dateofadmission").val( ui.item.admissiondate );
-       			  $( "#studentName").val( ui.item.name );
+       			  //$( "#studentName").val( ui.item.name );
        			$( "#fathername").val( ui.item.fathername );
        			$( "#mothername").val( ui.item.mothername );
        			$( "#nationality").val( ui.item.nationality );
@@ -306,6 +307,7 @@
        			$( "#dateofbirth").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#classadmitted").val( ui.item.classandsec );
+       			$( "#studentname").val( ui.item.studentname );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -519,8 +521,8 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>    
+                    <td style="width: 45%">Select Student: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentname" id="studentname" style="width: 200px" /></td>    
                         
                     </tr>
                     
