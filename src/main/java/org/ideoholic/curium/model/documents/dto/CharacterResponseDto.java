@@ -18,5 +18,5 @@ public class CharacterResponseDto {
 	private List<Parents> listofParents;
 	private boolean success;
 	List<StudyCertificate>  studyCertificate;
-
+	private String[] characterStudent;  // Character of all the students selected
 }

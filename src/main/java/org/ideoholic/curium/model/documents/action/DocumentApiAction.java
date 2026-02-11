@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.documents.action;
 
+import java.util.List;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
@@ -62,7 +64,7 @@ public interface DocumentApiAction {
 		
 	public ResponseEntity<SearchStudentResponseDto> multiClassSearchPendingAdmissoinReport(@RequestBody StudentNameSearchDto studentNameSearchDto,@RequestHeader(value = "branchid") String branchId,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
-	public ResponseEntity<ParentDto> generateCharacterCertificate(@RequestBody StudentIdsDto studentIdsDto);
+	public ResponseEntity<List<ParentDto>> generateCharacterCertificate(@RequestBody StudentIdsDto studentIdsDto);
 
 	public ResponseEntity<String> printStudyCertificate();
 

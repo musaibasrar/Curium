@@ -1244,14 +1244,17 @@ public class StudentService {
 		BonafideGenerationResponseDto result = BonafideGenerationResponseDto.builder().build();
 
 		String[] studentIds = dto.getStudentIds();
-		String bonafidePage = null;
 
-		if(studentIds!=null){
-			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
-			Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
-			result.setParents(parents);
-			result.setSuccess(true);
-			result.setMessage("bonafidecertificateprint");
+		if (studentIds != null) {
+			List<Parents> parentsList = new ArrayList<>();
+			for (String studentId : studentIds) {
+				String getStudentInfo = "from Parents as parents where parents.student.sid=" + studentId;
+				Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
+				parentsList.add(parents);
+				result.setParentsList(parentsList);
+				result.setSuccess(true);
+				result.setMessage("bonafidecertificateprint");
+			}
 		}
 
 		return result;

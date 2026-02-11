@@ -117,6 +117,10 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+
+		<!-- Loop through each student in the list -->
+		<c:forEach items="${studentDetailsBonafideList}" var="studentdetailsbonafide" varStatus="loop">
+		
 		<br>
 		<table align="center">
 			
@@ -231,8 +235,9 @@ for(Cookie cookie : cookies){
 			</tr>
 			
 		</table>
-		
+		</c:forEach>
 
+		<!-- Print Button appears once at the end -->
 		<TABLE id="dataTable" width="100%" border="0"
 			style="page-break-after: always; border-collapse: collapse;">
 

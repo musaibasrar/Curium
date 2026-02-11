@@ -1,9 +1,13 @@
 package org.ideoholic.curium.model.student.dto;
 
+import java.util.List;
+
+import org.ideoholic.curium.model.parents.dto.Parents;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Builder;
 import lombok.Data;
-import org.ideoholic.curium.model.parents.dto.Parents;
 
 @Data
 @Builder
@@ -12,6 +16,6 @@ public class BonafideGenerationResponseDto {
 
     @Builder.Default
     private boolean success = false;
-    private Parents parents;
+    private List<Parents> parentsList;
     private String message;
 }

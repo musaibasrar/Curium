@@ -3,6 +3,8 @@
  */
 package org.ideoholic.curium.model.documents.action;
 
+import java.util.List;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
@@ -179,8 +181,8 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 	}
 	
 	@PostMapping("/GenerateCharacterCertificate")
-	public ResponseEntity<ParentDto> generateCharacterCertificate(@RequestBody StudentIdsDto studentIdsDto) {
-		ParentDto result = documentService.GenerateCharacterCertificate(studentIdsDto);
+	public ResponseEntity<List<ParentDto>> generateCharacterCertificate(@RequestBody StudentIdsDto studentIdsDto) {
+		List<ParentDto> result = documentService.GenerateCharacterCertificate(studentIdsDto);
 		if (result != null) {
 			return ResponseEntity.ok(result);
 		} else {

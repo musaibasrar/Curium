@@ -129,6 +129,10 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+	
+			<!-- Loop through each student in the list -->
+		<c:forEach items="${studentDetailsBonafideList}" var="studentBonafide" varStatus="loop">
+		<c:set var="studentdetailsbonafide" value="${studentBonafide.parents}" />
 		<br>
 		
 		 <table align="center">
@@ -202,7 +206,7 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${character}" /></span>character
+			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${character[loop.index]}" /></span>character
 			</h3>
 			</td>
 			</tr>
@@ -240,10 +244,8 @@ for(Cookie cookie : cookies){
 			<td align="center">Principal</td>
 		</tr>
 		
-		<!-- 	<tr>
-              <td align="center"><a id="print" href="/school/DocumentsProcess/printCharacterCertificate">Print</a></td>
-            </tr>-->
 		</TABLE>
+		</c:forEach>
 	</form>
 </body>
 </html>

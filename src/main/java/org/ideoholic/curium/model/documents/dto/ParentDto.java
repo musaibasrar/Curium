@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.documents.dto;
 
+import java.util.List;
+
 import org.ideoholic.curium.model.parents.dto.Parents;
 
 import lombok.AllArgsConstructor;
@@ -13,4 +15,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ParentDto {
 		private Parents parents;
+		private List<Parents> parentsList;
 }
