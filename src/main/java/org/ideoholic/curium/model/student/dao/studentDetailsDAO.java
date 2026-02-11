@@ -18,7 +18,9 @@ import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.stereotype.Service;
 
+@Service
 public class studentDetailsDAO {
 	Session session = null;
 	/**
