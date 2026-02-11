@@ -22,10 +22,17 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SponsorService {
+	
+	 @Autowired
+	    private SponsorDao sponsorDao;
+	    
+	    @Autowired
+	    private studentDetailsDAO studentDetailsDAO;
 	
 	public SponsorResponseDto addSponsor(SponsorDto sponsorDto, String branchid, String userid) {
 		SponsorResponseDto sponsorResponseDto = new SponsorResponseDto();
@@ -41,7 +48,7 @@ public class SponsorService {
 		sponsor.setNotes(notes);
 		sponsor.setBranchid(Integer.parseInt(branchid));
 		sponsor.setUserid(Integer.parseInt(userid));
-		result = new SponsorDao().addSponsor(sponsor);
+		result = sponsorDao.addSponsor(sponsor);
 		if(result) {
 			sponsorResponseDto.setSuccess(true);	
 		}
@@ -52,7 +59,7 @@ public class SponsorService {
 	public SponsorResponseDto viewAllSponsor(String branchid) {
 		int branchId = Integer.parseInt(branchid);
 		SponsorResponseDto sponsorResponseDto = new SponsorResponseDto();
-		List<Sponsor> list = new SponsorDao().viewSponsor(branchId);
+		List<Sponsor> list = sponsorDao.viewSponsor(branchId);
 		sponsorResponseDto.setList(list);
 		return sponsorResponseDto;
 	}
@@ -65,7 +72,7 @@ public class SponsorService {
 	            ids.add(Integer.valueOf(id));
 
 	        }
-	        new SponsorDao().deleteMultiple(ids);
+	        sponsorDao.deleteMultiple(ids);
 		 }
 		
 	}
@@ -76,7 +83,7 @@ public class SponsorService {
 		 boolean result = false;
 	        try {
 	            int id = Integer.parseInt(spId);
-	            Sponsor sponsor = new SponsorDao().readUniqueObject(id);
+	            Sponsor sponsor = sponsorDao.readUniqueObject(id);
 	           
 	            if (sponsor != null) {
 	            	sponsorResponseDto.setSponsor(sponsor);
@@ -109,14 +116,14 @@ public class SponsorService {
 		sponsor.setNotes(notes);
 		sponsor.setUserid(userId);
 		sponsor.setBranchid(branchId);
-		result = new SponsorDao().updateSponsor(sponsor);	
+		result = sponsorDao.updateSponsor(sponsor);	
 	    sponsorResponseDto.setSuccess(result);	
 		return sponsorResponseDto;
 	}
 
 	public ResultResponse viewSponsor(String branchId) {
 		if (branchId != null) {
-			List<Sponsor> sponsorList = new SponsorDao().viewSponsor(Integer.parseInt(branchId));
+			List<Sponsor> sponsorList = sponsorDao.viewSponsor(Integer.parseInt(branchId));
 			return ResultResponse.builder().resultList(sponsorList).success(true).build();
 		}
 
@@ -128,12 +135,12 @@ public class SponsorService {
 		Map<Student, Studentfeesstructure> mapOfSponsors = new HashMap<Student, Studentfeesstructure>();
 		String sponsorName =  sponsorDto.getName();
 		int branchId = Integer.parseInt(branchid);
-		List<Studentfeesstructure> list = new SponsorDao().getFeesStructuredBySponsor(branchId,sponsorName);
+		List<Studentfeesstructure> list = sponsorDao.getFeesStructuredBySponsor(branchId,sponsorName);
 		List<Integer> sIds = new ArrayList<Integer>(); 
 		for (Studentfeesstructure studentfeesstructure : list) {
 			sIds.add(studentfeesstructure.getSid());
 		}
-		List<Student> listStudent = new studentDetailsDAO().getStudentsListByIds(sIds);
+		List<Student> listStudent = studentDetailsDAO.getStudentsListByIds(sIds);
 		for (Student student : listStudent) {
 			for (Studentfeesstructure studentfeesstructure : list) {
 				int sids = student.getSid();
