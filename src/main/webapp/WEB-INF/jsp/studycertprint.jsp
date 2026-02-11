@@ -149,10 +149,9 @@ body{
 
 
     <div class="header">
-        <h3>ARUNODAYA VIDHYA VIKAS TRUST</h3>
+       
         <h2>${collegename}</h2>
-        <p>(Recognized by the PUE Board, Bangalore)</p>
-        <p>College Code: FF0207 &nbsp;&nbsp; Phone No: 8884106686 / 9739819534</p>
+        
     </div>
 
     <div class="top-right">
@@ -166,21 +165,21 @@ body{
 
     <div class="content">
         This is to certify that Sri/Kum. 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.name}" /></span><br>
+        <span class="line"><c:out value="${studentname}" /></span><br>
 
         S/O 
-        <span class="line"> <c:out value="${studentdetailsbonafide.fathersname}" /></span> 
+        <span class="line"> <c:out value="${fathersname}" /></span> 
         has studied from 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.classadmittedin}" />1<sup>st</sup> YEAR</span><br>
+        <span class="line"><c:out value="${studiedfrom}" /> </span><br>
 
         standard to 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.classstudying}" /> 2<sup>nd</sup> YEAR</span> 
+        <span class="line"><c:out value="${studiedto}" />  </span> 
         standard in our institute,<br>
 
         from 
-        <span class="line"> <c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span> 
+        <span class="line"> <c:out value="${fromyear}" /></span> 
         to 
-        <span class="line"><c:out value="${studentdetailsbonafide.student.promotedyear}" /></span> 
+        <span class="line"><c:out value="${toyear}" /></span> 
         academic years.
         <br><br>
 
@@ -197,7 +196,7 @@ body{
             </td>
             <td class="signature">
                 Signature of Principal<br><br>
-                Name: <strong>AKHIL</strong>
+                Name: <strong>&emsp;&emsp;&emsp;</strong>
             </td>
         </tr>
     </table>
