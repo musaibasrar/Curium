@@ -29,22 +29,22 @@ public class BookHistory implements java.io.Serializable {
 	@Column(name = "bid", length = 200)
 	private String bid;
 
-	@Column(name = "bookname", length = 200)
+	@Column(name = "bookName", length = 200)
 	private String bookName;
 
-	@Column(name = "studentname", length = 200)
+	@Column(name = "studentName", length = 200)
 	private String studentName;
 
 	@Column(name = "uid", length = 200)
 	private String uid;
 
-	@Column(name = "issuedate")
+	@Column(name = "issueDate")
 	private Date issueDate;
 
-	@Column(name = "expectedreturnDate")
+	@Column(name = "expectedReturnDate")
 	private Date expectedReturnDate;
 
-	@Column(name = "actualreturndate")
+	@Column(name = "actualReturnDate")
 	private Date actualReturnDate;
 
 	@Column(name = "sid", length = 45)
