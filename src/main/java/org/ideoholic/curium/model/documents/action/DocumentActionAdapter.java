@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.documents.action;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -86,9 +87,9 @@ public class DocumentActionAdapter {
 	public String GenerateCharacterCertificate() {
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
-		if (parentDto != null) {
-			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+		List<ParentDto> parentDtoList = documentService.GenerateCharacterCertificate(studentIdsDto);
+		if (parentDtoList != null) {
+			httpSession.setAttribute("studentDetailsBonafideList", parentDtoList);
 			return "charactercertificateprint";
 		}
 		return null;
@@ -100,10 +101,10 @@ public class DocumentActionAdapter {
 		ParentDto parentDto = documentService.generateStudyCertificate(studentIdsDto,DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR),DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
 				httpSession.getAttribute("userloginid").toString());
 		if (parentDto != null) {
-			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+			httpSession.setAttribute("studentDetailsBonafideList", parentDto.getParentsList());
 			return "studycertificateprint";
 		}
-		return null;
+		return "error";
 	}
 
 	public boolean printTransferCertificate() {
@@ -193,9 +194,9 @@ public class DocumentActionAdapter {
 
 	public void printCharacterCertificate() {
 		CharacterDto characterDto = new CharacterDto();
-		characterDto.setCharacterStudent(request.getParameter("characterstudent"));
+		characterDto.setCharacterStudent(request.getParameterValues("characterstudent[]"));
 		CharacterResponseDto characterResponseDto = documentService.printCharacterCertificate(characterDto);
-		request.setAttribute("character", characterResponseDto.getCharacter());
+		request.setAttribute("character", characterResponseDto.getCharacterStudent());
 	}
 	
 	public boolean downlaodFile() {
@@ -236,9 +237,9 @@ public class DocumentActionAdapter {
 
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		ParentDto parentDto = documentService.GenerateCharacterCertificate(studentIdsDto);
-		if (parentDto != null) {
-			httpSession.setAttribute("studentdetailsbonafide", parentDto.getParents());
+		List<ParentDto> parentDtoList = documentService.GenerateCharacterCertificate(studentIdsDto);
+		if (parentDtoList != null) {
+			httpSession.setAttribute("studentDetailsBonafideList", parentDtoList);
 			return "articleprint";
 		}
 		return null;

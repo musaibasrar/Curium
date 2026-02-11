@@ -51,6 +51,10 @@ for(Cookie cookie : cookies){
 <body style="font-size:20px;">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+	
+		<!-- Loop through each student in the list -->
+		<c:forEach items="${studentDetailsBonafideList}" var="studentdetailsbonafide" varStatus="loop">
+		<div class="page-break">
 	<table align="center">
 <tr>
 <td style="text-align:center;">
@@ -201,7 +205,7 @@ Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;${studentdetailsbonafide.student.na
 <tr><td><br></td></tr>
 <tr>
 <td>
-Date:<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+Date:<input name="dateofcr_${loop.index}" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >
 </td>
 <td>
@@ -231,7 +235,7 @@ Name:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bott
 <tr>
 <td>
 Date:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;">
-<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+<input name="dateofcr_verification_${loop.index}" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" >
 </span> 
 &nbsp;&nbsp;&nbsp;</td><td>
@@ -256,11 +260,14 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 </td><td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> District
 </td></tr>
-<tr>
-              <td align="center"><a id="print" href="/school/DocumentsProcess/printArticleCertificate">Print</a></td>
-            </tr>
 </table>
-	
+	    </div>
+		</c:forEach>
+
+		<!-- Print Button appears once at the end -->
+		<div class="print-btn">
+			<button type="button" onclick="window.print();">Print Certificates</button>
+		</div>
 	</form>
 </body>
 </html>

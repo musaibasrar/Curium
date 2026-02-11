@@ -78,6 +78,7 @@ public class DocumentDAO {
 		boolean status = false;
 		try {
 			studyCertificateRepo.save(studyCertificate);
+			status = true;
 		} catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();

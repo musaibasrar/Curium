@@ -807,60 +807,69 @@ public class DocumentService {
 	
 	public CharacterResponseDto printCharacterCertificate(CharacterDto characterDto) {
 		CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-		String character= characterDto.getCharacterStudent();
-		characterResponseDto.setCharacter(character);
+		String[] characterList = characterDto.getCharacterStudent();
+		characterResponseDto.setCharacterStudent(characterList);
 		return characterResponseDto;
 	}
 
 
-	public ParentDto GenerateCharacterCertificate(StudentIdsDto studentIdsDto) {
+	public List<ParentDto> GenerateCharacterCertificate(StudentIdsDto studentIdsDto) {
 		ParentDto parentDto = null;
 		String[] studentIds = studentIdsDto.getStudentIds();
-		String characterPage = null;
+		List<ParentDto> parentsList = new ArrayList<>();
+
+		if (studentIds != null) {
+			for (String studentId : studentIds) {
+				String getStudentInfo = "from Parents as parents where parents.student.sid = " + studentId;
+				Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
+				parentDto = new ParentDto();
+				parentDto.setParents(parents);
+				parentsList.add(parentDto);
+			}
+		}
+
+		return parentsList;
+	}
+	
+	public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto, String academicyear, String branchId, String userId) {
+		ParentDto parentDto = null;
+		String[] studentIds = studentIdsDto.getStudentIds();
+		String bonafidePage = null;
 		
-		if(studentIds!=null){
-			String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentIds[0];
-			Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
-			parentDto = new ParentDto();
-			parentDto.setParents(parents);
-			characterPage = "charactercertificateprint";
+		List<Parents> parentsList = new ArrayList<>();
+
+		if (studentIds != null) {
+			for (String studentId : studentIds) {
+				String getStudentInfo = "from Parents as parents where parents.student.sid = " + studentId;
+				Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
+				if (parents != null && parents.getStudent() != null) {
+					StudyCertificate studyCertificate = new StudyCertificate();
+					studyCertificate.setName(parents.getStudent().getName());
+					studyCertificate.setFatherName(parents.getFathersname());
+					studyCertificate.setReason("education");
+					studyCertificate.setClassStudying(parents.getStudent().getClassstudying());
+					studyCertificate.setAcademicYear(academicyear);
+					studyCertificate.setBranchId(Integer.parseInt(branchId));
+					studyCertificate.setDateofissues(new Date());
+					studyCertificate.setSid(parents.getStudent().getSid());
+					studyCertificate.setUid(parents.getStudent().getStudentexternalid());
+					studyCertificate.setUserid(Integer.parseInt(userId));
+					boolean success = documentDAO.add(studyCertificate);
+					if (success) {
+						parentDto = new ParentDto();
+						parentDto.setParents(parents);
+						parentsList.add(parents);
+						parentDto.setParentsList(parentsList);
+						bonafidePage = "studycertificateprint";
+					} else {
+						bonafidePage = "error";
+					}
+				}
+			}
 		}
 		
 		return parentDto;
 	}
-	
-		 public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto,String academicyear,String branchId, String userId) {
-			 ParentDto parentDto = null;
-			String[] studentIds = studentIdsDto.getStudentIds();
-			String bonafidePage = null;
-			 StudyCertificate studyCertificate = new StudyCertificate();
-			
-			if(studentIds!=null){
-				String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
-				Parents parents = studentDetailsDao.getStudentRecords(getStudentInfo);
-				studyCertificate.setName(parents.getStudent().getName());
-				studyCertificate.setFatherName(parents.getFathersname());
-				studyCertificate.setReason("education");
-				studyCertificate.setClassStudying(parents.getStudent().getClassstudying());
-				studyCertificate.setAcademicYear(academicyear);
-				studyCertificate.setBranchId(Integer.parseInt(branchId));
-				studyCertificate.setDateofissues(new Date());
-				studyCertificate.setSid(parents.getStudent().getSid());
-				studyCertificate.setUid(parents.getStudent().getStudentexternalid());
-				studyCertificate.setUserid(Integer.parseInt(userId));
-				boolean success = documentDAO.add(studyCertificate);
-				if(success) {
-				parentDto = new ParentDto();
-				parentDto.setParents(parents);
-				bonafidePage = "studycertificateprint";
-				}
-				else {
-					bonafidePage = "error";
-				}
-			}
-			
-			return parentDto;
-		}
 		 
 		 public CharacterResponseDto viewTcDetail() {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();

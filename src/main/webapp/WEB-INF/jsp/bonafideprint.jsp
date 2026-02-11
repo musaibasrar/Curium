@@ -195,6 +195,10 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+		
+		<!-- Loop through each student in the list -->
+		<c:forEach items="${studentDetailsBonafideList}" var="studentdetailsbonafide" varStatus="loop">
+
 		<br><br>
 		<table align="center">
 			
@@ -334,6 +338,8 @@ for(Cookie cookie : cookies){
 			<td align="right" style="padding-right: 70px;">Principal</td>
 		</tr>
 		</TABLE>
+		
+		</c:forEach>
 	</form>
 	
 	
