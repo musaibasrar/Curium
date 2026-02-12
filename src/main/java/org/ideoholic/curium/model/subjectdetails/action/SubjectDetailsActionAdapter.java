@@ -38,6 +38,7 @@ public class SubjectDetailsActionAdapter {
         subjectDto.setMinMarks(request.getParameter("minmarks"));
         subjectDto.setMaxMarks(request.getParameter("maxmarks"));
         subjectDto.setExamName(request.getParameter("examname"));
+        subjectDto.setSubjectNameList(request.getParameterValues("subjectname"));
         subjectDto.setExamClassList(request.getParameterValues("examclass"));
         ResultResponse result = subjectDetailsService.addSubject(subjectDto, httpSession.getAttribute("branchid").toString(),
                                                                    httpSession.getAttribute("userloginid").toString());
