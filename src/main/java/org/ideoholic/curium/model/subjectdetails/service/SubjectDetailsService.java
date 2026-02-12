@@ -52,51 +52,36 @@ public class SubjectDetailsService {
 	}
 
 	public ResultResponse addSubject(SubjectDto subjectDto, String branchId, String userLoginId) {
-		Subject subject = new Subject();
-		boolean result= true;
-		String[] classesCat = subjectDto.getExamClassList();
-		for(String clsCat : classesCat) {
-		String[] subjectNames = subjectDto.getSubjectNameList();
-		for (String sub : subjectNames) {
-			if(branchId!=null){
-			String[] subjt= sub.split(":");
-			subject.setSubjectname(subjt[0]);
-			subject.setSubjectid(Integer.parseInt(subjt[1]));
-			subject.setMinmarks(Float.parseFloat(subjectDto.getMinMarks()));
-			subject.setMaxmarks(Float.parseFloat(subjectDto.getMaxMarks()));
-			subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
-			subject.setExamclass(DataUtil.emptyString(clsCat));
-			subject.setBranchid(Integer.parseInt(branchId));
-			subject.setUserid(Integer.parseInt(userLoginId));
-			subject = subjectDetailsDao.addSubject(subject);
-			
+
+		boolean result = true;
+		try {
+			String[] classesCat = subjectDto.getExamClassList();
+			for (String clsCat : classesCat) {
+				String[] subjectNames = subjectDto.getSubjectNameList();
+				for (String sub : subjectNames) {
+					if (branchId != null) {
+						Subject subject = new Subject();
+						String[] subjt = sub.split(":");
+						subject.setSubjectname(subjt[0]);
+						subject.setSubjectid(Integer.parseInt(subjt[1]));
+						subject.setMinmarks(Float.parseFloat(subjectDto.getMinMarks()));
+						subject.setMaxmarks(Float.parseFloat(subjectDto.getMaxMarks()));
+						subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
+						subject.setExamclass(DataUtil.emptyString(clsCat));
+						subject.setBranchid(Integer.parseInt(branchId));
+						subject.setUserid(Integer.parseInt(userLoginId));
+						subject = subjectDetailsDao.addSubject(subject);
+					}
+				}
+
+			}
+		} catch (Exception e) {
+			result = false;
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
 		}
-		}
-		
-		}
-		
-		/*
-		 * if(branchId!=null){ String[] subjectNameId =
-		 * DataUtil.emptyString(subjectDto.getSubjectName()).split(":");
-		 * subject.setSubjectname(subjectNameId[0]);
-		 * subject.setSubjectid(Integer.parseInt(subjectNameId[1]));
-		 * subject.setMinmarks(Float.parseFloat(subjectDto.getMinMarks()));
-		 * subject.setMaxmarks(Float.parseFloat(subjectDto.getMaxMarks()));
-		 * subject.setExamname(DataUtil.emptyString(subjectDto.getExamName()));
-		 * subject.setExamclass(DataUtil.emptyString(subjectDto.getExamClass()));
-		 * subject.setBranchid(Integer.parseInt(branchId));
-		 * subject.setUserid(Integer.parseInt(userLoginId)); subject = new
-		 * SubjectDetailsDAO().addSubject(subject);
-		 * 
-		 * if(subject!=null){ return ResultResponse.builder().success(result).build(); }
-		 * }
-		 */
-		
-		if(subject!=null){
-			return ResultResponse.builder().success(result).build();
-		}
-		
-		return ResultResponse.builder().build();
+
+		return ResultResponse.builder().success(result).build();
 	}
 
 	public ResultResponse deleteMultiple(SubjectIdsDto subjectIdsDto) {

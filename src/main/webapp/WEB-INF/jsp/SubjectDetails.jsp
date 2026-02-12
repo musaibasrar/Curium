@@ -523,20 +523,9 @@ for(Cookie cookie : cookies){
 						</tr>
 						<tr>
 							<td width="10%" class="alignRight">Subject Name &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><%-- <label> 
-									<select name="subjectname"
-									id="subjectname" style="width: 200px;">
-										<option selected></option>
-										<c:forEach items="${listSubjectNames}" var="subjectnames">
-												<option value="${subjectnames.subjectname}:${subjectnames.subjectid}">
-													<c:out value="${subjectnames.subjectname}" />
-												</option>
-										</c:forEach>
-								</select>
-							
-							</label> --%>
+							<td width="70%">
 							 <label> 
-							 
+
 							 <c:forEach items="${listSubjectNames}" var="subjectnames">
 										<c:if test="${(subjectnames.subjectname != '')}">
 										
@@ -556,29 +545,17 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						
-						
 						<tr>
 							<td width="10%" class="alignRight">Class &nbsp;&nbsp;&nbsp;</td>
-							<td width="28%"><%-- <label> <select name="examclass"
-									id="examclass" style="width: 200px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select> --%>
-								
-								 <label> 
-							 
+							<td width="28%">
+							 <label> 
+
 							 <c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
+									<c:if test="${(classdetailslist.classdetails != '')}">
 										
 										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox"  name="examclass" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										</c:if>	
+									</c:if>	
 							</c:forEach>
 
 							</label></td>
@@ -604,18 +581,18 @@ for(Cookie cookie : cookies){
 						
 						<tr>
 							<td width="10%" class="alignRight">Maximum Marks &nbsp;&nbsp;&nbsp;</td>
-							<td width="70%"><label> <input id="maxmarks"
-									name="maxmarks" type="text" class="textField"  size="30" required>
-
-							</label></td>
+							<td width="70%">
+								<label> 
+									<input id="maxmarks" name="maxmarks" type="text" class="textField"  size="30" required>
+								</label>
+							</td>
 						</tr>
-						
 
 						<tr>
 							<td><br /></td>
 						</tr>			
-							
-							<tr>
+
+						<tr>
 							<td><br /></td>
 						</tr>
 					</table>
@@ -656,10 +633,7 @@ for(Cookie cookie : cookies){
 
 					<c:forEach items="${listSubject}" var="listSubject">
 
-						<tr style="border-color: #000000" border="1" cellpadding="1"
-							cellspacing="1">
-							
-							
+						<tr style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
                           <td class="dataText"><input type="checkbox" id = "<c:out value="${listSubject.subid}"/>" class = "chcktbl"  name="subjectIDs"  value="<c:out value="${listSubject.subid}"/>"/></td>
 						  <td class="dataText"><c:out value="${listSubject.subjectname}" /></td>
 						  <td class="dataText"><c:out value="${listSubject.examname}" /></td>
@@ -669,18 +643,13 @@ for(Cookie cookie : cookies){
 						</tr>
 					</c:forEach>
 
-
-
-
 				</tbody>
 				<tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button> 
-                    
-                        </tr></tfoot>
+                        <td  class="footerTD" colspan="2" ><button id="delete" type="submit">Delete</button></td> 
+                </tr></tfoot>
 			</table>
 
 		</div>
-
 
 	</form>
 
