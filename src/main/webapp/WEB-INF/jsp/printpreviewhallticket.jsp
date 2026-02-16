@@ -18,7 +18,7 @@
 <!--
 .headerText {
 	width: 10px;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	font-size: 12px;
 	color: #FFFFFF;
 	font-weight: normal;
@@ -30,7 +30,7 @@
 
 .headerTextLeft {
 	width: 10px;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	font-size: 12px;
 	color: #FFFFFF;
 	font-weight: normal;
@@ -42,7 +42,7 @@
 
 .dataTextBold {
 	font-weight: bold;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -51,7 +51,7 @@
 
 .dataTextBoldLeft {
 	font-weight: normal;
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -59,25 +59,25 @@
 }
 
 .dataTextBoldCenter {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 18px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
+	font-weight: bold;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
 	text-align: center;
 }
 
+.addressLine{
+	font-weight: normal;
+	font-family: "Times New Roman", Times;
+	color: black;
+	font-size: 7px;
+	letter-spacing: normal;
+	text-align: center;
+}
+
 .dataText {
-	font-family: Tahoma;
+	font-family: "Times New Roman", Times, Tahoma;
 	color: black;
 	font-size: 12px;
 	letter-spacing: normal;
@@ -149,13 +149,9 @@ span{
         }
         
         @page {
-              
-             margin-left:  1cm;
-             margin-right: 1cm;
-             margin-bottom: 1cm;
-             margin-top: 1cm;
-             size: auto;
-        }
+    size: A4;
+    margin: 10mm;
+}
 
         @media screen {
             .fontsize { font-size: 15px;
@@ -194,16 +190,61 @@ span{
         }
         
         .datatable {
-    font-family: arial, sans-serif;
+    font-family: "Times New Roman", Times, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    font-size: 8px;
 }
 
 .datatd, .datath {
     border: 1px solid #000000;
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
+
+.ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+}
+
+
+.ticket {
+    width: 50%;
+    height: 50vh;
+    box-sizing: border-box;
+    padding: 12px;
+}
+
+.ticket-inner {
+    border: 1px solid black;
+    height: 90%;
+    padding: 10px;
+}
+
+/* PRINT SETTINGS */
+
+@media print {
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .ticket {
+        width: 50%;
+        height: 50vh;
+        padding: 10px;
+    }
+
+    .page-break {
+        page-break-after: always;
+    }
+
+}
+
+
 
     </style>
 	<script type="text/javascript">
@@ -219,7 +260,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+	response.sendRedirect("/daralmajd/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -234,119 +275,108 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-                        <c:forEach items="${studentList}" var="Parents">
-                        
-                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-                        
-         <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
-                        		
-			<tr>
-				<td><img src="/alirfan/images/alirfan.jpg" width="68" height="80"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
-			</tr>
-		</table>
+                        <div class="ticket-container">
 
-<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
-                <tr>
+<c:forEach items="${studentList}" var="Parents" varStatus="status">
 
-                    <td colspan="4" ></td>
+    <div class="ticket">
+        <div class="ticket-inner">
 
-                </tr>
-            </TABLE>
-            
+            <!-- ===== HEADER ===== -->
             <table width="100%" style="border-collapse: collapse;">
-					
-				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
-			</table>
+                <tr>
+                    <td><img src="/daralmajd/images/daralmajd.jpg" width="30" height="30"/></td>
+                    <td align="center">
+                        <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+                    </td>
+                </tr>
+            </table>
 
-			<table style=" border-collapse: collapse;width: 100%;">
-											
-                            <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-						    ${splt} 
-							</c:forEach>
-                                </td>
-                                
-                             </tr>
-                             
-                             
-                             <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Roll. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
-                                <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
-									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
-                            </tr>
-                            
-                           <!-- <tr>
-                            <td><br></td>
-                            </tr> -->
-                            
-                            </table>
-                            
-                            <table style=" border-collapse: collapse;width: 100%;">
-                            	<thead>
-                            	<tr>
-                            	<th class="subjectdetails">Date</th>
-                            	<th class="subjectdetails">Day</th>
-                            	<th class="subjectdetails">Subject</th>
-                            	<th class="subjectdetails">Time</th>
-                            	<th class="subjectdetails">Examiner's Sign</th>
-                            	</tr>
-                            	</thead>
-                            	<tbody>
-                            	<c:forEach items="${examschedulelist}" var="examschedulelist">
-                             	<tr>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd/MM/yyyy"/></td>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="E"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
-                                <td class="subjectdetails"></td>
-                                </tr>
-                                 </c:forEach>
-                       
-                   				 </tbody>
-                            </table>
-                            <br>
-                            
-                            <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-inside:avoid; border-collapse: collapse;">
+            <hr style="margin-top: 2px;margin-bottom: 2px;">
 
-						<!-- <tr>
-							<td><br><br><br></td>
-						</tr> -->
-						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-				<tr>
-				<td></td>
-				<td align="left">Accountant</td>	
-					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
-					</tr>
-                    
-		</TABLE>
-		</div>
-		<br>
-                                 
+            <!-- ===== TITLE ===== -->
+            <table width="100%">
+                <tr>
+                	<td width="30%"></td>
+                    <td class="dataTextBoldCenter">
+                        Hall Ticket<br>${examname}
+                    </td>
+                    <td align="right">
+                        <img src="data:image;base64,<c:out value='${Parents.student.studentpic}'/>"
+                             width="30" height="30"/>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- ===== STUDENT DETAILS ===== -->
+            <table width="100%">
+                <tr>
+                    <td style="text-align: left;font-size: 10px;">Student Name: <b>${Parents.student.name}</b></td>
+                    <td style="text-align: left;font-size: 10px;">
+                        Class:
+                        <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+                            ${splt}
                         </c:forEach>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: left;font-size: 10px;">Father's Name: ${Parents.fathersname}</td>
+                    <td style="text-align: left;font-size: 10px;">Admission No: ${Parents.student.admissionnumber}</td>
+                </tr>
+            </table>
+
+            <!-- ===== EXAM TABLE ===== -->
+            <table width="100%" class="datatable">
+                <thead>
+                <tr>
+                    <th class="datath">Date</th>
+                    <th class="datath">Day</th>
+                    <th class="datath">Subject</th>
+                    <th class="datath">Time</th>
+                    <th class="datath">Sign</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <c:forEach items="${examschedulelist}" var="schedule">
+                    <tr>
+                        <td class="datatd">
+                            <fmt:formatDate value="${schedule.date}" pattern="dd/MM/yyyy"/>
+                        </td>
+                        <td class="datatd">
+                            <fmt:formatDate value="${schedule.date}" pattern="E"/>
+                        </td>
+                        <td class="datatd">${schedule.subject}</td>
+                        <td class="datatd">${schedule.starttime} - ${schedule.endtime}</td>
+                        <td class="datatd"></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+
+            <br><br>
+
+            <table width="100%">
+                <tr>
+                    <td style="font-weight: bold;">Accountant</td>
+                    <td style="font-weight: bold;align-content: center;">Class Teacher</td>
+                    <td style="font-weight: bold;align-content: center;">Principal</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- Page break after every 4 tickets -->
+    <c:if test="${(status.index + 1) % 4 == 0}">
+        <div class="page-break"></div>
+    </c:if>
+
+</c:forEach>
+
+</div>
+
 			
 	</form>
 	
