@@ -345,9 +345,9 @@ public class ExamDetailsService {
 
 				if(i>0) {
 					if (!addSec.equalsIgnoreCase("")) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+ addSec + "%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+ addSec + "%");
 					}else {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 					}
 					
 				}else {
@@ -365,8 +365,8 @@ public class ExamDetailsService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
@@ -383,7 +383,7 @@ public class ExamDetailsService {
 			 for (Feescategory CatFeesList : feecategoryList) {
 				 feesCatList.add(CatFeesList.getIdfeescategory());
 			}
-		 
+
 		//End Fees Categories
 
 			for (Parents parents : searchStudentList) {

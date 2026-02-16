@@ -448,7 +448,7 @@ public class FeesService {
 			for (String classOne : addClass) {
 
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}

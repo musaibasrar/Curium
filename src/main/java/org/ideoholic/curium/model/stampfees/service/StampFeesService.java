@@ -649,7 +649,7 @@ public class StampFeesService {
 
 					for (int i = 0; i < addClass.length; i++) {
 
-					    sb.append(" parents.Student.classstudying LIKE '%")
+					    sb.append(" parents.student.classstudying LIKE '%")
 					      .append(addClass[i])
 					      .append("%' ");
 
@@ -662,7 +662,7 @@ public class StampFeesService {
 	    		}
 
 	    		if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = classStudying+"  AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    			querySub = classStudying+"  AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				
 

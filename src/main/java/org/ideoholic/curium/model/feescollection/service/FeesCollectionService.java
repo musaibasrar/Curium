@@ -3054,7 +3054,7 @@ public class FeesCollectionService {
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
 				}else {
 					conClassStudying.append(classOne+"--"+"%");
 				}
@@ -3066,8 +3066,8 @@ public class FeesCollectionService {
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			querySub = querySub + " (parents.student.classstudying like '"
+					+ classStudying + "') AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchId)+" order by parents.student.admissionnumber ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {
