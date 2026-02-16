@@ -1,13 +1,21 @@
 package org.ideoholic.curium.model.examdetails.action;
 
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.examdetails.dto.*;
-import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.examdetails.dto.AddExamDto;
+import org.ideoholic.curium.model.examdetails.dto.AddScheduleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamIdsDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamScheduleDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamScheduleResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.ExamsListResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.HallTicketResponseDto;
+import org.ideoholic.curium.model.examdetails.dto.PrintPreviewHallTicketDto;
+import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
+import org.ideoholic.curium.util.Constants;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class ExamDetailsActionAdapter {
@@ -18,22 +26,19 @@ public class ExamDetailsActionAdapter {
     @Autowired
     private ExamDetailsService examDetailsService;
 
-    private String BRANCHID = "branchid";
-    private String CURRENTACADEMICYEAR = "currentAcademicYear";
-
     public Boolean addExam() {
 
         AddExamDto result = new AddExamDto();
         result.setExamName(request.getParameter("examname"));
 
-        ResultResponse resultResponse = examDetailsService.addExam(result, httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = examDetailsService.addExam(result, httpSession.getAttribute(Constants.BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
 
     public boolean readListOfExams() {
 
-        ExamsListResponseDto result = examDetailsService.readListOfExams(httpSession.getAttribute(BRANCHID).toString());
+        ExamsListResponseDto result = examDetailsService.readListOfExams(httpSession.getAttribute(Constants.BRANCHID).toString());
 
         httpSession.setAttribute("examdetails", result.getExams());
         return result.isSuccess();
@@ -59,14 +64,14 @@ public class ExamDetailsActionAdapter {
         addScheduleDto.setAcademicyear(request.getParameter("academicyear"));
         addScheduleDto.setExam(request.getParameter("exam"));
 
-        ResultResponse resultResponse = examDetailsService.addSchedule(addScheduleDto, httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = examDetailsService.addSchedule(addScheduleDto, httpSession.getAttribute(Constants.BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
 
     public boolean getExamSchedule() {
 
-        ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(BRANCHID).toString());
+        ExamScheduleResponseDto result = examDetailsService.getExamSchedule(httpSession.getAttribute(Constants.BRANCHID).toString());
         httpSession.setAttribute("examschedule", result.getExamschedules());
 
         return result.isSuccess();
@@ -90,8 +95,8 @@ public class ExamDetailsActionAdapter {
         examScheduleDto.setClassAdmno(request.getParameter("classandsec"));
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
-
-        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto, httpSession.getAttribute(BRANCHID).toString());
+        
+        ExamScheduleResponseDto result = examDetailsService.getExamScheduleDetails(examScheduleDto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("selectedclass", result.getSelectedclass());
         request.setAttribute("selectedexam", result.getSelectedexam());
         request.setAttribute("selectedstudentname", result.getSelectedstudentname());
@@ -103,7 +108,7 @@ public class ExamDetailsActionAdapter {
     }
 
     public void printPreviewHallTicket() {
-
+    	
         PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
         printPreviewHallTicketDto.setExamName(request.getParameterValues("examname"));
         printPreviewHallTicketDto.setClasses(request.getParameterValues("classes"));
@@ -118,24 +123,27 @@ public class ExamDetailsActionAdapter {
         printPreviewHallTicketDto.setClassStudying(request.getParameter("class"));
         printPreviewHallTicketDto.setStudentIds(request.getParameterValues("studentIDs"));
 
-        HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString());
+        HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());
         request.setAttribute("examname", result.getExamname());
         request.setAttribute("examschedulelist", result.getExamscheduleList());
         request.setAttribute("urlbranchid", result.getUrlbranchid());
     }
     
-    public void readListOfStudentsForHallTicket() {
-    			
-    	PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
-    			 
-    	printPreviewHallTicketDto.setShowFees(request.getParameter("showfees"));
-    	printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
-    	printPreviewHallTicketDto.setClasses(request.getParameterValues("classsearch"));
-    	printPreviewHallTicketDto.setClassAndSec(request.getParameter("secsearch"));
-    	
-    	ResultResponse resultResponse = examDetailsService.getStudentsForHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-    	httpSession.setAttribute("studentslistforhallticket", resultResponse.getResultList());
-    			
-    	}
+	public void readListOfStudentsForHallTicket() {
+
+		PrintPreviewHallTicketDto printPreviewHallTicketDto = new PrintPreviewHallTicketDto();
+
+		printPreviewHallTicketDto.setShowFees(request.getParameter("showfees"));
+		printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
+		printPreviewHallTicketDto.setClasses(request.getParameterValues("classsearch"));
+		printPreviewHallTicketDto.setClassAndSec(request.getParameter("secsearch"));
+
+		ResultResponse resultResponse = examDetailsService.getStudentsForHallTicket(
+				printPreviewHallTicketDto,
+				httpSession.getAttribute(Constants.BRANCHID).toString(),
+				httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
+		request.setAttribute("studentslistforhallticket", resultResponse.getResultList());
+
+	}
 }
