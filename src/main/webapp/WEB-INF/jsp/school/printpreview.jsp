@@ -459,7 +459,7 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-color: white; width: 5.5cm; height: 9.7cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
@@ -518,14 +518,16 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
     <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
   </tr>
+  <tr>
+  <td></td>
+  <td>
+	<div height="30" width="20%" style="text-align:right;float:right;">
+		<img src="/school/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<div>Principal&nbsp;&nbsp;&nbsp;</div>
+	</div>
+  </td>
+  </tr>
 </table>
-
-<div height="30" width="20%" style="text-align:right;float:right;">
-
-<img src="/school/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
-</div>
 </div>
  </c:if>
    <% i = i + 1;%>
