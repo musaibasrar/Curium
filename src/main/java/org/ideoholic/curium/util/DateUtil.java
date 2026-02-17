@@ -396,33 +396,34 @@ public static String getStringDate(Date dateofbirth) {
 	return date;
 	}
 
-public static String dateParserddMMYYYY(Date date) {
-	
-	String datefinal = null;
-	try {
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
-				Locale.ENGLISH);
-		datefinal = formatter.format(date);
+	public static String dateParserddMMYYYY(Date date) {
+		String datefinal = null;
+		if (date != null) {
+			try {
+				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+				datefinal = formatter.format(date);
 
-	} catch (Exception e) {
-			e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return datefinal;
 	}
-	return datefinal;
-}
 
-public static String dateParseryyyymmdd(Date date) {
-	
-	String datefinal = null;
-	try {
-		SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
+	public static String dateParseryyyymmdd(Date date) {
+		String datefinal = null;
+		if (date != null) {
+			try {
+				SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd");
 
-		datefinal = dateformatter.format(date);
-		System.out.println("datefinal "+datefinal);
-	} catch (Exception e) {
-			e.printStackTrace();
+				datefinal = dateformatter.format(date);
+				System.out.println("datefinal " + datefinal);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return datefinal;
 	}
-	return datefinal;
-}
 
 public static Date indiandateParser(String stringDate) {
     if (stringDate == null || stringDate.equalsIgnoreCase("")) {
