@@ -292,6 +292,10 @@ background-color:rgba(0, 0, 0, 0);
     transition:height 1s;
     -webkit-transition:height 1s;
 }
+#search:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 </style>
 <style>
 #button {
@@ -482,6 +486,28 @@ background-color:rgba(0, 0, 0, 0);
 		                    .append( "<a><b> " + item.value +" / "+ item.classandsec+ " </b> </a>" )
 		                    .appendTo( ul );
 		                };
+		            });
+
+		            $(document).ready(function() {
+		                // Function to check required fields and enable/disable Search button
+		                function checkRequiredFields() {
+		                    var academicYear = $('#academicyear').val();
+		                    var classValue = $('#classsearch').val();
+		                    var examValue = $('#exam').val();
+		                    
+		                    // Check if all fields have values and aren't empty
+		                    if (academicYear && classValue && examValue) {
+		                        $('#search').prop('disabled', false);
+		                    } else {
+		                        $('#search').prop('disabled', true);
+		                    }
+		                }
+
+		                // Initial check when page loads
+		                checkRequiredFields();
+
+		                // Listen for changes on all three required fields
+		                $('#academicyear, #classsearch, #exam').on('change', checkRequiredFields);
 		            });
 </script>
 </head>
@@ -737,13 +763,7 @@ for(Cookie cookie : cookies){
 						</tr>
 					</c:forEach>
 
-
-
-
 				</tbody>
-				<!-- <tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
-                        </tr></tfoot> -->
 			</table>
 
 		</div>

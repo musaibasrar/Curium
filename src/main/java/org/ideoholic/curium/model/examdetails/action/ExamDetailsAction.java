@@ -4,21 +4,14 @@
 package org.ideoholic.curium.model.examdetails.action;
 
 import org.ideoholic.curium.model.academicyear.action.YearActionAdapter;
-import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
-import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
-import org.ideoholic.curium.model.student.action.StudentActionAdapter;
-import org.ideoholic.curium.model.student.service.StudentService;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
-import org.ideoholic.curium.model.subjectdetails.service.SubjectDetailsService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author Musaib_2
@@ -29,12 +22,6 @@ import javax.servlet.http.HttpServletResponse;
 public class ExamDetailsAction {
 
     @Autowired
-    private HttpServletRequest request;
-
-    @Autowired
-    private HttpServletResponse response;
-
-    @Autowired
     private YearActionAdapter yearActionAdapter;
 
     @Autowired
@@ -42,19 +29,13 @@ public class ExamDetailsAction {
 
     @Autowired
     private ExamDetailsActionAdapter examDetailsActionAdapter;
+
     @Autowired
     private SubjectDetailsActionAdapter subjectDetailsActionAdapter;
-    @Autowired
-    private StudentActionAdapter studentActionAdapter;
-    @Autowired
-    private FeesCollectionActionAdapter feesCollectionActionAdapter;
-    
-    private String error = "error";
-
 
     @PostMapping("/printPreviewHallTicket")
     public String printPreviewHallTicket() {
-
+    	examDetailsActionAdapter.readListOfStudentsForHallTicket();
         examDetailsActionAdapter.printPreviewHallTicket();
         return "school/printpreviewhallticket";
     }
@@ -76,13 +57,13 @@ public class ExamDetailsAction {
 
         result = examDetailsActionAdapter.readListOfExams();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         result = standardActionAdapter.viewClasses();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         result = yearActionAdapter.getYear();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         /*result = studentActionAdapter.viewAllStudentsList();
         if (!result)
             return error;*/
@@ -118,19 +99,19 @@ public class ExamDetailsAction {
 
         result = examDetailsActionAdapter.readListOfExams();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         result = standardActionAdapter.viewClasses();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         subjectDetailsActionAdapter.readListOfSubjectNames();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         result = yearActionAdapter.getYear();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
         result = examDetailsActionAdapter.getExamSchedule();
         if (!result)
-            return error;
+            return Constants.ERROR_PAGE;
 
         return "examschedule";
 

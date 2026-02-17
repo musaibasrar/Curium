@@ -234,6 +234,9 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+
+	    <c:choose>
+		<c:when test="${studentList.size() > 0}">
                         <c:forEach items="${studentList}" var="Parents">
                         
                         <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
@@ -347,7 +350,13 @@ for(Cookie cookie : cookies){
 		<br>
                                  
                         </c:forEach>
-			
+            </c:when>
+
+    		<c:otherwise>
+    			<h1>Unable to fetch the Student List or the Exam Schedule</h1>
+			</c:otherwise>
+
+			</c:choose>
 	</form>
 	
 	

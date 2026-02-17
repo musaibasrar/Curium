@@ -15,4 +15,6 @@ public interface Constants {
 	String CURRENTACADEMICYEAR = "currentAcademicYear";
 	
 	String CANCELLED = "CANCELLED";
+	
+	String ERROR_PAGE = "error";
 }
