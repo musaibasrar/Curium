@@ -207,7 +207,10 @@ body{
             </td>
             <td class="signature">
                 Signature of Principal<br><br>
-                Name: <strong>&emsp;&emsp;&emsp;</strong>
+                Name: <strong><input name="nameofprincipal"
+									type="text" class="myclass"
+									id="nameofprincipal"
+									size="30"></strong>
             </td>
         </tr>
     </table>

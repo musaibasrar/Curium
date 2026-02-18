@@ -222,8 +222,7 @@ b) No of days he/she was present </td>
             <td ><c:out value="${studentdetails.student.dateleaving}" /></td>
         </tr>
 <tr>
-            <td >21. Date on which the application for the transfer  <br>
-Certificate was received  </td>
+            <td >21. Date of Application for Certificate </td>
             <td ><c:out value="${datecert}" /></td>
         </tr>       <tr>
             <td >22. Date of issue of the transfer certificate  </td>
