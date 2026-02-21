@@ -269,6 +269,7 @@ public class DocumentActionAdapter {
 		request.setAttribute("studiedto", request.getParameter("studiedto"));
 		request.setAttribute("fromyear", request.getParameter("fromyear"));
 		request.setAttribute("toyear", request.getParameter("toyear"));
+		request.setAttribute("nameofprincipal", request.getParameter("nameofprincipal"));
 		
 	}
 

@@ -196,7 +196,7 @@ body{
             </td>
             <td class="signature">
                 Signature of Principal<br><br>
-                Name: <strong>&emsp;&emsp;&emsp;</strong>
+                Name: <strong><c:out value="${nameofprincipal}" /></strong>
             </td>
         </tr>
     </table>
