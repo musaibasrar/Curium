@@ -1009,7 +1009,6 @@ for(Cookie cookie : cookies){
 							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
-										<option selected>${currentAcademicYear}</option>
 										<option>2026/27</option>
 										<option>2025/26</option>
 										<option>2024/25</option>

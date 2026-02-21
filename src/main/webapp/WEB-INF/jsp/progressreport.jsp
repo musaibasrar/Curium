@@ -589,7 +589,7 @@ for(Cookie cookie : cookies){
 							 <td width="12%" align="left">
                                         <label> <select name="academicyear" id="academicyear" required
 									style="width: 130px;border-radius: 4px;background: white;height: 20px;" >
-										<option></option>
+										<option>${currentAcademicYear}</option>
 										<option>2026/27</option>
 										<option>2025/26</option>
 										<option>2024/25</option>

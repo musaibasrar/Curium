@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.marksdetails.action;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.ideoholic.curium.model.examdetails.service.ExamDetailsService;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
 import org.ideoholic.curium.model.std.action.StandardAction;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -134,7 +135,7 @@ public class MarksDetailsAction {
 
 	@PostMapping("/generateRankReport")
 	public String generateRankReport() {
-		if (new MarksDetailsService(request, response).generateRankReport()) {
+		if (new MarksDetailsService(request, response).generateRankReportSingelExam()) {
 			return "studentRankReport";
 		} else {
 			return "error";
@@ -189,6 +190,7 @@ public class MarksDetailsAction {
 	@GetMapping("/rankReport")
 	public String rankreport() {
 		new StandardService(request, response).viewClasses();
+		new ExamDetailsService(request, response).readListOfExams();
 		return "rankreport";
 	}
 	

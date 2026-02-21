@@ -363,7 +363,7 @@ for(Cookie cookie : cookies){
 									    <thead>
 									        <tr style="background-color: #b5ffe6;">
 									            
-									            <th width="15%" style="font-size: 12px; border: 1px solid black; padding: 4px; vertical-align: middle;">Subject&nbsp;</th>
+									            <th width="15%" style="font-size: 12px; border: 1px solid black; padding: 4px; vertical-align: middle;height: 40px;">Subject&nbsp;</th>
 									            
 									            <c:forEach items="${Parents.exammarks}" var="exammarks" begin="0" end="5" step="1">
 									                <th width="<c:out value="${85 / 6}"/>%" style="font-size: 12px; border: 1px solid black; padding: 4px; vertical-align: middle;">
@@ -551,7 +551,7 @@ for(Cookie cookie : cookies){
 							<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
 								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;"><c:out value="Subject"/><br/>&nbsp;</th>
+								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;height: 40px;"><c:out value="Subject"/>&nbsp;</th>
 								        </tr>
 								    </thead>
 								    
@@ -643,7 +643,7 @@ for(Cookie cookie : cookies){
 					<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								    <thead>
 								        <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;"><c:out value="Subject"/><br/>&nbsp;</th>
+								            <th style="border: 1px solid black;font-size: 14px;background-color: #b5ffe6;height: 40px;"><c:out value="Subject"/>&nbsp;</th>
 								        </tr>
 								    </thead>
 								    
@@ -1045,34 +1045,50 @@ for(Cookie cookie : cookies){
 							style="border-left: solid white; border-right: solid white"><br></td>
 					</tr>
 					</table>
-					<table>
-					<tr>
-						<td style="border-left: solid white;text-align:left;">Class
-							Teacher Remarks:&nbsp;${Parents.overallresult}</td>
-						<td colspan="3" style="border-left: solid white;text-align:left;font-weight: bold;"></td>
-						<td colspan="10" style="border-right: solid white;text-align:left;">
-						</td>
-					</tr>
-					<tr>
-						<td colspan="13"
-							style="border-left: solid white; border-right: solid white"><br></td>
-					</tr>
-					<tr>
-						<td colspan="0" style="border-left: solid white;text-align:left;">Result:&nbsp;Passed
-							& Promoted To Next Class</td>
-						<td colspan="4" style="border-left: solid white;text-align:left;font-weight: bold;"></td>
-						<td colspan="10" style="border-right: solid white;text-align:left;"></td>
-					</tr>
+					<table style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size: 14px;">
+					    
+					    <tr>
+					        <td style="width: 180px; border: 1px solid #000; padding: 6px;text-align: left">
+					            <strong>Rank</strong>
+					        </td>
+					        <td style="width: 400px; border: 1px solid #000; padding: 6px;text-align: left">
+					            ${Parents.overAllRank}
+					        </td>
+					    </tr>
 					
-					<tr>
-						<td colspan="13"
-							style="border-left: solid white; border-right: solid white"><br></td>
-					</tr>
-					<tr>
-						<td colspan="13"
-							style="border-left: solid white; border-right: solid white"><br></td>
-					</tr>
+					    <tr>
+					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
+					            <strong>Class Teacher Remarks</strong>
+					        </td>
+					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
+					            ${Parents.overallresult}
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <td colspan="2" style="border: 1px solid #000; padding: 6px; height: 20px;"></td>
+					    </tr>
+					
+					    <tr>
+					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
+					            <strong>Result</strong>
+					        </td>
+					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
+					            Passed &amp; Promoted To Next Class
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
+					            <strong>School Will Reopen On</strong>
+					        </td>
+					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
+					            
+					        </td>
+					    </tr>
+					
 					</table>
+
 					<TABLE id="dataTable" width="100%" border="0"
 					style="page-break-inside: avoid; border-collapse: collapse;">
 
@@ -1080,8 +1096,8 @@ for(Cookie cookie : cookies){
 					<td style="text-align: left;">
 					Place:&nbsp;<br><br>
 					Date:&nbsp;</td>	
-					<td align="center">Signature<br><br>Class Teacher</td>
-					<td align="center">Signature<br><br>Principal</td>
+					<td align="center"><br><br>Class Teacher</td>
+					<td align="center"><br><br>Principal</td>
 				</tr>
                     
 		</TABLE>

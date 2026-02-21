@@ -708,9 +708,9 @@ public boolean viewStudentAttendanceDetailsMonthlyGraph() {
 
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " student.classstudying like '" + classStudying
-						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+						+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND (student.promotedyear='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"' or student.yearofadmission='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"') AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			} else if (classStudying.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
+				querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND (student.promotedyear='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"' or student.yearofadmission='"+httpSession.getAttribute(CURRENTACADEMICYEAR).toString()+"') AND student.branchid="+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString());
 			}
 
 			queryMain = queryMain + querySub;

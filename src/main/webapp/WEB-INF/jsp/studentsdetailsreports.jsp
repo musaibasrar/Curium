@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -662,7 +663,8 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th class="headerText">Sl.No</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Name</th>
+						<th title="click to sort" class="headerText">D.O.B</th>
 						<th title="click to sort" class="headerText">Father Name</th>
 						<th title="click to sort" class="headerText">Contact Number</th>
 						<th title="click to sort" class="headerText">Class &
@@ -692,6 +694,7 @@ for(Cookie cookie : cookies){
 								href="/shatabdi/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><fmt:formatDate type="date" value="${Parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out value="${Parents.contactnumber}" /></td>
 							<td class="dataText"><c:out

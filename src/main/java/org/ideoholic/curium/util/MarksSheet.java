@@ -13,12 +13,13 @@ public class MarksSheet  implements java.io.Serializable {
     String overallresult;
     int totalDays;
     int totalPresent;
-    int totalAbsent;    
+    int totalAbsent;
+    int overAllRank;
     
     public MarksSheet() {
     }
 
-    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent) {
+    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent, int overAllRank) {
         this.parents = parents;
         this.exammarks = exammarks;
         this.finaltermmarks = finaltermmarks;
@@ -27,6 +28,7 @@ public class MarksSheet  implements java.io.Serializable {
         this.totalDays = totalDays;
         this.totalPresent = totalPresent;
         this.totalAbsent = totalAbsent;
+        this.overAllRank = overAllRank;
     }
 
 
@@ -94,6 +96,14 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setTotalAbsent(int totalAbsent) {
 		this.totalAbsent = totalAbsent;
+	}
+
+	public int getOverAllRank() {
+		return overAllRank;
+	}
+
+	public void setOverAllRank(int overAllRank) {
+		this.overAllRank = overAllRank;
 	}
 	
   }

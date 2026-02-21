@@ -98,7 +98,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -555,6 +555,32 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 
+						</tr>
+						<tr>
+						<td class="alignRightFields">Exam &nbsp;</td>
+							<td width="12%" align="left"><label>
+									<select name="exam" id="exam"
+									style="width: 130px;border-radius: 4px;background: white;height: 20px;">
+										<option selected></option>
+
+										<c:forEach items="${examdetails}" var="listExam">
+
+											<option value="${listExam.exid}">
+												<c:out value="${listExam.examname}" />
+											</option>
+
+
+										</c:forEach>
+
+								</select></label></td>
+						</tr>
+
+						
+
+
+						
+						<tr>
+							<td><br /></td>
 						</tr>
 						<tr>
 							<td  width="30%" class="alignRight">Academic Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
