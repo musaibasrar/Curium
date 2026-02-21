@@ -376,6 +376,14 @@ background-color:rgba(0, 0, 0, 0);
 
 	}
 	
+	function printPreviewAdmitCard() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/meps/ExamDetailsProcess/printPreviewAdmitCard";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -441,6 +449,18 @@ background-color:rgba(0, 0, 0, 0);
              
              return false;
          });
+         
+         $("#printAdmitCard").button({
+             icons:{
+                 primary: "ui-icon-mail-open"
+             }
+         }).click(function(){
+        	 if(confirm('Are you sure,you want to print?')){
+        		 printPreviewAdmitCard();	
+         	}
+             
+             return false;
+         });  
      });
 	 
 	 
@@ -691,7 +711,7 @@ for(Cookie cookie : cookies){
 					</c:forEach>
 				</tbody>
 				<tfoot><tr>
-                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> 
+                            <td  class="footerTD" colspan="2" ><button id="print">Print Preview</button> &nbsp;&nbsp;<button id="printAdmitCard">Print 4 In 1</button>
                         </tr></tfoot>
 			</table>
 			
