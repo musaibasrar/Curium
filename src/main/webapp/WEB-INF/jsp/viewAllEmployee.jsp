@@ -459,7 +459,7 @@ for(Cookie cookie : cookies){
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${employee.tid}"/>"/></td>
                                  <td class="dataText" align="center">${status.index + 1}</td>
-                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/vision/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive" style="text-transform:uppercase"><a class="dataTextInActive" href="/hamidullah/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${employee.teachername}"/></a></td>
                                 <td class="dataText"><c:out value="${employee.contactnumber}"/></td>
                                 <td class="dataText"><c:out value="${employee.department}"/></td>
                                 <td class="dataText"><button id="query_${employee.tid}" class="querybutton" onclick="createQuery(${employee.tid},${employee.branchid})">Create Assignment</button></td>
@@ -468,7 +468,7 @@ for(Cookie cookie : cookies){
                     </tbody>
                     <tfoot><tr>
                             <td  class="footerTD" colspan="2" ><!-- <input value="Delete" type="submit" id="delete"/> -->
-                             <input value="Export" type="submit" id="export" formaction="/vision/EmployeeProcess/exportDataForEmployees" />
+                             <input value="Export" type="submit" id="export" formaction="/hamidullah/EmployeeProcess/exportDataForEmployees" />
                             <input value="Archive" type="submit" id="archive"/> </td>
                     
                         </tr></tfoot>
