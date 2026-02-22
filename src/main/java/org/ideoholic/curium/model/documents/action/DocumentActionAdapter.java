@@ -180,6 +180,10 @@ public class DocumentActionAdapter {
 	    request.setAttribute("studentdetails", transferCertificateResponseDto.getParents());
 		request.setAttribute("tcdetails",transferCertificateResponseDto.getTc());
 		request.setAttribute("dateinword",transferCertificateResponseDto.getDateInWord());
+		request.setAttribute("yesno",request.getParameter("yesno"));
+		request.setAttribute("leavingclass",request.getParameter("leavingclass"));
+		request.setAttribute("partone",request.getParameter("partone"));
+		request.setAttribute("parttwo",request.getParameter("parttwo"));
 	    switch(transferCertificateResponseDto.getStatus())
 	    {
 	    case TCEXISTS:

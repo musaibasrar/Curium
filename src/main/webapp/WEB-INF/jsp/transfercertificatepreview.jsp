@@ -97,11 +97,10 @@ for(Cookie cookie : cookies){
 
     <!-- Header -->
     <div class="tc-header">
-        <h2 style="margin:0px">AVV TRUST®</h2>
+        <h2 style="margin:0px">POONAM EDUCATIONAL INSTITUTION MUNGNAL®</h2>
         <hr>
         <h3 style="margin:0px">${collegename}</h3>
-         <hr>
-        <h5 style="margin:0px">POONAM EDUCATIONAL INSTITUTION MUNGNAL® </h5>
+         
          <hr>
         <h3 style="margin:0px;color:red;">TRANSFER CERTIFICATE</h3>
         <p style="margin:0px">OR ANNEXURE TO THE TRANSFER CERTIFICATE</p>
@@ -168,7 +167,7 @@ for(Cookie cookie : cookies){
 Scheduled Tribe, Nomadic Tribe or Semi Nomadic Tribe 
             </td>
              <td >
-             YES<br>NO
+             ${yesno}
             </td>
         </tr>
         <tr>
@@ -177,11 +176,10 @@ Scheduled Tribe, Nomadic Tribe or Semi Nomadic Tribe
         </tr>
         <tr>
             <td >
-                16. Class studied at the time of leaving (In Words)
-                <br>PUC FIRST YEAR SCIENCE PASSED / PUC <br>SECOND YEAR SCIENCE PASSED
+                16.  Class in which the student was studied at the time of <br>
+leaving the institution (In words) 
             </td>
-            <td >PUC FIRST YEAR SCIENCE PASSED<br> 
-PUC SECOND YEAR SCIENCE PASSED </td>
+            <td >${leavingclass}</td>
         </tr>
         <tr>
             <td >
@@ -200,7 +198,7 @@ Year
                 18. a) Language Offered in Part-I 
                 </td>
                  <td >
-              <c:out value="${studentdetails.student.languagesstudied}" />
+              ${partone} 
                 </td>
         </tr>
          <tr>
@@ -208,7 +206,7 @@ Year
                 18. b) Optional Subjects Offered in Part-II 
                 </td>
                  <td >
-             <c:out value="${studentdetails.student.remarks}" />
+              ${parttwo} 
                 </td>
         </tr>
         <tr>
@@ -222,8 +220,7 @@ b) No of days he/she was present </td>
             <td ><c:out value="${studentdetails.student.dateleaving}" /></td>
         </tr>
 <tr>
-            <td >21. Date on which the application for the transfer  <br>
-Certificate was received  </td>
+            <td >21. Date of Application for Certificate </td>
             <td ><c:out value="${datecert}" /></td>
         </tr>       <tr>
             <td >22. Date of issue of the transfer certificate  </td>
