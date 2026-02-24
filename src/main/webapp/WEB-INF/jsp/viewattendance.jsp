@@ -683,26 +683,61 @@
 	
 
 	
-	   function checkDate(){
-			  var toDate = document.getElementById('todateofattendance').value;
-			  var fromDate = document.getElementById('fromdateofattendance').value;
-			  var currentDate = new Date();
-			  var sDate = new Date(toDate);
-			  var fDate = new Date(fromDate);
-			  
-			if(toDate!= '' && sDate > currentDate)
-			  {
-			    alert("Please ensure that the To Date is lesser than or equals to current Date.");
-			    document.getElementById('todateofattendance').value = '';
-			    return false;
-			  }else if(sDate < fDate){
-				  alert("Please ensure that the To Date is greater than or equals to from Date.");
-				    document.getElementById('todateofattendance').value = '';
-				    return false;  
-			  }else if(fromDate== '' || toDate== ''){
-			    	alert("Enter the valid dates");
-			    }
-	   }
+	function parseDateDMY(dateStr) {
+		  if (!dateStr) return null;
+		  var parts = dateStr.trim().split(/[\/\-\.\s]+/); // accepts "/", "-" or "."
+		  if (parts.length !== 3) return null;
+
+		  var day = parseInt(parts[0], 10);
+		  var month = parseInt(parts[1], 10);
+		  var year = parseInt(parts[2], 10);
+
+		  if (isNaN(day) || isNaN(month) || isNaN(year)) return null;
+
+		  // Optional: handle two-digit year if needed
+		  // if (year < 100) year += (year > 50 ? 1900 : 2000);
+
+		  var date = new Date(year, month - 1, day);
+
+		  // Validate that the constructed date matches the components (catches invalid dates)
+		  if (date.getFullYear() !== year || date.getMonth() !== (month - 1) || date.getDate() !== day) {
+		    return null;
+		  }
+		  return date;
+		}
+
+		function checkDate() {
+		  var toDateStr = document.getElementById('todateofattendance').value;
+		  var fromDateStr = document.getElementById('fromdateofattendance').value;
+
+		  var sDate = parseDateDMY(toDateStr);
+		  var fDate = parseDateDMY(fromDateStr);
+
+		  if (!fDate || !sDate) {
+		    if (!fDate) document.getElementById('fromdateofattendance').value = '';
+		    if (!sDate) document.getElementById('todateofattendance').value = '';
+		    return false;
+		  }
+
+		  // Compare only the date part (ignore time)
+		  var today = new Date();
+		  today.setHours(0, 0, 0, 0);
+		  sDate.setHours(0, 0, 0, 0);
+		  fDate.setHours(0, 0, 0, 0);
+
+		  if (sDate > today) {
+		    alert("Please ensure that the To Date is less than or equal to the current Date.");
+		    document.getElementById('todateofattendance').value = '';
+		    return false;
+		  } else if (sDate < fDate) {
+		    alert("Please ensure that the To Date is greater than or equal to the From Date.");
+		    document.getElementById('todateofattendance').value = '';
+		    return false;
+		  }
+
+		  // Dates are valid
+		  return true;
+		}
 	   
 	   function checkDateGraph(){
 			  var toDate = document.getElementById('tomonthlyattendance').value;
