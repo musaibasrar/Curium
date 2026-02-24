@@ -269,6 +269,7 @@ public class ExamDetailsService {
 		String admNo = request.getParameter("admno");
 		String studentName = request.getParameter("studentName");
 		String academicYear = request.getParameter("academicyear");
+		String hallticketnotes = request.getParameter("hallticketnotes");
 		
 		if(examName!=null){
 		
@@ -305,6 +306,7 @@ public class ExamDetailsService {
 		request.setAttribute("examname", examName[0]);
 		request.setAttribute("examschedulelist", examscheduleList);
 		request.setAttribute("urlbranchid",httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("hallticketnotes", hallticketnotes);
 		
 	}
 		
