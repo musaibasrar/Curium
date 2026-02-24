@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Print General Ledger Report
-    Created on : JAN 13 2021, 9:38 PM
+    Document   : Print Expense Report
+    Created on : JAN 27 2026, 3:43 PM
     Author     : Musaib
 --%>
 
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Fees Collection Details</title>
+<title>Print Expense Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -186,7 +186,7 @@
 
 
         @media print {
-            .fontsize { font-size: 15px ;
+            .fontsize { font-size: 12px ;
                         font-weight: bold;
                         font-family: 'Times New Roman';
                         
@@ -230,12 +230,12 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/dolphin/images/dolphin.jpg" width="100" height="100"/>
+				<img src="/vision/images/vision.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Fees Collection Details Report</label><br>
-				<label class="addressLineTwo">${daterangefeescollection}</label><br>
+				<label class="addressLine">Expense Report</label><br>
+				<label class="addressLineTwo">${expensesfromdate} to ${expensestodate}</label><br>
 				</td>
 			</tr>
 	</table>
@@ -251,72 +251,34 @@
             <table class="datatable">
             <thead>
  				 <tr>
- 				 		<th class=datath>Sl.No.</th>
- 				 		<th class="datath">UID</th>
- 				 		<th class=datath>Admission Number</th>
-						<th class="datath">Student Name</th>
-						<th class="datath">Class</th>
-						<th class="datath">Father Name</th>
-						 <th></th> 
-				       	<th class="datath">Fees Summary</th>
- 				 </tr>
+ 				 	<th class="datath">Sl.No.</th>	
+					<th class="datath">Voucher #</th>
+					<th class="datath">Date</th>
+					<th class="datath">Party Name</th>
+					<th class="datath">Being</th>
+					<th class="datath">Payment Type</th>
+					<th class="datath">Reference #</th>
+					<th class="datath">Transaction Date</th>
+					<th class="datath">Bank Name</th>
+					<th class="datath">Status</th>
+					<th class="datath">Amount (Rs.)</th>
+				</tr>
  			 </thead>
 			<tbody>
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
-					<tr class="trClass" style="border-color: #000000" border="1"
+					<c:forEach items="${adminexpenses}" var="expenses" varStatus="status">
+						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="datatd"><c:out value="${status.index+1}" />
-							</td>
-							<td class="datatd"><c:out value="${studentfeesreportlist.parents.student.studentexternalid}" />
-							</td>
-							<td class="datatd"><c:out value="${studentfeesreportlist.parents.student.admissionnumber}" />
-							</td>
-							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.student.name}" /></td>
-							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.student.classstudying}" /></td>
-							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.fathersname}" /></td>
-							 <td width="0px;"> 
-									<c:set var="DueAmount" value="0" />
-									<c:set var="TotalAmount" value="0" />
-								<c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
-									<%-- <table width="0px;">
-										<tr>
-											<td>
-												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
-											</td>
-											<td>
-												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
-											</td>
-										</tr>
-									</table> --%>
-									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
-									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-									
-									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
-									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-								    <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
-								     <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
-								</c:forEach>
-							 </td> 
-							<td class="datatd">
-									<table>
-										<tr>
-											<c:if test="${DueAmount > 0}">
-												<td style="width: 160px;" align="right" >
-													<label style="color: red;">${DueAmount}/${TotalAmount}</label>&nbsp;&nbsp;&nbsp;
-												</td>
-											</c:if>
-											
-											<c:if test="${DueAmount == 0}">
-												<td style="width: 160px;" align="right" >
-													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
-												</td>
-											</c:if>
-													
-											
-										</tr>
-									</table>
-							</td>
+							<td class="datatd"><c:out value="${status.index+1}" /></td>
+							<td class="datatd"><c:out value="${expenses.idAdminExpenses}" /></td>
+						  	<td class="datatd"><fmt:formatDate value="${expenses.entrydate}" pattern="dd/MM/yyyy"/></td>
+						  	<td class="datatd"><c:out value="${expenses.paidto}" /></td>
+						  	<td class="datatd"><c:out value="${expenses.itemdescription}" /></td>
+						  	<td class="datatd"><c:out value="${expenses.paymenttype}" /></td>
+						  	<td class="datatd"><c:out value="${expenses.chequeno}" /></td>
+						  	<td class="datatd"><fmt:formatDate value="${expenses.chequedate}" pattern="dd/MM/yyyy"/></td>
+						  	<td class="datatd"><c:out value="${expenses.bankname}" /></td>
+						  	<td class="datatd"><label style="text-transform: capitalize;"><c:out value="${expenses.voucherstatus}" /></label></td>
+						  	<td class="datatd" style="text-align: right;"><c:out value="${expenses.priceofitem}" /></td>
 						</tr>
 						
 					</c:forEach>
@@ -328,15 +290,17 @@
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
-									</b>
+									Total</b>
 							</label> 
 							</td>
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${sumofdetailsfees}" /> 
+								<fmt:formatNumber type="currency"  value="${sumofexpenses}" /> 
 							</b>
 							</label>
 							</td>
@@ -345,39 +309,6 @@
 				</table>
 			
 				<br>
-			
-			<table class="datatable">
-						<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									 Total Amount:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${TotalSum}" /> 
-							</b>
-							</label>
-							</label> 
-							</td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									 Total Paid Amount:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${TotalPaidAmount}" /> (${TotalSumper}%)
-							</b>
-							</label>
-							</label> 
-							</td>
-							<td class="dataTextRight" >
-								<label style="color: #eb6000"><b>
-									Total Due Amount:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${TotalDueAmount}" /> (${TotalDueper}%)
-							</b>
-							</label>
-							</label> 
-							</td>
-					</tr>
-				</table>
-				
 			<div style="page-break-inside: avoid;" align="center">
 				<table>
 						<tr>

@@ -492,7 +492,7 @@ for(Cookie cookie : cookies){
                     <tfoot><tr>
                             <td  class="footerTD" colspan="2" ><!-- <input value="Delete" type="submit" id="delete"/> -->
                              <input value="Print" style="width: 35px;" id="print"/>
-                             <input value="Export" type="submit" id="export" formaction="/vision/EmployeeProcess/exportDataForEmployees" />
+                             <input value="Export" type="submit" id="export" formaction="/dolphin/EmployeeProcess/exportDataForEmployees" />
                              <input value="Archive" type="submit" id="archive"/> </td>
                         </tr></tfoot>
                 </table>
