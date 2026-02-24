@@ -616,7 +616,16 @@ for(Cookie cookie : cookies){
 
 										</c:forEach>
 
-								</select></td>
+								</select>
+								&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							Hall ticket Notes: <textarea
+											name="hallticketnotes" type="text" 
+											id="hallticketnotes" rows="6" cols="60"
+											style="text-transform:capitalize;"
+											></textarea>
+							</td>
 						</tr>
 										
 					

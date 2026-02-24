@@ -386,23 +386,14 @@ for(Cookie cookie : cookies){
                     
 		</TABLE>
 		 <table style="text-align:left;font-size:25px;">
-                        <tr>
-                        <td>Note:</td>
-                        </tr>
+                       
                          <tr>
-                        <td>1) Make your child to memorize the given revision daily. </td>
-                        </tr>
-                         <tr>
-                        <td>2) In case postponed, exam continues as per schedule,</td>
-                        </tr>
-                         <tr>
-                        <td>postponed paper will be after exam</td>
-                        </tr>
-                         <tr>
-                        <td>3)Holidays are from 21/03/2025 March to 31/05/2025 May</td>
-                        </tr>
-                         <tr>
-                        <td>4)Parent-Teacher meeting will be on 5/04/2025 April </td>
+                        <td >
+                        <div style="white-space: pre-wrap;padding-top:0px;margin-top:0px;">
+   Notes:<br> ${hallticketnotes}
+</div>
+                        
+                 </td>
                         </tr>
                         
                         </table>  
