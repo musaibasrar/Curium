@@ -477,7 +477,7 @@ for(Cookie cookie : cookies){
 								name="id"
 								value="<c:out value="${book.bid}"/>" /></td>
 							 <td class="dataText" align="center">${status.index + 1}</td>	
-							<td class="dataText"><a class="dataTextInActive" href="/vision/LibraryProcess/bookdetail?id=<c:out value='${book.bid}'/>"><c:out value="${book.bookname}" /></a></td>	
+							<td class="dataText"><a class="dataTextInActive" href="/dolphin/LibraryProcess/bookdetail?id=<c:out value='${book.bid}'/>"><c:out value="${book.bookname}" /></a></td>	
 							<td class="dataText"><c:out value="${book.subject}" /></td>
 							<td class="dataText"><c:out value="${book.author}" /></td>
 							<td class="dataText"><c:out value="${book.publisher}" /></td>
