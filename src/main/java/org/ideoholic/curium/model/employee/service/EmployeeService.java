@@ -468,7 +468,7 @@ public class EmployeeService {
 	        	        viewAllRelationsResponseDto.setSectionList(sectionList);
 	        
 	        
-	        List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+	        List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectMasterNames(Integer.parseInt(branchId));
 	        viewAllRelationsResponseDto.setListSubjectMaster(subjectList);
 		}
 		return viewAllRelationsResponseDto;

@@ -244,7 +244,7 @@ public class MarksDetailsService {
 		result.setSearchStudentList(searchStudentList);
 
 		// get all the subjects
-		List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+		List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectMasterNames(Integer.parseInt(branchId));
 		result.setSubjectListName(subjectList);
 
 		// get the list for all the midterms
@@ -458,7 +458,7 @@ public class MarksDetailsService {
 	public SearchStudentResponseDto getSubjectExams(String branchId) {
 		SearchStudentResponseDto result = SearchStudentResponseDto.builder().build();
 		// get all the subjects
-		List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+		List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectMasterNames(Integer.parseInt(branchId));
 		result.setSubjectListName(subjectList);
 
 		// get the list for all the midterms
@@ -1918,7 +1918,7 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	
 	List<String> classTeacherList = Arrays.asList(employeeDetails.getEmployee().getSubjectsteaching().split("\\s*,\\s*"));
 	// get all the subjects
-	List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+	List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectMasterNames(Integer.parseInt(branchId));
 	List<Subjectmaster> subjectListFinal = new ArrayList<>();
 	
 

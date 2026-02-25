@@ -97,20 +97,6 @@ public class SubjectDetailsDAO {
     }
 
     @Transactional
-    public List<Subjectmaster> readListOfSubjectNames(int branchId) {
-        List<Subjectmaster> results = new ArrayList<>();
-        try {
-            // session.createQuery("From Subjectmaster where branchid="+branchId)
-            results = subjectmasterRepo.findByBranchid(branchId);
-        } catch (Exception e) {
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            log.error(e.getMessage(), e);
-            e.printStackTrace();
-        }
-        return results;
-    }
-
-    @Transactional
     public void deleteMultipleSubjects(List<Integer> ids) {
         try {
             // session.createQuery("delete from Subjectmaster where subjectid IN (:ids)").setParameterList("ids", ids).executeUpdate();

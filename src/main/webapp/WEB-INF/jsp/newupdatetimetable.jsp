@@ -371,7 +371,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;Class<select name='classsec' id='classsec'><option selected>${timetable.class_}</option>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;Class<select name='classsec' id='classsec'><option selected>${timetable.classSec}</option>
 					<c:forEach items="${classdetailslist}" var="classdetailslist">
 					                               <c:if test="${(classdetailslist.classdetails != '')}">
 												<option value="${classdetailslist.classdetails}">
