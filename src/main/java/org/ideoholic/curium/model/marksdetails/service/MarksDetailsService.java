@@ -432,7 +432,7 @@ public class MarksDetailsService {
 		
 		for (Parents parents : searchStudentList) {
 			List<Marks> singleMarksDetails = marksDetailsDao.readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
-			if(CollectionUtils.isEmpty(singleMarksDetails)) {
+			if(!CollectionUtils.isEmpty(singleMarksDetails)) {
 				for (Marks marks : singleMarksDetails) {
 					int subSubjectId = marks.getSubsubjectid();
 					if ( subSubjectId ==0) {
