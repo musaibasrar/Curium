@@ -425,7 +425,7 @@ public class MarksDetailsService {
 		String[] examIdName = exam.split(":");
 		Subject subjectDetails = subjectDetailsDao.readSubjectByExam(Integer.parseInt(branchId), addClass, examIdName[1], Integer.parseInt(subject));
 		int subjectDetailsId = 0;
-		if(subjectDetails != null) subjectDetails.getSubid();
+		if(subjectDetails != null) subjectDetailsId = subjectDetails.getSubid();
 		
 		List<Parents> newStudentList = new ArrayList<>();
 		List<Marks> newMarksDetails = new ArrayList<>();
