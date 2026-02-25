@@ -68,6 +68,7 @@ import org.ideoholic.curium.util.FinalTermMarks;
 import org.ideoholic.curium.util.MarksSheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -423,18 +424,22 @@ public class MarksDetailsService {
 
 		String[] examIdName = exam.split(":");
 		Subject subjectDetails = subjectDetailsDao.readSubjectByExam(Integer.parseInt(branchId), addClass, examIdName[1], Integer.parseInt(subject));
-		int subjectDetailsId = subjectDetails.getSubid();
-		List<Parents> newStudentList = new ArrayList<Parents>();
-		List<Marks> newMarksDetails = new ArrayList<Marks>();
+		int subjectDetailsId = 0;
+		if(subjectDetails != null) subjectDetailsId = subjectDetails.getSubid();
+		
+		List<Parents> newStudentList = new ArrayList<>();
+		List<Marks> newMarksDetails = new ArrayList<>();
+		
 		for (Parents parents : searchStudentList) {
-
 			List<Marks> singleMarksDetails = marksDetailsDao.readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
-			for (Marks marks : singleMarksDetails) {
-				int subSubjectId = marks.getSubsubjectid();
-				if ( subSubjectId ==0) {
-					newStudentList.add(parents);
-					newMarksDetails.add(marks);
-					log.debug("Marks Details: {}", marks.getMarksobtained());
+			if(!CollectionUtils.isEmpty(singleMarksDetails)) {
+				for (Marks marks : singleMarksDetails) {
+					int subSubjectId = marks.getSubsubjectid();
+					if ( subSubjectId ==0) {
+						newStudentList.add(parents);
+						newMarksDetails.add(marks);
+						log.debug("Marks Details: {}", marks.getMarksobtained());
+					}
 				}
 			}
 		}

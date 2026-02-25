@@ -1,18 +1,25 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
-import org.ideoholic.curium.model.marksdetails.dto.*;
+import org.ideoholic.curium.model.marksdetails.dto.GenerateReportDto;
+import org.ideoholic.curium.model.marksdetails.dto.GenerateReportResponseDto;
+import org.ideoholic.curium.model.marksdetails.dto.MarksResponseDto;
+import org.ideoholic.curium.model.marksdetails.dto.MarksUpdateDto;
+import org.ideoholic.curium.model.marksdetails.dto.MarksViewDto;
+import org.ideoholic.curium.model.marksdetails.dto.SearchStudentExamDto;
+import org.ideoholic.curium.model.marksdetails.dto.StudentGraphDto;
+import org.ideoholic.curium.model.marksdetails.dto.StudentGraphResponseDto;
 import org.ideoholic.curium.model.marksdetails.service.MarksDetailsService;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class MarksDetailsActionAdapter {
@@ -32,17 +39,13 @@ public class MarksDetailsActionAdapter {
     @Autowired
     private EmployeeService employeeService;
     
-    private String CURRENTACADEMICYEAR = "currentAcademicYear";
-    private String BRANCHID = "branchid";
-    private String USERID = "userloginid";
-
     public void getStudentGraph() {
 
         StudentGraphDto dto = new StudentGraphDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameterValues("examclass"));
 
-        StudentGraphResponseDto responseDto = marksDetailsService.getStudentGraph(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        StudentGraphResponseDto responseDto = marksDetailsService.getStudentGraph(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         request.setAttribute("examDetailsGraph", responseDto.getExamDetailsGraph());
         request.setAttribute("examDetailsGraphSize", responseDto.getExamDetailsGraphSize());
         request.setAttribute("studentName", responseDto.getSearchStudent());
@@ -50,7 +53,7 @@ public class MarksDetailsActionAdapter {
 
     public void getStudentList() {
 
-        ResultResponse resultResponse = marksDetailsService.getStudentList(httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = marksDetailsService.getStudentList(httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("studentList", resultResponse.getResultList());
     }
 
@@ -61,7 +64,7 @@ public class MarksDetailsActionAdapter {
         dto.setAddClass(request.getParameter("classsearch"));
         dto.setAddSec(request.getParameter("secsearch"));
         
-        SearchStudentResponseDto responseDto = marksDetailsService.Search(dto, httpSession.getAttribute(BRANCHID).toString());
+        SearchStudentResponseDto responseDto = marksDetailsService.Search(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
         request.setAttribute("listSubjectNames", responseDto.getSubjectListName());
         request.setAttribute("listExam", responseDto.getExamsList());
@@ -77,7 +80,7 @@ public class MarksDetailsActionAdapter {
         dto.setEndDate(request.getParameter("enddate")); 
         dto.setStartDate(request.getParameter("startdate"));
 
-        GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReport(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 		request.setAttribute("totaldays", responseDto.getTotalDays());
@@ -92,7 +95,7 @@ public class MarksDetailsActionAdapter {
         dto.setStudentUID(request.getParameter("id"));
         dto.setStudentIds(request.getParameterValues("studentIDs"));
 
-        GenerateReportResponseDto responseDto = marksDetailsService.generateReportParent(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReportParent(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 
@@ -119,14 +122,14 @@ public class MarksDetailsActionAdapter {
         dto.setExam(request.getParameter("examidselected"));
         dto.setSubject(request.getParameter("subjectidselected"));
 
-        ResultResponse resultResponse = marksDetailsService.updateMarks(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        ResultResponse resultResponse = marksDetailsService.updateMarks(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
 
     public void getSubjectExams() {
 
-        SearchStudentResponseDto responseDto = marksDetailsService.getSubjectExams(httpSession.getAttribute(BRANCHID).toString());
+        SearchStudentResponseDto responseDto = marksDetailsService.getSubjectExams(httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("listSubject", responseDto.getSubjectListName());
         request.setAttribute("listExam", responseDto.getExamsList());
     }
@@ -142,7 +145,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubjectSelected(request.getParameter("subjectselected"));
         dto.setExamSelected(request.getParameter("examselected"));
 
-        MarksResponseDto responseDto = marksDetailsService.viewMarks(dto, httpSession.getAttribute(BRANCHID).toString());
+        MarksResponseDto responseDto = marksDetailsService.viewMarks(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("newStudentList", responseDto.getNewStudentList());
         request.setAttribute("newMarksDetails", responseDto.getNewMarksDetails());
         request.setAttribute("subjectselected", responseDto.getSubjectSelected());
@@ -168,7 +171,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubject(request.getParameter("subject"));
         dto.setClassSearch(request.getParameter("classsearch"));
         dto.setAcademicYear(request.getParameter("academicyear"));
-        ResultResponse resultResponse = marksDetailsService.addMarks(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
+        ResultResponse resultResponse = marksDetailsService.addMarks(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.USERID).toString());
 
         return resultResponse.getMessage();
     }
@@ -179,7 +182,7 @@ public class MarksDetailsActionAdapter {
         dto.setAddClass(request.getParameter("classsearch"));
         dto.setAddSec(request.getParameter("secsearch"));
 
-        SearchStudentResponseDto responseDto = marksDetailsService.rankSearch(dto, httpSession.getAttribute(BRANCHID).toString());
+        SearchStudentResponseDto responseDto = marksDetailsService.rankSearch(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
         request.setAttribute("listExam", responseDto.getExamsList());
     }
@@ -191,7 +194,7 @@ public class MarksDetailsActionAdapter {
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamDetailsID(request.getParameter("exam"));
 
-        GenerateReportResponseDto responseDto = marksDetailsService.generateRankReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
+        GenerateReportResponseDto responseDto = marksDetailsService.generateRankReport(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.USERID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 
@@ -206,7 +209,7 @@ public class MarksDetailsActionAdapter {
         dto.setExamIds(request.getParameterValues("examslist"));
         dto.setNoofpresentday(request.getParameter("dateforattendance"));
 
-        GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
         request.setAttribute("totaldays", responseDto.getTotalDays());
@@ -224,7 +227,7 @@ public class MarksDetailsActionAdapter {
         dto.setAddSec(request.getParameter("secsearch"));
         
         EmployeeDetailsResponseDto result = employeeService.viewDetailsEmployeeStaffLogin(httpSession.getAttribute("username").toString());
-        SearchStudentResponseDto responseDto = marksDetailsService.SearchForTeacher(result,dto, httpSession.getAttribute(BRANCHID).toString());
+        SearchStudentResponseDto responseDto = marksDetailsService.SearchForTeacher(result,dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("searchStudentList", responseDto.getSearchStudentList());
         request.setAttribute("listSubjectNames", responseDto.getSubjectListName());
         request.setAttribute("listExam", responseDto.getExamsList());
@@ -244,7 +247,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubject(request.getParameter("subject"));
         dto.setClassSearch(request.getParameter("classsearch"));
         dto.setAcademicYear(request.getParameter("academicyear"));
-        ResultResponse resultResponse = marksDetailsService.addMarksSubSubject(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(USERID).toString());
+        ResultResponse resultResponse = marksDetailsService.addMarksSubSubject(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.USERID).toString());
         request.setAttribute("errormessage", resultResponse.getMessage());
         return resultResponse.getMessage();
     }
@@ -260,7 +263,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubjectSelected(request.getParameter("subjectselected"));
         dto.setExamSelected(request.getParameter("examselected"));
 
-        MarksResponseDto responseDto = marksDetailsService.viewMarksSub(dto, httpSession.getAttribute(BRANCHID).toString());
+        MarksResponseDto responseDto = marksDetailsService.viewMarksSub(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("newStudentList", responseDto.getNewStudentList());
         request.setAttribute("newMarksDetails", responseDto.getNewMarksDetails());
         request.setAttribute("subjectselected", responseDto.getSubjectSelected());
@@ -281,7 +284,7 @@ public class MarksDetailsActionAdapter {
 	        dto.setExam(request.getParameter("examidselected"));
 	        dto.setSubject(request.getParameter("subjectidselected"));
 
-	        ResultResponse resultResponse = marksDetailsService.updateMarksSub(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+	        ResultResponse resultResponse = marksDetailsService.updateMarksSub(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
 
 	        return resultResponse.isSuccess();
 	    }
@@ -292,7 +295,7 @@ public class MarksDetailsActionAdapter {
 	        dto.setExamClass(request.getParameter("examclass"));
 	        dto.setExamName(request.getParameter("examname"));
 	       
-	        GenerateReportResponseDto responseDto = marksDetailsService.generateFinalExamReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+	        GenerateReportResponseDto responseDto = marksDetailsService.generateFinalExamReport(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
 	        request.setAttribute("endloop", responseDto.getEndLoop());
 	        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
 	        request.setAttribute("examname", responseDto.getExamName());
@@ -300,7 +303,7 @@ public class MarksDetailsActionAdapter {
 	}
 
 	public void getStartDate() {
-		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate(httpSession.getAttribute(BRANCHID).toString());
+		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate(httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("startDateStr", responseDto.getStartDate());
 		
 	}
