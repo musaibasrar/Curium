@@ -127,7 +127,7 @@ public class SubjectDetailsService {
 	public SubjectsResponseDto readListOfSubjectNames(String branchId) {
 		SubjectsResponseDto result = new SubjectsResponseDto();
 	    try {
-	    	List<Subjectmaster> list = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+	    	List<Subjectmaster> list = subjectDetailsDao.readListOfSubjectMasterNames(Integer.parseInt(branchId));
 			result.setSubjectMasters(list);
 			result.setSuccess(true);
 	    } catch (Exception e) {
@@ -161,7 +161,7 @@ public class SubjectDetailsService {
 		
 		SubSubjectsResponseDto result = new SubSubjectsResponseDto();
 	    try {
-	    	List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectNames(Integer.parseInt(branchId));
+	    	List<Subjectmaster> subjectList = subjectDetailsDao.readListOfSubjectMasterNames(Integer.parseInt(branchId));
 	    	List<SubSubject> subSubjectList = subjectDetailsDao.readListOfSubSubject(Integer.parseInt(branchId));
 	    	 Map<Integer, String> subjectIdNameMap = subjectList.stream()
 	    	            .collect(Collectors.toMap(

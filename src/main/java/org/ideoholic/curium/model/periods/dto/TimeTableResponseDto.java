@@ -1,13 +1,16 @@
 package org.ideoholic.curium.model.periods.dto;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Builder;
-import lombok.Data;
+import java.util.List;
+
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
+import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder
@@ -18,6 +21,7 @@ public class TimeTableResponseDto {
     private List<Subject> subjects;
     private List<Classsec> classSecs;
     private List<Teacher> employeeList;
+    private List<Subjectmaster> subjectMasters;
 
     private boolean success;
 }

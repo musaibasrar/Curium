@@ -35,9 +35,6 @@ public class Leavedetails implements java.io.Serializable {
 	@Column(name = "idleavedetails", unique = true, nullable = false)
 	private Integer idleavedetails;
 
-	@Column(name = "idteacher")
-	private Integer idteacher;
-
 	@Column(name = "numberofleaves")
 	private Integer numberofleaves;
 
@@ -46,7 +43,7 @@ public class Leavedetails implements java.io.Serializable {
 	private Leavetypemaster leaveTypeMaster;
 
 	@ManyToOne
-	@JoinColumn(name = "teacherid", referencedColumnName = "tid")
+	@JoinColumn(name = "idteacher")
 	private Teacher teacher;
 
 	@Column(name = "academicyear", length = 45)

@@ -85,7 +85,7 @@ public class PeriodActionAdapter {
         dto.setStaff(request.getParameterValues("staff"));
         dto.setPeriodStartTimeHr(request.getParameterValues("periodstarttimehr"));
         dto.setPeriodStartTimeMin(request.getParameterValues("periodstarttimemin"));
-        dto.setPeriodEndTimeAm(request.getParameterValues("periodstarttimeam"));
+        dto.setPeriodStartTimeAm(request.getParameterValues("periodstarttimeam"));
         dto.setPeriodEndTimeHr(request.getParameterValues("periodendtimehr"));
         dto.setPeriodEndTimeMin(request.getParameterValues("periodendtimemin"));
         dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
@@ -100,6 +100,9 @@ public class PeriodActionAdapter {
         TimeTableResponseDto responseDto = periodService.periodConfiguration(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
         httpSession.setAttribute("currentYear", responseDto.getCurrentYear());
         request.setAttribute("periodmasterlist", responseDto.getPeriodMaster());
+        request.setAttribute("listSubjectNames", responseDto.getSubjectMasters());
+        request.setAttribute("classdetailslist", responseDto.getClassSecs());
+        request.setAttribute("employeeList", responseDto.getEmployeeList());
 
         return responseDto.isSuccess();
     }

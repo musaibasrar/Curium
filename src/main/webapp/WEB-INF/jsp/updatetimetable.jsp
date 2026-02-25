@@ -372,7 +372,7 @@ for(Cookie cookie : cookies){
 			<table width="100%">
 				<tr>
 					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;
-					<c:set var="itemparts" value="${fn:split(timetable.class_, '--')}" />
+					<c:set var="itemparts" value="${fn:split(timetable.classSec, '--')}" />
 					Class<select name="classsec" id="classsec"><option selected>${itemparts[0]}</option>
 					<c:forEach items="${classdetailslist}" var="classdetailslist">
 					                               <c:if test="${(classdetailslist.classdetails != '')}">
