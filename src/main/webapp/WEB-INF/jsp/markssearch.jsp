@@ -289,6 +289,16 @@
 	font-weight: bold;
 	height: 22px;
 }
+#search:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    background-color: #cccccc !important;
+}
+
+#search:enabled {
+    cursor: pointer !important;
+    opacity: 1 !important;
+}
 </style>
 <style>
 #button {
@@ -370,6 +380,54 @@
 		form1.submit();
 
 	}
+
+	function createListeners() {
+		    // Grab elements
+		    const nameInput     = document.getElementById('namesearch');
+		    const classSelect   = document.getElementById('classsearch');
+		    const sectionSelect = document.getElementById('secsearch'); // optional, not used in validation
+		    const subjectInput  = document.getElementById('subject');
+		    const examSelect    = document.getElementById('exam');
+		    const searchBtn     = document.getElementById('search');
+		    const form          = document.getElementById('form1');
+
+		    // Core validation as per requirements
+		    function isFormValid() {
+		      const subjectFilled = subjectInput.value.trim().length > 0;
+		      const examChosen    = examSelect.value.trim().length > 0;
+
+		      const nameFilled    = nameInput.value.trim().length > 0;
+		      const classChosen   = classSelect.value.trim().length > 0;
+
+		      // 1) Subject + Exam are mandatory
+		      // 2) Either Name OR Class must be provided
+		      return subjectFilled && examChosen && (nameFilled || classChosen);
+		    }
+
+		    function updateButtonState() {
+		      searchBtn.disabled = !isFormValid();
+		    }
+
+		    // Attach listeners (cover typing, pasting, and selection changes)
+		    ['input', 'change'].forEach(evt => {
+		      nameInput.addEventListener(evt, updateButtonState);
+		      classSelect.addEventListener(evt, updateButtonState);
+		      subjectInput.addEventListener(evt, updateButtonState);
+		      examSelect.addEventListener(evt, updateButtonState);
+		      // sectionSelect is optional; no listener needed
+		    });
+
+		    // Initialize on load
+		    updateButtonState();
+
+		    // Optional: guard on submit (prevents edge cases if JS runs late)
+		    form.addEventListener('submit', function (e) {
+		      if (!isFormValid()) {
+		        e.preventDefault();
+		        updateButtonState();
+		      }
+		    });
+	};
 
 	$(function() {
 
@@ -514,7 +572,7 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-<body>
+<body onload="createListeners()">
 	<form id="form1" action="/school/MarksDetailsProcess/updateMarks" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
