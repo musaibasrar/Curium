@@ -125,7 +125,9 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/abc/welcome" ><img src="/abc/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/abc/welcome" >
+								<img src="/abc/images/curiumheader.png" width="112" height="41"/>
+								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/abc/images/abcheader.png"
@@ -159,27 +161,16 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-<!-- 							<td ><a target="leftFrame" href="/abc/leftsettings_officeadmin">
+							<td ><a target="leftFrame" href="/abc/leftsettings">
 									<img alt="Settings" src="/abc/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td> -->
+							</a></td>
 
 							<td ><a target="mainFrame"
 								href="/abc/AdminProcess/viewAllExpenses"><img
 									alt="Admin Exp" src="/abc/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
-
-							<!-- <td ><a target="mainFrame" href="/abc/sendsms"><img
-									src="/abc/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a>
-								<a target="leftFrame" href="/abc/reports_officeadmin"><img
-									src="/abc/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							
-							</td> -->
 
 							<td ><a target="mainFrame"
 								href="/abc/StudentProcess/viewAllStudentsWithParents"><img
@@ -188,12 +179,12 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/abc/UserProcess/dashBoard"><img
+							<td ><a target="mainFrame"
+								href="/abc/dashboardloader"><img
 									alt="Dash Board" src="/abc/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
-									</a></td> -->
+									</a></td>
 								
 							<td ><a target="_parent"
 								href="/abc/UserProcess/logout"><img
