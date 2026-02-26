@@ -184,6 +184,23 @@ public class DocumentActionAdapter {
 		request.setAttribute("leavingclass",request.getParameter("leavingclass"));
 		request.setAttribute("partone",request.getParameter("partone"));
 		request.setAttribute("parttwo",request.getParameter("parttwo"));
+		request.setAttribute("collegecode",request.getParameter("collegecode"));
+		request.setAttribute("Admissionno",request.getParameter("Admissionno"));
+		request.setAttribute("dateofadmission",request.getParameter("dateofadmission"));
+		request.setAttribute("sts",request.getParameter("sts"));
+		request.setAttribute("studentname1",request.getParameter("studentname1"));
+		request.setAttribute("gender",request.getParameter("gender"));
+		request.setAttribute("fathername1",request.getParameter("fathername1"));
+		request.setAttribute("mothername1",request.getParameter("mothername1"));
+		request.setAttribute("nationality",request.getParameter("nationality"));
+		request.setAttribute("religion",request.getParameter("religion"));
+		request.setAttribute("category",request.getParameter("category"));
+		request.setAttribute("dateofbirth",request.getParameter("dateofbirth"));
+		request.setAttribute("dateofbirthwords",request.getParameter("dateofbirthwords"));
+		request.setAttribute("dateofleaving",request.getParameter("dateofleaving"));
+		request.setAttribute("dateoftc",request.getParameter("dateoftc"));
+		request.setAttribute("trustname",request.getParameter("trustname"));
+		
 	    switch(transferCertificateResponseDto.getStatus())
 	    {
 	    case TCEXISTS:

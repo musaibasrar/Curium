@@ -561,10 +561,10 @@ for(Cookie cookie : cookies){
             </table>
             <table>
 	                <tr>
-                    <td style="font-weight: bold;font-size: 10px;">Note: Only green fields are to be filled&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                    <td style="font-weight: bold;font-size: 10px;">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                     <td style="color:green;">1.College Name:&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color:green;">  <select name="collegename"
+                     <td >1.College Name:&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color:green;">  <select name="collegename"
 									 id="collegename"
 									style="width: 200px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
@@ -572,14 +572,14 @@ for(Cookie cookie : cookies){
 										<option>SRI SATHYAM PU COLLEGE AURAD (B)-585326</option>
 										<option>NALANDA COMPOSITE PRE-UNIVERSITY <br>COLLEGE AURAD (B)-585326</option>
 								</select></td>
-				  <td >2.College Code:&nbsp; </td><td><input  type="text" name="collegecode" id="collegecode" style="width: 200px" readonly/></td>    
+				  <td >2.College Code:&nbsp; </td><td><input  type="text" name="collegecode" id="collegecode" style="width: 200px"/></td>    
                    		</tr>
                    		 <tr>
                     <td><br></td>
                     </tr>
                    		<tr>
                    		 <td >3.Admission No: 
-                    				</td><td>		<input  type="text" name="admno" id="admno" style="width: 200px" /></td>
+                    				</td><td>		<input  type="text" name="Admissionno" id="Admissionno" style="width: 200px" /></td>
                     <td >4.Date of Admission:</td><td> <input  type="text" name="dateofadmission" id="dateofadmission" style="width: 200px" /></td>
                    		</tr>
                    		 <tr>
@@ -587,28 +587,28 @@ for(Cookie cookie : cookies){
                     </tr>
                    		 <tr>
                     <td >5.Student SATS No:</td><td> <input  type="text" name="sts" id="sts" style="width: 200px" /></td>
-                    <td >6.Student Name:</td><td><input  type="text" name="studentname" id="studentname1" style="width: 200px" /></td>        
+                    <td >6.Student Name:</td><td><input  type="text" name="studentname1" id="studentname1" style="width: 200px" /></td>        
                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
                    		<tr>	
                     <td >7.Sex: </td><td>		<input  type="text" name="gender" id="gender" style="width: 200px" /></td>
-                    <td >8.Name of the Father:</td><td>  <input  type="text" name="fathername" id="fathername1" style="width: 200px" /></td>
+                    <td >8.Name of the Father:</td><td>  <input  type="text" name="fathername1" id="fathername1" style="width: 200px" /></td>
                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td >9.Name of the Mother:</td><td><input  type="text" name="mothername" id="mothername1" style="width: 200px" readonly/></td>    
-                    <td >10.Nationality:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="nationality" id="nationality" style="width: 200px" readonly/></td>    
+                    <td >9.Name of the Mother:</td><td><input  type="text" name="mothername1" id="mothername1" style="width: 200px"/></td>    
+                    <td >10.Nationality:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="nationality" id="nationality" style="width: 200px"/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
                     <td >11.Religion:</td><td> <input  type="text" name="religion" id="religion" style="width: 200px" /></td>
-                    <td >12.Caste:&nbsp; </td><td><input  type="text" name="caste" id="caste" style="width: 200px" readonly/></td>    
+                    <td >12.Caste:&nbsp; </td><td><input  type="text" name="caste" id="caste" style="width: 200px" /></td>    
                     </tr>
                     <tr>
                     <td><br></td>
@@ -616,7 +616,7 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>13.Category:&nbsp; </td><td><input  type="text" name="category" id="category" style="width: 200px" /></td>    
-                    <td style="color:green;">14.Whether the student belongs to Schedule Cast,<br>
+                    <td >14.Whether the student belongs to Schedule Cast,<br>
                      Scheduled Tribe, Nomadic Tribe or Semi Nomadic Tribe:&nbsp; </td><td><input  type="text" name="yesno" id="yesno" style="width: 200px;color:green;" /></td>    
                     </tr>
                      <tr>
@@ -624,7 +624,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td >15(a).Date of Birth: </td><td> <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
-                    <td >15(b).Date of Birth (words):</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px" readonly/></td>    
+                    <td >15(b).Date of Birth (words):</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px"/></td>    
                     </tr>
                      <tr>
                     <td><br></td>
@@ -638,45 +638,56 @@ for(Cookie cookie : cookies){
                     <td><br></td>
                     </tr>
                      <tr>
-                    <td style="color:green;">17(a)Examination: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px;color:green;" /></td>
-                    <td style="color:green;">17(b)MONTH & YEAR:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px;color:green;" /></td>    
+                    <td >17(a)EXAMINATION: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px;color:green;" /></td>
+                    <td >17(b)MONTH & YEAR:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px;color:green;" /></td>    
                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td style="color:green;">17(c)REG. NO: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="thirdsubject" id="thirdsubject" style="width: 200px;color:green;" /></td>
-                    <td style="color:green;">17(d)RESULT:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fourthsubject" id="Fourthsubject" style="width: 200px;color:green;" /></td>    
+                    <td >17(c)REG. NO: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="thirdsubject" id="thirdsubject" style="width: 200px;color:green;" /></td>
+                    <td >17(d)RESULT:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fourthsubject" id="Fourthsubject" style="width: 200px;color:green;" /></td>    
                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
                      <tr>
-                    <td style="color:green;">18(a) Language Offered in Part-I: </td><td><input  type="text" name="partone" id="partone" style="width: 200px;color:green;" /></td>
-                    <td style="color:green;">18(b) Optional Subjects Offered in Part-II:</td><td> <input  type="text" name="parttwo" id="parttwo" style="width: 200px;color:green;" /></td>    
+                    <td >18(a) Language Offered in Part-I: </td><td><input  type="text" name="partone" id="partone" style="width: 200px;color:green;" /></td>
+                    <td >18(b) Optional Subjects Offered in Part-II:</td><td> <input  type="text" name="parttwo" id="parttwo" style="width: 200px;color:green;" /></td>    
                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
                     
                      <tr>
-                    <td style="color:green;">19(a)Total No. of working days: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="workingdays" id="workingdays" style="width: 200px;color:green;" /></td>
-                    <td style="color:green;">19(b)No of days he/she was present:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="present" id="present" style="width: 200px;color:green;" /></td>    
+                    <td >19(a)Total No. of working days: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="workingdays" id="workingdays" style="width: 200px;color:green;" /></td>
+                    <td >19(b)No of days he/she was present:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="present" id="present" style="width: 200px;color:green;" /></td>    
                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
                     <tr>
                     <td >20.Last date of student attendance in the institution: </td><td><input  type="text" name="dateofleaving" id="dateofleaving" style="width: 200px" /></td>
-                     <td style="color:green;">21.Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px;color:green;" /></td>    
+                     <td >21.Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px;color:green;" /></td>    
                      </tr>
                     <tr>
                     <td><br></td>
                   
                     <tr>
-                     <td > 22. Date of issue of the transfer certificate: </td><td><input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" /></td>    
+                     <td > 22. Date of issue of the transfer certificate: </td><td><input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" /></td>    
                    <!--  <td >Class in Which Pupil Studied Last In Words:</td><td> <input  type="text" name="classinword" id="classinword" style="width: 200px" /></td>     -->
-                    <td style="color:green;">Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reason" id="reason" style="width: 200px" /></td>    
+                    <td >Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reason" id="reason" style="width: 200px" /></td>    
+                    </tr>
+                     <tr>
+                     <td >  23. Character & Conduct: </td><td><input  style="width: 200px" type="text" name="conduct" id="conduct"  /></td>    
+                   <!--  <td >Class in Which Pupil Studied Last In Words:</td><td> <input  type="text" name="classinword" id="classinword" style="width: 200px" /></td>     -->
+                    <td >Trust Name:&nbsp;&nbsp;&nbsp;&nbsp;</td><td style="color:green;">  <select name="trustname"
+									 id="trustname"
+									style="width: 200px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>AVV TRUST®</option>
+										<option>POONAM EDUCATIONAL INSTITUTION MUNGNAL®</option>
+								</select></td>    
                     </tr>
                     <tr>
                     <td><br></td>

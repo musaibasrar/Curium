@@ -97,7 +97,7 @@ for(Cookie cookie : cookies){
 
     <!-- Header -->
     <div class="tc-header">
-        <h2 style="margin:0px">POONAM EDUCATIONAL INSTITUTION MUNGNAL®</h2>
+        <h2 style="margin:0px">${trustname}</h2>
         <hr>
         <h3 style="margin:0px">${collegename}</h3>
          
@@ -122,44 +122,44 @@ for(Cookie cookie : cookies){
         </tr>
         <tr>
             <td >2. College Code</td>
-            <td ><c:out value="${studentdetails.student.schoollastattended}" /></td>
+            <td ><c:out value="${collegecode}" /></td>
                    </tr>
         <tr>
             
             <td >3. Admission No</td>
-            <td ><c:out value="${studentdetails.student.admissionnumber}" /></td>
+            <td ><c:out value="${Admissionno}" /></td>
         </tr>
         <tr>
             <td >4. Date of Admission</td>
-            <td ><c:out value="${studentdetails.student.admissiondate}" /></td>
+            <td ><c:out value="${dateofadmission}" /></td>
              </tr>
         <tr>
             <td >5. Student SATS No</td>
-            <td> <c:out value="${studentdetails.student.sts}" /></td>
+            <td> <c:out value="${sts}" /></td>
         </tr>
         <tr>
             <td >6. Name of the Student<br><small>(As entered in Admission Register)</small></td>
-            <td > <c:out value="${studentdetails.student.name}" /></td>
+            <td > <c:out value="${studentname1}" /></td>
         </tr>
         <tr>
             <td >7. Sex</td>
-            <td > <c:out value="${studentdetails.student.gender}" /></td>
+            <td > <c:out value="${gender}" /></td>
              </tr>
         <tr>
             <td >8. Name of the Father</td>
-            <td ><c:out value="${studentdetails.fathersname}" /></td>
+            <td ><c:out value="${fathername1}" /></td>
         </tr>
         <tr>
             <td >9. Name of the Mother</td>
-            <td ><c:out value="${studentdetails.mothersname}" /></td>
+            <td ><c:out value="${mothername1}" /></td>
         </tr>
         <tr>
-            <td >10. Nationality:INDIAN</td>
-            <td >11. Religion:<c:out value="${studentdetails.student.religion}" /></td>
+            <td >10. Nationality:<c:out value="${nationality}" /></td>
+            <td >11. Religion:<c:out value="${religion}" /></td>
         </tr>
         <tr>
-            <td >12. Caste:<c:out value="${studentdetails.student.caste}" /></td>
-            <td >13. Category:<c:out value="${studentdetails.student.socialcategory}" /></td>
+            <td >12. Caste:<c:out value="${caste}" /></td>
+            <td >13. Category:<c:out value="${category}" /></td>
         </tr>
         <tr>
             <td >
@@ -172,7 +172,7 @@ Scheduled Tribe, Nomadic Tribe or Semi Nomadic Tribe
         </tr>
         <tr>
             <td >15. Date of Birth   in Figures<br>in words</td>
-            <td ><c:out value="${studentdetails.student.dateofbirth}" /><br> <c:out value="${dateinword}" /></td>
+            <td ><c:out value="${dateofbirth}" /><br> <c:out value="${dateofbirthwords}" /></td>
         </tr>
         <tr>
             <td >
@@ -224,13 +224,11 @@ b) No of days he/she was present </td>
             <td ><c:out value="${datecert}" /></td>
         </tr>       <tr>
             <td >22. Date of issue of the transfer certificate  </td>
-            <td ><input
-									name="dateoftc" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${tcdetails.dateofissues}" pattern="yyyy-MM-dd"/>" ></td>
+            <td ><c:out value="${dateoftc}" /></td>
         </tr>
         <tr>
             <td >23. Character & Conduct</td>
-            <td ><b>GOOD</b></td>
+            <td ><b><c:out value="${conduct}" /></b></td>
         </tr>
     </table>
 
