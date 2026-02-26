@@ -43,14 +43,16 @@ public class EnquiryAction {
 	
 	@GetMapping("/getStudentEnquiryform")
 	public String getStudentEnquiryform() {
+		standardActionAdapter.viewClasses();
 		enquiryActionAdapter.getStudentEnquiry(); 
 		return "studentenquiryformprint";
 	}
 	
 	@PostMapping("/updateEnquiryDetails")
 	public String updateEmployeeDetails() {
+		standardActionAdapter.viewClasses();
 		enquiryActionAdapter.getStudentEnquiry(); 
-			return "enquiry_update";
+		return "enquiry_update";
 	}
 	
 	@PostMapping("/updateEnquiryFormDetails")
