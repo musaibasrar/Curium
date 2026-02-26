@@ -12,6 +12,7 @@ import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class EnquiryActionAdapter {
@@ -48,7 +49,9 @@ public class EnquiryActionAdapter {
 	public boolean saveEnquiryForm() {
 		String branchId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID);
 		String userId = DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID);
-		
+		// If the branchId is not available, do not proceed
+		if(!StringUtils.hasLength(branchId)) return false;
+
 		AdmissionEnquiryDto admissionEnquiryDto = new AdmissionEnquiryDto();
 		admissionEnquiryDto.setName(request.getParameter("name"));
 		admissionEnquiryDto.setGender(request.getParameter("gender"));
@@ -72,8 +75,9 @@ public class EnquiryActionAdapter {
 		admissionEnquiryDto.setAddress(request.getParameter("address"));
 		admissionEnquiryDto.setNotes(request.getParameter("notes"));
 		admissionEnquiryDto.setMobileno(request.getParameter("contactno"));
-		admissionEnquiryDto.setBranchId(DataUtil.parseInt(request.getParameter("branchid")));
+		admissionEnquiryDto.setBranchId(DataUtil.parseInt(branchId));
 		admissionEnquiryDto.setUserId(userId);
+
 		AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.saveEnquiryForm(admissionEnquiryDto);
 
 		request.setAttribute("name", admissionEnquiryResponseDto.getName());
