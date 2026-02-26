@@ -765,6 +765,27 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
+						<tr>
+						<td class="alignLeft">PEN No. &nbsp;</td>
+							<td ><label> <input
+									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36" required
+									style="text-transform:capitalize;"
+									/>
+							</label></td>
+
+							<td  class="alignLeft" style="padding-left: 20px;">APAAR Id &nbsp;</td>
+							<td  ><input
+									name="bplcardno" type="text" class="myclass" id="bplcardno" size="36" required
+									style="text-transform:capitalize;" />
+
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						
 						<tr>
 							<td class="alignLeft">Student Name* &nbsp;</td>
@@ -1033,14 +1054,14 @@ $(document).ready(function() {
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;"><!-- BPL Card No. -->
 								&nbsp;</td>
-							<td ><label> <input
+							<td ><!-- <label> <input
 									name="bplcardno" type="text" class="myclass"
 									style="text-transform:capitalize;"
 									id="bplcardno" size="36">
 
-							</label></td>
+							</label> --></td>
 						</tr>	
 						<tr>
 							<td><br /></td>
@@ -1966,11 +1987,11 @@ $(document).ready(function() {
 									</tr>
 						
 						<tr>
-							<td class="alignLeft" >Bank IFSC Code&nbsp;</td>
-							<td><label> <input name="bankifsc" type="text" class="myclass" id="bankifsc" size="36"
+							<td class="alignLeft" ><!-- Bank IFSC Code -->&nbsp;</td>
+							<td><!-- <label> <input name="bankifsc" type="text" class="myclass" id="bankifsc" size="36"
 									style="text-transform:capitalize;"
 									>
-							</label></td>
+							</label> --></td>
 						</tr>
 								<tr>
 										<td><br /></td>
