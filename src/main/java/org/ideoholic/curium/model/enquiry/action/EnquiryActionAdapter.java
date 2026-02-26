@@ -10,6 +10,7 @@ import org.ideoholic.curium.model.enquiry.dto.CertificateDto;
 import org.ideoholic.curium.model.enquiry.dto.CertificateResponseDto;
 import org.ideoholic.curium.model.enquiry.service.EnquiryService;
 import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -72,8 +73,8 @@ public class EnquiryActionAdapter {
 	    admissionEnquiryDto.setAddress(request.getParameter("address"));
 	    admissionEnquiryDto.setNotes(request.getParameter("notes"));
 	    admissionEnquiryDto.setMobileno(request.getParameter("contactno"));
-	    admissionEnquiryDto.setBranchId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	    admissionEnquiryDto.setUserId(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+	    admissionEnquiryDto.setBranchId(DataUtil.parseInt(request.getParameter("branchid")));
 	    AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.saveEnquiryForm(admissionEnquiryDto);
 	    
 	    request.setAttribute("name", admissionEnquiryResponseDto.getName());
@@ -153,8 +154,8 @@ public class EnquiryActionAdapter {
 	    admissionEnquiryDto.setAddress(request.getParameter("address"));
 	    admissionEnquiryDto.setNotes(request.getParameter("notes"));
 	    admissionEnquiryDto.setMobileno(request.getParameter("contactno"));
-	    admissionEnquiryDto.setBranchId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	    admissionEnquiryDto.setUserId(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
+	    admissionEnquiryDto.setBranchId(DataUtil.parseInt(request.getParameter("branchid")));
 	    AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.updateEnquiry(admissionEnquiryDto);
 	    return admissionEnquiryResponseDto.isSuccess();
 				

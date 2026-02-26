@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.enquiry.dto;
 
-import java.util.Date;
 import java.util.List;
 
 import lombok.Data;
