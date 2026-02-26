@@ -474,7 +474,7 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">
 			<div class="card" style="background-image: url('/brainystars/images/bggreen.png');background-repeat:no-repeat;background-color: #FEE12B; width: 11cm; height: 7cm;border: 1px solid;border-radius: 5px;margin:10px;">
-  <div class="table-container" style="padding-left: 10px;margin-bottom:0px;padding-bottom:0px;">
+  <div class="table-container" style="padding-left: 10px;margin-bottom:0px;padding-bottom:10px;">
    
 		 <table style="width: 50%;margin-bottom:0px;padding-bottom:0px;margin-left:16px;">
    <tr>
@@ -531,7 +531,7 @@ for(Cookie cookie : cookies){
 
   <div class="table-container" style="padding-left: 10px;margin-top:0px;padding-top:0px;">
   
-  <table style="width: 77%;margin-top:0px;padding-top:0px;">
+  <table style="width: 77%;margin-top:0px;padding-top:0px;padding-bottom:0px;">
    <tr>
         <td style="padding-bottom:0px;">&emsp;
           <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;margin-bottom:0px;" alt="Photo"  />
@@ -576,11 +576,12 @@ for(Cookie cookie : cookies){
    <tr>
    <td>&nbsp;</td></tr>
    <tr>
-  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="/brainystars/images/brainysign.png" alt="Sign Brainy Stars" width="75" height="25"></td>
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<img src="/brainystars/images/principalsign.png" alt="Sign Brainy Stars" width="75" height="46"></td>
   </tr>
   <tr>
   <!-- <td></td> -->
-  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Signature</td>
+  <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Signature
+  </td>
   </tr>
 </table>
     
