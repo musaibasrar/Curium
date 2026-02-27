@@ -545,6 +545,27 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
+
+
+							<td class="alignLeft">PEN No.&nbsp;</td>
+							<td ><label> <input name="bankifsc"
+									type="text" class="myclass" required
+									value="<c:out default="" value="${student.bankifsc}" />"
+									id="bankifsc" size="30" data-validate="validate(required)">
+
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR Id &nbsp;</td>
+
+									<td width="16%"><label> <input
+											name="bplcardno" type="text" class="myclass"
+											id="bplcardno" size="30" value="${student.bplcardno}">
+
+									</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
 							<td class="alignLeft">Name &nbsp;</td>
 							<td><input type="hidden" name="id" id="id"
 								value="<c:out value="${student.sid}" />" /><input type="hidden" name="studentexternalid" id="studentexternalid"
@@ -843,13 +864,13 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
+							<td class="alignLeft" style="padding-left: 20px;"><!-- BPL Card No. -->
 								&nbsp;</td>
-							<td><label> <input
+							<td><%-- <label> <input
 									name="bplcardno" type="text" class="myclass" value="${student.bplcardno}"
 									id="bplcardno" size="30">
 
-							</label></td>
+							</label> --%></td>
 						
 						</tr>
 						
@@ -1809,11 +1830,11 @@ for(Cookie cookie : cookies){
 										<td><br /></td>
 									</tr>
 						<tr>
-								<td class="alignLeft"><label> Bank IFSC Code</label></td>
-								<td><input name="bankifsc"
+								<td class="alignLeft"><!-- <label> Bank IFSC Code</label> --></td>
+								<td><%-- <input name="bankifsc"
 									value="<c:out default="" value="${student.bankifsc}" />"
 									type="text" class="myclass" id="bankifsc" size="30" style="text-transform: capitalize;"
-									onclick="validateNameContact();"></td>
+									onclick="validateNameContact();"> --%></td>
 						</tr>
 						<tr>
 
