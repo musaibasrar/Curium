@@ -471,6 +471,22 @@ for(Cookie cookie : cookies){
                             </td>
                             
                         </tr>
+                        
+                        <tr>
+                         
+                            <td  width="25%"  class="alignLeft" height="50">PEN No.
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.bankifsc}" />
+                            </td>
+                            
+                        <td width="25%" class="alignLeft" height="50">APAAR Id
+								</td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.bplcardno}" />
+                            </td>
+                            
+                        </tr>
 
 					<tr>
                             <td width="25%"  class="alignLeft" height="50">Name</td>
@@ -590,10 +606,10 @@ for(Cookie cookie : cookies){
            						 </c:if>
            						 
                             </td>
-                            <td  width="25%"  class="alignLeft" height="50" >BPL Card No.
+                            <td  width="25%"  class="alignLeft" height="50" ><!-- BPL Card No. -->
                             </td>
                             <td width="25%" class="tablerows" >
-                                <c:out default="" value="${student.bplcardno}" />
+                               <%--  <c:out default="" value="${student.bplcardno}" /> --%>
                             </td>                        
                         
                         </tr>
@@ -870,10 +886,10 @@ for(Cookie cookie : cookies){
                               ${student.bankname}
                             </td>
                             
-                             <td  width="25%"  class="alignLeft" height="50">Bank IFSC Code
+                             <td  width="25%"  class="alignLeft" height="50"><!-- Bank IFSC Code -->
                             </td>
                             <td width="25%" class="tablerows">
-                                ${student.bankifsc}
+                               <%--  ${student.bankifsc} --%>
                             </td>
                         </tr>
                         
