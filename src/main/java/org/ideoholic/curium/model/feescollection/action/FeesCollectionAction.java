@@ -295,5 +295,11 @@ public class FeesCollectionAction {
 		        private String printFeesReportDue() {
 		            return "printfeesdueheadwisereport";
 				}
+			 
+			 @PostMapping("/printOtherFeesReport")
+				public String printOtherFeesReport() {
+					return "printOtherFeesReport";
+				}
+
 		 
 }
