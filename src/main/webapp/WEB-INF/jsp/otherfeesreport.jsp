@@ -341,9 +341,21 @@
 		form1.method = "POST";
 		form1.submit();
 	}
+	function printOtherFeesReport() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/shatabdi/FeesCollection/printOtherFeesReport";
+		form1.method = "POST";
+		form1.submit();
+	}
 	$(function() {
 		$("#search").button().click(function() {
 			searchForStudents();
+		});
+		
+	});
+	$(function() {
+		$("#print").button().click(function() {
+			printOtherFeesReport();
 		});
 		
 	});
@@ -707,10 +719,10 @@ for(Cookie cookie : cookies){
 				<tfoot>
 					<tr>
 
-					<td  class="footerTD" > <input value="Export"
-							type="submit" id="export" style="height:28px;"/></td>
+					<td  class="footerTD" colspan="2"> <input value="Export"
+							type="submit" id="export" />&nbsp;&nbsp;<button id="print">Print</button></td>
 
-						<td class="footerTD" colspan="7" >
+						<td class="footerTD" colspan="6" >
 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
