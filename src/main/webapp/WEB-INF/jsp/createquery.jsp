@@ -176,7 +176,16 @@
 				text-align: left;
 				vertical-align: middle;
 				font-weight: bold;
-			}           
+			}
+			#createquery:disabled {
+			    opacity: 0.5 !important;
+			    cursor: not-allowed !important;
+			    background-color: #cccccc !important;
+			}
+			#createquery:enabled {
+			    cursor: pointer !important;
+			    opacity: 1 !important;
+			}
         </style>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
@@ -200,11 +209,53 @@
             } );
         </script>
         <script type="text/javascript">
+    	function createListeners() {
+		    // Grab elements
+		    const titleInput     = document.getElementById('jobtitle');
+		    const endDateInput   = document.getElementById('expecteddeliverydate');
+		    const saveButton     = document.getElementById('createquery');
+		    const form           = document.getElementById('form1');
+
+		    // Core validation as per requirements
+		    function isFormValid() {
+		      const titleFilled = titleInput.value.trim().length > 0;
+		      const endDateFilled = endDateInput.value.trim().length > 0;
+		      const tasksFilled = document.getElementById('dataTableTasks').rows.length > 0;
+
+		      return titleFilled && endDateFilled && tasksFilled;
+		    }
+
+		    function updateButtonState() {
+		    	saveButton.disabled = !isFormValid();
+		    }
+
+		    // Attach listeners (cover typing, pasting, and selection changes)
+		    ['input', 'change'].forEach(evt => {
+		    	titleInput.addEventListener(evt, updateButtonState);
+		    	endDateInput.addEventListener(evt, updateButtonState);
+		    });
+
+		    ['addnewitem', 'removenewitem'].forEach(id => {
+		        document.getElementById(id).addEventListener('click', updateButtonState);
+		    });
+
+		    // Initialize on load
+		    updateButtonState();
+
+		    // Optional: guard on submit (prevents edge cases if JS runs late)
+		    form.addEventListener('submit', function (e) {
+		      if (!isFormValid()) {
+		        e.preventDefault();
+		        updateButtonState();
+		      }
+		    });
+		};
+
             function deleteRecords(){
                 var form1=document.getElementById("form1");
                 form1.action="/school/StudentProcess/archiveMultiple";
-               form1.submit();
-           }
+                form1.submit();
+            }
             function filter2 (phrase, _id)
             {
                 var words = phrase.value.toLowerCase().split(" ");
@@ -293,7 +344,7 @@
             });
             
             function saveQuery(){
-                var form1=document.getElementById("form1");
+               var form1=document.getElementById("form1");
                form1.action="/school/JobProcess/addQuery";
                form1.submit();
             }
@@ -482,25 +533,25 @@
                 }
             }
             
-				function fixAppointment(appointmentdate,appointmenttime){
-		            	  
-						var appointmentDate = appointmentdate.value;
-						var appointmentTime = appointmenttime.value;
-		            	var form1 = document.getElementById("form1");
-		        		form1.action = "/school/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
-		        		form1.method = "POST";
-		        		form1.submit();
-		            }
+		   function fixAppointment(appointmentdate,appointmenttime){
+            	  
+				var appointmentDate = appointmentdate.value;
+				var appointmentTime = appointmenttime.value;
+            	var form1 = document.getElementById("form1");
+        		form1.action = "/school/AppointmentProcess/addAppointment?appointmentdate="+appointmentDate+"&appointmenttime="+appointmentTime+"";
+        		form1.method = "POST";
+        		form1.submit();
+           }
 		
-				function writeQuery(assignto,filetype,typeofwork,typeofworkcourt,typeofworknoncourt,typeofworkcourtcases,typeofworkcourtdocs,typeofworknoncourtabt,typeofworknoncourtcd,typeofworknoncourtsr,typeofworknoncourtdr,typeofworknoncourtcs,typeofworknoncourturd,typeofworknoncourtrlo,typeofworknoncourtmw,typeofworknoncourtno,expecteddeliverydate){
-					
-					var assignto = assignto.value;					
-					var form1 = document.getElementById("form1");
-					
-		    		form1.action = "/school/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
-		    		form1.method = "POST";
-		    		form1.submit();
-		        }
+			function writeQuery(assignto,filetype,typeofwork,typeofworkcourt,typeofworknoncourt,typeofworkcourtcases,typeofworkcourtdocs,typeofworknoncourtabt,typeofworknoncourtcd,typeofworknoncourtsr,typeofworknoncourtdr,typeofworknoncourtcs,typeofworknoncourturd,typeofworknoncourtrlo,typeofworknoncourtmw,typeofworknoncourtno,expecteddeliverydate){
+				
+				var assignto = assignto.value;					
+				var form1 = document.getElementById("form1");
+				
+	    		form1.action = "/school/JobProcess/addQuery?staffid="+assignto+"&filetype="+filetype.value+"&typeofwork="+typeofwork.value+"&typeofworkcourt="+typeofworkcourt.value+"&typeofworknoncourt="+typeofworknoncourt.value+"&typeofworkcourtcases="+typeofworkcourtcases.value+"&typeofworkcourtdocs="+typeofworkcourtdocs.value+"&typeofworknoncourtabt="+typeofworknoncourtabt.value+"&typeofworknoncourtcd="+typeofworknoncourtcd.value+"&typeofworknoncourtsr="+typeofworknoncourtsr.value+"&typeofworknoncourtdr="+typeofworknoncourtdr.value+"&typeofworknoncourtcs="+typeofworknoncourtcs.value+"&typeofworknoncourturd="+typeofworknoncourturd.value+"&typeofworknoncourtrlo="+typeofworknoncourtrlo.value+"&typeofworknoncourtmw="+typeofworknoncourtmw.value+"&typeofworknoncourtno="+typeofworknoncourtno.value+"&expecteddeliverydate="+expecteddeliverydate.value+"";
+	    		form1.method = "POST";
+	    		form1.submit();
+	        }
             
             function check(studentid){
             	
@@ -543,7 +594,7 @@
                 var rowCount = document.getElementById('dataTableTasks').rows.length;    
                 
                 var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
-                var col2="<td class='dataTextInActive'><label> <select name='assignto' id=assignto_"+rowCount+" style='width: 250px;height: 25px;'><option selected></option><c:forEach items='${employeeList}' var='employeeList'><option value='${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}'><c:out value='${employeeList.teachername}' /></option></c:forEach></select></label></td>";
+                var col2="<td class='dataTextInActive'><label> <select name='assignto' id=assignto_"+rowCount+" style='width: 250px;height: 25px;'><option value='' disabled>Select Teacher</option><c:forEach items='${employeeList}' var='employeeList'><option value='${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}' <c:if test='${employeeList.teachername == employee.teachername}'>selected</c:if>><c:out value='${employeeList.teachername}' /></option></c:forEach></select></label></td>";
                 var col3="<td class='dataTextInActive'><input type='text' name='task'  id=task_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
                 var col4="<td class='dataTextInActive'><input type='text' name='description'  id=description_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' /></td>";
                 var col5="<td class='dataTextInActive'><label><input type='date'  name='expecteddeliverydatetask' class='textfield' style='font-size: 14px;' style='width: 250px;height: 25px;'	id=expecteddeliverydatetask_"+rowCount+" autocomplete='false'></label></td>";
@@ -575,9 +626,9 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body  >
+    <body onload="createListeners()">
 
-        <form name="form1" id="form1" method="post">
+        <form name="form1" id="form1" method="POST">
             <div style="overflow: hidden" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
                 <table width="100%">
                     <tr>
@@ -597,7 +648,7 @@ for(Cookie cookie : cookies){
 								</tr>
 								<tr>
 										
-										<td class="alignLeft">Title: &nbsp;</td>
+										<td class="alignLeft">Title*: &nbsp;</td>
 	
 										<td ><label>
 											<input type="text"  name="jobtitle" id="jobtitle"
@@ -608,7 +659,7 @@ for(Cookie cookie : cookies){
 									<td><br></td>
 								</tr>
 								<tr>
-									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">Description* &nbsp;</td>
+									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">Description: &nbsp;</td>
 									<td style="font-weight: bold"><label> <textarea  name="jobquery"
 													type="text" class="myclass" id="jobquery" rows="6" cols="55"
 													></textarea>
@@ -624,7 +675,7 @@ for(Cookie cookie : cookies){
 								
 									<tr>
 										
-										<td class="alignLeft">Expected End Date: &nbsp;</td>
+										<td class="alignLeft">Expected End Date*: &nbsp;</td>
 	
 										<td ><label>
 											<input type="text"  name="expecteddeliverydate"
@@ -637,21 +688,6 @@ for(Cookie cookie : cookies){
 									<td><br></td>
 								</tr>
 								
-								<%-- <tr>
-										
-										<td class="alignLeft">Referred By: &nbsp;</td>
-	
-										<td ><label>
-											<select multiple class="chosen-select" name="referredby" id="referredby" style="width: 250px;border-radius: 4px;" >
-  										     <c:forEach items='${employeeList}' var='employeeList'>
-  										     	<option value='${employeeList.tid}'><c:out value='${employeeList.teachername}' /></option>
-  										     </c:forEach>
-  										  </select>
-										</label></td>
-								</tr>
-								<tr>
-									<td><br></td>
-								</tr> --%>
 						</table>
 						
 						<div align="center">
