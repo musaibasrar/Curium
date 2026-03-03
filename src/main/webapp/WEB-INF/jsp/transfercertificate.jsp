@@ -263,6 +263,20 @@
 }
         </style>
         <script type="text/javascript">
+function formatDateToDDMMYYYY(dateStr) {
+    if (!dateStr || dateStr === "0") return "";
+
+    // agar time bhi aa raha ho (yyyy-mm-dd HH:mm:ss)
+    dateStr = dateStr.split(" ")[0];
+
+    var parts = dateStr.split("-");
+    if (parts.length === 3) {
+        return parts[2] + "-" + parts[1] + "-" + parts[0];
+    }
+    return dateStr;
+}
+</script>
+        <script type="text/javascript">
             var students = [
             <c:forEach varStatus="status" items="${studentListtc}" var="parents">{
                 value:'<c:out default="0" value="${parents.student.name}" />',
@@ -308,7 +322,8 @@
        			$( "#gender").val( ui.item.gender );
        			$( "#religion").val( ui.item.religion );
        			$( "#caste").val( ui.item.caste );
-       			$( "#dateofbirth").val( ui.item.dateofbirth );
+       			$("#dateofbirth").val( formatDateToDDMMYYYY(ui.item.dateofbirth) );
+       			$( "#dateofbirth1").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#classadmitted").val( ui.item.classandsec );
        			$( "#studentname").val( ui.item.studentname );
@@ -461,7 +476,7 @@
             	var wMonths = ['','January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
             	var wNumbers = ['zero','one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty', 'twentyone']
 
-            	var date = document.getElementById('dateofbirth').value.split("-");
+            	var date = document.getElementById('dateofbirth1').value.split("-");
             	var day = date[2] - 1;
 //             	var months = trimNumber(date[1]);
             	var month = trimNumber(date[1]);
@@ -623,7 +638,7 @@ for(Cookie cookie : cookies){
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td >15(a).Date of Birth: </td><td> <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
+                    <td >15(a).Date of Birth: </td><td> <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /><input  type="hidden" name="dateofbirth1" id="dateofbirth1" style="width: 200px" /></td>
                     <td >15(b).Date of Birth (words):</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px"/></td>    
                     </tr>
                      <tr>
@@ -692,7 +707,9 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td><br></td>
                     </tr>
-                    
+                    <tr>
+                    <td >TC No.: </td><td><input  type="text" name="tcno" id="tcno" style="width: 200px" /></td>
+                     </tr>
                      <tr>
                     <td><br></td>
                     </tr>
