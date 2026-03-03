@@ -221,6 +221,7 @@ public class SmsService {
 	        String var2 = "";
 	        String var3 = "";
 	        String var4 = "";
+	        String var5 = "";
 	        
 	        int messageIterations = messageSeq.length;
 	        
@@ -244,6 +245,13 @@ public class SmsService {
 				var3=messageSeq[2];
 				var4=messageSeq[3];
 				break;
+			case 5:
+				var1=messageSeq[0];
+				var2=messageSeq[1];
+				var3=messageSeq[2];
+				var4=messageSeq[3];
+				var5=messageSeq[4];
+				break;
 
 			default:
 				break;
@@ -253,6 +261,7 @@ public class SmsService {
 	        templatemessage = templatemessage.replace("var2", var2);
 	        templatemessage = templatemessage.replace("var3", var3);
 	        templatemessage = templatemessage.replace("var4", var4);
+	        templatemessage = templatemessage.replace("var5", var5);
 		// Construct data
 		String phonenumbers=numbers;
 		
@@ -336,8 +345,13 @@ public class SmsService {
 										}
 										
 										String SMSTempType = "feesreminderwithdueamount";
-										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
-										
+										String var1 = String.valueOf(dueAmount);
+										String var2 = studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()));
+										String[] classSec = studentFeesReport.getParents().getStudent().getClassstudying().split("--");
+										String var3 = classSec[0];
+										String var4 = classSec[1];
+										String var5 = dto.getMessage();
+										String message = "Rs. "+var1+":"+var2+":"+var3+":"+var4+":"+var5;
 										int attempts = 0;
 								        while (attempts < 1) {
 								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
