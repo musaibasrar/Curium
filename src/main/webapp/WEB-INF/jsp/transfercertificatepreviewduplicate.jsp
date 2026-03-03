@@ -154,12 +154,12 @@ for(Cookie cookie : cookies){
             <td ><c:out value="${mothername1}" /></td>
         </tr>
         <tr>
-            <td >10. Nationality:<c:out value="${nationality}" /></td>
-            <td >11. Religion:<c:out value="${religion}" /></td>
+            <td >10. Nationality:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${nationality}" /></td>
+            <td >11. Religion:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${religion}" /></td>
         </tr>
         <tr>
-            <td >12. Caste:<c:out value="${caste}" /></td>
-            <td >13. Category:<c:out value="${category}" /></td>
+            <td >12. Caste:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${caste}" /></td>
+            <td >13. Category:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${category}" /></td>
         </tr>
         <tr>
             <td >
@@ -187,7 +187,7 @@ leaving the institution (In words)
 Year 
              </td>
              <td >
-                a)  Examination: ${firstsubject}
+                a)  EXAMINATION: ${firstsubject}
                 <br>b) MONTH & YEAR: ${secondsubject} 
                 <br>c) REG. NO: ${thirdsubject}
                 <br>d)  RESULT: ${Fourthsubject} 
@@ -217,7 +217,7 @@ b) No of days he/she was present </td>
         </tr>
         <tr>
             <td >20. Last date of student attendance in the institution </td>
-            <td ><c:out value="${studentdetails.student.dateleaving}" /></td>
+            <td ><c:out value="${dateofleaving}" /></td>
         </tr>
 <tr>
             <td >21. Date of Application for Certificate </td>
