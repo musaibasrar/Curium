@@ -580,9 +580,9 @@
 	
 	var itemlist=[
         <c:forEach varStatus="status" items="${messstockavailabilitylist}" var="itemlist">{
-                value:'<c:out default="0" value="${itemlist.messitems.name}" />',
-                particularname:'<c:out default="0" value="${itemlist.messitems.unitofmeasure}" />',
-                id:'<c:out default="0" value="${itemlist.messitems.id}" />'
+                value:'<c:out default="0" value="${itemlist.messItems.name}" />',
+                particularname:'<c:out default="0" value="${itemlist.messItems.unitofmeasure}" />',
+                id:'<c:out default="0" value="${itemlist.messItems.id}" />'
                 }<c:if test="${!status.last}">,</c:if>
         </c:forEach>
         ];
@@ -1082,8 +1082,8 @@ for(Cookie cookie : cookies){
 						<td class="dataTextInActive"><input type="checkbox" id = "<c:out value="${purchasedetail.itemId}"/>" class = "chcktbl" checked name="itemids"  value="<c:out value="${purchasedetail.itemId}"/>"/></td>
 						<td class="dataTextInActive">
 									<c:forEach items="${messstockavailabilitylist}" var="messstockavailabilitylist">
-										<c:if test="${purchasedetail.itemId == messstockavailabilitylist.messitems.id}">
-											<input type="text" value="${messstockavailabilitylist.messitems.name}" name="itemsname"   class="textfieldvalues" style='font-size: 14px;'/>
+										<c:if test="${purchasedetail.itemId == messstockavailabilitylist.messItems.id}">
+											<input type="text" value="${messstockavailabilitylist.messItems.name}" name="itemsname"   class="textfieldvalues" style='font-size: 14px;'/>
 										</c:if>
 									</c:forEach>
 						</td>

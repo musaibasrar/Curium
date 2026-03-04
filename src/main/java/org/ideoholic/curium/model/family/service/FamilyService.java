@@ -28,7 +28,7 @@ public class FamilyService {
 	/**
 	 * Get siblings of a student as DTOs. Returns an empty list if none found.
 	 */
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<StudentSimpleDto> getSiblings(Integer studentSid) {
 		List<Student> siblings = familyDao.findSiblings(studentSid);
 		return siblings.stream().map(this::toDto).collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class FamilyService {
 	 * Get offsprings (students) of a parent as DTOs. Returns an empty list if none
 	 * found.
 	 */
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<StudentSimpleDto> getOffsprings(Integer parentPid) {
 		List<Student> offsprings = familyDao.findOffSprings(parentPid);
 		return offsprings.stream().map(this::toDto).collect(Collectors.toList());

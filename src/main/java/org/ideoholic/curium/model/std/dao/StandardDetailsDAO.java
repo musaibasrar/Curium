@@ -45,7 +45,7 @@ public class StandardDetailsDAO {
 		return classsec;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Classsec> viewClasses(int branchId) {
 		List<Classsec> classsecList = new ArrayList<>();
 		try {
@@ -95,7 +95,7 @@ public class StandardDetailsDAO {
 		}
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Classhierarchy> viewClassHierarchy(int branchid) {
 		List<Classhierarchy> classHierarchyList = new ArrayList<>();
 		try {
@@ -172,7 +172,7 @@ public class StandardDetailsDAO {
 		return result;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Student> readListOfStudentsGraduated() {
 		List<Student> results = new ArrayList<Student>();
 		try {
@@ -186,7 +186,7 @@ public class StandardDetailsDAO {
 		return results;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Student> readListOfStudentsDropped() {
 		List<Student> results = new ArrayList<Student>();
 		try {
@@ -234,7 +234,7 @@ public class StandardDetailsDAO {
 		}
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Parents> getStudentsByClass(String classofStd, int branchId, String currentAcademicYear) {
 		List<Parents> results = new ArrayList<Parents>();
 		try {
@@ -248,7 +248,7 @@ public class StandardDetailsDAO {
 		return results;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<Student> readListOfStudentsLeft() {
 		List<Student> results = new ArrayList<Student>();
 		try {

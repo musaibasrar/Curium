@@ -25,6 +25,6 @@ public interface MessStockMoveRepository extends JpaRepository<MessStockMove, In
 	@Query("FROM MessStockMove msm where msm.status != :status order by msm.id DESC")
 	Page<MessStockMove> findByStatusAndId(@Param("status") String status, Pageable page);
 
-	int countByStatusAndBranchid(String status, Integer branchId);
+	int countByStatusNotAndBranchid(String status, Integer branchId);
 
 }
