@@ -42,7 +42,7 @@ public class parentsDetailsDAO {
     /**
      * Read a unique Parents object by student id.
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public Parents readUniqueObject(Integer id) {
         Parents parents = new Parents();
         try {
@@ -62,7 +62,7 @@ public class parentsDetailsDAO {
     /**
      * Read a unique Parents object by student's external id (plogin).
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public Parents readploginUniqueObject(String id) {
         Parents parents = new Parents();
         try {

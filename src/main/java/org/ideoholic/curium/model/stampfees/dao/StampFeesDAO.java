@@ -44,7 +44,7 @@ public class StampFeesDAO {
     /**
      * Fetch a unique Login object by username and password
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public Login readUniqueObject(String userName, String password) {
         try {
             // Query query = session.createQuery("FROM Login as login where login.username1= :loginName and login.password1= :password");
@@ -64,7 +64,7 @@ public class StampFeesDAO {
     /**
      * Get number of students who are not archived
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public int getNoOfStudents() {
         try {
         	//  results = (java.util.List<Student>) session.createQuery("FROM Student s where s.archive = 0").list();
@@ -83,7 +83,7 @@ public class StampFeesDAO {
     /**
      * Get number of students for a given class where archive=0
      */
-    @Transactional(readOnly = true)
+    @Transactional
 	public int getNoOfStudentsOne(String classStudying) {
 		try {
 			// results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' AND s.archive = 0").list();
@@ -99,7 +99,7 @@ public class StampFeesDAO {
 		}
 	}
 
-    @Transactional(readOnly = true)
+    @Transactional
 	public List<Parents> getListOfParents(String query) {
 		try {
 			// Query HQLquery = session.createQuery(query);
@@ -247,7 +247,7 @@ public class StampFeesDAO {
     /**
      * Get Studentfeesstructure for sid/feesCategoryId/year
      */
-    @Transactional(readOnly = true)
+    @Transactional
     public Studentfeesstructure getStudentFeesStructure(int sid, int feesCategoryId, String academicYear) {
         try {
         	// Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+sid+"' and sfs.Feescategory.idfeescategory = '"+feesCategoryId+"' and sfs.academicyear = '"+academicYear+"'");

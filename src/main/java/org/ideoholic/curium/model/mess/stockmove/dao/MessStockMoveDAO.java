@@ -3,9 +3,6 @@ package org.ideoholic.curium.model.mess.stockmove.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-
 import org.hibernate.HibernateException;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
@@ -14,7 +11,6 @@ import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessTaxInvoice;
-import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.repositories.MessInvoiceDetailsRepository;
 import org.ideoholic.curium.repositories.MessItemsRepository;
 import org.ideoholic.curium.repositories.MessStockAvailabilityRepository;
@@ -24,8 +20,6 @@ import org.ideoholic.curium.repositories.MessStockMoveRepository;
 import org.ideoholic.curium.repositories.MessTaxInvoiceRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.QueryUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,13 +35,13 @@ public class MessStockMoveDAO {
 
 	private final QueryUtil queryUtil;
 	private final MessItemsRepository messItemsRepository;
-	private MessTaxInvoiceRepository messTaxInvoiceRepository;
 	private final MessStockMoveRepository messStockMoveRepository;
+	private final MessTaxInvoiceRepository messTaxInvoiceRepository;
 	private final MessStockEntryRepository messStockEntryRepository;
 	private final MessStockMoveInfoRepository messStockMoveInfoRepository;
 	private final MessInvoiceDetailsRepository messInvoiceDetailsRepository;
 	private final MessStockAvailabilityRepository messStockAvailabilityRepository;
-	private VoucherEntryTransactionsRepository voucherEntryTransactionsRepository;
+	private final VoucherEntryTransactionsRepository voucherEntryTransactionsRepository;
 
 	@Transactional
 	public List<MessItems> getItemsDetails() {
@@ -256,7 +250,11 @@ public class MessStockMoveDAO {
 			// query.setFirstResult(offset);
 			// query.setMaxResults(noOfRecords);
 			List<MessStockMove> msmList = messStockMoveRepository.findByStatusAndId("CANCELLED", PageRequest.of(offset, noOfRecords)).toList();
-			// TODO: How to cast the above list to List<Bill> ?
+			msmList.forEach(msmItem -> {
+				Bill bill = new Bill();
+				bill.setQuantity(msmItem.getQuantity());
+				bill.setItemname(msmItem.getItemid() + "");
+			});
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -343,7 +341,7 @@ public class MessStockMoveDAO {
 		int noOfRecords = 0;
 		try {
 			// results = (List<Student>) session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' AND msm.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
-			noOfRecords = messStockMoveRepository.countByStatusAndBranchid("CANCELLED", branchId);
+			noOfRecords = messStockMoveRepository.countByStatusNotAndBranchid("CANCELLED", branchId);
 			log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -375,7 +373,6 @@ public class MessStockMoveDAO {
 		try {
 			// Query queryMaxRow = session.createQuery("from MessStockMove ORDER BY id DESC");
 			// queryMaxRow.setMaxResults(1);
-
 			msm = messStockMoveRepository.findTopByOrderByIdDesc().orElse(new MessStockMove());
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

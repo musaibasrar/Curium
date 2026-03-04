@@ -38,7 +38,7 @@ public class MessSuppliersDAO {
 	private final VoucherEntryTransactionsRepository voucherEntryTransactionsRepo;
 	
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<MessSuppliers> getSupplierDetails() {
 		List<MessSuppliers> results = new ArrayList<>();
 		try {
@@ -150,14 +150,16 @@ public class MessSuppliersDAO {
 		return result;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public MessSuppliers getMessSupplierById(Integer supplierid) {
 		MessSuppliers result = null;
 		try {
 			// This was the original Hibernate query:
 			// Query query = session.createQuery("From MessSuppliers ms where ms.id = '"+supplierid+"'");
 			// result = (MessSuppliers) query.uniqueResult();
-			result = messSuppliersRepo.findById(supplierid).orElse(null);
+			if(supplierid != null) {
+				result = messSuppliersRepo.findById(supplierid).orElse(null);
+			}
 		} catch (Exception ex) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error(ex.getMessage(), ex);
@@ -166,7 +168,7 @@ public class MessSuppliersDAO {
 		return result;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public Accountdetailsbalance getSupplierBalance(String supplieridledgerid) {
 		Accountdetailsbalance accountDetailsBalance = null;
 		try {
@@ -209,7 +211,7 @@ public class MessSuppliersDAO {
 		return result;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public List<MessSuppliersPayment> readListOfSuppliersPaymentPagination(int offset, int noOfRecords, int branchid) {
 		List<MessSuppliersPayment> results = new ArrayList<>();
 		try {
@@ -225,7 +227,7 @@ public class MessSuppliersDAO {
 		return results;
 	}
 
-	@Transactional(readOnly = true)
+	@Transactional
 	public int getNoOfSuppliersPaymentDetails(int branchId) {
 		int noOfRecords = 0;
 		try {

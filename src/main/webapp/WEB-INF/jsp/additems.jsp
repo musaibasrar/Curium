@@ -699,14 +699,14 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${messstockavailabilitylist}" var="messstock" varStatus="status">
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td class="dataText"><input type="checkbox" id = "<c:out value="${messstock.messitems.id}"/>" class = "chcktbl"  name="messitemsids"  value="<c:out value="${messstock.messitems.id}"/>"/></td>
+                                <td class="dataText"><input type="checkbox" id = "<c:out value="${messstock.messItems.id}"/>" class = "chcktbl"  name="messitemsids"  value="<c:out value="${messstock.messItems.id}"/>"/></td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messstock.messitems.name}"/>" id="updateitemname" name="updateitemname_<c:out value="${messstock.messitems.id}"/>"><label style="display: none;"><c:out value="${messstock.messitems.name}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messstock.messItems.name}"/>" id="updateitemname" name="updateitemname_<c:out value="${messstock.messItems.id}"/>"><label style="display: none;"><c:out value="${messstock.messItems.name}"/></label>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                 <select name="updateunitofmeasure_<c:out value="${messstock.messitems.id}"/>"
+                                 <select name="updateunitofmeasure_<c:out value="${messstock.messItems.id}"/>"
 									id="updateunitofmeasure" style="width: 100px;height: 20px;background-color: #E3EFFF;border-style: none;color: #4B6A84;" >
-										<option selected>${messstock.messitems.unitofmeasure}</option>
+										<option selected>${messstock.messItems.unitofmeasure}</option>
 										<option>Kilogram</option>
 										<option>Litre</option>
 										<option>Piece</option>
@@ -716,7 +716,7 @@ for(Cookie cookie : cookies){
 								</select>
                                 </td>
                                 <td class="dataText" style="text-transform:uppercase">
-                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messstock.minstock}"/>" id="updateminstock" name="updateminstock_<c:out value="${messstock.messitems.id}"/>"><label style="display: none;"><c:out value="${messstock.minstock}"/></label>
+                                <input type="text" style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" value="<c:out value="${messstock.minstock}"/>" id="updateminstock" name="updateminstock_<c:out value="${messstock.messItems.id}"/>"><label style="display: none;"><c:out value="${messstock.minstock}"/></label>
                                 </td>
                             </tr>
                         </c:forEach>

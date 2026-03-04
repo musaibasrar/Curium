@@ -580,9 +580,9 @@
 	
 	var itemlist=[
         <c:forEach varStatus="status" items="${messstockavailabilitylist}" var="itemlist">{
-                value:'<c:out default="0" value="${itemlist.messitems.name}" />',
-                particularname:'<c:out default="0" value="${itemlist.messitems.unitofmeasure}" />',
-                id:'<c:out default="0" value="${itemlist.messitems.id}" />'
+                value:'<c:out default="0" value="${itemlist.messItems.name}" />',
+                particularname:'<c:out default="0" value="${itemlist.messItems.unitofmeasure}" />',
+                id:'<c:out default="0" value="${itemlist.messItems.id}" />'
                 }<c:if test="${!status.last}">,</c:if>
         </c:forEach>
         ];
