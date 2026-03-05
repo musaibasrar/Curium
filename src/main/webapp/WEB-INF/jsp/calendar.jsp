@@ -172,6 +172,10 @@
                 margin-bottom: 10px;
             }
         }
+        /* Set the height and width of the color input */
+        input[type="color"] {
+            height: 40px;  /* Adjust the height as needed */
+        }
     </style>
 </head>
 <body>
@@ -211,7 +215,7 @@
                 </div>
                 <div class="form-group">
                     <label for="color">Color:</label>
-                    <input type="color" id="color">
+                    <input type="color" id="color" name="color" />
                 </div>
                 <!-- <div class="form-group">
                     <label for="allDay">All Day:</label>
