@@ -133,7 +133,7 @@ public class DocumentActionAdapter {
 		TransferCertificateDto transferCertificateDto = new TransferCertificateDto();
 		transferCertificateDto.setStudentId(request.getParameter("studentId"));
 		transferCertificateDto.setReason(request.getParameter("reason"));
-		transferCertificateDto.setBookNo(request.getParameter("bookno"));
+		transferCertificateDto.setBookNo(request.getParameter("slno"));
 		transferCertificateDto.setTcNo(request.getParameter("tcno"));
 		transferCertificateDto.setCaste(request.getParameter("caste"));
 		transferCertificateDto.setClassInWord(request.getParameter("classinword"));
@@ -160,9 +160,9 @@ public class DocumentActionAdapter {
 		TransferCertificateResponseDto transferCertificateResponseDto = documentService.generateTransferCertificate(transferCertificateDto);
 		
 		request.setAttribute("leavingReason", transferCertificateResponseDto.getReason());
-		request.setAttribute("bookno", transferCertificateResponseDto.getBookNo());
+		request.setAttribute("slno", transferCertificateResponseDto.getBookNo());
 		 request.setAttribute("tcno", transferCertificateResponseDto.getTcNo());
-		request.setAttribute("caste", transferCertificateResponseDto.getCaste());
+		
 		request.setAttribute("classinword", transferCertificateResponseDto.getClassInWord());
 		request.setAttribute("lastexam", transferCertificateResponseDto.getLastExam());
 		request.setAttribute("failpass", transferCertificateResponseDto.getFailPass());
@@ -181,11 +181,35 @@ public class DocumentActionAdapter {
 		request.setAttribute("ncc",transferCertificateResponseDto.getNcc());
 		request.setAttribute("game", transferCertificateResponseDto.getGame());
 		request.setAttribute("conduct", transferCertificateResponseDto.getConduct());
+		request.setAttribute("caste", transferCertificateResponseDto.getCaste());
 		request.setAttribute("datecert", transferCertificateResponseDto.getDateCert());
 		request.setAttribute("Remarks", transferCertificateResponseDto.getRemarks());
 	    request.setAttribute("studentdetails", transferCertificateResponseDto.getParents());
 		request.setAttribute("tcdetails",transferCertificateResponseDto.getTc());
 		request.setAttribute("dateinword",transferCertificateResponseDto.getDateInWord());
+		request.setAttribute("reason",transferCertificateResponseDto.getReason());
+		request.setAttribute("studentName",request.getParameter("studentName"));
+		request.setAttribute("fathername",request.getParameter("fathername"));
+		request.setAttribute("mothername",request.getParameter("mothername"));
+		request.setAttribute("nationality",request.getParameter("nationality"));
+		request.setAttribute("mothertongue",request.getParameter("mothertongue"));
+		request.setAttribute("dateofbirth",request.getParameter("dateofbirth"));
+		request.setAttribute("dateofbirthwords",request.getParameter("dateofbirthwords"));
+		request.setAttribute("religion",request.getParameter("religion"));
+		request.setAttribute("lastschoolattended",request.getParameter("lastschoolattended"));
+		request.setAttribute("lastclassattended",request.getParameter("lastclassattended"));
+		request.setAttribute("dateofadmission",request.getParameter("dateofadmission"));
+		request.setAttribute("classadmitted",request.getParameter("classadmitted"));
+		request.setAttribute("academicprogress",request.getParameter("academicprogress"));
+		request.setAttribute("classandsec",request.getParameter("classandsec"));
+		request.setAttribute("from",request.getParameter("from"));
+		request.setAttribute("To",request.getParameter("To"));
+		request.setAttribute("dateleaving",request.getParameter("dateleaving"));
+		request.setAttribute("result",request.getParameter("result"));
+		request.setAttribute("namestuckoff",request.getParameter("namestuckoff"));
+		request.setAttribute("allduespaid",request.getParameter("allduespaid"));
+		request.setAttribute("dateissue",request.getParameter("dateissue"));
+		request.setAttribute("acadmicyear",request.getParameter("acadmicyear"));
 	    switch(transferCertificateResponseDto.getStatus())
 	    {
 	    case TCEXISTS:

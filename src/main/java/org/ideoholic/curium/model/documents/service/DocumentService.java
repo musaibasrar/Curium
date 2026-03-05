@@ -113,7 +113,7 @@ public class DocumentService {
 		String conduct = DataUtil.emptyString(transferCertificateDto.getConduct());
 		String datecert = DataUtil.emptyString(transferCertificateDto.getDateCert());
 		String Remarks = DataUtil.emptyString(transferCertificateDto.getRemarks());
-		Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
+		//Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
 		
 		student.setReasonleaving(leavingReason);
 		student.setSid(studentId);
@@ -122,7 +122,7 @@ public class DocumentService {
 		 if(updateStudent){
 			 tc.setSid(studentId);
 			 tc.setApplicationstatus("applied");
-			 tc.setDateofissues(dateOfTc);
+			 //tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
 			 
 			 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
