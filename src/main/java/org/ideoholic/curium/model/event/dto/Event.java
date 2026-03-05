@@ -36,7 +36,7 @@ public class Event implements java.io.Serializable {
     @Column(name = "location")
     private String location;
     
-    @Column
+    @Column(name = "color")
     private String color;
     
     @Column(name = "all_day")
