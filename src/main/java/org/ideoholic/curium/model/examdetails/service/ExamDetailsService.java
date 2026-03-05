@@ -405,8 +405,9 @@ public class ExamDetailsService {
 				for (Studentfeesstructure studentFeesStructure : feesstructure) {
 
 					String[] feesStartMonth = new DataUtil().getPropertiesValue("feesstartmonth").split("/");
+					String[] feesStartYear = currentAcademicYear.split("/");
 					 LocalDate currentDate = LocalDate.now();
-				     LocalDate startDate = LocalDate.of(Integer.parseInt(feesStartMonth[2]), Integer.parseInt(feesStartMonth[1]), Integer.parseInt(feesStartMonth[0]));
+				     LocalDate startDate = LocalDate.of(Integer.parseInt(feesStartYear[0]), Integer.parseInt(feesStartMonth[1]), Integer.parseInt(feesStartMonth[0]));
 				     LocalDate endDate = LocalDate.of(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()); // Change this to your desired end date
 
 				        // Calculate the period between the start date and end date
@@ -426,6 +427,7 @@ public class ExamDetailsService {
 				        Long feesPerInstallment = studentFeesStructure.getFeesamount()/totalFeesInstallments;
 				        int installmentTillDate = quotient+1;
 						Long ActualFeesToBePaid = feesPerInstallment*installmentTillDate;
+						ActualFeesToBePaid = ActualFeesToBePaid-studentFeesStructure.getConcession()-studentFeesStructure.getWaiveoff();
 						Long feesPaid = studentFeesStructure.getFeespaid();
 						Long committedFees = studentFeesStructure.getFeesamount()/totalFeesInstallments;
 
