@@ -1,155 +1,60 @@
 package org.ideoholic.curium.model.event.dto;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "events")
 public class Event implements java.io.Serializable {
-    
-    @Id
+	private static final long serialVersionUID = 4431917499271548592L;
+
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column
-    private int branchid;
-    
-    @Column
-    private int userid;
-    
-    @Column(nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
     
-    @Column(length = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
     
-    @Column(nullable = false)
+    @Column(name = "start_date_time", nullable = false)
     private LocalDateTime startDateTime;
     
-    @Column(nullable = false)
+    @Column(name = "end_date_time", nullable = false)
     private LocalDateTime endDateTime;
     
-    @Column
+    @Column(name = "location")
     private String location;
     
-    @Column
+    @Column(name = "color")
     private String color;
     
-    @Column
+    @Column(name = "all_day")
     private boolean allDay;
-    
-    @Column
+
+    @Column(name = "created_by")
     private String createdBy;
     
-    @Column
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
     
-    @Column
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
-    }
+	@Column(name = "branchid")
+	private Integer branchid;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-    
+	@Column(name = "userid")
+	private Integer userid;
 
-    public int getBranchid() {
-		return branchid;
-	}
-
-	public void setBranchid(int branchid) {
-		this.branchid = branchid;
-	}
-	
-	public int getUserid() {
-		return userid;
-	}
-
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
-
-	public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public LocalDateTime getStartDateTime() {
-        return startDateTime;
-    }
-
-    public void setStartDateTime(LocalDateTime startDateTime) {
-        this.startDateTime = startDateTime;
-    }
-
-    public LocalDateTime getEndDateTime() {
-        return endDateTime;
-    }
-
-    public void setEndDateTime(LocalDateTime endDateTime) {
-        this.endDateTime = endDateTime;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public boolean isAllDay() {
-        return allDay;
-    }
-
-    public void setAllDay(boolean allDay) {
-        this.allDay = allDay;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 } 
