@@ -270,34 +270,13 @@
 	letter-spacing: normal;
 	text-align: center;
 }
-        </style>
-        <script type="text/javascript">
 
-            function updateContact() {
-                var form1 = document.getElementById("form1");
-                form1.action = "/school/PersonalProcess/updateContactDetails?id=1";
-                form1.submit();
-            }
-
-            function hideButton() {
-
-            }
-
-        </script>
-
-        <script type="text/javascript">
-            $(function() {
-
-                $("#accordion").accordion({
-                    collapsible: true,
-                    autoHeight: false});
-                /*$("#set")
-                 .button()
-                 .click(function() {
-                 updateVisit();
-                 });  */
-            });
-        </script>
+.address-container {
+    font-size: 10px; /* Starting font size */
+    line-height: 1;
+    word-wrap: break-word;
+}
+</style>
 
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
@@ -321,14 +300,51 @@
             });
         </script>
         
-        <script type="text/javascript">
-                                $(function() {
-                                    $("#print")
-                                            .button()
+<script type="text/javascript">
 
+		function updateContact() {
+		    var form1 = document.getElementById("form1");
+		    form1.action = "/school/PersonalProcess/updateContactDetails?id=1";
+		    form1.submit();
+		}
+		
+		function hideButton() {
+		
+		}
+		$(function() {
+		
+		    $("#accordion").accordion({
+		        collapsible: true,
+		        autoHeight: false});
+		    /*$("#set")
+		     .button()
+		     .click(function() {
+		     updateVisit();
+		     });  */
+		});
 
-                                });
-                            </script>
+         $(function() {
+             $("#print").button()
+         });
+
+        function autoScaleAddress() {
+            // 9.7cm is roughly 366 pixels depending on DPI
+            var maxHeight = 320; 
+            var containers = document.querySelectorAll('.address-container');
+
+            containers.forEach(function(container) {
+                var fontSize = 10; // Start size
+                // While the content is taller than the card, reduce font size
+                while (container.scrollHeight > maxHeight && fontSize > 8) {
+                    fontSize -= 1;
+                    container.style.fontSize = fontSize + "px";
+                }
+            });
+        }
+
+        // Run after page loads
+        window.onload = autoScaleAddress;
+</script>
 
   <%
 //allow access only if session exists
@@ -340,13 +356,51 @@ String userName = null;
 String sessionID = null;
 Cookie[] cookies = request.getCookies();
 if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
+	for(Cookie cookie : cookies){
+		if(cookie.getName().equals("user")) userName = cookie.getValue();
+		if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+	}
 }
 %>
- 
+
+<%! 
+public String formatAddress(Object rawAttr, int maxChars) {
+    if (rawAttr == null) return "";
+    
+    // Replace literal newlines with a unique marker
+    String address = rawAttr.toString().replace("\n", " [NL] ").replace("\r", "");
+    String[] words = address.split("\\s+"); 
+    
+    StringBuilder result = new StringBuilder();
+    StringBuilder currentLine = new StringBuilder();
+    String indent = "&nbsp;";
+
+    for (String word : words) {
+        if (word.equals("[NL]")) {
+            if (currentLine.length() > 0) {
+                result.append(indent).append(currentLine.toString().trim()).append("<br/>");
+                currentLine = new StringBuilder();
+            }
+            continue;
+        }
+
+        int spaceNeeded = (currentLine.length() == 0) ? 0 : 1;
+        if (currentLine.length() + spaceNeeded + word.length() > maxChars) {
+            result.append(indent).append(currentLine.toString().trim()).append("<br/>");
+            currentLine = new StringBuilder();
+        }
+
+        if (currentLine.length() > 0) currentLine.append(" ");
+        currentLine.append(word);
+    }
+    
+    if (currentLine.length() > 0) {
+        result.append(indent).append(currentLine.toString().trim());
+    }
+
+    return result.toString();
+}
+%>
 
    <style type="text/css">
 
@@ -362,6 +416,8 @@ for(Cookie cookie : cookies){
                 margin-left: 0px ;
                 margin-right: 0px;
             }
+            body { margin: 0; }
+            .card { page-break-inside: avoid; }
             
         }
         
@@ -383,16 +439,8 @@ for(Cookie cookie : cookies){
                 margin-right: 0px;
             }
         }
- /*        .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 8.5cm;
-    height: 13cm;
-    border-radius: 25px;
-    background: blue;
-} */
 
-       .card {
+.card {
     width: 11cm;
     height: 7cm;
     background: #FEE12B;
@@ -418,35 +466,16 @@ for(Cookie cookie : cookies){
         font-size: 16px;
       }
       
-/* .containerschoolname {
-		padding: 2px 5px;
-} */
-    </style>
-
-<style>
-    /* CSS to display tables side by side */
-   /* .table-container {
-      display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
-    
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
-    
     /* CSS for table styling */
-    
-    
-    
-    
     .vertical-line {
       border-left: 2px solid #350c76; /* Add a vertical line */
     }
-  </style>
+</style>
+
     </head>
      
 
-    <body class="bodymargin">
+    <body class="bodymargin" onload="autoScaleAddress()">
        
         <form action="/school/" method="post" id="form1" class="bodymargin">
 			
@@ -457,13 +486,34 @@ for(Cookie cookie : cookies){
                         <%!                        
                             int i = 1;
                         %>
+           <%
+			    Object addrObj = request.getSession().getAttribute("address" + i);
+			    String formatted = formatAddress(addrObj, 20);
+			%>
 			<c:if test="${limit < iInitial}">	
-	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 9.7cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+
+  <!-- Card Example (Repeat this div for each card) -->
+  <div class="card" style="
+    max-width: 7cm; 
+    max-height: 11cm; 
+    width: 100%; 
+    height: auto; 
+    margin-bottom: 1cm; 
+    border: 1px solid #000; 
+    padding: 10px; 
+    box-sizing: border-box; 
+    position: relative; 
+    background-color: #fff;
+    page-break-inside: avoid;">
+
+<!--
+This is the fixed height pattern  
+<div class="card" style="position: relative; background-color: white; width: 5.5cm; min-height: 9.7cm; border: 1px solid; border-radius: 5px; margin: 20px; overflow: hidden;"> 
+-->
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:14px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
    </table>
@@ -516,18 +566,20 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
-  </tr>
-  <tr>
-  <td></td>
-  <td>
-	<div height="30" width="20%" style="text-align:right;float:right;">
-		<img src="/school/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<div>Principal&nbsp;&nbsp;&nbsp;</div>
-	</div>
-  </td>
+    <td style="padding: 0;">
+    <div id="addr_<%= i %>" class="address-container">:<%= formatted %> </div>
+    </td>
   </tr>
 </table>
+ <div style="margin-top: 0px; padding-right: 15px; display: flex; flex-direction: column; align-items: flex-end;">
+    <!-- Signature Container -->
+    <div style="margin-top: auto; display: flex; justify-content: center; padding-top: 10px;">
+      <img src="/school/images/principalsignature.png" 
+           alt="Principal Signature" 
+           style="width: 45px; height: auto; display: block;" />
+    </div>
+    <div style="font-weight: bold; font-size: 11px; margin-top: 2px;">Principal</div>
+ </div>
 </div>
  </c:if>
    <% i = i + 1;%>
