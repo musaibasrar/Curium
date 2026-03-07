@@ -119,21 +119,20 @@ public class LibraryService {
 	public ResultResponse updateBook(BooksRequestDto booksListDto) {
 
 		String uid = booksListDto.getStudentExternalId();
-		// String dates=request.getParameter("transactiondate");
-		// String date = DateUtil.dateFromatConversionSlash(booksListDto.getTransactionDate());
 		String[] bids = booksListDto.getBookIds();
-		String[] bookNames = booksListDto.getBookName();
 		List<BookHistory> bookHistoryList = new ArrayList<>();
 		List<BookIssue> bookIssueList = new ArrayList<>();
-		
+
 		if (bids != null) {
 			List<Integer> ids = new ArrayList<>();
-			int i=0;
 			for (String id : bids) {
-				ids.add(Integer.valueOf(id));
+				int bookId = Integer.valueOf(id);
+				ids.add(bookId);
+				Book book = libraryDao.readDetailsOfBook(bookId);
+
 				BookHistory bookHistory = new BookHistory();
 				bookHistory.setBid(id);
-				bookHistory.setBookName(bookNames[i]);
+				bookHistory.setBookName(book.getBookname());
 				bookHistory.setStudentName(booksListDto.getStudentName());
 				bookHistory.setUid(uid);
 				bookHistory.setIssueDate(booksListDto.getIssueDate());
@@ -141,21 +140,20 @@ public class LibraryService {
 				bookHistory.setStudentName(booksListDto.getStudentName());
 				bookHistory.setSid(booksListDto.getStudentId());
 				bookHistoryList.add(bookHistory);
-				
+
 				BookIssue bookIssue = new BookIssue();
 				bookIssue.setBookId(Integer.parseInt(id));
 				bookIssue.setReturned("No");
 				bookIssue.setBookHolder(uid);
 				bookIssue.setSid(Integer.parseInt(booksListDto.getStudentId()));
 				bookIssue.setStudentName(booksListDto.getStudentName());
-				bookIssue.setBookName(bookNames[i]);
+				bookIssue.setBookName(book.getBookname());
 				bookIssue.setStartDate(booksListDto.getIssueDate());
 				bookIssue.setEndDate(DateUtil.datePars(booksListDto.getExpectedReturnDate()));
 				bookIssueList.add(bookIssue);
-				i++;
 			}
-			//libraryDao.updatebook(uid, ids, date);
-			libraryDao.updatebookAfterIssue(ids,bookHistoryList,bookIssueList);
+			// libraryDao.updatebook(uid, ids, date);
+			libraryDao.updatebookAfterIssue(ids, bookHistoryList, bookIssueList);
 			return ResultResponse.builder().success(true).build();
 		}
 

@@ -320,7 +320,7 @@
             });
 
             
-            function getbooks(){
+            function getbooks() {
             	var form1 = document.getElementById("form1");
         		form1.action="/school/LibraryProcess/searchbooks";
         		form1.method = "POST";
@@ -385,9 +385,9 @@
                 .append( "<a><b> " + item.value +"/" +item.classandsec+"/"+item.fathername+"/"+item.uid+" </b> </a>" )
                 .appendTo( ul );
             };
-            var addFeesButtonID="#addFees";
+            var searchBooksButtonID="#searchBooks";
             var removeDossageButtonID="#removeDossage";
-            $( addFeesButtonID )
+            $( searchBooksButtonID )
             .button({
                 icons: {
                     primary: "ui-icon-plus"
@@ -528,19 +528,15 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Academic Year:&nbsp;&nbsp;&nbsp;&nbsp; 
-                        	   <label>
-                                        <label> <select name="academicyear" id="academicyear" required
-									 style="width: 184px;border-radius: 4px;background: white;height: 28px;">
+                        	<label>
+                                 <select name="academicyear" id="academicyear" required style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
 										 <c:forEach var="year" items="${previousAcademicYears}">
         										<option value="${year}">${year}</option>
     									</c:forEach>
-										
-								</select>
+								 </select>
 
 							</label> 
-                                    </label>
-                        
                         </td>
                         
                     </tr>
@@ -550,9 +546,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     
                     <tr>
-                    	
-                        <td><button id="addFees">Search</button>&nbsp;&nbsp;&nbsp;</td>
-                        
+                        <td><button id="searchBooks">Search</button>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                     
                     <tr>
@@ -585,15 +579,7 @@ for(Cookie cookie : cookies){
                         		<select name="classandsecDetails"
 									id="classandsecDetails" style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${classandsecDetails}</option>
-<%-- 										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach> --%>
 								</select>
-                        
                         </td>
                         
                     </tr>
@@ -611,174 +597,30 @@ for(Cookie cookie : cookies){
 
 				<thead>
                     <tr>
-								<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Book Name</th>
-						<!-- <th title="click to sort" class="headerText">Book Id</th> -->
 						<th title="click to sort" class="headerText">Date of Issue</th>
 						<th title="click to sort" class="headerText">Total Days</th>
-							</tr>
+					</tr>
                 </thead>
 
 				<tbody>
-
-						    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
-           							<tr>
-           								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
-									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
-									      <%-- <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /> </td> --%>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
-									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /><input type="hidden" name="noofdays"  value="<c:out value="${bookslistdetail.noOfDays}" />"/></td>
-                					</tr>
-								
-							</c:forEach> 
+				    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
+         				<tr>
+					      <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
+					      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
+					      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
+					      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /><input type="hidden" name="noofdays"  value="<c:out value="${bookslistdetail.noOfDays}" />"/></td>
+              			</tr>
+					</c:forEach> 
 				</tbody>				
 			</table>
-            <!-- <TABLE id="dataTable" width="100%" border="1" >
-                <thead>
-                    <tr >
-                        <td class="headerText"><INPUT type="checkbox" id="selectAll"  name="selectAll" onclick="selectAllRow('dataTable')" /></td>
-                        <td class="headerText">Fees Category</td>
-                        <td class="headerText">Fees Amount</td>                       
-                        <td class="headerText">For the month</td>
-                        <td class="headerText">Total Amount</td>
-
-                    </tr>
-                </thead>
-                <tbody>
-
-                </tbody>
-                <tfoot>
-                    <tr>
-
-                        <td colspan="4" align="right">Total&nbsp;&nbsp;</td>
-                        <td align="center"><input type="text" name="feesTotalAmount" id="feesTotalAmount" value="0" readonly /></td>
-                    </tr>
-                    <tr>
-
-                        <td colspan="4" align="right"><b>Grand Total&nbsp;&nbsp;</b></td>
-                        <td align="center"><b><input type="text" name="grandTotalAmount" id="grandTotalAmount" value="0" readonly /></b></td>
-                    </tr>
-                </tfoot>
-            </TABLE>
- -->
             
             <!-- <input type="submit" value="submit" id="submit"/> -->
             
               
             <input type="button" value="Return Book" id="submitbtn"/>
-            
-            
-           <%--  <div id="dialogpaymentmethod" title="Payment Method">
-				
-           		 
-           		 <table style="width: auto;height: auto;">
-						
-						<tr>
-							<td>Payment method &nbsp;</td>
-						
-							<td>
-							
-								<input type="radio" id="cashpayment" name="paymentmethod" value="cashpayment" onclick="selectPayment(this.id)">
-								<label for="cashpayment">Cash</label>
-									
-								<input type="radio" id="banktransfer" name="paymentmethod" value="banktransfer" onclick="selectPayment(this.id)">
-								<label for="banktransfer">Bank Transfer</label>
-								
-								<input type="radio" id="chequetransfer" name="paymentmethod" value="chequetransfer" onclick="selectPayment(this.id)">
-								<label for="chequetransfer">Cheque</label>							
-							
-							</td>
-							
-							
-						</tr>
-						
-						<tr>
-							<td><br></td>
-						</tr>
-						<tr id="onlinetransferack" style="display: none;">
-							<td></td>
-						
-							<td>
-								Acknowledgement # &nbsp;<input type="text" id="ackno" name="ackno" style="width: 175px;">														
-							</td>
-							
-						</tr>
-						<tr id="onlinetransferdate" style="display: none;">
-							<td></td>
-						
-							<td>
-							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="text"  name="transferdate"
-									class="textField" style="font-size: 14px;"
-									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="transferdate" autocomplete="false" required
-									data-validate="validate(required)">
-								
-							</td>
-							
-						</tr>
-						
-						<tr id="onlinetransferbank" style="display: none;">
-							<td></td>
-						
-							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label>
-									<select name="transferbankname" id="transferbankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="ICICI">ICICI Bank</option>
-								</select>
-							
-							</label>
-							
-							</td>
-							
-						</tr>
-						
-						
-						<tr>
-							<td><br></td>
-						</tr>
-						<tr id="onlinechequeack" style="display: none;">
-							<td></td>
-						
-							<td>
-								Cheque # &nbsp;<input type="text" id="chequeno" name="chequeno" style="width: 175px;">														
-							</td>
-							
-						</tr>
-						<tr id="onlinechequedate" style="display: none;">
-							<td></td>
-						
-							<td>
-							Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="text"  name="chequedate"
-									class="textField" style="font-size: 14px;"
-									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" 
-									id="chequedate" autocomplete="false" required
-									data-validate="validate(required)">
-								
-							</td>
-							
-						</tr>
-						
-						<tr id="onlinechequebank" style="display: none;">
-							<td></td>
-						
-							<td>Bank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<label>
-									<select name="chequebankname" id="chequebankname" class="dropdownlist" style="font-size: 14px;width: 175px;" required>
-											<option value="ICICI">ICICI Bank</option>
-								</select>
-							
-							</label>
-							
-							</td>
-							
-						</tr>
-						
-					</table>
-			</div> --%>
+
             </div>
             </div>
         </form>

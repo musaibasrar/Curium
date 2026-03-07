@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.library.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -106,7 +107,7 @@ public class LibraryDAO {
     	List<BookIssue> result = new ArrayList<>();
         try {
             // session.createQuery("From BookIssue where bookHolder='" + sid + "'").list();
-            return bookIssueRepository.findByBookHolder(sid);
+            return bookIssueRepository.findByBookHolderAndReturnedNot(sid, "Yes");
         } catch (Exception e) {
             e.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -121,8 +122,10 @@ public class LibraryDAO {
 			// session.createSQLQuery("update book set issuedQty = issuedQty-1 where bid IN (:ids)");
 			for (Integer id : ids) {
 				bookRepository.findById(id).ifPresent(book -> {
-					book.setIssuedQty(book.getIssuedQty() - 1);
-					bookRepository.save(book);
+					if(book.getIssuedQty() > 0) {
+						book.setIssuedQty(book.getIssuedQty() - 1);
+						bookRepository.save(book);
+					}
 				});
 			}
 		} catch (Exception e) {
@@ -256,8 +259,10 @@ public class LibraryDAO {
             // session.createSQLQuery("update book set issuedQty = issuedQty-1  where bid IN (:ids)");
             for (Integer id : bookIds) {
                 bookRepository.findById(id).ifPresent(book -> {
-                	book.setIssuedQty(book.getIssuedQty() - 1);
-                    bookRepository.save(book);
+                	if(book.getIssuedQty() > 0) {
+                		book.setIssuedQty(book.getIssuedQty() - 1);
+                		bookRepository.save(book);
+                	}
                 });
             }
             // session.createSQLQuery("UPDATE bookissue SET noofdays = :totalDays, returned = 'Yes',actualreturndate='"+returnDate+"' WHERE id = :bookId");
@@ -271,6 +276,7 @@ public class LibraryDAO {
                     issue.setReturned("Yes");
                     // Assume actualReturnDate is a String, convert as needed
                     // issue.setActualReturnDate(...);
+                    issue.setActualReturnDate(new Date());
                     bookIssueRepository.save(issue);
                 }
             }

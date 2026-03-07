@@ -10,4 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface BookIssueRepository extends JpaRepository<BookIssue, Integer> {
 
 	List<BookIssue> findByBookHolder(String bookHolder);
+
+	List<BookIssue> findByBookHolderAndReturnedNot(String bookHolder, String returned);
 }

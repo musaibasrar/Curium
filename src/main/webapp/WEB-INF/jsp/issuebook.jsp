@@ -487,14 +487,8 @@
 			"bSort" : true,
 			"bInfo" : true,
 			"bAutoWidth" : true,
-			/* bJQueryUI: true,
-            sPaginationType: "full_numbers" */
 		});
-		
-		// #myInput is a <input type="text"> element
-		/* $('#myInput').on( 'keyup', function () {
-			$('#dataTableOne').DataTable().search( this.value ).draw();
-		} ); */
+
 	});
 	
 	var table = $('#example').DataTable();
@@ -595,7 +589,6 @@
                  else {
                      $('.chcktbl:not(:checked)').attr('checked', true);
                  }
-
              }
 
          });
@@ -604,7 +597,6 @@
              var trLength=$('.trClass').length;
              alert(tdLength);
              if (length > trLength) {
-
                  $('.chcktbl:not(:checked)').attr('disabled', true);
              }
              else {
@@ -637,8 +629,6 @@
         }
     }
 </script>
-
-
 
 		<script type="text/javascript">
 					
@@ -765,7 +755,33 @@
         
         <script type="text/javascript">
 	function issueBook() {
-		var form1 = document.getElementById("form1");
+	    var form1 = document.getElementById("form1");
+	    
+	    // 1. Validate Student Name (Mandatory)
+	    var studentName = document.getElementById("studentname").value;
+	    if (studentName === null || studentName.trim() === "") {
+	        alert("Student Name is mandatory.");
+	        document.getElementById("studentname").focus();
+	        return false;
+	    }
+
+	    // 2. Validate Expected Return Date (Mandatory)
+	    var returnDate = document.getElementById("expectedreturndate").value;
+	    if (returnDate === null || returnDate.trim() === "") {
+	        alert("Expected Return Date is mandatory.");
+	        document.getElementById("expectedreturndate").focus();
+	        return false;
+	    }
+
+	    // 3. Validate at least one checkbox is selected
+	    // Uses jQuery (already loaded in your JSP) to check the length of checked boxes
+	    var selectedBooks = $('.chcktbl:checked').length;
+	    if (selectedBooks === 0) {
+	        alert("Please select at least one book to issue.");
+	        return false;
+	    }
+
+	    // 4. If all validations pass, submit the form
 		form1.action = "/school/LibraryProcess/bookIssuedStudent";
 		form1.method = "POST";
 		form1.submit();
