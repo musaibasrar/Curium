@@ -21,6 +21,9 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class PrintIdsService {
 
@@ -86,17 +89,13 @@ public class PrintIdsService {
 	public PrintMultipleEmployeesResponseDto printMultiple(StudentIdsDto studentIdsDto,String currentAcademicYear) {
 		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = new PrintMultipleEmployeesResponseDto();
         String[] studentIDs = studentIdsDto.getStudentIds();
-        List<Long> ids = new ArrayList<Long>();
-        Parents parentsDetails = new Parents();
-     
+        Parents parentsDetails = null;
         	
           int i = 1;
        
           for (String id : studentIDs) {
-
               
-               System.out.println("Value of i is " + i);
-               int sid = Integer.valueOf(id);
+               log.debug("Value of i is {}", i);
                parentsDetails = printIdsDAO.printMultipleIds(id);
                
                //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
@@ -111,7 +110,7 @@ public class PrintIdsService {
             	   printMultipleEmployeesResponseDto.getResultParams().put("studentpic" + i + "",parentsDetails.getStudent().getStudentpic());
             	   printMultipleEmployeesResponseDto.getResultParams().put("dateofbirth" + i + "", DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDateofbirth()));
             	   printMultipleEmployeesResponseDto.getResultParams().put("currentacadmicyear", currentAcademicYear);
-            	   printMultipleEmployeesResponseDto.getResultParams().put("rollnumber" + i + "", parentsDetails.getStudent().getSts());
+            	   printMultipleEmployeesResponseDto.getResultParams().put("rollnumber" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getSts()));
             	   printMultipleEmployeesResponseDto.getResultParams().put("admissionnumber" + i + "", parentsDetails.getStudent().getAdmissionnumber());
                    //result = true;
                } else {
@@ -184,7 +183,7 @@ public ParentCardResponsDto searchDetailsCardValidity(SearchStudentDto searchStu
 			 * "FROM Parents as parents where  parents.student.dateofbirth = '2006-04-06'"
 			 * ;
 			 */
-			System.out.println("SEARCH QUERY ***** " + queryMain);
+			log.debug("SEARCH QUERY ***** {}", queryMain);
 			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 			List<Integer> studentids = new ArrayList<>(); 
 			

@@ -538,13 +538,13 @@ public class EmployeeService {
 	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
 	           if (teacherDetails != null) {
-				   result.getResultParams().put("staffId"+ i,  teacherDetails.getTeacherexternalid());
+				   result.getResultParams().put("staffId"+ i,  DataUtil.emptyString(teacherDetails.getTeacherexternalid()));
 				   result.getResultParams().put("teachername" + i , teacherDetails.getTeachername());
 				   result.getResultParams().put("guardian" + i , teacherDetails.getRemarks());
 				   result.getResultParams().put("contactnumber" + i , teacherDetails.getContactnumber());
 				   result.getResultParams().put("contactnumber" + i  , teacherDetails.getContactnumber());
 				   result.getResultParams().put("designation" + i , teacherDetails.getDesignation());
-				   result.getResultParams().put("Address" + i , teacherDetails.getAddress());
+				   result.getResultParams().put("address" + i , teacherDetails.getAddress());
 				   result.getResultParams().put("employeephoto" + i , teacherDetails.getEmployeephoto());
 				   result.getResultParams().put("dateofjoining" + i , DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
 				   result.getResultParams().put("currentAcademicYear" , currentAcademicYear);
