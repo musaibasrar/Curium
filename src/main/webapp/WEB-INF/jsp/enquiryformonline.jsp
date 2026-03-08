@@ -271,13 +271,8 @@
 </script>
 
     <script type="text/javascript" src="/littleflower/js/datetimepicker_css.js"></script>
-
     <script src="/littleflower/JavaScript/actb.js"></script>
     <script src="/littleflower/JavaScript/common.js"></script>
-
-
-
-
     <script>
         $(function() {
             $("#datepicker").datepicker({
