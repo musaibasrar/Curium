@@ -255,6 +255,9 @@
                     <td  class="headerTD">Name: &nbsp;<c:out value="${student.name}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td  class="headerTD">Class: &nbsp;<c:out value="${student.classstudying}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                 </tr>
+                <tr>
+                    <td  class="headerTD">Father Name: &nbsp;<c:out value="${parents.fathersname}" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                </tr>
                 
             </table>
             
