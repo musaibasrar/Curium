@@ -1,10 +1,10 @@
 package org.ideoholic.curium.model.account.dto;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
@@ -15,5 +15,8 @@ public class SearchLedgerEntriesResponseDto {
     private String fromDate;
     private String toDate;
     private String voucherType;
+    private BigDecimal openingBalance;
+    private BigDecimal closingBalance;
+    private int accountgroupmasterid;
     private boolean success;
 }
