@@ -659,6 +659,7 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
+					<td class="dataText"></td>
 						<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
