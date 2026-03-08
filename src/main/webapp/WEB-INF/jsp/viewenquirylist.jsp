@@ -577,7 +577,7 @@ for(Cookie cookie : cookies){
 								name="id"
 								value="<c:out value="${admissionEnquiryList.id}"/>" /></td>
 							<td class="dataText" align="center">${status.index + 1}</td>	
-							<td class="dataText"><a class="dataTextInActive" href="/vision/EnquiryProcess/getStudentEnquiryform?id=<c:out value='${admissionEnquiryList.id}'/>"><c:out value="${admissionEnquiryList.name}" /></a></td>
+							<td class="dataText"><a class="dataTextInActive" href="/littleflower/EnquiryProcess/getStudentEnquiryform?id=<c:out value='${admissionEnquiryList.id}'/>"><c:out value="${admissionEnquiryList.name}" /></a></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.fathername}" /></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.mothername}" /></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.admissionclass}" /></td>
