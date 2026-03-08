@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 @Data
@@ -17,4 +18,6 @@ public class SearchJournalEntriesResponseDto {
     private String message;
     private String fromDate;
     private String toDate;
+    private BigDecimal openingBalance;
+    private BigDecimal closingBalance;
 }

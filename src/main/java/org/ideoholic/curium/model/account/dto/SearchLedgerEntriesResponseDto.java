@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.account.dto;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -15,5 +16,8 @@ public class SearchLedgerEntriesResponseDto {
     private String fromDate;
     private String toDate;
     private String voucherType;
+    private BigDecimal openingBalance;
+    private BigDecimal closingBalance;
+    private int accountgroupmasterid;
     private boolean success;
 }
