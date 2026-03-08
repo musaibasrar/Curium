@@ -229,10 +229,10 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/jdh/images/logo.jpg" width="150" height="80"/>
+				<img src="/vision/images/vision.jpg" width="90" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
-				Curium<br><br>
+				${branchname}<br><br>
 				<label class="addressLine">General Ledger Report</label><br>
 				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
 				<label class="addressLineTwo">&nbsp;&nbsp;&nbsp;Ledger Name: ${ledgername}</label>
@@ -320,27 +320,27 @@
 							</td>
 						</tr>
 						<tr>
-					<td class="dataText"></td>
-					<td class="dataText"></td>
+					<td class="dataTextRight">
+						<label style="color: #eb6000"><b>
+									Opening Balance</b>
+							</label> 
+					</td>
+					<td class="dataTextRight" style="text-align: left;"><label style="color: #eb6000"><b>
+									<fmt:formatNumber type="currency"  value="${openingbalance}" />                                    
+							</b>
+							</label></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
-									Balance</b>
+									Closing Balance</b>
 							</label> 
 							</td>
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-							<c:choose>
-                                <c:when test="${drtotal > crtotal}">
-									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
-                                </c:when>
-                                <c:otherwise>
-                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
-                                </c:otherwise>
-                            </c:choose>
+									<fmt:formatNumber type="currency"  value="${closingbalance}" />                                    
 							</b>
 							</label>
 							</td>
