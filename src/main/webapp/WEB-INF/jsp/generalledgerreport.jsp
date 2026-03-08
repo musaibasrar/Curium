@@ -601,6 +601,7 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
+					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 									Opening Balance</b>
@@ -661,6 +662,7 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
+					<td class="dataText"></td>
 						<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
@@ -673,6 +675,7 @@ for(Cookie cookie : cookies){
 							</td>
 					</tr>
 					<tr>
+					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
