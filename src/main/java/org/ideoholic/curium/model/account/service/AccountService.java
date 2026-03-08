@@ -2266,9 +2266,9 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				int accountId = accountdetailsbalance.getAccountDetails().getAccountdetailsid();
 				
 				if(cashLedgeridRP.contains(accountId)) {
-					cashBalance = accountdetailsbalance.getCurrentbalance();
+					cashBalance = cashBalance.add(accountdetailsbalance.getCurrentbalance());
 				}else if (bankLedgeridRP.contains(accountId)) {
-					bankBalance = accountdetailsbalance.getCurrentbalance();
+					bankBalance = bankBalance.add(accountdetailsbalance.getCurrentbalance());
 				}
 				
 			}
