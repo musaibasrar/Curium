@@ -683,6 +683,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Class<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/bba/css/dataTable/images/sort_both.png" /></th>
@@ -708,11 +709,12 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${examschedule}" var="examschedule">
+					<c:forEach items="${examschedule}" var="examschedule" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
 							<td class="dataText"><input type="checkbox" id="<c:out value="${examschedule.idexamschedule}"/>" class="chcktbl" name="idexamschedule" value="<c:out value="${examschedule.idexamschedule}"/>" /></td>
+							<td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataText"><c:out value="${examschedule.classes}" /></td>
 							<td class="dataText"><c:out value="${examschedule.examname}" /></td>
 							<td class="dataText"><c:out value="${examschedule.subject}" /></td>
