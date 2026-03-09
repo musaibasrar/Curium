@@ -448,6 +448,7 @@
                                 <td>
                                     <select name="academicyear" id="academicyear" required class="myclass" style="width: 100%;border-radius: 6px;background: white;height: 36px;width: 165px;">
                                         <option selected></option>
+                                        <option>2026/27</option>
                                         <option>2025/26</option>
                                         <option>2026/27</option>
                                         <option>2027/28</option>
