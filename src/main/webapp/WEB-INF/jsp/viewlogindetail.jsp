@@ -472,7 +472,7 @@ for(Cookie cookie : cookies){
 								name="id"
 								value="<c:out value="${logindetail.lid}"/>" /></td>
 								<td class="dataText" align="center">${status.index + 1}</td>
-							<td class="dataText"><a class="dataTextInActive" href="/vision/LoginProcess/logindetail?id=<c:out value='${logindetail.lid}'/>"><c:out value="${logindetail.username}" /></a></td>	
+							<td class="dataText"><a class="dataTextInActive" href="/bba/LoginProcess/logindetail?id=<c:out value='${logindetail.lid}'/>"><c:out value="${logindetail.username}" /></a></td>	
 							<td class="dataText"><c:out value="${logindetail.password}" /></td>
 							<td class="dataText"><c:out value="${logindetail.usertype}" /></td>
 						</tr>
