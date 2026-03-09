@@ -73,6 +73,10 @@ body {
     }
 }
 
+td{
+font-size:16px;
+}
+
 </style>
 </head>
  <%
@@ -118,75 +122,75 @@ for(Cookie cookie : cookies){
     <table class="tc-table">
         <tr>
             <td >1. Name of the Institution</td>
-            <td >${collegename}</td>
+            <td style="font-weight:bold;">${collegename}</td>
         </tr>
         <tr>
             <td >2. College Code</td>
-            <td ><c:out value="${collegecode}" /></td>
+            <td style="font-weight:bold;"><c:out value="${collegecode}" /></td>
                    </tr>
         <tr>
             
             <td >3. Admission No</td>
-            <td ><c:out value="${Admissionno}" /></td>
+            <td style="font-weight:bold;"><c:out value="${Admissionno}" /></td>
         </tr>
         <tr>
             <td >4. Date of Admission</td>
-            <td ><c:out value="${dateofadmission}" /></td>
+            <td style="font-weight:bold;"><c:out value="${dateofadmission}" /></td>
              </tr>
         <tr>
             <td >5. Student SATS No</td>
-            <td> <c:out value="${sts}" /></td>
+            <td style="font-weight:bold;"> <c:out value="${sts}" /></td>
         </tr>
         <tr>
             <td >6. Name of the Student<br><small>(As entered in Admission Register)</small></td>
-            <td > <c:out value="${studentname1}" /></td>
+            <td style="font-weight:bold;"> <c:out value="${studentname1}" /></td>
         </tr>
         <tr>
             <td >7. Sex</td>
-            <td > <c:out value="${gender}" /></td>
+            <td style="font-weight:bold;"> <c:out value="${gender}" /></td>
              </tr>
         <tr>
             <td >8. Name of the Father</td>
-            <td ><c:out value="${fathername1}" /></td>
+            <td style="font-weight:bold;"><c:out value="${fathername1}" /></td>
         </tr>
         <tr>
             <td >9. Name of the Mother</td>
-            <td ><c:out value="${mothername1}" /></td>
+            <td style="font-weight:bold;"><c:out value="${mothername1}" /></td>
         </tr>
         <tr>
-            <td >10. Nationality:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${nationality}" /></td>
-            <td >11. Religion:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${religion}" /></td>
+            <td >10. Nationality:&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-weight:bold;"><c:out value="${nationality}" /></label></td>
+            <td >11. Religion:&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-weight:bold;"><c:out value="${religion}" /></label></td>
         </tr>
         <tr>
-            <td >12. Caste:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${caste}" /></td>
-            <td >13. Category:&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${category}" /></td>
+            <td >12. Caste:&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-weight:bold;"><c:out value="${caste}" /></label></td>
+            <td >13. Category:&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-weight:bold;"><c:out value="${category}" /></label></td>
         </tr>
         <tr>
             <td >
                 14. Whether the student belongs to Schedule Cast, <br>
 Scheduled Tribe, Nomadic Tribe or Semi Nomadic Tribe 
             </td>
-             <td >
+             <td style="font-weight:bold;">
              ${yesno}
             </td>
         </tr>
         <tr>
             <td >15. Date of Birth   in Figures<br>in words</td>
-            <td ><c:out value="${dateofbirth}" /><br> <c:out value="${dateofbirthwords}" /></td>
+            <td style="font-weight:bold;"><c:out value="${dateofbirth}" /><br> <c:out value="${dateofbirthwords}" /></td>
         </tr>
         <tr>
             <td >
                 16.  Class in which the student was studied at the time of <br>
 leaving the institution (In words) 
             </td>
-            <td >${leavingclass}</td>
+            <td style="font-weight:bold;">${leavingclass}</td>
         </tr>
         <tr>
             <td >
                 17.  Public Examination appeared with Reg. No. Month & <br>
 Year 
              </td>
-             <td >
+             <td style="font-weight:bold;">
                 a)  EXAMINATION: ${firstsubject}
                 <br>b) MONTH & YEAR: ${secondsubject} 
                 <br>c) REG. NO: ${thirdsubject}
@@ -197,7 +201,7 @@ Year
             <td >
                 18. a) Language Offered in Part-I 
                 </td>
-                 <td >
+                 <td style="font-weight:bold;">
               ${partone} 
                 </td>
         </tr>
@@ -205,30 +209,30 @@ Year
             <td >
                 18. b) Optional Subjects Offered in Part-II 
                 </td>
-                 <td >
+                 <td style="font-weight:bold;">
               ${parttwo} 
                 </td>
         </tr>
         <tr>
             <td >19. a) Total number of working days <br>
 b) No of days he/she was present </td>
-            <td> ${workingdays} <br>
+            <td style="font-weight:bold;"> ${workingdays} <br>
  ${present} </td>
         </tr>
         <tr>
             <td >20. Last date of student attendance in the institution </td>
-            <td ><c:out value="${dateofleaving}" /></td>
+            <td style="font-weight:bold;"><c:out value="${dateofleaving}" /></td>
         </tr>
 <tr>
             <td >21. Date of Application for Certificate </td>
-            <td ><c:out value="${datecert}" /></td>
+            <td style="font-weight:bold;"><c:out value="${datecert}" /></td>
         </tr>       <tr>
             <td >22. Date of issue of the transfer certificate  </td>
-            <td ><c:out value="${dateoftc}" /></td>
+            <td style="font-weight:bold;"><c:out value="${dateoftc}" /></td>
         </tr>
         <tr>
             <td >23. Character & Conduct</td>
-            <td ><b><c:out value="${conduct}" /></b></td>
+            <td style="font-weight:bold;"><b><c:out value="${conduct}" /></b></td>
         </tr>
     </table>
 
