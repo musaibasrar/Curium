@@ -341,26 +341,42 @@ for(Cookie cookie : cookies){
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
                 <a target="mainFrame" href="/alirfan/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-            </div>
-
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
-            <div>
-                <a target="mainFrame" href="/alirfan/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/alirfan/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
-                <a target="mainFrame" href="/alirfan/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/alirfan/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
             <div>
-                <a target="mainFrame" href="/alirfan/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
-                <a target="mainFrame" href="/alirfan/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
-
+                <a target="mainFrame" href="/alirfan/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
-            <div >
-                <a target="mainFrame" href="/alirfan/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
+            <div>
+                <a target="mainFrame" href="/alirfan/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/alirfan/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
+                <a target="mainFrame" href="/alirfan/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
+                <a target="mainFrame" href="/alirfan/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/alirfan/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
             </div>
+            
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <div>
+                <a target="mainFrame" href="/alirfan/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
+                <a target="mainFrame" href="/alirfan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+            </div>
+            
+              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+            <div>
+				<a target="mainFrame" href="/alirfan/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+            </div>
+            
+            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
+            <div>
+                
+                <a target="mainFrame" href="/alirfan/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
+                <a target="mainFrame" href="/alirfan/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+            </div>
+
+            
             </div>
             
             <!-- END -->

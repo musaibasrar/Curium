@@ -138,8 +138,8 @@ form{
                 	window.open('/alirfan/index_officeadmin','_self');
                 }else if(type=='teacher'){
                 	window.open('/alirfan/index_teacher','_self');
-                }else if(type=='marksentry'){
-                	window.open('/alirfan/index_marksentry','_self');
+                }else if(type=='exams'){
+                	window.open('/alirfan/index_exams','_self');
                 }else if(type=='parents'){
                 	window.open('/alirfan/index_parents','_self');
                 }
@@ -155,7 +155,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height:199px;width:170px;" alt="ideoholic" src="/alirfan/images/alirfan.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height:140px;width:120px;" alt="ideoholic" src="/alirfan/images/alirfan.png"></h2>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">

@@ -2494,11 +2494,11 @@ public class FeesCollectionService {
 						        dto.setDateOfFeesDetails(group.get(0).getCell(2).getStringCellValue());
 						        dto.setClassAndSecDetails(studentDetails[1]);
 						        dto.setPaymentMethod(group.get(0).getCell(5).getStringCellValue());
-						        dto.setAckNo(DataUtil.emptyString(group.get(0).getCell(6).getStringCellValue()));
-						        dto.setTransferDate(DataUtil.emptyString(group.get(0).getCell(7).getStringCellValue()));
+						        dto.setAckNo("");
+						        dto.setTransferDate("");
 						        //dto.setTransferBankName(row.getCell(2).getStringCellValue());
-						        dto.setChequeNo(DataUtil.emptyString(group.get(0).getCell(8).getStringCellValue()));
-						        dto.setChequeDate(DataUtil.emptyString(group.get(0).getCell(9).getStringCellValue()));
+						        dto.setChequeNo("");
+						        dto.setChequeDate("");
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
 						        dto.setAcademicYear(group.get(0).getCell(10).getStringCellValue());         
 					            

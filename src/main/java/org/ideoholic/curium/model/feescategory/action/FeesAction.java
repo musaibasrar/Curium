@@ -135,6 +135,8 @@ public class FeesAction {
 		if (studentActionAdapter.viewDetailsOfStudent()) {
 			if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_feesstructure_admin";
+			} if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+				return "student_details_feesstructure_admin";
 			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_feesstructure";
 			} else {

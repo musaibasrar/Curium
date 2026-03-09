@@ -136,6 +136,8 @@ form{
                     window.open('/alirfan/index_feescollector','_self');
                 }else if(type=='officeadmin'){
                 	window.open('/alirfan/index_officeadmin','_self');
+                }else if(type=='exams'){
+                	window.open('/alirfan/index_exams','_self');
                 }else if(type=='marksentry'){
                 	window.open('/alirfan/index_marksentry','_self');
                 }

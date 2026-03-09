@@ -132,47 +132,37 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/alirfan/images/alirfanheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/alirfan/left_officeadmin"> <img
+							<td><a target="leftFrame" href="/alirfan/left_exams"> <img
 									src="/alirfan/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
-
+							
 							<td><a target="mainFrame"
-								href="/alirfan/FeesProcess/feesCollect"> <img
-									src="/alirfan/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+								href="/alirfan/StudentProcess/addNew"> <img
+									src="/alirfan/images/student_header.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td>
-								<a target="mainFrame"
-								href="/alirfan/AccountProcess/createVoucher"> <img
-									src="/alirfan/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<td ><a target="leftFrame" href="/alirfan/leftsettings_officeadmin">
+							<td ><a target="leftFrame" href="/alirfan/leftsettings_exams">
 									<img alt="Settings" src="/alirfan/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
-								href="/alirfan/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/alirfan/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><!-- <a target="mainFrame" href="/alirfan/sendsms"><img
-									src="/alirfan/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a> -->
-								<a target="leftFrame" href="/alirfan/reports_officeadmin"><img
+							<td >
+								<a target="leftFrame" href="/alirfan/reports_exams"><img
 									src="/alirfan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 								
 							</td>
+
+							<td ><a target="mainFrame"
+								href="/alirfan/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/alirfan/images/students.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+								View Students
+							</a></td>
+							
 								
 							<td ><a target="_parent"
 								href="/alirfan/UserProcess/logout"><img
