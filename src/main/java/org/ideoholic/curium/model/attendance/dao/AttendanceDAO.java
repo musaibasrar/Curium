@@ -542,6 +542,8 @@ public class AttendanceDAO {
 	            } else {
 					// session.createSQLQuery("update att_staffdailyattendance set attendancestatus = '"+staffDailyAttendance.getAttendancestatus()+"' where attendanceid = '"+staffDailyAttendanceDetails.getAttendanceid()+"'");
 	                existingAttendance.setAttendancestatus(staffDailyAttendance.getAttendancestatus());
+	                existingAttendance.setIntime(staffDailyAttendance.getIntime());
+	                existingAttendance.setOuttime(staffDailyAttendance.getOuttime());
 	                staffDailyAttendanceRepository.save(existingAttendance);
 	            }
 	        }

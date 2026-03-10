@@ -6,6 +6,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,8 +32,9 @@ public class Staffdailyattendance implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "attendanceid", unique = true, nullable = false)
-	private int attendanceid;
+	private Integer attendanceid;
 
 	@Column(name = "attendeeid", nullable = false, length = 45)
 	private String attendeeid;
