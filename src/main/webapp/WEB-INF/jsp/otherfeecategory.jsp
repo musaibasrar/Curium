@@ -562,6 +562,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Fees Category<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/greatindiaacademy/css/dataTable/images/sort_both.png" /></th>
@@ -582,7 +583,7 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${otherfeescategory}" var="fees">
+					<c:forEach items="${otherfeescategory}" var="fees" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -590,6 +591,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${fees.idfeescategory}"/>" class="chcktbl"
 								name="idfeescategory"
 								value="<c:out value="${fees.idfeescategory}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>
