@@ -91,13 +91,21 @@ public class MessStockMoveAction {
 
 	}
 	
-	@GetMapping("/billsReport")
-	public String billsReport() {
+	//@GetMapping("/billsReport")
+	@RequestMapping(value = "/generateBillsReport", method = { RequestMethod.GET, RequestMethod.POST })
+	public String generateBillsReport() {
 		    	
     	messStockMoveActionAdapter.viewStockMoveDetails();
     	
     	return "billsreport";
     }
+	
+	@GetMapping("/billsReport")
+	public String billsReport() {
+    	
+    	return "billsreport";
+    }
+	
 	
 	@PostMapping("/dueReport")
 	public String dueReport() {
@@ -182,6 +190,16 @@ public class MessStockMoveAction {
     	
     	return "taxinvoicereport";
     }
+	
+	@PostMapping("/printStockMove")
+	public String printStockMove() {
+
+		messStockMoveActionAdapter.printStockMove();
+		return "bill";
+	}
+	
+	
+
 
 
 
