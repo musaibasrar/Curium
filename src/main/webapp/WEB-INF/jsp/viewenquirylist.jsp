@@ -555,6 +555,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Name</th>
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
 						<th title="click to sort" class="headerText">Mother Name&nbsp;</th>
@@ -567,7 +568,7 @@ for(Cookie cookie : cookies){
 
                    <tbody>
 
-					<c:forEach items="${admissionEnquiryList}" var="admissionEnquiryList">
+					<c:forEach items="${admissionEnquiryList}" var="admissionEnquiryList" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -575,7 +576,8 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${admissionEnquiryList.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${admissionEnquiryList.id}"/>" /></td>
-							<td class="dataText"><a class="dataTextInActive" href="/greatindiaacademy/EnquiryProcess/getStudentEnquiryform?id=<c:out value='${admissionEnquiryList.id}'/>"><c:out value="${admissionEnquiryList.name}" /></a></td>
+							<td class="dataText" align="center">${status.index + 1}</td>	
+							<td class="dataText"><a class="dataTextInActive" href="/vision/EnquiryProcess/getStudentEnquiryform?id=<c:out value='${admissionEnquiryList.id}'/>"><c:out value="${admissionEnquiryList.name}" /></a></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.fathername}" /></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.mothername}" /></td>
 							<td class="dataText"><c:out value="${admissionEnquiryList.admissionclass}" /></td>
