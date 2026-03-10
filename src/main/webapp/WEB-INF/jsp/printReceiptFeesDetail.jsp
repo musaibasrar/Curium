@@ -179,13 +179,14 @@
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/greatindiaacademy/images/greatindiaacademy.jpg" width="197" height="80"/></td>
+				<td><img src="/greatindiaacademy/images/greatindiaacademy.jpg" width="123" height="50"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
+				<td><img  src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
 		</table>
 		
@@ -208,7 +209,7 @@
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Adm.No.:&nbsp;<c:out value="${student.admissionnumber}" />
 				</td>
 				
 
@@ -367,7 +368,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier:<label style="text-transform: capitalize;">${userType}</label></td>
 		<!-- <td><img src="/greatindiaacademy/images/greatindiaacademypaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -379,13 +380,14 @@
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/greatindiaacademy/images/greatindiaacademy.jpg" width="197" height="80"/></td>
+				<td><img src="/greatindiaacademy/images/greatindiaacademy.jpg" width="123" height="50"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
+				<td><img  src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
 		</table>
 
@@ -407,7 +409,7 @@
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
 			
-				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Adm.No.:&nbsp;<c:out value="${student.admissionnumber}" />
 				</td>
 				
 
@@ -568,7 +570,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier:<label style="text-transform: capitalize;">${userType}</label></td>
 		<!-- <td><img src="/greatindiaacademy/images/greatindiaacademypaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>

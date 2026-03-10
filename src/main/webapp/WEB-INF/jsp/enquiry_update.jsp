@@ -414,7 +414,6 @@
 							<td>
 								<select name="academicyear" id="academicyear" required class="myclass" style="width: 180px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${admissionEnquiry.academicYear}</option>
-										<option>2025/26</option>
 										<option>2026/27</option>
 										<option>2027/28</option>
 										<option>2028/29</option>

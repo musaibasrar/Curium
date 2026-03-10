@@ -281,6 +281,7 @@ public class FeesCollectionService {
 			receiptInfo.setBranchid(Integer.parseInt(branchId));
 			receiptInfo.setUserid(Integer.parseInt(userId));
 			receiptInfo.setClasssec(dto.getClassAndSecDetails());
+			receiptInfo.setBranchreceiptnumber(dto.getManualreceiptno());
 			Long grantTotal = 0l;
 			
 			/* new feesCollectionDAO().createReceipt(receiptInfo); */

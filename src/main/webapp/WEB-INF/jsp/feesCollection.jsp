@@ -479,12 +479,20 @@
         ];
         $(function() {
             $( "#studentname").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentId").val( ui.item.id );
-                    
-                    
+            	minLength: 1,
+            	source: function(request, response) {
+            	      var term = $.trim(request.term);
+            	      if (!term) { response([]); return; }
+            	      var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+            	      var matches = $.grep(students, function(item) {
+            	        // check any fields you want to be searchable
+            	        return matcher.test(item.name)
+            	            || matcher.test(item.value)
+            	            || matcher.test(item.regno)
+            	            || matcher.test(item.admissionno)
+            	            || matcher.test(item.fathername);
+            	      });
+            	      response(matches);   
                 },
                 focus: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
@@ -1045,14 +1053,14 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td class="alignLeft" style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admnoDetails" required id="admnoDetails" readonly value="${admnoDetails}" class="myclass" style="border: none;"/> <input name="studentIdDetails" type="hidden" id="studentIdDetails" value="${studentIdDetails}" /> </td>
                         
-                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}" style="border: none;"/></td>
+                        <td class="alignLeft">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text" name="dateoffeesDetails" id="dateoffeesDetails" class="myclass" value="${dateoffeesDetails}"/></td>
                         
                     </tr>
                     
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Student Name:&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentNameDetails" id="studentNameDetails" value="${studentNameDetails}" class="myclass" style="border: none;" readonly/></td>
-                        <td class="alignLeft">Class & SEC : &nbsp;&nbsp;&nbsp;
+                        <td class="alignLeft">Class & Sec:&nbsp;&nbsp;&nbsp;
                         
                         		<select name="classandsecDetails"
 									id="classandsecDetails" style="width: 184px;border-radius: 4px;background: white;height: 28px;">
@@ -1072,6 +1080,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     
                         <td class="alignLeft" style="width: 45%">Father Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fatherNameDetails" id="fatherNameDetails" value="${fatherNameDetails}" class="myclass" readonly style="border: none;"/></td>
+                        <td class="alignLeft">Receipt No.:&nbsp;&nbsp;&nbsp;&nbsp;<input name="manualreceiptno" type="text" class="myclass" id="manualreceiptno" /></td>
                     </tr>
                     <tr>
 						<td><br></td>
