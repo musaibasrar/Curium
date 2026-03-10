@@ -13,40 +13,41 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>fees structure</title>
-<script src="/school/js/Chart.js"></script>
+<title>Mark Attendance</title>
 <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/school/css/datePicker/demos.css">
 <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.css">
 <link rel="stylesheet" href="/school/css/graph/jquery.jqplot.min.css">
 
 
+  <script src="/school/js/Chart.js"></script>
   <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        
-        
-         <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/school/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/school/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/school/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/school/js/jquery.jqplot.min.js" ></script>
-        <script src="/school/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.dialog.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.accordion.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/sliderAccess.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  
+  
+  <script  type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.position.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.mouse.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.draggable.js"></script>
+  <script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.resizable.js"></script>
+  <script type="text/javascript" src="/school/js/graph/jquery.jqplot.js"></script>        
+  <script  type="text/javascript" src="/school/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+  <script type="text/javascript" src="/school/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+  <script type="text/javascript" src="/school/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+  <script type="text/javascript" src="/school/js/graph/plugins/jqplot.cursor.min.js"></script>
+  <script type="text/javascript" src="/school/js/graph/plugins/jqplot.highlighter.min.js"></script>
+  <script type="text/javascript" src="/school/js/graph/plugins/jqplot.dragable.min.js"></script>
+  <script type="text/javascript" src="/school/js/graph/plugins/jqplot.trendline.min.js"></script>
+  <script src="/school/js/jquery.jqplot.min.js" ></script>
+  <script src="/school/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+  <script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
         
 <style type="text/css">
 <!--
@@ -322,12 +323,21 @@
 	font-weight: bold;
 	height: 22px;
 }
-</style>
-<style>
-#button {
-	
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }
+
+.shake-error {
+  animation: shake 0.2s ease-in-out 0s 2;
+  border: 2px solid red !important;
+}
+
 </style>
+
 <link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
@@ -364,6 +374,7 @@
 	src="/school/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
 	src="/school/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -376,8 +387,7 @@
 			"bAutoWidth" : false
 		});
 	});
-</script>
-<script type="text/javascript">
+
 	function select(id, name) {
 		var clipEffect = 'blind';
 		var options = {};
@@ -387,10 +397,6 @@
 
 	}
 	
-</script>
-
-<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
-<script type="text/javascript">
 
 	$(function() {
 
@@ -431,11 +437,6 @@
 		$("#save").button().click(function() {
 			addDepartment();
 		});
-		
-	
-		
-		
-		/* $("#effect").hide(); */
 
 	});
 	
@@ -478,14 +479,91 @@
 
 	});
 	
+	$(document).ready(function() {
+	    // 1. Initially disable the save button
+	    $('#update').button("disable");
+
+	    // 2. Listen for changes on checkboxes and inputs within the table
+	    $('#myTable').on('change keyup', '.chcktbl, #intime, #outtime, #staffAttendanceStatus', function() {
+	        validateSaveButton();
+	    });
+
+	    function validateSaveButton() {
+	        var anyValidRowSelected = false;
+	        var rows = $('.trClass');
+	        var selectedCheckboxes = $('.chcktbl:checked');
+
+	        // Requirement 1: Disable if none are selected
+	        if (selectedCheckboxes.length === 0) {
+	            $('#update').button("disable");
+	            return;
+	        }
+
+	        var allSelectedAreValid = true;
+
+	        // Requirement 2: Check mandatory fields for each selected row
+	        selectedCheckboxes.each(function() {
+	            var row = $(this).closest('tr');
+	            var inTime = row.find('#intime').val();
+	            var outTime = row.find('#outtime').val();
+	            var status = row.find('#staffAttendanceStatus').val();
+
+	            // If any mandatory field in a selected row is empty
+	            if (!inTime || !outTime || !status || status.trim() === "") {
+	                allSelectedAreValid = false;
+	            }
+	        });
+
+	        if (allSelectedAreValid) {
+	            $('#update').button("enable");
+	        } else {
+	            $('#update').button("disable");
+	        }
+	    }
+	});
+	
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
 		form1.action = "/school/AttendanceProcess/markStaffAttendance";
 		form1.method = "POST";
 		form1.submit();
 	}
-	
-	
+
+	function validateAttendance(input) {
+	    const val = input.value.toUpperCase();
+	    
+	    // If the box is empty, just update the last valid (optional)
+	    if (val === "") {
+	        input.dataset.lastValid = "";
+	        return;
+	    }
+
+	    // Check if input is valid (only A or P)
+	    if (val === "P" || val === "A") {
+	        input.value = val;
+	        input.dataset.lastValid = val; // Store the new valid value
+	        input.classList.remove("shake-error");
+	    } else {
+	        // Trigger shake effect
+	        input.classList.add("shake-error");
+	        
+	        // Revert to the last valid value stored in data attribute
+	        input.value = input.dataset.lastValid;
+	        
+	        // Remove the shake class after animation finishes so it can be re-triggered
+	        setTimeout(() => {
+	            input.classList.remove("shake-error");
+	        }, 400);
+	    }
+	}
+
+    function markabsent(cheese){
+    	if(cheese.value=="P"){
+    		cheese.value="A";
+    	}else if(cheese.value=="A"){
+    		cheese.value="P";
+    	}
+    }
 	
 </script>
 
@@ -588,7 +666,7 @@ for(Cookie cookie : cookies){
 							<input type="time" id="outtime" name="outtime">
 							</td>
 							<td class="dataText">
-							<input type="text" id="staffAttendanceStatus" name="staffAttendanceStatus" style="text-transform:uppercase" value="P" maxlength="1">
+							<input type="text" id="staffAttendanceStatus" name="staffAttendanceStatus" style="text-transform:uppercase" size="2" value="P" maxlength="1" data-last-valid="P" onclick="markabsent(this);" oninput="validateAttendance(this);">
 							</td>
 						</tr>
 					</c:forEach>
