@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -14,4 +15,7 @@ public class StockMoveResponseDto {
     private int noOfPages;
     private List<Bill> messStockMoveList;
     private boolean success;
+    private String fromDate;
+    private String toDate;
+   
 }
