@@ -5,4 +5,6 @@ import lombok.Data;
 @Data
 public class ClassSearchDto {
     private String classSearch;
+    private String fromDate;
+    private String toDate;
 }
