@@ -655,7 +655,7 @@ for(Cookie cookie : cookies){
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 									<td class="dataText" align="center">${status.index + 1}</td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-									href="/vision/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
+									href="/greatindiaacademy/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.studentexternalid}" /></a></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 									href="/greatindiaacademy/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
