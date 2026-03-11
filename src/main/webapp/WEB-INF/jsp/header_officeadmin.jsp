@@ -171,7 +171,23 @@ for(Cookie cookie : cookies){
 									alt="Admin Exp" src="/abc/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td>
-
+							
+							<td ><!-- <a target="mainFrame" href="/abc/sendsms"><img
+									src="/abc/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+									Send Message		
+							</a> -->
+								<a target="leftFrame" href="/abc/reports_officeadmin"><img
+									src="/abc/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a>
+								
+								<!-- <a target="leftFrame" href="/abc/reports_officeadmin"><img
+									src="/abc/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
+							
+							</td>
+						
 							<td ><a target="mainFrame"
 								href="/abc/StudentProcess/viewAllStudentsWithParents"><img
 									alt="View All Students" src="/abc/images/students.svg" width="18"
