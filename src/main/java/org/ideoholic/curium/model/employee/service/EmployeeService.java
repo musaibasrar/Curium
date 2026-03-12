@@ -19,7 +19,7 @@ import org.ideoholic.curium.model.employee.dto.EmployeeDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeListDto;
 import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
-import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleRecordsResponseDto;
 import org.ideoholic.curium.model.employee.dto.SearchEmployeeDto;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.employee.dto.ViewAllRelationsResponseDto;
@@ -29,7 +29,6 @@ import org.ideoholic.curium.model.position.dto.Position;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
 import org.ideoholic.curium.model.user.dao.UserDAO;
@@ -518,57 +517,47 @@ public class EmployeeService {
 		return departmentResponseDto;
 	}
 
-	public PrintMultipleEmployeesResponseDto printMultipleEmployees(StudentIdsDto studentIdsDto, String currentAcademicYear) {
-		PrintMultipleEmployeesResponseDto result = new PrintMultipleEmployeesResponseDto();
+	public PrintMultipleRecordsResponseDto printMultipleEmployees(EmployeeIdsDto emploeeIdsDto, String currentAcademicYear) {
+		PrintMultipleRecordsResponseDto result = new PrintMultipleRecordsResponseDto();
 
-	    String[] studentIDs = studentIdsDto.getStudentIds();
-	    List<Long> ids = new ArrayList<Long>();
-	    Teacher teacherDetails = new Teacher();
-	 
-	    	
-	      int i = 1;
-	   
-	      for (String id : studentIDs) {
+		String[] employeeIds = emploeeIdsDto.getEmployeeIds();
+		Teacher teacherDetails = new Teacher();
 
-	          
-	    	  log.debug("Value of i is:{}", i);
-	           int sid = Integer.valueOf(id);
-	           teacherDetails = printIdsDAO.printMultipleIdsEmployee(id);
-	           
-	           //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
+		int i = 1;
 
-	           if (teacherDetails != null) {
-				   result.getResultParams().put("staffId"+ i,  DataUtil.emptyString(teacherDetails.getTeacherexternalid()));
-				   result.getResultParams().put("teachername" + i , teacherDetails.getTeachername());
-				   result.getResultParams().put("guardian" + i , teacherDetails.getRemarks());
-				   result.getResultParams().put("contactnumber" + i , teacherDetails.getContactnumber());
-				   result.getResultParams().put("contactnumber" + i  , teacherDetails.getContactnumber());
-				   result.getResultParams().put("designation" + i , teacherDetails.getDesignation());
-				   result.getResultParams().put("address" + i , teacherDetails.getAddress());
-				   result.getResultParams().put("employeephoto" + i , teacherDetails.getEmployeephoto());
-				   result.getResultParams().put("dateofjoining" + i , DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
-				   result.getResultParams().put("currentAcademicYear" , currentAcademicYear);
+		if (employeeIds != null) {
+			for (String id : employeeIds) {
 
-	           } else {
+				log.debug("Value of i is:{}", i);
+				teacherDetails = printIdsDAO.printMultipleIdsEmployee(id);
 
-	           }
+				if (teacherDetails != null) {
+					result.getResultParams().put("staffId" + i, DataUtil.emptyString(teacherDetails.getTeacherexternalid()));
+					result.getResultParams().put("teachername" + i, teacherDetails.getTeachername());
+					result.getResultParams().put("guardian" + i, teacherDetails.getRemarks());
+					result.getResultParams().put("contactnumber" + i, teacherDetails.getContactnumber());
+					result.getResultParams().put("contactnumber" + i, teacherDetails.getContactnumber());
+					result.getResultParams().put("designation" + i, teacherDetails.getDesignation());
+					result.getResultParams().put("address" + i, teacherDetails.getAddress());
+					result.getResultParams().put("employeephoto" + i, teacherDetails.getEmployeephoto());
+					result.getResultParams().put("dateofjoining" + i, DateUtil.dateParserddMMYYYY(teacherDetails.getDateofjoining()));
+					result.getResultParams().put("currentAcademicYear", currentAcademicYear);
+				}
 
-	           i++;
-	       }
+				i++;
+			}
+		}
 
-		result.setInitialValue(i);
-	   i = (int) (Math.ceil((float) (i) / 3));
-		result.setEndValue(i);
-	   
-	   
-	    if (teacherDetails == null) {
+		result.setTotalNumberOfRecords(i - 1);
+
+		if (teacherDetails == null) {
 			result.setSuccess(false);
-	    } else {
+		} else {
 			result.setSuccess(true);
-	    }
-	    return result;
+		}
+		return result;
 
-}
+	}
 
 	public EmployeeDetailsResponseDto viewDetailsEmployeeStaffLogin(String userName) {
 		EmployeeDetailsResponseDto result = new EmployeeDetailsResponseDto();

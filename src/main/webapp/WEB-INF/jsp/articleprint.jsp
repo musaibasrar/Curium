@@ -53,7 +53,7 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
 	
 		<!-- Loop through each student in the list -->
-		<c:forEach items="${studentDetailsBonafideList}" var="studentdetailsbonafide" varStatus="loop">
+		<c:forEach items="${studentDetailsBonafideList}" var="studentDetailsBonafide" varStatus="loop">
 		<div class="page-break">
 	<table align="center">
 <tr>
@@ -101,13 +101,13 @@ Rules for Issue Certificate, 2013]</b>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 This is to certify that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
-<c:out value="${studentdetailsbonafide.student.name}" />
+<c:out value="${studentDetailsBonafide.parents.student.name}" />
 </span>   D/o,S/o</td>
 </tr>
 <tr>
 <td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
-<c:out value="${studentdetailsbonafide.fathersname}" />
+<c:out value="${studentDetailsBonafide.parents.fathersname}" />
 </span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 </td>
 </tr>
@@ -138,20 +138,20 @@ Reference of Document
 &nbsp;&nbsp;&nbsp;1
 </td>
 <td class="borderset" style="text-align:center;">
-<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classadmittedin,'--')}">
+<c:forEach var="splt" items="${fn:split(studentDetailsBonafide.parents.student.classadmittedin,'--')}">
 						    		${splt} 
 								</c:forEach>
 								to
-<c:forEach var="splts" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+<c:forEach var="splts" items="${fn:split(studentDetailsBonafide.parents.student.classstudying,'--')}">
 						    		${splts} 
 								</c:forEach>								
 </td>
 <td class="borderset" style="text-align:center;">
-From ${studentdetailsbonafide.student.yearofadmission} to ${studentdetailsbonafide.student.promotedyear}
+From ${studentDetailsBonafide.parents.student.yearofadmission} to ${studentDetailsBonafide.parents.student.promotedyear}
 
 </td>
 <td class="borderset" style="text-align:center;">
-${studentdetailsbonafide.student.admissionnumber}
+${studentDetailsBonafide.parents.student.admissionnumber}
 </td>
 </tr>
 </table>
@@ -180,26 +180,26 @@ Reference of Document
 &nbsp;&nbsp;&nbsp;1
 </td>
 <td class="borderset">
-<%-- <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+<%-- <c:forEach var="splt" items="${fn:split(studentDetailsBonafide.parents.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach> --%>
 								SSLC
 </td>
 <td class="borderset" style="text-align:center;">
-${studentdetailsbonafide.student.promotedyear}
+${studentDetailsBonafide.parents.student.promotedyear}
 </td>
 <td class="borderset">
 passed
 </td>
 <td class="borderset" style="text-align:center;">
-${studentdetailsbonafide.student.admissionnumber}
+${studentDetailsBonafide.parents.student.admissionnumber}
 </td>
 </tr>
 </table>	
 <table align="center">
 <tr><td><br></td></tr>
 <tr><td>
-Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;${studentdetailsbonafide.student.name}
+Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;${studentDetailsBonafide.parents.student.name}
 </td></tr>
 <tr><td><br></td></tr>
 <tr><td><br></td></tr>

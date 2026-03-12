@@ -429,7 +429,7 @@
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.trClass').length;
-			alert(tdLength);
+			// alert(tdLength);
 			if (length > trLength) {
 
 				$('.chcktbl:not(:checked)').attr('disabled', true);

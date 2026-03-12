@@ -159,13 +159,12 @@ public class EmployeeActionAdapter {
     }
     public void printMultipleEmployees() {
 
-        StudentIdsDto studentIdsDto = new StudentIdsDto();
-        studentIdsDto.setStudentIds(request.getParameterValues("employeeIDs"));
+    	EmployeeIdsDto employeeIdsDto = new EmployeeIdsDto();
+    	employeeIdsDto.setEmployeeIds(request.getParameterValues("employeeIDs"));
 
-        PrintMultipleEmployeesResponseDto result = employeeService.printMultipleEmployees(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+        PrintMultipleRecordsResponseDto result = employeeService.printMultipleEmployees(employeeIdsDto, httpSession.getAttribute("currentAcademicYear").toString());
         if(result.isSuccess()) {
-            httpSession.setAttribute("iInitial", result.getInitialValue());
-            httpSession.setAttribute("endValue", result.getEndValue());
+            httpSession.setAttribute("totalNumberOfRecords", result.getTotalNumberOfRecords());
             for (Map.Entry<String, String> entry : result.getResultParams().entrySet()) {
                 httpSession.setAttribute(entry.getKey(), entry.getValue());
             }

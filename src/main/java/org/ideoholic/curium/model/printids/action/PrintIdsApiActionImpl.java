@@ -6,8 +6,9 @@ package org.ideoholic.curium.model.printids.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
 import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
-import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleRecordsResponseDto;
 import org.ideoholic.curium.model.employee.service.EmployeeService;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
@@ -73,9 +74,9 @@ public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 	}
 
 	@PostMapping("/printPreview")
-	public ResponseEntity<PrintMultipleEmployeesResponseDto> printPreview(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
+	public ResponseEntity<PrintMultipleRecordsResponseDto> printPreview(@RequestBody StudentIdsDto studentIdsDto, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
 
-		PrintMultipleEmployeesResponseDto result = printIdsService.printMultiple(studentIdsDto,currentAcademicYear);
+		PrintMultipleRecordsResponseDto result = printIdsService.printMultiple(studentIdsDto,currentAcademicYear);
 		return ResponseEntity.ok(result);
 	}
 	
@@ -86,8 +87,8 @@ public class PrintIdsApiActionImpl implements PrintIdsApiAction {
 	}
 	
 	@PostMapping("/printPreviewEmployee")
-	public ResponseEntity<PrintMultipleEmployeesResponseDto> printpreviewemployee(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
-		PrintMultipleEmployeesResponseDto result = employeeService.printMultipleEmployees(studentIdsDto,currentAcademicYear);
+	public ResponseEntity<PrintMultipleRecordsResponseDto> printpreviewemployee(@RequestBody EmployeeIdsDto employeeIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
+		PrintMultipleRecordsResponseDto result = employeeService.printMultipleEmployees(employeeIdsDto,currentAcademicYear);
 		return ResponseEntity.ok(result);
 	}
 	

@@ -47,15 +47,10 @@ for(Cookie cookie : cookies){
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 		%>
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
-			
-		 <c:set var="iInitial" value="${iInitial}"/>
-         <c:set var="limit" value="1"/>
                         
-          <c:forEach begin="1" end="${endValue}">
-                        <%!                        
-                            int i = 1;
-                        %>
-			<c:if test="${limit < iInitial}">	/
+          <c:forEach begin="1" end="${totalNumberOfRecords}">
+                     <%!  int i = 1;  %> <!-- Variable i is available to all methods and expressions in the JSP page  -->
+          
 <div style="border:2px solid black;padding:5px;">
 <table width="100%" style="border:0px;">
 <tr style="border:0px;">
@@ -164,17 +159,12 @@ Income</td>
 
 </table>
 </div>
- </c:if>
    <% i = i + 1;%>
-                        <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
                     <% i = 1;%>
-                    <c:set var="iInitial" value="1"/>
-                        <c:set var="limit" value="1"/>
-                         
-                            <button  onclick="window.print()"
-                                    >Print</button>     
+
+                            <button  onclick="window.print()">Print</button>     
                        
  </form>                        
 </body>

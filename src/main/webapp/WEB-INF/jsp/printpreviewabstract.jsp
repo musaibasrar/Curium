@@ -420,27 +420,6 @@ for(Cookie cookie : cookies){
         font-size: 16px;
       }
       
-/* .containerschoolname {
-		padding: 2px 5px;
-} */
-    </style>
-
-<style>
-    /* CSS to display tables side by side */
-   /* .table-container {
-      display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
-    
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
-    
-    /* CSS for table styling */
-    
-    
-    
-    
     .vertical-line {
       border-left: 2px solid #350c76; /* Add a vertical line */
     }
@@ -452,14 +431,10 @@ for(Cookie cookie : cookies){
        
         <form action="/school/" method="post" id="form1" class="bodymargin">
 			
-		 <c:set var="iInitial" value="${iInitial}"/>
-         <c:set var="limit" value="1"/>
                         
-          <c:forEach begin="1" end="${endValue}">
-                        <%!                        
-                            int i = 1;
-                        %>
-			<c:if test="${limit < iInitial}">	/
+          <c:forEach begin="1" end="${totalNumberOfRecords}">
+           <%!  int i = 1;  %> <!-- Variable i is available to all methods and expressions in the JSP page  -->
+
 	    
 	    <table>
 <tr>
@@ -713,14 +688,10 @@ for(Cookie cookie : cookies){
   </tr>
 </table>
 </div>
- </c:if>
    <% i = i + 1;%>
-                        <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
                     <% i = 1;%>
-                    <c:set var="iInitial" value="1"/>
-                        <c:set var="limit" value="1"/>
   
                    <table  width="70%"  id="table11" align="left">
                     <tr>

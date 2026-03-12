@@ -6,8 +6,9 @@ package org.ideoholic.curium.model.printids.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.employee.dto.EmployeeIdsDto;
 import org.ideoholic.curium.model.employee.dto.EmployeesWithSalaryResponseDto;
-import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleRecordsResponseDto;
 import org.ideoholic.curium.model.printids.dto.ParentCardResponsDto;
 import org.ideoholic.curium.model.printids.dto.PrintIdsDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
@@ -30,10 +31,10 @@ public interface PrintIdsApiAction {
 
 	ResponseEntity<SearchStudentResponseDto> searchDetails(@RequestBody SearchStudentDto searchStudentDto,@RequestHeader(value = "branchid") String branchId);
 
-	ResponseEntity<PrintMultipleEmployeesResponseDto> printPreview(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
+	ResponseEntity<PrintMultipleRecordsResponseDto> printPreview(@RequestBody StudentIdsDto studentIdsDto, @RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
 	ResponseEntity<EmployeesWithSalaryResponseDto> generateIdsEmployees(@RequestHeader(value = "branchid") String branchId);
 	
-	ResponseEntity<PrintMultipleEmployeesResponseDto> printpreviewemployee(@RequestBody StudentIdsDto studentIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
+	ResponseEntity<PrintMultipleRecordsResponseDto> printpreviewemployee(@RequestBody EmployeeIdsDto employeeIdsDto,@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
 }

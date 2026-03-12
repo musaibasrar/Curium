@@ -17,7 +17,7 @@ import org.ideoholic.curium.model.documents.dto.TcResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.service.DocumentService;
-import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleRecordsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.Constants;
@@ -249,10 +249,9 @@ public class DocumentActionAdapter {
 
 		StudentIdsDto studentIdsDto = new StudentIdsDto();
 		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
-		PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = documentService.printAdmissionAbstract(studentIdsDto,httpSession.getAttribute("currentAcademicYear").toString());
+		PrintMultipleRecordsResponseDto printMultipleEmployeesResponseDto = documentService.printAdmissionAbstract(studentIdsDto, httpSession.getAttribute("currentAcademicYear").toString());
 	    if(printMultipleEmployeesResponseDto.isSuccess()) {
-	    	  httpSession.setAttribute("iInitial", printMultipleEmployeesResponseDto.getInitialValue());
-	    	  httpSession.setAttribute("endValue", printMultipleEmployeesResponseDto.getEndValue());
+	    	  httpSession.setAttribute("totalNumberOfRecords", printMultipleEmployeesResponseDto.getTotalNumberOfRecords());
 	    	  for (Map.Entry<String, String> entry : printMultipleEmployeesResponseDto.getResultParams().entrySet()) {
 	                httpSession.setAttribute(entry.getKey(), entry.getValue());
 	            }
