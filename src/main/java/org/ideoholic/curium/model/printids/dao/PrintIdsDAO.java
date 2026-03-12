@@ -11,24 +11,22 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.repositories.CardRepository;
 import org.ideoholic.curium.repositories.ParentsRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class PrintIdsDAO {
 
-	@Autowired
-	private ParentsRepository parentsRepository;
+	private final ParentsRepository parentsRepository;
 
-	@Autowired
-	private TeacherRepository teacherRepository;
+	private final TeacherRepository teacherRepository;
 
-	@Autowired
-	private CardRepository cardRepo;
+	private final CardRepository cardRepo;
 
 	@Transactional
 	public Parents printMultipleIds(String id) {

@@ -8,9 +8,8 @@ import java.util.Map;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_ABSENT)
-public class PrintMultipleEmployeesResponseDto {
-    private int initialValue;
-    private int endValue;
+public class PrintMultipleRecordsResponseDto {
+    private int totalNumberOfRecords;
     private boolean success;
     private Map<String, String> resultParams = new HashMap<>();
 }

@@ -1,4 +1,5 @@
 <%@page import="java.lang.String"%>
+<%@page import = "java.util.logging.Logger" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -278,27 +279,6 @@
 }
 </style>
 
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable({
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 500,
-                    "aoColumnDefs": [
-                        {'bSortable': false, 'aTargets': [0]}
-                    ]
-
-                });
-            });
-        </script>
         
 <script type="text/javascript">
 
@@ -479,18 +459,19 @@ public String formatAddress(Object rawAttr, int maxChars) {
        
         <form action="/school/" method="post" id="form1" class="bodymargin">
 			
-		 <c:set var="iInitial" value="${iInitial}"/>
-         <c:set var="limit" value="1"/>
-                        
-          <c:forEach begin="1" end="${iInitial}">
-                        <%!                        
-                            int i = 1;
-                        %>
+         <c:forEach begin="1" end="${totalNumberOfRecords}">
+           <%!  int i = 1;  %> <!-- Variable i is available to all methods and expressions in the JSP page  -->
            <%
 			    Object addrObj = request.getSession().getAttribute("address" + i);
 			    String formatted = formatAddress(addrObj, 20);
+			    
+			    Logger logger = Logger.getLogger(this.getClass().getName());
+			    String message = "Loop values { "
+			            + "totalNumberOfRecords = " + pageContext.findAttribute("totalNumberOfRecords")
+			            + "loop counter = " + i
+			            + "formatted address = " + formatted;
+			    logger.info( message );
 			%>
-			<c:if test="${limit < iInitial}">	
 
   <!-- Card Example (Repeat this div for each card) -->
   <div class="card" style="
@@ -581,14 +562,10 @@ This is the fixed height pattern
     <div style="font-weight: bold; font-size: 11px; margin-top: 2px;">Principal</div>
  </div>
 </div>
- </c:if>
    <% i = i + 1;%>
-                        <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
                     <% i = 1;%>
-                    <c:set var="iInitial" value="1"/>
-                        <c:set var="limit" value="1"/>
   
                    <table  width="70%"  id="table11" align="left">
                     <tr>

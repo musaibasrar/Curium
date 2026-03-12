@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class EmployeeIdsDto {
-private String[] employeeIds;
+	private String[] employeeIds;
 }

@@ -40,6 +40,17 @@ public class DataUtil {
         }
         return  target;
     }
+    
+    public static String emptyString(Integer source){
+        String target="";
+        if(source==null){
+            target="";
+        }
+        else{
+            target=source.toString();
+        }
+        return  target;
+    }
     /**
      *
      * @param src

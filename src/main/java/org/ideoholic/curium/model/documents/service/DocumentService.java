@@ -38,6 +38,7 @@ import org.ideoholic.curium.model.documents.dto.TransferCertificateDto;
 import org.ideoholic.curium.model.documents.dto.TransferCertificateResponseDto;
 import org.ideoholic.curium.model.documents.dto.TransferStatus;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.employee.dto.PrintMultipleRecordsResponseDto;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.printids.dao.PrintIdsDAO;
@@ -47,23 +48,27 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdsDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.ideoholic.curium.model.employee.dto.PrintMultipleEmployeesResponseDto;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class DocumentService {
-
-	@Autowired
-	private StandardService standardService;
 	
-	@Autowired
-	private DocumentDAO documentDAO;
 
-	private HttpServletResponse response;
+	private final DocumentDAO documentDao;
 	
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
+	private final PrintIdsDAO printIdsDao;
+
+	private final StandardService standardService;
+	
+	private final StudentDetailsDAO studentDetailsDao;
+
+	private final HttpServletResponse response;
+	
 	
 	/**
     * Size of a byte buffer to read/write file
@@ -142,7 +147,7 @@ public class DocumentService {
 			 tc.setDateofissues(dateOfTc);
 			 tc.setNoofissues(1);
 			 
-			 Transfercertificate transferCertificate = documentDAO.getTransferCertificateDetails(tc.getSid()); 
+			 Transfercertificate transferCertificate = documentDao.getTransferCertificateDetails(tc.getSid()); 
 			 if(transferCertificate != null){
 				 String getStudentInfo  = "from Parents as parents where parents.student.sid="+studentId;
 				 parents = studentDetailsDao.getStudentRecords(getStudentInfo);
@@ -177,7 +182,7 @@ public class DocumentService {
 				 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
 				 return transferCertificateResponseDto;
 			 }else {
-					transferCertificateString = documentDAO.generateTransferCertificate(tc,student);
+					transferCertificateString = documentDao.generateTransferCertificate(tc,student);
 			}
 		 
 		 
@@ -315,7 +320,7 @@ public class DocumentService {
 			Parents parents = new Parents();
 			Transfercertificate tc = new Transfercertificate();
 
-			tc = documentDAO.getTransferCertificateDetails(studentId);
+			tc = documentDao.getTransferCertificateDetails(studentId);
 
 			String getStudentInfo = "from Parents as parents where parents.student.sid=" + studentId;
 			parents = studentDetailsDao.getStudentRecords(getStudentInfo);
@@ -353,7 +358,7 @@ public class DocumentService {
 
 	public SearchStudentResponseDto searchForStudents(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = SearchStudentResponseDto.builder().build();
-		List<Parents> searchStudentList = new ArrayList<Parents>();
+		List<Parents> searchStudentList = new ArrayList<>();
 		if (branchid != null) {
 			String queryMain = "From Parents as parents where";
 			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
@@ -396,7 +401,7 @@ public class DocumentService {
 						+ " AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.branchid="
 						+ Integer.parseInt(branchid)
 						+ " order by parents.student.admissionnumber ASC";
-				System.out.println("QUERY*********** " + queryMain);
+				log.debug("QUERY*********** {}", queryMain);
 				searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 			}
 			searchStudentResponseDto.setSuccess(true);
@@ -678,7 +683,7 @@ public class DocumentService {
 			outStream.close();
 			return ResultResponse.builder().success(true).build();
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error(e.getMessage(), e);
 		}
 		return ResultResponse.builder().success(false).build();
 	}
@@ -687,7 +692,7 @@ public class DocumentService {
 	public SearchStudentResponseDto multiClassSearchAdmissoinReport(StudentNameSearchDto studentNameSearchDto,String branchid) {
 
 		SearchStudentResponseDto searchStudentResponseDto= new SearchStudentResponseDto();
-		List<Parents> searchStudentList = new ArrayList<Parents>();
+		List<Parents> searchStudentList = new ArrayList<>();
 		
 		if(branchid!=null){
 		
@@ -747,7 +752,7 @@ public class DocumentService {
 			String branchid, String currentAcademicYear) {
 
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
-		List<Parents> searchStudentList = new ArrayList<Parents>();
+		List<Parents> searchStudentList = new ArrayList<>();
 
 		if (branchid != null) {
 
@@ -834,7 +839,6 @@ public class DocumentService {
 	public ParentDto generateStudyCertificate(StudentIdsDto studentIdsDto, String academicyear, String branchId, String userId) {
 		ParentDto parentDto = null;
 		String[] studentIds = studentIdsDto.getStudentIds();
-		String bonafidePage = null;
 		
 		List<Parents> parentsList = new ArrayList<>();
 
@@ -854,15 +858,12 @@ public class DocumentService {
 					studyCertificate.setSid(parents.getStudent().getSid());
 					studyCertificate.setUid(parents.getStudent().getStudentexternalid());
 					studyCertificate.setUserid(Integer.parseInt(userId));
-					boolean success = documentDAO.add(studyCertificate);
+					boolean success = documentDao.add(studyCertificate);
 					if (success) {
 						parentDto = new ParentDto();
 						parentDto.setParents(parents);
 						parentsList.add(parents);
 						parentDto.setParentsList(parentsList);
-						bonafidePage = "studycertificateprint";
-					} else {
-						bonafidePage = "error";
 					}
 				}
 			}
@@ -873,8 +874,8 @@ public class DocumentService {
 		 
 		 public CharacterResponseDto viewTcDetail() {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				List<Transfercertificate> tc = documentDAO.getTCertificateDetails();
-				List<Integer> sid = new ArrayList<Integer>(); 
+				List<Transfercertificate> tc = documentDao.getTCertificateDetails();
+				List<Integer> sid = new ArrayList<>(); 
 				for (Transfercertificate transfercertificate : tc) {
 					sid.add(transfercertificate.getSid());
 				}
@@ -903,8 +904,8 @@ public class DocumentService {
 			public CharacterResponseDto printTcList(CharacterDto characterDto, String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
 				String[] feesIds = characterDto.getSIds();
-				List<Transfercertificate> tc = documentDAO.getTCertificateDetails();
-				List<Integer> sid = new ArrayList<Integer>(); 
+				List<Transfercertificate> tc = documentDao.getTCertificateDetails();
+				List<Integer> sid = new ArrayList<>(); 
 				for (String id : feesIds) {
 				    sid.add(Integer.parseInt(id));
 				}
@@ -932,7 +933,7 @@ public class DocumentService {
 
 			public CharacterResponseDto viewScDetail(String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				List<StudyCertificate>  studyCertificate = documentDAO.getStudentCertificateList(Integer.parseInt(branchId));
+				List<StudyCertificate>  studyCertificate = documentDao.getStudentCertificateList(Integer.parseInt(branchId));
 				characterResponseDto.setStudyCertificate(studyCertificate);
 				return characterResponseDto;
 			}
@@ -940,16 +941,15 @@ public class DocumentService {
 			public CharacterResponseDto printScList(CharacterDto characterDto, String branchId) {
 				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
 				String[] sIds = characterDto.getSIds();
-				List<StudyCertificate> listStudyCertificate = documentDAO.getListOfIssuedStudyCertificate(sIds, Integer.parseInt(branchId));
+				List<StudyCertificate> listStudyCertificate = documentDao.getListOfIssuedStudyCertificate(sIds, Integer.parseInt(branchId));
 				characterResponseDto.setStudyCertificate(listStudyCertificate);
 				characterResponseDto.setSuccess(true);
 				return characterResponseDto;
 			}
 
-			public PrintMultipleEmployeesResponseDto printAdmissionAbstract(StudentIdsDto studentIdsDto, String string) {
-				PrintMultipleEmployeesResponseDto printMultipleEmployeesResponseDto = new PrintMultipleEmployeesResponseDto();
+			public PrintMultipleRecordsResponseDto printAdmissionAbstract(StudentIdsDto studentIdsDto, String string) {
+				PrintMultipleRecordsResponseDto printMultipleEmployeesResponseDto = new PrintMultipleRecordsResponseDto();
 		        String[] studentIDs = studentIdsDto.getStudentIds();
-		        List<Long> ids = new ArrayList<Long>();
 		        Parents parentsDetails = new Parents();
 		     
 		        	
@@ -958,9 +958,8 @@ public class DocumentService {
 		          for (String id : studentIDs) {
 
 		              
-		               System.out.println("Value of i is " + i);
-		               int sid = Integer.valueOf(id);
-		               parentsDetails = new PrintIdsDAO().printMultipleIds(id);
+		        	  log.debug("Value of i is {}", i);
+		               parentsDetails = printIdsDao.printMultipleIds(id);
 		               
 		               //PersonalDetails personal = new PersonalDetailsDAO().printMultiple(pid);
 
@@ -996,20 +995,14 @@ public class DocumentService {
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("notcissued" + i + "", DataUtil.emptyString(parentsDetails.getStudent().getNotcissued() != null? parentsDetails.getStudent().getNotcissued().toString(): ""));
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("datetcissued" + i + "",DataUtil.emptyString(DateUtil.dateParserddMMYYYY(parentsDetails.getStudent().getDatetcissued())));
 		            	   printMultipleEmployeesResponseDto.getResultParams().put("remark" + i + "",parentsDetails.getStudent().getRemarks());
-		            	   printMultipleEmployeesResponseDto.getResultParams().put("age" + i + "",parentsDetails.getStudent().getAge().toString());
+		            	   printMultipleEmployeesResponseDto.getResultParams().put("age" + i + "",DataUtil.emptyString(parentsDetails.getStudent().getAge()));
 		            	   //result = true;
-		               } else {
-
-		                  
-		                   //result = false;
 		               }
 
 		               i++;
 		           }
 		       
-		       printMultipleEmployeesResponseDto.setInitialValue(i);
-		       i = (int) (Math.ceil((float) (i) / 3));
-		       printMultipleEmployeesResponseDto.setEndValue(i);
+		       printMultipleEmployeesResponseDto.setTotalNumberOfRecords(i - 1);
 		       
 		       
 		        if (parentsDetails == null) {
