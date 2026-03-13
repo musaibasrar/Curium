@@ -74,7 +74,7 @@ body {
 }
 
 td{
-font-size:16px;
+font-size:17px;
 }
 
 </style>
@@ -106,16 +106,16 @@ for(Cookie cookie : cookies){
         <h3 style="margin:0px">${collegename}</h3>
          
          <hr>
-        <h3 style="margin:0px;color:red;">TRANSFER CERTIFICATE</h3>
-        <p style="margin:0px">OR ANNEXURE TO THE TRANSFER CERTIFICATE</p>
-        <p style="margin:0px">Two Year Pre-University Course</p>
-        <p style="margin:0px">(Under the Board of Pre-University education in Bengaluru Karnataka)</p>
+        <h3 style="margin:5px;color:red;">TRANSFER CERTIFICATE</h3>
+        <p style="margin:5px">OR ANNEXURE TO THE TRANSFER CERTIFICATE</p>
+        <p style="margin:5px">Two Year Pre-University Course</p>
+        <p style="margin:5px">(Under the Board of Pre-University education in Bengaluru Karnataka)</p>
         <hr>
     </div>
 
     <!-- TC Number -->
     <div class="tc-number">
-        <b>T.C. No:</b>&nbsp;&nbsp; <c:out value="${tcno}" />
+        <b>T.C. No:&nbsp;&nbsp; <c:out value="${tcno}" /></b>
     </div>
 
     <!-- Main Table -->
@@ -239,7 +239,7 @@ b) No of days he/she was present </td>
     <!-- Footer -->
     <div class="tc-footer">
         <div class="signature">
-            <p>________________________</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
             <p><b>Principal</b></p>
         </div>
     </div>
