@@ -301,21 +301,20 @@ public class MarksDetailsServiceBackup {
 		//
 		String exam = request.getParameter("exam");
 		String subject = request.getParameter("subject");
+		String academicYear = request.getParameter("academicyear");
 		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
 
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),0,0,academicYear);
 			for (Marks marks : singleMarksDetails) {
 				System.out.println("The student id is " + parents.getStudent().getSid());
 				System.out.println("The marks sid is " + marks.getSid());
-				if (marks.getSubid() == Integer.parseInt(subject) && marks.getExamid() == Integer.parseInt(exam)) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
-				}
 			}
 		}
 

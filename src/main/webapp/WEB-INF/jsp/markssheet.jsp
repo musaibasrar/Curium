@@ -478,7 +478,7 @@ for(Cookie cookie : cookies){
 								                                    <%-- <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td> --%>
 								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
 								                                    <%-- <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" /> --%>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
+								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}${dateParts[1]}</td>
 								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> --%>
 								                                </tr>
 								                            </c:forEach>
@@ -886,7 +886,7 @@ for(Cookie cookie : cookies){
 					<td></td>
 					<td align="left">
 					Place:&nbsp;Ratlam<br><br>
-					Date:&nbsp;03/04/2024</td>	
+					Date:&nbsp;25/03/2025</td>	
 					<td align="centre">Signature<br><br>Class Teacher</td>
 					<td align="centre">Signature<br><br>Head Mistress</td>
 				</tr>

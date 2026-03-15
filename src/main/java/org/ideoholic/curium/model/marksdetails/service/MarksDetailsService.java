@@ -64,9 +64,10 @@ public class MarksDetailsService {
 
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String[] studentsMarks = request.getParameterValues("studentMarks");
-		String exam = request.getParameter("exam");
+		String[] examidName = request.getParameter("exam").split("__");
 		String subject = request.getParameter("subject");
-		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
+		String classSearch = request.getParameter("classsearchselected");
+		System.out.println("the subject id is " + subject + ", and exam id is " + examidName[0]);
 		int sizeOfArray = 0;
 		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
 		List<Integer> ids = new ArrayList<Integer>();
@@ -105,10 +106,12 @@ public class MarksDetailsService {
 			Set mapSet = mapOfMarks.entrySet();
 			Iterator mapIterator = mapSet.iterator();
 
-			int examid = Integer.parseInt(exam);
+			int examid = Integer.parseInt(examidName[0]);
 			int subid = Integer.parseInt(subject);
 			List<Marks> marksList = new ArrayList<Marks>();
 
+			Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),classSearch,examidName[1],subid);
+			
 			while (mapIterator.hasNext()) {
 				Map.Entry mapEntry = (Entry) mapIterator.next();
 				System.out.println("The id is " + mapEntry.getKey() + "and marks is " + mapEntry.getValue());
@@ -116,7 +119,7 @@ public class MarksDetailsService {
 				String test = (String) mapEntry.getValue();
 				Marks marks = new Marks();
 				marks.setExamid(examid);
-				marks.setSubid(subid);
+				marks.setSubid(subjectDetails.getSubid());
 				marks.setSid((int) mapEntry.getKey());
 				marks.setMarksobtained(Integer.parseInt(test));
 				String currentYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
@@ -198,6 +201,8 @@ public class MarksDetailsService {
 		// get the list for all the midterms
 		List<Exams> examList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		request.setAttribute("listExam", examList);
+		
+		request.setAttribute("classselected", addClass);
 		}
 
 	}
@@ -300,23 +305,25 @@ public class MarksDetailsService {
 		System.out.println("Total Number of Students" + searchStudentList.size());*/
 
 		//
-		String exam = request.getParameter("exam");
+		String[] examIdName = request.getParameter("exam").split(":");
 		String subject = request.getParameter("subject");
-		System.out.println("the subject id is " + subject + ", and exam id is " + exam);
-
+		String academicYear = request.getParameter("academicyear");
+		System.out.println("the subject id is " + subject + ", and exam id & Name is " + examIdName);
+		
+		Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), addClass, examIdName[1], Integer.parseInt(subject));
+		int subjectDetailsId = subjectDetails.getSubid();
+		
 		List<Parents> newStudentList = new ArrayList<Parents>();
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
-
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid());
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]),academicYear);
+			//List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),academicYear);
 			for (Marks marks : singleMarksDetails) {
 				System.out.println("The student id is " + parents.getStudent().getSid());
 				System.out.println("The marks sid is " + marks.getSid());
-				if (marks.getSubid() == Integer.parseInt(subject) && marks.getExamid() == Integer.parseInt(exam)) {
 					newStudentList.add(parents);
 					newMarksDetails.add(marks);
 					System.out.println("Marks Details " + marks.getMarksobtained());
-				}
 			}
 		}
 
@@ -325,7 +332,9 @@ public class MarksDetailsService {
 		request.setAttribute("subjectselected", request.getParameter("subjectselected"));
 		request.setAttribute("examselected", request.getParameter("examselected"));
 		request.setAttribute("subjectid", subject);
-		request.setAttribute("examid", exam);
+		request.setAttribute("examid", examIdName[0]);
+		request.setAttribute("examname", examIdName[1]);
+		request.setAttribute("classselected", addClass);
 		/*
 		 * for(int i=0; i<marksDetails.size(); i++){ System.out.println(
 		 * "Marks details "+marksDetails.get(i).getMarksobtained()); }
@@ -352,8 +361,9 @@ public class MarksDetailsService {
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String[] studentsMarks = request.getParameterValues("studentMarks");
 		String[] marksid = request.getParameterValues("marksid");
-		String exam = request.getParameter("examidselected");
+		String[] examidName = request.getParameter("examidnameselected").split("__");
 		String subject = request.getParameter("subjectidselected");
+		String classSearch = request.getParameter("classselected");
 		int sizeOfArray = 0;
 		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<Integer, Map<Integer, String>>();
 		List<Integer> ids = new ArrayList<Integer>();
@@ -394,10 +404,12 @@ public class MarksDetailsService {
 
 			}
 
-			int examid = Integer.parseInt(exam);
+			int examid = Integer.parseInt(examidName[0]);
 			int subid = Integer.parseInt(subject);
 			List<Marks> marksList = new ArrayList<Marks>();
 
+			Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),classSearch,examidName[1],subid);
+			
 			for (Entry<Integer, Map<Integer, String>> entry : mapOfMarksid.entrySet()) {
 				Integer marksID = entry.getKey();
 				Map<Integer, String> value = entry.getValue();
@@ -412,7 +424,7 @@ public class MarksDetailsService {
 					Marks marks = new Marks();
 					marks.setMarksid(marksID);
 					marks.setExamid(examid);
-					marks.setSubid(subid);
+					marks.setSubid(subjectDetails.getSubid());
 					marks.setSid(studentId);
 					marks.setMarksobtained(Integer.parseInt(marksObtained));
 					String currentAcademicYear = (String) httpSession.getAttribute(CURRENTACADEMICYEAR);
@@ -514,7 +526,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)
@@ -1228,7 +1240,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										
@@ -1394,8 +1406,33 @@ public class MarksDetailsService {
 											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_F");
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
+											String grade=null;
+											switch(marksObtained/5) {
 											
-											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_P");
+											 case 10:
+											    case 9:
+											        grade = "A1";
+											        break;
+											    case 8:
+											        grade = "A2";
+											        break;
+											    case 7:
+											        grade = "B1";
+											        break;
+											    case 6:
+											        grade = "B2";
+											        break;
+											    case 5:
+											        grade = "C1";
+											        break;
+											    case 4:
+											        grade = "C2";
+											        break;
+											    default:
+											        grade = "F"; 
+											
+											}
+											subMarks.put(sub.getSubjectname(), Integer.toString(marks.getMarksobtained())+"/"+sub.getMaxmarks()+""+"_"+grade);
 											totalObtainedMarks = totalObtainedMarks+marks.getMarksobtained();
 										}else if(marksObtained == 999) {
 											subMarks.put(sub.getSubjectname(), " _AB");
@@ -1581,7 +1618,7 @@ public class MarksDetailsService {
 							
 							if(marksObtainedSubjectAllExamsfinalTermTwo!=0) {
 								
-								switch(marksObtainedSubjectAllExamsfinalTermTwo/5) {
+								switch(marksObtainedSubjectAllExamsfinalTermTwo/10) {
 								
 								 case 10:
 								    case 9:

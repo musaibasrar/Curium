@@ -332,9 +332,9 @@ for(Cookie cookie : cookies){
 								                                <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
 								                            </tr>
 								                        </c:forEach>
-								                        <tr style="border-top: 1px solid black;">
+								                        <!-- <tr style="border-top: 1px solid black;">
 								                            <td style="border: 1px solid black;text-align: left;">Total</td>
-								                        </tr>
+								                        </tr> -->
 								                        <!-- <tr style="border: 1px solid black;">
 								                            <td style="border: 1px solid black;text-align: left;">Total Marks</td>
 								                        </tr> -->
@@ -356,7 +356,7 @@ for(Cookie cookie : cookies){
 								                    <c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
 								                    <c:out value="${examParts[1]}"/></th>
 								                </c:forEach>
-								                <th style="border: 1px solid black;">Marks Obtained</th>
+								                <th style="border: 1px solid black;">Over All Grade</th>
 								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
@@ -370,12 +370,13 @@ for(Cookie cookie : cookies){
 								                                <tr style="border: 1px solid black;">
 								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
+								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td> --%>
+								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> 
 								                                </tr>
 								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;">
+								                            <%-- <tr style="border-top: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr>
+								                            </tr> --%>
 								                           <%--  <tr style="border: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
 								                            </tr> --%>
@@ -394,13 +395,13 @@ for(Cookie cookie : cookies){
 								                                    <%-- <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td> --%>
 								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
 								                                    <%-- <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" /> --%>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
-								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> --%>
+								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td> --%>
+								                                    	 <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
 								                                </tr>
 								                            </c:forEach>
-								                             <tr style="border-top: 1px solid black;">
+								                             <%-- <tr style="border-top: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${finaltermmarks.totalMarksObtained}</td>
-								                            </tr>
+								                            </tr> --%>
 								                            <!-- <tr style="border: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">0</td>
 								                            </tr> -->
@@ -440,7 +441,7 @@ for(Cookie cookie : cookies){
 								                    <th style="border: 1px solid black;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
 								                    <c:out value="${examParts[1]}"/></th>
 								                </c:forEach>
-								                <th style="border: 1px solid black;">Marks Obtained</th>
+								                <th style="border: 1px solid black;">Over All Grade</th>
 								                <!-- <th style="border: 1px solid black;">Grade</th> -->
 								            </tr>
 								        </thead>
@@ -454,12 +455,13 @@ for(Cookie cookie : cookies){
 								                                <tr style="border: 1px solid black;">
 								                                    <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
 								                                    <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" />
-								                                    <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td>
+								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dataSubParts[0]}</td> --%>
+								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
 								                                </tr>
 								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;">
+								                            <%-- <tr style="border-top: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarksObtained}</td>
-								                            </tr>
+								                            </tr> --%>
 								                           <%--  <tr style="border: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.totalMarks}</td>
 								                            </tr> --%>
@@ -478,13 +480,13 @@ for(Cookie cookie : cookies){
 								                                    <%-- <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td> --%>
 								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
 								                                    <%-- <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" /> --%>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
-								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> --%>
+								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td> --%>
+								                                    	<td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
 								                                </tr>
 								                            </c:forEach>
-								                             <tr style="border-top: 1px solid black;">
+								                             <%-- <tr style="border-top: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${finaltermmarks.totalMarksObtained}</td>
-								                            </tr>
+								                            </tr> --%>
 								                        </table>
 								                    </td>
 								                </c:forEach>
@@ -522,8 +524,8 @@ for(Cookie cookie : cookies){
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
 								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "4" step="1">
-								                    <th style="border: 1px solid black;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
-								                    <c:out value="${examParts[1]}"/></th>
+								                    <%-- <th style="border: 1px solid black;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
+								                    <c:out value="${examParts[1]}"/></th> --%>
 								                    <!-- <th style="border: 1px solid black;">%<br>&nbsp;</th> -->
 								                <th style="border: 1px solid black;">Grade</th>
 								                </c:forEach>
@@ -532,7 +534,7 @@ for(Cookie cookie : cookies){
 								        
 								        <tbody>
 								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "4" step="1">
+								              <%--   <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "4" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -546,8 +548,8 @@ for(Cookie cookie : cookies){
 								                            </tr>
 								                        </table>
 								                    </td>
-								                </c:forEach>
-								               <%--  <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "4" step="1">
+								                </c:forEach> --%>
+								               <%-- old <c:forEach items="${Parents.exammarks}" var="exammarks" begin="4" end= "4" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -574,10 +576,10 @@ for(Cookie cookie : cookies){
 								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td>
 								                                </tr>
 								                            </c:forEach>
-								                            <tr style="border-top: 1px solid black;">
+								                            <%-- <tr style="border-top: 1px solid black;">
 								                                <td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
 								                            </tr>
-								                            
+								                             --%>
 								                        </table>
 								                    </td>
 								                </c:forEach>

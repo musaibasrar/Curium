@@ -366,8 +366,11 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		<td align="left" style="padding-left: 20px;">
+		
+		<c:set var="paymentParts" value="${fn:split(recieptinfo.paymenttype, ':')}" />
+		Payment Mode:&nbsp;${paymentParts[0]}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		Date&nbsp;:&nbsp;${recieptdate}&nbsp;&nbsp;&nbsp;&nbsp;Receipt No. (Manual): ${paymentParts[1]}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>

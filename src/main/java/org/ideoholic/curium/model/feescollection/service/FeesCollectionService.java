@@ -264,10 +264,11 @@ public class FeesCollectionService {
 		String chequeDate = request.getParameter("chequedate");
 		String chequeBankname = request.getParameter("chequebankname");
 		String paymentType = "Cash";
+		String narrationReceipt = request.getParameter("narrationreceipt");
 				
 			if("banktransfer".equalsIgnoreCase(paymentMethod)) {
 				ackNoVoucherNarration = " acknowledgement number: "+ackNo+" , Amount transfer date: "+transferDate;
-				paymentType = "Bank Transfer";
+				paymentType = "Bank Transfer:";
 			}else if("chequetransfer".equalsIgnoreCase(paymentMethod)) {
 				chequeNoVoucherNarration = " cheque number: "+chequeNo+" , Amount clearance date: "+chequeDate;
 				paymentType = "Cheque";
@@ -289,7 +290,7 @@ public class FeesCollectionService {
 				String[] totalAmount = studentSfsIds[i].split("_");
 				grantTotal+=DataUtil.parseLong(amountPaying[Integer.parseInt(totalAmount[1])]);
 			}
-			receiptInfo.setPaymenttype(paymentType);
+			receiptInfo.setPaymenttype(paymentType+":"+narrationReceipt);
 			receiptInfo.setFine(fineAmount);
 			receiptInfo.setMisc(miscAmount);
 			receiptInfo.setTotalamount(grantTotal+fineAmount+miscAmount);
@@ -336,7 +337,7 @@ public class FeesCollectionService {
 			transactions.setVouchertype(1);
 			transactions.setTransactiondate(receiptInfo.getDate());
 			transactions.setEntrydate(DateUtil.todaysDate());
-			transactions.setNarration("Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
+			transactions.setNarration(narrationReceipt+" Towards Fees Payment:  "+ackNoVoucherNarration+" "+chequeNoVoucherNarration);
 			transactions.setCancelvoucher("no");
 			transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).getFinancialid());
 			transactions.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
