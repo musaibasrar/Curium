@@ -92,6 +92,19 @@ span{
     width: 300px;
     font-weight: normal;
 }
+.bodymargin::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/shatabdi/images/shatabdi.jpg') no-repeat center;
+    background-position: center 15%;
+    background-size: 600px;
+    opacity: 0.1; /* Adjust opacity as needed */
+    z-index: -1; /* Keep it behind the content */
+}
 </style>
 
 
