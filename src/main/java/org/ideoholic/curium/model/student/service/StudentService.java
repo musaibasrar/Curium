@@ -565,7 +565,12 @@ public class StudentService {
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setcompulsorysubjects(compulsory.toString());
 		student.setPudetails(puDetails);
-		student.setDegreedetails(degreeDetails);
+		if (degreeDetails != null && degreeDetails.getExampassedappearance() != null) {
+			student.setDegreedetails(degreeDetails);
+		} else {
+			student.setDegreedetails(null);
+		}
+		
 		parents.setStudent(student);
 		parents.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		parents.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));

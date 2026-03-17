@@ -265,7 +265,7 @@
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="datatd"><c:out value="${status.index+1}" /></td>
