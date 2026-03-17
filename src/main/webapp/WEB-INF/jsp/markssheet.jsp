@@ -335,10 +335,24 @@ for(Cookie cookie : cookies){
 				            <div style="margin-bottom: 3px;">${Parents.parents.student.sts}</div>
 				            <div style="margin-bottom: 3px;">${Parents.parents.student.classstudying}</div>
 				            <div style="margin-bottom: 3px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></div>
-				            
-				            <div style="margin-bottom: 3px; font-size: 12px; line-height: 1.2;">
-				                Total Days: ${Parents.totalDays} | Present: ${Parents.totalPresent} | Absent: ${Parents.totalAbsent}
-				            </div>
+				             <c:set var="classsec" value="${fn:split(Parents.parents.student.classstudying, '--')}" />
+
+							<c:set var="totalDays" value="217" />
+							
+							<c:choose>
+							    <c:when test="${classsec[0] == 'VI' || classsec[0] == 'VII' || classsec[0] == 'VIII'}">
+							        <c:set var="totalDays" value="224"/>
+							    </c:when>
+							
+							    <c:when test="${classsec[0] == 'IX' || classsec[0] == 'X'}">
+							        <c:set var="totalDays" value="232"/>
+							    </c:when>
+							</c:choose>
+							
+							<div style="margin-bottom: 3px; font-size: 12px; line-height: 1.2;">
+							    Total Days: ${totalDays} | Present: ${Parents.parents.student.degreedetails.exampassedappearance} |
+							    Absent: ${totalDays - Parents.parents.student.degreedetails.exampassedappearance}
+							</div>
 				        </td>
 				        
 				        <td style="width: 10%; text-align: center; padding: 4px;">
@@ -800,20 +814,20 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td style="border: 1px solid black">Work-education(or
 							pre-vocational)</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.exampassedyear}</td>
 					</tr>
 					<tr>
 						<td style="border: 1px solid black">Art Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.exampassedregno}</td>
 					</tr>
 					<tr>
 						<td style="border: 1px solid black">Health and
 							Physical Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.exampassedresultwithclass}</td>
 					</tr>
 					<tr>
 						<td style="border: 1px solid black">Discipline</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.pumediuminstruction}</td>
 					</tr>
 					<tr>
 						<td colspan="13"
@@ -831,10 +845,10 @@ for(Cookie cookie : cookies){
 
 				<tr>
 					<td style="text-align: left;">
-					Place:&nbsp;<br><br>
-					Date:&nbsp;</td>	
-					<td align="center">Signature<br><br>Class Teacher</td>
-					<td align="center">Signature<br><br>Principal</td>
+					Place:&nbsp;<label style="font-weight: bold;">Gaya</label><br><br>
+					Date:&nbsp;<label style="font-weight: bold;">28/03/2026</label></td>		
+					<td align="center"><br><br>Class Teacher</td>
+					<td align="center"><img src="/shatabdi/images/principalsign.png" width="60" height="50"/><br>Principal</td>
 				</tr>
                     
 		</TABLE>
@@ -861,20 +875,20 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td style="border: 1px solid black">Work-education(or
 							pre-vocational)</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.subjectsqualifingexampartone}</td>
 					</tr>
 					<tr>
 						<td style="border: 1px solid black">Art Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.subjectsqualifingexamparttwo}</td>
 					</tr>
 					<tr>
 						<td style="border: 1px solid black">Health and
 							Physical Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.subjectsdegreecoursepartone}</td>
 					</tr>
 					<tr>
 						<td style="border: 1px solid black">Discipline</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;&nbsp;&nbsp;&nbsp;${Parents.parents.student.degreedetails.subjectsdegreecourseparttwo}</td>
 					</tr>
 					<tr>
 						<td colspan="13"
@@ -892,10 +906,10 @@ for(Cookie cookie : cookies){
 
 				<tr>
 					<td style="text-align: left;">
-					Place:&nbsp;<br><br>
-					Date:&nbsp;</td>	
-					<td align="center">Signature<br><br>Class Teacher</td>
-					<td align="center">Signature<br><br>Principal</td>
+					Place:&nbsp;<label style="font-weight: bold;">Gaya</label><br><br>
+					Date:&nbsp;<label style="font-weight: bold;">28/03/2026</label></td>		
+					<td align="center"><br><br>Class Teacher</td>
+					<td align="center"><img src="/shatabdi/images/principalsign.png" width="60" height="50"/><br>Principal</td>
 				</tr>
                     
 		</TABLE>
@@ -1003,24 +1017,24 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td colspan="5" style="border: 1px solid black">Work-education(or
 							pre-vocational)</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.exampassedyear}</td>
 						<td colspan="6" style="border: 1px solid black">Work-education(or
 							pre-vocational)</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.subjectsqualifingexampartone}</td>
 					</tr>
 					<tr>
 						<td colspan="5" style="border: 1px solid black">Art Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.exampassedregno}</td>
 						<td colspan="6" style="border: 1px solid black">Art Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.subjectsqualifingexamparttwo}</td>
 					</tr>
 					<tr>
 						<td colspan="5" style="border: 1px solid black">Health and
 							Physical Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.exampassedresultwithclass}</td>
 						<td colspan="6" style="border: 1px solid black">Health and
 							Physical Education</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.subjectsdegreecoursepartone}</td>
 					</tr>
 					<tr>
 						<td colspan="13"
@@ -1035,10 +1049,10 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td colspan="5" style="border: 1px solid black">Discipline
 							Term-1 [on a 3-point(A-C)grading scale]</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.pumediuminstruction}</td>
 						<td colspan="6" style="border: 1px solid black">Discipline
 							Term-2[on a 3-point(A-C)grading scale]</td>
-						<td colspan="1" style="border: 1px solid black">&nbsp;</td>
+						<td colspan="1" style="border: 1px solid black">&nbsp;${Parents.parents.student.degreedetails.subjectsdegreecourseparttwo}</td>
 					</tr>
 					<tr>
 						<td colspan="13"
@@ -1083,7 +1097,7 @@ for(Cookie cookie : cookies){
 					            <strong>School Will Reopen On</strong>
 					        </td>
 					        <td style="border: 1px solid #000; padding: 6px;text-align: left">
-					            
+					             <strong>02/04/2026 at 7:30 A.M.</strong>
 					        </td>
 					    </tr>
 					
@@ -1094,10 +1108,10 @@ for(Cookie cookie : cookies){
 
 				<tr>
 					<td style="text-align: left;">
-					Place:&nbsp;<br><br>
-					Date:&nbsp;</td>	
+					Place:&nbsp;<label style="font-weight: bold;">Gaya</label><br><br>
+					Date:&nbsp;<label style="font-weight: bold;">28/03/2026</label></td>		
 					<td align="center"><br><br>Class Teacher</td>
-					<td align="center"><br><br>Principal</td>
+					<td align="center"><img src="/shatabdi/images/principalsign.png" width="60" height="50"/><br>Principal</td>
 				</tr>
                     
 		</TABLE>
