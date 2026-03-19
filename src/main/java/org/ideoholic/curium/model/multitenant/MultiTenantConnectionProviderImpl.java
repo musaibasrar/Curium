@@ -23,6 +23,7 @@ import org.ideoholic.curium.config.DataSourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.zaxxer.hikari.HikariConfig;
@@ -35,6 +36,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MultiTenantConnectionProviderImpl
 		implements MultiTenantConnectionProvider, ServiceRegistryAwareService, HibernatePropertiesCustomizer {
 	private static final long serialVersionUID = 4368575201221677384L;
+    private static final String DEFAULT_POOL_KEY = "default";
+    private static final String ANY_POOL_KEY = "__any__";
 
 	@Autowired
 	private DataSourceConfig dataSourceConfig;
@@ -79,10 +82,9 @@ public class MultiTenantConnectionProviderImpl
 
 	@Override
 	public Connection getAnyConnection() throws SQLException {
-        String tenant = TenantContext.getCurrentTenant();
-        log.trace("getAnyConnection for tenant: {}", tenant);
-        HikariDataSource ds = getOrCreateDataSource(tenant);
-        updateLastAccess(tenant);
+        // Hibernate bootstrap path: do not bind to a tenant database here.
+        HikariDataSource ds = getOrCreateAnyDataSource();
+        updateLastAccess(ANY_POOL_KEY);
         return ds.getConnection();
 	}
 
@@ -91,21 +93,29 @@ public class MultiTenantConnectionProviderImpl
 		Connection connection = null;
 
 		String tenant = schema == null ? TenantContext.getCurrentTenant() : schema;
+        if (!StringUtils.hasLength(tenant)) {
+            throw new SQLException("Tenant schema is not resolved for current request");
+        }
 		log.trace("Creating a new connection for:{}", tenant);
 		HikariDataSource ds = getOrCreateDataSource(tenant);
 		updateLastAccess(tenant);
 		connection = ds.getConnection();
 		try {
 			if (connection != null && !connection.isClosed()) {
-				// set schema only if needed and supported by DB/driver
-				connection.setSchema(tenant);
+				// For MySQL/MariaDB, catalog maps to database and is more reliable than schema.
+				connection.setCatalog(tenant);
+				try {
+					// Keep as best-effort fallback for drivers that support schema mapping.
+					connection.setSchema(tenant);
+				} catch (SQLException e) {
+					log.debug("Could not set schema for tenant {} (non-fatal)", tenant, e);
+				}
 			} else {
 				log.error("Connection is already closed...!!!");
 			}
 		} catch (SQLException e) {
-			// Some drivers/databases may not support setSchema; log and continue.
-			log.error("Could not alter JDBC connection to specified schema [ {} ]", schema, e);
-			e.printStackTrace();
+			log.error("Could not set JDBC connection catalog/schema for tenant [ {} ]", tenant, e);
+			throw e;
 		}
 		return connection;
 	}
@@ -223,12 +233,63 @@ public class MultiTenantConnectionProviderImpl
     }
 
     private HikariDataSource getOrCreateDataSource(String tenant) {
-        tenant = tenant == null ? TenantContext.getCurrentTenant() : tenant;
+        tenant = StringUtils.hasLength(tenant) ? tenant : DEFAULT_POOL_KEY;
         // computeIfAbsent ensures only one DataSource per tenant is created
         HikariDataSource ds = tenantDataSources.computeIfAbsent(tenant, this::createTenantDataSource);
         // update last access whenever the pool is used/obtained
         updateLastAccess(tenant);
         return ds;
+    }
+
+    /**
+     * Pool used only for Hibernate bootstrap (getAnyConnection), without tenant DB suffix.
+     */
+    private HikariDataSource getOrCreateAnyDataSource() {
+        HikariDataSource ds = tenantDataSources.computeIfAbsent(ANY_POOL_KEY, this::createAnyDataSource);
+        updateLastAccess(ANY_POOL_KEY);
+        return ds;
+    }
+
+    /**
+     * Create bootstrap datasource using configured base JDBC URL as-is.
+     */
+    private HikariDataSource createAnyDataSource(String ignored) {
+        try {
+            HikariConfig cfg = new HikariConfig(getBaseHikariConfig());
+            cfg.setPoolName("curium-any");
+            cfg.setDriverClassName(baseHikariConfig.getDriverClassName());
+            cfg.setConnectionTimeout(baseHikariConfig.getConnectionTimeout());
+            cfg.setIdleTimeout(baseHikariConfig.getIdleTimeout());
+            cfg.setMaxLifetime(baseHikariConfig.getMaxLifetime());
+            cfg.setMaximumPoolSize(baseHikariConfig.getMaximumPoolSize());
+            cfg.setMinimumIdle(baseHikariConfig.getMinimumIdle());
+            cfg.setLeakDetectionThreshold(baseHikariConfig.getLeakDetectionThreshold());
+            cfg.setConnectionTestQuery(baseHikariConfig.getConnectionTestQuery());
+            cfg.setAutoCommit(baseHikariConfig.isAutoCommit());
+
+            String jdbcUrl;
+            String username;
+            String password;
+            if (dataSourceConfig == null) {
+                jdbcUrl = "jdbc:mariadb://fineractmysql:3306/";
+                username = "root";
+                password = "root";
+            } else {
+                jdbcUrl = dataSourceConfig.getJdbcUrl();
+                username = dataSourceConfig.getUsername();
+                password = dataSourceConfig.getPassword();
+            }
+
+            cfg.setJdbcUrl(jdbcUrl);
+            cfg.setUsername(username);
+            cfg.setPassword(password);
+
+            log.info("Creating Hikari pool '{}' for bootstrap -> {}", cfg.getPoolName(), jdbcUrl);
+            return new HikariDataSource(cfg);
+        } catch (Exception e) {
+            log.error("Failed to create bootstrap HikariDataSource", e);
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -254,26 +315,53 @@ public class MultiTenantConnectionProviderImpl
             String username;
             String password;
             if (dataSourceConfig == null) {
-                jdbcUrl = "jdbc:mariadb://fineractmysql:3306/" + tenant;
-				log.trace("Static Driver URL:{}", jdbcUrl);
+                jdbcUrl = "jdbc:mariadb://fineractmysql:3306/";
+                log.trace("Static Driver URL:{}", jdbcUrl);
                 username = "root";
                 password = "root";
             } else {
-                jdbcUrl = dataSourceConfig.getJdbcUrl() + tenant;
-				log.trace("Config loaded Driver URL:{}", jdbcUrl);
+                jdbcUrl = dataSourceConfig.getJdbcUrl();
+                log.trace("Config loaded Driver URL:{}", jdbcUrl);
                 username = dataSourceConfig.getUsername();
                 password = dataSourceConfig.getPassword();
             }
-            cfg.setJdbcUrl(jdbcUrl);
+            String tenantJdbcUrl = buildTenantJdbcUrl(jdbcUrl, tenant);
+            cfg.setJdbcUrl(tenantJdbcUrl);
             cfg.setUsername(username);
             cfg.setPassword(password);
 
-            log.info("Creating Hikari pool '{}' for tenant {} -> {}", cfg.getPoolName(), tenant, jdbcUrl);
+            log.info("Creating Hikari pool '{}' for tenant {} -> {}", cfg.getPoolName(), tenant, tenantJdbcUrl);
             return new HikariDataSource(cfg);
         } catch (Exception e) {
             log.error("Failed to create HikariDataSource for tenant " + tenant, e);
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Ensures jdbc URL contains the tenant database in the path.
+     * Example: jdbc:mysql://localhost:3306/ + school -> jdbc:mysql://localhost:3306/school
+     */
+    private String buildTenantJdbcUrl(String baseJdbcUrl, String tenant) {
+        if (!StringUtils.hasLength(baseJdbcUrl) || !StringUtils.hasLength(tenant)) {
+            return baseJdbcUrl;
+        }
+
+        int queryIdx = baseJdbcUrl.indexOf('?');
+        String baseNoQuery = queryIdx >= 0 ? baseJdbcUrl.substring(0, queryIdx) : baseJdbcUrl;
+        String query = queryIdx >= 0 ? baseJdbcUrl.substring(queryIdx) : "";
+
+        int schemeIdx = baseNoQuery.indexOf("://");
+        if (schemeIdx > -1) {
+            int firstSlashAfterHost = baseNoQuery.indexOf('/', schemeIdx + 3);
+            if (firstSlashAfterHost > -1 && firstSlashAfterHost < baseNoQuery.length() - 1) {
+                // DB already present in URL; keep existing configuration unchanged.
+                return baseJdbcUrl;
+            }
+        }
+
+        String normalizedBase = baseNoQuery.endsWith("/") ? baseNoQuery : baseNoQuery + "/";
+        return normalizedBase + tenant + query;
     }
 
 	private Properties getBaseHikariConfig() {
