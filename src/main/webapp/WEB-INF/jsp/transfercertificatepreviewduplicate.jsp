@@ -142,7 +142,7 @@ for(Cookie cookie : cookies){
             <td style="font-weight:bold;"> <c:out value="${sts}" /></td>
         </tr>
         <tr>
-            <td >6. Name of the Student<br><small>(As entered in Admission Register)</small></td>
+            <td >6. Name of the Student<br><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(As entered in Admission Register)</small></td>
             <td style="font-weight:bold;"> <c:out value="${studentname1}" /></td>
         </tr>
         <tr>
@@ -167,27 +167,27 @@ for(Cookie cookie : cookies){
         </tr>
         <tr>
             <td >
-                14. Whether the student belongs to Schedule Cast, <br>
-Scheduled Tribe, Nomadic Tribe or Semi Nomadic Tribe 
+                14. Whether the student belongs to<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Schedule  Cast,
+Scheduled Tribe,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nomadic Tribe or  Semi Nomadic <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tribe 
             </td>
              <td style="font-weight:bold;">
              ${yesno}
             </td>
         </tr>
         <tr>
-            <td >15. Date of Birth   in Figures<br>in words</td>
+            <td >15. Date of Birth   in Figures<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in words</td>
             <td style="font-weight:bold;"><c:out value="${dateofbirth}" /><br> <c:out value="${dateofbirthwords}" /></td>
         </tr>
         <tr>
             <td >
-                16.  Class in which the student was studied at the time of <br>
-leaving the institution (In words) 
+                16.  Class in which the student was studied <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; at the time of
+leaving the <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; institution (In words) 
             </td>
             <td style="font-weight:bold;">${leavingclass}</td>
         </tr>
         <tr>
             <td >
-                17.  Public Examination appeared with Reg. No. Month & <br>
+                17.  Public Examination appeared with <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Reg. No. Month & 
 Year 
              </td>
              <td style="font-weight:bold;">
@@ -215,12 +215,12 @@ Year
         </tr>
         <tr>
             <td >19. a) Total number of working days <br>
-b) No of days he/she was present </td>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) No of days he/she was present </td>
             <td style="font-weight:bold;"> ${workingdays} <br>
  ${present} </td>
         </tr>
         <tr>
-            <td >20. Last date of student attendance in the institution </td>
+            <td >20. Last date of student attendance in the<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; institution </td>
             <td style="font-weight:bold;"><c:out value="${dateofleaving}" /></td>
         </tr>
 <tr>
@@ -240,7 +240,7 @@ b) No of days he/she was present </td>
     <div class="tc-footer">
         <div class="signature">
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-            <p><b>Principal</b></p>
+            <p><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></p>
         </div>
     </div>
 
