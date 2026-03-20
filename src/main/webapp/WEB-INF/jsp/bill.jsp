@@ -176,357 +176,398 @@
 <body style="text-align: center" class="bodymargin" onload="window.print();">
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
-			<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
-			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/nortuntrading/images/nortuntrading.jpg" width="119" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
-				</td>
-			</tr>
-		</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-                    <td colspan="4" ></td>
-                </tr>
-            </TABLE>
-
-		<table style="padding-left: 5px;">
-		
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr >
-			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${billdetailsstudentname}" /></label>
-				</td>
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${billdetailsfathername}" /></label>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${billdetailsclassstudying}" />
-				</td>
-
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
-						value="${billdetailstransactiondate}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
-						value="${billno}" /> 
-				</td>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${currentAcademicYear}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-
-		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
-
-		<TABLE id="dataTable" width="100%" border="0"
-			style="border-collapse: collapse;">
+			<div class="invoice-box">
+<div width="100%">
+<table align="center" width="60%" style="float: left;">
+    <tr>
+        <td style="font-size: 80px;">
+              NORTUN
+        </td>
+    </tr>
+</table>
+<table width="40%"  align="right" style="float: right;">
+    <tr>
+        <td>NORTUN TRADING</td>
+    </tr>
+    <tr>
+        <td>Building Tools & Hardware LLC</td>
+    </tr>
+    <tr>
+        <td>Mob: 050 845 8466 , Tel: 06 744 3786</td>
+    </tr>
+    <tr>
+        <td>Email: ahussain@nortunproduds.com</td>
+    </tr>
+    <tr>
+        <td>P.O.Box:18581, Ajman UAE</td>
+    </tr>
+     <tr>
+        <td>TRN:100356259000003</td>
+    </tr>
+</table>
+</div>
 
 
-			<tr>
+<table width="100%">
+<tr>
+    <td align="center">
+       <h2>TAX INVOICE</h2> 
+    </td>
+</tr>
+</table>
+<table width="50%" style="border: 1px solid black;float: left;">
+<tr>
+    <td>
+        <b>Customer Name & Address :</b><c:out value="${billdetailsstudentname}" />
+    </td>
+</tr>
+<tr>
+    <td>
+        &nbsp;
+    </td>
+</tr>
+<tr>
+    <td>
+        Tel : 
+    </td>
+</tr>    
+<tr>
+    <td>
+        TRN :
+    </td>
+</tr>
 
-				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
-				
+   
+</table>
+<table width="50%"  style="border: 1px solid black;float: right;">
+    <tr>
+    <td>
+          INV. No.
+    </td>
+    <td> INV. Date:</td>
+    </tr>
+     <tr>
+    <td>
+         
+    </td>
+    <td> Payment Terms:</td>
+    </tr>
+    <tr>
+    <td colspan="2">
+       LPO. No. 
+    </td>
+    </tr>
+     <tr>
+    <td colspan="2">
+         DO.No.  
+    </td>
+    </tr>
+</table>
+<div style="width:100%; height:500px; border:1px solid black;">
+<table width="100%" >
 
-			</tr>
-			
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
+<tr style="background-color: rgb(192, 53, 169);">
+<th>Sl No</th>
+<th>Code</th>
+<th>Description</th>
+<th>Qty</th>
+<th>Unit</th>
+<th>Unit Price (AED)</th>
+<th>Amount</th>
+<th>VAT Rate</th>
+<th>VAT Amount</th>
+<th>Total Amount</th>
+</tr>
 
-
-			<c:forEach items="${billdetails}" var="feescatmap">
+<c:forEach items="${billdetails}" var="feescatmap">
 				<tr>
 					<td class="dataText"><c:out
 							value="${feescatmap.itemname}" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${feescatmap.salesprice}" /></td>
-					
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-			</table>
-			
-			
-			<TABLE width="100%" border="0">
-			
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-			
-			
-			<tr>
-				<td class="headerText" ></td>
-				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
-			</tr>
-			
-			</table>
-			
-		<%-- <TABLE width="100%" border="0">
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
 
-			<tr>
-				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
-				</td>
-				<td class="headerText">
-					Total fees paid : Rs.  ${sumoffees}
-				</td>
-				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
-				</td>
-				
-			</tr>
-			
-			<tr>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-			</table> --%>
-			
-			<TABLE width="100%" border="0">
-		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${billdetailstotaltotal}" /><c:out value="${duplicate}" /></label></td>
-		</tr>
+</table>
+</div>
 
-		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
-		</table>
+<table class="total-table">
+
+<tr>
+<td>Sub Total</td>
+<td></td>
+</tr>
+
+<tr>
+<td>VAT @ 5%</td>
+<td></td>
+</tr>
+
+<tr>
+<td><b>Grand Total</b></td>
+<td></td>
+</tr>
+
+</table>
+
+<div class="footer">
+
+<div>
+<b>NET Amount in Words AED :</b>
+</div>
+
+<div class="signature">
+
+<div>
+Receiver's Signature & Stamp
+</div>
+
+<div>
+For NORTUN TRADING L.L.C
+</div>
+
+</div>
+
+<div class="note">
+All claims must be in writing and made within 3 days after receipt of goods.
+</div>
+
+</div>
+
+
+</div>
+<table>
+<tr>
+<td>
+<br>
+</td>
+</tr>
+<tr>
+<td>
+<br>
+</td>
+</tr>
+<tr>
+<td>
+<br>
+</td>
+</tr>
+<tr>
+<td>
+<br>
+</td>
+</tr><tr>
+<td>
+<br>
+</td>
+</tr><tr>
+<td>
+<br>
+</td>
+</tr><tr>
+<td>
+<br>
+</td>
+</tr><tr>
+<td>
+<br>
+</td>
+</tr><tr>
+<td>
+<br>
+</td>
+</tr><tr>
+<td>
+<br>
+</td>
+</tr>
+</table>
 		
-		<TABLE width="90%" border="0">
-		<tr style="font-size: 10px;" align="right">
-		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td> --%>
-		
-		<td>Received with thanks,<br><br> Cashier/Accountant</td>
-		</tr>
-		</TABLE>
-		</div>
-		<br>
-		<div style="border: 1px solid;border-radius: 15px">
-		<table width="100%" style="border-collapse: collapse;">
-			<tr>
-				<td align="left" style="padding-left: 50px;">
-				<img src="/nortuntrading/images/nortuntrading.jpg" width="119" height="60"/>
-				</td> 
-				<td style="width: 100%;" align="left">
-				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
-				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
-				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
-				</td>
-			</tr>
-		</table>
-
-<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-                    <td colspan="4" ></td>
-                </tr>
-            </TABLE>
-
-		<table style="padding-left: 5px;">
-		
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr >
-			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
-					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${billdetailsstudentname}" /></label>
-				</td>
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${billdetailsfathername}" /></label>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${billdetailsclassstudying}" />
-				</td>
-
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
-						value="${billdetailstransactiondate}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
-						value="${billno}" /> 
-				</td>
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${currentAcademicYear}" />
-				</td>
-				<td></td>
-			</tr>
-
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-
-		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-                </tr>
-            </TABLE>
-
-		<TABLE id="dataTable" width="100%" border="0"
-			style="border-collapse: collapse;">
+		<div class="invoice-box">
+<div width="100%">
+<table align="center" width="60%" style="float: left;">
+    <tr>
+        <td style="font-size: 80px;">
+              NORTUN
+        </td>
+    </tr>
+</table>
+<table width="40%"  align="right" style="float: right;">
+    <tr>
+        <td>NORTUN TRADING</td>
+    </tr>
+    <tr>
+        <td>Building Tools & Hardware LLC</td>
+    </tr>
+    <tr>
+        <td>Mob: 050 845 8466 , Tel: 06 744 3786</td>
+    </tr>
+    <tr>
+        <td>Email: ahussain@nortunproduds.com</td>
+    </tr>
+    <tr>
+        <td>P.O.Box:18581, Ajman UAE</td>
+    </tr>
+     <tr>
+        <td>TRN:100356259000003</td>
+    </tr>
+</table>
+</div>
 
 
-			<tr>
+<table width="100%">
+<tr>
+    <td align="center">
+       <h2>TAX INVOICE</h2> 
+    </td>
+</tr>
+</table>
+<table width="50%" style="border: 1px solid black;float: left;">
+<tr>
+    <td>
+        <b>Customer Name & Address :</b>
+    </td>
+</tr>
+<tr>
+    <td>
+        &nbsp;
+    </td>
+</tr>
+<tr>
+    <td>
+        Tel : 
+    </td>
+</tr>    
+<tr>
+    <td>
+        TRN :
+    </td>
+</tr>
 
-				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
-				
+   
+</table>
+<table width="50%"  style="border: 1px solid black;float: right;">
+    <tr>
+    <td>
+          INV. No.
+    </td>
+    <td> INV. Date:</td>
+    </tr>
+     <tr>
+    <td>
+         
+    </td>
+    <td> Payment Terms:</td>
+    </tr>
+    <tr>
+    <td colspan="2">
+       LPO. No. 
+    </td>
+    </tr>
+     <tr>
+    <td colspan="2">
+         DO.No.  
+    </td>
+    </tr>
+</table>
+<div style="width:100%; height:500px; border:1px solid black;">
+<table width="100%" >
 
-			</tr>
-			
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
+<tr style="background-color: rgb(192, 53, 169);">
+<th>Sl No</th>
+<th>Code</th>
+<th>Description</th>
+<th>Qty</th>
+<th>Unit</th>
+<th>Unit Price (AED)</th>
+<th>Amount</th>
+<th>VAT Rate</th>
+<th>VAT Amount</th>
+<th>Total Amount</th>
+</tr>
+
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5%</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>5%</td>
+<td></td>
+<td></td>
+</tr>
+
+</table>
+</div>
+
+<table class="total-table">
+
+<tr>
+<td>Sub Total</td>
+<td></td>
+</tr>
+
+<tr>
+<td>VAT @ 5%</td>
+<td></td>
+</tr>
+
+<tr>
+<td><b>Grand Total</b></td>
+<td></td>
+</tr>
+
+</table>
+
+<div class="footer">
+
+<div>
+<b>NET Amount in Words AED :</b>
+</div>
+
+<div class="signature">
+
+<div>
+Receiver's Signature & Stamp
+</div>
+
+<div>
+For NORTUN TRADING L.L.C
+</div>
+
+</div>
+
+<div class="note">
+All claims must be in writing and made within 3 days after receipt of goods.
+</div>
+
+</div>
 
 
-			<c:forEach items="${billdetails}" var="feescatmap">
-				<tr>
-					<td class="dataText"><c:out
-							value="${feescatmap.itemname}" /></td>
-					<td class="dataText">Rs. <c:out
-							value="${feescatmap.salesprice}" /></td>
-					
-					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
-				</tr>
-			</c:forEach>
-			</table>
-			
-			
-			<TABLE width="100%" border="0">
-			
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-			
-			
-			<tr>
-				<td class="headerText" ></td>
-				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
-			</tr>
-			
-			</table>
-			
-		<%-- <TABLE width="100%" border="0">
-			<tr>
-			
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-
-			<tr>
-				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
-				</td>
-				<td class="headerText">
-					Total fees paid : Rs.  ${sumoffees}
-				</td>
-				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
-				</td>
-				
-			</tr>
-			
-			<tr>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			<td><hr width="100%"></td>
-			</tr>
-			</table> --%>
-			
-			<TABLE width="100%" border="0">
-		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${billdetailstotaltotal}" /><c:out value="${duplicate}" /></label></td>
-		</tr>
-
-		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
-		</tr>
-		</table>
-		
-		<TABLE width="90%" border="0">
-		<tr style="font-size: 10px;" align="right">
-		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td> --%>
-		
-		<td>Received with thanks,<br><br> Cashier/Accountant</td>
-		</tr>
-		</TABLE>
-		</div>
+</div>
 	</form>
 	
 	</div>
