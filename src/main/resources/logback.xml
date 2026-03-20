@@ -41,7 +41,7 @@
     	<appender-ref ref="ASYNC" />
 	</logger>
 
-	<logger name="org.ideoholic" level="DEBUG" additivity="false">
+	<logger name="org.ideoholic" level="TRACE" additivity="false">
 		<appender-ref ref="CONSOLE" />
 		<appender-ref ref="ASYNC" />
 	</logger>

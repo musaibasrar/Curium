@@ -160,7 +160,9 @@ form{
 								<!-- <span class="fa fa-lock"></span> -->
 								<input type="password" name="password" id="password" class="form__input" placeholder="Password">
 							</div>
-							
+							<div class="row">
+								<input type="text" name="tenantId" id="tenantId" class="form__input" placeholder="Tenant ID" value="school" required>
+							</div>
 							<div class="row">
 								<input type="submit" value="Login" class="btn">
 							</div>
