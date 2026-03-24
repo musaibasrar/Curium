@@ -1,9 +1,11 @@
 package org.ideoholic.curium.model.diary.service;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
@@ -18,6 +20,7 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class DiaryService {
@@ -41,7 +44,7 @@ public class DiaryService {
 
 	}
 
-	public void addDiary(AddDiaryDto addDiaryDto, String branchId, String userLoginId, String currentAcademicYear) {
+	public void addDiary(AddDiaryDto addDiaryDto, MultipartFile[] listOfFiles, String branchId, String userLoginId, String currentAcademicYear) {
 		// TODO Auto-generated method stub
 		Diary diary = new Diary();
 
@@ -59,6 +62,100 @@ public class DiaryService {
 			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
 			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
 			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
+			try {
+				// Process form file field (input type="file")
+				 if(listOfFiles != null && listOfFiles.length != 0) 
+				 {
+						 
+						 MultipartFile fileItem1 = listOfFiles[0];
+						 String contentType1 = fileItem1.getContentType();
+						  String fileName1 = (DataUtil.emptyString(fileItem1.getOriginalFilename()));
+		                    
+						  if (!fileName1.equalsIgnoreCase("")) {
+
+							    byte[] bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
+
+							    if (contentType1.equals("image/png")) {
+							        String saveFile = "data:image/png;base64," + new String(bytesEncoded);
+							        diary.setAttachment1(saveFile);
+
+							    } else if (contentType1.equals("image/jpeg")) {
+							        String saveFile = "data:image/jpeg;base64," + new String(bytesEncoded);
+							        diary.setAttachment1(saveFile);
+
+							    } else if (contentType1.equals("application/pdf")) {
+							        String saveFile = "data:application/pdf;base64," + new String(bytesEncoded);
+							        diary.setAttachment1(saveFile);
+
+							    } else {
+							        System.out.println("Invalid file type");
+							    }
+							}
+			                
+		                    
+		                    MultipartFile fileItem2 = listOfFiles[1];
+							String fileName2 = (DataUtil.emptyString(fileItem2.getOriginalFilename()));
+							String contentType2 = fileItem2.getContentType();
+			                
+							if (!fileName2.equalsIgnoreCase("")) {
+
+							    byte[] bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
+
+							    if (contentType2.equals("image/png")) {
+							        String saveFile = "data:image/png;base64," + new String(bytesEncoded);
+							        diary.setAttachment2(saveFile);
+
+							    } else if (contentType2.equals("image/jpeg")) {
+							        String saveFile = "data:image/jpeg;base64," + new String(bytesEncoded);
+							        diary.setAttachment2(saveFile);
+
+							    } else if (contentType2.equals("application/pdf")) {
+							        String saveFile = "data:application/pdf;base64," + new String(bytesEncoded);
+							        diary.setAttachment2(saveFile);
+
+							    } else {
+							        System.out.println("Invalid file type");
+							    }
+							}
+			                
+			                MultipartFile fileItem3 = listOfFiles[2];
+			                String fileName3 = (DataUtil.emptyString(fileItem3.getOriginalFilename()));
+			                String contentType3 = fileItem3.getContentType();
+			                
+			                if (!fileName3.equalsIgnoreCase("")) {
+
+							    byte[] bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
+
+							    if (contentType3.equals("image/png")) {
+							        String saveFile = "data:image/png;base64," + new String(bytesEncoded);
+							        diary.setAttachment3(saveFile);
+
+							    } else if (contentType3.equals("image/jpeg")) {
+							        String saveFile = "data:image/jpeg;base64," + new String(bytesEncoded);
+							        diary.setAttachment3(saveFile);
+
+							    } else if (contentType3.equals("image/jpg")) {
+							        String saveFile = "data:image/jpg;base64," + new String(bytesEncoded);
+							        diary.setAttachment3(saveFile);
+							    } else if (contentType3.equals("application/pdf")) {
+							        String saveFile = "data:application/pdf;base64," + new String(bytesEncoded);
+							        diary.setAttachment3(saveFile);
+
+							    } else {
+							        System.out.println("Invalid file type");
+							    }
+							}
+			                
+			                
+			               
+			                //End Employee Docs
+				 }
+
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
 			diary = new diaryDAO().create(diary);
 		}
 	}
@@ -91,6 +188,10 @@ public class DiaryService {
 					diary.setStartdate((Date) diaryObject[6]);
 					diary.setEnddate((Date) diaryObject[7]);
 					diary.setCreateddate((Date) diaryObject[8]);
+					diary.setAttachment1((String) diaryObject[9]);
+					diary.setAttachment2((String) diaryObject[10]);
+					diary.setAttachment3((String) diaryObject[11]);
+					
 					diaryDetails.add(diary);
 				}
 
