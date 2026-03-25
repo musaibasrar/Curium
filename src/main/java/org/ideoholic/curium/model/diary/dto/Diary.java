@@ -10,10 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
-import org.ideoholic.curium.model.pudetails.dto.Pudetails;
-import org.ideoholic.curium.model.student.dto.Student;
-
 import lombok.Data;
 
 @Data

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
+import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
@@ -22,6 +24,9 @@ import org.ideoholic.curium.util.DateUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class DiaryService {
 	private String BRANCHID = "branchid";
@@ -29,136 +34,81 @@ public class DiaryService {
 	 * Size of a byte buffer to read/write file
 	 */
 	private static final int BUFFER_SIZE = 4096;
+	
+	private static final String IMAGE_PNG = "image/png";
+	private static final String IMAGE_JPEG = "image/jpeg";
+	private static final String IMAGE_JPG = "image/jpg";
+	private static final String APPLICATION_PDF = "application/pdf";
+
+	private static final Set<String> ALLOWED_TYPES = Set.of(
+	    IMAGE_PNG, IMAGE_JPEG, IMAGE_JPG, APPLICATION_PDF
+	);
+	
+	private String processFile(MultipartFile file) throws IOException {
+
+	    if (file == null || file.getOriginalFilename() == null || file.getOriginalFilename().isEmpty()) {
+	        return null;
+	    }
+
+	    String contentType = file.getContentType();
+
+	    if (!ALLOWED_TYPES.contains(contentType)) {
+	        log.warn("Invalid file type: {}", contentType);
+	        return null;
+	    }
+
+	    byte[] bytesEncoded = Base64.encodeBase64(file.getBytes());
+	    return "data:" + contentType + ";base64," + new String(bytesEncoded);
+	}
 
 	
 	public void adddetail() {
-		// TODO Auto-generated method stub
 		Login login = new Login();
-		/*
-		 * String Id=login.getUsername(); Student student = new
-		 * studentDetailsDAO().readploginUniqueObject(Id);
-		 
-		String studentcls = student.getClassstudying();
-		request.setAttribute("studentcls", studentcls);
-		*/
-
 	}
+	
+	public void addDiary(AddDiaryDto addDiaryDto, MultipartFile[] listOfFiles,
+            String branchId, String userLoginId, String currentAcademicYear) {
 
-	public void addDiary(AddDiaryDto addDiaryDto, MultipartFile[] listOfFiles, String branchId, String userLoginId, String currentAcademicYear) {
-		// TODO Auto-generated method stub
-		Diary diary = new Diary();
+Diary diary = new Diary();
 
-		if (branchId != null) {
+if (branchId != null) {
 
-			String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
-			String classString = addDiaryDto.getAddClass() + "--" + secString;
+String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
+String classString = addDiaryDto.getAddClass() + "--" + secString;
 
-			diary.setClasssec(DataUtil.emptyString(classString));
-			diary.setMessage(addDiaryDto.getMessageBody());
-			diary.setSubject(addDiaryDto.getSubject());
-			diary.setBranchid(branchId);
-			diary.setUserid(Integer.parseInt(userLoginId));
-			diary.setAcademicyear(currentAcademicYear);
-			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
-			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
-			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
-			try {
-				// Process form file field (input type="file")
-				 if(listOfFiles != null && listOfFiles.length != 0) 
-				 {
-						 
-						 MultipartFile fileItem1 = listOfFiles[0];
-						 String contentType1 = fileItem1.getContentType();
-						  String fileName1 = (DataUtil.emptyString(fileItem1.getOriginalFilename()));
-		                    
-						  if (!fileName1.equalsIgnoreCase("")) {
+diary.setClasssec(DataUtil.emptyString(classString));
+diary.setMessage(addDiaryDto.getMessageBody());
+diary.setSubject(addDiaryDto.getSubject());
+diary.setBranchid(branchId);
+diary.setUserid(Integer.parseInt(userLoginId));
+diary.setAcademicyear(currentAcademicYear);
+diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
+diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
+diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
 
-							    byte[] bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
+try {
+    if (listOfFiles != null && listOfFiles.length > 0) {
 
-							    if (contentType1.equals("image/png")) {
-							        String saveFile = "data:image/png;base64," + new String(bytesEncoded);
-							        diary.setAttachment1(saveFile);
+        if (listOfFiles.length > 0) {
+            diary.setAttachment1(processFile(listOfFiles[0]));
+        }
+        if (listOfFiles.length > 1) {
+            diary.setAttachment2(processFile(listOfFiles[1]));
+        }
+        if (listOfFiles.length > 2) {
+            diary.setAttachment3(processFile(listOfFiles[2]));
+        }
+    }
 
-							    } else if (contentType1.equals("image/jpeg")) {
-							        String saveFile = "data:image/jpeg;base64," + new String(bytesEncoded);
-							        diary.setAttachment1(saveFile);
+} catch (IOException e) {
+    log.error("Error processing file upload", e);
+}
 
-							    } else if (contentType1.equals("application/pdf")) {
-							        String saveFile = "data:application/pdf;base64," + new String(bytesEncoded);
-							        diary.setAttachment1(saveFile);
+diary = new diaryDAO().create(diary);
+}
+}
 
-							    } else {
-							        System.out.println("Invalid file type");
-							    }
-							}
-			                
-		                    
-		                    MultipartFile fileItem2 = listOfFiles[1];
-							String fileName2 = (DataUtil.emptyString(fileItem2.getOriginalFilename()));
-							String contentType2 = fileItem2.getContentType();
-			                
-							if (!fileName2.equalsIgnoreCase("")) {
-
-							    byte[] bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
-
-							    if (contentType2.equals("image/png")) {
-							        String saveFile = "data:image/png;base64," + new String(bytesEncoded);
-							        diary.setAttachment2(saveFile);
-
-							    } else if (contentType2.equals("image/jpeg")) {
-							        String saveFile = "data:image/jpeg;base64," + new String(bytesEncoded);
-							        diary.setAttachment2(saveFile);
-
-							    } else if (contentType2.equals("application/pdf")) {
-							        String saveFile = "data:application/pdf;base64," + new String(bytesEncoded);
-							        diary.setAttachment2(saveFile);
-
-							    } else {
-							        System.out.println("Invalid file type");
-							    }
-							}
-			                
-			                MultipartFile fileItem3 = listOfFiles[2];
-			                String fileName3 = (DataUtil.emptyString(fileItem3.getOriginalFilename()));
-			                String contentType3 = fileItem3.getContentType();
-			                
-			                if (!fileName3.equalsIgnoreCase("")) {
-
-							    byte[] bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
-
-							    if (contentType3.equals("image/png")) {
-							        String saveFile = "data:image/png;base64," + new String(bytesEncoded);
-							        diary.setAttachment3(saveFile);
-
-							    } else if (contentType3.equals("image/jpeg")) {
-							        String saveFile = "data:image/jpeg;base64," + new String(bytesEncoded);
-							        diary.setAttachment3(saveFile);
-
-							    } else if (contentType3.equals("image/jpg")) {
-							        String saveFile = "data:image/jpg;base64," + new String(bytesEncoded);
-							        diary.setAttachment3(saveFile);
-							    } else if (contentType3.equals("application/pdf")) {
-							        String saveFile = "data:application/pdf;base64," + new String(bytesEncoded);
-							        diary.setAttachment3(saveFile);
-
-							    } else {
-							        System.out.println("Invalid file type");
-							    }
-							}
-			                
-			                
-			               
-			                //End Employee Docs
-				 }
-
-
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-
-			diary = new diaryDAO().create(diary);
-		}
-	}
+	
 
 	public DiaryResponseDto viewDiary(String strPage, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();

@@ -323,7 +323,6 @@
 	        }
 	    }
 	</script>
-	</script>
 </head>
   <%
 //allow access only if session exists
@@ -444,24 +443,57 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
-                        <tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Attachment1</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
-								</tr>
-								<tr>
-							<td><br /></td>
-						</tr>
-                        <tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Attachment2</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
-								</tr>
-								<tr>
-							<td><br /></td>
-						</tr>
-                        <tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Attachment3</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
-								</tr>
+                       <tr>
+  <td>
+    <label for="file1" style="font-size: 12px;color: #325F6D;font-weight: bold;">
+      Attachment1
+    </label><br />
+
+    <input type="file"
+           name="fileToUpload"
+           id="file1"
+           accept="image/*"
+           onchange="Upload()">
+
+    <br><br><br><br>
+  </td>
+</tr>
+
+<tr><td><br /></td></tr>
+
+<tr>
+  <td>
+    <label for="file2" style="font-size: 12px;color: #325F6D;font-weight: bold;">
+      Attachment2
+    </label><br />
+
+    <input type="file"
+           name="fileToUpload"
+           id="file2"
+           accept="image/*"
+           onchange="Upload()">
+
+    <br><br><br><br>
+  </td>
+</tr>
+
+<tr><td><br /></td></tr>
+
+<tr>
+  <td>
+    <label for="file3" style="font-size: 12px;color: #325F6D;font-weight: bold;">
+      Attachment3
+    </label><br />
+
+    <input type="file"
+           name="fileToUpload"
+           id="file3"
+           accept="image/*"
+           onchange="Upload()">
+
+    <br><br><br><br>
+  </td>
+</tr>
 					</table>
 						<div>
 							<table width="100%">
