@@ -63,8 +63,9 @@ public class DiaryActionAdapter {
         StudentIdPageDto studentIdPageDto = new StudentIdPageDto();
         studentIdPageDto.setStudentId(request.getParameter("id"));
         studentIdPageDto.setPage(request.getParameter("page"));
+        studentIdPageDto.setStudentBranchId(request.getParameter("urlbranchid"));
 
-        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto, httpSession.getAttribute(Constants.BRANCHID).toString());
+        DiaryResponseDto diaryResponseDto = diaryService.viewDiaryParent(studentIdPageDto);
         request.setAttribute("diaryparents", diaryResponseDto.getDiaryparents());
         request.setAttribute("noOfPages", diaryResponseDto.getNoOfPages());
         request.setAttribute("currentPage", diaryResponseDto.getCurrentPage());
