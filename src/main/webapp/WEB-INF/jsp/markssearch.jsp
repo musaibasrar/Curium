@@ -457,7 +457,7 @@
 	
 	function printMarksReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MarksDetailsProcess/printMarksReport";
+		form1.action = "/fathima/MarksDetailsProcess/printMarksReport";
 		form1.method = "POST";
 		form1.submit();
 
