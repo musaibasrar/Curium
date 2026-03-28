@@ -202,16 +202,16 @@ for(Cookie cookie : cookies){
 	<div style="border:2px solid black;margin-left:10px;margin-right:10px;">
 		<br>
 		<table width="100%" style="border-collapse: collapse;">
-			<tr><td rowspan="3" style="padding-left:200px;"><img src="/fathima/images/fathima.jpg" width="105" height="105"/></td>
-				<td  style="width: 100%;text-align:left;">
+			<tr><td rowspan="3" style="padding-left:80px;"><img src="/fathima/images/fathima.jpg" width="105" height="105"/></td>
+				<td  style="width: 100%;text-align:left;padding-left: 40px;">
 				
 			<h2 style="margin-bottom:0px;">	${branchname} </h2></td>
 			</tr>
 			<tr>
-			<td class="addressLine"  style="text-align:left;">&emsp;&emsp;&emsp;&emsp;${branchaddress}</td>
+			<td class="addressLine"  style="text-align:left;padding-left: 40px;">&emsp;&emsp;&emsp;&emsp;${branchaddress}</td>
 			</tr>
 			<tr>
-			<td class="addressLine" style="text-align:left;">&emsp;&emsp;${branchcontact}</td>
+			<td class="addressLine" style="text-align:left;padding-left: 40px;">&emsp;&emsp;${branchcontact}</td>
 			</tr>
 
 			<tr>
