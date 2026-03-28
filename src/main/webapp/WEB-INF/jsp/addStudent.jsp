@@ -22,8 +22,8 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/vision/css/dataTable/css/demo_page.css";
-            @import "/vision/css/dataTable/css/jquery.dataTables.css";
+            @import "/fathima/css/dataTable/css/demo_page.css";
+            @import "/fathima/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
@@ -37,10 +37,10 @@
 <script src="/fathima/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script src="/fathima/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/fathima/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/fathima/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/fathima/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/fathima/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -605,7 +605,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/fathima/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
