@@ -176,7 +176,7 @@ Scheduled Tribe,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nomadic Tribe or  Semi Nomadi
         </tr>
         <tr>
             <td >15. Date of Birth   in Figures<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in words</td>
-            <td style="font-weight:bold;"><c:out value="${dateofbirth}" /><br> <c:out value="${dateofbirthwords}" /></td>
+            <td style="font-weight:bold;"><c:out value="${dateofbirth}" /><br><label style="text-transform:uppercase;"> <c:out value="${dateofbirthwords}" /></label></td>
         </tr>
         <tr>
             <td >
