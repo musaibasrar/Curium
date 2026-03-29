@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/DiaryProcess")
@@ -34,9 +36,9 @@ public class DiaryAction {
 		return "diary";
 	}
 	
-	@PostMapping("/addDiary")
-	public String addDiary() {
-		diaryActionAdapter.addDiary();
+	@RequestMapping(value = "/addDiary", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String addDiary(@RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
+		diaryActionAdapter.addDiary(uploadedFiles);
 		return "diarySaved";
 
 	}

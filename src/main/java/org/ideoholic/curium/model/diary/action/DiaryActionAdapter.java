@@ -7,6 +7,7 @@ import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +25,7 @@ public class DiaryActionAdapter {
 
     private String BRANCHID = "branchid";
 
-    public void addDiary() {
+    public void addDiary(MultipartFile[] uploadedFiles) {
         AddDiaryDto addDiaryDto = new AddDiaryDto();
         addDiaryDto.setAddSec(request.getParameter("addsec"));
         addDiaryDto.setAddClass(request.getParameter("addclass"));
@@ -35,7 +36,7 @@ public class DiaryActionAdapter {
         addDiaryDto.setStartDate(request.getParameter("startdate"));
 
 
-        diaryService.addDiary(addDiaryDto, httpSession.getAttribute(BRANCHID).toString(),
+        diaryService.addDiary(addDiaryDto,uploadedFiles, httpSession.getAttribute(BRANCHID).toString(),
                 httpSession.getAttribute("userloginid").toString(),
                 httpSession.getAttribute("currentAcademicYear").toString());
 
