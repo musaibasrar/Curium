@@ -35,5 +35,14 @@
         <property name="userid" type="int">
             <column name="userid"  />
         </property>
+        <property name="attachment1" type="string">
+            <column name="attachment1" />
+        </property>
+        <property name="attachment2" type="string">
+            <column name="attachment2" />
+        </property>
+        <property name="attachment3" type="string">
+            <column name="attachment3" />
+        </property>
     </class>
 </hibernate-mapping>

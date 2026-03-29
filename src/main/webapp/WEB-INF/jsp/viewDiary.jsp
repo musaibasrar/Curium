@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -461,6 +462,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Start Date</th>
 						<th title="click to sort" class="headerText">End Date</th>
 						<th title="click to sort" class="headerText">Created Date</th>
+						<th title="click to sort" class="headerText">attach1</th>
+						<th title="click to sort" class="headerText">attach2</th>
+						<th title="click to sort" class="headerText">attach3</th>
 					</tr>
 				</thead>
 
@@ -481,6 +485,18 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out value="${diary.startdate}" /></td>
 							<td class="dataText"><c:out value="${diary.enddate}" /></td>
 							<td class="dataText"><c:out value="${diary.createddate}" /></td>
+							 <td class="dataText">
+                    <a download="attachment1.${fn:split(fn:split(diary.attachment1,'/')[1],';')[0]}" 
+                     href="${diary.attachment1}">Download</a>
+                    </td>
+                     <td class="dataText"><c:set var="attachpart2" value="${fn:split(diary.attachment2, '/')}" />
+							 <c:set var="attach2" value="${fn:split(attachpart2[1], ';')}" />
+                    <a download="attachment2.${attach2[0]}" href="${diary.attachment2}">Download</a>
+                    </td>
+                     <td class="dataText"><c:set var="attachpart3" value="${fn:split(diary.attachment3, '/')}" />
+							 <c:set var="attach3" value="${fn:split(attachpart3[1], ';')}" />
+                    <a download="attachment3.${attach3[0]}" href="${diary.attachment3}">Download</a>
+                    </td>
 						</tr>
 					</c:forEach>
 
