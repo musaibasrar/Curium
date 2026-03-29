@@ -309,6 +309,20 @@
 	});
 	
 	</script>
+	<script type="text/javascript">
+	 function Upload() {
+	        var fileUpload = document.getElementById("fileToUpload");
+	        if (typeof (fileUpload.files) != "undefined") {
+	            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+	            if(size>100){
+	            	alert("File size should not exceed 100KB");
+	            	document.getElementById("fileToUpload").value='';
+	            }
+	        } else {
+	            alert("Unsupported File");
+	        }
+	    }
+	</script>
 </head>
   <%
 //allow access only if session exists
@@ -327,7 +341,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form method="post"  id="form1">
+	<form method="post"  id="form1" enctype="multipart/form-data">
 	<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 		%>
@@ -429,7 +443,57 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td><br /></td>
 						</tr>
+                       <tr>
+  <td>
+    <label for="file1" style="font-size: 12px;color: #325F6D;font-weight: bold;">
+      Attachment1
+    </label><br />
 
+    <input type="file"
+           name="fileToUpload"
+           id="file1"
+           accept="image/*"
+           onchange="Upload()">
+
+    <br><br><br><br>
+  </td>
+</tr>
+
+<tr><td><br /></td></tr>
+
+<tr>
+  <td>
+    <label for="file2" style="font-size: 12px;color: #325F6D;font-weight: bold;">
+      Attachment2
+    </label><br />
+
+    <input type="file"
+           name="fileToUpload"
+           id="file2"
+           accept="image/*"
+           onchange="Upload()">
+
+    <br><br><br><br>
+  </td>
+</tr>
+
+<tr><td><br /></td></tr>
+
+<tr>
+  <td>
+    <label for="file3" style="font-size: 12px;color: #325F6D;font-weight: bold;">
+      Attachment3
+    </label><br />
+
+    <input type="file"
+           name="fileToUpload"
+           id="file3"
+           accept="image/*"
+           onchange="Upload()">
+
+    <br><br><br><br>
+  </td>
+</tr>
 					</table>
 						<div>
 							<table width="100%">

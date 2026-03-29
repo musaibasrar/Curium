@@ -1,131 +1,63 @@
 package org.ideoholic.curium.model.diary.dto;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "diary")
 public class Diary implements java.io.Serializable {
 	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
-	private String classsec;
-	private String academicyear;
-	private String branchid;
-	private String subject;
-	private String message;
-	private Date startdate;
-	private Date enddate;
-	private Date createddate;
-	private int userid;
-
-	public Diary(String classsec, String academicyear, String branchid, String subject, String message,
-			Date startdate, Date enddate, Date createddate, int userid) {
-		this.classsec = classsec;
-		this.academicyear = academicyear;
-		this.branchid = branchid;
-		this.subject = subject;
-		this.message = message;
-		this.startdate = startdate;
-		this.enddate = enddate;
-		this.createddate = createddate;
-		this.userid = userid;
-	}
-
-	public Diary() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Column(name = "id")
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	@Column(name = "classsec", length = 45)
-	public String getClasssec() {
-		return classsec;
-	}
-
-	public void setClasssec(String classsec) {
-		this.classsec = classsec;
-	}
-
+	private String classsec;
+	
 	@Column(name = "academicyear", length = 45)
-	public String getAcademicyear() {
-		return academicyear;
-	}
-
-	public void setAcademicyear(String academicyear) {
-		this.academicyear = academicyear;
-	}
-
+	private String academicyear;
+	
 	@Column(name = "branchid", length = 45)
-	public String getBranchid() {
-		return branchid;
-	}
-
-	public void setBranchid(String branchid) {
-		this.branchid = branchid;
-	}
-
+	private String branchid;
+	
 	@Column(name = "subject", length = 45)
-	public String getSubject() {
-		return subject;
-	}
-
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-
+	private String subject;
+	
 	@Column(name = "message", length = 1000)
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
+	private String message;
+	
 	@Column(name = "startdate")
-	public Date getStartdate() {
-		return startdate;
-	}
-
-	public void setStartdate(Date startdate) {
-		this.startdate = startdate;
-	}
-
+	private Date startdate;
+	
 	@Column(name = "enddate")
-	public Date getEnddate() {
-		return enddate;
-	}
-
-	public void setEnddate(Date enddate) {
-		this.enddate = enddate;
-	}
-
+	private Date enddate;
+	
 	@Column(name = "createddate")
-	public Date getCreateddate() {
-		return createddate;
-	}
-
-	public void setCreateddate(Date createddate) {
-		this.createddate = createddate;
-	}
-
+	private Date createddate;
+	
 	@Column(name = "userid")
-	public int getUserid() {
-		return userid;
-	}
+	private int userid;
+	
+	@Column(name = "attachment1")
+	private String attachment1;
+	
+	@Column(name = "attachment2")
+	private String attachment2;
+	
+	@Column(name = "attachment3")
+	private String attachment3;
 
-	public void setUserid(int userid) {
-		this.userid = userid;
-	}
+	
 
 }
