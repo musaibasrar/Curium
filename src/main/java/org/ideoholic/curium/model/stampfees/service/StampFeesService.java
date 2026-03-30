@@ -29,6 +29,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -420,54 +421,51 @@ public class StampFeesService {
 		OtherFeesCategoryResponseDto otherFeescategoryResponseDto = new OtherFeesCategoryResponseDto();
 		List<Parents> searchStudentList = new ArrayList<>();
 
-		if(branchid!=null){
+		if (branchid != null) {
 			
 			String className = searchStudentDto.getClassSearch();
         	
-            List<OtherFeecategory> otherFeecategoryList= feesCategoryDao.getOtherFeeCategory(className,currentAcademicYear,branchid);
+			List<OtherFeecategory> otherFeecategoryList = feesCategoryDao.getOtherFeeCategory(className, currentAcademicYear, Integer.parseInt(branchid));
             otherFeescategoryResponseDto.setOtherFeesCategory(otherFeecategoryList);
-  		
-    		
     		
     		// Get Student Details
 
-		String queryMain = "From Parents as parents where";
-		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
-		String addClass = searchStudentDto.getClassSearch();
-		String addSec = searchStudentDto.getSecSearch();
-		String conClassStudying = "";
-
-		if (!addClass.equalsIgnoreCase("")) {
-			conClassStudying = addClass+"--"+"%";
+			String queryMain = "From Parents as parents where";
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+			String addClass = searchStudentDto.getClassSearch();
+			String addSec = searchStudentDto.getSecSearch();
+			String conClassStudying = "";
+	
+			if (StringUtils.hasLength(addClass)) {
+				conClassStudying = addClass+"--"+"%";
+			}
+			if (StringUtils.hasLength(addSec)) {
+				conClassStudying = addClass;
+				conClassStudying = conClassStudying + "--" + addSec + "%";
+			}
+	
+			String classStudying = DataUtil.emptyString(conClassStudying);
+			String querySub = "";
+	
+			if (StringUtils.hasLength(studentname)) {
+				querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
+			}
+	
+			if (StringUtils.hasLength(classStudying)
+					&& StringUtils.hasLength(querySub)) {
+				querySub = querySub + " AND parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
+			} else if (StringUtils.hasLength(classStudying)) {
+				querySub = querySub + " parents.student.classstudying like '"
+						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+			}
+	
+			if(StringUtils.hasLength(querySub)) {
+				queryMain = queryMain + querySub;
+				searchStudentList = studentDetailsDao.getStudentsList(queryMain);
+			}
+			otherFeescategoryResponseDto.setSearchStudentList(searchStudentList);
 		}
-		if (!addSec.equalsIgnoreCase("")) {
-			conClassStudying = addClass;
-			conClassStudying = conClassStudying+"--"+addSec+"%";
-		}
-
-		String classStudying = DataUtil.emptyString(conClassStudying);
-		String querySub = "";
-
-		if (!studentname.equalsIgnoreCase("")) {
-			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
-		}
-
-		if (!classStudying.equalsIgnoreCase("")
-				&& !querySub.equalsIgnoreCase("")) {
-			querySub = querySub + " AND parents.student.classstudying like '"
-					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-		} else if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " parents.student.classstudying like '"
-					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
-		}
-
-		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub;
-			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
-		}
-		otherFeescategoryResponseDto.setSearchStudentList(searchStudentList);
-
-	}
 		
 		return otherFeescategoryResponseDto;
 	}

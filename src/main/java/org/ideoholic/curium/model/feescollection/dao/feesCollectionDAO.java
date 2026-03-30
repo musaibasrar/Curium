@@ -165,7 +165,7 @@ public class feesCollectionDAO {
     	List<Receiptinfo> result = new ArrayList<>();
         try {
         	// session.createQuery("from Receiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-        	result = receiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
+        	result = receiptinfoRepository.findByStudentSidAndAcademicyearAndCancelreceiptOrNull(id, currentacademicyear, 0);
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             e.printStackTrace();
