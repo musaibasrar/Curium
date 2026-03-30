@@ -1135,7 +1135,7 @@ response.getWriter().println(buffer.toString());
 		        		searchYear = yearofAdmissionStr;
 		        	}
 		        	
-		            List<OtherFeecategory> feecategoryList= feesCategoryDao.getOtherFeeCategory(classname,searchYear,branchid);
+					List<OtherFeecategory> feecategoryList = feesCategoryDao.getOtherFeeCategory(classname, searchYear, Integer.parseInt(branchid));
 		            otherFeesCategoryResponseDto.setOtherFeesCategory(feecategoryList);
 
 		            Locale indiaLocale = new Locale("en", "IN");

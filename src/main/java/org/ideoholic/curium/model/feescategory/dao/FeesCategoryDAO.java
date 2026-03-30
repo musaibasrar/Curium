@@ -384,7 +384,7 @@ public class FeesCategoryDAO {
 	}
 
 	@Transactional
-	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, String branchId) {
+	public List<OtherFeecategory> getOtherFeeCategory(String className, String searchYear, Integer branchId) {
 		List <OtherFeecategory> result= new ArrayList<>();
 		try {
 			// Query query = session.createQuery("from OtherFeecategory where particularname like '"+className+"--%' and academicyear = '"+searchYear+"' and branchid='"+branchId+"'");

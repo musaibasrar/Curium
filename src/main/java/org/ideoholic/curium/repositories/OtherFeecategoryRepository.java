@@ -30,7 +30,7 @@ public interface OtherFeecategoryRepository extends JpaRepository<OtherFeecatego
 	    List<OtherFeecategory> findByClassNamePrefixAndAcademicYearAndBranchId(
 	        @Param("className") String className,
 	        @Param("searchYear") String searchYear,
-	        @Param("branchId") String branchId
+	        @Param("branchId") Integer branchId
 	    );
 
 }

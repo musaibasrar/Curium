@@ -6,10 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.feescategory.service.FeesService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.action.StudentActionAdapter;
-import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/FeesProcess")
 public class FeesAction {
-	@Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private HttpServletResponse response;
 	@Autowired
 	private HttpSession httpSession;
 	@Autowired
@@ -187,16 +181,11 @@ public class FeesAction {
 	
 	@GetMapping("/searchfeecategory")
 	public void searchFeeCategory() {
-			try {
-				feesActionAdapter.getFeeCategory();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-	}
-
-	public void setHttpobjects(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
+		try {
+			feesActionAdapter.getFeeCategory();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@PostMapping("/applyotherConcession")
