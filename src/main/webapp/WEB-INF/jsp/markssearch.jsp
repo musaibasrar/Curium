@@ -718,7 +718,7 @@ border-color: transparent;background-color:#E6EEF4;font-size: 18px;font-weight:b
 							
 							
 							<td class="alignRightFields">Exam &nbsp;&nbsp;</td>
-							<td ><label><input  /> <input style="border: none;
+							<td ><label><input style="border: none;
 border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:bold;font-variant: small-caps;color: #EB6000;"
 									name="examselected" type="text" class="myclass" id="examselected"
 									size="36" value='<c:out value="${examselected}"></c:out>'>
