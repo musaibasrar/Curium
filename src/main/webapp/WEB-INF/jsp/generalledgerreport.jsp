@@ -594,6 +594,24 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 				<fmt:setLocale value="en_SA" scope="session"/>
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Opening Balance</b>
+							</label> 
+							</td>
+							
+							<td class="dataTextRight">
+								<label style="color: #eb6000"><b>
+								<fmt:formatNumber type="currency"  value="${openingbalance}" />
+							</label>
+							</td>
+					</tr>
 					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
@@ -660,21 +678,13 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
-									Balance</b>
+									Closing Balance</b>
 							</label> 
 							</td>
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-							<c:choose>
-                                <c:when test="${drtotal > crtotal}">
-									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
-                                </c:when>
-                                <c:otherwise>
-                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
-                                </c:otherwise>
-                            </c:choose>
-							</b>
+								<fmt:formatNumber type="currency"  value="${closingbalance}" />
 							</label>
 							</td>
 					</tr>
