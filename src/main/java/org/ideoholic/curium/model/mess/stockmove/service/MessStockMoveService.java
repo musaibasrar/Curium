@@ -1,6 +1,18 @@
 package org.ideoholic.curium.model.mess.stockmove.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
@@ -11,7 +23,18 @@ import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
-import org.ideoholic.curium.model.mess.stockmove.dto.*;
+import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
+import org.ideoholic.curium.model.mess.stockmove.dto.BillResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.ClassSearchDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.DuesResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessTaxInvoice;
+import org.ideoholic.curium.model.mess.stockmove.dto.MoveStockResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveIdsDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveOldDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
@@ -20,15 +43,7 @@ import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -565,8 +580,19 @@ public class MessStockMoveService {
 		
 		List<Bill> messStockMoveList = new ArrayList<Bill>();
 		StockMoveResponseDto result = StockMoveResponseDto.builder().build();
-		String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
-		String toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
+		String fromDate = null;
+		String toDate = null;		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		if(dto!=null) {
+			fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
+			toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
+		}else {
+			String currentDate = LocalDate.now().format(formatter);
+		    fromDate = currentDate;
+		    toDate = currentDate;
+		}
+		
 		
 		 if(branchId!=null){
 			 
