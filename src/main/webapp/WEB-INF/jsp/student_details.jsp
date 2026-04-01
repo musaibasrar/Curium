@@ -641,7 +641,7 @@ for(Cookie cookie : cookies){
            						 
                             </td>
    
-                            <td  width="25%"  class="alignLeft" height="50">Remarks
+                            <td  width="25%"  class="alignLeft" height="50">How did you know?
                             </td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.remarks}" />
@@ -815,13 +815,13 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                          <tr>
-                        <td width="25%"   class="alignLeft" height="50" >Languages Studied</td>
+                        <td width="25%"   class="alignLeft" height="50" >Marks</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.languagesstudied}" />
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
+                            <td width="25%"   class="alignLeft" height="50" >Exam Board</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.subsequentprogress}" />
                             </td>
@@ -937,12 +937,12 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         <tr>
-                            <td width="25%"  class="alignLeft" height="50">Father's Caste <br> Certificate No</td>
+                            <td width="25%"  class="alignLeft" height="50">Father occupation</td>
                             <td width="25%" class="tablerows" >
                                  <c:out value="${parents.fatherscastecertno}" />
                                 
                             </td>
-                            <td width="25%"  class="alignLeft" height="50" >Mother's Caste <br> Certificate No
+                            <td width="25%"  class="alignLeft" height="50" >Mother Occupation
                             </td>
                             <td width="25%"  class="tablerows">
                                 <c:out default="" value="${parents.motherscastecertno}" />

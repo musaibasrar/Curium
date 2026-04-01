@@ -991,13 +991,22 @@ for(Cookie cookie : cookies){
 								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
 							</td>
 
-							<td class="alignLeft" style="padding-left: 20px;">Remarks&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">How did you know?&nbsp;</td>
 
-							<td align="left"><label> <input name="remarks"
+							<td align="left"><%-- <label> <input name="remarks"
 									type="text" class="myclass"
 									value="<c:out default="" value="${student.remarks}" />"
 									id="remarks" size="30">
 
+							</label> --%> <label> <select name="remarks"
+									 id="remarks"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected><c:out default="" value="${student.remarks}" /></option>
+										<option>Newspaper</option>
+										<option>Teacher</option>
+										<option>Friends</option>
+										<option>Website</option>
+								</select>
 							</label></td>
 							</tr>
 							
@@ -1453,7 +1462,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-						<td class="alignLeft">Father's Caste <br> Certificate No</td>
+						<td class="alignLeft">Father Occupation</td>
 							<td><label> <input
 									name="fatherscastecertno" type="text"  style="text-transform:capitalize;" class="myclass" value="${parents.fatherscastecertno}"
 									id="fatherscastecertno" size="30">
@@ -1461,7 +1470,7 @@ for(Cookie cookie : cookies){
 							</label></td>
 
 					
-						<td class="alignLeft" style="padding-left: 20px;">Mother's Caste <br> Certificate No</td>
+						<td class="alignLeft" style="padding-left: 20px;">Mother Occupation</td>
 							<td><label> <input name="motherscastecertno"
 									type="text" class="myclass" id="motherscastecertno"  style="text-transform:capitalize;" value="${parents.motherscastecertno}" size="30">
 
@@ -1718,7 +1727,7 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Languages Studied</td>
+							<td class="alignLeft">Marks</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass" style="text-transform:capitalize;"
@@ -1727,7 +1736,7 @@ for(Cookie cookie : cookies){
 
 							</label></td>
 							
-							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied&nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Exam Board&nbsp;</td>
 							<td><label> <input name="subsequentprogress"
 									type="text" class="myclass" style="text-transform:capitalize;"
 									value="<c:out default="" value="${student.subsequentprogress}" />"
