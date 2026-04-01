@@ -27,4 +27,6 @@ public interface TeacherRepository extends JpaRepository<Teacher,  Integer> {
 	List<String> fetchTeacherexternalid();
 	
 	Optional<Teacher> findByTeacherexternalid(String teacherExternalId);
+	
+	List<Teacher> findByBranchidAndTidIn(Integer branchId, List<Integer> teacherIds);
 }

@@ -396,17 +396,21 @@ public static String getStringDate(Date dateofbirth) {
 	return date;
 	}
 
-	public static String dateParserddMMYYYY(Date date) {
-		String datefinal = "";
-		if (date != null) {
-			try {
-				SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-				datefinal = formatter.format(date);
+public static String dateParserddMMYYYY(Date date) {
+	
+	if (date == null) {
+        return "";
+    }
+	
+	String datefinal = null;
+	try {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
+				Locale.ENGLISH);
+		datefinal = formatter.format(date);
 
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
 		return datefinal;
 	}
 
