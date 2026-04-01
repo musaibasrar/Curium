@@ -1460,11 +1460,17 @@ $(document).ready(function() {
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
-							<td ><label> <input name="remarks"
-									type="text" class="myclass" id="remarks" size="36"
-									style="text-transform:capitalize;"
-									>
+							<td class="alignLeft" style="padding-left: 20px;">How did you know? &nbsp;</td>
+							<td >
+							 <label> <select name="remarks"
+									 id="remarks"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Newspaper</option>
+										<option>Teacher</option>
+										<option>Friends</option>
+										<option>Website</option>
+								</select>
 							</label></td>
 						</tr>
 
@@ -1911,7 +1917,7 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td class="alignLeft">Father's Aadhar No
+									<td class="alignLeft">Father occupation
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
@@ -1919,7 +1925,7 @@ $(document).ready(function() {
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
+									<td class="alignLeft" style="padding-left: 20px;">Mother Occupation
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
@@ -2176,7 +2182,7 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Languages Studied &nbsp;</td>
+							<td class="alignLeft">Exam Board &nbsp;</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass"
@@ -2186,7 +2192,7 @@ $(document).ready(function() {
 
 
 
-							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Marks &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:capitalize;"
