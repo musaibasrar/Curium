@@ -355,7 +355,7 @@ for(Cookie cookie : cookies){
                 </tbody>
             </table>
 
-            <br><br>
+            <br><br><br><br>
 
             <table width="100%">
                 <tr>
