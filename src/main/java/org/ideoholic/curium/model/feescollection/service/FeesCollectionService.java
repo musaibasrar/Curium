@@ -50,7 +50,8 @@ import java.util.*;
 public class FeesCollectionService {
 
 	private StandardActionAdapter standardActionAdapter;
-
+	private SmsService smsService;
+	
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 	private HttpSession httpSession;
@@ -62,11 +63,12 @@ public class FeesCollectionService {
 	private static final int BUFFER_SIZE = 4096;
 
 	public FeesCollectionService(HttpServletRequest request,
-			HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
+			HttpServletResponse response, StandardActionAdapter standardActionAdapter, SmsService smsService) {
 		this.request = request;
 		this.response = response;
 		this.httpSession = request.getSession();
 		this.standardActionAdapter = standardActionAdapter;
+		this.smsService = smsService;
 	}
 
 	public Feescollection add(Feesdetails feesdetails) {
@@ -378,7 +380,7 @@ public class FeesCollectionService {
 				getFeesDetails(sid,dto.getAcademicYear());
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
 				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
-				new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				smsService.sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 			
@@ -1437,7 +1439,7 @@ public class FeesCollectionService {
 				getFeesDetails(sid,dto.getAcademicYear());
 				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(sid));
 				String studentName = parent.getStudent().getName().substring(0, Math.min(parent.getStudent().getName().length(), 17));
-				new SmsService(request, response).sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
+				smsService.sendSMS(parent.getContactnumber(), "of "+studentName+",Rs."+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 				//new SmsService(request, response).sendSMS(parent.getContactnumber(), "Total "+String.valueOf(receiptInfo.getTotalamount()) , "fees");
 			}
 
@@ -2408,7 +2410,7 @@ public class FeesCollectionService {
 		ResultResponse result = ResultResponse.builder().success(false).build();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
-		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter, smsService);
 		XSSFRow row;
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 
@@ -2668,7 +2670,7 @@ public class FeesCollectionService {
 		// Student student = new Student();
 		DateFormat format = new SimpleDateFormat("MMMM d, yyyy");
 		List<Parents> listParents = new ArrayList<Parents>();
-		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter, smsService);
 		XSSFRow row;
 		System.out.println("-------------------------------READING THE SPREADSHEET-------------------------------------");
 

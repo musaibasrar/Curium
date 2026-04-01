@@ -322,7 +322,10 @@ public class ExamDetailsService {
         String admNo = printPreviewHallTicketDto.getAdmNo();
         String studentName = printPreviewHallTicketDto.getStudentName();
         String academicYear = printPreviewHallTicketDto.getAcademicYear();
-
+        String[] studentIds = printPreviewHallTicketDto.getStudentIds();
+        List<Integer> studentIdsList = Arrays.stream(studentIds)
+				.map(Integer::parseInt)
+					.collect(Collectors.toList());
 
             List<Parents> studentList = new ArrayList<>();
             List<Examschedule> examscheduleList = new ArrayList<>();
@@ -330,7 +333,7 @@ public class ExamDetailsService {
             classStudying = classStudying + "--" + "%";
 
             if (admNo.equals("")) {
-                studentList = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.classstudying LIKE '" + classStudying + "' and (parents.Student.promotedyear='" + academicYear + "' or parents.Student.yearofadmission='" + academicYear + "') and parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid = " + branchId + " order by parents.Student.sid desc");
+            	studentList = new studentDetailsDAO().getReferredList(studentIdsList);
             } else {
                 Parents parent = new Parents();
                 Student student = new Student();

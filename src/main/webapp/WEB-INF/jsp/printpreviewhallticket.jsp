@@ -363,22 +363,22 @@ for(Cookie cookie : cookies){
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
 						<tr>
-							<td><br><br><br></td>
+							<td><br></td>
 						</tr>
 						<tr>
 							<td><br></td>
 							<td></td>
 							<td></td>
-							<td></td>
+							<td><img src="/meps/images/examcoordinatorsignature.png" width="100" height="40"/></td>
 						</tr>
 						<tr>
 						<td><br></td>
 						</tr>
 				<tr>
 				<td></td>
-				<td align="left" style="font-size:25px;">Class Teacher</td>	
+				<td align="left" style="font-size:25px;"></td>	
 					<td align="centre" style="font-size:25px;">&emsp;</td>
-					<td align="centre" style="font-size:25px;">Head Master</td>
+					<td align="centre" style="font-size:25px;">Principal</td>
 					</tr>
                     
 		</TABLE>
