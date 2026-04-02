@@ -22,9 +22,11 @@ public interface MessStockMoveRepository extends JpaRepository<MessStockMove, In
 	@Query("UPDATE MessStockMove SET voucherid = :transactionsId WHERE id = :id")
 	void updateVoucherId(@Param("transactionsId") Integer transactionsId, @Param("id") Integer id);
 
-	@Query("FROM MessStockMove msm where msm.status != :status order by msm.id DESC")
-	Page<MessStockMove> findByStatusAndId(@Param("status") String status, Pageable page);
+	@Query("FROM MessStockMove msm where msm.status != :status and msm.transactiondate between :fromDate and :toDate AND msm.branchid :branchId order by msm.id DESC")
+	Page<MessStockMove> findByStatusAndId(@Param("status") String status, @Param("fromDate") String fromDate,  @Param("toDate") String toDate, @Param("branchId") Integer branchId, Pageable page);
 
 	int countByStatusNotAndBranchid(String status, Integer branchId);
-
+	
+	@Query("From MessStockMove msm where msm.status != :status and msm.transactiondate between :fromDate and :toDate AND msm.branchid :branchId")
+	List<MessStockMove> findByStatusNotAndTransactiondateBetweenAndBranchid(@Param("status") String status, @Param("fromDate") String fromDate,  @Param("toDate") String toDate, @Param("branchId") Integer branchId);
 }
