@@ -1,8 +1,13 @@
 package org.ideoholic.curium.model.diary.service;
 
+import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.codec.binary.Base64;
+import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
@@ -18,28 +23,60 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class DiaryService {
+
 	@Autowired
 	private diaryDAO diarysDao;
 	
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
 		
-	public void adddetail() {
-		Login login = new Login();
-		/*
-		 * String Id=login.getUsername(); Student student = new
-		 * studentDetailsDAO().readploginUniqueObject(Id);
-		 
-		String studentcls = student.getClassstudying();
-		request.setAttribute("studentcls", studentcls);
-		*/
+	private String BRANCHID = "branchid";
+	/**
+	 * Size of a byte buffer to read/write file
+	 */
+	private static final int BUFFER_SIZE = 4096;
+	
+	private static final String IMAGE_PNG = "image/png";
+	private static final String IMAGE_JPEG = "image/jpeg";
+	private static final String IMAGE_JPG = "image/jpg";
+	private static final String APPLICATION_PDF = "application/pdf";
 
+	private static final Set<String> ALLOWED_TYPES = Set.of(
+	    IMAGE_PNG, IMAGE_JPEG, IMAGE_JPG, APPLICATION_PDF
+	);
+	
+	private String processFile(MultipartFile file) throws IOException {
+
+	    if (file == null || file.getOriginalFilename() == null || file.getOriginalFilename().isEmpty()) {
+	        return null;
+	    }
+
+	    String contentType = file.getContentType();
+
+	    if (!ALLOWED_TYPES.contains(contentType)) {
+	        log.warn("Invalid file type: {}", contentType);
+	        return null;
+	    }
+
+	    byte[] bytesEncoded = Base64.encodeBase64(file.getBytes());
+	    return "data:" + contentType + ";base64," + new String(bytesEncoded);
 	}
 
-	public void addDiary(AddDiaryDto addDiaryDto, String branchId, String userLoginId, String currentAcademicYear) {
+	
+	public void adddetail() {
+		Login login = new Login();
+	}
+	
+	public void addDiary(AddDiaryDto addDiaryDto, MultipartFile[] listOfFiles,
+            String branchId, String userLoginId, String currentAcademicYear) {
+
 		Diary diary = new Diary();
 
 		if (branchId != null) {
@@ -56,9 +93,30 @@ public class DiaryService {
 			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
 			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
 			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
-			diary = diarysDao.create(diary);
+
+			try {
+				if (listOfFiles != null && listOfFiles.length > 0) {
+
+					if (listOfFiles.length > 0) {
+						diary.setAttachment1(processFile(listOfFiles[0]));
+					}
+					if (listOfFiles.length > 1) {
+						diary.setAttachment2(processFile(listOfFiles[1]));
+					}
+					if (listOfFiles.length > 2) {
+						diary.setAttachment3(processFile(listOfFiles[2]));
+					}
+				}
+
+			} catch (IOException e) {
+				log.error("Error processing file upload", e);
+			}
+
+			diary = new diaryDAO().create(diary);
 		}
-	}
+}
+
+	
 
 	public DiaryResponseDto viewDiary(String strPage, String branchId) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
@@ -72,6 +130,7 @@ public class DiaryService {
 				}
 				List<Diary> diaryDetails = diarysDao.readListOfObjects((page - 1) * recordsPerPage,
 						recordsPerPage, Integer.parseInt(branchId));
+
 				int noOfRecords = diarysDao.getNoOfRecords(Integer.parseInt(branchId));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiary(diaryDetails);
