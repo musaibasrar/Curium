@@ -1,13 +1,13 @@
 package org.ideoholic.curium.model.account.dto;
 
-import lombok.Builder;
-import lombok.Data;
-
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+
+import lombok.Builder;
+import lombok.Data;
 
 @Data
 @Builder
@@ -18,6 +18,9 @@ public class SearchLedgerEntriesResponseDto {
     private String fromDate;
     private String toDate;
     private String voucherType;
+    private BigDecimal openingBalance;
+    private BigDecimal closingBalance;
+    private int accountgroupmasterid;
     private boolean success;
     private List<MessSuppliers> messSuppliersList;
 }
