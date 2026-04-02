@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +15,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,6 +42,7 @@ import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
+import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
 import org.ideoholic.curium.model.marksdetails.dto.GenerateReportDto;
 import org.ideoholic.curium.model.marksdetails.dto.GenerateReportResponseDto;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
@@ -480,7 +481,7 @@ public class MarksDetailsService {
 		String[] studentIds = dto.getStudentIds();
 		String[] studentsMarks = dto.getStudentsMarks();
 		String[] marksid = dto.getMarksId();
-		String exam = dto.getExam();
+		String[] examIdName = dto.getExam().split(":");
 		String subject = dto.getSubject();
 		int sizeOfArray = 0;
 		Map<Integer, Map<Integer, String>> mapOfMarksid = new HashMap<>();
@@ -522,8 +523,9 @@ public class MarksDetailsService {
 
 			}
 
-			Exams exams = examDetailsDao.getExamDetails(Integer.parseInt(exam));
+			int examid = Integer.parseInt(examIdName[0]);
 			int subid = Integer.parseInt(subject);
+			Exams exam = examDetailsDao.getExamDetails(examid);
 			Subject subjectDetails =  subjectDetailsDao.getSubjectDetails(subid);
 			List<Marks> marksList = new ArrayList<Marks>();
 
@@ -540,7 +542,7 @@ public class MarksDetailsService {
 
 					Marks marks = new Marks();
 					marks.setMarksid(marksID);
-					marks.setExam(exams);
+					marks.setExam(exam);
 					marks.setSubject(subjectDetails);
 					marks.setStudent(studentDetailsDao.readUniqueObject(studentId));
 					marks.setSubsubjectid(0);
