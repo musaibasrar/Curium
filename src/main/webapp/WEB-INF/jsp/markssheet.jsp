@@ -350,7 +350,24 @@ for(Cookie cookie : cookies){
 	                                		</tr> 
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
-                            					<td style="border: 1px solid black;text-align: left;"></td>
+                            					<c:choose>
+												    <c:when test="${exammarks.percentage >= 85}">
+												        <td style="border: 1px solid black;text-align: left;">Distinction</td>
+												    </c:when>
+												
+												    <c:when test="${exammarks.percentage >= 60 && exammarks.percentage < 85}">
+												        <td style="border: 1px solid black;text-align: left;">First Class</td>
+												    </c:when>
+												
+												    <c:when test="${exammarks.percentage >= 50 && exammarks.percentage < 60}">
+												        <td style="border: 1px solid black;text-align: left;">Second Class</td>
+												    </c:when>
+												
+												    <c:when test="${exammarks.percentage >= 35 && exammarks.percentage < 50}">
+												        <td style="border: 1px solid black;text-align: left;">Third Class</td>
+												    </c:when>
+												</c:choose>
+                            					
 	                                		</tr>                                                           	
 	                                	</table>
                                 </td>

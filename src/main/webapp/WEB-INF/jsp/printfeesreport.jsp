@@ -245,10 +245,10 @@
 						<th class="datath">Class & Sec&nbsp;</th>
 						<th class="datath">Father Name&nbsp;</th>
 						<th class="datath">Contact No.&nbsp;</th>
-						<!-- <th class="datath">Fees Details(Due Amount/Total Amount)</th> -->
 						<th class="datath">Paid Amount&nbsp;</th>
 						<th class="datath">Due Amount&nbsp;</th>
-						<th class="datath">Fees Summary(Due Amount/Total Amount)</th>
+						<th class="datath">Total Amount</th>
+						<!-- <th class="datath">Fees Summary(Due Amount/Total Amount)</th> -->
  				 </tr>
  			 </thead>
  		 
@@ -321,13 +321,7 @@
 							<c:out value="${PaidAmount}" /></td>
 							<td class="dataText"><c:out value="${DueAmount}" /></td>
 							<td class="dataText">
-									<table>
-										<tr>
-												<td style="width: 160px;" align="right" >
-													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
-												</td>
-										</tr>
-									</table>
+							<c:out value="${TotalAmount}" />
 							</td>
 						</tr>
 					</c:forEach>

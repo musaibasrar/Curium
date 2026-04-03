@@ -14,7 +14,7 @@
         <property name="examid" type="java.lang.Integer">
             <column name="examid" />
         </property>
-        <property name="marksobtained" type="java.lang.Integer">
+        <property name="marksobtained" type="java.lang.Float">
             <column name="marksobtained" />
         </property>
          <property name="academicyear" type="java.lang.String">

@@ -233,10 +233,9 @@
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
-	font-weight: normal;
+	font-weight: bold;
 	width: auto;
 	height: 27px;
-	vertical-align: text-top;
 	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -342,6 +341,15 @@
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
+		$('#myTableFeesCat').dataTable({
 			"sScrollY" : "380px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
@@ -676,17 +684,47 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
 							<td id="feescat">
-							<div style="overflow:scroll;width:220px; height: 250px;">
-							<c:forEach items="${feescategory}" var="feescategory">
+							<div style="overflow:scroll;width:420px; height: 250px;">
+							
+								<table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
+						            
+						            <thead>
+						                <tr>
+						                    <th class="headerText">Select</th>
+						                    <th class="headerText">Fees Details</th>
+						                </tr>
+						            </thead>
+						
+						            <tbody>
+						                <c:forEach items="${feescategory}" var="feescategory">
+						                    <tr>
+						                        <td class="dataText" style="background-color:white;">
+						                            <input type="checkbox"
+						                                   name="feescategory"
+						                                   class="chcktbl"
+						                                   value="${feescategory.idfeescategory}" />
+						                        </td>
+						
+						                        <td class="dataText" style="font-weight:bold;color:#325F6D;background-color:white;text-align: left">
+						                            ${feescategory.feescategoryname} : ${feescategory.particularname}
+						                        </td>
+						                    </tr>
+						                </c:forEach>
+						            </tbody>
+						
+						        </table>
+								<%-- <c:forEach items="${feescategory}" var="feescategory">
+												<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
+									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
+									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</label><br>
 									<c:if test="${!fn:contains(feescategory.feescategoryname, 'Bus Fee')}">
 												<label class="labelClass" style="font-weight: bold;color:#325F6D"> <input
 									 type="checkbox" name="feescategory" class="chcktbl" value="${feescategory.idfeescategory}"
 									size="36"> ${feescategory.feescategoryname} : </label> <label style="font-weight: bold;color:#eb6000">${feescategory.particularname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</label><br>
-									</c:if>
-										
-							
-								</c:forEach>
+									</c:if> 
+								</c:forEach> --%>
 								</div>
 							</td>
 							

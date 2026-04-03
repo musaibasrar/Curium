@@ -247,7 +247,7 @@ for(Cookie cookie : cookies){
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
+				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="70" height="70"/></td>
 			</tr>
 		</table>
 
@@ -339,7 +339,15 @@ for(Cookie cookie : cookies){
 				<td></td>
 				<td align="left">Accountant</td>	
 					<td align="centre">Class Teacher</td>
-					<td align="centre">Head Master</td>
+					<c:choose>
+					    <c:when test="${branchid == '2'}">
+						<td align="center">Head Master</td>
+					    </c:when>
+					    <c:otherwise>
+						<td align="center">Principal</td>
+					    </c:otherwise>
+					</c:choose>
+					
 					</tr>
                     
 		</TABLE>
