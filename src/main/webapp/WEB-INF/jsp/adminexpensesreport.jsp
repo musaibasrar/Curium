@@ -451,7 +451,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action="/vision/AdminProcess/printAllExpenses";
+		form1.action="/noblewisdom/AdminProcess/printAllExpenses";
 		form1.method = "POST";
 		form1.submit();
 	}
