@@ -11,6 +11,7 @@ import org.ideoholic.curium.repositories.PaybasicRepository;
 import org.ideoholic.curium.repositories.TeacherRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 
@@ -304,4 +305,19 @@ public class EmployeeDAO {
 		}
 		
 	}
+	
+	public List<Teacher> getTeachersList(int branchId, List<Integer> ids) {
+	    List<Teacher> results = new ArrayList<>();
+
+	    try {
+	        results = teacherRepository.findByBranchidAndTidIn(branchId, ids);
+	    } catch (Exception hibernateException) {
+	        log.error(hibernateException.getMessage(), hibernateException);
+	        hibernateException.printStackTrace();
+	        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	    }
+
+	    return results;
+	}
+	
 }

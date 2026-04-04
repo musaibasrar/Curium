@@ -40,14 +40,13 @@ public class diaryDAO {
 		List<Diary> results = new ArrayList<>();
 		
         try {
-			
         	Pageable pageable = PageRequest.of(offset, noOfRecords);
-        	 results = diaryRepo.findByBranchid(branchId, pageable).toList();
+        	 results = diaryRepo.findDiaryByBranchId(branchId, pageable);
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();       
-            } 
+        }
         return results;
 	}
     @Transactional

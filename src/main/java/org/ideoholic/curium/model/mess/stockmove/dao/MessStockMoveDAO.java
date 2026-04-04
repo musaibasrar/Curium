@@ -227,7 +227,6 @@ public class MessStockMoveDAO {
 			} else {
 				msmiBRN = 1;
 			}
-
 			messStockMoveInfo.setBranchreceiptnumber(String.format("%04d", msmiBRN));
 			messStockMoveInfoRepository.save(messStockMoveInfo);
 
@@ -241,7 +240,7 @@ public class MessStockMoveDAO {
 	}
 
 	@Transactional
-	public List<Bill> getStockMoveDetails(int offset, int noOfRecords, int branchId) {
+	public List<Bill> getStockMoveDetails(String frmDate, String toDate, int offset, int noOfRecords, int branchId) {
 
 		List<Bill> results = new ArrayList<>();
 
@@ -249,7 +248,7 @@ public class MessStockMoveDAO {
 			// Query query = session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' order by msm.id DESC").setCacheable(true).setCacheRegion("commonregion");
 			// query.setFirstResult(offset);
 			// query.setMaxResults(noOfRecords);
-			List<MessStockMove> msmList = messStockMoveRepository.findByStatusAndId("CANCELLED", PageRequest.of(offset, noOfRecords)).toList();
+			List<MessStockMove> msmList = messStockMoveRepository.findByStatusAndId("CANCELLED", frmDate, toDate, branchId, PageRequest.of(offset, noOfRecords)).toList();
 			msmList.forEach(msmItem -> {
 				Bill bill = new Bill();
 				bill.setQuantity(msmItem.getQuantity());
@@ -336,17 +335,16 @@ public class MessStockMoveDAO {
 		return results;
 	}
 
-	@Transactional
-	public int getNoOfRecordsStockMove(int branchId) {
+	public int getNoOfRecordsStockMove(String fromDate, String toDate, int branchId) {
+		List<MessStockMove> results = new ArrayList<MessStockMove>();
 		int noOfRecords = 0;
 		try {
-			// results = (List<Student>) session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' AND msm.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
-			noOfRecords = messStockMoveRepository.countByStatusNotAndBranchid("CANCELLED", branchId);
-			log.info("The size of list is:::::::::::::::::::::::::::::::::::::::::: " + noOfRecords);
+			//results = session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' AND msm.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
+			messStockMoveRepository.findByStatusNotAndTransactiondateBetweenAndBranchid("CANCELLED", fromDate, toDate, branchId);
+			noOfRecords = results.size();
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error(hibernateException.getMessage(), hibernateException);
-			hibernateException.printStackTrace();
 		}
 		return noOfRecords;
 	}
@@ -458,5 +456,17 @@ public class MessStockMoveDAO {
 			hibernateException.printStackTrace();
 		}
 		return results;
+	}
+	
+	@Transactional
+	public MessItems getItem(Integer itemid) {
+	    try {
+	        return messItemsRepository.findById(itemid).orElse(null);
+	    } catch (Exception hibernateException) {
+	        log.error(hibernateException.getMessage(), hibernateException);
+	        hibernateException.printStackTrace();
+	        TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+	        return null;
+	    }
 	}
 }

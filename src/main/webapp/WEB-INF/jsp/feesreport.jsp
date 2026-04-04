@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -126,14 +127,12 @@
 	border-radius: 3px;
 	width: 10px;
 	font-family: Tahoma;
-	font-size: 14px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
 	font-weight: Bold;
 	width: auto;
 	height: 24px;
 	vertical-align: text-top;
-	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
@@ -232,10 +231,10 @@
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
-	font-weight: normal;
+	font-weight: bold;
 	width: auto;
 	height: 27px;
-	vertical-align: text-top;
+	/* vertical-align: text-top; */
 	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -349,6 +348,16 @@
 			"bInfo" : false,
 			"bAutoWidth" : false
 		});
+		
+		$('#myTableFeesCat').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
 	});
 </script>
 <script type="text/javascript">
@@ -373,12 +382,31 @@
 		form1.submit();
 
 	}
+	
+	
+	function printRecords() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/school/FeesDetails/printDataForFeesReport";
+		form1.method = "POST";
+		form1.submit();
+}
 
 	$(function() {
 
 		$("#search").button().click(function() {
 			searchForStudents();
 		});
+		
+		
+		$("#print").button({
+            icons:{
+                primary: "ui-icon-print"
+            }
+        }).click(function(){
+            printRecords();
+            return false;
+
+        });
 		
 
 	});
@@ -397,7 +425,7 @@
 	$(function() {
 		$("#export").button({
 			icons : {
-				primary : "ui-icon-trash"
+				primary : "ui-icon-transferthick-e-w"
 			}
 		});
 	});
@@ -563,6 +591,20 @@
 
     </script>
 
+<script>
+function toggleSelectAll(source) {
+    const checkboxes = document.querySelectorAll(".chcktbl1");
+    checkboxes.forEach(cb => cb.checked = source.checked);
+}
+
+function syncSelectAll() {
+    const checkboxes = document.querySelectorAll(".chcktbl1");
+    const selectAll = document.getElementById("chckHead1");
+
+    selectAll.checked = Array.from(checkboxes)
+                             .every(cb => cb.checked);
+}
+</script>
 
 
 </head>
@@ -615,7 +657,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 
 						</tr>
-						<tr>
+						<%-- <tr>
 						<td style="font-weight: bold;color:#325F6D">Select All</td>
 						<td><input type="checkbox" id="chckHead1" /></td>
 						</tr>
@@ -644,8 +686,51 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:if>	
 										</c:forEach></td>
+						</tr>  --%>
+						 <tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead1" /></td>
 						</tr>
-						
+
+<tr><td colspan="2"><br/></td></tr>
+
+<tr>
+    <td style="font-weight:bold;color:#325F6D">Class:</td>
+    <td>
+
+        <c:forEach items="${classdetailslist}" var="item">
+
+            <!-- build Class--Section -->
+            <c:set var="classSec" value="${item.classdetails}" />
+
+            <!-- reset checked flag -->
+            <c:set var="isChecked" value="false" />
+
+            <!-- keep checked after search -->
+            <c:forEach items="${selectedClassList}" var="selected">
+                <c:if test="${selected eq classSec}">
+                    <c:set var="isChecked" value="true" />
+                </c:if>
+            </c:forEach>
+
+            <c:if test="${not empty item.classdetails}">
+                <label class="labelClass"
+                       style="font-weight:bold;color:#325F6D; display:inline-block; margin-right:15px;">
+                    <input type="checkbox"
+                           class="chcktbl1"
+                           name="classsearch"
+                           value="${classSec}"
+                           <c:if test="${isChecked}">checked</c:if>
+                           onclick="syncSelectAll()" />
+                    ${classSec}
+                </label>
+            </c:if>
+
+        </c:forEach>
+
+    </td>
+</tr>
+
 							<tr>
 							<td><br /></td>
 
@@ -682,8 +767,68 @@ for(Cookie cookie : cookies){
 							</td>
 							
 						</tr>
-											
 						<tr>
+    <td></td>
+    <td id="feescat">
+    
+        <div style="overflow:scroll;width:420px; height:250px;">
+
+    <table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
+
+        <thead>
+            <tr>
+                <th class="headerText">Select</th>
+                <th class="headerText">Fees Details</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <c:forEach items="${feescategory}" var="item">
+
+                <!-- reset checked flag -->
+                <c:set var="isChecked" value="false" />
+
+                <!-- keep checked after search -->
+                <c:forEach items="${selectedFeesCategoryList}" var="selected">
+                    <c:if test="${selected eq item.idfeescategory}">
+                        <c:set var="isChecked" value="true" />
+                    </c:if>
+                </c:forEach>
+
+                <tr>
+                    <td class="dataText" style="background-color:white;">
+
+                        <input type="checkbox"
+                               name="feescategory"
+                               class="chcktbl"
+                               value="${item.idfeescategory}"
+                               <c:if test="${isChecked}">checked</c:if>
+                               onclick="syncFeesSelectAll()" />
+
+                    </td>
+
+                    <td class="dataText"
+                        style="font-weight:bold;color:#325F6D;background-color:white;text-align:left">
+
+                        ${item.feescategoryname} :
+                        <span style="color:#eb6000;">
+                            ${item.particularname}
+                        </span>
+
+                    </td>
+                </tr>
+
+            </c:forEach>
+        </tbody>
+
+    </table>
+
+</div>
+
+    </td>
+</tr>
+											
+						<%-- <tr>
 							<td class="alignRightFields" style="font-weight: bold;color:#325F6D"></td>
 							<td id="feescat">
 							<div style="overflow:scroll;width:420px; height: 100px;">
@@ -697,7 +842,7 @@ for(Cookie cookie : cookies){
 								</div>
 							</td>
 							
-						</tr>
+						</tr> --%>
 						 <tr>
 							<td><br /></td>
 
@@ -746,6 +891,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -762,7 +908,7 @@ for(Cookie cookie : cookies){
 					<c:set var="TotalDueAmount" value="0" />
 					<c:set var="TotalSum" value="0" />
 					
-					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist">
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -770,6 +916,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${studentfeesreportlist.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${studentfeesreportlist.student.sid}"/>" /></td> --%>
+								<td class="dataText" align="center">${status.index + 1}</td>
 								<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
 							<td class="dataText"><c:out
@@ -799,6 +946,8 @@ for(Cookie cookie : cookies){
 									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
 									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+								      <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
+								     <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
 								</c:forEach>
 							</td>
 							<td class="dataText">
@@ -825,15 +974,16 @@ for(Cookie cookie : cookies){
 				</tbody>
 				<tfoot>
 					<tr>
-					
-					<td  class="footerTD" > <input value="Export"
-							type="submit" id="export"/></td>
+					&nbsp;&nbsp;
+					<td colspan="3"  class="footerTD" style="textalign:left"> <button value="Export" type="submit" id="export">Export</button>
+					&nbsp;&nbsp;<button value="Print" id="print">Print</button>
+							</td>
 													
-						<td class="footerTD" colspan="7" >
+						<td class="footerTD" style="text-align: center" colspan="5" >
 						 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
-						 Total Paid Amount : ${TotalPaidAmount} &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount }
+						 Total Paid Amount : ${TotalPaidAmount} (<fmt:formatNumber value="${TotalSumper}" pattern="0.00" />%) &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)
 						 
 						</td>
 							

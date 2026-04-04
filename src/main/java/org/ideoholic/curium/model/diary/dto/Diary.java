@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.ideoholic.curium.model.enquiry.dto.Enquiry;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -61,5 +59,13 @@ public class Diary implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private Integer userid;
-
+	
+	@Column(name = "attachment1")
+	private String attachment1;
+	
+	@Column(name = "attachment2")
+	private String attachment2;
+	
+	@Column(name = "attachment3")
+	private String attachment3;
 }

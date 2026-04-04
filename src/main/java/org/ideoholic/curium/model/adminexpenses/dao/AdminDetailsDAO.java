@@ -151,4 +151,23 @@ public class AdminDetailsDAO {
 
 	}
 
+	public List<Adminexpenses> readAllExpenses(List<Integer> expenseIdList, String  branchId) {
+		
+
+		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
+		
+		try{
+
+			results = adminExpensesRepo.findByIdAdminExpensesInAndBranchid(expenseIdList, Integer.parseInt(branchId));
+
+
+        } catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+            
+            hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+		
+		return results;
+	}	
 }

@@ -220,6 +220,8 @@ public class AccountActionAdapter {
 			request.setAttribute("ledgername", responseDto.getLedgerName());
 			request.setAttribute("fromdateselected", responseDto.getFromDate());
 			request.setAttribute("todateselected", responseDto.getToDate());
+			request.setAttribute("openingbalance", responseDto.getOpeningBalance());
+			request.setAttribute("closingbalance", responseDto.getClosingBalance());
 		}
 
 		return responseDto.isSuccess();
@@ -272,7 +274,10 @@ public class AccountActionAdapter {
 		request.setAttribute("accountid", searchLedgerEntriesResponseDto.getAccountId());
 		request.setAttribute("fromdate", searchLedgerEntriesResponseDto.getFromDate());
 		request.setAttribute("todate", searchLedgerEntriesResponseDto.getToDate());
-
+		request.setAttribute("accountgroupmasterid", searchLedgerEntriesResponseDto.getAccountgroupmasterid());
+		request.setAttribute("openingbalance", searchLedgerEntriesResponseDto.getOpeningBalance());
+		request.setAttribute("closingbalance", searchLedgerEntriesResponseDto.getClosingBalance());
+		
 		return searchLedgerEntriesResponseDto.isSuccess();
 	}
 

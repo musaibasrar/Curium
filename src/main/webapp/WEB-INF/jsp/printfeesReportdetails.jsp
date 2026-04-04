@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print General Ledger Report</title>
+<title>Print Fees Collection Details</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -225,17 +225,17 @@
 
 
 <body style="text-align: center" class="bodymargin">
+<fmt:setLocale value="en_IN" scope="session"/>
 	<form method="post" class="bodymargin">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/vision/images/vision.jpg" width="90" height="80"/>
+				<img src="/school/images/school.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">General Ledger Report</label><br>
-				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
-				<label class="addressLineTwo">&nbsp;&nbsp;&nbsp;Ledger Name: ${ledgername}</label>
+				<label class="addressLine">Fees Collection Details Report</label><br>
+				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>
 	</table>
@@ -251,98 +251,129 @@
             <table class="datatable">
             <thead>
  				 <tr>
- 				 		<th class=datath>Sl.No</th>
-						<th class="datath">Vou #</th>
-						<th class="datath">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th class="datath">Account Description</th>
-						<th class="datath">Narration</th>
-						<th class="datath">Debits</th>
-						<th class="datath">Credits</th>
-				       	
+ 				 		<th class=datath>Sl.No.</th>
+ 				 		<th class="datath">UID</th>
+ 				 		<th class=datath>Admission Number</th>
+						<th class="datath">Student Name</th>
+						<th class="datath">Class</th>
+						<th class="datath">Father Name</th>
+						 <th></th> 
+				       	<th class="datath">Fees Summary</th>
  				 </tr>
  			 </thead>
- 		 
 			<tbody>
-					<c:set var="crtotal" value="${0}" />
-					<c:set var="drtotal" value="${0}" />
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
-					
-					
-					
+					<c:forEach items="${studentfeesreportlist}" var="studentfeesreportlist" varStatus="status">
 					<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${ledgertransactions.key.transactionsid}" />
+							<td class="datatd"><c:out value="${studentfeesreportlist.parents.student.studentexternalid}" />
 							</td>
-							<td class="datatd"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>
+							<td class="datatd"><c:out value="${studentfeesreportlist.parents.student.admissionnumber}" />
+							</td>
+							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.student.name}" /></td>
+							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.student.classstudying}" /></td>
+							<td class="datatd"><c:out	value="${studentfeesreportlist.parents.fathersname}" /></td>
+							 <td width="0px;"> 
+									<c:set var="DueAmount" value="0" />
+									<c:set var="TotalAmount" value="0" />
+								<c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
+									<%-- <table width="0px;">
+										<tr>
+											<td>
+												${studentfeescatagorydetails.feescategory.feescategoryname}:&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td>
+												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
+											</td>
+										</tr>
+									</table> --%>
+									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
+									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+									
+									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
+									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
+								    <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
+								     <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
+								</c:forEach>
+							 </td> 
 							<td class="datatd">
-							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
-							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
-							 <td class="datatd"><c:out	value="${ledgertransactions.key.narration}" /></td>
-							<c:if test="${ledgername[1] == 'Dr'}">
-								<td class="datatd"></td>
-								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
-								<td class="datatdright">
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${ledgertransactions.key.cramount}" />
-								</td>
-							</c:if>
-							<c:if test="${ledgername[1] == 'Cr'}">
-								<td class="datatdright">
-								<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${ledgertransactions.key.dramount}" />
-								</td>
-								<td class="datatd"></td>
-							</c:if>
+									<table>
+										<tr>
+											<c:if test="${DueAmount > 0}">
+												<td style="width: 160px;" align="right" >
+													<label style="color: red;">${DueAmount}/${TotalAmount}</label>&nbsp;&nbsp;&nbsp;
+												</td>
+											</c:if>
+											
+											<c:if test="${DueAmount == 0}">
+												<td style="width: 160px;" align="right" >
+													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
+												</td>
+											</c:if>
+													
+											
+										</tr>
+									</table>
+							</td>
 						</tr>
 						
 					</c:forEach>
-			</tbody>
-				</table>
-			<br>
-			<table class="datatable">
-						<tr>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td align="right" class="dataTextRight" >
-							<label style="font-weight: bold;">
-							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${drtotal}" />
-							</label>
-							</td>
-							
-							<td align="right" style="width: 90px;" class="dataTextRight" >
-							<label style="font-weight: bold;">
-							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${crtotal}" />
-							</label>
-							</td>
-						</tr>
-						<tr>
-					<td class="dataTextRight">
-						<label style="color: #eb6000"><b>
-									Opening Balance</b>
-							</label> 
-					</td>
-					<td class="dataTextRight" style="text-align: left;"><label style="color: #eb6000"><b>
-									<fmt:formatNumber type="currency"  value="${openingbalance}" />                                    
-							</b>
-							</label></td>
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
-									Closing Balance</b>
+									</b>
 							</label> 
 							</td>
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-									<fmt:formatNumber type="currency"  value="${closingbalance}" />                                    
+								<fmt:formatNumber type="currency"  value="${sumofdetailsfees}" /> 
 							</b>
 							</label>
+							</td>
+					</tr>
+			</tbody>
+				</table>
+			
+				<br>
+			
+			<table class="datatable">
+						<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									 Total Amount:</b><label style="color: #eb6000"><b>
+								<fmt:formatNumber type="currency"  value="${TotalSum}" /> 
+							</b>
+							</label>
+							</label> 
+							</td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									 Total Paid Amount:</b><label style="color: #eb6000"><b>
+								<fmt:formatNumber type="currency"  value="${TotalPaidAmount}" /> (${TotalSumper}%)
+							</b>
+							</label>
+							</label> 
+							</td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Total Due Amount:</b><label style="color: #eb6000"><b>
+								<fmt:formatNumber type="currency"  value="${TotalDueAmount}" /> (${TotalDueper}%)
+							</b>
+							</label>
+							</label> 
 							</td>
 					</tr>
 				</table>

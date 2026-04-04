@@ -66,7 +66,7 @@
 
             function downloadFile(){
                 var form1=document.getElementById("form1");
-                form1.action="/school/StudentProcess/download";
+                form1.action="/school/EmployeeProcess/downloadEmployees";
                 form1.submit();
             }
         </script>

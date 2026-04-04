@@ -1,6 +1,6 @@
 <%-- 
-    Document   : Print General Ledger Report
-    Created on : JAN 13 2021, 9:38 PM
+    Document   : Print Expense Report
+    Created on : JAN 27 2026, 3:43 PM
     Author     : Musaib
 --%>
 
@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print General Ledger Report</title>
+<title>Print Expense Report</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -186,7 +186,7 @@
 
 
         @media print {
-            .fontsize { font-size: 15px ;
+            .fontsize { font-size: 12px ;
                         font-weight: bold;
                         font-family: 'Times New Roman';
                         
@@ -225,17 +225,17 @@
 
 
 <body style="text-align: center" class="bodymargin">
+<fmt:setLocale value="en_IN" scope="session"/>
 	<form method="post" class="bodymargin">
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/vision/images/vision.jpg" width="90" height="80"/>
+				<img src="/school/images/school.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">General Ledger Report</label><br>
-				<label class="addressLineTwo">From: ${fromdateselected}</label><label class="addressLineTwo">&nbsp;&nbsp;&nbsp;To: ${todateselected}</label><br>
-				<label class="addressLineTwo">&nbsp;&nbsp;&nbsp;Ledger Name: ${ledgername}</label>
+				<label class="addressLine">Expense Report</label><br>
+				<label class="addressLineTwo">${expensesfromdate} to ${expensestodate}</label><br>
 				</td>
 			</tr>
 	</table>
@@ -251,102 +251,64 @@
             <table class="datatable">
             <thead>
  				 <tr>
- 				 		<th class=datath>Sl.No</th>
-						<th class="datath">Vou #</th>
-						<th class="datath">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-						<th class="datath">Account Description</th>
-						<th class="datath">Narration</th>
-						<th class="datath">Debits</th>
-						<th class="datath">Credits</th>
-				       	
- 				 </tr>
+ 				 	<th class="datath">Sl.No.</th>	
+					<th class="datath">Voucher #</th>
+					<th class="datath">Date</th>
+					<th class="datath">Party Name</th>
+					<th class="datath">Being</th>
+					<th class="datath">Payment Type</th>
+					<th class="datath">Reference #</th>
+					<th class="datath">Transaction Date</th>
+					<th class="datath">Bank Name</th>
+					<th class="datath">Status</th>
+					<th class="datath">Amount (Rs.)</th>
+				</tr>
  			 </thead>
- 		 
 			<tbody>
-					<c:set var="crtotal" value="${0}" />
-					<c:set var="drtotal" value="${0}" />
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
-					
-					
-					
-					<tr class="trClass" style="border-color: #000000" border="1"
+					<c:forEach items="${adminexpenses}" var="expenses" varStatus="status">
+						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="datatd"><c:out value="${status.index+1}" />
-							</td>
-							<td class="datatd"><c:out value="${ledgertransactions.key.transactionsid}" />
-							</td>
-							<td class="datatd"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>
-							<td class="datatd">
-							<c:set var="ledgername" value="${fn:split(ledgertransactions.value,':')}"></c:set>
-							${ledgername[0]}<%-- <c:out value="${ledgertransactions.value}" /> --%></td>
-							 <td class="datatd"><c:out	value="${ledgertransactions.key.narration}" /></td>
-							<c:if test="${ledgername[1] == 'Dr'}">
-								<td class="datatd"></td>
-								<c:set var="crtotal" value="${crtotal + ledgertransactions.key.cramount}" />
-								<td class="datatdright">
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${ledgertransactions.key.cramount}" />
-								</td>
-							</c:if>
-							<c:if test="${ledgername[1] == 'Cr'}">
-								<td class="datatdright">
-								<c:set var="drtotal" value="${drtotal + ledgertransactions.key.dramount}" />
-								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${ledgertransactions.key.dramount}" />
-								</td>
-								<td class="datatd"></td>
-							</c:if>
+							<td class="datatd"><c:out value="${status.index+1}" /></td>
+							<td class="datatd"><c:out value="${expenses.idAdminExpenses}" /></td>
+						  	<td class="datatd"><fmt:formatDate value="${expenses.entrydate}" pattern="dd/MM/yyyy"/></td>
+						  	<td class="datatd"><c:out value="${expenses.paidto}" /></td>
+						  	<td class="datatd"><c:out value="${expenses.itemdescription}" /></td>
+						  	<td class="datatd"><c:out value="${expenses.paymenttype}" /></td>
+						  	<td class="datatd"><c:out value="${expenses.chequeno}" /></td>
+						  	<td class="datatd"><fmt:formatDate value="${expenses.chequedate}" pattern="dd/MM/yyyy"/></td>
+						  	<td class="datatd"><c:out value="${expenses.bankname}" /></td>
+						  	<td class="datatd"><label style="text-transform: capitalize;"><c:out value="${expenses.voucherstatus}" /></label></td>
+						  	<td class="datatd" style="text-align: right;"><c:out value="${expenses.priceofitem}" /></td>
 						</tr>
 						
 					</c:forEach>
-			</tbody>
-				</table>
-			<br>
-			<table class="datatable">
-						<tr>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td class="dataText"></td>
-							<td align="right" class="dataTextRight" >
-							<label style="font-weight: bold;">
-							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${drtotal}" />
-							</label>
-							</td>
-							
-							<td align="right" style="width: 90px;" class="dataTextRight" >
-							<label style="font-weight: bold;">
-							<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${crtotal}" />
-							</label>
-							</td>
-						</tr>
-						<tr>
-					<td class="dataTextRight">
-						<label style="color: #eb6000"><b>
-									Opening Balance</b>
-							</label> 
-					</td>
-					<td class="dataTextRight" style="text-align: left;"><label style="color: #eb6000"><b>
-									<fmt:formatNumber type="currency"  value="${openingbalance}" />                                    
-							</b>
-							</label></td>
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
-									Closing Balance</b>
+									Total</b>
 							</label> 
 							</td>
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-									<fmt:formatNumber type="currency"  value="${closingbalance}" />                                    
+								<fmt:formatNumber type="currency"  value="${sumofexpenses}" /> 
 							</b>
 							</label>
 							</td>
 					</tr>
+			</tbody>
 				</table>
-				
+			
+				<br>
 			<div style="page-break-inside: avoid;" align="center">
 				<table>
 						<tr>

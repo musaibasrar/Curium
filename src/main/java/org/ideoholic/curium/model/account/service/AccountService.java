@@ -1138,7 +1138,59 @@ public class AccountService {
 			int accountId = DataUtil.parseInt(DataUtil.emptyString(accountIdName[0]));
 			String fromDate = DataUtil.dateFromatConversionSlash(searchLedgerEntriesDto.getFromDate());
 			String toDate = DataUtil.dateFromatConversionSlash(searchLedgerEntriesDto.getToDate());
+			
+			Accountdetails account = accountDao.getAccountDetails(accountId);
+			
 			if(branchId!=null) {
+				
+				
+				// Calculate Opening Balances
+				
+				BigDecimal openingBalanceLedger = BigDecimal.ZERO;
+				BigDecimal closingBalanceLedger = BigDecimal.ZERO;
+				BigDecimal totalCrLedgerOB = BigDecimal.ZERO;
+				BigDecimal totalDrLedgerOB = BigDecimal.ZERO;
+				BigDecimal totalCrLedgerCB = BigDecimal.ZERO;
+				BigDecimal totalDrLedgerCB = BigDecimal.ZERO;
+				
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				Date newdate = new Date();
+				String todaysDate = df.format(newdate);
+				
+				
+				List<VoucherEntrytransactions> voucherTransactionsTillToday = accountDao.getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, accountId, Integer.parseInt(branchId));
+				
+				for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsTillToday) {
+					int drAccount = voucherEntrytransactions.getDraccountid();
+					int crAccount = voucherEntrytransactions.getCraccountid();
+					
+					if(accountId == drAccount) {
+						totalDrLedgerOB = totalDrLedgerOB.add(voucherEntrytransactions.getDramount());
+					}else if(accountId == crAccount) {
+						totalCrLedgerOB = totalCrLedgerOB.add(voucherEntrytransactions.getCramount());
+					}
+				}
+				
+				List<Integer> accountids = new ArrayList<Integer>();
+				accountids.add(accountId);
+				List<Accountdetailsbalance> accountDetailsBalanceList = accountDao.getAccountBalanceDetails(accountids, Integer.parseInt(branchId));
+				BigDecimal currentBalanceLedger = BigDecimal.ZERO;
+				BigDecimal balanceLedgerOB = BigDecimal.ZERO;
+				BigDecimal balanceLedgerCB = BigDecimal.ZERO;
+				
+				for (Accountdetailsbalance accountdetailsbalance : accountDetailsBalanceList) {
+						currentBalanceLedger = accountdetailsbalance.getCurrentbalance();
+				}
+				
+				if(account.getAccountGroupMaster().getAccountgroupid() == 1 || account.getAccountGroupMaster().getAccountgroupid() == 4) {
+					balanceLedgerOB = totalDrLedgerOB.subtract(totalCrLedgerOB);
+				}else if (account.getAccountGroupMaster().getAccountgroupid() == 2 || account.getAccountGroupMaster().getAccountgroupid() == 3 || account.getAccountGroupMaster().getAccountgroupid() == 5) {
+					balanceLedgerOB = totalCrLedgerOB.subtract(totalDrLedgerOB);
+				}
+				
+				openingBalanceLedger = currentBalanceLedger.subtract(balanceLedgerOB);
+				
+				// End calculating Opening Balances
 
 				String twoAccounts = null;
 
@@ -1148,6 +1200,9 @@ public class AccountService {
 
 				for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 
+					int drAccount = voucherEntry.getDraccountid();
+					int crAccount = voucherEntry.getCraccountid();
+					
 					if(voucherEntry.getDraccountid() != accountId) {
 						twoAccounts = accountDao.getAccountName(voucherEntry.getDraccountid())+":Dr";
 					}else if(voucherEntry.getCraccountid() != accountId) {
@@ -1155,13 +1210,31 @@ public class AccountService {
 					}
 					//twoAccounts = accountDao.getAccountName(voucherEntry.getDraccountid())+"--"+accountDao.getAccountName(voucherEntry.getCraccountid());
 					voucherMap.put(voucherEntry, twoAccounts);
+					
+					if(accountId == drAccount) {
+						totalDrLedgerCB = totalDrLedgerCB.add(voucherEntry.getDramount());
+					}else if(accountId == crAccount) {
+						totalCrLedgerCB = totalCrLedgerCB.add(voucherEntry.getCramount());
+					}
+					
 				}
-
+				
+				if(account.getAccountGroupMaster().getAccountgroupid() == 1 || account.getAccountGroupMaster().getAccountgroupid() == 4) {
+					balanceLedgerCB = totalDrLedgerCB.subtract(totalCrLedgerCB);
+				}else if (account.getAccountGroupMaster().getAccountgroupid() == 2 || account.getAccountGroupMaster().getAccountgroupid() == 3 || account.getAccountGroupMaster().getAccountgroupid() == 5) {
+					balanceLedgerCB = totalCrLedgerCB.subtract(totalDrLedgerCB);
+				}
+				
+				closingBalanceLedger = openingBalanceLedger.add(balanceLedgerCB);
+				
 				result.setLedgerTransaction(voucherMap);
 				result.setAccountId(accountDetails);
 				result.setLedgerName(accountIdName[1]);
 				result.setFromDate(searchLedgerEntriesDto.getFromDate());
 				result.setToDate(searchLedgerEntriesDto.getToDate());
+				result.setAccountgroupmasterid(account.getAccountGroupMaster().getAccountgroupid());
+				result.setOpeningBalance(openingBalanceLedger);
+				result.setClosingBalance(closingBalanceLedger);
 				result.setSuccess(true);
 				return result;
 			}
@@ -1284,32 +1357,100 @@ public class AccountService {
 			String fromDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getFromDate()));
 			String toDate = DateUtil.dateFromatConversionSlash(DataUtil.emptyString(printSearchJournalEntriesDto.getToDate()));
 
-			if (branchId != null) {
+			Accountdetails account = accountDao.getAccountDetails(accountId);
+			
+			if(branchId!=null) {
+				
+				
+				// Calculate Opening Balances
+				
+				BigDecimal openingBalanceLedger = BigDecimal.ZERO;
+				BigDecimal closingBalanceLedger = BigDecimal.ZERO;
+				BigDecimal totalCrLedgerOB = BigDecimal.ZERO;
+				BigDecimal totalDrLedgerOB = BigDecimal.ZERO;
+				BigDecimal totalCrLedgerCB = BigDecimal.ZERO;
+				BigDecimal totalDrLedgerCB = BigDecimal.ZERO;
+				
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				Date newdate = new Date();
+				String todaysDate = df.format(newdate);
+				
+				
+				List<VoucherEntrytransactions> voucherTransactionsTillToday = accountDao.getVoucherEntryTransactionsBetweenDates(fromDate, todaysDate, accountId, Integer.parseInt(branchId));
+				
+				for (VoucherEntrytransactions voucherEntrytransactions : voucherTransactionsTillToday) {
+					int drAccount = voucherEntrytransactions.getDraccountid();
+					int crAccount = voucherEntrytransactions.getCraccountid();
+					
+					if(accountId == drAccount) {
+						totalDrLedgerOB = totalDrLedgerOB.add(voucherEntrytransactions.getDramount());
+					}else if(accountId == crAccount) {
+						totalCrLedgerOB = totalCrLedgerOB.add(voucherEntrytransactions.getCramount());
+					}
+				}
+				
+				List<Integer> accountids = new ArrayList<Integer>();
+				accountids.add(accountId);
+				List<Accountdetailsbalance> accountDetailsBalanceList = accountDao.getAccountBalanceDetails(accountids, Integer.parseInt(branchId));
+				BigDecimal currentBalanceLedger = BigDecimal.ZERO;
+				BigDecimal balanceLedgerOB = BigDecimal.ZERO;
+				BigDecimal balanceLedgerCB = BigDecimal.ZERO;
+				
+				for (Accountdetailsbalance accountdetailsbalance : accountDetailsBalanceList) {
+						currentBalanceLedger = accountdetailsbalance.getCurrentbalance();
+				}
+				
+				if(account.getAccountGroupMaster().getAccountgroupid() == 1 || account.getAccountGroupMaster().getAccountgroupid() == 4) {
+					balanceLedgerOB = totalDrLedgerOB.subtract(totalCrLedgerOB);
+				}else if (account.getAccountGroupMaster().getAccountgroupid() == 2 || account.getAccountGroupMaster().getAccountgroupid() == 3 || account.getAccountGroupMaster().getAccountgroupid() == 5) {
+					balanceLedgerOB = totalCrLedgerOB.subtract(totalDrLedgerOB);
+				}
+				
+				openingBalanceLedger = currentBalanceLedger.subtract(balanceLedgerOB);
+				
+				// End calculating Opening Balances
 
 				String twoAccounts = null;
 
-				Map<VoucherEntrytransactions, String> voucherMap = new LinkedHashMap<VoucherEntrytransactions, String>();
-				int financialYearId = accountDao
-						.getCurrentFinancialYear(Integer.parseInt((branchId)))
-						.getFinancialid();
-				voucherTransactions = accountDao.getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId,
-                        Integer.parseInt(branchId));
+				Map<VoucherEntrytransactions,String> voucherMap = new LinkedHashMap<>();
+				int financialYearId = accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid();
+				voucherTransactions = accountDao.getVoucherEntryTransactionsBetweenDates(fromDate, toDate, accountId, Integer.parseInt(branchId));
 
 				for (VoucherEntrytransactions voucherEntry : voucherTransactions) {
 
-					if (voucherEntry.getDraccountid() != accountId) {
-						twoAccounts = accountDao.getAccountName(voucherEntry.getDraccountid()) + ":Dr";
-					} else if (voucherEntry.getCraccountid() != accountId) {
-						twoAccounts = accountDao.getAccountName(voucherEntry.getCraccountid()) + ":Cr";
+					int drAccount = voucherEntry.getDraccountid();
+					int crAccount = voucherEntry.getCraccountid();
+					
+					if(voucherEntry.getDraccountid() != accountId) {
+						twoAccounts = accountDao.getAccountName(voucherEntry.getDraccountid())+":Dr";
+					}else if(voucherEntry.getCraccountid() != accountId) {
+						twoAccounts = accountDao.getAccountName(voucherEntry.getCraccountid())+":Cr";
 					}
-					// twoAccounts = new
-					// AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new
-					// AccountDAO().getAccountName(voucherEntry.getCraccountid());
+					//twoAccounts = new AccountDAO().getAccountName(voucherEntry.getDraccountid())+"--"+new AccountDAO().getAccountName(voucherEntry.getCraccountid());
 					voucherMap.put(voucherEntry, twoAccounts);
+					
+					if(accountId == drAccount) {
+						totalDrLedgerCB = totalDrLedgerCB.add(voucherEntry.getDramount());
+					}else if(accountId == crAccount) {
+						totalCrLedgerCB = totalCrLedgerCB.add(voucherEntry.getCramount());
+					}
+					
 				}
+				
+				if(account.getAccountGroupMaster().getAccountgroupid() == 1 || account.getAccountGroupMaster().getAccountgroupid() == 4) {
+					balanceLedgerCB = totalDrLedgerCB.subtract(totalCrLedgerCB);
+				}else if (account.getAccountGroupMaster().getAccountgroupid() == 2 || account.getAccountGroupMaster().getAccountgroupid() == 3 || account.getAccountGroupMaster().getAccountgroupid() == 5) {
+					balanceLedgerCB = totalCrLedgerCB.subtract(totalDrLedgerCB);
+				}
+				
+				closingBalanceLedger = openingBalanceLedger.add(balanceLedgerCB);
 
 				result.setLedgerTransaction(voucherMap);
 				result.setLedgerName(accountIdName[1]);
+				result.setFromDate(printSearchJournalEntriesDto.getFromDate());
+				result.setToDate(printSearchJournalEntriesDto.getToDate());
+				result.setOpeningBalance(openingBalanceLedger);
+				result.setClosingBalance(closingBalanceLedger);
 				result.setSuccess(true);
 				return result;
 			}
@@ -1908,8 +2049,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			
 			String cashLedgerid = getLedgerAccountId("cashledgers"+Integer.parseInt(branchId));
 			String bankLedgerid = getLedgerAccountId("bankledgers"+Integer.parseInt(branchId));
-			String excludeIncomeLedger = getLedgerAccountId("excludeincomeledger"+Integer.parseInt(branchId));
-			
+			String feeLedger = getLedgerAccountId("feeledger"+Integer.parseInt(branchId));
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 			Date newdate = new Date();
 			String todaysDate = df.format(newdate);
@@ -1926,94 +2066,120 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				bankLedgeridRP.add(Integer.parseInt(s));
 	        }
 			
-			String[] strArrayExcludeIncome = excludeIncomeLedger.split(":");
-			List<Integer> excludeIncomeLedgerRP = new ArrayList<>();
+			String[] strArrayExcludeIncome = feeLedger.split(":");
+			List<Integer> feeLedgerLedgerRP = new ArrayList<>();
 			for (String s : strArrayExcludeIncome) {
-				excludeIncomeLedgerRP.add(Integer.parseInt(s));
+				feeLedgerLedgerRP.add(Integer.parseInt(s));
 	        }
 			
-				List<Accountdetails> accountsDetails = new ArrayList<Accountdetails>();
-				accountsDetails = accountDao.getLedgerAccountdetails(Integer.parseInt(branchId));
-				
+			// Combine all cash and bank ledger IDs
+	        List<Integer> allCashBankIds = new ArrayList<>(cashLedgeridRP);
+	        allCashBankIds.addAll(bankLedgeridRP);
+			
 				//Group 1
-				BigDecimal totalIncomeCash = BigDecimal.ZERO;
-				BigDecimal totalIncomeBank = BigDecimal.ZERO;
+				BigDecimal totalReceiptsCash = BigDecimal.ZERO;
+				BigDecimal totalReceiptsBank = BigDecimal.ZERO;
 				Map<Accountdetails,BigDecimal> incomeLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
 				
 				
 				//Group 2
-				BigDecimal totalExpenseCash = BigDecimal.ZERO;
-				BigDecimal totalExpenseBank = BigDecimal.ZERO;
+				BigDecimal totalPaymentsCash = BigDecimal.ZERO;
+				BigDecimal totalPaymentsBank = BigDecimal.ZERO;
 				Map<Accountdetails,BigDecimal> expenseLedgersAccount = new HashMap<Accountdetails, BigDecimal>();
 				
 				
-				for (Accountdetails accountDetails : accountsDetails) {
-					int accountId = accountDetails.getAccountdetailsid();
-					if(!excludeIncomeLedgerRP.contains(accountId)) {
-					List<VoucherEntrytransactions> voucherTransactions = accountDao.getVoucherEntryTransactionsBetweenDates(dto.getFromDate(), dto.getToDate(), accountDetails.getAccountdetailsid(), Integer.parseInt(branchId));
-					
-					if(!voucherTransactions.isEmpty()) {
-					
-						int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
-
-						switch(groupId){
-						
-						case 1: 
-							if(cashLedgeridRP.contains(accountId) || bankLedgeridRP.contains(accountId)) {
-								BigDecimal[] totalAmountIncome = getTotalBalanceCashBankIncome(accountDetails,voucherTransactions,cashLedgeridRP,bankLedgeridRP);
-								totalAmountIncome[0] = totalAmountIncome[0].abs();
-								totalAmountIncome[1] = totalAmountIncome[1].abs();
-								totalIncomeCash = totalIncomeCash.add(totalAmountIncome[0]);
-								totalIncomeBank = totalIncomeBank.add(totalAmountIncome[1]);
-								break;
-							}
-													
-						case 4: 
-							    BigDecimal incomeCashBank = BigDecimal.ZERO;
-								for (VoucherEntrytransactions voucherTransaction : voucherTransactions) {
-									incomeCashBank = incomeCashBank.add(voucherTransaction.getCramount());
-								}
-								incomeLedgersAccount.put(accountDetails, incomeCashBank);
-								break;
-						case 5: 
-								BigDecimal[] totalAmountEx = getTotalBalanceCashBankDebit(accountDetails,voucherTransactions,cashLedgeridRP,bankLedgeridRP);
-								totalAmountEx[0] = totalAmountEx[0].abs();
-								totalAmountEx[1] = totalAmountEx[1].abs();
-								totalExpenseCash = totalExpenseCash.add(totalAmountEx[0]);
-								totalExpenseBank = totalExpenseBank.add(totalAmountEx[1]);
-								expenseLedgersAccount.put(accountDetails, totalAmountEx[0].add(totalAmountEx[1]));
-								break;
-						default:
-								
-						}
-						
-						}/*else {
-							
-							int groupId = accountDetails.getAccountGroupMaster().getAccountgroupid();
-
-							switch(groupId){
-							
-							case 4: 
-									incomeLedgersAccount.put(accountDetails, BigDecimal.ZERO);
-									break;
-							case 5: 
-									expenseLedgersAccount.put(accountDetails, BigDecimal.ZERO);
-									break;
-							default:
-									
-							}
-						}*/
-					}
-				}
+				List<VoucherEntrytransactions> voucherTransactions = accountDao.getVoucherEntryTransactionsBetweenDatesByIds(dto.getFromDate(), dto.getToDate(), allCashBankIds, Integer.parseInt(branchId));
+				
+				   // Step 4: Categorize transactions
+    	        for (VoucherEntrytransactions transaction : voucherTransactions) {
+    	            
+    	            int drAccountId = transaction.getDraccountid();
+    	            int crAccountId = transaction.getCraccountid();
+    	            BigDecimal drAmount = transaction.getDramount() != null ? transaction.getDramount() : BigDecimal.ZERO;
+    	            BigDecimal crAmount = transaction.getCramount() != null ? transaction.getCramount() : BigDecimal.ZERO;
+    	            
+    	            // RECEIPTS: Cash/Bank is debited (money in)
+    	            if(cashLedgeridRP.contains(drAccountId) && !cashLedgeridRP.contains(crAccountId) && !bankLedgeridRP.contains(crAccountId)) {
+    	                totalReceiptsCash = totalReceiptsCash.add(drAmount);
+    	                
+    	                // Track income/receipt source
+    	                Accountdetails crAccount = accountDao.getAccountDetails(crAccountId);
+    	                if(crAccount != null && (crAccount.getAccountGroupMaster().getAccountgroupid() == 4 || 
+    	                   crAccount.getAccountGroupMaster().getAccountgroupid() == 1)) {
+    	                	if(feeLedgerLedgerRP.contains(crAccountId)) {
+    	                		crAccount.setAccountname("Fee Collection Cash");
+    	                		incomeLedgersAccount.merge(crAccount, drAmount, BigDecimal::add);
+    	                	}else {
+    	                		incomeLedgersAccount.merge(crAccount, drAmount, BigDecimal::add);
+    	                	}
+    	                	
+    	                }
+    	            } 
+    	            else if(bankLedgeridRP.contains(drAccountId) && !cashLedgeridRP.contains(crAccountId) && !bankLedgeridRP.contains(crAccountId)) {
+    	                totalReceiptsBank = totalReceiptsBank.add(drAmount);
+    	                
+    	                Accountdetails crAccount = accountDao.getAccountDetails(crAccountId);
+    	                if(crAccount != null && (crAccount.getAccountGroupMaster().getAccountgroupid() == 4 || 
+    	                   crAccount.getAccountGroupMaster().getAccountgroupid() == 1)) {
+    	                	if(feeLedgerLedgerRP.contains(crAccountId)) {
+    	                		crAccount.setAccountname("Fee Collection Bank");
+    	                		incomeLedgersAccount.merge(crAccount, drAmount, BigDecimal::add);
+    	                	}else {
+    	                		incomeLedgersAccount.merge(crAccount, drAmount, BigDecimal::add);
+    	                	}
+    	                }
+    	            }
+    	            
+    	            // PAYMENTS: Cash/Bank is credited (money out)
+    	            if(cashLedgeridRP.contains(crAccountId) && !cashLedgeridRP.contains(drAccountId) && !bankLedgeridRP.contains(drAccountId)) {
+    	                totalPaymentsCash = totalPaymentsCash.add(crAmount);
+    	                
+    	                // Track expense source
+    	                Accountdetails drAccount = accountDao.getAccountDetails(drAccountId);
+    	                if(drAccount != null && (drAccount.getAccountGroupMaster().getAccountgroupid() == 5 || 
+    	                   drAccount.getAccountGroupMaster().getAccountgroupid() == 2)) {
+    	                	expenseLedgersAccount.merge(drAccount, crAmount, BigDecimal::add);
+    	                }
+    	            } 
+    	            else if(bankLedgeridRP.contains(crAccountId) && !cashLedgeridRP.contains(drAccountId) && !bankLedgeridRP.contains(drAccountId)) {
+    	                totalPaymentsBank = totalPaymentsBank.add(crAmount);
+    	                
+    	                Accountdetails drAccount = accountDao.getAccountDetails(drAccountId);
+    	                if(drAccount != null && (drAccount.getAccountGroupMaster().getAccountgroupid() == 5 || 
+    	                   drAccount.getAccountGroupMaster().getAccountgroupid() == 2)) {
+    	                	expenseLedgersAccount.merge(drAccount, crAmount, BigDecimal::add);
+    	                }
+    	            }
+    	            
+    	           /* // CONTRA ENTRIES: Transfer between cash and bank
+    	            if((cashLedgeridRP.contains(drAccountId) && bankLedgeridRP.contains(crAccountId)) ||
+    	               (bankLedgeridRP.contains(drAccountId) && cashLedgeridRP.contains(crAccountId))) {
+    	                // These are internal transfers - don't count as income/expense
+    	                // But update the respective balances
+    	                if(cashLedgeridRP.contains(drAccountId)) {
+    	                    totalReceiptsCash = totalReceiptsCash.add(drAmount);
+    	                    totalPaymentsBank = totalPaymentsBank.add(crAmount);
+    	                } else {
+    	                    totalReceiptsBank = totalReceiptsBank.add(drAmount);
+    	                    totalPaymentsCash = totalPaymentsCash.add(crAmount);
+    	                }
+    	            }*/
+    	        }
+				
+    	        
+    	     // Step 5: Calculate totals
+    	        BigDecimal totalReceipts = totalReceiptsCash.add(totalReceiptsBank);
+    	        BigDecimal totalPayments = totalPaymentsCash.add(totalPaymentsBank);
+    	        
+    	     // Step 8: Calculate profit/loss
+    	        BigDecimal netProfit = totalReceipts.subtract(totalPayments);
 		
-		BigDecimal profit = totalIncomeCash.add(totalIncomeBank).subtract(totalExpenseCash.add(totalExpenseBank));
-		
-		if(profit.compareTo(BigDecimal.ZERO) > 0){
+		if(netProfit.compareTo(BigDecimal.ZERO) > 0){
 			result.setProfitLabel("Net Profit");
-			result.setTotalProfit(profit);
-		}else if(profit.compareTo(BigDecimal.ZERO) < 0){
+			result.setTotalProfit(netProfit);
+		}else if(netProfit.compareTo(BigDecimal.ZERO) < 0){
 			result.setProfitLabel("Net Loss");
-			result.setTotalProfit(profit.negate());
+			result.setTotalProfit(netProfit.negate());
 		}
 		
 		// Calculate Opening Balances
@@ -2100,9 +2266,9 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 				int accountId = accountdetailsbalance.getAccountDetails().getAccountdetailsid();
 				
 				if(cashLedgeridRP.contains(accountId)) {
-					cashBalance = accountdetailsbalance.getCurrentbalance();
+					cashBalance = cashBalance.add(accountdetailsbalance.getCurrentbalance());
 				}else if (bankLedgeridRP.contains(accountId)) {
-					bankBalance = accountdetailsbalance.getCurrentbalance();
+					bankBalance = bankBalance.add(accountdetailsbalance.getCurrentbalance());
 				}
 				
 			}
@@ -2114,14 +2280,14 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			openingBalanceBank = bankBalance.subtract(totalDrBank);
 
 			
-			BigDecimal closingDrCrCash = totalIncomeCash.subtract(totalExpenseCash).subtract(totalCrCashContra);
+			BigDecimal closingDrCrCash = totalReceiptsCash.subtract(totalPaymentsCash).subtract(totalCrCashContra);
 			closingBalanceCash = openingBalanceCash.add(closingDrCrCash).add(totalDrCashContra);
 			
-			BigDecimal closingDrCrBank = totalIncomeBank.subtract(totalCrBankContra);
+			BigDecimal closingDrCrBank = totalReceiptsBank.subtract(totalCrBankContra);
 			closingBalanceBank = openingBalanceBank.add(closingDrCrBank).add(totalDrBankContra);
 			
-			BigDecimal grandReceiptTotal = totalIncomeCash.add(totalIncomeBank).add(openingBalanceCash).add(openingBalanceBank);
-			BigDecimal grandPaymentTotal = totalExpenseCash.add(totalExpenseBank).add(closingBalanceCash).add(closingBalanceBank);
+			BigDecimal grandReceiptTotal = totalReceiptsCash.add(totalReceiptsBank).add(openingBalanceCash).add(openingBalanceBank);
+			BigDecimal grandPaymentTotal = totalPaymentsCash.add(totalPaymentsBank).add(closingBalanceCash).add(closingBalanceBank);
 			
 			
 			result.setGrandReceiptTotal(grandReceiptTotal.toString());
@@ -2133,17 +2299,17 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			// End calculating Opening Balances
 			
 			//group 1
-			result.setIncome(totalIncomeCash.add(totalIncomeBank));
+			result.setIncome(totalReceiptsCash.add(totalReceiptsBank));
 			result.setIncomeLedgersAccount(incomeLedgersAccount);
 			
 			//group 2
-			result.setExpenses(totalExpenseCash.add(totalIncomeBank));
+			result.setExpenses(totalPaymentsCash.add(totalPaymentsBank));
 			result.setExpenseLedgersAccount(expenseLedgersAccount);
 			
 			result.setIncomeTotalLabel("Total Income");
 			result.setExpenseTotalLabel("Total Expense");
-			result.setIncomeTotal(totalIncomeCash.add(totalIncomeBank));
-			result.setExpenseTotal(totalExpenseCash.add(totalExpenseBank));
+			result.setIncomeTotal(totalReceiptsCash.add(totalReceiptsBank));
+			result.setExpenseTotal(totalPaymentsCash.add(totalPaymentsBank));
 			
 			//group 3
 			result.setFromDate(dto.getFromDate());

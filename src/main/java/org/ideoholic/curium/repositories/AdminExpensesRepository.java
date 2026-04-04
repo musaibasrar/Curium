@@ -15,5 +15,7 @@ public interface AdminExpensesRepository extends JpaRepository<Adminexpenses, In
 
     @Query("From Adminexpenses where idAdminExpenses=:expensesIds  and branchid=:branchId")
     Adminexpenses findByExpenseId(@Param("expensesIds") Integer expensesIds,@Param("branchId") Integer  branchId);
+    
+    List<Adminexpenses> findByIdAdminExpensesInAndBranchid(List<Integer> expensesIds,Integer branchId);
 
 }

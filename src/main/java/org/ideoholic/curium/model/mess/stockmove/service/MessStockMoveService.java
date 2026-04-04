@@ -1,6 +1,18 @@
 package org.ideoholic.curium.model.mess.stockmove.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Properties;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
@@ -11,7 +23,18 @@ import org.ideoholic.curium.model.mess.item.service.MessItemsService;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
-import org.ideoholic.curium.model.mess.stockmove.dto.*;
+import org.ideoholic.curium.model.mess.stockmove.dto.Bill;
+import org.ideoholic.curium.model.mess.stockmove.dto.BillResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.ClassSearchDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.DuesResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockItemDetails;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
+import org.ideoholic.curium.model.mess.stockmove.dto.MessTaxInvoice;
+import org.ideoholic.curium.model.mess.stockmove.dto.MoveStockResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveIdsDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveOldDto;
+import org.ideoholic.curium.model.mess.stockmove.dto.StockMoveResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
@@ -20,15 +43,7 @@ import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Properties;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
@@ -561,10 +576,23 @@ public class MessStockMoveService {
 	}
 
 
-	public StockMoveResponseDto viewStockMoveDetails(String strPage, String branchId) {
+	public StockMoveResponseDto viewStockMoveDetails(ClassSearchDto dto, String strPage, String branchId) {
 		
 		List<Bill> messStockMoveList = new ArrayList<Bill>();
 		StockMoveResponseDto result = StockMoveResponseDto.builder().build();
+		String fromDate = null;
+		String toDate = null;		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		
+		if(dto!=null) {
+			fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
+			toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
+		}else {
+			String currentDate = LocalDate.now().format(formatter);
+		    fromDate = currentDate;
+		    toDate = currentDate;
+		}
+		
 		
 		 if(branchId!=null){
 			 
@@ -575,13 +603,14 @@ public class MessStockMoveService {
 								page = Integer.parseInt(strPage);
 							}
 
-						messStockMoveList = messStockMoveDao.getStockMoveDetails((page - 1) * recordsPerPage,
+						messStockMoveList = messStockMoveDao.getStockMoveDetails(fromDate, toDate,(page - 1) * recordsPerPage,
 									recordsPerPage, Integer.parseInt(branchId));
-						int noOfRecords = messStockMoveDao.getNoOfRecordsStockMove(Integer.parseInt(branchId));
+						int noOfRecords = messStockMoveDao.getNoOfRecordsStockMove(fromDate, toDate, Integer.parseInt(branchId));
 						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 						result.setNoOfPages(noOfRecords);
 						result.setCurrentPage(page);
-						
+						result.setFromDate(fromDate);
+						result.setToDate(toDate);
 						result.setSuccess(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -818,6 +847,82 @@ public class MessStockMoveService {
 		billResponseDto.setMessTaxInvoice(messTaxInvoice);
 				return billResponseDto;
 	}
-	
-	
+
+	public BillResponseDto printStockMove(StockMoveIdsDto dto) {
+		BillResponseDto billResponseDto = new BillResponseDto();
+		String[] smIds = dto.getStockMoveIds();
+		
+		for (String stockmoveids : smIds) {
+			
+			
+			MessStockMove messStockMove = messStockMoveDao.getStockMoveDetails(Integer.parseInt(stockmoveids));
+			String[] messStockMoveBillNo = messStockMove.getExternalid().split("_");
+			String[] custDetails = messStockMove.getIssuedto().split("_");
+			String queryMain = "from MessStockMove msm where msm.externalid like '%\\_"+messStockMoveBillNo[1]+"'";
+			List<MessStockMove> messStockMoveList = messStockMoveDao.getStockMoveDetailsReport(queryMain);
+			
+			//BILL DETAILS
+			
+			List<Bill> billList = new ArrayList<Bill>();
+			BigDecimal grandTotal = BigDecimal.ZERO;
+			
+			for (MessStockMove stockMoveSingle : messStockMoveList) {
+				Bill bill = new Bill();
+				MessItems messItem = messStockMoveDao.getItem(stockMoveSingle.getItemid());
+				bill.setItemname(messItem.getName());
+				bill.setSalesprice(Float.parseFloat(stockMoveSingle.getPurpose()));
+				billList.add(bill);
+				grandTotal = grandTotal.add(new BigDecimal(stockMoveSingle.getPurpose()));
+			}
+			
+
+			billResponseDto.setBillList(billList);
+			//request.setAttribute("billdetails", billList);
+			//request.setAttribute("billdetails", messStockMovesList);
+			billResponseDto.setBilldetailstransactiondate(DateUtil.dateParserddMMYYYY(messStockMove.getTransactiondate()));
+			//request.setAttribute("billdetailstransactiondate", DateUtil.dateParserddMMYYYY(messStockMove.getTransactiondate()));
+			billResponseDto.setBilldetailsstudentname(custDetails[0]);
+			//request.setAttribute("billdetailsstudentname", custDetails[0]);
+			billResponseDto.setBilldetailsclassstudying(custDetails[1]);
+			//request.setAttribute("billdetailsclassstudying", custDetails[1]);
+			billResponseDto.setBilldetailsfathername(custDetails[2]);
+			//request.setAttribute("billdetailsfathername", custDetails[2]);
+			
+			
+			NumberToWord toWord = new NumberToWord();
+			String grandTotalInWords = "";
+			if(grandTotal.compareTo(BigDecimal.ZERO) != 0){
+				grandTotalInWords = toWord.convert(grandTotal.intValue());
+			}
+			
+			StringBuffer res = new StringBuffer();
+			String[] strArr = grandTotalInWords.split(" ");
+			
+			for(String str : strArr){
+				char[] stringArray = str.trim().toCharArray();
+				stringArray[0] = Character.toUpperCase(stringArray[0]);
+				str = new String(stringArray);
+				res.append(str).append(" ");
+			}
+			grandTotalInWords = res.toString().trim();
+			billResponseDto.setBilldetailstotaltotal(grandTotalInWords+" "+"Only");
+			//request.setAttribute("billdetailstotaltotal", grandTotalInWords+" "+"Only");
+			billResponseDto.setBillgrandtotal(grandTotal);
+			//request.setAttribute("billgrandtotal", grandTotal);
+			
+			//Get Bill No
+	     	 //request.setAttribute("billno", messStockMoveBillNo[1]);
+	     	billResponseDto.setBillNo(messStockMoveBillNo[1]);
+	     	 
+		
+			
+		}
+		return billResponseDto;
+		
+	}
+		
+
 }
+	
+	
+
