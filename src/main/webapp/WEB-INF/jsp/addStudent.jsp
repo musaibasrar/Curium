@@ -22,25 +22,25 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/bbis/css/dataTable/css/demo_page.css";
-            @import "/bbis/css/dataTable/css/jquery.dataTables.css";
+            @import "/vision/css/dataTable/css/demo_page.css";
+            @import "/vision/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
-	src="/bbis/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/bbis/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/bbis/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/bbis/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/bbis/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/bbis/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/bbis/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/bbis/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/bbis/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bbis/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/bbis/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/bbis/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/bbis/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -279,7 +279,7 @@
 
 
 
-<script type="text/javascript" src="/bbis/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
 <script>
 	$(function() {
@@ -608,7 +608,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/bbis/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -672,7 +672,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/bbis/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -976,7 +976,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/bbis/StudentProcess/checkDuplicateStudent?"
+			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),
@@ -999,7 +999,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/bbis/UserProcess/sessionTimeOut");
+		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1375,7 +1375,7 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft" >Bag No.&nbsp;</td>
+							<td class="alignLeft" >Number&nbsp;</td>
 								<td><input
 									name="bhagyalakshmibondnumber" type="text" class="myclass"
 									style="text-transform:capitalize;"
@@ -1490,32 +1490,9 @@ $(document).ready(function() {
                                         <label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> 
@@ -2527,14 +2504,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/bbis/StudentProcess/AddStudent";
+									form1.action = "/vision/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/bbis/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 
