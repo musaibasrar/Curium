@@ -14,22 +14,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Student Update</title>
-<link rel="stylesheet" href="/readmodelschool/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/readmodelschool/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-	src="/readmodelschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/readmodelschool/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/readmodelschool/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/readmodelschool/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/readmodelschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/readmodelschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/readmodelschool/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/readmodelschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/readmodelschool/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/readmodelschool/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/readmodelschool/css/datePicker/demos.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -191,7 +191,7 @@
 }
 -->
 </style>
-<script type="text/javascript" src="/readmodelschool/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
 <script type="text/javascript">
 	
@@ -479,7 +479,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/readmodelschool/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -492,7 +492,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form action="/readmodelschool/PersonalProcess/viewAll" modelAttribute="student"
+	<form action="/vision/PersonalProcess/viewAll" modelAttribute="student"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
 			<div id="tabs">
@@ -906,7 +906,7 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Bag No.
+							<td class="alignLeft">Number
 								&nbsp;</td>
 								<td>
 										<input
@@ -1026,33 +1026,9 @@ for(Cookie cookie : cookies){
 							<label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.yearofadmission}</option>
-										<option>2026/27</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>										
 								</select>
 
 							</label> 
@@ -1969,7 +1945,7 @@ for(Cookie cookie : cookies){
 							function cancel() {
 
 								var form1 = document.getElementById("form1");
-								form1.action = "/readmodelschool/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 
@@ -1977,7 +1953,7 @@ for(Cookie cookie : cookies){
 								
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
-									form1.action = "/readmodelschool/StudentProcess/updateStudent";
+									form1.action = "/vision/StudentProcess/updateStudent";
 									form1.submit();
 								  }
 							}
