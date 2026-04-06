@@ -538,6 +538,12 @@ public class StudentService {
 					result.setTotalFeesConcession(totalFeesConcession);
 					result.setTotalFineAmount(totalFineAmount);
 					result.setTotalMiscAmount(totalMiscAmount);
+					result.setStudentOtherFeesStructure(otherfeesstructure);
+					result.setOtherTotalSum(othertotalSum);
+					result.setOtherDueAmount(othertotalFeesAmount-othertotalSum);
+					result.setOtherTotalFees(othertotalFeesAmount);
+					result.setOtherTotalFeesConcession(othertotalFeesConcession);
+					result.setOtherReceiptInfo(orinfo);
 					result.setSuccess(true);
 				}
 				ResultResponse classsec = standardService.viewClasses(branchId);
