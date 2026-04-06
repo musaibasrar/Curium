@@ -278,7 +278,7 @@
 					<td class="dataText"><c:out
 							value="${feescatmap.itemname}" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${feescatmap.salesprice}" /></td>
+							value="${feescatmap.salesprice*feescatmap.quantity}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
@@ -454,7 +454,7 @@
 					<td class="dataText"><c:out
 							value="${feescatmap.itemname}" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${feescatmap.salesprice}" /></td>
+							value="${feescatmap.salesprice*feescatmap.quantity}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
