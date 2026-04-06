@@ -175,19 +175,21 @@
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
-			
-			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
-                        		
+		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td><img src="/roshan/images/roshan.jpg" width="72" height="80"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<td align="left" style="padding-left: 10px;">
+				<img src="/roshan/images/roshanfees.jpg" width="90" height="60"/>
+				</td> 
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
+				<td align="left" style="padding-right: 10px;">
+				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
+				</td> 
 			</tr>
-		</table>
-		
+</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -288,7 +290,7 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-				<c:if test="${recieptinfo.fine > 0}">
+			<c:if test="${recieptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
@@ -296,7 +298,7 @@
 							value="${recieptinfo.fine}" /></td>
 				</tr>
 			</c:if>
-				
+
 			<c:if test="${recieptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
@@ -321,7 +323,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -366,27 +368,30 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
-		
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
+		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
-                        		
+		<table width="100%" style="border-collapse: collapse;">
 			<tr>
-				<td><img src="/roshan/images/roshan.jpg" width="72" height="80"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<td align="left" style="padding-left: 10px;">
+				<img src="/roshan/images/roshanfees.jpg" width="90" height="60"/>
+				</td> 
+				<td style="width: 100%;" align="left">
+				<label class="dataTextBoldCenter" style="padding-left: 20px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
+				<label class="addressLine" style="padding-left: 45px;">${branchaddress}<br></label>
+				<label class="addressLine" style="padding-left: 145px;">Contact:&nbsp;${branchcontact} </label>
 				</td>
+				<td align="left" style="padding-right: 10px;">
+				<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="90" height="60">
+				</td> 
 			</tr>
-		</table>
-		
+</table>
 
 <TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
@@ -496,7 +501,7 @@
 							value="${recieptinfo.fine}" /></td>
 				</tr>
 			</c:if>
-				
+
 			<c:if test="${recieptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
@@ -505,6 +510,7 @@
 							value="${recieptinfo.misc}" /></td>
 				</tr>
 			</c:if>
+			
 			</table>
 			
 			
@@ -521,13 +527,13 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
 			
 		<TABLE width="100%" border="0">
-			 <tr>
+			<tr>
 			
 			<td><hr width="100%"></td>
 			<td><hr width="100%"></td>
@@ -545,7 +551,7 @@
 				 Total fees Due : Rs.  ${dueamount} 
 				</td>
 				
-			</tr> 
+			</tr>
 			
 			<tr>
 			<td><hr width="100%"></td>
@@ -566,9 +572,9 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
-		
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
+		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td>
+		<td><img src="/roshan/images/roshanpaytm.jpeg" width="70" height="65"/></td>
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>

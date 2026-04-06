@@ -86,7 +86,7 @@ window.onload = function(){
 <table width="100%">
     <tr>
         <td width="20%" align="center">
-            <img src="/roshan/images/roshan.jpg" width="80" height="80">
+            <img src="/roshan/images/roshan.jpg" width="85" height="80">
         </td>
         <td width="80%">
             <div class="title">${branchname}</div>

@@ -53,10 +53,9 @@ public class feesCollectionDAO {
 			 	
 			 	
 			 	if(ReceiptList.size() > 0) {
-			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
-			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
+			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
 			 	}else {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
+			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
 			 	}
 			 	
 			 	//Receipts
@@ -559,10 +558,9 @@ public class feesCollectionDAO {
 			 	List<Receiptinfo> ReceiptList = queryReceipt.list();
 			 	
 			 	if(ReceiptList.size() > 0) {
-			 		String branchReceiptNo = ReceiptList.get(0).getBranchreceiptnumber().substring(2);
-			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",Integer.parseInt(branchReceiptNo)+1));
+			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",Integer.parseInt(ReceiptList.get(0).getBranchreceiptnumber())+1));
 			 	}else {
-			 		receiptInfo.setBranchreceiptnumber(String.format("%06d",1));
+			 		receiptInfo.setBranchreceiptnumber(String.format("%03d",1));
 			 	}
 			 	
 			 	//Receipts

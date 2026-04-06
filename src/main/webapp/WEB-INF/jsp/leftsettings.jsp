@@ -356,10 +356,10 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
-                <a target="mainFrame" href="/roshan/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
+                <a target="mainFrame" href="/roshan/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
+                <a target="mainFrame" href="/roshan/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
 
             </div>
             
