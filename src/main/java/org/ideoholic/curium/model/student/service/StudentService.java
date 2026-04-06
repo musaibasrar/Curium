@@ -426,6 +426,25 @@ public class StudentService {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
+			
+			//code for otherfee
+			List<Otherreceiptinfo> orinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,
+					currentYear.getCurrentacademicyear());
+			List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO()
+					.getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+			long othertotalSum = 0l;
+			for (Otherreceiptinfo otherreceiptInfoSingle : orinfo) {
+				othertotalSum = othertotalSum + otherreceiptInfoSingle.getTotalamount();
+			}
+			long othertotalFeesAmount = 0l;
+			long othertotalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				othertotalFeesAmount = othertotalFeesAmount + studentotherfeesstructureSingle.getFeesamount()
+						- studentotherfeesstructureSingle.getWaiveoff()
+						- studentotherfeesstructureSingle.getConcession();
+				othertotalFeesConcession = othertotalFeesConcession + studentotherfeesstructureSingle.getConcession();
+			}
+			// code for otherfee
 
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
