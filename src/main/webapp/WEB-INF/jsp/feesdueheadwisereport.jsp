@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Report</title>
-<link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bba/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -305,38 +305,38 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/bba/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/bba/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bba/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bba/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bba/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
 
 
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -363,12 +363,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/bba/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bba/FeesCollection/searchFeesDueHeadWiseReport";
+		form1.action = "/vision/FeesCollection/searchFeesDueHeadWiseReport";
 		form1.method = "POST";
 		form1.submit();
 
@@ -452,7 +452,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/bba/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -543,7 +543,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/bba/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.open("GET", "/vision/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
 			xmlHttp.send(null);
 	}
     
@@ -576,7 +576,7 @@ var xmlHttp;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bba/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -589,7 +589,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/bba/FeesCollection/printFeesDueHeadWiseReport" method="POST">
+	<form id="form1" action="/vision/FeesCollection/printFeesDueHeadWiseReport" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -669,21 +669,9 @@ for(Cookie cookie : cookies){
                                          <select name="yearofadmission" id="yearofadmission" onchange="searchfeecategory()" required
 									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
-										<option>2026/27</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 										</select>
                               </label>
                         </td>

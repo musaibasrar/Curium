@@ -448,13 +448,9 @@
                                 <td>
                                     <select name="academicyear" id="academicyear" required class="myclass" style="width: 100%;border-radius: 6px;background: white;height: 36px;width: 165px;">
                                         <option selected></option>
-                                        <option>2026/27</option>
-                                        <option>2025/26</option>
-                                        <option>2026/27</option>
-                                        <option>2027/28</option>
-                                        <option>2028/29</option>
-                                        <option>2029/30</option>
-                                        <option>2030/31</option>                                        
+                                       <c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>                                     
                                     </select>
                                 </td>
                             </tr>
