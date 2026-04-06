@@ -160,7 +160,7 @@ public class UserActionAdapter {
 
         String branchId = request.getParameter(BRANCHID);
 
-        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), httpSession.getAttribute("superuserAuth").toString(), branchId);
+        UserAuthenticationResponseDto responseDto = userService.authenticateMultiUser(httpSession.getAttribute("username").toString(), null, branchId);
         httpSession.setAttribute("currentAcademicYear", responseDto.getAcademicYear());
         httpSession.setAttribute("username", responseDto.getUserName());
         httpSession.setAttribute("branchid", responseDto.getBranchId());
