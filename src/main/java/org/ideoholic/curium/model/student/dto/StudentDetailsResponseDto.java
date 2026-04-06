@@ -39,4 +39,8 @@ public class StudentDetailsResponseDto {
     private List<Studentotherfeesstructure> studentOtherFeesStructure;
     private List<Classsec> classSec;
     private Map<Receiptinfo,String> receiptNarrationMap;
+    private long otherTotalSum;
+    private long otherDueAmount;
+    private long otherTotalFees;
+    private long otherTotalFeesConcession;
 }
