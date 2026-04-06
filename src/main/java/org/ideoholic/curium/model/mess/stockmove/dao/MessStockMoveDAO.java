@@ -202,15 +202,18 @@ public class MessStockMoveDAO {
    			MessStockMove msm = (MessStockMove) queryMaxRow.uniqueResult();
 			
 			if(msm!=null) {
-				billNo = msm.getId() + 1;
+				String[] externalId = msm.getExternalid().split("_");
+				billNo = Integer.parseInt(externalId[1]) + 1;
 			}else {
 				billNo = 1;
 			}
 			
 			for (MessStockMove messStockMove : messStockMovesList) {
 	        	
-				messStockMove.setExternalid(String.format("%04d",billNo));
+				//messStockMove.setExternalid(String.format("%04d",billNo));
 				session.save(messStockMove);
+				Query queryUpdateMessStockExId = session.createQuery("update MessStockMove set externalid= concat(externalid,'_"+billNo+"'), voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
+	        	queryUpdateMessStockExId.executeUpdate();
 	        	Query queryUpdateMessStock = session.createQuery("update MessStockMove set voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 	        	queryUpdateMessStock.executeUpdate();
 				Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock-'"+messStockMove.getQuantity()+"' where itemid="+messStockMove.getItemid());

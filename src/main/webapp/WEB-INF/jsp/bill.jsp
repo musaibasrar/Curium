@@ -180,7 +180,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/roshan/images/roshan.jpg" width="54" height="60"/>
+				<img src="/roshan/images/roshan.jpg" width="110" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -278,7 +278,7 @@
 					<td class="dataText"><c:out
 							value="${feescatmap.itemname}" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${feescatmap.salesprice}" /></td>
+							value="${feescatmap.salesprice*feescatmap.quantity}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
@@ -356,7 +356,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="left" style="padding-left: 50px;">
-				<img src="/roshan/images/roshan.jpg" width="54" height="60"/>
+				<img src="/roshan/images/roshan.jpg" width="110" height="60"/>
 				</td> 
 				<td style="width: 100%;" align="left">
 				<label class="dataTextBoldCenter" style="padding-left: 25px;">&nbsp;&nbsp;&nbsp;${branchname}</label><br>
@@ -454,7 +454,7 @@
 					<td class="dataText"><c:out
 							value="${feescatmap.itemname}" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${feescatmap.salesprice}" /></td>
+							value="${feescatmap.salesprice*feescatmap.quantity}" /></td>
 					
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
