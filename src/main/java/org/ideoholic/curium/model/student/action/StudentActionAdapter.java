@@ -269,6 +269,13 @@ public class StudentActionAdapter {
         httpSession.setAttribute("classdetailslist", responseDto.getClassSec());
         request.setAttribute("receiptinfonarration", responseDto.getReceiptNarrationMap());
         
+        httpSession.setAttribute("otherfeesstructure", responseDto.getStudentOtherFeesStructure());
+        httpSession.setAttribute("othersumoffees", responseDto.getOtherTotalSum());
+        httpSession.setAttribute("otherdueamount", responseDto.getOtherDueAmount());
+        httpSession.setAttribute("othertotalfees", responseDto.getOtherTotalFees());
+        httpSession.setAttribute("othertotalfeesconcession", responseDto.getOtherTotalFeesConcession());
+        request.setAttribute("otherreceiptinfo", responseDto.getOtherReceiptInfo());
+        
         return responseDto.isSuccess();
     }
 
