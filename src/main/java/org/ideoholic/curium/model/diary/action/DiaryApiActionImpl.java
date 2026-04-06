@@ -41,7 +41,7 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 
 	@PostMapping("/addDiary")
 	public ResponseEntity addDiary(@RequestBody AddDiaryDto addDiaryDto,
-			@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, 
+			@RequestPart("fileToUpload") MultipartFile[] uploadedFiles,
 			@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,
 			@RequestHeader(value = "userloginid") String userLoginId) {
