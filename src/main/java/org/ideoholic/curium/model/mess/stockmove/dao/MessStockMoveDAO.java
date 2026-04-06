@@ -195,7 +195,6 @@ public class MessStockMoveDAO {
 			billNo = messStockMoveRepository.findTopByOrderByIdDesc().map(msm -> msm.getId() + 1).orElse(1);
 
 			for (MessStockMove messStockMove : messStockMovesList) {
-
 				messStockMove.setExternalid(String.format("%04d", billNo));
 				// session.save(messStockMove);
 				messStockMoveRepository.save(messStockMove);

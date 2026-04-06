@@ -508,6 +508,25 @@ public class StudentService {
 					}
 
 					// httpSession.setAttribute("feesdetails", feesdetails);
+					
+							//code for otherfee
+							List<Otherreceiptinfo> orinfo = feesCollectionDAO.getOtherReceiptDetailsPerStudent(id,
+									currentYear.getCurrentacademicyear());
+							List<Studentotherfeesstructure> otherfeesstructure = studentDetailsDao
+									.getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+							long othertotalSum = 0l;
+							for (Otherreceiptinfo otherreceiptInfoSingle : orinfo) {
+								othertotalSum = othertotalSum + otherreceiptInfoSingle.getTotalamount();
+							}
+							long othertotalFeesAmount = 0l;
+							long othertotalFeesConcession = 0l;
+							for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+								othertotalFeesAmount = othertotalFeesAmount + studentotherfeesstructureSingle.getFeesamount()
+										- studentotherfeesstructureSingle.getWaiveoff()
+										- studentotherfeesstructureSingle.getConcession();
+								othertotalFeesConcession = othertotalFeesConcession + studentotherfeesstructureSingle.getConcession();
+							}
+							// code for otherfee
 
 					result.setParents(parents);
 					result.setFeesStructure(feesstructure);
@@ -519,6 +538,12 @@ public class StudentService {
 					result.setTotalFeesConcession(totalFeesConcession);
 					result.setTotalFineAmount(totalFineAmount);
 					result.setTotalMiscAmount(totalMiscAmount);
+					result.setStudentOtherFeesStructure(otherfeesstructure);
+					result.setOtherTotalSum(othertotalSum);
+					result.setOtherDueAmount(othertotalFeesAmount-othertotalSum);
+					result.setOtherTotalFees(othertotalFeesAmount);
+					result.setOtherTotalFeesConcession(othertotalFeesConcession);
+					result.setOtherReceiptInfo(orinfo);
 					result.setSuccess(true);
 				}
 				ResultResponse classsec = standardService.viewClasses(branchId);

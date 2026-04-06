@@ -205,7 +205,7 @@ public class MessStockMoveService {
 					
 					messStockMove.setStockentryid(Integer.parseInt(StockEntryIds[i]));
 					messStockMove.setItemid(Integer.parseInt(itemsIds[i]));
-					//messStockMove.setExternalid(custDetails[3]);
+					messStockMove.setExternalid(custDetails[3]);
 					messStockMove.setQuantity(Float.parseFloat(issuequantity[i]));
 					messStockMove.setPurpose(itemunitprice[i]);
 					messStockMove.setTransactiondate(DateUtil.indiandateParser(dto.getTransactionDate()));
@@ -870,9 +870,10 @@ public class MessStockMoveService {
 				Bill bill = new Bill();
 				MessItems messItem = messStockMoveDao.getItem(stockMoveSingle.getItemid());
 				bill.setItemname(messItem.getName());
+				bill.setQuantity(stockMoveSingle.getQuantity());
 				bill.setSalesprice(Float.parseFloat(stockMoveSingle.getPurpose()));
 				billList.add(bill);
-				grandTotal = grandTotal.add(new BigDecimal(stockMoveSingle.getPurpose()));
+				grandTotal = grandTotal.add(new BigDecimal(stockMoveSingle.getPurpose()).multiply(new BigDecimal(String.valueOf(stockMoveSingle.getQuantity()))));
 			}
 			
 
