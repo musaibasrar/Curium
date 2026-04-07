@@ -525,6 +525,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th title="click to sort" class="headerText"></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Item Name</th>
 						<th title="click to sort" class="headerText">Available Quantity</th>
 						<th title="click to sort" class="headerText">Status</th>
@@ -533,10 +534,10 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${currentstocklist}" var="currentstocklist">
+					<c:forEach items="${currentstocklist}" var="currentstocklist" varStatus="status">
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
-						 
+						 <td class="dataText" align="center">${status.index + 1}</td>
 						  <c:if test="${currentstocklist.availablestock > currentstocklist.minstock}">
 						  <td class="dataText"><div class="squareinstock"></div></td>
 						   <td class="dataTextLeft"><span><c:out value="${currentstocklist.messitems.name}" /></span></td>

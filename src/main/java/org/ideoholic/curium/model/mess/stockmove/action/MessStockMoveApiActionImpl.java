@@ -53,7 +53,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
          * Batch stock issue new MessStockMoveService(request,
          * response).viewStockEntryDetails();
          */
-        StockMoveResponseDto stockMoveDetailsResult = messStockMoveService.viewStockMoveDetails(page, branchId);
+        StockMoveResponseDto stockMoveDetailsResult = messStockMoveService.viewStockMoveDetails(null,page, branchId);
         stockMoveCancelDto.setCurrentPage(stockMoveDetailsResult.getCurrentPage());
         stockMoveCancelDto.setNoOfPages(stockMoveDetailsResult.getNoOfPages());
         stockMoveCancelDto.setMessStockMoveList(stockMoveDetailsResult.getMessStockMoveList());
@@ -62,7 +62,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
     }
 
     @RequestMapping(value = "/issueItems", method = { RequestMethod.GET, RequestMethod.POST })
-    public ResponseEntity<StockMoveCancelDto> issueItems(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
+    public ResponseEntity<StockMoveCancelDto> issueItems(@RequestBody ClassSearchDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
         StockMoveCancelDto stockMoveCancelDto = new StockMoveCancelDto();
 
         ResultResponse stockToIssueResult = messItemsService.getCurrentStockToIssue();
@@ -81,7 +81,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
 
 
 
-        StockMoveResponseDto stockMoveDetailsResult = messStockMoveService.viewStockMoveDetails(page, branchId);
+        StockMoveResponseDto stockMoveDetailsResult = messStockMoveService.viewStockMoveDetails(dto,page, branchId);
         stockMoveCancelDto.setCurrentPage(stockMoveDetailsResult.getCurrentPage());
         stockMoveCancelDto.setNoOfPages(stockMoveDetailsResult.getNoOfPages());
         stockMoveCancelDto.setMessStockMoveList(stockMoveDetailsResult.getMessStockMoveList());
@@ -116,7 +116,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
         ResultResponse entryDetailsResult = messStockMoveService.viewStockEntryDetails(branchId);
         stockMoveSaveDto.setMessStockItemDetailsList(entryDetailsResult.getResultList());
 
-        StockMoveResponseDto stockMoveDetailsResult = messStockMoveService.viewStockMoveDetails(page, branchId);
+        StockMoveResponseDto stockMoveDetailsResult = messStockMoveService.viewStockMoveDetails(null,page, branchId);
         stockMoveSaveDto.setCurrentPage(stockMoveDetailsResult.getCurrentPage());
         stockMoveSaveDto.setNoOfPages(stockMoveDetailsResult.getNoOfPages());
         stockMoveSaveDto.setMessStockMoveList(stockMoveDetailsResult.getMessStockMoveList());
@@ -130,9 +130,9 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
     }
 
     @GetMapping("/billsReport")
-    public ResponseEntity<StockMoveResponseDto> billsReport(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
+    public ResponseEntity<StockMoveResponseDto> billsReport(@RequestBody ClassSearchDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
 
-        StockMoveResponseDto result = messStockMoveService.viewStockMoveDetails(branchId, page);
+        StockMoveResponseDto result = messStockMoveService.viewStockMoveDetails(dto, branchId, page);
 
         return ResponseEntity.ok(result);
     }

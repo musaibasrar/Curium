@@ -133,7 +133,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/vision/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/vision/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${branchid}"> <img
 									src="/vision/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
@@ -153,7 +153,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/vision/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/vision/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}"> <img
 									src="/vision/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
@@ -172,7 +172,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/vision/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/vision/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${branchid}"> <img
 									src="/vision/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
@@ -209,7 +209,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/vision/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/vision/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}"> <img
 									src="/vision/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>

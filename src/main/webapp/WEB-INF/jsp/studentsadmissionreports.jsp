@@ -587,32 +587,9 @@ for(Cookie cookie : cookies){
 								<label> <select name="yearofadmission" id="yearofadmission" required
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>									
 								</select>
 
 							</label> 	
@@ -660,6 +637,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name</th>
@@ -675,7 +653,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${searchStudentList}" var="Parents">
+					<c:forEach items="${searchStudentList}" var="Parents" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -683,6 +661,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
 								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>

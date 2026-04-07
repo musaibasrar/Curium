@@ -210,6 +210,8 @@ public class AccountActionAdapter {
 			request.setAttribute("ledgername", responseDto.getLedgerName());
 			request.setAttribute("fromdateselected", responseDto.getFromDate());
 			request.setAttribute("todateselected", responseDto.getToDate());
+			request.setAttribute("openingbalance", responseDto.getOpeningBalance());
+			request.setAttribute("closingbalance", responseDto.getClosingBalance());
 		}
 
 		return responseDto.isSuccess();
@@ -262,7 +264,10 @@ public class AccountActionAdapter {
 		request.setAttribute("accountid", searchLedgerEntriesResponseDto.getAccountId());
 		request.setAttribute("fromdate", searchLedgerEntriesResponseDto.getFromDate());
 		request.setAttribute("todate", searchLedgerEntriesResponseDto.getToDate());
-
+		request.setAttribute("accountgroupmasterid", searchLedgerEntriesResponseDto.getAccountgroupmasterid());
+		request.setAttribute("openingbalance", searchLedgerEntriesResponseDto.getOpeningBalance());
+		request.setAttribute("closingbalance", searchLedgerEntriesResponseDto.getClosingBalance());
+		
 		return searchLedgerEntriesResponseDto.isSuccess();
 	}
 
@@ -430,5 +435,40 @@ public class AccountActionAdapter {
 		request.setAttribute("voucherentrytransactions", dayBookDtoOutput.getVoucherEntryTransactions());
 		
 		return dayBookDtoOutput.isSuccess();
+	}
+
+	public void getRPStatement() {
+		
+		DayBookDto dto = new DayBookDto();
+		dto.setFromDate(DateUtil.dateFromatConversionSlash(request.getParameter("fromdate")));
+		dto.setToDate(DateUtil.dateFromatConversionSlash(request.getParameter("todate")));
+		
+		ReceiptPaymentResponseDto receiptPaymentResponseDto = accountService.getRPStatement(dto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("grandreceipttotal", receiptPaymentResponseDto.getGrandReceiptTotal());
+		request.setAttribute("grandpaymenttotal", receiptPaymentResponseDto.getGrandPaymentTotal());
+		request.setAttribute("openingbalance", receiptPaymentResponseDto.getOpeningBalanceCash());
+		request.setAttribute("closingbalance", receiptPaymentResponseDto.getClosingBalanceCash());
+		request.setAttribute("openingbalancebank", receiptPaymentResponseDto.getOpeningBalanceBank());
+		request.setAttribute("closingbalancebank", receiptPaymentResponseDto.getClosingBalanceBank());
+		
+		//group 1
+		request.setAttribute("income", receiptPaymentResponseDto.getIncome());
+		request.setAttribute("incomeledgersaccount", receiptPaymentResponseDto.getIncomeLedgersAccount());
+				
+		//group 2
+		request.setAttribute("expenses", receiptPaymentResponseDto.getExpenses());
+		request.setAttribute("expensesledgersaccount", receiptPaymentResponseDto.getExpenseLedgersAccount());
+		//request.setAttribute("expensesledgersaccount", expenseLedgersAccount);
+				
+		request.setAttribute("incometotallabel", "Total Income");
+		request.setAttribute("expensetotallabel", "Total Expense");
+		request.setAttribute("incometotal", receiptPaymentResponseDto.getIncomeTotal());
+		request.setAttribute("expensetotal", receiptPaymentResponseDto.getExpenseTotal());
+		request.setAttribute("expenseledgersaccountclub", receiptPaymentResponseDto.getExpenseLedgersAccount());
+				
+				
+		//group 3
+		request.setAttribute("fromdate", request.getParameter("fromdate"));
+		request.setAttribute("todate", request.getParameter("todate"));
 	}
 }

@@ -675,7 +675,16 @@ for(Cookie cookie : cookies){
 								</select>
 
 							</label></td>
-							
+							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;Academic Year:</td>
+							<td ><label>
+                                         <select name="academicyear" id="academicyear"
+									style="width: 240px">
+										<option selected></option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
+										</select>
+                              </label></td>
 						</tr>
 							
 						<tr>
@@ -736,6 +745,7 @@ for(Cookie cookie : cookies){
 				<thead>
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                            <th class="headerText">Sl No</th>
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Student Name</th>
                             <th title="click to sort" class="headerText">Class</th>
@@ -752,13 +762,14 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
 								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
 								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
@@ -766,7 +777,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount-feesdetails.key.fine-feesdetails.key.misc}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.fine}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.misc}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/>${feesdetails.value.student.fathersname}</td>
+                                <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
                             </tr>

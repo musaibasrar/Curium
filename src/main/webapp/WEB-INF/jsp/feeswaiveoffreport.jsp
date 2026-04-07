@@ -431,7 +431,41 @@
      
 </script>
 
+<script>
+$(function() {
+	$('#chckHead').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktbl:checked').attr('checked', false);
+			this.checked = false;
 
+		} else {
+			if (this.checked == false) {
+				$('.chcktbl:checked').attr('checked', false);
+			} else {
+				$('.chcktbl:not(:checked)').attr('checked', true);
+			}
+
+		}
+
+	});
+	
+	$('.chcktbl').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		alert(tdLength);
+		if (length > trLength) {
+
+			$('.chcktbl:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktbl:not(:checked)').attr('disabled', false);
+		}
+	});
+
+});
+
+</script>
 
 
 </head>
@@ -499,20 +533,22 @@ for(Cookie cookie : cookies){
 							</label></td>
 							
 						</tr>
-
-						<tr style="display: none;" id="classsearchtr">
+						<tbody id="classsearchtr" style="display:none;">
+                        <tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead" /></td>
+						</tr>     
+						<tr>
 							<td class="alignRightFields">Class &nbsp;</td>
-							<td><label> <select name="classsearch"
-									id="classsearch" style="width: 235px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
+							<td><label>
+							 <c:forEach items="${classdetailslist}" var="classdetailslist">
+										<c:if test="${(classdetailslist.classdetails != '')}">
+
+										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox" class = "chcktbl"  name="classsearch" value="${classdetailslist.classdetails}">
+										${classdetailslist.classdetails}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										</c:if>	
+							</c:forEach>
+
 
 							</label> <label style="display: none;"> <select name="secsearch" id="secsearch"
 									style="width: 100px">
@@ -528,7 +564,7 @@ for(Cookie cookie : cookies){
 								</select>
 							</label>
 						</tr>
-
+                         </tbody>
 						<tr>
 							<td><br /></td>
 
@@ -594,6 +630,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -608,7 +645,7 @@ for(Cookie cookie : cookies){
 				</thead>
 
 				<tbody>
-					<c:forEach items="${studentsfeesstructuredetailswaiveoff}" var="students">
+					<c:forEach items="${studentsfeesstructuredetailswaiveoff}" var="students" varStatus="status">
 
 						<c:forEach items="${students.value}" var="fees">
 						
@@ -617,6 +654,7 @@ for(Cookie cookie : cookies){
 									id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
 									name="studentIDs"
 									value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
+									<td class="dataText" align="center">${status.index + 1}</td>
 									<td class="dataTextInActive"><a class="dataTextInActive"
 									href="/vision/StudentProcess/ViewFeesStructure?id=<c:out value='${students.key.student.sid}'/>"><c:out
 											value="${students.key.student.studentexternalid}" /></a></td>

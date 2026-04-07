@@ -104,15 +104,20 @@ public class UserService {
 			}
 			
 			//get the Previous Year List
+			int previousYears = 4;
+			int futureYears = 1;
+
 			String[] parts = academicyear.split("/");
 			int startYear = Integer.parseInt(parts[0]);
 
 			List<String> academicYears = new ArrayList<>();
-			for (int i = 0; i < 4; i++) {
-			    int year1 = startYear - i;
+
+			for (int i = -previousYears; i <= futureYears; i++) {
+			    int year1 = startYear + i;
 			    int year2 = year1 + 1;
-			    academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
+			    academicYears.add(year1 + "/" + String.valueOf(year2).substring(2));
 			}
+
 			result.setPreviousAcademicYears(academicYears);
 			// end
 			
@@ -604,6 +609,7 @@ public class UserService {
 				String fromDate = DataUtil.emptyString(dto.getFromDate());
 				String oneDay = DataUtil.emptyString(dto.getOneDay());
 				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
+				String academicYear = DataUtil.emptyString(dto.getAcademicYear());
 
 				String querySub = "";
 
@@ -630,6 +636,10 @@ public class UserService {
 
 				if(!modeOfPayment.equalsIgnoreCase("")){
 					querySub = querySub+" and feesdetails.paymenttype = '"+modeOfPayment+"'" ;
+				}
+				
+				if(!academicYear.equalsIgnoreCase("")){
+					querySub = querySub+" and feesdetails.academicyear = '"+academicYear+"'" ;
 				}
 
 				queryMain = queryMain+querySub;
@@ -700,16 +710,17 @@ public class UserService {
 
         
         String userName =null;
-        String superUserAuth = null;
+        //String superUserAuth = null;
 
         
         	if(strUserName!=null) {
         		userName = strUserName;
 	        }
         
-        	if(strSuperUserAuth!=null) {
-	        	superUserAuth = DataUtil.emptyString(strSuperUserAuth);
-	        }
+			/*
+			 * if(strSuperUserAuth!=null) { superUserAuth =
+			 * DataUtil.emptyString(strSuperUserAuth); }
+			 */
         
         if(userName != null) {
         	int branchId = Integer.parseInt(strBranchId);

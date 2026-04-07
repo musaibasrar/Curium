@@ -91,7 +91,7 @@ for(Cookie cookie : cookies){
         <form id="form1" method="post">
     <table height="462" class="tableCSS"  >
       <tr>
-        <td height="50" align="center" valign="middle"><p class="style1"> File Exported Successful</p>
+        <td height="50" align="center" valign="middle"><p class="style1"> File Exported Successfully</p>
         </td>
         
       </tr>

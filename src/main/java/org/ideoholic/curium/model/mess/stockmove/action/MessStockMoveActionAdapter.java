@@ -3,6 +3,7 @@ package org.ideoholic.curium.model.mess.stockmove.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.mess.stockmove.dto.*;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +40,18 @@ public class MessStockMoveActionAdapter {
     public void viewStockMoveDetails() {
         
         String page = request.getParameter("page");
+        ClassSearchDto dto = new ClassSearchDto();
+        dto.setFromDate(request.getParameter("transactiondatefrom"));
+        dto.setToDate(request.getParameter("transactiondateto"));
 
-        StockMoveResponseDto responseDto = messStockMoveService.viewStockMoveDetails(page, httpSession.getAttribute(BRANCHID).toString());
+        StockMoveResponseDto responseDto = messStockMoveService.viewStockMoveDetails(dto, page, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("noOfPages", responseDto.getNoOfPages());
         request.setAttribute("currentPage", page);
         request.setAttribute("messstockmovelist", responseDto.getMessStockMoveList());
+        request.setAttribute("fromdate", responseDto.getFromDate());
+		request.setAttribute("todate", responseDto.getToDate());
+		//request.setAttribute("transactiondatefromselected", request.getParameter("transactiondatefrom"));
+		//request.setAttribute("transactiondatetoselected", request.getParameter("transactiondateto"));
     }
 
     public void saveStockMove() {
@@ -81,7 +89,7 @@ public class MessStockMoveActionAdapter {
         dto.setItemsGrandNetDueAmount(request.getParameter("itemsGrandNetDueAmount"));
 
         MoveStockResponseDto responseDto = messStockMoveService.saveStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute("branchcode").toString());
-        request.setAttribute("billdetails", responseDto.getBillDetails());
+        request.setAttribute("billdetails", responseDto.getBillList());
         request.setAttribute("billdetailstransactiondate", dto.getTransactionDate());
         request.setAttribute("billdetailsstudentname", responseDto.getBillDetailsStudentName());
         request.setAttribute("billdetailsclassstudying", responseDto.getBillDetailsClassStudying());
@@ -89,7 +97,7 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("billdetailstotaltotal", responseDto.getBillDetailsTotalTotal());
         request.setAttribute("billgrandtotal", responseDto.getBillGrandTotal());
         request.setAttribute("billno", responseDto.getBillNo());
-        request.setAttribute("billdetails", responseDto.getBillDetails());
+        //request.setAttribute("billdetails", responseDto.getBillDetails());
         request.setAttribute("billdetailstransactiondate", responseDto.getBillDetailsTransactionDate());
         request.setAttribute("billdetailscustomername", responseDto.getBillDetailsCustomerName());
         request.setAttribute("itemissued", responseDto.isItemsIssued());
@@ -189,5 +197,19 @@ public class MessStockMoveActionAdapter {
 	public void generateTaxInvoiceReport() {
 		BillResponseDto billResponseDto = messStockMoveService.getTaxInvoiceDetail();
 		request.setAttribute("invoicereport", billResponseDto.getMessTaxInvoice());
+	}
+
+	public void printStockMove() {
+		 StockMoveIdsDto dto = new StockMoveIdsDto();
+		 dto.setStockMoveIds(request.getParameterValues("stockmoveid"));
+		 BillResponseDto billResponseDto = messStockMoveService.printStockMove(dto);
+		 request.setAttribute("billdetails", billResponseDto.getBillList());
+		 request.setAttribute("billdetailstransactiondate", billResponseDto.getBilldetailstransactiondate());
+		 request.setAttribute("billdetailsstudentname", billResponseDto.getBilldetailsstudentname());
+		 request.setAttribute("billdetailsclassstudying", billResponseDto.getBilldetailsclassstudying());
+		 request.setAttribute("billdetailsfathername", billResponseDto.getBilldetailsfathername());
+		 request.setAttribute("billdetailstotaltotal", billResponseDto.getBilldetailstotaltotal());
+		 request.setAttribute("billgrandtotal", billResponseDto.getBillgrandtotal());
+		 request.setAttribute("billno", billResponseDto.getBillNo());
 	}
 }

@@ -181,7 +181,7 @@ public class MessStockMoveService {
 					
 					messStockMove.setStockentryid(Integer.parseInt(StockEntryIds[i]));
 					messStockMove.setItemid(Integer.parseInt(itemsIds[i]));
-					//messStockMove.setExternalid(custDetails[3]);
+					messStockMove.setExternalid(custDetails[3]);
 					messStockMove.setQuantity(Float.parseFloat(issuequantity[i]));
 					messStockMove.setPurpose(itemunitprice[i]);
 					messStockMove.setTransactiondate(DateUtil.indiandateParser(dto.getTransactionDate()));
@@ -552,10 +552,12 @@ public class MessStockMoveService {
 	}
 
 
-	public StockMoveResponseDto viewStockMoveDetails(String strPage, String branchId) {
+	public StockMoveResponseDto viewStockMoveDetails(ClassSearchDto dto, String strPage, String branchId) {
 		
 		List<Bill> messStockMoveList = new ArrayList<Bill>();
 		StockMoveResponseDto result = StockMoveResponseDto.builder().build();
+		String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
+		String toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
 		
 		 if(branchId!=null){
 			 
@@ -566,13 +568,14 @@ public class MessStockMoveService {
 								page = Integer.parseInt(strPage);
 							}
 
-						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails((page - 1) * recordsPerPage,
+						messStockMoveList = new MessStockMoveDAO().getStockMoveDetails(fromDate, toDate,(page - 1) * recordsPerPage,
 									recordsPerPage, Integer.parseInt(branchId));
-						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(Integer.parseInt(branchId));
+						int noOfRecords = new MessStockMoveDAO().getNoOfRecordsStockMove(fromDate, toDate, Integer.parseInt(branchId));
 						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 						result.setNoOfPages(noOfRecords);
 						result.setCurrentPage(page);
-						
+						result.setFromDate(fromDate);
+						result.setToDate(toDate);
 						result.setSuccess(true);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -809,6 +812,83 @@ public class MessStockMoveService {
 		billResponseDto.setMessTaxInvoice(messTaxInvoice);
 				return billResponseDto;
 	}
-	
-	
+
+	public BillResponseDto printStockMove(StockMoveIdsDto dto) {
+		BillResponseDto billResponseDto = new BillResponseDto();
+		String[] smIds = dto.getStockMoveIds();
+		
+		for (String stockmoveids : smIds) {
+			
+			
+			MessStockMove messStockMove = new MessStockMoveDAO().getStockMoveDetails(Integer.parseInt(stockmoveids));
+			String[] messStockMoveBillNo = messStockMove.getExternalid().split("_");
+			String[] custDetails = messStockMove.getIssuedto().split("_");
+			String queryMain = "from MessStockMove msm where msm.externalid like '%\\_"+messStockMoveBillNo[1]+"'";
+			List<MessStockMove> messStockMoveList = new MessStockMoveDAO().getStockMoveDetailsReport(queryMain);
+			
+			//BILL DETAILS
+			
+			List<Bill> billList = new ArrayList<Bill>();
+			BigDecimal grandTotal = BigDecimal.ZERO;
+			
+			for (MessStockMove stockMoveSingle : messStockMoveList) {
+				Bill bill = new Bill();
+				MessItems messItem = new MessItemsDAO().getItem(stockMoveSingle.getItemid());
+				bill.setItemname(messItem.getName());
+				bill.setQuantity(stockMoveSingle.getQuantity());
+				bill.setSalesprice(Float.parseFloat(stockMoveSingle.getPurpose()));
+				billList.add(bill);
+				grandTotal = grandTotal.add(new BigDecimal(stockMoveSingle.getPurpose()).multiply(new BigDecimal(String.valueOf(stockMoveSingle.getQuantity()))));
+			}
+			
+
+			billResponseDto.setBillList(billList);
+			//request.setAttribute("billdetails", billList);
+			//request.setAttribute("billdetails", messStockMovesList);
+			billResponseDto.setBilldetailstransactiondate(DateUtil.dateParserddMMYYYY(messStockMove.getTransactiondate()));
+			//request.setAttribute("billdetailstransactiondate", DateUtil.dateParserddMMYYYY(messStockMove.getTransactiondate()));
+			billResponseDto.setBilldetailsstudentname(custDetails[0]);
+			//request.setAttribute("billdetailsstudentname", custDetails[0]);
+			billResponseDto.setBilldetailsclassstudying(custDetails[1]);
+			//request.setAttribute("billdetailsclassstudying", custDetails[1]);
+			billResponseDto.setBilldetailsfathername(custDetails[2]);
+			//request.setAttribute("billdetailsfathername", custDetails[2]);
+			
+			
+			NumberToWord toWord = new NumberToWord();
+			String grandTotalInWords = "";
+			if(grandTotal.compareTo(BigDecimal.ZERO) != 0){
+				grandTotalInWords = toWord.convert(grandTotal.intValue());
+			}
+			
+			StringBuffer res = new StringBuffer();
+			String[] strArr = grandTotalInWords.split(" ");
+			
+			for(String str : strArr){
+				char[] stringArray = str.trim().toCharArray();
+				stringArray[0] = Character.toUpperCase(stringArray[0]);
+				str = new String(stringArray);
+				res.append(str).append(" ");
+			}
+			grandTotalInWords = res.toString().trim();
+			billResponseDto.setBilldetailstotaltotal(grandTotalInWords+" "+"Only");
+			//request.setAttribute("billdetailstotaltotal", grandTotalInWords+" "+"Only");
+			billResponseDto.setBillgrandtotal(grandTotal);
+			//request.setAttribute("billgrandtotal", grandTotal);
+			
+			//Get Bill No
+	     	 //request.setAttribute("billno", messStockMoveBillNo[1]);
+	     	billResponseDto.setBillNo(messStockMoveBillNo[1]);
+	     	 
+		
+			
+		}
+		return billResponseDto;
+		
+	}
+		
+
 }
+	
+	
+

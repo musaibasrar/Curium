@@ -428,6 +428,25 @@ public class StudentService {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
+			
+			//code for otherfee
+			List<Otherreceiptinfo> orinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,
+					currentYear.getCurrentacademicyear());
+			List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO()
+					.getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+			long othertotalSum = 0l;
+			for (Otherreceiptinfo otherreceiptInfoSingle : orinfo) {
+				othertotalSum = othertotalSum + otherreceiptInfoSingle.getTotalamount();
+			}
+			long othertotalFeesAmount = 0l;
+			long othertotalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				othertotalFeesAmount = othertotalFeesAmount + studentotherfeesstructureSingle.getFeesamount()
+						- studentotherfeesstructureSingle.getWaiveoff()
+						- studentotherfeesstructureSingle.getConcession();
+				othertotalFeesConcession = othertotalFeesConcession + studentotherfeesstructureSingle.getConcession();
+			}
+			// code for otherfee
 
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
@@ -1459,6 +1478,30 @@ public class StudentService {
 		}
 		return result;
 	}
+		
+public void checkDuplicateStudent(String aadhaarNo, String studentName, String dob) throws IOException {
+			
+			Student student = new studentDetailsDAO().checkDuplicateStudent(aadhaarNo, studentName, dob);
+				PrintWriter out = response.getWriter(); 
+				response.setContentType("text/xml");
+			        response.setHeader("Cache-Control", "no-cache");
+			        try {
+			        	
+			        	if(student!= null){
+			        		String buffer = "<label style='color:red;'>Student Already Exist</label>";
+				        	response.getWriter().println(buffer);
+			        	}else{
+			        		String buffer = "<label></label>";
+				        	response.getWriter().println(buffer);
+			        	}
+			        	
+			        } catch (Exception e) {
+			            out.write("<label></label>");
+			        } finally {
+			            out.flush();
+			            out.close();
+			        }
+			}
 
 	public void getParentList(String branchid) throws IOException {
 

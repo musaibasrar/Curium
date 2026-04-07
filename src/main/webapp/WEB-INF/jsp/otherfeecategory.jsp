@@ -525,13 +525,9 @@ for(Cookie cookie : cookies){
 							<td width="70%"><label> <select name="categoryyearof" id="categoryyearof" 
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> </td>
@@ -561,6 +557,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Fees Category<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/vision/css/dataTable/images/sort_both.png" /></th>
@@ -581,7 +578,7 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${otherfeescategory}" var="fees">
+					<c:forEach items="${otherfeescategory}" var="fees" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -589,6 +586,7 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${fees.idfeescategory}"/>" class="chcktbl"
 								name="idfeescategory"
 								value="<c:out value="${fees.idfeescategory}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataText"><c:out value="${fees.feescategoryname}" /></td>
 							<td class="dataText"><c:out value="${fees.particularname}" /></td>
 							<td class="dataText"><c:out value="${fees.amount}" /></td>

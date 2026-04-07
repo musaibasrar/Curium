@@ -273,6 +273,13 @@ public class StudentActionAdapter {
         httpSession.setAttribute("classdetailslist", responseDto.getClassSec());
         request.setAttribute("receiptinfonarration", responseDto.getReceiptNarrationMap());
         
+        httpSession.setAttribute("otherfeesstructure", responseDto.getStudentOtherFeesStructure());
+        httpSession.setAttribute("othersumoffees", responseDto.getOtherTotalSum());
+        httpSession.setAttribute("otherdueamount", responseDto.getOtherDueAmount());
+        httpSession.setAttribute("othertotalfees", responseDto.getOtherTotalFees());
+        httpSession.setAttribute("othertotalfeesconcession", responseDto.getOtherTotalFeesConcession());
+        request.setAttribute("otherreceiptinfo", responseDto.getOtherReceiptInfo());
+        
         return responseDto.isSuccess();
     }
 
@@ -358,8 +365,15 @@ public class StudentActionAdapter {
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
 
-	public void searchListOfParent() throws IOException {
+	public void searchListOfParent() {
 		 studentService.getParentList(httpSession.getAttribute(BRANCHID).toString());
-		
+  }
+    
+    public void checkDuplicateStudent()  throws IOException {
+    	
+		String aadhaarNo = request.getParameter("aadhaarnumber");
+		String studentName = request.getParameter("studentname");
+		String dob = request.getParameter("dob");
+		studentService.checkDuplicateStudent(aadhaarNo, studentName, DateUtil.dateFromatConversionSlash(dob));
 	}
 }

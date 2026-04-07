@@ -582,6 +582,7 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">Voucher Number</th>
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Account Description&nbsp;</th>
@@ -593,7 +594,27 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 				<fmt:setLocale value="en_IN" scope="session"/>
-					<c:forEach items="${ledgertransactions}" var="ledgertransactions">
+				
+					<tr>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+					<td class="dataText"></td>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>
+									Opening Balance</b>
+							</label> 
+							</td>
+							
+							<td class="dataTextRight">
+								<label style="color: #eb6000"><b>
+								<fmt:formatNumber type="currency"  value="${openingbalance}" />
+							</label>
+							</td>
+					</tr>
+					
+					<c:forEach items="${ledgertransactions}" var="ledgertransactions" varStatus="status">
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
@@ -604,6 +625,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${ledgertransactions.key.transactionsid}"/>" />
 								
 							</td>
+							<td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataTextInActive"><c:out value="${ledgertransactions.key.transactionsid}" />
 							</td>
 							<td class="dataText"><c:out	value="${ledgertransactions.key.transactiondate}" /></td>
@@ -639,6 +661,7 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
+					<td class="dataText"></td>
 						<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 							<fmt:formatNumber type="currency"  value="${drtotal}" /></b>
@@ -658,21 +681,13 @@ for(Cookie cookie : cookies){
 					<td class="dataText"></td>
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
-									Balance</b>
+									Closing Balance</b>
 							</label> 
 							</td>
 							
 							<td class="dataTextRight">
 								<label style="color: #eb6000"><b>
-							<c:choose>
-                                <c:when test="${drtotal > crtotal}">
-									<fmt:formatNumber type="currency"  value="${drtotal-crtotal}" />                                    
-                                </c:when>
-                                <c:otherwise>
-                                   <fmt:formatNumber type="currency"  value="${crtotal-drtotal}" />
-                                </c:otherwise>
-                            </c:choose>
-							</b>
+								<fmt:formatNumber type="currency"  value="${closingbalance}" />
 							</label>
 							</td>
 					</tr>
