@@ -5,6 +5,7 @@ import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsRespons
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
+import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.*;
@@ -40,7 +41,7 @@ public class StudentActionAdapter {
 
     @Autowired
     private StudentService studentService;
-
+    
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -363,6 +364,10 @@ public class StudentActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
+
+	public void searchListOfParent() {
+		 studentService.getParentList(httpSession.getAttribute(BRANCHID).toString());
+  }
     
     public void checkDuplicateStudent()  throws IOException {
     	
