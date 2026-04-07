@@ -21,7 +21,8 @@ import org.ideoholic.curium.model.library.dto.BooksResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.util.DateUtil;
-
+import org.springframework.stereotype.Service;
+@Service
 public class LibraryService {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
@@ -30,11 +31,6 @@ public class LibraryService {
 
 	private static final int BUFFER_SIZE = 4096;
 
-	public LibraryService(HttpServletRequest request, HttpServletResponse response) {
-		this.request = request;
-		this.response = response;
-		this.httpSession = request.getSession();
-	}
 
 	public ResultResponse addBook(BookDto bookDto, String branchId) {
 
