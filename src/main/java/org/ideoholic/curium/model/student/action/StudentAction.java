@@ -347,6 +347,11 @@ public class StudentAction {
 		}
 	}
 	
+	@GetMapping("/searchListOfParent")
+	public void searchListOfParent() {
+				studentActionAdapter.searchListOfParent();
+  }
+  
 	@GetMapping("/checkDuplicateStudent")
 	public void checkDuplicateStudent() {
 		try {
