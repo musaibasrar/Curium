@@ -26,11 +26,13 @@ public class LibraryActionAdapter {
 
     @Autowired
     private HttpSession httpSession;
+    
+    @Autowired
+	private LibraryService libraryService;
 
     private String BRANCHID = "branchid";
 
 	public boolean addBook() {
-		LibraryService libraryService = new LibraryService(request, response);
 
 		BookDto bookDto = BookDto.builder()
 				.subject(request.getParameter("subject"))
@@ -49,7 +51,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean viewBooks() {
-		LibraryService libraryService = new LibraryService(request, response);
 
 		BooksResponseDto result = libraryService.viewBooks(httpSession.getAttribute(BRANCHID).toString());
 		httpSession.setAttribute("book", result.getBooksList());
@@ -58,7 +59,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean deleteRecord() {
-		LibraryService libraryService = new LibraryService(request, response);
 
 		return libraryService.deleteRecord(BooksRequestDto.builder()
 				.bookIds(request.getParameterValues("id"))
@@ -66,7 +66,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean viewBooksAvailable() {
-		LibraryService libraryService = new LibraryService(request, response);
 		
 		BooksResponseDto result = libraryService.viewBooksAvailable(httpSession.getAttribute(BRANCHID).toString());
 		
@@ -77,7 +76,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean updateBook() {
-		LibraryService libraryService = new LibraryService(request, response);
 
 		return libraryService.updateBook(
 				BooksRequestDto.builder()
@@ -94,7 +92,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean searchStudentBook() {
-		LibraryService libraryService = new LibraryService(request, response);
 
 		BooksResponseDto response = libraryService.searchstudentBook(
 				BooksRequestDto.builder()
@@ -112,7 +109,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean bookReturnByStudent() {
-		LibraryService libraryService = new LibraryService(request, response);
 		
 		return libraryService.bookReturnByStudent(
 				BooksRequestDto.builder()
@@ -125,7 +121,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean viewBookdetails() {
-		LibraryService libraryService = new LibraryService(request, response);
 		
 		BooksResponseDto response = libraryService.viewBookdetails(request.getParameter("id"), httpSession.getAttribute(BRANCHID).toString());
 		
@@ -135,7 +130,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean updateBookitems() {
-		LibraryService libraryService = new LibraryService(request, response);
 		
 		BookDto bookDto = BookDto.builder()
 				.bId(request.getParameter("bid"))
@@ -156,7 +150,6 @@ public class LibraryActionAdapter {
 	}
 
 	public boolean getBookHistory() {
-		LibraryService libraryService = new LibraryService(request, response);
 
 		BooksHistoryResponseDto response = libraryService.getBookHistory(
 				BooksHistoryRequestDto.builder()
@@ -171,7 +164,6 @@ public class LibraryActionAdapter {
 
 	public boolean getActiveStudentsWithParents() {
 
-		LibraryService libraryService = new LibraryService(request, response);
 		ResultResponse resultResponse = libraryService.getActiveStudentsWithParents(httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("studentListtc", resultResponse.getResultList());
 		return resultResponse.isSuccess();
