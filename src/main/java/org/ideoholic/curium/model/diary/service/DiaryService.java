@@ -193,6 +193,9 @@ public class DiaryService {
 					diary.setStartdate((Date) diaryObject[6]);
 					diary.setEnddate((Date) diaryObject[7]);
 					diary.setCreateddate((Date) diaryObject[8]);
+					diary.setAttachment1((String) diaryObject[9]);
+					diary.setAttachment2((String) diaryObject[10]);
+					diary.setAttachment3((String) diaryObject[11]);
 					diaryDetails.add(diary);
 				}
 
