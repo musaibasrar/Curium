@@ -76,7 +76,8 @@ public class diaryDAO {
         try {
             
             transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.startdate,d.enddate,d.createddate,d.userid from Diary d where  branchid="+branchId+" and classsec='"+classsec+"'");
+            Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,"
+            		+ "d.startdate,d.enddate,d.createddate,d.attachment1,d.attachment2,d.attachment3,d.userid from Diary d where  branchid="+branchId+" and classsec='"+classsec+"'");
             query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();

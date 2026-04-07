@@ -6,6 +6,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -124,9 +125,12 @@ for(Cookie cookie : cookies){
 <thead class="thead-dark">
 <tr>
 <th>Subject</th>
-<th style="width: 30%;">Message</th>
-<th style="width: 20%;">Start Date</th>
-<th style="width: 20%;">End Date</th>
+<th style="width: 20%;">Message</th>
+<th style="width: 10%;">Start Date</th>
+<th style="width: 10%;">End Date</th>
+<th style="width: 15%;">attachment1</th>
+<th style="width: 15%;">attachment2</th>
+<th style="width: 15%;">attachment3</th>
 </tr>
 </thead>
 <tbody>
@@ -136,6 +140,18 @@ for(Cookie cookie : cookies){
 <td style="width: 30%;"><a class="dataText" style="cursor: pointer;" onclick="viewStudentDiary(${diary.id})">Read More...</a></td>
 <td class="dateCell" style="width: 20%;"><fmt:formatDate value="${diary.startdate}" pattern="dd/MM/yyyy"/></td>
 <td style="width: 20%;"><fmt:formatDate value="${diary.enddate}" pattern="dd/MM/yyyy"/></td>
+<td class="dataText">
+                    <a download="attachment1.${fn:split(fn:split(diary.attachment1,'/')[1],';')[0]}" 
+                     href="${diary.attachment1}">Download</a>
+                    </td>
+                     <td class="dataText"><c:set var="attachpart2" value="${fn:split(diary.attachment2, '/')}" />
+							 <c:set var="attach2" value="${fn:split(attachpart2[1], ';')}" />
+                    <a download="attachment2.${attach2[0]}" href="${diary.attachment2}">Download</a>
+                    </td>
+                     <td class="dataText"><c:set var="attachpart3" value="${fn:split(diary.attachment3, '/')}" />
+							 <c:set var="attach3" value="${fn:split(attachpart3[1], ';')}" />
+                    <a download="attachment3.${attach3[0]}" href="${diary.attachment3}">Download</a>
+                    </td>
 </tr>
 </c:forEach>
 </tbody>
