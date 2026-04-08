@@ -1,0 +1,4 @@
+databasename=('abc' 'def')
+backuppath="/dbbackups/dailybackups"
+mysql_user="mysql"
+mysql_password="root"
