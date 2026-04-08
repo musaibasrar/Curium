@@ -378,7 +378,7 @@ background-color:rgba(0, 0, 0, 0);
 	
 	function printPreviewAdmitCard() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/meps/ExamDetailsProcess/printPreviewAdmitCard";
+		form1.action = "/hamidullah/ExamDetailsProcess/printPreviewAdmitCard";
 		form1.method = "POST";
 		form1.submit();
 
