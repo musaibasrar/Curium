@@ -230,7 +230,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/daralmajd/images/logo.jpg" width="100" height="100"/>
+				<img src="/daralmajd/images/daralmajd.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
@@ -259,6 +259,7 @@
 						<th class="datath">Class</th>
 						<th class="datath">Father Name</th>
 						<th class="datath">Date of Fees</th>
+						<th class="datath">Fees Category</th>
 				       	<th class="datath">Total</th>
  				 </tr>
  			 </thead>
@@ -268,16 +269,21 @@
 							cellpadding="1" cellspacing="1">
 							<td class="datatd"><c:out value="${status.index+1}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.value.student.admissionnumber}" />
+							<td class="datatd"><c:out value="${feesmap.value.parent.student.admissionnumber}" />
 							</td>
-							<td class="datatd"><c:out value="${feesmap.value.student.studentexternalid}" />
+							<td class="datatd"><c:out value="${feesmap.value.parent.student.studentexternalid}" />
 							</td>
 							<td class="datatd"><c:out	value="${feesmap.key.branchreceiptnumber}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.value.student.name}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.value.student.classstudying}" /></td>
-							<td class="datatd"><c:out	value="${feesmap.value.fathersname}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.value.parent.student.name}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.value.parent.student.classstudying}" /></td>
+							<td class="datatd"><c:out	value="${feesmap.value.parent.fathersname}" /></td>
 							<td class="datatd">
 							<fmt:formatDate type="date" value="${feesmap.key.date}" pattern="dd/MM/yyyy"/>
+							</td>
+							<td class="datatd">
+								<c:forEach items="${feesmap.value.studentFeesStructure}" var="fee">
+        								<c:out value="${fee.feescategory.feescategoryname}" /><br/>
+    							</c:forEach>
 							</td>
 							<td class="datatd">
 								<fmt:formatNumber type="number"  maxFractionDigits = "2"   value="${feesmap.key.totalamount}" />

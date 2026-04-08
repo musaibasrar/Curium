@@ -25,8 +25,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
@@ -34,6 +38,7 @@ import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.stereotype.Service;
@@ -295,6 +300,7 @@ public class FeesDetailsService {
 	public DataForFeesResponseDto printDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
 		DataForFeesResponseDto dataForFeesResponseDto = new DataForFeesResponseDto();
+		StudentFeesReport studentFeesReportDTO = new StudentFeesReport();
 		String[] feesIds = feesIdDetailsDto.getFeesIds();
 		String toDate= DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getToDate());
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getFromDate());
@@ -302,7 +308,7 @@ public class FeesDetailsService {
 		
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
+		Map<Receiptinfo,StudentFeesReport> feesMap = new HashMap<Receiptinfo,StudentFeesReport>();
 		double sumOfFees = 0l;
 		double fine = 0l;
 		double misc = 0l;
@@ -312,8 +318,17 @@ public class FeesDetailsService {
 				if (id != null || id != "") {
 					
 					receiptInfo = new feesDetailsDAO().readFeesDetails(Long.parseLong(id));
+					Set<Feescollection>  feesCollection = receiptInfo.getFeesCollectionRecords();
+					List<Integer> sfsList = new ArrayList<Integer>();
+					
+					for (Feescollection fee : feesCollection) {
+						sfsList.add(fee.getSfsid());
+					}
+					List<Studentfeesstructure> studentFeesStructureList = new feesCollectionDAO().getStudentsFeesStructureBySfsId(sfsList);
 					student = new studentDetailsDAO().readUniqueObjectParents(receiptInfo.getSid());
-					feesMap.put(receiptInfo, student);
+					studentFeesReportDTO.setParents(student);
+					studentFeesReportDTO.setStudentFeesStructure(studentFeesStructureList);
+					feesMap.put(receiptInfo, studentFeesReportDTO);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 					fine = fine + receiptInfo.getFine();
@@ -335,14 +350,14 @@ public class FeesDetailsService {
 		
 
 		// Step 1: Convert map entries to a list
-		List<Map.Entry<Receiptinfo, Parents>> entryList = new ArrayList<>(feesMap.entrySet());
+		List<Map.Entry<Receiptinfo, StudentFeesReport>> entryList = new ArrayList<>(feesMap.entrySet());
 
 		// Step 2: Sort the list by receiptnumber
 		entryList.sort(Comparator.comparing(e -> e.getKey().getReceiptnumber()));
 
 		// Step 3: Create a LinkedHashMap to maintain the sorted order
-		Map<Receiptinfo, Parents> sortedMap = new LinkedHashMap<>();
-		for (Map.Entry<Receiptinfo, Parents> entry : entryList) {
+		Map<Receiptinfo, StudentFeesReport> sortedMap = new LinkedHashMap<>();
+		for (Map.Entry<Receiptinfo, StudentFeesReport> entry : entryList) {
 		    sortedMap.put(entry.getKey(), entry.getValue());
 		}
 		
