@@ -366,7 +366,7 @@ public class StudentActionAdapter {
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
 
-	public void searchListOfParent() {
+	public void searchListOfParent() throws IOException {
 		 studentService.getParentList(httpSession.getAttribute(BRANCHID).toString());
   }
     
