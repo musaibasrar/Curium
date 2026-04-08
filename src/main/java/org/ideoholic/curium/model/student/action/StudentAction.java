@@ -355,7 +355,7 @@ public class StudentAction {
 	}
 	
 	@GetMapping("/searchListOfParent")
-	public void searchListOfParent() {
+	public void searchListOfParent() throws IOException {
 				studentActionAdapter.searchListOfParent();
   }
   
