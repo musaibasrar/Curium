@@ -589,5 +589,27 @@ public class feesCollectionDAO {
 		return result;
 
 	}
+	
+public List<Studentfeesstructure> getStudentsFeesStructureBySfsId(List<Integer> sfsIds) {
+		
+		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
+
+		try {
+			transaction = session.beginTransaction();
+
+			Query query = session.createQuery("from Studentfeesstructure sfs where sfs.sfsid in (:ids)");
+			query.setParameter("ids", sfsIds);
+			results = query.list();
+			transaction.commit();
+
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 
 }
