@@ -161,6 +161,8 @@ public class StudentDto implements java.io.Serializable {
     private String reasonforleaving;
     private String dateoftcissued;
     private String guardian;
+    private String apaarId;
+    private String pen;
 
     /* Parents Data */
     private String fathersname;
