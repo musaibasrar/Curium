@@ -67,6 +67,8 @@ public class CreateStudentDto {
 	private String mediumofinstructionlastschool;
 	private String yearofadmission;
 	private String promotedyear;
+	private String pen;
+	private String apaarId;
 
 	/* Parents Data */
 	private String fathersname;
