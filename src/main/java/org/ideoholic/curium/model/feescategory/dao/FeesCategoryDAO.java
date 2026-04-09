@@ -399,10 +399,8 @@ public class FeesCategoryDAO {
 	}
 	
 	@Transactional
-	public List <Feescategory> getFeecategoryByName(String[] classNames, SearchStudentDto searchStudentDto,
-			String branchId)
-	{
-		List <Feescategory> result= new ArrayList();
+	public List<Feescategory> getFeecategoryByName(String[] classNames, SearchStudentDto searchStudentDto, String branchId) {
+		List<Feescategory> result = new ArrayList<>();
 		/*try {
 			transaction = session.beginTransaction();
 			StringBuilder hql = new StringBuilder(
@@ -415,33 +413,55 @@ public class FeesCategoryDAO {
 			        hql.append(" OR ");
 			    }
 			}
-
+	
 			hql.append(" )");
-
+	
 			Query query = session.createQuery(hql.toString());
 			query.setParameter("year", searchStudentDto.getAcademicyear());
 			query.setParameter("branchId", Integer.parseInt(branchId));
 			query.setParameter("feesCategoryName", "%"+searchStudentDto.getNameSearch()+"%");
-
+	
 			for (int i = 0; i < classNames.length; i++) {
 			    query.setParameter("particularname" + i, "%" + classNames[i] + "%");
 			}
 			
-			queryUtil.runGivenQuery(query, getClass())
-			
 			//Query query = session.createQuery("from Feescategory where academicyear = '"+searchStudentDto.getCategoryYear()+"' and feescategoryname like '%"+searchStudentDto.getNameSearch()+"%'  and branchid='"+branchId+"'");
 			result=query.list();
 			transaction.commit();
-
+		
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-
+		
 			hibernateException.printStackTrace();
-
+		
 		} finally {
-				HibernateUtil.closeSession();
+			HibernateUtil.closeSession();
 			return result;
-
+		
 		}*/
+		try {
+			StringBuilder hql = new StringBuilder("FROM Feescategory f WHERE f.academicyear = ").append(searchStudentDto.getAcademicyear());
+			hql.append(" AND f.branchid = ").append(branchId);
+			hql.append(" AND f.feescategoryname LIKE ").append("%" + searchStudentDto.getNameSearch() + "%");
+
+			if (classNames.length > 0) {
+				hql.append(" AND (");
+
+				for (int i = 0; i < classNames.length; i++) {
+					hql.append(" f.particularname LIKE ").append("%" + classNames[i] + "%");
+					if (i < classNames.length - 1) {
+						hql.append(" OR ");
+					}
+				}
+
+				hql.append(" )");
+			}
+
+			result = queryUtil.runGivenQuery(hql.toString(), Feescategory.class);
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
 		return result;
 	}
 
