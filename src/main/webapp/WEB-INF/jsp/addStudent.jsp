@@ -1612,6 +1612,30 @@ $(document).ready(function() {
 						<tr>
 							<td><br /></td>
 						</tr>
+
+                        <tr>
+										
+							<td class="alignLeft">PEN &nbsp;</td>
+							<td ><label> <input name="pen"
+									type="text"
+									class="myclass" id="pen" size="36"
+									>
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR ID
+								&nbsp;</td>
+							<td ><label> <input
+									name="apaarid" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="apaarid" size="36">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 										
 							<td class="alignLeft">Sibling &nbsp;</td>
