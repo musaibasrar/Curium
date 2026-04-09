@@ -297,6 +297,47 @@ span{
 									<td class="marksTableCell"><c:out
 											value="${subjectEntry.value[exam.examName]}" /></td>
 								</c:forEach>
+								
+								<!-- Subject-wise Summary Columns -->
+			                <c:set var="currentSubject" value="" />
+			                <c:forEach items="${Parents.subjectSummaries}" var="subjectSummary">
+			                    <c:if test="${subjectSummary.subjectName == subjectEntry.key}">
+			                        <c:set var="currentSubject" value="${subjectSummary}" />
+			                    </c:if>
+			                </c:forEach>
+			                
+			                <!-- Total Marks for Subject -->
+			                <td class="marksTableCell" style="text-align: center;">
+			                    <c:choose>
+			                        <c:when test="${currentSubject != ''}">
+			                            <fmt:formatNumber value="${currentSubject.totalMarksObtained}" maxFractionDigits="2" />
+			                            / 
+			                            <fmt:formatNumber value="${currentSubject.totalMaxMarks}" maxFractionDigits="0" />
+			                        </c:when>
+			                        <c:otherwise>-</c:otherwise>
+			                    </c:choose>
+			                </td>
+			                
+			                <!-- Percentage for Subject -->
+			                <td class="marksTableCell" style="text-align: center;">
+			                    <c:choose>
+			                        <c:when test="${currentSubject != '' && currentSubject.totalPercentage > 0}">
+			                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${currentSubject.totalPercentage}" />%
+			                        </c:when>
+			                        <c:otherwise>-</c:otherwise>
+			                    </c:choose>
+			                </td>
+			                
+			                <!-- Grade for Subject -->
+			                <td class="marksTableCell" style="text-align: center;">
+			                    <c:choose>
+			                        <c:when test="${currentSubject != '' && currentSubject.overallGrade != null && currentSubject.overallGrade != ''}">
+			                            ${currentSubject.overallGrade}
+			                        </c:when>
+			                        <c:otherwise>-</c:otherwise>
+			                    </c:choose>
+			                </td>
+			                
 								<!-- Remarks Column - Only add rowspan on first row to span both tables -->
 								<c:if test="${status.first}">
 									<td rowspan="${fn:length(Parents.subjectExamMarks) + 6}"

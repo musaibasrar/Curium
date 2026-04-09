@@ -13,7 +13,7 @@ public class ExamSummary {
     private String examName;
     private int examId;
     private int totalMarks;
-    private int totalMarksObtained;
+    private float totalMarksObtained;
     private double percentage;
     private String grade;
     private int rank;
