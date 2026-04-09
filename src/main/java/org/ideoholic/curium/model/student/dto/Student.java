@@ -265,6 +265,12 @@ public class Student implements java.io.Serializable {
 
 	@Column(name = "promotedyear", length = 10)
 	private String promotedyear;
+	
+	@Column(name = "apaarid ", length = 100)
+	private String apaarId ;
+
+	@Column(name = "pen", length = 100)
+	private String pen;
 
 	public int fetchAge() {
 		if(age==null){
