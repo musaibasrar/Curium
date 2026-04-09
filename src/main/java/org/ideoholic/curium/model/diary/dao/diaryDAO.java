@@ -41,7 +41,7 @@ public class diaryDAO {
 		
         try {
         	Pageable pageable = PageRequest.of(offset, noOfRecords);
-        	 results = diaryRepo.findDiaryByBranchId(branchId, pageable);
+        	 results = diaryRepo.findByBranchid(branchId, pageable).toList();
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
