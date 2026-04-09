@@ -170,6 +170,8 @@ public class StudentActionAdapter {
         student.setOtherFeesAmount(request.getParameterValues("otherFeesFullCat"));
         student.setOtherFeesConcession(request.getParameterValues("otherFeesConcession"));
         student.setOtherTotalInstallments(request.getParameterValues("otherFeesCount"));
+        student.setPen(request.getParameter("pen"));
+        student.setApaarId(request.getParameter("apaarid"));
 
         ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
@@ -238,6 +240,8 @@ public class StudentActionAdapter {
         studentDto.setStudentexternalid(request.getParameter("studentexternalid"));
         studentDto.setApplicationtype(request.getParameter("applicationtype"));
         studentDto.setStream(request.getParameter("stream"));
+        studentDto.setApaarId(request.getParameter("apaarid"));
+        studentDto.setPen(request.getParameter("pen"));
 
         Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("branchcode").toString());
 
