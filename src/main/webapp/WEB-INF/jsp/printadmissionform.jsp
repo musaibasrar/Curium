@@ -286,7 +286,7 @@ for(Cookie cookie : cookies){
 					
 						 </td>
 					<td style="text-align: center;border: 0px solid black;"><img
-						src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>"
+						src="${parents.student.studentpic}"
 						alt="Student's Photo" width="140" height="70" /></td>
 				</tr>
 			</table>

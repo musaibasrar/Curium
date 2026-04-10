@@ -92,19 +92,27 @@ span{
     width: 300px;
     font-weight: normal;
 }
-.bodymargin::before {
-    content: "";
+    .background-div {
+    position: relative;
+    border: 1px solid #ccc;
+    overflow: hidden;
+} 
+
+.background-div::before {
+
+	content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: url('/shatabdi/images/shatabdi.jpg') no-repeat center;
-    background-position: center 15%;
+    background-position: center;
     background-size: 600px;
     opacity: 0.1; /* Adjust opacity as needed */
     z-index: -1; /* Keep it behind the content */
 }
+
 </style>
 
 
@@ -270,7 +278,7 @@ for(Cookie cookie : cookies){
 	<form method="post" class="bodymargin">
                         <c:forEach items="${markssheetlist}" var="Parents">
                         
-              <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">
+              <div style="page-break-inside: avoid;border-style: solid;border-width: thin;" class="background-div">
 				<table width="100%" align="center">
 				
 					<tr>
@@ -369,7 +377,7 @@ for(Cookie cookie : cookies){
 				        </td>
 				        
 				        <td style="width: 10%; text-align: center; padding: 4px;">
-				            <img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80" style="display: block; margin: 0 auto; border: 1px solid #ccc;"/>
+				            <img src="${Parents.parents.student.studentpic}" alt="Student's Photo" width="80" height="80" style="display: block; margin: 0 auto; border: 1px solid #ccc;"/>
 				        </td>
 				    </tr>
 				</table>
@@ -682,7 +690,31 @@ for(Cookie cookie : cookies){
 								                        <c:forEach items="${exammarks.subMarks}" var="submarks" >
 								                            <tr style="border: 1px solid black;font-size: 18px;">
 								                                <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-								                                <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
+								                                <td style="border: 1px solid black;text-align: left;">
+								                                <c:choose>
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'information technology (i.t)'}">
+																        <c:set var="subjectname" value="I.T" />
+																    </c:when>
+																    
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'drawing'}">
+																        <c:set var="subjectname" value="Drawing (Optional)" />
+																    </c:when>
+																    
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'g.k.'}">
+																        <c:set var="subjectname" value="G.K. (Optional)" />
+																    </c:when>
+																    
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'computer'}">
+																        <c:set var="subjectname" value="Computer (Optional)" />
+																    </c:when>
+																    
+																    <c:otherwise>
+																        <c:set var="subjectname" value="${submarks.key}" />
+																    </c:otherwise>
+																</c:choose>
+								                                
+								                                
+								                                ${subjectname}</td>
 								                            </tr>
 								                        </c:forEach>
 								                        <!-- <tr style="border-top: 1px solid black;font-size: 18px;">
@@ -947,7 +979,31 @@ for(Cookie cookie : cookies){
                             <c:forEach items="${exammarks.subMarks}" var="submarks" >
                                 <tr style="border: 1px solid black;font-size: 18px;">
                                     <c:set var="dateParts" value="${fn:split(submarks.value,'_')}" />
-                                    <td style="border: 1px solid black;text-align: left;">${submarks.key}</td>
+                                    <td style="border: 1px solid black;text-align: left;">
+                                    <c:choose>
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'information technology (i.t)'}">
+																        <c:set var="subjectname" value="I.T" />
+																    </c:when>
+																    
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'drawing'}">
+																        <c:set var="subjectname" value="Drawing (Optional)" />
+																    </c:when>
+																    
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'g.k.'}">
+																        <c:set var="subjectname" value="G.K. (Optional)" />
+																    </c:when>
+																    
+																    <c:when test="${fn:toLowerCase(submarks.key) == 'computer'}">
+																        <c:set var="subjectname" value="Computer (Optional)" />
+																    </c:when>
+																    
+																    <c:otherwise>
+																        <c:set var="subjectname" value="${submarks.key}" />
+																    </c:otherwise>
+																</c:choose>
+                                    
+                                    
+                                    ${subjectname}</td>
                                 </tr>
                             </c:forEach>
                             <!-- <tr style="border-top: 1px solid black;font-size: 18px;">

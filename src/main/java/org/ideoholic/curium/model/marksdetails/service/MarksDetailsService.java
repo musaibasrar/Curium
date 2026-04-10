@@ -35,6 +35,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
@@ -77,7 +78,8 @@ public class MarksDetailsService {
 	public String addMarks() {
 
 		String result = "false";
-
+		String output = "error";
+		
 		String[] studentIds = request.getParameterValues("studentIDs");
 		String[] studentsMarks = request.getParameterValues("studentMarks");
 		String[] examidName = request.getParameter("exam").split("__");
@@ -132,6 +134,7 @@ public class MarksDetailsService {
 			float minMarks = subjectDetails.getMinmarks();
 			float maxMarks = subjectDetails.getMaxmarks();
 
+			if(subjectDetails.getSubid()!=null) {
 			while (mapIterator.hasNext()) {
 				Map.Entry mapEntry = (Entry) mapIterator.next();
 
@@ -162,8 +165,8 @@ public class MarksDetailsService {
 				marksList.add(marks);
 			}
 
-			String output = new MarksDetailsDAO().addMarks(marksList);
-			
+				output = new MarksDetailsDAO().addMarks(marksList);
+			}
 			if(output=="success"){
 				result = "true";
 			}else if (output.contains("Duplicate")){
@@ -611,6 +614,13 @@ public class MarksDetailsService {
 				subjectListOtherExam.add(Integer.parseInt(id));
 			}
 			
+			String[] excludedSubjects = new DataUtil().getPropertiesValue("excludedsubjectids"+httpSession.getAttribute(BRANCHID).toString()).split(",");
+			Set<Integer> excludedSubjectsIds = Arrays.stream(excludedSubjects)
+			        .map(String::trim)
+			        .filter(s -> !s.isEmpty())
+			        .map(Integer::parseInt)
+			        .collect(Collectors.toSet());
+			
 			for (int i = 0; i < studentIds.length; i++) {
 				MarksSheet markssheet = new MarksSheet();
 				List<ExamsMarks> examMarksList = new ArrayList<ExamsMarks>();
@@ -623,7 +633,7 @@ public class MarksDetailsService {
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				String startDateyy=sdf.format(startDate);
 				String endDateyy=sdf.format(endDate);
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),startDateyy,endDateyy);
+				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear,startDateyy,endDateyy);
 				 List<Holidaysmaster> holidaysMasterList = new MarksDetailsDAO().getListofHolidays(startDate,endDate);
 				 int holidayCount = 0;
 				 for(Holidaysmaster holiday:holidaysMasterList) {
@@ -678,6 +688,16 @@ public class MarksDetailsService {
 				        "MATHEMATICS",
 				        "SOCIAL SCIENCE",
 				        "SCIENCE",
+				        "EVS",
+				        "Drawing",
+				        "G.K.",
+				        "COMPUTER",
+				        "INFORMATION TECHNOLOGY (I.T)"
+				);
+				
+				List<String> subjectOrderOptional = Arrays.asList(
+				        "EVS",
+				        "Drawing",
 				        "G.K.",
 				        "COMPUTER"
 				);
@@ -731,27 +751,36 @@ public class MarksDetailsService {
 												marksObtained = Math.round(marks.getMarksobtained());
 												
 												if( marksObtained < minMarks) {
-													marksObtained = Math.round(marks.getMarksobtained()/5);
+													marksObtained = (int) Math.round(marks.getMarksobtained()/5.0);
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
-													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
-													totalMarks = totalMarks+maxMarks;
-													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
-													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
+														totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
+														totalMarks = totalMarks+maxMarks;
+														marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+														totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
-													marksObtained = Math.round(marks.getMarksobtained()/5);
+													marksObtained =  (int) Math.round(marks.getMarksobtained()/5.0);
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
 													totalMarks = totalMarks+maxMarks;
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 												}
 												
 												
@@ -761,29 +790,40 @@ public class MarksDetailsService {
 												marksObtained = 5;
 												minMarks = 5;
 												maxMarks = 5;
-												
+												if(Integer.parseInt(studentIds[i])==1293) {
+													marksObtained=999;
+												}
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = totalObtainedMarks+marksObtained;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = totalObtainedMarks+marksObtained;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}
 												
@@ -794,29 +834,40 @@ public class MarksDetailsService {
 												marksObtained = 5;
 												minMarks = 5;
 												maxMarks = 5;
-												
+												if(Integer.parseInt(studentIds[i])==1293) {
+													marksObtained=999;
+												}
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 												}
 												
 												
@@ -829,25 +880,33 @@ public class MarksDetailsService {
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(), "AB/"+maxMarks+""+"_AB");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 												}
 												
 												
@@ -864,8 +923,6 @@ public class MarksDetailsService {
 						                    // **Summation Logic**
 						                    subjectTotalMarksTermOne.put(sub.getSubjectname(),subjectTotalMarksTermOne.getOrDefault(sub.getSubjectname(), 0) + marksObtained
 						                    );
-										
-									
 										}
 									}
 								}
@@ -946,6 +1003,8 @@ public class MarksDetailsService {
 						else if (marksObtainedSubjectAllExamsInt <= 32) {
 						    gradeTermOne = "E";
 						} 
+					}else {
+						gradeTermOne = "--";
 					}
 				    totalSubMarksTermOneGrade.put(entry.getKey(),gradeTermOne);
 				}
@@ -979,7 +1038,7 @@ public class MarksDetailsService {
 					float marksObtainedSubjectAllExams = 0;
 					float totalMarksObtainedSubjectAllExams = 0;
 					
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),exam.getExid());
+					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksforStudent(Integer.parseInt(studentIds[i]),academicYear,exam.getExid());
 					List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname());
 					
 					for (Marks marks : marksDetailsList) {
@@ -1013,29 +1072,38 @@ public class MarksDetailsService {
 												marksObtained = Math.round(marks.getMarksobtained());
 												
 												if( marksObtained < minMarks) {
-													marksObtained = Math.round(marks.getMarksobtained()/5);
+													marksObtained =  (int) Math.round(marks.getMarksobtained()/5.0);
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
-													marksObtained = Math.round(marks.getMarksobtained()/5);
+													marksObtained =  (int) Math.round(marks.getMarksobtained()/5.0);
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 												}
 												break;
 											case 9:
@@ -1046,19 +1114,24 @@ public class MarksDetailsService {
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = totalObtainedMarks+marksObtained;
+													}
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = totalObtainedMarks+marksObtained;
+													}
 												}else if(marksObtained == 999) {
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
 												}
 												
+												if (!excludedSubjectsIds.contains(subjectId)) {
 												totalMarks = totalMarks+maxMarks;
 												marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 												totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
-												
+												}
 												break;
 											case 10:
 												marksObtained = 5;
@@ -1068,27 +1141,37 @@ public class MarksDetailsService {
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													
+													}
 												}
 												break;
 
@@ -1100,28 +1183,36 @@ public class MarksDetailsService {
 												if( marksObtained < minMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_F");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if ( marksObtained >= minMarks && marksObtained <= maxMarks) {
 													
 													subMarks.put(sub.getSubjectname(), Integer.toString(marksObtained)+"/"+maxMarks+""+"_P");
+													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalObtainedMarks = Math.round((totalObtainedMarks+marksObtained)* 100) / 100.0f;
 													
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 													
 												}else if(marksObtained == 999) {
 													marksObtained = 0;
 													subMarks.put(sub.getSubjectname(),  "AB"+"/"+maxMarks+""+" _AB");
 													
+													if (!excludedSubjectsIds.contains(subjectId)) {
 													totalMarks = totalMarks+maxMarks;
 													marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 													totalMarksObtainedSubjectAllExams = totalMarksObtainedSubjectAllExams + maxMarks;
+													}
 												}
 												
 											}
@@ -1207,6 +1298,8 @@ public class MarksDetailsService {
 						else if (marksObtainedSubjectAllExamsInt <= 32) {
 							gradeTermTwo = "E";
 						} 
+					}else {
+						gradeTermOne = "--";
 					}
 				    totalSubMarksTermTwoGrade.put(entry.getKey(),gradeTermTwo);
 				}
@@ -1257,16 +1350,54 @@ public class MarksDetailsService {
 							FinalTermMarks finalExamMarks = new FinalTermMarks();
 							finalExamMarks.setExamName("Term Total/Grand Total");
 							double overAllTotalMarks = 0;
+							double overAllTotalMarksExcludingOptional = 0;
 							Map<String,String> subMarksoverAll = new LinkedHashMap<String, String>();
+							Map<String,String> subMarksoverAllExcludingOptional = new LinkedHashMap<String, String>();
 							
 							for (String key : totalSubMarksTermOne.keySet()) {
 					            if (totalSubMarksTermTwo.containsKey(key)) {
 					                int value1 = Integer.parseInt(totalSubMarksTermOne.get(key));
 					                int value2 = Integer.parseInt(totalSubMarksTermTwo.get(key));
 					                
-					                int overAll = Math.round((value1+value2)/2);
+					                int overAll = (int) Math.round((value1+value2)/2.0);
 					                overAllTotalMarks = overAllTotalMarks + value1 + value2;
 					                String overAllGrade = null;
+					                
+										if(!subjectOrderOptional.contains(key)) {
+											
+											
+											overAllTotalMarksExcludingOptional = overAllTotalMarksExcludingOptional + value1 + value2;	
+											int overAllExcludingOptional = (int) Math.round((value1+value2)/2.0);
+											
+											if (overAllExcludingOptional >= 91 && overAllExcludingOptional <= 100) {
+							                	overAllGrade = "A1";
+											} 
+											else if (overAllExcludingOptional >= 81) {
+												overAllGrade = "A2";
+											} 
+											else if (overAllExcludingOptional >= 71) {
+												overAllGrade = "B1";
+											} 
+											else if (overAllExcludingOptional >= 61) {
+												overAllGrade = "B2";
+											} 
+											else if (overAllExcludingOptional >= 51) {
+												overAllGrade = "C1";
+											} 
+											else if (overAllExcludingOptional >= 41) {
+												overAllGrade = "C2";
+											} 
+											else if (overAllExcludingOptional >= 33) {
+												overAllGrade = "D";
+											} 
+											else if (overAllExcludingOptional <= 32) {
+												overAllGrade = "E";
+											} 
+							                
+							                
+											subMarksoverAllExcludingOptional.put(key, String.valueOf(overAll)+"_"+overAllGrade);
+															                	
+															                }
 					                
 					                if (overAll >= 91 && overAll <= 100) {
 					                	overAllGrade = "A1";
@@ -1293,47 +1424,53 @@ public class MarksDetailsService {
 										overAllGrade = "E";
 									} 
 					                
+					                
 					                subMarksoverAll.put(key, String.valueOf(overAll)+"_"+overAllGrade);
 					            }
 					        }
 							
 								int size = subMarksoverAll.size() * 100;
-								double d = (overAllTotalMarks*100.0)/size;
-								finalExamMarks.setPercentage(d);
-								int percentage = (int) d;
+								//double d = (overAllTotalMarks*100.0)/size;
+								
+								int sizeExcludingOptional = subMarksoverAllExcludingOptional.size() * 100 * 2;
+								double dExcludingOptional = (overAllTotalMarksExcludingOptional*100.0)/sizeExcludingOptional;
+								
+								
+								finalExamMarks.setPercentage(dExcludingOptional);
+								int percentage = (int) dExcludingOptional;
 								finalExamMarks.setSubMarks(subMarksoverAll);
 								String overAllPercentageGrade = null;
 								 String overAllResultClass = null;
 								 
-								 if (percentage >= 91 && percentage <= 100) {
+								 if (dExcludingOptional >= 91 && dExcludingOptional <= 100) {
 									 overAllPercentageGrade = "A1";
 								    	overAllResultClass = "Outstanding";
 									} 
-									else if (percentage >= 81) {
+									else if (dExcludingOptional >= 81) {
 										overAllPercentageGrade = "A2";
 								    	overAllResultClass = "Excellent";
 									} 
-									else if (percentage >= 71) {
+									else if (dExcludingOptional >= 71) {
 										overAllPercentageGrade = "B1";
 								    	overAllResultClass = "Very Good";
 									} 
-									else if (percentage >= 61) {
+									else if (dExcludingOptional >= 61) {
 										overAllPercentageGrade = "B2";
 								    	overAllResultClass = "Good";
 									} 
-									else if (percentage >= 51) {
+									else if (dExcludingOptional >= 51) {
 										overAllPercentageGrade = "C1";
 								    	overAllResultClass = "Satisfactory, can do better";
 									} 
-									else if (percentage >= 41) {
+									else if (dExcludingOptional >= 41) {
 										overAllPercentageGrade = "C2";
 								    	overAllResultClass = "Average, can do better";
 									} 
-									else if (percentage >= 33) {
+									else if (dExcludingOptional >= 33) {
 										overAllPercentageGrade = "D";
 								    	overAllResultClass = "Work Hard";
 									} 
-									else if (percentage <= 32) {
+									else if (dExcludingOptional <= 32) {
 										overAllPercentageGrade = "E";
 								    	overAllResultClass = "";
 									} 
@@ -1813,7 +1950,7 @@ public boolean generateRankReport() {
 						examrank.setSid(Integer.parseInt(studentIds[i]));
 						examrank.setExamid(exam.getExid());
 						examrank.setMarksobtained(totalObtainedMarks);
-						examrank.setAcademicyear(httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+						examrank.setAcademicyear(academicYear);
 						examrank.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 						examrank.setUserid(Integer.parseInt(httpSession.getAttribute(USERID).toString()));
 						examRankList.add(examrank);
@@ -1852,7 +1989,7 @@ public boolean generateRankReport() {
 			
 			for (Exams exams : examsList) {
 				int rank = 1;
-				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,exams.getExid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<ExamRank> listExamRank = new MarksDetailsDAO().getListExamRank(studentsIds,exams.getExid(),academicYear.toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 				Collections.sort(listExamRank);
 				
 				// Assign ranks
@@ -2402,7 +2539,7 @@ public boolean generateReportSingleExams() {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String startDateyy=sdf.format(startDate);
 			String endDateyy=sdf.format(endDate);
-			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),startDateyy,endDateyy);
+			studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear,startDateyy,endDateyy);
 			 List<Holidaysmaster> holidaysMasterList = new MarksDetailsDAO().getListofHolidays(startDate,endDate);
 			 int holidayCount = 0;
 			 for(Holidaysmaster holiday:holidaysMasterList) {
@@ -2530,7 +2667,7 @@ public boolean generateReportSingleExams() {
 						}
 						
 					}
-					ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),exam.getExid(),academicYear,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					if(examRank!=null) {
 					examMarks.setRank(examRank.getRank());
 					}

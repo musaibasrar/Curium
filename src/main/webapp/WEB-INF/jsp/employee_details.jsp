@@ -362,7 +362,7 @@ for(Cookie cookie : cookies){
 					<tr>
                     <td style="border: 0px;"></td>
                     <td style="border: 0px;">
-                    <img src="data:image;base64,<c:out value="${employee.employeephoto}"/>" alt="Staff's Photo" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeephoto}" alt="Staff's Photo" style="width: 200px;height: 200px;">
                     </td>
                     <td style="border: 0px;"></td>
                     <td style="width: 200px;border: 0px;"></td>
@@ -510,46 +510,46 @@ for(Cookie cookie : cookies){
                     
                         <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc1}"/>" alt="Staff's Doc1" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc1}" alt="Staff's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="employeedoc1.jpg" href="data:image/jpg;base64,<c:out value="${employee.employeedoc1}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc2}"/>" alt="Staff's Doc2" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="employeedoc2.jpg" href="data:image/jpg;base64,<c:out value="${employee.employeedoc2}"/>">Download</a>
+                    <a download="employeedoc1.jpg" href="${employee.employeedoc1}">Download</a>
                     </td>
                     </tr>
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc3}"/>" alt="Staff's Doc3" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc2}" alt="Staff's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="employeedoc3.jpg" href="data:image/jpg;base64,<c:out value="${employee.employeedoc3}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc4}"/>" alt="Staff's Doc4" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="employeedoc4.jpg" href="data:image/jpg;base64,<c:out value="${employee.employeedoc4}"/>">Download</a>
+                    <a download="employeedoc2.jpg" href="${employee.employeedoc2}">Download</a>
                     </td>
                     </tr>
                     
                     <tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc5}"/>" alt="Staff's Doc5" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc3}" alt="Staff's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
-                    <a download="employeedoc5.jpg" href="data:image/jpg;base64,<c:out value="${employee.employeedoc5}"/>">Download</a>
+                    <a download="employeedoc3.jpg" href="${employee.employeedoc3}">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="${employee.employeedoc4}" alt="Staff's Doc4" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="employeedoc4.jpg" href="${employee.employeedoc4}">Download</a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td>
+                    <img src="${employee.employeedoc5}" alt="Staff's Doc5" style="width: 200px;height: 200px;">
+                    </td>
+                    <td>
+                    <a download="employeedoc5.jpg" href="${employee.employeedoc5}">Download</a>
                     </td>
                     </tr>
                     </table>

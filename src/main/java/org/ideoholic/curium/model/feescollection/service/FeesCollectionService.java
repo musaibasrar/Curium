@@ -954,12 +954,12 @@ public class FeesCollectionService {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 			}
 			
-				httpSession.setAttribute("feesstructure", feesstructure);
-				httpSession.setAttribute("sumoffees", totalSum);
-				httpSession.setAttribute("dueamount", totalFeesAmount-totalSum);
-				httpSession.setAttribute("totalfees", totalFeesAmount);
-				httpSession.setAttribute("academicPerYear", academicYear);
-				httpSession.setAttribute("currentAcademicYear", academicYear);
+				request.setAttribute("feesstructure", feesstructure);
+				request.setAttribute("sumoffees", totalSum);
+				request.setAttribute("dueamount", totalFeesAmount-totalSum);
+				request.setAttribute("totalfees", totalFeesAmount);
+				request.setAttribute("academicPerYear", academicYear);
+				request.setAttribute("currentAcademicYear", academicYear);
 				
 		} catch (Exception e) {
 			e.printStackTrace();

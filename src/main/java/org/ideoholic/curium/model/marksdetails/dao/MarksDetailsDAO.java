@@ -31,7 +31,7 @@ public class MarksDetailsDAO {
 
 	public String addMarks(List<Marks> marksList) {
 		
-		String output = "success";
+		String output = "error";
 		
 		try{
 			transaction = session.beginTransaction();
@@ -43,6 +43,7 @@ public class MarksDetailsDAO {
 			}
 			
 			transaction.commit();
+			output = "success";
 			
 		}  catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			

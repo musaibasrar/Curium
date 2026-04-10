@@ -707,7 +707,7 @@ for(Cookie cookie : cookies){
 									value="${Parents.student.yearofadmission}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.student.admissiondate}" /></td>
-							<td class="dataText"><img src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" style="width: 50px;height: 50px;"></td>
+							<td class="dataText"><img src="${Parents.student.studentpic}" alt="Student's Photo" style="width: 50px;height: 50px;"></td>
 
 						</tr>
 					</c:forEach>

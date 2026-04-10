@@ -318,7 +318,7 @@ for(Cookie cookie : cookies){
 				        </td>
 				        
 				        <td style="width: 10%; text-align: center; padding: 4px;">
-				            <img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80" style="display: block; margin: 0 auto; border: 1px solid #ccc;"/>
+				            <img src="${Parents.parents.student.studentpic}" alt="Student's Photo" width="80" height="80" style="display: block; margin: 0 auto; border: 1px solid #ccc;"/>
 				        </td>
 				    </tr>
 				</table>
@@ -338,7 +338,7 @@ for(Cookie cookie : cookies){
                             <%-- <table style=" border-collapse: collapse;width: 30%;float: left">
                             	<tr>
                             		<td>
-                            			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;">
+                            			<img src="${Parents.parents.student.studentpic}" alt="Student's Photo" style="width: 60px;height: 60px;">
                             		</td>
                             	</tr>
                             
