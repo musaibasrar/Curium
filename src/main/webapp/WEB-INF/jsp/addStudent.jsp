@@ -1511,9 +1511,9 @@ $(document).ready(function() {
                                         <label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
-										 <c:forEach var="year" items="${previousAcademicYears}">
+										<c:forEach var="year" items="${previousAcademicYears}">
         										<option value="${year}">${year}</option>
-    									</c:forEach>										
+    									</c:forEach>
 								</select>
 
 							</label> 
