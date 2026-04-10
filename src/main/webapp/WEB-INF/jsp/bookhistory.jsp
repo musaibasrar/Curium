@@ -542,7 +542,7 @@ for(Cookie cookie : cookies){
 								name="id"
 								value="<c:out value="${book.id}"/>" /></td>
 								<td class="dataText" align="center">${status.index + 1}</td>
-							<td class="dataText"><a class="dataTextInActive" href="/vision/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
+							<td class="dataText"><a class="dataTextInActive" href="/littleflower/LibraryProcess/bookdetail?id=<c:out value='${book.id}'/>"><c:out value="${book.bookName}" /></a></td>	
 							<td class="dataText"><c:out value="${book.uid}" /></td>
 							<td class="dataText"><c:out value="${book.studentName}" /></td>
 							<td class="dataText"><c:out value="${book.issueDate}" /></td>
