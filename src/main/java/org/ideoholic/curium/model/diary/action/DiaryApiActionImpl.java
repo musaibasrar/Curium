@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/api/v1/DiaryProcess")
@@ -39,10 +41,11 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 
 	@PostMapping("/addDiary")
 	public ResponseEntity addDiary(@RequestBody AddDiaryDto addDiaryDto,
+			@RequestPart("fileToUpload") MultipartFile[] uploadedFiles,
 			@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear,
 			@RequestHeader(value = "userloginid") String userLoginId) {
-		diaryService.addDiary(addDiaryDto, branchId, userLoginId, currentAcademicYear);
+		diaryService.addDiary(addDiaryDto, uploadedFiles, branchId, userLoginId, currentAcademicYear);
 		return ResponseEntity.ok().build();
 
 	}
