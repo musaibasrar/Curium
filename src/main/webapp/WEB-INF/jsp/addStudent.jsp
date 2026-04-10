@@ -1046,7 +1046,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
@@ -1087,14 +1087,14 @@ $(document).ready(function() {
 						<tr>
 						<td class="alignLeft">PEN No. &nbsp;</td>
 							<td ><label> <input
-									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36" required
+									name="bankifsc" type="text" class="myclass" id="bankifsc" size="36"
 									style="text-transform:capitalize;"
 									/>
 							</label></td>
 
 							<td  class="alignLeft" style="padding-left: 20px;">APAAR Id &nbsp;</td>
 							<td  ><input
-									name="bplcardno" type="text" class="myclass" id="bplcardno" size="36" required
+									name="bplcardno" type="text" class="myclass" id="bplcardno" size="36"
 									style="text-transform:capitalize;" />
 
 							</td>
@@ -1511,32 +1511,9 @@ $(document).ready(function() {
                                         <label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
+										 <c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>										
 								</select>
 
 							</label> 
