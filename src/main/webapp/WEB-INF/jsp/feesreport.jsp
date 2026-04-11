@@ -983,7 +983,7 @@ for(Cookie cookie : cookies){
 						 
 						 Total Amount: ${TotalSum}
 						 &nbsp;&nbsp;&nbsp;
-						 Total Paid Amount : ${TotalPaidAmount} (<fmt:formatNumber value="${TotalSumper}" pattern="0.00" />%) &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)
+						 Total Paid Amount : ${TotalPaidAmount} (<fmt:formatNumber value="${TotalSumper}" pattern="0" />%) &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0" />%)
 						 
 						</td>
 							
