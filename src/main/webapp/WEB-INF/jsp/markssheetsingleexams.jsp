@@ -334,7 +334,7 @@ body {
 					<b>SCHOOL DISE CODE : 29050505406</b>
 				</div>
 				<div>
-					<b style="color: green"><label style="font-size:12px;">Quadri Education Trust®</label></b>
+					<b style="color: green"><label style="font-size:12px;">Quadri Educational Trust®</label></b>
 				</div>
 				<div>
 					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
