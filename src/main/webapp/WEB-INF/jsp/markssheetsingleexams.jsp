@@ -45,6 +45,7 @@ body {
 	display: flex;
 	align-items: center;
 	margin-top: 5px;
+	height:100px;
 }
 
 .logo {
@@ -151,7 +152,7 @@ body {
 }
 
 .partb {
-	margin-top: 15px;
+	margin-top: 0px;
 }
 
 .partb table {
@@ -348,7 +349,7 @@ body {
 				</div>
 
 				<div class="schoolname">
-					<h3 style="font-size: 15px;">QUADRI GROUP OF INSTITUTIONS</h3>
+					<h3 style="font-size: 16px;">QUADRI GROUP OF INSTITUTIONS</h3>
 					<h2 style="font-size: 30px;">HAMIDULLA ENGLISH MEDIUM HIGH
 						SCHOOL</h2>
 					<div>
