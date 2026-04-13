@@ -31,9 +31,9 @@ body {
 	border-style: double;
 }
 
-.header {
-	border-bottom: 2px solid #000;
-}
+/* .header {
+	border-bottom: 1px solid #000;
+} */
 
 .topline {
 	font-size: 12px;
@@ -49,15 +49,17 @@ body {
 
 .logo {
 	width: 90px;
-	height: 90px;
-	border: 1px solid #aaa;
+	height: 95px;
+	border: 2px solid #538261;
 }
 
 .schoolname {
-	background: #e0a321;
+	background: #fec000;
 	flex: 1;
 	text-align: center;
 	height: 90px;
+	padding-top: 5px;
+	border: 1px solid #000;
 }
 
 .studentphoto {
@@ -75,13 +77,20 @@ body {
 
 .title {
 	text-align: center;
-	margin-top: 10px;
 }
 
 .title h2 {
 	border: 2px solid black;
 	display: inline-block;
 	padding: 5px 20px;
+	border-radius: 10px; 
+	font-size: 25px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+  	outline: 2px solid black;       /* outer border */
+  	outline-offset: 6px;            /* gap between borders */
+
+  	border-radius: 10px;
 }
 
 .studentinfo {
@@ -126,6 +135,8 @@ body {
 	width: 70%;
 	background: #f4d5a6;
 	border-radius: 5px;
+	text-transform: uppercase;
+	font-size: 14px;
 }
 
 .percentage {
@@ -136,6 +147,7 @@ body {
 	text-align: center;
 	font-weight: bold;
 	border-radius: 5px;
+	text-transform: uppercase;
 }
 
 .partb {
@@ -169,7 +181,7 @@ body {
 .cce {
 	font-family: "Brush Script MT", cursive;
 	font-size: 22px;
-	color: #1a4a7a;
+	color: #1975d0;
 	font-weight: bold;
 }
 
@@ -309,7 +321,7 @@ body {
 
 <c:forEach items="${markssheetlist}" var="Parents" varStatus="studentStatus">
 		
-	<div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
+	<div style="page-break-inside: avoid;">   
 
 	<div class="container">
 
@@ -320,10 +332,10 @@ body {
 					<b>SCHOOL DISE CODE : 29050505406</b>
 				</div>
 				<div>
-					<b style="color: green">Quadri Education Trust®</b>
+					<b style="color: green"><label style="font-size:12px;">Quadri Education Trust®</label></b>
 				</div>
 				<div>
-					<b>SSLC BOARD CODE : SS0612</b>
+					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
 				</div>
 			</div>
 
@@ -334,7 +346,7 @@ body {
 				</div>
 
 				<div class="schoolname">
-					<h3 style="font-size: 2cap;">QUADRI GROUP OF INSTITUTIONS</h3>
+					<h3 style="font-size: 15px;">QUADRI GROUP OF INSTITUTIONS</h3>
 					<h2 style="font-size: 30px;">HAMIDULLA ENGLISH MEDIUM HIGH
 						SCHOOL</h2>
 					<div>
@@ -348,9 +360,14 @@ body {
 
 
 		<div class="title">
-			<h2 style="border-radius: 10px; font-size: 25px;">PROGRESS
+			<h2>PROGRESS
 				REPORT</h2>
-			<div style="font-size: 23px;">For the Academic Year ${currentAcademicYear}</div>
+			<div style="font-size: 20px;font-weight:bold;">
+			<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}" />
+			<c:set var="startYear" value="${yearParts[0]}" />
+			<c:set var="endYear" value="${startYear + 1}" />
+
+			For the Academic Year ${startYear}-${endYear}</div>
 			<div class="cce" style="font-size: 25px;">Continuous And
 				Comprehensive Evaluation</div>
 			<div class="certifyline" style="font-size: 16px;">
@@ -368,40 +385,40 @@ body {
 
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 17px;"><b>Enrollment
+						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Enrollment (SATS)
 							No :</b> <c:out value="${Parents.parents.student.admissionnumber}" /></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 17px;"><b>Roll
+						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Roll
 							No :</b>
 					<c:out value="${Parents.parents.student.sts}" /></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 17px;"><b>Class
+						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Class
 							:</b>
 					<c:out value="${dataSubParts[0]}" /></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 17px;"><b>DOB
+						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Date of Birth
 							:</b> <c:out value="${Parents.parents.student.dateofbirth}" /></td>
 				</tr>
 				<tr>
 					<br>
 				</tr>
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Student Name :</b>
+					<td colspan="3" style="font-size: 20px;"><b>Student's Name :</b>
 						<label style="text-transform: uppercase;"><c:out
 								value="${Parents.parents.student.name}" /></label></td>
-					<td rowspan="3" align="right"><div class="studentphoto">
-							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="110" height="110">
+					<td rowspan="3" align="center"><div class="studentphoto">
+							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="130" height="150">
 						</div></td>
 				</tr>
 
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Father Name :</b>
+					<td colspan="3" style="font-size: 20px;"><b>Father's Name :</b>
 						<label style="text-transform: uppercase;"><c:out
 								value="${Parents.parents.fathersname}" /></label></td>
 				</tr>
 
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Mother Name :</b><label
+					<td colspan="3" style="font-size: 20px;"><b>Mother's Name :</b><label
 						style="text-transform: uppercase;"><c:out
 								value="${Parents.parents.mothersname}" /></label></td>
 				</tr>
@@ -413,37 +430,36 @@ body {
 
 		<div class="marks">
 			<h4
-				style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART
-				A</h4>
+				style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART-A</h4>
 						<table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
 						    <thead>
 						    
 						    <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<tr>
-										<th rowspan="2">Scholastic Subjects</th>
-										<th colspan="3">Semester 1</th>
-										<th colspan="3">Semester 2</th>
-										<th colspan="2">TOTAL</th>
-										<th rowspan="2">Grade</th>
+										<th rowspan="2" style="text-transform: uppercase;">Scholastic Subjects</th>
+										<th colspan="3" style="text-transform: uppercase;">Semester-1</th>
+										<th colspan="3" style="text-transform: uppercase;">Semester-2</th>
+										<th colspan="2" style="text-transform: uppercase;">TOTAL</th>
+										<th rowspan="2" style="text-transform: uppercase;">OVER ALL Grade</th>
 									</tr>
 									<tr>
-										<th>FA1</th>
-										<th>FA2</th>
-										<th>SA1</th>
-										<th>FA3</th>
-										<th>FA4</th>
-										<th>SA2</th>
-										<th>Max</th>
-										<th>Obt</th>
+										<th>FA-1<br>(10%)</th>
+										<th>FA-2<br>(10%)</th>
+										<th>SA-1<br>(30%)</th>
+										<th>FA-3<br>(10%)</th>
+										<th>FA-4<br>(10%)</th>
+										<th>SA-2<br>(30%)</th>
+										<th>MAX.<br>MARKS</th>
+										<th>OBT.<br>MARKS</th>
 									</tr>
 						        </c:when>
 						
 						        <c:otherwise>
 						        	<tr>
-						            <th class="marksTableHeader" style="text-align: center; width: 20%;"> Scholastic Subject</th>
+						            <th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> Scholastic Subject</th>
 						            <c:forEach items="${Parents.examSummaries}" var="exam">
-						                <th class="marksTableHeader"><c:out value="${exam.examName}" /></th>
+						                <th class="marksTableHeader" style="text-transform: uppercase;"><c:out value="${exam.examName}" /></th>
 						            </c:forEach>
 						            <!-- Subject-wise Summary Headers -->
 						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Total<br>Obt. / Max</th>
@@ -703,9 +719,21 @@ body {
 						           <!-- Grand Total Row -->
 						           
 						           		 <tr style="background-color: #f0f0f0; font-weight: bold;">
-									        <td class="summaryTableHeader" style="width: 20%;">Grand Total</td>
+									        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
 									        <c:forEach items="${Parents.examSummaries}" var="exam">
-									            <td class="marksTableCell"></td>
+									        	<c:choose>
+						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+						                                        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained / 2}" maxFractionDigits="1" /></td>
+						                                    </c:when>
+						
+						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained * 0.6}" maxFractionDigits="1" /></td>
+						                                    </c:when>
+						
+						                                    <c:otherwise>
+						                                        <td class="marksTableCell">${exam.totalMarksObtained}</td>
+						                                    </c:otherwise>
+						                                </c:choose>
 									        </c:forEach>
 									        
 									        <c:set var="roundedMarks">
@@ -741,7 +769,7 @@ body {
 		<div class="totalbox">
 
 			<div class="words">
-				<b>Total Marks Obtained (In Words) :</b><label class="amountWords"></label>
+				<b>Total Marks Obtained (In Words) :<label class="amountWords"></label>&nbsp; only</b>
 			</div>
 
 			<div class="percentage">Percentage : <fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentage}" />%</div>
@@ -751,41 +779,43 @@ body {
 
 		<c:choose>
 			<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
+				<div style="margin-top: 100px;">
+				<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 0px;">PART-B</h4>
+				</div>
 				<div style="display: flex; gap: 10px;" class="partb">
-
 				    <table style="width: 50%; border-collapse: collapse;">
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <th>Co-Scholastic Subjects</th>
 				            <th>Grade</th>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Physical & Health Education</td>
 				            <td>A</td>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Art Education</td>
 				            <td>A</td>
 				        </tr>
 				    </table>
 				
-				    <table style="width: 50%; border-collapse: collapse;">
-				        <tr>
+				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
+				        <tr style="text-transform: uppercase;">
 				            <th>Attendance</th>
 				            <th>Semester-1</th>
 				            <th>Semester-2</th>
 				            <th>Total</th>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Working Days</td>
 				            <td></td>
 				            <td></td>
 				            <td></td>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Present Days</td>
 				            <td></td>
 				            <td></td>
@@ -797,51 +827,54 @@ body {
 			</c:when>
 			<c:otherwise>
 			
+			<div>
+			<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 0px;">PART-B</h4>
+			</div>
+			
 			<div style="display: flex; gap: 10px;" class="partb">
-
-				    <table style="width: 50%; border-collapse: collapse;">
-				        <tr>
+				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
+				        <tr style="text-transform: uppercase;">
 				            <th>Co-Scholastic Subjects</th>
 				            <th>Grade</th>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Physical & Health Education</td>
 				            <td>A</td>
 				        </tr>
 				        
-				        <tr>
-				            <td>Attitude & Values</td>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
+				            <td>ATTITUDE & VALUES</td>
 				            <td>A</td>
 				        </tr>
 				        
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Work Experience</td>
 				            <td>A</td>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Art Education</td>
 				            <td>A</td>
 				        </tr>
 				    </table>
 				
-				    <table style="width: 50%; border-collapse: collapse;">
-				        <tr>
+				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
+				        <tr style="text-transform: uppercase;">
 				            <th>Attendance</th>
 				            <th>Semester-1</th>
 				            <th>Semester-2</th>
 				            <th>Total</th>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Working Days</td>
 				            <td></td>
 				            <td></td>
 				            <td></td>
 				        </tr>
 				
-				        <tr>
+				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Present Days</td>
 				            <td></td>
 				            <td></td>
