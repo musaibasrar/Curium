@@ -596,7 +596,7 @@ body {
 						                </td>-->
 						                
 						                <!-- Grade for Subject (based on percentage) -->
-						                <td class="marksTableCell" style="text-align: center;">
+						                <td class="marksTableCell" style="text-align: left;">&emsp;
 						                    ${subjectGrade}
 						                </td>
 						                
@@ -759,8 +759,8 @@ body {
 								                </c:choose>
 								            </td> --%>
 								            
-									        <td class="marksTableCell" style="text-align: center;">
-									            ${grandGrade}
+									        <td class="marksTableCell" style="text-align: left;">
+									            &emsp;&nbsp;${grandGrade}
 									        </td>
 									    </tr>
 						    </tbody>
@@ -895,8 +895,8 @@ body {
         
 Head Master&emsp;&emsp;&emsp;&emsp;&emsp;<br><label style="font-weight: 700;font-size: 11px;">
 HAMIDULLA ENGLISH MEDIUM HIGH SCHOOL&nbsp;<br>
-MANGALGI,TQ:CHITGUPPA, DIST: BIDAR:585329<br>
-DISE CODE:29050505406,SSLC:SS0612&emsp;&emsp;
+MANGALGI,TQ:CHITGUPPA, DIST: BIDAR-585329<br>
+DISE CODE:29050505406,SSLC CODE:SS0612&emsp;
 </label>
 </div>
 
