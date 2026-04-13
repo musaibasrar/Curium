@@ -45,6 +45,7 @@ body {
 	display: flex;
 	align-items: center;
 	margin-top: 5px;
+	height:100px;
 }
 
 .logo {
@@ -151,7 +152,7 @@ body {
 }
 
 .partb {
-	margin-top: 15px;
+	margin-top: 0px;
 }
 
 .partb table {
@@ -334,7 +335,7 @@ body {
 					<b>SCHOOL DISE CODE : 29050505406</b>
 				</div>
 				<div>
-					<b style="color: green"><label style="font-size:12px;">Quadri Education Trust®</label></b>
+					<b style="color: green"><label style="font-size:12px;">Quadri Educational Trust®</label></b>
 				</div>
 				<div>
 					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
@@ -348,7 +349,7 @@ body {
 				</div>
 
 				<div class="schoolname">
-					<h3 style="font-size: 15px;">QUADRI GROUP OF INSTITUTIONS</h3>
+					<h3 style="font-size: 16px;">QUADRI GROUP OF INSTITUTIONS</h3>
 					<h2 style="font-size: 30px;">HAMIDULLA ENGLISH MEDIUM HIGH
 						SCHOOL</h2>
 					<div>
@@ -595,7 +596,7 @@ body {
 						                </td>-->
 						                
 						                <!-- Grade for Subject (based on percentage) -->
-						                <td class="marksTableCell" style="text-align: center;">
+						                <td class="marksTableCell" style="text-align: left;">&emsp;
 						                    ${subjectGrade}
 						                </td>
 						                
@@ -758,8 +759,8 @@ body {
 								                </c:choose>
 								            </td> --%>
 								            
-									        <td class="marksTableCell" style="text-align: center;">
-									            ${grandGrade}
+									        <td class="marksTableCell" style="text-align: left;">
+									            &emsp;&nbsp;${grandGrade}
 									        </td>
 									    </tr>
 						    </tbody>
@@ -894,8 +895,8 @@ body {
         
 Head Master&emsp;&emsp;&emsp;&emsp;&emsp;<br><label style="font-weight: 700;font-size: 11px;">
 HAMIDULLA ENGLISH MEDIUM HIGH SCHOOL&nbsp;<br>
-MANGALGI,TQ:CHITGUPPA, DIST: BIDAR:585329<br>
-DISE CODE:29050505406,SSLC:SS0612&emsp;&emsp;
+MANGALGI,TQ:CHITGUPPA, DIST: BIDAR-585329<br>
+DISE CODE:29050505406,SSLC CODE:SS0612&emsp;
 </label>
 </div>
 
