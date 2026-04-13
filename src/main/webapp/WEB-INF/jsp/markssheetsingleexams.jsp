@@ -191,6 +191,8 @@ body {
 	margin-top: 5px;
 	margin-bottom: 8px;
 	font-style: italic;
+	padding-left:0px;
+	padding-right:0px;
 }
 
 
@@ -370,7 +372,7 @@ body {
 			For the Academic Year ${startYear}-${endYear}</div>
 			<div class="cce" style="font-size: 25px;">Continuous And
 				Comprehensive Evaluation</div>
-			<div class="certifyline" style="font-size: 16px;">
+			<div class="certifyline" style="font-size: 15px;font-weight:bold;">
 				This is to certify that the below mentioned candidate has passed <b>
 				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
 						${dataSubParts[0]}
@@ -386,41 +388,41 @@ body {
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Enrollment (SATS)
-							No :</b> <c:out value="${Parents.parents.student.admissionnumber}" /></td>
+							No : <c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Roll
-							No :</b>
-					<c:out value="${Parents.parents.student.sts}" /></td>
+							No :
+					<c:out value="${Parents.parents.student.sts}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Class
-							:</b>
-					<c:out value="${dataSubParts[0]}" /></td>
+							:
+					<c:out value="${dataSubParts[0]}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Date of Birth
-							:</b> <c:out value="${Parents.parents.student.dateofbirth}" /></td>
+							: <c:out value="${Parents.parents.student.dateofbirth}" /></b></td>
 				</tr>
 				<tr>
 					<br>
 				</tr>
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Student's Name :</b>
+					<td colspan="3" style="font-size: 20px;"><b>Student's Name :
 						<label style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.student.name}" /></label></td>
+								value="${Parents.parents.student.name}" /></label></b></td>
 					<td rowspan="3" align="center"><div class="studentphoto">
 							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="120" height="120">
 						</div></td>
 				</tr>
 
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Father's Name :</b>
+					<td colspan="3" style="font-size: 20px;"><b>Father's Name :
 						<label style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.fathersname}" /></label></td>
+								value="${Parents.parents.fathersname}" /></label></b></td>
 				</tr>
 
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Mother's Name :</b><label
+					<td colspan="3" style="font-size: 20px;"><b>Mother's Name :<label
 						style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.mothersname}" /></label></td>
+								value="${Parents.parents.mothersname}" /></label></b></td>
 				</tr>
 
 			</table>
@@ -892,8 +894,8 @@ body {
         
 Head Master&emsp;&emsp;&emsp;&emsp;&emsp;<br><label style="font-weight: 700;font-size: 11px;">
 HAMIDULLA ENGLISH MEDIUM HIGH SCHOOL&nbsp;<br>
-MANGALGI,TQ:CHITGUPPA, DIST: BIDAR:556612<br>
-UDISE CODE:29050505406,SSLC:SS0612&emsp;&emsp;
+MANGALGI,TQ:CHITGUPPA, DIST: BIDAR:585329<br>
+DISE CODE:29050505406,SSLC:SS0612&emsp;&emsp;
 </label>
 </div>
 
