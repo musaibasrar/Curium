@@ -407,7 +407,7 @@ body {
 						<label style="text-transform: uppercase;"><c:out
 								value="${Parents.parents.student.name}" /></label></td>
 					<td rowspan="3" align="center"><div class="studentphoto">
-							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="130" height="150">
+							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="120" height="120">
 						</div></td>
 				</tr>
 
