@@ -286,7 +286,7 @@ for(Cookie cookie : cookies){
                              
                              <tr>   
 				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Roll. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
+                                <td class="namedetails"><label>Mobile No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.contactnumber}"/></td>
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
