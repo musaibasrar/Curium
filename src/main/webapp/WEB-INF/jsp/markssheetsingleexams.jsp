@@ -376,7 +376,18 @@ body {
 			<div class="certifyline" style="font-size: 15px;font-weight:bold;">
 				This is to certify that the below mentioned candidate has passed <b>
 				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
-						${dataSubParts[0]}
+						<c:choose>
+						    <c:when test="${dataSubParts[0] == 1}">1st</c:when>
+						    <c:when test="${dataSubParts[0] == 2}">2nd</c:when>
+						    <c:when test="${dataSubParts[0] == 3}">3rd</c:when>
+						    <c:when test="${dataSubParts[0] == 4}">4th</c:when>
+						    <c:when test="${dataSubParts[0] == 5}">5th</c:when>
+						    <c:when test="${dataSubParts[0] == 6}">6th</c:when>
+						    <c:when test="${dataSubParts[0] == 7}">7th</c:when>
+						    <c:when test="${dataSubParts[0] == 8}">8th</c:when>
+						    <c:when test="${dataSubParts[0] == 9}">9th</c:when>
+						    <c:when test="${dataSubParts[0] == 10}">10th</c:when>
+						</c:choose>
 				</b> Examination with the following details.
 			</div>
 		</div>
@@ -389,18 +400,30 @@ body {
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Enrollment (SATS)
-							No : <c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
+							No : <c:out value="${Parents.parents.student.sts}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Roll
 							No :
-					<c:out value="${Parents.parents.student.sts}" /></b></td>
+					<c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Class
 							:
-					<c:out value="${dataSubParts[0]}" /></b></td>
+						<c:choose>
+							    <c:when test="${dataSubParts[0] == 1}">1st</c:when>
+							    <c:when test="${dataSubParts[0] == 2}">2nd</c:when>
+							    <c:when test="${dataSubParts[0] == 3}">3rd</c:when>
+							    <c:when test="${dataSubParts[0] == 4}">4th</c:when>
+							    <c:when test="${dataSubParts[0] == 5}">5th</c:when>
+							    <c:when test="${dataSubParts[0] == 6}">6th</c:when>
+							    <c:when test="${dataSubParts[0] == 7}">7th</c:when>
+							    <c:when test="${dataSubParts[0] == 8}">8th</c:when>
+							    <c:when test="${dataSubParts[0] == 9}">9th</c:when>
+							    <c:when test="${dataSubParts[0] == 10}">10th</c:when>
+							</c:choose>
+					</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Date of Birth
-							: <c:out value="${Parents.parents.student.dateofbirth}" /></b></td>
+							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td>
 				</tr>
 				<tr>
 					<br>
@@ -805,6 +828,9 @@ body {
 				
 				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
 				        <tr style="text-transform: uppercase;">
+				        	<c:set var="attendanceParts" value="${fn:split(Parents.parents.student.urbanrural, '/')}" />
+							<c:set var="sem1" value="${attendanceParts[0]}" />
+							<c:set var="sem2" value="${attendanceParts[1]}" />
 				            <th>Attendance</th>
 				            <th>Semester-1</th>
 				            <th>Semester-2</th>
@@ -813,16 +839,16 @@ body {
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Working Days</td>
-				            <td></td>
-				            <td></td>
-				            <td></td>
+				            <td>118</td>
+				            <td>126</td>
+				            <td>244</td>
 				        </tr>
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Present Days</td>
-				            <td></td>
-				            <td></td>
-				            <td></td>
+				            <td>${sem1}</td>
+				            <td>${sem1}</td>
+				            <td>${sem1+sem2}</td>
 				        </tr>
 				    </table>
 				
@@ -864,6 +890,9 @@ body {
 				
 				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
 				        <tr style="text-transform: uppercase;">
+				        	<c:set var="attendanceParts" value="${fn:split(Parents.parents.student.urbanrural, '/')}" />
+							<c:set var="sem1" value="${attendanceParts[0]}" />
+							<c:set var="sem2" value="${attendanceParts[1]}" />
 				            <th>Attendance</th>
 				            <th>Semester-1</th>
 				            <th>Semester-2</th>
@@ -872,16 +901,16 @@ body {
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Working Days</td>
-				            <td></td>
-				            <td></td>
-				            <td></td>
+				            <td>118</td>
+				            <td>126</td>
+				            <td>244</td>
 				        </tr>
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Present Days</td>
-				            <td></td>
-				            <td></td>
-				            <td></td>
+				            <td>${sem1}</td>
+				            <td>${sem1}</td>
+				            <td>${sem1+sem2}</td>
 				        </tr>
 				    </table>
 				
