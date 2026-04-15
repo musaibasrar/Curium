@@ -829,7 +829,14 @@ body {
 									        <c:forEach items="${Parents.examSummaries}" var="exam">
 									        	<c:choose>
 						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
-						                                        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained / 2}" maxFractionDigits="1" /></td>
+						                                       		 <c:choose>
+																	    <c:when test="${dataSubParts[0]=='9'}">
+																	        <td class="marksTableCell"><fmt:formatNumber value="${((exam.totalMarksObtained/exam.totalMarks) * 120) /2}" maxFractionDigits="1" /></td>
+																	    </c:when>
+																	    <c:otherwise>
+																	        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained/2}" maxFractionDigits="1" /></td>
+																	    </c:otherwise>
+																	</c:choose>
 						                                    </c:when>
 						
 						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
