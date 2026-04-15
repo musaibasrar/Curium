@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 7 Feb, 2018 12:41:26 AM by Hibernate Tools 4.0.0 -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.sponsor.dto.Sponsor" table="sponsor">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="branchid" type="java.lang.Integer">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="java.lang.Integer">
+            <column name="userid" />
+        </property>
+         <property name="name" type="string">
+            <column name="name" length="100" />
+        </property>
+         <property name="contact" type="string">
+            <column name="contact" length="45" />
+        </property>
+         <property name="address" type="string">
+            <column name="address" length="1000" />
+        </property>
+         <property name="notes" type="string">
+            <column name="notes" length="1000" />
+        </property>
+        
+    </class>
+</hibernate-mapping>
