@@ -335,7 +335,7 @@ body {
 					<b>SCHOOL DISE CODE : 29050505406</b>
 				</div>
 				<div>
-					<b style="color: green"><label style="font-size:12px;">Quadri Educational Trust®</label></b>
+					<b style="color: green"><label style="font-size:12px;text-transform: upppercase;">Quadri Educational Trust®</label></b>
 				</div>
 				<div>
 					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
@@ -349,8 +349,8 @@ body {
 				</div>
 
 				<div class="schoolname">
-					<h3 style="font-size: 16px;">QUADRI GROUP OF INSTITUTIONS</h3>
-					<h2 style="font-size: 30px;">HAMIDULLA ENGLISH MEDIUM HIGH
+					<h3 style="font-size: 19px;">QUADRI GROUP OF INSTITUTIONS</h3>
+					<h2 style="font-size: 31px;">HAMIDULLA ENGLISH MEDIUM HIGH
 						SCHOOL</h2>
 					<div>
 						<b>MANGALGI TQ: CHITGUPPA DIST: BIDAR 585329</b>
@@ -373,20 +373,21 @@ body {
 			For the Academic Year ${startYear}-${endYear}</div>
 			<div class="cce" style="font-size: 25px;">Continuous And
 				Comprehensive Evaluation</div>
-			<div class="certifyline" style="font-size: 15px;font-weight:bold;">
+			<div class="certifyline" style="font-size: 13px;font-weight:bold;">
 				This is to certify that the below mentioned candidate has passed <b>
 				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
 						<c:choose>
-						    <c:when test="${dataSubParts[0] == 1}">1st</c:when>
-						    <c:when test="${dataSubParts[0] == 2}">2nd</c:when>
-						    <c:when test="${dataSubParts[0] == 3}">3rd</c:when>
-						    <c:when test="${dataSubParts[0] == 4}">4th</c:when>
-						    <c:when test="${dataSubParts[0] == 5}">5th</c:when>
-						    <c:when test="${dataSubParts[0] == 6}">6th</c:when>
-						    <c:when test="${dataSubParts[0] == 7}">7th</c:when>
-						    <c:when test="${dataSubParts[0] == 8}">8th</c:when>
-						    <c:when test="${dataSubParts[0] == 9}">9th</c:when>
-						    <c:when test="${dataSubParts[0] == 10}">10th</c:when>
+						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
+						    <c:when test="${dataSubParts[0] == '1'}">1st Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '2'}">2nd Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '3'}">3rd Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '4'}">4th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '5'}">5th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '6'}">6th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '7'}">7th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '8'}">8th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '9'}">9th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '10'}">10th Std.</c:when>
 						</c:choose>
 				</b> Examination with the following details.
 			</div>
@@ -409,17 +410,18 @@ body {
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Class
 							:
 						<c:choose>
-							    <c:when test="${dataSubParts[0] == 1}">1st</c:when>
-							    <c:when test="${dataSubParts[0] == 2}">2nd</c:when>
-							    <c:when test="${dataSubParts[0] == 3}">3rd</c:when>
-							    <c:when test="${dataSubParts[0] == 4}">4th</c:when>
-							    <c:when test="${dataSubParts[0] == 5}">5th</c:when>
-							    <c:when test="${dataSubParts[0] == 6}">6th</c:when>
-							    <c:when test="${dataSubParts[0] == 7}">7th</c:when>
-							    <c:when test="${dataSubParts[0] == 8}">8th</c:when>
-							    <c:when test="${dataSubParts[0] == 9}">9th</c:when>
-							    <c:when test="${dataSubParts[0] == 10}">10th</c:when>
-							</c:choose>
+						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
+						    <c:when test="${dataSubParts[0] == '1'}">1st Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '2'}">2nd Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '3'}">3rd Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '4'}">4th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '5'}">5th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '6'}">6th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '7'}">7th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '8'}">8th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '9'}">9th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '10'}">10th Std.</c:when>
+						</c:choose>
 					</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Date of Birth
@@ -573,23 +575,17 @@ body {
 						                    <c:when test="${subjectPercentage >= 90}">
 						                        <c:set var="subjectGrade" value="A+" />
 						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 80}">
+						                    <c:when test="${subjectPercentage >= 70}">
 						                        <c:set var="subjectGrade" value="A" />
 						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 70}">
+						                    <c:when test="${subjectPercentage >= 50}">
 						                        <c:set var="subjectGrade" value="B+" />
 						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 60}">
+						                    <c:when test="${subjectPercentage >= 30}">
 						                        <c:set var="subjectGrade" value="B" />
 						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 50}">
-						                        <c:set var="subjectGrade" value="C+" />
-						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 40}">
+						                    <c:when test="${subjectPercentage >= 29}">
 						                        <c:set var="subjectGrade" value="C" />
-						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 33}">
-						                        <c:set var="subjectGrade" value="D" />
 						                    </c:when>
 						                    <c:otherwise>
 						                        <c:set var="subjectGrade" value="F" />
@@ -633,34 +629,118 @@ body {
 							        <c:if test="${grandTotalMaxMarks > 0}">
 							            <c:set var="grandPercentage" value="${(grandTotalMarksObtained / grandTotalMaxMarks) * 100}" />
 							        </c:if>
-							        
-							        <c:set var="grandGrade" value="-" />
+							         
+							         <c:set var="roundedMarks">
+									            <fmt:formatNumber value="${grandTotalMarksObtained}" maxFractionDigits="0" />
+									        </c:set>
+									        
 							        <c:choose>
-							            <c:when test="${grandPercentage >= 90}">
-							                <c:set var="grandGrade" value="A+" />
-							            </c:when>
-							            <c:when test="${grandPercentage >= 80}">
-							                <c:set var="grandGrade" value="A" />
-							            </c:when>
-							            <c:when test="${grandPercentage >= 70}">
-							                <c:set var="grandGrade" value="B+" />
-							            </c:when>
-							            <c:when test="${grandPercentage >= 60}">
-							                <c:set var="grandGrade" value="B" />
-							            </c:when>
-							            <c:when test="${grandPercentage >= 50}">
-							                <c:set var="grandGrade" value="C+" />
-							            </c:when>
-							            <c:when test="${grandPercentage >= 40}">
-							                <c:set var="grandGrade" value="C" />
-							            </c:when>
-							            <c:when test="${grandPercentage >= 33}">
-							                <c:set var="grandGrade" value="D" />
-							            </c:when>
-							            <c:otherwise>
-							                <c:set var="grandGrade" value="F" />
-							            </c:otherwise>
-							        </c:choose>
+									<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
+									
+									
+									<c:choose>
+						                    <c:when test="${roundedMarks >= 270}">
+						                        <c:set var="grandGrade" value="A+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 240}">
+						                        <c:set var="grandGrade" value="A" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 210}">
+						                        <c:set var="grandGrade" value="B+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 180}">
+						                        <c:set var="grandGrade" value="B" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 150}">
+						                        <c:set var="grandGrade" value="C+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 120}">
+						                        <c:set var="grandGrade" value="C" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 90}">
+						                        <c:set var="grandGrade" value="D" />
+						                    </c:when>
+						                    <c:otherwise>
+						                        <c:set var="grandGrade" value="NA" />
+						                    </c:otherwise>
+						                </c:choose>
+								</c:when>
+								
+								
+								<c:when test="${dataSubParts[0]=='1' || dataSubParts[0]=='2' || dataSubParts[0]=='3' || dataSubParts[0]=='4' || dataSubParts[0]=='5'}">
+									
+									
+									<c:choose>
+						                    <c:when test="${roundedMarks >= 450}">
+						                        <c:set var="grandGrade" value="A+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 400}">
+						                        <c:set var="grandGrade" value="A" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 350}">
+						                        <c:set var="grandGrade" value="B+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 300}">
+						                        <c:set var="grandGrade" value="B" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 250}">
+						                        <c:set var="grandGrade" value="C+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 200}">
+						                        <c:set var="grandGrade" value="C" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 150}">
+						                        <c:set var="grandGrade" value="D" />
+						                    </c:when>
+						                    <c:otherwise>
+						                        <c:set var="grandGrade" value="NA" />
+						                    </c:otherwise>
+						                </c:choose>
+								</c:when>
+								
+								
+			 					<c:otherwise>
+			
+							        <c:choose>
+						                    <c:when test="${roundedMarks >= 540}">
+						                        <c:set var="grandGrade" value="A+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 420}">
+						                        <c:set var="grandGrade" value="A" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 300}">
+						                        <c:set var="grandGrade" value="B+" />
+						                    </c:when>
+						                    <c:when test="${roundedMarks >= 180}">
+						                        <c:set var="grandGrade" value="B" />
+						                    </c:when>
+						                    <c:otherwise>
+						                        <c:set var="grandGrade" value="C" />
+						                    </c:otherwise>
+						                </c:choose>
+						   </c:otherwise>     
+						   
+						   </c:choose>
+							        <c:choose>
+						                    <c:when test="${subjectPercentage >= 90}">
+						                        <c:set var="subjectGrade" value="A+" />
+						                    </c:when>
+						                    <c:when test="${subjectPercentage >= 70}">
+						                        <c:set var="subjectGrade" value="A" />
+						                    </c:when>
+						                    <c:when test="${subjectPercentage >= 50}">
+						                        <c:set var="subjectGrade" value="B+" />
+						                    </c:when>
+						                    <c:when test="${subjectPercentage >= 30}">
+						                        <c:set var="subjectGrade" value="B" />
+						                    </c:when>
+						                    <c:when test="${subjectPercentage >= 29}">
+						                        <c:set var="subjectGrade" value="C" />
+						                    </c:when>
+						                    <c:otherwise>
+						                        <c:set var="subjectGrade" value="F" />
+						                    </c:otherwise>
+						                </c:choose>
 						
 						        <!-- Summary Section Rows within the same table 
 						        <tr>
@@ -762,9 +842,6 @@ body {
 						                                </c:choose>
 									        </c:forEach>
 									        
-									        <c:set var="roundedMarks">
-									            <fmt:formatNumber value="${grandTotalMarksObtained}" maxFractionDigits="0" />
-									        </c:set>
 									        <td class="amount" style="display: none;">${roundedMarks}</td>
 									        
 									        <td class="marksTableCell" style="text-align: center;">
@@ -806,7 +883,7 @@ body {
 		<c:choose>
 			<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 				<div style="margin-top: 100px;">
-				<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 0px;">PART-B</h4>
+				<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 10px;">PART-B</h4>
 				</div>
 				<div style="display: flex; gap: 10px;" class="partb">
 				    <table style="width: 50%; border-collapse: collapse;">
@@ -847,7 +924,7 @@ body {
 				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Present Days</td>
 				            <td>${sem1}</td>
-				            <td>${sem1}</td>
+				            <td>${sem2}</td>
 				            <td>${sem1+sem2}</td>
 				        </tr>
 				    </table>
@@ -857,7 +934,7 @@ body {
 			<c:otherwise>
 			
 			<div>
-			<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 0px;">PART-B</h4>
+			<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 10px;">PART-B</h4>
 			</div>
 			
 			<div style="display: flex; gap: 10px;" class="partb">
@@ -909,7 +986,7 @@ body {
 				        <tr style="text-transform: uppercase;font-weight: bold;">
 				            <td>Total Present Days</td>
 				            <td>${sem1}</td>
-				            <td>${sem1}</td>
+				            <td>${sem2}</td>
 				            <td>${sem1+sem2}</td>
 				        </tr>
 				    </table>
