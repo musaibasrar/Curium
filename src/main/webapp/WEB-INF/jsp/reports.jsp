@@ -510,16 +510,21 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/rahmani/daybook" style="font-size: 12px;">Day Book</a>
+            				<a target="mainFrame" href="/rahmani/receiptpayment" style="font-size: 12px;">R & P Statement</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/rahmani/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            				<a target="mainFrame" href="/rahmani/daybook" style="font-size: 12px;">Day Book</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/rahmani/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/rahmani/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
             			</td>
             		</tr>
