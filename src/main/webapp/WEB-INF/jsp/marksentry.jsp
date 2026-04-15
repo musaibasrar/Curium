@@ -581,7 +581,7 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td width="30%" class="alignRight">Exam Class &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label> <select name="classsearchselected"
-									id="classsearchselected" style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+									id="classsearchselected" style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${classselected}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 											<c:if test="${(classdetailslist.classdetails != '')}">
@@ -603,7 +603,7 @@ for(Cookie cookie : cookies){
 						<td width="30%" class="alignRight">Subject &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="subject" id="subject"
-									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
+									style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listSubjectNames}" var="listSubject">
@@ -628,7 +628,7 @@ for(Cookie cookie : cookies){
 						<td width="30%" class="alignRight">Exam &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
 									<select name="exam" id="exam"
-									style="width: 240px;border-radius: 4px;background: white;height: 28px;">
+									style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
 										<c:forEach items="${listExam}" var="listExam">

@@ -11,4 +11,5 @@ public class MarksViewDto {
     private String subject;
     private String subjectSelected;
     private String examSelected;
+    private String academicYear;
 }
