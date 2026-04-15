@@ -14,4 +14,5 @@ public class SponsorDto {
 	private int userId;
 	private int branchId;
 
+
 }

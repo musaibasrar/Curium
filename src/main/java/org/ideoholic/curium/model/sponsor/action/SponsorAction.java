@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/SponserProcess")
 public class SponsorAction {
-	
 	@Autowired
 	private SponsorActionAdapter sponsorActionAdapter;
-
+	
 	
 	@GetMapping("/addSponsorPage")
 	public String addSponsorPage() {
@@ -26,10 +25,7 @@ public class SponsorAction {
 		{
 		return "sponsorsaved";
 		}
-		else
-		{
-			return "error";
-		}
+		return "error";
 	}
 	
 	@RequestMapping(value = "/ViewAllSponsor", method = { RequestMethod.GET, RequestMethod.POST })
@@ -65,7 +61,17 @@ public class SponsorAction {
 			return "error";
 		}
 	}
+	
+	@GetMapping("/sponsorlistdetail")
+	public String sponsorlistdetail() {
+		sponsorActionAdapter.viewAllSponsor();
+		return "sponsorlist";
+	}
 
-
+	@PostMapping("/searchSponsoredStudent")
+	public String searchSponsoredStudent() {
+		sponsorActionAdapter.getFeesStructuredBySponsor();
+		return "sponsorlist";
+	}
 
 }

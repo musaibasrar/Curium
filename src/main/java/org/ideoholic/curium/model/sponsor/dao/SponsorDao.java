@@ -9,14 +9,17 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.sponsor.dto.Sponsor;
+import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
-
+import org.springframework.stereotype.Service;
+@Service
 public class SponsorDao {
-	
+
 	Session session = null;
-   
+	   
     Transaction transaction = null;
     
     SessionFactory sessionFactory;
@@ -116,4 +119,22 @@ public class SponsorDao {
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Studentfeesstructure> getFeesStructuredBySponsor(int branchId, String sponsorName) {
+		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
+		try {
+
+			transaction = session.beginTransaction();
+			results = (List<Studentfeesstructure>) session.createQuery("From Studentfeesstructure as sfr where sfr.concessionnotes='" + sponsorName+ "' and sfr.branchid=" + branchId)
+					.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
+	
 }
