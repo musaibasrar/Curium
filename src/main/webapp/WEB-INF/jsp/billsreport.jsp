@@ -536,7 +536,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MessItemsMoveProcess/printStockMove";
+		form1.action = "/rahmani/MessItemsMoveProcess/printStockMove";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -557,7 +557,7 @@
 	
 	function generateBillsReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MessItemsMoveProcess/generateBillsReport";
+		form1.action = "/rahmani/MessItemsMoveProcess/generateBillsReport";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -1004,7 +1004,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/vision/MessItemsMoveProcess/generateBillsReport?page=${currentPage - 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/rahmani/MessItemsMoveProcess/generateBillsReport?page=${currentPage - 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1017,7 +1017,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/vision/MessItemsMoveProcess/generateBillsReport?page=${i}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/rahmani/MessItemsMoveProcess/generateBillsReport?page=${i}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1026,7 +1026,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/vision/MessItemsMoveProcess/generateBillsReport?page=${currentPage + 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/rahmani/MessItemsMoveProcess/generateBillsReport?page=${currentPage + 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Next</a></td>
                 </c:if>
                     </div>
                     
