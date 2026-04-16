@@ -334,13 +334,8 @@ public class SmsService {
 										}
 										
 										String SMSTempType = "feesreminderwithdueamount";
-										String var1 = String.valueOf(dueAmount);
-										String var2 = studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()));
-										String[] classSec = studentFeesReport.getParents().getStudent().getClassstudying().split("--");
-										String var3 = classSec[0];
-										String var4 = classSec[1];
-										String var5 = dto.getMessage();
-										String message = "Rs. "+var1+":"+var2+":"+var3+":"+var4+":"+var5;
+										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
+										
 										int attempts = 0;
 								        while (attempts < 1) {
 								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
@@ -348,6 +343,7 @@ public class SmsService {
 								            attempts++;
 								        }
 								}
+								
 							}
 							
 						}
