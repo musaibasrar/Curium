@@ -263,6 +263,7 @@ for(Cookie cookie : cookies){
                     <thead>
                         <tr  >
                             <th class="headerText"><input  type="checkbox" id = "chckHead" /></th>
+                            <th class="headerText">Sl No</th>
                             <th title="click to sort" class="headerText">UID</th>
                             <th title="click to sort" class="headerText">Admission Number</th>
                             <th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
@@ -275,10 +276,11 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${studentListLeft}" var="Student">
+                        <c:forEach items="${studentListLeft}" var="Student" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Student.sid}"/>"/></td>
+                                <td class="dataText" align="center">${status.index + 1}</td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/cambridge/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.studentexternalid}"/></a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/cambridge/StudentProcess/ViewDetails?id=<c:out value='${Student.sid}'/>"><c:out value="${Student.admissionnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Student.name}"/></td>
