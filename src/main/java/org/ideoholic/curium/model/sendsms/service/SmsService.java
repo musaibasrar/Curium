@@ -3,9 +3,9 @@ package org.ideoholic.curium.model.sendsms.service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -254,53 +254,62 @@ public class SmsService {
 	        templatemessage = templatemessage.replace("var4", var4);
 		// Construct data
 		String phonenumbers=numbers;
-		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(templatemessage, "UTF-8");
-		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&apikey=" + apikey;
-		data +="&peid=" + peid;
-		data +="&templateid=" + templateid;
+		
+		String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?";
+		 StringBuilder sgcPostContent = new StringBuilder(POST_URL);
+         sgcPostContent.append("APIKey=").append(URLEncoder.encode(apikey, "UTF-8"));
+         sgcPostContent.append("&senderid=").append(URLEncoder.encode(smssender, "UTF-8"));
+         sgcPostContent.append("&channel=").append(URLEncoder.encode("trans", "UTF-8"));
+         sgcPostContent.append("&DCS=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&flashsms=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&number=").append(URLEncoder.encode(phonenumbers, "UTF-8"));
+         sgcPostContent.append("&text=").append(URLEncoder.encode(templatemessage, "UTF-8"));
+         sgcPostContent.append("&route=").append(URLEncoder.encode("04", "UTF-8"));
+         sgcPostContent.append("&DLTTemplateId=").append(URLEncoder.encode(templateid, "UTF-8"));
+         sgcPostContent.append("&PEID=").append(URLEncoder.encode(peid, "UTF-8"));
+				
 		// Send data
 		
-		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
+		//String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?"+data;
 		log.info(templateType+": URL "+POST_URL);
 		log.debug(templateType+": URL "+POST_URL);
-        URL obj = new URL(POST_URL);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+        URL obj = new URL(sgcPostContent.toString());
+        URLConnection myURLConnection = obj.openConnection();
+        myURLConnection.connect();
 
 		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
+        BufferedReader reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+        
+        String output;
+        while ((output = reader.readLine()) != null) {
+            System.out.println("OUTPUT: " + output);
+            
+         // Check if ErrorCode is present
+            int errorCodeIndex = output.indexOf("\"ErrorCode\":\"");
+            if (errorCodeIndex != -1) {
+                int start = errorCodeIndex + "\"ErrorCode\":\"".length();
+                int end = output.indexOf("\"", start);
+                String errorCode = output.substring(start, end);
 
-		responseCode = con.getResponseCode();
-		log.info("POST Response Code :: " + responseCode);
+                if ("000".equals(errorCode)) {
+                	responseCode=200;
+                } else {
+                    System.out.println("❌ Message not sent. ErrorCode: " + errorCode);
+                }
+            } else {
+                System.out.println("⚠️ Invalid response format: ErrorCode not found.");
+            }
+        }
 
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
+        // Close reader
+        reader.close();
 
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			// print result
-			log.info(response.toString());
 		} else {
 			log.error("POST request not worked");
-		}}}
+		}}
 		catch (Exception e)
 		{
-		log.error("Error SMS "+e);
+			log.error("Error SMS "+e);
 		}
 		return responseCode;
 	}
@@ -325,8 +334,13 @@ public class SmsService {
 										}
 										
 										String SMSTempType = "feesreminderwithdueamount";
-										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
-										
+										String var1 = String.valueOf(dueAmount);
+										String var2 = studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()));
+										String[] classSec = studentFeesReport.getParents().getStudent().getClassstudying().split("--");
+										String var3 = classSec[0];
+										String var4 = classSec[1];
+										String var5 = dto.getMessage();
+										String message = "Rs. "+var1+":"+var2+":"+var3+":"+var4+":"+var5;
 										int attempts = 0;
 								        while (attempts < 1) {
 								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
@@ -334,24 +348,10 @@ public class SmsService {
 								            attempts++;
 								        }
 								}
-								
-								numbers=sbN.toString();
-								numbers = numbers.substring(0, numbers.length()-1);
-								log.info("Numbers are *** "+numbers);
-								
-								long dueAmount = 0l;
-								for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
-									dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
-								}
-								
-								
-								String SMSTempType = "feesreminderwithdueamount";
-								String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
-								
-								resultSMS = sendSMS(numbers,message,SMSTempType);
 							}
 							
 						}
+						
 					}
 					
 			if(resultSMS==200){
