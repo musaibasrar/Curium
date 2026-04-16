@@ -1628,6 +1628,29 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 
+                        <tr>
+										
+							<td class="alignLeft">Subject Opted &nbsp;</td>
+							<td ><label> <select name="urbanrural"
+									 id="urbanrural"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>Kannada</option>
+								</select>
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">
+								&nbsp;</td>
+							<td ></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
 
 						<div>
 							<table width="100%">

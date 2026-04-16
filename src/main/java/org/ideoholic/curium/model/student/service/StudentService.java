@@ -1155,7 +1155,7 @@ public class StudentService {
 			headerData.put("Header",
 				new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 					"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
-					"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
+					"Caste", "Fathers Name", "Mothers Name","Contact No.","Language Opted", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -1173,6 +1173,7 @@ public class StudentService {
 						DataUtil.emptyString(studentDetails.getStudent().getDisabilitychild()),
 						DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
 						DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),
+						DataUtil.emptyString(studentDetails.getStudent().getUrbanrural()),
 
 
 						studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" ,
