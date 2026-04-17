@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -22,7 +21,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,9 +73,11 @@ import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -109,11 +109,12 @@ public class FeesCollectionService {
 	
 	private final parentsDetailsDAO parentsDetailsDao;
 	
+	private final PropertiesUtil propertiesUtil;
+	
     private final HttpServletRequest request;
 	private final HttpServletResponse response;
 	private final HttpSession httpSession;
 
-	private static final int BUFFER_SIZE = 4096;
 
 	public Feescollection add(Feesdetails feesdetails) {
 
@@ -1018,25 +1019,16 @@ public class FeesCollectionService {
 	private Integer getLedgerAccountId(String itemAccount) {
 		
 		int result = 0;
-	 	
-	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		
-        		try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		    
-        		String ItemLedgerId = properties.getProperty(itemAccount);
-		    
+
+        	String ItemLedgerId = propertiesUtil.getPropertiesValue(itemAccount);
+
 		    if(ItemLedgerId!=null) {
 		    	result = Integer.parseInt(ItemLedgerId);
 		    }else {
-		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+		    	String ItemLedger = propertiesUtil.getPropertiesValue(itemAccount.toLowerCase());
 		    	result = Integer.parseInt(ItemLedger.toLowerCase());
 		    }
-		    
+
 		    return result;
 	}
 
@@ -1187,7 +1179,7 @@ public class FeesCollectionService {
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
@@ -2310,7 +2302,7 @@ public class FeesCollectionService {
 
 				for (Studentfeesstructure studentFeesStructure : feesstructure) {
 
-					String[] feesStartMonth = new DataUtil().getPropertiesValue("feesstartmonth").split("/");
+					String[] feesStartMonth = propertiesUtil.getPropertiesValue("feesstartmonth").split("/");
 					 LocalDate currentDate = LocalDate.now();
 				     LocalDate startDate = LocalDate.of(Integer.parseInt(feesStartMonth[2]), Integer.parseInt(feesStartMonth[1]), Integer.parseInt(feesStartMonth[0]));
 				     LocalDate endDate = LocalDate.of(currentDate.getYear(), currentDate.getMonthValue(), currentDate.getDayOfMonth()); // Change this to your desired end date

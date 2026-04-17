@@ -1,37 +1,54 @@
 package org.ideoholic.curium.model.mess.supplier.service;
 
-import lombok.extern.slf4j.Slf4j;
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.*;
-import org.ideoholic.curium.model.mess.item.dto.MessIdsDto;
-import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
-import org.ideoholic.curium.model.mess.supplier.dto.*;
-import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.account.dao.AccountDAO;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
+import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
+import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.mess.item.dto.MessIdsDto;
+import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
+import org.ideoholic.curium.model.mess.supplier.dto.ChequeDetailsDto;
+import org.ideoholic.curium.model.mess.supplier.dto.ChequeDto;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
+import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliersPayment;
+import org.ideoholic.curium.model.mess.supplier.dto.PaymentDetailsResponseDto;
+import org.ideoholic.curium.model.mess.supplier.dto.SuppliersDetailsDto;
+import org.ideoholic.curium.model.mess.supplier.dto.SuppliersDetailsResponseDto;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.PropertiesUtil;
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MessSuppliersService {
 
-	@Autowired
-	private HttpServletResponse response;
+	private final HttpServletResponse response;
 	
-	@Autowired
-    private AccountDAO accountDao;
+    private final AccountDAO accountDao;
 	
-	@Autowired
-	private MessSuppliersDAO messSuppliersDao;
+	private final MessSuppliersDAO messSuppliersDao;
+	
+	private final PropertiesUtil propertiesUtil;
 
 	public ResultResponse viewSuppliersDetails(String branchId) {
 		
@@ -162,19 +179,10 @@ public class MessSuppliersService {
 		try {
 			if (branchId != null) {
 
-
-				Properties properties = new Properties();
-				InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-				try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-
-				String groupName = properties.getProperty("groupName");
-				String subGroupCode = properties.getProperty("subGroupCode");
-				String ssGroupCode = properties.getProperty("ssGroupCode");
-				String accountCode = properties.getProperty("accountcode");
+				String groupName = propertiesUtil.getPropertiesValue("groupName");
+				String subGroupCode = propertiesUtil.getPropertiesValue("subGroupCode");
+				String ssGroupCode = propertiesUtil.getPropertiesValue("ssGroupCode");
+				String accountCode = propertiesUtil.getPropertiesValue("accountcode");
 
 
 				Accountdetails accountDetails = new Accountdetails();
@@ -337,24 +345,7 @@ public class MessSuppliersService {
 	}
 	
 	private Integer getLedgerAccountId(String itemAccount) {
-		
-	 	
-	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		
-        		try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		    
-        		String ItemLedgerId = properties.getProperty(itemAccount);
-		    
-		    if(ItemLedgerId!=null) {
-		    	return Integer.parseInt(ItemLedgerId);
-		    }else {
-		    	return 0;
-		    }
+	 	return propertiesUtil.getIntPropertiesValue(itemAccount, 0);
 	}
 
 

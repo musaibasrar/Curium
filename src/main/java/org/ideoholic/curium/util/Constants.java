@@ -16,5 +16,12 @@ public interface Constants {
 	
 	String CANCELLED = "CANCELLED";
 	
+	String SUCCESS = "Success";
+	
 	String ERROR_PAGE = "error";
+
+    /**
+     * Size of a byte buffer to read/write file
+     */
+	int BUFFER_SIZE = 4096;
 }

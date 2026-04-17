@@ -26,28 +26,39 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.appointment.dao.AppointmentDAO;
-import org.ideoholic.curium.model.appointment.dto.*;
+import org.ideoholic.curium.model.appointment.dto.AddAppointmentDto;
+import org.ideoholic.curium.model.appointment.dto.Appointment;
+import org.ideoholic.curium.model.appointment.dto.AppointmentResponseDto;
+import org.ideoholic.curium.model.appointment.dto.CancelAppointmentsDto;
+import org.ideoholic.curium.model.appointment.dto.CompleteAppointmentsDto;
+import org.ideoholic.curium.model.appointment.dto.ExportAppointmentsReportDto;
+import org.ideoholic.curium.model.appointment.dto.GenerateAppointmentsReportDto;
+import org.ideoholic.curium.model.appointment.dto.MonthlyAppointmentsResponseDto;
+import org.ideoholic.curium.model.appointment.dto.UpdateAppointmentDto;
+import org.ideoholic.curium.model.appointment.dto.ViewAllAppoinmentsResponseDto;
+import org.ideoholic.curium.model.appointment.dto.ViewAllAppointmentsDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AppointmentService {
 
-	@Autowired
-	private HttpServletResponse response;
+	private final HttpServletResponse response;
 	
-	@Autowired
-	private AppointmentDAO appointmentDao;
+	private final AppointmentDAO appointmentDao;
 	
-	 private static final int BUFFER_SIZE = 4096;
-
+	private final PropertiesUtil propertiesUtil;
+	
 	public ResultResponse addAppointment(AddAppointmentDto addAppointmentDto, String branchId, String currentAcademicYear, String userLoginId) {
 
 
@@ -99,7 +110,7 @@ public class AppointmentService {
 						  }
 				appointment.setAppointmenttime(outputStartTime+" "+meridian);		  
 				String resultQuery = appointmentDao.addAppointment(appointment);
-				String sendAppointmentSMS = new DataUtil().getPropertiesValue("sendappointmentsms");
+				String sendAppointmentSMS = propertiesUtil.getPropertiesValue("sendappointmentsms");
 				
 				if(resultQuery!=null && "yes".equalsIgnoreCase(sendAppointmentSMS)) {
 
@@ -172,7 +183,7 @@ public class AppointmentService {
 			}
 			
 			result = appointmentDao.cancelAppointments(appointmentIdsList);
-			String sendCancelAppointmentSMS = new DataUtil().getPropertiesValue("sendcancelappointmentsms");
+			String sendCancelAppointmentSMS = propertiesUtil.getPropertiesValue("sendcancelappointmentsms");
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCancelAppointmentSMS)) {
 				for (Appointment appointment : result) {
 					 String message = "Your appointment with appt. no. "+appointment.getExternalid()+" has been cancelled.";
@@ -394,7 +405,7 @@ public class AppointmentService {
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream

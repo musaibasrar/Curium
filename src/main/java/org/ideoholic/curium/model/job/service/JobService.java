@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -36,7 +34,6 @@ import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
 import org.ideoholic.curium.model.job.dto.AddQueryDto;
-import org.ideoholic.curium.model.job.dto.QueriesDto;
 import org.ideoholic.curium.model.job.dto.FeedbackDto;
 import org.ideoholic.curium.model.job.dto.JobQuery;
 import org.ideoholic.curium.model.job.dto.JobQueryDto;
@@ -47,35 +44,32 @@ import org.ideoholic.curium.model.job.dto.UpdateQueriesDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.task.dto.Task;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class JobService {
-    @Autowired
-	private HttpServletRequest request;
+	private final HttpServletRequest request;
     
-    @Autowired
-    private HttpServletResponse response;
+    private final HttpServletResponse response;
     
-    @Autowired
-    private HttpSession httpSession;
+    private final HttpSession httpSession;
     
-    @Autowired
-    private JobDAO jobDAO;
+    private final JobDAO jobDAO;
 	
-    @Autowired
-    private StudentDetailsDAO studentDetailsDao;
+    private final StudentDetailsDAO studentDetailsDao;
     
-	@Autowired
-	private EmployeeDAO employeeDao;
+	private final EmployeeDAO employeeDao;
     
-    private static final int BUFFER_SIZE = 4096;
+	private final PropertiesUtil propertiesUtil;
 
 	
 	public ResultResponse addQuery(AddQueryDto addQueryDto,String branchId,String currentAcademicYear,String userLoginId ) {
@@ -150,11 +144,11 @@ public class JobService {
 				String resultTask =  jobDAO.addTask(taskList,Integer.parseInt(queryValues[1]));
 			}
 
-			String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
+			String sendQuerySMS = propertiesUtil.getPropertiesValue("sendjobsms");
 
 			if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
 				result.setSuccess(true);
-				String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
+				String feedbacklink = propertiesUtil.getPropertiesValue("feedbacklink");
 				String[] queryValues = resultQuery.split(":");
 				String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
 				feedbacklink = feedbacklink+param;
@@ -216,7 +210,7 @@ public class JobService {
 			}
 
 			result = jobDAO.completeQueries(QueryIdsList, userId);
-			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
+			String sendCompletedQuerySMS = propertiesUtil.getPropertiesValue("sendcompletedquerysms");
 
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
 				reportResponseDto.setQuerycompleted("success");
@@ -497,7 +491,7 @@ public class JobService {
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
@@ -752,7 +746,7 @@ public class JobService {
 			}
 
 			result = jobDAO.completeTasks(TaskIdsList, userId, jobStatus, Integer.parseInt(queriesDto.getJobId()));
-			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
+			String sendCompletedQuerySMS = propertiesUtil.getPropertiesValue("sendcompletedquerysms");
 
 
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS) && jobStatus.equalsIgnoreCase("Completed")) {

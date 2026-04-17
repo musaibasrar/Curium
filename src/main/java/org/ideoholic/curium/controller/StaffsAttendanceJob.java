@@ -1,20 +1,29 @@
 package org.ideoholic.curium.controller;
+
+import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.stereotype.Service;
 
-import org.ideoholic.curium.model.attendance.service.AttendanceService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
- public class StaffsAttendanceJob implements Job {
+@Slf4j
+@Service
+@RequiredArgsConstructor
+public class StaffsAttendanceJob implements Job {
 
-  public void execute(JobExecutionContext context) throws JobExecutionException {
-    try {
-    	System.out.println("In staff attendance job");
-         new AttendanceService().markDailyAttendanceJobStaff();
+	private final AttendanceService attendanceService;
 
-    } catch (Exception ex) {
-        System.out.println("entering the quartz config");  
+	public void execute(JobExecutionContext context) throws JobExecutionException {
+		try {
+			log.debug("In staff attendance job");
+			attendanceService.markDailyAttendanceJobStaff();
 
-    }
-  }
+		} catch (Exception ex) {
+			log.debug("entering the quartz config");
+
+		}
+	}
 }

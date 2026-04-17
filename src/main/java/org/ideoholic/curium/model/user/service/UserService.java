@@ -1,6 +1,5 @@
 package org.ideoholic.curium.model.user.service;
 
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Properties;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -56,47 +54,40 @@ import org.ideoholic.curium.model.user.dto.UserAuthenticationDto;
 import org.ideoholic.curium.model.user.dto.UserAuthenticationResponseDto;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.HibernateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-	@Autowired
-    private AdminService adminService;
+    private final AdminService adminService;
 
-    @Autowired
-    private FeesCollectionService feesCollectionService;
+    private final FeesCollectionService feesCollectionService;
 
-    @Autowired
-    private UserDAO userDao;
+    private final UserDAO userDao;
     
-    @Autowired
-    private YearDAO yearDao;
+    private final YearDAO yearDao;
 
-	@Autowired
-	private EmployeeDAO employeeDao;
+	private final EmployeeDAO employeeDao;
 	
-	@Autowired
-	private AccountDAO accountDao;
+	private final AccountDAO accountDao;
 	
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
+	private final StudentDetailsDAO studentDetailsDao;
 	
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
-    @Autowired
-    private HttpServletResponse response;
+    private final HttpServletResponse response;
     
-    @Autowired
-    private HttpSession httpSession;
+    private final HttpSession httpSession;
     
-	@Autowired
-	private StandardDetailsDAO standardDetailsDao;
+	private final StandardDetailsDAO standardDetailsDao;
+	
+	private final PropertiesUtil propertiesUtil;
 
     public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
         UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
@@ -528,17 +519,14 @@ public class UserService {
 		ResultResponse result = ResultResponse.builder().build();
 
         try {
-            Properties properties = new Properties();
-            InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-            properties.load(inputStream);
-            String backupDirectoryIS = properties.getProperty("backupdirectory");
+            String backupDirectoryIS = propertiesUtil.getPropertiesValue("backupdirectory");
 			log.error("the backup directory from input stream is " + backupDirectoryIS);
 
 
             int processcomplete; // to verify that either process completed or not
             String sqlExtension = ".sql";
             String backupLocation = backupDirectoryIS + fileName + sqlExtension;
-            String mysqlPath = properties.getProperty("mysqlpath");
+            String mysqlPath = propertiesUtil.getPropertiesValue("mysqlpath");
 			result.setMessage(backupLocation);
             Process runtimeProcess = Runtime.getRuntime().exec(mysqlPath + backupLocation);
 

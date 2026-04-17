@@ -15,7 +15,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,7 +41,6 @@ import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
-import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
 import org.ideoholic.curium.model.marksdetails.dto.GenerateReportDto;
 import org.ideoholic.curium.model.marksdetails.dto.GenerateReportResponseDto;
 import org.ideoholic.curium.model.marksdetails.dto.Marks;
@@ -61,38 +59,36 @@ import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
 import org.ideoholic.curium.model.subjectdetails.dto.SubSubject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subject;
 import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.ExamsDetails;
 import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.FinalTermMarks;
 import org.ideoholic.curium.util.MarksSheet;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MarksDetailsService {
 
-	@Autowired
-	private HttpServletResponse response;
+	private final HttpServletResponse response;
 	
-	@Autowired
-	private ExamDetailsDAO examDetailsDao;
+	private final ExamDetailsDAO examDetailsDao;
 
-	@Autowired
-	private MarksDetailsDAO marksDetailsDao;
+	private final MarksDetailsDAO marksDetailsDao;
 	
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
+	private final StudentDetailsDAO studentDetailsDao;
 	
-	@Autowired
-	private SubjectDetailsDAO subjectDetailsDao;
+	private final SubjectDetailsDAO subjectDetailsDao;
 
-	private static final int BUFFER_SIZE = 4096;
+	private final PropertiesUtil propertiesUtil;
 
 	public ResultResponse addMarks(MarksUpdateDto dto, String branchId, String currentAcademicYear, String userId) {
 
@@ -602,11 +598,11 @@ public class MarksDetailsService {
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
 			String presentDate = dto.getTotalDaysPresent();
-			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+			//String totalColumnNumber = propertiesUtil.getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 			List<MarksSheet> marksSheetList = new ArrayList<>();
-			String[] subjectListOtherExamIds = new DataUtil().getPropertiesValue("OtherExamsSubjects"+Integer.parseInt(branchId)).split(",");
+			String[] subjectListOtherExamIds = propertiesUtil.getPropertiesValue("OtherExamsSubjects"+Integer.parseInt(branchId)).split(",");
 			List<Integer> subjectListOtherExam = new ArrayList<>();	
 			Map<String,Double> subMarksTermOne = new HashMap<>();
 			Map<String,Double> subMarksTermTwo = new HashMap<>();
@@ -745,7 +741,7 @@ public class MarksDetailsService {
 				}
 				
 				//Read all the  subjects of term one and query their marks subject wise
-				String[] examTermOneIds = new DataUtil().getPropertiesValue("TermOneExams"+Integer.parseInt(branchId)).split(",");
+				String[] examTermOneIds = propertiesUtil.getPropertiesValue("TermOneExams"+Integer.parseInt(branchId)).split(",");
 				List<Integer> examTermOneIdsList = new ArrayList<>();	
 				for (String id : examTermOneIds) {
 					examTermOneIdsList.add(Integer.parseInt(id));
@@ -862,7 +858,7 @@ public class MarksDetailsService {
 					}
 					
 					
-					String[] examTermTwoIds = new DataUtil().getPropertiesValue("TermTwoExams"+Integer.parseInt(branchId)).split(",");
+					String[] examTermTwoIds = propertiesUtil.getPropertiesValue("TermTwoExams"+Integer.parseInt(branchId)).split(",");
 					List<Integer> examTermTwoIdsList = new ArrayList<>();	
 					
 						for (String id : examTermTwoIds) {
@@ -1242,7 +1238,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			String examC = student.getClassstudying();
 			//String examC = request.getParameter("examclass");
 			String[] examClass = examC.split("--");
-			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+			//String totalColumnNumber = propertiesUtil.getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 			List<MarksSheet> marksSheetList = new ArrayList<>();
@@ -1437,7 +1433,7 @@ public GenerateReportResponseDto generateReportParent(GenerateReportDto dto, Str
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
@@ -1517,7 +1513,7 @@ public GenerateReportResponseDto generateRankReport(GenerateReportDto dto, Strin
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
 			String examDetailsId = dto.getExamDetailsID();
-			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+			//String totalColumnNumber = propertiesUtil.getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			Exams examsList = examDetailsDao.getExamDetails(Integer.parseInt(examDetailsId));
 			List<MarksSheet> marksSheetList = new ArrayList<>();
@@ -1704,7 +1700,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String[] examClass = examC.split("--");
 		List<Integer> examIds = new ArrayList<Integer>();
 		String presentDate = dto.getTotalDaysPresent();
-		//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
+		//String totalColumnNumber = propertiesUtil.getPropertiesValue("totalColumnNumber");
 		//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 		for (String examId : dto.getExamIds()) {
 			examIds.add(Integer.parseInt(examId));
@@ -2307,7 +2303,7 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 
 public GenerateReportResponseDto getStartDate(String branchId) {
 	GenerateReportResponseDto result = GenerateReportResponseDto.builder().build();
-	String startDate = new DataUtil().getPropertiesValue("startdate"+branchId);
+	String startDate = propertiesUtil.getPropertiesValue("startdate"+branchId);
 	result.setStartDate(startDate);
 	return result;
 }
