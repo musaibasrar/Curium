@@ -1,11 +1,8 @@
 package org.ideoholic.curium.model.stampfees.service;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
@@ -27,27 +24,27 @@ import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class StampFeesService {
 	
-	@Autowired
-    private AccountDAO accountDao;
+    private final AccountDAO accountDao;
 	
-	@Autowired
-	private StampFeesDAO stampFeesDao;
+	private final StampFeesDAO stampFeesDao;
 
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
+	private final StudentDetailsDAO studentDetailsDao;
 	
-	@Autowired
-	private FeesCategoryDAO feesCategoryDao;
+	private final FeesCategoryDAO feesCategoryDao;
+
+	private final PropertiesUtil propertiesUtil;
 
 	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
@@ -315,22 +312,12 @@ public class StampFeesService {
 		
 		int result = 0;
 	 	
-	 	Properties properties = new Properties();
-		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		
-        		try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		    
-        		String ItemLedgerId = properties.getProperty(itemAccount);
-        		log.debug("The value of ItemLedgerId:{}", ItemLedgerId);
-		    if(ItemLedgerId!=null) {
-		    	result = Integer.parseInt(ItemLedgerId);
+        	int itemLedgerId = propertiesUtil.getIntPropertiesValue(itemAccount, -1);
+        	log.debug("The value of ItemLedgerId:{}", itemLedgerId);
+		    if(itemLedgerId != -1) {
+		    	result = itemLedgerId;
 		    }else {
-		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
-		    	result = Integer.parseInt(ItemLedger);
+		    	itemLedgerId = propertiesUtil.getIntPropertiesValue(itemAccount.toLowerCase(), 0);
 		    }
 		    
 		    return result;

@@ -1,7 +1,6 @@
 package org.ideoholic.curium.model.mess.stockmove.service;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,7 +8,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -40,32 +38,30 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.NumberToWord;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MessStockMoveService {
 
-	@Autowired
-	private HttpServletResponse response;
+	private final HttpServletResponse response;
 
-	@Autowired
-	private MessItemsService messItemsService;
+	private final MessItemsService messItemsService;
 
-	@Autowired
-    private AccountDAO accountDao;
+    private final AccountDAO accountDao;
 	
-	@Autowired
-	private MessItemsDAO messItemsDao;
+	private final MessItemsDAO messItemsDao;
 	
-	@Autowired
-	private MessStockEntryDAO messStockEntryDao;
+	private final MessStockEntryDAO messStockEntryDao;
 	
-	@Autowired
-	private MessStockMoveDAO messStockMoveDao;
+	private final MessStockMoveDAO messStockMoveDao;
+	
+	private final PropertiesUtil propertiesUtil;
 	
 	public MoveStockResponseDto saveStockMove(StockMoveDto dto, String branchId, String userId, String userName, String currentAcademicYear,String branchCode) {
 
@@ -555,24 +551,7 @@ public class MessStockMoveService {
 	}
 	
 	private Integer getLedgerAccountId(String itemAccount) {
-		
-	 	
-	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		
-        		try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		    
-        		String ItemLedgerId = properties.getProperty(itemAccount);
-		    
-		    if(ItemLedgerId!=null) {
-		    	return Integer.parseInt(ItemLedgerId);
-		    }else {
-		    	return 0;
-		    }
+        	return propertiesUtil.getIntPropertiesValue(itemAccount, 0);
 	}
 
 

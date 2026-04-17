@@ -1,39 +1,90 @@
 package org.ideoholic.curium.model.account.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
-import org.ideoholic.curium.model.account.dto.*;
+import org.ideoholic.curium.model.account.dto.AccountContraDto;
+import org.ideoholic.curium.model.account.dto.AccountDeleteDto;
+import org.ideoholic.curium.model.account.dto.AccountDto;
+import org.ideoholic.curium.model.account.dto.AccountFinancialYearDto;
+import org.ideoholic.curium.model.account.dto.AccountJournalDto;
+import org.ideoholic.curium.model.account.dto.AccountPaymentDto;
+import org.ideoholic.curium.model.account.dto.AccountReceiptDto;
+import org.ideoholic.curium.model.account.dto.Accountdetails;
+import org.ideoholic.curium.model.account.dto.Accountdetailsbalance;
+import org.ideoholic.curium.model.account.dto.Accountgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountssgroupmaster;
+import org.ideoholic.curium.model.account.dto.Accountsubgroupmaster;
+import org.ideoholic.curium.model.account.dto.BalanceSheetResponseDto;
+import org.ideoholic.curium.model.account.dto.CancelVoucherDto;
+import org.ideoholic.curium.model.account.dto.CreateAccountResponseDto;
+import org.ideoholic.curium.model.account.dto.CreateVoucherResponseDto;
+import org.ideoholic.curium.model.account.dto.CurrentFinancialYearResponseDto;
+import org.ideoholic.curium.model.account.dto.DayBookDto;
+import org.ideoholic.curium.model.account.dto.DayBookResponseDto;
+import org.ideoholic.curium.model.account.dto.ExportTrialBalanceDto;
+import org.ideoholic.curium.model.account.dto.ExportVoucherDto;
+import org.ideoholic.curium.model.account.dto.Financialaccountingyear;
+import org.ideoholic.curium.model.account.dto.IncomeStatementDto;
+import org.ideoholic.curium.model.account.dto.IncomeStatementResponseDto;
+import org.ideoholic.curium.model.account.dto.LedgerAccBalanceDto;
+import org.ideoholic.curium.model.account.dto.PrintSearchJournalEntriesDto;
+import org.ideoholic.curium.model.account.dto.ReceiptPaymentResponseDto;
+import org.ideoholic.curium.model.account.dto.SearchJournalEntriesResponseDto;
+import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesDto;
+import org.ideoholic.curium.model.account.dto.SearchLedgerEntriesResponseDto;
+import org.ideoholic.curium.model.account.dto.SearchSingleLedgerEntriesResponseDto;
+import org.ideoholic.curium.model.account.dto.TrailBalanceDto;
+import org.ideoholic.curium.model.account.dto.TrialBalanceResponseDto;
+import org.ideoholic.curium.model.account.dto.ViewNextVoucherDto;
+import org.ideoholic.curium.model.account.dto.ViewNextVoucherResponseDto;
+import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
+import org.ideoholic.curium.model.account.dto.VoucherPrintDto;
+import org.ideoholic.curium.model.account.dto.VoucherPrintResponseDto;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.Map.Entry;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class AccountService {
 
-		@Autowired
-	    private HttpServletResponse response;
+	    private final HttpServletResponse response;
 		
-		@Autowired
-	    private AccountDAO accountDao;
+	    private final AccountDAO accountDao;
+		
+	    private final PropertiesUtil propertiesUtil;
 	    
-	    private static final int BUFFER_SIZE = 4096;
-
 
 	public ResultResponse saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -1634,7 +1685,7 @@ public class AccountService {
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
@@ -1971,7 +2022,7 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
@@ -2386,31 +2437,23 @@ public SearchSingleLedgerEntriesResponseDto searchSingleLedgerEntries(String acc
 		values[0]=totalBalanceAccCash;
 		values[1]=totalBalanceAccBank;
 		return values;
-	
-}
+	}
 	
 	private String getLedgerAccountId(String itemAccount) {
 		String result = "";
-	 	
-	 	Properties properties = new Properties();
-	    InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		
-	    		try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 		    
-	    		String ItemLedgerId = properties.getProperty(itemAccount);
-	    		System.out.println("Item Ledger Name "+itemAccount);
-		    if(ItemLedgerId!=null) {
-		    	result = ItemLedgerId;
-		    }else {
-		    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
-		    	result = ItemLedger.toLowerCase();
-		    }
-		    
-		    return result;
+    	String itemLedgerId = propertiesUtil.getPropertiesValue(itemAccount);
+    	log.debug("Item Ledger Name {} - {}", itemAccount, itemLedgerId);
+
+	    if(itemLedgerId!=null) {
+	    	result = itemLedgerId;
+	    } else {
+	    	itemLedgerId = propertiesUtil.getPropertiesValue(itemAccount.toLowerCase());
+	    	log.debug("Item Ledger Name lower case {} - {}", itemAccount, itemLedgerId);
+	    	result = itemLedgerId.toLowerCase();
+	    }
+	    
+	    return result;
 	}
 	
 	private BigDecimal[] getTotalBalanceCashBankIncome(Accountdetails accountDetails, List<VoucherEntrytransactions> voucherTransactions, List<Integer> cashLedgeridRP, List<Integer> bankLedgeridRP) {

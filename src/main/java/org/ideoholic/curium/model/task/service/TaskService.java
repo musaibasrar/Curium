@@ -28,30 +28,32 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.ideoholic.curium.model.department.dto.Department;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.job.dao.JobDAO;
-import org.ideoholic.curium.model.parents.dto.Parents;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.job.dto.JobQuery;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
-import org.ideoholic.curium.model.job.dto.JobQuery;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class TaskService {
 
-    @Autowired
-	private HttpServletRequest request;
-	@Autowired
-	private HttpServletResponse response;
-	@Autowired
-	private HttpSession httpSession;
+	private final HttpServletRequest request;
 
-	@Autowired
-	private JobDAO jobDAO;
-	private static final int BUFFER_SIZE = 4096;
+	private final HttpServletResponse response;
+
+	private final HttpSession httpSession;
+
+	private final JobDAO jobDAO;
+	
+	private final PropertiesUtil propertiesUtil;
 
 	public boolean addQuery() {
 		
@@ -95,11 +97,11 @@ public class TaskService {
 			 		query.setExternalid(externalId);
 			 		
 					String resultQuery = jobDAO.addQuery(query);
-					String sendQuerySMS = new DataUtil().getPropertiesValue("sendjobsms");
+					String sendQuerySMS = propertiesUtil.getPropertiesValue("sendjobsms");
 									
 					if(resultQuery!=null && "yes".equalsIgnoreCase(sendQuerySMS)) {
 						result = true;
-						 String feedbacklink = new DataUtil().getPropertiesValue("feedbacklink");
+						 String feedbacklink = propertiesUtil.getPropertiesValue("feedbacklink");
 						 String[] queryValues = resultQuery.split(":");
 						 String param = "?id="+queryValues[1]+"&no="+pidContact[0]+"";
 						 feedbacklink = feedbacklink+param;
@@ -162,7 +164,7 @@ public class TaskService {
 			}
 			
 			result = jobDAO.completeQueries(QueryIdsList, userId);
-			String sendCompletedQuerySMS = new DataUtil().getPropertiesValue("sendcompletedquerysms");
+			String sendCompletedQuerySMS = propertiesUtil.getPropertiesValue("sendcompletedquerysms");
 			
 			if(!result.isEmpty() && "yes".equalsIgnoreCase(sendCompletedQuerySMS)) {
 				request.setAttribute("querycompleted","success");
@@ -478,7 +480,7 @@ public class TaskService {
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream
@@ -490,7 +492,7 @@ public class TaskService {
 			outStream.close();
 			result = true;
 		} catch (Exception e) {
-			System.out.println("" + e);
+			log.error(e.getMessage(), e);
 		}
 		return result;
 	}

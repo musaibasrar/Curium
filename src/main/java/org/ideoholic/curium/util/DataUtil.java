@@ -5,11 +5,8 @@
 
 package org.ideoholic.curium.util;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.HttpSession;
@@ -103,22 +100,6 @@ public class DataUtil {
         }
         
     }
-     
-     
-     public String getPropertiesValue(String key){
-    	 String value= null;
-    	 Properties properties = new Properties();
-         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-         try {
- 			properties.load(inputStream);
- 		} catch (IOException e1) {
- 			// TODO Auto-generated catch block
- 			e1.printStackTrace();
- 		}
-         value = properties.getProperty(key);
-         return value;
-     }
-
 
    public static String dateFromatConversionDash(String ddmmyyyy) {
 	   String date = null;

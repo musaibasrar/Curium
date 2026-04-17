@@ -1,18 +1,15 @@
 package org.ideoholic.curium.model.sendsms.service;
 
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Properties;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -23,9 +20,8 @@ import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.QueryUtil;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -40,10 +36,9 @@ import lombok.extern.slf4j.Slf4j;
 public class SmsService {
 	
 	private final SmsDAO smsDao;
-	    
-	private static DecimalFormat df2 = new DecimalFormat(".##");
 
-
+	private final PropertiesUtil propertiesUtil;
+	
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
 
 		int noOfRecords = 100;
@@ -212,20 +207,17 @@ public class SmsService {
 		int responseCode = 0;
 		try 
 		{
-			Properties properties = new Properties();
-	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-	        properties.load(inputStream);
 	        
-	        String sendsms = properties.getProperty(templateType+"sendsms");
+	        String sendsms = propertiesUtil.getPropertiesValue(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
 	        	
-	        String smsuser = properties.getProperty("smsuser");
-	        String smssender = properties.getProperty("smssender");
-	        String apikey = properties.getProperty("apikey");
-	        String peid = properties.getProperty("peid");
-	        String templateid = properties.getProperty(templateType+"templateid");
-	        String templatemessage = properties.getProperty(templateType+"templatemessage");
+	        String smsuser = propertiesUtil.getPropertiesValue("smsuser");
+	        String smssender = propertiesUtil.getPropertiesValue("smssender");
+	        String apikey = propertiesUtil.getPropertiesValue("apikey");
+	        String peid = propertiesUtil.getPropertiesValue("peid");
+	        String templateid = propertiesUtil.getPropertiesValue(templateType+"templateid");
+	        String templatemessage = propertiesUtil.getPropertiesValue(templateType+"templatemessage");
 	        String[] messageSeq = message.split(":");
 	        String var1 = "";
 	        String var2 = "";
@@ -367,16 +359,10 @@ public class SmsService {
 		int responseCode = 0;
 		List<SMSReportResponse> reportResponses = null;
 		 try {
-			 
-			 
-			 	Properties properties = new Properties();
-		        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		        properties.load(inputStream);
-		        
-		        String smsuser = properties.getProperty("smsuser");
-		        String smssender = properties.getProperty("smssender");
-		        String apikey = properties.getProperty("apikey");
-		        String peid = properties.getProperty("peid");
+		        String smsuser = propertiesUtil.getPropertiesValue("smsuser");
+		        String smssender = propertiesUtil.getPropertiesValue("smssender");
+		        String apikey = propertiesUtil.getPropertiesValue("apikey");
+		        String peid = propertiesUtil.getPropertiesValue("peid");
 			 
 	            // Get the current date and two days earlier date
 	            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

@@ -1,56 +1,67 @@
 package org.ideoholic.curium.model.mess.item.service;
 
-import lombok.extern.slf4j.Slf4j;
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
-import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
-import org.ideoholic.curium.model.mess.item.dto.*;
+import org.ideoholic.curium.model.mess.item.dto.InvoiceDetailsResponseDto;
+import org.ideoholic.curium.model.mess.item.dto.InvoiceIdsDto;
+import org.ideoholic.curium.model.mess.item.dto.IssuanceReportDto;
+import org.ideoholic.curium.model.mess.item.dto.IssuanceReportResponseDto;
+import org.ideoholic.curium.model.mess.item.dto.ItemDetailsDto;
+import org.ideoholic.curium.model.mess.item.dto.ItemDetailsResponseDto;
+import org.ideoholic.curium.model.mess.item.dto.ItemsDto;
+import org.ideoholic.curium.model.mess.item.dto.MessIdsDto;
+import org.ideoholic.curium.model.mess.item.dto.MessItems;
+import org.ideoholic.curium.model.mess.item.dto.PoMaster;
+import org.ideoholic.curium.model.mess.item.dto.PurchaseDto;
+import org.ideoholic.curium.model.mess.item.dto.PurchaseOrder;
+import org.ideoholic.curium.model.mess.item.dto.StockReportDto;
+import org.ideoholic.curium.model.mess.item.dto.StockReportResponseDto;
 import org.ideoholic.curium.model.mess.stockentry.dao.MessStockEntryDAO;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessInvoiceDetails;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockAvailability;
 import org.ideoholic.curium.model.mess.stockentry.dto.MessStockEntry;
 import org.ideoholic.curium.model.mess.stockmove.dao.MessStockMoveDAO;
 import org.ideoholic.curium.model.mess.stockmove.dto.MessStockMove;
-import org.ideoholic.curium.model.mess.supplier.action.MessSuppliersActionAdapter;
 import org.ideoholic.curium.model.mess.supplier.dao.MessSuppliersDAO;
 import org.ideoholic.curium.model.mess.supplier.dto.MessSuppliers;
 import org.ideoholic.curium.model.mess.supplier.service.MessSuppliersService;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.ideoholic.curium.util.StockIssuance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MessItemsService {
 
-	@Autowired
-	private MessSuppliersService messSuppliersService;
+	private final MessSuppliersService messSuppliersService;
 	
-	@Autowired
-    private AccountDAO accountDao;
+    private final AccountDAO accountDao;
 	
-	@Autowired
-	private MessItemsDAO messItemsDao;
+	private final MessItemsDAO messItemsDao;
 
-	@Autowired
-	private MessStockEntryDAO messStockEntryDao;
+	private final MessStockEntryDAO messStockEntryDao;
 	
-	@Autowired
-	private MessStockMoveDAO messStockMoveDao;
+	private final MessStockMoveDAO messStockMoveDao;
 
-	@Autowired
-	private MessSuppliersDAO messSuppliersDao;
+	private final MessSuppliersDAO messSuppliersDao;
 
+	private final PropertiesUtil propertiesUtil;
 
 	public ResultResponse viewItemDetails(String branchId) {
 
@@ -119,18 +130,8 @@ public class MessItemsService {
 
 
 	private Integer getLedgerAccountId(String itemAccount) {
-		
-	 	
-	 	Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-		
-        		try {
-					properties.load(inputStream);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
 		    
-        		String ItemLedgerId = properties.getProperty(itemAccount);
+        	String ItemLedgerId = propertiesUtil.getPropertiesValue(itemAccount);
 		    
 		    if(ItemLedgerId!=null) {
 		    	return Integer.parseInt(ItemLedgerId);

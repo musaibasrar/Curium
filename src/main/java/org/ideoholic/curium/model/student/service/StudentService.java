@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
@@ -65,8 +63,10 @@ import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.model.student.dto.StudentsSuperAdminResponseDto;
 import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -101,13 +101,10 @@ public class StudentService {
 	
 	private final FamilyDao familyDao;
 	
+	private final PropertiesUtil propertiesUtil;
+	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
-
-	/**
-	 * Size of a byte buffer to read/write file
-	 */
-	private static final int BUFFER_SIZE = 4096;
 
 	public ResultResponse addStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -374,26 +371,15 @@ public class StudentService {
 	private int getLedgerAccountId(String itemAccount) {
 
 		int result = 0;
-
-		Properties properties = new Properties();
-		InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-
-		try {
-			properties.load(inputStream);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		String ItemLedgerId = properties.getProperty(itemAccount);
-
-		if(ItemLedgerId!=null) {
-			result = Integer.parseInt(ItemLedgerId);
-		}else {
-			String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
-			result = Integer.parseInt(ItemLedger.toLowerCase());
-		}
-
-		return result;
+	 	
+    	int itemLedgerId = propertiesUtil.getIntPropertiesValue(itemAccount, -1);
+	    if(itemLedgerId != -1) {
+	    	result = itemLedgerId;
+	    }else {
+	    	itemLedgerId = propertiesUtil.getIntPropertiesValue(itemAccount.toLowerCase(), 0);
+	    }
+	    
+	    return result;
 	}
 
 	public StudentDetailsDto viewAllStudents(String branchId) {
@@ -1308,7 +1294,7 @@ public class StudentService {
 			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
 
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[Constants.BUFFER_SIZE];
 			int bytesRead = -1;
 
 			// write bytes read from the input stream into the output stream

@@ -35,9 +35,10 @@ import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -46,16 +47,16 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ExamDetailsService {
 	
-	@Autowired
-	private ExamDetailsDAO examDetailsDao;
+	private final ExamDetailsDAO examDetailsDao;
 	
-	@Autowired
-	private StudentDetailsDAO studentDetailsDao;
+	private final StudentDetailsDAO studentDetailsDao;
 	
-	@Autowired
-	private FeesCategoryDAO feesCategoryDAO;
+	private final FeesCategoryDAO feesCategoryDAO;
+	
+	private final PropertiesUtil propertiesUtil;
 
 	public ResultResponse addExam(AddExamDto addExamDto, String branchId) {
 
@@ -412,7 +413,7 @@ public class ExamDetailsService {
 
 				for (Studentfeesstructure studentFeesStructure : feesstructure) {
 
-					String[] feesStartMonth = new DataUtil().getPropertiesValue("feesstartmonth").split("/");
+					String[] feesStartMonth = propertiesUtil.getPropertiesValue("feesstartmonth").split("/");
 					String[] feesStartYear = currentAcademicYear.split("/");
 					 LocalDate currentDate = LocalDate.now();
 				     LocalDate startDate = LocalDate.of(Integer.parseInt(feesStartYear[0]), Integer.parseInt(feesStartMonth[1]), Integer.parseInt(feesStartMonth[0]));

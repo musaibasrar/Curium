@@ -7,7 +7,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import java.util.Properties;
 import javax.servlet.http.HttpServletResponse;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
@@ -46,46 +44,35 @@ import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class FeesService {
         
-			@Autowired
-            private HttpServletResponse response;
+            private final HttpServletResponse response;
 			
-			@Autowired
-			private YearDAO yearDao;
-			
-			@Autowired
-		    private AccountDAO accountDao;
+		    private final AccountDAO accountDao;
 
-			@Autowired
-			private feesDetailsDAO feesDetailsDao;
+			private final feesDetailsDAO feesDetailsDao;
 
-			@Autowired
-			private FeesCategoryDAO feesCategoryDao;
+			private final FeesCategoryDAO feesCategoryDao;
 
-			@Autowired
-			private feesCollectionDAO feesCollectionDAO;
+			private final feesCollectionDAO feesCollectionDAO;
 			
-			@Autowired
-			private StudentDetailsDAO studentDetailsDao;
+			private final StudentDetailsDAO studentDetailsDao;
 			
-			@Autowired
-			private StandardDetailsDAO standardDetailsDao;
-            /**
-             * Size of a byte buffer to read/write file
-             */
-            private static final int BUFFER_SIZE = 4096;
-        
+			private final StandardDetailsDAO standardDetailsDao;
 			
+			private final PropertiesUtil propertiesUtil;        
 
 
         public FeescategoryResponseDto viewFees(String branchid,String currentAcademicYear ) {
@@ -241,7 +228,7 @@ public class FeesService {
                         // get output stream of the response
                         OutputStream outStream = response.getOutputStream();
 
-                        byte[] buffer = new byte[BUFFER_SIZE];
+                        byte[] buffer = new byte[Constants.BUFFER_SIZE];
                         int bytesRead = -1;
 
                         // write bytes read from the input stream into the output stream
@@ -943,22 +930,12 @@ response.getWriter().println(buffer.toString());
 		private int getLedgerAccountId(String itemAccount) {
 
 			int result = 0;
-
-		 	Properties properties = new Properties();
-			InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-
-	        		try {
-						properties.load(inputStream);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-
-	        		String ItemLedgerId = properties.getProperty(itemAccount);
+	        	String ItemLedgerId = propertiesUtil.getPropertiesValue(itemAccount);
 
 			    if(ItemLedgerId!=null) {
 			    	result = Integer.parseInt(ItemLedgerId);
 			    }else {
-			    	String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
+			    	String ItemLedger = propertiesUtil.getPropertiesValue(itemAccount.toLowerCase());
 			    	result = Integer.parseInt(ItemLedger.toLowerCase());
 			    }
 
@@ -1197,7 +1174,7 @@ response.getWriter().println(buffer.toString());
 
 		public FeescategoryResponseDto getFeesMonths(String branchId) {
 			FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
-			feescategoryResponseDto.setFeesMonths(new DataUtil().getPropertiesValue("feesmonths"+branchId));
+			feescategoryResponseDto.setFeesMonths(propertiesUtil.getPropertiesValue("feesmonths"+branchId));
 			return feescategoryResponseDto;
 		}
 }

@@ -1,12 +1,10 @@
 package org.ideoholic.curium.model.student.service;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -34,7 +32,7 @@ import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,6 +44,7 @@ public class StudentServiceArchive {
 
 	private final parentsDetailsDAO parentsDetailsDao;
 	private final StudentDetailsDAO studentDetailsDao;
+	private final PropertiesUtil propertiesUtil;
 	private final StampFeesDAO stampFeesDao;
 	private final AccountDAO accountDao;
 	private final UserDAO userDao;
@@ -672,30 +671,19 @@ public class StudentServiceArchive {
         }
     }
 
-    private int getLedgerAccountId(String itemAccount) {
+	private int getLedgerAccountId(String itemAccount) {
 
-        int result = 0;
-
-        Properties properties = new Properties();
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
-
-        try {
-            properties.load(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String ItemLedgerId = properties.getProperty(itemAccount);
-
-        if(ItemLedgerId!=null) {
-            result = Integer.parseInt(ItemLedgerId);
-        }else {
-            String ItemLedger = properties.getProperty(itemAccount.toLowerCase());
-            result = Integer.parseInt(ItemLedger.toLowerCase());
-        }
-
-        return result;
-    }
+		int result = 0;
+	 	
+    	int itemLedgerId = propertiesUtil.getIntPropertiesValue(itemAccount, -1);
+	    if(itemLedgerId != -1) {
+	    	result = itemLedgerId;
+	    }else {
+	    	itemLedgerId = propertiesUtil.getIntPropertiesValue(itemAccount.toLowerCase(), 0);
+	    }
+	    
+	    return result;
+	}
 
     public String updateStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles) {
         Student student = StudentMapper.INSTANCE.mapStudent(createStudentDto);
