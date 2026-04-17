@@ -391,16 +391,16 @@ body {
 				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
 						<c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
-						    <c:when test="${dataSubParts[0] == '1'}"><label style="text-transform: uppercase;">1st Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '2'}"><label style="text-transform: uppercase;">2nd Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '3'}"><label style="text-transform: uppercase;">3rd Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '4'}"><label style="text-transform: uppercase;">4th Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '5'}"><label style="text-transform: uppercase;">5th Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '6'}"><label style="text-transform: uppercase;">6th Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '7'}"><label style="text-transform: uppercase;">7th Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '8'}"><label style="text-transform: uppercase;">8th Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '9'}"><label style="text-transform: uppercase;">9th Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '10'}"><label style="text-transform: uppercase;">10th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '1'}"><label >1<sup>st</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '2'}"><label>2<sup>nd</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '3'}"><label>3<sup>rd</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '4'}"><label>4<sup>th</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '5'}"><label>5<sup>th</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '6'}"><label>6<sup>th</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '7'}"><label>7<sup>th</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '8'}"><label>8<sup>th</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '9'}"><label>9<sup>th</sup> Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '10'}"><label>10<sup>th</sup> Std.</label></c:when>
 						</c:choose>
 				</b> Examination with the following details.
 			</div>
@@ -424,16 +424,16 @@ body {
 							:
 						<c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
-						    <c:when test="${dataSubParts[0] == '1'}">1st Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '2'}">2nd Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '3'}">3rd Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '4'}">4th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '5'}">5th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '6'}">6th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '7'}">7th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '8'}">8th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '9'}">9th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '10'}">10th Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '1'}">1<sup>st</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '2'}">2<sup>nd</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '3'}">3<sup>rd</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '4'}">4<sup>th</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '5'}">5<sup>th</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '6'}">6<sup>th</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '7'}">7<sup>th</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '8'}">8<sup>th</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '9'}">9<sup>th</sup> Std.</c:when>
+						    <c:when test="${dataSubParts[0] == '10'}">10<sup>th</sup> Std.</c:when>
 						</c:choose>
 					</b></td>
 					<td
