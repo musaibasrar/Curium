@@ -655,4 +655,19 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/index_stock")
+	public String getIndexStock() {
+		return "index_stock";
+	}
+	
+	@GetMapping("/header_stock")
+	public String getHeaderStock() {
+		return "header_stock";
+	}
+	
+	@GetMapping("/left_stock")
+	public String getLeftStock() {
+		return "left_stock";
+	}
 }

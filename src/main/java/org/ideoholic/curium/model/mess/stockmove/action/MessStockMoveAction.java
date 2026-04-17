@@ -64,8 +64,9 @@ public class MessStockMoveAction {
     	messStockMoveActionAdapter.viewStockEntryDetails();
     	
     	//Get Customers
-    	studentActionAdapter.viewStudentsParentsPerBranch();
-		
+    	//studentActionAdapter.viewStudentsParentsPerBranch();
+    	
+    	studentActionAdapter.viewStudentsParentsAllBranches();
 		
 		messStockMoveActionAdapter.viewStockMoveDetails();
 		return "issuestock";

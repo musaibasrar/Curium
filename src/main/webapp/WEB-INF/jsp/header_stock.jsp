@@ -132,32 +132,17 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/roshan/images/roshanheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td>
-							<a target="leftFrame" href="/roshan/left_feescollector"><img
-									src="/roshan/images/home.svg" width="18" height="18" alt="Home" style="vertical-align: bottom;"/>
-									Home		
-								</a>
-							</td>
-							
-							<td><a target="mainFrame"
-								href="/roshan/FeesProcess/feesCollect"> <img
-									src="/roshan/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+							<td><a target="leftFrame" href="/roshan/left_stock"> <img
+									src="/roshan/images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
-							
-							<td>
-							<a target="leftFrame" href="/roshan/reports_feescollector"><img
+
+							<td >
+								<a target="leftFrame" href="/roshan/reports_stock"><img
 									src="/roshan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							</td>
-							
-							<td ><a target="mainFrame"
-								href="/roshan/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/roshan/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td>
 
 							<td ><a target="_parent"
 								href="/roshan/UserProcess/logout"><img

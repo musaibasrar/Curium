@@ -142,7 +142,7 @@ public class StudentService {
 			
 			if(studentDB!=null) {
 	        	String UID = studentDB.getStudentexternalid();
-	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
+	        	String numbersOnly = UID.substring(4);
 	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
 	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
@@ -1543,6 +1543,40 @@ public void checkDuplicateStudent(String aadhaarNo, String studentName, String d
 			out.flush();
 			out.close();
 		}
+	}
+	
+	
+	public StudentListResponseDto viewStudentsParentsAllBranches(String branchId) {
+
+		StudentListResponseDto result = StudentListResponseDto.builder().build();
+		//String pages = "1";
+		if(branchId!=null){
+			try {
+
+				List<Object[]> list = new studentDetailsDAO().readStudentsParentsAllBranches();
+
+				List<Parents> parentDetails = new ArrayList<Parents>();
+				for(Object[] parentdetails: list){
+					Parents parent = new Parents();
+					Student student = new Student();
+					student.setSid((Integer)parentdetails[0]);
+					student.setStudentexternalid((String)parentdetails[1]);
+					student.setAdmissionnumber((String)parentdetails[2]);
+					student.setName((String)parentdetails[3]);
+					student.setClassstudying((String)parentdetails[4]);
+					parent.setFathersname((String)parentdetails[5]);
+					parent.setMothersname((String)parentdetails[6]);
+					parent.setStudent(student);
+					parentDetails.add(parent);
+				}
+
+				result.setParentDetails(parentDetails);
+				result.setSuccess(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 }

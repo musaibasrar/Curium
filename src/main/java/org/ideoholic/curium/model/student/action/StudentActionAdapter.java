@@ -380,4 +380,10 @@ public class StudentActionAdapter {
 		String dob = request.getParameter("dob");
 		studentService.checkDuplicateStudent(aadhaarNo, studentName, DateUtil.dateFromatConversionSlash(dob));
 	}
+    
+    public void viewStudentsParentsAllBranches() {
+
+        StudentListResponseDto response = studentService.viewStudentsParentsAllBranches(httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("studentList", response.getParentDetails());
+    }
 }

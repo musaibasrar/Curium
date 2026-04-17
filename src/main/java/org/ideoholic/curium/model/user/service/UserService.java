@@ -104,7 +104,7 @@ public class UserService {
 			}
 			
 			//get the Previous Year List
-			int previousYears = 4;
+			int previousYears = 7;
 			int futureYears = 1;
 
 			String[] parts = academicyear.split("/");
@@ -763,15 +763,20 @@ public class UserService {
 			response.addCookie(cookie);
 			
 			//get the Previous Year List
+			int previousYears = 7;
+			int futureYears = 1;
+
 			String[] parts = academicyear.split("/");
 			int startYear = Integer.parseInt(parts[0]);
 
 			List<String> academicYears = new ArrayList<>();
-			for (int i = 0; i < 4; i++) {
-			    int year1 = startYear - i;
+
+			for (int i = -previousYears; i <= futureYears; i++) {
+			    int year1 = startYear + i;
 			    int year2 = year1 + 1;
-			    academicYears.add(year1 + "/" + (String.valueOf(year2).substring(2)));
+			    academicYears.add(year1 + "/" + String.valueOf(year2).substring(2));
 			}
+
 			result.setPreviousAcademicYears(academicYears);
 			// end
 			

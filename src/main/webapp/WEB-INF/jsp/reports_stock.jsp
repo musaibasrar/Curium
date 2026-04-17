@@ -291,117 +291,56 @@ for(Cookie cookie : cookies){
 
         <div id="container" style="width: 95%" >
             
-             
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
+            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
+            				 <a target="mainFrame" href="/roshan/MessItemsMoveProcess/generateBillsReport" style="font-size: 12px;">Receipts Report</a>
             			</td>
             		</tr>
             		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/roshan/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/roshan/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Unpaid Receipts</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
-
-            	  <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+            
             <div style="padding-left: 0px;padding-right: 0px;">
+            
             	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesReportDue" style="font-size: 12px;">Fees Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/feescollectiondetailscategory" style="font-size: 12px;">Fees Collection Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesDueReportHeadWise" style="font-size: 12px;">Fees Due Head Wise</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/roshan/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            				 <a target="mainFrame" href="/roshan/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            				 <a target="mainFrame" href="/roshan/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/roshan/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
+            				<a target="mainFrame" href="/roshan/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
+            				 <a target="mainFrame" href="/roshan/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/otherfeesCollectionDetails" style="font-size: 12px;">Other Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/defaulterReport" style="font-size: 12px;">Defaulter Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/dndReport" style="font-size: 12px;">DND Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/roshan/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/roshan/FeesProcess/feesOutstanding" style="font-size: 12px;">Fees Outstanding</a>
-            			</td>
-            		</tr>
-                </table>
+            	</table>
             </div>
             
             </div>

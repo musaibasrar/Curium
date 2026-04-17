@@ -142,6 +142,8 @@ form{
                 	window.open('/roshan/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/roshan/index_parents','_self');
+                }else if(type=='stock'){
+                	window.open('/roshan/index_stock','_self');
                 }
             }
             else if(!flag1){
