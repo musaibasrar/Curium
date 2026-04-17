@@ -15,10 +15,10 @@
 <html>
 <head>
 <title>Progress Report</title>
-
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
 <style>
 body {
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: "Times New Roman", Times, serif;
 	background: #f5f5f5;
 }
 
@@ -125,7 +125,7 @@ body {
 }
 
 .totalbox {
-	margin-top: 10px;
+	margin-top: 50px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -167,20 +167,34 @@ body {
 	text-align: center;
 }
 
-.footer{
-    text-align:right;
-    margin-top:20px;
-    font-weight:bold;
+.footer {
+    text-align: right;
+    margin-top: 20px;
+    font-weight: bold;
     color: blue;
 }
 
+.signature {
+    display: block;
+    margin-left: auto;
+    margin-bottom: -10px;
+}
+
+.headmaster {
+    padding-right: 90px;  /* 👈 required spacing */
+}
+
+.school-info {
+    font-weight: 700;
+    font-size: 11px;
+}
 .printbtn {
 	text-align: center;
 	margin-top: 20px;
 }
 
 .cce {
-	font-family: "Brush Script MT", cursive;
+	font-family: "Alex Brush", cursive;
 	font-size: 22px;
 	color: #1975d0;
 	font-weight: bold;
@@ -335,7 +349,7 @@ body {
 					<b>SCHOOL DISE CODE : 29050505406</b>
 				</div>
 				<div>
-					<b style="color: green"><label style="font-size:12px;text-transform: upppercase;">Quadri Educational Trust®</label></b>
+					<b style="color: green"><label style="font-size:12px;text-transform: uppercase;">Quadri Educational Trust®</label></b>
 				</div>
 				<div>
 					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
@@ -350,10 +364,9 @@ body {
 
 				<div class="schoolname">
 					<h3 style="font-size: 19px;">QUADRI GROUP OF INSTITUTIONS</h3>
-					<h2 style="font-size: 31px;">HAMIDULLA ENGLISH MEDIUM HIGH
-						SCHOOL</h2>
+					<h2 style="font-size: 28px;">HAMIDULLA ENGLISH MEDIUM HIGH SCHOOL</h2>
 					<div>
-						<b>MANGALGI TQ: CHITGUPPA DIST: BIDAR 585329</b>
+						<b><label style="font-size:19px;text-transform: uppercase;">MANGALGI TQ: CHITGUPPA DIST: BIDAR 585329</label></b>
 					</div>
 				</div>
 
@@ -363,31 +376,31 @@ body {
 
 
 		<div class="title">
-			<h2>PROGRESS
-				REPORT</h2>
-			<div style="font-size: 20px;font-weight:bold;">
+			<h2><label style="font-size:29px;text-transform: uppercase;">PROGRESS
+				REPORT</label></h2>
+			<div style="font-size: 21px;font-weight:bold;">
 			<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}" />
 			<c:set var="startYear" value="${yearParts[0]}" />
 			<c:set var="endYear" value="${startYear + 1}" />
 
 			For the Academic Year ${startYear}-${endYear}</div>
-			<div class="cce" style="font-size: 25px;">Continuous And
+			<div class="cce" style="font-size: 27px;">Continuous And
 				Comprehensive Evaluation</div>
-			<div class="certifyline" style="font-size: 13px;font-weight:bold;">
+			<div class="certifyline" style="font-size: 16px;font-weight:bold;">
 				This is to certify that the below mentioned candidate has passed <b>
 				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
 						<c:choose>
-						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
-						    <c:when test="${dataSubParts[0] == '1'}">1st Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '2'}">2nd Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '3'}">3rd Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '4'}">4th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '5'}">5th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '6'}">6th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '7'}">7th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '8'}">8th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '9'}">9th Std.</c:when>
-						    <c:when test="${dataSubParts[0] == '10'}">10th Std.</c:when>
+						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
+						    <c:when test="${dataSubParts[0] == '1'}"><label style="text-transform: uppercase;">1st Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '2'}"><label style="text-transform: uppercase;">2nd Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '3'}"><label style="text-transform: uppercase;">3rd Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '4'}"><label style="text-transform: uppercase;">4th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '5'}"><label style="text-transform: uppercase;">5th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '6'}"><label style="text-transform: uppercase;">6th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '7'}"><label style="text-transform: uppercase;">7th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '8'}"><label style="text-transform: uppercase;">8th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '9'}"><label style="text-transform: uppercase;">9th Std.</label></c:when>
+						    <c:when test="${dataSubParts[0] == '10'}"><label style="text-transform: uppercase;">10th Std.</label></c:when>
 						</c:choose>
 				</b> Examination with the following details.
 			</div>
@@ -400,14 +413,14 @@ body {
 
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Enrollment (SATS)
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment (SATS)
 							No : <c:out value="${Parents.parents.student.sts}" /></b></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Roll
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
 							No :
 					<c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Class
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
 							:
 						<c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
@@ -424,7 +437,7 @@ body {
 						</c:choose>
 					</b></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 14px;"><b>Date of Birth
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
 							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td>
 				</tr>
 				<tr>
@@ -506,6 +519,7 @@ body {
 									     <!-- Initialize grand totals -->
 								        <c:set var="grandTotalMarksObtained" value="0" />
 								        <c:set var="grandTotalMaxMarks" value="0" />
+								        <c:set var="englishexam" value="" />
 						        <c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry" varStatus="status">
 						            <tr>
 						                <td class="marksTableCellLeft" style="width: 20%;"><c:out value="${subjectEntry.key}" /></td>
@@ -527,7 +541,6 @@ body {
 						                                <c:set var="parts" value="${fn:split(markStr, '/')}" />
 						                                <c:set var="secured" value="${parts[0]}" />
 						                                <c:set var="maxPart" value="${parts[1]}" />
-						                                
 						                                <!-- Extract max marks (before space or parenthesis) -->
 						                                <c:set var="maxMarks" value="${fn:trim(fn:substringBefore(maxPart, ' '))}" />
 						                                <c:if test="${empty maxMarks}">
@@ -539,15 +552,15 @@ body {
 						
 						                                <c:choose>
 						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
-						                                        <c:set var="displayMarks" value="${(secured / maxMarks) * 10}" />
-						                                        <fmt:formatNumber value="${displayMarks}" maxFractionDigits="2" />
+						                                        <c:set var="displayMarks" value="${(secured / 20) * 10}" />
+						                                        <fmt:formatNumber value="${displayMarks}" maxFractionDigits="1" />
 						                                        <c:set var="subjectTotalMarksObtained" value="${subjectTotalMarksObtained + displayMarks}" />
 						                                        <c:set var="subjectTotalMaxMarks" value="${subjectTotalMaxMarks + 10}" />
 						                                    </c:when>
 						
 						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
-						                                        <c:set var="displayMarks" value="${(secured / maxMarks) * 30}" />
-						                                        <fmt:formatNumber value="${displayMarks}" maxFractionDigits="2" />
+						                                        <c:set var="displayMarks" value="${(secured / 50) * 30}" />
+						                                        <fmt:formatNumber value="${displayMarks}" maxFractionDigits="1" />
 						                                        <c:set var="subjectTotalMarksObtained" value="${subjectTotalMarksObtained + displayMarks}" />
 						                                        <c:set var="subjectTotalMaxMarks" value="${subjectTotalMaxMarks + 30}" />
 						                                    </c:when>
@@ -601,7 +614,7 @@ body {
 						                    <fmt:formatNumber value="${subjectTotalMaxMarks}" maxFractionDigits="0" />
 						                </td>
 						                <td class="marksTableCell" style="text-align: center;">
-						                    <fmt:formatNumber value="${subjectTotalMarksObtained}" maxFractionDigits="2" />
+						                    <fmt:formatNumber value="${subjectTotalMarksObtained}" maxFractionDigits="1" />
 						                </td>
 						                
 						                <!-- Percentage for Subject 
@@ -634,93 +647,27 @@ body {
 									            <fmt:formatNumber value="${grandTotalMarksObtained}" maxFractionDigits="0" />
 									        </c:set>
 									        
-							        <c:choose>
-									<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
-									
-									
-									<c:choose>
-						                    <c:when test="${roundedMarks >= 270}">
+									        
+									       <c:choose>
+						                    <c:when test="${grandPercentage >= 90}">
 						                        <c:set var="grandGrade" value="A+" />
 						                    </c:when>
-						                    <c:when test="${roundedMarks >= 240}">
+						                    <c:when test="${roundedMarks >= 70}">
 						                        <c:set var="grandGrade" value="A" />
 						                    </c:when>
-						                    <c:when test="${roundedMarks >= 210}">
+						                    <c:when test="${roundedMarks >= 50}">
 						                        <c:set var="grandGrade" value="B+" />
 						                    </c:when>
-						                    <c:when test="${roundedMarks >= 180}">
-						                        <c:set var="grandGrade" value="B" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 150}">
-						                        <c:set var="grandGrade" value="C+" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 120}">
-						                        <c:set var="grandGrade" value="C" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 90}">
-						                        <c:set var="grandGrade" value="D" />
-						                    </c:when>
-						                    <c:otherwise>
-						                        <c:set var="grandGrade" value="NA" />
-						                    </c:otherwise>
-						                </c:choose>
-								</c:when>
-								
-								
-								<c:when test="${dataSubParts[0]=='1' || dataSubParts[0]=='2' || dataSubParts[0]=='3' || dataSubParts[0]=='4' || dataSubParts[0]=='5'}">
-									
-									
-									<c:choose>
-						                    <c:when test="${roundedMarks >= 450}">
-						                        <c:set var="grandGrade" value="A+" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 400}">
-						                        <c:set var="grandGrade" value="A" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 350}">
-						                        <c:set var="grandGrade" value="B+" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 300}">
-						                        <c:set var="grandGrade" value="B" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 250}">
-						                        <c:set var="grandGrade" value="C+" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 200}">
-						                        <c:set var="grandGrade" value="C" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 150}">
-						                        <c:set var="grandGrade" value="D" />
-						                    </c:when>
-						                    <c:otherwise>
-						                        <c:set var="grandGrade" value="NA" />
-						                    </c:otherwise>
-						                </c:choose>
-								</c:when>
-								
-								
-			 					<c:otherwise>
-			
-							        <c:choose>
-						                    <c:when test="${roundedMarks >= 540}">
-						                        <c:set var="grandGrade" value="A+" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 420}">
-						                        <c:set var="grandGrade" value="A" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 300}">
-						                        <c:set var="grandGrade" value="B+" />
-						                    </c:when>
-						                    <c:when test="${roundedMarks >= 180}">
+						                    <c:when test="${roundedMarks >= 30}">
 						                        <c:set var="grandGrade" value="B" />
 						                    </c:when>
 						                    <c:otherwise>
 						                        <c:set var="grandGrade" value="C" />
 						                    </c:otherwise>
 						                </c:choose>
-						   </c:otherwise>     
-						   
-						   </c:choose>
+						                
+									        
+							        
 							        <c:choose>
 						                    <c:when test="${subjectPercentage >= 90}">
 						                        <c:set var="subjectGrade" value="A+" />
@@ -830,17 +777,34 @@ body {
 									        	<c:choose>
 						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
 						                                       		 <c:choose>
-																	    <c:when test="${dataSubParts[0]=='9'}">
-																	        <td class="marksTableCell"><fmt:formatNumber value="${((exam.totalMarksObtained/exam.totalMarks) * 120) /2}" maxFractionDigits="1" /></td>
-																	    </c:when>
+						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
+						                                       		 		<td class="marksTableCell">
+																	        <fmt:formatNumber value="${(exam.totalMarksObtained/60) * 30}" maxFractionDigits="1" /></td>
+						                                       		 	</c:when>
+						                                       		 	<c:when test="${dataSubParts[0]=='1' || dataSubParts[0]=='2' || dataSubParts[0]=='3' || dataSubParts[0]=='4' || dataSubParts[0]=='5'}">
+						                                       		 		<td class="marksTableCell">
+																	        <fmt:formatNumber value="${(exam.totalMarksObtained/100) * 50}" maxFractionDigits="1" /></td>
+						                                       		 	</c:when>
 																	    <c:otherwise>
-																	        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained/2}" maxFractionDigits="1" /></td>
+																	        <td class="marksTableCell"><fmt:formatNumber value="${(exam.totalMarksObtained/120) * 60}" maxFractionDigits="1" /></td>
 																	    </c:otherwise>
 																	</c:choose>
 						                                    </c:when>
 						
 						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
-						                                        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained * 0.6}" maxFractionDigits="1" /></td>
+						                                    			<c:choose>
+						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
+						                                       		 		<td class="marksTableCell">
+																	        <fmt:formatNumber value="${(exam.totalMarksObtained/150) * 90}" maxFractionDigits="1" /></td>
+						                                       		 	</c:when>
+						                                       		 	<c:when test="${dataSubParts[0]=='1' || dataSubParts[0]=='2' || dataSubParts[0]=='3' || dataSubParts[0]=='4' || dataSubParts[0]=='5'}">
+						                                       		 		<td class="marksTableCell">
+																	        <fmt:formatNumber value="${(exam.totalMarksObtained/250) * 150}" maxFractionDigits="1" /></td>
+						                                       		 	</c:when>
+																	    <c:otherwise>
+																	        <td class="marksTableCell"><fmt:formatNumber value="${(exam.totalMarksObtained/300) * 180}" maxFractionDigits="1" /></td>
+																	    </c:otherwise>
+																	</c:choose>
 						                                    </c:when>
 						
 						                                    <c:otherwise>
@@ -886,10 +850,10 @@ body {
 
 		</div>
 
-
+<div class="marks" style="font-size: 19px;">
 		<c:choose>
 			<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
-				<div style="margin-top: 100px;">
+				<div style="margin-top: 50px;">
 				<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 10px;">PART-B</h4>
 				</div>
 				<div style="display: flex; gap: 10px;" class="partb">
@@ -947,28 +911,28 @@ body {
 			<div style="display: flex; gap: 10px;" class="partb">
 				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
 				        <tr style="text-transform: uppercase;">
-				            <th>Co-Scholastic Subjects</th>
-				            <th>Grade</th>
+				            <th style="font-size:14px;">Co-Scholastic Subjects</th>
+				            <th style="font-size:14px;">Grade</th>
 				        </tr>
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Physical & Health Education</td>
-				            <td>A</td>
+				            <td style="font-size:14px;">Physical & Health Education</td>
+				            <td style="font-size:14px;">A</td>
 				        </tr>
 				        
 				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>ATTITUDE & VALUES</td>
-				            <td>A</td>
+				            <td style="font-size:14px;">ATTITUDE & VALUES</td>
+				            <td style="font-size:14px;">A</td>
 				        </tr>
 				        
 				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Work Experience</td>
-				            <td>A</td>
+				            <td style="font-size:14px;">Work Experience</td>
+				            <td style="font-size:14px;">A</td>
 				        </tr>
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Art Education</td>
-				            <td>A</td>
+				            <td style="font-size:14px;">Art Education</td>
+				            <td style="font-size:14px;">A</td>
 				        </tr>
 				    </table>
 				
@@ -977,40 +941,40 @@ body {
 				        	<c:set var="attendanceParts" value="${fn:split(Parents.parents.student.urbanrural, '/')}" />
 							<c:set var="sem1" value="${attendanceParts[0]}" />
 							<c:set var="sem2" value="${attendanceParts[1]}" />
-				            <th>Attendance</th>
-				            <th>Semester-1</th>
-				            <th>Semester-2</th>
-				            <th>Total</th>
+				            <th style="font-size:14px;">Attendance</th>
+				            <th style="font-size:14px;">Semester-1</th>
+				            <th style="font-size:14px;">Semester-2</th>
+				            <th style="font-size:14px;">Total</th>
 				        </tr>
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Total Working Days</td>
-				            <td>118</td>
-				            <td>126</td>
-				            <td>244</td>
+				            <td style="font-size:14px;">Total Working Days</td>
+				            <td style="font-size:14px;">118</td>
+				            <td style="font-size:14px;">126</td>
+				            <td style="font-size:14px;">244</td>
 				        </tr>
 				
 				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Total Present Days</td>
-				            <td>${sem1}</td>
-				            <td>${sem2}</td>
-				            <td>${sem1+sem2}</td>
+				            <td style="font-size:14px;">Total Present Days</td>
+				            <td style="font-size:14px;">${sem1}</td>
+				            <td style="font-size:14px;">${sem2}</td>
+				            <td style="font-size:14px;">${sem1+sem2}</td>
 				        </tr>
 				    </table>
 				
 				</div></c:otherwise>
 		</c:choose>
+</div>
+	<div class="footer">
+    <img src="/hamidullah/images/hmsign.png" class="signature" width="200" height="60"/>
 
-		<div class="footer">
-    <br>
-    <br>
-    <br>
-        
-Head Master&emsp;&emsp;&emsp;&emsp;&emsp;<br><label style="font-weight: 700;font-size: 11px;">
-HAMIDULLA ENGLISH MEDIUM HIGH SCHOOL&nbsp;<br>
-MANGALGI,TQ:CHITGUPPA, DIST: BIDAR-585329<br>
-DISE CODE:29050505406,SSLC CODE:SS0612&emsp;
-</label>
+    <div class="headmaster">Head Master</div>
+
+    <label class="school-info">
+        HAMIDULLA ENGLISH MEDIUM HIGH SCHOOL<br>
+        MANGALGI,TQ:CHITGUPPA, DIST: BIDAR-585329<br>
+        DISE CODE:29050505406,SSLC CODE:SS0612&nbsp;&nbsp;&nbsp;
+    </label>
 </div>
 
 

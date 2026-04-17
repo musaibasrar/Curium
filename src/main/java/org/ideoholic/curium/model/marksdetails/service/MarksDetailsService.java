@@ -1763,11 +1763,18 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 						if (examid == exid && mSubid == subjectSubid) {
 							markFound = true;
 							examPresent = true;
-
-							float marksObtained = marks.getMarksobtained();
 							float minMarks = sub.getMinmarks();
 							float maxMarks = sub.getMaxmarks();
-
+							float marksObtained = 0l;
+							
+							if(maxMarks>50) {
+								marksObtained = (marks.getMarksobtained()/maxMarks) *50;
+							}else if(subjectName.equalsIgnoreCase("ENGLISH") && maxMarks==25) {
+								marksObtained = (marks.getMarksobtained()/25) *20;
+							}else{
+								marksObtained = marks.getMarksobtained();
+							}
+							
 							String displayMarks;
 							if (marksObtained < minMarks) {
 								displayMarks = marksObtained + "/" + maxMarks + " (F)";
@@ -1804,7 +1811,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				if (examPresent) {
 					double percentage = (totalMarks > 0) ? (totalObtainedMarks * 100.0) / totalMarks : 0;
 					examSummary.setTotalMarks((int) totalMarks);
-					examSummary.setTotalMarksObtained((int) totalObtainedMarks);
+					examSummary.setTotalMarksObtained(totalObtainedMarks);
 					examSummary.setPercentage(percentage);
 
 					int mypercent = (int) Math.round(percentage);
