@@ -1069,6 +1069,21 @@ for(Cookie cookie : cookies){
 									type="text" value="<fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>" class="myclass"
 									id="datepickerDND" size="30" data-validate="validate(required)">
 							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Language Opted &nbsp;</td>
+
+							<td align="left">
+							
+							<label>
+							<select name="urbanrural" 
+									id="urbanrural" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
+										<option selected>${student.urbanrural}</option>
+										<option>Urdu</option>
+										<option>Hindi</option>
+										<option>Kannada</option>
+								</select>
+							</label>
+							
+							</td>
 						</tr>
 							
 						<tr>
