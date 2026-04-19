@@ -50,8 +50,8 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("messstockmovelist", responseDto.getMessStockMoveList());
         request.setAttribute("fromdate", responseDto.getFromDate());
 		request.setAttribute("todate", responseDto.getToDate());
-		//request.setAttribute("transactiondatefromselected", request.getParameter("transactiondatefrom"));
-		//request.setAttribute("transactiondatetoselected", request.getParameter("transactiondateto"));
+		request.setAttribute("transactiondatefromselected", request.getParameter("transactiondatefrom"));
+		request.setAttribute("transactiondatetoselected", request.getParameter("transactiondateto"));
     }
 
     public void saveStockMove() {
