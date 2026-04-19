@@ -417,7 +417,7 @@ public class MarksDetailsService {
 		List<Marks> newMarksDetails = new ArrayList<Marks>();
 		for (Parents parents : searchStudentList) {
 
-			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
+			List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]),dto.getAcademicYear());
 			for (Marks marks : singleMarksDetails) {
 				int subSubjectId = marks.getSubsubjectid();
 				if ( subSubjectId ==0) {
@@ -2114,7 +2114,7 @@ public MarksResponseDto viewMarksSub(MarksViewDto dto, String branchId) {
 	
 	for (Parents parents : searchStudentList) {
 
-		List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]));
+		List<Marks> singleMarksDetails = new MarksDetailsDAO().readListOfMarks(parents.getStudent().getSid(),subjectDetailsId,Integer.parseInt(examIdName[0]),dto.getAcademicYear());
 		Map<Integer,Float> marksObtained = new HashMap<Integer,Float>();
 		// Sort marks by subsubjectid
 	    singleMarksDetails.sort(Comparator.comparingInt(Marks::getSubsubjectid));
