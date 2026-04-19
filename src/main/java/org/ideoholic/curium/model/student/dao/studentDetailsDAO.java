@@ -18,7 +18,9 @@ import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
 import org.ideoholic.curium.util.Session.Transaction;
+import org.springframework.stereotype.Service;
 
+@Service
 public class studentDetailsDAO {
 	Session session = null;
 	/**
@@ -884,8 +886,25 @@ public List<Object[]> readStudentsParentsAllBranches() {
 
 	} finally {
 			HibernateUtil.closeSession();
+	}
 		return results;
 	}
+
+	public List<Student> getStudentsListByIds(List<Integer> sIds) {
+	List<Student> sponseredList = new ArrayList<Student>();
+	try {
+		transaction = session.beginTransaction();
+		Query query = session
+				.createQuery("From Student as student where student.sid IN (:ids)");
+		query.setParameterList("ids", sIds);
+		sponseredList = query.list();
+		transaction.commit();
+	} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+		hibernateException.printStackTrace();
+	}finally {
+		HibernateUtil.closeSession();
+	 }
+	return sponseredList;
 }
 
 }

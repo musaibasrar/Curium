@@ -670,4 +670,9 @@ public class JspController {
 	public String getLeftStock() {
 		return "left_stock";
 	}
+	
+	@GetMapping("/reports_stock")
+	public String getReportsStock() {
+		return "reports_stock";
+	}
 }
