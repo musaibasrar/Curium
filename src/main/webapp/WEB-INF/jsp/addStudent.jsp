@@ -1392,6 +1392,14 @@ $(document).ready(function() {
 									class="myclass" id="datepickerDND" size="36"
 									data-validate="validate(required)">
 							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Identifications
+								&nbsp;</td>
+							<td ><label> <input
+									name="crecord" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="crecord" size="36">
+
+							</label></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -1400,7 +1408,29 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 
+                        <tr>
+										
+							<td class="alignLeft">PEN &nbsp;</td>
+							<td ><label> <input name="pen"
+									type="text"
+									class="myclass" id="pen" size="36"
+									>
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR ID
+								&nbsp;</td>
+							<td ><label> <input
+									name="apaarid" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="apaarid" size="36">
 
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<div>
 							<table width="100%">
 								<tr>
@@ -1759,6 +1789,35 @@ $(document).ready(function() {
 								<tr>
 									<td><br /></td>
 								</tr>
+
+								<tr>
+									<td class="alignLeft">Father's Occupation
+										&nbsp;</td>
+									<td ><label> <input
+											name="fatherscaste" type="text" class="myclass"
+											id="fatherscaste" 
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's
+										Occupation&nbsp;</td>
+									<td><label> <input
+											name="motherscaste" type="text" class="myclass"
+											id="motherscaste"
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+								
+								<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
 								<tr>
 									<td class="alignLeft">Father's Aadhar No
 										&nbsp;</td>
@@ -2035,7 +2094,7 @@ $(document).ready(function() {
 
 
 
-							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">secured/max/percentage &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:capitalize;"

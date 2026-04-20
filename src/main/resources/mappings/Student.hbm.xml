@@ -207,6 +207,12 @@
         <property name="promotedyear" type="string">
             <column name="promotedyear" length="10" />
         </property>  
+        <property name="apaarId" type="string">
+            <column name="apaarid" length="100" />
+        </property>
+        <property name="pen" type="string">
+            <column name="pen" length="100" />
+        </property>
         
          <!-- <many-to-one name="Pudetails" class="org.ideoholic.curium.model.pudetails.dto.Pudetails"
             column="pudetailsid" unique="true" not-null="true" lazy="false"
