@@ -53,7 +53,6 @@ import org.ideoholic.curium.model.user.dto.SearchByParentDto;
 import org.ideoholic.curium.model.user.dto.UserAuthenticationDto;
 import org.ideoholic.curium.model.user.dto.UserAuthenticationResponseDto;
 import org.ideoholic.curium.util.DataUtil;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
 
@@ -156,14 +155,16 @@ public class UserService {
        return result;
    }
 
-    public void logOutUser() {
-        httpSession.invalidate();
-        try {
-            HibernateUtil.closeSession();
-        }catch(Exception ex){
-            log.error(ex.getMessage(), ex);
-        }
-    }
+	public void logOutUser() {
+
+		httpSession.getAttributeNames().asIterator().forEachRemaining(attributeName -> httpSession.removeAttribute(attributeName));
+		httpSession.invalidate();
+
+		request.getAttributeNames().asIterator().forEachRemaining(attributeName -> request.removeAttribute(attributeName));
+		for (int i = 0; i < request.getCookies().length; i++) {
+			request.getCookies()[i].setMaxAge(0);
+		}
+	}
 
 	public DashBoardResponseDto dashBoard(SearchByDateDto dto, String branchId, String currentAcademicYear) {
 		DashBoardResponseDto result = DashBoardResponseDto.builder().build();

@@ -191,13 +191,15 @@ public class FeesCollectionActionAdapter {
         dto.setAcademicYear(request.getParameter("academicyear"));
 
         FeesDetailsResponseDto responseDto = feesCollectionService.getotherFeesDetails(dto);
-        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
-        httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
-        httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
-        httpSession.setAttribute("dueamount", responseDto.getDueAmount());
-        httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
-        httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
-        httpSession.setAttribute(Constants.CURRENTACADEMICYEAR, responseDto.getCurrentAcademicYear());
+		if (responseDto.isSuccess()) {
+			request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+			httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
+			httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
+			httpSession.setAttribute("dueamount", responseDto.getDueAmount());
+			httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
+			httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
+			httpSession.setAttribute(Constants.CURRENTACADEMICYEAR, responseDto.getCurrentAcademicYear());
+		}
         return responseDto;
     }
 

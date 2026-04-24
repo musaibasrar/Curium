@@ -165,8 +165,8 @@ public class FeesActionAdapter {
 
 	public boolean viewOtherFees() {
 		OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = feesService.viewOtherFees(
-		DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
-		DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
+				DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID),
+				DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.CURRENTACADEMICYEAR));
 		httpSession.setAttribute("otherfeescategory", otherFeesCategoryResponseDto.getOtherFeesCategory());
 		return otherFeesCategoryResponseDto.isSuccess();
 	}
@@ -240,12 +240,6 @@ public class FeesActionAdapter {
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 		feescategoryResponseDto = feesService.getFeesMonths(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
     	request.setAttribute("feesmonths", feescategoryResponseDto.getFeesMonths());
-	}
-	
-	public boolean viewAllStudentsListOtherFees() {
-		ParentListResponseDto parentListResponseDto = feesService.viewAllStudentsListOtherFees(DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID));
-		request.setAttribute("studentListFeesCollection", parentListResponseDto.getParentsList());
-		return parentListResponseDto.isSuccess();
 	}
 	
 }

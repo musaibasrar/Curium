@@ -167,8 +167,10 @@ public class FeesAction {
 	
 	@GetMapping("/otherfeesCollect")
 	public String otherfeesCollect() {
+		// The first request comes here
 		feesActionAdapter.viewOtherFees();
-		feesActionAdapter.viewAllStudentsListOtherFees();
+        standardActionAdapter.viewClasses();
+        feesActionAdapter.viewAllStudentsList();
 		return "otherfeesCollection";
 	}
 	

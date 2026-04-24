@@ -464,9 +464,10 @@
                 },
                 select: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
-       			  $( "#studentName").val( ui.item.name );
-       			$( "#classandsec").val( ui.item.classandsec );
-       			$( "#admissionno").val( ui.item.admissionno );
+       			  	$( "#studentName").val( ui.item.name );
+       				$( "#classandsec").val( ui.item.classandsec );
+       				$( "#admissionno").val( ui.item.admissionno );
+       				toggleSearchFeesButton();  // Enable the button when student is selected
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -478,6 +479,8 @@
             };
             var addFeesButtonID="#addFees";
             var removeDossageButtonID="#removeDossage";
+
+
             $( addFeesButtonID )
             .button({
                 icons: {
@@ -489,6 +492,9 @@
                  //addRow();
                 return false;
             });
+	        // Initially disable the Search Fees button
+            $(addFeesButtonID).button('disable');
+	        
             $(removeDossageButtonID)
             .button({
                 icons: {
@@ -498,8 +504,26 @@
             .click(function() {
                 deleteRow('dataTable');
                 return false;
-            });            
+            });
+            // Helper function to enable/disable the Search Fees button
+            function toggleSearchFeesButton() {
+                var studentId = $("#studentId").val();
+                if(studentId != null && studentId != "") {
+                    $(addFeesButtonID).button('enable');
+                } else {
+                    $(addFeesButtonID).button('disable');
+                }
+            }
+
+            $("#studentname").on('input change', function() {
+                if($(this).val() == "") {
+                    $("#studentId").val("");
+                    toggleSearchFeesButton();  // Disable button when name is cleared
+                }
+            });
+
         });
+
         $('#selectAll').click(function () {
             var length = $('.chcktbl:checked').length;
             var trLength=$('.trClass').length;
@@ -978,7 +1002,7 @@ for(Cookie cookie : cookies){
 				<thead>
                     <tr >
                     	<th class="headerText"><input type="checkbox" id="chckHead" /></th>
-                        <td class="headerText">otherFees Category</td>
+                        <td class="headerText">Other Fees Category</td>
                         <td class="headerText">Total Amount/Due Amount</td>                       
                         <td class="headerText">Amount Due to be paid</td>
                         <!-- <td class="headerText">Fine</td> -->

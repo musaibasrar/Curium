@@ -1271,7 +1271,7 @@ public class FeesCollectionService {
 			StampFeeResponseDto result = StampFeeResponseDto.builder().build();
 			
 			String studentId = dto.getStudentId();
-			if (currentAcademicYear != null && StringUtils.hasLength(studentId)) {
+			if (StringUtils.hasLength(currentAcademicYear) && StringUtils.hasLength(studentId)) {
 				String academicYear = dto.getAcademicYear();
 
 				Integer id = Integer.parseInt(dto.getStudentId());
@@ -1316,33 +1316,36 @@ public class FeesCollectionService {
 		FeesDetailsResponseDto result = FeesDetailsResponseDto.builder().build();
 
 		try {
-			Integer id = Integer.parseInt(dto.getStudentId());
-			String academicYear = dto.getAcademicYear();
+			if (StringUtils.hasLength(dto.getStudentId()) && StringUtils.hasLength(dto.getAcademicYear())) {
+				Integer id = Integer.parseInt(dto.getStudentId());
+				String academicYear = dto.getAcademicYear();
 
-			//Currentacademicyear currentYear = new YearDAO().showYear();
-			//httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
+				// Currentacademicyear currentYear = new YearDAO().showYear();
+				// httpSession.setAttribute("currentyearfromservice",currentYear.getCurrentacademicyear());
 
-			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id,academicYear);
-			result.setReceiptInfo(rinfo);
-			List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id, academicYear);
+				List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(id, academicYear);
+				result.setReceiptInfo(rinfo);
+				List<Studentotherfeesstructure> feesstructure = studentDetailsDao.getStudentOtherFeesStructure(id,
+						academicYear);
 
-			long totalSum = 0l;
-			for (Receiptinfo receiptInfoSingle : rinfo) {
-				totalSum = totalSum + receiptInfoSingle.getTotalamount();
-			}
+				long totalSum = 0l;
+				for (Receiptinfo receiptInfoSingle : rinfo) {
+					totalSum = totalSum + receiptInfoSingle.getTotalamount();
+				}
 
-			long totalFeesAmount = 0l;
-			for (Studentotherfeesstructure studentfeesstructureSingle : feesstructure) {
-				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
-			}
+				long totalFeesAmount = 0l;
+				for (Studentotherfeesstructure studentfeesstructureSingle : feesstructure) {
+					totalFeesAmount = totalFeesAmount + studentfeesstructureSingle.getFeesamount() - studentfeesstructureSingle.getWaiveoff() - studentfeesstructureSingle.getConcession();
+				}
 
 				result.setOtherFeesStructure(feesstructure);
 				result.setTotalSum(totalSum);
-				result.setDueAmount(totalFeesAmount-totalSum);
+				result.setDueAmount(totalFeesAmount - totalSum);
 				result.setTotalFeesAmount(totalFeesAmount);
 				result.setAcademicPerYear(academicYear);
 				result.setCurrentAcademicYear(academicYear);
 				result.setSuccess(true);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
