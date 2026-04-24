@@ -170,17 +170,7 @@ public class FeesCollectionAction {
 	  @GetMapping("/otherprintReceipt")
         public String otherprintReceipt() {
                 feesCollectionActionAdapter.otherpreviewDetails();
-
-					/*
-					 * if(httpSession.getAttribute("branchid")!=null){ String branchId =
-					 * httpSession.getAttribute("branchid").toString();
-					 * if("1".equalsIgnoreCase(branchId) || "2".equalsIgnoreCase(branchId) ||
-					 * "3".equalsIgnoreCase(branchId)) { return "printFeesDetail"; }else
-					 * if("4".equalsIgnoreCase(branchId)) { return "printFeesDetail"; }else
-					 * if("5".equalsIgnoreCase(branchId)) { return "printFeesDetail"; } }
-					 */
-
-	                return "printOtherFeesDetail";
+	            return "printOtherFeesDetail";
         }
 	  
 	  @PostMapping("/feesAddother")	

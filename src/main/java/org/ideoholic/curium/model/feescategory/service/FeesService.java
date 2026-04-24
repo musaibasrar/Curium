@@ -3,7 +3,6 @@ package org.ideoholic.curium.model.feescategory.service;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
@@ -13,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,6 +47,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -79,7 +78,7 @@ public class FeesService {
         
         	FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
                  
-                 if(branchid!=null){
+                 if(StringUtils.hasLength(branchid) && StringUtils.hasLength(currentAcademicYear)){
                 	 String[] currentYear = currentAcademicYear.split("/");
               	   int cYear = Integer.parseInt(currentYear[0])+1;
               	   int cYear2 = Integer.parseInt(currentYear[1])+1;
@@ -99,7 +98,7 @@ public class FeesService {
 
         public void addFeesParticular(FeesCategoryDto feesCategoryDto,String branchid,String userlogin) {
                 
-                if(branchid!=null){
+                if(StringUtils.hasLength(branchid)){
                 	
                 	String[] classesFeesCat = feesCategoryDto.getFromClass();
                 	List<Feescategory> feesCategoryList = new ArrayList<>();
@@ -316,29 +315,6 @@ public class FeesService {
         }
         return studentListResponseDto;
     }
-
-
-	/*
-	 * public String waiveOffFeesOld() {
-	 * 
-	 * String[] idfeescategory = request.getParameterValues("sfsid"); List<Integer>
-	 * sfsId = new ArrayList(); List<Integer> feesCatId = new ArrayList();
-	 * 
-	 * String studentId = request.getParameter("id");
-	 * 
-	 * if(idfeescategory!=null){
-	 * 
-	 * for (String string : idfeescategory) { String[] test = string.split("_");
-	 * sfsId.add(Integer.valueOf(test[0])); feesCatId.add(Integer.valueOf(test[1]));
-	 * } new FeesCategoryDAO().waiveOffFees(sfsId,feesCatId,studentId);
-	 * 
-	 * return
-	 * "/school/StudentProcess/ViewFeesStructure&id="+studentId; }
-	 * 
-	 * return "error.jsp";
-	 * 
-	 * }
-	 */
     
     public StudentIdDto waiveOffFees(ConcessionDto concessionDto, String academicYear, String branchId, String userId) {
         
@@ -670,20 +646,20 @@ public class FeesService {
            boolean result = false;
            List<OtherFeecategory> list = new ArrayList<>();
 
-           if(branchid!=null){
-        	   String[] currentYear = currentAcademicYear.split("/");
-        	   int cYear = Integer.parseInt(currentYear[0])+1;
-        	   int cYear2 = Integer.parseInt(currentYear[1])+1;
-        	   String nextYear = ""+cYear+"/"+cYear2+"";
-        		try {
-                          list = feesCategoryDao.readListOfOtherFeeObjects(Integer.parseInt(branchid),currentAcademicYear,nextYear);
-                          //httpSession.setAttribute("otherfeescategory", list);
-                          result = true;
-                  } catch (Exception e) {
-                      e.printStackTrace();
-                      result = false;
-                  }
-           }
+			if (StringUtils.hasLength(branchid) && StringUtils.hasLength(currentAcademicYear)) {
+				String[] currentYear = currentAcademicYear.split("/");
+				int cYear = Integer.parseInt(currentYear[0]) + 1;
+				int cYear2 = Integer.parseInt(currentYear[1]) + 1;
+				String nextYear = "" + cYear + "/" + cYear2 + "";
+				try {
+					list = feesCategoryDao.readListOfOtherFeeObjects(Integer.parseInt(branchid), currentAcademicYear, nextYear);
+					// httpSession.setAttribute("otherfeescategory", list);
+					result = true;
+				} catch (Exception e) {
+					e.printStackTrace();
+					result = false;
+				}
+			}
           otherFeesCategoryResponseDto.setOtherFeesCategory(list);
           otherFeesCategoryResponseDto.setSuccess(result);
           return otherFeesCategoryResponseDto;
