@@ -226,7 +226,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/vision/images/vision.png" width="90" height="60"/>
+				<img src="/global/images/global${branchid}.png" width="57" height="60"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
