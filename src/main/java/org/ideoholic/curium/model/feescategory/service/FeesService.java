@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -47,6 +48,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -392,8 +394,93 @@ public class FeesService {
        
 	}
 
-
 	public SearchFeesResponseDto searchFeesWaiveofforConcessionReport(SearchStudentDto searchStudentDto,String searchCriteria,String branchid) {
+		
+		SearchFeesResponseDto searchFeesResponseDto = new SearchFeesResponseDto();
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		Map<Parents,List<Studentfeesstructure>> parentsStudentFeesStructure = new HashMap<Parents,List<Studentfeesstructure>>();
+		
+		if(branchid!=null){
+			StringBuilder queryBuilder = new StringBuilder("FROM Parents as parents WHERE");
+			Map<String, Object> params = new LinkedHashMap<>();
+			String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
+
+			String[] addClass = searchStudentDto.getClassesSearch() != null
+			        ? searchStudentDto.getClassesSearch()
+			        : Constants.EMPTY_STRING_ARRAY;
+			StringBuilder conClassStudying = new StringBuilder();
+			
+			int i = 0;
+			for (String classOne : addClass) {
+
+				if(i>0) {
+					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+
+				i++;
+			}
+
+			String classStudying = DataUtil.emptyString(conClassStudying.toString());
+
+			if (!studentname.isEmpty()) {
+			    queryBuilder.append(" parents.student.name LIKE :studentName AND");
+			    params.put("studentName", "%" + studentname + "%");
+			}
+
+			if (!classStudying.isEmpty()) {
+			    queryBuilder.append(" parents.student.classstudying LIKE :classStudying AND");
+			    params.put("classStudying", classStudying);
+			}
+
+			// Always-required filters
+			queryBuilder.append(" parents.student.archive = 0"
+			    + " AND parents.student.passedout = 0"
+			    + " AND parents.student.droppedout = 0"
+			    + " AND parents.student.leftout = 0"
+			    + " AND parents.branchid = :branchid");
+			params.put("branchid", Integer.parseInt(branchid));
+
+			String queryMain = queryBuilder.toString();
+			log.debug("SEARCH QUERY ***** {}", queryMain);
+			searchStudentList = studentDetailsDao.getStudentsList(queryMain, params);
+
+			List<Integer> studentids = new ArrayList<>(); 
+			for (Parents parents : searchStudentList) {
+				studentids.add(parents.getStudent().getSid());
+			}
+			searchFeesResponseDto.setCurrentYearFromService(searchStudentDto.getAcademicyear());
+			
+			if (!CollectionUtils.isEmpty(studentids)) {
+				List<Studentfeesstructure> listStudentsFeesStructure = feesCollectionDAO.getStudentsFeesStructure(studentids, searchStudentDto.getAcademicyear(), searchCriteria);
+
+				for (Parents parents : searchStudentList) {
+					List<Studentfeesstructure> singleStudent = new ArrayList<>();
+					for (Studentfeesstructure fees : listStudentsFeesStructure) {
+						int feeSid = fees.fetchSid();
+						int sid = parents.getStudent().getSid();
+
+						if (feeSid == sid) {
+							singleStudent.add(fees);
+						}
+					}
+					parentsStudentFeesStructure.put(parents, singleStudent);
+				}
+			}
+		}
+		if("waiveoff".equalsIgnoreCase(searchCriteria)) {
+			searchFeesResponseDto.setStudentsFeesStructureDetailsWaiveoff(parentsStudentFeesStructure);
+			searchFeesResponseDto.setStudentsFeesStructureDetailsConcession(null);
+		}else if("concession".equalsIgnoreCase(searchCriteria)) {
+			searchFeesResponseDto.setStudentsFeesStructureDetailsWaiveoff(null);
+			searchFeesResponseDto.setStudentsFeesStructureDetailsConcession(parentsStudentFeesStructure);
+		}
+		
+		return searchFeesResponseDto;
+	}
+
+	public SearchFeesResponseDto searchFeesWaiveofForConcessionReport(SearchStudentDto searchStudentDto,String searchCriteria,String branchid) {
 		
 		SearchFeesResponseDto searchFeesResponseDto = new SearchFeesResponseDto();
 		List<Parents> searchStudentList = new ArrayList<Parents>();

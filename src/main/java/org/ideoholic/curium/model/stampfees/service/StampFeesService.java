@@ -26,6 +26,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import lombok.RequiredArgsConstructor;
@@ -50,7 +51,7 @@ public class StampFeesService {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<>();
 		
-		if(branchid!=null){
+		if(StringUtils.hasLength(branchid)){
 		
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
@@ -58,10 +59,10 @@ public class StampFeesService {
 		String addSec = searchStudentDto.getSecSearch();
 		String conClassStudying = "";
 
-		if (!addClass.equalsIgnoreCase("")) {
+		if (StringUtils.hasLength(addClass)) {
 			conClassStudying = addClass+"--"+"%";
 		}
-		if (!addSec.equalsIgnoreCase("")) {
+		if (StringUtils.hasLength(addSec)) {
 			conClassStudying = addClass;
 			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}
@@ -69,20 +70,19 @@ public class StampFeesService {
 		String classStudying = DataUtil.emptyString(conClassStudying);
 		String querySub = "";
 
-		if (!studentname.equalsIgnoreCase("")) {
+		if (StringUtils.hasLength(studentname)) {
 			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.branchid="+Integer.parseInt(branchid);
 		}
 
-		if (!classStudying.equalsIgnoreCase("")
-				&& !querySub.equalsIgnoreCase("")) {
+		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
 			querySub = querySub + " AND parents.student.classstudying like '"
 					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-		} else if (!classStudying.equalsIgnoreCase("")) {
+		} else if (StringUtils.hasLength(classStudying)) {
 			querySub = querySub + " parents.student.classstudying like '"
 					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 		}
 
-		if(!"".equalsIgnoreCase(querySub)) {
+		if(StringUtils.hasLength(querySub)) {
 			queryMain = queryMain + querySub;
 			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
@@ -97,7 +97,7 @@ public class StampFeesService {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<>();
 		
-		if(branchid!=null){
+		if(StringUtils.hasLength(branchid)){
 		
 		String academicYear = searchStudentDto.getAcademicyear();
 			
@@ -120,7 +120,7 @@ public class StampFeesService {
 			}
 			
 		
-		/*if (!addSec.equalsIgnoreCase("")) {
+		/*if (StringUtils.hasLength(addSec)) {
 			//conClassStudying = addClass;
 			conClassStudying = conClassStudying+"--"+addSec+"%";
 		}*/
@@ -128,20 +128,19 @@ public class StampFeesService {
 		String classStudying = DataUtil.emptyString(conClassStudying.toString());
 		String querySub = "";
 
-		if (!studentname.equalsIgnoreCase("")) {
+		if (StringUtils.hasLength(studentname)) {
 			querySub = " parents.student.name like '%" + studentname + "%' and parents.student.branchid="+Integer.parseInt(branchid);
 		}
 
-		if (!classStudying.equalsIgnoreCase("")
-				&& !querySub.equalsIgnoreCase("")) {
+		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
 			querySub = querySub + " AND (parents.student.classstudying like '"
 					+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
-		} else if (!classStudying.equalsIgnoreCase("")) {
+		} else if (StringUtils.hasLength(classStudying)) {
 			querySub = querySub + " (parents.student.classstudying like '"
 					+ classStudying + "') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 		}
 
-		if(!"".equalsIgnoreCase(querySub)) {
+		if(StringUtils.hasLength(querySub)) {
 			queryMain = queryMain + querySub;
 			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 		}
@@ -154,20 +153,20 @@ public class StampFeesService {
 	public SearchStudentResponseDto advanceSearchByParents(String fatherName,String motherName,String branchid) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		
-		if(branchid!=null){
+		if(StringUtils.hasLength(branchid)){
 			String queryMain = "From Parents as parents where parents.branchid="+Integer.parseInt(branchid);
 			String fathersname = DataUtil.emptyString(fatherName);
 			String mothersname = DataUtil.emptyString(motherName);
 			String querySub = "";
 
-			if (!fathersname.equalsIgnoreCase("")) {
+			if (StringUtils.hasLength(fathersname)) {
 				querySub = "AND parents.fathersname like '%" + fathersname + "%'";
 			}
 
-			if (!mothersname.equalsIgnoreCase("") && !querySub.equalsIgnoreCase("")) {
+			if (StringUtils.hasLength(motherName) && StringUtils.hasLength(querySub)) {
 				querySub = querySub + " AND parents.mothersname like '%"
 						+ mothersname + "%'";
-			} else if (!mothersname.equalsIgnoreCase("")) {
+			} else if (StringUtils.hasLength(motherName)) {
 				querySub = querySub + "AND parents.mothersname like '%" + mothersname
 						+ "%'";
 			}
@@ -212,10 +211,10 @@ public class StampFeesService {
 						int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
 
 						// check whether the fees category is already stamped
-						Studentfeesstructure result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(id), Integer.parseInt(feesCatAndIndex[0]), currentAcademicYear);
+						List<Studentfeesstructure> result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(id), Integer.parseInt(feesCatAndIndex[0]), currentAcademicYear);
 						// END
 
-						if (result == null) {
+						if (CollectionUtils.isEmpty(result)) {
 
 							Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
 							Feescategory feescategory = new Feescategory();
@@ -461,7 +460,7 @@ public class StampFeesService {
 		
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 
-        if(branchid!=null){
+        if(StringUtils.hasLength(branchid)){
         	String className = searchStudentDto.getClassSearch();
         	
             List<Feescategory> feecategoryList= feesCategoryDao.getfeecategoryofstudent(className,currentAcademicYear,branchId);
@@ -472,8 +471,6 @@ public class StampFeesService {
     		// Get Student Details
     		
     		List<Parents> searchStudentList = new ArrayList<>();
-    		
-    		if(branchid!=null){
     		
     		String queryMain = "From Parents as parents where";
     		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
@@ -487,110 +484,105 @@ public class StampFeesService {
 
     		switch (studentType) {
 			case "Active":
-				if (!addClass.equalsIgnoreCase("")) {
+				if (StringUtils.hasLength(addClass)) {
 	    			conClassStudying = addClass+"--"+"%";
 	    		}
-	    		if (!addSec.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(addSec)) {
 	    			conClassStudying = addClass;
 	    			conClassStudying = conClassStudying+"--"+addSec+"%";
 	    		}
 
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
-	    		if (!studentname.equalsIgnoreCase("")) {
-	    			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND (parents.Student.yearofadmission='"+academicYear+"' OR parents.Student.promotedyear='"+academicYear+"') AND parents.Student.branchid="+Integer.parseInt(branchid);
+	    		if (StringUtils.hasLength(studentname)) {
+	    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND (parents.student.yearofadmission='"+academicYear+"' OR parents.student.promotedyear='"+academicYear+"') AND parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
-	    		if (!classStudying.equalsIgnoreCase("")
-	    				&& !querySub.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
 	    			querySub = querySub + " AND parents.student.classstudying like '"
 	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-	    		} else if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = querySub + " parents.Student.classstudying like '"
-	    					+ classStudying + "' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND (parents.Student.yearofadmission='"+academicYear+"' OR parents.Student.promotedyear='"+academicYear+"') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+	    		} else if (StringUtils.hasLength(classStudying)) {
+	    			querySub = querySub + " parents.student.classstudying like '"
+	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND (parents.student.yearofadmission='"+academicYear+"' OR parents.student.promotedyear='"+academicYear+"') AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;
 			case "InActive":
-				if (!addClass.equalsIgnoreCase("")) {
+				if (StringUtils.hasLength(addClass)) {
 	    			conClassStudying = addClass+"--"+"%";
 	    		}
-	    		if (!addSec.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(addSec)) {
 	    			conClassStudying = addClass;
 	    			conClassStudying = conClassStudying+"--"+addSec+"%";
 	    		}
 
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
-	    		if (!studentname.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(studentname)) {
 	    			querySub = " parents.student.name like '%" + studentname + "%' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
-	    		if (!classStudying.equalsIgnoreCase("")
-	    				&& !querySub.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
 	    			querySub = querySub + " AND parents.student.classstudying like '"
 	    					+ classStudying + "' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1)";
-	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    		} else if (StringUtils.hasLength(classStudying)) {
 	    			querySub = querySub + " parents.student.classstudying like '"
 	    					+ classStudying + "' AND (parents.student.archive=1 or parents.student.passedout=1 or parents.student.droppedout=1 or parents.student.leftout=1) AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;	
 			case "All":	
 				
-				if (!addClass.equalsIgnoreCase("")) {
+				if (StringUtils.hasLength(addClass)) {
 	    			conClassStudying = addClass+"--"+"%";
 	    		}
-	    		if (!addSec.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(addSec)) {
 	    			conClassStudying = addClass;
 	    			conClassStudying = conClassStudying+"--"+addSec+"%";
 	    		}
 
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
-	    		if (!studentname.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(studentname)) {
 	    			querySub = " parents.student.name like '%" + studentname + "%' AND  parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
-	    		if (!classStudying.equalsIgnoreCase("")
-	    				&& !querySub.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
 	    			querySub = querySub + " AND parents.student.classstudying like '"
 	    					+ classStudying + "'";
-	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    		} else if (StringUtils.hasLength(classStudying)) {
 	    			querySub = querySub + " parents.student.classstudying like '"
 	    					+ classStudying + "' AND  parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;
 			default:
-				if (!addClass.equalsIgnoreCase("")) {
+				if (StringUtils.hasLength(addClass)) {
 	    			conClassStudying = addClass+"--"+"%";
 	    		}
-	    		if (!addSec.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(addSec)) {
 	    			conClassStudying = addClass;
 	    			conClassStudying = conClassStudying+"--"+addSec+"%";
 	    		}
 
 	    		classStudying = DataUtil.emptyString(conClassStudying);
 
-	    		if (!studentname.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(studentname)) {
 	    			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid);
 	    		}
 
-	    		if (!classStudying.equalsIgnoreCase("")
-	    				&& !querySub.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
 	    			querySub = querySub + " AND parents.student.classstudying like '"
 	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-	    		} else if (!classStudying.equalsIgnoreCase("")) {
+	    		} else if (StringUtils.hasLength(classStudying)) {
 	    			querySub = querySub + " parents.student.classstudying like '"
 	    					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				break;
 			}
 
-    		if(!"".equalsIgnoreCase(querySub)) {
+    		if(StringUtils.hasLength(querySub)) {
     			queryMain = queryMain + querySub;
     			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
     		}
     		
-    	}
     		feescategoryResponseDto.setSearchStudentList(searchStudentList);
 
 
@@ -602,7 +594,7 @@ public class StampFeesService {
 		
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 
-        if(branchid!=null){
+        if(StringUtils.hasLength(branchid)){
         	String[] className = searchStudentDto.getClassesSearch();
        
             List<Feescategory> feecategoryList= feesCategoryDao.getFeecategoryByName(className,searchStudentDto,branchid);
@@ -612,7 +604,7 @@ public class StampFeesService {
     		
     		List<Parents> searchStudentList = new ArrayList<>();
     		
-    		if(branchid!=null){
+    		if(StringUtils.hasLength(branchid)) {
     		
     		String queryMain = "From Parents as parents where";
     		String[] addClass = searchStudentDto.getClassesSearch();
@@ -636,12 +628,12 @@ public class StampFeesService {
 					classStudying = sb.toString();
 	    		}
 
-	    		if (!classStudying.equalsIgnoreCase("")) {
+	    		if (StringUtils.hasLength(classStudying)) {
 	    			querySub = classStudying+"  AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
 	    		}
 				
 
-    		if(!"".equalsIgnoreCase(querySub)) {
+    		if(StringUtils.hasLength(querySub)) {
     			queryMain = queryMain + querySub;
     			searchStudentList = studentDetailsDao.getStudentsList(queryMain);
     		}
@@ -654,9 +646,9 @@ public class StampFeesService {
         return feescategoryResponseDto;
 	}
 	
-public void addFeesStampAll(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
+	public void addFeesStampAll(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
 		
-		if(currentAcademicYear!=null){
+		if(StringUtils.hasLength(currentAcademicYear)) {
 		String[] studentIds = stampFeesDto.getStudentIds();
 		if(studentIds!=null){
 		Academicfeesstructure academicfessstructure = new Academicfeesstructure();
@@ -684,10 +676,10 @@ public void addFeesStampAll(StampFeesDto stampFeesDto,String currentAcademicYear
 				if(studentIdClass[1].equalsIgnoreCase(feesCatAndIndex[2])) {
 					
 				//check whether the fees category is already stamped 
-				Studentfeesstructure result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(studentIdClass[0]),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
+				List<Studentfeesstructure> result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(studentIdClass[0]),Integer.parseInt(feesCatAndIndex[0]),currentAcademicYear);
 				// END
 				
-				if(result==null) {
+				if(CollectionUtils.isEmpty(result)) {
 					
 					Studentfeesstructure studentfeesstructure = new Studentfeesstructure();   
 					Feescategory feescategory = new Feescategory();

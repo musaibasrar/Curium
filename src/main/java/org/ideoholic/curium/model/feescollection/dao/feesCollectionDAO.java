@@ -1,7 +1,9 @@
 package org.ideoholic.curium.model.feescollection.dao;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.feescollection.dto.Feescollection;
@@ -191,10 +193,13 @@ public class feesCollectionDAO {
     @Transactional
     public List<Studentfeesstructure> getStudentsFeesStructure(List<Integer> studentids, String currentYear, String searchCriteria) {
     	List<Studentfeesstructure> result = new ArrayList<>();
+    	Map<String, Object> params = new LinkedHashMap<>();
         try {
             // session.createQuery("from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'");
-        	String finalQuery = "from Studentfeesstructure sfs where sfs.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = '"+currentYear+"'";
-        	result = queryUtil.runGivenQuery(finalQuery, Studentfeesstructure.class);
+        	String finalQuery = "from Studentfeesstructure sfs where sfs.student.sid in (:ids) and sfs."+searchCriteria+" > 0 and sfs.academicyear = :currentYear";
+        	 params.put("ids", studentids);
+        	 params.put("currentYear", currentYear);
+        	result = queryUtil.runGivenQuery(finalQuery, params, Studentfeesstructure.class);
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -289,7 +294,7 @@ public class feesCollectionDAO {
     }
 
     @Transactional
-    public List<Otherreceiptinfo> getOtherReceiptDetailsPerStudent(long id, String currentacademicyear) {
+    public List<Otherreceiptinfo> getOtherReceiptDetailsPerStudent(Integer id, String currentacademicyear) {
     	List<Otherreceiptinfo> result = new ArrayList<>();
         try {
         	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
@@ -317,7 +322,7 @@ public class feesCollectionDAO {
     }
 
     @Transactional
-    public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(long id, String currentacademicyear) {
+    public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(Integer id, String currentacademicyear) {
     	List<Otherreceiptinfo> result = new ArrayList<>();
         try {
         	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
