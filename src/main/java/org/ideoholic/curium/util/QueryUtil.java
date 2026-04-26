@@ -1,6 +1,7 @@
 package org.ideoholic.curium.util;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
@@ -26,6 +27,16 @@ public class QueryUtil {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public List runGivenQuery(String query, Class clazz) {
 		return entityManager.createQuery(query, clazz).getResultList();
+	}
+	
+	@Transactional
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public List runGivenQuery(String query,  Map<String, Object> params, Class clazz) {
+		TypedQuery q = entityManager.createQuery(query, clazz);
+		if (params != null) {
+			params.forEach(q::setParameter);
+		}
+		return q.getResultList();
 	}
 
 	@Transactional

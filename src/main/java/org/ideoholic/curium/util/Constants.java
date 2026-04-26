@@ -24,4 +24,6 @@ public interface Constants {
      * Size of a byte buffer to read/write file
      */
 	int BUFFER_SIZE = 4096;
+
+	String[] EMPTY_STRING_ARRAY = new String[0];
 }

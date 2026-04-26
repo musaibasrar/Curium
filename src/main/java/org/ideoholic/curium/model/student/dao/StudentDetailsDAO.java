@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.hibernate.query.Query;
@@ -458,12 +459,24 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Parents> getStudentsList(String query) {
-		java.util.List<Parents> parents = new ArrayList<Parents>();
+		List<Parents> parents = new ArrayList<>();
         try {
         	// original:
         	// Query HQLquery = session.createQuery(query);
         	// parents = (java.util.List<Parents>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
             parents = (List<Parents>) queryUtil.runGivenQuery(query, Parents.class);
+        } catch (Exception hibernateException) {
+        	TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        	log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+        }
+        return parents;
+	}
+
+	public List<Parents> getStudentsList(String query, Map<String, Object> params) {
+		List<Parents> parents = new ArrayList<Parents>();
+        try {
+            parents = (List<Parents>) queryUtil.runGivenQuery(query, params, Parents.class);
         } catch (Exception hibernateException) {
         	TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         	log.error(hibernateException.getMessage(), hibernateException);

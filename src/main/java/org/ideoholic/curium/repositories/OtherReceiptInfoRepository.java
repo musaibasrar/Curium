@@ -11,6 +11,5 @@ public interface OtherReceiptInfoRepository extends JpaRepository<Otherreceiptin
 
 	Otherreceiptinfo findTopByBranchidOrderByReceiptnumberDesc(Integer branchid);
 
-	List<Otherreceiptinfo> findByStudent_SidAndAcademicyearAndCancelreceipt(Long sid, String academicyear,
-			Integer cancelreceipt);
+	List<Otherreceiptinfo> findByStudent_SidAndAcademicyearAndCancelreceipt(Integer sid, String academicyear, Integer cancelreceipt);
 }
