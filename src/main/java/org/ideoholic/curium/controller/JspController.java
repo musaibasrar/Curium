@@ -655,4 +655,9 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/leftsettings_feescollector")
+	public String getLeftSettingsFeescollector() {
+		return "leftsettings_feescollector";
+	}
 }

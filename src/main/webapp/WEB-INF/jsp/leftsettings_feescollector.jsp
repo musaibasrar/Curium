@@ -1,6 +1,6 @@
 <%-- 
-Document   : left
-Created on : Jan 4, 2012, 3:41:11 PM
+Document   : left settings
+Created on : May 10, 2018, 12:51:11 PM
 Author     : Musaib
 --%>
 
@@ -27,111 +27,7 @@ Author     : Musaib
         <link href="/cambridge/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/cambridge/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
-        <script type="text/javascript">
-            var get;
-            function getdata1() {
-                var startHour, startMin;
-                var tDate = new Date();
-                startHour = tDate.getHours();
-                startMin = tDate.getMinutes();
-
-                if (typeof XMLHttpRequest != "undefined") {
-                    get = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    get = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                get.onreadystatechange = processdata;
-                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
-                get.send(null);
-
-            }
-
-            function processdata() {
-                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
-                if (get.readyState == 4)
-                {
-                    if (get.status == 200) {
-                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
-                        var visitNodes = visits.getElementsByTagName("Visit");
-                        for (var i = 0; i < visitNodes.length; i++) {
-                            var visit = visitNodes[i];
-
-                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
-                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
-                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
-                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
-
-                            $(function() {
-                                $('#Notification').jnotifyAddMessage({
-                                    text: link,
-                                    permanent: false,
-                                    disappearTime: 30000
-                                });
-
-                            });
-
-                        }
-
-
-                        setTimeout('getdata1();', 60000);
-
-
-                    }
-                }
-
-            }
-            /**
-             * Comment
-             */
-            var getExpiringStockCount;
-            function getExpiringStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getExpiringStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getExpiringStockCount.onreadystatechange = processExpiringStockData;
-                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
-                getExpiringStockCount.send(null);
-
-            }
-           
-            var getDepletingStockCount;
-            function getDepletingStock() {
-                if (typeof XMLHttpRequest != "undefined") {
-                    getDepletingStockCount = new XMLHttpRequest();
-                } else if (window.ActiveXObject) {
-                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-
-
-                getDepletingStockCount.onreadystatechange = processDepletingStockData;
-                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
-                getDepletingStockCount.send(null);
-
-            }
-            function processDepletingStockData() {
-
-                if (getDepletingStockCount.readyState == 4)
-                {
-                    if (getDepletingStockCount.status == 200) {
-                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
-                        var depletingStockCount = count.childNodes[0].nodeValue;
-                        var depletingStock = document.getElementById("depletingStock");
-                        depletingStock.innerHTML = " " + depletingStockCount;
-                        setTimeout('getDepletingStock();', 60000);
-
-
-                    }
-                }
-
-            }
-
-        </script>
+      
         <script type="text/javascript">
             var req;
 
@@ -276,22 +172,14 @@ Author     : Musaib
                 font-weight: bold;
                 height: 22px;
             }
-
-.sideaccordian{
-		
-		font-size: 12px;
-		/* border: 0px; */
-		border-radius: 5px;
-		/* border-bottom:  1px solid #010d1c !important; */
-}
-
-
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+            
+            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
 .ui-widget-content {
     border: 1px solid #b6cfe2;
     background: #ffffff;
     color: #222222;
 }
+
 
 
         </style>
@@ -442,111 +330,35 @@ for(Cookie cookie : cookies){
 }
 %>
     <body onload="StartClock()" onunload="KillClock()">
-       <!--  <form name="theClock">
+        <!-- <form name="theClock">
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-                </table>
+            
+            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
+            <div>
+                <a target="mainFrame" href="/cambridge/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/cambridge/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/cambridge/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
             </div>
             
-            
-			
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/FeesProcess/otherfeesCollect" style="font-size: 12px;">Bus Fees Collect</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
+            <div>
+                <a target="mainFrame" href="/cambridge/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
+                <a target="mainFrame" href="/cambridge/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
+
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-            
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/changePassword" style="font-size: 12px;">Change Password</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <div >
+                <a target="mainFrame" href="/cambridge/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
             
             </div>
-                   
             
             <!-- END -->
            
