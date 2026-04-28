@@ -779,5 +779,18 @@ public class StudentDetailsDAO {
 		}
 		return student;
 	}
+	
+	@Transactional
+	public List<Student> getStudentsListByIds(List<Integer> sIds) {
+		List<Student> sponseredList = new ArrayList<Student>();
+		try {
+			sponseredList = studentRepo.findBySidIn(sIds);
+		}catch (Exception hibernateException) { 
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+		}
+		return sponseredList;
+	}
 
 }
