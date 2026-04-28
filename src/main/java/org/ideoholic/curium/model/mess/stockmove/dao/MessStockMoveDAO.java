@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.mess.stockmove.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.hibernate.HibernateException;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
@@ -149,7 +150,7 @@ public class MessStockMoveDAO {
 			MessStockMoveInfo messStockMoveInfo) {
 
 		boolean result = false;
-		int billNo = 0;
+		int billNo=0;
 		try {
 			// session.save(transactions);
 			voucherEntryTransactionsRepository.save(transactions);
@@ -192,12 +193,24 @@ public class MessStockMoveDAO {
 			}
 
 			// Determine billNo similar to original logic (get last MessStockMove)
-			billNo = messStockMoveRepository.findTopByOrderByIdDesc().map(msm -> msm.getId() + 1).orElse(1);
+			MessStockMove msm = messStockMoveRepository.findTopByOrderByIdDesc().orElse(new MessStockMove());
+			
+			if(msm!=null) {
+				String[] billId = msm.getExternalid().split("_");
+				billNo = Integer.parseInt(billId[1]) + 1;
+			}else {
+				billNo = 1;
+			}
 
 			for (MessStockMove messStockMove : messStockMovesList) {
-				messStockMove.setExternalid(String.format("%04d", billNo));
+				
+				
+				//messStockMove.setExternalid(String.format("%04d",billNo));
 				// session.save(messStockMove);
 				messStockMoveRepository.save(messStockMove);
+				//Query queryUpdateMessStockExId = session.createQuery("update MessStockMove set externalid= concat(externalid,'_"+String.format("%05d",billNo)+"'), voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
+				String formattedBillNo = "_" + String.format("%05d", billNo);
+				messStockMoveRepository.updateMessStockMoveExternalId(formattedBillNo,transactions.getTransactionsid(),messStockMove.getId());
 				// Query queryUpdateMessStock = session.createQuery("update MessStockMove set voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 				messStockMoveRepository.updateVoucherId(transactions.getTransactionsid(), messStockMove.getId());
 				// Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock-'"+messStockMove.getQuantity()+"' where itemid="+messStockMove.getItemid());

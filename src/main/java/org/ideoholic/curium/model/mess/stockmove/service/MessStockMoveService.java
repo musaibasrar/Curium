@@ -365,14 +365,8 @@ public class MessStockMoveService {
 
 							//Get Bill No
 							MessStockMove msm = messStockMoveDao.getMessStockMoveMaxRow();
-							int billNo = 0;
-							if(msm!=null) {
-								billNo = msm.getId() + 1;
-							}else {
-								billNo = 1;
-							}
-
-							results.setBillNo(billNo);
+							String[] billNo = msm.getExternalid().split("_");
+							results.setBillNo(Integer.parseInt(billNo[1]));
 
 						}else {
 							results.setBillDetails("");
@@ -577,7 +571,7 @@ public class MessStockMoveService {
 			 
 					try {
 						int page = 1;
-						int recordsPerPage = 50;
+						int recordsPerPage = 500;
 							if (!"".equalsIgnoreCase(DataUtil.emptyString(strPage))) {
 								page = Integer.parseInt(strPage);
 							}
@@ -586,7 +580,7 @@ public class MessStockMoveService {
 									recordsPerPage, Integer.parseInt(branchId));
 						int noOfRecords = messStockMoveDao.getNoOfRecordsStockMove(fromDate, toDate, Integer.parseInt(branchId));
 						int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-						result.setNoOfPages(noOfRecords);
+						result.setNoOfPages(noOfPages);
 						result.setCurrentPage(page);
 						result.setFromDate(fromDate);
 						result.setToDate(toDate);
