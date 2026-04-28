@@ -82,4 +82,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     List<Student> findStudentsLeft();
 
     Student findByNameAndDateofbirthOrDisabilitychild(String name, Date dateOfBirth, String aadhaarNo);
+    
+    List<Student> findBySidIn(List<Integer> ids);
 }

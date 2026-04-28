@@ -17,14 +17,18 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
+import org.ideoholic.curium.model.feescollection.dto.Feescollection;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
 import org.ideoholic.curium.model.feesdetails.dto.DataForFeesResponseDto;
 import org.ideoholic.curium.model.feesdetails.dto.FeesIdDetailsDto;
 import org.ideoholic.curium.model.feesdetails.dto.Feesdetails;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +41,9 @@ public class FeesDetailsService {
 	
 	@Autowired
 	private StudentDetailsDAO studentDetailsDao;
+	
+	@Autowired
+	private feesCollectionDAO feesCollectionDao;
 
 	public Feesdetails addFeesDetails(FeesIdDetailsDto feesIdDetailsDto,String branchid,String userId, String currentyear) {
 		
@@ -287,6 +294,7 @@ public class FeesDetailsService {
 	public DataForFeesResponseDto printDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
 		DataForFeesResponseDto dataForFeesResponseDto = new DataForFeesResponseDto();
+		StudentFeesReport studentFeesReportDTO = new StudentFeesReport();
 		String[] feesIds = feesIdDetailsDto.getFeesIds();
 		String toDate= DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getToDate());
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getFromDate());
@@ -294,7 +302,7 @@ public class FeesDetailsService {
 		
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
+		Map<Receiptinfo,StudentFeesReport> feesMap = new HashMap<Receiptinfo,StudentFeesReport>();
 		long sumOfFees = 0l;
 		long fine = 0l;
 		long misc = 0l;
@@ -303,9 +311,18 @@ public class FeesDetailsService {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
 					
-					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
+					receiptInfo =feesDetailsDao.readFeesDetails(Long.parseLong(id));
+					Set<Feescollection>  feesCollection = receiptInfo.getFeesCollectionRecords();
+					List<Integer> sfsList = new ArrayList<Integer>();
+					
+					for (Feescollection fee : feesCollection) {
+						sfsList.add(fee.fetchSfsid());
+					}
+					List<Studentfeesstructure> studentFeesStructureList = feesCollectionDao.getStudentsFeesStructureBySfsId(sfsList);
 					student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
-					feesMap.put(receiptInfo, student);
+					studentFeesReportDTO.setParents(student);
+					studentFeesReportDTO.setStudentFeesStructure(studentFeesStructureList);
+					feesMap.put(receiptInfo, studentFeesReportDTO);
 					
 					sumOfFees = sumOfFees + receiptInfo.getTotalamount();
 					fine = fine + receiptInfo.getFine();
@@ -327,14 +344,14 @@ public class FeesDetailsService {
 		
 
 		// Step 1: Convert map entries to a list
-		List<Map.Entry<Receiptinfo, Parents>> entryList = new ArrayList<>(feesMap.entrySet());
+		List<Map.Entry<Receiptinfo, StudentFeesReport>> entryList = new ArrayList<>(feesMap.entrySet());
 
 		// Step 2: Sort the list by receiptnumber
 		entryList.sort(Comparator.comparing(e -> e.getKey().getReceiptnumber()));
 
 		// Step 3: Create a LinkedHashMap to maintain the sorted order
-		Map<Receiptinfo, Parents> sortedMap = new LinkedHashMap<>();
-		for (Map.Entry<Receiptinfo, Parents> entry : entryList) {
+		Map<Receiptinfo, StudentFeesReport> sortedMap = new LinkedHashMap<>();
+		for (Map.Entry<Receiptinfo, StudentFeesReport> entry : entryList) {
 		    sortedMap.put(entry.getKey(), entry.getValue());
 		}
 		

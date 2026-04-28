@@ -499,4 +499,19 @@ public class feesCollectionDAO {
         }
         return result;
     }
+    
+    @Transactional
+    public List<Studentfeesstructure> getStudentsFeesStructureBySfsId(List<Integer> sfsIds) {
+		
+		List<Studentfeesstructure> result = new ArrayList<Studentfeesstructure>();
+
+		try {
+			result=studentfeesstructureRepository.findBySfsidIn(sfsIds);
+		}catch (Exception hibernateException) {
+            log.error(hibernateException.getMessage(), hibernateException);
+            hibernateException.printStackTrace();
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+        }
+		return result;
+	}
 }

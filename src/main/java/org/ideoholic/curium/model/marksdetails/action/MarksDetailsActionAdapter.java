@@ -144,6 +144,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubject(request.getParameter("subject"));
         dto.setSubjectSelected(request.getParameter("subjectselected"));
         dto.setExamSelected(request.getParameter("examselected"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
 
         MarksResponseDto responseDto = marksDetailsService.viewMarks(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("newStudentList", responseDto.getNewStudentList());
@@ -265,6 +266,7 @@ public class MarksDetailsActionAdapter {
         dto.setSubject(request.getParameter("subject"));
         dto.setSubjectSelected(request.getParameter("subjectselected"));
         dto.setExamSelected(request.getParameter("examselected"));
+        dto.setAcademicYear(request.getParameter("academicyear"));
 
         MarksResponseDto responseDto = marksDetailsService.viewMarksSub(dto, httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("newStudentList", responseDto.getNewStudentList());

@@ -29,4 +29,8 @@ public interface MessStockMoveRepository extends JpaRepository<MessStockMove, In
 	
 	@Query("From MessStockMove msm where msm.status != :status and msm.transactiondate between :fromDate and :toDate AND msm.branchid = :branchId")
 	List<MessStockMove> findByStatusNotAndTransactiondateBetweenAndBranchid(@Param("status") String status, @Param("fromDate") String fromDate,  @Param("toDate") String toDate, @Param("branchId") Integer branchId);
+	
+	@Modifying
+	@Query("UPDATE MessStockMove m SET m.externalid = CONCAT(m.externalid, :suffix) WHERE m.id = :id")
+	int updateMessStockMoveExternalId(@Param("suffix") String suffix, @Param("id") Integer id);
 }

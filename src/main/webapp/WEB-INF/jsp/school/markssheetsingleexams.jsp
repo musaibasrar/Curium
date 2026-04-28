@@ -207,7 +207,7 @@ span{
 	//allow access only if session exists
 	String user = null;
 	if(session.getAttribute("userAuth") == null){
-		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+		response.sendRedirect("/school/UserProcess/sessionTimeOut");
 	}else user = (String) session.getAttribute("userAuth");
 	String userName = null;
 	String sessionID = null;
@@ -230,7 +230,7 @@ span{
 			<!-- HEADER SECTION WITH SCHOOL DETAILS -->
 			<table style="page-break-inside: avoid;border-collapse: collapse;width: 100%;">
 				<tr>
-					<td style="padding-left: 200px;"><img src="/vision/images/vision${branchid}.jpg" width="72" height="80"/></td>
+					<td style="padding-left: 200px;"><img src="/school/images/school${branchid}.jpg" width="72" height="80"/></td>
 					<td>
 						<label class="dataTextBoldCenter">${branchname}</label><br>
 						<label class="addressLine">${branchaddress}</label>
@@ -297,6 +297,47 @@ span{
 									<td class="marksTableCell"><c:out
 											value="${subjectEntry.value[exam.examName]}" /></td>
 								</c:forEach>
+								
+								<!-- Subject-wise Summary Columns -->
+			                <c:set var="currentSubject" value="" />
+			                <c:forEach items="${Parents.subjectSummaries}" var="subjectSummary">
+			                    <c:if test="${subjectSummary.subjectName == subjectEntry.key}">
+			                        <c:set var="currentSubject" value="${subjectSummary}" />
+			                    </c:if>
+			                </c:forEach>
+			                
+			                <!-- Total Marks for Subject -->
+			                <td class="marksTableCell" style="text-align: center;">
+			                    <c:choose>
+			                        <c:when test="${currentSubject != ''}">
+			                            <fmt:formatNumber value="${currentSubject.totalMarksObtained}" maxFractionDigits="2" />
+			                            / 
+			                            <fmt:formatNumber value="${currentSubject.totalMaxMarks}" maxFractionDigits="0" />
+			                        </c:when>
+			                        <c:otherwise>-</c:otherwise>
+			                    </c:choose>
+			                </td>
+			                
+			                <!-- Percentage for Subject -->
+			                <td class="marksTableCell" style="text-align: center;">
+			                    <c:choose>
+			                        <c:when test="${currentSubject != '' && currentSubject.totalPercentage > 0}">
+			                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${currentSubject.totalPercentage}" />%
+			                        </c:when>
+			                        <c:otherwise>-</c:otherwise>
+			                    </c:choose>
+			                </td>
+			                
+			                <!-- Grade for Subject -->
+			                <td class="marksTableCell" style="text-align: center;">
+			                    <c:choose>
+			                        <c:when test="${currentSubject != '' && currentSubject.overallGrade != null && currentSubject.overallGrade != ''}">
+			                            ${currentSubject.overallGrade}
+			                        </c:when>
+			                        <c:otherwise>-</c:otherwise>
+			                    </c:choose>
+			                </td>
+			                
 								<!-- Remarks Column - Only add rowspan on first row to span both tables -->
 								<c:if test="${status.first}">
 									<td rowspan="${fn:length(Parents.subjectExamMarks) + 6}"
