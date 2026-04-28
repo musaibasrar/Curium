@@ -248,7 +248,7 @@ public class StampFeesDAO {
      * Get Studentfeesstructure for sid/feesCategoryId/year
      */
     @Transactional
-    public Studentfeesstructure getStudentFeesStructure(int sid, int feesCategoryId, String academicYear) {
+    public List<Studentfeesstructure> getStudentFeesStructure(int sid, int feesCategoryId, String academicYear) {
         try {
         	// Query query = session.createQuery("from Studentfeesstructure as sfs where sfs.sid = '"+sid+"' and sfs.Feescategory.idfeescategory = '"+feesCategoryId+"' and sfs.academicyear = '"+academicYear+"'");
             return studentFeesStructureRepo.findBySidAndIdfeescategoryAndAcademicyear(sid, feesCategoryId, academicYear);
