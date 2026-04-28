@@ -957,7 +957,7 @@ $(document).ready(function() {
             xmlHttpParent.onreadystatechange = stateChangedParent;
             xmlHttpParent.open(
                 "GET",
-                "/vision/StudentProcess/searchListOfParent",
+                "/school/StudentProcess/searchListOfParent",
                 true
             );
             xmlHttpParent.send(null);
