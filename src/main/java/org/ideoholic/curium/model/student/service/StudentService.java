@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,6 +42,7 @@ import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -67,6 +69,7 @@ import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.PropertiesUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -105,6 +108,8 @@ public class StudentService {
 	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
+	@Autowired
+	private LibraryService libraryService;
 
 	public ResultResponse addStudent(CreateStudentDto createStudentDto, MultipartFile[] listOfFiles, String branchCode, String branchId, String userId, String strCurrentAcademicYear) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -1520,4 +1525,45 @@ public class StudentService {
 		}
 		return false;
 	}
+	
+	public void getParentList(String branchid) throws IOException {
+
+		response.setContentType("text/xml");
+        response.setHeader("Cache-Control", "no-cache");
+
+		PrintWriter out = response.getWriter();
+
+		try {
+			if (branchid != null && !branchid.isEmpty()) {
+
+				ResultResponse result = libraryService.getActiveStudentsWithParents(branchid);
+
+				List<Parents> parentList = result.getResultList();
+
+				StringBuilder buffer = new StringBuilder();
+
+				buffer.append("<select id='parentId' name='parentId' class='textfieldvalues'>");
+				buffer.append("<option value=''>-- Select Parent --</option>");
+
+				if (parentList != null && !parentList.isEmpty()) {
+					for (Parents parent : parentList) {
+						buffer.append("<option value='").append(parent.getPid()) // use correct ID
+								.append("'>").append(parent.getFathersname()+"/"+parent.getContactnumber()) // use getter
+								.append("</option>");
+					}
+				}
+
+				buffer.append("</select>");
+
+				out.print(buffer.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			out.print("<select><option value=''>No Parent Found</option></select>");
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
+
 }
