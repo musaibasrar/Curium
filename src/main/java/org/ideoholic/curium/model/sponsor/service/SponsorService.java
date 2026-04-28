@@ -6,33 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.documents.dto.Transfercertificate;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sponsor.dao.SponsorDao;
 import org.ideoholic.curium.model.sponsor.dto.Sponsor;
 import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
 import org.ideoholic.curium.model.sponsor.dto.SponsorResponseDto;
-import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SponsorService {
 	
-	 @Autowired
+	 	@Autowired
 	    private SponsorDao sponsorDao;
 	    
 	    @Autowired
-	    private studentDetailsDAO studentDetailsDAO;
+	    private StudentDetailsDAO studentDetailsDAO;
 	
 	public SponsorResponseDto addSponsor(SponsorDto sponsorDto, String branchid, String userid) {
 		SponsorResponseDto sponsorResponseDto = new SponsorResponseDto();
@@ -135,16 +126,16 @@ public class SponsorService {
 		Map<Student, Studentfeesstructure> mapOfSponsors = new HashMap<Student, Studentfeesstructure>();
 		String sponsorName =  sponsorDto.getName();
 		int branchId = Integer.parseInt(branchid);
-		List<Studentfeesstructure> list = sponsorDao.getFeesStructuredBySponsor(branchId,sponsorName);
+		List<Studentfeesstructure> list = sponsorDao.getFeesStructureBySponsor(branchId,sponsorName);
 		List<Integer> sIds = new ArrayList<Integer>(); 
 		for (Studentfeesstructure studentfeesstructure : list) {
-			sIds.add(studentfeesstructure.getSid());
+			sIds.add(studentfeesstructure.fetchSid());
 		}
 		List<Student> listStudent = studentDetailsDAO.getStudentsListByIds(sIds);
 		for (Student student : listStudent) {
 			for (Studentfeesstructure studentfeesstructure : list) {
 				int sids = student.getSid();
-				int sidf = studentfeesstructure.getSid();
+				int sidf = studentfeesstructure.fetchSid();
 				if(sids==sidf) {
 			mapOfSponsors.put(student, studentfeesstructure);
 		}

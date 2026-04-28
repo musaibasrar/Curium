@@ -3,138 +3,102 @@ package org.ideoholic.curium.model.sponsor.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.hibernate.SessionFactory;
+import javax.transaction.Transactional;
+
 import org.hibernate.query.Query;
-import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.sponsor.dto.Sponsor;
-import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.repositories.SponsorRepository;
+import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.util.HibernateUtil;
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.springframework.stereotype.Service;
-@Service
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
+@Component
+@RequiredArgsConstructor
 public class SponsorDao {
 
-	Session session = null;
-	   
-    Transaction transaction = null;
-    
-    SessionFactory sessionFactory;
-    private static final Logger logger = LogManager.getLogger(SponsorDao.class);
+	private final SponsorRepository sponsorRepo;
+    private final StudentFeesStructureRepository studentFeesRepo;
 
-
-    public SponsorDao() {
-		session = HibernateUtil.openCurrentSession();
-	}
-    
+    @Transactional
 	public boolean addSponsor(Sponsor sponsor) {
-
-		boolean result = false;
-		try {
-            transaction = session.beginTransaction();
-            session.save(sponsor);
-            transaction.commit();
-            result = true;
-            
-        } catch (Exception hibernateException) { transaction.rollback();
-        logger.error(hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
+        try {
+            sponsorRepo.save(sponsor);
+            return true;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
         }
-		
-		return result;
-		
-	}
+        return false;
+    }
 
+    @Transactional
 	public List<Sponsor> viewSponsor(int branchId) {
-		List<Sponsor> results = new ArrayList<Sponsor>();
-		try {
-
-			transaction = session.beginTransaction();
-			results = (List<Sponsor>) session.createQuery("From Sponsor as sponsor where sponsor.branchid=" + branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
-
-	public void deleteMultiple(List<Integer> ids) {
-		try {
-            transaction = session.beginTransaction();
-            Query query = session.createQuery("delete from Sponsor where id IN (:ids)");
-            query.setParameterList("ids", ids);
-            query.executeUpdate();
-            transaction.commit();
-        } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-            hibernateException.printStackTrace();
-        }finally {
-			HibernateUtil.closeSession();
-		}
-		
-	}
-
-	public Sponsor readUniqueObject(int id) {
-		Sponsor sponsor = new Sponsor();
-
-		try {
-
-			transaction = session.beginTransaction();
-			Query query = session.createQuery("From Sponsor as sponsor where sponsor.id=" + id);
-			sponsor = (Sponsor) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-		}
-
-		return sponsor;
-	}
-
-	public boolean updateSponsor(Sponsor sponsor) {
-		boolean result = false;
-		try {
-            transaction = session.beginTransaction();
-            session.update(sponsor);
-            transaction.commit();
-            result = true;
-        } catch (Exception hibernateException) { 
-        	transaction.rollback(); logger.error(hibernateException);
-            
-            hibernateException.printStackTrace();
-        } finally {
-    			HibernateUtil.closeSession();
+        List<Sponsor> results = new ArrayList<>();
+        try {
+            results = sponsorRepo.findByBranchid(branchId);
+        }catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
         }
-		return result;
-	}
+        return results;
+    }
 
-	@SuppressWarnings("unchecked")
-	public List<Studentfeesstructure> getFeesStructuredBySponsor(int branchId, String sponsorName) {
-		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
-		try {
+    @Transactional
+	public void deleteMultiple(List<Integer> ids) {
+        try {
+            sponsorRepo.deleteByIdIn(ids);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+    }
 
-			transaction = session.beginTransaction();
-			results = (List<Studentfeesstructure>) session.createQuery("From Studentfeesstructure as sfr where sfr.concessionnotes='" + sponsorName+ "' and sfr.branchid=" + branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
-			
-			hibernateException.printStackTrace();
-		} finally {
-				HibernateUtil.closeSession();
-			return results;
-		}
-	}
+    @Transactional
+	public Sponsor readUniqueObject(int id) {
+        Sponsor sponsor = new Sponsor();
+        try {
+            Sponsor found = sponsorRepo.findById(id).orElse(null);
+            if (found != null) sponsor = found;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return sponsor;
+    }
+
+    @Transactional
+	public boolean updateSponsor(Sponsor sponsor) {
+        try {
+            sponsorRepo.save(sponsor); // save acts as update
+            return true;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Transactional
+	public List<Studentfeesstructure> getFeesStructureBySponsor(int branchId, String sponsorName) {
+        List<Studentfeesstructure> results = new ArrayList<>();
+        try {
+            results = studentFeesRepo.findByConcessionnotesAndBranchid(sponsorName, branchId);
+        }  catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return results;
+    }
 	
 }

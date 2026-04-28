@@ -1707,7 +1707,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			examIds.add(Integer.parseInt(examId));
 		}
 
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(examIds, Integer.parseInt(branchId));
+		List<Exams> examsList = examDetailsDao.readListOfExams(examIds, Integer.parseInt(branchId));
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 
 		for (int i = 0; i < studentIds.length; i++) {

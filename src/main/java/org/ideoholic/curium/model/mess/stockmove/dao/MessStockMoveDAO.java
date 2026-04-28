@@ -210,7 +210,7 @@ public class MessStockMoveDAO {
 				messStockMoveRepository.save(messStockMove);
 				//Query queryUpdateMessStockExId = session.createQuery("update MessStockMove set externalid= concat(externalid,'_"+String.format("%05d",billNo)+"'), voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 				String formattedBillNo = "_" + String.format("%05d", billNo);
-				messStockMoveRepository.updateMessStockMoveExternalId(formattedBillNo,transactions.getTransactionsid(),messStockMove.getId());
+				messStockMoveRepository.updateMessStockMoveExternalId(formattedBillNo,messStockMove.getId());
 				// Query queryUpdateMessStock = session.createQuery("update MessStockMove set voucherid = '"+transactions.getTransactionsid()+"' where id="+messStockMove.getId());
 				messStockMoveRepository.updateVoucherId(transactions.getTransactionsid(), messStockMove.getId());
 				// Query queryStockAvailability = session.createQuery("update MessStockAvailability set availablestock= availablestock-'"+messStockMove.getQuantity()+"' where itemid="+messStockMove.getItemid());

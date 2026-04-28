@@ -38,7 +38,9 @@ public interface StudentFeesStructureRepository extends JpaRepository<Studentfee
 
     // sid = student.getSid(); idfeescategory = student.getFeescategory().getIdfeescategory();
     @Query("SELECT s FROM Studentfeesstructure s WHERE s.student.sid = :sid AND s.feescategory.idfeescategory = :idfeescategory AND s.academicyear = :academicyear")
-	Studentfeesstructure findBySidAndIdfeescategoryAndAcademicyear(@Param("sid") int sid, @Param("idfeescategory") Integer idFeesCategory, @Param("academicyear") String academicYear);
+    List<Studentfeesstructure> findBySidAndIdfeescategoryAndAcademicyear(@Param("sid") int sid, @Param("idfeescategory") Integer idFeesCategory, @Param("academicyear") String academicYear);
     
     List<Studentfeesstructure> findBySfsidIn(List<Integer> ids);
+    
+    List<Studentfeesstructure> findByConcessionnotesAndBranchid(String sponsorName, int branchId);
 }
