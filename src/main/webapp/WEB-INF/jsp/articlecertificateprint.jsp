@@ -108,12 +108,12 @@ This is to certified that Sri/Smt  <span style="font-weight: bold;text-transform
 <td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
 <c:out value="${studentdetailsbonafide.fathersname}" />
-</span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+</span>  has been studied in<b> ${branchname}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 </td>
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period Noted below:-
+<b>HIGH SCHOOL,</b>Taluka<b> BIDAR </b>District <b> BIDAR </b> During the Period Noted below:-
 </td>
 </tr>
 </table>
@@ -182,7 +182,7 @@ Reference of Document
 <%-- <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach> --%>
-								SSLC
+								${studentdetailsbonafide.student.classstudying}
 </td>
 <td class="borderset" style="text-align:center;">
 ${studentdetailsbonafide.student.promotedyear}
@@ -198,7 +198,7 @@ ${studentdetailsbonafide.student.admissionnumber}
 <table align="center">
 <tr><td><br></td></tr>
 <tr><td>
-Place: Raichur</td><td>Name:&nbsp;&nbsp;ASMA SUHA
+Place: Kamthana</td><td>Name:&nbsp;&nbsp;
 </td></tr>
 <tr><td>
 <br>
@@ -248,7 +248,7 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 <tr>
 <td>
 </td><td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> Taluka
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;">BIDAR</span> Taluka
 </td>
 
 </tr>
@@ -258,7 +258,7 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 </tr>
 <tr><td>
 </td><td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> District
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;">BIDAR</span> District
 </td></tr>
 
 </table>

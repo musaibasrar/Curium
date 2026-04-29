@@ -13,7 +13,6 @@
 
 <html>
 <head>
-
 <style>
         .borderset{
         border:1px solid black;
@@ -28,6 +27,29 @@
     text-align:center;
 }
         </style>
+        <style>
+
+.print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+.printinput{
+font-weight:normal;
+font-size:15px;
+}        
+
+        @media print{
+            .print-btn{
+                display: none;
+            }
+            .printinput{
+            border:none;
+            outline:none;
+            box-shadow:none:
+            }
+        }
+</style>
+
 	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Article 371 Certificate</title>
@@ -104,12 +126,12 @@ This is to certify that Sri/Smt  <span style="font-weight: bold;text-transform: 
 <td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
 <c:out value="${studentdetailsbonafide.fathersname}" />
-</span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+</span>  has been studied in<b> ${branchname}&nbsp;</b>
 </td>
 </tr>
 <tr>
 <td>
-<b>HIGH SCHOOL,</b>Taluka<b> RAICHUR </b>District <b> RAICHUR </b> During the Period mentioned below:-
+</b>Taluka<b> BIDAR </b>District <b> BIDAR </b> During the Period mentioned below:-
 </td>
 </tr>
 <tr><td><br></td></tr>
@@ -175,11 +197,11 @@ Reference of Document
 <td class="borderset">
 &nbsp;&nbsp;&nbsp;1
 </td>
-<td class="borderset">
+<td class="borderset" style="text-align:center;">
 <%-- <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach> --%>
-								SSLC
+								<input type="text" class="printinput" style="text-align:center;" />
 </td>
 <td class="borderset" style="text-align:center;">
 ${studentdetailsbonafide.student.promotedyear}
@@ -195,7 +217,7 @@ ${studentdetailsbonafide.student.admissionnumber}
 <table align="center">
 <tr><td><br></td></tr>
 <tr><td>
-Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;${studentdetailsbonafide.student.name}
+Place: &emsp;&emsp;Kamthana</td><td>Name:&nbsp;&nbsp;<input type="text" class="printinput" />
 </td></tr>
 <tr><td><br></td></tr>
 <tr><td><br></td></tr>
@@ -244,7 +266,7 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 <tr>
 <td>
 </td><td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> Taluka
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;">BIDAR</span> Taluka
 </td>
 
 </tr>
@@ -254,13 +276,15 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 </tr>
 <tr><td>
 </td><td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> District
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;">BIDAR</span> District
 </td></tr>
 <tr>
-              <td align="center"><a id="print" href="/roshan/DocumentsProcess/printArticleCertificate">Print</a></td>
+              <td align="center"><!-- <a id="print" href="/roshan/DocumentsProcess/printArticleCertificate">Print</a> --></td>
             </tr>
 </table>
-	
+	<div class="print-btn">
+    <button onclick="window.print()">Print</button>
+</div>
 	</form>
 </body>
 </html>

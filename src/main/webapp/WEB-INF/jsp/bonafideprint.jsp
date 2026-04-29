@@ -196,26 +196,10 @@ for(Cookie cookie : cookies){
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
 		<br><br>
-		<table align="center">
-			
-			
-			<tr>
-			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/roshan/images/roshan.png">
-			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
-				</td>
-			</tr>
-			</table>
-			
-		<table align="center" style="padding-left: 30px;padding-right: 20px;">
+		<table style="padding-left: 30px;padding-right: 20px;">
 			<tr>
 			<td class="dataTextBoldLeft">
-			<br>
+			<br><br><br>
 				<%-- Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
@@ -268,13 +252,13 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+					 He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 120px;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 					</span>
-					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					during the year <span style="font-weight: bold;width: 80px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>.His/ her date of birth
 					</h3>
 				</td>
 			
@@ -301,7 +285,7 @@ for(Cookie cookie : cookies){
 			<tr>
 				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
 				<h3 style="font-weight: normal;" align="center">
-					He/She bears good Moral Character
+					He bears good Moral Character
 					</h3>
 				</td>
 				
@@ -331,7 +315,7 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 			<td style="padding-left: 10px;">Date</td>	
-			<td align="right" style="padding-right: 70px;">Principal</td>
+			<td align="right" style="padding-right: 70px;">Head Master/Principal</td>
 		</tr>
 		</TABLE>
 	</form>

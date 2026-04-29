@@ -93,6 +93,30 @@ span{
     font-weight: normal;
 }
 </style>
+<style>
+@page {
+    size: A4;
+    margin: 10mm;
+}
+    .page {
+    width: 190mm;
+    min-height: 277mm;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: auto; 
+}
+.print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        @media print{
+            .print-btn{
+                display: none;
+            }
+        }
+</style>
 	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Bonafide Certificate</title>
@@ -116,24 +140,30 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
+	<div class="page">
+	<table>
+	<tr>
+	<td><br></td>
+	</tr>
+	<tr>
+	<td><br></td>
+	</tr>
+	<tr>
+	<td><br></td>
+	</tr>
+	<tr>
+	<td><br></td>
+	</tr>
+	</table>
+	<table align="center">
+	<tr>
+	<td><img src="/roshan/images/roshan.png" /></td>
+	<td><lable class="dataTextBoldCenter">${branchname}</lable><br>
+	<label style="font-weight:bold;">${branchaddress}</label><br>
+	<label style="font-weight:bold;">${branchcontact}</label></td>
+	</tr>
+	</table>
 		<br>
-		
-		<table align="center">
-			
-			
-			<tr>
-			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/roshan/images/roshan.png">
-			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
-				</td>
-			</tr>
-			</table>
-			
 		<table>
 			<tr>
 			<td class="dataTextBoldLeft">
@@ -156,6 +186,15 @@ for(Cookie cookie : cookies){
 			
 			</tr>
 			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">Admission no. &nbsp;&nbsp;
+					<span style="font-weight: bold;width:150px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					SATS NO.&nbsp;<span style="font-weight: bold;width:120px;"><c:out value="${studentdetailsbonafide.student.sts}" /></span></h3>
+				</td>
+			</tr>
+			<tr>
 			<td></td>
 			
 			</tr>
@@ -164,7 +203,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<span style="font-weight: bold;text-transform: capitalize;width:400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -176,7 +215,21 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
 					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
+					is/ was a student of this</h3>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+				
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;" > School/College.
+					He/ She is/ Was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 220px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
 					</span>
 					
 					</h3>
@@ -191,14 +244,9 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
-					</h3>
+					
+					during the year <span style="font-weight: bold;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;${currentAcademicYear}</span>.His/ her date of birth
+					as per School/College</h3>
 					
 				</td>
 				
@@ -213,7 +261,7 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft"  >
 				
 				<h3 style="font-weight: normal;" >
-					 as per School/College record is
+					  record is
 					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 					</h3>
 					
@@ -245,15 +293,21 @@ for(Cookie cookie : cookies){
 			</tr>
 		<tr>
 		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td align="left">Date:&nbsp;&nbsp;
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
+			<td align="center"></td>
+			<td align="center">Headmaster</td>
 		</tr>
 		
-			<tr>
+			<!-- <tr>
               <td align="center"><a id="print" href="/roshan/DocumentsProcess/printBonafide">Print</a></td>
-            </tr>
+            </tr> -->
 		</TABLE>
+		</div>
+		<div class="print-btn">
+    <button onclick="window.print()">Print</button>
+</div>
 	</form>
 </body>
 </html>
