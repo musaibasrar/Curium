@@ -74,7 +74,7 @@ public class EnquiryActionAdapter {
 	    admissionEnquiryDto.setNotes(request.getParameter("notes"));
 	    admissionEnquiryDto.setMobileno(request.getParameter("contactno"));
 	    admissionEnquiryDto.setUserId(Integer.parseInt(httpSession.getAttribute(Constants.USERID).toString()));
-	    admissionEnquiryDto.setBranchId(DataUtil.parseInt(request.getParameter("branchid")));
+	    admissionEnquiryDto.setBranchId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 	    AdmissionEnquiryResponseDto admissionEnquiryResponseDto = enquiryService.saveEnquiryForm(admissionEnquiryDto);
 	    
 	    request.setAttribute("name", admissionEnquiryResponseDto.getName());
