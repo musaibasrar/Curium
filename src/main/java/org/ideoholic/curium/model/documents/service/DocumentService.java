@@ -203,14 +203,14 @@ public class DocumentService {
 	}
 
 
-		private String generateDate(Date dateofbirth) {
+		public String generateDate(Date dateofbirth) {
 		// TODO Auto-generated method stub
 
 		String dateOfBirth = DateUtil.dateParseryyyymmdd(dateofbirth);
 		String[] dob = dateOfBirth.split("-");
 		String dayInWords = formatDayInWords(Integer.parseInt(dob[2]));
-	        String monthInWords = formatMonthInWords(Integer.parseInt(dob[1]));
-	        String yearInWords = formatYearInWords(Integer.parseInt(dob[0]));
+	    String monthInWords = formatMonthInWords(Integer.parseInt(dob[1]));
+	    String yearInWords = formatYearInWords(Integer.parseInt(dob[0]));
 
 	        return dayInWords+" "+monthInWords+" "+yearInWords;
 
