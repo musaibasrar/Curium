@@ -125,12 +125,14 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/readmodelschool/welcome" ><img src="/readmodelschool/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/readmodelschool/welcome" >
+								<img src="/readmodelschool/images/curiumheader.png" width="112" height="41"/>
+								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/readmodelschool/images/readmodelschoolheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/readmodelschool/left_officeadmin"> <img
+							<td><a target="leftFrame" href="/readmodelschool/left_admin"> <img
 									src="/readmodelschool/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
@@ -159,7 +161,7 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/readmodelschool/leftsettings_officeadmin">
+							<td ><a target="leftFrame" href="/readmodelschool/leftsettings">
 									<img alt="Settings" src="/readmodelschool/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
@@ -178,6 +180,11 @@ for(Cookie cookie : cookies){
 									src="/readmodelschool/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/readmodelschool/reports_officeadmin"><img
+									src="/readmodelschool/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
 							
 							</td>
 
@@ -188,13 +195,6 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/readmodelschool/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/readmodelschool/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
-								
 							<td ><a target="_parent"
 								href="/readmodelschool/UserProcess/logout"><img
 									src="/readmodelschool/images/logout.svg" width="18" height="18" alt="Log Out" 

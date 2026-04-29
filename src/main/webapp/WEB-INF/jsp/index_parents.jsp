@@ -114,6 +114,48 @@ font-size:70px;
             setTimeout("init()",100)
 
         </script>
+        
+        <%-- Add PWA manifest and service worker registration for parents --%>
+    <link rel="manifest" href="/readmodelschool/manifest.json">
+    <meta name="theme-color" content="#9D0176" />
+    <script>
+      // Service Worker registration
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/readmodelschool/service-worker.js')
+            .then(function(reg) {
+              console.log('Service worker registered.', reg);
+            })
+            .catch(function(err) {
+              console.error('Service worker registration failed:', err);
+            });
+        });
+      }
+
+      // Optional: handle beforeinstallprompt (show install button)
+      let deferredPrompt;
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        // You can show a custom install button to the user here.
+        // Example:
+        // document.getElementById('installBtn').style.display = 'block';
+      });
+
+      // Example install button handler (if you add a button in header)
+      function promptInstall() {
+        if (!deferredPrompt) return;
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+          if (choiceResult.outcome === 'accepted') {
+            console.log('User accepted the A2HS prompt');
+          } else {
+            console.log('User dismissed the A2HS prompt');
+          }
+          deferredPrompt = null;
+        });
+      }
+    </script>
 </head>
 <%
 //allow access only if session exists

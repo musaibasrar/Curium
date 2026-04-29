@@ -992,5 +992,17 @@ public class DocumentService {
 		        }
 		        return printMultipleEmployeesResponseDto;
 			}
-			 
+			
+	public CharacterResponseDto GenerateCertificates(StudentIdsDto studentIdsDto) {
+				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+				String[] studentIds = studentIdsDto.getStudentIds();
+				
+				List<Integer> sid = new ArrayList<Integer>(); 
+				for (String id : studentIds) {
+				    sid.add(Integer.parseInt(id));
+				}
+				List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
+				characterResponseDto.setListofParents(listofParents);
+				return characterResponseDto;
+	}
 }

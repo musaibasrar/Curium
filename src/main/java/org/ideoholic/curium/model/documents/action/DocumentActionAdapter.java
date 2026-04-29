@@ -268,4 +268,11 @@ public class DocumentActionAdapter {
 		
 	}
 
+	public void printAppreciationCertificate() {
+		StudentIdsDto studentIdsDto = new StudentIdsDto();
+		studentIdsDto.setStudentIds(request.getParameterValues("studentIDs"));
+		CharacterResponseDto characterResponseDto = documentService.GenerateCertificates(studentIdsDto);
+		httpSession.setAttribute("parentlist", characterResponseDto.getListofParents());
+	}
+
 }

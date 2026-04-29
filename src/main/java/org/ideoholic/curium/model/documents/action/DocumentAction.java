@@ -295,5 +295,11 @@ public class DocumentAction {
 			documentActionAdapter.printAdmissionAbstract();
 			return "printpreviewabstractsinglepage";
 		}
-	 
+	  
+	  @PostMapping("/printAppreciationCertificate")
+		public String printAppreciationCertificate() {
+			documentActionAdapter.printAppreciationCertificate();
+			return "printappreciationcertificate";
+		}
+	  
 }

@@ -173,6 +173,7 @@ span{
     		text-align: center;
    		    padding: 8px;
    		    font-size: 12px;
+   		    font-weight: bold;
         }
         
         .nosubjectdetails{
@@ -245,7 +246,7 @@ for(Cookie cookie : cookies){
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine"> ${branchcontact}</label>
 				</td>
 				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
@@ -262,13 +263,9 @@ for(Cookie cookie : cookies){
             <table width="100%" style="border-collapse: collapse;">
 					
 				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket&nbsp;&nbsp;-&nbsp;&nbsp;${examname}
 					</td>
 				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
 			</table>
 
 			<table style=" border-collapse: collapse;width: 100%;">

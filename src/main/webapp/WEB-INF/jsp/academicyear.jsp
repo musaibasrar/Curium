@@ -505,6 +505,7 @@ for(Cookie cookie : cookies){
 										<option selected></option>
 										 <c:forEach var="year" items="${previousAcademicYears}">
         										<option value="${year}">${year}</option>
+        										<option>2026/27</option>
     									</c:forEach>
 								</select>
 

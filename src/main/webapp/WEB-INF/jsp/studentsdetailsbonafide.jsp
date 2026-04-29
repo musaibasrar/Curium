@@ -396,6 +396,15 @@
 			return false;
 
 		});
+		$("#printappreciationcertificate").button({
+			icons : {
+				primary : "ui-icon-print"
+			}
+		}).click(function() {
+			printAppreciationCertificate();
+			return false;
+
+		});
 		
 		$('#chckHead').click(function() {
 			var length = $('.chcktbl:checked').length;
@@ -436,6 +445,14 @@
 		form1.method = "POST";
 		form1.submit();
 	}
+	
+	function printAppreciationCertificate(){
+		var form1 = document.getElementById("form1");
+		form1.action = "/readmodelschool/DocumentsProcess/printAppreciationCertificate";
+		form1.method = "POST";
+		form1.submit();
+	}
+	
 </script>
 
 
@@ -766,7 +783,9 @@ for(Cookie cookie : cookies){
 						<td class="footerTD" colspan="2"> &nbsp;
 						<input value="Generate Certificate"
 							type="submit" id="export"/></td>
-							
+							<td class="footerTD" colspan="2"> &nbsp;
+						<input type="button" value="Print Certificate"
+							 id="printappreciationcertificate"/></td>
 							
 
 					</tr>

@@ -183,7 +183,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label><br>
+				<label class="addressLine"> ${branchcontact}</label><br>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
@@ -266,7 +266,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<td class="headerText">Fees Amount Paid</td>
 				
 
 			</tr>
@@ -322,7 +322,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total Paid:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -337,13 +337,13 @@
 
 			<tr>
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
+					<%-- Total Fees: Rs. ${totalfees} --%>
 				</td>
 				<td class="headerText">
-					Total fees paid : Rs.  ${sumoffees}
+					<%-- Total fees paid : Rs.  ${sumoffees} --%>
 				</td>
 				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
+				 Total Fees Due : Rs.  ${dueamount} 
 				</td>
 				
 			</tr>
@@ -373,7 +373,7 @@
 		</tr>
 		</TABLE>
 		</div>
-		<br>
+		<br><br><br>
 		<div style="border: 1px solid;border-radius: 15px">
 		
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
@@ -383,7 +383,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine"> ${branchcontact}</label>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 			</tr>
@@ -465,7 +465,7 @@
 			<tr>
 
 				<td class="headerText">Particulars</td>
-				<td class="headerText">Fees Amount</td>
+				<td class="headerText">Fees Amount Paid</td>
 				
 
 			</tr>
@@ -523,7 +523,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total Paid:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -538,13 +538,13 @@
 
 			<tr>
 				<td class="headerText">
-					Total Fees: Rs. ${totalfees}
+					<%-- Total Fees: Rs. ${totalfees} --%>
 				</td>
 				<td class="headerText">
-					Total fees paid : Rs.  ${sumoffees}
+					<%-- Total fees paid : Rs.  ${sumoffees} --%>
 				</td>
 				<td class="headerText">
-				 Total fees Due : Rs.  ${dueamount} 
+				 Total Fees Due : Rs.  ${dueamount} 
 				</td>
 				
 			</tr>
