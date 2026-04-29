@@ -128,7 +128,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 106px;width: 100px;" alt="logo" src="/roshan/images/roshan.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 86px;" alt="logo" src="/roshan/images/roshan.png">
 			</td>
 				<td >
 					<br>
@@ -154,8 +154,9 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">Admission No. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width:120px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
-					</h3>
+					<span style="font-weight: bold;text-transform: capitalize;width:150px;"> <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span>
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;SATS NO.<span style="font-weight: bold;text-transform: capitalize;width:150px;"> <c:out value="${studentdetailsbonafide.student.sts}" /></span> </h3>
 				</td>
 			</tr>
 			
@@ -231,7 +232,8 @@ for(Cookie cookie : cookies){
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">place &nbsp;&nbsp;
 					<span style="font-weight: bold;text-transform: capitalize;width:120px">&nbsp;&nbsp;&nbsp;&nbsp; </span>
-					<span style="font-weight: bold;text-transform: capitalize;width:200px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;</span>Headmaster/principal
+					<span style="font-weight: bold;text-transform: capitalize;width:200px;border-bottom:0px solid black;">&nbsp;&nbsp;&nbsp;&nbsp;
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</span>Headmaster
 					</h3>
 				</td>
 			</tr>
