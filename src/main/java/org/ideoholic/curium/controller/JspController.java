@@ -651,6 +651,31 @@ public class JspController {
 		return "rpstatementprint";
 	}
 	
+	@GetMapping("/header_exams")
+	public String getHeaderExams() {
+		return "header_exams";
+	}
+
+	@GetMapping("/index_exams")
+	public String getIndexExams() {
+		return "index_exams";
+	}
+	
+	@GetMapping("/left_exams")
+	public String getLeftExams() {
+		return "left_exams";
+	}
+	
+	@GetMapping("/leftsettings_exams")
+	public String getLeftSettingsExams() {
+		return "leftsettings_exams";
+	}
+	
+	@GetMapping("/reports_exams")
+	public String getReportsExams() {
+		return "reports_exams";
+	}
+	
 	@GetMapping("/enquiryformonline")
 	public String enquiryFormOnline() {
 		return "enquiryformonline";

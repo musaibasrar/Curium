@@ -1320,7 +1320,7 @@
                                 <td  class="dataTextFeesCollection"><c:out value="${receiptinfo.date}"/></a></td>
                                 <td  class="dataTextFeesCollection"><c:out value="${receiptinfo.branchreceiptnumber}"/></a></td>
                                 <td class="dataTextFeesCollection"><c:out value="${receiptinfo.totalamount}"/></td>
-                                <td  class="dataTextFeesCollection"><a class="dataTextInActive" target="_blank" href="/vision/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextFeesCollection"><a class="dataTextInActive" target="_blank" href="/alirfan/FeesCollection/ViewDetails?id=<c:out value='${receiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>

@@ -14,30 +14,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Transfer Certificate</title>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
+        <link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/alirfan/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
+        <script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script  type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.ui.resizable.js"></script>
 
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.slide.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.bounce.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.clip.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.transfer.js"></script>
+        <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery.effects.blind.js"></script>
         <style type="text/css">
             <!--
             .labelCss {
@@ -278,6 +278,7 @@
                 classandsec:'<c:out default="0" value="${parents.student.classstudying}" />',
                 classadmittedin:'<c:out default="0" value="${parents.student.classadmittedin}" />',
                 id:'<c:out default="0" value="${parents.student.sid}" />',
+                dateleaving:'<c:out default="0" value="${parents.student.dateleaving}" />',
                 
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
@@ -296,7 +297,7 @@
                 select: function( event, ui ) {
                     $( "#studentId").val( ui.item.id );
                     $( "#dateofadmission").val( ui.item.admissiondate );
-       			  $( "#studentName").val( ui.item.name );
+       			  $( "#studentName").val( ui.item.value );
        			$( "#fathername").val( ui.item.fathername );
        			$( "#mothername").val( ui.item.mothername );
        			$( "#nationality").val( ui.item.nationality );
@@ -306,6 +307,10 @@
        			$( "#dateofbirth").val( ui.item.dateofbirth );
        			$( "#classandsec").val( ui.item.classandsec );
        			$( "#classadmitted").val( ui.item.classandsec );
+       			$( "#dateleaving").val( ui.item.classandsec );
+       			$( "#fathername1").val( ui.item.fathername );
+       			$( "#mothername1").val( ui.item.mothername );
+       		    $( "#studentName1").val( ui.item.value );
                     /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
                     return true;
                 }
@@ -431,7 +436,7 @@
             
             function getstampfees(){
             	var form1 = document.getElementById("form1");
-        		form1.action = "/vision/FeesCollection/StampFees";
+        		form1.action = "/alirfan/FeesCollection/StampFees";
         		form1.method = "POST";
         		form1.submit();
             }
@@ -469,24 +474,13 @@
             	
             }
             
-            function validateForm() {
-    		    const graduated = document.getElementById('yes:studentstatus').checked;
-    		    const leftout = document.getElementById('no:studentstatus').checked;
-
-    		    if (!graduated && !leftout) {
-    		      alert("Please select either 'Graduated' or 'Left Out'.");
-    		      return false;
-    		    }
-    		    return true;
-    		  }
-            
         </script>
     </head>
       <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -500,7 +494,7 @@ for(Cookie cookie : cookies){
 %>
     <body>
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
-        <form id="form1" action="/vision/DocumentsProcess/generateTransferCertificate" method="post" onkeypress="if (event.keyCode == 92) datetowords();">
+        <form id="form1" action="/alirfan/DocumentsProcess/generateTransferCertificate" method="post" onkeypress="if (event.keyCode == 92) datetowords();">
             <table  width="100%">
                 <thead>
                     <tr>
@@ -520,7 +514,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
-                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/></td>    
+                    <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName1" id="studentName1" style="width: 200px" readonly/></td>    
                         
                     </tr>
                     
@@ -534,8 +528,8 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Father Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="fathername" id="fathername" style="width: 200px" /></td>
-                    <td >Mother Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="mothername" id="mothername" style="width: 200px" readonly/></td>    
+                    <td style="width: 45%">Father Name: &nbsp; <input  type="text" name="fathername1" id="fathername1" style="width: 200px" /></td>
+                    <td >Mother Name:&nbsp; <input  type="text" name="mothername1" id="mothername1" style="width: 200px" readonly/></td>    
                     </tr>
                     
                     
@@ -543,113 +537,136 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> STUDENT PERSONAL INFORMATION</span> </td>
+                    <td >&nbsp;&nbsp;&nbsp;&nbsp;<span style="width: 200%;font-weight: bold;font-size: 15px;color: #4B6A84"> STUDENT PERSONAL INFORMATION</span> </td>
                     </tr>
                     </tbody>
             </table>
             <table>
+                     <tr>
+                    <td>Sl No.: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="slno" id="slno" style="width: 200px" /></td>
+                    <td >Tc No.:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="tcno" id="tcno" style="width: 200px" /></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td >1.Student Name:&nbsp;</td><td> <input  type="text" name="studentName" id="studentName" style="width: 200px" /></td>
+                    <td ><!-- Student Name: -->&nbsp;</td><td> <!-- <input  type="text" name="studentName" id="studentName" style="width: 200px" readonly/> --></td>    
+                        
+                    </tr>
+                     <tr>
+                    <td >2.Father Name: &nbsp;</td><td> <input  type="text" name="fathername" id="fathername" style="width: 200px" /></td>
+                    <td >Mother Name:&nbsp;</td><td> <input  type="text" name="mothername" id="mothername" style="width: 200px" readonly/></td>    
+                    </tr>
 	                <tr>
                     <td style="font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                    <td >Gender: 
-                    				</td><td>		<input  type="text" name="gender" id="gender" style="width: 200px" /></td>
-                    <td >Nationality:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="nationality" id="nationality" style="width: 200px" readonly/></td>    
+                    <!-- <td >Gender: 
+                    				</td><td>		<input  type="text" name="gender" id="gender" style="width: 200px" /></td> -->
+                    <td >3.Nationality:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="nationality" id="nationality" style="width: 200px"/></td>    
+                    <td >Mother Tongue: 
+                    				</td><td>		<input  type="text" name="mothertongue" id="mothertongue" style="width: 200px" /></td>
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
-                    <tr>
-                    <td >Religion:</td><td> <input  type="text" name="religion" id="religion" style="width: 200px" /></td>
-                    <td >Caste:&nbsp; </td><td><input  type="text" name="caste" id="caste" style="width: 200px" readonly/></td>    
+                     <tr>
+                    <td >4.Date of Birth: </td><td> <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
+                    <td >Date of Birth (words):</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px" /></td>    
                     </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                      <tr>
+                    <td >5.Place of birth:(a)City/Village: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px" /></td>
+                    <td >(b)Taluka:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px" /></td>    
+                    </tr>
+                    <tr>
+                    <td >(c)District: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="thirdsubject" id="thirdsubject" style="width: 200px" /></td>
+                    <td >(d)State:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fourthsubject" id="Fourthsubject" style="width: 200px" /></td>    
+                    </tr>
+                    <tr>
+                    <td>(e)Country: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fifthsubject" id="Fifthsubject" style="width: 200px" /></td>
+                    <td >Subcaste</td><td>  <input  type="text" name="sixthsubject" id="sixthsubject" style="width: 200px;" /> </td>    
+                    </tr> 
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td >Date of Birth: </td><td> <input  type="text" name="dateofbirth" id="dateofbirth" style="width: 200px" /></td>
-                    <td >Date of Birth (words):</td><td> <input  type="text" name="dateofbirthwords" id="dateofbirthwords" style="width: 200px" readonly/></td>    
+                    <td >6.Religion:</td><td> <input  type="text" name="religion" id="religion" style="width: 200px" /></td>
+                    <td >Caste:&nbsp; </td><td><input  type="text" name="caste" id="caste" style="width: 200px"/></td>    
                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
-                    <tr>
-                    <td >Date of Admission:</td><td> <input  type="text" name="dateofadmission" id="dateofadmission" style="width: 200px" /></td>
-                    <td >Class Admitted In:</td><td> <input  type="text" name="classadmitted" id="classadmitted" style="width: 200px" readonly/></td>    
-                    </tr>
-                    <tr>
-                    <td><br></td>
-                    </tr>
-                    <tr>
-                    <td >Class Last Studied: </td><td><input  type="text" name="classandsec" id="classandsec" style="width: 200px" /></td>
-                    <td >Date of issue of TC: </td><td><input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" /></td>    
-                    </tr>
+                     <tr>
+                    <td >7.last School attended:</td><td> <input  type="text" name="lastschoolattended" id="lastschoolattended" style="width: 200px" /></td>
+                    <td >Class:&nbsp; </td><td><input  type="text" name="lastclassattended" id="lastclassattendede" style="width: 200px"/></td>    
+                     </tr>
                     <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    <td >Book no.:</td><td> <input  type="text" name="bookno" id="bookno" style="width: 200px" /></td>
-                    <td >TC no.:</td><td> <input  type="text" name="tcno" id="tcno" style="width: 200px" /></td>    
+                    <td >8.Date of Admission in the school:</td><td> <input  type="text" name="dateofadmission" id="dateofadmission" style="width: 200px" /></td>
+                    <td >Class of admission:</td><td> <input  type="text" name="classadmitted" id="classadmitted" style="width: 200px" /></td>    
                     </tr>
-                    
-                    <tr>
-                    <td >School/Board Annual Examination<br> Last taken with Result::</td><td> <input  type="text" name="lastexam" id="lastexam" style="width: 200px" /></td>
-                    <td >Whether failed if so Once/Twice in the same Class:</td><td> <input  type="text" name="failpass" id="failpass" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td >Subject Studied - First Subject: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px" /></td>
-                    <td >Second Subject:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td >Third Subject: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="thirdsubject" id="thirdsubject" style="width: 200px" /></td>
-                    <td >Fourth Subject:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fourthsubject" id="Fourthsubject" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td>Fifth Subject: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="Fifthsubject" id="Fifthsubject" style="width: 200px" /></td>
-                    <td >Sixth Subject:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="sixthsubject" id="sixthsubject" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td>Promotion to higher <br>class in figures: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="pinfig" id="pinfig" style="width: 200px" /></td>
-                    <td >In words:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="pinword" id="pinword" style="width: 200px" /></td>    
+                     <tr>
+                    <td><br></td>
                     </tr>
                     <tr>
                     <td>Month upto which the School<br> Dues paid: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="dues" id="dues" style="width: 200px" /></td>
-                    <td >Any concession available of,if<br> so,the nature of such concession:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="concession" id="concession" style="width: 200px" /></td>    
+                    <td >9.Any concession available of,if<br> so,the nature of such concession: </td><td><input  type="text" name="concession" id="concession" style="width: 200px" /></td>    
                     </tr>
-                    <tr>
-                    <td>Total No. of working days: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="workingdays" id="workingdays" style="width: 200px" /></td>
-                    <td >Total No. of working days present:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="present" id="present" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td>Whether NCC cadet/Boy Scout/Girl<br> Scout (detail may be given) &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="ncc" id="ncc" style="width: 200px" /></td>
-                    <td >Games played or extra curricular activities<br> in which the pupil usually took part:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="game" id="game" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td >Genaral Conduct: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>
-                    <td >Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px" /></td>    
-                    </tr>
-                    <tr>
-                    <td >Class in Which Pupil Studied Last In Words:</td><td> <input  type="text" name="classinword" id="classinword" style="width: 200px" /></td>    
-                    <td >Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reason" id="reason" style="width: 200px" /></td>    
-                    </tr>
-                     <tr>
-                    <td>Any other Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>
-                    </tr>
-                    
                      <tr>
                     <td><br></td>
                     </tr>
                     <tr>
-                    	<td>Student Status: &nbsp;&nbsp;&nbsp;&nbsp;</td>
-                    	
-                    	<td  height="30">&nbsp;Graduated<input
-								type="checkbox" value="passedout" name="studentadmissionstatus" id="yes:studentstatus"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Left Out<input
-								type="checkbox" value="leftout" name="studentadmissionstatus" id="no:studentstatus"
-								onclick="noCheck(this.id)" />
-
-							</td>
-							</tr>
+                    <td>10.Total No. of working days: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="workingdays" id="workingdays" style="width: 200px" /></td>
+                    <td >Total No. of working days present:&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="present" id="present" style="width: 50px" /></td><td>Academic Year:&nbsp;&nbsp; <input  type="text" name="acadmicyear" id="acadmicyear" style="width: 50px" /></td>    
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td>11.Academic Progress: &nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="academicprogress" id="academicprogress" style="width: 200px" /></td>
+                    <td >Conduct:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>    
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td>12.Standard in which studying and since when:  </td><td><input  type="text" name="classandsec" id="classandsec" style="width: 200px" /></td>
+                    <td >From:&nbsp;<input  type="text" name="from" id="from" style="width: 50px" /></td><td>To: <input  type="text" name="to" id="to" style="width: 50px" /></td>    
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td >13.Date of Leaving Schools:</td><td> <input  type="text" name="dateleaving" id="dateleaving" style="width: 200px" /></td>    
+                    <td >14.Reason for Leaving the School:&nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="reason" id="reason" style="width: 200px" /></td>    
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td >15.Result of annual exam: </td><td><input  type="text" name="result" id="result" style="width: 200px" /></td>
+                    <td >16.Any other Remarks: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="Remarks" id="Remarks" style="width: 200px" /></td>    
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td >17.Date on which pupil name was struck of from the rolls:</td><td> <input  type="text" name="namestuckoff" id="namestuckoff" style="width: 200px" /></td>
+                    <td >18.Whether the pupil has paid all the dues:</td><td> <input  type="text" name="allduespaid" id="allduespaid" style="width: 200px" /></td>    
+                    </tr>
+                    
+                    <tr>
+                    <td >Date of issue of certificate:</td><td> <input  type="text" name="dateissue" id="dateissue" style="width: 200px" /></td>
+                    </tr>
+                   
+                   
+                    
                     </table>
                     <tr>
                     <td><br></td>
