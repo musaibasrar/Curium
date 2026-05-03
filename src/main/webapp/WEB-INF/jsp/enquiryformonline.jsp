@@ -203,22 +203,22 @@
 
 </style>
 
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/hwfschools/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/hwfschools/css/validation/jquery.ketchup.css">
 
 <script type="text/javascript"
-    src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+    src="/hwfschools/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/hwfschools/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/hwfschools/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/hwfschools/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/hwfschools/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/hwfschools/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/hwfschools/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/hwfschools/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/hwfschools/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-    src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+    src="/hwfschools/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/hwfschools/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -247,7 +247,7 @@
     function saveEnquiryForm() {
         var form1 = document.getElementById("form1");
         if(form1.checkValidity()) {
-        form1.action = "/vision/EnquiryProcess/saveEnquiryFormOnline";
+        form1.action = "/hwfschools/EnquiryProcess/saveEnquiryFormOnline";
         form1.method = "POST";
         form1.submit();
         }
@@ -270,10 +270,10 @@
     }
 </script>
 
-    <script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+    <script type="text/javascript" src="/hwfschools/js/datetimepicker_css.js"></script>
 
-    <script src="/vision/JavaScript/actb.js"></script>
-    <script src="/vision/JavaScript/common.js"></script>
+    <script src="/hwfschools/JavaScript/actb.js"></script>
+    <script src="/hwfschools/JavaScript/common.js"></script>
 
 
 
@@ -375,7 +375,7 @@
                 <div id="tabs">
                     <div class="card-header">
                         <div class="card-logo">
-                            <img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/vision/images/vision.png">
+                            <img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/hwfschools/images/hwfschools${branchid}.png">
                         </div>
                         <div class="card-title">Admission Enquiry Form</div>
                     </div>
