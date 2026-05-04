@@ -957,7 +957,7 @@
     //allow access only if session exists
     String user = null;
     if (session.getAttribute("userAuth") == null) {
-    	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+    	response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
     } else
     	user = (String) session.getAttribute("userAuth");
     String userName = null;

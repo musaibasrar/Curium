@@ -687,4 +687,13 @@ public class JspController {
 		return "reports_principal";
 	}
 	
+	@GetMapping("/receiptpayment")
+	public String receiptpayment() {
+		return "receiptsandpayments";
+	}
+	
+	@GetMapping("/rpstatementprint")
+	public String rpstatementprint() {
+		return "rpstatementprint";
+	}
 }
