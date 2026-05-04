@@ -813,6 +813,18 @@ for(Cookie cookie : cookies){
                             </td>
                         </tr>
                         
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">APAAR ID
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.apaarId}" />
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">PEN
+                            </td>
+                            <td width="25%" class="tablerows">
+                            <c:out default="" value="${student.pen}" />
+                            </td>
+                        </tr>
                          <tr>
                          <td  width="25%"  class="alignLeft" height="50">Leaving Certificate (TC)
                             </td>
