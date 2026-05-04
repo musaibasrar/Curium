@@ -6,22 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.documents.dto.Transfercertificate;
-import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
-import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
-import org.ideoholic.curium.model.employee.dto.Teacher;
-import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sponsor.dao.SponsorDao;
 import org.ideoholic.curium.model.sponsor.dto.Sponsor;
 import org.ideoholic.curium.model.sponsor.dto.SponsorDto;
 import org.ideoholic.curium.model.sponsor.dto.SponsorResponseDto;
-import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
-import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
-import org.ideoholic.curium.model.user.dao.UserDAO;
-import org.ideoholic.curium.model.user.dto.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
