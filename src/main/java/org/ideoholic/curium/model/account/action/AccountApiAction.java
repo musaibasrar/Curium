@@ -58,7 +58,7 @@ public interface AccountApiAction {
     ResponseEntity<CreateAccountResponseDto> deleteAccount(@RequestBody AccountDeleteDto dto, @RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/saveAccount")
-    ResponseEntity<CreateAccountResponseDto> saveAccount(@RequestBody AccountDto dto, @RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<CreateAccountResponseDto> saveAccount(@RequestBody AccountDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value = "userid") String userId);
 
     @GetMapping("/getSubGroupNames")
     ResponseEntity<ResultResponse> getSubGroupNames(@RequestHeader(value = "branchid") String branchId, @RequestParam(value = "groupname") String accountGroupMasterId);

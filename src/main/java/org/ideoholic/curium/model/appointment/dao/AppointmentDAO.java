@@ -255,7 +255,7 @@ public class AppointmentDAO {
 	@Transactional
 	public List<Appointment> generateAppointmentsReport(String query) {
 
-		List<Appointment> results = new ArrayList<Appointment>();
+		List<Appointment> results = new ArrayList<>();
 
 		try {
 

@@ -197,8 +197,8 @@ public class AccountApiActionImpl implements AccountApiAction {
 
     }
 
-    public ResponseEntity<CreateAccountResponseDto> saveAccount(AccountDto dto, String branchId) {
-        CreateAccountResponseDto result = accountService.saveAccount(dto, branchId);
+    public ResponseEntity<CreateAccountResponseDto> saveAccount(AccountDto dto, String branchId, String userId) {
+        CreateAccountResponseDto result = accountService.saveAccount(dto, branchId, userId);
         if (result.isSuccess()) {
             return createAccount(branchId);
         }

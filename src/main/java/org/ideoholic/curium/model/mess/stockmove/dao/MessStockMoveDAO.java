@@ -348,7 +348,7 @@ public class MessStockMoveDAO {
 	}
 
 	public int getNoOfRecordsStockMove(String fromDate, String toDate, int branchId) {
-		List<MessStockMove> results = new ArrayList<MessStockMove>();
+		List<MessStockMove> results = new ArrayList<>();
 		int noOfRecords = 0;
 		try {
 			//results = session.createQuery("From MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' AND msm.branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
