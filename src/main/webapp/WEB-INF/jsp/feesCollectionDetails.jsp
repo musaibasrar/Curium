@@ -791,6 +791,7 @@ for(Cookie cookie : cookies){
 				<thead>
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
+                            <th class="headerText">Sl No</th>
                             <th title="click to sort" class="headerText">Date of fees</th>
                             <th title="click to sort" class="headerText">Student Name</th>
                             <th title="click to sort" class="headerText">Class</th>
@@ -807,13 +808,14 @@ for(Cookie cookie : cookies){
                     </thead>
 
                     <tbody>
-                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails">
+                        <c:forEach items="${searchfeesdetailslist}" var="feesdetails" varStatus="status">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" checked="checked"
 								id="<c:out value="${feesdetails.key.receiptnumber}"/>" class="chcktbl"
 								name="feesIDs"
 								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
