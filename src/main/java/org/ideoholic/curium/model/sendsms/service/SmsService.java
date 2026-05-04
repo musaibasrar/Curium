@@ -7,11 +7,19 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
@@ -19,6 +27,7 @@ import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
+import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 import org.springframework.stereotype.Service;
@@ -31,14 +40,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class SmsService {
-
-
+	
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
 
 		int noOfRecords = 100;
 		int offset=0;
 		
 		if(branchId!=null){
+			int maxRetries = 3;
+			int attempts = 0;
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
 			String addClass =dto.getAddClass();
@@ -102,13 +112,21 @@ public class SmsService {
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
 						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
+						while (attempts < maxRetries) {
+						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    
+						    if (resultSMS == 200) {
+						        break; // success, exit loop
+						    }
+						    
+						    attempts++; // retry if not successful
+						}
 					}
 					
 				offset = offset+100;
 			}
 			if(resultSMS==200){
-				 ResultResponse.builder().success(true).build();
+				return ResultResponse.builder().success(true).build();
 			}
 		}
 		
@@ -197,7 +215,7 @@ public class SmsService {
 	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
-
+	        	
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
@@ -255,7 +273,7 @@ public class SmsService {
 		
 		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
 		log.info(templateType+": URL "+POST_URL);
-		log.debug(templateType+": URL "+POST_URL);
+		System.out.println(templateType+": URL "+POST_URL);
         URL obj = new URL(POST_URL);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 		con.setRequestMethod("POST");
@@ -285,11 +303,11 @@ public class SmsService {
 			// print result
 			log.info(response.toString());
 		} else {
-			log.error("POST request not worked");
+			log.info("POST request not worked");
 		}}}
 		catch (Exception e)
 		{
-		log.error("Error SMS "+e);
+		log.info("Error SMS "+e);
 		}
 		return responseCode;
 	}
@@ -298,31 +316,36 @@ public class SmsService {
 		int resultSMS=0;
 
 		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
-
+		String[] studentIds = dto.getStudentIds();
 		String numbers = null;
 					StringBuilder sbN = new StringBuilder();
 
 					if(!studentFeesReportList.isEmpty()){
 						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
-							
-							String phoneNo = studentFeesReport.getParents().getContactnumber();
-							if(phoneNo!=null && !phoneNo.isEmpty()) {
-								char[] contactNo = phoneNo.toCharArray();
-								
-								if(contactNo.length == 10) {
-									sbN.append(studentFeesReport.getParents().getContactnumber());
-									sbN.append(",");
+							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
+								String phoneNo = studentFeesReport.getParents().getContactnumber();
+								if(phoneNo!=null && phoneNo.length() == 10) {
+									
+										long dueAmount = 0l;
+										for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
+											dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
+										}
+										
+										String SMSTempType = "feesreminderwithdueamount";
+										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
+										
+										int attempts = 0;
+								        while (attempts < 1) {
+								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
+								            if (resultSMS == 200) break;
+								            attempts++;
+								        }
 								}
+								
 							}
+							
 						}
-						numbers=sbN.toString();
-						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
 						
-						String SMSTempType = "feesreminder";
-						String message = "deadline";
-						
-						resultSMS = sendSMS(numbers,message,SMSTempType);
 					}
 					
 			if(resultSMS==200){
