@@ -620,6 +620,7 @@ public class UserService {
 				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
 				String feesCollectorWithId = DataUtil.emptyString(dto.getFeesCollector());
 				String[] feesCollector = feesCollectorWithId.split(":");
+				String academicYear = DataUtil.emptyString(dto.getAcademicYear());
 
 				String querySub = "";
 
@@ -651,6 +652,10 @@ public class UserService {
 				if(!feesCollector[0].equalsIgnoreCase("")){
 					querySub = querySub +" AND feesdetails.userid = '"+feesCollector[0]+"'" ;
 					result.setFeesCollectorName(feesCollector[1]);
+				}
+				
+				if(!academicYear.equalsIgnoreCase("")){
+					querySub = querySub+" and feesdetails.academicyear = '"+academicYear+"'" ;
 				}
 
 				queryMain = queryMain+querySub;
