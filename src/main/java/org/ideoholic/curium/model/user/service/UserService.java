@@ -731,7 +731,7 @@ public class UserService {
 
         
         String userName =null;
-        String superUserAuth = null;
+        //String superUserAuth = null;
 
         
         	if(strUserName!=null) {
