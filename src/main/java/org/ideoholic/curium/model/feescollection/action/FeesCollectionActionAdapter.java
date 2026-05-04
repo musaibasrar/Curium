@@ -27,6 +27,7 @@ import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
 import org.ideoholic.curium.model.feescollection.dto.Studentotherfeesreport;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
+import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
 import org.ideoholic.curium.model.std.service.StandardService;
@@ -52,6 +53,9 @@ public class FeesCollectionActionAdapter {
     
     @Autowired
 	private SmsService smsService;
+    
+    @Autowired
+    private StandardActionAdapter standardActionAdapter;
 
     public void getFeesReport() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
@@ -539,7 +543,7 @@ public class FeesCollectionActionAdapter {
         dto.setAcademicYearArray(request.getParameterValues("academicyear"));
         dto.setAddClass(request.getParameterValues("classsearch"));
         													  	
-        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
     }
 }
