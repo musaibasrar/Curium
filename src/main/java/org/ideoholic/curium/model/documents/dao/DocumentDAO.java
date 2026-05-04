@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.query.Query;
 import org.ideoholic.curium.model.documents.dto.StudyCertificate;
 import org.ideoholic.curium.model.documents.dto.Transfercertificate;
+import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.Session;
@@ -34,13 +35,13 @@ public class DocumentDAO {
 	
 	
 
-	public String generateTransferCertificate(Transfercertificate tc, Student student, String studentStatus) {
+	public String generateTransferCertificate(Transfercertificate tc, Student student, String studentAdmissionStatus) {
 		String status = "false";
 		try {
 			transaction = session.beginTransaction();
 			session.save(tc);
 			Query queryUpdate = session
-					.createQuery("update Student set "+studentStatus+"= '1'  where sid = '"+student.getSid()+"'");
+					.createQuery("update Student set reasonleaving = '"+student.getReasonleaving()+"',"+studentAdmissionStatus+"='1'  where sid = '"+student.getSid()+"'");
 			queryUpdate.executeUpdate();
 			transaction.commit();
 			status = "true";
