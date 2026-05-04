@@ -666,4 +666,25 @@ public class JspController {
 	public String getPrintstudentdetailsotherfeesstructure() {
 		return "printstudentdetailsotherfeesstructure";
 	}
+	
+	@GetMapping("/index_principal")
+	public String getIndexPrincipal() {
+		return "index_principal";
+	}
+	
+	@GetMapping("/header_principal")
+	public String getHeaderPrincipal() {
+		return "header_principal";
+	}
+	
+	@GetMapping("/left_principal")
+	public String getLeftprincipal() {
+		return "left_principal";
+	}
+	
+	@GetMapping("/reports_principal")
+	public String getReportsprincipal() {
+		return "reports_principal";
+	}
+	
 }

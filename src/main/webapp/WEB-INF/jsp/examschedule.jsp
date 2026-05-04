@@ -688,7 +688,7 @@ for(Cookie cookie : cookies){
 							src="/scholar/css/dataTable/images/sort_both.png" /></th>
 							<th title="click to sort" class="headerText">Exam Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/vision/css/dataTable/images/sort_both.png" /></th>
+							src="/scholar/css/dataTable/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Subject<img
 							alt=" " style="position: relative; top: 4px;"
 							src="/scholar/css/dataTable/images/sort_both.png" /></th>
