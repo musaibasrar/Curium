@@ -203,5 +203,20 @@ public class DocumentActionAdapter {
 		request.setAttribute("birthdate", request.getParameter("birthdate"));
 		return true;
 	}
+	
+	public void viewTcDetail() {
+
+		CharacterResponseDto characterResponseDto = documentService.viewTcDetail();
+		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		
+	}
+
+	public boolean printTcList() {
+		CharacterDto characterDto = new CharacterDto();
+		characterDto.setFeesIds(request.getParameterValues("studentIDs"));
+		CharacterResponseDto characterResponseDto = documentService.printTcList(characterDto);
+		request.setAttribute("studenttcissued", characterResponseDto.getListofParents());
+		return characterResponseDto.isSuccess();
+	}
 
 }
