@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.mess.card.dto.Card;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -25,7 +24,6 @@ import org.ideoholic.curium.repositories.PuDetailsRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentRepository;
-import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -70,7 +68,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Object[]> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
-		List<Object[]> results = new ArrayList<Object[]>();
+		List<Object[]> results = new ArrayList<>();
 		try {
 			// original:
 			// Query query = session.createQuery("select s.sid, s.studentexternalid, s.admissionnumber, s.name, s.classstudying, f.fathersname, f.mothersname FROM Student s JOIN Parents f ON s.sid=f.student.sid WHERE s.archive = 0 AND s.passedout=0 AND s.droppedout=0 and s.leftout=0 AND s.branchid="+branchId+" order by name ASC");
@@ -177,7 +175,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Student> readListOfStudents(int branchId) {
-		List<Student> results = new ArrayList<Student>();
+		List<Student> results = new ArrayList<>();
 		try {
 			// original:
 			// results = (List<Student>) session.createQuery("FROM Student WHERE archive=0 AND passedout=0 AND droppedout=0 and leftout=0 AND branchid="+branchId).setCacheable(true).setCacheRegion("commonregion").list();
@@ -215,7 +213,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Student> readListOfStudentsArchive(int branchId) {
-		List<Student> results = new ArrayList<Student>();
+		List<Student> results = new ArrayList<>();
 		try {
 			// original:
 			// results = (List<Student>) session.createQuery("FROM Student s WHERE s.archive = 1 and branchid="+branchId+"").setCacheable(true).setCacheRegion("commonregion").list();
@@ -351,7 +349,7 @@ public class StudentDetailsDAO {
 	@Transactional
 	public List<Parents> readListOfObjectsPaginationALL(int offset,
 			int noOfRecords, int branchId) {
-		List<Parents> results = new ArrayList<Parents>();
+		List<Parents> results = new ArrayList<>();
 		try {
 			// original:
 			// Query query = session.createQuery("FROM Parents as parents WHERE parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid ="+branchId+" order by parents.student.name ASC");
@@ -374,7 +372,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Student> readListOfObjectsForIcon(int branchId) {
-		List<Student> results = new ArrayList<Student>();
+		List<Student> results = new ArrayList<>();
 		try {
 			// original:
 			// Query query = session.createQuery("FROM Student s WHERE s.archive = 0 and s.passedout=0 AND s.droppedout=0 and s.leftout=0 and s.branchid= "+branchId+" order by name ASC");
@@ -425,7 +423,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Studentfeesstructure> getStudentFeesStructure(Integer id, String currentYear) {
-		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
+		List<Studentfeesstructure> results = new ArrayList<>();
 		try {
 			// original:
 			// Query query = session.createQuery("FROM Studentfeesstructure sfs WHERE sfs.student.sid = '"+id+"' and sfs.academicyear = '"+currentYear+"'");
@@ -464,7 +462,7 @@ public class StudentDetailsDAO {
         	// original:
         	// Query HQLquery = session.createQuery(query);
         	// parents = (java.util.List<Parents>) HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
-            parents = (List<Parents>) queryUtil.runGivenQuery(query, Parents.class);
+            parents = queryUtil.runGivenQuery(query, Parents.class);
         } catch (Exception hibernateException) {
         	TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -474,9 +472,9 @@ public class StudentDetailsDAO {
 	}
 
 	public List<Parents> getStudentsList(String query, Map<String, Object> params) {
-		List<Parents> parents = new ArrayList<Parents>();
+		List<Parents> parents = new ArrayList<>();
         try {
-            parents = (List<Parents>) queryUtil.runGivenQuery(query, params, Parents.class);
+            parents = queryUtil.runGivenQuery(query, params, Parents.class);
         } catch (Exception hibernateException) {
         	TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -487,12 +485,12 @@ public class StudentDetailsDAO {
 	
 	@Transactional
 	public List<Student> getListStudents(String query) {
-		java.util.List<Student> student = new ArrayList<Student>();
+		java.util.List<Student> student = new ArrayList<>();
         try {
         	// original:
         	// Query HQLquery = session.createQuery(query);
         	// student = HQLquery.setCacheable(true).setCacheRegion("commonregion").list();
-            student = (List<Student>) queryUtil.runGivenQuery(query, Student.class);
+            student = queryUtil.runGivenQuery(query, Student.class);
         } catch (Exception hibernateException) { 
         	TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         	log.error(hibernateException.getMessage(), hibernateException);
@@ -503,7 +501,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Studentfeesstructure> getStudentFeesStructureDetails(int sfsid) {
-		List<Studentfeesstructure> studentFeesStructure = new ArrayList<Studentfeesstructure>();
+		List<Studentfeesstructure> studentFeesStructure = new ArrayList<>();
 		try {
 			// original:
 			// studentFeesStructure = session.createQuery("FROM Studentfeesstructure sfs WHERE sfs.sfsid = '"+sfsid+"'").list();
@@ -564,7 +562,7 @@ public class StudentDetailsDAO {
 
     @Transactional
     public List<Parents> readListStudentsSuperAdmin(int offset, int noOfRecords) {
-        List<Parents> results = new ArrayList<Parents>();
+        List<Parents> results = new ArrayList<>();
         try {
         	// original:
         	// Query query = session.createQuery("FROM Parents as parents WHERE parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 order by parents.student.name ASC");
@@ -583,7 +581,6 @@ public class StudentDetailsDAO {
 
     @Transactional
     public int getNoOfRecords() {
-        List<Student> results = new ArrayList<Student>();
         int noOfRecords = 0;
         try {
         	// original:
@@ -622,7 +619,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Studentfeesstructure> getStudentFeesStructurebyFeesCategory(Integer id, List<Integer> feesCat) {
-		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
+		List<Studentfeesstructure> results = new ArrayList<>();
 		try {
 			// original:
 			// createQuery("FROM Studentfeesstructure sfs WHERE sfs.student.sid = '"+id+"' and sfs.feescategory.idfeescategory IN (:feescat)");
@@ -639,7 +636,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Studentotherfeesstructure> getStudentOtherFeesStructure(Integer id, String currentYear) {
-		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
+		List<Studentotherfeesstructure> results = new ArrayList<>();
 		try {
 			// original:
 			// .createQuery("FROM Studentotherfeesstructure sfs WHERE sfs.sid = '"+id+"' and sfs.academicyear = '"+currentYear+"'");
@@ -656,7 +653,7 @@ public class StudentDetailsDAO {
 	
 	@Transactional
 	public List<Studentotherfeesstructure> getotherStudentFeesStructureDetails(int sfsid) {
-		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<Studentotherfeesstructure>();
+		List<Studentotherfeesstructure> studentFeesStructure = new ArrayList<>();
 		try {
 			// original:
 			// studentFeesStructure = session.createQuery("FROM Studentotherfeesstructure sfs WHERE sfs.sfsid = '"+sfsid+"'").list();
@@ -672,7 +669,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Studentotherfeesstructure> getStudentotherFeesStructurebyFeesCategory(Long id, List<Integer> feesCat) {
-		List<Studentotherfeesstructure> results = new ArrayList<Studentotherfeesstructure>();
+		List<Studentotherfeesstructure> results = new ArrayList<>();
 		try {
 
 			// original:
@@ -726,7 +723,7 @@ public class StudentDetailsDAO {
 
 	@Transactional
 	public List<Student> getListofsid(String classsec) {
-		List<Student> results = new ArrayList<Student>();
+		List<Student> results = new ArrayList<>();
 		try {
 			// original:
 			// Query query = session.createQuery("FROM Student WHERE classstudying = "+classsec+"");

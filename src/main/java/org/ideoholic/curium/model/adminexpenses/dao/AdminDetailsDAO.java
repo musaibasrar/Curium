@@ -37,7 +37,7 @@ public class AdminDetailsDAO {
 
 	@Transactional
 	public List<Adminexpenses> readListOfExpenses(Integer branchId) {
-		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
+		List<Adminexpenses> results = new ArrayList<>();
 
 		try {
 
@@ -75,7 +75,7 @@ public class AdminDetailsDAO {
 @Transactional
 	public List<Adminexpenses> searchExpensesbydate(String queryMain) {
 		
-		List<Adminexpenses> adminExpenses = new ArrayList<Adminexpenses>();
+		List<Adminexpenses> adminExpenses = new ArrayList<>();
 
 		try{
 
@@ -154,7 +154,7 @@ public class AdminDetailsDAO {
 	public List<Adminexpenses> readAllExpenses(List<Integer> expenseIdList, String  branchId) {
 		
 
-		List<Adminexpenses> results = new ArrayList<Adminexpenses>();
+		List<Adminexpenses> results = new ArrayList<>();
 		
 		try{
 

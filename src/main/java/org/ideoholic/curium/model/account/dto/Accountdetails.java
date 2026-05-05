@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,15 +45,15 @@ public class Accountdetails implements java.io.Serializable {
 	@Column(name = "accountcode", nullable = false, length = 100)
 	private String accountcode;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ssgroupmasterid", referencedColumnName = "ssgroupmasterid")
 	private Accountssgroupmaster accountSSGroupMaster;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "accountsubgroupmasterid", referencedColumnName = "accountsubgroupmasterid")
 	private Accountsubgroupmaster accountSubGroupMaster;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "accountgroupid")
 	private Accountgroupmaster accountGroupMaster;
 	

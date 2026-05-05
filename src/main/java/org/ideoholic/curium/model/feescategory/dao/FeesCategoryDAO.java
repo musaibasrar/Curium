@@ -49,7 +49,7 @@ public class FeesCategoryDAO {
 	@Transactional
 	public List<Feescategory> readListOfObjects(int branchId, String academicYear) {
 		
-		List<Feescategory> results = new ArrayList<Feescategory>();
+		List<Feescategory> results = new ArrayList<>();
 		try {
 			// session.createQuery("From Feescategory where academicyear='"+academicYear+"' and branchid="+branchId).list();
 			results = feesCatRepo.findByAcademicyearAndBranchid(academicYear, branchId);
@@ -91,7 +91,7 @@ public class FeesCategoryDAO {
 
 	@Transactional
 	public void deleteFeesCategory(List<Integer> ids, List<Integer> feesCatId, String sid, List<VoucherEntrytransactions> transactionsList, List<String> debitEntries, List<String> creditEntries) {
-		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
+		List<Feescollection> feesCollection = new ArrayList<>();
 		int sId = Integer.parseInt(sid);
 		try {
 			//Query queryOne = session.createQuery("from Feescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
@@ -233,7 +233,7 @@ public class FeesCategoryDAO {
 	
 	@Transactional
 	public List<OtherFeecategory> readListOfOtherFeeObjects(int branchId, String academicYear, String nextYear) {
-		List<OtherFeecategory> results = new ArrayList<OtherFeecategory>();
+		List<OtherFeecategory> results = new ArrayList<>();
         try {
 
            // results = (List<OtherFeecategory>) session.createQuery("From OtherFeecategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
@@ -315,7 +315,7 @@ public class FeesCategoryDAO {
 
 	@Transactional
 	public List<Feescategory> readListOfFeeCategory(int branchId, String academicYear, String nextYear) {
-		List<Feescategory> results = new ArrayList<Feescategory>();
+		List<Feescategory> results = new ArrayList<>();
         try {
             
            // results = (List<Feescategory>) session.createQuery("From Feescategory where (academicyear='"+academicYear+"' or academicyear='"+nextYear+"') and branchid="+branchId).list();
@@ -347,7 +347,7 @@ public class FeesCategoryDAO {
 	@Transactional
 	public void deleteOtherFeesCategory(List<Integer> ids, List<Integer> feesCatId, String sid) {
         int sId = Integer.parseInt(sid);
-		List<Feescollection> feesCollection = new ArrayList<Feescollection>();
+		List<Feescollection> feesCollection = new ArrayList<>();
 		try {
 			//Query queryOne = session.createQuery("from Otherfeescollection as feescollection where feescollection.sid = '"+sid+"' and feescollection.sfsid IN (:ids)");
 			feesCollection = otherfeescollectionRepo.findByStudentSidAndOtherFeesStructureIn(sId, ids);

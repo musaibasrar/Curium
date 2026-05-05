@@ -52,7 +52,7 @@ public class JobDAO {
 	@Transactional
 	public List<JobQuery> readListOfObjectsPagination(int offset, int noOfRecords, int branchId) {
 
-		List<JobQuery> results = new ArrayList<JobQuery>();
+		List<JobQuery> results = new ArrayList<>();
 
 		try {
 			// Query query = session.createQuery("From JobQuery as query where query.branchid = "+branchId+" order by query.id desc");
@@ -102,7 +102,7 @@ public class JobDAO {
 
 	@Transactional
 	public List<JobQuery> completeQueries(List<Integer> queryIdsList, int userId) {
-		List<JobQuery> result = new ArrayList<JobQuery>();
+		List<JobQuery> result = new ArrayList<>();
 		try {
 			// Query query = session.createQuery("update JobQuery set status = 'Completed', updateddate = CURDATE(), updateduserid= "+userId+" where id="+appId+"");
 			jobQueryRepository.updateJobStatus(queryIdsList, "Completed", userId, Date.from(Instant.now()));
@@ -182,7 +182,7 @@ public class JobDAO {
 	public List<JobQuery> readListOfObjectsPaginationDepartmentWise(int offset, int noOfRecords, int branchId,
 			int tid) {
 
-		List<JobQuery> results = new ArrayList<JobQuery>();
+		List<JobQuery> results = new ArrayList<>();
 
 		try {
 			// Query query = session.createQuery("From JobQuery as query where query.branchid = "+branchId+" and query.teacher.tid='"+tid+"' order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
@@ -218,7 +218,7 @@ public class JobDAO {
 	public int getNoOfRecordsMonthly(String fromDate, String toDate) {
 		Date fromdate = DateUtil.dateParserdd(fromDate);
 		Date todate = DateUtil.dateParserdd(toDate);
-		List<JobQuery> results = new ArrayList<JobQuery>();
+		List<JobQuery> results = new ArrayList<>();
 		int noOfRecords = 0;
 		try {
 			// results = (List<JobQuery>) session.createQuery("From JobQuery where (createddate between '"+fromDate+"' and '"+toDate+"')  and status !='Cancelled'")
@@ -290,7 +290,7 @@ public class JobDAO {
 	@Transactional
 	public int getNoOfRecordsTodayUnResolvedQueries() {
 
-		List<JobQuery> results = new ArrayList<JobQuery>();
+		List<JobQuery> results = new ArrayList<>();
 		int noOfRecords = 0;
 		try {
 			// (List<JobQuery>) session.createQuery("From JobQuery where (status = 'Assigned' or status = 'In Progress') and createddate = CURDATE()").setCacheable(true).setCacheRegion("commonregion")
@@ -310,7 +310,7 @@ public class JobDAO {
 	@Transactional
 	public List<JobQuery> generateQueriesReport(String parentQuery) {
 
-		List<JobQuery> results = new ArrayList<JobQuery>();
+		List<JobQuery> results = new ArrayList<>();
 
 		try {
 			// (List<JobQuery>) session.createQuery(parentQuery).setCacheable(true).setCacheRegion("commonregion").list();
@@ -429,7 +429,7 @@ public class JobDAO {
 
 	public List<Task> viewTaksDetails(int jobId) {
 
-		List<Task> results = new ArrayList<Task>();
+		List<Task> results = new ArrayList<>();
 
 		try {
 			// results = (List<Task>) session.createQuery("from Task where jobid="+jobId+"").list();
@@ -445,7 +445,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> readListOfObjectsPaginationTask(int offset, int noOfRecords, int branchId) {
 
-		List<Task> results = new ArrayList<Task>();
+		List<Task> results = new ArrayList<>();
 
 		try {
 			// Query query = session.createQuery("From Task as query where query.branchid = "+branchId+" order by query.id desc").setCacheable(true).setCacheRegion("commonregion");
@@ -478,7 +478,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> readListOfObjectsPaginationDepartmentWiseTask(int offset, int noOfRecords, int branchId, int tid) {
 
-		List<Task> results = new ArrayList<Task>();
+		List<Task> results = new ArrayList<>();
 
 		try {
 			// Query query = session.createQuery("From Task as query where query.branchid = "+branchId+" and query.teacher.tid='"+tid+"' order by query.id desc");
@@ -511,7 +511,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> completeTasks(List<Integer> taskIdsList, int userId, String jobStatus, int jobId) {
 
-		List<Task> result = new ArrayList<Task>();
+		List<Task> result = new ArrayList<>();
 		try {
 			// Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
 			jobQueryRepository.updateJobStatus(jobStatus, Date.from(Instant.now()), userId, jobId);
@@ -532,7 +532,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> cancelTasks(List<Integer> taskIdsList, int userId, String jobStatus, int jobId) {
 
-		List<Task> result = new ArrayList<Task>();
+		List<Task> result = new ArrayList<>();
 		try {
 
 			if (jobStatus != null) {
@@ -557,7 +557,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> toDoTasks(List<Integer> taskIdsList, int userId, String jobStatus, int jobId) {
 
-		List<Task> result = new ArrayList<Task>();
+		List<Task> result = new ArrayList<>();
 		try {
 
 			// Query query = session.createQuery("update JobQuery set status = '"+jobStatus+"', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
@@ -579,7 +579,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> inProgressTasks(List<Integer> taskIdsList, int userId, String jobStatus, int jobId) {
 
-		List<Task> result = new ArrayList<Task>();
+		List<Task> result = new ArrayList<>();
 		try {
 
 			// Query query = session.createQuery("update JobQuery set status = 'In Progress', updateddate = CURDATE(), updateduserid= "+userId+" where id="+jobId+"");
@@ -603,7 +603,7 @@ public class JobDAO {
 	@Transactional
 	public List<Task> generateTasksReport(String parentQuery) {
 
-		List<Task> results = new ArrayList<Task>();
+		List<Task> results = new ArrayList<>();
 		try {
 			// results = (List<Task>) session.createQuery(parentQuery).setCacheable(true).setCacheRegion("commonregion").list();
 			results = queryUtil.runGivenQuery(parentQuery, Task.class);

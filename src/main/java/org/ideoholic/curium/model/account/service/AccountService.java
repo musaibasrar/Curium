@@ -65,6 +65,9 @@ import org.ideoholic.curium.model.account.dto.ViewNextVoucherResponseDto;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.account.dto.VoucherPrintDto;
 import org.ideoholic.curium.model.account.dto.VoucherPrintResponseDto;
+import org.ideoholic.curium.repositories.AccountGroupMasterRepository;
+import org.ideoholic.curium.repositories.AccountSubGroupMasterRepository;
+import org.ideoholic.curium.repositories.AccountssgroupmasterRepository;
 import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
@@ -85,6 +88,11 @@ public class AccountService {
 		
 	    private final PropertiesUtil propertiesUtil;
 	    
+	    private final AccountSubGroupMasterRepository accountSubGroupMasterRepo;
+	    
+	    private final AccountssgroupmasterRepository accountSsGroupMasterRepo;
+	    
+	    private final AccountGroupMasterRepository accountGroupMasterRepo;
 
 	public ResultResponse saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -133,8 +141,8 @@ public class AccountService {
 
 	public CreateAccountResponseDto createAccount(String branchId) {
 
-		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<Accountdetailsbalance>();
-		List<Accountgroupmaster> accountGroupMaster = new ArrayList<Accountgroupmaster>();
+		List<Accountdetailsbalance> accountDetailsBalance = new ArrayList<>();
+		List<Accountgroupmaster> accountGroupMaster = new ArrayList<>();
 		
 		if(branchId!=null){
 
@@ -161,7 +169,7 @@ public class AccountService {
 
 	public ResultResponse getSubGroupNames(String branchId, String strAccountGroupMasterId) throws IOException {
 		ResultResponse resultResponse = null;
-		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<Accountsubgroupmaster>();
+		List<Accountsubgroupmaster> accountSubGroupMaster = new ArrayList<>();
 		
 		if(branchId!=null){
 			int accountGroupMasterId = Integer.parseInt(strAccountGroupMasterId);
@@ -204,7 +212,7 @@ public class AccountService {
 		return resultResponse;
 	}
 
-	public CreateAccountResponseDto saveAccount(AccountDto accountDto, String branchId) {
+	public CreateAccountResponseDto saveAccount(AccountDto accountDto, String branchId, String userId) {
 
 		CreateAccountResponseDto result = null;
 		String newSubGroup =  DataUtil.emptyString(accountDto.getNewSubGroup());
@@ -228,15 +236,13 @@ public class AccountService {
 				
 				
 				if(getInt(subGroupName)!=null){
-					Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
-					accountSubGroupMaster.setAccountsubgroupmasterid(getInt(subGroupName));
+					Accountsubgroupmaster accountSubGroupMaster = accountSubGroupMasterRepo.findById(getInt(subGroupName)).orElse(null);
 					accountDetails.setAccountSubGroupMaster(accountSubGroupMaster);
 				}
 				
 				if(!"New Sub-Group".equalsIgnoreCase(ssGroupName)) {
 					if(getInt(ssGroupName)!=null) {
-						Accountssgroupmaster accountSSGroup = new Accountssgroupmaster();
-						accountSSGroup.setSsgroupmasterid(getInt(ssGroupName));
+						Accountssgroupmaster accountSSGroup = accountSsGroupMasterRepo.findById(getInt(ssGroupName)).orElse(null);
 						accountDetails.setAccountSSGroupMaster(accountSSGroup);
 					}
 				}else if("New Sub-Group".equalsIgnoreCase(ssGroupName)){
@@ -247,14 +253,16 @@ public class AccountService {
 					accountSSGroupMaster.setAccountSubGroupMaster(accountSubGroupMaster);
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setBranchid(Integer.parseInt(branchId));
+					accountSSGroupMaster.setUserid(Integer.parseInt(userId));
 					accountSSGroupMaster = accountDao.createSSGroup(accountSSGroupMaster);
 					accountDetails.setAccountSSGroupMaster(accountSSGroupMaster);
 				}
 				
-				Accountgroupmaster accountGroupMaster = new Accountgroupmaster();
-				accountGroupMaster.setAccountgroupid(getInt(groupName));
+				Accountgroupmaster accountGroupMaster = accountGroupMasterRepo.findById(getInt(groupName)).orElse(null);
+
 				accountDetails.setAccountGroupMaster(accountGroupMaster);
-				accountDetails.setBranchid(Integer.parseInt(branchId));
+				accountDetails.setBranchid(getInt(branchId));
+				accountDetails.setUserid(getInt(userId));
 				
 					// Add account balance
 					Financialaccountingyear financialyear = accountDao.getFinancialAccountingYear(Integer.parseInt(branchId));
@@ -278,12 +286,12 @@ public class AccountService {
 
 			Accountsubgroupmaster accountSubGroupMaster = new Accountsubgroupmaster();
 			Accountssgroupmaster accountSSGroupMaster = new Accountssgroupmaster();
-			Accountgroupmaster accountGroup = new Accountgroupmaster();
+			Accountgroupmaster accountGroupMaster = accountGroupMasterRepo.findById(getInt(groupName)).orElse(null);
 			
-			accountGroup.setAccountgroupid(Integer.parseInt(groupName));
-			accountSubGroupMaster.setAccountGroupMaster(accountGroup);
+			accountSubGroupMaster.setAccountGroupMaster(accountGroupMaster);
 			accountSubGroupMaster.setAccountsubgroupname(newSubGroup);
-			accountSubGroupMaster.setBranchid(Integer.parseInt(branchId));
+			accountSubGroupMaster.setBranchid(getInt(branchId));
+			accountSSGroupMaster.setUserid(getInt(userId));
 			accountSubGroupMaster = accountDao.createSubGroup(accountSubGroupMaster);
 			
 			 if("New Sub-Group".equalsIgnoreCase(ssGroupName)){
@@ -293,27 +301,24 @@ public class AccountService {
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setSsgroupname(newSSGroup);
 					accountSSGroupMaster.setBranchid(Integer.parseInt(branchId));
+					accountSSGroupMaster.setUserid(getInt(userId));
 					accountSSGroupMaster = accountDao.createSSGroup(accountSSGroupMaster);
 					
 				}
 			
 				Accountdetails accountDetails = new Accountdetails();
-				Accountgroupmaster accountGroupMaster = new Accountgroupmaster();
-				//Group
-				Accountsubgroupmaster accountSubGroup = new Accountsubgroupmaster();
-				accountSubGroup.setAccountsubgroupmasterid(accountSubGroupMaster.getAccountsubgroupmasterid());
-				accountDetails.setAccountSubGroupMaster(accountSubGroup);
 				//Sub-Group
-				Accountssgroupmaster accountSSGroup = new Accountssgroupmaster();
-				accountSSGroup.setSsgroupmasterid(accountSSGroupMaster.getSsgroupmasterid());
-				accountDetails.setAccountSSGroupMaster(accountSSGroup);
+				accountDetails.setAccountSubGroupMaster(accountSubGroupMaster);
+				//SSub-Group;
+				accountDetails.setAccountSSGroupMaster(accountSSGroupMaster);
+				//Group Master
+				accountDetails.setAccountGroupMaster(accountGroupMaster);
 				//Account Details
 				accountDetails.setAccountname(accountName);
 				accountDetails.setAccountcode(accountCode);
-				accountGroupMaster.setAccountgroupid(Integer.parseInt(groupName));
-				accountDetails.setAccountGroupMaster(accountGroupMaster);
 				accountDetails.setAccountSubGroupMaster(accountSubGroupMaster);
-				accountDetails.setBranchid(Integer.parseInt(branchId));
+				accountDetails.setBranchid(getInt(branchId));
+				accountDetails.setUserid(getInt(userId));
 				
 					Financialaccountingyear financialyear = accountDao.getFinancialAccountingYear(Integer.parseInt(branchId));
 					Accountdetailsbalance accountDetailsBalance = new Accountdetailsbalance();
@@ -328,6 +333,7 @@ public class AccountService {
 					accountDetailsBalance.setCurrentbalance(new BigDecimal(0));
 					accountDetailsBalance.setEnteredon(new Date());
 					accountDetailsBalance.setBranchid(Integer.parseInt(branchId));
+					accountDetailsBalance.setUserid(getInt(userId));
 					result = CreateAccountResponseDto.builder()
 						.message(accountDao.saveNewAccount(accountDetails, accountDetailsBalance))
 						.success(true).build();

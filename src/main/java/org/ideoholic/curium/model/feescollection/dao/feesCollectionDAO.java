@@ -322,20 +322,6 @@ public class feesCollectionDAO {
     }
 
     @Transactional
-    public List<Otherreceiptinfo> getotherReceiptDetailsPerStudent(Integer id, String currentacademicyear) {
-    	List<Otherreceiptinfo> result = new ArrayList<>();
-        try {
-        	// session.createQuery("from Otherreceiptinfo where sid = '"+id+"' and academicyear = '"+currentacademicyear+"' and cancelreceipt=0").list();
-        	result = otherreceiptinfoRepository.findByStudent_SidAndAcademicyearAndCancelreceipt(id, currentacademicyear, 0);
-        } catch (Exception e) {
-            log.error(e.getMessage(), e);
-            e.printStackTrace();
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-        }
-        return result;
-    }
-
-    @Transactional
     public Studentfeesstructure getStudentFeesStructure(String sid, String idFeesCategory, String currentAcademicYear) {
     	Studentfeesstructure result = null;
         try {
