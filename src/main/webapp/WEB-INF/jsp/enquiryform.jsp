@@ -368,6 +368,24 @@
 	                    
 	                } );
 	            } );
+	            
+	            
+	        	function CalculateAge(value) {
+	        		var dateOfBirth = document.getElementById('datepicker').value;
+	        		var from = dateOfBirth.split("/");
+	        		var today = new Date();
+	        		var birthDate = new Date(from[2],from[1] - 1,from[0]);
+	        		var month = birthDate.getMonth();
+	        		var age = today.getFullYear() - birthDate.getFullYear();
+	        		var m = today.getMonth() - birthDate.getMonth();
+	        		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+	        			age--;
+	        		}
+	        		//return age;
+	        		document.getElementById('age').value = age;
+	        	}
+	        	
+	        	
 	        </script>
 	</head>
 	<%
@@ -406,64 +424,6 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Name of the child</td>
-							<td><input type="text" name="name" class="myclass"/></td>
-							<td class="alignLeft" style="padding-left: 20px;">Gender</td>
-							<td>Male<input type="checkbox" value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input type="checkbox" value="Female" name="gender" id="no:male" onclick="noCheck(this.id)" /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Date of Birth</td>
-							<td><input name="dateofbirth" type="text" class="myclass" id="datepicker" size="20" autocomplete="false" onchange="CalculateAge(this)" data-validate="validate(required)"></td>
-							<td class="alignLeft" style="padding-left: 20px;">Caste</td>
-							<td><input type="text" name="caste" class="myclass"/></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Place of Birth</td>
-							<td><input type="text" name="placeofbirth" class="myclass"/></td>
-							<td class="alignLeft" style="padding-left: 20px;">Surname</td>
-							<td><input type="text" name="surname" class="myclass"/></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Previous Class Passed</td>
-							<td><label> <select name="previousclasspass" 
-									id="previousclasspass" class="myclass" style="width: 180px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classItem">
-											<c:if test="${(classItem.classdetails != '')}">
-												<option value="${classItem.classdetails}">
-													<c:out value="${classItem.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select></label></td>
-							<td class="alignLeft" style="padding-left: 20px;">Previous school Name</td>
-							<td><input type="text" name="previousschoolname" class="myclass"/></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
 							<td class="alignLeft">Class to be Admitted</td>
 							<td>
 								<label> <select name="classadmittedin" 
@@ -478,8 +438,33 @@
 										</c:forEach>
 								</select></label>
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">Religion</td>
-							<td><input type="text" name="religion" class="myclass"/></td>
+							<!-- <td class="alignLeft" style="padding-left: 20px;">Religion</td>
+							<td><input type="text" name="religion" class="myclass"/></td> -->
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Name of the Student</td>
+							<td><input type="text" name="name" class="myclass"/></td>
+							<td class="alignLeft" style="padding-left: 20px;">Gender</td>
+							<td>Male<input type="checkbox" value="Male" name="gender" id="yes:male" onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input type="checkbox" value="Female" name="gender" id="no:male" onclick="noCheck(this.id)" /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td class="alignLeft">Date of Birth</td>
+							<td><input name="dateofbirth" type="text" class="myclass" id="datepicker" size="20" autocomplete="false" onchange="CalculateAge(this)" data-validate="validate(required)"></td>
+							<td class="alignLeft" style="padding-left: 20px;">Age</td>
+							<td><input type="text" name="occupation" id="age" class="myclass"/></td>
 						</tr>
 						<tr>
 							<td><br /></td>
@@ -511,10 +496,73 @@
 						<tr>
 							<td><br /></td>
 						</tr>
+						
 						<tr>
-							<td class="alignLeft">Elder/Younger<br> brother Education</td>
+							<td class="alignLeft">Father's Occupation</td>
+							<td><input type="text" name="placeofbirth" class="myclass"/></td>
+							<td class="alignLeft" style="padding-left: 20px;">Mother's Occupation</td>
+							<td><input type="text" name="surname" class="myclass"/></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Religion</td>
+							<td><input type="text" name="religion" class="myclass"/></td>
+							<td class="alignLeft" style="padding-left: 20px;">Caste</td>
+							<td><input type="text" name="caste" class="myclass"/></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Previous Class Passed</td>
+							<td><label> <select name="previousclasspass" 
+									id="previousclasspass" class="myclass" style="width: 180px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classItem">
+											<c:if test="${(classItem.classdetails != '')}">
+												<option value="${classItem.classdetails}">
+													<c:out value="${classItem.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select></label></td>
+							<td class="alignLeft" style="padding-left: 20px;">Previous school Name</td>
+							<td><input type="text" name="previousschoolname" class="myclass"/></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Permanent Address</td>
+							<td><textarea name="address" class="myclass"></textarea></td>
+							<td class="alignLeft">Contact No</td>
+							<td><input type="text" name="contactno" class="myclass"/></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignLeft">Elder brother/Sister</td>
 							<td><input type="text" name="brothereducation" class="myclass"/></td>
-							<td class="alignLeft" style="padding-left: 20px;">Elder/Younger<br> Sister Education</td>
+							<td class="alignLeft" style="padding-left: 20px;">Younger brother/Sister</td>
 							<td><input type="text" name="sistereducation" class="myclass"/></td>
 						</tr>
 						<tr>
@@ -524,9 +572,9 @@
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td class="alignLeft">Nature of <br>Profession/occupation</td>
-							<td><input type="text" name="occupation" class="myclass"/></td>
-							<td class="alignLeft" style="padding-left: 20px;">Academic Year</td>
+							<!-- <td class="alignLeft">Nature of <br>Profession/occupation</td>
+							<td><input type="text" name="occupation" class="myclass"/></td> -->
+							<td class="alignLeft">Academic Year</td>
 							<td><select name="academicyear" id="academicyear" required class="myclass" style="width: 180px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${currentAcademicYear}</option>
 										<c:forEach var="year" items="${previousAcademicYears}">
@@ -540,9 +588,8 @@
 						<tr>
 							<td><br /></td>
 						</tr>
-						<tr>
-							<td class="alignLeft">Permanent Address</td>
-							<td><textarea name="address" class="myclass"></textarea></td>
+						
+						<!-- <tr>
 							<td class="alignLeft" style="padding-left: 20px;">Notes</td>
 							<td><textarea name="notes" class="myclass"></textarea></td>
 						</tr>
@@ -551,19 +598,8 @@
 						</tr>
 						<tr>
 							<td><br /></td>
-						</tr>
-						<tr>
-							<td class="alignLeft">Contact No</td>
-							<td><input type="text" name="contactno" class="myclass"/></td>
-							<!-- <td class="alignLeft" style="padding-left: 20px;">Parent Sig</td>
-							<td><input type="text" name="parentsign" class="myclass"/></td> -->
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
-						<tr>
-							<td><br /></td>
-						</tr>
+						</tr> -->
+						
 						<tr align="center">
 							<td class="alignRight">&nbsp;</td>
 							<td align="center">
