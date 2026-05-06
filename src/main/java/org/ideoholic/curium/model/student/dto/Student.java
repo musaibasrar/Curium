@@ -119,7 +119,7 @@ public class Student implements java.io.Serializable {
 	private String placeofbirth;
 
 	@Column(name = "nooftc")
-	private Integer nooftc;
+	private Long nooftc;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "dateoftc", length = 10)

@@ -170,7 +170,7 @@ public class StudentServiceArchive {
                     student.setPlaceofbirth(DataUtil.emptyString(request.getParameter(fieldName)));
                 }
                 if (fieldName.equalsIgnoreCase("tcno")) {
-                    student.setNooftc(DataUtil.parseInt(request.getParameter(fieldName)));
+                    student.setNooftc((long)DataUtil.parseInt(request.getParameter(fieldName)));
                 }
                 if (fieldName.equalsIgnoreCase("dateoftc")) {
                     student.setDateoftc(DateUtil.indiandateParser(request.getParameter(fieldName)));
