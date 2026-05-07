@@ -20,4 +20,6 @@ public class GenerateReportResponseDto {
     private int totalabsent;
     private String examName;
     private String startDate;
+    private String minMark;
+    private String maxMark;
 }
