@@ -207,7 +207,7 @@ span{
 	//allow access only if session exists
 	String user = null;
 	if(session.getAttribute("userAuth") == null){
-		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+		response.sendRedirect("/dolphin/UserProcess/sessionTimeOut");
 	}else user = (String) session.getAttribute("userAuth");
 	String userName = null;
 	String sessionID = null;
@@ -230,7 +230,7 @@ span{
 			<!-- HEADER SECTION WITH SCHOOL DETAILS -->
 			<table style="page-break-inside: avoid;border-collapse: collapse;width: 100%;">
 				<tr>
-					<td style="padding-left: 200px;"><img src="/vision/images/vision${branchid}.jpg" width="72" height="80"/></td>
+					<td style="padding-left: 200px;"><img src="/dolphin/images/dolphin${branchid}.jpg" width="72" height="80"/></td>
 					<td>
 						<label class="dataTextBoldCenter">${branchname}</label><br>
 						<label class="addressLine">${branchaddress}</label>
