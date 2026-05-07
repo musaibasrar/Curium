@@ -1262,6 +1262,8 @@ public class StudentService {
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			String dob = new DateUtil().generateDateInWord(parents.getStudent().getDateofbirth()); 
+			result.setDateOfBirth(dob);
 			result.setParents(parents);
 			result.setSuccess(true);
 			result.setMessage("bonafidecertificateprint");
