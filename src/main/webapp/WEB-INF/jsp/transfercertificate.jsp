@@ -582,7 +582,7 @@ for(Cookie cookie : cookies){
                     </tr>
                     <tr>
                     <td >Class Last Studied: </td><td><input  type="text" name="classandsec" id="classandsec" style="width: 200px" /></td>
-                    <td >Date of issue of TC: </td><td><input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" /></td>    
+                    <td >Date of issue of TC: </td><td><input  style="width: 200px" type="text" name="dateoftc" id="dateoftc"  value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" /></td>    
                     </tr>
                     <tr>
                     <td><br></td>
