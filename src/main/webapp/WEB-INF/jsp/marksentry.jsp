@@ -356,6 +356,50 @@
 	}
 	
 </script>
+<script>
+var xmlHttp;
+var count;
+function getSubjectDetails() {
+    var subjectId = document.getElementById('subject').value;
+    var classSearch = document.getElementById('classsearchselected').value;
+    var examName = document.getElementById('exam').value;
+
+    if (typeof XMLHttpRequest != "undefined") {
+        xmlHttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlHttp.onreadystatechange = stateChanged;
+
+    var url = "/vision/MarksDetailsProcess/getSubjectDetails"
+        + "?subject=" + encodeURIComponent(subjectId)
+        + "&classSearch=" + encodeURIComponent(classSearch)
+        + "&examName=" + encodeURIComponent(examName);
+
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+function stateChanged() {
+
+	if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+		document.getElementById("minmax").innerHTML = xmlHttp.responseText;
+	}
+}
+function GetXmlHttpObject() {
+	var xmlHttp = null;
+	try {
+		xmlHttp = new XMLHttpRequest();
+	} catch (e) {
+		try {
+			xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	}
+	return xmlHttp;
+}
+</script>
 
 <script type="text/javascript" src="/readmodelschool/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
@@ -433,12 +477,17 @@
 
 <script type="text/javascript">
         
-    function checkMandatory(){
+    function checkMandatory(enteredMarks){
+    	
+    	var marksEntered = parseInt(enteredMarks.value, 10);
+        var maxMarks = parseInt(document.getElementById("maxmarks").value, 10);
     	
     	if(document.getElementById("exam").value == ""){
     		alert('Please enter the exam field');	
     	}else if(document.getElementById("subject").value == ""){
     		alert('Please enter the subject');
+    	}else if(marksEntered > maxMarks){
+    	    alert('Entered marks must not exceed the maximum marks');
     	}
     	
     }
@@ -602,7 +651,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="30%" class="alignRight">Subject &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="subject" id="subject"
+									<select name="subject" id="subject" 
 									style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
@@ -627,7 +676,7 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td width="30%" class="alignRight">Exam &nbsp;</td>
 							<td width="16%" height="30" class="alignLeft"><label>
-									<select name="exam" id="exam"
+									<select name="exam" id="exam" onchange="getSubjectDetails()"
 									style="width: 184px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 
@@ -670,9 +719,9 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td><br /></td>
+						<td colspan="2" id="minmax"></td>
 						</tr>
-
+						
 					</table>
 					
 					
@@ -730,7 +779,7 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><input type="text"
 								id="studentMarks" 
 								name="studentMarks"
-								onkeyup="checkMandatory();" value="0"
+								onkeyup="checkMandatory(this);" value="0"
 								onkeypress="return (event.charCode >= 00 && event.charCode <=57) || event.charCode == 65"
 								maxlength="4"
 								 /></td>
