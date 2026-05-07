@@ -128,7 +128,7 @@ public class DocumentService {
 			 if(transferCertificate != null){
 				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-				 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+				 String dateinword = new DateUtil().generateDateInWord(parents.getStudent().getDateofbirth());
 				 transferCertificateResponseDto.setReason(leavingReason); 
 				 transferCertificateResponseDto.setBookNo(bookno);
 				 transferCertificateResponseDto.setTcNo(tcno);
@@ -166,7 +166,7 @@ public class DocumentService {
 		 if("true".equalsIgnoreCase(transferCertificateString)){
 			 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
 			 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
-			 String dateinword=generateDate(parents.getStudent().getDateofbirth());
+			 String dateinword = new DateUtil().generateDateInWord(parents.getStudent().getDateofbirth());
 			 transferCertificateResponseDto.setReason(leavingReason); 
 			 transferCertificateResponseDto.setBookNo(bookno);
 			 transferCertificateResponseDto.setTcNo(tcno);
@@ -202,95 +202,7 @@ public class DocumentService {
 	}
 
 
-		private String generateDate(Date dateofbirth) {
-		// TODO Auto-generated method stub
-
-		String dateOfBirth = DateUtil.dateParseryyyymmdd(dateofbirth);
-		String[] dob = dateOfBirth.split("-");
-		String dayInWords = formatDayInWords(Integer.parseInt(dob[2]));
-	        String monthInWords = formatMonthInWords(Integer.parseInt(dob[1]));
-	        String yearInWords = formatYearInWords(Integer.parseInt(dob[0]));
-
-	        return dayInWords+" "+monthInWords+" "+yearInWords;
-
-	    }
-
-
-	private String formatYearInWords(int year) {
-        if (year >= 1900 && year <= 2099) {
-            String[] units = {
-                "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"
-            };
-            String[] teens = {
-                "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
-            };
-            String[] tens = {
-                "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
-            };
-
-            int thousandsDigit = (year / 1000) % 10;
-            int hundredsDigit = (year / 100) % 10;
-            int tensDigit = (year / 10) % 10;
-            int onesDigit = year % 10;
-
-            String yearInWords = "";
-
-            if (thousandsDigit > 0) {
-                yearInWords += units[thousandsDigit] + " Thousand ";
-            }
-
-            if (hundredsDigit > 0) {
-                yearInWords += units[hundredsDigit] + " Hundred ";
-            }
-
-            if (tensDigit > 1) {
-                yearInWords += tens[tensDigit];
-                if (onesDigit > 0) {
-                    yearInWords += "-" + units[onesDigit];
-                }
-            } else if (tensDigit == 1) {
-                yearInWords += teens[onesDigit];
-            } else if (onesDigit > 0) {
-                yearInWords += units[onesDigit];
-            }
-
-            return yearInWords.trim();
-        } else {
-            return "Invalid year";
-        }
-}
-
-
-	private String formatMonthInWords(int month) {
-	        String[] monthNames = {
-	            "", "January", "February", "March", "April", "May", "June", "July", "August", "September",
-	            "October", "November", "December"
-	        };
-
-	        if (month >= 1 && month <= 12) {
-	            return monthNames[month];
-	        } else {
-	            return "Invalid month";
-	        }
-	    }
-
-
-	private String formatDayInWords(int day) {
-	        String[] dayNames = {
-	            "", "First", "Second", "Third", "Fourth", "Fifth", "Sixth", "Seventh", "Eighth", "Ninth",
-	            "Tenth", "Eleventh", "Twelfth", "Thirteenth", "Fourteenth", "Fifteenth", "Sixteenth",
-	            "Seventeenth", "Eighteenth", "Nineteenth", "Twentieth", "Twenty-First", "Twenty-Second",
-	            "Twenty-Third", "Twenty-Fourth", "Twenty-Fifth", "Twenty-Sixth", "Twenty-Seventh",
-	            "Twenty-Eighth", "Twenty-Ninth", "Thirtieth", "Thirty-First"
-	        };
-
-	        if (day >= 1 && day <= 31) {
-	            return dayNames[day];
-	        } else {
-	            return "Invalid day";
-	        }
-	    }
-
+		
 
 		public TcResponseDto printTransferCertificate(int studentId) {
 			TcResponseDto tcResponseDto = new TcResponseDto();
