@@ -10,6 +10,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -411,9 +412,11 @@ for(Cookie cookie : cookies){
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                     <label style="font-weight: bold;color: #325F6D">  The Current Financial Accounting Year is from </label>
-                                    <label style="font-weight: bold;color: #325F6D;font-size: 20px">${currentfinancialaccountingyearfrom}</label>
+                                    <label style="font-weight: bold;color: #325F6D;font-size: 20px">
+                                    <fmt:formatDate value="${currentfinancialaccountingyearfrom}" pattern="dd/MM/yyyy"/></label>
                                     <label style="font-weight: bold;color: #325F6D"> To </label>
-                                    <label style="font-weight: bold;color: #325F6D;font-size: 20px">${currentfinancialaccountingyearto}</label>
+                                    <label style="font-weight: bold;color: #325F6D;font-size: 20px">
+                                    <fmt:formatDate value="${currentfinancialaccountingyearto}" pattern="dd/MM/yyyy"/></label>
                                 </td>
 							</tr>
 							<tr>
