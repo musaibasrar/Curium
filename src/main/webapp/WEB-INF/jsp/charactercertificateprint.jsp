@@ -104,8 +104,29 @@ span{
  width:40px;
  } */      
 </style>
-	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<style>
+@page {
+    size: A4;
+    margin: 10mm;
+}
+    .page {
+    width: 190mm;
+    min-height: 277mm;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: auto; 
+}
+.print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        
+        }
+</style>
+	<script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script>
         $(function() {
 
@@ -146,11 +167,12 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 	<jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form id="form1" method="post" class="bodymargin">
+        <div class="page">
 		<br>
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/roshan/images/roshan.jpg" width="104" height="120"/></td>
+				<td ><img src="/roshan/images/roshan.png" width="126" height="140"/></td>
 				<td  class="dataTextBoldCenter">
 				<h1 style="margin-bottom:0px;">	${branchname}</h1>
 				<h4 style="margin-top:0px;margin-bottom:0px;">	${branchaddress}</h4>
@@ -180,8 +202,27 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;"><label style="text-align:left;">Admission no. &nbsp;&nbsp;
+					<span  style="font-weight: bold;text-transform: capitalize;width:150px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span></label>
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<label >SATS No. &nbsp;&nbsp;
+					<span  style="font-weight: bold;text-transform: capitalize;width:150px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.sts}" /></span></label>
+					</h3>
+				</td>
+			</tr
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+			
+			<tr>
+			
+				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:600px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:450px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -192,12 +233,12 @@ for(Cookie cookie : cookies){
 				
 				<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:700px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					Son/Daughter of &nbsp;&nbsp;<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:550px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
 					</h3></td></tr><tr>
 					<td class="dataTextBoldLeft">
 					<h3 style="font-weight: normal;" >
-					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:200px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
-					bearing STS<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:250px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.sts}" /></span>
+					has passed the AISSE/AISSCE<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:180px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.classstudying}" /></span>
+					bearing STS<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:180px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.sts}" /></span>
 					</h3>
 				</td>
 			
@@ -205,14 +246,14 @@ for(Cookie cookie : cookies){
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:520px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
+			His/Her date of Birth as per our record is<span class="rightside" style="font-weight: bold;text-transform: capitalize;width:370px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span>
 			</h3>
 			</td>
 			</tr>
 			<tr>
 			<td class="dataTextBoldLeft">
 			<h3 style="font-weight: normal;" >
-			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:500px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="characterstudent" id="characterstudent" style="width: 200px" /></span>character
+			He/She bears<span style="font-weight: bold;text-transform: capitalize;width:470px;border-bottom:dotted;">&nbsp;&nbsp;&nbsp;&nbsp;<input  type="text" name="characterstudent" id="characterstudent" style="width: 200px" /></span>character
 			</h3>
 			</td>
 			</tr>
@@ -254,15 +295,20 @@ for(Cookie cookie : cookies){
 				Date:&nbsp;&nbsp;
 				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" ></td>	
-			<td align="center">Accountant</td>
-			<td align="center">Principal</td>
+			<td align="center"></td>
+			<td align="center">Headmaster</td>
 		</tr>
 		
-			<tr>
+			<!--<tr>
               <td><button class="printtcstudent"  >Print</button></td>
-              <!-- <a id="print" href="/roshan/DocumentsProcess/printCharacterCertificate">Print</a> -->
-            </tr>
+             
+            </tr>-->
 		</TABLE>
+        </div>
+        <div class="print-btn">
+   
+    <button type="button" onclick="printtc()">Print</button>
+</div>
 	</form>
 </body>
 </html>
