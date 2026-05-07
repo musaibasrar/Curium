@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>fees structure</title>
-<link rel="stylesheet" href="/bright/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/bright/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -295,42 +295,43 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/bright/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/bright/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/bright/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/bright/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/bright/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/bright/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -356,11 +357,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/bright/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/bright/StampFeesProcess/searchForFees";
+		form1.action = "/vision/StampFeesProcess/searchForFees";
 		form1.method = "POST";
 		form1.submit();
 
@@ -389,7 +390,58 @@
 
 </script>
 
-
+<script>
+var students = [
+    <c:forEach varStatus="status" items="${studentListFeesCollection}" var="parent">{
+    	value:'<c:out default="0" value="${parent.student.name}" />',
+        admissionno:'<c:out default="0" value="${parent.student.admissionnumber}" />',
+        regno:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+        name:'<c:out default="0" value="${parent.student.name}" />',
+        classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
+        id:'<c:out default="0" value="${parent.student.sid}" />',
+        fathername:'<c:out default="0" value="${parent.fathersname}" />',
+        
+    }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+];
+$(function() {
+    $( "#studentname").autocomplete({
+    	minLength: 1,
+    	source: function(request, response) {
+    	      var term = $.trim(request.term);
+    	      if (!term) { response([]); return; }
+    	      var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+    	      var matches = $.grep(students, function(item) {
+    	        // check any fields you want to be searchable
+    	        return matcher.test(item.name)
+    	            || matcher.test(item.value)
+    	            || matcher.test(item.regno)
+    	            || matcher.test(item.admissionno)
+    	            || matcher.test(item.fathername);
+    	      });
+    	      response(matches);
+        },
+        focus: function( event, ui ) {
+            $( "#studentId").val( ui.item.id );
+            return true;
+        },
+        select: function( event, ui ) {
+            $( "#studentId").val( ui.item.id );
+			  $( "#studentName").val( ui.item.name );
+			$( "#classandsec").val( ui.item.classandsec );
+			$( "#admissionno").val( ui.item.admissionno );
+			$( "#fathername").val( ui.item.fathername );
+            /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
+            return true;
+        }
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li></li>" )
+        .data( "item.autocomplete", item )
+        .append( "<a><b> " + item.value +" / "+item.classandsec+" / "+item.regno+" / "+item.fathername+" </b> </a>" )
+        .appendTo( ul );
+    };
+});
+</script>
 
 
 
@@ -398,7 +450,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bright/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -426,8 +478,9 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Student Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+									name="namesearch" type="text" class="myclass" id="studentname"
+									size="36""><input name="studentId" type="hidden" id="studentId" value="" />
+									<input  type="hidden" name="fathername" id="fathername" class="myclass" />
 							</label></td>
 							
 						</tr>
@@ -511,8 +564,8 @@ for(Cookie cookie : cookies){
 					<tr>
 						<!-- <th class="headerText"><input type="checkbox" id="chckHead" /></th> -->
 						<th title="click to sort" class="headerText">View Fees</th>
-						<th title="click to sort" class="headerText">View Other Fees</th>
-						<th title="click to sort" class="headerText">UID</th>
+						<th title="click to sort" class="headerText">View Bus Fees</th>
+						<!-- <th title="click to sort" class="headerText">UID</th> -->
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Father Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class &
@@ -534,12 +587,12 @@ for(Cookie cookie : cookies){
 								name="studentIDs"
 								value="<c:out value="${Parents.student.sid}"/>" /></td> --%>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/bright/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
+								href="/vision/StudentProcess/ViewFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/bright/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
-										value="${Parents.student.admissionnumber}" /></a></td>
-							<td class="dataText"><c:out value="${Parents.student.studentexternalid}" /></td>
+								href="/vision/StudentProcess/ViewotherFeesStructure?id=<c:out value='${Parents.student.sid}'/>"><c:out
+										value="${Parents.student.studentexternalid}" /></a></td>
+							<%-- <td class="dataText"><c:out value="${Parents.student.studentexternalid}" /></td> --%>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out
