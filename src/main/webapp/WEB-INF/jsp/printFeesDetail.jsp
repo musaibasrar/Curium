@@ -233,7 +233,7 @@
                 
 				
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
@@ -244,7 +244,7 @@
 				</td>
 				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					&nbsp;&nbsp;&nbsp;Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 
 			</tr>
@@ -263,7 +263,7 @@
 						value="${recieptdate}" />
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
 			</tr>
 
 			<tr>
@@ -345,7 +345,9 @@
 			
 			
 			<tr>
-				<td class="headerText" style="padding-left: 210px;"><label style="font-weight: bold;">Total:</label>&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText" ></td>
+				<td class="headerText"></td>
+				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -445,7 +447,7 @@
                 
 				
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
 						value="${recieptinfo.branchreceiptnumber}" /> 
 				</td>
 				
@@ -456,7 +458,7 @@
 				</td>
 				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					&nbsp;&nbsp;&nbsp;Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
 				</td>
 				
 				</tr>
@@ -465,16 +467,10 @@
 			<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
 						value="${recieptdate}" />
 				</td>
-             <td class="dataTextBoldLeft" style="font-size: 14px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
+             <td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
 			</tr>
 			<tr>
 			<td></td>
-			
-			
-				
-				
-				
-				
 				<td></td>
 			</tr>
 
@@ -560,7 +556,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 210px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
