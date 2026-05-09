@@ -1,5 +1,6 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
@@ -397,6 +398,16 @@ public class MarksDetailsAction {
 		    marksDetailsActionAdapter.viewMarksSub();
 			marksDetailsActionAdapter.getSubjectExams();
 		return "examMarksReportSub";
+	}
+	
+	@GetMapping("/getSubjectDetails")
+	public void getSubjectDetails() {
+		try {
+		marksDetailsActionAdapter.getSubjectDetails();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+	}
 	}
 	
 }
