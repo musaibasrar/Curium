@@ -316,11 +316,16 @@ public class MarksDetailsService {
 			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = dto.getExamClass();
 			String[] exCl = examClass[0].split("--");
-				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+				
+			if(dto.getExamsList() == null || dto.getExamsList().isEmpty()) {
+							List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+									dto.setExamsList(examDetailsList);
+								}
+				
 				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
-				for (Exams exams : examDetailsList) {
+				for (Exams exams : dto.getExamsList()) {
 					
 					ExamsDetails examsD = new ExamsDetails();
 							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
@@ -1839,6 +1844,16 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			markssheet.setExamSummaries(examSummaries);
 			// row-wise subject summaries
 			markssheet.setSubjectSummaries(new ArrayList<>(subjectSummaryMap.values()));
+			
+			//Generate Graph for Each Student
+			StudentGraphDto studentGraphDto = new StudentGraphDto();
+			String[] stdIds = {studentIds[i]};
+			studentGraphDto.setStudentIds(studentIds);
+			studentGraphDto.setExamClass(examClass);
+			studentGraphDto.setExamsList(examsList);
+			StudentGraphResponseDto studentGraphResponseDto = getStudentGraph(studentGraphDto, branchId, currentAcademicYear);
+			markssheet.setExamsDetails(studentGraphResponseDto.getExamDetailsGraph());
+			//End Generate Graph
 
 			marksSheetList.add(markssheet);
 			result.setSuccess(true);
