@@ -67,46 +67,46 @@ public class DiaryService {
 	}
 	
 	public void addDiary(AddDiaryDto addDiaryDto, MultipartFile[] listOfFiles,
-            String branchId, String userLoginId, String currentAcademicYear) {
+			String branchId, String userLoginId, String currentAcademicYear) {
 
-Diary diary = new Diary();
+		Diary diary = new Diary();
 
-if (branchId != null) {
+		if (branchId != null) {
 
-String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
-String classString = addDiaryDto.getAddClass() + "--" + secString;
+			String secString = DataUtil.emptyString(addDiaryDto.getAddSec());
+			String classString = addDiaryDto.getAddClass() + "--" + secString;
 
-diary.setClasssec(DataUtil.emptyString(classString));
-diary.setMessage(addDiaryDto.getMessageBody());
-diary.setSubject(addDiaryDto.getSubject());
-diary.setBranchid(branchId);
-diary.setUserid(Integer.parseInt(userLoginId));
-diary.setAcademicyear(currentAcademicYear);
-diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
-diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
-diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
+			diary.setClasssec(DataUtil.emptyString(classString));
+			diary.setMessage(addDiaryDto.getMessageBody());
+			diary.setSubject(addDiaryDto.getSubject());
+			diary.setBranchid(branchId);
+			diary.setUserid(Integer.parseInt(userLoginId));
+			diary.setAcademicyear(currentAcademicYear);
+			diary.setCreateddate(DateUtil.indiandateParser(addDiaryDto.getCreatedDate()));
+			diary.setEnddate(DateUtil.indiandateParser(addDiaryDto.getEndDate()));
+			diary.setStartdate(DateUtil.indiandateParser(addDiaryDto.getStartDate()));
 
-try {
-    if (listOfFiles != null && listOfFiles.length > 0) {
+			try {
+				if (listOfFiles != null && listOfFiles.length > 0) {
 
-        if (listOfFiles.length > 0) {
-            diary.setAttachment1(processFile(listOfFiles[0]));
-        }
-        if (listOfFiles.length > 1) {
-            diary.setAttachment2(processFile(listOfFiles[1]));
-        }
-        if (listOfFiles.length > 2) {
-            diary.setAttachment3(processFile(listOfFiles[2]));
-        }
-    }
+					if (listOfFiles.length > 0) {
+						diary.setAttachment1(processFile(listOfFiles[0]));
+					}
+					if (listOfFiles.length > 1) {
+						diary.setAttachment2(processFile(listOfFiles[1]));
+					}
+					if (listOfFiles.length > 2) {
+						diary.setAttachment3(processFile(listOfFiles[2]));
+					}
+				}
 
-} catch (IOException e) {
-    log.error("Error processing file upload", e);
-}
+			} catch (IOException e) {
+				log.error("Error processing file upload", e);
+			}
 
-diary = new diaryDAO().create(diary);
-}
-}
+			diary = new diaryDAO().create(diary);
+		}
+	}
 
 	
 

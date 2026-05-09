@@ -104,14 +104,14 @@ public class ImportFileService {
 										+ "/" + (row.getCell(21).getStringCellValue())));*/
 						student.setClassstudying(row.getCell(8).getStringCellValue()+"--"+row.getCell(47).getStringCellValue());
 						
-						//student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
+						student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
 						//student.setBloodgroup(row.getCell(9).getStringCellValue());
 						//student.setMothertongue(row.getCell(10).getStringCellValue());
 						//student.setReligion(row.getCell(11).getStringCellValue());
 						//student.setStudentscaste(row.getCell(12).getStringCellValue());
 						student.setNationality(row.getCell(13).getStringCellValue());
 						//student.setStudentscastecertno(row.getCell(14).getStringCellValue());
-						student.setDisabilitychild(row.getCell(14).getStringCellValue());//Aadhar no
+						//student.setDisabilitychild(row.getCell(14).getStringCellValue());//Aadhar no
 						//student.setSocialcategory(row.getCell(15).getStringCellValue());
 						// student.setSecondlanguage(row.getCell(15).getStringCellValue());
 						student.setCreateddate(DateUtil.simpleDateParser(
@@ -126,7 +126,7 @@ public class ImportFileService {
 						student.setUserid(Integer.parseInt(row.getCell(46).getStringCellValue()));
 						student.setBhagyalakshmibondnumber(row.getCell(48).getStringCellValue());//rollno
 						//student.setSts(row.getCell(49).getStringCellValue());
-
+						student.setYearofadmission("2026/27");
 						student.setBranchid(2);
 						student.setArchive(0);
 						student.setPassedout(0);
@@ -140,7 +140,7 @@ public class ImportFileService {
 						parent.setContactnumber(row.getCell(28).getStringCellValue());
 						//parent.setParentsannualincome(row.getCell(29).getStringCellValue());
 						// parent.setEmergencycontactno(row.getCell(30).getStringCellValue());
-						parent.setAddresspermanent(row.getCell(31).getStringCellValue());
+						//parent.setAddresspermanent(row.getCell(31).getStringCellValue());
 						//parent.setAddresstemporary(row.getCell(32).getStringCellValue());
 						//student.setGuardiandetails(row.getCell(33).getStringCellValue());
 						//parent.setRemarks(row.getCell(34).getStringCellValue());
