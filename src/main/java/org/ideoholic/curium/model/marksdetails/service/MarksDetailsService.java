@@ -40,6 +40,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
@@ -2301,5 +2302,25 @@ public GenerateReportResponseDto getStartDate() {
 	result.setStartDate(startDate);
 	return result;
 }
+
+
+public GenerateReportResponseDto getSubjectDetails(MarksViewDto marksViewDto, String branchid) {
+	GenerateReportResponseDto generateReportResponseDto = GenerateReportResponseDto.builder().build();
+	    String subject = marksViewDto.getSubject();
+	    int subid = Integer.parseInt(subject);
+	    String exam = marksViewDto.getExam();
+	    String[] parts = exam.split("_");
+	    String examName = parts[2];
+	    String examClass = marksViewDto.getAddClass();
+		
+		Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchid),examClass,examName,subid);
+		float minMarks = subjectDetails.getMinmarks();
+		float maxMarks = subjectDetails.getMaxmarks();
+		generateReportResponseDto.setMinMark(String.valueOf(minMarks));
+		generateReportResponseDto.setMaxMark(String.valueOf(maxMarks));
+	return generateReportResponseDto;
+}
+
+
 
 }
