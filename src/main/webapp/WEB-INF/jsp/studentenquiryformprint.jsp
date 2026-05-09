@@ -282,6 +282,7 @@
 	
 	function updateEnquiryForm(){
 		var form1=document.getElementById("form1");
+		form1.method = "POST";
 		form1.action="/meps/EnquiryProcess/updateEnquiryDetails?id=<c:out value='${admissionEnquiry.id}'/>";
 		form1.submit();
 	}
