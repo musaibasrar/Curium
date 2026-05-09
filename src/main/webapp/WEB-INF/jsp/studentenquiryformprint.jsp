@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -116,7 +117,7 @@ function updateEnquiryForm(){
 
     <div class="form-row">
         <div class="form-label">Date of Birth</div>
-        <div class="form-value">${admissionEnquiry.dateofbirth}</div>
+        <div class="form-value"><fmt:formatDate value="${admissionEnquiry.dateofbirth}" pattern="dd/MM/yyyy"/></div>
     </div>
 
     <div class="form-row">
