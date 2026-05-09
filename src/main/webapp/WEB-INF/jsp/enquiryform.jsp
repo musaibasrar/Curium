@@ -370,7 +370,7 @@
 	            } );
 	            
 	            
-	        	function CalculateAge(value) {
+	        	/*function CalculateAge(value) {
 	        		var dateOfBirth = document.getElementById('datepicker').value;
 	        		var from = dateOfBirth.split("/");
 	        		var today = new Date();
@@ -383,6 +383,40 @@
 	        		}
 	        		//return age;
 	        		document.getElementById('age').value = age;
+	        	}*/
+	        	
+	        	function CalculateAge() {
+
+	        	    var dateOfBirth = document.getElementById('datepicker').value;
+
+	        	    // Expected format: dd/mm/yyyy
+	        	    var from = dateOfBirth.split("/");
+
+	        	    var birthDate = new Date(from[2], from[1] - 1, from[0]);
+	        	    var today = new Date();
+
+	        	    var years = today.getFullYear() - birthDate.getFullYear();
+	        	    var months = today.getMonth() - birthDate.getMonth();
+	        	    var days = today.getDate() - birthDate.getDate();
+
+	        	    // Adjust days
+	        	    if (days < 0) {
+	        	        months--;
+
+	        	        // Get days in previous month
+	        	        var previousMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+	        	        days += previousMonth.getDate();
+	        	    }
+
+	        	    // Adjust months
+	        	    if (months < 0) {
+	        	        years--;
+	        	        months += 12;
+	        	    }
+
+	        	    // Final Age
+	        	    document.getElementById('age').value =
+	        	        years + " Years " + months + " Months " + days + " Days";
 	        	}
 	        	
 	        	
@@ -409,6 +443,10 @@
 	%>
    <body>
         <form method="post"  id="form1">
+        <%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
         <div>
 			<div id="tabs">
 				<ul>
@@ -438,8 +476,8 @@
 										</c:forEach>
 								</select></label>
 							</td>
-							<!-- <td class="alignLeft" style="padding-left: 20px;">Religion</td>
-							<td><input type="text" name="religion" class="myclass"/></td> -->
+							 <td class="alignLeft" style="padding-left: 20px;">Date</td>
+							<td><input type="text" name="religion" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="myclass"/></td> 
 						</tr>
 						<tr>
 							<td><br /></td>
