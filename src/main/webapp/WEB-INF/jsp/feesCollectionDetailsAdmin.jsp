@@ -377,7 +377,7 @@ $(document).ready(function() {
         "bProcessing": false,
         "bServerSide": false,
         "bAutoWidth": false,
-        "iDisplayLength": 2000,
+        "iDisplayLength": 8000,
         "aoColumnDefs":[
             { 'bSortable': false, 'aTargets': [ 0 ] }
         ]

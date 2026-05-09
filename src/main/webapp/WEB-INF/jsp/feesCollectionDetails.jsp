@@ -343,17 +343,26 @@
 <script type="text/javascript"
 	src="/littleflower/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
-	});
+$(document).ready(function() {
+    $('#myTable').dataTable( {
+        "sScrollY": "380px",
+        "scrollCollapse": true,
+        "bPaginate": true,
+        "bLengthChange": false,
+        "bFilter": true,
+        "bSort": true,
+        "bInfo": true,
+        "bStateSave": false,
+        "bProcessing": false,
+        "bServerSide": false,
+        "bAutoWidth": false,
+        "iDisplayLength": 8000,
+        "aoColumnDefs":[
+            { 'bSortable': false, 'aTargets': [ 0 ] }
+        ]
+        
+    } );
+} );
 </script>
 <script type="text/javascript">
 	function select(id, name) {
