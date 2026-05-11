@@ -3,11 +3,9 @@ package org.ideoholic.curium.model.feescollection.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
-import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.std.dto.ClassesHierarchyDto;
 import org.ideoholic.curium.model.std.dto.Classsec;
-import org.ideoholic.curium.model.std.service.StandardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -35,12 +33,6 @@ public class FeesCollectionActionAdapter {
 
     @Autowired
     StandardActionAdapter standardActionAdapter;
-    
-    @Autowired
-    StandardService standardService;
-	
-    @Autowired
-    SmsService smsService;
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -50,7 +42,7 @@ public class FeesCollectionActionAdapter {
 
 
     public void getFeesReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -65,7 +57,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void undoFeesReceipt() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String receiptId = request.getParameter("id");
         
@@ -74,7 +66,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void viewCancelledReceipts() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         CancelledReceiptsDto dto = new CancelledReceiptsDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -92,7 +84,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getStampFees() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         StampFeeDto dto = new StampFeeDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -117,7 +109,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getFeesDetails() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setStudentId(request.getParameter("studentId"));
@@ -135,7 +127,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void previewFeesDetails() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String sId = request.getParameter("sid");
         String receiptNo = request.getParameter("id");
@@ -149,7 +141,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void previewDetails() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String receiptNumber = request.getParameter("id");
         String duplicate = request.getParameter("duplicate");
@@ -167,7 +159,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getotherStampFees() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         StampFeeDto dto = new StampFeeDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -186,7 +178,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getotherFeesDetails() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setStudentId(request.getParameter("studentId"));
@@ -203,7 +195,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getotherFeesReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -215,7 +207,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void otherpreviewDetails() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String receiptNumber = request.getParameter("id");
         String duplicate = request.getParameter("duplicate");
@@ -232,7 +224,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void searchOtherFeesCollection() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         CancelledReceiptsDto dto = new CancelledReceiptsDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -251,7 +243,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void previewOtherFeesDetails() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String sId= request.getParameter("sid");
         String receiptNo = request.getParameter("id");
@@ -265,7 +257,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void cancelOtherFeesReceipt() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String receiptId = request.getParameter("receiptid");
         String journalId = request.getParameter("journalid");
@@ -276,7 +268,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getFeesDetailsDashBoard() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
         standardActionAdapter.viewClasses();
         ClassesHierarchyDto dto = new ClassesHierarchyDto();
         dto.setSelectedBranchId(request.getParameter("selectedbranchid"));
@@ -293,7 +285,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getDefaultersReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -305,7 +297,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getFeesReportDue() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -319,7 +311,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getFeesStampDueReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
@@ -330,7 +322,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public boolean printOtherDataForFees() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         CancelledReceiptsDto dto = new CancelledReceiptsDto();
         dto.setFeesIds(request.getParameterValues("feesIDs"));
@@ -347,7 +339,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void viewCancelledOtherFeesReceipts() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         CancelledReceiptsDto dto = new CancelledReceiptsDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -365,7 +357,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void getFeesCollectionCategory() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         FeesCategoryDto dto = new FeesCategoryDto();
         dto.setBranchId(request.getParameter("selectedbranchid"));
@@ -388,7 +380,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public boolean downlaod() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         ResultResponse resultResponse = feesCollectionService.downlaod();
 
@@ -396,7 +388,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void exportDataForStudentsOtherFeesReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         StudentFeesDto dto = new StudentFeesDto();
         dto.setStudentotherfeesreportList((List<Studentotherfeesreport>) httpSession.getAttribute("studentotherfeesreportlist"));
@@ -405,7 +397,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void printFeesDueHeadWiseReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         StudentFeesDto dto = new StudentFeesDto();
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
@@ -414,7 +406,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void cancelFeesReceipt() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         String receiptId = request.getParameter("receiptid");
         String journalId = request.getParameter("journalid");
@@ -425,7 +417,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void exportDataForStudentsFeesReport() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         StudentFeesDto dto = new StudentFeesDto();
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
@@ -434,7 +426,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public Receiptinfo add() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         AddFeesCollectionDto dto = new AddFeesCollectionDto();
         dto.setStudentId(request.getParameter("studentIdDetails"));
@@ -459,7 +451,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void preview(Receiptinfo receiptInfo) {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         DetailsResponseDto responseDto = feesCollectionService.preview(receiptInfo, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -470,7 +462,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public Otherreceiptinfo addother() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         AddFeesCollectionDto dto = new AddFeesCollectionDto();
         dto.setStudentId(request.getParameter("studentIdDetails"));
@@ -493,7 +485,7 @@ public class FeesCollectionActionAdapter {
     }
 
     public void otherpreview(Otherreceiptinfo receiptInfo) {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         DetailsResponseDto responseDto = feesCollectionService.otherpreview(receiptInfo, httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("student", responseDto.getStudent());
@@ -503,13 +495,13 @@ public class FeesCollectionActionAdapter {
     }
 
 	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
-		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles);
 		return result.isSuccess();
 	}
 
 	public Receiptinfo feesPaymentTypeModify() {
-        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
         AddFeesCollectionDto dto = new AddFeesCollectionDto();
         dto.setStudentId(request.getParameter("receiptnumber"));
