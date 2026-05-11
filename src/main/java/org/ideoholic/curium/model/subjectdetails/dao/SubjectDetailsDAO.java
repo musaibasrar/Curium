@@ -169,8 +169,7 @@ public class SubjectDetailsDAO {
         SubSubject subsubject = new SubSubject();
         try {
             // session.createQuery("From SubSubject where subjectid='"+subjectId+"' and subsubjectname='"+subSubject+"'  and branchid = "+branchId+"");
-            SubSubject found = subSubjectRepo.fetchSubSubjects(subjectId, subSubject, branchId);
-            if(found != null) subsubject = found;
+            subsubject = subSubjectRepo.fetchSubSubjects(subjectId, subSubject, branchId);
         } catch (Exception e) {
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             log.error(e.getMessage(), e);
