@@ -88,6 +88,7 @@ public class FeesAction {
 	@GetMapping("/feesStructure")
 	public String feesStructure() {
 		standardActionAdapter.viewClasses();
+		feesActionAdapter.viewAllStudentsList();
 		return "feesstructure";
 	}
 
