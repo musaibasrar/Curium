@@ -5,8 +5,8 @@ import org.ideoholic.curium.exceptions.CustomErrorMessage;
 import org.ideoholic.curium.exceptions.CustomResponseException;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.service.DiaryService;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -55,8 +55,7 @@ public class DiaryApiActionImpl implements DiaryApiAction{
 	}
 
 	@RequestMapping(value = "/viewDiaryStudentParent", method = { RequestMethod.GET, RequestMethod.POST })
-	public ResponseEntity<DiaryResponseDto> viewDiaryStudentParent(@RequestBody StudentIdPageDto studentIdPageDto,
-			@RequestHeader(value = "branchid") String branchId) {
+	public ResponseEntity<DiaryResponseDto> viewDiaryStudentParent(@RequestBody StudentIdPageDto studentIdPageDto) {
 		DiaryResponseDto result = diaryService.viewDiaryParent(studentIdPageDto);
 		return ResponseEntity.ok(result);
 	}
