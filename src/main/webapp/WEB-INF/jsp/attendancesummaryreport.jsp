@@ -364,8 +364,8 @@
 }
 </style>
 
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/brightschool/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/brightschool/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/brightschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
