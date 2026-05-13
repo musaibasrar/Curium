@@ -372,7 +372,7 @@ function getSubjectDetails() {
 
     xmlHttp.onreadystatechange = stateChanged;
 
-    var url = "/vision/MarksDetailsProcess/getSubjectDetails"
+    var url = "/brightschool/MarksDetailsProcess/getSubjectDetails"
         + "?subject=" + encodeURIComponent(subjectId)
         + "&classSearch=" + encodeURIComponent(classSearch)
         + "&examName=" + encodeURIComponent(examName);
