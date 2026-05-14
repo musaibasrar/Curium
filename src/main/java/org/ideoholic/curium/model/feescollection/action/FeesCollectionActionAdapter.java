@@ -227,7 +227,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("parents", responseDto.getParents());
         httpSession.setAttribute("student", responseDto.getStudent());
         request.setAttribute("recieptdate", responseDto.getReceiptDate());
-        request.setAttribute("recieptinfo", responseDto.getReceiptInfo());
+        request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
