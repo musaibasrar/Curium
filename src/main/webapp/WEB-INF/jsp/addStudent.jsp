@@ -22,25 +22,25 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/vision/css/dataTable/css/demo_page.css";
-            @import "/vision/css/dataTable/css/jquery.dataTables.css";
+            @import "/noble/css/dataTable/css/demo_page.css";
+            @import "/noble/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/noble/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/noble/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/noble/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/noble/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/noble/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/noble/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/noble/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/noble/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -279,7 +279,7 @@
 
 
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/noble/js/datetimepicker_css.js"></script>
 
 <script>
 	$(function() {
@@ -608,7 +608,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/noble/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -672,7 +672,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/noble/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -956,7 +956,7 @@ $(document).ready(function() {
             xmlHttpParent.onreadystatechange = stateChangedParent;
             xmlHttpParent.open(
                 "GET",
-                "/vision/StudentProcess/searchListOfParent",
+                "/noble/StudentProcess/searchListOfParent",
                 true
             );
             xmlHttpParent.send(null);
@@ -1058,7 +1058,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+		response.sendRedirect("/noble/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -2606,14 +2606,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/vision/StudentProcess/AddStudent";
+									form1.action = "/noble/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/vision/StudentProcess/viewAll";
+								form1.action = "/noble/StudentProcess/viewAll";
 								form1.submit();
 							}
 

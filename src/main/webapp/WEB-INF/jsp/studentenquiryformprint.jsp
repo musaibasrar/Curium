@@ -55,21 +55,21 @@
         }
     }
 </style>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<link rel="stylesheet" href="/noble/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/noble/css/validation/jquery.ketchup.css">
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/noble/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/noble/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/noble/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/noble/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/noble/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/noble/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+	src="/noble/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/noble/css/datePicker/demos.css">
 
 <style type="text/css">
 .myclass {
@@ -283,7 +283,7 @@
 	function updateEnquiryForm(){
 		var form1=document.getElementById("form1");
 		form1.method = "POST";
-		form1.action="/vision/EnquiryProcess/updateEnquiryDetails?id=<c:out value='${admissionEnquiry.id}'/>";
+		form1.action="/noble/EnquiryProcess/updateEnquiryDetails?id=<c:out value='${admissionEnquiry.id}'/>";
 		form1.submit();
 	}
 	
@@ -298,7 +298,7 @@
 				</ul>
 				
 				<div id="fragment-1">
-					<div class="title"><img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/vision/images/vision.png"></div>
+					<div class="title"><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/noble/images/noble.png"></div>
 					<div class="title">${branchname}</div>
 					<div class="subtitle">Admission Enquiry Form - ${admissionEnquiry.academicYear}</div>
 					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
