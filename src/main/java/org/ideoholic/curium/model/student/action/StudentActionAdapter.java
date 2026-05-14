@@ -319,7 +319,7 @@ public class StudentActionAdapter {
 
         StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
-        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        request.setAttribute("receiptinfo", responseDto.getOtherReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
         httpSession.setAttribute("secstudying", responseDto.getSecStudying());
         httpSession.setAttribute("classstudying", responseDto.getClassStudying());
