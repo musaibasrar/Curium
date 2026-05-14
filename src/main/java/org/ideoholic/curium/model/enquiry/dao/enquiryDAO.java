@@ -88,7 +88,7 @@ AdmissionEnquiry admissionEnquiry = new AdmissionEnquiry();
         try {
             
             transaction = session.beginTransaction();
-            results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry where branchid="+branchId).list();
+            results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry where branchid="+branchId+"  order by id DESC").list();
             transaction.commit();
         } catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
             
