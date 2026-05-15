@@ -13,8 +13,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Students Details Study Certificate</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/global/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/global/css/datePicker/demos.css">
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style type="text/css">
 <!--
