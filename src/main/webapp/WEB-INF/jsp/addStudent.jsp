@@ -1035,7 +1035,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			"/global/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),
@@ -1105,7 +1105,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked="checked"
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
@@ -1208,13 +1208,11 @@ $(document).ready(function() {
 							
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
-							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
-								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+							          Term<input type="checkbox" value="Tuition" name="feescategories" id="termfees"/>
+								&nbsp;Admission<input type="checkbox" value="Hostel" name="feescategories" id="admissionfees"/>
+								&nbsp;Exams<input type="checkbox" value="Hostel" name="feescategories" id="examsfees"/>
 								&nbsp;Transport <select name="feescategories" id="transport">
 										        <option value="Select">-- Select --</option>
-										        <option value="Malmal">Malmal</option>
-										        <option value="Madhubani">Madhubani</option>
-										        <option value="xyz">xyz</option>
 										    </select>
 								</label></td>
 						</tr>

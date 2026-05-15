@@ -655,4 +655,9 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/reports_marksentry")
+	public String getReportsMarksEntry() {
+		return "reports_marksentry";
+	}
 }

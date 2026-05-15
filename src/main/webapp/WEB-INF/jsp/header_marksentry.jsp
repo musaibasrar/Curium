@@ -125,33 +125,22 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/global/welcome" >
-								<img src="/global/images/curiumheader.png" width="112" height="41"/>
-								</a>
+								<a target="mainFrame" href="/global/welcome" ><label style="font-family: Tahoma;font-weight: bolder;color: #143160;font-size: 14px;">${branchname}</label></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/global/images/globalheader.png"
-								style="width: 200px; height: 20px;" /></td> -->
 							<td>
-							<a target="leftFrame" href="/global/left_feescollector"><img
+							<a target="leftFrame" href="/global/left_marksentry"><img
 									src="/global/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Home		
 								</a>
 							</td>
 							
-							<td><a target="mainFrame"
-								href="/global/FeesProcess/feesCollect"> <img
+							<td><a target="leftFrame"
+								href="/global/reports_marksentry"> <img
 									src="/global/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+									alt="Fees Collection" style="vertical-align: bottom;" />Reports
 							</a></td>
-							
-							
-							<td><a target="mainFrame"
-								href="/global/FeesProcess/otherfeesCollect"> <img
-									src="/global/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Other Fees Collection
-							</a></td>
-							
+								
 							<td ><a target="_parent"
 								href="/global/UserProcess/logout"><img
 									src="/global/images/logout.svg" width="18" height="18" alt="Log Out" 
