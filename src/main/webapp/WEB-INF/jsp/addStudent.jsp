@@ -289,6 +289,7 @@
 			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0",
 			onSelect: function () {
+				CalculateAge(this);
 				searchStudentDuplicate();
 		    }
 		});
