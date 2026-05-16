@@ -88,22 +88,21 @@ for(Cookie cookie : cookies){
 }
 %>
     <body background="/images/bg.jpg" >
-        <form id="form1" method="post">
-    <table height="462" class="tableCSS"  >
-      <tr>
-          <td height="250" align="center" style="font-color:red" valign="middle"><p class="style1"> Operation Failed, Please Try Again</p>
-          <td width="26%"  class="alignRightYear">
-                            
-                             
-                            </td>
-                            
-        <p class="style1">
-          
-            
-            <!-- <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='/addStudent';"> -->
-        </p></td>
-      </tr>
-    </table>
-            </form>
+    <form id="form1" method="post">
+      <table height="462" class="tableCSS"  >
+        <tr>
+            <td height="250" align="center" style="font-color:red" valign="middle">
+            <p class="style1">
+          Operation Failed${errormessage ? : ${errormessage} : "."} <br/> 
+          Please Try Again
+        </p>
+            <td width="26%"  class="alignRightYear"></td>
+          <td>                   
+          <p class="style1">
+              <!-- <input type="button" value="Back" id="addnew" onClick="JavaScript:window.location='/addStudent';"> -->
+          </p></td>
+        </tr>
+      </table>
+    </form>
     </body>
 </html>
