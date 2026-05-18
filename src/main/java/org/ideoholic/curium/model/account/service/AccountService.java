@@ -34,32 +34,7 @@ public class AccountService {
 	    
 	    private static final int BUFFER_SIZE = 4096;
 		
-		private static final String IMAGE_PNG = "image/png";
-		private static final String IMAGE_JPEG = "image/jpeg";
-		private static final String IMAGE_JPG = "image/jpg";
-		private static final String APPLICATION_PDF = "application/pdf";
-
-		private static final Set<String> ALLOWED_TYPES = Set.of(
-		    IMAGE_PNG, IMAGE_JPEG, IMAGE_JPG, APPLICATION_PDF
-		);
 		
-		private String processFile(MultipartFile file) throws IOException {
-
-		    if (file == null || file.getOriginalFilename() == null || file.getOriginalFilename().isEmpty()) {
-		        return null;
-		    }
-
-		    String contentType = file.getContentType();
-
-		    if (!ALLOWED_TYPES.contains(contentType)) {
-		        log.warn("Invalid file type: {}", contentType);
-		        return null;
-		    }
-
-		    byte[] bytesEncoded = Base64.encodeBase64(file.getBytes());
-		    return "data:" + contentType + ";base64," + new String(bytesEncoded);
-		}
-
 
 	public ResultResponse saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -430,13 +405,13 @@ public class AccountService {
 		    if (listOfFiles != null && listOfFiles.length > 0) {
 
 		        if (listOfFiles.length > 0 && !listOfFiles[0].isEmpty()) {
-		        	transactions.setSupportingDoc1(processFile(listOfFiles[0]));
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[0]));
 		        }
 		        if (listOfFiles.length > 1 && !listOfFiles[1].isEmpty()) {
-		        	transactions.setSupportingDoc2(processFile(listOfFiles[1]));
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[1]));
 		        }
 		        if (listOfFiles.length > 2 && !listOfFiles[2].isEmpty()) {
-		        	transactions.setSupportingDoc3(processFile(listOfFiles[2]));
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[2]));
 		        }
 		    }
 
@@ -485,13 +460,13 @@ public class AccountService {
 		    if (listOfFiles != null && listOfFiles.length > 0) {
 
 		        if (listOfFiles.length > 0 && !listOfFiles[3].isEmpty()) {
-		        	transactions.setSupportingDoc1(processFile(listOfFiles[3]));
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[3]));
 		        }
 		        if (listOfFiles.length > 1 && !listOfFiles[4].isEmpty()) {
-		        	transactions.setSupportingDoc2(processFile(listOfFiles[4]));
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[4]));
 		        }
 		        if (listOfFiles.length > 2 && !listOfFiles[5].isEmpty()) {
-		        	transactions.setSupportingDoc3(processFile(listOfFiles[5]));
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[5]));
 		        }
 		    }
 
@@ -540,13 +515,13 @@ public class AccountService {
 		    if (listOfFiles != null && listOfFiles.length > 0) {
 
 		        if (listOfFiles.length > 0 && !listOfFiles[6].isEmpty()) {
-		        	transactions.setSupportingDoc1(processFile(listOfFiles[6]));
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[6]));
 		        }
 		        if (listOfFiles.length > 1 && !listOfFiles[7].isEmpty()) {
-		        	transactions.setSupportingDoc2(processFile(listOfFiles[7]));
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[7]));
 		        }
 		        if (listOfFiles.length > 2 && !listOfFiles[8].isEmpty()) {
-		        	transactions.setSupportingDoc3(processFile(listOfFiles[8]));
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[8]));
 		        }
 		    }
 
@@ -595,13 +570,13 @@ public class AccountService {
 		    if (listOfFiles != null && listOfFiles.length > 0) {
 
 		        if (listOfFiles.length > 0 && !listOfFiles[9].isEmpty()) {
-		        	transactions.setSupportingDoc1(processFile(listOfFiles[9]));
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[9]));
 		        }
 		        if (listOfFiles.length > 1 && !listOfFiles[10].isEmpty()) {
-		        	transactions.setSupportingDoc2(processFile(listOfFiles[10]));
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[10]));
 		        }
 		        if (listOfFiles.length > 2 && !listOfFiles[11].isEmpty()) {
-		        	transactions.setSupportingDoc3(processFile(listOfFiles[11]));
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[11]));
 		        }
 		    }
 
