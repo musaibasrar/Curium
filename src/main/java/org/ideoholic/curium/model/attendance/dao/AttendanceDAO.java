@@ -55,7 +55,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Holidaysmaster> readListOfHolidays(String currentAcademicYear, int branchId) {
-		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
+		List<Holidaysmaster> holidayMaster = new ArrayList<>();
 		try{
 			holidayMaster = holidayMasterRepo.findByAcademicyearAndBranchid(currentAcademicYear,branchId);
 		}catch (Exception e) {
@@ -109,7 +109,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Weeklyoff> readListOfWeekOff(String academicYear, int branchId) {
-			List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
+			List<Weeklyoff> weeklyOff = new ArrayList<>();
 			try{
 				weeklyOff = weeklyoffRepo.findByAcademicyearAndBranchid(academicYear, branchId);
 			}catch (Exception e) {
@@ -122,7 +122,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Weeklyoff> readListOfWeeklyOff(List<Integer> weeklyOffList, String academicYear, int branchid) {
-		List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
+		List<Weeklyoff> weeklyOff = new ArrayList<>();
 		try{
 			weeklyOff = weeklyoffRepo.findByAcademicyearAndBranchidAndWidIn(academicYear, branchid, weeklyOffList);
 		}catch (Exception e) {
@@ -136,7 +136,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Weeklyoff> readListOfWeeklyOff(List<Integer> weeklyOffList, String academicYear) {
-		List<Weeklyoff> weeklyOff = new ArrayList<Weeklyoff>();
+		List<Weeklyoff> weeklyOff = new ArrayList<>();
 		try {
 
 			weeklyOff = weeklyoffRepo.findByAcademicyearAndWidIn(academicYear, weeklyOffList);
@@ -214,7 +214,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId, int branchId) {
-		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
+		List<Attendancemaster> studentAttendanceMaster = new ArrayList<>();
 		try{
 
 			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeidAndBranchid(attendeeId,branchId);
@@ -230,7 +230,7 @@ public class AttendanceDAO {
 
 	@Transactional
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId) {
-		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
+		List<Attendancemaster> studentAttendanceMaster = new ArrayList<>();
 		try{
 			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeid(attendeeId);
 		}catch (Exception e) {
@@ -277,7 +277,7 @@ public class AttendanceDAO {
 	@Transactional
 	public List<Studentdailyattendance> readListOfStudentAttendance(Date date, String currentAcademicYear, String studentExternalId, int branchId) {
 
-		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 
 		try{
 			// studentDailyAttendance = session.createQuery("from Studentdailyattendance  where date = '"+date+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+studentExternalId+"' and branchid="+branchId).list();
@@ -427,7 +427,7 @@ public class AttendanceDAO {
 		try{
 			
 			for (Student student : searchStudentList) {
-				List<Studentdailyattendance> studentAttendance = new ArrayList<Studentdailyattendance>();
+				List<Studentdailyattendance> studentAttendance = new ArrayList<>();
 				// studentAttendance = session.createQuery("from Studentdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+student.getStudentexternalid()+"' and branchid="+branchId).list();
 				mapStudentAttendance.put(student.getName(), studentAttendance);
 				studentAttendance = studentDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeStudentexternalidAndBranchid(
@@ -473,7 +473,7 @@ public class AttendanceDAO {
 	public List<Staffdailyattendance> readListOfStaffAttendance(String currentAcademicYear,
 			Timestamp timestamp, String teacherexternalid, int branchId) {
 
-		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
+		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<>();
 
 		try {
 			// session.createQuery("from Staffdailyattendance where date = '"+timestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacherexternalid+"' and branchid="+branchId).list();
@@ -514,7 +514,7 @@ public class AttendanceDAO {
 	@Transactional
 	public List<Staffdailyattendance> getStaffDailyAttendance(String staffExternalId, Timestamp fromTimestamp,
 			Timestamp toTimestamp, String currentAcademicYear, int branchId) {
-		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattendance>();
+		List<Staffdailyattendance> staffDailyAttendance = new ArrayList<>();
 		try{
 			// session.createQuery("from Staffdailyattendance  where date between '"+fromTimestamp+"' and '"+toTimestamp+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+staffExternalId+"' and branchid="+branchId).list();
 			staffDailyAttendance = staffDailyAttendanceRepository.findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(fromTimestamp, toTimestamp, currentAcademicYear, staffExternalId, branchId);
@@ -601,8 +601,8 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
-	public List<Studentdailyattendance> getStudentAttendance(String date) {
-		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
+	public List<Studentdailyattendance> getStudentAttendance(Date date) {
+		List<Studentdailyattendance> studentdailyattendance = new ArrayList<>();
 		try{
 			// session.createQuery("from Studentdailyattendance  where date = '"+date+"'").list();
 			studentdailyattendance = studentDailyAttendanceRepository.findByDate(date);
@@ -616,8 +616,8 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
-	public List<Studentdailyattendance> getStudentClassAttendance(String date, List<String> attendeeIds) {
-		List<Studentdailyattendance> studentdailyattendance = new ArrayList<Studentdailyattendance>();
+	public List<Studentdailyattendance> getStudentClassAttendance(Date date, List<String> attendeeIds) {
+		List<Studentdailyattendance> studentdailyattendance = new ArrayList<>();
 		try{
 			// session.createQuery("from Studentdailyattendance  where date = '"+date+"' and attendeeid IN (:ids)");
 			studentdailyattendance = studentDailyAttendanceRepository.findByDateAndAttendeeStudentexternalidIn(date, attendeeIds);
@@ -648,7 +648,7 @@ public class AttendanceDAO {
 	@Transactional
 	public List<Studentdailyattendance> getStudentTotalAttendanceDateWise(String studentexternalid,
 			String currentAcademicYear, int branchid, Date datePresent) {
-		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
+		List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 
 		    try {
 		    	

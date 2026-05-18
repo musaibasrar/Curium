@@ -1440,7 +1440,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	public StudentAttendanceMonthlyResponseDto attendanceSummaryReport(StudentAttendanceDetailsDto dto, String branchId) {
 
 		StudentAttendanceMonthlyResponseDto result = StudentAttendanceMonthlyResponseDto.builder().success(false).build();
-		String date = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
+		String dateString = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
+		Date date = DateUtil.datePars(dateString);
 		int present = 0;
 		int absent = 0;
 		int totalNoofStudents = 0;
