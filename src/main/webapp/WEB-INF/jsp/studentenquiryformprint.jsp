@@ -124,6 +124,11 @@ function updateEnquiryForm(){
         <div class="form-label">Gender</div>
         <div class="form-value">${admissionEnquiry.gender}</div>
     </div>
+    
+     <div class="form-row">
+        <div class="form-label">Age</div>
+        <div class="form-value">${admissionEnquiry.occupation}</div>
+    </div>
 
     <!-- PARENT DETAILS -->
     <div class="section-title">Parent Details</div>
