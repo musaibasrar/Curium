@@ -363,6 +363,24 @@
 
 <script type="text/javascript" src="/theage/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
+function printStudentDetail() {
+	var form1 = document.getElementById("form1");
+	form1.action = "/vision/StudentProcess/printStudentDetail";
+	form1.method = "POST";
+	form1.submit();
+
+}
+
+$(function() {
+
+	$("#print").button().click(function() {
+		printStudentDetail();
+	});
+	
+
+});
+</script>
+<script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/theage/StudentProcess/multiClassSearch";
@@ -717,7 +735,9 @@ for(Cookie cookie : cookies){
 						<td class="footerTD" colspan="2"> &nbsp;
 						
 						<input value="Export"
-							type="submit" id="export"/></td>
+							type="submit" id="export"/>
+							<input value="Print"
+							type="submit" id="print"/></td>
 							
 							
 
