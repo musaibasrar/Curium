@@ -396,9 +396,10 @@
         		    }
         		   });
                 
-                $("#cramountsecond").keyup(function (e) {
+               /* $("#cramountsecond").keyup(function (e) {
         		    $('#grandTotalAmountCr').val(document.getElementById("cramountsecond").value);
-        		   });
+        		   });*/
+        		   
 
                 //payment
                 
@@ -421,9 +422,9 @@
        		    }
        		   });
                
-               $("#cramountpaymentsecond").keyup(function (e) {
+               /*$("#cramountpaymentsecond").keyup(function (e) {
        		    $('#grandTotalAmountCrPayment').val(document.getElementById("cramountpaymentsecond").value);
-       		   });
+       		   });*/
                
                //contra
                 
@@ -446,9 +447,9 @@
       		    }
       		   });
               
-              $("#cramountcontrasecond").keyup(function (e) {
+             /* $("#cramountcontrasecond").keyup(function (e) {
       		    $('#grandTotalAmountCrcontra').val(document.getElementById("cramountcontrasecond").value);
-      		   });
+      		   });*/
               
               
             //journal
@@ -472,9 +473,9 @@
      		    }
      		   });
              
-             $("#cramountjournalsecond").keyup(function (e) {
+            /* $("#cramountjournalsecond").keyup(function (e) {
      		    $('#grandTotalAmountCrjournal').val(document.getElementById("cramountjournalsecond").value);
-     		   });
+     		   });*/
               
             });
 
@@ -535,6 +536,99 @@
             	
             
         </script>
+        <script type="text/javascript">
+	/* function Upload() {
+	        var fileUpload = document.getElementById("fileToUpload");
+	        if (typeof (fileUpload.files) != "undefined") {
+	            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+	            if(size>100){
+	            	alert("File size should not exceed 100KB");
+	            	document.getElementById("fileToUpload").value='';
+	            }
+	        } else {
+	            alert("Unsupported File");
+	        }
+	    }*/
+	    function Upload(inputFile) {
+
+	        if (typeof (inputFile.files) != "undefined") {
+
+	            var size = parseFloat(inputFile.files[0].size / 1024).toFixed(2);
+
+	            if (size > 100) {
+	                alert("File size should not exceed 100KB");
+	                inputFile.value = '';
+	            }
+
+	        } else {
+	            alert("Unsupported File");
+	        }
+	    }
+	</script>
+	<script>
+$(document).ready(function () {
+
+    $("#dramount").keyup(function () {
+
+        var value = $(this).val();
+
+        // write in second td
+        $("#cramountsecond").val(value);
+
+        // write in third td
+        $("#grandTotalAmountCr").val(value);
+    });
+
+});
+</script>
+<script>
+$(document).ready(function () {
+
+    $("#dramountpayment").keyup(function () {
+
+        var value = $(this).val();
+
+        // write in second td
+        $("#cramountpaymentsecond").val(value);
+
+        // write in third td
+        $("#grandTotalAmountCrPayment").val(value);
+    });
+
+});
+</script>
+<script>
+$(document).ready(function () {
+
+    $("#dramountcontra").keyup(function () {
+
+        var value = $(this).val();
+
+        // write in second td
+        $("#cramountcontrasecond").val(value);
+
+        // write in third td
+        $("#grandTotalAmountCrcontra").val(value);
+    });
+
+});
+</script>
+<script>
+$(document).ready(function () {
+
+    $("#dramountjournal").keyup(function () {
+
+        var value = $(this).val();
+
+        // write in second td
+        $("#cramountjournalsecond").val(value);
+
+        // write in third td
+        $("#grandTotalAmountCrjournal").val(value);
+    });
+
+});
+</script>
     </head>
 <%
 //allow access only if session exists
@@ -554,7 +648,7 @@ for(Cookie cookie : cookies){
 %>    
     <body>
     <jsp:useBean id="now" class="java.util.Date" scope="page" />
-        <form id="form1" method="post" ">
+        <form id="form1" method="post" enctype="multipart/form-data">
 
             <div id="tabs">
 				<ul>
@@ -642,7 +736,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><b><input type="text" name="dramount" id="dramount" value="0"/></b></td>
+					<td align="center"><b><input type="text" name="dramount" id="dramount" value="0" onclick="if(this.value=='0'){this.value='';}" /></b></td>
 					<td align="center"><b><input type="text" name="cramount" id="cramount" style="background-color: #E3E3E3;" readonly/></b></td>
 					</tr>
 					
@@ -699,20 +793,64 @@ for(Cookie cookie : cookies){
                         <td align="center"><b><input type="text" name="grandTotalAmountCr" id="grandTotalAmountCr" value="0" readonly /></b></td>
                     </tr>
 					<tr>
-						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
+						<td ><b>Narration&nbsp;&nbsp;</b></td>
                         <td align="left"><label><textarea  name="receiptnarration"
 											type="text" class="textField" id="receiptnarration" rows="2" cols="40"
 											
 											onkeypress="return validateContactNum(this);"></textarea></label></td>
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td colspan="5">
+                    <table width="100%" >
+                    <tr>
+                    <td colspan="3" ><label style="font-size: 12px;font-weight: bold;">
+                    Supporting Documents(file size should be less than 100kb)<br></label></td>
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td > <label for="file1" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document1<br>
+                    <input type="file"
+                    name="listOfFiles"
+                    id="receiptFile1"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file2" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document2
+                    <br />
+                    <input type="file"
+                    name="listOfFiles"
+                    id="receiptFile2"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file3" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document3<br />
+                    <input type="file"
+                    name="listOfFiles"
+                    id="receiptFile3"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    </tr>
+                    </table>
+                    </td>
                     </tr>
                     <tr>
                     <td>
                     <input type="hidden" value="1" name="receiptvoucher" id="receiptvoucher" >
                     </td>
                     </tr>
-                    <tr>
-                    <td></td>
-                    </tr>
+                   
                     <tr>
                     <td></td>
                     </tr>
@@ -824,7 +962,9 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><b><input type="text" name="dramountpayment" id="dramountpayment" value="0"/></b></td>
+					<td align="center"><b><input type="text" name="dramountpayment" id="dramountpayment" value="0"  
+						onclick="if(this.value=='0'){this.value='';}"
+						 /></b></td>
 					<td align="center"><b><input type="text" name="cramountpayment" id="cramountpayment" style="background-color: #E3E3E3;" readonly/></b></td>
 					</tr>
 					
@@ -884,7 +1024,7 @@ for(Cookie cookie : cookies){
                         <td align="center"><b><input type="text" name="grandTotalAmountCrPayment" id="grandTotalAmountCrPayment" value="0" readonly /></b></td>
                     </tr>
 					<tr>
-						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
+						<td ><b>Narration&nbsp;&nbsp;</b></td>
                         <td align="left"><label><textarea  name="paymentnarration"
 											type="text" class="textField" id="paymentnarration" rows="2" cols="40"
 											
@@ -895,6 +1035,53 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="2" name="paymentvoucher" id="paymentvoucher" >
                     </td>
                     </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td colspan="5">
+                    <table width="100%" >
+                    <tr>
+                    <td colspan="3" ><label style="font-size: 12px;font-weight: bold;">
+                    Supporting Documents(file size should be less than 100kb)<br></label></td>
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td > <label for="file1" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document1<br>
+                     <input type="file"
+                    name="listOfFiles"
+                    id="paymentFile1"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file2" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document2
+                    <br />
+                    <input type="file"
+                    name="listOfFiles"
+                    id="paymentFile2"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file3" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document3<br />
+                    <input type="file"
+                    name="listOfFiles"
+                    id="paymentFile3"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    </tr>
+                    </table>
+                    </td>
+                    </tr>
+                    
                     <tr>
                     <td></td>
                     </tr>
@@ -1011,7 +1198,8 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><b><input type="text" name="dramountcontra" id="dramountcontra" value="0"/></b></td>
+					<td align="center"><b><input type="text" name="dramountcontra" id="dramountcontra" value="0"
+					 onclick="if(this.value=='0'){this.value='';}" /></b></td>
 					<td align="center"><b><input type="text" name="cramountcontra" id="cramountcontra" style="background-color: #E3E3E3;" readonly/></b></td>
 					</tr>
 					
@@ -1068,7 +1256,7 @@ for(Cookie cookie : cookies){
                         <td align="center"><b><input type="text" name="grandTotalAmountCrcontra" id="grandTotalAmountCrcontra" value="0" readonly /></b></td>
                     </tr>
 					<tr>
-						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
+						<td ><b>Narration&nbsp;&nbsp;</b></td>
                         <td align="left"><label><textarea  name="contranarration"
 											type="text" class="textField" id="contranarration" rows="2" cols="40"
 											
@@ -1079,6 +1267,53 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="3" name="contravoucher" id="contravoucher" >
                     </td>
                     </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td colspan="5">
+                    <table width="100%" >
+                    <tr>
+                    <td colspan="3" ><label style="font-size: 12px;font-weight: bold;">
+                    Supporting Documents(file size should be less than 100kb)<br></label></td>
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td > <label for="file1" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document1<br>
+                    <input type="file"
+                    name="listOfFiles"
+                    id="contrFile1"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file2" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document2
+                    <br />
+                    <input type="file"
+                    name="listOfFiles"
+                    id="contrFile2"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file3" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document3<br />
+                     <input type="file"
+                    name="listOfFiles"
+                    id="contrFile3"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    </tr>
+                    </table>
+                    </td>
+                    </tr>
+                    
                     <tr>
                     <td></td>
                     </tr>
@@ -1194,7 +1429,8 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select></label></td>
-					<td align="center"><b><input type="text" name="dramountjournal" id="dramountjournal" value="0"/></b></td>
+					<td align="center"><b><input type="text" name="dramountjournal" id="dramountjournal" value="0" 
+					onclick="if(this.value=='0'){this.value='';}" /></b></td>
 					<td align="center"><b><input type="text" name="cramountjournal" id="cramountjournal" style="background-color: #E3E3E3;" readonly/></b></td>
 					</tr>
 					
@@ -1251,7 +1487,7 @@ for(Cookie cookie : cookies){
                         <td align="center"><b><input type="text" name="grandTotalAmountCrjournal" id="grandTotalAmountCrjournal" value="0" readonly /></b></td>
                     </tr>
 					<tr>
-						<td align="right"><b>Narration&nbsp;&nbsp;</b></td>
+						<td><b>Narration&nbsp;&nbsp;</b></td>
                         <td align="left"><label><textarea  name="journalnarration"
 											type="text" class="textField" id="journalnarration" rows="2" cols="40"
 											
@@ -1262,6 +1498,53 @@ for(Cookie cookie : cookies){
                     <input type="hidden" value="4" name="journalvoucher" id="journalvoucher" >
                     </td>
                     </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                     <tr>
+                    <td colspan="5">
+                    <table width="100%" >
+                    <tr>
+                    <td colspan="3" ><label style="font-size: 12px;font-weight: bold;">
+                    Supporting Documents(file size should be less than 100kb)<br></label></td>
+                    </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td><br></td>
+                    </tr>
+                    <tr>
+                    <td > <label for="file1" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document1<br>
+                    <input type="file"
+                    name="listOfFiles"
+                    id="journalFile1"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file2" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document2
+                    <br />
+                   <input type="file"
+                    name="listOfFiles"
+                    id="journalFile2"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    <td ><label for="file3" style="font-size: 12px;font-weight: bold;">
+                    Supporting Document3<br />
+                    <input type="file"
+                    name="listOfFiles"
+                    id="journalFile3"
+                    accept=".png,.jpg,.jpeg,.pdf"
+                    onchange="Upload(this)"></label></td>
+                    </tr>
+                    </table>
+                    </td>
+                    </tr>
+                    
                     <tr>
                     <td></td>
                     </tr>
