@@ -747,4 +747,36 @@ public class StampFeesService {
 		}
 	}
 
+public FeescategoryResponseDto printStudentDetail(StampFeesDto stampFeesDto, String branchId) {
+	 String[] studentIds = stampFeesDto.getStudentIds();
+	 FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+
+    List<Parents> allStudentList = new ArrayList<Parents>();
+
+    if (studentIds != null) {
+
+        for (String id : studentIds) {
+
+            if (id != null && !id.trim().equals("")) {
+
+                String queryMain =
+                    "From Parents as parents where parents.Student.branchid="
+                    + Integer.parseInt(branchId)
+                    + " AND parents.Student.id = "
+                    + id
+                    + " order by parents.Student.admissionnumber ASC";
+
+                List<Parents> searchStudentList =
+                        new studentDetailsDAO().getStudentsList(queryMain);
+
+                allStudentList.addAll(searchStudentList);
+            }
+        }
+    }
+
+    feescategoryResponseDto.setSearchStudentList(allStudentList);
+    return feescategoryResponseDto;
+	
+}
+
 }
