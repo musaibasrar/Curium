@@ -40,6 +40,7 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
+import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
@@ -315,11 +316,16 @@ public class MarksDetailsService {
 			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = dto.getExamClass();
 			String[] exCl = examClass[0].split("--");
-				List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+				
+			if(dto.getExamsList() == null || dto.getExamsList().isEmpty()) {
+							List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+									dto.setExamsList(examDetailsList);
+								}
+				
 				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
-				for (Exams exams : examDetailsList) {
+				for (Exams exams : dto.getExamsList()) {
 					
 					ExamsDetails examsD = new ExamsDetails();
 							List<Marks> marksListPerSubject = new MarksDetailsDAO().readMarksPerExam(searchStudent.getSid(),exams.getExid(),
@@ -1838,6 +1844,16 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			markssheet.setExamSummaries(examSummaries);
 			// row-wise subject summaries
 			markssheet.setSubjectSummaries(new ArrayList<>(subjectSummaryMap.values()));
+			
+			//Generate Graph for Each Student
+			StudentGraphDto studentGraphDto = new StudentGraphDto();
+			String[] stdIds = {studentIds[i]};
+			studentGraphDto.setStudentIds(studentIds);
+			studentGraphDto.setExamClass(examClass);
+			studentGraphDto.setExamsList(examsList);
+			StudentGraphResponseDto studentGraphResponseDto = getStudentGraph(studentGraphDto, branchId, currentAcademicYear);
+			markssheet.setExamsDetails(studentGraphResponseDto.getExamDetailsGraph());
+			//End Generate Graph
 
 			marksSheetList.add(markssheet);
 			result.setSuccess(true);
@@ -2286,5 +2302,25 @@ public GenerateReportResponseDto getStartDate() {
 	result.setStartDate(startDate);
 	return result;
 }
+
+
+public GenerateReportResponseDto getSubjectDetails(MarksViewDto marksViewDto, String branchid) {
+	GenerateReportResponseDto generateReportResponseDto = GenerateReportResponseDto.builder().build();
+	    String subject = marksViewDto.getSubject();
+	    int subid = Integer.parseInt(subject);
+	    String exam = marksViewDto.getExam();
+	    String[] parts = exam.split("_");
+	    String examName = parts[2];
+	    String examClass = marksViewDto.getAddClass();
+		
+		Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchid),examClass,examName,subid);
+		float minMarks = subjectDetails.getMinmarks();
+		float maxMarks = subjectDetails.getMaxmarks();
+		generateReportResponseDto.setMinMark(String.valueOf(minMarks));
+		generateReportResponseDto.setMaxMark(String.valueOf(maxMarks));
+	return generateReportResponseDto;
+}
+
+
 
 }
