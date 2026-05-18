@@ -28,9 +28,9 @@ public interface StudentDailyAttendanceRepository extends JpaRepository<Studentd
     @Query("UPDATE Studentdailyattendance s SET s.attendancestatus = :status WHERE s.attendanceid = :id")
    void updateAttendanceStatusById(@Param("id") Integer id, @Param("status") String status);
 
-    List<Studentdailyattendance> findByDate(String date);
+    List<Studentdailyattendance> findByDate(Date date);
 
-    List<Studentdailyattendance> findByDateAndAttendeeStudentexternalidIn(String date, List<String> attendeeIds);
+    List<Studentdailyattendance> findByDateAndAttendeeStudentexternalidIn(Date date, List<String> attendeeIds);
 
     @Query("SELECT s FROM Studentdailyattendance s WHERE s.attendee.studentexternalid = :userName AND s.date = :date")
     Studentdailyattendance findByAttendeeIdAndDate(@Param("userName") String userName, @Param("date") Date date);

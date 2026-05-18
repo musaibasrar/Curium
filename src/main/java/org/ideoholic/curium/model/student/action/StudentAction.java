@@ -15,7 +15,7 @@ import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.StudentDto;
-import org.ideoholic.curium.model.student.service.StudentService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -188,6 +188,7 @@ public class StudentAction {
 	public String updateStudentDetails(HttpServletRequest request, HttpServletResponse response) {
 		if (studentActionAdapter.viewDetailsOfStudent()) {
 			String urlBranchId = request.getParameter("urlbranchid");
+			urlBranchId = urlBranchId != null ? urlBranchId : httpSession.getAttribute(Constants.BRANCHID).toString();
 			if ("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId)
 					|| "3".equalsIgnoreCase(urlBranchId)) {
 				return "student_update";
@@ -206,7 +207,8 @@ public class StudentAction {
 		String branchId;
 		if (studentActionAdapter.viewDetailsOfStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
-			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
+			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString();
+			branchId = branchId != null ? branchId : httpSession.getAttribute(Constants.BRANCHID).toString();
 			if (branchId.equalsIgnoreCase("1")) {
 				return "student_details";
 			} else if (branchId.equalsIgnoreCase("2")) {
@@ -231,7 +233,8 @@ public class StudentAction {
 		String branchId;
 		if (studentActionAdapter.viewDetailsbySidStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
-			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
+			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString();
+			branchId = branchId != null ? branchId : httpSession.getAttribute(Constants.BRANCHID).toString();
 			if (branchId.equalsIgnoreCase("1")) {
 				return "student_detailparent";
 			} else if (branchId.equalsIgnoreCase("2")) {
@@ -256,7 +259,8 @@ public class StudentAction {
 		String branchId;
 		if (studentActionAdapter.viewDetailsbySidStudent()) {
 			Object obj = request.getAttribute("urlbranchid");
-			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString(); 
+			branchId = (obj == null) ? request.getParameter("urlbranchid") : obj.toString();
+			branchId = branchId != null ? branchId : httpSession.getAttribute(Constants.BRANCHID).toString();
 			if (branchId.equalsIgnoreCase("1")) {
 				return "studentfee_detail";
 			} else if (branchId.equalsIgnoreCase("2")) {
