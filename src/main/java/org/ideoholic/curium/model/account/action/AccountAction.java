@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Musaib_2
@@ -112,37 +114,37 @@ public class AccountAction {
 		
 	}
 
-	@PostMapping("/saveJournal")
-	public String saveJournal() {
-		if(accountActionAdapter.saveJournal()){
+	@RequestMapping(value = "/saveJournal", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String saveJournal(@RequestParam("listOfFiles") MultipartFile[] uploadedFiles) {
+		if(accountActionAdapter.saveJournal(uploadedFiles)){
 			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	@PostMapping("/saveContra")
-	public String saveContra() {
-		if(accountActionAdapter.saveContra()){
+	@RequestMapping(value = "/saveContra", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String saveContra(@RequestParam("listOfFiles") MultipartFile[] uploadedFiles) {
+		if(accountActionAdapter.saveContra(uploadedFiles)){
 			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	@PostMapping("/savePayment")
-	public String savePayment() {
+	@RequestMapping(value = "/savePayment", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String savePayment(@RequestParam("listOfFiles") MultipartFile[] uploadedFiles) {
 		
-		if(accountActionAdapter.savePayment()){
+		if(accountActionAdapter.savePayment(uploadedFiles)){
 			return createVoucher();
 		}
 		return ERRORPAGE;
 		
 	}
 
-	@PostMapping("/saveReceipt")
-	public String saveReceipt() {
-		if(accountActionAdapter.saveReceipt()){
+	@RequestMapping(value = "/saveReceipt", method = RequestMethod.POST, consumes = "multipart/form-data")
+	public String saveReceipt(@RequestParam("listOfFiles") MultipartFile[] uploadedFiles) {
+		if(accountActionAdapter.saveReceipt(uploadedFiles)){
 			return createVoucher();
 		}
 		return ERRORPAGE;

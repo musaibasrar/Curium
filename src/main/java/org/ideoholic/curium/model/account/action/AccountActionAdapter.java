@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -59,7 +60,7 @@ public class AccountActionAdapter {
 		return resultResponse.isSuccess();
 	}
 
-	public boolean saveReceipt(){
+	public boolean saveReceipt(MultipartFile[] uploadedFiles){
 	
 		AccountReceiptDto accountReceiptDto = new AccountReceiptDto();
 		accountReceiptDto.setDraccountName(request.getParameter("accountname"));
@@ -70,7 +71,7 @@ public class AccountActionAdapter {
 		accountReceiptDto.setReceiptDate(request.getParameter("dateofreceipt"));
 		accountReceiptDto.setReceiptNarration(request.getParameter("receiptnarration"));
 
-		CreateVoucherResponseDto resultResponse = accountService.saveReceipt(accountReceiptDto, httpSession.getAttribute(BRANCHID).toString());
+		CreateVoucherResponseDto resultResponse = accountService.saveReceipt(accountReceiptDto, uploadedFiles, httpSession.getAttribute(BRANCHID).toString());
 
 		return resultResponse.isSuccess();
 	}
@@ -86,7 +87,7 @@ public class AccountActionAdapter {
 		return resultResponse.isSuccess();
 	}
 
-	public boolean saveJournal(){
+	public boolean saveJournal(MultipartFile[] uploadedFiles){
 	
 		AccountJournalDto accountJournalDto = new AccountJournalDto();
 		accountJournalDto.setDraccountNameJournal(request.getParameter("accountnamejournal"));
@@ -97,12 +98,12 @@ public class AccountActionAdapter {
 		accountJournalDto.setJournalDate(request.getParameter("dateofjournal"));
 		accountJournalDto.setJournalNarration(request.getParameter("journalnarration"));
 
-		CreateVoucherResponseDto resultResponse = accountService.saveJournal(accountJournalDto, httpSession.getAttribute(BRANCHID).toString());
+		CreateVoucherResponseDto resultResponse = accountService.saveJournal(accountJournalDto, uploadedFiles, httpSession.getAttribute(BRANCHID).toString());
 
 		return resultResponse.isSuccess();
 	}
 
-	public boolean saveContra(){
+	public boolean saveContra(MultipartFile[] uploadedFiles){
 	
 		AccountContraDto accountContraDto = new AccountContraDto();
 		accountContraDto.setDraccountName(request.getParameter("accountnamecontra"));
@@ -113,12 +114,12 @@ public class AccountActionAdapter {
 		accountContraDto.setContraDate(request.getParameter("dateofcontra"));
 		accountContraDto.setContraNarration(request.getParameter("contranarration"));
 
-		CreateVoucherResponseDto resultResponse = accountService.saveContra(accountContraDto, httpSession.getAttribute(BRANCHID).toString());
+		CreateVoucherResponseDto resultResponse = accountService.saveContra(accountContraDto, uploadedFiles, httpSession.getAttribute(BRANCHID).toString());
 
 		return resultResponse.isSuccess();
 	}
 
-	public boolean savePayment(){
+	public boolean savePayment(MultipartFile[] uploadedFiles){
 	
 		AccountPaymentDto accountPaymentDto = new AccountPaymentDto();
 		accountPaymentDto.setDraccountName(request.getParameter("accountnamepayment"));
@@ -129,7 +130,7 @@ public class AccountActionAdapter {
 		accountPaymentDto.setPaymentDate(request.getParameter("dateofpayment"));
 		accountPaymentDto.setPaymentNarration(request.getParameter("paymentnarration"));
 
-		CreateVoucherResponseDto resultResponse = accountService.savePayment(accountPaymentDto, httpSession.getAttribute(BRANCHID).toString());
+		CreateVoucherResponseDto resultResponse = accountService.savePayment(accountPaymentDto, uploadedFiles, httpSession.getAttribute(BRANCHID).toString());
 
 		return resultResponse.isSuccess();
 	}
