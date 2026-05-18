@@ -360,4 +360,10 @@ public class StudentAction {
 		}
 	}
 	
+	@PostMapping("/printStudentDetail")
+	public String printStudentDetail() {
+		stampFeesActionAdapter.printStudentDetail();
+		return "printstudentdetail";
+	}
+	
 }
