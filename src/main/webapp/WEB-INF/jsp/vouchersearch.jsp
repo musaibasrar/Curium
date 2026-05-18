@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -702,6 +703,9 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Dr Account -- Cr Account&nbsp;</th>
 						<th title="click to sort" class="headerText">Narration</th>
 						<th title="click to sort" class="headerText">Amount&nbsp;</th>
+						<th title="click to sort" class="headerText">doc1</th>
+						<th title="click to sort" class="headerText">doc2</th>
+						<th title="click to sort" class="headerText">doc3</th>
 					</tr>
 				</thead>
 
@@ -732,6 +736,15 @@ for(Cookie cookie : cookies){
 								<%-- <c:out value=" -- " />
 								<fmt:formatNumber type="number" maxFractionDigits="2" minFractionDigits="2" value="${vouchertransactions.key.cramount}"/> --%>
 							</td>
+							<td class="dataText">
+							<a download="supportingDoc1.${fn:split(fn:split(vouchertransactions.key.supportingDoc1,'/')[1],';')[0]}" 
+                     href="${vouchertransactions.key.supportingDoc1}">Download</a></td>
+							<td class="dataText">
+							<a download="supportingDoc2.${fn:split(fn:split(vouchertransactions.key.supportingDoc2,'/')[1],';')[0]}" 
+                     href="${vouchertransactions.key.supportingDoc2}">Download</a></td>
+							<td class="dataText">
+							<a download="supportingDoc3.${fn:split(fn:split(vouchertransactions.key.supportingDoc3,'/')[1],';')[0]}" 
+                     href="${vouchertransactions.key.supportingDoc3}">Download</a></td>		
 						</tr>
 					</c:forEach>
 				</tbody>

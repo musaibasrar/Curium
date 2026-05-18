@@ -124,4 +124,13 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 	public void setUserid(int userid) {
 		this.userid = userid;
 	}
+	
+	@Column(name = "supportingdoc1")
+	private String supportingDoc1;
+	
+	@Column(name = "supportingdoc2")
+	private String supportingDoc2;
+	
+	@Column(name = "supportingdoc3")
+	private String supportingDoc3;
 }

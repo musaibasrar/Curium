@@ -47,5 +47,14 @@
          <property name="userid" type="int">
  			<column name="userid" />
 		</property>
+		<property name="supportingDoc1" type="string">
+            <column name="supportingdoc1" />
+        </property>
+        <property name="supportingDoc2" type="string">
+            <column name="supportingdoc2" />
+        </property>
+        <property name="supportingDoc3" type="string">
+            <column name="supportingdoc3" />
+        </property>
     </class>
 </hibernate-mapping>
