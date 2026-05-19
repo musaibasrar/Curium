@@ -10,6 +10,7 @@ import org.ideoholic.curium.model.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
@@ -113,8 +114,8 @@ public class AccountApiActionImpl implements AccountApiAction {
 
     }
 
-    public ResponseEntity<CreateVoucherResponseDto> saveJournal(AccountJournalDto dto, String branchId) {
-        CreateVoucherResponseDto result = accountService.saveJournal(dto, branchId);
+    public ResponseEntity<CreateVoucherResponseDto> saveJournal(AccountJournalDto dto, MultipartFile[] uploadedFiles, String branchId) {
+        CreateVoucherResponseDto result = accountService.saveJournal(dto, uploadedFiles, branchId);
         if (result.isSuccess()) {
             return createVoucher(branchId);
         }
@@ -122,8 +123,8 @@ public class AccountApiActionImpl implements AccountApiAction {
 
     }
 
-    public ResponseEntity<CreateVoucherResponseDto> saveContra(AccountContraDto dto, String branchId) {
-        CreateVoucherResponseDto result = accountService.saveContra(dto, branchId);
+    public ResponseEntity<CreateVoucherResponseDto> saveContra(AccountContraDto dto, MultipartFile[] uploadedFiles, String branchId) {
+        CreateVoucherResponseDto result = accountService.saveContra(dto,uploadedFiles, branchId);
         if (result.isSuccess()) {
             return createVoucher(branchId);
         }
@@ -131,8 +132,8 @@ public class AccountApiActionImpl implements AccountApiAction {
 
     }
 
-    public ResponseEntity<CreateVoucherResponseDto> savePayment(AccountPaymentDto dto, String branchId) {
-        CreateVoucherResponseDto result = accountService.savePayment(dto, branchId);
+    public ResponseEntity<CreateVoucherResponseDto> savePayment(AccountPaymentDto dto, MultipartFile[] uploadedFiles, String branchId) {
+        CreateVoucherResponseDto result = accountService.savePayment(dto,uploadedFiles, branchId);
         if (result.isSuccess()) {
             return createVoucher(branchId);
         }
@@ -140,8 +141,8 @@ public class AccountApiActionImpl implements AccountApiAction {
 
     }
 
-    public ResponseEntity<CreateVoucherResponseDto> saveReceipt(AccountReceiptDto dto, String branchId) {
-        CreateVoucherResponseDto result = accountService.saveReceipt(dto, branchId);
+    public ResponseEntity<CreateVoucherResponseDto> saveReceipt(AccountReceiptDto dto, MultipartFile[] uploadedFiles, String branchId) {
+        CreateVoucherResponseDto result = accountService.saveReceipt(dto, uploadedFiles, branchId);
         if (result.isSuccess()) {
             return createVoucher(branchId);
         }
