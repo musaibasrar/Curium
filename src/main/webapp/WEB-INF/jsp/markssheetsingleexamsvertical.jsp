@@ -86,7 +86,7 @@ window.onload = function(){
 <table width="100%">
     <tr>
         <td width="20%" align="center">
-            <img src="/vision/images/vision.jpg" width="80" height="80">
+            <img src="/theage/images/theage.jpg" width="61" height="80">
         </td>
         <td width="80%">
             <div class="title">${branchname}</div>
@@ -188,7 +188,7 @@ window.onload = function(){
         <td align="left">Class Teacher</td>
         <td align="center">Parent</td>
         <td align="right">
-            <img src="/vision/images/principalsignature.png" width="60" height="28"><br>
+            <img src="/theage/images/principalsignature.png" width="60" height="28"><br>
             Principal
         </td>
     </tr>

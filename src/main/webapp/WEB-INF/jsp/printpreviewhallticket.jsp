@@ -260,7 +260,7 @@ span{
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/daralmajd/UserProcess/sessionTimeOut");
+	response.sendRedirect("/theage/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -285,7 +285,7 @@ for(Cookie cookie : cookies){
             <!-- ===== HEADER ===== -->
             <table width="100%" style="border-collapse: collapse;">
                 <tr>
-                    <td><img src="/daralmajd/images/daralmajd.jpg" width="30" height="30"/></td>
+                    <td><img src="/theage/images/theage.jpg" width="23" height="30"/></td>
                     <td align="center">
                         <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
                     </td>

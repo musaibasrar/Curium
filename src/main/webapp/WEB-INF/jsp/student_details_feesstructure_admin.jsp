@@ -15,34 +15,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Details Fees Structure</title>
 
-        <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/theage/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/theage/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/theage/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/theage/css/datePicker/demos.css">
+        <script type="text/javascript" src="/theage/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/abc/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/theage/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/theage/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/theage/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -350,7 +350,6 @@
         	        }
         	    });
                 
-                
                 $("#applyconcession").button({
         	        icons: {
         	            primary: "ui-icon-flag"
@@ -413,7 +412,7 @@
                 var form1 = document.getElementById("form1");
                 var id = document.getElementById("id").value;
                 
-                form1.action = "/abc/StudentProcess/feesStructurePerYear?id="+id;
+                form1.action = "/theage/StudentProcess/feesStructurePerYear?id="+id;
                 form1.submit();
 
             }
@@ -421,7 +420,7 @@
             function deleteRecord() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/deleteFeesCategory";
+                form1.action = "/theage/FeesProcess/deleteFeesCategory";
                 form1.submit();
 
             }
@@ -429,7 +428,7 @@
             function waiveOff() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/waiveOffFees";
+                form1.action = "/theage/FeesProcess/waiveOffFees";
                 form1.submit();
 
             }
@@ -437,7 +436,7 @@
             function applyConcession() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/FeesProcess/applyConcession";
+                form1.action = "/theage/FeesProcess/applyConcession";
                 form1.submit();
 
             }
@@ -455,13 +454,40 @@
             }
            
         </script>
+		<script>
 
-    </head>
+function applyConcessionToAll() {
+
+    var isChecked = document.getElementById("applyAllConcession").checked;
+
+    var commonValue = document.getElementById("commonConcession").value;
+
+    var concessionInputs = document.getElementsByClassName("concession");
+
+    for (var i = 0; i < concessionInputs.length; i++) {
+
+        // if unchecked set zero
+        if (!isChecked) {
+            concessionInputs[i].value = 0;
+        } else {
+            concessionInputs[i].value = commonValue;
+        }
+
+        // trigger existing validation
+        if (typeof concessionInputs[i].onkeyup === "function") {
+            concessionInputs[i].onkeyup();
+        }
+    }
+}
+
+</script>
+
+</head>
       <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/theage/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -632,7 +658,8 @@ for(Cookie cookie : cookies){
                     </tbody>
                    
                 </table>
-				
+                
+	              			
 				<table width="100%" >
                                     <tr>
 
@@ -654,9 +681,31 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/abc/printstudentdetailsfeesstructure'">Print</button>
+                                             <button id="print" onclick="window.location.href='/theage/printstudentdetailsfeesstructure'">Print</button>
+											
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+											    <span style="color: #416884;font-size:13px; font-weight:bold;">Common Concession :</span>
+											
+											    <input type="text"
+											           id="commonConcession"
+											           class="dataText"
+											           style="width:120px;
+											                  background: transparent;
+											                  border: 1px solid #4b6a84;
+											                  color: #4b6a84;
+											                  font-size: 13px;
+											                  padding: 3px;">
+											
+											    <input type="checkbox"
+											           id="applyAllConcession"
+											           onclick="applyConcessionToAll()"
+											           style="vertical-align: middle;
+											                  cursor:pointer;">
+											
+											    <span style="color: #416884;font-size:13px; font-weight:bold;">Apply to all rows</span>
                                         </td>
+                                        
 
                                     </tr>
                                     
@@ -749,7 +798,7 @@ for(Cookie cookie : cookies){
         
             function Cancel(){
                 var form1=document.getElementById("form1");
-                form1.action="/abc/StudentProcess/ViewAll";
+                form1.action="/theage/StudentProcess/ViewAll";
                 form1.submit();
             }
         </script>
