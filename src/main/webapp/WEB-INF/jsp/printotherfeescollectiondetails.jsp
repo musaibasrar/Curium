@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Other Fees Collection Details</title>
+<title>Print Bus Fees Collection Details</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -230,11 +230,11 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/bbis/images/logo.jpg" width="100" height="100"/>
+				<img src="/vision/images/vision.jpg" width="100" height="100"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Other Fees Collection Details Report</label><br>
+				<label class="addressLine">Fees Report</label><br>
 				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>
