@@ -896,7 +896,7 @@ for(Cookie cookie : cookies){
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;
-                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0" />%)</label>
+                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)</label>
                             </td>
                    </tr>
                    

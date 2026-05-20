@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Fees Collection Details</title>
+<title>Print Fees Due</title>
 <style type="text/css">
 <!--
 .headerText {
@@ -234,7 +234,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Fees Collection Details Report</label><br>
+				<label class="addressLine">Fees Due Report</label><br>
 				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>
@@ -362,7 +362,7 @@
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 									 Total Paid Amount:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${TotalPaidAmount}" /> (${TotalSumper}%)
+								<fmt:formatNumber type="currency"  value="${TotalPaidAmount}" />  (<fmt:formatNumber value="${TotalSumper}" pattern="0.00" />%)
 							</b>
 							</label>
 							</label> 
@@ -370,7 +370,7 @@
 							<td class="dataTextRight" >
 								<label style="color: #eb6000"><b>
 									Total Due Amount:</b><label style="color: #eb6000"><b>
-								<fmt:formatNumber type="currency"  value="${TotalDueAmount}" /> (${TotalDueper}%)
+								<fmt:formatNumber type="currency"  value="${TotalDueAmount}" /> (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)
 							</b>
 							</label>
 							</label> 
