@@ -313,13 +313,20 @@ function CalculateAge() {
 							<td>
 								<select name="classadmittedin" class="myclass" style="width: 180px;border-radius: 4px;background: white;height: 28px;">
 									<option value="">${admissionEnquiry.admissionclass}</option>
-									<c:forEach items="${classdetailslist}" var="classItem">
-										<c:if test="${(classItem.classdetails != '')}">
-											<option value="${classItem.classdetails}" ${admissionEnquiry.admissionclass == classItem.classdetails ? 'selected' : ''}>
-												<c:out value="${classItem.classdetails}" />
-											</option>
-										</c:if>
-									</c:forEach>
+									<option selected></option>
+										<option value="Nursery"><c:out value="Nursery" /></option>
+										<option value="L.K.G"><c:out value="L.K.G" /></option>
+										<option value="U.K.G"><c:out value="U.K.G" /></option>
+										<option value="1"><c:out value="1" /></option>
+										<option value="2"><c:out value="2" /></option>
+										<option value="3"><c:out value="3" /></option>
+										<option value="4"><c:out value="4" /></option>
+										<option value="5"><c:out value="5" /></option>
+										<option value="6"><c:out value="6" /></option>
+										<option value="7"><c:out value="7" /></option>
+										<option value="8"><c:out value="8" /></option>
+										<option value="9"><c:out value="9" /></option>
+										<option value="10"><c:out value="10" /></option>
 								</select>
 							</td>
 							<td class="alignLeft" style="padding-left: 20px;"></td>

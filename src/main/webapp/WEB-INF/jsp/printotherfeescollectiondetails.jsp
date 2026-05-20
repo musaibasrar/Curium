@@ -234,7 +234,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
-				<label class="addressLine">Other Fees Collection Details Report</label><br>
+				<label class="addressLine">Fees Report</label><br>
 				<label class="addressLineTwo">${daterangefeescollection}</label><br>
 				</td>
 			</tr>
