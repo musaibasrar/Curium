@@ -322,4 +322,10 @@ public class FeesCollectionAction {
 	            feesCollectionActionAdapter.getFeesReportOutstanding();
 	            return "feesoutstanding";
 	        }
+		  
+		  @PostMapping("/searchFeesReportBulkConcession")
+	        public String searchFeesReportBulkConcession() {
+	            feesCollectionActionAdapter.getFeesReport();
+	            return "bulkconcession";
+	        }
 }
