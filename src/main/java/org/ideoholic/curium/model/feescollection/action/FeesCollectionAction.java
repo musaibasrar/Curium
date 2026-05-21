@@ -301,7 +301,7 @@ public class FeesCollectionAction {
 		  
 		  @PostMapping("/searchFeesReportBulkConcession")
 	        public String searchFeesReportBulkConcession() {
-	            feesCollectionActionAdapter.getFeesReport();
+	            feesCollectionActionAdapter.getFeesReportDue();
 	            return "bulkconcession";
 	        }
 }
