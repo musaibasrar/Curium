@@ -10,34 +10,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Admission Abstract</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/vision/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/rahmani/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/rahmani/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/rahmani/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/rahmani/css/datePicker/demos.css">
+        <script type="text/javascript" src="/rahmani/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/vision/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/rahmani/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -279,7 +279,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/vision/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "/rahmani/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -338,7 +338,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/rahmani/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -450,7 +450,7 @@ for(Cookie cookie : cookies){
 
     <body class="bodymargin">
        
-        <form action="/vision/" method="post" id="form1" class="bodymargin">
+        <form action="/rahmani/" method="post" id="form1" class="bodymargin">
 			
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
@@ -462,36 +462,37 @@ for(Cookie cookie : cookies){
 			<c:if test="${limit < iInitial}">	/
 	    
 	    <table>
+
 <tr>
 <td><br></td>
 </tr>
 <tr>
 <td><br></td>
 </tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
+
 </table>
 	    
 	    <table>
+	    <tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
 <tr>
 <td><br></td>
 </tr>
@@ -499,6 +500,22 @@ for(Cookie cookie : cookies){
 <td><br></td>
 </tr>
 <tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
 <td><br></td>
 </tr>
 <tr>
@@ -525,13 +542,13 @@ for(Cookie cookie : cookies){
    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Cumulative Record No.<br>
    with date of opening</p></td>
   
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Name in Full</p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Name in Full</p></td>
   
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Boy or Girl</p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Boy or Girl</p></td>
   
   <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Date Of Birth, Age in Years</p></td>
   
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Father And Mother Name<br>And Occupation</p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Father And Mother Name<br>And Occupation</p></td>
   
     <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Parent Annual Income</p></td>
   
@@ -540,7 +557,7 @@ for(Cookie cookie : cookies){
     <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Nationality,Religion<br>Caste</p></td>
    
     <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Mother Tongue</p></td>
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Guardian Name And Address<br></p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">&nbsp;&nbsp;Guardian Name And &nbsp;&nbsp;Address<br></p></td>
   
   </tr>
   <tr>
@@ -576,6 +593,7 @@ for(Cookie cookie : cookies){
 </div>
 
 <table>
+
 <tr>
 <td><br></td>
 </tr>
@@ -593,11 +611,29 @@ for(Cookie cookie : cookies){
 </tr>
 <tr>
 <td><br></td>
-</tr>
-<tr>
+</tr><tr>
 <td><br></td>
-</tr>
-<tr>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
 <td><br></td>
 </tr>
 <tr>
@@ -623,15 +659,8 @@ for(Cookie cookie : cookies){
 <tr>
 <td><br></td>
 </tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
+
+
 </table>
 <table>
 <tr>
@@ -657,7 +686,7 @@ for(Cookie cookie : cookies){
 	</div>
     <table  class="abstract"  height="400px;"  style="vertical-align: top;border-radius: 10px;background-color:white;">
   <tr height="150px">
-   <td  class="abstract"  style="font-size:12px;"><p>Permanent address<br> of the pupil</p></td>
+   <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Permanent address<br> of the pupil</p></td>
   
    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Last School attended</p></td>
   
@@ -670,7 +699,7 @@ for(Cookie cookie : cookies){
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">Date of admission</p></td>
   
     <td  class="abstract"  style="font-size:12px;transform:rotate(270deg);margin:0px;padding:0px;">Subsequent progress of
-    the pupil in school every year from the date of admission</td>
+    the pupil in school<br> every year from the date of admission</td>
   
    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Class of leaving</p></td>
    
@@ -679,7 +708,7 @@ for(Cookie cookie : cookies){
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Reason for leaving</p></td>
    
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">No. and date of Transfer Certified issued</p></td>
-    <td  class="abstract"  style="font-size:12px;"><p>Remarks<br></p></td>
+    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Remarks<br></p></td>
   
   </tr>
   <tr>
@@ -728,7 +757,7 @@ for(Cookie cookie : cookies){
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/vision/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/rahmani/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 
