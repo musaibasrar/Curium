@@ -294,7 +294,7 @@ public class FeesAction {
 	@PostMapping("/applyBulkConcession")
 	public String applyBulkConcession() {
 		feesActionAdapter.applyBulkConcession();
-		feesCollectionActionAdapter.getFeesReport();
+		feesCollectionActionAdapter.getFeesReportDue();
 		return "bulkconcession";
 	}
 }
