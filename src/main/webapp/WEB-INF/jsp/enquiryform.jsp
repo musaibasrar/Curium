@@ -483,7 +483,7 @@
 								</select></label>
 							</td>
 							 <td class="alignLeft" style="padding-left: 20px;">Date</td>
-							<td><input type="text" name="religion" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="myclass"/></td> 
+							<td><input type="text" name="createddate" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" class="myclass"/></td> 
 						</tr>
 						<tr>
 							<td><br /></td>

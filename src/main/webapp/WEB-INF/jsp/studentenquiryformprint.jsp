@@ -91,7 +91,11 @@ function updateEnquiryForm(){
 <body>
 
 <form id="form1">
-
+ <%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
+		
 <div class="form-container">
 
     <!-- HEADER -->
@@ -105,7 +109,7 @@ function updateEnquiryForm(){
         </div>
     </div>
     
-    <div class="section-title">Class to which admission is being sought: ${admissionEnquiry.admissionclass}</div>
+    <div class="section-title">Class to which admission is being sought: ${admissionEnquiry.admissionclass} <span style="padding-left:280px;">Date: <fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/></span></div>
 
     <!-- STUDENT DETAILS -->
     <div class="section-title">Student Details</div>
