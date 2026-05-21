@@ -214,76 +214,187 @@
 		<c:forEach items="${markssheetlist}" var="mlist" >
 		<div style="page-break-inside: avoid;">
 		<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-		<table width="100%" border="0" style="border-color: #4b6a84;float: left;text-align: left">
-		
-			<tr>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><label class="markssheetlabel">Examination Year:</label>&nbsp;&nbsp;<label class="markssheetvalue">${markssheetyear}</label></td>
-						<td><label class="markssheetlabel">Center Code:</label>&nbsp;<label class="markssheetvalue">${markssheetcentercode}</label></td>
-			</tr>
-			
-			<tr>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><label class="markssheetlabel">Language:</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="markssheetvalue">${mlist.parents.student.languageopted}</label></td>
-						<td><label class="markssheetlabel">Reg. No:</label>&nbsp;&nbsp;
-						<label class="markssheetvalue">${mlist.parents.student.admissionnumber}</label></td>
-			</tr>
-		</table>
-		
-		
-		<table  width="100%" border="0" style="border-color: #4b6a84;float: left;text-align: left">
-					<tr>
-						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-						<td><label class="markssheetlabel">Examination:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="markssheetvalue">${markssheetexamlevel}</label></td>
-					</tr>
-		</table>
-	
-		
-		<table width="100%" style="text-align: left">
-		
-			<tr>
-						
-						<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Center Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="markssheetvalue">${markssheetcentername}</label></td>
-			</tr>
-			
-			<tr>
-						<td><br><br><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						Candidate Name:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.student.name}</label></td>
-			</tr>
-			
-			      <tr>
-							<c:if test="${(mlist.parents.mothersname != '')}">
-							<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							W/O:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.mothersname}</label></td>
-							</c:if>	
+		<table width="100%" border="0"
+	style="border-color: #4b6a84; float: left; text-align: left; table-layout: fixed;">
 
-								<c:if test="${(mlist.parents.fathersname != '')}">
-								
-								<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								S/D/O:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-							<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.fathersname}</label></td>
-						
-							</c:if>
+	<tr>
+		<td width="5%">&nbsp;</td>
 
-                             	<c:if test="${(mlist.parents.student.guardiandetails != '')}">
-                             	<td><label class="markssheetlabel">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                             	Guardian:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-								<label class="markssheetvalue" style="font-weight: bold;">${mlist.parents.student.guardiandetails}</label></td>
-                                </c:if>
-                </tr>
-                <tr>
-			<td><br></td>
-			</tr>
-               
-                       
-		</table>
+		<td width="47%" style="vertical-align: top;">
+			<label class="markssheetlabel">Examination Year:</label>
+			&nbsp;&nbsp;
+			<label class="markssheetvalue">${markssheetyear}</label>
+		</td>
+
+		<td width="48%" style="vertical-align: top;">
+			<label class="markssheetlabel">Center Code:</label>
+			&nbsp;&nbsp;
+			<label class="markssheetvalue">${markssheetcentercode}</label>
+		</td>
+	</tr>
+
+	<tr>
+		<td>&nbsp;</td>
+
+		<td style="vertical-align: top;">
+			<label class="markssheetlabel">Language:</label>
+			&nbsp;&nbsp;
+			<label class="markssheetvalue">${mlist.parents.student.languageopted}</label>
+		</td>
+
+		<td style="vertical-align: top;">
+			<label class="markssheetlabel">Reg. No:</label>
+			&nbsp;&nbsp;
+			<label class="markssheetvalue">${mlist.parents.student.admissionnumber}</label>
+		</td>
+	</tr>
+
+</table>
+
+
+<table width="100%" border="0"
+	style="border-color: #4b6a84; float: left; text-align: left; table-layout: fixed; margin-top: 5px;">
+
+	<tr>
+		<td width="5%">&nbsp;</td>
+
+		<td>
+			<label class="markssheetlabel">Examination:</label>
+			&nbsp;&nbsp;
+			<label class="markssheetvalue">${markssheetexamlevel}</label>
+		</td>
+	</tr>
+
+</table>
+
+
+<table width="100%" border="0"
+	style="text-align: left; table-layout: fixed; margin-top: 8px;">
+
+	<tr>
+		<td width="5%">&nbsp;</td>
+
+		<td style="vertical-align: top; word-wrap: break-word; white-space: normal;">
+
+			<label class="markssheetlabel">Center Name:</label>
+			&nbsp;&nbsp;
+
+			<label class="markssheetvalue"
+				style="display: inline-block;
+					   width: 75%;
+					   vertical-align: top;
+					   word-break: break-word;
+					   white-space: normal;
+					   line-height: 20px;">
+
+				${markssheetcentername}
+
+			</label>
+
+		</td>
+	</tr>
+
+
+	<tr>
+		<td>&nbsp;</td>
+
+		<td style="padding-top: 15px; vertical-align: top;">
+
+			<label class="markssheetlabel">Candidate Name:</label>
+			&nbsp;&nbsp;
+
+			<label class="markssheetvalue"
+				style="font-weight: bold;
+					   display: inline-block;
+					   width: 70%;
+					   word-break: break-word;
+					   white-space: normal;">
+
+				${mlist.parents.student.name}
+
+			</label>
+
+		</td>
+	</tr>
+
+
+	<tr>
+		<td>&nbsp;</td>
+
+		<td style="padding-top: 10px; vertical-align: top;">
+
+			<c:if test="${(mlist.parents.mothersname != '')}">
+				<div style="margin-bottom: 5px;">
+
+					<label class="markssheetlabel"
+						style="display: inline-block; width: 120px;">
+						W/O:
+					</label>
+
+					<label class="markssheetvalue"
+						style="font-weight: bold;
+							   display: inline-block;
+							   width: 70%;
+							   word-break: break-word;
+							   white-space: normal;">
+
+						${mlist.parents.mothersname}
+
+					</label>
+
+				</div>
+			</c:if>
+
+
+			<c:if test="${(mlist.parents.fathersname != '')}">
+				<div style="margin-bottom: 5px;">
+
+					<label class="markssheetlabel"
+						style="display: inline-block; width: 120px;">
+						S/D/O:
+					</label>
+
+					<label class="markssheetvalue"
+						style="font-weight: bold;
+							   display: inline-block;
+							   width: 70%;
+							   word-break: break-word;
+							   white-space: normal;">
+
+						${mlist.parents.fathersname}
+
+					</label>
+
+				</div>
+			</c:if>
+
+
+			<c:if test="${(mlist.parents.student.guardiandetails != '')}">
+				<div>
+
+					<label class="markssheetlabel"
+						style="display: inline-block; width: 120px;">
+						Guardian:
+					</label>
+
+					<label class="markssheetvalue"
+						style="font-weight: bold;
+							   display: inline-block;
+							   width: 70%;
+							   word-break: break-word;
+							   white-space: normal;">
+
+						${mlist.parents.student.guardiandetails}
+
+					</label>
+
+				</div>
+			</c:if>
+
+		</td>
+	</tr>
+
+</table>
             <br>
             
             <table class="datatable" align="center" style="width:85%">

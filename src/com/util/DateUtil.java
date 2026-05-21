@@ -365,5 +365,19 @@ public static String dateFromatConversionSlash(String ddmmyyyy) {
 	   return date;
 }
 
+public static String dateParserddMMYYYY(Date date) {
+	
+	String datefinal = null;
+	try {
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy",
+				Locale.ENGLISH);
+		datefinal = formatter.format(date);
+
+	} catch (Exception e) {
+			e.printStackTrace();
+	}
+	return datefinal;
+}
+
 
 }

@@ -906,16 +906,16 @@ public class StudentService {
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
-						new Object[] { studentDetails.getStudent().getName(), studentDetails.getStudent().getGender(),
-								studentDetails.getStudent().getDateofbirth().toString(),
-								studentDetails.getStudent().getAge().toString(),
-								studentDetails.getStudent().getQualification(),
-								studentDetails.getStudent().getExamlevel(),
-								studentDetails.getStudent().getAdmissionnumber(),
-								studentDetails.getStudent().getAdmissiondate().toString(),
-								studentDetails.getStudent().getLanguageopted(), studentDetails.getStudent().getDistrictcode(),
-								studentDetails.getStudent().getCentercode(), studentDetails.getFathersname(),
-								studentDetails.getMothersname() });
+						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getName()) , DataUtil.emptyString(studentDetails.getStudent().getGender()),
+								DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
+								DataUtil.emptyString(studentDetails.getStudent().getAge().toString()),
+								DataUtil.emptyString(studentDetails.getStudent().getQualification()),
+								DataUtil.emptyString(studentDetails.getStudent().getExamlevel()),
+								DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
+								DataUtil.emptyString(studentDetails.getStudent().getAdmissiondate().toString()),
+								DataUtil.emptyString(studentDetails.getStudent().getLanguageopted()),DataUtil.emptyString(studentDetails.getStudent().getDistrictcode()),
+								DataUtil.emptyString(studentDetails.getStudent().getCentercode()), DataUtil.emptyString(studentDetails.getFathersname()),
+								DataUtil.emptyString(studentDetails.getMothersname()) });
 				i++;
 			}
 			Row headerRow = sheet.createRow(0);
@@ -950,7 +950,7 @@ public class StudentService {
 				//Local 
 				//FileOutputStream out = new FileOutputStream("D:/schoolfiles/test.xlsx");
 				//FileOutputStream out = new FileOutputStream(new File("/usr/local/tomcat/webapps/www.searchmysearch.com/musarpbiabha/studentsdetails.xlsx"));
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"studentsdetails.xlsx"));
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
@@ -988,7 +988,7 @@ public class StudentService {
 		boolean result = false;
 		try {
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"studentsdetails.xlsx");
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsdetails.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
 	        // get MIME type of the file
@@ -1755,26 +1755,27 @@ public class StudentService {
 	public boolean approveRecords() {
 		
 		String[] studentIds = request.getParameterValues("studentIDs");
-		
+		int admission = 1;
 		if (studentIds != null) {
 			
+			String admissionNo = request.getParameter("admissionno_"+studentIds[0]);
+			String admNo = admissionNo.substring(0, admissionNo.length() - 3);
+			String admissionNumber = null;
+			
+			List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where admissionnumber like '"+admNo+"%' AND (remarks = 'approved' OR remarks = 'admin') order by sid DESC");
+			
+			if(lastSid.size() > 0) {
+	            //admission = lastSid.get(0).getSid();
+	            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
+	            admission++;
+	        }
+			
 			for (String id : studentIds) {
-				
-				String admissionNo = request.getParameter("admissionno_"+id);
-				String admNo = admissionNo.substring(0, admissionNo.length() - 3);
-				String admissionNumber = null;
-				
-				List<Student> lastSid = new studentDetailsDAO().getListStudents("From Student where admissionnumber like '"+admNo+"%' AND (remarks = 'approved' OR remarks = 'admin') order by sid DESC");
-				
-				int admission = 1;
-		        if(lastSid.size() > 0) {
-		            //admission = lastSid.get(0).getSid();
-		            admission = Integer.parseInt(lastSid.get(0).getAdmissionnumber().substring(lastSid.get(0).getAdmissionnumber().length()-3));
-		            admission++;
-		        }
+		        
 				 admissionNumber = admNo+String.format("%03d", admission);
 				 System.out.println("AdmissionNumber "+admissionNumber);
 				 new studentDetailsDAO().approveRecords(id,admissionNumber);
+				 admission++;
 			}
 		}
 		
@@ -1835,5 +1836,26 @@ public class StudentService {
 	    List<Parents> studentList = new studentDetailsDAO().getStudentsList(searchQuery);
 	    request.setAttribute("studentList", studentList);
 		
+	}
+
+	public void arrangeMultiple() {
+		String[] studentIds = request.getParameterValues("admissionnoids");
+		
+		if (studentIds != null) {
+			List<String> idsAdmissionNo = new ArrayList<String>();
+			int sequence=1;
+			
+			for (String idAdmissionNo : studentIds) {
+				
+		        String[] parts = idAdmissionNo.split("_");
+		        String admno = parts[0]; 
+		        String id = parts[1];  
+		        String updatedPrefix = admno.substring(0, admno.length() - 3) + String.format("%03d", sequence);
+		        String updatedAdmissionNumber = updatedPrefix + "_" + id;
+		        idsAdmissionNo.add(updatedAdmissionNumber);
+		        sequence++;
+			}
+			new studentDetailsDAO().arrangeMultiple(idsAdmissionNo);
+		}
 	}
 }

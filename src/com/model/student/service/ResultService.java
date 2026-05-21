@@ -663,13 +663,14 @@ public class ResultService {
         String examLevel = request.getParameter("examlevelcode");
         String[] examLevelCode = examLevel.split(":");
         String examYear = request.getParameter("examyear");
+        String examLevelCodeSearch = request.getParameter("examlevelcodesearch");
+        String[] centerCode = request.getParameter("centercode").split(":");
         
         String language = null;
         String searchQuery = "From Parents as parent where ";
         String subQuery =null;
         
              if(!request.getParameter("centercode").equalsIgnoreCase("")) {
-                 String[] centerCode = request.getParameter("centercode").split(":");
                  subQuery = "parent.Student.centercode = '"+centerCode[0]+"'";
                  httpSession.setAttribute("markssheetcentersearch", centerCode[0]+":"+centerCode[1]);
              }else {
@@ -678,11 +679,13 @@ public class ResultService {
              
              if(!request.getParameter("examlevelcode").equalsIgnoreCase("")) {
                  
-					/*
-					 * if(subQuery!=null) { subQuery =
-					 * subQuery+" AND parent.Student.examlevel = '"+examLevelCode[0]+"'"; }else {
-					 * subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'"; }
-					 */
+					
+					if(subQuery!=null) {
+						subQuery = subQuery+" AND parent.Student.examlevel = '"+examLevelCode[0]+"'";
+						}else {
+							subQuery = "parent.Student.examlevel = '"+examLevelCode[0]+"'"; 
+					}
+					
                  httpSession.setAttribute("markssheetexamlevelsearch", request.getParameter("examlevelcode").toString());
                 // httpSession.setAttribute("formarkssheetexamlevelsearch", request.getParameter("forexamlevel").toString());
              }else {
@@ -768,7 +771,7 @@ public class ResultService {
 				 * //END Query Class Hierarchy to get the exam level
 				 */ 	            
  	            //Query examleveldetails where levelcode is 
- 	            List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(examLevelCode[0]);
+ 	            List<Examleveldetails> examLevelDetails = new ExamLevelDetailsDAO().getExamLevelDetails(examLevelCodeSearch);
  	            //END Query examleveldetails where levelcode is
  	            
              //String[] examDet = forExamLevel.split(":");
@@ -779,6 +782,28 @@ public class ResultService {
              int failCounter=0,passCounter=0,secondCounter=0,firstCounter=0,distinctionCounter=0;
              
              for (Parents studentDetails : parentsList) {
+	            	
+	            	
+	            	// Generate New Admission Number
+	            	
+	            	String oldAdmissionNumber = studentDetails.getStudent().getAdmissionnumber(); // 24247CS002
+
+	            	// 1. Get "24" from "2024/25"
+	            	String academicYear = examYear; // "2024/25"
+	            	String yearShort = academicYear.substring(2, 4); // "24"
+
+	            	
+	            	// 4. Extract numeric suffix from old admission number (002)
+	            	String numberPart = oldAdmissionNumber.replaceAll(".*?(\\d+)$", "$1");
+
+	            	// 5. Build new admission number
+	            	String newAdmissionNumber = yearShort + centerCode[0] + examLevelCodeSearch + numberPart;
+
+	            	
+	            	studentDetails.getStudent().setAdmissionnumber(newAdmissionNumber);
+	            	
+	            	
+	            	// End Generate new admission number
                  MarksSheet result = new MarksSheet();
                  List<Integer> marksList = new ArrayList<Integer>();
                  List<String> subjectList = new ArrayList<String>();

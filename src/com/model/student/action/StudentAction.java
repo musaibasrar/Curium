@@ -180,7 +180,9 @@ public class StudentAction {
                     url = rejectedApprovals();
                 }else if (action.equalsIgnoreCase("approvalshistory")) {
                     url = approvalsHistory();
-                }
+                }else if (action.equalsIgnoreCase("arrangeMultiple")) {
+        			url = arrangeMultiple();
+        		}
 		return url;
 	}
 	
@@ -419,7 +421,7 @@ public class StudentAction {
 
     private String exportStudentsReport() {
         new StudentService(request, response).exportStudentsReport();
-        return "studentsreportsucess.jsp";
+        return "studentsreportsuccess.jsp";
     }
 
     private String searchStudents() {
@@ -587,4 +589,11 @@ public class StudentAction {
 			return "exportfailure.jsp";
 		}
 	}
+	
+	private String arrangeMultiple() {
+		
+	    
+	    new StudentService(request, response).arrangeMultiple();
+	    return "Controller?process=StudentProcess&action=viewAll";
+	    }
 }

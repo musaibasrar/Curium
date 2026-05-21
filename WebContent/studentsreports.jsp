@@ -542,7 +542,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="Controller?process=StudentProcess&action=exportStudentsReport" method="POST">
+	<form id="form1" action="Controller?process=StudentProcess&action=exportDataStudents" method="POST">
 		<div style="height: 28px">
 			<button id="add">Students Details Report</button>
 			<br />
@@ -695,6 +695,7 @@ for(Cookie cookie : cookies){
 										<option selected value="${studentsreportacademicsearch}">${studentsreportacademicsearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2024/25" >2024/25</option>
 											<option value="2023/24" >2023/24</option>
 											<option value="2022/23" >2022/23</option>
 											<option value="2021/22" >2021/22</option>
@@ -769,7 +770,9 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${Parents.key.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
 								value="<c:out value="${Parents.key.student.sid}"/>" /></td> --%>
-							<td class="dataText"><c:out value="${(status.index)+1}" /></td>
+							<td class="dataText"><c:out value="${(status.index)+1}" />
+								<input type="hidden" id="<c:out value="${Parents.key.student.sid}"/>" name="studentIDs" value="<c:out value="${Parents.key.student.sid}"/>" />
+							</td>
 							<td class="dataTextInActive"><c:out value="${Parents.key.student.admissionnumber}" /></td>
 							<td class="dataText"><c:out value="${Parents.key.student.name}" /></td>
 							<td class="dataText">

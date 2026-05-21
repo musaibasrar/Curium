@@ -296,9 +296,9 @@ public class studentDetailsDAO {
 				    
 				    for (Student student : studentList) {
 				        String hql = "UPDATE student set examlevel = '"+ch.getUpperclass()+"',"
-				        		+ " admissionnumber = CONCAT(REPLACE(LEFT(admissionnumber,2),LEFT('"+student.getAdmissionnumber()+"',2)"
+				        		+ " admissionnumber = REPLACE(CONCAT(REPLACE(LEFT(admissionnumber,2),LEFT('"+student.getAdmissionnumber()+"',2)"
             					+ " , '"+currentAcademicYear+"'),SUBSTRING(admissionnumber, 3, CHAR_LENGTH(admissionnumber))),"
-			                     		+ " admissionnumber = replace(admissionnumber, '"+classStudying+"', '"+ch.getUpperclass()+"'),"
+			                     		+ " '"+classStudying+"', '"+ch.getUpperclass()+"'),"
 				                        + " age = age+1, qualification = '"+student.getQualification()+"' WHERE sid ="+student.getSid()+"";
 	                                Query query = session.createSQLQuery(hql);
 	                                query.executeUpdate();
@@ -847,6 +847,26 @@ public class studentDetailsDAO {
 						.createQuery("update Student set remarks='rejected' where id IN (:ids)");
 				query.setParameterList("ids", ids);
 				query.executeUpdate();
+				transaction.commit();
+			} catch (HibernateException hibernateException) {transaction.rollback();
+				hibernateException.printStackTrace();
+			}finally {
+				HibernateUtil.closeSession();
+			}
+
+		}
+
+		public void arrangeMultiple(List<String> idsAdmissionNo) {
+			try {
+				transaction = session.beginTransaction();
+					
+				for (String admissionNoid : idsAdmissionNo) {
+						String[] admnid= admissionNoid.split("_");
+						Query query = session
+								.createQuery("update Student set admissionnumber = '"+admnid[0]+"'  where id ="+admnid[1]+"");
+						query.executeUpdate();
+					}
+				
 				transaction.commit();
 			} catch (HibernateException hibernateException) {transaction.rollback();
 				hibernateException.printStackTrace();

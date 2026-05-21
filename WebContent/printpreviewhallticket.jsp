@@ -254,7 +254,7 @@ for(Cookie cookie : cookies){
 			
 	</table>
 	
-<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+			<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -377,13 +377,9 @@ for(Cookie cookie : cookies){
 			<td align="centre">Signature of Chief Examiner</td>
 			</tr>
 		</TABLE>
-		</div>               
-		<br> 
-		<br> 
-		<br>
-		<br> 
-                        </c:forEach>
-			
+		</div>    
+			<br>		           
+      </c:forEach>
 	</form>
 	
 	

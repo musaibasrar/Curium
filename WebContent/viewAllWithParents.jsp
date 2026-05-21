@@ -186,6 +186,13 @@
            form1.submit();
             
         }
+        
+        function arrangeRecords(){
+            var form1=document.getElementById("form1");
+            form1.action="Controller?process=StudentProcess&action=arrangeMultiple";
+           form1.submit();
+            
+        }
         </script>
         
         <script type="text/javascript">
@@ -272,6 +279,19 @@
                    return false;
 
                });
+                
+                $("#arrange").button({
+                    icons:{
+                        primary: "ui-icon-trash"
+                    }
+                }).click(function(){
+                	if(confirm('are you sure, you want to arrange admission numbers?')){
+               		 arrangeRecords();
+               	}
+                   return false;
+
+               });
+                
                 $('#chckHead').click(function () {
                     var length = $('.chcktbl:checked').length;
                     var trLength=$('.trClass').length;
@@ -462,6 +482,7 @@ for(Cookie cookie : cookies){
 										<option selected value="${studentviewallacademic}">${studentviewallacademic}</option>
 											<option></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2024/25" >2024/25</option>
 											<option value="2023/24" >2023/24</option>
 											<option value="2022/23" >2022/23</option>
 											<option value="2021/22" >2021/22</option>
@@ -658,7 +679,9 @@ for(Cookie cookie : cookies){
 											
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Parents.student.sid}"/>" class = "chcktbl"  name="studentIDs"  value="<c:out value="${Parents.student.sid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="Controller?process=StudentProcess&action=ViewDetails&id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out value="${Parents.student.admissionnumber}"/></a>
+                                <input type="hidden" id = "<c:out value="${Parents.student.admissionnumber}_${_Parents.student.sid}"/>" class = "chcktbl"  name="admissionnoids"  value="<c:out value="${Parents.student.admissionnumber}_${Parents.student.sid}"/>"/>
+                                </td>
                                 <td class="dataText" style="text-transform:uppercase"><c:out value="${Parents.student.name}"/></td>
                                 <td class="dataText">
 								<c:if test="${(Parents.mothersname != '')}">
@@ -685,7 +708,8 @@ for(Cookie cookie : cookies){
                     <tfoot><tr>
                             <td  class="footerTD" colspan="2" >
                             <input value="Delete" type="submit" id="delete"/> &nbsp;&nbsp;&nbsp;
-                            <input value="Archive" type="submit" id="archive"/> </td>
+                            <input value="Archive" type="submit" id="archive"/>&nbsp;&nbsp;&nbsp;
+                            <input value="Arrange" type="submit" id="arrange"/> </td>
                     
                         </tr></tfoot>
                 </table>

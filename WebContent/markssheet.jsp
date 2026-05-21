@@ -532,7 +532,7 @@ for(Cookie cookie : cookies){
 						</tr>
 						
 						<tr>
-							<td class="alignRightFields">Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td class="alignRightFields">Current Exam Level &nbsp;&nbsp;&nbsp;</td>
 							<td width="70%"><label> 
 										<select name="examlevelcode" id="examlevelcode" required
 									style="width: 240px;">
@@ -546,6 +546,28 @@ for(Cookie cookie : cookies){
 								</select>
 							</label> 
 						</tr>
+						
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Search Exam Level &nbsp;&nbsp;&nbsp;</td>
+							<td width="70%"><label> 
+										<select name="examlevelcodesearch" id="examlevelcodesearch" required
+									style="width: 240px;">
+										<option selected>${markssheetexamlevelsearch}</option>
+										<option></option>
+										<c:forEach items="${examleveldetails}" var="examleveldetails">
+											<option value="${examleveldetails.levelcode}" >
+												<c:out value="${examleveldetails.levelcode} -- ${examleveldetails.levelname}" />
+											</option>
+										</c:forEach>
+								</select>
+							</label> 
+						</tr>
+						
 
 						<tr>
 							<td><br /></td>
@@ -623,6 +645,7 @@ for(Cookie cookie : cookies){
 										<option selected value="${studentsreportacademicsearch}">${studentsreportacademicsearch}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2024/25" >2024/25</option>
 											<option value="2023/24" >2023/24</option>
 											<option value="2022/23" >2022/23</option>
 											<option value="2021/22" >2021/22</option>

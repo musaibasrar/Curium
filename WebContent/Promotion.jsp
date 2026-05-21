@@ -594,6 +594,7 @@ for(Cookie cookie : cookies){
 											<option selected value="${resultexamyear}">${resultexamyear}</option>
 											<option ></option>
 											<option value="${currentAcademicYear}">${currentAcademicYear} {Current Academic Year}</option>
+											<option value="2024/25" >2024/25</option>
 											<option value="2023/24" >2023/24</option>
 											<option value="2022/23" >2022/23</option>
 											<option value="2021/22" >2021/22</option>
@@ -638,6 +639,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Father Name</th>
                             <th title="click to sort" class="headerText">Exam Level&nbsp;</th>
                             <th title="click to sort" class="headerText">Qualification&nbsp;</th>
+                            <th title="click to sort" class="headerText">Language&nbsp;</th>
                             <th title="click to sort" class="headerText">Center Code&nbsp;</th>
                             <th title="click to sort" class="headerText">%&nbsp;</th>
                             <th title="click to sort" class="headerText">Result&nbsp;</th>
@@ -654,6 +656,7 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${resultlist.fathername}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.examlevel}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.qualification}"/></td>
+                                <td class="dataText"><c:out value="${resultlist.student.languageopted}"/></td>
                                 <td class="dataText"><c:out value="${resultlist.student.centercode}"/></td>
                                 <td class="dataText">
                                 	<fmt:formatNumber type = "number" 
