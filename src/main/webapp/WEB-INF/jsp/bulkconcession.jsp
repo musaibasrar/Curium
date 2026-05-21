@@ -1,6 +1,6 @@
 <%--
-    Document   : Fees Report
-    Created on : MAR 24, 2020, 12:58:28 PM
+    Document   : Bulk Concession
+    Created on : MAY 21, 2026, 12:58:28 PM
     Author     : Musaib
 --%>
 
@@ -350,7 +350,6 @@
 		});
 		
 		$('#myTableFeesCat').dataTable({
-			"sScrollY" : "380px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
 			"bFilter" : true,
@@ -375,6 +374,25 @@
 <script type="text/javascript" src="/noble/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
+$(document).ready(function () {
+
+    // clear old hidden values
+    $("#selectedFeesCategoryHidden").html("");
+
+    // copy selected popup checkbox values
+    $(".feesCategoryChk:checked").each(function () {
+
+        console.log($(this).val());
+
+        $("#selectedFeesCategoryHidden").append(
+            '<input type="hidden" name="feescategory" value="' 
+            + $(this).val() + '">'
+        );
+
+    });
+
+});
+
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/noble/FeesCollection/searchFeesReportBulkConcession";
@@ -385,6 +403,7 @@
 	
 	
 	function applyConcession() {
+		
 		var form1 = document.getElementById("form1");
 		form1.action = "/noble/FeesProcess/applyBulkConcession";
 		form1.method = "POST";
@@ -431,28 +450,10 @@
 	});
 
 	$(function() {
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.labelClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
 		
 		$('.chcktbl').click(function() {
 			var length = $('.chcktbl:checked').length;
 			var trLength = $('.labelClass').length;
-			alert(tdLength);
 			if (length > trLength) {
 
 				$('.chcktbl:not(:checked)').attr('disabled', true);
@@ -626,6 +627,57 @@ function toggleStudentCheckbox(textbox, studentId) {
 </script>
 
 
+<script>
+
+$(function () {
+
+    $("#feesCategoryDialog").dialog({
+        autoOpen: false,
+        modal: true,
+        width: 500,
+        height: 400
+    });
+
+    $("#openFeesPopup").click(function () {
+
+        $("#feesCategoryDialog").dialog("open");
+
+        $("#feesCategoryHeadChk").prop("checked", true);
+
+        $(".feesCategoryChk").prop("checked", true);
+    });
+
+});
+
+
+/* Select All Fees Category */
+$('#feesCategoryHeadChk').click(function () {
+
+    $('.feesCategoryChk').prop('checked', this.checked);
+
+});
+
+
+$(document).on('click', '#feesCategoryHeadChk', function () {
+
+    $('.feesCategoryChk').prop('checked', this.checked);
+
+});
+
+/* Sync All checkbox */
+function syncFeesSelectAll() {
+
+    const checkboxes = document.querySelectorAll(".feesCategoryChk");
+
+    const allChecked = Array.from(checkboxes)
+                            .every(cb => cb.checked);
+
+    $("#feesCategoryHeadChk").prop("checked", allChecked);
+}
+
+</script>
+
+
 </head>
   <%
 //allow access only if session exists
@@ -649,7 +701,7 @@ for(Cookie cookie : cookies){
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Fees Report</a></li>
+					<li><a href="#tabs-1">Bulk Concession</a></li>
 
 				</ul>
 				<div id="tabs-1">
@@ -745,79 +797,28 @@ for(Cookie cookie : cookies){
 						<td><br></td>
                     </tr>
                     
-                    		<tr>
-							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
-							<td>
-							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
-							</label>
-							</td>
-							
-						</tr>
-						<tr>
-    <td></td>
-    <td id="feescat">
-    
-        <div style="overflow:scroll;width:420px; height:250px;">
-
-    <table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
-
-        <thead>
-            <tr>
-                <th class="headerText">Select</th>
-                <th class="headerText">Fees Details</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <c:forEach items="${feescategory}" var="item">
-
-                <!-- reset checked flag -->
-                <c:set var="isChecked" value="false" />
-
-                <!-- keep checked after search -->
-                <c:forEach items="${selectedFeesCategoryList}" var="selected">
-                    <c:if test="${selected eq item.idfeescategory}">
-                        <c:set var="isChecked" value="true" />
-                    </c:if>
-                </c:forEach>
-
-                <tr>
-                    <td class="dataText" style="background-color:white;">
-
-                        <input type="checkbox"
-                               name="feescategory"
-                               class="chcktbl"
-                               value="${item.idfeescategory}"
-                               <c:if test="${isChecked}">checked</c:if>
-                               onclick="syncFeesSelectAll()" />
-
-                    </td>
-
-                    <td class="dataText"
-                        style="font-weight:bold;color:#325F6D;background-color:white;text-align:left">
-
-                        ${item.feescategoryname} :
-                        <span style="color:#eb6000;">
-                            ${item.particularname}
-                        </span>
-
-                    </td>
-                </tr>
-
-            </c:forEach>
-        </tbody>
-
-    </table>
-
-</div>
-
-    </td>
-</tr>
+					<tr>
+					    <td style="font-weight: bold;color:#325F6D">
+					        Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;
+					    </td>
+					
+					    <td>
+					
+					        &nbsp;&nbsp;&nbsp;
+					
+					        <a href="javascript:void(0);" id="openFeesPopup" style="color:#4b6a84;font-weight:bold;text-decoration:none;cursor:pointer;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">
+    								Select Fees Category
+								</a>
+							<div id="selectedFeesCategoryHidden"></div>
+					    </td>
+					</tr>
 
 						 <tr>
 							<td><br /></td>
 
 						</tr>
+						
+						
                     
 					</table>
 					
@@ -861,7 +862,7 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText"><input type="checkbox" id="studentChckHead" /></th>
 						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
 						<!-- <th title="click to sort" class="headerText">Admission Number</th> -->
@@ -978,9 +979,99 @@ for(Cookie cookie : cookies){
 			</table>
 
 		</div>
+		
+		<!-- Fees Category Popup -->
+			<div id="feesCategoryDialog" title="Select Fees Category"  style="display:none;">
+			
+			    <div id="feescat">
+			    
+			    <label class="labelClass"
+					               style="font-weight: bold;color:#325F6D">
+					
+					            <input type="checkbox"
+					                   id="feesCategoryHeadChk"
+					                   checked="checked" />All
+					
+					        </label>
+			
+					<div style="width:420px;">
+			
+			            <table id="myTableFeesCat"
+			                   width="100%"
+			                   border="0"
+			                   style="border-color: #4b6a84;">
+			
+			                <thead>
+			                    <tr>
+			                        <th class="headerText">Select</th>
+			                        <th class="headerText">Fees Details</th>
+			                    </tr>
+			                </thead>
+			
+			                <tbody>
+			
+			                    <c:forEach items="${feescategory}" var="item">
+			
+			                        <!-- reset checked flag -->
+			                        <c:set var="isChecked" value="false" />
+			
+			                        <!-- keep checked after search -->
+			                        <c:forEach items="${selectedFeesCategoryList}" var="selected">
+			                            <c:if test="${selected eq item.idfeescategory}">
+			                                <c:set var="isChecked" value="true" />
+			                            </c:if>
+			                        </c:forEach>
+			
+			                        <tr>
+			
+			                            <td class="dataText"
+			                                style="background-color:white;">
+			
+			                                <input type="checkbox"
+			                                       name="feescategorypopup"
+			                                       class="feesCategoryChk"
+			                                       value="${item.idfeescategory}"
+			
+			                                       <c:choose>
+													    <c:when test="${isChecked}">
+													        checked="checked"
+													    </c:when>
+													    <c:otherwise>
+													        checked="checked"
+													    </c:otherwise>
+													</c:choose>
+			
+			                                       onclick="syncFeesSelectAll()" />
+			
+			                            </td>
+			
+			                            <td class="dataText"
+			                                style="font-weight:bold;
+			                                       color:#325F6D;
+			                                       background-color:white;
+			                                       text-align:left">
+			
+			                                ${item.feescategoryname} :
+			                                <span style="color:#eb6000;">
+			                                    ${item.particularname}
+			                                </span>
+			
+			                            </td>
+			
+			                        </tr>
+			
+			                    </c:forEach>
+			
+			                </tbody>
+			
+			            </table>
+			    </div>
+				</div>
+			</div>
 
 
 	</form>
 
 </body>
 </html>
+
