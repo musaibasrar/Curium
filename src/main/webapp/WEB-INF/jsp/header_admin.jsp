@@ -132,6 +132,11 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/littleflower/images/littleflowerheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
+							<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/littleflower/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
+							
 							<td><a target="leftFrame" href="/littleflower/left_admin"> <img
 									src="/littleflower/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
