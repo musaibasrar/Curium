@@ -131,7 +131,7 @@ public class MessStockMoveApiActionImpl implements MessStockMoveApiAction {
 
     @GetMapping("/billsReport")
     public ResponseEntity<StockMoveResponseDto> billsReport(@RequestBody ClassSearchDto dto, @RequestHeader(value = "branchid") String branchId, @RequestParam(value = "page") String page) {
-
+        
         StockMoveResponseDto result = messStockMoveService.viewStockMoveDetails(dto, branchId, page);
         return ResponseEntity.ok(result);
     }
