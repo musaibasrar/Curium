@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
 				
 				<tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px;height: 200px;">
+                    <img src="${student.studentpic}" alt="Student's Photo" style="width: 200px;height: 200px;">
                     <input type="hidden" value="<c:out value="${student.studentpic}"/>" id="studentpicupdate" name="studentpicupdate">
                     
                     <input type="hidden" value="<c:out value="${student.studentdoc1}"/>" id="studentdoc1update" name="studentdoc1update">
@@ -1137,7 +1137,7 @@ for(Cookie cookie : cookies){
                   		 	 <input type="checkbox" name="studentpicdelete" value="delete">Delete
                     		</td>
 							<td>
-                  		  	<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Pic" style="width: 200px;height: 200px;">
+                  		  	<img src="${student.studentpic}" alt="Student's Pic" style="width: 200px;height: 200px;">
                    			 </td>
                     
 							<td><br />
@@ -1150,7 +1150,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc1delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
+                    <img src="${student.studentdoc1}" alt="Student's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc1" onchange="Upload()" accept="image/*" >
@@ -1162,7 +1162,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc2delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
+                    <img src="${student.studentdoc2}" alt="Student's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc2" onchange="Upload()" accept="image/*" >
@@ -1175,7 +1175,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc3delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
+                    <img src="${student.studentdoc3}" alt="Student's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                    <input type="file" name="fileToUpload" id="studentdoc3" onchange="Upload()" accept="image/*" >
@@ -1187,7 +1187,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc4delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
+                    <img src="${student.studentdoc4}" alt="Student's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc4" onchange="Upload()" accept="image/*" >
@@ -1199,7 +1199,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="studentdoc5delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
+                    <img src="${student.studentdoc5}" alt="Student's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="studentdoc5" onchange="Upload()" accept="image/*" >

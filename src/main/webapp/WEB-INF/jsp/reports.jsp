@@ -468,9 +468,14 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/brainystars/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
+            				 <a target="mainFrame" href="/brainystars/MarksDetailsProcess/deenyatProgressReport" style="font-size: 12px;">Generate Deenyat Marks Card</a>
             			</td>
             		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/brainystars/MarksDetailsProcess/progressReport" style="font-size: 12px;">Consolidated Marks Card</a>
+            			</td>
+            		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/brainystars/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>

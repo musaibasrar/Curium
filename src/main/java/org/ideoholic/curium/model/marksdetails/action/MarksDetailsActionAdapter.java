@@ -304,4 +304,28 @@ public class MarksDetailsActionAdapter {
 		request.setAttribute("startDateStr", responseDto.getStartDate());
 		
 	}
+
+	public boolean generateDeenyaatReport() {
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setExamClass(request.getParameter("examclass"));
+
+        GenerateReportResponseDto responseDto = marksDetailsService.generateDeenyaatReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+        return responseDto.isSuccess();
+    }
+	
+    public boolean generatePreprimaryReport() {
+
+        GenerateReportDto dto = new GenerateReportDto();
+        dto.setStudentIds(request.getParameterValues("studentIDs"));
+        dto.setExamClass(request.getParameter("examclass"));
+
+        GenerateReportResponseDto responseDto = marksDetailsService.generatePreprimaryReport(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
+        request.setAttribute("endloop", responseDto.getEndLoop());
+        request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
+        return responseDto.isSuccess();
+    }
 }

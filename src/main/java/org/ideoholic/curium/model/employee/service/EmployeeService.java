@@ -84,7 +84,7 @@ public class EmployeeService {
 		                    
 		                    if (!fileName1.equalsIgnoreCase("")) {
 		                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
-		                    	String saveFile = new String(bytesEncoded);
+		                    	String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 		                    	employee.setEmployeephoto(saveFile);
 		                    }
 		                    
@@ -95,7 +95,7 @@ public class EmployeeService {
 			                    if (!fileName2.equalsIgnoreCase("")) {
 			                    	// encode data on your side using BASE64
 			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
-			                    	String saveFile = new String(bytesEncoded);
+			                    	String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 			                    	employee.setEmployeedoc1(saveFile);
 
 			                    } 
@@ -106,7 +106,7 @@ public class EmployeeService {
 			                    if (!fileName3.equalsIgnoreCase("")) {
 			                    	// encode data on your side using BASE64
 			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
-			                    	String saveFile = new String(bytesEncoded);
+			                    	String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 			                    	employee.setEmployeedoc2(saveFile);
 
 			                    } 
@@ -118,7 +118,7 @@ public class EmployeeService {
 			                    if (!fileName4.equalsIgnoreCase("")) {
 			                    	// encode data on your side using BASE64
 			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
-			                    	String saveFile = new String(bytesEncoded);
+			                    	String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 			                    	employee.setEmployeedoc3(saveFile);
 
 			                    } 
@@ -128,7 +128,7 @@ public class EmployeeService {
 			                    if (!fileName5.equalsIgnoreCase("")) {
 			                    	// encode data on your side using BASE64
 			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
-			                    	String saveFile = new String(bytesEncoded);
+			                    	String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 			                    	employee.setEmployeedoc4(saveFile);
 
 			                    } 
@@ -139,7 +139,7 @@ public class EmployeeService {
 			                    if (!fileName6.equalsIgnoreCase("")) {
 			                    	// encode data on your side using BASE64
 			                    	byte[]   bytesEncoded = Base64.encodeBase64(fileItem6.getBytes());
-			                    	String saveFile = new String(bytesEncoded);
+			                    	String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 			                    	employee.setEmployeedoc5(saveFile);
 			                    } 
 			                
@@ -289,7 +289,7 @@ public class EmployeeService {
 
 			if (!fileName1.equalsIgnoreCase("")) {
 				byte[] bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
-				String saveFile = new String(bytesEncoded);
+				String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 				employee.setEmployeephoto(saveFile);
 			} else {
 				if (employeePhotodelete != null) {
@@ -306,7 +306,7 @@ public class EmployeeService {
 			if (!fileName2.equalsIgnoreCase("")) {
 				// encode data on your side using BASE64
 				byte[] bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
-				String saveFile = new String(bytesEncoded);
+				String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 				employee.setEmployeedoc1(saveFile);
 
 			} else {
@@ -323,7 +323,7 @@ public class EmployeeService {
 			if (!fileName3.equalsIgnoreCase("")) {
 				// encode data on your side using BASE64
 				byte[] bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
-				String saveFile = new String(bytesEncoded);
+				String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 				employee.setEmployeedoc2(saveFile);
 
 			} else {
@@ -341,7 +341,7 @@ public class EmployeeService {
 			if (!fileName4.equalsIgnoreCase("")) {
 				// encode data on your side using BASE64
 				byte[] bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
-				String saveFile = new String(bytesEncoded);
+				String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 				employee.setEmployeedoc3(saveFile);
 
 			} else {
@@ -357,7 +357,7 @@ public class EmployeeService {
 			if (!fileName5.equalsIgnoreCase("")) {
 				// encode data on your side using BASE64
 				byte[] bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
-				String saveFile = new String(bytesEncoded);
+				String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 				employee.setEmployeedoc4(saveFile);
 
 			} else {
@@ -374,7 +374,7 @@ public class EmployeeService {
 			if (!fileName6.equalsIgnoreCase("")) {
 				// encode data on your side using BASE64
 				byte[] bytesEncoded = Base64.encodeBase64(fileItem6.getBytes());
-				String saveFile = new String(bytesEncoded);
+				String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 				employee.setEmployeedoc5(saveFile);
 			} else {
 				if (employeedoc5delete != null) {

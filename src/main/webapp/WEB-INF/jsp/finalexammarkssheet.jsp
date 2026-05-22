@@ -147,7 +147,7 @@ footer p {
         <p><strong style="color:red">Section:</strong><strong style="color:blue"> ${dateClassParts[1]}</strong></p>
         <p><strong style="color:red">Roll No.:</strong> <strong style="color:blue">${Parents.parents.student.sts}</strong></p>
     </div>
-    <%-- <img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/> --%>
+    <%-- <img  src="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/> --%>
 </section>        <table>
             <thead>
                 <tr>

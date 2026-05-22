@@ -101,7 +101,7 @@ public class StudentService {
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 					if (!fileName.equalsIgnoreCase("")) {
 						byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
-						String saveFile = new String(bytesEncoded);
+						String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 						 switch (i) {
 						 	case 0:
 			                    student.setStudentpic(saveFile);
@@ -712,7 +712,7 @@ public class StudentService {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 
 					student.setStudentpic(saveFile);
 
@@ -730,7 +730,7 @@ public class StudentService {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 
 					student.setStudentdoc1(saveFile);
 
@@ -747,7 +747,7 @@ public class StudentService {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 
 					student.setStudentdoc2(saveFile);
 
@@ -764,7 +764,7 @@ public class StudentService {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 
 					student.setStudentdoc3(saveFile);
 
@@ -780,7 +780,7 @@ public class StudentService {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 
 					student.setStudentdoc4(saveFile);
 
@@ -796,7 +796,7 @@ public class StudentService {
 					// Resize the image
 					byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
 
 					student.setStudentdoc5(saveFile);
 

@@ -194,7 +194,6 @@ public class ExamDetailsDAO {
 			results = (List<Exams>) query.getResultList();
 			transaction.commit();
 			
-			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			hibernateException.printStackTrace();
 		}finally {

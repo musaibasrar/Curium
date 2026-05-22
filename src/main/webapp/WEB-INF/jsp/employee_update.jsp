@@ -340,13 +340,13 @@ for(Cookie cookie : cookies){
 				
 				<tr>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeephoto}"/>" alt="Staff's Photo" style="width: 200px;height: 200px;">
-                    <input type="hidden" value="<c:out value="${employee.employeephoto}"/>" id="employeephotoupdate" name="employeephotoupdate">
-                    <input type="hidden" value="<c:out value="${employee.employeedoc1}"/>" id="employeedoc1update" name="employeedoc1update">
-                    <input type="hidden" value="<c:out value="${employee.employeedoc2}"/>" id="employeedoc2update" name="employeedoc2update">
-                    <input type="hidden" value="<c:out value="${employee.employeedoc3}"/>" id="employeedoc3update" name="employeedoc3update">
-                    <input type="hidden" value="<c:out value="${employee.employeedoc4}"/>" id="employeedoc4update" name="employeedoc4update">
-                    <input type="hidden" value="<c:out value="${employee.employeedoc5}"/>" id="employeedoc5update" name="employeedoc5update">
+                    <img src="${employee.employeephoto}" alt="Staff's Photo" style="width: 200px;height: 200px;">
+                    <input type="hidden" value="<c:out value="${employee.employeephoto}" id="employeephotoupdate" name="employeephotoupdate">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc1}" id="employeedoc1update" name="employeedoc1update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc2}" id="employeedoc2update" name="employeedoc2update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc3}" id="employeedoc3update" name="employeedoc3update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc4}" id="employeedoc4update" name="employeedoc4update">
+                    <input type="hidden" value="<c:out value="${employee.employeedoc5}" id="employeedoc5update" name="employeedoc5update">
                     </td>
                     </tr>
 				
@@ -944,7 +944,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="employeedoc1delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc1}"/>" alt="Staff's Doc1" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc1}"/>" alt="Staff's Doc1" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="employeedoc1" accept="image/*" >
@@ -956,7 +956,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="employeedoc2delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc2}"/>" alt="Staff's Doc2" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc2}"/>" alt="Staff's Doc2" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="employeedoc2" accept="image/*" >
@@ -969,7 +969,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="employeedoc3delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc3}"/>" alt="Staff's Doc3" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc3}"/>" alt="Staff's Doc3" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                    <input type="file" name="fileToUpload" id="employeedoc3" accept="image/*" >
@@ -981,7 +981,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="employeedoc4delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc4}"/>" alt="Staff's Doc4" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc4}"/>" alt="Staff's Doc4" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="employeedoc4" accept="image/*" >
@@ -993,7 +993,7 @@ for(Cookie cookie : cookies){
                     <input type="checkbox" name="employeedoc5delete" value="delete">Delete
                     </td>
                     <td>
-                    <img src="data:image;base64,<c:out value="${employee.employeedoc5}"/>" alt="Staff's Doc5" style="width: 200px;height: 200px;">
+                    <img src="${employee.employeedoc5}"/>" alt="Staff's Doc5" style="width: 200px;height: 200px;">
                     </td>
                     <td>
                     <input type="file" name="fileToUpload" id="employeedoc5" accept="image/*" >

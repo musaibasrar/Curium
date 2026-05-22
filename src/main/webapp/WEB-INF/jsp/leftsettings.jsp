@@ -368,7 +368,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/brainystars/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
                 <a target="mainFrame" href="/brainystars/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/brainystars/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/brainystars/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/brainystars/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a><br>
                 <a target="mainFrame" href="/brainystars/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
             </div>
             

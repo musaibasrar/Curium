@@ -450,7 +450,7 @@ public class StudentServiceArchive {
 
                 if (!fileName1.equalsIgnoreCase("")) {
                     byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
-                    String saveFile = new String(bytesEncoded);
+                    String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                     student.setStudentpic(saveFile);
                 }
 
@@ -461,7 +461,7 @@ public class StudentServiceArchive {
                 if (!fileName2.equalsIgnoreCase("")) {
                     // encode data on your side using BASE64
                     byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
-                    String saveFile = new String(bytesEncoded);
+                    String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                     student.setStudentdoc1(saveFile);
 
                 }
@@ -472,7 +472,7 @@ public class StudentServiceArchive {
                 if (!fileName3.equalsIgnoreCase("")) {
                     // encode data on your side using BASE64
                     byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
-                    String saveFile = new String(bytesEncoded);
+                    String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                     student.setStudentdoc2(saveFile);
 
                 }
@@ -484,7 +484,7 @@ public class StudentServiceArchive {
                 if (!fileName4.equalsIgnoreCase("")) {
                     // encode data on your side using BASE64
                     byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
-                    String saveFile = new String(bytesEncoded);
+                    String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                     student.setStudentdoc3(saveFile);
 
                 }
@@ -494,7 +494,7 @@ public class StudentServiceArchive {
                 if (!fileName5.equalsIgnoreCase("")) {
                     // encode data on your side using BASE64
                     byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
-                    String saveFile = new String(bytesEncoded);
+                    String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                     student.setStudentdoc4(saveFile);
 
                 }
@@ -505,7 +505,7 @@ public class StudentServiceArchive {
                 if (!fileName6.equalsIgnoreCase("")) {
                     // encode data on your side using BASE64
                     byte[]   bytesEncoded = Base64.encodeBase64(fileItem6.getBytes());
-                    String saveFile = new String(bytesEncoded);
+                    String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                     student.setStudentdoc5(saveFile);
                 }
 
@@ -704,8 +704,8 @@ public class StudentServiceArchive {
                     if (!fileName.equalsIgnoreCase("")) {
                         // Resize the image
                         byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
-                        System.out.println("ecncoded value is " + new String(bytesEncoded));
-                        String saveFile = new String(bytesEncoded);
+                        System.out.println("ecncoded value is " + new String("data:image/jpg;base64,"+bytesEncoded));
+                        String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
                         student.setStudentpic(saveFile);
                     } else {
                         student.setStudentpic(studentPicUpdate);

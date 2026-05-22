@@ -56,7 +56,7 @@ padding:1 rem;
      <div class="d-flex justify-content-center mb-2" style="width: 100%; padding: 0.25rem;">
   <div class="card" style="width: 100%; max-width: 360px;">
     <div class="card-body text-center">
-      <img class="rounded-circle mx-auto" src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px; height: 200px;">
+      <img class="rounded-circle mx-auto" src="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px; height: 200px;">
       <h5 class="my-3"><c:out value="${student.name}" /></h5>
       <p class="text-muted mb-1"><c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
         ${splt}
