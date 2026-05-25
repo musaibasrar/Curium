@@ -383,7 +383,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("feesbycash", responseDto.getFeesByCash());
         httpSession.setAttribute("feesbybank", responseDto.getFeesByBank());
         httpSession.setAttribute("feesbycashotherfees", responseDto.getFeesByCashOtherFees());
-        httpSession.setAttribute("feesbycashotherfees", responseDto.getFeesByBankOtherFees());
+        httpSession.setAttribute("feesbybankotherfees", responseDto.getFeesByBankOtherFees());
     }
 
     public boolean downlaod() {
