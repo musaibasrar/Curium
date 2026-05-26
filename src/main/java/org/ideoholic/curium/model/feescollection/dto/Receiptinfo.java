@@ -58,7 +58,7 @@ public class Receiptinfo implements java.io.Serializable {
 	private String academicyear;
 
 	@Column(name = "cancelreceipt")
-	private int cancelreceipt;
+	private Integer cancelreceipt;
 
 	@Column(name = "branchreceiptnumber", length = 20)
 	private String branchreceiptnumber;
