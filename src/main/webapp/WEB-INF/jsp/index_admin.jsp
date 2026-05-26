@@ -96,11 +96,11 @@ for(Cookie cookie : cookies){
 }
 %>
     <frameset rows="55,*" frameborder="0" border="0" framespacing="0">
-        <frame src="/vision/header_admin" name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame src="/fathima/header_admin" name="topFrame" scrolling="NO" noresize frameborder="0">
 
         <frameset cols="195,*" frameborder="0" border="0" framespacing="0">
-            <frame src="/vision/left_admin" name="leftFrame" scrolling="yes" frameborder="1" />
-            <frame src="/vision/welcome" name="mainFrame" scrolling="yes" />
+            <frame src="/fathima/left_admin" name="leftFrame" scrolling="yes" frameborder="1" />
+            <frame src="/fathima/welcome" name="mainFrame" scrolling="yes" />
         </frameset>
 
     </frameset>
