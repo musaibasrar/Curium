@@ -957,8 +957,8 @@ public class FeesCollectionService {
 				idBranch = Integer.parseInt(strBranchId);
 			}
 	        
-		String queryMainDaily ="From Receiptinfo as feesdetails where (feesdetails.cancelreceipt = 0 or feesdetails.cancelreceipt IS NULL) and feesdetails.branchid="+idBranch+" AND";
-		String queryMainMonthly ="From Receiptinfo as feesdetails where (feesdetails.cancelreceipt = 0 or feesdetails.cancelreceipt IS NULL) and feesdetails.branchid="+idBranch+" AND";
+		String queryMainDaily ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
+		String queryMainMonthly ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 
 
 		Date monthOf = new Date();
@@ -1980,7 +1980,7 @@ public class FeesCollectionService {
 	        	idBranch = Integer.parseInt(strBranchId);
 	        }
 	        
-		String queryMain ="From Receiptinfo as feesdetails where (feesdetails.cancelreceipt = 0 or feesdetails.cancelreceipt IS NULL) and feesdetails.branchid="+idBranch+" AND";
+		String queryMain ="From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+idBranch+" AND";
 		String toDate= DataUtil.emptyString(dto.getToDate());
 		String fromDate = DataUtil.emptyString(dto.getFromDate());
 		
