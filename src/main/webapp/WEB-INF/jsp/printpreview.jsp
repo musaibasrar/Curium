@@ -10,34 +10,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Student Id Card</title> 
 
-        <script type="text/javascript" language="JavaScript" src="/abc/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/divine/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/divine/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/divine/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
-        <script type="text/javascript" src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/divine/css/datePicker/demos.css">
+        <script type="text/javascript" src="/divine/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/abc/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/abc/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/divine/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/divine/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/divine/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
             <!--
@@ -275,7 +275,7 @@
 
             function updateContact() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/PersonalProcess/updateContactDetails?id=1";
+                form1.action = "/divine/PersonalProcess/updateContactDetails?id=1";
                 form1.submit();
             }
 
@@ -334,7 +334,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/UserProcess/sessionTimeOut");
+	response.sendRedirect("/divine/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -357,6 +357,10 @@ for(Cookie cookie : cookies){
                         
                         
             }
+  .card {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
             .header,.hide { visibility: hidden }
             .bodymargin{
                 margin-left: 0px ;
@@ -367,10 +371,11 @@ for(Cookie cookie : cookies){
         
         @page {
               
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
+             size: A4;
+    margin-top: 10mm;   /* Adjust this value */
+    margin-bottom: 0mm;
+    margin-left: 10mm;
+    margin-right: 10mm;
         }
 
         @media screen {
@@ -442,13 +447,52 @@ for(Cookie cookie : cookies){
     .vertical-line {
       border-left: 2px solid #350c76; /* Add a vertical line */
     }
+    
+  .id-top-flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;   /* IMPORTANT */
+    width: 95%;
+    margin: auto;
+    height: 95px;
+}
+
+.vertical-id {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: bold;
+    background: green;
+    border-radius: 5px;
+    padding: 4px;
+    margin-right: 4px;   /* VERY SMALL GAP */
+}
+
+.student-photo {
+    height: 78px;
+    width: 60px;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-right: 6px;   /* SMALL GAP before SESSION */
+}
+
+.vertical-session {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-weight: bold;
+    margin-right: auto;   /* pushes logo to right */
+}
+
+.logo-img {
+    width: 80px;
+    height: 28px;
+}
   </style>
     </head>
      
 
     <body class="bodymargin">
        
-        <form action="/abc/" method="post" id="form1" class="bodymargin">
+        <form action="/divine/" method="post" id="form1" class="bodymargin">
 			
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
@@ -459,46 +503,39 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
+			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;padding-top: 10px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
    </table>
   </div>
 
-  <div class="table-container" style=" ">
- <table style="margin-left:10px;">
- <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/abc/images/abc.png" width="65" height="72"/>
- </td>
- </tr>
- </table>
-   </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
+ <div class="id-top-flex">
+    <div class="vertical-id">IDENTITY-CARD</div>
+
+    <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>"
+         class="student-photo"/>
+
+    <div class="vertical-session">SESSION ${currentacadmicyear}</div>
+
+    <img src="/divine/images/divine.png" class="logo-img"/>
+</div>
+   <div style="text-align: center;">
+   <p style="font-size:18px;margin-bottom:10px;margin-top:10px; text-transform: uppercase;"><%= request.getSession().getAttribute("studentname" + i + "") %></p>
 	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 100%;margin-left: 0px">
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
-  <tr>
+  <%-- <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
   </tr>
@@ -509,20 +546,20 @@ for(Cookie cookie : cookies){
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
+  </tr> --%>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;">:&nbsp;Bidar District</td>
   </tr>
 </table>
 
-<div height="30" width="20%" style="text-align:right;float:right;">
+<div height="30" width="20%" style="text-align:right;float:right;margin-top:30px;">
 
-<img src="/abc/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<img src="/divine/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
 principal&nbsp;&nbsp;&nbsp;</div>
 </div>
@@ -542,7 +579,7 @@ principal&nbsp;&nbsp;&nbsp;</div>
 
                         </td>
                         <td>
-                            <button id="print" type="button" style="background-image: url(/abc/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
+                            <button id="print" type="button" style="background-image: url(/divine/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
                                     this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
                         </td>
 
