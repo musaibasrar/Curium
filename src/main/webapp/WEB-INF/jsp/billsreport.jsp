@@ -17,8 +17,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bills Report</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/shaheen/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/shaheen/css/datePicker/demos.css">
 <style type="text/css">
 .divCSS {
 	overflow: scroll;
@@ -408,26 +408,26 @@
 }
 
 </style>
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script type="text/javascript" src="/shaheen/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/shaheen/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/shaheen/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/shaheen/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+	src="/shaheen/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/shaheen/js/datePicker/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/shaheen/js/datePicker/ui/jquery.ui.accordion.js"></script>
 	
 	<!-- Select drop down -->	
-	<!-- <link href="/vision/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<script src="/vision/js/bootstrap.min.js"></script>
-<!-- <script src="/vision/js/jquery.min.js"></script> -->
+	<!-- <link href="/shaheen/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="/shaheen/js/bootstrap.min.js"></script>
+<!-- <script src="/shaheen/js/jquery.min.js"></script> -->
 
 
-<link href="/vision/css/select2.min.css" rel="stylesheet" />
-<script src="/vision/js/select2.min.js"></script>
+<link href="/shaheen/css/select2.min.css" rel="stylesheet" />
+<script src="/shaheen/js/select2.min.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -511,7 +511,7 @@
 	});
 	
 </script>
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/shaheen/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function saveissueentry() {
@@ -528,7 +528,7 @@
 	
 	function cancelRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MessItemsMoveProcess/cancelStockMove";
+		form1.action = "/shaheen/MessItemsMoveProcess/cancelStockMove";
 		form1.method = "POST";
 		form1.submit();
 
@@ -536,7 +536,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MessItemsMoveProcess/printStockMove";
+		form1.action = "/shaheen/MessItemsMoveProcess/printStockMove";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -557,7 +557,7 @@
 	
 	function generateBillsReport() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/MessItemsMoveProcess/generateBillsReport";
+		form1.action = "/shaheen/MessItemsMoveProcess/generateBillsReport";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -1004,7 +1004,7 @@ for(Cookie cookie : cookies){
 			<div align="center">
              <%--For displaying Previous link except for the 1st page --%>
                 <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/vision/MessItemsMoveProcess/generateBillsReport?page=${currentPage - 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Previous</a></td>
+                    <td><a style="color: #4B6A84;font-size: 12px" href="/shaheen/MessItemsMoveProcess/generateBillsReport?page=${currentPage - 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Previous</a></td>
                 </c:if>
 
                 <%--For displaying Page numbers.
@@ -1017,7 +1017,7 @@ for(Cookie cookie : cookies){
                                     <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/vision/MessItemsMoveProcess/generateBillsReport?page=${i}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">${i}</a></td>
+                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/shaheen/MessItemsMoveProcess/generateBillsReport?page=${i}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">${i}</a></td>
                                 </c:otherwise>
                             </c:choose>
                         </c:forEach>
@@ -1026,7 +1026,7 @@ for(Cookie cookie : cookies){
 
                 <%--For displaying Next link --%>
                 <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/vision/MessItemsMoveProcess/generateBillsReport?page=${currentPage + 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Next</a></td>
+                    <td ><a style="color: #4B6A84;font-size: 12px" href="/shaheen/MessItemsMoveProcess/generateBillsReport?page=${currentPage + 1}&transactiondatefrom=${transactiondatefromselected}&transactiondateto=${transactiondatetoselected}">Next</a></td>
                 </c:if>
                     </div>
                     
