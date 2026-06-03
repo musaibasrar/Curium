@@ -513,6 +513,10 @@
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -521,6 +525,10 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
