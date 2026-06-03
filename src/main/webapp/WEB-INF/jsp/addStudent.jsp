@@ -22,25 +22,25 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/global/css/dataTable/css/demo_page.css";
-            @import "/global/css/dataTable/css/jquery.dataTables.css";
+            @import "/vision/css/dataTable/css/demo_page.css";
+            @import "/vision/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
-	src="/global/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/global/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/global/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/global/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/global/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/global/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/global/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/global/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/global/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/global/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/global/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/global/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/global/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -279,7 +279,7 @@
 
 
 
-<script type="text/javascript" src="/global/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
 <script>
 	$(function() {
@@ -513,6 +513,10 @@
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -521,6 +525,10 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
@@ -609,7 +617,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/global/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -673,7 +681,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/global/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -957,7 +965,7 @@ $(document).ready(function() {
             xmlHttpParent.onreadystatechange = stateChangedParent;
             xmlHttpParent.open(
                 "GET",
-                "/global/StudentProcess/searchListOfParent",
+                "/vision/StudentProcess/searchListOfParent",
                 true
             );
             xmlHttpParent.send(null);
@@ -1036,7 +1044,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/global/StudentProcess/checkDuplicateStudent?"
+			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),
@@ -1059,7 +1067,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/global/UserProcess/sessionTimeOut");
+		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1106,7 +1114,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input checked="checked"
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
@@ -1209,11 +1217,13 @@ $(document).ready(function() {
 							
 							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
 							<td ><label>
-							          Term<input type="checkbox" value="Tuition" name="feescategories" id="termfees"/>
-								&nbsp;Admission<input type="checkbox" value="Hostel" name="feescategories" id="admissionfees"/>
-								&nbsp;Exams<input type="checkbox" value="Hostel" name="feescategories" id="examsfees"/>
+							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
+								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
 								&nbsp;Transport <select name="feescategories" id="transport">
 										        <option value="Select">-- Select --</option>
+										        <option value="Malmal">Malmal</option>
+										        <option value="Madhubani">Madhubani</option>
+										        <option value="xyz">xyz</option>
 										    </select>
 								</label></td>
 						</tr>
@@ -2605,14 +2615,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/global/StudentProcess/AddStudent";
+									form1.action = "/vision/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/global/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 
