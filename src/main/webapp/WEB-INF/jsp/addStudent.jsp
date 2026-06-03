@@ -513,6 +513,10 @@
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -521,6 +525,10 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
@@ -1106,7 +1114,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
