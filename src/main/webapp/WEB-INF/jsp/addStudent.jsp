@@ -954,7 +954,7 @@ $(document).ready(function() {
             xmlHttpParent.onreadystatechange = stateChangedParent;
             xmlHttpParent.open(
                 "GET",
-                "/vision/StudentProcess/searchListOfParent",
+                "/awami/StudentProcess/searchListOfParent",
                 true
             );
             xmlHttpParent.send(null);
