@@ -603,7 +603,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/awami/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
