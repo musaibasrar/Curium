@@ -475,108 +475,43 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
              
-            
-			
-             <!--  <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+             
+              <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            				 <a target="mainFrame" href="/vision/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
+            			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/awami/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				 <a target="mainFrame" href="/vision/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
             			</td>
+            			
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/awami/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/awami/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
+            		
                 </table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				 <a target="mainFrame" href="/vision/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/vision/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            			</td>
+            			
             		</tr>
                 </table>
-            </div> -->
+            </div>
             
-            
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/awami/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/awami/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/awami/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/awami/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
             
               <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -603,129 +538,6 @@ for(Cookie cookie : cookies){
             		</tr> -->
                 </table>
             </div>
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/awami/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/awami/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/awami/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            
-                 <!--  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-             <!-- <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            
-               
-            <!--   <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/awami/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -776,36 +588,12 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
+          	<h5 class="sideaccordian" ><a href="#">Time Table</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
-            			</td>
-            			
-            		</tr>
-            		
-                </table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/awami/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            				<a target="mainFrame" href="/vision/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
             			</td>
             			
             		</tr>
