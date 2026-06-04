@@ -705,9 +705,25 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                                 <fmt:formatDate value="${student.crecorddate}" pattern="dd/MM/yyyy"/>
                             </td>
+                            <td  width="25%"  class="alignLeft" height="50">Identification
+                            </td>
+                            <td width="25%" class="tablerows">
+                            <c:out default="" value="${student.crecord}" />
+                            </td>
                         </tr>
                         
-           
+             <tr>
+                            <td  width="25%"  class="alignLeft" height="50">APAAR ID
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.apaarId}" />
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">PEN
+                            </td>
+                            <td width="25%" class="tablerows">
+                            <c:out default="" value="${student.pen}" />
+                            </td>
+                        </tr>
 
                         <tr>
                             <td  width="25%"  class="alignLeft" height="50">
@@ -821,7 +837,7 @@ for(Cookie cookie : cookies){
                             </td>
                             
                             
-                            <td width="25%"   class="alignLeft" height="50" >Core Subjects Studied</td>
+                            <td width="25%"   class="alignLeft" height="50" >secured/max/percentage</td>
                             <td width="25%" class="tablerows" >
                                 <c:out default="" value="${student.subsequentprogress}" />
                             </td>
@@ -934,6 +950,18 @@ for(Cookie cookie : cookies){
                             </td>
                             <td width="25%" class="tablerows" style="text-transform:uppercase">
                                 <c:out default="" value="${parents.mothersqualification}" />
+                            </td>
+                        </tr>
+                         <tr>
+
+                            <td width="25%"  class="alignLeft" height="50">Father's Occupation</td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.fatherscaste}" />
+                            </td>
+                            <td width="25%"  class="alignLeft" height="50" >Mother's Occupation
+                            </td>
+                            <td width="25%" class="tablerows" style="text-transform:uppercase">
+                                <c:out default="" value="${parents.motherscaste}" />
                             </td>
                         </tr>
                         <tr>
