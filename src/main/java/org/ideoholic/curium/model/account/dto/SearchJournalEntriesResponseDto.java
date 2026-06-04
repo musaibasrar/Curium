@@ -1,10 +1,12 @@
 package org.ideoholic.curium.model.account.dto;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.Builder;
 import lombok.Data;
-
-import java.util.Map;
 
 @Data
 @Builder
@@ -17,4 +19,6 @@ public class SearchJournalEntriesResponseDto {
     private String message;
     private String fromDate;
     private String toDate;
+    private BigDecimal openingBalance;
+    private BigDecimal closingBalance;
 }
