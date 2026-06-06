@@ -1043,6 +1043,12 @@ for(Cookie cookie : cookies){
 									id="datepickerCD" size="30" data-validate="validate(required)">
 							</label></td>
 							
+							<td style="display: none;">&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" ${student.rte == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" ${student.rte == '0' ? 'checked' : ''}/>
+							</td>
 							
 							<td class="alignLeft" style="padding-left: 20px;">Admission Year&nbsp;</td>
 

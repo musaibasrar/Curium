@@ -512,6 +512,10 @@
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -520,6 +524,10 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
@@ -1105,8 +1113,8 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
-								type="checkbox" value="Admission" name="stream" id="yes:at" checked
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
+								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
 								onclick="noCheck(this.id)" />
@@ -1559,11 +1567,18 @@ $(document).ready(function() {
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
+							<td style="display: none;"  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
 							<td ><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="36"
 									data-validate="validate(required)">
+									
 							</label></td>
 							
 							<td  class="alignLeft" style="padding-left: 20px;">Admission/PassedOut Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
