@@ -1699,7 +1699,7 @@ $(document).ready(function() {
 								</tr>
 								<tr>
 									<td><br /></td>
-								</tr> -->
+								</tr>
 
 								<tr>
 
@@ -1752,6 +1752,30 @@ $(document).ready(function() {
 											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
 											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+                        <tr>
+										
+							<td class="alignLeft">PEN &nbsp;</td>
+							<td ><label> <input name="pen"
+									type="text"
+									class="myclass" id="pen" size="36"
+									>
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR ID
+								&nbsp;</td>
+							<td ><label> <input
+									name="apaarid" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="apaarid" size="36">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 										
 							<td class="alignLeft">Sibling &nbsp;</td>
