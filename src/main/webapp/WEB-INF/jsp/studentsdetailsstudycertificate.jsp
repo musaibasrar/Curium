@@ -15,6 +15,7 @@
 <title>Students Details Study Certificate</title>
 <link rel="stylesheet" href="/daralmajd/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/daralmajd/css/datePicker/demos.css">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <style type="text/css">
 <!--
 .divCSS {
@@ -757,8 +758,7 @@ for(Cookie cookie : cookies){
 									value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out
 									value="${Parents.mothersname}" /></td>
-							<td class="dataText"><c:out
-									value="${Parents.student.admissiondate}" /></td>
+							<td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="dd/MM/yyyy"/></td>
 						</tr>
 					</c:forEach>
 				</tbody>
