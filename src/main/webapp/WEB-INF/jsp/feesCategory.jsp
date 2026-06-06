@@ -745,7 +745,7 @@ for(Cookie cookie : cookies){
 										<option selected>${currentAcademicYear}</option>
 										<c:forEach var="year" items="${previousAcademicYears}">
         										<option value="${year}">${year}</option>
-    									</c:forEach>
+    									</c:forEach>										
 								</select>
 
 							</label> </td>
