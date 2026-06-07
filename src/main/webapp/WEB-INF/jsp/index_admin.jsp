@@ -5,7 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -15,48 +14,69 @@
         <meta name="viewport" content="width=device-width, initial-scale=.85">
         <script type="text/javascript">
 
-            /***********************************************
-             * Collapsible Frames script- © Dynamic Drive (www.dynamicdrive.com)
-             * This notice must stay intact for use
-             * Visit http://www.dynamicdrive.com/ for full source code
-             ***********************************************/
+            var leftFrameHidden = false;
+            var originalCols = "195,*";
+            var animationDuration = 500; // milliseconds
+            var isAnimating = false;
 
-            var columntype=""
-            var defaultsetting=""
-
-            function getCurrentSetting(){
-                if (document.body)
-                    return (document.body.cols)? document.body.cols : document.body.rows
-            }
-
-            function setframevalue(coltype, settingvalue){
-                if (coltype=="rows")
-                    document.body.rows=settingvalue
-                else if (coltype=="cols")
-                    document.body.cols=settingvalue
-            }
-
-            function resizeFrame(contractsetting){
-                if (getCurrentSetting()!=defaultsetting)
-                    setframevalue(columntype, defaultsetting)
-                else
-                    setframevalue(columntype, contractsetting)
-            }
-
-            function init(){
-                if (!document.all && !document.getElementById) return
-                if (document.body!=null){
-                    columntype=(document.body.cols)? "cols" : "rows"
-                    defaultsetting=(document.body.cols)? document.body.cols : document.body.rows
+            // Smooth toggle function with animation
+            function toggleLeftFrame(){
+                if (isAnimating) return; // Prevent multiple clicks during animation
+                
+                var innerFrameset = document.getElementsByTagName("frameset")[1];
+                
+                if (leftFrameHidden) {
+                    // Unhide with smooth transition
+                    smoothTransition(innerFrameset, 0, 195, true);
+                } else {
+                    // Hide with smooth transition
+                    smoothTransition(innerFrameset, 195, 0, false);
                 }
-                else
-                    setTimeout("init()",100)
             }
 
-            setTimeout("init()",100)
+            // Smooth transition animation function
+            function smoothTransition(frameset, startWidth, endWidth, isUnhiding){
+                isAnimating = true;
+                var startTime = Date.now();
+                var steps = 30; // Number of animation steps
+                var stepDuration = animationDuration / steps;
+                
+                function animate(){
+                    var elapsed = Date.now() - startTime;
+                    var progress = Math.min(elapsed / animationDuration, 1);
+                    
+                    // Easing function for smooth motion (ease-out)
+                    var easeProgress = 1 - Math.pow(1 - progress, 3);
+                    
+                    var currentWidth = startWidth + (endWidth - startWidth) * easeProgress;
+                    
+                    if (currentWidth > 0) {
+                        frameset.cols = Math.round(currentWidth) + ",*";
+                    } else {
+                        frameset.cols = "0,*";
+                    }
+                    
+                    if (progress < 1) {
+                        setTimeout(animate, stepDuration);
+                    } else {
+                        // Animation complete
+                        if (isUnhiding) {
+                            frameset.cols = originalCols;
+                            leftFrameHidden = false;
+                        } else {
+                            frameset.cols = "0,*";
+                            leftFrameHidden = true;
+                        }
+                        isAnimating = false;
+                    }
+                }
+                
+                animate();
+            }
 
         </script>
     </head>
+
 
 
 <%
@@ -75,21 +95,15 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
-    
-		   <c:if test="${(userType == 'admin')}">
-			    <frame   src="/iqra/header_admin"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
+    <frameset rows="55,*" frameborder="0" border="0" framespacing="0">
+        <frame src="/iqra/header_admin" name="topFrame" scrolling="NO" noresize frameborder="0">
 
-            <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/iqra/left_admin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/iqra/welcome" name="mainFrame" scrolling="yes" />
-            </frameset>
+        <frameset cols="195,*" frameborder="0" border="0" framespacing="0">
+            <frame src="/iqra/left_admin" name="leftFrame" scrolling="yes" frameborder="1" />
+            <frame src="/iqra/welcome" name="mainFrame" scrolling="yes" />
+        </frameset>
 
-   </frameset>
-
-
-
+    </frameset>
 
     <noframes>
         <body>
