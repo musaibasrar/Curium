@@ -12,12 +12,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 public interface DiaryApiAction {
 	
 	 ResponseEntity<ResultResponse> getdiarystudent(@RequestHeader(value = Constants.BRANCHID) String branchId) ;
 
 	 ResponseEntity addDiary(@RequestBody AddDiaryDto addDiaryDto,
+			 @RequestPart("fileToUpload") MultipartFile[] uploadedFiles,
 			@RequestHeader(value = Constants.BRANCHID) String branchId,
 			@RequestHeader(value = Constants.CURRENTACADEMICYEAR) String currentAcademicYear,
 			@RequestHeader(value = Constants.USERID) String userLoginId);
