@@ -344,8 +344,8 @@
 		
 		<TABLE width="90%" border="0">
 		<tr style="font-size: 10px;" align="right">
-		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td> --%>
+		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
+		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${receiptdate}</td> --%>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -520,8 +520,8 @@
 		
 		<TABLE width="90%" border="0">
 		<tr style="font-size: 10px;" align="right">
-		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
-		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${recieptdate}</td> --%>
+		<%-- <td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}</label>
+		Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;${receiptdate}</td> --%>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
