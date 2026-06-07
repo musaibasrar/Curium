@@ -1073,7 +1073,7 @@ for(Cookie cookie : cookies){
 
 							<td><br /></td>
 						</tr>
-						<tr>
+						<%-- <tr>
 							<td class="alignLeft">APAAR Id &nbsp;</td>
 							<td><label> <input name="apaarid"
 									type="text" value="<c:out default="" value="${student.apaarId}" />" class="myclass"
@@ -1092,7 +1092,7 @@ for(Cookie cookie : cookies){
 						<tr>
 
 							<td><br /></td>
-						</tr>
+						</tr> --%>
 						<tr>
 							<td class="alignLeft">DND Date &nbsp;</td>
 							<td><label> <input name="crecorddate"

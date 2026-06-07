@@ -540,7 +540,7 @@ public class FeesCollectionService {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
 				feeCategoryMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 				String[] tokens = studentfeesstructure.get(0).getFeescategory().getFeescategoryname().split("[/ ]"); // Split by both / and space
-				categoryName[i] = tokens.length > 2 ? tokens[2] : "";
+				categoryName[i] = tokens.length > 2 ? tokens[0]+" "+tokens[2] : "";
 				i++;
 			}
 			

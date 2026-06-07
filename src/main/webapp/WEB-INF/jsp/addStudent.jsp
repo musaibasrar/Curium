@@ -1768,8 +1768,9 @@ $(document).ready(function() {
 											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
 											id="cocontactnumber" size="36" maxlength="10" minlength="10">
-
-                        <tr>
+										</label>
+										</td>
+                        <!-- <tr>
 										
 							<td class="alignLeft">PEN &nbsp;</td>
 							<td ><label> <input name="pen"
@@ -1813,7 +1814,7 @@ $(document).ready(function() {
 						</tr>
 
 									</label></td>
-								</tr>
+								</tr> -->
 
 								<tr>
 									<td><br /></td>

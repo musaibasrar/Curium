@@ -708,7 +708,7 @@ for(Cookie cookie : cookies){
                           
                            
                         </tr>
-                        <tr>
+                        <%-- <tr>
                             <td  width="25%"  class="alignLeft" height="50">APAAR ID
                             </td>
                             <td width="25%" class="tablerows">
@@ -719,7 +719,7 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                             <c:out default="" value="${student.pen}" />
                             </td>
-                        </tr>
+                        </tr> --%>
                          <tr>
                             <td  width="25%"  class="alignLeft" height="50">DND Date
                             </td>
