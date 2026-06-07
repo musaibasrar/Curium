@@ -16,7 +16,7 @@
 <head>
 <title>Progress Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-<script src="/vision/js/Chart.min.js"></script>
+<script src="/iqra/js/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-3d@1.0.0/dist/chartjs-plugin-3d.min.js"></script>
 <style>
 body {
@@ -376,12 +376,12 @@ body {
 			<div class="schoolbox">
 			
 				<div class="logo">
-					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/vision/images/vision.png">
+					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/iqra/images/iqra.png">
 				</div>
 		
 				<div class="schoolname">
 					<h3 style="font-size: 40px;color: #971d1d;">Little Flower Public School</h3>
-					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/vision/images/visionschoolname.png"> -->
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/iqra/images/iqraschoolname.png"> -->
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
 					</div>
@@ -1050,7 +1050,7 @@ body {
 		</c:choose>
 </div>
 	<!-- <div class="footer">
-    <img src="/vision/images/hmsign.png" class="signature" width="200" height="60"/>
+    <img src="/iqra/images/hmsign.png" class="signature" width="200" height="60"/>
 
     <div class="headmaster">H.M.</div>
 

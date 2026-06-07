@@ -354,6 +354,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/iqra/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/iqra/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
                 <a target="mainFrame" href="/iqra/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/iqra/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
