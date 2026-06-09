@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/bright/css/bootstrap.min.css">
-        <script src="/bright/js/jquery.min.js"></script>
-        <script src="/bright/js/bootstrap.min.js"></script>
-        <script src="/bright/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
+        <script src="/vision/js/jquery.min.js"></script>
+        <script src="/vision/js/bootstrap.min.js"></script>
+        <script src="/vision/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/bright/UserProcess/logout";
+                form1.action="/vision/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/bright/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,79 +125,89 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/bright/welcome" ><img src="/bright/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/vision/welcome" ><img src="/vision/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/bright/images/brightheader.png"
+							<!-- <td align="left"><img src="/vision/images/visionheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/bright/left_officeadmin"> <img
-									src="/bright/images/home.svg" width="18" height="18" 
+								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/vision/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
+							<td><a target="leftFrame" href="/vision/left_officeadmin"> <img
+									src="/vision/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/bright/FeesProcess/feesCollect"> <img
-									src="/bright/images/feescollect.svg" width="18" height="18"
+								href="/vision/FeesProcess/feesCollect"> <img
+									src="/vision/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
+							<td ><a target="mainFrame"
+								href="/vision/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/vision/FeesProcess/otherfeesCollect" width="18" height="18" style="vertical-align: bottom;"/>
+									Bus Fee Collection
+							</a></td>
+							
 							<td>
 								<a target="mainFrame"
-								href="/bright/AccountProcess/createVoucher"> <img
-									src="/bright/images/createvoucher.svg" width="18" height="18"
+								href="/vision/AccountProcess/createVoucher"> <img
+									src="/vision/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/bright/feesCollectionDetails"><img  alt="Fees Details" src="/bright/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/vision/feesCollectionDetails"><img  alt="Fees Details" src="/vision/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/bright/StudentProcess/addNew"> <img
-									src="/bright/images/student_header.svg" width="18" height="18"
+								href="/vision/StudentProcess/addNew"> <img
+									src="/vision/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/bright/leftsettings_officeadmin">
-									<img alt="Settings" src="/bright/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/vision/leftsettings_officeadmin">
+									<img alt="Settings" src="/vision/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
-								href="/bright/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/bright/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+							<!-- <td ><a target="mainFrame"
+								href="/vision/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
-							</a></td>
+							</a></td> -->
 
-							<td ><!-- <a target="mainFrame" href="/bright/sendsms"><img
-									src="/bright/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/vision/sendsms"><img
+									src="/vision/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/bright/reports_officeadmin"><img
-									src="/bright/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/vision/reports_officeadmin"><img
+									src="/vision/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/bright/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/bright/images/students.svg" width="18"
+								href="/vision/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/vision/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<!-- <td ><a target="mainFrame"
-								href="/bright/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/bright/images/dashboard.svg" width="18"
+								href="/vision/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/vision/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td> -->
 								
 							<td ><a target="_parent"
-								href="/bright/UserProcess/logout"><img
-									src="/bright/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/vision/UserProcess/logout"><img
+									src="/vision/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>
