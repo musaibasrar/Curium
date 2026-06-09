@@ -382,17 +382,17 @@ public class AccountDAO {
 
 	public boolean checkInTransactions(Integer accountId) {
 		
-		VoucherEntrytransactions rTransactions = new VoucherEntrytransactions();
+		List<VoucherEntrytransactions> rTransactions = new ArrayList<VoucherEntrytransactions>();
 		
 		
 		try {
 			transaction = session.beginTransaction();
 
 			Query receipt = session.createQuery("from VoucherEntrytransactions where draccountid='"+accountId+"' or craccountid='"+accountId+"'");
-			rTransactions = (VoucherEntrytransactions) receipt.uniqueResult();
+			rTransactions = receipt.list();
 			transaction.commit();
 
-			if(rTransactions != null){
+			if(rTransactions != null && !rTransactions.isEmpty()){
 				return true;
 			}
 			
