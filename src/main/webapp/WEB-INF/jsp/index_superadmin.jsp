@@ -56,6 +56,69 @@
             setTimeout("init()",100)
 
         </script>
+        <script type="text/javascript">
+
+            var leftFrameHidden = false;
+            var originalCols = "195,*";
+            var animationDuration = 500; // milliseconds
+            var isAnimating = false;
+
+            // Smooth toggle function with animation
+            function toggleLeftFrame(){
+                if (isAnimating) return; // Prevent multiple clicks during animation
+                
+                var innerFrameset = document.getElementsByTagName("frameset")[1];
+                
+                if (leftFrameHidden) {
+                    // Unhide with smooth transition
+                    smoothTransition(innerFrameset, 0, 195, true);
+                } else {
+                    // Hide with smooth transition
+                    smoothTransition(innerFrameset, 195, 0, false);
+                }
+            }
+
+            // Smooth transition animation function
+            function smoothTransition(frameset, startWidth, endWidth, isUnhiding){
+                isAnimating = true;
+                var startTime = Date.now();
+                var steps = 30; // Number of animation steps
+                var stepDuration = animationDuration / steps;
+                
+                function animate(){
+                    var elapsed = Date.now() - startTime;
+                    var progress = Math.min(elapsed / animationDuration, 1);
+                    
+                    // Easing function for smooth motion (ease-out)
+                    var easeProgress = 1 - Math.pow(1 - progress, 3);
+                    
+                    var currentWidth = startWidth + (endWidth - startWidth) * easeProgress;
+                    
+                    if (currentWidth > 0) {
+                        frameset.cols = Math.round(currentWidth) + ",*";
+                    } else {
+                        frameset.cols = "0,*";
+                    }
+                    
+                    if (progress < 1) {
+                        setTimeout(animate, stepDuration);
+                    } else {
+                        // Animation complete
+                        if (isUnhiding) {
+                            frameset.cols = originalCols;
+                            leftFrameHidden = false;
+                        } else {
+                            frameset.cols = "0,*";
+                            leftFrameHidden = true;
+                        }
+                        isAnimating = false;
+                    }
+                }
+                
+                animate();
+            }
+
+        </script>
     </head>
 
 
