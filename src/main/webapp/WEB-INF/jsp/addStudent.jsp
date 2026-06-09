@@ -22,25 +22,25 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/bba/css/dataTable/css/demo_page.css";
-            @import "/bba/css/dataTable/css/jquery.dataTables.css";
+            @import "/vision/css/dataTable/css/demo_page.css";
+            @import "/vision/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/bba/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/bba/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/bba/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/bba/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/bba/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/bba/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/bba/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/bba/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/bba/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -279,7 +279,7 @@
 
 
 
-<script type="text/javascript" src="/bba/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 
 <script>
 	$(function() {
@@ -617,7 +617,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/bba/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -681,7 +681,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/bba/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -1044,7 +1044,7 @@ $(document).ready(function() {
 		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
 		xmlHttp2.open(
 			"GET",
-			"/bba/StudentProcess/checkDuplicateStudent?"
+			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
 			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
 			+ "&studentname=" + encodeURIComponent(studentName)
 			+ "&dob=" + encodeURIComponent(finalDob),
@@ -1067,7 +1067,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/bba/UserProcess/sessionTimeOut");
+		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -1419,15 +1419,15 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td  class="alignLeft" >Study Mode&nbsp;</td>
-							<td>&nbsp;Offline<input
+							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
+							<td>&nbsp;Yes<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Online<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
 								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
 								onclick="noCheck(this.id);" />
 
 							</td>
-							<td class="alignLeft" style="padding-left: 20px;">State
+							<td class="alignLeft" style="padding-left: 20px;">BPL Card No.
 								&nbsp;</td>
 							<td ><label> <input
 									name="bplcardno" type="text" class="myclass"
@@ -1518,27 +1518,21 @@ $(document).ready(function() {
 
 						<tr>
 						
-							<td class="alignLeft"  >Student Type
+							<td class="alignLeft"  >RTE
 										&nbsp;</td>
 
-									<td  >&nbsp;Residential<input
+									<td  >&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Day Scholar<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
 										</td>
 										
-							<td class="alignLeft" style="padding-left: 20px;">How did you know? &nbsp;</td>
-							<td >
-							 <label> <select name="remarks"
-									 id="remarks"
-									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
-										<option selected></option>
-										<option>Newspaper</option>
-										<option>Teacher</option>
-										<option>Friends</option>
-										<option>Website</option>
-								</select>
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
 							</label></td>
 						</tr>
 
@@ -2004,7 +1998,7 @@ $(document).ready(function() {
 									<td><br /></td>
 								</tr>
 								<tr>
-									<td class="alignLeft">Father occupation
+									<td class="alignLeft">Father's Aadhar No
 										&nbsp;</td>
 									<td><label> <input
 											name="fatherscastecertno" type="text" class="myclass"
@@ -2012,7 +2006,7 @@ $(document).ready(function() {
 											id="fatherscastecertno" size="36">
 									</label></td>
 
-									<td class="alignLeft" style="padding-left: 20px;">Mother Occupation
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Aadhar No
 										&nbsp;</td>
 									<td ><label> <input
 											name="motherscastecertno" type="text" class="myclass"
@@ -2269,7 +2263,7 @@ $(document).ready(function() {
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Exam Board &nbsp;</td>
+							<td class="alignLeft">Languages Studied &nbsp;</td>
 
 							<td><label> <input
 									name="languagesstudied" type="text" class="myclass"
@@ -2279,7 +2273,7 @@ $(document).ready(function() {
 
 
 
-							<td class="alignLeft" style="padding-left: 20px;">Marks &nbsp;</td>
+							<td class="alignLeft" style="padding-left: 20px;">Core Subjects Studied &nbsp;</td>
 							<td><label> <input
 									name="progress" type="text"
 									style="text-transform:capitalize;"
@@ -2621,14 +2615,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/bba/StudentProcess/AddStudent";
+									form1.action = "/vision/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/bba/StudentProcess/viewAll";
+								form1.action = "/vision/StudentProcess/viewAll";
 								form1.submit();
 							}
 
