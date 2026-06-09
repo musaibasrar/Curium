@@ -361,6 +361,7 @@ public class FeesCollectionService {
 				receiptInfo.setFine(fineAmount);
 				receiptInfo.setMisc(miscAmount);
 				receiptInfo.setTotalamount(grantTotal + fineAmount + miscAmount);
+				receiptInfo.setCancelreceipt(0);
 				/* createFeesCollection = feesCollectionDAO.create(feescollection); */
 
 				// Pass Receipt : Credit the student Fees Receivable & debit the cash
