@@ -134,12 +134,12 @@ for(Cookie cookie : cookies){
 								style="width: 200px; height: 20px;" /></td> -->
 
 							<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
-									src="/vision/images/menu.svg" width="18" height="18" 
+									src="/brightschool/images/menu.svg" width="18" height="18" 
 									alt="Toggle Menu" style="vertical-align: bottom;" />
 							</a></td>
 							
-							<td><a target="leftFrame" href="/vision/left_admin"> <img
-									src="/vision/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/brightschool/left_admin"> <img
+									src="/brightschool/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
