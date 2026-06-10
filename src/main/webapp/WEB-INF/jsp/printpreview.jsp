@@ -448,14 +448,14 @@ for(Cookie cookie : cookies){
       border-left: 2px solid #350c76; /* Add a vertical line */
     }
     
-  .id-top-flex {
+ /*  .id-top-flex {
     display: flex;
     align-items: center;
-    justify-content: flex-start;   /* IMPORTANT */
+    justify-content: flex-start;  
     width: 95%;
     margin: auto;
     height: 95px;
-}
+} */
 
 .vertical-id {
     writing-mode: vertical-rl;
@@ -483,8 +483,8 @@ for(Cookie cookie : cookies){
 }
 
 .logo-img {
-    width: 80px;
-    height: 28px;
+    width: 100px;
+    height: 35px;
 }
   </style>
     </head>
@@ -503,66 +503,74 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;padding-top: 10px;">
+			<div class="card" style="position:relative;background-image: url('/divine/images/backgroundid.png');background-repeat:no-repeat;background-position: center;background-color: white; width: 5.5cm; height: 8.6cm;border-radius: 10px;margin: 20px;padding-top: 10px;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
+    <p style="margin-bottom:0px;margin-top:8px;padding:0px;font-size:15px;font-weight: 900; color:red"><img src="/divine/images/divine.png" class="logo-img" /> </p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:10px;margin-bottom:0px;margin-top:0px;padding:0px;">MOHAMMAD ALI EDUCATION SOCIETY'S</p>
+   <p style="font-size:10px;margin-bottom:0px;margin-top:0px;padding:0px;font-weight:bold;">DIVINE M.A SCHOOL PRIMARY AND HIGH SCHOOL</p>
    </table>
   </div>
-
- <div class="id-top-flex">
-    <div class="vertical-id">IDENTITY-CARD</div>
+  <table align="center" width="90%" height="3px" style="background-color:red;margin-top:0px;"></table>
+<table align="center">
+<tr><td style="font-weight:bold;">Astana Road, Nai Kaman, Bidar</td></tr>
+</table>
+ <div class="id-top-flex" style="text-align:center;">
 
     <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>"
          class="student-photo"/>
 
-    <div class="vertical-session">SESSION ${currentacadmicyear}</div>
 
-    <img src="/divine/images/divine.png" class="logo-img"/>
+    
 </div>
-   <div style="text-align: center;">
+  <%--  <div style="text-align: center;">
    <p style="font-size:18px;margin-bottom:10px;margin-top:10px; text-transform: uppercase;"><%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 100%;margin-left: 0px">
+	</div> --%>
+    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 100%;font-weight:bold;">
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
+    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;NAME</td>
+    <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td>
+  </tr>
+  <tr>
+    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;F/NAME</td>
     <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
+    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;CLASS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
-  <%-- <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
-  </tr>
+ 
   <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
+    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;D.O.B.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr> --%>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
+ 
   <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Bidar District</td>
+    <td colspan="2" style="padding: 0;text-align:center;">&nbsp;&nbsp;
+     <%= request.getSession().getAttribute("address" + i + "") %> 
+     <!-- KUSUM GALLI, BIDAR<br>8660710340 --> </td>
+    <!-- <td style="padding: 0;">:&nbsp;Bidar District</td> -->
   </tr>
 </table>
+<table align="center"  style="position:absolute;
+                  bottom:2px;
+                  left:50%;
+                  transform:translateX(-50%);
+                  width:60%;
+                  ">
+<tr><td style="text-align:center;margin:0px;padding:0px;"><img src="/divine/images/principalsignature.png" width="50" height="25"/></td></tr>
+<tr><td style="color:yellow;text-align:center;margin:0px;padding:0px;">Principal</td></tr>
+<tr><td style="text-align:center;text-align:center;color:white;margin:0px;padding:0px;">Divine School Bidar</td></tr>
+<tr><td style="color:green;background-color: #E0BD24;border-radius:5px;margin:0px;padding:0p;:">PH:9916891788/8444946233</td></tr>
+</table>
 
-<div height="30" width="20%" style="text-align:right;float:right;margin-top:30px;">
+<!-- <div >
 
 <img src="/divine/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
 principal&nbsp;&nbsp;&nbsp;</div>
-</div>
+</div> -->
 </div>
  </c:if>
    <% i = i + 1;%>
