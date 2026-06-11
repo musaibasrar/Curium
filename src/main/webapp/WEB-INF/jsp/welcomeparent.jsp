@@ -133,7 +133,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/patriswamy/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/patriswamy/StudentProcess/ViewDetailsbyexternalid?id=${username}&urlbranchid=${branchid}"> <img
 									src="/patriswamy/images/studentprofile.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Student Profile
 							</a>
@@ -153,7 +153,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/patriswamy/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/patriswamy/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}"> <img
 									src="/patriswamy/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Class Diary
 							</a>
@@ -172,7 +172,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/patriswamy/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/patriswamy/StudentProcess/ViewFeesDetailsbyexternalid?id=${username}&urlbranchid=${branchid}"> <img
 									src="/patriswamy/images/fees.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Fees
 							</a>
@@ -209,7 +209,7 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size:34px;"
-								href="/patriswamy/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}"> <img
+								href="/patriswamy/StudentDiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}"> <img
 									src="/patriswamy/images/logbook.svg" width="50" height="50"
 									alt="Logbook" style="vertical-align: bottom;" />Logbook
 							</a>
