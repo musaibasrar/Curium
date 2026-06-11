@@ -613,8 +613,22 @@ for(Cookie cookie : cookies){
                             <td width="25%" class="tablerows">
                                 <c:out default="" value="${student.remarks}" />
                             </td>
-   
    							<td  width="25%"  class="alignLeft" height="50"> Language Offered in Part-I:
+                        </tr>
+                        <tr>
+                            <td  width="25%"  class="alignLeft" height="50">APAAR ID
+                            </td>
+                            <td width="25%" class="tablerows">
+                                <c:out default="" value="${student.apaarId}" />
+                            </td>
+                            <td  width="25%"  class="alignLeft" height="50">PEN
+                            </td>
+                            <td width="25%" class="tablerows">
+                            <c:out default="" value="${student.pen}" />
+                            </td>
+                        </tr>
+                         <tr>
+                            <td  width="25%"  class="alignLeft" height="50">DND Date
                             </td>
                             <td width="25%" class="tablerows">
                              <c:out default="" value="${student.languagesstudied}" />
