@@ -443,6 +443,14 @@ for(Cookie cookie : cookies){
       border-left: 2px solid #350c76; /* Add a vertical line */
     }
   </style>
+  <style>
+  .box{
+  background: linear-gradient(to right, #9C8C8A, #473533, #9C8C8A);
+  }
+  .addressbox{
+  background: linear-gradient(to right, #EBC5C0 0%, #87241F 20%,#87241F 80%, #EBC5C0 100%);
+  }
+  </style>
     </head>
      
 
@@ -461,28 +469,34 @@ for(Cookie cookie : cookies){
 	    
 			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 5px;">
-  <table width="100%">
+  <table width="100%" align="center" class="box" style="background-color:">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
+  <tr>
+  <td colspan="2" style="text-align:center;padding:0px;color:white;">Rahmani Educational Society</td>
+  </tr>
+  <tr>
+  <td ><img src="/rahmani/images/rahmani.png" width="40" height="40"/></td>
+  <td style="font-size:20px;font-weight: 900; color:red;text-align:center;color:yellow">${branchname}</td></tr>
+  </table>
+  <table width="100%" align="center" class="addressbox" style="border:2px solid #EDB9EC;color:white;">
+  <tr><td colspan="2" style="text-align:center;padding:0px;">${branchaddress}</td></tr>
+  <tr><td colspan="2" style="text-align:center;padding:0px;"><%-- ${branchcontact} --%>
+  Contact:9632996123/7760631834</td></tr>
    </table>
   </div>
 
   <div class="table-container" style=" ">
- <table style="margin-left:10px;">
+ <table width="100%" align="center">
  <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
+ <td style="writing-mode:vertical-lr;background-color: #701704;color:white;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);"> ${currentacadmicyear}
  </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
+ <td style="text-align:center;">
+ <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:75px;width:75px;border: 1px solid black;border-radius: 50%;" alt="Photo" />
  </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
+ <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);background-color: #701704;color:white;">
+ IDENTITY-CARD
  </td>
- <td>&nbsp;&nbsp;
- <img src="/rahmani/images/rahmani.png" width="72" height="72"/>
- </td>
+
  </tr>
  </table>
    </div>
@@ -502,10 +516,10 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
   </tr>
-  <tr>
+  <%-- <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
-  </tr>
+  </tr> --%>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>

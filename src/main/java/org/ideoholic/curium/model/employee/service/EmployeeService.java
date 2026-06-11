@@ -531,7 +531,6 @@ public class EmployeeService {
 				   result.getResultParams().put("teachername" + i , teacherDetails.getTeachername());
 				   result.getResultParams().put("guardian" + i , teacherDetails.getRemarks());
 				   result.getResultParams().put("contactnumber" + i , teacherDetails.getContactnumber());
-				   result.getResultParams().put("contactnumber" + i  , teacherDetails.getContactnumber());
 				   result.getResultParams().put("designation" + i , teacherDetails.getDesignation());
 				   result.getResultParams().put("Address" + i , teacherDetails.getAddress());
 				   result.getResultParams().put("employeephoto" + i , teacherDetails.getEmployeephoto());
