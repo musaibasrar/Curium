@@ -1420,6 +1420,30 @@ $(document).ready(function() {
 								</tr>
 
 						
+							<td class="alignLeft"  >RTE
+										&nbsp;</td>
+
+									<td  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
+										
+							<td class="alignLeft" style="padding-left: 20px;">Remarks &nbsp;</td>
+							<td ><label> <input name="remarks"
+									type="text" class="myclass" id="remarks" size="36"
+									style="text-transform:capitalize;"
+									>
+							</label></td>
+						</tr>
+
+<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
