@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Marks Sheet
-    Created on : Nov 29 2021, 09:22 PM
-    Author     : Musaib
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -11,406 +5,550 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
-<html moznomarginboxes >
+<html>
 <head>
 
 <style type="text/css">
 <!--
-.headerText {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: center;
+.mark{
+    border:1px solid black;
+    border-collapse: collapse;
 }
 
-.headerTextLeft {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: left;
-}
 
-.dataTextBold {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataTextBoldLeft {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: left;
-}
-
-.dataTextBoldCenter {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 14px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataText {
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-span{
-    display:inline-block;
-    border-bottom:2px solid black;
-    padding-bottom:1px;
-    width: 300px;
-    font-weight: normal;
-}
-
-.subjectdetails{
-	border: 1px solid black;
-	text-align: left;
-	padding: 8px;
-}
-
-.nosubjectdetails{
-	border: 0px;
-	text-align: left;
-	padding: 8px;
-}
-
-.namedetails{
-	border: 0px solid #dddddd;
-	text-align: left;
-	padding: 4px;
-}
-
-.namedetailscenter{
-	border: 0px solid #dddddd;
-	text-align: right;
-	padding: 8px;
-}
-
-.datatable {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
-
-.datatd, .datath {
-	border: 1px solid #000000;
-	text-align: left;
-	padding: 8px;
-}
-
-.marksTableHeader {
-	background-color: #f2f2f2;
-	font-weight: bold;
-	border: 1px solid black;
-	padding: 8px;
-	text-align: center;
-}
-
-.marksTableCell {
-	border: 1px solid black;
-	padding: 8px;
-	text-align: center;
-}
-
-.marksTableCellLeft {
-	border: 1px solid black;
-	padding: 8px;
-	text-align: left;
-	font-weight: bold;
-}
-
-.summaryTableHeader {
-	background-color: #f9f9f9;
-	font-weight: bold;
-	border: 1px solid black;
-	padding: 8px;
-	text-align: left;
-}
-
--->
 </style>
-
-<style type="text/css">
-	@media print {
-		.fontsize { 
-			font-size: 10px ;
-			font-weight: bold;
-			font-family: 'Times New Roman';
-		}
-		.header,.hide { visibility: hidden }
-		.bodymargin{
-			margin-left: 0px ;
-			margin-right: 0px;
-		}
-	}
-	
-	@page {
-		margin-left:  1cm;
-		margin-right: 1cm;
-		margin-bottom: 1cm;
-		margin-top: 1cm;
-		size: auto;
-	}
-
-	@media screen {
-		.fontsize { 
-			font-size: 10px;
-			font-weight: bold;
-			font-family: 'Times New Roman'
-		}
-		.bodymargin{
-			margin-left: 0px ;
-			margin-right: 0px;
-		}
-	}
+<style>
+ .rightside{
+        float:right;
+        }
 </style>
+<style>
+@page {
+    size: A4;
+    margin: 10mm;
+}
+    .page {
+    width: 190mm;
+    min-height: 277mm;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: auto; 
+}
 
-<script type="text/javascript">
-	window.onload = function(){
-		window.print();
-	}
-</script>
-<title>Marks Sheet</title>
+ .print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        @media print{
+            .print-btn{
+                display: none;
+            }
+        }
+
+        
+        
+</style>
+	<script type="text/javascript" src="/roshan/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/roshan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <title>Character Certificate</title>
+        <script type="text/javascript">
+            // window.onload = function(){
+            //	 window.print();
+            // }
+        </script>
 </head>
 
-<%
-	//allow access only if session exists
-	String user = null;
-	if(session.getAttribute("userAuth") == null){
-		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
-	}else user = (String) session.getAttribute("userAuth");
-	String userName = null;
-	String sessionID = null;
-	Cookie[] cookies = request.getCookies();
-	if(cookies !=null){
-		for(Cookie cookie : cookies){
-			if(cookie.getName().equals("user")) userName = cookie.getValue();
-			if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-		}
-	}
-%>
-
 <body style="text-align: center" class="bodymargin">
-<jsp:useBean id="now" class="java.util.Date" scope="page" />
-<form method="post" class="bodymargin">
-	<c:forEach items="${markssheetlist}" var="Parents">
+	<jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<form id="form1" method="post" class="bodymargin">
+        <div class="page">
+            <table width="100%">
+                <tr>
+                    <td style="text-align: left;"></td>
+                    <td style="text-align: center;">ACADEMIC PERFORMANCE (2025 – 2026)</td>
+                    <td style="text-align: right;"></td>
+                </tr>
+                 <tr>
+                    <td style="text-align: left;">Admission NO:  </td>
+                    <td style="text-align: center;">Name: Amal Ahmed Geabel AL Saeedi  (2025 – 2026)</td>
+                    <td style="text-align: right;">Grade: LKG </td>
+                </tr>
+                 <tr>
+                    <td style="text-align: left;"></td>
+                    <td style="text-align: center;">ANNUAL REPORT CARD</td>
+                    <td style="text-align: right;"></td>
+                </tr>
+            </table>
+            <table width="100%" class="mark">
+                <tr>
+                    <td class="mark">SCHOLASTIC <br>
+AREAS</td>
+                    <td class="mark" colspan="2">EVALUATION 1 </td>
+                    <td class="mark" colspan="2">EVALUATION 2</td>
+                    <td class="mark" colspan="2">EVALUATION 3</td>
+                </tr>
+                <tr>
+                    <td class="mark">Subject</td>
+                    <td class="mark">Oral</td>
+                    <td class="mark">written</td>
+                    <td class="mark">Oral</td>
+                    <td class="mark">written</td>
+                    <td class="mark">Oral</td>
+                    <td class="mark">written</td>
+                </tr>
+                 <tr>
+                    <td class="mark">ENGLISH </td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark"></td>
+                    <td class="mark"></td>
+                </tr>
+                 <tr>
+                    <td class="mark">MATHEMATICS</td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark"></td>
+                    <td class="mark"></td>
+                </tr>
+                 <tr>
+                    <td class="mark">SCIENCE</td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark"></td>
+                    <td class="mark"></td>
+                </tr>
+                 <tr>
+                    <td class="mark">ISLAMIC STUDIES</td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark"></td>
+                    <td class="mark"></td>
+                </tr>
+                 <tr>
+                    <td class="mark">ART & CRAFT</td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark"></td>
+                    <td class="mark"></td>
+                </tr>
+            </table>
+            <h5>PERSONALITY DEVELOPMENT </h5>
+             <table width="100%" class="mark">
+                <tr>
+                    <td class="mark">Personal and Social Traits</td>
+                    <td class="mark" >EVALUATION 1 </td>
+                    <td class="mark" >EVALUATION 2</td>
+                    <td class="mark" >EVALUATION 3</td>
+                </tr>
+                <tr>
+                    <td class="mark">Courteousness </td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Confidence  </td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Care of belongings </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    
+                </tr>
+                 <tr>
+                    <td class="mark">Neatness</td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Regularity and Punctuality </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Sharing and caring </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    
+                </tr> 
+                <tr>
+                    <td class="mark">Respect for other’s Property </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    
+                </tr>
+                <tr>
+                    <td class="mark">Self-control </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    
+                </tr>
+                <tr>
+                    <td class="mark">Specific Achievement  </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    
+                </tr>
+            </table>
+             <h5  style="margin: 4px;">&emsp; </h5>
+             <table width="100%" class="mark">
+                <tr>
+                    <td class="mark">CO-SCHOLASTIC AREAS</td>
+                    <td class="mark" >EVALUATION 1 </td>
+                    <td class="mark" >EVALUATION 2</td>
+                    <td class="mark" >EVALUATION 3</td>
+                </tr>
+                <tr>
+                    <td class="mark">Games </td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Work Education  </td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Discipline </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    
+                </tr>
+                 <tr>
+                    <td class="mark">Health/Physical Education</td>
+                     <td class="mark">height / weight</td>
+                    <td class="mark">height / weight</td>
+                    <td class="mark">height / weight</td>
+                   
+                </tr>
+                 <tr>
+                    <td class="mark">Attendance </td>
+                     <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                    <td class="mark">A1</td>
+                   
+                </tr>
+             </table>
+             <p style="margin-top: 0px;font-size: 11px;text-align: left;">REMARKS: All over good in all Aspects </p>
+             <p style="font-size: 11px;text-align: left;">RESULT: PASSED </p>
+             <p style="margin-bottom: 0px;font-size: 11px;text-align: left;">DATE: 30-October 2025 CLASS TEACHER'S SIGNATURE_________ PARENT’S SIGNATURE__________</p>
+              <table class="mark">
+                <tr>
+                    <td class="mark">
+                        <table>
+                            <tr>
+                                <td style="text-align: left;">The School Principal </td>
+                                <td></td>
+                                <td style="text-align: right;"> المدرسةم</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">Name </td>
+                                 <td>Ms. SOHA ALBISAIS </td>
+                                <td style="text-align: right;"> : 
+
+اسم
+</td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: left;">Date </td>
+                                 <td></td>
+                                <td style="text-align: right;">التاريخ</td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: left;">Signature </td>
+                                 <td></td>
+                                <td style="text-align: right;"> التوقيع</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="mark">
+                          <table>
+                            <tr>
+                                <td style="text-align: left;">The School Principal </td>
+                                <td></td>
+                                <td style="text-align: right;"> المدرسةم</td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: left;">Name </td>
+                                 <td>Ms. SOHA ALBISAIS </td>
+                                <td style="text-align: right;"> :  اسم</td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: left;">Date </td>
+                                 <td></td>
+                                <td style="text-align: right;">التاريخ
+</td>
+                            </tr>
+                             <tr>
+                                <td style="text-align: left;">Signature </td>
+                                 <td></td>
+                                <td style="text-align: right;"> التوقيع</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="mark">Attesting (Authentication)
+                        <br>&nbsp;<br>&nbsp;<br>
+                    </td>
+                    <td class="mark">School Stamp
+                        <br>&nbsp;<br>&nbsp;<br> </td>
+                </tr>
+              </table> 
+              <table width="100%">
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+              </table>
+              <table style="float: left;">
+                <tr>
+                    <td>GRADING SCALE </td>
+                </tr>
+                <tr>
+                    <td>SCHOLASTIC AREAS </td>
+                </tr>
+              </table> 
+              <table class="mark">
+
+                <tr>
+                    <td class="mark">MARKS RANGE</td>
+                     <td class="mark">GRADE</td>
+                </tr>
+                <tr>
+                    <td class="mark">90-100</td>
+                     <td class="mark">A1</td>
+                </tr>
+                <tr>
+                    <td class="mark">75-89</td>
+                     <td class="mark">A</td>
+                </tr>
+                <tr>
+                    <td class="mark">56-74</td>
+                     <td class="mark">B</td>
+                </tr>
+                 <tr>
+                    <td class="mark">35 - 55 </td>
+                     <td class="mark">C</td>
+                </tr>
+                 <tr>
+                    <td class="mark">35 & below </td>
+                     <td class="mark">D</td>
+                </tr>
+              </table>
 		
-		<div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-			
-			<!-- HEADER SECTION WITH SCHOOL DETAILS -->
-			<table style="page-break-inside: avoid;border-collapse: collapse;width: 100%;">
-				<tr>
-					<td style="padding-left: 200px;"><img src="/vision/images/vision${branchid}.jpg" width="72" height="80"/></td>
-					<td>
-						<label class="dataTextBoldCenter">${branchname}</label><br>
-						<label class="addressLine">${branchaddress}</label>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2"></td>
-				</tr>
-			</table>
+        </div>
+        <!-- cover page -->
+         <div class="page">
+            <table width="100%">
+               <tr><td><br></td></tr>
+                <tr><td><br></td></tr>
+                <tr>
+                    <td style="text-align: left;">Kingdom of saudi arabia</td>
+                    <td>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;</td>
+                    <td style="text-align: right;">المملكة العربية السعودية</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Ministry of Education (280) </td>
+                    <td></td>
+                    <td style="text-align: right;">وزارة التعليم (٢٨٠)</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">General Directorate of Education in Jeddah</td>
+                    <td></td>
+                    <td style="text-align: right;">الإدارة العامة للتعليم بمحافظة جدة</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Private Education Office </td>
+                    <td></td>
+                    <td style="text-align: right;">مكتب التعليم الخاص</td>
+                </tr>
+                <tr>
+                    <td><br></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">DAR AL MAJD INTERNATIONAL SCHOOL</td>
+                    <td></td>
+                    <td style="text-align: right;">مدرسة دار المجد العالمية</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;"> JEDDAH,KSA </td>
+                    <td></td>
+                    <td style="text-align: right;">جدة، المملكة العربية السعودية</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">License No.520-0867 </td>
+                    <td></td>
+                    <td style="text-align: right;">رقم الترخيص: 520-0867</td>
+                </tr>
+                 <tr>
+                    <td style="text-align: left;">Authorized Curriculum: INDIAN.</td>
+                    <td></td>
+                    <td style="text-align: right;">المنهج المعتمد: الهندي</td>
+                </tr>
+                 <tr>
+                    <td style="text-align: left;">Accredited by: CBSE </td>
+                    <td></td>
+                    <td style="text-align: right;">جهة الاعتماد: CBSE</td>
+                </tr>
+            </table>
+            <table width="100%">
+                <tr>
+                    <td style="text-align: left;"><img src="daralmajd.png" width="100px" height="100px"/></td>
+                    <td style="text-align: center;">ACHIEVEMENT RECORD FOR GRADE- LKG2 <br>
+                    Academic Year 2025 – 2026</td>
+                    <td style="text-align: right;"><img src="student.png" width="100px" height="100px"/></td>
+                </tr>
+                 <tr><td><br></td></tr>
+               <tr><td><br></td></tr>
+            </table>
+            <hr>
+            <table width="100%">
+              
+               <tr><td><br></td></tr>
+               <tr><td><br></td></tr>
+             <tr>
+                <td style="text-align: left;">Student's Name</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.name}"/></td>
+                <td style="text-align: right;">  اسم الطالب / الطالبة</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Admission Number</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.admissionnumber}"/></td>
+                <td style="text-align: right;">رقم القبول</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Class </td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.classstudying}"/></td>
+                <td style="text-align: right;">الصف</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Nationality</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.nationality}"/> </td>
+                <td style="text-align: right;">الجنسية</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Date of Birth</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.dateofbirth}"/> </td>
+                <td style="text-align: right;">تاريخ الميلاد</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Place of Birth</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.placeofbirth}"/></td>
+                <td style="text-align: right;">مكان الميلاد</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Name of Father</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.fathersname}"/></td>
+                <td style="text-align: right;">اسم الأب</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Name of Mother </td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.mothersname}"/></td>
+                <td style="text-align: right;">اسم الأم</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Contact Number</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.contactnumber}"/></td>
+                <td style="text-align: right;">رقم الجوال</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Email Address</td>
+                <td style="text-align: center;"> <c:out value="${Parents.parents.email}"/> </td>
+                <td style="text-align: right;">البريد الإلكتروني</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">ID / Iqama No</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.studentexternalid}"/> </td>
+                <td style="text-align: right;">رقم الهوية / الإقامة</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Passport No</td>
+                <td style="text-align: center;"> </td>
+                <td style="text-align: right;">رقم جواز السفر</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Date of Admission</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.admissiondate}"/></td>
+                <td style="text-align: right;">تاريخ الالتحاق</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Date of Leaving</td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.dateleaving}"/></td>
+                <td style="text-align: right;">تاريخ ترك المدرسة</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Previous School </td>
+                <td style="text-align: center;"><c:out value="${Parents.parents.student.schoollastattended}"/></td>
+                <td style="text-align: right;">المدرسة السابقة</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">Date Issued (G - H) </td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: right;">تاريخ إصدار الشهادة (هـ - م)</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">No. of weeks</td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: right;">عدد الأسابيع</td>
+             </tr>
+             <tr>
+                <td style="text-align: left;">No. of Terms </td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: right;">عدد الفصول الدراسية</td>
+             </tr>
+            </table>
+            <hr>
+<table width="100%">
+  
+   <tr>
+      <td style="text-align: right;">
+         صندوق بريد 4448 - جدة 22335 - المملكة العربية السعودية
+الهاتف: +966126332334
+البريد الإلكتروني: [info@daralmajdschool.com]
 
-			<TABLE width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
-				<tr>
-					<td colspan="4" ></td>
-				</tr>
-			</TABLE>
+      </td>
+   </tr>
+    <tr>
+      <td>P. O. Box 4448- Jeddah-22335 Saudi Arabia Phone:+966126332334 E-mail: info@daralmajdschool.com</td>
+   </tr>
 
-			<!-- STUDENT DETAILS SECTION -->
-			<table style="border-collapse: collapse;width: 100%;margin-bottom: 20px;">
-				<tr>
-					<td style="width: 70%;">
-						<table style="border-collapse: collapse;width: 100%;">
-							<tr style="border-color:#000000">
-								<td class="namedetails" style="width: 50%;"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.student.name}"/></label></td>
-								<td class="namedetails" style="width: 50%;"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-									<c:forEach var="splt" items="${fn:split(Parents.parents.student.classstudying,'--')}">
-										${splt} 
-									</c:forEach>
-								</td>
-							</tr>
-							<tr>   
-								<td class="namedetails" style="width: 50%;"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;text-transform: capitalize;"><c:out value="${Parents.parents.fathersname}"/></label></td>	
-								<td class="namedetails" style="width: 50%;"><label>Exam Reg. No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.parents.student.admissionnumber}"/></td>
-							</tr>
-						</table>
-					</td>
-					<td style="width: 30%;text-align: center;vertical-align: top;">
-						<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 60px;height: 60px;border: 1px solid #ccc;"/>
-					</td>
-				</tr>
-			</table>
-
-				<!-- MARKS TABLE - SUBJECTS AS ROWS, EXAMS AS COLUMNS -->
-				<table
-					style="border-collapse: collapse; width: 100%; margin-top: 20px;">
-					<thead>
-						<tr>
-							<th class="marksTableHeader"
-								style="text-align: left; width: 20%;">Subject</th>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<th class="marksTableHeader"><c:out
-										value="${exam.examName}" /></th>
-							</c:forEach>
-							<th class="marksTableHeader"
-								style="text-align: center; width: 15%;">Remarks</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry"
-							varStatus="status">
-							<tr>
-								<td class="marksTableCellLeft" style="width: 20%;"><c:out
-										value="${subjectEntry.key}" /></td>
-								<c:forEach items="${Parents.examSummaries}" var="exam">
-									<td class="marksTableCell"><c:out
-											value="${subjectEntry.value[exam.examName]}" /></td>
-								</c:forEach>
-								<!-- Remarks Column - Only add rowspan on first row to span both tables -->
-								<c:if test="${status.first}">
-									<td rowspan="${fn:length(Parents.subjectExamMarks) + 6}"
-										class="marksTableCell"
-										style="text-align: left; vertical-align: top; padding: 8px; width: 15%;">
-										<c:forEach items="${Parents.examSummaries}" var="exam"
-											varStatus="examStatus">
-											<div
-												style="border-bottom: 1px solid #000000; padding: 10px 5px; min-height: 100px; margin-bottom: 5px;">
-												<strong style="font-size: 10px;"><c:out value="${exam.examName}" /></strong><br />
-											</div>
-										</c:forEach>
-									</td>
-								</c:if>
-							</tr>
-						</c:forEach>
-
-						<!-- Summary Section Rows within the same table -->
-						<tr>
-							<td class="summaryTableHeader" style="width: 20%;">Summary</td>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<td class="marksTableCell">${exam.totalMarksObtained}</td>
-							</c:forEach>
-						</tr>
-
-						<tr>
-							<td class="summaryTableHeader">Total Marks Obtained</td>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<td class="marksTableCell">${exam.totalMarksObtained}</td>
-							</c:forEach>
-						</tr>
-
-						<tr>
-							<td class="summaryTableHeader">Total Marks</td>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<td class="marksTableCell">${exam.totalMarks}</td>
-							</c:forEach>
-						</tr>
-
-						<tr>
-							<td class="summaryTableHeader">Percentage</td>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<td class="marksTableCell"><c:choose>
-										<c:when test="${exam.percentage > 0}">
-											<fmt:formatNumber type="number" maxFractionDigits="1"
-												value="${exam.percentage}" />%
-						</c:when>
-										<c:otherwise>-</c:otherwise>
-									</c:choose></td>
-							</c:forEach>
-						</tr>
-
-						<tr>
-							<td class="summaryTableHeader">Grade</td>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<td class="marksTableCell"><c:choose>
-										<c:when test="${exam.grade != null && exam.grade != ''}">
-							${exam.grade}
-						</c:when>
-										<c:otherwise>-</c:otherwise>
-									</c:choose></td>
-							</c:forEach>
-						</tr>
-
-						<tr>
-							<td class="summaryTableHeader">Rank</td>
-							<c:forEach items="${Parents.examSummaries}" var="exam">
-								<td class="marksTableCell"><c:choose>
-										<c:when test="${exam.rank > 0}">
-							${exam.rank}
-						</c:when>
-										<c:otherwise>-</c:otherwise>
-									</c:choose></td>
-							</c:forEach>
-						</tr>
-					</tbody>
-				</table>
-
-				<!-- SIGNATURE SECTION -->
-			<table id="dataTable" width="100%" border="0" style="page-break-inside:avoid; border-collapse: collapse;margin-top: 30px;">
-				<tr>
-					<td><br></td>
-				</tr>
-				<tr>
-					<td style="width: 25%;text-align: center;"><br></td>
-					<td style="width: 25%;text-align: center;"><br></td>
-					<td style="width: 25%;text-align: center;"><br></td>
-					<td style="width: 25%;text-align: center;"><br></td>
-				</tr>
-				<tr>
-					<td style="width: 25%;text-align: center;border-top: 1px solid black;">Class Teacher</td>
-					<td style="width: 25%;text-align: center;border-top: 1px solid black;">Principal</td>
-					<td style="width: 25%;text-align: center;border-top: 1px solid black;">Parent</td>
-					<td style="width: 25%;text-align: center;border-top: 1px solid black;">Date</td>
-				</tr>
-			</table>
-
-		</div>
-
-		<!-- ATTENDANCE SECTION - DISPLAYED ONCE PER STUDENT -->
-		<table style="margin-top: 30px;width: 100%;margin-bottom: 40px;">
-			<tr>
-				<td style="font-weight:bold;">Total Days:&emsp;&emsp;</td>
-				<td style="font-weight:bold;">${totaldays}</td>
-				<td style="font-weight:bold;">&emsp;&emsp;Total Present:&emsp;&emsp;</td>
-				<td style="font-weight:bold;">${totalpresent}</td>
-				<td style="font-weight:bold;">&emsp;&emsp;Total Absent:&emsp;&emsp;</td>
-				<td style="font-weight:bold;">${totalabsent}</td>
-			</tr>
-		</table>
-
-	</c:forEach>
-	
-</form>
-
+</table>
+         </div>
+        <div class="print-btn">
+    <button onclick="window.print()">Print</button>
+</div>
+       
+	</form>
 </body>
 </html>
