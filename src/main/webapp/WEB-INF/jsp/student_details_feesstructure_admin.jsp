@@ -454,7 +454,7 @@
             }
            
         </script>
-		<script>
+        <script>
 
 function applyConcessionToAll() {
 
