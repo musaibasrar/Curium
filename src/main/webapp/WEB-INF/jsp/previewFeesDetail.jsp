@@ -224,7 +224,7 @@ for(Cookie cookie : cookies){
                         
                     <%-- </c:forEach> --%>
                     <tr>
-                        <td align="center"><a id="print" href="/vision/FeesCollection/printReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td align="center"><a id="print" href="/patriswamy/FeesCollection/printReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </TABLE>
