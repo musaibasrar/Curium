@@ -13,6 +13,7 @@ import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsRespons
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.FeesDetailsResponseDto;
 import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto;
+import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
@@ -41,6 +42,10 @@ public class StudentActionAdapter {
 
     @Autowired
     private StudentService studentService;
+    
+    private String CURRENTACADEMICYEAR = "currentAcademicYear";
+    private String BRANCHID = "branchid";
+    private String USERID = "userloginid";
 
     public void viewAllStudentsSuperAdmin() {
 
@@ -71,6 +76,7 @@ public class StudentActionAdapter {
 
         BonafideGenerationResponseDto responseDto = studentService.generateBonafide(dto);
         httpSession.setAttribute("studentdetailsbonafide", responseDto.getParents());
+        request.setAttribute("dobInWords", responseDto.getDateOfBirth());
 
         return responseDto;
     }
@@ -165,6 +171,8 @@ public class StudentActionAdapter {
         student.setOtherFeesAmount(request.getParameterValues("otherFeesFullCat"));
         student.setOtherFeesConcession(request.getParameterValues("otherFeesConcession"));
         student.setOtherTotalInstallments(request.getParameterValues("otherFeesCount"));
+        student.setPen(request.getParameter("pen"));
+        student.setApaarId(request.getParameter("apaarid"));
 
         ResultResponse resultResponse = studentService.addStudent(student, uploadedFiles, httpSession.getAttribute("branchcode").toString(), httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
 
@@ -237,6 +245,8 @@ public class StudentActionAdapter {
         studentDto.setStudentexternalid(request.getParameter("studentexternalid"));
         studentDto.setApplicationtype(request.getParameter("applicationtype"));
         studentDto.setStream(request.getParameter("stream"));
+        studentDto.setApaarId(request.getParameter("apaarid"));
+        studentDto.setPen(request.getParameter("pen"));
 
         Student student = studentService.updateStudent(uploadedFiles, studentDto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.USERID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute("branchcode").toString());
 
@@ -272,6 +282,13 @@ public class StudentActionAdapter {
         httpSession.setAttribute("classdetailslist", responseDto.getClassSec());
         request.setAttribute("receiptinfonarration", responseDto.getReceiptNarrationMap());
         
+        httpSession.setAttribute("otherfeesstructure", responseDto.getStudentOtherFeesStructure());
+        httpSession.setAttribute("othersumoffees", responseDto.getOtherTotalSum());
+        httpSession.setAttribute("otherdueamount", responseDto.getOtherDueAmount());
+        httpSession.setAttribute("othertotalfees", responseDto.getOtherTotalFees());
+        httpSession.setAttribute("othertotalfeesconcession", responseDto.getOtherTotalFeesConcession());
+        request.setAttribute("otherreceiptinfo", responseDto.getOtherReceiptInfo());
+        
         return responseDto.isSuccess();
     }
 
@@ -306,7 +323,7 @@ public class StudentActionAdapter {
 
         StudentDetailsResponseDto responseDto = studentService.viewOtherFeesDetailsOfStudent(studentId, httpSession.getAttribute(Constants.BRANCHID).toString());
         httpSession.setAttribute("currentyearfromservice", responseDto.getCurrentYearFromService());
-        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        request.setAttribute("receiptinfo", responseDto.getOtherReceiptInfo());
         httpSession.setAttribute("student", responseDto.getStudent());
         httpSession.setAttribute("secstudying", responseDto.getSecStudying());
         httpSession.setAttribute("classstudying", responseDto.getClassStudying());
@@ -356,6 +373,10 @@ public class StudentActionAdapter {
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute("totalfeesconcession", responseDto.getTotalFeesConcession());
     }
+
+	public void searchListOfParent() throws IOException {
+		 studentService.getParentList(httpSession.getAttribute(BRANCHID).toString());
+  }
     
     public void checkDuplicateStudent()  throws IOException {
     	

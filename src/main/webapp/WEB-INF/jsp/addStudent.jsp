@@ -288,6 +288,7 @@
 			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0",
 			onSelect: function () {
+				CalculateAge(this);
 				searchStudentDuplicate();
 		    }
 		});
@@ -511,6 +512,10 @@
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -519,6 +524,10 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
@@ -931,6 +940,65 @@ $(document).ready(function() {
 			    document.getElementById('feesTotalAmount').value = totalAmount;
 			} */
         </script>
+        <script>
+        /* ================== SECOND AJAX : Parent List ================== */
+
+        var xmlHttpParent;   // ✅ different variable
+        var parentCount;
+
+        function searchListOfParent() {
+
+            var addClass = document.getElementById('addclass').value;
+
+            if (!addClass) {
+                console.warn("Class is not selected. Skipping search.");
+                return;
+            }
+
+            if (typeof XMLHttpRequest != "undefined") {
+                xmlHttpParent = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                xmlHttpParent = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlHttpParent.onreadystatechange = stateChangedParent;
+            xmlHttpParent.open(
+                "GET",
+                "/daralmajd/StudentProcess/searchListOfParent",
+                true
+            );
+            xmlHttpParent.send(null);
+        }
+
+        /* ✅ Separate callback */
+        function stateChangedParent() {
+
+            if (xmlHttpParent.readyState === 4 && xmlHttpParent.status === 200) {
+
+                // Load dropdown / parent list
+                document.getElementById("parentDiv").innerHTML =
+                    xmlHttpParent.responseText;
+            }
+        }
+
+        /* Optional helper (if needed) */
+        function GetXmlHttpObjectParent() {
+            var xmlhttp = null;
+            try {
+                xmlhttp = new XMLHttpRequest();
+            } catch (e) {
+                try {
+                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlhttp;
+        }
+
+    
+</script>
+        
         
         <script>
 	var xmlHttp2;
@@ -1045,8 +1113,8 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
-								type="checkbox" value="Admission" name="stream" id="yes:at" checked
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
+								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
 								onclick="noCheck(this.id)" />
@@ -1499,11 +1567,18 @@ $(document).ready(function() {
 						<tr>
 										
 							<td class="alignLeft">Created Date &nbsp;</td>
+							<td style="display: none;"  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
 							<td ><label> <input name="createddate"
 									type="text"
 									value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"
 									class="myclass" id="datepickerCD" size="36"
 									data-validate="validate(required)">
+									
 							</label></td>
 							
 							<td  class="alignLeft" style="padding-left: 20px;">Admission/PassedOut Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -1512,33 +1587,9 @@ $(document).ready(function() {
                                         <label> <select name="yearofadmission" id="yearofadmission"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
 										<option selected>${currentAcademicYear}</option>
-										<option>2026/27</option>
-										<option>2025/26</option>
-										<option>2024/25</option>
-										<option>2023/24</option>
-										<option>2022/23</option>
-										<option>2021/22</option>
-										<option>2020/21</option>
-										<option>2019/20</option>
-										<option>2018/19</option>
-										<option>2017/18</option>
-										<option>2016/17</option>
-										<option>2015/16</option>
-										<option>2014/15</option>
-										<option>2013/14</option>
-										<option>2012/13</option>
-										<option>2011/12</option>
-										<option>2010/11</option>
-										<option>2009/10</option>
-										<option>2008/09</option>
-										<option>2007/08</option>
-										<option>2006/07</option>
-										<option>2005/06</option>
-										<option>2004/05</option>
-										<option>2003/04</option>
-										<option>2002/03</option>
-										<option>2001/02</option>
-										<option>2000/01</option>										
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
 								</select>
 
 							</label> 
@@ -1664,7 +1715,7 @@ $(document).ready(function() {
 								</tr>
 								<tr>
 									<td><br /></td>
-								</tr> -->
+								</tr>
 
 								<tr>
 
@@ -1717,9 +1768,53 @@ $(document).ready(function() {
 											name="cocontactnumber" type="text" class="myclass"
 											style="text-transform:capitalize;"
 											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+										</label>
+										</td>
+                        <!-- <tr>
+										
+							<td class="alignLeft">PEN &nbsp;</td>
+							<td ><label> <input name="pen"
+									type="text"
+									class="myclass" id="pen" size="36"
+									>
+							</label></td>
+							<td class="alignLeft" style="padding-left: 20px;">APAAR ID
+								&nbsp;</td>
+							<td ><label> <input
+									name="apaarid" type="text" class="myclass"
+									style="text-transform:capitalize;"
+									id="apaarid" size="36">
+
+							</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+										
+							<td class="alignLeft">Sibling &nbsp;</td>
+							<td ><label> <input
+								type="checkbox"
+								onchange="searchListOfParent();" />
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Parents&nbsp;</td>
+							<td ><label id="parentDiv"><input name="dateofadmission" autocomplete="false"
+									type="text" class="myclass" id="dateofadmission" size="36"
+									>	 </label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
 
 									</label></td>
-								</tr>
+								</tr> -->
 
 								<tr>
 									<td><br /></td>

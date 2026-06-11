@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -893,7 +894,7 @@ for(Cookie cookie : cookies){
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;
-                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (${TotalDueper}%)</label>
+                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)</label>
                             </td>
                    </tr>
                    

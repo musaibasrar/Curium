@@ -540,7 +540,7 @@ public class FeesCollectionService {
 				List<Studentfeesstructure> studentfeesstructure = new studentDetailsDAO().getStudentFeesStructureDetails(feescollectionSingle.getSfsid());
 				feeCategoryMap.put(studentfeesstructure.get(0), feescollectionSingle.getAmountpaid());
 				String[] tokens = studentfeesstructure.get(0).getFeescategory().getFeescategoryname().split("[/ ]"); // Split by both / and space
-				categoryName[i] = tokens.length > 2 ? tokens[2] : "";
+				categoryName[i] = tokens.length > 2 ? tokens[0]+" "+tokens[2] : "";
 				i++;
 			}
 			
@@ -2590,7 +2590,23 @@ public class FeesCollectionService {
 
 		if (!classStudying.equalsIgnoreCase("")) {
 			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" ORDER BY "
+							+ "CASE "
+							+ "    WHEN LOWER(parents.Student.classstudying) = 'lkg' THEN 0"
+							+ "    WHEN LOWER(parents.Student.classstudying) = 'ukg' THEN 1"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('1','I') THEN 2"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('2','II') THEN 3"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('3','III') THEN 4"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('4','IV') THEN 5"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('5','V') THEN 6"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('6','VI') THEN 7"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('7','VII') THEN 8"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('8','VIII') THEN 9"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('9','IX') THEN 10"
+							+ "    WHEN UPPER(SUBSTRING_INDEX(parents.Student.classstudying, '--', 1)) IN ('10','X') THEN 11"
+							+ "    ELSE 999 "
+							+ "END,"
+							+ "parents.Student.classstudying ASC";
 		}
 
 		if(!"".equalsIgnoreCase(querySub)) {

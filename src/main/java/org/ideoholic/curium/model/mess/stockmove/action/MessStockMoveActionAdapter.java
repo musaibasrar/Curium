@@ -50,8 +50,8 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("messstockmovelist", responseDto.getMessStockMoveList());
         request.setAttribute("fromdate", responseDto.getFromDate());
 		request.setAttribute("todate", responseDto.getToDate());
-		//request.setAttribute("transactiondatefromselected", request.getParameter("transactiondatefrom"));
-		//request.setAttribute("transactiondatetoselected", request.getParameter("transactiondateto"));
+		request.setAttribute("transactiondatefromselected", request.getParameter("transactiondatefrom"));
+		request.setAttribute("transactiondatetoselected", request.getParameter("transactiondateto"));
     }
 
     public void saveStockMove() {
@@ -89,7 +89,7 @@ public class MessStockMoveActionAdapter {
         dto.setItemsGrandNetDueAmount(request.getParameter("itemsGrandNetDueAmount"));
 
         MoveStockResponseDto responseDto = messStockMoveService.saveStockMove(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute("username").toString(),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute("branchcode").toString());
-        request.setAttribute("billdetails", responseDto.getBillDetails());
+        request.setAttribute("billdetails", responseDto.getBillList());
         request.setAttribute("billdetailstransactiondate", dto.getTransactionDate());
         request.setAttribute("billdetailsstudentname", responseDto.getBillDetailsStudentName());
         request.setAttribute("billdetailsclassstudying", responseDto.getBillDetailsClassStudying());
@@ -97,7 +97,7 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("billdetailstotaltotal", responseDto.getBillDetailsTotalTotal());
         request.setAttribute("billgrandtotal", responseDto.getBillGrandTotal());
         request.setAttribute("billno", responseDto.getBillNo());
-        request.setAttribute("billdetails", responseDto.getBillDetails());
+        //request.setAttribute("billdetails", responseDto.getBillDetails());
         request.setAttribute("billdetailstransactiondate", responseDto.getBillDetailsTransactionDate());
         request.setAttribute("billdetailscustomername", responseDto.getBillDetailsCustomerName());
         request.setAttribute("itemissued", responseDto.isItemsIssued());

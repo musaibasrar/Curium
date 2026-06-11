@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
+import org.ideoholic.curium.model.marksdetails.dto.SubjectSummary;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
 public class MarksSheet  implements java.io.Serializable {
@@ -18,11 +19,13 @@ public class MarksSheet  implements java.io.Serializable {
     int totalAbsent;
     Map<String, Map<String, String>> subjectExamMarks; // Subject -> (Exam -> Marks)
     List<ExamSummary> examSummaries;
+    List<SubjectSummary> subjectSummaries;
+    List<ExamsDetails> examsDetails;
     
     public MarksSheet() {
     }
 
-    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent,Map<String, Map<String, String>> subjectExamMarks,List<ExamSummary> examSummaries) {
+    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent,Map<String, Map<String, String>> subjectExamMarks,List<ExamSummary> examSummaries,List<SubjectSummary> subjectSummaries, List<ExamsDetails> examsDetails) {
         this.parents = parents;
         this.exammarks = exammarks;
         this.finaltermmarks = finaltermmarks;
@@ -33,6 +36,8 @@ public class MarksSheet  implements java.io.Serializable {
         this.totalAbsent = totalAbsent;
         this.subjectExamMarks = subjectExamMarks;
         this.examSummaries = examSummaries;
+        this.subjectSummaries = subjectSummaries;
+        this.examsDetails = examsDetails;
     }
 
 
@@ -116,6 +121,22 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setExamSummaries(List<ExamSummary> examSummaries) {
 		this.examSummaries = examSummaries;
+	}
+
+	public List<SubjectSummary> getSubjectSummaries() {
+		return subjectSummaries;
+	}
+
+	public void setSubjectSummaries(List<SubjectSummary> subjectSummaries) {
+		this.subjectSummaries = subjectSummaries;
+	}
+
+	public List<ExamsDetails> getExamsDetails() {
+		return examsDetails;
+	}
+
+	public void setExamsDetails(List<ExamsDetails> examsDetails) {
+		this.examsDetails = examsDetails;
 	}
 	
   }

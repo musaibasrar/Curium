@@ -337,19 +337,26 @@ www.daralmajdschool.com</div>
                     		<c:choose>
 									<c:when
 										test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
-										<fmt:formatNumber value="${((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" />
+										<fmt:formatNumber value="${((feescatmap.value) * 0.15) + (feescatmap.value)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+										<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value) * 0.15) + (feescatmap.value)}" />
+										<%-- <fmt:formatNumber value="${((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" /> --%>
+										<%-- <c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" /> --%>
+                    					
 									</c:when>
 									<c:otherwise>
-           								<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
+										<fmt:formatNumber value="${feescatmap.value}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    					<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value)}" />
+           								<%-- <fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    					<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" /> --%>
         							</c:otherwise>
 								</c:choose>
                     	</c:if>	
                     	
                     	<c:if test="${applyVAT==0}">
-                    		<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
+                    		<%-- <fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" /> --%>
+                    		<%-- <c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" /> --%>
+                    		<fmt:formatNumber value="${feescatmap.value}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value)}" />
                     	</c:if>
 					</td>
                 </tr>
@@ -604,19 +611,26 @@ www.daralmajdschool.com</div>
                     		<c:choose>
 									<c:when
 										test="${fn:containsIgnoreCase(feescatmap.key.feescategory.feescategoryname, 'tuition fee')}">
-										<fmt:formatNumber value="${((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" />
+										<fmt:formatNumber value="${((feescatmap.value) * 0.15) + (feescatmap.value)}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+										<c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value) * 0.15) + (feescatmap.value)}" />
+										<%-- <fmt:formatNumber value="${((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" type="number" maxFractionDigits="2" minFractionDigits="2" /> --%>
+										<%-- <c:set var="itemTotalNet" value="${itemTotalNet + ((feescatmap.value - feescatmap.key.concession) * 0.15) + (feescatmap.value - feescatmap.key.concession)}" /> --%>
+                    					
 									</c:when>
 									<c:otherwise>
-           								<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
+										<fmt:formatNumber value="${feescatmap.value}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    					<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value)}" />
+           								<%-- <fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    					<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" /> --%>
         							</c:otherwise>
 								</c:choose>
                     	</c:if>	
                     	
                     	<c:if test="${applyVAT==0}">
-                    		<fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" />
-                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" />
+                    		<%-- <fmt:formatNumber value="${feescatmap.value - feescatmap.key.concession}" type="number" maxFractionDigits="2" minFractionDigits="2" /> --%>
+                    		<%-- <c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value - feescatmap.key.concession)}" /> --%>
+                    		<fmt:formatNumber value="${feescatmap.value}" type="number" maxFractionDigits="2" minFractionDigits="2" />
+                    		<c:set var="itemTotalNet" value="${itemTotalNet + (feescatmap.value)}" />
                     	</c:if>
 					</td>
                 </tr>

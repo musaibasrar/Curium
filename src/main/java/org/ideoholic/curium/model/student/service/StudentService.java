@@ -41,6 +41,7 @@ import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -77,6 +78,8 @@ public class StudentService {
 	private StandardService standardService;
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
+	@Autowired
+	private LibraryService libraryService;
 
 	/**
 	 * Size of a byte buffer to read/write file
@@ -431,6 +434,25 @@ public class StudentService {
 				totalFeesAmount = totalFeesAmount+studentfeesstructureSingle.getFeesamount()-studentfeesstructureSingle.getWaiveoff()-studentfeesstructureSingle.getConcession();
 				totalFeesConcession = totalFeesConcession+studentfeesstructureSingle.getConcession();
 			}
+			
+			//code for otherfee
+			List<Otherreceiptinfo> orinfo = new feesCollectionDAO().getOtherReceiptDetailsPerStudent(id,
+					currentYear.getCurrentacademicyear());
+			List<Studentotherfeesstructure> otherfeesstructure = new studentDetailsDAO()
+					.getStudentOtherFeesStructure(id, currentYear.getCurrentacademicyear());
+			long othertotalSum = 0l;
+			for (Otherreceiptinfo otherreceiptInfoSingle : orinfo) {
+				othertotalSum = othertotalSum + otherreceiptInfoSingle.getTotalamount();
+			}
+			long othertotalFeesAmount = 0l;
+			long othertotalFeesConcession = 0l;
+			for (Studentotherfeesstructure studentotherfeesstructureSingle : otherfeesstructure) {
+				othertotalFeesAmount = othertotalFeesAmount + studentotherfeesstructureSingle.getFeesamount()
+						- studentotherfeesstructureSingle.getWaiveoff()
+						- studentotherfeesstructureSingle.getConcession();
+				othertotalFeesConcession = othertotalFeesConcession + studentotherfeesstructureSingle.getConcession();
+			}
+			// code for otherfee
 
 			//String sumOfFees = new feesDetailsDAO().feesSum(id, currentYear.getCurrentacademicyear());
 			//String totalFees = new feesDetailsDAO().feesTotal(id, currentYear.getCurrentacademicyear());
@@ -482,6 +504,12 @@ public class StudentService {
 				result.setTotalFeesConcession(totalFeesConcession);
 				result.setTotalFineAmount(totalFineAmount);
 				result.setTotalMiscAmount(totalMiscAmount);
+				result.setStudentOtherFeesStructure(otherfeesstructure);
+				result.setOtherTotalSum(othertotalSum);
+				result.setOtherDueAmount(othertotalFeesAmount-othertotalSum);
+				result.setOtherTotalFees(othertotalFeesAmount);
+				result.setOtherTotalFeesConcession(othertotalFeesConcession);
+				result.setOtherReceiptInfo(orinfo);
 				result.setSuccess(true);
 			}
 			ResultResponse classsec = standardService.viewClasses(branchId);
@@ -1169,7 +1197,12 @@ public class StudentService {
 			headerData.put("Header",
 				new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 					"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
-					"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
+					"Caste", "Fathers Name", "Mothers Name","Contact No.","Place of Birth","Nationality","student cast cert no.",
+					"bpl card no.","Mother Tongue","RTE","Remarks","Created Date","Admission Year",
+					"Apaar Id","Pen","DND","Father Qualification","Mother Qualification",
+					"Father Cast cert no.","Mother Cast cert no.","Permanent address","Temporary address",
+					"Cocontact no.","Email","Previous school name","languages studied",
+					"medium of instruction","class of leaving","Date leaving","reason leaving","Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
 			for (Parents studentDetails : listOfStudentRecords) {
 				data.put(Integer.toString(i),
@@ -1187,6 +1220,34 @@ public class StudentService {
 						DataUtil.emptyString(studentDetails.getStudent().getDisabilitychild()),
 						DataUtil.emptyString(studentDetails.getStudent().getCaste()),  DataUtil.emptyString(studentDetails.getFathersname()),
 						DataUtil.emptyString(studentDetails.getMothersname()),DataUtil.emptyString(studentDetails.getContactnumber()),
+						DataUtil.emptyString(studentDetails.getStudent().getPlaceofbirth()),
+						DataUtil.emptyString(studentDetails.getStudent().getNationality()),
+						DataUtil.emptyString(studentDetails.getStudent().getStudentscastecertno()),
+						DataUtil.emptyString(studentDetails.getStudent().getBplcardno()),
+						DataUtil.emptyString(studentDetails.getStudent().getMothertongue()),
+						DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getRte())),
+						DataUtil.emptyString(studentDetails.getStudent().getRemarks()),
+						DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getCreateddate()),
+						DataUtil.emptyString(studentDetails.getStudent().getYearofadmission()),
+						DataUtil.emptyString(studentDetails.getStudent().getApaarId()),
+						DataUtil.emptyString(studentDetails.getStudent().getPen()),
+						DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getCrecorddate()),
+						DataUtil.emptyString(studentDetails.getFathersqualification()),
+						DataUtil.emptyString(studentDetails.getMothersqualification()),
+						DataUtil.emptyString(studentDetails.getFatherscastecertno()),
+						DataUtil.emptyString(studentDetails.getMotherscastecertno()),
+						DataUtil.emptyString(studentDetails.getAddresspermanent()),
+						DataUtil.emptyString(studentDetails.getAddresstemporary()),
+						DataUtil.emptyString(studentDetails.getCocontactnumber()),
+						DataUtil.emptyString(studentDetails.getEmail()),
+						//DataUtil.emptyString(Integer.toString(studentDetails.getNoofdependents())),
+						DataUtil.emptyString(studentDetails.getStudent().getSchoollastattended()),
+						DataUtil.emptyString(studentDetails.getStudent().getLanguagesstudied()),
+						DataUtil.emptyString(studentDetails.getStudent().getInstructionmediumlastschool()),
+						DataUtil.emptyString(studentDetails.getStudent().getClassonleaving()),
+						DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateleaving()),
+						DataUtil.emptyString(studentDetails.getStudent().getReasonleaving()),
+						//DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getNooftc())),
 
 
 						studentDetails.getStudent().getArchive()==1 ? "Yes" : "No" ,
@@ -1247,6 +1308,8 @@ public class StudentService {
 		if(studentIds!=null){
 			String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentIds[0];
 			Parents parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+			String dob = new DateUtil().generateDateInWord(parents.getStudent().getDateofbirth()); 
+			result.setDateOfBirth(dob);
 			result.setParents(parents);
 			result.setSuccess(true);
 			result.setMessage("bonafidecertificateprint");
@@ -1522,5 +1585,45 @@ public void checkDuplicateStudent(String aadhaarNo, String studentName, String d
 			            out.close();
 			        }
 			}
+
+	public void getParentList(String branchid) throws IOException {
+
+		response.setContentType("text/xml");
+        response.setHeader("Cache-Control", "no-cache");
+
+		PrintWriter out = response.getWriter();
+
+		try {
+			if (branchid != null && !branchid.isEmpty()) {
+
+				ResultResponse result = libraryService.getActiveStudentsWithParents(branchid);
+
+				List<Parents> parentList = result.getResultList();
+
+				StringBuilder buffer = new StringBuilder();
+
+				buffer.append("<select id='parentId' name='parentId' class='textfieldvalues'>");
+				buffer.append("<option value=''>-- Select Parent --</option>");
+
+				if (parentList != null && !parentList.isEmpty()) {
+					for (Parents parent : parentList) {
+						buffer.append("<option value='").append(parent.getPid()) // use correct ID
+								.append("'>").append(parent.getFathersname()+"/"+parent.getContactnumber()) // use getter
+								.append("</option>");
+					}
+				}
+
+				buffer.append("</select>");
+
+				out.print(buffer.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			out.print("<select><option value=''>No Parent Found</option></select>");
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
 
 }
