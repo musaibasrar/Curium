@@ -483,8 +483,8 @@ for(Cookie cookie : cookies){
 }
 
 .logo-img {
-    width: 100px;
-    height: 35px;
+    width: 85px;
+    height: 30px;
 }
   </style>
     </head>
@@ -503,13 +503,13 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="position:relative;background-image: url('/divine/images/backgroundid.png');background-repeat:no-repeat;background-position: center;background-color: white; width: 5.5cm; height: 8.3cm;">
+			<div class="card" style="position:relative;background-image: url('/divine/images/bg2.png');background-repeat:no-repeat;background-position: center;background-color: white; width: 5.5cm; height: 8.3cm;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:15px;font-weight: 900; color:red"><img src="/divine/images/divine.png" class="logo-img" /> </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:8px;margin-bottom:0px;margin-top:0px;padding:0px;">MOHAMMAD ALI EDUCATION SOCIETY'S</p>
-   <p style="font-size:8px;margin-bottom:0px;margin-top:0px;padding:0px;font-weight:bold;">DIVINE M.A SCHOOL PRIMARY AND HIGH SCHOOL</p>
+    <p style="margin-bottom:0px;margin-top:12px;padding:0px;font-size:15px;font-weight: 900; color:red"><img src="/divine/images/divine.png" class="logo-img" /> </p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">MOHAMMAD ALI EDUCATION SOCIETY'S</p>
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;font-weight:bold;">DIVINE M.A SCHOOL PRIMARY AND HIGH SCHOOL</p>
    </table>
   </div>
   <table align="center" width="90%" height="3px" style="background-color:red;"></table>
@@ -529,20 +529,20 @@ for(Cookie cookie : cookies){
 	</div> --%>
     <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 100%;font-weight:bold;">
   <tr>
-    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;NAME</td>
+    <td style="padding: 0;text-align:left;">&emsp;&emsp;NAME</td>
     <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("studentname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;F/NAME</td>
+    <td style="padding: 0;text-align:left;">&emsp;&emsp;F/NAME</td>
     <td style="padding: 0;text-transform: uppercase;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;CLASS</td>
+    <td style="padding: 0;text-align:left;">&emsp;&emsp;CLASS</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
  
   <tr>
-    <td style="padding: 0;text-align:right;">&nbsp;&nbsp;D.O.B.</td>
+    <td style="padding: 0;text-align:left;">&emsp;&emsp;D.O.B.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
  
@@ -554,13 +554,22 @@ for(Cookie cookie : cookies){
   </tr>
 </table>
 <table align="center"  style="position:absolute;
-                  bottom:2px;
+                  bottom:1px;
                   left:50%;
                   transform:translateX(-50%);
                   width:60%;
                   ">
-<tr><td style="text-align:center;margin:0px;padding:0px;"><img src="/divine/images/principalsign.png" width="50" height="25"/></td></tr>
-<tr><td style="color:yellow;text-align:center;margin:0px;padding:0px;">Principal</td></tr>
+<tr><td style="text-align:center;margin:0px;padding:0px;">
+<c:choose>
+    <c:when test="${branchid == 3}">
+        <img src="/divine/images/principalsign.png" width="50" height="25"/>
+    </c:when>
+    <c:otherwise>
+        <img src="/divine/images/hmsign.png" width="50" height="25"/>
+    </c:otherwise>
+</c:choose>
+<!-- <img src="/divine/images/principalsign.png" width="50" height="25"/> --></td></tr>
+<tr><td style="color:yellow;text-align:center;padding:0px;font-weight:bold;"><p style="margin:8px;">Principal</p></td></tr>
 <!-- <tr><td style="text-align:center;text-align:center;color:white;margin:0px;padding:0px;">Divine School Bidar</td></tr> -->
 <tr><td style="color:green;background-color: #E0BD24;border-radius:5px;margin:0px;padding:0p;:">PH:9916891788/8444946233</td></tr>
 </table>
