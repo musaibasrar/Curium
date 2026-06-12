@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -299,6 +300,17 @@
 #button {
 	
 }
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 75px;
+        box-sizing: border-box;
+    }
 </style>
 <link rel="stylesheet" href="/brightschool/css/validation/jquery.ketchup.css">
 <script type="text/javascript" src="/brightschool/js/datePicker/jquery-1.7.1.js"></script>
@@ -451,7 +463,40 @@ $(function() {
 	
 	
 </script>
+<script>
+$(function() {
+		$('#chckHead1').click(function() {
+			var length = $('.chcktbl1:checked').length;
+			var trLength = $('.labelClass').length;
+			if (length > 0) {
+				$('.chcktbl1:checked').attr('checked', false);
+				this.checked = false;
 
+			} else {
+				if (this.checked == false) {
+					$('.chcktbl1:checked').attr('checked', false);
+				} else {
+					$('.chcktbl1:not(:checked)').attr('checked', true);
+				}
+
+			}
+
+		});
+		
+		$('.chcktbl1').click(function() {
+			var length = $('.chcktbl:checked').length;
+			var trLength = $('.labelClass').length;
+			alert(tdLength);
+			if (length > trLength) {
+
+				$('.chcktbl1:not(:checked)').attr('disabled', true);
+			} else {
+				$('.chcktbl1:not(:checked)').attr('disabled', false);
+			}
+		});
+
+	});
+</script>
 
 <script type="text/javascript">
         
@@ -556,15 +601,15 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td class="alignRight">Class &nbsp;</td>
-							<td>
+							<!-- <td class="alignRight">Class &nbsp;</td> -->
+							<%-- <td>
 							<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}&nbsp;&nbsp;
 										</c:if>	
 										
-							</c:forEach>
+							</c:forEach> --%>
 							<%-- <label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
 										<option selected></option>
@@ -577,7 +622,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label>  --%><label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
+							<%-- </label>  --%><%--<label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -589,7 +634,82 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 
 								</select>
-							</label>
+							</label> --%>
+							
+						</tr>
+						 <tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead1" /></td>
+						</tr>
+						<tr>
+						<td class="alignRight">Class &nbsp;</td>
+						<td >
+							
+									<div class="checkbox-container">
+										<!-- initialize -->
+										<c:set var="classList" value="" />
+										<c:set var="sectionList" value="" />
+										
+										<!-- collect classes and sections -->
+										<c:forEach items="${classdetailslist}" var="item">
+										    <c:if test="${not empty item.classdetails}">
+										                <c:set var="classList" value="${classList},${item.classdetails}" />
+										    </c:if>
+										    <c:if test="${not empty item.section}">
+										                <c:set var="sectionList" value="${sectionList},${item.section}" />
+										    </c:if>
+										</c:forEach>
+										
+										<!-- safely strip first comma if present -->
+										<c:set var="cleanClassList" value="${classList}" />
+										<c:set var="cleanSectionList" value="${sectionList}" />
+										
+										
+										<c:if test="${fn:startsWith(cleanClassList, ',')}">
+										    <c:set var="cleanClassList" value="${fn:substring(cleanClassList, 1, fn:length(cleanClassList))}" />
+										</c:if>
+										
+										<c:if test="${fn:startsWith(cleanSectionList, ',')}">
+										    <c:set var="cleanSectionList" value="${fn:substring(cleanSectionList, 1, fn:length(cleanSectionList))}" />
+										</c:if>
+										
+										<!-- convert to arrays -->
+										<c:set var="classes" value="${fn:split(cleanClassList, ',')}" />
+										<c:set var="sections" value="${fn:split(cleanSectionList, ',')}" />
+										
+										<!-- cross product -->
+										<c:forEach items="${classes}" var="classItem">
+
+    <!-- Class without section -->
+    <div class="checkbox-item">
+        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+            <input type="checkbox" class="chcktbl1" name="classsearch"
+                   value="${classItem}--">
+            ${classItem}
+        </label>
+    </div>
+
+    <!-- Class with sections -->
+    <c:forEach items="${sections}" var="sectionItem">
+        <div class="checkbox-item">
+            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+                <input type="checkbox" class="chcktbl1" name="classsearch"
+                       value="${classItem}--${sectionItem}">
+                ${classItem}${sectionItem}
+            </label>
+        </div>
+    </c:forEach>
+
+</c:forEach>
+										
+
+
+									</div>
+
+
+							</td>
+							
+							
 						</tr>
 
 						<tr>
