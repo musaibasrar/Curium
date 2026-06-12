@@ -89,7 +89,7 @@ public class ImportFileService {
 						}
 						student.setAdmissionnumber(getCellValue(row, 0));
 						student.setSts(getCellValue(row, 1));
-						student.setStudentexternalid(getCellValue(row, 46));
+						student.setStudentexternalid(getCellValue(row, 6));
 						student.setName(getCellValue(row, 2));
 						student.setGender(getCellValue(row, 3));
 
@@ -99,23 +99,23 @@ public class ImportFileService {
 						        getCellValue(row, 18)));
 
 						student.setAge(Integer.parseInt(getCellValue(row, 5)));
-						student.setPlaceofbirth(getCellValue(row, 6));
+						//student.setPlaceofbirth(getCellValue(row, 6));
 
 						/*student.setAdmissiondate(DateUtil.simpleDateParser(
 						        getCellValue(row, 19) + "/" +
 						        getCellValue(row, 20) + "/" +
 						        getCellValue(row, 21)));*/
 
-						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 47));
+						student.setClassstudying(getCellValue(row, 8) + "--");
 
 						//student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
-						student.setMothertongue(getCellValue(row, 10));
-						student.setReligion(getCellValue(row, 11));
+						//student.setMothertongue(getCellValue(row, 10));
+						//student.setReligion(getCellValue(row, 11));
 						//student.setStudentscaste(getCellValue(row, 12));
 						student.setNationality(getCellValue(row, 13));
 						//student.setStudentscastecertno(getCellValue(row, 14));
-						//student.setDisabilitychild(getCellValue(row, 14)); // Aadhar no
+						student.setDisabilitychild(getCellValue(row, 14)); // Aadhar no
 						//student.setSocialcategory(getCellValue(row, 15));
 						//student.setSecondlanguage(getCellValue(row, 15));
 
@@ -131,6 +131,7 @@ public class ImportFileService {
 						//student.setLastfirstlanguage(getCellValue(row, 44));
 
 						student.setUserid(2);
+						student.setRte(0);
 
 						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
 						//student.setSts(getCellValue(row, 49));
@@ -156,7 +157,7 @@ public class ImportFileService {
 
 						parent.setAddresspermanent(getCellValue(row, 31));
 
-						//parent.setAddresstemporary(getCellValue(row, 32));
+						parent.setAddresstemporary(getCellValue(row, 32));
 						//student.setGuardiandetails(getCellValue(row, 33));
 						//parent.setRemarks(getCellValue(row, 34));
 
