@@ -591,11 +591,15 @@ for(Cookie cookie : cookies){
                     <td >Book no.:</td><td> <input  type="text" name="bookno" id="bookno" style="width: 200px" /></td>
                     <td >TC no.:</td><td> <input  type="text" name="tcno" id="tcno" style="width: 200px" /></td>    
                     </tr>
-                    
                     <tr>
-                    <td >School/Board Annual Examination<br> Last taken with Result::</td><td> <input  type="text" name="lastexam" id="lastexam" style="width: 200px" /></td>
-                    <td >Whether failed if so Once/Twice in the same Class:</td><td> <input  type="text" name="failpass" id="failpass" style="width: 200px" /></td>    
+                    <td><br></td>
                     </tr>
+                    <tr>
+                    <td >Surname:</td><td> <input  type="text" name="lastexam" id="lastexam" style="width: 200px" /></td>
+                    <td >Subcaste:</td><td> <input  type="text" name="failpass" id="failpass" style="width: 200px" /></td>    
+                    </tr>
+                    
+                   <!--  
                     <tr>
                     <td >Subject Studied - First Subject: </td><td><input  type="text" name="firstsubject" id="firstsubject" style="width: 200px" /></td>
                     <td >Second Subject:</td><td> <input  type="text" name="secondsubject" id="secondsubject" style="width: 200px" /></td>    
@@ -623,7 +627,7 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td>Whether NCC cadet/Boy Scout/Girl<br> Scout (detail may be given) &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="ncc" id="ncc" style="width: 200px" /></td>
                     <td >Games played or extra curricular activities<br> in which the pupil usually took part:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="game" id="game" style="width: 200px" /></td>    
-                    </tr>
+                    </tr> -->
                     <tr>
                     <td >Genaral Conduct: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>
                     <td >Date of Application for Certificate:&nbsp;&nbsp;&nbsp;&nbsp; </td><td><input  type="text" name="datecert" id="datecert" style="width: 200px" /></td>    
