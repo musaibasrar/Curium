@@ -130,6 +130,10 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/aashiyana/images/aashiyanaheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
+								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/aashiyana/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
 							<td><a target="leftFrame" href="/aashiyana/left_officeadmin"> <img
 									src="/aashiyana/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
