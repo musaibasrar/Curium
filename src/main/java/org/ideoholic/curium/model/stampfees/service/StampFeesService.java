@@ -96,14 +96,14 @@ public class StampFeesService {
 		String[] addClass = searchStudentDto.getClassesSearch();
 		//String addSec = request.getParameter("secsearch");
 		StringBuffer conClassStudying = new StringBuffer();
-
+         
 			int i = 0;
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+""+"%");
 				}else {
-					conClassStudying.append(classOne+"--"+"%");
+					conClassStudying.append(classOne+""+"%");
 				}
 				
 				i++;
