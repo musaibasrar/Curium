@@ -1576,7 +1576,7 @@ public class StudentService {
 
 				StringBuilder buffer = new StringBuilder();
 
-				buffer.append("<select id='parentId' name='parentId' class='textfieldvalues'>");
+				buffer.append("<select id='parentId' name='parentId' class='textfieldvalues select2'>");
 				buffer.append("<option value=''>-- Select Parent --</option>");
 
 				if (parentList != null && !parentList.isEmpty()) {
