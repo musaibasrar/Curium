@@ -45,11 +45,11 @@ public class LoginActionAdapter {
 		
 	}
 
-	public boolean viewLoginDetail() {
+	public LoginResponseDto viewLoginDetail() {
 		
 		LoginResponseDto result = loginService.viewLoginDetail(request.getParameter("id"), httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("logindetail", result.getLogin());
-		return result.isSuccess();
+		return result;
 		
 	}
 
