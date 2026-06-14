@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.ideoholic.curium.model.feescategory.action.FeesActionAdapter;
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
+import org.ideoholic.curium.model.login.action.LoginActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.action.UserActionAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class FeesCollectionAction {
 
 		@Autowired
 		private UserActionAdapter userActionAdapter;
+		
+		@Autowired
+		private LoginActionAdapter loginActionAdapter;
 
         @PostMapping("/searchFeesReport")
         public String searchFeesReport() {
@@ -303,5 +307,23 @@ public class FeesCollectionAction {
 	        public String searchFeesReportBulkConcession() {
 	            feesCollectionActionAdapter.getFeesReportDue();
 	            return "bulkconcession";
+	        }
+		  
+		  @GetMapping("/feesCollectionDetails")
+	        public String feesCollectionDetailsReport() {
+			  	loginActionAdapter.viewLogin();
+				if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
+        			return "feesCollectionDetailsAdmin";
+        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+        			return "feesCollectionDetailsAdmin";
+        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+        			return "feesCollectionDetailsAdmin";
+        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+        			return "feesCollectionDetailsAdmin";
+        		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+        			return "feesCollectionDetails";
+        		} else {
+        			return "feesCollectionDetails";
+        		}
 	        }
 }
