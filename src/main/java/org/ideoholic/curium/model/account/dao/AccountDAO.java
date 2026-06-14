@@ -23,7 +23,6 @@ import org.ideoholic.curium.repositories.FinancialAccountingYearRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
 import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.QueryUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
