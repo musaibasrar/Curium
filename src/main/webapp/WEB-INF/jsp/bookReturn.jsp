@@ -605,14 +605,17 @@ for(Cookie cookie : cookies){
                 </thead>
 
 				<tbody>
-				    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
-         				<tr>
-					      <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
-					      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
-					      <td class="dataTextLeft"><c:out  value="${bookslistdetail.startDate}" /></td>
-					      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /><input type="hidden" name="noofdays"  value="<c:out value="${bookslistdetail.noOfDays}" />"/></td>
-              			</tr>
-					</c:forEach> 
+						    <c:forEach items="${bookslist}" var="bookslistdetail" varStatus="status"> 
+           							<tr>
+           								  <td class="dataTextLeft" style="text-align:center;"><input type="checkbox" id = "<c:out value="${bookslistdetail.id}"/>" class = "chcktbl"  name="bookissueid"  value="<c:out value="${bookslistdetail.id}"/>"/></td>
+									      <td class="dataTextLeft"><c:out value="${bookslistdetail.bookName}" /><input type="hidden" name="bookid"  value="<c:out value="${bookslistdetail.bookId}" />"/> </td>
+									      <%-- <td class="dataTextLeft"><c:out value="${bookslistdetail.bookId}" /> </td> --%>
+									      <td class="dataTextLeft">
+									      <fmt:formatDate value="${bookslistdetail.startDate}" pattern="dd/MM/yyyy"/></td>
+									      <td class="dataTextLeft"><c:out  value="${bookslistdetail.noOfDays}" /><input type="hidden" name="noofdays"  value="<c:out value="${bookslistdetail.noOfDays}" />"/></td>
+                					</tr>
+								
+							</c:forEach> 
 				</tbody>				
 			</table>
             
