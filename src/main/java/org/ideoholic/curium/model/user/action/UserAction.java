@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
+import org.ideoholic.curium.model.login.action.LoginActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,8 @@ public class UserAction {
 	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 	@Autowired
 	private UserActionAdapter userActionAdapter;
+	@Autowired
+	private LoginActionAdapter loginActionAdapter;
 
 	@GetMapping("/sessionTimeOut")
 	public String sessionTimeOut() {
@@ -44,6 +47,7 @@ public class UserAction {
 	@PostMapping("/searchByDate")
 	public String searchByDate() {
 		userActionAdapter.searchByDate();
+		loginActionAdapter.viewLogin();
 		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 			return "feesCollectionDetailsAdmin";
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {

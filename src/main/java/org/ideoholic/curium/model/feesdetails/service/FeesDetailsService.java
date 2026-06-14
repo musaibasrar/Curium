@@ -297,6 +297,7 @@ public class FeesDetailsService {
 		String toDate= DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getToDate());
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getFromDate());
 		String oneDay = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getOneDay());
+		String feesCollector = feesIdDetailsDto.getFeesCollector();
 		
 		Map<Receiptinfo,StudentFeesReport> feesMap = new HashMap<Receiptinfo,StudentFeesReport>();
 		long sumOfFees = 0l;
@@ -353,6 +354,7 @@ public class FeesDetailsService {
 		
 		dataForFeesResponseDto.setFeesMap(sortedMap);
 		dataForFeesResponseDto.setSuccess(true);
+		dataForFeesResponseDto.setFeesCollector(feesCollector);
 		return dataForFeesResponseDto;
 	}
 
