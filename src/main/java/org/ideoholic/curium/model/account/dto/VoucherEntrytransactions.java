@@ -79,4 +79,62 @@ public class VoucherEntrytransactions implements java.io.Serializable {
 
 	@Column(name = "userid")
 	private int userid;
+
+	public int getFinancialyear() {
+		return financialyear;
+	}
+
+	public void setFinancialyear(int financialyear) {
+		this.financialyear = financialyear;
+	}
+
+	public String getCancelvoucher() {
+		return cancelvoucher;
+	}
+
+	public void setCancelvoucher(String cancelvoucher) {
+		this.cancelvoucher = cancelvoucher;
+	}
+
+	public Date getEntrydate() {
+		return entrydate;
+	}
+
+	public void setEntrydate(Date entrydate) {
+		this.entrydate = entrydate;
+	}
+
+	public Date getVouchercancellationdate() {
+		return vouchercancellationdate;
+	}
+
+	public void setVouchercancellationdate(Date vouchercancellationdate) {
+		this.vouchercancellationdate = vouchercancellationdate;
+	}
+
+	@Column(name = "branchid")
+	public int getBranchid() {
+		return branchid;
+	}
+
+	public void setBranchid(int branchid) {
+		this.branchid = branchid;
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
+	}
+	
+	@Column(name = "supportingdoc1")
+	private String supportingDoc1;
+	
+	@Column(name = "supportingdoc2")
+	private String supportingDoc2;
+	
+	@Column(name = "supportingdoc3")
+	private String supportingDoc3;
 }

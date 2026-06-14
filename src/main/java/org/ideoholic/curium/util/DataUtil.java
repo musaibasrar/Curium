@@ -5,9 +5,17 @@
 
 package org.ideoholic.curium.util;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
+import java.util.Set;
+
+import org.apache.commons.codec.binary.Base64;
+import org.ideoholic.curium.model.diary.service.DiaryService;
+import org.springframework.web.multipart.MultipartFile;
+
+import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpSession;
 
@@ -17,10 +25,18 @@ import org.springframework.util.StringUtils;
  *
  * @author Musaib
  */
+@Slf4j
 public class DataUtil {
     
      static SimpleDateFormat simpleDateFormat;
     static Date returnDate;
+    private static final String IMAGE_PNG = "image/png";
+	private static final String IMAGE_JPEG = "image/jpeg";
+	private static final String IMAGE_JPG = "image/jpg";
+	private static final String APPLICATION_PDF = "application/pdf";
+    private static final Set<String> ALLOWED_TYPES = Set.of(
+    	    IMAGE_PNG, IMAGE_JPEG, IMAGE_JPG, APPLICATION_PDF
+    	);
     /**
      *
      * @param source String Object
@@ -178,6 +194,23 @@ public class DataUtil {
        } while (mathrandom >= alphaNumericLength);
        return mathrandom;
    }
+   
+   public String processFile(MultipartFile file) throws IOException {
+
+	    if (file == null || file.getOriginalFilename() == null || file.getOriginalFilename().isEmpty()) {
+	        return null;
+	    }
+
+	    String contentType = file.getContentType();
+
+	    if (!ALLOWED_TYPES.contains(contentType)) {
+	        log.warn("Invalid file type: {}", contentType);
+	        return null;
+	    }
+
+	    byte[] bytesEncoded = Base64.encodeBase64(file.getBytes());
+	    return "data:" + contentType + ";base64," + new String(bytesEncoded);
+	}
 
     public static String requireNonNullElse(String str, String defaultValue) {
         return StringUtils.hasLength(str) ? str : defaultValue;
