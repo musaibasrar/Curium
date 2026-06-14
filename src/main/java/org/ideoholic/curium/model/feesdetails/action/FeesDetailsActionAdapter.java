@@ -46,6 +46,7 @@ public class FeesDetailsActionAdapter {
 			feesIdDetailsDto.setFromDate(request.getParameter("fromdate"));
 			feesIdDetailsDto.setOneDay(request.getParameter("oneday"));
 			feesIdDetailsDto.setToDate(request.getParameter("todate"));
+			feesIdDetailsDto.setFeesCollector(request.getParameter("feescollector"));
 			DataForFeesResponseDto dataForFeesResponseDto = feesDetailsService.printDataForFees(feesIdDetailsDto);
 			httpSession.setAttribute("sumofdetailsfees", dataForFeesResponseDto.getSumOfDetailsFees());
 			httpSession.setAttribute("sumofonlyfee", dataForFeesResponseDto.getSumOfOnlyFee());
@@ -53,6 +54,7 @@ public class FeesDetailsActionAdapter {
 			httpSession.setAttribute("sumofmisc", dataForFeesResponseDto.getSumOfMisc());
 			httpSession.setAttribute("daterangefeescollection", dataForFeesResponseDto.getDateRangeFeesCollection());
 			request.setAttribute("feesmap", dataForFeesResponseDto.getFeesMap());
+			request.setAttribute("feescollector", dataForFeesResponseDto.getFeesCollector());
 			return dataForFeesResponseDto.isSuccess();
 		}
 
