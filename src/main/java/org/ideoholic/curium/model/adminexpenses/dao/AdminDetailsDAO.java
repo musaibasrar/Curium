@@ -6,6 +6,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.ideoholic.curium.model.adminexpenses.dto.Adminexpenses;
+import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.repositories.AdminExpensesRepository;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class AdminDetailsDAO {
 	@Transactional
 	public Adminexpenses create(Adminexpenses adminexpenses) {
 		try {
+			Adminexpenses latestAdminexpenses = adminExpensesRepo.findTopByBranchidOrderByIdAdminExpensesDesc(adminexpenses.getBranchid());
+			if (latestAdminexpenses != null) {
+			    adminexpenses.setVno(latestAdminexpenses.getVno() + 1);
+			} else {
+			    adminexpenses.setVno(1);
+			}
 			adminexpenses = adminExpensesRepo.save(adminexpenses);
 		} catch (Exception hibernateException) { 
 			log.error(hibernateException.getMessage(), hibernateException);
@@ -40,11 +47,7 @@ public class AdminDetailsDAO {
 		List<Adminexpenses> results = new ArrayList<>();
 
 		try {
-
-			results =adminExpensesRepo.findByBranchid(branchId);
-
-
-
+			results =adminExpensesRepo.findByBranchidOrderByIdAdminExpensesAsc(branchId);
 		} catch (Exception hibernateException) {
 			log.error(hibernateException.getMessage(), hibernateException);
 
