@@ -328,11 +328,12 @@ public class MarksDetailsService {
 			Student searchStudent = studentDetailsDao.readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = dto.getExamClass();
 			String[] exCl = examClass[0].split("--");
-				List<Exams> examDetailsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
-				List<Subject> subjectDetailsList = subjectDetailsDao.readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
-				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
+
+			List<Exams> examDetailsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
+			List<Subject> subjectDetailsList = subjectDetailsDao.readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
+			List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
-				for (Exams exams : examDetailsList) {
+				for (Exams exams : dto.getExamsList()) {
 					
 					ExamsDetails examsD = new ExamsDetails();
 							List<Marks> marksListPerSubject = marksDetailsDao.readMarksPerExam(searchStudent.getSid(),exams.getExid(),
@@ -1861,6 +1862,16 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			markssheet.setExamSummaries(examSummaries);
 			// row-wise subject summaries
 			markssheet.setSubjectSummaries(new ArrayList<>(subjectSummaryMap.values()));
+			
+			//Generate Graph for Each Student
+			StudentGraphDto studentGraphDto = new StudentGraphDto();
+			String[] stdIds = {studentIds[i]};
+			studentGraphDto.setStudentIds(studentIds);
+			studentGraphDto.setExamClass(examClass);
+			studentGraphDto.setExamsList(examsList);
+			StudentGraphResponseDto studentGraphResponseDto = getStudentGraph(studentGraphDto, branchId, currentAcademicYear);
+			markssheet.setExamsDetails(studentGraphResponseDto.getExamDetailsGraph());
+			//End Generate Graph
 
 			marksSheetList.add(markssheet);
 			result.setSuccess(true);
@@ -2319,7 +2330,7 @@ public GenerateReportResponseDto getSubjectDetails(MarksViewDto marksViewDto, St
 	    String examName = parts[2];
 	    String examClass = marksViewDto.getAddClass();
 		
-		Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(branchid),examClass,examName,subid);
+		Subject subjectDetails =  subjectDetailsDao.readSubjectByExam(Integer.parseInt(branchid),examClass,examName,subid);
 		float minMarks = subjectDetails.getMinmarks();
 		float maxMarks = subjectDetails.getMaxmarks();
 		generateReportResponseDto.setMinMark(String.valueOf(minMarks));
