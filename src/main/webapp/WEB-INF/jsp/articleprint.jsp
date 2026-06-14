@@ -27,7 +27,40 @@
     font-weight: normal;
     text-align:center;
 }
+input{
+text-align:center;
+font-weight:bolder;
+font-size:15px;
+}
         </style>
+       
+
+<style>
+.printInput{
+    border:1px solid black;   /* visible on screen */
+    outline:none;
+}
+
+/* While printing */
+@media print {
+    .printInput{
+        border:none !important;
+        outline:none !important;
+        box-shadow:none !important;
+    }
+}
+ .print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        @media print{
+            .print-btn{
+                display: none;
+            }
+        }
+
+</style>
 	<script type="text/javascript" src="/hamidullah/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/hamidullah/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <title>Article 371 Certificate</title>
@@ -97,13 +130,13 @@ Rules for Issue Certificate, 2013]</b>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 This is to certify that Sri/Smt  <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:320px;">
-<c:out value="${studentdetailsbonafide.student.name}" />
+<input type="text" name="studentname" style="width:315px;" value="${studentdetailsbonafide.student.name}" class="printInput">
 </span>   D/o,S/o</td>
 </tr>
 <tr>
 <td>
 <span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:325px;">
-<c:out value="${studentdetailsbonafide.fathersname}" />
+<input type="text" name="fathersname" style="width:320px;" value="${studentdetailsbonafide.fathersname}" class="printInput">
 </span>  has been studied in<b> THE LITTLE ANGELS&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
 </td>
 </tr>
@@ -134,20 +167,22 @@ Reference of Document
 &nbsp;&nbsp;&nbsp;1
 </td>
 <td class="borderset" style="text-align:center;">
-<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classadmittedin,'--')}">
-						    		${splt} 
-								</c:forEach>
+
+<c:set var="splt" value="${fn:split(studentdetailsbonafide.student.classadmittedin,'--')}" />
+		<input type="text" name="classadmittedin" style="width:60px;" value="${splt[0]}" class="printInput">								
 								to
-<c:forEach var="splts" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splts} 
-								</c:forEach>								
+
+								<c:set var="splts" value="${fn:split(studentdetailsbonafide.student.classstudying,'--')}" />
+								<input type="text" name="classstudying" style="width:60px;" value="${splts[0]}" class="printInput">							
 </td>
 <td class="borderset" style="text-align:center;">
-From ${studentdetailsbonafide.student.yearofadmission} to ${studentdetailsbonafide.student.promotedyear}
+From <input type="text" name="yearofadmission" style="width:60px;" value="${studentdetailsbonafide.student.yearofadmission}" class="printInput">
+ to
+ <input type="text" name="promotedyear" style="width:60px;" value="${studentdetailsbonafide.student.promotedyear}" class="printInput">
 
 </td>
 <td class="borderset" style="text-align:center;">
-${studentdetailsbonafide.student.admissionnumber}
+<input type="text" name="admissionnumber" value="${studentdetailsbonafide.student.admissionnumber}" class="printInput">
 </td>
 </tr>
 </table>
@@ -179,23 +214,27 @@ Reference of Document
 <%-- <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach> --%>
-								SSLC
+								<input type="text" name="admissionnumber" value="SSLC" class="printInput">
 </td>
 <td class="borderset" style="text-align:center;">
 ${studentdetailsbonafide.student.promotedyear}
+<input type="text" name="promotedyear" style="width:40px;" value="${studentdetailsbonafide.student.promotedyear}" class="printInput">
+
 </td>
 <td class="borderset">
 passed
 </td>
 <td class="borderset" style="text-align:center;">
 ${studentdetailsbonafide.student.admissionnumber}
+<input type="text" name="admissionnumber" value="${studentdetailsbonafide.student.admissionnumber}" class="printInput">
 </td>
 </tr>
 </table>	
 <table align="center">
 <tr><td><br></td></tr>
 <tr><td>
-Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;${studentdetailsbonafide.student.name}
+Place: &emsp;&emsp;</td><td>Name:&nbsp;&nbsp;
+<input type="text" name="studentname" style="width:150px;" value="${studentdetailsbonafide.student.name}" class="printInput">
 </td></tr>
 <tr><td><br></td></tr>
 <tr><td><br></td></tr>
@@ -223,9 +262,12 @@ CERTIFICATE
 </tr>
 <tr>
 <td>
-Place:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;"></span> 
+Place:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;">
+<input type="text" name="place" style="width:290px;" value="BIDAR" class="printInput">
+</span> 
 </td><td>
-Name:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;"></span> 
+Name:&nbsp;<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:300px;">
+<input type="text" name="studentname" style="width:290px;"  class="printInput"></span> 
 </td>
 </tr>
 <tr>
@@ -244,7 +286,9 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 <tr>
 <td>
 </td><td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> Taluka
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;">
+<input type="text" name="studentname" style="width:140px;"  class="printInput"></span>
+</span> Taluka
 </td>
 
 </tr>
@@ -254,12 +298,16 @@ Block Education Officer&nbsp;&nbsp;&nbsp;&nbsp;
 </tr>
 <tr><td>
 </td><td>
-<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;"></span> District
+<span style="font-weight: bold;text-transform: capitalize;border-bottom:dotted;width:150px;">
+<input type="text" name="studentname" style="width:140px;"  class="printInput"></span></span> District
 </td></tr>
 <tr>
-              <td align="center"><a id="print" href="/hamidullah/DocumentsProcess/printArticleCertificate">Print</a></td>
+              <td align="center"><!-- <a id="print" href="/hamidullah/DocumentsProcess/printArticleCertificate">Print</a> --></td>
             </tr>
 </table>
+<div class="print-btn">
+    <button onclick="window.print()">Print</button>
+</div>
 	
 	</form>
 </body>

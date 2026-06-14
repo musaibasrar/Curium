@@ -1,10 +1,8 @@
-<%@page import="java.lang.String"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
     <head >
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -330,22 +328,8 @@
                                 });
                             </script>
 
-  <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/hamidullah/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
+  
+
  
 
    <style type="text/css">
@@ -395,9 +379,9 @@ for(Cookie cookie : cookies){
        .card {
     width: 11cm;
     height: 7cm;
-    //background: #FEE12B;
+    background: #0b8f3e;
     
-}
+    }
 
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -455,74 +439,66 @@ for(Cookie cookie : cookies){
          <c:set var="limit" value="1"/>
                         
           <c:forEach begin="1" end="${iInitial}">
-                        <%!                        
-                            int i = 1;
-                        %>
+                       
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="background-image: url('/hamidullah/images/frontpart.png');background-repeat:no-repeat;    background-position: center;
+			<div class="card" style="background-image: url('/hamidullah/images/backpartfromphoto.png');background-repeat:no-repeat;    background-position: center;
 			 width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
   <div class="table-container" style="margin-bottom: 0px;">
   <table width="100%" style="padding-bottom:0px;margin-bottom:0px;" >
   <tr align="center"><td style="text-align:center;padding:0px;">
-  <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:13px;font-weight: 900; color:yellow">QUADRI EDUCATIONAL TRUST(R)</p>
+  <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:11px;font-weight: 900; color:yellow">QUADRI EDUCATIONAL TRUST(R)</p>
     <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:17px;font-weight: 900; color:white">
-    HAMIDULLA HIGH SCHOOL MANGALGI<%-- ${branchname} --%> </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">(ENGLISH MEDIUM)<%-- ${branchaddress} --%></p>
+    HAMIDULLA HIGH SCHOOL MANGALGI </p></td></tr><tr><td style="text-align:center;padding:0px;">
+   <p style="font-size:12px;margin-bottom:0px;margin-top:0px;padding:0px;color:white">(ENGLISH MEDIUM)</p>
    </table>
   </div>
 
   <div class="table-container" style="padding-top:0px;margin-top:0px;">
- <table align="center" style="padding-top:0px;margin-top:0px;" >
- <tr>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:100px;border: 6px double #07CB48;;border-radius: 50%;" alt="Photo" />
- </td>
- </tr>
- </table>
+ 
    </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
+   <table align="center">
+
+    <tr>
+    <td><img src="/hamidullah/images/backimage.jpg" width="150px" height="150px"/></td>
+   </tr>
+  
+   </table>
+   
+    <table align="center"  style="border-collapse: collapse;width: 100%;text-align: center;">
   <tr>
-    <td style="font-weight:bold;font-size:10px;">&nbsp;&nbsp;CLASS</td>
-    <td style="font-weight:bold;font-size:10px;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr> 
+    <td style="font-weight:bold;font-size:11px;">Pre Primary, Lower Primary,Higher Primary</td>
+    </tr> 
   <tr>
-    <td style="font-weight:bold;font-size:10px;">&nbsp;&nbsp;F/NAME</td>
-    <td style="font-weight:bold;font-size:10px;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
-  </tr>
+    <td style="font-weight:bold;font-size:10px;">High School and PU College for Sciences</td>
+     </tr>
  
   <tr>
-    <td style="font-weight:bold;font-size:10px;;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;font-size:12px;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
-  </tr>
+    <td style="font-weight:bold;font-size:8px;;white-space: nowrap;">Post Mangalgi,Tq Chitguppa, Dist:-Bidar-585329</td>
+    </tr>
  
   <tr>
-    <td style="font-weight:bold;font-size:10px;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="font-weight:bold;font-size:10px;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
+    <td style="font-weight:bold;font-size:10px;">www.quadrigroupinstitution@gmail.com</td>
+    </tr>
  
   <tr>
-    <td style="font-weight:bold;font-size:10px;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="font-weight:bold;font-size:10px;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
-  </tr>
+    <td style="font-weight:bold;font-size:10px;color: #fc0d0d;">Cell No.9636363510 </td>
+     </tr>
 </table>
 
 <div height="30" width="20%" style="text-align:right;float:right;">
 
-<img src="/hamidullah/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <div>
-principal&nbsp;&nbsp;&nbsp;</div>
+&nbsp;&nbsp;&nbsp;</div>
 </div>
 </div>
  </c:if>
-   <% i = i + 1;%>
+  
                         <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
-                    <% i = 1;%>
+                   
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
   

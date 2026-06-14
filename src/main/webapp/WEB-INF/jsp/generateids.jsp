@@ -374,6 +374,14 @@
 
 	}
 	
+	function printBackview() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/hamidullah/Printids/printBackview";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	$(function() {
 
 		$("#search").button().click(function() {
@@ -382,6 +390,9 @@
 		
 		$("#printpreview").button().click(function() {
 			printPreview();
+		});
+		$("#printbackview").button().click(function() {
+			printBackview();
 		});
 		
 
@@ -606,6 +617,8 @@ for(Cookie cookie : cookies){
 					<tr>
 						<td class="footerTD" colspan="2"><input 
 							type="submit" value="Print Preview"  id="printpreview" />
+							<input 
+							type="submit" value="Print Backview"  id="printbackview" />
 							</td>
 							
 
