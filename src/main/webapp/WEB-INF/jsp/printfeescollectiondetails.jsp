@@ -236,6 +236,7 @@
 				${branchname}<br><br>
 				<label class="addressLine">Fees Collection Details Report</label><br>
 				<label class="addressLineTwo">${daterangefeescollection}</label><br>
+				<label class="addressLineTwo">${feescollector}</label><br>
 				</td>
 			</tr>
 	</table>

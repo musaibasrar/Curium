@@ -46,6 +46,7 @@ public class UserActionAdapter {
         dto.setOneDay(request.getParameter("oneday"));
         dto.setModeOfPayment(request.getParameter("modeofpayment"));
         dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setUser(request.getParameter("feescollector"));
 
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone"), httpSession.getAttribute("datefrom"), httpSession.getAttribute("dateto"));
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
@@ -57,6 +58,7 @@ public class UserActionAdapter {
         httpSession.setAttribute("sumofonlyfee", responseDto.getSumOfOnlyFee());
         httpSession.setAttribute("sumoffine", responseDto.getFine());
         httpSession.setAttribute("sumofmisc", responseDto.getMisc());
+        httpSession.setAttribute("feescollector", responseDto.getUserName());
     }
 
     public void advanceSearchByParents() {

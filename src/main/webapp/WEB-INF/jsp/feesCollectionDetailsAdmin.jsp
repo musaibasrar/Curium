@@ -895,7 +895,7 @@ for(Cookie cookie : cookies){
 							<td class="alignLeft"> &nbsp;&nbsp; &nbsp;&nbsp;Academic Year:</td>
 							<td ><label>
                                          <select name="academicyear" id="academicyear"
-									style="width: 120px">
+									style="width: 240px">
 										<option selected></option>
 										<c:forEach var="year" items="${previousAcademicYears}">
         										<option value="${year}">${year}</option>
@@ -903,6 +903,31 @@ for(Cookie cookie : cookies){
 										</select>
                               </label></td>
 							
+						</tr>
+							
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
+						
+						
+						<tr>
+							<td width="20%" class="alignRight">Fees Collector&nbsp;&nbsp;</td>
+							<td ><label>
+                                         <select name="feescollector" id="feescollector"
+									style="width: 240px">
+										<option value="${feescollector}" selected>${feescollector}</option>
+										<c:forEach var="logindetails" items="${logindetail}">
+												<c:if test="${logindetails.usertype!='parents' && logindetails.usertype!='teacher'}">
+        											<option value="${logindetails.userid}:${logindetails.username}">${logindetails.username}</option>
+        										</c:if>
+    									</c:forEach>
+    									<option></option>
+										</select>
+                              </label></td>
 						</tr>
 							
 						<tr>
@@ -952,7 +977,7 @@ for(Cookie cookie : cookies){
 				<tr>
 					<td class="headerTD">
 					<input type="hidden" id="selectedReceiptnumber" name="receiptnumber" />
-					<label style="color: #EB6000;">${branchname} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
+					<label style="color: #EB6000;">${feescollector} </label>${feesdetailsbranchname}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fees :</label>Rs. ${sumofonlyfee}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total fine :</label>Rs. ${sumoffine}&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">total Misc. :</label>Rs. ${sumofmisc}
 					&nbsp;&nbsp;&nbsp; <label style="color: #EB6000;">Grand Total :</label>Rs. ${sumofdetailsfees}
 					
