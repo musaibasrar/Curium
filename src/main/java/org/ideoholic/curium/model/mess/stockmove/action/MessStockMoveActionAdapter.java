@@ -101,6 +101,8 @@ public class MessStockMoveActionAdapter {
         request.setAttribute("billdetailstransactiondate", responseDto.getBillDetailsTransactionDate());
         request.setAttribute("billdetailscustomername", responseDto.getBillDetailsCustomerName());
         request.setAttribute("itemissued", responseDto.isItemsIssued());
+        request.setAttribute("itemsgranddueamount", responseDto.getBillDueTotal());
+        request.setAttribute("itemsGrandNetTotalAmount", responseDto.getBillPaidTotal());
     }
 
     public void viewStockDueDetails() {

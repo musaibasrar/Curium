@@ -1566,29 +1566,7 @@ for(Cookie cookie : cookies){
 				</table>
 	
 				<table style="width: auto;height: auto;">
-					<tr>
-					        <td>
-           		 				Net Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetTotalAmount" id="itemsGrandNetTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
-           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
-           		 				<br>
-           		 			</td>
-           		 				</tr>
-           		 				<tr>
-           		 			<td>
-           		 				Due Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
-           		 				<input type="hidden" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
-           		 				<br>
-           		 			</td>
-           		 			   </tr>
-           		 				<tr>
-           		 			<td>
-           		 				Grand Total:</td><td> &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
-           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
-           		 				<br>
-           		 			</td>
-           		 			
-           		 			
-           		 		</tr>
+					
 				</table>
 				
            		 
@@ -1618,10 +1596,36 @@ for(Cookie cookie : cookies){
 							<td></td>
 						
 							<td>
-								Amount &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" onkeyup="getAmount()" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
+								Amount</td><td> &nbsp;<input type="text" name="totalcashamount" id="totalcashamount" onkeyup="getAmount()" class="textfieldvaluesshorts" value="0" style="font-size: 14px;font-weight: bold;" />														
 							</td>
 							
 						</tr>
+						<tr>
+						<td></td>
+					        <td>
+           		 				Net Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetTotalAmount" id="itemsGrandNetTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<br>
+           		 			</td>
+           		 				</tr>
+           		 				<tr>
+           		 				<td></td>
+           		 			<td>
+           		 				Due Amount:</td><td> &nbsp;<input type="text" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<input type="hidden" name="itemsGrandNetDueAmount" id="itemsGrandNetDueAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" />
+           		 				<br>
+           		 			</td>
+           		 			   </tr>
+           		 				<tr>
+           		 				<td></td>
+           		 			<td>
+           		 				Grand Total:</td><td> &nbsp;<input type="text" name="itemsGrandTotalAmount" id="itemsGrandTotalAmount" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
+           		 				<input type="hidden" name="itemsGrandTotalAmountWithoutGST" id="itemsGrandTotalAmountWithoutGST" class="textfieldvaluesshorts" style="font-size: 14px;font-weight: bold;" readonly/>
+           		 				<br>
+           		 			</td>
+           		 			
+           		 			
+           		 		</tr>
 						<tr>
 							<td><br></td>
 						</tr>
