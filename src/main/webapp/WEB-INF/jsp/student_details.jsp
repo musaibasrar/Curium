@@ -1090,7 +1090,7 @@ for(Cookie cookie : cookies){
                         <c:forEach items="${receiptinfonarration}" var="receiptinfo">
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
-                                <td  class="dataText"><c:out value="${receiptinfo.key.date}"/></a></td>
+                                <td  class="dataText"><fmt:formatDate pattern="dd/MM/yyyy" value="${receiptinfo.key.date}"/></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.key.branchreceiptnumber}"/></a></td>
                                 <td  class="dataText"><c:out value="${receiptinfo.value}"/></a></td>
                                 <td class="dataText"><c:out value="${receiptinfo.key.totalamount}"/></td>
