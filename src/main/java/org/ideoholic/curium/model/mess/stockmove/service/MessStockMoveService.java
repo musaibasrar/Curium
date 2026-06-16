@@ -62,6 +62,7 @@ public class MessStockMoveService {
 			String[] uom = dto.getUom();
 			String[] batchno = dto.getBatchNo();
 			String[] singleItemTotal = dto.getSingleItemTotal();
+			BigDecimal billDue = new BigDecimal(dto.getItemsGrandNetDueAmount());
 			BigDecimal totalValue = BigDecimal.ZERO;
 			BigDecimal PurchasePricetotalValue = BigDecimal.ZERO;
 			
@@ -324,10 +325,11 @@ public class MessStockMoveService {
 							results.setBillDetailsFatherName(custDetails[2]);
 
 
+							BigDecimal netPaidAmount = itemsGrandTotalAmountWithoutGST.subtract(billDue);
 							NumberToWord toWord = new NumberToWord();
 							String grandTotalInWords = "";
 							if(totalValue.compareTo(BigDecimal.ZERO) != 0){
-								grandTotalInWords = toWord.convert(grandTotal.intValue());
+								grandTotalInWords = toWord.convert(netPaidAmount.intValue());
 							}
 
 							StringBuffer res = new StringBuffer();
@@ -341,6 +343,8 @@ public class MessStockMoveService {
 							}
 							grandTotalInWords = res.toString().trim();
 							results.setBillDetailsTotalTotal(grandTotalInWords+" "+"Only");
+							results.setBillPaidTotal(netPaidAmount);
+							results.setBillDueTotal(billDue);
 							results.setBillGrandTotal(grandTotal);
 
 							//Get Bill No
