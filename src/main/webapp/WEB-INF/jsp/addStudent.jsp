@@ -37,13 +37,13 @@
 <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script src="/abc/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<script src="/vision/js/bootstrap.min.js"></script>
-<link href="/vision/css/select2.min.css" rel="stylesheet" />
-<script src="/vision/js/select2.min.js"></script>
+	src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/abc/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
+<script src="/abc/js/bootstrap.min.js"></script>
+<link href="/abc/css/select2.min.css" rel="stylesheet" />
+<script src="/abc/js/select2.min.js"></script>
 
 <style type="text/css">
 .myclass {
