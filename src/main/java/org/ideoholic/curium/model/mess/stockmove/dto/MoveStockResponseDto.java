@@ -22,5 +22,7 @@ public class MoveStockResponseDto {
     private String billDetails;
     private String billDetailsCustomerName;
     public boolean itemsIssued;
+    private BigDecimal billPaidTotal;
+    private BigDecimal billDueTotal;
     private boolean success;
 }
