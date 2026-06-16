@@ -125,17 +125,20 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/roshan/welcome" ><img src="/roshan/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/roshan/welcome" >
+								<img src="/roshan/images/curiumheader.png" width="112" height="41"/>
+								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/roshan/images/roshanheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
-									src="/vision/images/menu.svg" width="18" height="18" 
+							<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/roshan/images/menu.svg" width="18" height="18" 
 									alt="Toggle Menu" style="vertical-align: bottom;" />
 							</a></td>
-							<td><a target="leftFrame" href="/vision/left_officeadmin"> <img
-									src="/vision/images/home.svg" width="18" height="18" 
+							
+							<td><a target="leftFrame" href="/roshan/left_officeadmin"> <img
+									src="/roshan/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
@@ -182,6 +185,11 @@ for(Cookie cookie : cookies){
 									src="/roshan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/roshan/reports_officeadmin"><img
+									src="/roshan/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
 							
 							</td>
 
@@ -192,12 +200,12 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/roshan/UserProcess/dashBoard"><img
+							<td ><a target="mainFrame"
+								href="/roshan/dashboardloader"><img
 									alt="Dash Board" src="/roshan/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
-									</a></td> -->
+									</a></td>
 								
 							<td ><a target="_parent"
 								href="/roshan/UserProcess/logout"><img

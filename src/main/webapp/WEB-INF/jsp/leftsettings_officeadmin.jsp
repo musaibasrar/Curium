@@ -334,14 +334,13 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD" style="width: 95%;height:40px;" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label><br>
-        Branch Code:${branchcode} </div>
+        <div class="headerTD" style="width: 95%;height: 40px;" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> <br><label>Branch Code:${branchcode}</label></div>
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <!-- <a target="mainFrame" href="/roshan/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
+                <a target="mainFrame" href="/roshan/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
                 <a target="mainFrame" href="/roshan/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
@@ -350,10 +349,12 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/roshan/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
             <div>
                 <a target="mainFrame" href="/roshan/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/roshan/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
@@ -365,13 +366,14 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/roshan/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/roshan/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/roshan/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
                 <a target="mainFrame" href="/roshan/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/roshan/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
             </div>
             
-          <!--   <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="/roshan/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
                 <a target="mainFrame" href="/roshan/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
@@ -380,7 +382,7 @@ for(Cookie cookie : cookies){
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
 				<a target="mainFrame" href="/roshan/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
-            </div> -->
+            </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
@@ -389,7 +391,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/roshan/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
-            <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="/roshan/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
@@ -404,7 +406,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/roshan/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
                 <a target="mainFrame" href="/roshan/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="/roshan/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div> -->
+            </div>
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>
