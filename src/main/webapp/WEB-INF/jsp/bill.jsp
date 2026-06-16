@@ -299,7 +299,18 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
+				<td class="headerText" style="padding-left: 300px;text-align:right;"><label style="font-weight: bold;">Total:</label></td><td style="text-align:left;">&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
+			</tr>
+			<tr>
+				<td class="headerText" ></td>
+				<td class="headerText"></td>
+				<td class="headerText" style="padding-left: 300px;text-align:right;"><label style="font-weight: bold;">Total Paid:</label></td><td style="text-align:left;">&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${itemsGrandNetTotalAmount}" /></td>
+			</tr>
+			
+			<tr>
+				<td class="headerText" ></td>
+				<td class="headerText"></td>
+				<td class="headerText" style="padding-left: 300px;text-align:right;"><label style="font-weight: bold;">Total Balance:</label></td><td style="text-align:left;">&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${itemsgranddueamount}" /></td>
 			</tr>
 			
 			</table>
@@ -336,6 +347,7 @@
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${billdetailstotaltotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
+		
 
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
@@ -475,7 +487,18 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 500px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
+				<td class="headerText" style="padding-left: 300px;text-align:right;"><label style="font-weight: bold;">Total:</label></td><td style="text-align:left;">&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${billgrandtotal}" /></td>
+			</tr>
+			<tr>
+				<td class="headerText" ></td>
+				<td class="headerText"></td>
+				<td class="headerText" style="padding-left: 300px;text-align:right;"><label style="font-weight: bold;">Total Paid:</label></td><td style="text-align:left;">&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${itemsGrandNetTotalAmount}" /></td>
+			</tr>
+			
+			<tr>
+				<td class="headerText" ></td>
+				<td class="headerText"></td>
+				<td class="headerText" style="padding-left: 300px;text-align:right;"><label style="font-weight: bold;">Total Balance:</label></td><td style="text-align:left;">&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${itemsgranddueamount}" /></td>
 			</tr>
 			
 			</table>
