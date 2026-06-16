@@ -295,9 +295,9 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/school/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/school/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-<script type="text/javascript" src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/readmodel/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/readmodel/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+<script type="text/javascript" src="/readmodel/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/readmodelschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
