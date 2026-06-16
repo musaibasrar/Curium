@@ -455,6 +455,34 @@
             }
            
         </script>
+        
+        <script>
+
+function applyConcessionToAll() {
+
+    var isChecked = document.getElementById("applyAllConcession").checked;
+
+    var commonValue = document.getElementById("commonConcession").value;
+
+    var concessionInputs = document.getElementsByClassName("concession");
+
+    for (var i = 0; i < concessionInputs.length; i++) {
+
+        // if unchecked set zero
+        if (!isChecked) {
+            concessionInputs[i].value = 0;
+        } else {
+            concessionInputs[i].value = commonValue;
+        }
+
+        // trigger existing validation
+        if (typeof concessionInputs[i].onkeyup === "function") {
+            concessionInputs[i].onkeyup();
+        }
+    }
+}
+
+</script>
 
     </head>
       <%
@@ -655,6 +683,27 @@ for(Cookie cookie : cookies){
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/readmodelschool/printstudentdetailsfeesstructure'">Print</button>
+                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+											    <span style="color: #416884;font-size:13px; font-weight:bold;">Common Concession :</span>
+											
+											    <input type="text"
+											           id="commonConcession"
+											           class="dataText"
+											           style="width:120px;
+											                  background: transparent;
+											                  border: 1px solid #4b6a84;
+											                  color: #4b6a84;
+											                  font-size: 13px;
+											                  padding: 3px;">
+											
+											    <input type="checkbox"
+											           id="applyAllConcession"
+											           onclick="applyConcessionToAll()"
+											           style="vertical-align: middle;
+											                  cursor:pointer;">
+											
+											    <span style="color: #416884;font-size:13px; font-weight:bold;">Apply to all rows</span>
 
                                         </td>
 

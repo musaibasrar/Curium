@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Article 371</title>
-<link rel="stylesheet" href="/readmodel/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/readmodel/css/datePicker/demos.css">
+<link rel="stylesheet" href="/readmodelschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/readmodelschool/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {

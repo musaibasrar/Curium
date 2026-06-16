@@ -481,13 +481,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/readmodel/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            				 <a target="mainFrame" href="/readmodelschool/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/readmodel/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            				 <a target="mainFrame" href="/readmodelschool/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
             			</td>
             			
             		</tr>
@@ -499,13 +499,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/readmodel/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            				 <a target="mainFrame" href="/readmodelschool/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/readmodel/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            				 <a target="mainFrame" href="/readmodelschool/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
             			</td>
             			
             		</tr>
@@ -593,7 +593,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/readmodel/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
+            				<a target="mainFrame" href="/readmodelschool/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
             			</td>
             		</tr>
                 </table>

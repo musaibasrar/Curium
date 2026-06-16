@@ -108,7 +108,7 @@ text-align:center;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/readmodel/UserProcess/sessionTimeOut");
+	response.sendRedirect("/readmodelschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

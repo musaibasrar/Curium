@@ -372,7 +372,7 @@ function getSubjectDetails() {
 
     xmlHttp.onreadystatechange = stateChanged;
 
-    var url = "/readmodel/MarksDetailsProcess/getSubjectDetails"
+    var url = "/readmodelschool/MarksDetailsProcess/getSubjectDetails"
         + "?subject=" + encodeURIComponent(subjectId)
         + "&classSearch=" + encodeURIComponent(classSearch)
         + "&examName=" + encodeURIComponent(examName);
