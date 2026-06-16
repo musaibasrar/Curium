@@ -487,8 +487,26 @@
 							value="${feescatmap.value}" /></td>
 				</tr>
 			</c:forEach>
-			</table> --%>
+			</table>
 			
+			<c:if test="${receiptinfo.fine > 0}">
+				<tr>
+					<td class="dataText"><c:out
+							value="Fine" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${receiptinfo.fine}" /></td>
+				</tr>
+			</c:if>
+				
+			<c:if test="${receiptinfo.misc > 0}">	
+				<tr>
+					<td class="dataText"><c:out
+							value="Misc" /></td>
+					<td class="dataText">Rs. <c:out
+							value="${receiptinfo.misc}" /></td>
+				</tr>
+			</c:if>
+			</table> --%>
 			
 			<TABLE width="100%" border="0">
 			

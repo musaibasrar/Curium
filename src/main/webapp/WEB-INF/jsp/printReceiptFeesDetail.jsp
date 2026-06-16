@@ -235,7 +235,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" /><br>${narrationreceipt}
+						value="${receiptdate}" /><br>${narrationreceipt}
 				</td>
 				
 				<td></td>
@@ -434,7 +434,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${recieptdate}" /><br>${narrationreceipt}
+						value="${receiptdate}" /><br>${narrationreceipt}
 				</td>
 				
 				<td></td>
