@@ -123,12 +123,23 @@ for(Cookie cookie : cookies){
 						cellpadding="2" cellspacing="0" bordercolor="#FFFFFF">
 						<tr><td></td></tr>
 						<tr style="height: 45px;">
-							
-									<td style="padding-left: 20px;">
+						
+							<c:choose>
+                                <c:when test="${userType == 'superadmin'}">
+                                    <td style="padding-left: 20px;">
+								<a target="mainFrame" href="/shaheen/welcomesuperadmin" >
+								<img src="/shaheen/images/curiumheader.png" width="112" height="41"/>
+								</a>
+								</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td style="padding-left: 20px;">
 								<a target="mainFrame" href="/shaheen/welcome" >
 								<img src="/shaheen/images/curiumheader.png" width="112" height="41"/>
 								</a>
 								</td>
+                                </c:otherwise>
+                            </c:choose>
 								
 							<!-- <td align="left"><img src="/shaheen/images/shaheenheader.png"
 								style="width: 200px; height: 20px;" /></td> -->

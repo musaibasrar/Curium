@@ -1680,7 +1680,14 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignLeft">Previous Class Studied</td>
 
-							<td><label> <select name="stdlaststudied" id="stdlaststudied"
+							<td><label>
+							
+							<input
+									name="stdlaststudied" type="text" class="myclass" id="stdlaststudied"
+									style="text-transform:capitalize;"
+									size="36" >
+									
+							 <!-- <select name="stdlaststudied" id="stdlaststudied"
 									style="width: 210px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.stdlaststudied}</option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -1690,7 +1697,7 @@ for(Cookie cookie : cookies){
 											</option>
 										</c:if>	
 										</c:forEach>
-								</select>
+								</select> -->
 
 							</label></td>
 

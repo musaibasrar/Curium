@@ -446,13 +446,13 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
-         <div id="container" style="width: 95%" >
+        <div id="container" style="width: 95%" >
             <h5 class="sideaccordian" ><a href="#">Students</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<!--<tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shaheen/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
@@ -461,23 +461,13 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/shaheen/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
-            		</tr>-->
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
             		</tr>
                 </table>
             </div>
-             
+            
             
 			
-            <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -487,43 +477,19 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
-            			</td>
-            		</tr>
-            		 <!--  <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shaheen/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/shaheen/FeesProcess/otherfeesCollect" style="font-size: 12px;">Bus Fees Collect</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr> -->
+            		
                 </table>
-            </div> 
+            </div>
             
-            <!-- <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -532,11 +498,11 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div> -->
+            </div>
             
             
             
-            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -551,7 +517,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
+            				 <a target="mainFrame" href="/shaheen/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
             			</td>
             			            		
             		</tr>
@@ -560,122 +526,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/shaheen/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
             			</td>
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-              <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr> -->
+            		
                 </table>
             </div>
             
-            
-           <!--  <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            
-                 <!--  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -684,94 +539,39 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div> -->
-            
-             <!-- <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
+            </div>
             
                
-            <!--   <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/shaheen/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
-            		</tr> -->
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/shaheen/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				<a target="mainFrame" href="/shaheen/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
-            		</tr> -->
-            		<!-- <tr>
+            		</tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/shaheen/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
-            		</tr> -->
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shaheen/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
-            
-           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/shaheen/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
-            <div >
-                <a target="mainFrame" href="/shaheen/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div> -->
             
             <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
         	
@@ -784,14 +584,24 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
             			</td>
             		</tr>
-            		<!-- <tr>
+            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
+            				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
             			</td>
-            		</tr> -->
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				 <a target="mainFrame" href="/shaheen/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
             			</td>
             		</tr>
             		<tr>
@@ -803,35 +613,7 @@ for(Cookie cookie : cookies){
             </div>
             
             
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
               
               <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -857,27 +639,11 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
             	</table>
-            </div> -->
+            </div>
             
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
+           
             
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
@@ -891,31 +657,42 @@ for(Cookie cookie : cookies){
             			</td>
             		</tr>
                 </table>
-            </div> -->
-            
-              <!--  <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            
-           <!--  <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/shaheen/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				 </table>
             </div>
-             -->
+            
+             
+             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            	
+            	<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            	
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            			</td>
+            			
+            		</tr> -->
+                </table>
+            </div>
+            
+            
             </div>
                    
             

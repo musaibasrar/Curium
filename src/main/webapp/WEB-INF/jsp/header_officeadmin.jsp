@@ -125,20 +125,30 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/shaheen/welcome" ><img src="/shaheen/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/shaheen/welcome" >
+								<img src="/shaheen/images/curiumheader.png" width="112" height="41"/>
+								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/shaheen/images/shaheenheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/shaheen/left_officeadmin"> <img
-									src="/shaheen/images/home.svg" width="18" height="18" 
-									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
-							</a></td>
-
+							<td>
+							<a target="leftFrame" href="/shaheen/left_officeadmin"><img
+									src="/shaheen/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Home		
+								</a>
+							</td>
+							
 							<td><a target="mainFrame"
 								href="/shaheen/FeesProcess/feesCollect"> <img
 									src="/shaheen/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+							</a></td>
+							
+							<td ><a target="mainFrame"
+								href="/shaheen/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/shaheen/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Bus Fee Collection
 							</a></td>
 
 							<td>
@@ -158,42 +168,18 @@ for(Cookie cookie : cookies){
 									src="/shaheen/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
-
+							
 							<td ><a target="leftFrame" href="/shaheen/leftsettings_officeadmin">
 									<img alt="Settings" src="/shaheen/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/shaheen/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/shaheen/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><!-- <a target="mainFrame" href="/shaheen/sendsms"><img
-									src="/shaheen/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a> -->
-								<a target="leftFrame" href="/shaheen/reports_officeadmin"><img
+							
+							<td>
+							<a target="leftFrame" href="/shaheen/reports_officeadmin"><img
 									src="/shaheen/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
-							
 							</td>
-
-							<td ><a target="mainFrame"
-								href="/shaheen/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/shaheen/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td>
-							
-							<!-- <td ><a target="mainFrame"
-								href="/shaheen/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/shaheen/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="/shaheen/UserProcess/logout"><img

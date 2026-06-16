@@ -2234,7 +2234,12 @@ $(document).ready(function() {
 						<tr>
 							<td class="alignLeft">Previous Class Studied &nbsp;</td>
 
-							<td ><label> <select name="lastclass" id="lastclass"
+							<td ><label><input
+									name="lastclass" type="text" class="myclass" id="lastclass"
+									style="text-transform:capitalize;"
+									size="36" >
+									
+									 <!-- <select name="lastclass" id="lastclass"
 									style="width: 256px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -2242,7 +2247,7 @@ $(document).ready(function() {
 												<c:out value="${classdetailslist.classdetails}" />
 											</option>
 										</c:forEach>
-								</select>
+								</select> -->
 							</label></td>
 
 							<td class="alignLeft" style="padding-left: 20px;">Previous School Name

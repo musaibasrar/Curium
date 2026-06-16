@@ -799,6 +799,7 @@ for(Cookie cookie : cookies){
             	                </table>
             </div>
             
+            <c:if test="${username=='chairman'}">
             <h5 class="sideaccordian" ><a href="#">Login Staff</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -814,7 +815,7 @@ for(Cookie cookie : cookies){
             		</tr>
                 </table>
             </div>
-            
+            </c:if>
             
             
             <h5 class="sideaccordian" ><a href="#">Events</a></h5>

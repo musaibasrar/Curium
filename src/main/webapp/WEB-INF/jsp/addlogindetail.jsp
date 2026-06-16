@@ -518,9 +518,15 @@ for(Cookie cookie : cookies){
 						<tr><td>&emsp;&emsp;&emsp;&emsp;&emsp;</td>
 
 							<td class="alignRight">User Type &nbsp;</td>
-							<td><label> <input name="usertype"
-							style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;"
-									type="text" class="myclass" id="address" size="20">
+							<td><label> <select name="usertype" id="address" class="myclass" style="text-transform:uppercase;height: 22px;font-size: 13px;font-weight: bold;">
+									    <option value="">-- Select User Type --</option>
+									    <option value="admin">ADMIN</option>
+									    <option value="feescollector">Fees Collector</option>
+									    <option value="officeadmin">Office Admin</option>
+									    <option value="teacher">Teacher</option>
+									    <option value="marksentry">Marks Entry</option>
+									    <option value="parents">Parents</option>
+									</select>
 							</label></td>
 
 							<td class="alignRight"> &nbsp;Branch</td>
