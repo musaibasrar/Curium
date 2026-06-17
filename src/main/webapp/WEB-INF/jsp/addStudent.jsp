@@ -1522,7 +1522,7 @@ $(document).ready(function() {
 										&nbsp;</td>
 
 									<td  >&nbsp;Yes<input
-								type="checkbox" value="1" name="rte" id="yes:rte" 
+								type="checkbox" value="1" name="rte" id="yes:rte"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
