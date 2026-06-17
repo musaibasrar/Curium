@@ -309,7 +309,6 @@ public class AccountDAO {
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-
 		}
 		return accountDetails;
 	}
