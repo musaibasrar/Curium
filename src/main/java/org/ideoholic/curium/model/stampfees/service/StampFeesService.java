@@ -209,7 +209,6 @@ public class StampFeesService {
 					for (int i = 0; i < feesCategoryIds.length; i++) {
 						String[] feesCatAndIndex = feesCategoryIds[i].split("_");
 						int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
-
 						// check whether the fees category is already stamped
 						List<Studentfeesstructure> result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(id), Integer.parseInt(feesCatAndIndex[0]), currentAcademicYear);
 						// END
@@ -744,6 +743,125 @@ public class StampFeesService {
 		//new studentDetailsDAO().addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
 		}
+		}
+	}
+	
+public void addFeesOldStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
+		
+		if (currentAcademicYear != null) {
+			String[] studentIds = stampFeesDto.getStudentIds();
+			if (studentIds != null) {
+				Academicfeesstructure academicfessstructure = new Academicfeesstructure();
+				List<Academicfeesstructure> listOfacademicfessstructure = new ArrayList<>();
+				List<Studentfeesstructure> listOfstudentfeesstructure = new ArrayList<>();
+
+				String feesTotalAmount = stampFeesDto.getFeesTotalAmount();
+				Long grandTotal = 0l;
+
+				String feesCategoryId = stampFeesDto.getFeesCategoryId();
+				String[] feesAmount = stampFeesDto.getFeesAmount();
+				String[] concession = stampFeesDto.getConcession();
+				String[] feesYears = stampFeesDto.getFeesYears();
+
+				listOfacademicfessstructure.clear();
+				for (String ids : studentIds) {
+					Long totalFeesAmount = 0l;
+					String[] studentids = ids.split("_");
+					String id = studentids[0];
+					int studentIndex = Integer.parseInt(studentids[1]);
+						String[] feesCatAndIndex = feesCategoryId.split("_");
+						int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+						// check whether the fees category is already stamped
+						List<Studentfeesstructure> result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(id), Integer.parseInt(feesCatAndIndex[0]), currentAcademicYear);
+						// END
+						if (CollectionUtils.isEmpty(result)) {
+
+							Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
+							Feescategory feescategory = new Feescategory();
+							studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(DataUtil.parseInt(id)));
+							feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
+							studentfeesstructure.setFeescategory(feescategory);
+							studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[studentIndex]));
+							studentfeesstructure.setFeespaid((long) 0);
+							studentfeesstructure.setWaiveoff((long) 0);
+							studentfeesstructure.setTotalinstallment(1);
+							studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
+							studentfeesstructure.setBranchid(Integer.parseInt(branchid));
+							studentfeesstructure.setUserid(Integer.parseInt(userid));
+							studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+							listOfstudentfeesstructure.add(studentfeesstructure);
+
+						}
+
+
+					academicfessstructure = new Academicfeesstructure();
+					academicfessstructure.setSid(Integer.valueOf(id));
+					academicfessstructure.setAcademicyear(feesYears[0]);
+					academicfessstructure.setUserid(Integer.parseInt(userid));
+					academicfessstructure.setTotalfees(totalFeesAmount.toString());
+					grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
+					academicfessstructure.setBranchid(Integer.parseInt(branchid));
+					academicfessstructure.setUserid(Integer.parseInt(userid));
+
+					listOfacademicfessstructure.add(academicfessstructure);
+					// ids.add(Integer.valueOf(id));
+					grandTotal = grandTotal + totalFeesAmount;
+
+				}
+
+				for (String ids : studentIds) {
+					String[] studentids = ids.split("_");
+					String id = studentids[0];
+					int studentIndex = Integer.parseInt(studentids[1]);
+						String[] feesCatAndIndex = feesCategoryId.split("_");
+						int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+						Studentfeesstructure studentfeesstructure = new Studentfeesstructure();
+						Feescategory feescategory = new Feescategory();
+						studentfeesstructure.setStudent(studentDetailsDao.readUniqueObject(Integer.valueOf(id)));
+						feescategory.setIdfeescategory(Integer.parseInt(feesCatAndIndex[0]));
+						studentfeesstructure.setFeescategory(feescategory);
+						studentfeesstructure.setFeesamount(Long.parseLong(feesAmount[studentIndex]));
+						studentfeesstructure.setFeespaid((long) 0);
+						studentfeesstructure.setWaiveoff((long) 0);
+						studentfeesstructure.setTotalinstallment(1);
+						studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
+						studentfeesstructure.setBranchid(Integer.parseInt(branchid));
+						studentfeesstructure.setUserid(Integer.parseInt(userid));
+						studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+						listOfstudentfeesstructure.add(studentfeesstructure);
+
+				}
+
+				// Accounts
+				// Pass J.V. : credit the Fees as income & debit the cash
+
+				int crFees = getLedgerAccountId("unearnedstudentfeesincome" + Integer.parseInt(branchid));
+				int drAccount = getLedgerAccountId("studentfeesreceivable" + Integer.parseInt(branchid));
+
+				VoucherEntrytransactions transactions = new VoucherEntrytransactions();
+
+				transactions.setDraccountid(drAccount);
+				transactions.setCraccountid(crFees);
+				transactions.setDramount(new BigDecimal(grandTotal));
+				transactions.setCramount(new BigDecimal(grandTotal));
+				transactions.setVouchertype(4);
+				transactions.setTransactiondate(DateUtil.todaysDate());
+				transactions.setEntrydate(DateUtil.todaysDate());
+				transactions.setNarration("Towards Fees Stamp");
+				transactions.setCancelvoucher("no");
+				transactions.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchid)).getFinancialid());
+				transactions.setBranchid(Integer.parseInt(branchid));
+				transactions.setUserid(Integer.parseInt(userid));
+
+				String updateDrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+" + grandTotal + " where accountdetailsid=" + drAccount;
+
+				String updateCrAccount = "update Accountdetailsbalance set currentbalance=currentbalance+" + grandTotal + " where accountdetailsid=" + crFees;
+
+				// End J.V
+				stampFeesDao.addStampFees(listOfacademicfessstructure, currentAcademicYear, listOfstudentfeesstructure, transactions, updateDrAccount, updateCrAccount);
+				// studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+			}
 		}
 	}
 

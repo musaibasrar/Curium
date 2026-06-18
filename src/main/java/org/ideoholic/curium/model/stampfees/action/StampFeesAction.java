@@ -127,4 +127,24 @@ public class StampFeesAction {
 		return "feesstampsuccess";
 	}
 	
+	@GetMapping("/showOldFeesDetails")
+	public String showOldFeesDetails() {
+		//feesActionAdapter.viewFees();
+		yearActionAdapter.getYear();
+		standardActionAdapter.viewClasses();
+		return "stampoldfees";
+	}
+	
+	@PostMapping("/advanceSearchForStampoldFees")
+	public String advanceSearchForStampoldFees() {
+		stampFeesActionAdapter.advanceSearchForStampFees();
+		return "stampoldfees";
+	}
+	
+	@PostMapping("/applyOldFees")
+	public String applyOldFees() {
+		stampFeesActionAdapter.addFeesOldStamp();
+		return "feesstampsuccess";
+	}
+	
 }
