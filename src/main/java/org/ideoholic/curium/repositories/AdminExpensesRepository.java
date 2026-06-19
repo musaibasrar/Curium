@@ -11,11 +11,13 @@ import java.util.List;
 @Repository
 public interface AdminExpensesRepository extends JpaRepository<Adminexpenses, Integer> {
 
-    List<Adminexpenses> findByBranchid(Integer branchId);
+    List<Adminexpenses> findByBranchidOrderByIdAdminExpensesAsc(Integer branchId);
 
     @Query("From Adminexpenses where idAdminExpenses=:expensesIds  and branchid=:branchId")
     Adminexpenses findByExpenseId(@Param("expensesIds") Integer expensesIds,@Param("branchId") Integer  branchId);
     
     List<Adminexpenses> findByIdAdminExpensesInAndBranchid(List<Integer> expensesIds,Integer branchId);
+
+	Adminexpenses findTopByBranchidOrderByIdAdminExpensesDesc(Integer branchid);
 
 }

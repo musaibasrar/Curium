@@ -106,14 +106,14 @@ public class StampFeesService {
 		String[] addClass = searchStudentDto.getClassesSearch();
 		//String addSec = request.getParameter("secsearch");
 		StringBuffer conClassStudying = new StringBuffer();
-
+         
 			int i = 0;
 			for (String classOne : addClass) {
 				
 				if(i>0) {
-					conClassStudying.append("' OR parents.student.classstudying LIKE '"+classOne+"--"+"%");
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+""+"%");
 				}else {
-					conClassStudying.append(classOne+"--"+"%");
+					conClassStudying.append(classOne+""+"%");
 				}
 				
 				i++;
@@ -865,5 +865,37 @@ public void addSingleFeesStamp(StampFeesDto stampFeesDto,String currentAcademicY
 			}
 		}
 	}
+
+public FeescategoryResponseDto printStudentDetail(StampFeesDto stampFeesDto, String branchId) {
+	 String[] studentIds = stampFeesDto.getStudentIds();
+	 FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
+
+    List<Parents> allStudentList = new ArrayList<Parents>();
+
+    if (studentIds != null) {
+
+        for (String id : studentIds) {
+
+            if (id != null && !id.trim().equals("")) {
+
+                String queryMain =
+                    "From Parents as parents where parents.Student.branchid="
+                    + Integer.parseInt(branchId)
+                    + " AND parents.Student.id = "
+                    + id
+                    + " order by parents.Student.admissionnumber ASC";
+
+                List<Parents> searchStudentList =
+                		studentDetailsDao.getStudentsList(queryMain);
+
+                allStudentList.addAll(searchStudentList);
+            }
+        }
+    }
+
+    feescategoryResponseDto.setSearchStudentList(allStudentList);
+    return feescategoryResponseDto;
+	
+}
 
 }

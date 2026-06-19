@@ -18,4 +18,5 @@ public class BonafideGenerationResponseDto {
     private boolean success = false;
     private List<Parents> parentsList;
     private String message;
+    private String dateOfBirth;
 }

@@ -5,6 +5,7 @@ import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDt
 import org.ideoholic.curium.model.account.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequestMapping({"api/v1/accountProcess", "api/v1/subGroupName"})
 public interface AccountApiAction {
@@ -40,16 +41,16 @@ public interface AccountApiAction {
     ResponseEntity<BalanceSheetResponseDto> balanceSheet(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/saveJournal")
-    ResponseEntity<CreateVoucherResponseDto> saveJournal(@RequestBody AccountJournalDto dto, @RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<CreateVoucherResponseDto> saveJournal(@RequestBody AccountJournalDto dto,@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/saveContra")
-    ResponseEntity<CreateVoucherResponseDto> saveContra(@RequestBody AccountContraDto dto, @RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<CreateVoucherResponseDto> saveContra(@RequestBody AccountContraDto dto,@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/savePayment")
-    ResponseEntity<CreateVoucherResponseDto> savePayment(@RequestBody AccountPaymentDto dto, @RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<CreateVoucherResponseDto> savePayment(@RequestBody AccountPaymentDto dto,@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/saveReceipt")
-    ResponseEntity<CreateVoucherResponseDto> saveReceipt(@RequestBody AccountReceiptDto dto, @RequestHeader(value = "branchid") String branchId);
+    ResponseEntity<CreateVoucherResponseDto> saveReceipt(@RequestBody AccountReceiptDto dto,@RequestPart("fileToUpload") MultipartFile[] uploadedFiles, @RequestHeader(value = "branchid") String branchId);
     
     @GetMapping("/createVoucher")
     ResponseEntity<CreateVoucherResponseDto> createVoucher(@RequestHeader(value = "branchid") String branchId);

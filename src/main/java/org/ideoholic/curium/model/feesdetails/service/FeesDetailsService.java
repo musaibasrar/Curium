@@ -75,7 +75,7 @@ public class FeesDetailsService {
 		String[] feesIds =  feesIdDetailsDto.getFeesIds();
 		Receiptinfo receiptInfo = new Receiptinfo();
 		Parents student = new Parents();
-		Map<Parents,Receiptinfo> feesMap = new HashMap<Parents,Receiptinfo>();
+		Map<Receiptinfo,Parents> feesMap = new HashMap<Receiptinfo,Parents>();
 
 		if (feesIds != null) {
 			for (String id : feesIds) {
@@ -84,7 +84,7 @@ public class FeesDetailsService {
 					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
 					if (receiptInfo != null) {
 						student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
-						feesMap.put(student, receiptInfo);
+						feesMap.put(receiptInfo, student);
 					}
 				}
 
@@ -105,7 +105,7 @@ public class FeesDetailsService {
 	}
 	
 	
-	public boolean exportDataToExcel(Map<Parents,Receiptinfo> feeMap)
+	public boolean exportDataToExcel(Map<Receiptinfo,Parents> feeMap)
 			throws Exception {
 
 		boolean writeSucees = false;
@@ -120,19 +120,19 @@ public class FeesDetailsService {
 					new Object[] { "Admission Number","UID","STS","Receipt No.", "Student Name","Class","Father Name","Contact Number", "Date of Fees", "Total"});
 			int i = 1;
 			
-			for (Entry<Parents, Receiptinfo> entry : feeMap.entrySet()) {
+			for (Entry<Receiptinfo,Parents> entry : feeMap.entrySet()) {
 	            
 				data.put(Integer.toString(i),new Object[] { 
-						entry.getKey().getStudent().getAdmissionnumber(), 
-						entry.getKey().getStudent().getStudentexternalid(), 
-						entry.getKey().getStudent().getSts(), 
-						entry.getValue().getBranchreceiptnumber(),
-						entry.getKey().getStudent().getName(),
-						entry.getKey().getStudent().getClassstudying(),
-						entry.getKey().getFathersname(), 
-						entry.getKey().getContactnumber(), 
-						entry.getValue().getDate().toString(),
-						entry.getValue().getTotalamount() });
+						entry.getValue().getStudent().getAdmissionnumber(), 
+						entry.getValue().getStudent().getStudentexternalid(), 
+						entry.getValue().getStudent().getSts(), 
+						entry.getKey().getBranchreceiptnumber(),
+						entry.getValue().getStudent().getName(),
+						entry.getValue().getStudent().getClassstudying(),
+						entry.getValue().getFathersname(), 
+						entry.getValue().getContactnumber(), 
+						entry.getKey().getDate().toString(),
+						entry.getKey().getTotalamount() });
 				i++;
 				}
 				
@@ -294,14 +294,12 @@ public class FeesDetailsService {
 	public DataForFeesResponseDto printDataForFees(FeesIdDetailsDto feesIdDetailsDto) {
 		
 		DataForFeesResponseDto dataForFeesResponseDto = new DataForFeesResponseDto();
-		StudentFeesReport studentFeesReportDTO = new StudentFeesReport();
 		String[] feesIds = feesIdDetailsDto.getFeesIds();
 		String toDate= DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getToDate());
 		String fromDate = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getFromDate());
 		String oneDay = DataUtil.dateFromatConversionDashToSlash(feesIdDetailsDto.getOneDay());
+		String feesCollector = feesIdDetailsDto.getFeesCollector();
 		
-		Receiptinfo receiptInfo = new Receiptinfo();
-		Parents student = new Parents();
 		Map<Receiptinfo,StudentFeesReport> feesMap = new HashMap<Receiptinfo,StudentFeesReport>();
 		long sumOfFees = 0l;
 		long fine = 0l;
@@ -309,9 +307,10 @@ public class FeesDetailsService {
 
 		if (feesIds != null) {
 			for (String id : feesIds) {
-				if (id != null || id != "") {
-					
-					receiptInfo =feesDetailsDao.readFeesDetails(Long.parseLong(id));
+				if (id != null && !id.trim().isEmpty()) {
+					StudentFeesReport studentFeesReportDTO = new StudentFeesReport();
+					Receiptinfo receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
+
 					Set<Feescollection>  feesCollection = receiptInfo.getFeesCollectionRecords();
 					List<Integer> sfsList = new ArrayList<Integer>();
 					
@@ -319,7 +318,7 @@ public class FeesDetailsService {
 						sfsList.add(fee.fetchSfsid());
 					}
 					List<Studentfeesstructure> studentFeesStructureList = feesCollectionDao.getStudentsFeesStructureBySfsId(sfsList);
-					student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
+					Parents student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
 					studentFeesReportDTO.setParents(student);
 					studentFeesReportDTO.setStudentFeesStructure(studentFeesStructureList);
 					feesMap.put(receiptInfo, studentFeesReportDTO);
@@ -357,6 +356,7 @@ public class FeesDetailsService {
 		
 		dataForFeesResponseDto.setFeesMap(sortedMap);
 		dataForFeesResponseDto.setSuccess(true);
+		dataForFeesResponseDto.setFeesCollector(feesCollector);
 		return dataForFeesResponseDto;
 	}
 

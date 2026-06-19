@@ -138,4 +138,11 @@ public class StampFeesActionAdapter {
 		
 	}
 
+
+	public void printStudentDetail() {
+		StampFeesDto stampFeesDto = new StampFeesDto();
+		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
+		FeescategoryResponseDto feescategoryResponseDto = stampFeesService.printStudentDetail(stampFeesDto,httpSession.getAttribute(BRANCHID).toString());
+		request.setAttribute("searchStudentList", feescategoryResponseDto.getSearchStudentList());
+	}
 }

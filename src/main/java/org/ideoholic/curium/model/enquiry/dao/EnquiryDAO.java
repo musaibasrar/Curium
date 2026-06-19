@@ -84,7 +84,7 @@ public class EnquiryDAO {
             // transaction = session.beginTransaction();
             // results = (List<AdmissionEnquiry>) session.createQuery("From AdmissionEnquiry where branchid="+branchId).list();
             // transaction.commit();
-            results = admissionEnquiryRepo.findByBranchId(branchId);
+            results = admissionEnquiryRepo.findByBranchIdOrderByIdDesc(branchId);
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();

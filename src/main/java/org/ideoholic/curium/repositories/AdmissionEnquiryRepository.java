@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface AdmissionEnquiryRepository extends JpaRepository<AdmissionEnquiry, Integer> {
 
     // Find all enquiries for a branch
-    List<AdmissionEnquiry> findByBranchId(int branchId);
+    List<AdmissionEnquiry> findByBranchIdOrderByIdDesc(int branchId);
 
     // Get last enquiry (highest id) for a branch
     AdmissionEnquiry findTopByBranchIdOrderByIdDesc(int branchId);

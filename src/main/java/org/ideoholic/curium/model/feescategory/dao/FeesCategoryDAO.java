@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.query.Query;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.documents.dto.SearchStudentDto;
 import org.ideoholic.curium.model.feescategory.dto.Concession;
@@ -23,6 +24,7 @@ import org.ideoholic.curium.repositories.OtherfeescollectionRepository;
 import org.ideoholic.curium.repositories.StudentFeesStructureRepository;
 import org.ideoholic.curium.repositories.StudentOtherFeesStructureRepository;
 import org.ideoholic.curium.repositories.VoucherEntryTransactionsRepository;
+import org.ideoholic.curium.util.HibernateUtil;
 import org.ideoholic.curium.util.QueryUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -172,7 +174,7 @@ public class FeesCategoryDAO {
 	}
 
 	@Transactional
-	public void applyConcession(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
+	public void applyConcession(List<Concession> concessionList, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
 		try {
 			for (Concession concession : concessionList) {
 				//Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
@@ -182,7 +184,7 @@ public class FeesCategoryDAO {
 				});
 				
 				//Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
-				academicfeesstructureRepo.findById(Integer.parseInt(sid)).ifPresent(academicfeesstructure -> {
+				academicfeesstructureRepo.findById(concession.getSid()).ifPresent(academicfeesstructure -> {
 					Integer currentTotalFees = Integer.parseInt(academicfeesstructure.getTotalfees());
 					currentTotalFees += Integer.parseInt(concession.getConcessionOld()) - Integer.parseInt(concession.getConcession());
 					academicfeesstructure.setTotalfees(String.valueOf(currentTotalFees));
@@ -465,4 +467,63 @@ public class FeesCategoryDAO {
 		return result;
 	}
 
+	@Transactional
+	public void applyConcessionBulk(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
+		
+		try {
+			for (Concession concession : concessionList) {
+				//Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				studentFeesStructureRepo.findById(concession.getSfsid()).ifPresent(studentfeesstructure -> {
+					studentfeesstructure.setConcession(Integer.parseInt(concession.getConcession()));
+					studentFeesStructureRepo.save(studentfeesstructure);
+				});
+				
+				//Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				academicfeesstructureRepo.findById(Integer.parseInt(sid)).ifPresent(academicfeesstructure -> {
+					Integer currentTotalFees = Integer.parseInt(academicfeesstructure.getTotalfees());
+					currentTotalFees += Integer.parseInt(concession.getConcessionOld()) - Integer.parseInt(concession.getConcession());
+					academicfeesstructure.setTotalfees(String.valueOf(currentTotalFees));
+					academicfeesstructureRepo.save(academicfeesstructure);
+				});
+			}
+			
+			//accounts
+			for (VoucherEntrytransactions transactions : transactionsReverseList) {
+				voucherEntryTransactionsRepo.save(transactions);
+			}
+			
+			for (VoucherEntrytransactions transactions : transactionsApplyList) {
+				voucherEntryTransactionsRepo.save(transactions);
+			}
+			
+			for (String updateDrAccountReverse : updateDrAccountReverseList) {
+				//Query queryAccountsReverse = session.createQuery(updateDrAccountReverse);
+				//queryAccountsReverse.executeUpdate();
+				queryUtil.runUpdateQuery(updateDrAccountReverse);
+			}
+			
+			for (String updateCrAccountReverse : updateCrAccountReverseList) {
+				//Query queryAccountsReverse = session.createQuery(updateCrAccountReverse);
+				//queryAccountsReverse.executeUpdate();
+				queryUtil.runUpdateQuery(updateCrAccountReverse);
+			}
+			
+			for (String updateDrAccountApply : updateDrAccountApplyList) {
+				//Query queryAccountsApply = session.createQuery(updateDrAccountApply);
+				//queryAccountsApply.executeUpdate();
+				queryUtil.runUpdateQuery(updateDrAccountApply);
+			}
+			
+			for (String updateCrAccountApply : updateCrAccountApplyList) {
+				//Query queryAccountsApply = session.createQuery(updateCrAccountApply);
+				//queryAccountsApply.executeUpdate();
+				queryUtil.runUpdateQuery(updateCrAccountApply);
+			}
+			
+		} catch (Exception hibernateException) {
+			log.error(hibernateException.getMessage(), hibernateException);
+			hibernateException.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+	}
 }
