@@ -509,6 +509,7 @@ for(Cookie cookie : cookies){
 		%>
 		<c:set var="itemTotal" value="${0}" />
 		<c:set var="itemTotalSales" value="${0}" />
+		<c:set var="itemTotalDue" value="${0}" />
 		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div style="height: 28px">
 			<button id="add">Parameters</button>
@@ -700,6 +701,21 @@ for(Cookie cookie : cookies){
 							<label style="color: #eb6000"><b>Sales Total:
 							<fmt:setLocale value="en_IN" scope="session"/>
 							<fmt:formatNumber type="currency"  value="${itemTotalSales}" /></b>
+							</label> 
+							<c:forEach items="${dueslist}" var="dueslist" varStatus="status">
+							<c:set var="itemTotalDue" value="${itemTotalDue + dueslist.due}" />
+							</c:forEach>
+							<label style="color: #eb6000"><b>Due Total:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotalDue}" /></b>
+							</label> 
+							</td>
+						</tr>
+						<tr>
+							<td class="dataTextRight" >
+								<label style="color: #eb6000"><b>Net Sale Total:
+							<fmt:setLocale value="en_IN" scope="session"/>
+							<fmt:formatNumber type="currency"  value="${itemTotalSales-itemTotalDue}" />&nbsp;&nbsp;&nbsp;</b>
 							</label> 
 							</td>
 						</tr>
