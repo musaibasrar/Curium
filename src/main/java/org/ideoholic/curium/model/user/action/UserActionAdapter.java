@@ -53,6 +53,7 @@ public class UserActionAdapter {
         String dayOne = httpSession.getAttribute("dayone") == null ? null : httpSession.getAttribute("dayone").toString();
         String dayFrom = httpSession.getAttribute("datefrom") == null ? null : httpSession.getAttribute("dayone").toString();
         String dateTo = httpSession.getAttribute("dateto") == null ? null : httpSession.getAttribute("dayone").toString();
+        dto.setUser(request.getParameter("feescollector"));
         
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID), dayOne, dayFrom, dateTo);
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
@@ -65,6 +66,7 @@ public class UserActionAdapter {
         httpSession.setAttribute("sumofonlyfee", responseDto.getSumOfOnlyFee());
         httpSession.setAttribute("sumoffine", responseDto.getFine());
         httpSession.setAttribute("sumofmisc", responseDto.getMisc());
+        httpSession.setAttribute("feescollector", responseDto.getUserName());
     }
 
     public void advanceSearchByParents() {
@@ -162,6 +164,7 @@ public class UserActionAdapter {
         httpSession.setAttribute("todaysAttendance", responseDto.getAttendanceStatus());
         httpSession.setAttribute("subbranchname",responseDto.getSubBranchName());
         httpSession.setAttribute("previousAcademicYears", responseDto.getPreviousAcademicYears());
+        httpSession.setAttribute("profilename", responseDto.getProfileName());
         return responseDto.isSuccess();
     }
 

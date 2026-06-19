@@ -41,6 +41,9 @@
 <link rel="stylesheet" href="/school/css/datePicker/demos.css">
 <script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
 <link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<script src="/school/js/bootstrap.min.js"></script>
+<link href="/school/css/select2.min.css" rel="stylesheet" />
+<script src="/school/js/select2.min.js"></script>
 
 
 <style type="text/css">
@@ -290,6 +293,7 @@
 			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0",
 			onSelect: function () {
+				CalculateAge(this);
 				searchStudentDuplicate();
 		    }
 		});
@@ -513,6 +517,10 @@
 			var splitId = id.split(':');
 			document.getElementById('no:'+splitId[1]).checked = false;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
 	}
@@ -521,6 +529,10 @@
 		if (document.getElementById(id).checked == true) {
 			var splitId = id.split(':');
 			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
 			document.getElementById('maybe:'+splitId[1]).checked = false;
 		}
 
@@ -940,7 +952,7 @@ $(document).ready(function() {
         var parentCount;
 
         function searchListOfParent() {
-
+ 
             var addClass = document.getElementById('addclass').value;
 
             if (!addClass) {
@@ -971,6 +983,13 @@ $(document).ready(function() {
                 // Load dropdown / parent list
                 document.getElementById("parentDiv").innerHTML =
                     xmlHttpParent.responseText;
+                
+                // Reinitialize Select2 on newly added dropdown
+                $('#parentId').select2({
+                    placeholder: "Search Parent",
+                    allowClear: true,
+                    width: '225px'
+                });
             }
         }
 
@@ -1106,7 +1125,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
@@ -1515,7 +1534,7 @@ $(document).ready(function() {
 
 									<td  >&nbsp;Yes<input
 								type="checkbox" value="1" name="rte" id="yes:rte"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
 								type="checkbox" value="0" name="rte" id="no:rte"
 								onclick="noCheck(this.id);" />
 										</td>

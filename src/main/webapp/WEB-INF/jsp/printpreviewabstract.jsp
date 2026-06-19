@@ -437,36 +437,37 @@ for(Cookie cookie : cookies){
 
 	    
 	    <table>
+
 <tr>
 <td><br></td>
 </tr>
 <tr>
 <td><br></td>
 </tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
+
 </table>
 	    
 	    <table>
+	    <tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr>
+<tr>
+<td><br></td>
+</tr>
 <tr>
 <td><br></td>
 </tr>
@@ -474,6 +475,22 @@ for(Cookie cookie : cookies){
 <td><br></td>
 </tr>
 <tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
 <td><br></td>
 </tr>
 <tr>
@@ -500,13 +517,13 @@ for(Cookie cookie : cookies){
    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Cumulative Record No.<br>
    with date of opening</p></td>
   
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Name in Full</p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Name in Full</p></td>
   
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Boy or Girl</p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Boy or Girl</p></td>
   
   <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Date Of Birth, Age in Years</p></td>
   
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Father And Mother Name<br>And Occupation</p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Father And Mother Name<br>And Occupation</p></td>
   
     <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Parent Annual Income</p></td>
   
@@ -515,7 +532,7 @@ for(Cookie cookie : cookies){
     <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Nationality,Religion<br>Caste</p></td>
    
     <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">Mother Tongue</p></td>
-    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p>Guardian Name And Address<br></p></td>
+    <td  class="abstract"  style="font-size:12px;">&nbsp;&nbsp;<p style="transform:rotate(270deg);">&nbsp;&nbsp;Guardian Name And &nbsp;&nbsp;Address<br></p></td>
   
   </tr>
   <tr>
@@ -551,6 +568,7 @@ for(Cookie cookie : cookies){
 </div>
 
 <table>
+
 <tr>
 <td><br></td>
 </tr>
@@ -568,11 +586,29 @@ for(Cookie cookie : cookies){
 </tr>
 <tr>
 <td><br></td>
-</tr>
-<tr>
+</tr><tr>
 <td><br></td>
-</tr>
-<tr>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
+<td><br></td>
+</tr><tr>
 <td><br></td>
 </tr>
 <tr>
@@ -598,15 +634,8 @@ for(Cookie cookie : cookies){
 <tr>
 <td><br></td>
 </tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
-<tr>
-<td><br></td>
-</tr>
+
+
 </table>
 <table>
 <tr>
@@ -632,7 +661,7 @@ for(Cookie cookie : cookies){
 	</div>
     <table  class="abstract"  height="400px;"  style="vertical-align: top;border-radius: 10px;background-color:white;">
   <tr height="150px">
-   <td  class="abstract"  style="font-size:12px;"><p>Permanent address<br> of the pupil</p></td>
+   <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Permanent address<br> of the pupil</p></td>
   
    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Last School attended</p></td>
   
@@ -645,7 +674,7 @@ for(Cookie cookie : cookies){
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">Date of admission</p></td>
   
     <td  class="abstract"  style="font-size:12px;transform:rotate(270deg);margin:0px;padding:0px;">Subsequent progress of
-    the pupil in school every year from the date of admission</td>
+    the pupil in school<br> every year from the date of admission</td>
   
    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Class of leaving</p></td>
    
@@ -654,7 +683,7 @@ for(Cookie cookie : cookies){
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Reason for leaving</p></td>
    
     <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);margin:0px;padding:0px;">No. and date of Transfer Certified issued</p></td>
-    <td  class="abstract"  style="font-size:12px;"><p>Remarks<br></p></td>
+    <td  class="abstract"  style="font-size:12px;"><p style="transform:rotate(270deg);">Remarks<br></p></td>
   
   </tr>
   <tr>

@@ -1,5 +1,8 @@
 package org.ideoholic.curium.model.marksdetails.action;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -314,5 +317,38 @@ public class MarksDetailsActionAdapter {
 		GenerateReportResponseDto responseDto = marksDetailsService.getStartDate(httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("startDateStr", responseDto.getStartDate());
 		
+	}
+
+	public void getSubjectDetails()throws IOException {
+		MarksViewDto marksViewDto = new MarksViewDto();
+		marksViewDto.setSubject(request.getParameter("subject"));
+		marksViewDto.setAddClass(request.getParameter("classSearch"));
+		marksViewDto.setExam(request.getParameter("examName"));
+		GenerateReportResponseDto responseDto  = marksDetailsService.getSubjectDetails(marksViewDto,httpSession.getAttribute(Constants.BRANCHID).toString());
+		request.setAttribute("minmark", responseDto.getMinMark());
+        request.setAttribute("maxmark", responseDto.getMaxMark());
+        PrintWriter out = response.getWriter(); 
+			response.setContentType("text/xml");
+		    response.setHeader("Cache-Control", "no-cache");
+		        try {
+		        	
+		        		String buffer = "<div style='width:400px; height: 75px;'>";
+			        		buffer = buffer +  "&emsp;&emsp;&emsp;"
+			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'>Minimum Mark: <input"
+			        				+ "	 type='text' name='minmarks' id='minmarks' class='chcktbl' value="+responseDto.getMinMark()+""
+			        				+ "	size='20'>   </label><br><br> <label style='font-weight: bold;color:#325F6D'>&emsp;&emsp;&emsp;Maximum Mark: <input"
+			        				+" type='text' name='maxmarks' id='maxmarks' class='chcktbl' value="+responseDto.getMaxMark()+" size='20'>"
+			        				+ "	</label><br>";
+			        	buffer = buffer + "</div>";
+			        	response.getWriter().println(buffer);
+		        	
+		        	
+		        } catch (Exception e) {
+		            out.write("<subgroup>0</subgroup>");
+		        } finally {
+		            out.flush();
+		            out.close();
+		        }
+
 	}
 }
