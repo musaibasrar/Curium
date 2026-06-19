@@ -5,6 +5,7 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.account.dao.AccountDAO;
 import org.ideoholic.curium.model.account.dto.VoucherEntrytransactions;
 import org.ideoholic.curium.model.mess.item.dao.MessItemsDAO;
+import org.ideoholic.curium.model.mess.item.dto.IssuanceReportDto;
 import org.ideoholic.curium.model.mess.item.dto.MessItems;
 import org.ideoholic.curium.model.mess.item.dto.MessStockMoveInfo;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
@@ -740,11 +741,23 @@ public class MessStockMoveService {
 		return result;
 	}
 
-	public DuesResponseDto getDuesList() {
+	public DuesResponseDto getDuesList(IssuanceReportDto dto, String branchId) {
 		DuesResponseDto duesResponseDto = new DuesResponseDto();
 		List<MessStockMoveInfo> messStockMoveInfoDuesList = new ArrayList<MessStockMoveInfo>();
 		List<MessStockMoveInfo> messStockMoveInfoList = new ArrayList<MessStockMoveInfo>();
-		messStockMoveInfoList = new MessStockMoveDAO().getTotalDue();
+		String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
+		String toDate = DateUtil.dateFromatConversionSlash(dto.getToDate());
+		String issueTo = dto.getIssueTo();
+		String studentName=null;
+		if (issueTo != null && issueTo.contains("_")) {
+		    String[] issueToValue = issueTo.split("_");
+
+		    studentName = issueToValue[0];
+		} else {
+		    // Invalid input format
+		}
+		
+		messStockMoveInfoList = new MessStockMoveDAO().getTotalDue(fromDate, toDate, studentName, Integer.parseInt(branchId));
 		for(MessStockMoveInfo messStockMoveInfo : messStockMoveInfoList) {
 			if(messStockMoveInfo.getDue()!=0)
 			{
