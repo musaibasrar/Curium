@@ -127,14 +127,14 @@ public class StampFeesActionAdapter {
 		
 	}
 	
-	public void addFeesOldStamp() {
+	public void addSingleFeesStamp() {
 		StampFeesDto stampFeesDto = new StampFeesDto();
 		stampFeesDto.setStudentIds(request.getParameterValues("studentIDs"));
 		stampFeesDto.setFeesCategoryId(request.getParameter("feesIDS"));
 		stampFeesDto.setFeesAmount(request.getParameterValues("oldfeesamount"));
 		stampFeesDto.setConcession(request.getParameterValues("feesConcession"));
 		stampFeesDto.setFeesYears(request.getParameterValues("feesYears"));
-		stampFeesService.addFeesOldStamp(stampFeesDto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
+		stampFeesService.addSingleFeesStamp(stampFeesDto,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
 		
 	}
 

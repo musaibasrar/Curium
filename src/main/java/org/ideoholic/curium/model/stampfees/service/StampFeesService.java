@@ -746,7 +746,7 @@ public class StampFeesService {
 		}
 	}
 	
-public void addFeesOldStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
+public void addSingleFeesStamp(StampFeesDto stampFeesDto,String currentAcademicYear,String branchid,String userid ) {
 		
 		if (currentAcademicYear != null) {
 			String[] studentIds = stampFeesDto.getStudentIds();
@@ -765,12 +765,13 @@ public void addFeesOldStamp(StampFeesDto stampFeesDto,String currentAcademicYear
 
 				listOfacademicfessstructure.clear();
 				for (String ids : studentIds) {
-					Long totalFeesAmount = 0l;
+					
 					String[] studentids = ids.split("_");
 					String id = studentids[0];
 					int studentIndex = Integer.parseInt(studentids[1]);
 						String[] feesCatAndIndex = feesCategoryId.split("_");
 						int feesCatIndex = Integer.parseInt(feesCatAndIndex[1]);
+						Long totalFeesAmount = Long.parseLong(feesAmount[studentIndex]);
 						// check whether the fees category is already stamped
 						List<Studentfeesstructure> result = stampFeesDao.getStudentFeesStructure(Integer.parseInt(id), Integer.parseInt(feesCatAndIndex[0]), currentAcademicYear);
 						// END
@@ -788,7 +789,7 @@ public void addFeesOldStamp(StampFeesDto stampFeesDto,String currentAcademicYear
 							studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
 							studentfeesstructure.setBranchid(Integer.parseInt(branchid));
 							studentfeesstructure.setUserid(Integer.parseInt(userid));
-							studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+							studentfeesstructure.setConcession(0);
 							listOfstudentfeesstructure.add(studentfeesstructure);
 
 						}
@@ -827,7 +828,7 @@ public void addFeesOldStamp(StampFeesDto stampFeesDto,String currentAcademicYear
 						studentfeesstructure.setAcademicyear(feesYears[feesCatIndex]);
 						studentfeesstructure.setBranchid(Integer.parseInt(branchid));
 						studentfeesstructure.setUserid(Integer.parseInt(userid));
-						studentfeesstructure.setConcession(Integer.parseInt(concession[feesCatIndex]));
+						studentfeesstructure.setConcession(0);
 						listOfstudentfeesstructure.add(studentfeesstructure);
 
 				}

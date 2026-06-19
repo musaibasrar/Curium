@@ -365,7 +365,7 @@
 <script type="text/javascript">
 	function searchForFees() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/school/StampFeesProcess/advanceSearchForStampoldFees";
+		form1.action = "/school/StampFeesProcess/advanceSearchForStampsingleFees";
 		form1.method = "POST";
 		form1.submit();
 
@@ -785,12 +785,12 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/school/StampFeesProcess/applyOldFees" method="POST">
+	<form id="form1" action="/school/StampFeesProcess/applySingleFees" method="POST">
     
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
-					<li><a href="#tabs-1">Stamp Old Fees</a></li>
+					<li><a href="#tabs-1">Stamp Single Fees</a></li>
 
 				</ul>
 				<div id="tabs-1">
