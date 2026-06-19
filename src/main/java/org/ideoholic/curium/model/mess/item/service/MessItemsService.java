@@ -503,7 +503,7 @@ public class MessItemsService {
 		}
 
 
-		public IssuanceReportResponseDto generateStockIssuanceReport(IssuanceReportDto dto) {
+		public IssuanceReportResponseDto generateStockIssuanceReport(IssuanceReportDto dto, String branchId) {
 		IssuanceReportResponseDto responseDto = IssuanceReportResponseDto.builder().build();
 			
 			String fromDate = DateUtil.dateFromatConversionSlash(dto.getFromDate());
@@ -511,7 +511,8 @@ public class MessItemsService {
 			String issueTo = dto.getIssueTo();
 			String purpose = dto.getPurpose();
 			String item = dto.getItem();
-			String queryMain = "from MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' ";
+			int bId = Integer.parseInt(branchId);
+			String queryMain = "from MessStockMove msm where msm.status != 'CANCELLED' and msm.transactiondate between '"+fromDate+"' and '"+toDate+"' and branchid="+bId+" ";
 			String subQuery = "";
 			List<StockIssuance> stockIssuanceList = new ArrayList<StockIssuance>();
 					
