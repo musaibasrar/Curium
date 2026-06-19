@@ -3,6 +3,8 @@ package org.ideoholic.curium.model.mess.item.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.mess.item.dto.*;
 import org.ideoholic.curium.model.mess.item.service.MessItemsService;
+import org.ideoholic.curium.model.mess.stockmove.dto.DuesResponseDto;
+import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,9 @@ public class MessItemActionAdapter {
     
     @Autowired
     private MessItemsService messItemsService;
+    
+    @Autowired
+    private MessStockMoveService messStockMoveService;
     
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -192,12 +197,14 @@ public class MessItemActionAdapter {
         dto.setPurpose(request.getParameter("purpose"));
         dto.setItem(request.getParameter("itemname"));
 
-        IssuanceReportResponseDto responseDto = messItemsService.generateStockIssuanceReport(dto);
+        IssuanceReportResponseDto responseDto = messItemsService.generateStockIssuanceReport(dto, httpSession.getAttribute(BRANCHID).toString());
+        DuesResponseDto duesResponseDto = messStockMoveService.getDuesList(dto, httpSession.getAttribute(BRANCHID).toString());
         httpSession.setAttribute("issuedtoselected", responseDto.getIssuedToSelected());
         httpSession.setAttribute("itemselected", responseDto.getItemSelected());
         httpSession.setAttribute("stockissuancelist", responseDto.getStockIssuanceList());
         httpSession.setAttribute("transactionfromdateselected", responseDto.getTransactionFromDateSelected());
         httpSession.setAttribute("transactiontodateselected", responseDto.getTransactionToDateSelected());
+        request.setAttribute("dueslist", duesResponseDto.getMessStockMoveInfoList());
     }
 
     public void getCurrentStockToIssue() {

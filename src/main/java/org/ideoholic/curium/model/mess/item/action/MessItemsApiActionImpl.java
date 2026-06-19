@@ -59,7 +59,7 @@ public class MessItemsApiActionImpl implements MessItemsApiAction {
 
     @PostMapping("/generateStockIssuanceReport")
     public ResponseEntity<IssuanceReportResponseDto> generateStockIssuanceReport(@RequestBody IssuanceReportDto dto, @RequestParam(value = "page") String page, @RequestHeader(value = "branchid") String branchId) {
-        IssuanceReportResponseDto result = messItemsService.generateStockIssuanceReport(dto);
+        IssuanceReportResponseDto result = messItemsService.generateStockIssuanceReport(dto, branchId);
         studentService.viewAllStudentsParents(page, branchId);
         return ResponseEntity.ok(result);
     }

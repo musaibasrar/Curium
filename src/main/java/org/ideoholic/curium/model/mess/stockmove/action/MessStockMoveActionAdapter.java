@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.mess.stockmove.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.mess.item.dto.IssuanceReportDto;
 import org.ideoholic.curium.model.mess.stockmove.dto.*;
 import org.ideoholic.curium.model.mess.stockmove.service.MessStockMoveService;
 import org.ideoholic.curium.util.DateUtil;
@@ -165,7 +166,12 @@ public class MessStockMoveActionAdapter {
     }
 
 	public void getDuesList() {
-		DuesResponseDto result = messStockMoveService.getDuesList();
+		IssuanceReportDto dto = new IssuanceReportDto();
+        dto.setFromDate(request.getParameter("transactiondatefrom"));
+        dto.setToDate(request.getParameter("transactiondateto"));
+        dto.setIssueTo(request.getParameter("issuedto"));
+        
+		DuesResponseDto result = messStockMoveService.getDuesList(dto,httpSession.getAttribute(BRANCHID).toString());
 		request.setAttribute("dueslist", result.getMessStockMoveInfoList());
 	}
 
