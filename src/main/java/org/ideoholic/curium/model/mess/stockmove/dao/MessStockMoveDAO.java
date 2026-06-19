@@ -468,13 +468,19 @@ return result;
 
 
 
-	public List<MessStockMoveInfo> getTotalDue() {
+	public List<MessStockMoveInfo> getTotalDue(String fromDate, String toDate, String studentName, int branchId) {
 		List<MessStockMoveInfo> results = new ArrayList<MessStockMoveInfo>();
 		try {
 			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("from MessStockMoveInfo");
-			results = query.list();
+			if(studentName!=null && !studentName.isEmpty()) {
+				Query query = session
+						.createQuery("from MessStockMoveInfo where date between '"+fromDate+"' and '"+toDate+"' AND studentname= '"+studentName+"' AND branchid="+branchId);
+				results = query.list();
+			}else {
+				Query query = session
+						.createQuery("from MessStockMoveInfo where date between '"+fromDate+"' and '"+toDate+"' AND branchid="+branchId);
+				results = query.list();
+			}
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
 			
