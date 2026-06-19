@@ -125,8 +125,9 @@ public class MessStockMoveAction {
 	
 	@GetMapping("/getDueReport")
 	public String getDueReport() {
-		    	
-		messStockMoveActionAdapter.getDuesList();
+		
+		studentActionAdapter.viewAllStudentsParents();    	
+		//messStockMoveActionAdapter.getDuesList();
     	
     	return "dueslist";
     }
@@ -199,7 +200,14 @@ public class MessStockMoveAction {
 	}
 	
 	
-
+	@PostMapping("/generateDueReport")
+	public String generateDueReport() {
+		
+		studentActionAdapter.viewAllStudentsParents();    	
+		messStockMoveActionAdapter.getDuesList();
+    	
+    	return "dueslist";
+    }
 
 
 
