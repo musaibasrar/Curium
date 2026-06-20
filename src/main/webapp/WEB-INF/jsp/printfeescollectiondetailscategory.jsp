@@ -230,7 +230,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/logo.jpg" width="70" height="80"/>
+				<img src="/orion/images/orion.jpg" width="80" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>
@@ -294,7 +294,7 @@
 			
 			<%-- <table width="100%" style="border-collapse: collapse;">
 				<tr>
-					<label class="addressLine">Other Fees</label><br>
+					<label class="addressLine">/readmodelschool</label><br>
 				</tr>
 			</table>
 
@@ -536,7 +536,7 @@
 			
 				<%-- <table width="100%" style="border-collapse: collapse;">
 				<tr style="text-align: center;">
-					<label class="addressLine">Break-up Bank Other Fees</label><br>
+					<label class="addressLine">Break-up Bank /readmodelschool</label><br>
 				</tr>
 			</table>
 			
