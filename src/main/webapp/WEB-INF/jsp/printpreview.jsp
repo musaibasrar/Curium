@@ -486,6 +486,13 @@ for(Cookie cookie : cookies){
     width: 85px;
     height: 30px;
 }
+.dot{
+background-color:white;
+width:2px;
+height:2px;
+border:1px solid white;
+border-radius:50%;
+}
   </style>
     </head>
      
@@ -503,13 +510,52 @@ for(Cookie cookie : cookies){
                         %>
 			<c:if test="${limit < iInitial}">	
 	    
-			<div class="card" style="position:relative;background-image: url('/divine/images/bg2.png');background-repeat:no-repeat;background-position: center;background-color: white; width: 5.5cm; height: 8.3cm;">
+			<div class="card" style="position:relative;background-image: url('/divine/images/backgroundid.png');background-repeat:no-repeat;background-position: center;background-color: white; width: 5.5cm; height: 8.3cm;">
   <div class="table-container" style="margin-bottom: 5px;">
   <table width="100%">
   <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:12px;padding:0px;font-size:15px;font-weight: 900; color:red"><img src="/divine/images/divine.png" class="logo-img" /> </p></td></tr><tr><td style="text-align:center;padding:0px;">
+    <p style="margin-bottom:0px;margin-top:12px;padding:0px;font-size:15px;font-weight: 900; color:red">
+    <table width="15px" height="20px" style="position:absolute; left:10px; top:10px;">
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+</table>
+    <img src="/divine/images/divine.png" class="logo-img" /> </p></td></tr><tr><td style="text-align:center;padding:0px;">
+    <table style="position:absolute; right:10px; top:10px;">
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+    <tr>
+        <td><div class="dot"></div></td>
+        <td><div class="dot"></div></td>
+    </tr>
+</table>
    <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">MOHAMMAD ALI EDUCATION SOCIETY'S</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;font-weight:bold;">DIVINE M.A SCHOOL PRIMARY AND HIGH SCHOOL</p>
+   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;font-weight:bold;">
+   DIVINE M.A SCHOOL PRIMARY AND HIGH SCHOOL
+   </p>
    </table>
   </div>
   <table align="center" width="90%" height="3px" style="background-color:red;"></table>
@@ -519,7 +565,7 @@ for(Cookie cookie : cookies){
  <div class="id-top-flex" style="text-align:center;">
 
     <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>"
-         class="student-photo"/>
+         class="student-photo" style="width:100px;height:100px;border-radius:50%;"/>
 
 
     
@@ -541,7 +587,7 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
  
-  <tr>
+ <%--  <tr>
     <td style="padding: 0;text-align:left;">&emsp;&emsp;D.O.B.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
@@ -549,15 +595,13 @@ for(Cookie cookie : cookies){
   <tr>
     <td colspan="2" style="padding: 0;text-align:center;">&nbsp;&nbsp;
      <%= request.getSession().getAttribute("address" + i + "") %> 
-     <!-- KUSUM GALLI, BIDAR<br>8660710340 --> </td>
-    <!-- <td style="padding: 0;">:&nbsp;Bidar District</td> -->
-  </tr>
+  </tr> --%>
 </table>
 <table align="center"  style="position:absolute;
                   bottom:1px;
                   left:50%;
                   transform:translateX(-50%);
-                  width:60%;
+                  width:70%;
                   ">
 <tr><td style="text-align:center;margin:0px;padding:0px;">
 <c:choose>
@@ -569,9 +613,17 @@ for(Cookie cookie : cookies){
     </c:otherwise>
 </c:choose>
 <!-- <img src="/divine/images/principalsign.png" width="50" height="25"/> --></td></tr>
-<tr><td style="color:yellow;text-align:center;padding:0px;font-weight:bold;"><p style="margin:8px;">Principal</p></td></tr>
+<tr><td style="text-align:center;padding:0px;font-weight:bold;"><p style="margin:8px;">Principal</p></td></tr>
 <!-- <tr><td style="text-align:center;text-align:center;color:white;margin:0px;padding:0px;">Divine School Bidar</td></tr> -->
-<tr><td style="color:green;background-color: #E0BD24;border-radius:5px;margin:0px;padding:0p;:">PH:9916891788/8444946233</td></tr>
+<!-- <tr><td style="color:green;background-color: #E0BD24;border-radius:5px;margin:0px;padding:0p;:"><img src="/divine/images/phone.png" width="15" height="15"/>9916891788/8444946233</td></tr> -->
+<tr>
+    <td style="color:green; background-color:#E0BD24; border-radius:5px; padding:0px;">
+        <img src="/divine/images/phone.png"
+             width="15" height="15"
+             style="vertical-align:middle;" />
+        <span style="vertical-align:middle;padding:0px;margin:0px;">9916891788 / 8444946233</span>
+    </td>
+</tr>
 </table>
 
 <!-- <div >
