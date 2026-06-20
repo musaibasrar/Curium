@@ -359,7 +359,7 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
             <div>
-                <a target="mainFrame" href="/orion/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
+                <a target="mainFrame" href="/orion/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
                 <a target="mainFrame" href="/orion/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
 
             </div>

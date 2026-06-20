@@ -13,7 +13,7 @@
 
 <html >
 <head>
-<title>Print Bus Fees Collection Details</title>
+<title>Print Other Fees Collection Details</title>
 <style type="text/css">
 <!--
 .headerText {
