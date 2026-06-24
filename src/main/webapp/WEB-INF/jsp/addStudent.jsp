@@ -1104,7 +1104,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input selected
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
