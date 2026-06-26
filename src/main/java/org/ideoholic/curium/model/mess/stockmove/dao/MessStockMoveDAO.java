@@ -414,11 +414,15 @@ public class MessStockMoveDAO {
 	}
 
 	@Transactional
-	public List<MessStockMoveInfo> getTotalDue() {
+	public List<MessStockMoveInfo> getTotalDue(String fromDate, String toDate, String studentName, int branchId) {
 		List<MessStockMoveInfo> results = new ArrayList<>();
 		try {
-			// Query query = session.createQuery("from MessStockMoveInfo");
-			results = messStockMoveInfoRepository.findAll();
+			if(studentName!=null && !studentName.isEmpty()) {
+			// Query query = session.createQuery("from MessStockMoveInfo where date between '"+fromDate+"' and '"+toDate+"' AND studentname= '"+studentName+"' AND branchid="+branchId");
+			results = messStockMoveInfoRepository.findByDateRangeAndStudentAndBranch(fromDate, toDate, studentName, branchId);
+			}else {
+				results = messStockMoveInfoRepository.findByDateRangeAndBranch(fromDate, toDate, branchId);
+			}
 		} catch (Exception hibernateException) {
 			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			log.error(hibernateException.getMessage(), hibernateException);
