@@ -757,7 +757,7 @@ buffer.append("<table id='dataTable' style='width:100%; border-collapse:collapse
       // ---------------------- HEADER -------------------------
       .append("<thead>")
       .append("<tr style='background:#4b6a84; color:white; height:22px; font-family:Tahoma;'>")
-      .append(" <th><input  type='checkbox' checked id = 'chckHead' onclick='toggleFeesCount(this)' /></th>")
+      .append(" <th><input  type='checkbox' id = 'chckHead' onclick='toggleFeesCount(this)' /></th>")
       .append(" <th>Fees Category</th>")
       .append(" <th>Class</th>")
       .append(" <th>Fees Amount</th>")
@@ -794,7 +794,7 @@ for(int i = 0; i < feecategoryList.size(); i++) {
     // Column 1 – Fee Category checkbox
     .append("<td style='text-align:center;'>")
     .append("<input type='checkbox' class='chcktbl' name='feescategory'")
-    .append(checkBoxChecked)
+    //.append(checkBoxChecked)
     .append(" id='feesCat_").append(i).append("'")
     .append(" value='").append(feecategoryList.get(i).getIdfeescategory()).append("--").append(i).append("'")
     .append(" onclick='updateFeesCategory(").append(i).append(")'/></td> ")
