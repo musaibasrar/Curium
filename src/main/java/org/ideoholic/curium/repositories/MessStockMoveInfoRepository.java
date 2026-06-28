@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 public interface MessStockMoveInfoRepository extends JpaRepository<MessStockMoveInfo, Integer> {
 	MessStockMoveInfo findTopByOrderByReceiptnumberDesc();
 	
-	@Query("SELECT m FROM MessStockMoveInfo m WHERE m.date BETWEEN :fromDate AND :toDate AND m.studentname = :studentName AND m.branchid = :branchId")
+	@Query("SELECT m FROM MessStockMoveInfo m WHERE m.date BETWEEN :fromDate AND :toDate AND m.studentName = :studentName AND m.branchid = :branchId")
 	List<MessStockMoveInfo> findByDateRangeAndStudentAndBranch(@Param("fromDate") String fromDate, @Param("toDate") String toDate, @Param("studentName") String studentName, @Param("branchId") int branchId);
 	
 	@Query("SELECT m FROM MessStockMoveInfo m WHERE m.date BETWEEN :fromDate AND :toDate AND m.branchid = :branchId")
