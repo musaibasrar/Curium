@@ -179,7 +179,7 @@ if (cookies != null) {
                         <td class="totalAmount"><c:out value="${receiptinfo.totalamount}" /></td>
                     </tr>
                     <tr>
-                        <td colspan="3"><a id="print" href="/vision/FeesCollection/printFeesReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
+                        <td colspan="3"><a id="print" href="/meps/FeesCollection/printFeesReceipt?id=<c:out value="${receiptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                     </tr>
                 </tfoot>
             </table>
