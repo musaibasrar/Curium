@@ -365,7 +365,7 @@
 <script type="text/javascript">
 function printStudentDetail() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/StudentProcess/printStudentDetail";
+	form1.action = "/meps/StudentProcess/printStudentDetail";
 	form1.method = "POST";
 	form1.submit();
 
