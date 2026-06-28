@@ -234,17 +234,17 @@
 				
 
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
+						value="${receiptinfo.branchreceiptnumber}" /> 
 				</td>
 				
 				</tr>
 			    <tr >
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
 				</td>
 				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					&nbsp;&nbsp;&nbsp;Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					&nbsp;&nbsp;&nbsp;Class:&nbsp;<c:out value="${receiptinfo.classsec}" />
 				</td>
 
 			</tr>
@@ -260,10 +260,10 @@
 			    <tr >
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
-						value="${recieptdate}" />
+						value="${receiptdate}" />
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Payment Mode:&nbsp;${receiptinfo.paymenttype}</td>
 			</tr>
 
 			<tr>
@@ -314,21 +314,21 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-				<c:if test="${recieptinfo.fine > 0}">
+				<c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.fine}" /></td>
+							value="${receiptinfo.fine}" /></td>
 				</tr>
 			</c:if>
 				
-			<c:if test="${recieptinfo.misc > 0}">	
+			<c:if test="${receiptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
 							value="Misc" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.misc}" /></td>
+							value="${receiptinfo.misc}" /></td>
 				</tr>
 			</c:if>
 			</table>
@@ -347,7 +347,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -393,7 +393,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 10px;">&nbsp;<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -448,26 +448,26 @@
 				
 
 				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
-						value="${recieptinfo.branchreceiptnumber}" /> 
+						value="${receiptinfo.branchreceiptnumber}" /> 
 				</td>
 				
 				
 			<tr>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${recieptinfo.academicyear}" />
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
 				</td>
 				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
-					&nbsp;&nbsp;&nbsp;Class:&nbsp;<c:out value="${recieptinfo.classsec}" />
+					&nbsp;&nbsp;&nbsp;Class:&nbsp;<c:out value="${receiptinfo.classsec}" />
 				</td>
 				
 				</tr>
 			    <tr >
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
-						value="${recieptdate}" />
+						value="${receiptdate}" />
 				</td>
-             <td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Payment Mode:&nbsp;${recieptinfo.paymenttype}</td>
+             <td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Payment Mode:&nbsp;${receiptinfo.paymenttype}</td>
 			</tr>
 			<tr>
 			<td></td>
@@ -523,21 +523,21 @@
 				</tr>
 			</c:forEach>
 			
-			<c:if test="${recieptinfo.fine > 0}">
+			<c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.fine}" /></td>
+							value="${receiptinfo.fine}" /></td>
 				</tr>
 			</c:if>
 				
-			<c:if test="${recieptinfo.misc > 0}">	
+			<c:if test="${receiptinfo.misc > 0}">	
 				<tr>
 					<td class="dataText"><c:out
 							value="Misc" /></td>
 					<td class="dataText">Rs. <c:out
-							value="${recieptinfo.misc}" /></td>
+							value="${receiptinfo.misc}" /></td>
 				</tr>
 			</c:if>
 			</table>
@@ -556,7 +556,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${recieptinfo.totalamount}" /></td>
+				<td class="headerText"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -602,7 +602,7 @@
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
 		<td align="left" style="padding-left: 10px;">&nbsp;<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
-		Date&nbsp;:&nbsp;${recieptdate}</td>
+		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
