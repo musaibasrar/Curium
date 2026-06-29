@@ -197,8 +197,8 @@ public class UserService {
 				result.setXaxisList(xaxisList);
 				result.setYaxisList(yaxisList);
 				result.setTotalStudents(totalStudents);
-				feesdailysearch();
-				feesmonthlysearch();
+				feesdailysearch(Integer.parseInt(branchId));
+				feesmonthlysearch(Integer.parseInt(branchId));
 
 				result.setSuccess(true);
 			}
@@ -209,7 +209,7 @@ public class UserService {
 		return result;
 	}
 	
-	public void feesdailysearch() {
+	public void feesdailysearch(int branchId) {
 		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Date newdate = new Date();
@@ -220,7 +220,7 @@ public class UserService {
 		Date dateBefore = null;
 		Date dateAfter = null;
 		
-		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and";
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+branchId+" and ";
 		
 		try {
 			dateBefore = df.parse(todaysDate);
@@ -257,7 +257,7 @@ public class UserService {
 		request.setAttribute("currentdate", dailyDatesList);
 	}
 
-	public void feesmonthlysearch() {
+	public void feesmonthlysearch(int branchId) {
 		
 		List<String> monthList = new LinkedList<String>();
 		List<String> totalFeesSum = new LinkedList<String>();
@@ -267,7 +267,7 @@ public class UserService {
 		List<Receiptinfo> feesDetailsList = new ArrayList<Receiptinfo>();
 		Date dateBefore = null;
 		Date dateAfter = null;
-		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and ";
+		String queryMain = "From Receiptinfo as feesdetails where feesdetails.cancelreceipt=0 and feesdetails.branchid="+branchId+" and  ";
 		String toDate = DataUtil.emptyString(request.getParameter("todate"));
 		String fromDate = DataUtil.emptyString(request.getParameter("fromdate"));
 		
