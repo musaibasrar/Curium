@@ -347,7 +347,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/FeesCollection/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/shaheen/FeesCollection/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		
@@ -682,7 +682,7 @@ for(Cookie cookie : cookies){
 				</tr>
 			</table>
 		</div> -->
-             <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
+             <!-- <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
             
@@ -694,7 +694,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		
             	</table>
-            </div>
+            </div> -->
             
             <h5 class="sideaccordian" ><a href="#" >Documents</a></h5>
             

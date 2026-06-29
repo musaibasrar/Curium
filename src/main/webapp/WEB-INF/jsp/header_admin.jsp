@@ -124,7 +124,7 @@ for(Cookie cookie : cookies){
 						<tr><td></td></tr>
 						<tr style="height: 45px;">
 						
-							<<td style="padding-left: 20px;">
+							<td style="padding-left: 20px;">
 								<a target="mainFrame" href="/shaheen/welcome" >
 								<img src="/shaheen/images/curiumheader.png" width="112" height="41"/>
 								</a>

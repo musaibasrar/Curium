@@ -350,8 +350,8 @@ for(Cookie cookie : cookies){
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: finalstep+20,
-                                stepSize: 20,
+                                max: finalstep+50,
+                                stepSize: 40,
                                 fontColor: "Black"
                                }
                         
@@ -556,8 +556,8 @@ for(Cookie cookie : cookies){
                 	   yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                max: 500000,
-                                stepSize: 20000
+                                max: 5000000,
+                                stepSize: 200000
                                }
                         
                             }]
