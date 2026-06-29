@@ -487,7 +487,7 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1">
-
+		<c:set var="totalfeesconcession" value="${0}" />
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
 				<ul>
@@ -634,20 +634,15 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Admission Number</th>
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
-						<th title="click to sort" class="headerText">Fees Category</th>
-						<th title="click to sort" class="headerText">Fees Amount</th>
-						<th title="click to sort" class="headerText">Installment</th>
-						<th title="click to sort" class="headerText">Total Fees Amount</th>
-						<th title="click to sort" class="headerText">Concession Amount</th>
+						<th title="click to sort" class="headerText">Fees Details</th>
+						<th title="click to sort" class="headerText">Total Concession Amount</th>
 
 					</tr>
 				</thead>
 
 				<tbody>
 					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" varStatus="status">
-
-						<c:forEach items="${students.value}" var="fees">
-						
+							<c:set var="studentfeesconcession" value="${0}" />
 							<tr class="trClass" style="border-color: #000000" border="1" cellpadding="1" cellspacing="1">
 								<%-- <td class="dataText"><input type="checkbox"
 									id="<c:out value="${Parents.student.sid}"/>" class="chcktbl"
@@ -662,19 +657,35 @@ for(Cookie cookie : cookies){
 											value="${students.key.student.admissionnumber}" /></a></td>
 								<td class="dataText"><c:out value="${students.key.student.name}" /></td>
 								<td class="dataText"><c:out	value="${students.key.student.classstudying}" /></td>
-								<td class="dataText"><c:out value="${fees.feescategory.feescategoryname}"/></td>
-                                <td class="dataText"><c:out value="${fees.feescategory.amount}"/></td>
-								<td class="dataText"><c:out	value="${fees.totalinstallment}" /></td>
-								<td class="dataText"><c:out	value="${fees.feesamount}" /></td>
-								<td class="dataText"><c:out	value="${fees.concession}" /></td>
+								<td class="dataText">
+									<c:forEach items="${students.value}" var="fees">
+								        <c:set var="totalfeesconcession"
+								            value="${totalfeesconcession + fees.concession}" />
+								        <c:set var="studentfeesconcession"
+								            value="${studentfeesconcession + fees.concession}" />
+								
+								        <div>
+								            <strong><c:out value="${fees.feescategory.feescategoryname}" /></strong> :
+								            <c:out value="${fees.feesamount}" />
+								            (<c:out value="${fees.concession}" />)
+								        </div>
+								    </c:forEach>
+								</td>
+								<td class="dataText">
+									<%-- <c:out value="${fees.feescategory.amount}"/> --%>
+									<c:out value="${studentfeesconcession}"/>
+								</td>
 							</tr>
-						</c:forEach>
 					</c:forEach>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td class="footerTD" colspan="2"><button id="print">Print</button>
+						<td class="footerTD" colspan="1"><button id="print">Print</button>
 							</td>
+							
+						<td class="footerTD" style="text-align: center" colspan="6" >
+						 <label style="font-size: 14px;color: white;font-weight: bold;">Total Concession Amount: Rs. ${totalfeesconcession}</label>
+						</td>
 					</tr>
 				</tfoot>
 			</table>
