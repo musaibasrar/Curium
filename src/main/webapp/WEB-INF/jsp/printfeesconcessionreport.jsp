@@ -221,7 +221,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/presidency/images/presidency.jpg" width="50" height="50"/>
+				<img src="/vision/images/vision.jpg" width="73" height="50"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				
@@ -253,34 +253,49 @@
  				 		<th class=datath>Adm. No.</th>
  				 		<th class="datath">Student Name</th>
 						<th class="datath">Class</th>
-						<th class="datath">Fees Cat.</th>
-						<th class="datath">Fees Amount</th>
-						<th class="datath">Inst.</th>
-						<th class="datath">Total Fees Amount</th>
-						<th class="datath">Concession Amount</th>
+						<th class="datath">Fees Details</th>
+						<th class="datath">Total Concession Amount</th>
  				 </tr>
  				 
  			 </thead>
  		 
 			<tbody>
 					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" >
-						
-						<c:forEach items="${students.value}" var="fees" varStatus="status">
-
+							<c:set var="studentfeesconcession" value="${0}" />
 							<tr>
 									<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.admissionnumber}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.name}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${students.key.student.classstudying}" /></td>
-									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.feescategory.feescategoryname}" /></td>
+									<td class="datatd" style="font-size: 9px;">
+									
+										<c:forEach items="${students.value}" var="fees">
+
+					                        <c:set var="studentfeesconcession"
+					                               value="${studentfeesconcession + fees.concession}" />
+					
+					                        <div>
+					                            <strong>
+					                                <c:out value="${fees.feescategory.feescategoryname}" />
+					                            </strong>
+					                            :
+					                            <c:out value="${fees.feesamount}" />
+					                            (<c:out value="${fees.concession}" />)
+					                        </div>
+
+                    					</c:forEach>
+									</td>
+									
+									<%-- <td class="datatd" style="font-size: 9px;"><c:out value="${fees.feescategory.feescategoryname}" /></td>
 									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feescategory.amount}" /></td>
 									<td class="datatd" style="font-size: 9px;"><c:out value="${fees.totalinstallment}" /></td>
-									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feesamount}" /></td>
+									<td class="datatdright" style="font-size: 9px;"><c:out value="${fees.feesamount}" /></td> --%>
+									
+									
 									<td class="datatdright" style="font-size: 9px;">
-									<c:set var="itemTotal" value="${itemTotal + fees.concession}" />
-										<c:out value="${fees.concession}" /></td>
+									<c:set var="itemTotal" value="${itemTotal + studentfeesconcession}" />
+										<c:out value="${studentfeesconcession}" /></td>
 							</tr>	
-						</c:forEach>
 					</c:forEach>
 			</tbody>
 				</table>
@@ -308,3 +323,4 @@
 	</form>
 </body>
 </html>
+
