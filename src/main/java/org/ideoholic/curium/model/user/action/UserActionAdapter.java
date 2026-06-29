@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.user.action;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -137,7 +139,11 @@ public class UserActionAdapter {
             request.setAttribute("monthlyexpenses", monthlyExpenses.getMonthlyExpenses());
             request.setAttribute("monthlistexpenses", monthlyExpenses.getMonthListExpenses());
         }
-        request.setAttribute("totalboysgirls", responseDto.getBoysGirls());
+        
+        //request.setAttribute("totalboysgirls", responseDto.getBoysGirls());
+        request.setAttribute("classNames", responseDto.getXaxisListClass());
+        request.setAttribute("boysData", responseDto.getYaxisListBoys());
+        request.setAttribute("girlsData", responseDto.getYaxisListGirls());
         request.setAttribute("studentxaxis", responseDto.getXaxisList());
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
         request.setAttribute("totalstudents", responseDto.getTotalStudents());
