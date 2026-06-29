@@ -690,7 +690,7 @@ for(Cookie cookie : cookies){
     </div>
 
     <!-- Class with sections -->
-    <c:forEach items="${sections}" var="sectionItem">
+   <%--  <c:forEach items="${sections}" var="sectionItem">
         <div class="checkbox-item">
             <label class="labelClass" style="font-weight: bold; color: #325F6D;">
                 <input type="checkbox" class="chcktbl1" name="classsearch"
@@ -698,8 +698,20 @@ for(Cookie cookie : cookies){
                 ${classItem}${sectionItem}
             </label>
         </div>
-    </c:forEach>
-
+    </c:forEach> --%>
+   <c:forEach items="${sections}" var="sectionItem">
+    <c:if test="${not empty fn:trim(sectionItem)}">
+        <div class="checkbox-item">
+            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+                <input type="checkbox"
+                       class="chcktbl1"
+                       name="classsearch"
+                       value="${classItem}--${sectionItem}">
+                ${classItem}${sectionItem}
+            </label>
+        </div>
+    </c:if>
+</c:forEach>
 </c:forEach>
 										
 
