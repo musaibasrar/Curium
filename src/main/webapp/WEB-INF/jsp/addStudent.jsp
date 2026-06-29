@@ -37,10 +37,13 @@
 <script src="/orchids/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script src="/orchids/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/orchids/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/orchids/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/orchids/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/orchids/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<script src="/vision/js/bootstrap.min.js"></script>
+<link href="/vision/css/select2.min.css" rel="stylesheet" />
+<script src="/vision/js/select2.min.js"></script>
 
 
 <style type="text/css">
@@ -948,7 +951,7 @@ $(document).ready(function() {
         var parentCount;
 
         function searchListOfParent() {
-
+ 
             var addClass = document.getElementById('addclass').value;
 
             if (!addClass) {
@@ -979,6 +982,13 @@ $(document).ready(function() {
                 // Load dropdown / parent list
                 document.getElementById("parentDiv").innerHTML =
                     xmlHttpParent.responseText;
+                
+                // Reinitialize Select2 on newly added dropdown
+                $('#parentId').select2({
+                    placeholder: "Search Parent",
+                    allowClear: true,
+                    width: '225px'
+                });
             }
         }
 
