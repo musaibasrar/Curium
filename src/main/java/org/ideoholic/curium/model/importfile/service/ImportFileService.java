@@ -198,7 +198,7 @@ public class ImportFileService {
 						listParentLogin.add(login);
 					}
 					
-		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
+		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents)).build();
 	}
 	
 	private String getCellValue(Row row, int cellIndex) {
