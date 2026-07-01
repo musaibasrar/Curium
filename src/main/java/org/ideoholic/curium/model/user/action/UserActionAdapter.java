@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdap
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.model.user.service.UserService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,6 @@ public class UserActionAdapter {
         dto.setOneDay(request.getParameter("oneday"));
         dto.setModeOfPayment(request.getParameter("modeofpayment"));
         dto.setAcademicYear(request.getParameter("academicyear"));
-        dto.setUser(request.getParameter("feescollector"));
 
         SearchByDateResponseDto responseDto = userService.searchByDate(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute("dayone"), httpSession.getAttribute("datefrom"), httpSession.getAttribute("dateto"));
         httpSession.setAttribute("feesdetailsbranchname", responseDto.getFeesDetailsBranchName());
@@ -57,7 +57,6 @@ public class UserActionAdapter {
         httpSession.setAttribute("sumofonlyfee", responseDto.getSumOfOnlyFee());
         httpSession.setAttribute("sumoffine", responseDto.getFine());
         httpSession.setAttribute("sumofmisc", responseDto.getMisc());
-        httpSession.setAttribute("feescollector", responseDto.getUserName());
     }
 
     public void advanceSearchByParents() {
