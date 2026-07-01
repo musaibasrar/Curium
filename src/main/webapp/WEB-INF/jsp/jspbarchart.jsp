@@ -209,11 +209,9 @@ for(Cookie cookie : cookies){
             	<div class="col" align="center">
             		<canvas id="student-male-female" height="300"></canvas>
             	</div>	
+            	
              </div>
-			
-			
-			
-		
+             
 
    		<form id="form1" method="post">
 				<label id="classesstudying" style="display: none;">${studentxaxis}</label>
@@ -225,6 +223,9 @@ for(Cookie cookie : cookies){
 				<label id = "monthlytotalexpenses" style="display: none;">${monthlyexpenses}</label>
 				<label id = "monthlisttotalexpenses" style="display: none;">${monthlistexpenses}</label>
 				<label id = "totalboysgirls" style="display: none;">${totalboysgirls}</label>
+				<label id = "classNames" style="display:none;">${classNames}</label>
+                <label id = "boysData" style="display:none;">${boysData}</label>
+                <label id = "girlsData" style="display:none;">${girlsData}</label>
         </form>
 	     
 	     
@@ -567,7 +568,7 @@ for(Cookie cookie : cookies){
             
             //Boys & Girls
             
-            var boysgirls = document.getElementById("totalboysgirls").innerHTML;
+           /* var boysgirls = document.getElementById("totalboysgirls").innerHTML;
         	var boysGirlsGraph = JSON.parse(boysgirls);
             
             var ctx = document.getElementById("student-male-female");
@@ -605,8 +606,119 @@ for(Cookie cookie : cookies){
                 	  }
 
               }
-            });
-     
+            });*/
+            
+     //class wise bargraph
+    
+               /* var className = document.getElementById("classNames").innerHTML;
+            	var classNamelabel = JSON.parse(className);
+            	
+          	 	var boyData = document.getElementById("boysData").innerHTML;
+          		var boyDatalabel = JSON.parse(boyData); 
+          		
+          		var girlData = document.getElementById("girlsData").innerHTML;
+          		var girlsDatalabel = JSON.parse(girlData);
+    
+          		
+new Chart(document.getElementById('student-male-female'), {
+    type: 'bar',
+    data: {
+        labels: classNamelabel,
+        datasets: [
+            {
+                label: 'Boys',
+                data: boyDatalabel,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            },
+            {
+                label: 'Girls',
+                data: girlsDatalabel,
+                backgroundColor: 'rgba(255, 99, 132, 0.7)'
+            }
+        ]
+    }
+});*/
+
+var className = document.getElementById("classNames").innerHTML;
+var classNamelabel = JSON.parse(className);
+
+	var boyData = document.getElementById("boysData").innerHTML;
+	var boyDatalabel = JSON.parse(boyData); 
+	
+	var girlData = document.getElementById("girlsData").innerHTML;
+	var girlsDatalabel = JSON.parse(girlData);
+
+new Chart(document.getElementById('student-male-female'), {
+    type: 'bar',
+    data: {
+        labels: classNamelabel,
+        datasets: [
+            {
+                label: 'Boys',
+                data: boyDatalabel,
+                backgroundColor: 'rgba(54, 162, 235, 0.7)'
+            },
+            {
+                label: 'Girls',
+                data: girlsDatalabel,
+                backgroundColor: 'rgba(255, 99, 132, 0.7)'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        legend: {
+            display: true
+        },
+
+        hover: {
+            animationDuration: 0
+        },
+
+        animation: {
+            duration: 1,
+            onComplete: function () {
+
+                var chartInstance = this.chart;
+                var ctx = chartInstance.ctx;
+
+                ctx.font = Chart.helpers.fontString(
+                    Chart.defaults.global.defaultFontSize,
+                    Chart.defaults.global.defaultFontStyle,
+                    Chart.defaults.global.defaultFontFamily
+                );
+
+                ctx.fillStyle = "black";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "bottom";
+
+                this.data.datasets.forEach(function (dataset, i) {
+
+                    var meta = chartInstance.controller.getDatasetMeta(i);
+
+                    meta.data.forEach(function (bar, index) {
+
+                        var value = dataset.data[index];
+
+                        ctx.fillText(value, bar._model.x, bar._model.y - 5);
+
+                    });
+
+                });
+
+            }
+        },
+
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
             
 	</script> 
 </body>    
