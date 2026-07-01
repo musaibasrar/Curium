@@ -298,7 +298,7 @@ public class FeesActionAdapter {
 			    }
 			}
 		
-			feesService.applyConcessionBulk(concessionDtoList,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
+			feesService.applyConcessionBulk(concessionDtoList,httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(Constants.BRANCHID).toString(),httpSession.getAttribute(Constants.USERID).toString());
 	}
 	
 }

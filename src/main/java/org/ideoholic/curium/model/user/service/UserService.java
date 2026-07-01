@@ -87,6 +87,8 @@ public class UserService {
 	private final StandardDetailsDAO standardDetailsDao;
 	
 	private final PropertiesUtil propertiesUtil;
+	
+	private final AttendanceDAO attendanceDAO;
 
     public UserAuthenticationResponseDto authenticateUser(UserAuthenticationDto dto) {
         UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
@@ -124,7 +126,7 @@ public class UserService {
 			
 			if(userType[0].equalsIgnoreCase("parents")) {
 				Date currentDate = Calendar.getInstance().getTime();
-				Studentdailyattendance attendance = new AttendanceDAO().getStudentTodaysAttendance(userName,currentDate);
+				Studentdailyattendance attendance = attendanceDAO.getStudentTodaysAttendance(userName,currentDate);
 			       if(attendance != null) {
 				   result.setAttendanceStatus(attendance.getAttendancestatus());
 			       }
@@ -806,7 +808,7 @@ public class UserService {
     		    	httpSession.removeAttribute(element);
     		}
     	   
-            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            Currentacademicyear currentAcademicYear = yearDao.showYear();
             String academicyear = "";
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
