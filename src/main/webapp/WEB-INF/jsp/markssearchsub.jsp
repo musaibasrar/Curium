@@ -469,6 +469,14 @@
 		form1.submit();
 
 	}
+	
+	function printMarksReportSub() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/MarksDetailsProcess/printMarksReportSub";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 </script>
 
 
