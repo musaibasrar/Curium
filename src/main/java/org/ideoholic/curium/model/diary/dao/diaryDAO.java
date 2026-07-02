@@ -56,7 +56,7 @@ public class diaryDAO {
         try {
             
             transaction = session.beginTransaction();
-            Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.startdate,d.enddate,d.createddate,d.attachment1,d.attachment2,d.attachment3,d.userid from Diary d where  branchid="+branchId);
+            Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,d.startdate,d.enddate,d.createddate,d.attachment1,d.attachment2,d.attachment3,d.userid from Diary d where  branchid="+branchId+" order by d.id desc");
             query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
@@ -77,7 +77,7 @@ public class diaryDAO {
             
             transaction = session.beginTransaction();
             Query query = session.createQuery("select d.id,d.classsec,d.academicyear,d.branchid,d.subject,d.message,"
-            		+ "d.startdate,d.enddate,d.createddate,d.attachment1,d.attachment2,d.attachment3,d.userid from Diary d where  branchid="+branchId+" and classsec='"+classsec+"'");
+            		+ "d.startdate,d.enddate,d.createddate,d.attachment1,d.attachment2,d.attachment3,d.userid from Diary d where  branchid="+branchId+" and classsec='"+classsec+"' order by d.id desc");
             query.setFirstResult(offset);
 			query.setMaxResults(noOfRecords);
 			results = query.list();
