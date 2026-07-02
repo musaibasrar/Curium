@@ -96,8 +96,21 @@ public class StampFeesService {
 			
 		String queryMain = "From Parents as parents where (parents.Student.promotedyear='"+academicYear+"' or parents.Student.yearofadmission='"+academicYear+"') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and ";
 		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
-		String[] addClass = searchStudentDto.getClassesSearch();
-		//String addSec = request.getParameter("secsearch");
+		String[] classwithoutSection = searchStudentDto.getClassesSearch();
+		String[] addSec = searchStudentDto.getSectSearch();
+		String[] addClass;
+		int index = 0;
+		if(addSec != null && addSec.length > 0) {
+			addClass = new String[classwithoutSection.length * addSec.length];
+		for (String cls : classwithoutSection) {
+		    for (String sec : addSec) {
+		    	addClass[index++] = cls + sec;
+		    }
+		}
+		}
+		else {
+			addClass=classwithoutSection;
+		}
 		StringBuffer conClassStudying = new StringBuffer();
          
 			int i = 0;
