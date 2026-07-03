@@ -7,13 +7,12 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.codec.binary.Base64;
-import org.ideoholic.curium.model.account.service.AccountService;
 import org.ideoholic.curium.model.diary.dao.diaryDAO;
 import org.ideoholic.curium.model.diary.dto.AddDiaryDto;
 import org.ideoholic.curium.model.diary.dto.DairyIdsDto;
 import org.ideoholic.curium.model.diary.dto.Diary;
-import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.diary.dto.DiaryDetailsMessageResponseDto;
+import org.ideoholic.curium.model.diary.dto.DiaryResponseDto;
 import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.model.student.dto.StudentIdDto;
@@ -164,11 +163,11 @@ diary = new diaryDAO().create(diary);
 //viewDiaryparent
 
 
-	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto, String branchId) {
+	public DiaryResponseDto viewDiaryParent(StudentIdPageDto studentIdPageDto) {
 		DiaryResponseDto diaryResponseDto = new DiaryResponseDto();
 		boolean result = false;
 
-		if (branchId != null) {
+		if (studentIdPageDto.getStudentBranchId() != null) {
 			try {
 				Student student = new studentDetailsDAO().readploginUniqueObject(studentIdPageDto.getStudentId());
 				String classsec = student.getClassstudying();
@@ -178,7 +177,7 @@ diary = new diaryDAO().create(diary);
 					page = Integer.parseInt(studentIdPageDto.getPage());
 				}
 				List<Object[]> list = new diaryDAO().readListOfParentObjects((page - 1) * recordsPerPage,
-						recordsPerPage, Integer.parseInt(branchId), classsec);
+						recordsPerPage, Integer.parseInt(studentIdPageDto.getStudentBranchId()), classsec);
 
 				List<Diary> diaryDetails = new ArrayList<Diary>();
 				for (Object[] diaryObject : list) {
@@ -200,7 +199,7 @@ diary = new diaryDAO().create(diary);
 				}
 
 
-				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(branchId));
+				int noOfRecords = new diaryDAO().getNoOfRecords(Integer.parseInt(studentIdPageDto.getStudentBranchId()));
 				int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
 				diaryResponseDto.setDiaryparents(diaryDetails);
 				diaryResponseDto.setNoOfPages(noOfPages);
@@ -240,5 +239,4 @@ diary = new diaryDAO().create(diary);
 		return viewDetailsOfDiaryMessageResponseDto;
 	  }
 	}
-
 
