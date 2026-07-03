@@ -567,7 +567,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/awami/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Due Report</a>
+            				 <a target="mainFrame" href="/awami/MessItemsMoveProcess/dueReport" style="font-size: 12px;">Due Report</a>
             			</td>
             		</tr>
             		
