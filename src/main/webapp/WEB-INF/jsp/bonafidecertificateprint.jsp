@@ -108,7 +108,7 @@ text-align:center;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/awami/UserProcess/sessionTimeOut");
+	response.sendRedirect("/lilyrose/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -127,10 +127,9 @@ for(Cookie cookie : cookies){
 <div class='stamp'>School Stamp</div>
 <div class='header'>
 <table>
-<tr><td><b><i>School Name</i></b></td><td><b>AWAMI HIGH SCHOOL</b></td></tr>
-<tr><td><b><i>UDISE Code</i></b></td><td>36160902283</td></tr>
-<tr><td><b><i>Mandal & District</i></b></td><td>Zaheerabad, Dist. Sangareddy</td></tr>
-<tr><td class='small' colspan='2'>School Recognition Proc. No. : 3452/B3/2019, Dated : 22/11/2019</td></tr>
+<tr><td><b><i>School Name</i></b></td><td><b>${branchname}</b></td></tr>
+<tr><td>${branchaddress}</td></tr>
+<tr><td class='small' colspan='2'>${branchcontact}</td></tr>
 </table>
 </div>
 <div class='title center'>BONAFIDE CERTIFICATE</div>

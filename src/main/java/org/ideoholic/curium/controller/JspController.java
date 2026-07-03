@@ -655,4 +655,29 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/index_clerk")
+	public String getIndexClerk() {
+		return "index_clerk";
+	}
+	
+	@GetMapping("/header_clerk")
+	public String getHeaderClerk() {
+		return "header_clerk";
+	}
+	
+	@GetMapping("/left_clerk")
+	public String getLeftClerk() {
+		return "left_clerk";
+	}
+	
+	@GetMapping("/leftsettings_clerk")
+	public String getLeftSettingsClerk() {
+		return "leftsettings_clerk";
+	}
+	
+	@GetMapping("/reports_clerk")
+	public String getReportsClerk() {
+		return "reports_clerk";
+	}
 }
