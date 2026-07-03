@@ -366,4 +366,10 @@ public class StudentAction {
 		return "printstudentdetail";
 	}
 	
+	@GetMapping("/QuickStudentSave")
+	public String QuickStudentSave() {
+		standardActionAdapter.viewClasses();
+		return "quickstudentsave";
+	}
+	
 }

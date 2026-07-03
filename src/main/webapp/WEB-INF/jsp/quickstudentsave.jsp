@@ -1,0 +1,1512 @@
+<%-- 
+    Document   : add Student
+    Created on : Jun 17, 2013, 4:17:40 PM
+    Author     : Musaib
+--%>
+
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession"%>
+
+<%@page import="java.util.*"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<!DOCTYPE HTML5>
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Add Student</title>
+
+ <style type="text/css" title="currentStyle">
+            @import "/school/css/dataTable/css/demo_page.css";
+            @import "/school/css/dataTable/css/jquery.dataTables.css";
+        </style>
+
+<script type="text/javascript"
+	src="/school/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/school/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/school/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/school/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/school/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/school/js/validation/jquery.ketchup.all.min.js"></script>
+<script type="text/javascript"
+	src="/school/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/school/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/school/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/school/css/datePicker/jquery-ui-1.8.18.custom.css">
+<script src="/school/js/bootstrap.min.js"></script>
+<link href="/school/css/select2.min.css" rel="stylesheet" />
+<script src="/school/js/select2.min.js"></script>
+
+
+<style type="text/css">
+.myclass {
+	font-size: 1.3em;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	width: auto;
+	height: 28px;
+	color: black;
+	text-transform: capitalize;
+	border-radius: 4px;
+}
+
+<!--
+.divCSS {
+	overflow: scroll;
+	height: 100%;
+	width: 100%;
+}
+
+.fiedlSet {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-width: 1;
+	width: 100%;
+	color: #000000;
+	font-size: 16px;
+	font-weight: bold;
+	font-variant: normal;
+	font-stretch: wider;
+	background-color: #e2ebf3;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+}
+
+.alignLeft {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.legendCSS {
+	color: #666666;
+}
+
+.tableCSS {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+.textAreaCSS {
+	height: auto;
+	width: auto;
+}
+
+.textField {
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #5d7e9b;
+	border-right-color: #5d7e9b;
+	border-bottom-color: #5d7e9b;
+	border-left-color: #5d7e9b;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+}
+
+.alignRight {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: right;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
+.alignRightHead {
+	font-family: Tahoma;
+	font-size: 12px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	font-weight: bold;
+}
+
+.alignRightMultiple {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-weight: bolder;
+	text-align: right;
+	vertical-align: middle;
+	font-style: normal;
+	color: #325F6D;
+}
+
+.alignCentreMultiple {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bolder;
+	text-align: center;
+	vertical-align: middle;
+	font-style: normal;
+	color: #000000;
+}
+
+.autoAdjust {
+	height: auto;
+	width: auto;
+}
+
+.radioSpanCSS {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: left;
+	vertical-align: middle;
+}
+
+.radioCSS {
+	background-position: left center;
+}
+
+.spanText {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	color: #000000;
+}
+
+.emptyFieldSet {
+	border-top-color: #FA7676;
+	border-right-color: #FA7676;
+	border-bottom-color: #FA7676;
+	border-left-color: #FA7676;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-width: thin;
+	border-right-width: thin;
+	border-bottom-width: thin;
+	border-left-width: thin;
+	background-image: url(images/close.JPG);
+	background-repeat: repeat-y;
+	background-attachment: scroll;
+	background-position: right;
+	width: auto;
+	height: auto;
+	display: inline;
+}
+
+.style1 {
+	font-family: Tahoma;
+	font-size: 14px;
+}
+
+.style2 {
+	color: #666666;
+	font-family: Tahoma;
+	font-size: 14px;
+}
+
+.style4 {
+	font-size: 12px;
+	font-family: Tahoma;
+	text-align: left;
+	vertical-align: middle;
+	color: #325f6d;
+}
+-->
+.dataTables_filter {
+    float: left;
+    text-align: left;
+}
+</style>
+
+<script type="text/javascript">
+	function dropdown() {
+		var listitem = document.getElementById("city");
+		var listitemtext = listitem.options[listitem.selectedIndex].text;
+
+		if (listitemtext == "Add New") {
+			document.getElementById("city").style.display = "none";
+			document.getElementById("addcity").style.display = '';
+		}
+	}
+
+	
+
+	function dropdownadmclass() {
+
+		var classlistitem = document.getElementById("admclass");
+		var classlistitemtext = classlistitem.options[classlistitem.selectedIndex].text;
+
+		if (classlistitemtext == "Add New") {
+			document.getElementById("admclass").style.display = "none";
+			document.getElementById("admclassE").style.display = '';
+			document.getElementById("addsecE").style.display = '';
+		}
+
+	}
+
+</script>
+
+
+
+
+<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+
+<script>
+	$(function() {
+		$("#datepicker").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0",
+			onSelect: function () {
+				CalculateAge(this);
+				searchStudentDuplicate();
+		    }
+		});
+		$("#anim").change(function() {
+			$("#datepicker").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	$(function() {
+		$("#datepicker1").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#datepicker1").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	
+	$(function() {
+		$("#dateoftc").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateoftc").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateofadmission").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateofadmission").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateofleaving").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateofleaving").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#dateoftcissued").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(
+				function() {
+					$("#dateoftcissued").datepicker("option", "showAnim",
+							$(this).val());
+				});
+	});
+	
+	$(function() {
+		$("#datepickerCD").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-50:+0"
+		});
+		$("#anim").change(function() {
+			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	
+	$(function() {
+		$("#datepickerDND").datepicker({
+			changeYear : true,
+			changeMonth : true,
+			dateFormat: 'dd/mm/yy',
+			yearRange: "-5:+4"
+		});
+		$("#anim").change(function() {
+			$("#datepickerDND").datepicker("option", "showAnim", $(this).val());
+		});
+	});
+	
+	
+</script>
+
+
+<script type="text/javascript">
+	$(function() {
+
+		
+		$(".save").button().click(function() {
+			addStudent();
+
+		});
+
+		$(".cancel").button().click(function() {
+			Cancel();
+
+		});
+					
+	});
+</script>
+<script>
+	$(function() {
+		$("#tabs").tabs();
+		$(".nexttab").click(function() {
+		    var selected = $("#tabs").tabs("option", "selected");
+		    $("#tabs").tabs("option", "selected", selected + 1);
+		});
+		$(".prevtab").click(function() {
+		    var selected = $("#tabs").tabs("option", "selected");
+		    $("#tabs").tabs("option", "selected", selected - 1);
+		});
+		
+		 $("#parentsannualincome").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
+		 $("#contactnumber").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
+		 $("#cocontactnumber").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
+		 $("#sts").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+		 
+		 $("#noofdependents").keypress(function (e) {
+		     //if the letter is not digit then display error and don't type anything
+		     if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		               return false;
+		    }
+		   });
+	});
+
+
+</script>
+
+
+<script type="text/javascript">
+	function check(value) {
+
+		xmlHttp = GetXmlHttpObject()
+		var url = "/check";
+		url = url + "?name=" + value;
+		xmlHttp.onreadystatechange = stateChanged
+		xmlHttp.open("GET", url, true)
+		xmlHttp.send(null)
+	}
+	function stateChanged() {
+		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+			var showdata = xmlHttp.responseText;
+			document.getElementById("mydiv").innerHTML = showdata;
+		}
+	}
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+
+
+	function CalculateAge(value) {
+		var dateOfBirth = document.getElementById('datepicker').value;
+		var from = dateOfBirth.split("/");
+		var today = new Date();
+		var birthDate = new Date(from[2],from[1] - 1,from[0]);
+		var month = birthDate.getMonth();
+		var age = today.getFullYear() - birthDate.getFullYear();
+		var m = today.getMonth() - birthDate.getMonth();
+		if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+			age--;
+		}
+		//return age;
+		document.getElementById('age').value = age;
+	}
+	
+	function yesCheck(id) {
+
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('no:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}
+
+	}
+	function noCheck(id) {
+
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}else if (document.getElementById(id).checked == false) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = true;
+			document.getElementById('maybe:'+splitId[1]).checked = false;
+		}
+
+	}
+	function maybeCheck(id) {
+
+		if (document.getElementById(id).checked == true) {
+			var splitId = id.split(':');
+			document.getElementById('yes:'+splitId[1]).checked = false;
+			document.getElementById('no:'+splitId[1]).checked = false;
+		}
+
+	}
+	
+	 function enterOtherSpecialCategory() {
+	        var distlistitem = document.getElementById("specialcategory");
+	        var distlistitemtext = distlistitem.options[distlistitem.selectedIndex].text;
+
+	        if (distlistitemtext == "Others (Please Specify)") {
+	            document.getElementById("specialcategory").style.display = "none";
+	            document.getElementById("categoryname").style.display = "none";
+	            document.getElementById("newcateg").style.display = '';
+	        }
+	    }
+</script>
+
+<script type="text/javascript">
+	
+    function numberWithCommas(annualincome) {
+    	var x=annualincome.value;
+    	x = x.replace (/,/g, "");
+    	
+    	var lastThree = x.substring(x.length-3);
+    	var otherNumbers = x.substring(0,x.length-3);
+    	if(otherNumbers != '')
+    	    lastThree = ',' + lastThree;
+    	var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree;
+    	annualincome.value = res;
+    }
+    
+    function Upload() {
+        var fileUpload = document.getElementById("fileToUpload");
+        if (typeof (fileUpload.files) != "undefined") {
+            var size = parseFloat(fileUpload.files[0].size / 1024).toFixed(2);
+            if(size>100){
+            	alert("File size should not exceed 100KB");
+            	document.getElementById("fileToUpload").value='';
+            }
+        } else {
+            alert("Unsupported File");
+        }
+    }
+</script>
+<script>
+	var xmlHttp;
+    var count;
+    function searchfeecategory() {
+    	var addClass=document.getElementById('addclass').value;
+    	var yoa=document.getElementById('yearofadmission').value;
+   		const feesCategories = document.getElementsByName('feescategories');
+   		const feesCategoriesTransport = document.getElementById('transport');
+   		
+        const checkedFeesCategoryValues = [];
+        
+        for (let i = 0; i < feesCategories.length; i++) {
+            const checkbox = feesCategories[i];
+            if (checkbox.checked) {
+                checkedFeesCategoryValues.push(checkbox.value);
+            }
+        }
+        
+        if (feesCategoriesTransport.value !== 'Select') {
+            checkedFeesCategoryValues.push(feesCategoriesTransport.value);
+        }
+        
+    	if (!addClass) {
+            console.warn("Class is not selected. Skipping search.");
+            return;
+        }
+    	
+			 if (typeof XMLHttpRequest != "undefined") {
+				 xmlHttp = new XMLHttpRequest();
+	            
+	         } else if (window.ActiveXObject) {
+	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+	             
+	         }
+			xmlHttp.onreadystatechange = stateChanged;
+			xmlHttp.open("GET", "/school/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.send(null);
+		
+	}
+    
+    function stateChanged() {
+        if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
+
+            document.getElementById("feescat").innerHTML = xmlHttp.responseText; // Load table
+
+            // Now initialize DataTable after table is loaded in DOM
+            setTimeout(() => {
+                if ($("#dataTable").length) {
+                	$(document).ready(function() {
+                        $('#dataTable').dataTable( {
+                        	"bPaginate" : false,
+                			"bLengthChange" : false,
+                			"bFilter" : true,
+                			"bSort" : false,
+                			"bInfo" : true,
+                			"bAutoWidth" : false
+                            
+                        } );
+                    } );
+                } else {
+                    console.error("Table not found #dataTable");
+                }
+            }, 100); // small delay ensures table is rendered
+        }
+    }
+
+	function GetXmlHttpObject() {
+		var xmlHttp = null;
+		try {
+			xmlHttp = new XMLHttpRequest();
+		} catch (e) {
+			try {
+				xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+			} catch (e) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+		}
+		return xmlHttp;
+	}
+    
+</script>
+
+<script>
+
+function searchOtherFeecategory() {
+    var addClass = document.getElementById('addclass').value;
+    var yoa = document.getElementById('yearofadmission').value;
+
+    if (!addClass) {
+        console.warn("Class is not selected. Skipping search.");
+        return;
+    }
+    
+    var xmlHttpof = new XMLHttpRequest();
+    xmlHttpof.onreadystatechange = function () {
+        if (xmlHttpof.readyState === 4 && xmlHttpof.status === 200) {
+            document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
+        }
+    };
+    xmlHttpof.open("GET", "/school/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.send(null);
+}
+</script>
+<script>
+$(function() {
+	$('#chckHead').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktbl:checked').attr('checked', false);
+			this.checked = false;
+		} else {
+			if (this.checked == false) {
+				$('.chcktbl:checked').attr('checked', false);
+			} else {
+				$('.chcktbl:not(:checked)').attr('checked', true);
+			}
+		}
+	});
+	
+	$('.chcktbl').click(function() {
+		var length = $('.chcktbl:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > trLength) {
+			$('.chcktbl:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktbl:not(:checked)').attr('disabled', false);
+		}
+	});
+});
+
+$(function() {
+	$('#chckHeadOtherFees').click(function() {
+		var length = $('.chcktblotherfees:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > 0) {
+			$('.chcktblotherfees:checked').attr('checked', false);
+			this.checked = false;
+		} else {
+			if (this.checked == false) {
+				$('.chcktblotherfees:checked').attr('checked', false);
+			} else {
+				$('.chcktblotherfees:not(:checked)').attr('checked', true);
+			}
+		}
+	});
+	
+	$('.chcktblotherfees').click(function() {
+		var length = $('.chcktblotherfees:checked').length;
+		var trLength = $('.labelClass').length;
+		if (length > trLength) {
+			$('.chcktblotherfees:not(:checked)').attr('disabled', true);
+		} else {
+			$('.chcktblotherfees:not(:checked)').attr('disabled', false);
+		}
+	});
+});
+</script>
+<script>
+	function calculate(value2) {
+		
+	
+	    var amountInput = document.getElementById('hiddenfees_amount_' + value2); // Base Fee Amount
+	    var countInput = document.getElementById('feesCount_' + value2);        // No. of Installments
+	    var fullAmountInput = document.getElementById('hiddenfees_full_amount_' + value2); // Row Total Output
+	    var checkbox = document.getElementById('feesCat_' + value2);            // Individual Checkbox
+	
+	    var baseAmount = parseFloat(amountInput.value || 0);
+	    var installmentCount = parseInt(countInput.value || 0);
+	    
+	    // Ensure the count is non-negative
+	    if (installmentCount < 0) installmentCount = 0;
+	    
+	    // If the checkbox is UNCHECKED, the installment count and final amount should be 0.
+	    if (!checkbox.checked) {
+	        installmentCount = 0;
+	        countInput.value = '0';
+	    }
+	
+	    var rowTotal = baseAmount * installmentCount;
+	    
+	    // Update the row's total amount input
+	    fullAmountInput.value = rowTotal;
+	    
+	    // Call the central function to refresh the grand total
+	    calculateGrandTotal(); 
+	}
+function calculateGrandTotal() {
+	
+	
+    var sum = 0.0;
+    var column2 = $('.feesFullAmount')
+    jQuery.each(column2,function(){
+        sum += parseFloat($(this).val());
+    });
+    
+    $('#feesTotalAmount').val(sum);
+}
+
+function calculateOtherFees(value2) {
+	var feesCount=document.getElementById("otherFeesCount_"+value2).value;
+	//alert("hii", value2);
+	 var feesCat=document.getElementById("hiddenOtherFees_amount_"+value2).value;
+	 //alert("hii", value2);
+     var feesCount=document.getElementById("otherFeesCount_"+value2).value;
+     var final1=document.getElementById("hiddenotherFees_full_amount_"+value2);
+     	
+     	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+     	//feesConcession (direct amount)
+        final1.value=feesCat*feesCount;
+     	//final1.value=feesCat;
+         calculateOtherFeesGrandTotal();
+   
+}
+function calculateOtherFeesGrandTotal() {
+	
+	
+    var sum = 0.0;
+    var column2 = $('.otherFeesFullAmount')
+    jQuery.each(column2,function(){
+        sum += parseFloat($(this).val());
+    });
+    
+    $('#otherFeesTotalAmount').val(sum);
+}
+$(document).ready(function() {
+    
+    
+    $("#dataTable").keyup(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.feesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#feesTotalAmount').val(sum);
+        
+    });
+    $("#dataTable").click(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.feesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#feesTotalAmount').val(sum);
+       
+    });
+    
+    
+    $("#dataTableOtherFees").keyup(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.otherFeesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#otherFeesTotalAmount').val(sum);
+        
+    });
+    $("#dataTableOtherFees").click(function(){
+        
+        var sum = 0.0;
+        var totalSum=0.0;
+        var column2 = $('.otherFeesFullAmount')
+        jQuery.each(column2,function(){
+            sum += parseFloat($(this).val());
+        });
+        
+        $('#otherFeesTotalAmount').val(sum);
+       
+    });
+});
+</script>
+<script type="text/javascript" charset="utf-8">
+            function updateFeesCategory(value2){
+            	
+            	
+            	var feesCount=document.getElementById("feesCount_"+value2).value;
+            	//alert("hii", value2);
+            	 var feesCat=document.getElementById("hiddenfees_amount_"+value2).value;
+            	 //alert("hii", value2);
+                 var feesCount=document.getElementById("feesCount_"+value2).value;
+                 var final1=document.getElementById("hiddenfees_full_amount_"+value2);
+                 
+                 var totalInstallments =  document.getElementById("totalinstallmentsactual_"+value2).value;
+                 	//var concession = ((feesCat*feesCount)*feesConcession)/100;(% concession)
+                 	//feesConcession (direct amount)
+                    
+                 	//final1.value=feesCat;
+                    
+            	
+            	var checkbox = document.getElementById("feesCat_"+value2);
+                var textField = document.getElementById("feesCount_"+value2);
+				var feesInstallment = document.getElementById("feesCount_"+value2);
+                // If checkbox is checked, set the text field value to "Checked", otherwise set it to "Unchecked"
+                if (checkbox.checked) {
+                	feesInstallment.value = totalInstallments;
+                	final1.value=feesCat*totalInstallments;
+                	 calculateGrandTotal();
+                } else {
+                	feesInstallment.value = "0";
+                	final1.value="0";
+                	calculateGrandTotal();
+                }
+            }
+            
+            function toggleFeesCount(allCheckbox) {
+                var checkboxes = document.querySelectorAll('.chcktbl');
+
+                checkboxes.forEach(function(checkbox) {
+                	var actualIndex = checkbox.id.split("_")[1];
+                    var feesCountInput = document.getElementById('feesCount_' + (actualIndex));
+
+                    checkbox.checked = allCheckbox.checked;
+
+                    if (!allCheckbox.checked) {
+                    	feesCountInput.value = '0';
+                    } 
+                    updateFeesCategory(actualIndex);
+                    //calculate(index);
+                });
+            }
+
+			
+			/* document.addEventListener('DOMContentLoaded', function() {
+			    updateTotalAmount();
+			});
+			
+			function updateTotalAmount() {
+			    var totalAmount = 0;
+			    
+			    // Select all the full amount inputs (the "Fees Total Amount" column)
+			    var fullAmountInputs = document.querySelectorAll('.feesFullAmount');
+			    
+			    fullAmountInputs.forEach(function(input) {
+			        // Get the index from the input's ID (e.g., '1' from 'hiddenfees_full_amount_1')
+			        var index = input.id.split('_').pop(); 
+			        
+			        // Find the corresponding checkbox for this row
+			        var checkbox = document.getElementById('feesCat_' + index);
+			        
+			        // Only sum the amount if the individual checkbox is currently selected
+			        if (checkbox && checkbox.checked) {
+			            var amount = parseFloat(input.value || 0);
+			            totalAmount += amount; 
+			        }
+			    });
+			
+			    // Update the final total display field, formatted to 2 decimal places
+			    document.getElementById('feesTotalAmount').value = totalAmount;
+			} */
+        </script>
+        <script>
+        /* ================== SECOND AJAX : Parent List ================== */
+
+        var xmlHttpParent;   // ✅ different variable
+        var parentCount;
+
+        function searchListOfParent() {
+ 
+            var addClass = document.getElementById('addclass').value;
+
+            if (!addClass) {
+                console.warn("Class is not selected. Skipping search.");
+                return;
+            }
+
+            if (typeof XMLHttpRequest != "undefined") {
+                xmlHttpParent = new XMLHttpRequest();
+            } else if (window.ActiveXObject) {
+                xmlHttpParent = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            xmlHttpParent.onreadystatechange = stateChangedParent;
+            xmlHttpParent.open(
+                "GET",
+                "/school/StudentProcess/searchListOfParent",
+                true
+            );
+            xmlHttpParent.send(null);
+        }
+
+        /* ✅ Separate callback */
+        function stateChangedParent() {
+
+            if (xmlHttpParent.readyState === 4 && xmlHttpParent.status === 200) {
+
+                // Load dropdown / parent list
+                document.getElementById("parentDiv").innerHTML =
+                    xmlHttpParent.responseText;
+                
+                // Reinitialize Select2 on newly added dropdown
+                $('#parentId').select2({
+                    placeholder: "Search Parent",
+                    allowClear: true,
+                    width: '225px'
+                });
+            }
+        }
+
+        /* Optional helper (if needed) */
+        function GetXmlHttpObjectParent() {
+            var xmlhttp = null;
+            try {
+                xmlhttp = new XMLHttpRequest();
+            } catch (e) {
+                try {
+                    xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+            }
+            return xmlhttp;
+        }
+
+    
+</script>
+        
+        
+        <script>
+	var xmlHttp2;
+
+	function searchStudentDuplicate() {
+		
+		var studentName = document.getElementById('name').value;
+		var dob = document.getElementById('datepicker').value;
+		var aadhaarNumber = document.getElementById('disabilitychild').value;
+		var finalDob = null;
+		var finalAadhaar = null;
+		
+		// Student name is mandatory
+		if (!studentName || studentName.trim() === "") {
+		    console.warn("Student name missing. Skipping duplicate check.");
+		    return;
+		}
+
+		// Priority: Aadhaar
+		if (aadhaarNumber && aadhaarNumber.trim() !== "") {
+		    if (!/^\d{12}$/.test(aadhaarNumber)) {
+		        console.warn("Invalid Aadhaar number.");
+		        return;
+		    }
+		    finalAadhaar = aadhaarNumber.trim();
+		} 
+		// Fallback: Name + DOB
+		else if (dob && dob.trim() !== "") {
+		    finalDob = dob.trim();
+		} 
+		else {
+		    console.warn("Either Aadhaar or DOB is required.");
+		    return;
+		}
+
+		if (typeof XMLHttpRequest != "undefined") {
+			xmlHttp2 = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			xmlHttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		xmlHttp2.onreadystatechange = stateChangedStudentDuplicate;
+		xmlHttp2.open(
+			"GET",
+			"/noblewisdom/StudentProcess/checkDuplicateStudent?"
+			+ "aadhaarnumber=" + encodeURIComponent(finalAadhaar)
+			+ "&studentname=" + encodeURIComponent(studentName)
+			+ "&dob=" + encodeURIComponent(finalDob),
+			true
+		);
+		xmlHttp2.send(null);
+	}
+
+	function stateChangedStudentDuplicate() {
+		if (xmlHttp2.readyState == 4 || xmlHttp2.readyState == "complete") {
+			document.getElementById("duplicatestudentmsgaadhaar").innerHTML = xmlHttp2.responseText;
+			document.getElementById("duplicatestudentmsgname").innerHTML = xmlHttp2.responseText;
+			document.getElementById("duplicatestudentmsgdob").innerHTML = xmlHttp2.responseText;
+		}
+	}
+</script>
+
+</head>
+<%
+	//allow access only if session exists
+	String user = null;
+	if (session.getAttribute("userAuth") == null) {
+		response.sendRedirect("/school/UserProcess/sessionTimeOut");
+	} else
+		user = (String) session.getAttribute("userAuth");
+	String userName = null;
+	String sessionID = null;
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null) {
+		for (Cookie cookie : cookies) {
+			if (cookie.getName().equals("user"))
+				userName = cookie.getValue();
+			if (cookie.getName().equals("JSESSIONID"))
+				sessionID = cookie.getValue();
+		}
+	}
+%>
+<body>
+	<form id="form1" modelAttribute="student"
+		method="post" enctype="multipart/form-data">
+		<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
+		<div>
+			<div id="tabs">
+				<ul>
+					<li><a href="#fragment-1">Student's Details</a></li>
+					<li><a href="#fragment-7">Stamp Fee</a></li>
+				</ul>
+
+
+
+				<div id="fragment-1">
+					<table style="width: auto;height: auto;" border="0" align="center" id="table1">
+					<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td  class="alignLeft">Application Type&nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
+								type="checkbox" value="Admission" name="stream" id="yes:at"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
+								type="checkbox" value="Registration" name="stream" id="no:at"
+								onclick="noCheck(this.id)" />
+								&nbsp; &nbsp;Alumni<input
+								type="checkbox" value="Alumni" name="stream" id="maybe:at"
+								onclick="maybeCheck(this.id)" />
+							</td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+					
+						
+						
+						<tr>
+							<td class="alignLeft">Student Name* &nbsp;</td>
+							<td ><label> <input
+									name="name" type="text" class="myclass" id="name" size="36" required
+									style="text-transform:capitalize;"  onblur="searchStudentDuplicate()"
+									required>
+							</label><div id="duplicatestudentmsgname"></div></td>
+
+							<td  class="alignLeft" style="padding-left: 20px;">Gender &nbsp;</td>
+							<td  height="30" class="alignLeft">&nbsp;Male<input
+								type="checkbox" value="Male" name="gender" id="yes:male"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Female<input
+								type="checkbox" value="Female" name="gender" id="no:male"
+								onclick="noCheck(this.id)" />
+
+							</td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+						<tr>
+							<td class="alignLeft">Date Of Birth &nbsp;</td>
+							<td ><label> <input name="dateofbirth"
+									type="text" class="myclass" id="datepicker" size="36" autocomplete="false"
+									onchange="CalculateAge(this)" onblur="searchStudentDuplicate()"
+									data-validate="validate(required)">
+							</label><div id="duplicatestudentmsgdob"></td>
+
+							<td class="alignLeft" style="padding-left: 20px;">Age &nbsp;</td>
+							<td><label> <input
+									name="age" type="text" class="myclass" id="age" size="36"
+									>
+							</label></td>
+
+
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+
+						<tr>
+
+							<td  class="alignLeft">Place Of Birth, Tq,
+								Dist.&nbsp;</td>
+							<td><label> <input
+							style="text-transform:capitalize;"
+									name="place" type="text" class="myclass" id="place" size="36">
+							</label></td>
+							
+							<td class="alignLeft" style="padding-left: 20px;">Fees Categories&nbsp;</td>
+							<td ><label>
+							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
+								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
+								&nbsp;Transport <select name="feescategories" id="transport">
+										        <option value="Select">-- Select --</option>
+										        <option value="Malmal">Malmal</option>
+										        <option value="Madhubani">Madhubani</option>
+										        <option value="xyz">xyz</option>
+										    </select>
+								</label></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
+
+
+							<td class="alignLeft">Studying in Class&nbsp;</td>
+							<td ><label> <select name="addclass" required
+									id="addclass" style="width: 186px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+
+							</label> <label> <select name="addsec" id="addsec" style="width: 70px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label></td>
+
+							<td  class="alignLeft" style="padding-left: 20px;">Admitted in Class &nbsp;
+							</td>
+
+							<td ><label> <select name="admclassE"
+									id="admclassE" style="width: 186px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.classdetails != '')}">
+												<option value="${classdetailslist.classdetails}">
+													<c:out value="${classdetailslist.classdetails}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label> <label> <select name="admsecE" id="admsecE" style="width: 70px;border-radius: 4px;background: white;height: 28px;"
+									>
+										<option selected></option>
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
+							</label></td>
+
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+						<tr>
+							<td><br /></td>
+						</tr>
+                        	<tr>
+									<td class="alignLeft">Father's Name* &nbsp;</td>
+									<td ><label> <input
+											name="fathersname" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="fathersname" size="36"
+											required> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+									<td class="alignLeft" style="padding-left: 20px;">Mother's Name* &nbsp;</td>
+									<td><label> <input
+											name="mothersname" type="text" class="myclass" id="name" required
+											style="text-transform:capitalize;"
+											size="36"> <!-- onkeyup="check(this.value);"  -->
+									</label></td>
+
+
+								</tr>
+
+
+                        	<tr>
+									<td><br /></td>
+								</tr>
+								<tr>
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td class="alignLeft">Contact Number* &nbsp;</td>
+
+									<td><label> <input
+											name="contactnumber" type="text" class="myclass" required
+											style="text-transform:capitalize;"
+											id="contactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+
+
+
+									<td class="alignLeft" style="padding-left: 20px;">Co-Contact Number
+										&nbsp;</td>
+
+									<td><label> <input
+											name="cocontactnumber" type="text" class="myclass"
+											style="text-transform:capitalize;"
+											id="cocontactnumber" size="36" maxlength="10" minlength="10">
+
+									</label></td>
+								</tr>
+								
+								
+
+						<div>
+						<!-- <div style="display:none;"> -->
+								<table>
+								<tbody id="hiddenSection" style="display:none;">
+								<tr>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
+										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+								</tr>
+								<tr>
+										
+							<td class="alignLeft"  >RTE
+										&nbsp;</td>
+
+									<td  >&nbsp;Yes<input
+								type="checkbox" value="1" name="rte" id="yes:rte"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input checked
+								type="checkbox" value="0" name="rte" id="no:rte"
+								onclick="noCheck(this.id);" />
+										</td>
+							
+							<td  class="alignLeft" style="padding-left: 20px;">Admission/PassedOut Year&nbsp;&nbsp;&nbsp;&nbsp;</td>
+							
+							 <td>
+                                        <label> <select name="yearofadmission" id="yearofadmission"
+									style="width: 258px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory();">
+										<option selected>${currentAcademicYear}</option>
+										<c:forEach var="year" items="${previousAcademicYears}">
+        										<option value="${year}">${year}</option>
+    									</c:forEach>
+								</select>
+
+							</label> 
+                        
+                        </td>
+							
+						</tr>
+						</tbody>
+						</table>
+						<!-- </div> -->
+							<table width="100%">
+								<tr>
+
+									<td><br /></td>
+								</tr>
+
+								<tr>
+
+									<td align="center"><a class="nexttab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Next</a></td>
+								</tr>
+
+								<tr>
+
+									<td><br /></td>
+								</tr>
+
+								<tr>
+									<td align="center">
+
+
+										<button id="savestudents" class="save" name="savestudent">Save Quick</button>
+
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button id="cancel" class="cancel">Cancel</button>
+
+									</td>
+
+
+								</tr>
+							</table>
+
+						</div>
+
+                       <div id="fragment-7">
+						
+						<!-- <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable1">
+											<tr>
+												<td><label class="labelClass"
+													style="font-weight: bold; color: #325F6D"> <input
+														type="checkbox" id="chckHead" onclick="toggleFeesCount(this)"/>All
+												</label></td>
+
+											</tr>
+						</table> -->
+						
+						<div style="overflow:scroll;width:auto; height: auto;" id="feescat">
+						
+						</div>				
+						
+							<table style="width: auto;height: auto;" align="center">
+							
+						 <tr>
+							<td><br /></td>
+						</tr>
+							
+						
+							<tr>
+								<td></td>
+								<td align="left">
+								
+								 <a
+										class="prevtab"
+										style="font-weight: bold; color: #325F6D; font-size: 13px"
+										href="#">Previous</a></td>
+								</tr>
+								<tr><td><br></td></tr>
+								<tr>
+								<tfoot>
+					
+				</tfoot>
+								</tr>
+									<tr>
+										<td></td>
+										<td align="left">
+										
+											<button id="saveseven" class="save" name="savestudent">Save</button>
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<button id="cancelthree" class="cancel">Cancel</button>
+										</td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+									<tr>
+										<td><br /></td>
+									</tr>
+				
+					
+				</table>
+				</div>
+				
+
+										
+				
+					</table>
+				</div>
+
+
+			</div>
+		</div>
+
+
+
+
+
+	</form>
+	<script type="text/javascript">
+							function addStudent() {
+								var form1 = document.getElementById("form1");
+								if(form1.checkValidity()) {
+									form1.savestudent.disabled = true;
+									form1.action = "/school/StudentProcess/AddStudent";
+									form1.submit();
+								  }
+							}
+
+							function Cancel() {
+								var form1 = document.getElementById("form1");
+								form1.action = "/school/StudentProcess/viewAll";
+								form1.submit();
+							}
+
+							
+						</script>
+</body>
+</html>
+
