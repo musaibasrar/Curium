@@ -462,6 +462,12 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/school/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/school/StudentProcess/QuickStudentSave" style="font-size: 12px;">Quick Student Save</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/school/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
