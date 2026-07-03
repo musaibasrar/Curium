@@ -21,4 +21,7 @@ public class DashBoardResponseDto {
     private boolean success = false;
     private DailyExpensesResponseDto dailyExpensesResponseDto;
     private MonthlyExpensesResponseDto monthlyExpensesResponseDto;
+    private List<String> xaxisListClass;
+    private List<String> yaxisListBoys;
+    private List<String> yaxisListGirls;
 }
