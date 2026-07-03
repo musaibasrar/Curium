@@ -164,6 +164,9 @@ public class UserService {
 				List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 				List<String> xaxisList = new LinkedList<>();
 				List<String> yaxisList = new LinkedList<>();
+				List<String> xaxisListClass = new LinkedList<>();
+				List<String> yaxisListBoys = new LinkedList<>();
+				List<String> yaxisListGirls = new LinkedList<>();
 				int totalStudents = 0;
 				String academicYear = currentAcademicYear;
 				// int[] test = new int[branchList.size()] ;
@@ -184,6 +187,26 @@ public class UserService {
 						} else {
 							yaxisList.add("\"" + 0 + "\"");
 						}
+						
+//Total Boys & Girls per class
+						
+						xaxisListClass.add("\"" + classstudying.getClassdetails() + "\"");
+						int totalBoys=0;
+						int totalGirls=0;
+						for (Parents parent : student) {
+							String gender = parent.getStudent().getGender();
+
+						    if (gender != null) {
+							if(parent.getStudent().getGender().equalsIgnoreCase("Male")) {
+								totalBoys++;
+							}else if(parent.getStudent().getGender().equalsIgnoreCase("Female")) {
+								totalGirls++;
+							}
+						    }
+							
+						}
+						yaxisListBoys.add("\"" + totalBoys + "\"");
+						yaxisListGirls.add("\"" + totalGirls + "\"");
 
 					}
 				}
@@ -206,8 +229,11 @@ public class UserService {
 
 				//Get Boys & Girls
 				ResultResponse resultResponse = adminService.getTotalBoysGirls(branchId);
-				result.setBoysGirls(resultResponse.getResultList());
+				//result.setBoysGirls(resultResponse.getResultList());
 
+				result.setXaxisListClass(xaxisListClass);
+				result.setYaxisListBoys(yaxisListBoys);
+				result.setYaxisListGirls(yaxisListGirls);
 				result.setXaxisList(xaxisList);
 				result.setYaxisList(yaxisList);
 				result.setTotalStudents(totalStudents);
