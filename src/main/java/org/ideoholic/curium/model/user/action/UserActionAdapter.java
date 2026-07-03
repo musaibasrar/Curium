@@ -128,6 +128,10 @@ public class UserActionAdapter {
         request.setAttribute("studentxaxis", responseDto.getXaxisList());
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
         request.setAttribute("totalstudents",responseDto.getTotalStudents());
+        request.setAttribute("classNames", responseDto.getXaxisListClass());
+        request.setAttribute("boysData", responseDto.getYaxisListBoys());
+        request.setAttribute("girlsData", responseDto.getYaxisListGirls());
+        
     }
 
     public boolean authenticateUser() {
