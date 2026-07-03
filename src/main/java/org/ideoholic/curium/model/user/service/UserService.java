@@ -596,6 +596,7 @@ public class UserService {
 		List<Receiptinfo> feesDetailsList = new ArrayList<>();
 		String branchId = dto.getBranchId();
 		int idBranch = 0;
+		String userName=null;
         try {
 			if(strBranchId!=null){
 
@@ -615,6 +616,9 @@ public class UserService {
 				String oneDay = DataUtil.emptyString(dto.getOneDay());
 				String modeOfPayment = DataUtil.emptyString(dto.getModeOfPayment());
 				String academicYear = DataUtil.emptyString(dto.getAcademicYear());
+				String user = DataUtil.emptyString(dto.getUser());
+				String[] userId = user.split(":");
+				
 
 				String querySub = "";
 
@@ -645,6 +649,11 @@ public class UserService {
 				
 				if(!academicYear.equalsIgnoreCase("")){
 					querySub = querySub+" and feesdetails.academicyear = '"+academicYear+"'" ;
+				}
+				
+				if(!user.equalsIgnoreCase("")){
+					querySub = querySub+" and feesdetails.userid = '"+userId[0]+"'" ;
+					userName = userId[1];
 				}
 
 				queryMain = queryMain+querySub;
@@ -677,6 +686,7 @@ public class UserService {
 			result.setSumOfOnlyFee(sumOfFees-fine-misc);
 			result.setFine(fine);
 			result.setMisc(misc);
+			result.setUserName(userName);
 
 			for (Entry<Receiptinfo, Parents> entry : feesMap.entrySet()) {
 				log.error("Key: " + entry.getKey().getReceiptnumber() + ", Value: " + entry.getValue().getStudent().getName());
