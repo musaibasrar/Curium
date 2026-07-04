@@ -301,7 +301,7 @@
 	
 }
 .checkbox-container {
-        display: flex;
+       // display: flex;
         flex-wrap: wrap;
         gap: 0px;
         max-width: 300px; /* adjust as needed */
@@ -690,7 +690,7 @@ for(Cookie cookie : cookies){
     </div>
 
     <!-- Class with sections -->
-    <c:forEach items="${sections}" var="sectionItem">
+   <%--  <c:forEach items="${sections}" var="sectionItem">
         <div class="checkbox-item">
             <label class="labelClass" style="font-weight: bold; color: #325F6D;">
                 <input type="checkbox" class="chcktbl1" name="classsearch"
@@ -698,7 +698,7 @@ for(Cookie cookie : cookies){
                 ${classItem}${sectionItem}
             </label>
         </div>
-    </c:forEach>
+    </c:forEach> --%>
 
 </c:forEach>
 										
@@ -708,7 +708,17 @@ for(Cookie cookie : cookies){
 
 
 							</td>
-							
+							<td>
+							<c:forEach items="${sections}" var="sectionItem">
+        <div class="checkbox-item">
+            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+                <input type="checkbox" class="chcktbl1" name="secsearch"
+                       value="${sectionItem}">
+                ${sectionItem}
+            </label>
+        </div>
+    </c:forEach>
+							</td>
 							
 						</tr>
 

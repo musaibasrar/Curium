@@ -19,4 +19,5 @@ public class SearchStudentDto {
 	private String[] classesSearch;
 	private String studentType;
 	private String categoryYear;
+	private String[] sectSearch;
 }
