@@ -1210,12 +1210,27 @@ $(document).ready(function() {
 							<td ><label>
 							          Tuition<input type="checkbox" value="Tuition" name="feescategories" id="tuition"/>
 								&nbsp;Hostel<input type="checkbox" value="Hostel" name="feescategories" id="hostel"/>
-								&nbsp;Transport <select name="feescategories" id="transport">
+								
+								<c:choose>
+                                <c:when test="${branchid eq 2}">
+                                    &nbsp;Annual Charges<input type="checkbox" value="Annual" name="feescategories" id="annualcharges"/>
+                                    &nbsp;Transport <select name="feescategories" id="transport">
 										        <option value="Select">-- Select --</option>
-										        <option value="Malmal">Malmal</option>
-										        <option value="Madhubani">Madhubani</option>
-										        <option value="xyz">xyz</option>
+										        <option value="Jama Masjid Road">Jama Masjid Road</option>
+										        <option value="Jhanda Chowk">Jhanda Chowk</option>
+										        <option value="Kallu Chowk">Kallu Chowk</option>
+										        <option value="Pabra">Pabra</option>
+										        <option value="Pelawal">Pelawal</option>
+										        <option value="Romi">Romi</option>
 										    </select>
+                                </c:when>
+                                <c:otherwise>
+                                     &nbsp;Transport <select name="feescategories" id="transport">
+										        <option value="Select">-- Select --</option>
+										    </select>
+                                </c:otherwise>
+                            </c:choose>
+								
 								</label></td>
 						</tr>
 						<tr>
