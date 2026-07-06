@@ -355,8 +355,8 @@ public class HrApiActionImpl implements HrApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<LeavesDetailsResponseDto> viewLeavesDetails(String id) {
-        LeavesDetailsResponseDto result = hrService.viewLeavesDetails(id);
+    public ResponseEntity<LeavesDetailsResponseDto> viewLeavesDetails(String id, String branchId) {
+        LeavesDetailsResponseDto result = hrService.viewLeavesDetails(id, Integer.parseInt(branchId));
         if(result.isSuccess()){
             return ResponseEntity.ok(result);
         }
