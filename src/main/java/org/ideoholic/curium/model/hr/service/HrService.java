@@ -111,10 +111,10 @@ public class HrService {
 		return ResultResponse.builder().build();
 	}
 
-	public LeavesDetailsResponseDto viewLeavesDetails(String id) {
+	public LeavesDetailsResponseDto viewLeavesDetails(String id, int branchId) {
 		LeavesDetailsResponseDto result = new LeavesDetailsResponseDto();
 		try {
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(branchId);
 
 			result.setCurrentAcademicYear(currentYear);
 
@@ -398,7 +398,7 @@ public class HrService {
 				Teacher addTeacher = new Teacher();
 				addTeacher.setTid(teacher.getTid());
 				leaveApplication.setTeacher(addTeacher);
-				int totalLeaves = calculateLeaves(DateUtil.dateParserUpdateStd(dto.getFromDate()),DateUtil.dateParserUpdateStd(dto.getToDate()),teacher.getTid());
+				int totalLeaves = calculateLeaves(DateUtil.dateParserUpdateStd(dto.getFromDate()),DateUtil.dateParserUpdateStd(dto.getToDate()),teacher.getTid(), Integer.parseInt(branchId));
 				if(totalLeaves==0){
 					return ResultResponse.builder().success(false).build();
 				}
@@ -415,7 +415,7 @@ public class HrService {
 	}
 
 	private Integer calculateLeaves(Date fromDate,
-			Date toDate, int teacherid) {
+			Date toDate, int teacherid, int branchId) {
 
 	     int totalLeaves = 0;
 		Calendar start = Calendar.getInstance();
@@ -432,7 +432,7 @@ public class HrService {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+				Currentacademicyear currentAcademicYear = new YearDAO().showYear(branchId);
 				
 					List<Attendancemaster> staffAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails(Integer.toString((teacherid)));
 					if(staffAttendanceMaster != null && !staffAttendanceMaster.isEmpty() && staffAttendanceMaster.get(0).getWeeklyoff() == null){
