@@ -149,7 +149,7 @@ public interface HrApiAction {
     ResponseEntity<LeavesDetailsResponseDto> leaveDetailsPerYear(@RequestBody LeaveDetailsDto dto);
 
     @GetMapping("/viewLeavesDetails")
-    ResponseEntity<LeavesDetailsResponseDto> viewLeavesDetails(@RequestParam(value = "id")String id);
+    ResponseEntity<LeavesDetailsResponseDto> viewLeavesDetails(@RequestParam(value = "id")String id, @RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/addLeaves")
     ResponseEntity<ResultResponse> addLeaves(@RequestBody LeaveTypeDto dto,@RequestHeader (value = Constants.CURRENTACADEMICYEAR)String currentAcademicYear,@RequestHeader(value = Constants.BRANCHID) String branchId,@RequestHeader(value = Constants.USERID)String userId);

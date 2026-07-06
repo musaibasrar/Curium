@@ -11,5 +11,26 @@
         <property name="currentacademicyear" type="string">
             <column name="currentacademicyear" length="100" />
         </property>
+        
+	    <property name="academicyearstartdate" type="date">
+	        <column name="academicyearstartdate" />
+	    </property>
+	
+	    <property name="academicyearenddate" type="date">
+	        <column name="academicyearenddate" />
+	    </property>
+	
+	    <property name="active" type="java.lang.Boolean">
+	        <column name="active" />
+	    </property>
+	
+	    <property name="branchid" type="java.lang.Integer">
+	        <column name="branchid" />
+	    </property>
+	
+	    <property name="userid" type="java.lang.Integer">
+	        <column name="userid" />
+	    </property>
+    
     </class>
 </hibernate-mapping>
