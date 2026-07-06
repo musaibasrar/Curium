@@ -401,7 +401,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(branchId));
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
@@ -530,7 +530,7 @@ public class StudentService {
 			Parents parents = new parentsDetailsDAO().readploginUniqueObject(studentId);
 
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(branchId));
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			List<Receiptinfo> rinfo = new feesCollectionDAO().getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());;
@@ -613,7 +613,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(branchId));
 			result.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
@@ -1409,7 +1409,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = new YearDAO().showYear();
+			Currentacademicyear currentYear = new YearDAO().showYear(Integer.parseInt(branchId));
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
