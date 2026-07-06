@@ -9,6 +9,8 @@ import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearDto;
 import org.ideoholic.curium.model.academicyear.dto.CurrentAcademicYearResponseDto;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.academicyear.service.YearService;
+import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,11 @@ public class YearActionAdapter {
 
 		CurrentAcademicYearDto currentacademicyeardto = new CurrentAcademicYearDto();
 		currentacademicyeardto.setCurrentacademicyear(request.getParameter("academicyear"));
+		currentacademicyeardto.setAcademicyearstartdate(DateUtil.indiandateParser(request.getParameter("fromdate")));
+		currentacademicyeardto.setAcademicyearenddate(DateUtil.indiandateParser(request.getParameter("todate")));
+		currentacademicyeardto.setActive(Boolean.valueOf(request.getParameter("active")));
+		currentacademicyeardto.setBranchid(Integer.valueOf(httpSession.getAttribute(Constants.BRANCHID).toString()));
+		currentacademicyeardto.setUserid(Integer.valueOf(httpSession.getAttribute(Constants.USERID).toString()));
 		ResultResponse response = yearService.saveYear(currentacademicyeardto);
 		if (response == null) {
 			return false;
@@ -42,12 +49,12 @@ public class YearActionAdapter {
 	}
 
 	public void updateYear() {
-		CurrentAcademicYearResponseDto currentacademicyear = yearService.updateYear();
+		CurrentAcademicYearResponseDto currentacademicyear = yearService.updateYear(Integer.valueOf(httpSession.getAttribute(Constants.BRANCHID).toString()));
 		request.setAttribute("currentyear", currentacademicyear.getCurrentacademicyear());
 	}
 	
 	public boolean getYear() {
-		Currentacademicyear currentYear = yearService.getYear();
+		Currentacademicyear currentYear = yearService.getYear(Integer.valueOf(httpSession.getAttribute(Constants.BRANCHID).toString()));
 		if(currentYear == null) {
 			return false;
 		}

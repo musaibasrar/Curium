@@ -69,7 +69,7 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
 		FeesDetailsDto feesDetailDto = new FeesDetailsDto();
 		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFees(branchId, currentAcademicYear);
-		Currentacademicyear currentacademicyear = yearService.getYear();
+		Currentacademicyear currentacademicyear = yearService.getYear(Integer.parseInt(branchId));
 		ResultResponse result = standardService.viewClasses(branchId);
 		feesDetailDto.copyFeescategoryResponseDto(feescategoryResponseDto);
 		feesDetailDto.copyCurrentacademicyear(currentacademicyear);
@@ -117,7 +117,7 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 		OtherFeesDetailsDto otherFeesDetailsDto = new OtherFeesDetailsDto();
 		OtherFeesCategoryResponseDto otherFeesCategoryResponseDto = feesService.viewOtherFees(branchId,
 				currentAcademicYear);
-		Currentacademicyear currentacademicyear = yearService.getYear();
+		Currentacademicyear currentacademicyear = yearService.getYear(Integer.parseInt(branchId));
 		ResultResponse result = standardService.viewClasses(branchId);
 		otherFeesDetailsDto.setOtherFeecategory(otherFeesCategoryResponseDto.getOtherFeesCategory());
 		otherFeesDetailsDto.setCurrentacademicyear(currentacademicyear.getCurrentacademicyear());

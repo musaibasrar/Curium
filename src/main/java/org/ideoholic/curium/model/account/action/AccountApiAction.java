@@ -74,7 +74,7 @@ public interface AccountApiAction {
     ResponseEntity<ResultResponse> saveFinancialYear(@RequestBody AccountFinancialYearDto dto, @RequestHeader(value = "branchid") String branchId);
 
     @GetMapping("/updateYear")
-    ResponseEntity<CurrentAcademicYearResponseDto> updateYear();
+    ResponseEntity<CurrentAcademicYearResponseDto> updateYear(@RequestHeader(value = "branchid") String branchId);
 
     @PostMapping("/downloadTrialBalance")
     ResponseEntity<ResultResponse> downloadTrialBalance();
