@@ -178,13 +178,15 @@
                 color: #325F6D;
             }
             .alignCentreMultiple {
+            
                 font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
+                font-size: 14px;
                 font-weight: bolder;
                 text-align: center;
                 vertical-align: middle;
                 font-style: normal;
-                color: #000000;
+                text-transform: capitalize;
+                color: #325F6D;
             }
             .autoAdjust {
                 height: auto;
@@ -368,6 +370,34 @@
 
             }
         </script>
+        
+           <script>
+        $(function() {
+    		$("#fromdate").datepicker({
+    			changeYear : true,
+    			changeMonth : true,
+    			dateFormat: 'dd/mm/yy',
+    			yearRange: "-5:+1"
+    		});
+    		$("#anim").change(function() {
+    			$("#fromdate").datepicker("option", "showAnim", $(this).val());
+    		});
+    	});
+    	$(function() {
+    		$("#todate").datepicker({
+    			changeYear : true,
+    			changeMonth : true,
+    			dateFormat: 'dd/mm/yy',
+    			yearRange: "-5:+1"
+    		});
+    		$("#anim").change(function() {
+    			$("#todate").datepicker("option", "showAnim", $(this).val());
+    		});
+    	});
+    	
+        </script>
+        
+        
         <script type="text/javascript">
         
             $(function() {
@@ -379,11 +409,25 @@
                         	if($("#academicyear").val().length===0){
                         		return false;
                         	}
+                        	var fromdate = document.getElementById("fromdate").value;
+                        	var varfromDate = new Date(fromdate); 
+                        	
+                        	var todate = document.getElementById("todate").value;
+                        	var vartoDate = new Date(todate); 
+								
+                        	if(varfromDate >= vartoDate ) {
+                        	alert("please enter valid dates");
+                        	return false;
+                        	}
+                        	
+                        	if($("#fromdate").val().length==0 || $("#todate").val().length==0){
+                        		return false;
+                        	}
+                        	
                         	if(confirm('Are you sure,you want to change the current academic year?')){
                         		changeYear();	
                         	}
                     
-
 
                 });
                 
@@ -447,220 +491,95 @@ for(Cookie cookie : cookies){
 
 
                     <div id="tabs-1">
-                    
-                    <div align="center">
-                    
-                    <h class="alignRightHeader">Enter the academic year</h>
-                    
-                    
-                    </div>
-                        <table width="100%" border="0" align="center"  id="table1">
 
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
+    <table width="60%" align="center" cellpadding="8" cellspacing="0">
 
+        <tr>
+            <td colspan="2" class="alignCentreMultiple">
+                The Current Academic Year
+                <b>${currentyear}</b> is from
+                <b><fmt:formatDate value="${currentacademicyearfrom}" pattern="dd/MM/yyyy"/></b>
+                to
+                <b><fmt:formatDate value="${currentacademicyearto}" pattern="dd/MM/yyyy"/></b>
+            </td>
+        </tr>
 
+        <tr>
+            <td class="alignRight" width="35%">
+                Academic Year <span style="color:red">*</span>
+            </td>
 
+            <td width="65%">
+                <select name="academicyear" id="academicyear" style="width:180px;">
+                    <option value="">Select Academic Year</option>
+                    <c:forEach var="year" items="${previousAcademicYears}">
+                        <option value="${year}">${year}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
 
+        <tr>
+            <td class="alignRight">
+                From Date
+            </td>
 
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
+            <td>
+                <input type="text"
+                       name="fromdate"
+                       id="fromdate"
+                       class="textField"
+                       size="15"/>
 
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
+                &nbsp;&nbsp;&nbsp;
 
-							<tr>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-							<td width="26%"  class="alignRightYear">
-                             Current academic year is: ${currentyear}
-                            </td>
-							</tr>
+                <strong style="color: #325F6D;">To</strong>
 
-<tr>
-<td><br/></td>
-</tr>
-                            <tr>
-                            
-                            
+                &nbsp;
 
+                <input type="text"
+                       name="todate"
+                       id="todate"
+                       class="textField"
+                       size="15"/>
+            </td>
+        </tr>
 
-                                <td width="26%"  class="alignRight" >
-                                    
-                                    Current Academic Year*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+        <tr>
+            <td class="alignRight">
+                Active
+            </td>
 
-                                <td width="28%"  >
-                                    <label>
-                                        <label> <select name="academicyear" id="academicyear"
-									style="width: 120px">
-										<option selected></option>
-										 <c:forEach var="year" items="${previousAcademicYears}">
-        										<option value="${year}">${year}</option>
-    									</c:forEach>
-								</select>
+            <td>
+                <label>
+                    <input type="radio" name="active" value="true">
+                    Yes
+                </label>
 
-							</label> 
-                                    </label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                </td>
+                <label>
+                    <input type="radio" name="active" value="false">
+                    No
+                </label>
+            </td>
+        </tr>
 
+        <tr id="mandatory" style="display:none;">
+            <td colspan="2" align="center" class="mandatoryClass">
+                * Please select the academic year.
+            </td>
+        </tr>
 
-                            </tr>
+        <tr>
+            <td colspan="2" align="center" style="padding-top:20px;">
+                <button id="save">Confirm</button>
+            </td>
+        </tr>
 
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
+    </table>
 
-
-                            
-                            <tr id="mandatory">
-                                
-                                <td width="16%"  class="mandatoryClass"  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * Please enter the current academic year</td>
-                            </tr>
-                            
-                                <table width="100%" >
-                                    <tr>
-
-                                        <td>
-                                            <br/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">
-
-                                            <button id="save" onmouseover="validateYear();" >Confirm</button>
-
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <!-- <button id="update" >Update</button> -->
-
-                                        </td>
-
-
-                                    </tr>
-                                </table>
-                                
-                                
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td>
-                                    <br/>
-                                </td>
-                            </tr>
-
-                            </div>
+</div>
                             
                     </div>
                 </div>

@@ -26,7 +26,6 @@ public class YearApiActionImpl implements YearApiAction {
 
 	@PostMapping("/saveYear")
 	public ResponseEntity<ResultResponse> saveYear(@RequestBody CurrentAcademicYearDto currentAcademicYearDto) {
-		log.debug("Action is viewAllExpenses");
 		ResultResponse result = yearService.saveYear(currentAcademicYearDto);
 		if (result.isSuccess()) {
 			return ResponseEntity.ok(result);
@@ -37,8 +36,7 @@ public class YearApiActionImpl implements YearApiAction {
 	}
 
 	@GetMapping("/updateYear")
-	public ResponseEntity<CurrentAcademicYearResponseDto> updateYear() {
-		log.debug("Action is addExpenses");
-		return ResponseEntity.ok(yearService.updateYear());
+	public ResponseEntity<CurrentAcademicYearResponseDto> updateYear(String branchId) {
+		return ResponseEntity.ok(yearService.updateYear(Integer.parseInt(branchId)));
 	}
 }
