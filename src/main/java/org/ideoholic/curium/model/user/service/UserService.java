@@ -70,7 +70,7 @@ public class UserService {
        login = new UserDAO().readUniqueObject(userName, password);
 
        if (login != null) {
-            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            Currentacademicyear currentAcademicYear = new YearDAO().showYear(login.getBranch().getIdbranch());
             String academicyear = "";
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
@@ -771,7 +771,7 @@ public class UserService {
     		    	httpSession.removeAttribute(element);
     		}
     	   
-            Currentacademicyear currentAcademicYear = new YearDAO().showYear();
+            Currentacademicyear currentAcademicYear = new YearDAO().showYear(branchId);
             String academicyear = "";
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
