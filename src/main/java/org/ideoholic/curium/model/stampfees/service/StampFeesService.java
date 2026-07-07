@@ -806,25 +806,23 @@ public void addSingleFeesStamp(StampFeesDto stampFeesDto,String currentAcademicY
 							studentfeesstructure.setConcession(0);
 							listOfstudentfeesstructure.add(studentfeesstructure);
 
-						}
-
 
 					academicfessstructure = new Academicfeesstructure();
 					academicfessstructure.setSid(Integer.valueOf(id));
 					academicfessstructure.setAcademicyear(feesYears[0]);
 					academicfessstructure.setUserid(Integer.parseInt(userid));
 					academicfessstructure.setTotalfees(totalFeesAmount.toString());
-					grandTotal = grandTotal + Long.parseLong(academicfessstructure.getTotalfees());
 					academicfessstructure.setBranchid(Integer.parseInt(branchid));
 					academicfessstructure.setUserid(Integer.parseInt(userid));
 
 					listOfacademicfessstructure.add(academicfessstructure);
 					// ids.add(Integer.valueOf(id));
 					grandTotal = grandTotal + totalFeesAmount;
+						}
 
 				}
 
-				for (String ids : studentIds) {
+				/*for (String ids : studentIds) {
 					String[] studentids = ids.split("_");
 					String id = studentids[0];
 					int studentIndex = Integer.parseInt(studentids[1]);
@@ -845,11 +843,12 @@ public void addSingleFeesStamp(StampFeesDto stampFeesDto,String currentAcademicY
 						studentfeesstructure.setConcession(0);
 						listOfstudentfeesstructure.add(studentfeesstructure);
 
-				}
+				} */
 
 				// Accounts
 				// Pass J.V. : credit the Fees as income & debit the cash
-
+				if(!listOfacademicfessstructure.isEmpty()||listOfacademicfessstructure.size()>0) {
+					
 				int crFees = getLedgerAccountId("unearnedstudentfeesincome" + Integer.parseInt(branchid));
 				int drAccount = getLedgerAccountId("studentfeesreceivable" + Integer.parseInt(branchid));
 
@@ -875,7 +874,7 @@ public void addSingleFeesStamp(StampFeesDto stampFeesDto,String currentAcademicY
 				// End J.V
 				stampFeesDao.addStampFees(listOfacademicfessstructure, currentAcademicYear, listOfstudentfeesstructure, transactions, updateDrAccount, updateCrAccount);
 				// studentDetailsDao.addStudentfeesstructure(listOfstudentfeesstructure,httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
-
+				}
 			}
 		}
 	}
