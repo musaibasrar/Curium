@@ -214,7 +214,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/hwfschools/images/hwfschools${branchid}.png" width="80" height="80"/>
+				<img src="/hwfschools/images/hwfschools${branchid}.png" width="134" height="80"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				${branchname}<br><br>

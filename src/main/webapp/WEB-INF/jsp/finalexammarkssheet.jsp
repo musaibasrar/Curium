@@ -132,7 +132,7 @@ footer p {
     <div>
      <c:forEach items="${markssheetlist}" var="Parents">
        <header style="display: flex; align-items: center; gap: 15px;">
-    <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/hwfschools/images/hwfschools${branchid}.png">
+    <img border="0" style="vertical-align: text-bottom;height: 100px;width: 167px;" alt="logo" src="/hwfschools/images/hwfschools${branchid}.png">
     <div style="background-color:blue;color:white;border-radius:10px;">
         <h1 style="text-transform:Uppercase;">${branchname},BIDAR</h1>
     </div>

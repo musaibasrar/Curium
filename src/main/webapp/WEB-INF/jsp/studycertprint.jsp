@@ -128,7 +128,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/hwfschools/images/hwfschools${branchid}.png">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 167px;" alt="logo" src="/hwfschools/images/hwfschools${branchid}.png">
 			</td>
 				<td >
 					<br>
