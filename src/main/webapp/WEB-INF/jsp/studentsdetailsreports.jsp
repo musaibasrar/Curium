@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -13,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Students Details Reports</title>
-<link rel="stylesheet" href="/dolphin/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/dolphin/css/datePicker/demos.css">
+<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -299,43 +300,54 @@
 #button {
 	
 }
+.checkbox-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0px;
+        max-width: 300px; /* adjust as needed */
+    }
+    .checkbox-item {
+        width: 30%;
+        min-width: 75px;
+        box-sizing: border-box;
+    }
 </style>
-<link rel="stylesheet" href="/dolphin/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/dolphin/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/dolphin/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/dolphin/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/vision/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/dolphin/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/dolphin/js/datePicker/ui/sliderAccess.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/dolphin/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/dolphin/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -361,11 +373,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/dolphin/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 function printStudentDetail() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/dolphin/StudentProcess/printStudentDetail";
+	form1.action = "/vision/StudentProcess/printStudentDetail";
 	form1.method = "POST";
 	form1.submit();
 
@@ -383,7 +395,7 @@ $(function() {
 <script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/dolphin/StudentProcess/multiClassSearch";
+		form1.action = "/vision/StudentProcess/multiClassSearch";
 		form1.method = "POST";
 		form1.submit();
 
@@ -450,42 +462,41 @@ $(function() {
 	});
 	
 	
-	$(function() {
-		$('#chckHeadClasses').click(function() {
-			var length = $('.chcktblClasses:checked').length;
+</script>
+<script>
+$(function() {
+		$('#chckHead1').click(function() {
+			var length = $('.chcktbl1:checked').length;
 			var trLength = $('.labelClass').length;
 			if (length > 0) {
-				$('.chcktblClasses:checked').attr('checked', false);
+				$('.chcktbl1:checked').attr('checked', false);
 				this.checked = false;
 
 			} else {
 				if (this.checked == false) {
-					$('.chcktblClasses:checked').attr('checked', false);
+					$('.chcktbl1:checked').attr('checked', false);
 				} else {
-					$('.chcktblClasses:not(:checked)').attr('checked', true);
+					$('.chcktbl1:not(:checked)').attr('checked', true);
 				}
 
 			}
 
 		});
 		
-		$('.chcktblClasses').click(function() {
-			var length = $('.chcktblClasses:checked').length;
+		$('.chcktbl1').click(function() {
+			var length = $('.chcktbl:checked').length;
 			var trLength = $('.labelClass').length;
 			alert(tdLength);
 			if (length > trLength) {
 
-				$('.chcktblClasses:not(:checked)').attr('disabled', true);
+				$('.chcktbl1:not(:checked)').attr('disabled', true);
 			} else {
-				$('.chcktblClasses:not(:checked)').attr('disabled', false);
+				$('.chcktbl1:not(:checked)').attr('disabled', false);
 			}
 		});
 
 	});
-	
-	
 </script>
-
 
 <script type="text/javascript">
         
@@ -546,7 +557,7 @@ $(function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/dolphin/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -559,7 +570,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/dolphin/StudentProcess/exportDataForStudents" method="POST">
+	<form id="form1" action="/vision/StudentProcess/exportDataForStudents" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -590,49 +601,16 @@ for(Cookie cookie : cookies){
 
 
 						<tr>
-							<td class="alignRight">Class &nbsp;</td>
-							<td>
-								<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHeadClasses" />All
-							</label>
-									<label>
-							
-								<c:set var="myList" value="<%= new java.util.ArrayList() %>" />
-
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.section != '')}">
-											<c:set var="dummy" value="${myList.add(classdetailslist.section)}" />
-											<%-- <c:set target="${myList}" property="add" value="${classdetailslist.section}" /> --%>
-										</c:if>
-										</c:forEach>
-										
-								<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
-										
-										<c:if test="${empty myList}">
-											   <input type="checkbox" class="chcktblClasses"  name="classsearch" value="${classdetailslist.classdetails}--">
-										${classdetailslist.classdetails}
-											</c:if>
-											<c:if test="${not empty myList}">
-											<c:forEach var="item" items="${myList}"><label>
-										    	<input type="checkbox" class="chcktblClasses" name="classsearch" value="${classdetailslist.classdetails}--${item}">
-										${classdetailslist.classdetails} <c:out value="${item}"/></label>
-										</c:forEach>
-											</c:if>		
-										</c:if>	
-										</c:forEach>
-										</label>
-										</td>
-						</tr>
-							
-							
-							<%-- <c:forEach items="${classdetailslist}" var="classdetailslist">
+							<!-- <td class="alignRight">Class &nbsp;</td> -->
+							<%-- <td>
+							<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
 										<input type="checkbox"  name="classsearch" value="${classdetailslist.classdetails}">
 										${classdetailslist.classdetails}&nbsp;&nbsp;
 										</c:if>	
 										
-							</c:forEach>
-							<label> <select name="classsearch"
+							</c:forEach> --%>
+							<%-- <label> <select name="classsearch"
 									id="classsearch" style="width: 150px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -644,7 +622,7 @@ for(Cookie cookie : cookies){
 										</c:forEach>
 								</select>
 
-							</label> <label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
+							<%-- </label>  --%><%--<label style="visibility: hidden;"> <select name="secsearch" id="secsearch"
 									style="width: 120px">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
@@ -657,6 +635,81 @@ for(Cookie cookie : cookies){
 
 								</select>
 							</label> --%>
+							
+						</tr>
+						 <tr>
+						<td style="font-weight: bold;color:#325F6D">Select All</td>
+						<td><input type="checkbox" id="chckHead1" /></td>
+						</tr>
+						<tr>
+						<td class="alignRight">Class &nbsp;</td>
+						<td >
+							
+									<div class="checkbox-container">
+										<!-- initialize -->
+										<c:set var="classList" value="" />
+										<c:set var="sectionList" value="" />
+										
+										<!-- collect classes and sections -->
+										<c:forEach items="${classdetailslist}" var="item">
+										    <c:if test="${not empty item.classdetails}">
+										                <c:set var="classList" value="${classList},${item.classdetails}" />
+										    </c:if>
+										    <c:if test="${not empty item.section}">
+										                <c:set var="sectionList" value="${sectionList},${item.section}" />
+										    </c:if>
+										</c:forEach>
+										
+										<!-- safely strip first comma if present -->
+										<c:set var="cleanClassList" value="${classList}" />
+										<c:set var="cleanSectionList" value="${sectionList}" />
+										
+										
+										<c:if test="${fn:startsWith(cleanClassList, ',')}">
+										    <c:set var="cleanClassList" value="${fn:substring(cleanClassList, 1, fn:length(cleanClassList))}" />
+										</c:if>
+										
+										<c:if test="${fn:startsWith(cleanSectionList, ',')}">
+										    <c:set var="cleanSectionList" value="${fn:substring(cleanSectionList, 1, fn:length(cleanSectionList))}" />
+										</c:if>
+										
+										<!-- convert to arrays -->
+										<c:set var="classes" value="${fn:split(cleanClassList, ',')}" />
+										<c:set var="sections" value="${fn:split(cleanSectionList, ',')}" />
+										
+										<!-- cross product -->
+										<c:forEach items="${classes}" var="classItem">
+
+    <!-- Class without section -->
+    <div class="checkbox-item">
+        <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+            <input type="checkbox" class="chcktbl1" name="classsearch"
+                   value="${classItem}--">
+            ${classItem}
+        </label>
+    </div>
+
+    <!-- Class with sections -->
+    <c:forEach items="${sections}" var="sectionItem">
+        <div class="checkbox-item">
+            <label class="labelClass" style="font-weight: bold; color: #325F6D;">
+                <input type="checkbox" class="chcktbl1" name="classsearch"
+                       value="${classItem}--${sectionItem}">
+                ${classItem}${sectionItem}
+            </label>
+        </div>
+    </c:forEach>
+
+</c:forEach>
+										
+
+
+									</div>
+
+
+							</td>
+							
+							
 						</tr>
 
 						<tr>
@@ -775,10 +828,10 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataText">${status.index+1}</td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/dolphin/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/dolphin/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
