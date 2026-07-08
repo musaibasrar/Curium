@@ -54,7 +54,7 @@ public class YearDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear where ca.branchid="+branchId+") ");
+					.createQuery("from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear where branchid="+branchId+") ");
 			currentacademicyear = (Currentacademicyear) query.setCacheable(true).setCacheRegion("commonregion").uniqueResult();
 			transaction.commit();
 		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
