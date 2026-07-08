@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Students Details Reports</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/dolphin/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/dolphin/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -312,42 +312,42 @@
         box-sizing: border-box;
     }
 </style>
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/dolphin/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/dolphin/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/dolphin/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/dolphin/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/dolphin/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/dolphin/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/dolphin/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/dolphin/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/dolphin/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -373,11 +373,11 @@
 	
 </script>
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/dolphin/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 function printStudentDetail() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/StudentProcess/printStudentDetail";
+	form1.action = "/dolphin/StudentProcess/printStudentDetail";
 	form1.method = "POST";
 	form1.submit();
 
@@ -395,7 +395,7 @@ $(function() {
 <script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/StudentProcess/multiClassSearch";
+		form1.action = "/dolphin/StudentProcess/multiClassSearch";
 		form1.method = "POST";
 		form1.submit();
 
@@ -557,7 +557,7 @@ $(function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/dolphin/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -570,7 +570,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/StudentProcess/exportDataForStudents" method="POST">
+	<form id="form1" action="/dolphin/StudentProcess/exportDataForStudents" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -828,10 +828,10 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${Parents.student.sid}"/>" /></td>
 								<td class="dataText">${status.index+1}</td>
 								<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/dolphin/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"
-								href="/vision/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
+								href="/dolphin/StudentProcess/ViewDetails?id=<c:out value='${Parents.student.sid}'/>&urlbranchid=<c:out value='${Parents.student.branchid}'/>"><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
 							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
