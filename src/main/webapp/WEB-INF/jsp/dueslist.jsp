@@ -1136,8 +1136,10 @@ for(Cookie cookie : cookies){
 				<thead>
 					<tr>
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th title="click to sort" class="headerText">Sl. No.</th>
 						<th title="click to sort" class="headerText">Date</th>
 						<th title="click to sort" class="headerText">Student Name</th>
+						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Branch Receipt Number&nbsp;</th>
 						<th title="click to sort" class="headerText">Academic Year</th>
 						<th title="click to sort" class="headerText">Due Amount&nbsp;</th>
@@ -1148,7 +1150,7 @@ for(Cookie cookie : cookies){
 
 				<tbody>
 
-					<c:forEach items="${dueslist}" var="dueslist">
+					<c:forEach items="${dueslist}" var="dueslist" varStatus="status">
 
 						<tr style="border-color: #000000" border="1" cellpadding="1"
 							cellspacing="1">
@@ -1156,8 +1158,10 @@ for(Cookie cookie : cookies){
 								id="<c:out value="${diary.id}"/>" class="chcktbl"
 								name="id"
 								value="<c:out value="${diary.id}"/>" /></td>
+							<td class="dataText"><c:out value="${status.index+1}" /></td>
 							<td class="dataText"><c:out value="${dueslist.date}" /></td>
 							<td class="dataText"><c:out value="${dueslist.studentName}" /></td>
+							<td class="dataText"><c:out value="${dueslist.classsec}" /></td>
 							<td class="dataText"><c:out value="${dueslist.branchreceiptnumber}" /></td>
 							<td class="dataText"><c:out value="${dueslist.academicyear}" /></td>
 							<td class="dataText"><c:out value="${dueslist.due}" /></td>
@@ -1181,35 +1185,6 @@ for(Cookie cookie : cookies){
 
 		</div>
 
- <div align="center">
-             <%--For displaying Previous link except for the 1st page --%>
-                <c:if test="${currentPage != 1}">
-                    <td><a style="color: #4B6A84;font-size: 12px" href="/dolphin/DiaryProcess/viewdiarystudent?page=${currentPage - 1}">Previous</a></td>
-                </c:if>
-
-                <%--For displaying Page numbers.
-                The when condition does not display a link for the current page--%>
-                <table border="0" cellpadding="5" cellspacing="5">
-                    <tr>
-                        <c:forEach begin="1" end="${noOfPages}" var="i">
-                            <c:choose>
-                                <c:when test="${currentPage eq i}">
-                                    <td style="color: #1D599B;font-weight:bolder;font-size: 20px ">${i}</td>
-                                </c:when>
-                                <c:otherwise>
-                                    <td style="color: black;font-weight:bold;font-size: 15px "><a style="color: #4B6A84" href="/dolphin/DiaryProcess/viewdiarystudent?page=${i}">${i}</a></td>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </tr>
-                </table>
-
-                <%--For displaying Next link --%>
-                <c:if test="${currentPage lt noOfPages}">
-                    <td ><a style="color: #4B6A84;font-size: 12px" href="/dolphin/DiaryProcess/viewdiarystudent?page=${currentPage + 1}">Next</a></td>
-                </c:if>
-                    </div>
-                    
                     <div id="dialog" title="Items Receive Details">
 				
                 
