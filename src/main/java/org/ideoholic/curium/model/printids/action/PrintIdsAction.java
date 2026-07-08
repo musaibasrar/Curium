@@ -3,8 +3,11 @@
  */
 package org.ideoholic.curium.model.printids.action;
 
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +28,8 @@ public class PrintIdsAction {
 	private EmployeeActionAdapter employeeActionAdapter;
 	@Autowired
 	private PrintIdsActionAdapter printIdsActionAdapter;
+	@Autowired
+	HttpSession httpSession;
 
 	@PostMapping("/updateCardValidity")
 	public String updateCardValidity() {
@@ -64,7 +69,11 @@ public class PrintIdsAction {
 	public String printPreview() {
 
 		printIdsActionAdapter.printMultiple();
+		if(httpSession.getAttribute("branchid").toString().equalsIgnoreCase("2")) {
 		return "printpreview";
+		}
+		else
+			return "printprevieweng";
 	}
 	
 	@GetMapping("/generateIdsEmployees")
