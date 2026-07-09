@@ -242,7 +242,7 @@ for(Cookie cookie : cookies){
                         		
 			<tr>
 				<td><img src="/rahmani/images/rahmani.jpg" width="80" height="80"/></td>
-				<td>
+				<td style="padding-left: 50px;padding-right: 50px;">
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
@@ -286,7 +286,7 @@ for(Cookie cookie : cookies){
                              
                              <tr>   
 				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Mobile No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.contactnumber}"/></td>
+                                <td class="namedetails"><label>Roll No.:&nbsp;&nbsp;&nbsp;</label><c:out value="${Parents.student.admissionnumber}"/></td>
                                 <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
 									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
 									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
@@ -333,7 +333,7 @@ for(Cookie cookie : cookies){
 							<td></td>
 							<td></td>
 							<td></td>
-							<td></td>
+							<td><img src="/rahmani/images/principalsignature.png" width="40" height="39"/></td>
 						</tr>
 				<tr>
 				<td></td>
