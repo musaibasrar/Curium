@@ -231,7 +231,7 @@ diary = new diaryDAO().create(diary);
 	public DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessage(StudentIdDto studentIdDto) {
 		DiaryDetailsMessageResponseDto viewDetailsOfDiaryMessageResponseDto = new DiaryDetailsMessageResponseDto();
 		boolean result = false;
-		long id = Long.parseLong(studentIdDto.getDiaryId());
+		long id = Long.parseLong(studentIdDto.getStudentId());
 		Diary diary = new diaryDAO().getMessage(id);
 		viewDetailsOfDiaryMessageResponseDto.setDiary(diary);
 		viewDetailsOfDiaryMessageResponseDto.setSuccess(true);
