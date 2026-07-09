@@ -271,6 +271,16 @@
 	text-align: center;
 }
         </style>
+        <style>
+        .page{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:4mm;
+    width:210mm;
+    padding:5mm;
+    box-sizing:border-box;
+}
+        </style>
         <script type="text/javascript">
 
             function updateContact() {
@@ -460,7 +470,7 @@ for(Cookie cookie : cookies){
 			
 		 <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
-                        
+           <div class="page">             
           <c:forEach begin="1" end="${iInitial}">
                         <%!                        
                             int i = 1;
@@ -530,7 +540,7 @@ for(Cookie cookie : cookies){
   </tr>
   <tr>
     <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
+    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
   </tr>
 </table>
 
@@ -546,6 +556,7 @@ principal&nbsp;&nbsp;&nbsp;</div>
                         <c:set var="limit" value="${limit+1}"/>
                         
                     </c:forEach>
+                    </div>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
