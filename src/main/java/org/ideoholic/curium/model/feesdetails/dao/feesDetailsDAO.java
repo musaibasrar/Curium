@@ -301,6 +301,15 @@ public class feesDetailsDAO {
                     for (Feescollection feescoll : feesCollection) {
                     	Query queryStudentFS = session.createQuery("update Studentfeesstructure set feespaid=feespaid-"+feescoll.getAmountpaid()+" where sfsid="+feescoll.getSfsid());
                     	queryStudentFS.executeUpdate();
+                    	Long feesPaid = (Long) session.createQuery("select feespaid from Studentfeesstructure where sfsid = :sfsid")
+                    		    .setParameter("sfsid", feescoll.getSfsid())
+                    		    .uniqueResult();
+
+                    		if (feesPaid != null && feesPaid == 0) {
+                    		    session.createQuery("delete from Feescollection where sfsid = :sfsid")
+                    		           .setParameter("sfsid", feescoll.getSfsid())
+                    		           .executeUpdate();
+                    		}
 					}
                     
                     if(updateReceiptDrAccount!=null && updateReceiptCrAccount!=null && cancelReceiptVoucher != null && updateJournalDrAccount!=null && updateJournalCrAccount!=null && cancelJournalVoucher!=null) {
