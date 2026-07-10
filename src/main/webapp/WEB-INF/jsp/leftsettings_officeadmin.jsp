@@ -340,7 +340,7 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 style="font-size: 12px"><a href="#">General</a></h5>
             <div>
-                <!-- <a target="mainFrame" href="/mfds/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
+                <a target="mainFrame" href="/mfds/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
                 <a target="mainFrame" href="/mfds/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
             </div>
             
@@ -349,28 +349,32 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/mfds/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
             <div>
                 <a target="mainFrame" href="/mfds/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/mfds/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/mfds/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/mfds/StampFeesProcess/showSingleFeesDetails" style="font-size: 12px;">Stamp Single Fee</a><br/>
+                <a target="mainFrame" href="/mfds/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
             <div>
-                <a target="mainFrame" href="/mfds/FeesProcess/otherFeesView" style="font-size: 12px;">Other Fees Category</a><br/>
-                <a target="mainFrame" href="/mfds/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Other Fee Stamp</a><br/>
+                <a target="mainFrame" href="/mfds/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
+                <a target="mainFrame" href="/mfds/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
 
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/mfds/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/mfds/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
+                <a target="mainFrame" href="/mfds/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
                 <a target="mainFrame" href="/mfds/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
                 <a target="mainFrame" href="/mfds/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a target="mainFrame" href="/mfds/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
             </div>
             
-          <!--   <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
             <div>
                 <a target="mainFrame" href="/mfds/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
                 <a target="mainFrame" href="/mfds/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
@@ -379,7 +383,7 @@ for(Cookie cookie : cookies){
               <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
             <div>
 				<a target="mainFrame" href="/mfds/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
-            </div> -->
+            </div>
             
             <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
             <div>
@@ -388,7 +392,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/mfds/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
-            <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
+            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
             <div >
                 <a target="mainFrame" href="/mfds/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
             </div>
@@ -403,7 +407,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/mfds/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
                 <a target="mainFrame" href="/mfds/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
                 <a target="mainFrame" href="/mfds/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div> -->
+            </div>
             
               <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
             <div>

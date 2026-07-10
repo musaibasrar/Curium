@@ -125,16 +125,20 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/mfds/welcome" ><img src="/mfds/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/mfds/welcome" >
+								<img src="/mfds/images/curiumheader.png" width="112" height="41"/>
+								</a>
 								</td>
 								
 							<!-- <td align="left"><img src="/mfds/images/mfdsheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+
+							<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
 									src="/mfds/images/menu.svg" width="18" height="18" 
 									alt="Toggle Menu" style="vertical-align: bottom;" />
 							</a></td>
-							<td><a target="leftFrame" href="/mfds/left_officeadmin"> <img
+							
+							<td><a target="leftFrame" href="/mfds/left_admin"> <img
 									src="/mfds/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
@@ -144,13 +148,13 @@ for(Cookie cookie : cookies){
 									src="/mfds/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
-
+							
 							<td ><a target="mainFrame"
-								href="/mfds/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/mfds/FeesProcess/otherfeesCollect" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/mfds/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/mfds/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Bus Fee Collection
 							</a></td>
-							
+
 							<td>
 								<a target="mainFrame"
 								href="/mfds/AccountProcess/createVoucher"> <img
@@ -169,25 +173,24 @@ for(Cookie cookie : cookies){
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/mfds/leftsettings_officeadmin">
+							<td ><a target="leftFrame" href="/mfds/leftsettings">
 									<img alt="Settings" src="/mfds/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
-
-							<!-- <td ><a target="mainFrame"
-								href="/mfds/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/mfds/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td> -->
 
 							<td ><!-- <a target="mainFrame" href="/mfds/sendsms"><img
 									src="/mfds/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/mfds/reports_officeadmin"><img
+								<a target="leftFrame" href="/mfds/reports"><img
 									src="/mfds/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/mfds/reports_officeadmin"><img
+									src="/mfds/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
 							
 							</td>
 
@@ -198,12 +201,6 @@ for(Cookie cookie : cookies){
 								View Students
 							</a></td>
 							
-							<!-- <td ><a target="mainFrame"
-								href="/mfds/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/mfds/images/dashboard.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-									Dash Board
-									</a></td> -->
 								
 							<td ><a target="_parent"
 								href="/mfds/UserProcess/logout"><img
