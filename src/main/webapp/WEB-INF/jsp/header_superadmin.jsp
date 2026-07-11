@@ -14,10 +14,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
         <meta name="Description" content = "School,School Management Software,SchoolCRM,">
         <meta name="Keywords" content = "School,School Management Software,SchoolCRM,">
-        <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
-        <script src="/vision/js/jquery.min.js"></script>
-        <script src="/vision/js/bootstrap.min.js"></script>
-        <script src="/vision/js/popper.min.js"></script>
+        <link rel="stylesheet" href="/rkgnyanaganga/css/bootstrap.min.css">
+        <script src="/rkgnyanaganga/js/jquery.min.js"></script>
+        <script src="/rkgnyanaganga/js/bootstrap.min.js"></script>
+        <script src="/rkgnyanaganga/js/popper.min.js"></script>
      
         <style type="text/css">
             
@@ -92,7 +92,7 @@ text-decoration: underline;
         <script type="text/javascript">
             function logout(){
                 var form1=document.getElementById("form1");
-                form1.action="/vision/UserProcess/logout";
+                form1.action="/rkgnyanaganga/UserProcess/logout";
                 form1.submit();
             }
 
@@ -102,7 +102,7 @@ text-decoration: underline;
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/rkgnyanaganga/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -125,90 +125,90 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/vision/welcome" ><img src="/vision/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/rkgnyanaganga/welcome" ><img src="/rkgnyanaganga/images/curiumheader.png" width="112" height="41"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/vision/images/visionheader.png"
+							<!-- <td align="left"><img src="/rkgnyanaganga/images/rkgnyanagangaheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
 								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
-									src="/vision/images/menu.svg" width="18" height="18" 
+									src="/rkgnyanaganga/images/menu.svg" width="18" height="18" 
 									alt="Toggle Menu" style="vertical-align: bottom;" />
 							</a></td>
 							
-							<td><a target="leftFrame" href="/vision/left_superadmin"> <img
-									src="/vision/images/home.svg" width="18" height="18" 
+							<td><a target="leftFrame" href="/rkgnyanaganga/left_superadmin"> <img
+									src="/rkgnyanaganga/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td><a target="mainFrame"
-								href="/vision/FeesProcess/feesCollect"> <img
-									src="/vision/images/feescollect.svg" width="18" height="18"
+								href="/rkgnyanaganga/FeesProcess/feesCollect"> <img
+									src="/rkgnyanaganga/images/feescollect.svg" width="18" height="18"
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
 														<td ><a target="mainFrame"
-								href="/vision/FeesProcess/otherfeesCollect"><img
-									alt="Bus Fee" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/rkgnyanaganga/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/rkgnyanaganga/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Bus Fee Collection
 							</a></td>
 							
 							<td>
 								<a target="mainFrame"
-								href="/vision/AccountProcess/createVoucher"> <img
-									src="/vision/images/createvoucher.svg" width="18" height="18"
+								href="/rkgnyanaganga/AccountProcess/createVoucher"> <img
+									src="/rkgnyanaganga/images/createvoucher.svg" width="18" height="18"
 									alt="Create Voucher" style="vertical-align: bottom;" />
 									Create Voucher
 								</a>
 							</td>
 
-							<!-- <td ><a target="mainFrame" href="/vision/feesCollectionDetails"><img  alt="Fees Details" src="/vision/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+							<!-- <td ><a target="mainFrame" href="/rkgnyanaganga/feesCollectionDetails"><img  alt="Fees Details" src="/rkgnyanaganga/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
                                             <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
 
 							<td><a target="mainFrame"
-								href="/vision/StudentProcess/addNew"> <img
-									src="/vision/images/student_header.svg" width="18" height="18"
+								href="/rkgnyanaganga/StudentProcess/addNew"> <img
+									src="/rkgnyanaganga/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
 
-							<td ><a target="leftFrame" href="/vision/leftsettings">
-									<img alt="Settings" src="/vision/images/settings.svg" width="18"
+							<td ><a target="leftFrame" href="/rkgnyanaganga/leftsettings">
+									<img alt="Settings" src="/rkgnyanaganga/images/settings.svg" width="18"
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
 							<!-- <td ><a target="mainFrame"
-								href="/vision/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/vision/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+								href="/rkgnyanaganga/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/rkgnyanaganga/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
 							</a></td> -->
 
-							<td ><!-- <a target="mainFrame" href="/vision/sendsms"><img
-									src="/vision/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+							<td ><!-- <a target="mainFrame" href="/rkgnyanaganga/sendsms"><img
+									src="/rkgnyanaganga/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
 									Send Message		
 							</a> -->
-								<a target="leftFrame" href="/vision/reports"><img
-									src="/vision/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+								<a target="leftFrame" href="/rkgnyanaganga/reports"><img
+									src="/rkgnyanaganga/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
 							
 							</td>
 
 							<td ><a target="mainFrame"
-								href="/vision/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/vision/images/students.svg" width="18"
+								href="/rkgnyanaganga/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/rkgnyanaganga/images/students.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 								View Students
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/vision/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/vision/images/dashboard.svg" width="18"
+								href="/rkgnyanaganga/UserProcess/dashBoard"><img
+									alt="Dash Board" src="/rkgnyanaganga/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
 								
 							<td ><a target="_parent"
-								href="/vision/UserProcess/logout"><img
-									src="/vision/images/logout.svg" width="18" height="18" alt="Log Out" 
+								href="/rkgnyanaganga/UserProcess/logout"><img
+									src="/rkgnyanaganga/images/logout.svg" width="18" height="18" alt="Log Out" 
 									style="vertical-align: bottom;"/>Logout</a></td>
 							<td width="60"></td>
 						</tr>

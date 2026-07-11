@@ -87,31 +87,31 @@ public class ImportFileService {
 
 							}
 						}
-						student.setAdmissionnumber(getCellValue(row, 0));
-						student.setSts(getCellValue(row, 1));
-						student.setStudentexternalid(getCellValue(row, 46));
+						//student.setAdmissionnumber(getCellValue(row, 0));
+						//student.setSts(getCellValue(row, 1));
+						student.setStudentexternalid(getCellValue(row, 1));
 						student.setName(getCellValue(row, 2));
-						student.setGender(getCellValue(row, 3));
+						//student.setGender(getCellValue(row, 3));
 
-						student.setDateofbirth(DateUtil.simpleDateParser(
+						/*student.setDateofbirth(DateUtil.simpleDateParser(
 						        getCellValue(row, 16) + "/" +
 						        getCellValue(row, 17) + "/" +
-						        getCellValue(row, 18)));
+						        getCellValue(row, 18)));*/
 
-						student.setAge(Integer.parseInt(getCellValue(row, 5)));
-						student.setPlaceofbirth(getCellValue(row, 6));
+						//student.setAge(Integer.parseInt(getCellValue(row, 5)));
+						//student.setPlaceofbirth(getCellValue(row, 6));
 
 						/*student.setAdmissiondate(DateUtil.simpleDateParser(
 						        getCellValue(row, 19) + "/" +
 						        getCellValue(row, 20) + "/" +
 						        getCellValue(row, 21)));*/
 
-						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 47));
-
+						student.setClassstudying(getCellValue(row, 8) + "--");
+						student.setClassadmittedin("");
 						//student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
-						student.setMothertongue(getCellValue(row, 10));
-						student.setReligion(getCellValue(row, 11));
+						//student.setMothertongue(getCellValue(row, 10));
+						//student.setReligion(getCellValue(row, 11));
 						//student.setStudentscaste(getCellValue(row, 12));
 						student.setNationality(getCellValue(row, 13));
 						//student.setStudentscastecertno(getCellValue(row, 14));
@@ -131,7 +131,9 @@ public class ImportFileService {
 						//student.setLastfirstlanguage(getCellValue(row, 44));
 
 						student.setUserid(2);
-
+						student.setRte(0);
+						student.setStream("Admission");
+						student.setAge(0);
 						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
 						//student.setSts(getCellValue(row, 49));
 
@@ -160,7 +162,7 @@ public class ImportFileService {
 						//student.setGuardiandetails(getCellValue(row, 33));
 						//parent.setRemarks(getCellValue(row, 34));
 
-						parent.setMothersname(getCellValue(row, 35));
+						//parent.setMothersname(getCellValue(row, 35));
 
 						//parent.setMotherscastecertno(getCellValue(row, 36));
 						//parent.setProfession(getCellValue(row, 36));
