@@ -778,21 +778,21 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList,dateofAttendance);
 			result.setMessage(res);
 			
 				if(res!=null) {
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList);
+						sendSMSAbsentees(studentDailyAttendanceList,dateofAttendance);
 					}
 			}
 		}
 		return result;
 	}
 	
-	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList,Date dateofAttendance) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -814,7 +814,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
-        				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				//String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				String todaysDate = new DateUtil().dateParserddMMYYYY(dateofAttendance);
+        				System.out.println("todays date "+todaysDate);
             			new SmsService(request, response).sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {

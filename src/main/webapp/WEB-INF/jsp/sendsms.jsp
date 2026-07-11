@@ -13,6 +13,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
@@ -327,6 +328,40 @@
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
 	});
+	 $(function() {
+			$("#holidayvar1").datepicker({
+				changeYear : true,
+				changeMonth : true,
+				dateFormat: 'dd/mm/yy',
+				yearRange: "-1:+2"
+			});
+			$("#anim").change(function() {
+				$("#holidayvar1").datepicker("option", "showAnim", $(this).val());
+			});
+		});
+		 $(function() {
+				$("#examsvar2").datepicker({
+					changeYear : true,
+					changeMonth : true,
+					dateFormat: 'dd/mm/yy',
+					yearRange: "-1:+2"
+				});
+				$("#anim").change(function() {
+					$("#examsvar2").datepicker("option", "showAnim", $(this).val());
+				});
+			});
+			$(function() {
+				$("#feesremindervar1").datepicker({
+					changeYear : true,
+					changeMonth : true,
+					dateFormat: 'dd/mm/yy',
+					yearRange: "-1:+2"
+				});
+				$("#anim").change(function() {
+					$("#feesremindervar1").datepicker("option", "showAnim", $(this).val());
+				});
+			});
+			
 </script>
 
 
@@ -650,7 +685,10 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form method="post"  id="form1">
-		
+		<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<div>
 			<div id="tabs">
 				<ul>
@@ -753,7 +791,8 @@ for(Cookie cookie : cookies){
 								 								
 								<span style="font-size: 16px;">Dear parents, school will be closed on </span> <span style="font-weight: bold;color: red">Date</span>  <span style="font-size: 16px;">due to</span> <span style="font-weight: bold;color: red">Reason</span>
 								<br><br>
-								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidayvar1" name="holidayvar1" maxlength="30">
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="holidayvar1"
+								 value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" name="holidayvar1" maxlength="30">
 								<br><br>
 								<label style="color: red;">Reason:&nbsp;&nbsp;</label><input type="text" id="holidayvar2" name="holidayvar2" maxlength="30">
 								<input type="hidden" id="holidayvar3" name="holidayvar3" maxlength="30">
@@ -765,7 +804,8 @@ for(Cookie cookie : cookies){
 								<br><br>
 								<label style="color: red;">Exams:&nbsp;</label>&nbsp;<input type="text" id="examsvar1" name="examsvar1" maxlength="30" value="Exams">
 								<br><br>
-								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsvar2" name="examsvar2" maxlength="30">
+								<label style="color: red;">Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="examsvar2"
+								 value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" name="examsvar2" maxlength="30">
 								<input type="hidden" id="examsvar3" name="examsvar3" maxlength="30">
 								<input type="hidden" id="examsvar4" name="examsvar4" maxlength="30">
     							</div>
@@ -793,7 +833,8 @@ for(Cookie cookie : cookies){
     							<div class="feesreminder box">
     								<span style="font-size: 16px;">Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">End Date</span>.Please ignore if already paid.</span>
 								<br><br>
-								<label style="color: red;">End Date:&nbsp;&nbsp;</label><input type="text" id="feesremindervar1" name="feesremindervar1" maxlength="9">
+								<label style="color: red;">End Date:&nbsp;&nbsp;</label><input type="text" id="feesremindervar1"
+								 value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>" name="feesremindervar1" maxlength="9">
 								<input type="hidden" id="feesremindervar1" name="feesremindervar1" maxlength="30">
 								<br><br>
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
