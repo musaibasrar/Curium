@@ -127,9 +127,15 @@ for(Cookie cookie : cookies){
 <div class='stamp'>School Stamp</div>
 <div class='header'>
 <table>
-<tr><td><b><i>School Name</i></b></td><td><b>AWAMI HIGH SCHOOL</b></td></tr>
-<tr><td><b><i>UDISE Code</i></b></td><td>36160902283</td></tr>
-<tr><td><b><i>Mandal & District</i></b></td><td>Zaheerabad, Dist. Sangareddy</td></tr>
+<tr><td>
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/rahmani/images/rahmani.png">
+			</td>
+				<td >
+					<br>
+					<h2 style="margin-bottom:0px;text-align:center;">${branchname}</h2>
+					<h3 style="margin-top:0px;text-align:center;">${branchaddress}<br>${branchcontact}</h3>
+					
+				</td></tr>
 <tr><td class='small' colspan='2'>School Recognition Proc. No. : 3452/B3/2019, Dated : 22/11/2019</td></tr>
 </table>
 </div>
