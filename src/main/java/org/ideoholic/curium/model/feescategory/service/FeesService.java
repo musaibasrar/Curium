@@ -901,7 +901,8 @@ for(int i = 0; i < feecategoryList.size(); i++) {
           // Column 4 – No. of installments
           .append("<td>")
           .append("<input type='text' size='18' required")
-          .append(" value='").append(checkFeesCat ? feecategoryList.get(i).getTotalinstallments() : "0").append("'")
+          //.append(" value='").append(checkFeesCat ? feecategoryList.get(i).getTotalinstallments() : "0").append("'")
+          .append(" value='").append("0").append("'")
           .append(" name='feesCount' id='feesCount_").append(i).append("'")
           .append(" onkeyup='calculate(").append(i).append(")' onclick='calculate(").append(i).append(")'/>")
           .append("<input type='hidden' name='totalinstallmentsactual' id='totalinstallmentsactual_").append(i).append("' value='").append(feecategoryList.get(i).getTotalinstallments()).append("'/>")
@@ -911,7 +912,8 @@ for(int i = 0; i < feecategoryList.size(); i++) {
           .append("<td>")
           .append("<input class='feesFullAmount' size='18' type='text'")
           .append(" name='feesFullCat' id='hiddenfees_full_amount_").append(i).append("'")
-          .append(" value='").append(totalAmountPerCategory).append("'/>")
+          //.append(" value='").append(totalAmountPerCategory).append("'/>")
+          .append(" value='").append("0").append("'/>")
           .append("</td>")
 
           .append("</tr>");
