@@ -11,4 +11,5 @@ public class AddScheduleDto {
     private String[] classesSelected;
     private String academicyear;
     private String exam;
+    private String sectionSelected;
 }
