@@ -8,102 +8,119 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Bonafide Certificate</title>
-<style>
-@page{size:A4;margin:8mm;}
-body{
-    font-family:"Times New Roman",serif;
-    background:#f5f5f5;
+
+<style type="text/css">
+<!--
+.headerText {
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: normal;
+	width: auto;
+	height: 22px;
+	vertical-align: middle;
+	text-align: center;
 }
-.page{
-    width:190mm;
-    min-height:277mm;
-    margin:auto;
-    background:#fff;
-    border:1px solid #777;
-    padding:10px;
-    box-sizing:border-box;
-    position:relative;
+
+.headerTextLeft {
+	width: 10px;
+	font-family: Tahoma;
+	font-size: 12px;
+	color: #FFFFFF;
+	font-weight: normal;
+	width: auto;
+	height: 22px;
+	vertical-align: middle;
+	text-align: left;
 }
-.inner{
-    border:1px solid #777;
-    min-height:255mm;
-    padding:12px;
-    position:relative;
+
+.dataTextBold {
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 12px;
+	letter-spacing: normal;
+	text-align: center;
 }
-.header table,.content table{
-    width:100%;
-    border-collapse:collapse;
+
+.dataTextBoldLeft {
+	font-weight: normal;
+	font-family: Tahoma;
+	color: black;
+	font-size: 14px;
+	letter-spacing: normal;
+	text-align: left;
 }
-td{
-    vertical-align:top;
-    font-size:22px;
+
+.dataTextBoldCenter {
+	font-weight: bold;
+	font-family: Tahoma;
+	color: black;
+	font-size: 18px;
+	letter-spacing: normal;
+	text-align: center;
 }
-.center{
-    text-align:center;
+
+.addressLine{
+	font-weight: normal;
+	font-family: ariel;
+	color: black;
+	font-size: 12px;
+	letter-spacing: normal;
+	text-align: center;
 }
-.title{
-    font-size:28px;
-    font-weight:700;
-    font-style:italic;
-    text-decoration:underline;
-    margin:10px 0 15px;
+
+.dataText {
+	font-family: Tahoma;
+	color: black;
+	font-size: 12px;
+	letter-spacing: normal;
+	text-align: center;
 }
-.line{
+-->
+
+span{
     display:inline-block;
-    border-bottom:1px solid #000;
-    min-width:220px;
-    height:auto;
-    vertical-align:middle;
-    text-align:center;
+    border-bottom:2px solid black;
+    padding-bottom:1px;
+    width: 300px;
+    font-weight: normal;
 }
-.small{
-    font-size:16px;
-}
-.stamp{
-    position:absolute;
-    right:18px;
-    top:18px;
-    width:110px;
-    height:110px;
-    border:1px solid #bbb;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#999;
-    font-style:italic;
-    font-size:18px;
-}
-.boxes{
-    border-collapse:collapse;
-    display:inline-table;
-    vertical-align:middle;
-}
-.boxes td{
-    width:24px;
-    height:24px;
-    border:1px solid #555;
-}
-.footer{
-    position:absolute;
-    bottom:14px;
-    left:12px;
-    right:12px;
-}
-.signature{
-    float:right;
-    text-align:center;
-    font-size:18px;
-    }
-.adharbox{
-text-align:center;
-}    
 </style>
+<style>
+@page {
+    size: A4;
+    margin: 10mm;
+}
+    .page {
+    width: 190mm;
+    min-height: 277mm;
+    border: 1px solid black;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: auto; 
+}
+.print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        @media print{
+            .print-btn{
+                display: none;
+            }
+        }
+</style>
+	<script type="text/javascript" src="/rahmani/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <title>Bonafide Certificate</title>
+</head>
 <%
 //allow access only if session exists
 String user = null;
@@ -120,66 +137,153 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-</head>
-<body>
-<div class='page'>
-<div class='inner'>
-<div class='stamp'>School Stamp</div>
-<div class='header'>
-<table>
-<tr><td><b><i>School Name</i></b></td><td><b>AWAMI HIGH SCHOOL</b></td></tr>
-<tr><td><b><i>UDISE Code</i></b></td><td>36160902283</td></tr>
-<tr><td><b><i>Mandal & District</i></b></td><td>Zaheerabad, Dist. Sangareddy</td></tr>
-<tr><td class='small' colspan='2'>School Recognition Proc. No. : 3452/B3/2019, Dated : 22/11/2019</td></tr>
-</table>
+<body style="text-align: center" class="bodymargin">
+	<jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<form method="post" class="bodymargin">
+	<div class="page">
+	<br><br>
+		<table align="center">
+			
+			
+			<tr>
+			<td>
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/rahmani/images/rahmani.png">
+			</td>
+				<td >
+					<br>
+					<h2 style="margin-bottom:0px;">${branchname}</h2>
+					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					
+				</td>
+			</tr>
+			</table>
+			
+		<table align="center" style="padding-left: 30px;padding-right: 20px;">
+			<tr>
+			<td class="dataTextBoldLeft">
+			<br>
+				<%-- Date:&nbsp;&nbsp;
+				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
+					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
+			
+			</tr>
+			
+			<tr>
+				<td colspan="4" class="dataTextBoldCenter">
+					<br>
+					<u>BONAFIDE CERTIFICATE</u>
+					<br><br>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			
+			</tr>
+			
+			<tr>
+			
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
+					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
+					</h3>
+				</td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+				
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;" >
+					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
+					is/ was a student of this School/College.
+					 
+					</h3>
+				</td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+				
+				<td class="dataTextBoldLeft">
+					<h3 style="font-weight: normal;" >
+					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+								&nbsp;&nbsp;&nbsp;&nbsp;
+								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+						    		${splt} 
+								</c:forEach>
+					</span>
+					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					</h3>
+				</td>
+			
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			
+				<td class="dataTextBoldLeft"  >
+				
+				<h3 style="font-weight: normal;" >
+					 as per School/College record is
+					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
+					</h3>
+					
+				</td>
+				
+
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
+				<h3 style="font-weight: normal;" align="center">
+					He/She bears good Moral Character
+					</h3>
+				</td>
+				
+
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		</table>
+		
+
+		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
+
+			<tr>
+			<td>
+			<br>
+			<br><br><br></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+		<tr>
+			<td style="padding-left: 10px;">Date</td>	
+			<td align="right" style="padding-right: 70px;">Principal</td>
+		</tr>
+		</TABLE>
+		</div>
+		<div class="print-btn">
+    <button onclick="window.print()">Print</button>
 </div>
-<div class='title center'>BONAFIDE CERTIFICATE</div>
-<div class='content'>
-<table>
-<tr><td colspan='2'>This is to certify that Mr./Ms.
-     <span class='line' style='min-width:400px;float: right;'>
-      <c:out value="${studentdetailsbonafide.student.name}" /></span></td></tr>
-<tr><td colspan='2'>S/o or D/o Sri. 
-    <span class='line' style='min-width:230px'><c:out value="${studentdetailsbonafide.fathersname}" />&nbsp;</span> &amp; Smt. 
-    <span class='line' style='min-width:230px;float: right;'>&nbsp;<c:out value="${studentdetailsbonafide.mothersname}" />
-    </span></td></tr>
-<tr><td colspan='2'>bearing admission No. <span class='line' style='min-width:160px'>&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> 
-is a bonafide student of this institution for the</td></tr>
-<tr><td colspan='2'>classes from <span class='line' style='min-width:130px'>&nbsp;
-<c:out value="${studentdetailsbonafide.student.classadmittedin}" /></span> to 
-<span class='line' style='min-width:130px'><c:out value="${studentdetailsbonafide.student.classstudying}" />
-</span> for the academic years from <span class='line' style='min-width:100px;'>&nbsp;
-<c:out value="${studentdetailsbonafide.student.yearofadmission}" /></span> to
- <span class='line' style='min-width:120px'>&nbsp;
- <c:out value="${studentdetailsbonafide.student.promotedyear}" /></span>.</td></tr>
-<tr><td colspan='2'>His/Her Date of Birth is <span class='line' style='min-width:220px'>
-<c:out value="${studentdetailsbonafide.student.dateofbirth}" /></span> (In words:
- <span class='line' style='min-width:120px;float: right;'>&nbsp; </span></td></tr>
-<tr><td colspan='2'><span class='line' style='min-width:620px'> ${dobInWords}</span>) as per relevant records of this institution.</td></tr>
-<tr><td colspan='2'>His / Her conduct is Satisfactory.</td></tr>
-<tr><td colspan='2' style='padding-top:25px;'>His/Her Aadhaar No.: 
-<table class='boxes'><tr>
-                <c:forEach var="i" begin="0" end="11">
-                    <td class="adharbox">
-                        ${fn:substring(studentdetailsbonafide.student.disabilitychild, i, i+1)}
-                    </td>
-                </c:forEach>
-            </tr></table></td></tr>
-<tr><td colspan='2' style='padding-top:12px;'>PEN No.: <span style='display:inline-block;width:95px'></span>
-<table class='boxes'><tr><c:forEach var="i" begin="0" end="11">
-                    <td class="adharbox">
-                        ${fn:substring(studentdetailsbonafide.student.pen, i, i+1)}
-                    </td>
-                </c:forEach></tr></table></td></tr>
-</table>
-</div>
-<div class='footer'>
-<div style='float:left;'>Date of Issue : <span class='line' style='min-width:300px'></span></div>
-<div class='signature'>Headmaster / Principal<br>Signature with Stamp</div>
-</div>
-</div>
-</div>
-<div style='text-align:center;margin:15px;' class='no-print'><button onclick='window.print()' style='padding:10px 20px;font-size:16px;cursor:pointer;'>Print</button></div>
-<style>@media print{.no-print{display:none;}body{background:#fff;}}</style>
+	</form>
 </body>
 </html>
