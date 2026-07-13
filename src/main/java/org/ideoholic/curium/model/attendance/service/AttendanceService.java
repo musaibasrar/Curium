@@ -801,21 +801,21 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList,dateofAttendance);
 			result.setMessage(res);
 			
 				if(res!=null) {
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
+						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto, dateofAttendance);
 					}
 			}
 		}
 		return result;
 	}
 	
-public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto, Date dateofAttendance) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -837,8 +837,9 @@ public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendance
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
-        				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent",parentDetails.get(0).getStudent().getBranchid());
+        				//String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				String todaysDate = new DateUtil().dateParserddMMYYYY(dateofAttendance);
+            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent", parentDetails.get(0).getStudent().getBranchid());
 						/*
 						 * if(parentDetails.size()>0) {
 						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }
