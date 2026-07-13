@@ -492,7 +492,7 @@
 					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
 				</tr>
 			</c:forEach>
-				<c:if test="${receiptinfo.fine > 0}">
+			<c:if test="${receiptinfo.fine > 0}">
 				<tr>
 					<td class="dataText"><c:out
 							value="Fine" /></td>

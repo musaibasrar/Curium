@@ -226,8 +226,8 @@ public class FeesCollectionActionAdapter {
         DetailsResponseDto responseDto = feesCollectionService.otherpreviewDetails(receiptNumber, duplicate, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("parents", responseDto.getParents());
         httpSession.setAttribute("student", responseDto.getStudent());
-        request.setAttribute("recieptdate", responseDto.getReceiptDate());
-        request.setAttribute("recieptinfo", responseDto.getOtherReceiptInfo());
+        request.setAttribute("receiptdate", responseDto.getReceiptDate());
+        request.setAttribute("receiptinfo", responseDto.getOtherReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
         request.setAttribute("user", responseDto.getUserLogin());
