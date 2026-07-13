@@ -584,6 +584,18 @@ for(Cookie cookie : cookies){
 										${classdetailslist.classdetails}
 										</c:if>	
 							</c:forEach>
+							&nbsp;&nbsp;&nbsp;
+							<select name="sectionselected" id="sectionselected" style="width: 70px;border-radius: 4px;background: white;height: 28px;">
+										<option selected></option>
+
+										<c:forEach items="${classdetailslist}" var="classdetailslist">
+											<c:if test="${(classdetailslist.section != '')}">
+												<option value="${classdetailslist.section}">
+													<c:out value="${classdetailslist.section}" />
+												</option>
+											</c:if>
+										</c:forEach>
+								</select>
 						</td>
 						</tr>
 						

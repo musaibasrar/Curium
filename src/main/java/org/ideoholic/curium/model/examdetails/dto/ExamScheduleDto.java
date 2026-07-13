@@ -6,6 +6,7 @@ import lombok.Data;
 public class ExamScheduleDto {
     private String academicYear;
     private String classH;
+    private String section;
     private String classAdmno;
     private String studentName;
     private String exam;

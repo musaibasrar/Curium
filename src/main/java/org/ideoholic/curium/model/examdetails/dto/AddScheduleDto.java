@@ -9,6 +9,7 @@ public class AddScheduleDto {
     private String[] startTime;
     private String[] endTime;
     private String[] classesSelected;
+    private String sectionSelected;
     private String academicyear;
     private String exam;
 }
