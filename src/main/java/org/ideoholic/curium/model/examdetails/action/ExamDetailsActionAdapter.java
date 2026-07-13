@@ -56,6 +56,7 @@ public class ExamDetailsActionAdapter {
         addScheduleDto.setStartTime(request.getParameterValues("starttime"));
         addScheduleDto.setEndTime(request.getParameterValues("endtime"));
         addScheduleDto.setClassesSelected(request.getParameterValues("classesselected"));
+        addScheduleDto.setSectionSelected(request.getParameter("sectionselected"));
         addScheduleDto.setAcademicyear(request.getParameter("academicyear"));
         addScheduleDto.setExam(request.getParameter("exam"));
 
@@ -87,6 +88,7 @@ public class ExamDetailsActionAdapter {
         ExamScheduleDto examScheduleDto = new ExamScheduleDto();
         examScheduleDto.setAcademicYear(request.getParameter("academicyear"));
         examScheduleDto.setClassH(request.getParameter("classsearch"));
+        examScheduleDto.setSection(request.getParameter("secsearch"));
         examScheduleDto.setClassAdmno(request.getParameter("classandsec"));
         examScheduleDto.setStudentName(request.getParameter("studentName"));
         examScheduleDto.setExam(request.getParameter("exam"));
