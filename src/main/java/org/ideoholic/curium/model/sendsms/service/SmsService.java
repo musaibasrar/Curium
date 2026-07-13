@@ -214,8 +214,8 @@ public class SmsService {
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
 	        String peid = properties.getProperty("peid");
-	        String templateid = properties.getProperty(templateType+"templateid");
-	        String templatemessage = properties.getProperty(templateType+"templatemessage");
+	        String templateid = properties.getProperty(templateType+"templateid"+branchId);
+	        String templatemessage = properties.getProperty(templateType+"templatemessage"+branchId);
 	        String[] messageSeq = message.split(":");
 	        String var1 = "";
 	        String var2 = "";
