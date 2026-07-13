@@ -9,4 +9,5 @@ public class ExamScheduleDto {
     private String classAdmno;
     private String studentName;
     private String exam;
+    private String section;
 }
