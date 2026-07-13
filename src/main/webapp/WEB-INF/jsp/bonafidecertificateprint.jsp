@@ -130,7 +130,7 @@ for(Cookie cookie : cookies){
 			<img border="0" style="vertical-align: text-bottom;height: 91px;width: 100px;" alt="logo" src="/noblewisdom/images/noblewisdom.png">
 			</td>
 				<td >
-					<h3 style="margin-bottom:0px;">NOBLE WISDOM ENGLISH MEDIUM SCHOOL<br>${branchaddress}
+					<h3 style="margin-bottom:0px;">NOBLE WISDOM ENGLISH SCHOOL<br>${branchaddress}
 					<br> Contact No. 7020123332</h3>
 					
 				</td>
@@ -188,7 +188,7 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-					 student of this high school studying in std &nbsp;&nbsp; 
+					 student of this school studying in std &nbsp;&nbsp; 
 					
 							<c:set var="itempart" value="${fn:split(studentdetailsbonafide.student.classstudying, '--')}" />
 					<span style="font-weight: bold;width: 70px;">
