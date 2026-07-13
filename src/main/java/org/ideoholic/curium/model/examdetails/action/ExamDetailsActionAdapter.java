@@ -117,12 +117,14 @@ public class ExamDetailsActionAdapter {
         printPreviewHallTicketDto.setAcademicYear(request.getParameter("academicyear"));
         printPreviewHallTicketDto.setClassStudying(request.getParameter("class"));
         printPreviewHallTicketDto.setStudentIds(request.getParameterValues("studentIDs"));
+        String hallticketnotes = request.getParameter("hallticketnotes");
 
         HallTicketResponseDto result = examDetailsService.printPreviewHallTicket(printPreviewHallTicketDto, httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("studentList", result.getStudentList());
         request.setAttribute("examname", result.getExamname());
         request.setAttribute("examschedulelist", result.getExamscheduleList());
         request.setAttribute("urlbranchid", result.getUrlbranchid());
+        request.setAttribute("hallticketnotes", hallticketnotes);
     }
     
     public void readListOfStudentsForHallTicket() {

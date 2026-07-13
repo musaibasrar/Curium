@@ -6,6 +6,7 @@ import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdap
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.*;
 import org.ideoholic.curium.model.user.service.UserService;
+import org.ideoholic.curium.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,10 +130,6 @@ public class UserActionAdapter {
         request.setAttribute("studentxaxis", responseDto.getXaxisList());
         request.setAttribute("studentyaxis", responseDto.getYaxisList());
         request.setAttribute("totalstudents",responseDto.getTotalStudents());
-        request.setAttribute("classNames", responseDto.getXaxisListClass());
-        request.setAttribute("boysData", responseDto.getYaxisListBoys());
-        request.setAttribute("girlsData", responseDto.getYaxisListGirls());
-        
     }
 
     public boolean authenticateUser() {
