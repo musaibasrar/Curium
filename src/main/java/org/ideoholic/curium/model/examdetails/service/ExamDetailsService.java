@@ -109,7 +109,7 @@ public class ExamDetailsService {
         String[] startTime = addScheduleDto.getStartTime();
         String[] endTime = addScheduleDto.getEndTime();
         String[] classesSelected = addScheduleDto.getClassesSelected();
-
+        String sectionSelected = DataUtil.emptyString(addScheduleDto.getSectionSelected());
 
         if (branchId != null) {
 
@@ -118,7 +118,11 @@ public class ExamDetailsService {
                 for (int i = 0; i < subject.length; i++) {
                     Examschedule examschedule = new Examschedule();
                     examschedule.setAcademicyear(DataUtil.emptyString(addScheduleDto.getAcademicyear()));
-                    examschedule.setClasses(selectedClass);
+                    if(sectionSelected.equalsIgnoreCase("")) {
+                    	examschedule.setClasses(selectedClass);
+                    }else {
+                    examschedule.setClasses(selectedClass+"--"+sectionSelected);
+                    }
                     examschedule.setExamname(DataUtil.emptyString(addScheduleDto.getExam()));
                     examschedule.setDate(DateUtil.dateParserUpdateStd(date[i]));
                     String[] starttimeSplit = startTime[i].split(":");
@@ -230,6 +234,7 @@ public class ExamDetailsService {
         String classAdmno = examScheduleDto.getClassAdmno();
         String studentName = examScheduleDto.getStudentName();
         String exam = examScheduleDto.getExam();
+        String section = DataUtil.emptyString(examScheduleDto.getSection());
 
         result.setSelectedclass(classH);
         result.setSelectedexam(exam);
@@ -241,6 +246,8 @@ public class ExamDetailsService {
         if (!classAdmno.equals("")) {
             String[] c = classAdmno.split("--");
             classH = c[0];
+        }else if (!section.equals("")) {
+            classH = classH+"--"+section;
         }
         if (branchId != null) {
 
