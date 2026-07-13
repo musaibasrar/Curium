@@ -959,7 +959,8 @@ response.getWriter().println(buffer.toString());
 	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
 	        	int j=0;
 	        	for (Classhierarchy classHierarchy : classHierarchyList) {
-	        		classHierarchyArray[j]=classHierarchy.getLowerclass();
+			      	//classHierarchyArray[j]=classHierarchy.getLowerclass();
+	        		classHierarchyArray[j]=classHierarchy.getUpperclass();
 	        		j++;
 				}
 
@@ -972,7 +973,7 @@ response.getWriter().println(buffer.toString());
 	                 }
 	             }
 	             
-	             if(diff>0) {
+	             if(diff>0  && classIndex>0) {
 	            	 searchClassName = classHierarchyArray[classIndex-diff];
 	             }else {
 	            	 searchClassName = classname;
