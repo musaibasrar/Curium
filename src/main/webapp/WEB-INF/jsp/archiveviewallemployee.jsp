@@ -424,8 +424,8 @@ for(Cookie cookie : cookies){
 
                             <tr class="trClass" style="border-color:#000000" border="1"  cellpadding="1"  cellspacing="1" >
                                 <td class="dataText"><input type="checkbox" id = "<c:out value="${Employee.tid}"/>" class = "chcktbl"  name="employeeIDs"  value="<c:out value="${Employee.tid}"/>"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/fathima/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${Employee.teachername}"/></a></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/fathima/EmployeeProcess/ViewDetails?id=<c:out value='${employee.tid}'/>"><c:out value="${Employee.contactnumber}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/fathima/EmployeeProcess/ViewDetails?id=<c:out value='${Employee.tid}'/>"><c:out value="${Employee.teachername}"/></a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" href="/fathima/EmployeeProcess/ViewDetails?id=<c:out value='${Employee.tid}'/>"><c:out value="${Employee.contactnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${Employee.department}"/></td>
                             </tr>
                         </c:forEach>
