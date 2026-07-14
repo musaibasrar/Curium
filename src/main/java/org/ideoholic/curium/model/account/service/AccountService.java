@@ -70,6 +70,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -81,7 +82,8 @@ public class AccountService {
 	    private HttpServletResponse response;
 	    
 	    private static final int BUFFER_SIZE = 4096;
-
+		
+		
 
 	public ResultResponse saveFinancialYear(AccountFinancialYearDto accountFinancialYearDto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
@@ -425,7 +427,7 @@ public class AccountService {
 	}
 
 
-	public CreateVoucherResponseDto saveReceipt(AccountReceiptDto accountReceiptDto, String branchId) {
+	public CreateVoucherResponseDto saveReceipt(AccountReceiptDto accountReceiptDto,  MultipartFile[] listOfFiles, String branchId) {
 
 		String draccountName = DataUtil.emptyString(accountReceiptDto.getDraccountName());
 		String craccountName = DataUtil.emptyString(accountReceiptDto.getCraccountName());
@@ -448,6 +450,23 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
 		transactions.setBranchid(Integer.parseInt(branchId));
+		try {
+		    if (listOfFiles != null && listOfFiles.length > 0) {
+
+		        if (listOfFiles.length > 0 && !listOfFiles[0].isEmpty()) {
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[0]));
+		        }
+		        if (listOfFiles.length > 1 && !listOfFiles[1].isEmpty()) {
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[1]));
+		        }
+		        if (listOfFiles.length > 2 && !listOfFiles[2].isEmpty()) {
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[2]));
+		        }
+		    }
+
+		} catch (IOException e) {
+		    log.error("Error processing file upload", e);
+		}
 		
 		
 		BigDecimal drAmountReceipt = new BigDecimal(drAmount);
@@ -463,7 +482,7 @@ public class AccountService {
 	}
 
 
-	public CreateVoucherResponseDto savePayment(AccountPaymentDto accountPaymentDto, String branchId) {
+	public CreateVoucherResponseDto savePayment(AccountPaymentDto accountPaymentDto,  MultipartFile[] listOfFiles, String branchId) {
 		
 		String draccountNamePayment = DataUtil.emptyString(accountPaymentDto.getDraccountName());
 		String craccountNamePayment = DataUtil.emptyString(accountPaymentDto.getCraccountName());
@@ -486,6 +505,23 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(branchId));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+		try {
+		    if (listOfFiles != null && listOfFiles.length > 0) {
+
+		        if (listOfFiles.length > 0 && !listOfFiles[3].isEmpty()) {
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[3]));
+		        }
+		        if (listOfFiles.length > 1 && !listOfFiles[4].isEmpty()) {
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[4]));
+		        }
+		        if (listOfFiles.length > 2 && !listOfFiles[5].isEmpty()) {
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[5]));
+		        }
+		    }
+
+		} catch (IOException e) {
+		    log.error("Error processing file upload", e);
+		}
 		
 		BigDecimal drAmount = new BigDecimal(drAmountPayment);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNamePayment);
@@ -501,7 +537,7 @@ public class AccountService {
 	}
 
 
-	public CreateVoucherResponseDto saveContra(AccountContraDto accountContraDto, String branchId) {
+	public CreateVoucherResponseDto saveContra(AccountContraDto accountContraDto,  MultipartFile[] listOfFiles, String branchId) {
 		
 		String draccountNameContra = DataUtil.emptyString(accountContraDto.getDraccountName());
 		String craccountNameContra = DataUtil.emptyString(accountContraDto.getCraccountName());
@@ -524,6 +560,24 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(branchId));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+		try {
+		    if (listOfFiles != null && listOfFiles.length > 0) {
+
+		        if (listOfFiles.length > 0 && !listOfFiles[6].isEmpty()) {
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[6]));
+		        }
+		        if (listOfFiles.length > 1 && !listOfFiles[7].isEmpty()) {
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[7]));
+		        }
+		        if (listOfFiles.length > 2 && !listOfFiles[8].isEmpty()) {
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[8]));
+		        }
+		    }
+
+		} catch (IOException e) {
+		    log.error("Error processing file upload", e);
+		}
+		
 		
 		BigDecimal drAmount = new BigDecimal(drAmountContra);
 		String updateDrAccount="update Accountdetailsbalance set currentbalance=currentbalance+"+drAmount+" where accountdetailsid="+Integer.parseInt(draccountNameContra);
@@ -538,7 +592,7 @@ public class AccountService {
 	}
 
 
-	public CreateVoucherResponseDto saveJournal(AccountJournalDto accountJournalDto, String branchId) {
+	public CreateVoucherResponseDto saveJournal(AccountJournalDto accountJournalDto, MultipartFile[] listOfFiles, String branchId) {
 		
 		String draccountNameJournal = DataUtil.emptyString(accountJournalDto.getDraccountNameJournal());
 		String craccountNameJournal = DataUtil.emptyString(accountJournalDto.getCraccountNameJournal());
@@ -561,6 +615,23 @@ public class AccountService {
 		transactions.setCancelvoucher("no");
 		transactions.setBranchid(Integer.parseInt(branchId));
 		transactions.setFinancialyear(new AccountDAO().getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
+		try {
+		    if (listOfFiles != null && listOfFiles.length > 0) {
+
+		        if (listOfFiles.length > 0 && !listOfFiles[9].isEmpty()) {
+		        	transactions.setSupportingDoc1(new DataUtil().processFile(listOfFiles[9]));
+		        }
+		        if (listOfFiles.length > 1 && !listOfFiles[10].isEmpty()) {
+		        	transactions.setSupportingDoc2(new DataUtil().processFile(listOfFiles[10]));
+		        }
+		        if (listOfFiles.length > 2 && !listOfFiles[11].isEmpty()) {
+		        	transactions.setSupportingDoc3(new DataUtil().processFile(listOfFiles[11]));
+		        }
+		    }
+
+		} catch (IOException e) {
+		    log.error("Error processing file upload", e);
+		}
 		
 
 		// Dr
