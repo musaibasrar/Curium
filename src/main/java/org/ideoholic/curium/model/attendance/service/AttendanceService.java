@@ -801,21 +801,21 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList,dateofAttendance);
 			result.setMessage(res);
 			
 				if(res!=null) {
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
+						sendSMSAbsentees(studentDailyAttendanceList,dateofAttendance);
 					}
 			}
 		}
 		return result;
 	}
 	
-public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList,Date dateofAttendance) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -826,7 +826,7 @@ public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendance
 						logger.info("send SMS "+e);
 					}
         
-        	String attendanceClass = dto.getAttendanceClass();
+        	String attendanceClass = request.getParameter("attendanceclass");
         	String absentMessage = null;
         	StringBuilder sbN = new StringBuilder();
         	String numbers = null;
@@ -837,7 +837,9 @@ public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendance
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
-        				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				//String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				String todaysDate = new DateUtil().dateParserddMMYYYY(dateofAttendance);
+        				System.out.println("todays date "+todaysDate);
             			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {
@@ -1113,7 +1115,6 @@ public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendance
 			inStream.close();
 			outStream.close();
 			result.setSuccess(true);
-			return result;
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
@@ -1634,5 +1635,5 @@ public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendance
 			}
 			return result;
 }
-	
+
 }
