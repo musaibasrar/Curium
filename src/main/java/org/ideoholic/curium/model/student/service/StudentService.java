@@ -40,6 +40,7 @@ import org.ideoholic.curium.model.feescollection.dto.OtherFeesDetailsResponseDto
 import org.ideoholic.curium.model.feescollection.dto.Otherreceiptinfo;
 import org.ideoholic.curium.model.feescollection.dto.Receiptinfo;
 import org.ideoholic.curium.model.feesdetails.dao.feesDetailsDAO;
+import org.ideoholic.curium.model.library.service.LibraryService;
 import org.ideoholic.curium.model.parents.dao.parentsDetailsDAO;
 import org.ideoholic.curium.model.parents.dto.ParentListResponseDto;
 import org.ideoholic.curium.model.parents.dto.Parents;
@@ -76,6 +77,8 @@ public class StudentService {
 	private StandardService standardService;
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
+	@Autowired
+	private LibraryService libraryService;
 
 	/**
 	 * Size of a byte buffer to read/write file
@@ -1499,5 +1502,45 @@ public class StudentService {
 			            out.close();
 			        }
 			}
+
+	public void getParentList(String branchid) throws IOException {
+
+		response.setContentType("text/xml");
+        response.setHeader("Cache-Control", "no-cache");
+
+		PrintWriter out = response.getWriter();
+
+		try {
+			if (branchid != null && !branchid.isEmpty()) {
+
+				ResultResponse result = libraryService.getActiveStudentsWithParents(branchid);
+
+				List<Parents> parentList = result.getResultList();
+
+				StringBuilder buffer = new StringBuilder();
+
+				buffer.append("<select id='parentId' name='parentId' class='textfieldvalues'>");
+				buffer.append("<option value=''>-- Select Parent --</option>");
+
+				if (parentList != null && !parentList.isEmpty()) {
+					for (Parents parent : parentList) {
+						buffer.append("<option value='").append(parent.getPid()) // use correct ID
+								.append("'>").append(parent.getFathersname()+"/"+parent.getContactnumber()) // use getter
+								.append("</option>");
+					}
+				}
+
+				buffer.append("</select>");
+
+				out.print(buffer.toString());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			out.print("<select><option value=''>No Parent Found</option></select>");
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
 
 }
