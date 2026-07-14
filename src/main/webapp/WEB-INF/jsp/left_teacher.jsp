@@ -475,108 +475,44 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
              
-            
-			
-             <!--  <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+             
+              <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+
+            				 <a target="mainFrame" href="/noblewisdom/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
+            			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            				 <a target="mainFrame" href="/noblewisdom/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
             			</td>
+            			
             		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
+            		
                 </table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            				 <a target="mainFrame" href="/noblewisdom/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/noblewisdom/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            			</td>
+            			
             		</tr>
                 </table>
-            </div> -->
+            </div>
             
-            
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AccountProcess/viewVoucherReceipt" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
             
               <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -603,129 +539,6 @@ for(Cookie cookie : cookies){
             		</tr> -->
                 </table>
             </div>
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            
-                 <!--  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-             <!-- <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            
-               
-            <!--   <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/noblewisdom/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
             
             <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -776,158 +589,17 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/noblewisdom/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/noblewisdom/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/noblewisdom/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/noblewisdom/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/noblewisdom/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
-            <div >
-                <a target="mainFrame" href="/noblewisdom/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/noblewisdom/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
-        	
-        	<div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Issue</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/MessItemsProcess/purchaseItems" style="font-size: 12px;">Receive</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
-              
-              <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/noblewisdom/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <!-- <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+          	<h5 class="sideaccordian" ><a href="#">Time Table</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/noblewisdom/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
-            			</td>
-            		</tr>
-            		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/noblewisdom/sendemail" style="font-size: 12px;">Email</a>
+            				<a target="mainFrame" href="/noblewisdom/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
             			</td>
             		</tr>
                 </table>
-            </div> -->
-            
-              <!--  <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/noblewisdom/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            
-           <!--  <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/noblewisdom/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				 </table>
             </div>
-             -->
+            
             </div>
                    
             
