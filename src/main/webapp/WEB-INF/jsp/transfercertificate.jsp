@@ -586,7 +586,6 @@ for(Cookie cookie : cookies){
                     <tr>
                     <td><br></td>
                     </tr>
-                    
                     <tr>
                     <td>Progress:</td><td> <input  type="text" name="classinword" id="classinword" style="width: 200px" /></td>    
                     <td>Conduct: &nbsp;&nbsp;&nbsp;&nbsp;</td><td> <input  type="text" name="conduct" id="conduct" style="width: 200px" /></td>
