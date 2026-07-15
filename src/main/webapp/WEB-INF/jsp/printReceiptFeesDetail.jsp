@@ -367,7 +367,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
 		<!-- <td><img src="/cambridge/images/cambridgepaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -568,7 +568,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${recieptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
 		<!-- <td><img src="/cambridge/images/cambridgepaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
