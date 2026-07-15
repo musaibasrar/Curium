@@ -483,6 +483,44 @@ function applyConcessionToAll() {
 }
 
 </script>
+<script>
+/*function calculateConcessionPercent(feesAmount, percentValue, sfsid,dueAmount) {
+    var percent = parseFloat(percentValue);
+    if (!isNaN(percent)) {
+        var concessionAmount = Math.round((feesAmount * percent) / 100);
+		var due = dueAmount
+        if (concessionAmount > due) {
+            document.getElementById('concession:' + sfsid).value = "";
+            document.getElementById(sfsid+'_concession').checked = false;
+            document.getElementById(sfsid).checked = true;
+        } else {
+            document.getElementById('concession:' + sfsid).value = concessionAmount;
+            document.getElementById(sfsid+'_concession').checked = true;
+        }
+    }
+}*/
+function calculateConcessionPercent(feesAmount, percentValue, sfsid, dueAmount) {
+
+    var percent = parseFloat(percentValue);
+
+    if (!isNaN(percent) && percentValue !== "") {
+
+        var concessionAmount = Math.round((feesAmount * percent) / 100);
+
+        if (concessionAmount > dueAmount) {
+            document.getElementById("concession:" + sfsid).value = "";
+            document.getElementById(sfsid).checked = false;
+        } else {
+            document.getElementById("concession:" + sfsid).value = concessionAmount;
+            document.getElementById(sfsid).checked = true;
+        }
+    } else {
+        document.getElementById("concession:" + sfsid).value = "";
+        document.getElementById(sfsid).checked = false;
+    }
+}
+
+</script>
 
     </head>
       <%
@@ -623,6 +661,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
+                             <th title="click to sort" class="headerText">Concession %&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Reason&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
@@ -643,11 +682,19 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
                                 <td class="dataText"><input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="dueamount:${feesstructure.sfsid}" value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}" readonly></td>
+                                 <!-- here -->
+                                 <td class="dataText"><input type="text" 
+       id="concessionPercent:${feesstructure.sfsid}" 
+       placeholder="%"
+       style="width: 50px; margin-left: 5px; font-size: 13px;" 
+       onkeyup="calculateConcessionPercent(${feesstructure.feesamount}, this.value, ${feesstructure.sfsid}, ${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff})"></td>
+                             
                                 <td class="dataText">
                                 <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
                                 <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid},this.value,${feesstructure.sfsid})" 
                                 name="concession:${feesstructure.sfsid}" class="concession"
                                 value="${feesstructure.concession}"></td>
+                               
                                 <td class="dataText">
 	                                <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}">		
                                 </td>
