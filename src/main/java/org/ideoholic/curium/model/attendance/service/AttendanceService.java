@@ -22,11 +22,14 @@ import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -75,7 +78,6 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -83,15 +85,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class AttendanceService {
-
-		@Autowired
+	
 	 	private HttpServletRequest request;
-
-		@Autowired
 	    private HttpServletResponse response;
+	    private HttpSession httpSession;
 	    private static final int BUFFER_SIZE = 4096;
-
-
+	    private String CURRENTACADEMICYEAR = "currentAcademicYear";
+	    private String BRANCHID = "branchid";
+	    
+	    private static final Logger logger = LogManager.getLogger(AttendanceService.class);
+	    
 	public ResultResponse viewAllHolidays(String branchId, String currentAcademicYear) {
 		//remove it after testing
 		//httpSession.setAttribute("currentAcademicYear", "2017/18");
@@ -131,7 +134,6 @@ public class AttendanceService {
 	}
 
 	public ResultResponse addWeekOff(WeekOffDto weekOffDto, String branchId, String currentAcademicYear) {
-		boolean success = true;
 		Weeklyoff weeklyOff = new Weeklyoff();
 		String[] weekOff = weekOffDto.getWeekOff();
 		if(weekOff!=null){
@@ -139,12 +141,15 @@ public class AttendanceService {
 			weeklyOff.setWeeklyoffday(weekOff[i]);
 			weeklyOff.setAcademicyear(currentAcademicYear);
 			weeklyOff.setBranchid(Integer.parseInt(branchId));
-			success &= new AttendanceDAO().saveWeeklyOff(weeklyOff);
+			return ResultResponse
+					.builder()
+					.success(new AttendanceDAO().saveWeeklyOff(weeklyOff))
+					.build();
 		}
 		}
 		return ResultResponse
 				.builder()
-				.success(success)
+				.success(false)
 				.build();
 	}
 
@@ -386,7 +391,7 @@ public class AttendanceService {
 		       		            }
 		                }
 		        } catch (FileUploadException e) {
-		        	log.error("file upload error"+ e);
+		        	logger.error(e);
 		        }
 		
 			if(!listStudentAttendance.isEmpty()){
@@ -411,7 +416,7 @@ public class AttendanceService {
 				        	return true;
 				        }
 					} catch (Exception e) {
-						log.info("checktimings "+e);
+						logger.info("checktimings "+e);
 					}
 					
 		return false;
@@ -653,7 +658,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	/*public boolean viewStudentAttendanceDetailsMonthlyGraphOLD() {
+	public boolean viewStudentAttendanceDetailsMonthlyGraphOLD() {
 		
 		if(httpSession.getAttribute(CURRENTACADEMICYEAR).toString()!=null){
 			
@@ -670,8 +675,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			Calendar cEnd = Calendar.getInstance();
 			cEnd.setTime(toDate);
 			cEnd.set(Calendar.DAY_OF_MONTH, cEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
-			*//*dateTemp = cEnd.getTime();
-			Timestamp toTimestamp = new Timestamp(dateTemp.getTime());*//*
+			/*dateTemp = cEnd.getTime();
+			Timestamp toTimestamp = new Timestamp(dateTemp.getTime());*/
 			int diffYear = Math.abs(cStart.get(Calendar.YEAR) - cEnd.get(Calendar.YEAR));
 			int diffMonth = diffYear * 12 + Math.abs(cStart.get(Calendar.MONTH) - cEnd.get(Calendar.MONTH));
 			int monthsDiff = cStart.get(Calendar.MONTH) - cEnd.get(Calendar.MONTH);
@@ -722,7 +727,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		request.setAttribute("studentList", studentList);
 		
 		return true;
-	}*/
+	}
 
 	public StudentAttendanceDetailsMarkResponseDto viewStudentAttendanceDetailsMark(StudentAttendanceDetailsMarkDto attendanceDetailsMarkDto, String branchId, String currentAcademicYear) {
 		
@@ -796,21 +801,21 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				studentDailyAttendanceList.add(studentDailyAttendance);
 			}
 					
-			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList);
+			String res = new AttendanceDAO().checkAndMarkStudentAttendance(studentDailyAttendanceList,dateofAttendance);
 			result.setMessage(res);
 			
 				if(res!=null) {
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
+						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto, dateofAttendance);
 					}
 			}
 		}
 		return result;
 	}
 	
-	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto, Date dateofAttendance) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -818,7 +823,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			        try {
 						properties.load(inputStream);
 					} catch (IOException e) {
-						log.info("send SMS "+e);
+						logger.info("send SMS "+e);
 					}
         
         	String attendanceClass = dto.getAttendanceClass();
@@ -832,7 +837,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
-        				String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				//String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
+        				String todaysDate = new DateUtil().dateParserddMMYYYY(dateofAttendance);
             			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {
@@ -1073,6 +1079,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 
 	public ResultResponse downloadFile() {
+		
 
 		ResultResponse result = ResultResponse.builder().build();
 		try {
@@ -1109,10 +1116,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			result.setSuccess(true);
 			return result;
 		} catch (Exception e) {
-			log.error("" + e);
-			result.setSuccess(false);
+			System.out.println("" + e);
 		}
 		return result;
+		
 		}
 
 	public ResultResponse viewAttendanceStaff(String branchId) {
@@ -1282,8 +1289,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 
 	public ResultResponse exportMonthlyDataStaff(MonthlyDataStaffDto monthlyDataStaffDto, String branchId, String currentAcademicYear) {
-		ResultResponse result = ResultResponse.builder().build();
-
+		
 		if(currentAcademicYear!=null){
 			
 		Date monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
@@ -1303,20 +1309,24 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
 		try {
-			result.setSuccess(true);
-			return exportDataToExcelStaff(staffsAttendance,monthOf);
+			ResultResponse
+					.builder()
+					.success(exportDataToExcelStaff(staffsAttendance,monthOf))
+					.build();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			result.setSuccess(false);
 		}
 		}
-		return result;
+		return ResultResponse
+				.builder()
+				.success(false)
+				.build();
 	}
 
-	private ResultResponse exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
+	private boolean exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
 
-		ResultResponse result = ResultResponse.builder().build();
+		boolean writeSucees = false;
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
 		int numberOfDays = cStart.getActualMaximum(Calendar.DAY_OF_MONTH);
@@ -1392,12 +1402,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx"));
 				workbook.write(out);
 				out.close();
-				result.setSuccess(true);
+				writeSucees = true;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return result;
+		return writeSucees;
 		// getFile(name, path);
 	}
 
@@ -1406,6 +1416,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 		ResultResponse result = ResultResponse.builder().build();
 		try {
+
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx");
 	        FileInputStream inStream = new FileInputStream(downloadFile);
 
@@ -1437,8 +1448,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			outStream.close();
 			result.setSuccess(true);
 		} catch (Exception e) {
-			log.error("" + e);
-			e.printStackTrace();
+			System.out.println("" + e);
 		}
 		return result;
 		
@@ -1625,5 +1635,5 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			}
 			return result;
 }
-
+	
 }
