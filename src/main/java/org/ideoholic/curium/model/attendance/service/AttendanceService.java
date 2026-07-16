@@ -811,7 +811,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 	}
 
-	public void markDailyAttendanceJob(){
+	public void markDailyAttendanceJob(int branchId){
 		
 			Date todaysDate = new Date();
 			try {
@@ -822,7 +822,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				e.printStackTrace();
 			}
 			List<Student> studentList = new studentDetailsDAO().getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
-			Currentacademicyear currentAcademicYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			Currentacademicyear currentAcademicYear = new YearDAO().showYear(branchId);
 			List<Attendancemaster> studentAttendanceMaster = new AttendanceDAO().getAttendanceMasterDetails("00011");
 			String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
 			List<Integer> studentWeeklyOffList = new ArrayList<Integer>();
@@ -1401,7 +1401,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 		}
 
-	public void markDailyAttendanceJobStaff() {
+	public void markDailyAttendanceJobStaff(int branchId) {
 		
 		Date todaysDate = new Date();
 		try {
@@ -1412,7 +1412,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			e.printStackTrace();
 		}
 		List<Teacher> staffList = new EmployeeDAO().readListOfObjects();
-		Currentacademicyear currentAcademicYear = new YearDAO().showYear(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+		Currentacademicyear currentAcademicYear = new YearDAO().showYear(branchId);
 		List<Staffdailyattendance> listStaffAttendance = new ArrayList<Staffdailyattendance>();
 		
 		for (Teacher teacher : staffList) {

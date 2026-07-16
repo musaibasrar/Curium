@@ -46,10 +46,11 @@ public class EmployeeDAO {
 		 	
 		 	if(queryList.size()>0) {
 		 		String tEId = queryList.get(0).getTeacherexternalid();
-			 	String externalIdNo = tEId.length() > 2 ? tEId.substring(tEId.length() - 2) : tEId;
-			 	employee.setTeacherexternalid(externalId+String.format("%02d",Integer.parseInt(externalIdNo)+1));
+		 		String externalIdNo = tEId.replaceAll("[^0-9]", "");
+			 	//String externalIdNo = tEId.length() > 2 ? tEId.substring(tEId.length() - 2) : tEId;
+			 	employee.setTeacherexternalid(externalId+String.format("%03d",Integer.parseInt(externalIdNo)+1));
 		 	}else {
-		 		employee.setTeacherexternalid(externalId+String.format("%02d",1));
+		 		employee.setTeacherexternalid(externalId+String.format("%03d",1));
 		 	}
 			
 			session.save(employee);

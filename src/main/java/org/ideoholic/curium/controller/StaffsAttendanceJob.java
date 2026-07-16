@@ -10,7 +10,7 @@ import org.ideoholic.curium.model.attendance.service.AttendanceService;
   public void execute(JobExecutionContext context) throws JobExecutionException {
     try {
     	System.out.println("In staff attendance job");
-         new AttendanceService().markDailyAttendanceJobStaff();
+         //new AttendanceService().markDailyAttendanceJobStaff();
 
     } catch (Exception ex) {
         System.out.println("entering the quartz config");  
