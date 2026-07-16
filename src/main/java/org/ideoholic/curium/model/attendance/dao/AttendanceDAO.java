@@ -23,6 +23,7 @@ import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
 import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.student.dto.Student;
+import org.ideoholic.curium.util.DateUtil;
 import org.ideoholic.curium.util.HibernateUtil;
 
 public class AttendanceDAO {
@@ -375,23 +376,23 @@ public class AttendanceDAO {
 		return studentDailyAttendance;
 	}
 
-	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList, Date dateofAttendance) {
 		
 		String result = null;
+		String attDate=  DateUtil.dateParseryyyymmdd(dateofAttendance);
 		
 		try {
 			transaction = session.beginTransaction();
 		
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
-				session.save(studentDailyAttendance);
-				/*Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
-				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= CURDATE() and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
+				Studentdailyattendance studentDailyAttendanceDetails = new Studentdailyattendance();
+				Query query = session.createQuery("from Studentdailyattendance  where attendeeid='"+studentDailyAttendance.getAttendeeid()+"' and date= '"+attDate+"' and academicyear = '"+studentDailyAttendance.getAcademicyear()+"'");
 				studentDailyAttendanceDetails = (Studentdailyattendance) query.uniqueResult();
 				if(studentDailyAttendanceDetails == null){
 					session.save(studentDailyAttendance);
 				}else{
 					return "error-Can't Mark the attendance twice!!!";
-				}*/
+				}
 			}
 			
 			transaction.commit();
