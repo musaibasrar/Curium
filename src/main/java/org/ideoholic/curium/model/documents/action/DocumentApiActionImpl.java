@@ -271,7 +271,17 @@ public class DocumentApiActionImpl implements DocumentApiAction {
 			  }
 	  
 	  }
+	 
+	 @GetMapping("/studentsRegistrationReports")
+		public ResponseEntity<ResultResponse> studentsRegistrationReports(@RequestHeader(value = "branchid") String branchId) {
+		 ResultResponse result = standardService.viewClasses(branchId);
+		 return ResponseEntity.ok(result);
+		}
 
-	
+	 @PostMapping("/multiClassSearchRegistrationReport")
+		public ResponseEntity<SearchStudentResponseDto> multiClassSearchRegistrationReport(@RequestBody StudentNameSearchDto studentNameSearchDto, @RequestHeader(value = "branchid") String branchId) {
+		SearchStudentResponseDto result = documentService.multiClassSearchRegistrationReport(studentNameSearchDto,branchId); 
+		return ResponseEntity.ok(result);
+		}
 
 }
