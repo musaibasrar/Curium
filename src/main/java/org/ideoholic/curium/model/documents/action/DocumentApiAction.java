@@ -87,4 +87,6 @@ public interface DocumentApiAction {
 	public ResponseEntity<CharacterResponseDto> scDetail(@RequestHeader(value = "branchid") String branchId);
 	
     public ResponseEntity<CharacterResponseDto> printScList(@RequestBody CharacterDto characterDto,@RequestHeader(value = "branchid") String branchId);
+    
+    public ResponseEntity<ResultResponse> studentsRegistrationReports(@RequestHeader(value = "branchid") String branchId);
 }
