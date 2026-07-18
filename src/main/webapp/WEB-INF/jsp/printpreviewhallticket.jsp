@@ -247,8 +247,8 @@ for(Cookie cookie : cookies){
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine"> ${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="90" height="90"/></td>
-			</tr>
+				<%-- <td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="90" height="90"/></td>
+			 --%></tr>
 		</table>
 
 <TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
@@ -259,10 +259,12 @@ for(Cookie cookie : cookies){
                 </tr>
             </TABLE>
             
-            <table width="100%" style="border-collapse: collapse;">
+            <table width="68%" style="border-collapse: collapse;float:left;">
 					
 				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+					<td class="dataTextBoldCenter" style="width: 100%">
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Hall Ticket<br>
+					&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;${examname}
 					</td>
 				</tr>
 				<tr>
@@ -270,8 +272,13 @@ for(Cookie cookie : cookies){
 				</tr>
 				<tr></tr>
 			</table>
-
-			<table style=" border-collapse: collapse;width: 100%;">
+              <table width="30%" style="float:right;text-align:right;">
+            <tr>
+            <td><img src="data:image;base64,<c:out value='${Parents.student.studentpic}'/>"
+                             width="90" height="90"/></td>
+            </tr>
+            </table>
+			<table width="68%" style=" border-collapse: collapse;float:right;" >
 											
                             <tr style="border-color:#000000">
                                 <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label></td>
