@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marks Card Annual Exam (2020-21)</title>
+    <title>Marks Card Annual Exam </title>
     <link rel="stylesheet" href="styles.css">
     <style>
     body {
@@ -132,12 +132,11 @@ footer p {
     <div>
      <c:forEach items="${markssheetlist}" var="Parents">
        <header style="display: flex; align-items: center; gap: 15px;">
-    <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/sac/images/sac${branchid}.png">
+    <img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/sac/images/sac.png">
     <div style="background-color:blue;color:white;border-radius:10px;">
-        <h1 style="text-transform:Uppercase;">${branchname},BIDAR</h1>
+        <h1 style="text-transform:Uppercase;">${branchname}</h1>
     </div>
 </header>
- <h3 align="center" style="margin-bottom:0px;">English Medium School With Shoba-E-Hifz and IIT Foundation Course</h3>
  <h3 align="center" style="margin-top:0px;">Marks Card<br> ${examname}<br> (${currentAcademicYear})</h3>
         <section class="student-info">
     <div class="student-details">
@@ -185,7 +184,9 @@ footer p {
                 </tr>
                 <tr>
                     <td><strong>Percentage</strong></td>
-                    <td colspan="4">${exammarks.percentage}</td>
+                    <td colspan="4">
+                    <%-- ${exammarks.percentage} --%><fmt:formatNumber value="${exammarks.percentage}" pattern="0.00"/>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>Grade</strong></td>
