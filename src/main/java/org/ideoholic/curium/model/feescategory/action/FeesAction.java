@@ -6,10 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.ideoholic.curium.model.feescategory.service.FeesService;
+import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.student.action.StudentActionAdapter;
-import org.ideoholic.curium.model.student.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +30,8 @@ public class FeesAction {
 	private FeesActionAdapter feesActionAdapter;
 	@Autowired
 	private StudentActionAdapter studentActionAdapter;
+	@Autowired
+	private FeesCollectionActionAdapter feesCollectionActionAdapter;
 
 	@PostMapping("/applyConcession")
 	public String applyConcession() {
@@ -280,5 +281,20 @@ public class FeesAction {
 		standardActionAdapter.viewClasses();
 		feesActionAdapter.viewFees();
 		return "feesoutstanding";
+	}
+	
+	@GetMapping("/bulkConcession")
+	public String bulkConcession() {
+		standardActionAdapter.viewClasses();
+		feesActionAdapter.viewFees();
+		return "bulkconcession";
+	}
+	
+	
+	@PostMapping("/applyBulkConcession")
+	public String applyBulkConcession() {
+		feesActionAdapter.applyBulkConcession();
+		feesCollectionActionAdapter.getFeesReport();
+		return "bulkconcession";
 	}
 }
