@@ -9,4 +9,5 @@ public class FeesIdDetailsDto {
 	private String toDate;
 	private String fromDate;
 	private String oneDay;
+	private String feesCollector;
 }
