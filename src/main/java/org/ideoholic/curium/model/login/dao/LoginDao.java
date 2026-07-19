@@ -96,7 +96,7 @@ public class LoginDao {
 		boolean result = false;
 		try {
             transaction = session.beginTransaction();
-            Query queryUpdate = session.createSQLQuery("update Login set username='"+login.getUsername()+"',password='"+login.getPassword()+"',usertype='"+login.getUsertype()+"' where lid="+login.getLid()+" ");
+            Query queryUpdate = session.createSQLQuery("update login set username='"+login.getUsername()+"',password='"+login.getPassword()+"',usertype='"+login.getUsertype()+"' where lid="+login.getLid()+" ");
             queryUpdate.executeUpdate();
             transaction.commit();
             result = true;
