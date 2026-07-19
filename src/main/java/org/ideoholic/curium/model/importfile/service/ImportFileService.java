@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -86,79 +87,97 @@ public class ImportFileService {
 
 							}
 						}
-						student.setAdmissionnumber(row.getCell(1).getStringCellValue());
-						//student.setSts(row.getCell(1).getStringCellValue());
-						student.setStudentexternalid(row.getCell(0).getStringCellValue());
-						student.setName(row.getCell(2).getStringCellValue());
-						student.setGender(row.getCell(3).getStringCellValue());
-						
-						student.setDateofbirth(DateUtil.simpleDateParser(
-						(row.getCell(16).getStringCellValue()) + "/" +
-						(row.getCell(17).getStringCellValue()) + "/" +
-						 (row.getCell(18).getStringCellValue())));
-						 
-						student.setAge(Integer.parseInt(row.getCell(5).getStringCellValue()));
-						//student.setPlaceofbirth(row.getCell(6).getRawValue());
-						student.setAdmissiondate(DateUtil.simpleDateParser(
-								(row.getCell(19).getStringCellValue()) + "/" + (row.getCell(20).getStringCellValue())
-										+ "/" + (row.getCell(21).getStringCellValue())));
-						student.setClassstudying(row.getCell(8).getStringCellValue()+"--");
-						
-						student.setClassadmittedin(row.getCell(42).getStringCellValue()+"--");
-						student.setRte(0);
-						student.setStream("Admission");
-						student.setYearofadmission("2025/26");
-						//student.setBloodgroup(row.getCell(9).getStringCellValue());
-						//student.setMothertongue(row.getCell(10).getStringCellValue());
-						student.setReligion(row.getCell(11).getStringCellValue());
-						student.setStudentscaste(row.getCell(12).getStringCellValue());
-						student.setNationality(row.getCell(13).getStringCellValue());
-						//student.setStudentscastecertno(row.getCell(14).getStringCellValue());
-						student.setDisabilitychild(row.getCell(14).getStringCellValue());//Aadhar no
-						//student.setSocialcategory(row.getCell(15).getStringCellValue());
-						// student.setSecondlanguage(row.getCell(15).getStringCellValue());
-						student.setCreateddate(DateUtil.simpleDateParser(
-								(row.getCell(22).getStringCellValue()) + "/" + (row.getCell(23).getStringCellValue())
-										+ "/" + (row.getCell(24).getStringCellValue())));
+						student.setAdmissionnumber(getCellValue(row, 0));
+						student.setSts(getCellValue(row, 1));
+						student.setStudentexternalid(getCellValue(row, 46));
+						student.setName(getCellValue(row, 2));
+						student.setGender(getCellValue(row, 3));
 
-						//student.setSchoollastattended(row.getCell(38).getStringCellValue());
-						// student.setLastschooladdress(row.getCell(39).getStringCellValue());
-						// student.setTotalmarks(Integer.parseInt(row.getCell(40).getStringCellValue()));
-						// student.setPercentage(row.getCell(41).getStringCellValue());
-						//student.setLastfirstlanguage(row.getCell(44).getStringCellValue());
-						student.setUserid(Integer.parseInt(row.getCell(45).getStringCellValue()));
-						//student.setBhagyalakshmibondnumber(row.getCell(50).getStringCellValue());
-						//student.setSts(row.getCell(49).getStringCellValue());
+						student.setDateofbirth(DateUtil.simpleDateParser(
+						        getCellValue(row, 16) + "/" +
+						        getCellValue(row, 17) + "/" +
+						        getCellValue(row, 18)));
+
+						student.setAge(Integer.parseInt(getCellValue(row, 5)));
+						student.setPlaceofbirth(getCellValue(row, 6));
+
+						/*student.setAdmissiondate(DateUtil.simpleDateParser(
+						        getCellValue(row, 19) + "/" +
+						        getCellValue(row, 20) + "/" +
+						        getCellValue(row, 21)));*/
+
+						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 47));
+
+						//student.setClassadmittedin(getCellValue(row, 42) + "--");
+						//student.setBloodgroup(getCellValue(row, 9));
+						student.setMothertongue(getCellValue(row, 10));
+						student.setReligion(getCellValue(row, 11));
+						//student.setStudentscaste(getCellValue(row, 12));
+						student.setNationality(getCellValue(row, 13));
+						//student.setStudentscastecertno(getCellValue(row, 14));
+						//student.setDisabilitychild(getCellValue(row, 14)); // Aadhar no
+						//student.setSocialcategory(getCellValue(row, 15));
+						//student.setSecondlanguage(getCellValue(row, 15));
+
+						student.setCreateddate(DateUtil.simpleDateParser(
+						        getCellValue(row, 22) + "/" +
+						        getCellValue(row, 23) + "/" +
+						        getCellValue(row, 24)));
+
+						//student.setSchoollastattended(getCellValue(row, 38));
+						//student.setLastschooladdress(getCellValue(row, 39));
+						//student.setTotalmarks(Integer.parseInt(getCellValue(row, 40)));
+						//student.setPercentage(getCellValue(row, 41));
+						//student.setLastfirstlanguage(getCellValue(row, 44));
+
+						student.setUserid(2);
+
+						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
+						//student.setSts(getCellValue(row, 49));
 
 						student.setBranchid(2);
 						student.setArchive(0);
 						student.setPassedout(0);
 						student.setDroppedout(0);
 						student.setLeftout(0);
-						//student.setStudentexternalid(row.getCell(1).getStringCellValue());
+
+						//student.setStudentexternalid(getCellValue(row, 1));
+
 						student.setLeftout(0);
 
-						parent.setFathersname(row.getCell(25).getStringCellValue());
-						//parent.setProfession(row.getCell(26).getStringCellValue());
-						//parent.setFathersqualification(row.getCell(27).getStringCellValue());
-						parent.setContactnumber(row.getCell(28).getStringCellValue());
-						//parent.setParentsannualincome(row.getCell(29).getStringCellValue());
-						// parent.setEmergencycontactno(row.getCell(30).getStringCellValue());
-						parent.setAddresspermanent(row.getCell(31).getStringCellValue());
-						//parent.setAddresstemporary(row.getCell(32).getStringCellValue());
-						//student.setGuardiandetails(row.getCell(33).getStringCellValue());
-						//parent.setRemarks(row.getCell(34).getStringCellValue());
-						parent.setMothersname(row.getCell(35).getStringCellValue());
-						//parent.setMotherscastecertno(row.getCell(36).getStringCellValue());
-						// parent.setProfession(row.getCell(36).getStringCellValue());
-						//parent.setMothersqualification(row.getCell(52).getStringCellValue());
-						parent.setCocontactnumber(row.getCell(30).getStringCellValue());
-						parent.setFatherscastecertno(row.getCell(47).getStringCellValue());
-						parent.setMotherscastecertno(row.getCell(48).getStringCellValue());
-						//parent.setAddresspermanent(row.getCell(54).getStringCellValue()+"-"+row.getCell(55).getStringCellValue()+"-"+row.getCell(56).getStringCellValue()+"-"+row.getCell(57).getStringCellValue()+"-"+row.getCell(58).getStringCellValue());
+						parent.setFathersname(getCellValue(row, 25));
+						//parent.setProfession(getCellValue(row, 26));
+						//parent.setFathersqualification(getCellValue(row, 27));
+
+						parent.setContactnumber(getCellValue(row, 28));
+
+						//parent.setParentsannualincome(getCellValue(row, 29));
+						//parent.setEmergencycontactno(getCellValue(row, 30));
+
+						parent.setAddresspermanent(getCellValue(row, 31));
+
+						//parent.setAddresstemporary(getCellValue(row, 32));
+						//student.setGuardiandetails(getCellValue(row, 33));
+						//parent.setRemarks(getCellValue(row, 34));
+
+						parent.setMothersname(getCellValue(row, 35));
+
+						//parent.setMotherscastecertno(getCellValue(row, 36));
+						//parent.setProfession(getCellValue(row, 36));
+						//parent.setMothersqualification(getCellValue(row, 52));
+						//parent.setCocontactnumber(getCellValue(row, 37));
+						//parent.setFatherscastecertno(getCellValue(row, 47));
+						//parent.setMotherscastecertno(getCellValue(row, 48));
+
+						//parent.setAddresspermanent(
+//						        getCellValue(row, 54) + "-" +
+//						        getCellValue(row, 55) + "-" +
+//						        getCellValue(row, 56) + "-" +
+//						        getCellValue(row, 57) + "-" +
+//						        getCellValue(row, 58));
 						
 						parent.setStudent(student);
-						parent.setBranchid(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+						parent.setBranchid(Integer.parseInt(branchId));
 
 						listParents.add(parent);
 
@@ -179,7 +198,17 @@ public class ImportFileService {
 						listParentLogin.add(login);
 					}
 					
-					return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
-		
+		return ResultResponse.builder().success(new parentsDetailsDAO().createMultiple(listParents,listParentLogin)).build();
+	}
+	
+	private String getCellValue(Row row, int cellIndex) {
+	    DataFormatter formatter = new DataFormatter();
+	    Cell cell = row.getCell(cellIndex);
+
+	    if (cell == null) {
+	        return "";
+	    }
+
+	    return formatter.formatCellValue(cell).trim();
 	}
 }
