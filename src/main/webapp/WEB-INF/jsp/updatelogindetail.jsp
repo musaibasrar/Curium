@@ -303,7 +303,7 @@
 						</tr>
 						<tr>
 							<td class="alignLeft">User Type</td>
-							<td><input name="usertype" type="text" class="myclass" id="datepicker" size="20" autocomplete="false"   value=" <c:out default="" value="${logindetail.usertype}" />"></td>
+							<td><input name="usertype" type="text" class="myclass" id="datepicker" size="20" autocomplete="false"   value="<c:out default="" value="${logindetail.usertype}" />" readonly></td>
 							<td class="alignLeft" style="padding-left: 20px;"></td>
 							<td></td>
 						</tr>
