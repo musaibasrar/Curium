@@ -23,6 +23,7 @@ public class SearchByDateResponseDto {
     private long fine;
     private long misc;
     private String feesCollectorName;
+    private String userName;
     @Builder.Default
     private boolean success = false;
 }

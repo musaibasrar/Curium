@@ -60,6 +60,7 @@ public class UserActionAdapter {
         httpSession.setAttribute("sumoffine", responseDto.getFine());
         httpSession.setAttribute("sumofmisc", responseDto.getMisc());
         httpSession.setAttribute("feescollectorname", responseDto.getFeesCollectorName());
+        httpSession.setAttribute("feescollector", responseDto.getUserName());
     }
 
     public void advanceSearchByParents() {

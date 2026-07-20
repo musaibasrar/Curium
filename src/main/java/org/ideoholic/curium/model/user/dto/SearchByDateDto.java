@@ -17,4 +17,5 @@ public class SearchByDateDto {
     private String modeOfPayment;
     private String feesCollector;
     private String academicYear;
+    private String user;
 }
