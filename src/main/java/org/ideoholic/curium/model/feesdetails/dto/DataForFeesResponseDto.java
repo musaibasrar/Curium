@@ -17,5 +17,6 @@ public class DataForFeesResponseDto {
 	private long sumOfMisc;
 	private String dateRangeFeesCollection;
 	private boolean success;
+	private String feesCollector;
 
 }
