@@ -1,8 +1,10 @@
 package org.ideoholic.curium.model.feescategory.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -239,6 +241,63 @@ public class FeesActionAdapter {
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 		feescategoryResponseDto = feesService.getFeesMonths(httpSession.getAttribute(BRANCHID).toString());
     	request.setAttribute("feesmonths", feescategoryResponseDto.getFeesMonths());
+	}
+	
+	public void applyBulkConcession() {
+		List<ConcessionDto> concessionDtoList = new ArrayList<ConcessionDto>();
+		Map<String, String> allRequestParameters = new HashMap<>();
+			List<String> sfsIdsList = new ArrayList<>();
+			String[] selectedStudents = request.getParameterValues("studentIDs");
+
+			if (selectedStudents != null) {
+
+			    for (String studentId : selectedStudents) {
+			    	ConcessionDto concessionDto = new ConcessionDto();
+			    	String[] stdId = studentId.split("_");
+			    	
+			        Enumeration<String> parameterNames = request.getParameterNames();
+
+			        while (parameterNames.hasMoreElements()) {
+
+			            String paramName = parameterNames.nextElement();
+			            // concession_101_55
+			            if (paramName.startsWith("concession_" + stdId[1] + "_")) {
+
+			                String concessionValue = request.getParameter(paramName);
+
+			                String[] parts = paramName.split("_");
+
+			                String sfsId = parts[2];
+			                sfsIdsList.add(sfsId);
+			                
+			                String fieldNameConcession = "concession:"+sfsId;			                
+			                allRequestParameters.put(fieldNameConcession, concessionValue);
+			                
+			                
+			                // Build old concession field name
+			                String oldConcessionField = "concessionold_" + stdId[1] + "_" + sfsId;
+			                String oldConcessionValue =  request.getParameter(oldConcessionField);
+			                
+			                String fieldNameConcessionold = "concessionold:"+sfsId;			                
+			                allRequestParameters.put(fieldNameConcessionold, oldConcessionValue);
+			                
+			                // Build Due Amount field name
+			                String dueAmountField = "dueamount_" + stdId[1] + "_" + sfsId;
+			                String dueAmountValue =  request.getParameter(dueAmountField);
+			                
+			                String fieldNameDueAmount = "dueamount:"+sfsId;			                
+			                allRequestParameters.put(fieldNameDueAmount, dueAmountValue);
+			            }
+			        }
+			        String[] sfsIds = sfsIdsList.toArray(new String[0]);
+					concessionDto.setSfsid(sfsIds);
+					concessionDto.setId(stdId[0]);
+					concessionDto.setRequestParams(allRequestParameters);
+					concessionDtoList.add(concessionDto);
+			    }
+			}
+		
+			feesService.applyConcessionBulk(concessionDtoList,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString(),httpSession.getAttribute(USERID).toString());
 	}
 	
 }

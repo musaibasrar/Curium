@@ -192,14 +192,14 @@ public class feesCategoryDAO {
 		}
 	}
 
-	public void applyConcession(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
+	public void applyConcession(List<Concession> concessionList, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
 		
 		try {
 			transaction = session.beginTransaction();
 			for (Concession concession : concessionList) {
 				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
 				query.executeUpdate();
-				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+concession.getSid()+"'");
 				queryAcademicFees.executeUpdate();
 			}
 			
@@ -485,6 +485,61 @@ public class feesCategoryDAO {
 				HibernateUtil.closeSession();
 			return result;
 
+		}
+	}
+	
+	
+	public void applyConcessionBulk(List<Concession> concessionList, String sid, List<VoucherEntrytransactions> transactionsReverseList, List<VoucherEntrytransactions> transactionsApplyList, List<String> updateDrAccountReverseList, List<String> updateCrAccountReverseList, List<String> updateDrAccountApplyList, List<String> updateCrAccountApplyList) {
+		
+		try {
+			transaction = session.beginTransaction();
+			for (Concession concession : concessionList) {
+				Query query = session.createQuery("update Studentfeesstructure as fees set fees.concession='"+Integer.parseInt(concession.getConcession())+"', fees.concessionnotes='"+concession.getConcessionNotes()+"' where fees.sfsid='"+concession.getSfsid()+"'");
+				query.executeUpdate();
+				Query queryAcademicFees = session.createQuery("update Academicfeesstructure as academicfees set academicfees.totalfees=academicfees.totalfees+'"+Integer.parseInt(concession.getConcessionOld())+"'-'"+Integer.parseInt(concession.getConcession())+"' where academicfees.sid='"+sid+"'");
+				queryAcademicFees.executeUpdate();
+			}
+			
+			
+			
+			
+			//accounts
+			for (VoucherEntrytransactions transactions : transactionsReverseList) {
+				session.save(transactions);
+			}
+			
+			for (VoucherEntrytransactions transactions : transactionsApplyList) {
+				session.save(transactions);
+			}
+			
+			for (String updateDrAccountReverse : updateDrAccountReverseList) {
+				Query queryAccountsReverse = session.createQuery(updateDrAccountReverse);
+				queryAccountsReverse.executeUpdate();
+			}
+			
+			for (String updateCrAccountReverse : updateCrAccountReverseList) {
+				Query queryAccountsReverse = session.createQuery(updateCrAccountReverse);
+				queryAccountsReverse.executeUpdate();
+			}
+			
+			for (String updateDrAccountApply : updateDrAccountApplyList) {
+				Query queryAccountsApply = session.createQuery(updateDrAccountApply);
+				queryAccountsApply.executeUpdate();
+			}
+			
+			for (String updateCrAccountApply : updateCrAccountApplyList) {
+				Query queryAccountsApply = session.createQuery(updateCrAccountApply);
+				queryAccountsApply.executeUpdate();
+			}
+			
+			
+			transaction.commit();
+		} catch (Exception hibernateException) {
+			transaction.rollback(); 
+			logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
 		}
 	}
 
