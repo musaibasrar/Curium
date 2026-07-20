@@ -613,7 +613,19 @@
 
     </script>
 
-
+<script>
+$(function() {
+	$("#deadline").datepicker({
+		changeYear : true,
+		changeMonth : true,
+		dateFormat: 'dd/mm/yy',
+		yearRange: "-1:+2"
+	});
+	$("#anim").change(function() {
+		$("#deadline").datepicker("option", "showAnim", $(this).val());
+	});
+});
+</script>
 
 </head>
   <%
@@ -634,6 +646,10 @@ for(Cookie cookie : cookies){
 %>
 <body>
 	<form id="form1" action="/rahmani/FeesCollection/exportDataForStudentsFeesReport" method="POST">
+	<%
+			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
+		%>
+		<jsp:useBean id="now" class="java.util.Date" scope="page" />
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -892,7 +908,8 @@ for(Cookie cookie : cookies){
                     <td  class="footerTD" colspan="9" >
                     
                     		<button value="Export" type="submit" id="export">Export</button>&nbsp;&nbsp;<button value="Print" id="print">Print</button>
-                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
+                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label>
+                    		<input type="text" id="deadline" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>">
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;
