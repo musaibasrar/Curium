@@ -464,7 +464,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/StudentProcess/QuickStudentSave" style="font-size: 12px;">Quick Student Save</a>
+            				 <a target="mainFrame" href="/rahmani/StudentProcess/QuickStudentSave" style="font-size: 12px;">Quick Student Save</a>
             			</td>
             		</tr>
             		<tr>
