@@ -117,6 +117,11 @@ public class UserService {
 			       }
 			}
 			
+			if(userType[0].equalsIgnoreCase("teacher")) {
+				Teacher employee = new EmployeeDAO().getEmployeeDetails(userName);
+				   result.setProfileName(employee.getTeachername());
+			}
+			
 			//get the Previous Year List
 			int previousYears = 4;
 			int futureYears = 1;
