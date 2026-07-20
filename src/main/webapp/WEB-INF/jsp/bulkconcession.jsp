@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Fees Report</title>
+<title>Bulk Concession</title>
 <link rel="stylesheet" href="/rahmani/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/rahmani/css/datePicker/demos.css">
 <style type="text/css">
@@ -92,6 +92,27 @@
 	font-weight: bold;
 }
 
+.alignRightFields {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: right;
+	font-weight: bold;
+}
+
+.alignSearch {
+	font-family: Tahoma;
+	font-size: 11px;
+	font-style: normal;
+	text-transform: capitalize;
+	color: #325F6D;
+	text-align: left;
+	vertical-align: middle;
+	font-weight: bold;
+}
+
 .alignRightMultiple {
 	font-family: Tahoma;
 	font-size: 11px;
@@ -100,6 +121,20 @@
 	vertical-align: middle;
 	font-style: normal;
 	color: #325F6D;
+}
+
+.footerTD {
+	border-radius: 3px;
+	width: 10px;
+	font-family: Tahoma;
+	background-color: #4b6a84;
+	color: #FFFFFF;
+	font-weight: Bold;
+	width: auto;
+	height: 24px;
+	vertical-align: text-top;
+	background-image:
+		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
 }
 
 .alignCentreMultiple {
@@ -191,14 +226,15 @@
 
 .headerText {
 	border-radius: 3px;
+	width: 10px;
 	font-family: Tahoma;
 	font-size: 12px;
 	background-color: #4b6a84;
 	color: #FFFFFF;
-	font-weight: normal;
+	font-weight: bold;
 	width: auto;
 	height: 27px;
-	vertical-align: text-top;
+	/* vertical-align: text-top; */
 	text-align: center;
 	background-image:
 		url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
@@ -261,15 +297,7 @@
 	font-weight: bold;
 	height: 22px;
 }
-.footerTD{
-                border-radius:6px;
-                background-color:#4b6a84;
 
-
-                text-align: left;
-
-
-            }
 </style>
 <style>
 #button {
@@ -288,10 +316,8 @@
 <script type="text/javascript"
 	src="/rahmani/js/datePicker/ui/jquery.ui.datepicker.js"></script>
 <script type="text/javascript" src="/rahmani/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/rahmani/js/datePicker/ui/sliderAccess.js"></script>
 
-<script type="text/javascript"
-	src="/rahmani/js/validation/jquery.ketchup.all.min.js"></script>
+
 <script type="text/javascript"
 	src="/rahmani/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
@@ -310,12 +336,20 @@
 	src="/rahmani/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
 	src="/rahmani/js/datePicker/ui/jquery.effects.blind.js"></script>
-<script type="text/javascript"
-	src="/rahmani/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
+		
+		$('#myTableFeesCat').dataTable({
 			"sScrollY" : "380px",
 			"bPaginate" : false,
 			"bLengthChange" : false,
@@ -343,23 +377,16 @@
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/rahmani/FeesCollection/searchFeesReportDue";
+		form1.action = "/rahmani/FeesCollection/searchFeesReportBulkConcession";
 		form1.method = "POST";
 		form1.submit();
 
 	}
 	
-	function sendSMS() {
-		var form1 = document.getElementById("form1");
-		form1.action = "/rahmani/SMSProcess/sendSMSFeesDueReminder";
-		form1.method = "POST";
-		form1.submit();
-
-	}
 	
-	function printRecords() {
+	function applyConcession() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/rahmani/FeesDetails/printDataForFeesReportdue";
+		form1.action = "/rahmani/FeesProcess/applyBulkConcession";
 		form1.method = "POST";
 		form1.submit();
 }
@@ -370,19 +397,17 @@
 			searchForStudents();
 		});
 		
-		/* $("#sendsms").button().click(function() {
-			sendSMS();
-			return false;
+		
+		$("#applyconcession").button({
+            icons:{
+                primary: "ui-icon-flag"
+            }
+        }).click(function(){
+            applyConcession();
+            return false;
 
-		}); */
-	      $("#sendsms").button({
-	             icons:{
-	                 primary: "ui-icon-mail-closed"
-	             }
-	         }).click(function(){
-	        	 sendSMS();	
-	         	});
-	             
+        });
+		
 
 	});
 
@@ -403,16 +428,6 @@
 				primary : "ui-icon-transferthick-e-w"
 			}
 		});
-	});
-	
-	$(function() {
-		$("#print").button({
-			 icons : {
-				primary : "ui-icon-print"
-			} 
-		}).click(function(){
-			printRecords();	
-     	});
 	});
 
 	$(function() {
@@ -448,42 +463,6 @@
 
 	});
 	
-	
-	
-	$(function() {
-		$('#chckHeadSMS').click(function() {
-			var length = $('.chcktblSMS:checked').length;
-			var trLength = $('.labelClass').length;
-			if (length > 0) {
-				$('.chcktblSMS:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktblSMS:checked').attr('checked', false);
-				} else {
-					$('.chcktblSMS:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		
-		$('.chcktblSMS').click(function() {
-			var length = $('.chcktblSMS:checked').length;
-			var trLength = $('.labelClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktblSMS:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktblSMS:not(:checked)').attr('disabled', false);
-			}
-		});
-
-	});
-	
-	
 	$(function() {
 		$('#chckHead1').click(function() {
 			var length = $('.chcktbl1:checked').length;
@@ -517,7 +496,6 @@
 
 	});
 	
-
 	
 </script>
 
@@ -613,6 +591,39 @@
 
     </script>
 
+<script>
+function toggleSelectAll(source) {
+    const checkboxes = document.querySelectorAll(".chcktbl1");
+    checkboxes.forEach(cb => cb.checked = source.checked);
+}
+
+function syncSelectAll() {
+    const checkboxes = document.querySelectorAll(".chcktbl1");
+    const selectAll = document.getElementById("chckHead1");
+
+    selectAll.checked = Array.from(checkboxes)
+                             .every(cb => cb.checked);
+}
+</script>
+
+<script>
+function toggleStudentCheckbox(textbox, studentId) {
+
+    var checkbox = document.getElementById(studentId);
+
+    if (!checkbox) {
+        return;
+    }
+
+    var value = parseFloat(textbox.value) || 0;
+
+    if (value > 0) {
+        checkbox.checked = true;
+    } else {
+        checkbox.checked = false;
+    }
+}
+</script>
 
 
 </head>
@@ -633,11 +644,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/rahmani/FeesCollection/exportDataForStudentsFeesReport" method="POST">
-		<!-- <div style="height: 28px">
-			<button id="add">Add Department</button>
-			<br />
-		</div> -->
+	<form id="form1" action="/rahmani/FeesProcess/applyBulkConcession" method="POST">
 
 		<div id="effect" class="ui-widget-content ui-corner-all">
 			<div id="tabs">
@@ -648,11 +655,32 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 				
 					<table>
-					<tr>
+						<tr>
+							<td style="font-weight: bold;color:#325F6D">Student Type &nbsp;</td>
+							<td><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
+										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
+						
+						 <tr>
 						<td style="font-weight: bold;color:#325F6D">Select All</td>
 						<td><input type="checkbox" id="chckHead1" /></td>
 						</tr>
-						<tr>
+
+<tr><td colspan="2"><br/></td></tr>
+
+<tr>
     <td style="font-weight:bold;color:#325F6D">Class:</td>
     <td>
 
@@ -689,7 +717,6 @@ for(Cookie cookie : cookies){
     </td>
 </tr>
 
-						
 							<tr>
 							<td><br /></td>
 
@@ -726,12 +753,22 @@ for(Cookie cookie : cookies){
 							</td>
 							
 						</tr>
-											
 						<tr>
     <td></td>
     <td id="feescat">
-        <div style="overflow:scroll;width:420px;height:100px;">
+    
+        <div style="overflow:scroll;width:420px; height:250px;">
 
+    <table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
+
+        <thead>
+            <tr>
+                <th class="headerText">Select</th>
+                <th class="headerText">Fees Details</th>
+            </tr>
+        </thead>
+
+        <tbody>
             <c:forEach items="${feescategory}" var="item">
 
                 <!-- reset checked flag -->
@@ -744,26 +781,39 @@ for(Cookie cookie : cookies){
                     </c:if>
                 </c:forEach>
 
-                <label class="labelClass" style="font-weight:bold;color:#325F6D">
-                    <input type="checkbox"
-                           name="feescategory"
-                           class="chcktbl"
-                           value="${item.idfeescategory}"
-                           <c:if test="${isChecked}">checked</c:if>
-                           onclick="syncFeesSelectAll()" />
-                    ${item.feescategoryname} :
-                </label>
+                <tr>
+                    <td class="dataText" style="background-color:white;">
 
-                <label style="font-weight:bold;color:#eb6000">
-                    ${item.particularname}
-                </label>
-                <br/>
+                        <input type="checkbox"
+                               name="feescategory"
+                               class="chcktbl"
+                               value="${item.idfeescategory}"
+                               <c:if test="${isChecked}">checked</c:if>
+                               onclick="syncFeesSelectAll()" />
+
+                    </td>
+
+                    <td class="dataText"
+                        style="font-weight:bold;color:#325F6D;background-color:white;text-align:left">
+
+                        ${item.feescategoryname} :
+                        <span style="color:#eb6000;">
+                            ${item.particularname}
+                        </span>
+
+                    </td>
+                </tr>
 
             </c:forEach>
+        </tbody>
 
-        </div>
+    </table>
+
+</div>
+
     </td>
 </tr>
+
 						 <tr>
 							<td><br /></td>
 
@@ -811,16 +861,16 @@ for(Cookie cookie : cookies){
 
 				<thead>
 					<tr>
-						<th class="headerText"><input type="checkbox" id="chckHeadSMS" /></th>
-						<th title="click to sort" class="headerText">Sl.No</th>
+						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
+						<th class="headerText">Sl No</th>
 						<th title="click to sort" class="headerText">UID</th>
-						<th title="click to sort" class="headerText">Admission Number</th>
+						<!-- <th title="click to sort" class="headerText">Admission Number</th> -->
 						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 						<th title="click to sort" class="headerText">Class & Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Father Name&nbsp;</th>
-						<th title="click to sort" class="headerText">Contact No.&nbsp;</th>
-						<th title="click to sort" class="headerText">Fees Details(Due Amount/Total Amount)</th>
-						<th title="click to sort" class="headerText">Fees Summary(Due Amount/Total Amount)</th>
+						<!-- <th title="click to sort" class="headerText">Contact No.&nbsp;</th> -->
+						<th title="click to sort" class="headerText">Fees Details<br>(Due Amount/Total Amount)</th>
+						<th title="click to sort" class="headerText">Fees Summary<br>(Due Amount/Total Amount)</th>
 					</tr>
 				</thead>
 
@@ -833,21 +883,20 @@ for(Cookie cookie : cookies){
 
 						<tr class="trClass" style="border-color: #000000" border="1"
 							cellpadding="1" cellspacing="1">
-							<td class="dataText"><input type="checkbox"
-								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktblSMS"
+							 <td class="dataText"><input type="checkbox"
+								id="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" class="chcktbl"
 								name="studentIDs"
-								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
+								value="<c:out value="${studentfeesreportlist.parents.student.sid}"/>_<c:out value="${studentfeesreportlist.parents.student.sid}"/>" /></td>
+								<td class="dataText" align="center">${status.index + 1}</td>
 								<td class="dataText"><c:out
-										value="${status.index+1}" /></td>
-										<td class="dataText"><c:out
 										value="${studentfeesreportlist.parents.student.studentexternalid}" /></a></td>
-							<td class="dataText"><c:out
-										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td>
+							<%-- <td class="dataText"><c:out
+										value="${studentfeesreportlist.parents.student.admissionnumber}" /></a></td> --%>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.student.name}" /></td>
 							<td class="dataText"><c:out
 									value="${studentfeesreportlist.parents.student.classstudying}" /></td>
 							<td class="dataText"><c:out value="${studentfeesreportlist.parents.fathersname}" /></td>
-							<td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td>
+							<%-- <td class="dataText"><c:out value="${studentfeesreportlist.parents.contactnumber}" /></td> --%>
 							<td class="dataText">
 									<c:set var="DueAmount" value="0" />
 									<c:set var="TotalAmount" value="0" />
@@ -861,6 +910,20 @@ for(Cookie cookie : cookies){
 												${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}/${studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}
 											</td>
 										</tr>
+										<tr>
+										<td style="width: 160px;" align="right">
+												Concession Amt.:&nbsp;&nbsp;&nbsp;	
+											</td>
+											<td align="left">
+												<input type="hidden" name="dueamount_<c:out value="${studentfeesreportlist.parents.student.sid}"/>_${studentfeescatagorydetails.sfsid}" value="${studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid-studentfeescatagorydetails.concession-studentfeescatagorydetails.waiveoff}" readonly>
+												<input type="hidden" id="concessionold_<c:out value="${studentfeesreportlist.parents.student.sid}"/>_${studentfeescatagorydetails.sfsid}" name="concessionold_<c:out value="${studentfeesreportlist.parents.student.sid}"/>_${studentfeescatagorydetails.sfsid}" value="${studentfeescatagorydetails.concession}">
+												<input type="text" 
+                      style="background-color: #E3EFFF;border-style: none;color: #4B6A84;" 
+                      name="concession_<c:out value="${studentfeesreportlist.parents.student.sid}"/>_${studentfeescatagorydetails.sfsid}"
+                      placeholder="Enter concession"  onkeyup="toggleStudentCheckbox(this, '<c:out value="${studentfeesreportlist.parents.student.sid}"/>')"
+                      value="${studentfeescatagorydetails.concession}">
+											</td>
+										</tr>
 									</table>
 									<c:set var="DueAmount" value="${DueAmount+studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
 									<c:set var="TotalAmount" value="${TotalAmount+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
@@ -868,38 +931,49 @@ for(Cookie cookie : cookies){
 									<c:set var="TotalPaidAmount" value="${TotalPaidAmount+studentfeescatagorydetails.feespaid}" />
 									<c:set var="TotalDueAmount" value="${TotalDueAmount+(studentfeescatagorydetails.feesamount-studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
 									<c:set var="TotalSum" value="${TotalSum+(studentfeescatagorydetails.feesamount - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff)}" />
-								    <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
-								    <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
+								      <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
+								     <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
 								</c:forEach>
 							</td>
 							<td class="dataText">
 									<table>
 										<tr>
-											<td style="width: 160px;" align="right">
-												${DueAmount}<%-- /${TotalAmount} --%>&nbsp;&nbsp;&nbsp;	
-											</td>
+											<c:if test="${DueAmount > 0}">
+												<td style="width: 160px;" align="right" >
+													<label style="color: red;">${DueAmount}/${TotalAmount}</label>&nbsp;&nbsp;&nbsp;
+												</td>
+											</c:if>
+											
+											<c:if test="${DueAmount == 0}">
+												<td style="width: 160px;" align="right" >
+													${DueAmount}/${TotalAmount}&nbsp;&nbsp;&nbsp;
+												</td>
+											</c:if>
+													
+											
 										</tr>
 									</table>
 							</td>
 						</tr>
 					</c:forEach>
 				</tbody>
-				
 				<tfoot>
-				
-				<tr>
-                    
-                    <td  class="footerTD" colspan="9" >
-                    
-                    		<button value="Export" type="submit" id="export">Export</button>&nbsp;&nbsp;<button value="Print" id="print">Print</button>
-                    		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label><input type="text" id="deadline">
-                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                             &nbsp;&nbsp;&nbsp;&nbsp;
-                           <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)</label>
-                            </td>
-                   </tr>
-                   
+					<tr>
+					&nbsp;&nbsp;
+					<td colspan="4"  class="footerTD" style="textalign:left"> <button value="applyconcession" type="submit" id="applyconcession">Apply</button>
+							</td>
+													
+						<td class="footerTD" style="text-align: center" colspan="4" >
+						 
+						 Total Amount: ${TotalSum}
+						 &nbsp;&nbsp;&nbsp;
+						 Total Paid Amount : ${TotalPaidAmount} (<fmt:formatNumber value="${TotalSumper}" pattern="0" />%) &nbsp;&nbsp;&nbsp; Total Due Amount: ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0" />%)
+						 
+						</td>
+							
+							
+
+					</tr>
 				</tfoot>
 			</table>
 
