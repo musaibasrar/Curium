@@ -296,6 +296,7 @@
 }
 </style>
 <link rel="stylesheet" href="/scholar/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
 <script type="text/javascript" src="/scholar/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
 	src="/scholar/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -389,7 +390,58 @@
 
 </script>
 
-
+<script>
+var students = [
+    <c:forEach varStatus="status" items="${studentListFeesCollection}" var="parent">{
+    	value:'<c:out default="0" value="${parent.student.name}" />',
+        admissionno:'<c:out default="0" value="${parent.student.admissionnumber}" />',
+        regno:'<c:out default="0" value="${parent.student.studentexternalid}" />',
+        name:'<c:out default="0" value="${parent.student.name}" />',
+        classandsec:'<c:out default="0" value="${parent.student.classstudying}" />',
+        id:'<c:out default="0" value="${parent.student.sid}" />',
+        fathername:'<c:out default="0" value="${parent.fathersname}" />',
+        
+    }<c:if test="${!status.last}">,</c:if>
+    </c:forEach>
+];
+$(function() {
+    $( "#studentname").autocomplete({
+    	minLength: 1,
+    	source: function(request, response) {
+    	      var term = $.trim(request.term);
+    	      if (!term) { response([]); return; }
+    	      var matcher = new RegExp($.ui.autocomplete.escapeRegex(term), "i");
+    	      var matches = $.grep(students, function(item) {
+    	        // check any fields you want to be searchable
+    	        return matcher.test(item.name)
+    	            || matcher.test(item.value)
+    	            || matcher.test(item.regno)
+    	            || matcher.test(item.admissionno)
+    	            || matcher.test(item.fathername);
+    	      });
+    	      response(matches);
+        },
+        focus: function( event, ui ) {
+            $( "#studentId").val( ui.item.id );
+            return true;
+        },
+        select: function( event, ui ) {
+            $( "#studentId").val( ui.item.id );
+			  $( "#studentName").val( ui.item.name );
+			$( "#classandsec").val( ui.item.classandsec );
+			$( "#admissionno").val( ui.item.admissionno );
+			$( "#fathername").val( ui.item.fathername );
+            /* $("#classandsec"+rowCount).val( ui.item.classandsec ); */
+            return true;
+        }
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+        return $( "<li></li>" )
+        .data( "item.autocomplete", item )
+        .append( "<a><b> " + item.value +" / "+item.classandsec+" / "+item.regno+" / "+item.fathername+" </b> </a>" )
+        .appendTo( ul );
+    };
+});
+</script>
 
 
 
@@ -426,8 +478,9 @@ for(Cookie cookie : cookies){
 						<tr>
 							<td class="alignRightFields">Student Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
-									name="namesearch" type="text" class="myclass" id="namesearch"
-									size="36"">
+									name="namesearch" type="text" class="myclass" id="studentname"
+									size="36""><input name="studentId" type="hidden" id="studentId" value="" />
+									<input  type="hidden" name="fathername" id="fathername" class="myclass" />
 							</label></td>
 							
 						</tr>
