@@ -130,8 +130,12 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/scholar/images/scholarheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td><a target="leftFrame" href="/scholar/left_officeadmin"> <img
-									src="/scholar/images/home.svg" width="18" height="18" 
+								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/vision/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
+							<td><a target="leftFrame" href="/vision/left_officeadmin"> <img
+									src="/vision/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
