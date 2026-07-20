@@ -77,6 +77,7 @@ public class StudentActionAdapter {
 
         BonafideGenerationResponseDto responseDto = studentService.generateBonafide(dto);
         httpSession.setAttribute("studentdetailsbonafide", responseDto.getParents());
+        request.setAttribute("dobInWords", responseDto.getDateOfBirth());
 
         return responseDto;
     }
