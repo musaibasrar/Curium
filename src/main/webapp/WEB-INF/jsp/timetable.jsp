@@ -351,7 +351,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.class_}</td>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.classSec}</td>
 				</tr>
 			</table>
 			<table width="100%" border="1" style="border-color: #4b6a84;"
