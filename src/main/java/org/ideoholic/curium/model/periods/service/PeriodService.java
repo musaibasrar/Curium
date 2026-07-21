@@ -66,7 +66,7 @@ public class PeriodService {
 	}
 
 	public ResultResponse savePeriods(PeriodsSaveDto dto, String branchId, String userId) {
-		ResultResponse result = ResultResponse.builder().build();
+ResultResponse result = ResultResponse.builder().build();
 		
 		String academicYear = DataUtil.emptyString(dto.getAcademicYear());
 		String totalNoOfPeriods = DataUtil.emptyString(dto.getTotalNoOfPeriods());
@@ -116,7 +116,7 @@ public class PeriodService {
 		List<Perioddetails> periodDetailsList = new ArrayList<>();
 		Periodmaster periodMaster = new Periodmaster();
 		periodMaster.setAcademicyear(academicYear);
-		periodMaster.setClass_(fromClass);
+		periodMaster.setClassSec(fromClass);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
@@ -270,25 +270,25 @@ public class PeriodService {
 				
 				if("monday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					mondayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					mondayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}else if("tuesday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					tuesdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					tuesdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}else if("wednesday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					wednesdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					wednesdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}else if("thursday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					thursdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					thursdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}else if("friday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					fridayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					fridayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}else if("saturday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					saturdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					saturdayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}else if("sunday".equalsIgnoreCase(perioddetails.getDays())) {
 					String periodNo = perioddetails.getPeriods();
-					sundayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClass_());
+					sundayMap.put(periodNo.substring(periodNo.length() - 1), periodMaster.getClassSec());
 				}
 				
 			}
@@ -483,7 +483,7 @@ public class PeriodService {
 		}
 
 		Periodmaster periodMaster = new Periodmaster();
-		periodMaster.setClass_(fromClass);
+		periodMaster.setClassSec(fromClass);
 		periodMaster.setAcademicyear(academicYear);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
