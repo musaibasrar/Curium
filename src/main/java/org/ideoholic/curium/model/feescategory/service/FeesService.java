@@ -636,7 +636,7 @@ public class FeesService {
                         		transactionsReverse.setCancelvoucher("no");
                         		transactionsReverse.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
                         		transactionsReverse.setBranchid(Integer.parseInt(branchId));
-                        		transactionsReverse.setUserid(Integer.parseInt(branchId));
+                        		transactionsReverse.setUserid(Integer.parseInt(userId));
                         		
                         		String updateDrAccountReverse="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionReverse+" where accountdetailsid="+drAccount;
 
