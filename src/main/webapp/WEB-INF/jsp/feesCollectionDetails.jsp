@@ -694,7 +694,23 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td>&nbsp;</td>
 						</tr>
+						<tr>
+							<td width="20%" class="alignRight">Fees Collector&nbsp;&nbsp;</td>
+							<td ><label>
+                                         <select name="feescollector" id="feescollector"
+									style="width: 240px">
+										<option value="${userloginid}:${username}" selected>${username}</option>
+										</select>
+                              </label></td>
+						</tr>
+							
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
 						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
 						<!-- <tr>
 							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
 							<td ><label> <select name="selectedbranchid"
