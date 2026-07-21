@@ -8,7 +8,7 @@
             <column name="idperiodmaster" />
             <generator class="identity" />
         </id>
-        <property name="class_" type="string">
+        <property name="classSec" type="string">
             <column name="class" length="45" />
         </property>
         <property name="totalperiods" type="java.lang.Integer">
