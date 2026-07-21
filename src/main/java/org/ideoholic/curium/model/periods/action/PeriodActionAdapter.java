@@ -7,6 +7,8 @@ import org.ideoholic.curium.model.periods.dto.*;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
+import org.ideoholic.curium.util.Constants;
+import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,13 +106,13 @@ public class PeriodActionAdapter {
         dto.setStaff(request.getParameterValues("staff"));
         dto.setPeriodStartTimeHr(request.getParameterValues("periodstarttimehr"));
         dto.setPeriodStartTimeMin(request.getParameterValues("periodstarttimemin"));
-        dto.setPeriodEndTimeAm(request.getParameterValues("periodstarttimeam"));
+        dto.setPeriodStartTimeAm(request.getParameterValues("periodstarttimeam"));
         dto.setPeriodEndTimeHr(request.getParameterValues("periodendtimehr"));
         dto.setPeriodEndTimeMin(request.getParameterValues("periodendtimemin"));
         dto.setPeriodEndTimeAm(request.getParameterValues("periodendtimeam"));
         dto.setDays(request.getParameterValues("days"));
 
-        ResultResponse resultResponse = periodService.savePeriods(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString());
+        ResultResponse resultResponse = periodService.savePeriods(dto, DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.BRANCHID), DataUtil.getSessionAttributeOrElseNull(httpSession, Constants.USERID));
 
         return resultResponse.isSuccess();
     }
