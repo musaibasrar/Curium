@@ -84,6 +84,8 @@ public class FeesCollectionAction {
     			return "feesCollectionDetailsAdmin";
     		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
     			return "feesCollectionDetailsAdmin";
+    		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
+    			return "feesCollectionDetailsAdmin";
     		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
     			return "feesCollectionDetails";
     		} else {
@@ -308,6 +310,8 @@ public class FeesCollectionAction {
 	        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
 	        			return "feesCollectionDetailsAdmin";
 	        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("principal")) {
+	        			return "feesCollectionDetailsAdmin";
+	        		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("feescollector")) {
 	        			return "feesCollectionDetailsAdmin";
 	        		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 	        			return "feesCollectionDetails";

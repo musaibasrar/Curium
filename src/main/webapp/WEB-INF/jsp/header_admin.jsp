@@ -172,9 +172,9 @@ for(Cookie cookie : cookies){
 							</a></td>
 
 							<td ><a target="mainFrame"
-								href="/littleflower/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/littleflower/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
+								href="/littleflower/FeesProcess/bulkConcession"><img
+									alt="Bulk Concession" src="/littleflower/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Bulk Concession
 							</a></td>
 
 							<td ><!-- <a target="mainFrame" href="/littleflower/sendsms"><img
