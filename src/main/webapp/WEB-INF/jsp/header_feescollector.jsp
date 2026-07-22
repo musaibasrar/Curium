@@ -132,13 +132,15 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/sac/images/sacheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
-							<td>
-							<a target="leftFrame" href="/sac/left_feescollector"><img
-									src="/sac/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Home		
-								</a>
-							</td>
-							
+								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/sac/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
+							<td><a target="leftFrame" href="/sac/left_feescollector"> <img
+									src="/sac/images/home.svg" width="18" height="18" 
+									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
+							</a></td>
+
 							<td><a target="mainFrame"
 								href="/sac/FeesProcess/feesCollect"> <img
 									src="/sac/images/feescollect.svg" width="18" height="18"
