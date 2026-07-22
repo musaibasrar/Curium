@@ -631,7 +631,29 @@ $(function() {
 	});
 });
 </script>
-
+<script type="text/javascript" charset="utf-8">
+	$(document).ready(function() {
+		/*$('#myTable').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});*/
+		
+		$('#myTableFeesCat').dataTable({
+			"sScrollY" : "380px",
+			"bPaginate" : false,
+			"bLengthChange" : false,
+			"bFilter" : true,
+			"bSort" : true,
+			"bInfo" : false,
+			"bAutoWidth" : false
+		});
+	});
+</script>
 </head>
   <%
 //allow access only if session exists
@@ -747,12 +769,22 @@ for(Cookie cookie : cookies){
 							</td>
 							
 						</tr>
-											
 						<tr>
     <td></td>
     <td id="feescat">
-        <div style="overflow:scroll;width:420px;height:100px;">
+    
+        <div style="overflow:scroll;width:420px; height:250px;">
 
+    <table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
+
+        <thead>
+            <tr>
+                <th class="headerText">Select</th>
+                <th class="headerText">Fees Details</th>
+            </tr>
+        </thead>
+
+        <tbody>
             <c:forEach items="${feescategory}" var="item">
 
                 <!-- reset checked flag -->
@@ -765,34 +797,38 @@ for(Cookie cookie : cookies){
                     </c:if>
                 </c:forEach>
 
-                <label class="labelClass" style="font-weight:bold;color:#325F6D">
-                    <input type="checkbox"
-                           name="feescategory"
-                           class="chcktbl"
-                           value="${item.idfeescategory}"
-                           <c:if test="${isChecked}">checked</c:if>
-                           onclick="syncFeesSelectAll()" />
-                    ${item.feescategoryname} :
-                </label>
+                <tr>
+                    <td class="dataText" style="background-color:white;">
 
-                <label style="font-weight:bold;color:#eb6000">
-                    ${item.particularname}
-                </label>
-                <br/>
+                        <input type="checkbox"
+                               name="feescategory"
+                               class="chcktbl"
+                               value="${item.idfeescategory}"
+                               <c:if test="${isChecked}">checked</c:if>
+                               onclick="syncFeesSelectAll()" />
+
+                    </td>
+
+                    <td class="dataText"
+                        style="font-weight:bold;color:#325F6D;background-color:white;text-align:left">
+
+                        ${item.feescategoryname} :
+                        <span style="color:#eb6000;">
+                            ${item.particularname}
+                        </span>
+
+                    </td>
+                </tr>
 
             </c:forEach>
+        </tbody>
 
-        </div>
+    </table>
+
+</div>
+
     </td>
 </tr>
-						 <tr>
-							<td><br /></td>
-
-						</tr>
-                    
-					</table>
-					
-					
 					<table>
                     
                     <tr>
