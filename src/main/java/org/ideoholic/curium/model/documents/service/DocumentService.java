@@ -905,16 +905,75 @@ public class DocumentService {
 		        return printMultipleEmployeesResponseDto;
 			}
 			
-	public CharacterResponseDto GenerateCertificates(StudentIdsDto studentIdsDto) {
-				CharacterResponseDto characterResponseDto = new CharacterResponseDto();
-				String[] studentIds = studentIdsDto.getStudentIds();
+			public CharacterResponseDto GenerateCertificates(StudentIdsDto studentIdsDto) {
+						CharacterResponseDto characterResponseDto = new CharacterResponseDto();
+						String[] studentIds = studentIdsDto.getStudentIds();
+						
+						List<Integer> sid = new ArrayList<Integer>(); 
+						for (String id : studentIds) {
+						    sid.add(Integer.parseInt(id));
+						}
+						List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
+						characterResponseDto.setListofParents(listofParents);
+						return characterResponseDto;
+			}
+
+			public SearchStudentResponseDto multiClassSearchRegistrationReport(StudentNameSearchDto studentNameSearchDto, String branchid) {
+
+				SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
+				List<Parents> searchStudentList = new ArrayList<Parents>();
 				
-				List<Integer> sid = new ArrayList<Integer>(); 
-				for (String id : studentIds) {
-				    sid.add(Integer.parseInt(id));
+				if(branchid!=null){
+				
+				String queryMain = "From Parents as parents where parents.Student.yearofadmission = '"+studentNameSearchDto.getYearOfAdmission()+"' AND parents.Student.stream = 'Registration' AND ";
+				String studentname = DataUtil.emptyString(studentNameSearchDto.getNameSearch());
+				String[] addClass = studentNameSearchDto.getClassSearch();
+				//String addSec = request.getParameter("secsearch");
+				StringBuffer conClassStudying = new StringBuffer();
+
+					int i = 0;
+					for (String classOne : addClass) {
+						
+						if(i>0) {
+							conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+						}else {
+							conClassStudying.append(classOne+"--"+"%");
+						}
+						
+						i++;
+					}
+					
+				
+				/*if (!addSec.equalsIgnoreCase("")) {
+					//conClassStudying = addClass;
+					conClassStudying = conClassStudying+"--"+addSec+"%";
+				}*/
+
+				String classStudying = DataUtil.emptyString(conClassStudying.toString());
+				String querySub = "";
+
+				if (!studentname.equalsIgnoreCase("")) {
+					querySub = " parents.Student.name like '%" + studentname + "%' and parents.Student.branchid="+Integer.parseInt(branchid);
 				}
-				List<Parents> listofParents = new studentDetailsDAO().getReferredList(sid);
-				characterResponseDto.setListofParents(listofParents);
-				return characterResponseDto;
-	}
+
+				if (!classStudying.equalsIgnoreCase("")
+						&& !querySub.equalsIgnoreCase("")) {
+					querySub = querySub + " AND (parents.Student.classstudying like '"
+							+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+				} else if (!classStudying.equalsIgnoreCase("")) {
+					querySub = querySub + " (parents.Student.classstudying like '"
+							+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
+				}
+
+				if(!"".equalsIgnoreCase(querySub)) {
+					queryMain = queryMain + querySub;
+					searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+				}
+				
+			}
+				searchStudentResponseDto.setSearchStudentList(searchStudentList);
+
+				return searchStudentResponseDto;
+			}
+			
 }
