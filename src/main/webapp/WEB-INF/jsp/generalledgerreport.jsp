@@ -595,7 +595,8 @@ for(Cookie cookie : cookies){
 				<tbody>
 				<fmt:setLocale value="en_IN" scope="session"/>
 				
-					<tr>
+				<tr>
+					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
@@ -674,6 +675,7 @@ for(Cookie cookie : cookies){
 							</td>
 					</tr>
 					<tr>
+					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
 					<td class="dataText"></td>
