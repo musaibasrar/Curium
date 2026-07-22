@@ -22,8 +22,8 @@ public class PeriodsSaveDto {
     private String dayEndAm;
     private String periodMasterId;
     private String toClass;
-
-    private String[] fromClass;
+    private String fromClass;
+   
     private String[] periods;
     private String[] periodId;
     private String[] subjects;
