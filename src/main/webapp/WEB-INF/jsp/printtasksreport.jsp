@@ -221,7 +221,7 @@
 		<table width="100%" style="border-collapse: collapse;">
 			<tr>
 				<td align="center">
-				<img src="/abc/images/abc.png" width="150" height="141"/>
+				<img src="/gnyanganga/images/gnyanganga${branchid}.png" width="163" height="141"/>
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				<label style="text-transform: uppercase;font-size: 24px;">${branchname}</label>
