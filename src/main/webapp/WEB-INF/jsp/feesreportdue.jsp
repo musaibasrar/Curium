@@ -14,8 +14,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Fees Report</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/iqraschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/iqraschool/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -276,42 +276,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/iqraschool/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/iqraschool/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/iqraschool/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/iqraschool/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/iqraschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/iqraschool/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/iqraschool/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/iqraschool/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/iqraschool/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
@@ -338,12 +338,12 @@
 	
 </script>
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/iqraschool/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/FeesCollection/searchFeesReportDue";
+		form1.action = "/iqraschool/FeesCollection/searchFeesReportDue";
 		form1.method = "POST";
 		form1.submit();
 
@@ -351,7 +351,7 @@
 	
 	function sendSMS() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/SMSProcess/sendSMSFeesDueReminder";
+		form1.action = "/iqraschool/SMSProcess/sendSMSFeesDueReminder";
 		form1.method = "POST";
 		form1.submit();
 
@@ -359,7 +359,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/FeesDetails/printDataForFeesReportdue";
+		form1.action = "/iqraschool/FeesDetails/printDataForFeesReportdue";
 		form1.method = "POST";
 		form1.submit();
 }
@@ -587,7 +587,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
+			xmlHttp.open("GET", "/iqraschool/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
 			xmlHttp.send(null);
 	}
     
@@ -654,7 +654,7 @@ $(function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/iqraschool/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -667,7 +667,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/FeesCollection/exportDataForStudentsFeesReport" method="POST">
+	<form id="form1" action="/iqraschool/FeesCollection/exportDataForStudentsFeesReport" method="POST">
 	<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat("dd/MM/yyyy");
 		%>

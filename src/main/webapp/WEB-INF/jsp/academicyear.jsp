@@ -20,19 +20,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Academic Year</title>
-        <link rel="stylesheet" href="/abc/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/abc/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/iqraschool/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/iqraschool/css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/abc/js/datePicker/jquery-1.7.1.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="/abc/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/abc/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script type="text/javascript" src="/abc/js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="/abc/css/datePicker/demos.css">
+        <script type="text/javascript" src="/iqraschool/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/iqraschool/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/iqraschool/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/iqraschool/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/iqraschool/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/iqraschool/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/iqraschool/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/iqraschool/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script type="text/javascript" src="/iqraschool/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/iqraschool/css/datePicker/demos.css">
 
 
 
@@ -271,7 +271,7 @@
     font-weight: bold;
 }
         </style>
-        <script type="text/javascript" src="/abc/js/datetimepicker_css.js"></script>
+        <script type="text/javascript" src="/iqraschool/js/datetimepicker_css.js"></script>
         <script>
             $(function() {
                 $("#datepicker").datepicker({changeYear: true, changeMonth: true});
@@ -332,7 +332,7 @@
            
             function Update() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/UserProcess/updateYear";
+                form1.action = "/iqraschool/UserProcess/updateYear";
                 form1.submit();
             }
 
@@ -444,7 +444,7 @@
             function changeYear() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/abc/YearProcess/saveYear";
+                form1.action = "/iqraschool/YearProcess/saveYear";
                 form1.submit();
 
             }
@@ -466,7 +466,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/abc/login");
+	response.sendRedirect("/iqraschool/login");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;

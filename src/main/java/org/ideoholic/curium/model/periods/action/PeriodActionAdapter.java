@@ -98,7 +98,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeHr(request.getParameter("dayendtime"));
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
-        dto.setFromClass(request.getParameterValues("fromclass"));
+        dto.setFromClass(request.getParameter("fromclass"));
         dto.setToClass(request.getParameter("toclass"));
 
         dto.setPeriods(request.getParameterValues("periods"));
@@ -159,7 +159,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
         dto.setPeriodMasterId(request.getParameter("periodmasterid"));
-        dto.setFromClass(request.getParameterValues("classsec"));
+        dto.setFromClass(request.getParameter("classsec"));
         dto.setToClass(request.getParameter("section"));
 
         dto.setPeriods(request.getParameterValues("periods"));
