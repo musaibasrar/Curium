@@ -12,7 +12,7 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-<title>FEES RECIEPT</title>
+<title>FEES RECEIPT</title>
 <head>
 <style type="text/css">
 .dataText {
@@ -27,7 +27,7 @@
 .headerText {
 	width: 10px;
 	font-family: Tahoma;
-	font-size: 12px;
+	font-size: 10px;
 	color: black;
 	font-weight: normal;
 	width: auto;
@@ -70,7 +70,7 @@
 	font-weight: normal;
 	font-family: Tahoma;
 	color: black;
-	font-size: 24px;
+	font-size: 14px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -79,7 +79,7 @@
 	font-weight: normal;
 	font-family: ariel;
 	color: black;
-	font-size: 16px;
+	font-size: 10px;
 	letter-spacing: normal;
 	text-align: center;
 }
@@ -128,62 +128,57 @@
 
 	
 
-</head>
-
-
-
-
         @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  1cm;
-             margin-right: 1cm;
-             margin-bottom: 1cm;
-             margin-top: 1cm;
-        }
 
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 1px ;
-                margin-right: 1px;
-            }
-        }
+    @page {
+        size: 105mm 148.5mm;   /* A6 size */
+        margin: 5mm;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Hide everything except receipt */
+    body * {
+        visibility: hidden;
+    }
+
+    #receipt, #receipt * {
+        visibility: visible;
+    }
+
+    #receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 105mm;
+        height: 120mm;
+        box-sizing: border-box;
+        font-size: 11px; /* adjust if needed */
+        overflow: hidden;
+    }
+}
     </style>
 
-
+</head>
 
 
 <body style="text-align: center" class="bodymargin">
 <div style="page-break-inside: avoid;border-collapse:collapse;">
 	<form method="post" class="bodymargin">
-			<div style="border: 1px solid;border-radius: 15px">
+	<div style="display: flex;">
+			<div style="border: 1px solid;border-radius: 15px; width: 100%;" id="receipt" >
 			
 			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/mfds/images/mfds.jpg" width="80" height="80"/></td>
+				<td>&nbsp;&nbsp;<img src="/mfds/images/mfds.jpg" width="56" height="50" style="margin:5px;"/></td>
 				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;font-family: ">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -195,7 +190,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 5px;">
+		<table align="center" style="padding-left: 5px;margin-tpo:5px;margin:bottom:5px;border: 1px solid;border-radius: 5px;">
 		
 			<tr>
 			<td></td>
@@ -203,41 +198,66 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td colspan="2" class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
+				</tr>
+				
+				<tr style="font-size: 20px;">
+			<td colspan="2" class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
+				</td>
+				
+				
+				</tr>
+				<!-- </table>
+				<TABLE  width="100%" border="1" style="border-collapse:collapse;border-bottom:none;">
+                <tr>
+
+                    <td colspan="4" ></td>
+
+                </tr>
+            </TABLE>
+            <table align="center" style="padding-left: 5px;margin-top:5px;margin-bottom:5px;border: 1px solid;border-radius: 5px;"> -->
+			    <tr >
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
-
+                
 				
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
 						value="${receiptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
+				</tr>
+			    <tr >
+				
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
 				</td>
-
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
-				</td>
-			
+				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
 					Class:&nbsp;<c:out value="${receiptinfo.classsec}" />
 				</td>
 
-			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+			</tr>
+			
+			<tr>
+			<td></td>
+			</tr>
+			
+			
+				
+				
+				</tr>
+			    <tr >
+
+			<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
 						value="${receiptdate}" />
 				</td>
 				
-				<td></td>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}</td>
 			</tr>
 
 			<tr>
@@ -250,7 +270,7 @@
 			</tr>
 
 		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+		<TABLE  width="100%" border="1" style="border-collapse:collapse;border-bottom:none;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -319,9 +339,7 @@
 			
 			
 			<tr>
-				<td class="headerText" ></td>
-				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 210px;"><label style="font-weight: bold;">Total:</label>&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -356,33 +374,32 @@
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
+		<td align="left" style="padding-left: 10px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
+		<td align="left" style="padding-left: 10px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
 		</tr>
 		</table>
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		<td align="left" style="padding-left: 10px;">&nbsp;<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
 		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
 		</div>
-		<br>
-		<div style="border: 1px solid;border-radius: 15px">
+		<%-- <div style="border: 1px solid;border-radius: 15px; width: 49%;">
 		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
                         		
 			<tr>
-				<td><img src="/mfds/images/mfds.jpg" width="80" height="80"/></td>
+				<td>&nbsp;&nbsp;<img src="/mfds/images/mfds.jpg" width="85" height="58" style="margin:5px;"/></td>
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				</td>
 			</tr>
 		</table>
@@ -394,7 +411,7 @@
                 </tr>
             </TABLE>
 
-		<table style="padding-left: 5px;">
+		<table align="center" style="padding-left: 5px;margin-tpo:5px;margin:bottom:5px;border: 1px solid;border-radius: 5px;">
 		
 			<tr>
 			<td></td>
@@ -402,39 +419,55 @@
 			</tr>
 			<tr >
 			
-				<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
+				<td colspan="2" class="dataTextBoldLeft" style="width: 50%;font-size: 14px;">Student
 					Name:&nbsp;<label style="text-transform: capitalize;font-size: 14px;"><c:out value="${student.name}" /></label>
 				</td>
+				
+				</tr>
+			<tr style="font-size: 20px;">
+			<td colspan="2" class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
+					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
+				</td>
+				
+				 </tr>
+				
+			     <tr >
 			
 				<td class="dataTextBoldLeft" style="font-size: 14px;">UID:&nbsp;<c:out value="${student.studentexternalid}" />
 				</td>
 				
-
+                
 				
 
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Receipt No:&nbsp;<c:out
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Receipt No:&nbsp;<c:out
 						value="${receiptinfo.branchreceiptnumber}" /> 
 				</td>
 				
-				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
-				</td>
-
-			</tr>
+				
 			<tr>
-			<td></td>
-			</tr>
-			<tr style="font-size: 20px;">
-			<td class="dataTextBoldLeft" style="width: 50%;font-size: 14px;" >Fathers
-					Name:&nbsp;<label style="text-transform: capitalize;"><c:out value="${parents.fathersname}" /></label>
+				
+				<td class="dataTextBoldLeft" style="font-size: 14px;">Year:&nbsp;<c:out value="${receiptinfo.academicyear}" />
 				</td>
-			
+				
 				<td class="dataTextBoldLeft" style="font-size: 14px;">
 					Class:&nbsp;<c:out value="${receiptinfo.classsec}" />
 				</td>
+				
+				</tr>
+			    <tr >
 
-			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
+			<td class="dataTextBoldLeft" style="font-size: 14px;">Date:&nbsp;<c:out
 						value="${receiptdate}" />
 				</td>
+             <td class="dataTextBoldLeft" style="font-size: 14px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}</td>
+			</tr>
+			<tr>
+			<td></td>
+			
+			
+				
+				
+				
 				
 				<td></td>
 			</tr>
@@ -449,7 +482,7 @@
 			</tr>
 
 		</table>
-		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
+		<TABLE  width="100%" border="1" style="border-collapse:collapse;border-bottom:none;">
                 <tr>
 
                     <td colspan="4" ></td>
@@ -484,7 +517,7 @@
 					<td class="dataText">Rs. <c:out
 							value="${feescatmap.value}" /></td>
 					
-					<%-- Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td> --%>
+					Rs. <td class="dataText">Rs. <c:out value="${unitdispensedose.amount}" /></td>
 				</tr>
 			</c:forEach>
 			
@@ -521,7 +554,7 @@
 			<tr>
 				<td class="headerText" ></td>
 				<td class="headerText"></td>
-				<td class="headerText" style="padding-left: 220px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
+				<td class="headerText" style="padding-left: 210px;"><label style="font-weight: bold;">Total:</label>&nbsp;&nbsp;&nbsp;Rs.  <c:out value="${receiptinfo.totalamount}" /></td>
 			</tr>
 			
 			</table>
@@ -556,22 +589,23 @@
 			
 			<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
+		<td align="left" style="padding-left: 10px;">In Words:<label style="text-transform: capitalize;"> Rupees <c:out value="${grandTotal}" /><c:out value="${duplicate}" /></label></td>
 		</tr>
 
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
+		<td align="left" style="padding-left: 10px;">Note: Fees once deposited will not be refunded under any Circumstances</td>
 		</tr>
 		</table>
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		<td align="left" style="padding-left: 10px;">&nbsp;<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
 		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
 		</TABLE>
+		</div> --%>
 		</div>
 	</form>
 	
