@@ -79,4 +79,11 @@ public class PrintIdsAction {
 		 return "printpreviewemployee";
 	}
 	
+	@PostMapping("/printbackpreview")
+	public String printbackpreview() {
+
+		printIdsActionAdapter.printMultiple();
+		return "printbackpreview";
+	}
+	
 }
