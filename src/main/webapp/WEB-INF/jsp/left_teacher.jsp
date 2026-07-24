@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script language="JavaScript" src="/hira/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/hira/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/hira/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/vision/css/font-awesome.css">
+        <script type="text/javascript" src="/hira/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/hira/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/hira/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/hira/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/hira/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/hira/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/hira/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/hira/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/hira/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -429,7 +429,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/hira/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -454,22 +454,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<!--<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            				 <a target="mainFrame" href="/hira/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
+            				 <a target="mainFrame" href="/hira/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>-->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            				 <a target="mainFrame" href="/hira/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            				 <a target="mainFrame" href="/hira/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
                 </table>
@@ -481,13 +481,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
+            				 <a target="mainFrame" href="/hira/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            				 <a target="mainFrame" href="/hira/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
             			</td>
             			
             		</tr>
@@ -499,13 +499,13 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            				 <a target="mainFrame" href="/hira/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
+            				 <a target="mainFrame" href="/hira/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
             			</td>
             			
             		</tr>
@@ -518,22 +518,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            				 <a target="mainFrame" href="/hira/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            				<a target="mainFrame" href="/hira/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            				 <a target="mainFrame" href="/hira/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            				<a target="mainFrame" href="/hira/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
             			</td>
             		</tr> -->
                 </table>
@@ -544,22 +544,22 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/Backup&Restore" style="font-size: 12px;">Backup</a>
+            				 <a target="mainFrame" href="/hira/Backup&Restore" style="font-size: 12px;">Backup</a>
             			</td>
             		</tr> -->
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/changePassword" style="font-size: 12px;">Change Password</a>
+            				<a target="mainFrame" href="/hira/changePassword" style="font-size: 12px;">Change Password</a>
             			</td>
             		</tr>
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/vision/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            				<a target="mainFrame" href="/hira/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
             			</td>
             		</tr> -->
             		<!-- <tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            				 <a target="mainFrame" href="/hira/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
             			</td>
             		</tr> -->
                 </table>
@@ -571,18 +571,18 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/JobProcess/viewAllQueriesDepartmentWise" style="font-size: 12px;">View Assignment</a>
+            				 <a target="mainFrame" href="/hira/JobProcess/viewAllQueriesDepartmentWise" style="font-size: 12px;">View Assignment</a>
             			</td>
             		</tr>
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/JobProcess/CreateQuery" style="font-size: 12px;">Create Assignment</a>
+            				 <a target="mainFrame" href="/hira/JobProcess/CreateQuery" style="font-size: 12px;">Create Assignment</a>
             			</td>
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            				 <a target="mainFrame" href="/hira/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
             			</td>
             		</tr>
                 </table>
@@ -593,7 +593,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/vision/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
+            				<a target="mainFrame" href="/hira/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
             			</td>
             		</tr>
                 </table>

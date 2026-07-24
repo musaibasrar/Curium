@@ -481,7 +481,7 @@ for(Cookie cookie : cookies){
  SESSION ${currentacadmicyear}
  </td>
  <td>&nbsp;&nbsp;
- <img src="/hira/images/hira.png" width="65" height="72"/>
+ <img src="/hira/images/hira.png" width="80" height="80"/>
  </td>
  </tr>
  </table>
