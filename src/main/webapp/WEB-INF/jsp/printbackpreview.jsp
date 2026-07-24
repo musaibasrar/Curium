@@ -8,7 +8,7 @@
 
     <style>
        body{
-    background:#f2f2f2;
+   // background:#f2f2f2;
     font-family:Arial, sans-serif;
 }
 
@@ -18,7 +18,7 @@
 
     background:#fff;
 
-    margin:20px auto;
+    margin:20px;
 
     position:relative;
     overflow:hidden;
@@ -29,31 +29,30 @@
 
 /* Curved Text */
 .curveText{
-    width:180px;
-    height:65px;
+    width:210px;
+    height:70px;
+    overflow:visible;
     display:block;
-    margin:5px auto 0;
+    margin:0 auto;
 }
 
-.curveText text{
-    font-size:11px;
-    font-weight:bold;
+.curveFont{
+    font-size:14px;      /* Increase to 15px if needed */
+    font-weight:700;
+    letter-spacing:0.4px;
     fill:#000;
 }
-
 /* Logo */
 .logo{
-    width:65px;
-    height:65px;
+    width:100px;
+    height:100px;
 
-    margin:-5px auto 0;
-
+    margin:-12px auto 0;
 
     display:flex;
     justify-content:center;
     align-items:center;
 }
-
 .logo img{
     width:100%;
     height:100%;
@@ -128,22 +127,33 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-
+			
+		 <c:set var="iInitial" value="${iInitial}"/>
+         <c:set var="limit" value="1"/>
+                        
+          <c:forEach begin="1" end="${iInitial}">
+                        <%!                        
+                            int i = 1;
+                        %>
+			<c:if test="${limit < iInitial}">	
 <div class="card">
 
     <!-- Curved Text -->
-    <svg class="curveText" viewBox="0 0 300 150">
-        <defs>
-            <path id="curve"
-                  d="M40,120 A110,110 0 0,1 260,120"/>
-        </defs>
+  <svg class="curveText" viewBox="0 0 210 90" style="margin-top:25px;">
+    <defs>
+        <path id="curve"
+      d="M5,80 A100,100 0 0,1 205,80"/>
+    </defs>
 
-        <text font-size="18" font-weight="bold">
-            <textPath href="#curve" startOffset="50%" text-anchor="middle">
-                O LORD INCREASE ME IN KNOWLEDGE
-            </textPath>
-        </text>
-    </svg>
+    <text class="curveFont">
+        <textPath href="#curve"
+                  startOffset="50%"
+                  text-anchor="middle"
+                  dominant-baseline="middle">
+            O LORD INCREASE ME IN KNOWLEDGE
+        </textPath>
+    </text>
+</svg>
 
     <!-- Logo -->
     <div class="logo">
@@ -166,6 +176,14 @@ for(Cookie cookie : cookies){
     </div>
 
 </div>
+ </c:if>
+   <% i = i + 1;%>
+                        <c:set var="limit" value="${limit+1}"/>
+                        
+                    </c:forEach>
+                    <% i = 1;%>
+                    <c:set var="iInitial" value="1"/>
+                        <c:set var="limit" value="1"/>
 <div class="print-btn">
     <button onclick="window.print()">Print</button>
 </div>
