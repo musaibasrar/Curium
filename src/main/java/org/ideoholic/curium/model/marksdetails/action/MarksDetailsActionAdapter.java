@@ -214,7 +214,7 @@ public class MarksDetailsActionAdapter {
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamIds(request.getParameterValues("examslist"));
         dto.setNoofpresentday(request.getParameter("dateforattendance"));
-
+		
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
         request.setAttribute("markssheetlist", responseDto.getMarksSheetList());
