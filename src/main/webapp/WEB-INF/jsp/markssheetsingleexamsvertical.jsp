@@ -12,14 +12,27 @@
 
 /* ===== PRINT SETTINGS ===== */
 @page {
-    size: auto;
-    margin: 1cm;
+    size: A4 portrait;
+    margin: 8mm;
 }
 
-@media print {
+/* @media print {
     body { margin: 0; }
 }
+ */
+ @media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+    }
 
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
 /* ===== COMMON ===== */
 body {
     font-family: Tahoma;
@@ -130,20 +143,11 @@ window.onload = function(){
         <td class="cell"><b>Student Name</b></td>
         <td class="cell"><b>Father Name</b></td>
 
-       <c:forEach items="${markssheetlist}" var="p" varStatus="ps">
-    <c:if test="${ps.index == 0}">
-        <c:forEach items="${p.exammarks}" var="em" varStatus="es">
-            <c:if test="${es.index == 0}">
-                <c:forEach items="${em.subMarks}" var="sub">
-                    <td class="cell subject-header">
-                        ${sub.key}
-                    </td>
-                </c:forEach>
-            </c:if>
-        </c:forEach>
-    </c:if>
-</c:forEach>
-
+      <c:forEach items="${markssheetlist[0].subjectSummaries}" var="sub">
+        <td class="cell subject-header">
+            ${sub.subjectName}
+        </td>
+    </c:forEach>
 
         <td class="cell subject-header">Total Obtained</td>
         <td class="cell subject-header">Total Marks</td>
@@ -159,22 +163,27 @@ window.onload = function(){
             <td class="cell left">${Parents.parents.student.name}</td>
             <td class="cell left">${Parents.parents.fathersname}</td>
 
-            <c:forEach items="${Parents.exammarks[0].subMarks}" var="sub">
-                <c:set var="p" value="${fn:split(sub.value,'_')}" />
-                <c:set var="m" value="${fn:split(p[0],'/')}" />
-                <td class="cell">${m[0]}/${m[1]}</td>
-            </c:forEach>
+           
 
+            <c:forEach items="${Parents.subjectSummaries}" var="sub">
+    <td class="cell">
+        <fmt:formatNumber value="${sub.totalMarksObtained}" maxFractionDigits="0"/>
+        /
+        <fmt:formatNumber value="${sub.maxMarks}" maxFractionDigits="0"/>
+    </td>
+</c:forEach>
+            
             <td class="cell">
-                <fmt:formatNumber value="${Parents.exammarks[0].totalMarksObtained}" maxFractionDigits="0"/>
+            
+                <fmt:formatNumber value="${Parents.examSummaries[0].totalMarksObtained}" maxFractionDigits="0"/> 
             </td>
             <td class="cell">
-                <fmt:formatNumber value="${Parents.exammarks[0].totalMarks}" maxFractionDigits="0"/>
+                <fmt:formatNumber value="${Parents.examSummaries[0].totalMarks}" maxFractionDigits="0"/>
             </td>
             <td class="cell">
-                <fmt:formatNumber value="${Parents.exammarks[0].percentage}" maxFractionDigits="1"/>
+                <fmt:formatNumber value="${Parents.examSummaries[0].percentage}" maxFractionDigits="1"/>
             </td>
-            <td class="cell last-col">${Parents.exammarks[0].rank}</td>
+            <td class="cell last-col">${Parents.examSummaries[0].rank}</td>
         </tr>
     </c:forEach>
 
