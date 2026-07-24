@@ -695,7 +695,7 @@ public class UserService {
 		
 	}
 
-	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strSuperUserAuth, String strBranchId) {
+	public UserAuthenticationResponseDto authenticateMultiUser(String strUserName, String strBranchId) {
 		UserAuthenticationResponseDto result = UserAuthenticationResponseDto.builder().build();
 
         
@@ -705,10 +705,6 @@ public class UserService {
         
         	if(strUserName!=null) {
         		userName = strUserName;
-	        }
-        
-        	if(strSuperUserAuth!=null) {
-	        	superUserAuth = DataUtil.emptyString(strSuperUserAuth);
 	        }
         
         if(userName != null) {

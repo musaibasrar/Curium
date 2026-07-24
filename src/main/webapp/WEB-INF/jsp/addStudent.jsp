@@ -908,7 +908,7 @@ $(document).ready(function() {
 						</tr>
 						<tr>
 							<td  class="alignLeft">Application Type&nbsp;</td>
-							<td  height="30" class="alignLeft">&nbsp;Admission<input
+							<td  height="30" class="alignLeft">&nbsp;Admission<input checked
 								type="checkbox" value="Admission" name="stream" id="yes:at"
 								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Registration<input
 								type="checkbox" value="Registration" name="stream" id="no:at"
@@ -1786,7 +1786,7 @@ $(document).ready(function() {
 
 									<td class="alignLeft">Sponsor Name 
 										 &nbsp;</td>
-									<td ><label> <select name="guardian" required
+									<td ><label> <select name="guardian"
 									id="guardian" style="width: 224px;border-radius: 4px;background: white;height: 28px;" onchange="searchfeecategory()">
 										<option selected></option>
 										<c:forEach items="${sponsorlist}" var="sponsorlist">
