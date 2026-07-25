@@ -201,7 +201,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 79px;" alt="logo" src="/jdh/images/jdh.png">
+			<img border="0" style="vertical-align: text-bottom;height: 44px;width: 79px;" alt="logo" src="/jdh/images/jdh.png">
 			</td>
 				<td >
 					<br>

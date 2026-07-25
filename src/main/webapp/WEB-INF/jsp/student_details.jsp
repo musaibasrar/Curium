@@ -590,15 +590,15 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
+                         <td  width="25%"  class="alignLeft" height="50" >Student Type
                             </td>
                             <td width="25%" class="tablerows" >
                                
                                 <c:if test="${(student.belongtobpl ==0)}">    
-           						  <c:out default="" value="No" />
+           						  <c:out default="" value="Boarder" />
            						 </c:if>
                                 <c:if test="${(student.belongtobpl ==1)}">    
-           						  <c:out default="" value="Yes" />
+           						  <c:out default="" value="Day Scholar" />
            						 </c:if>
            						 
                             </td>
@@ -1214,7 +1214,7 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${otherreceiptinfo.date}"/></a></td>
                                 <td  class="dataText"><c:out value="${otherreceiptinfo.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${otherreceiptinfo.totalamount}"/></td>
-                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/roshanold/FeesCollection/viewOtherFeesDetails?id=<c:out value='${otherreceiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
+                                <td  class="dataTextInActive"><a class="dataTextInActive" target="_blank" href="/jdhold/FeesCollection/viewOtherFeesDetails?id=<c:out value='${otherreceiptinfo.receiptnumber}'/>&sid=<c:out value='${student.sid}'/>">View Details</a></td>
                                  
 
                             </tr>

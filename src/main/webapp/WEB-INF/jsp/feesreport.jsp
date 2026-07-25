@@ -386,7 +386,7 @@
 	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/FeesDetails/printDataForFeesReport";
+		form1.action = "/jdh/FeesDetails/printDataForFeesReport";
 		form1.method = "POST";
 		form1.submit();
 }

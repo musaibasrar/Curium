@@ -17,5 +17,5 @@ public class CharacterResponseDto {
 	private String character;
 	private List<Parents> listofParents;
 	private boolean success;
-
+	List<StudyCertificate>  studyCertificate;
 }

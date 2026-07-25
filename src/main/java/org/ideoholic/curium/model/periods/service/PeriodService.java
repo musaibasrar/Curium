@@ -64,7 +64,7 @@ public class PeriodService {
 		return result;
 		
 	}
-
+	
 	public ResultResponse savePeriods(PeriodsSaveDto dto, String branchId, String userId) {
 ResultResponse result = ResultResponse.builder().build();
 		
@@ -91,7 +91,6 @@ ResultResponse result = ResultResponse.builder().build();
 		String[] periodEndTimeMin = dto.getPeriodEndTimeMin();
 		String[] periodEndTimeAm = dto.getPeriodEndTimeAm();
 		String[] days = dto.getDays();
-		
 		
 		Map<String,List<Perioddetails>> periodMap = new HashMap<>();
 		int getPeriod=0;
@@ -125,7 +124,6 @@ ResultResponse result = ResultResponse.builder().build();
 		periodMaster.setUserid(Integer.parseInt(userId));
 
 		result.setSuccess(new PeriodDAO().save(periodMaster,periodMap));
-
 		return result;
 	}
 
@@ -498,4 +496,7 @@ ResultResponse result = ResultResponse.builder().build();
 
 		return result;
 	}
+
+
+	
 }

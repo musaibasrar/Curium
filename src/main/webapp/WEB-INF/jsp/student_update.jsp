@@ -880,10 +880,10 @@ for(Cookie cookie : cookies){
 						
 						
 							<tr>
-								<td class="alignLeft">Belong to BPL &nbsp;</td>
-								<td height="30">&nbsp;Yes<input
+								<td class="alignLeft">Student Type &nbsp;</td>
+								<td height="30">&nbsp;Day Scholar<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" ${student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;Boarder<input
 								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
 								onclick="noCheck(this.id);" ${student.belongtobpl == '0' ? 'checked' : ''}/>
 
@@ -931,16 +931,20 @@ for(Cookie cookie : cookies){
 						</tr>
 
 						<tr>
-							<td class="alignLeft">Student Type&nbsp;</td>
+						
+							<td class="alignLeft" >Special Category&nbsp;</td>
 
 							<td id="categoryname"><label> <select
-									name="specialcategory" 
-									id="specialcategory" style="width: 210px;border-radius: 4px;background: white;height: 28px;">
+									name="specialcategory" onchange="enterOtherSpecialCategory()"
+									id="specialcategory" style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected>${student.specialcategory}</option>
-										<option>Day Scholar</option>
-										<option>Boarder</option>
+										<option></option>
+										<option>None</option>
+										<option>Destitute</option>
+										<option>HIV Case</option>
+										<option>Orphans</option>
+										<option>Others (Please Specify)</option>
 								</select>
-
 							</label></td>
 							<td id="newcateg" style="display: none;"><label> <input
 									name="newcategory" id="newcategory" type="text" class="myclass" size="30" 
