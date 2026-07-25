@@ -88,8 +88,8 @@ public class ImportFileService {
 							}
 						}
 						student.setAdmissionnumber(getCellValue(row, 0));
-						student.setSts(getCellValue(row, 1));
-						student.setStudentexternalid(getCellValue(row, 46));
+						//student.setSts(getCellValue(row, 1));
+						student.setStudentexternalid(getCellValue(row, 1));
 						student.setName(getCellValue(row, 2));
 						student.setGender(getCellValue(row, 3));
 
@@ -106,7 +106,7 @@ public class ImportFileService {
 						        getCellValue(row, 20) + "/" +
 						        getCellValue(row, 21)));*/
 
-						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 47));
+						student.setClassstudying(getCellValue(row, 8) + "--");
 
 						//student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
