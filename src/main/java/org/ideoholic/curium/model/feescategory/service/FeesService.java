@@ -496,6 +496,7 @@ public class FeesService {
 			String addSec = searchStudentDto.getSecSearch();
 			StringBuilder conClassStudying = new StringBuilder();
 			
+			if (addClass != null && addClass.length > 0) {
 			int i = 0;
 			for (String classOne : addClass) {
 
@@ -506,7 +507,7 @@ public class FeesService {
 				}
 
 				i++;
-			}
+			}}
 
 			String classStudying = DataUtil.emptyString(conClassStudying.toString());
 			String querySub = "";
@@ -517,11 +518,11 @@ public class FeesService {
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.student.classstudying like '"
-						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " AND ( parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.student.classstudying like '"
-						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
@@ -555,8 +556,10 @@ public class FeesService {
 								singleStudent.add(fees);
 						}
 				}
-				parentsStudentFeesStructure.put(parents, singleStudent);
 				
+				if(!singleStudent.isEmpty()) {
+					parentsStudentFeesStructure.put(parents, singleStudent);
+				}
 			}
 			
 		}
@@ -1368,3 +1371,4 @@ response.getWriter().println(buffer.toString());
 	        	    }
 		}
 }
+
