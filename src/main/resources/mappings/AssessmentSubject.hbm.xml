@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Hibernate mapping for AssessmentSubject -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubject" table="assessmentsubject" >
+        <id name="assessmentsubjectid" type="java.lang.Integer">
+            <column name="assessmentsubjectid" />
+            <generator class="native" />
+        </id>
+        <property name="subjectname" type="string">
+            <column name="subjectname" length="45" />
+        </property>
+        <property name="minrating" type="java.lang.Float">
+            <column name="minrating" />
+        </property>
+        <property name="maxrating" type="java.lang.Float">
+            <column name="maxrating" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="subjectid" type="int">
+            <column name="subjectid" />
+        </property>
+        <property name="assessmentname" type="string">
+            <column name="assessmentname" length="150" />
+        </property>
+        <property name="assessmentclass" type="string">
+            <column name="assessmentclass" length="10" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>
