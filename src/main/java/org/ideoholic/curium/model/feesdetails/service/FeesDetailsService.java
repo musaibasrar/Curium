@@ -80,7 +80,6 @@ public class FeesDetailsService {
 		if (feesIds != null) {
 			for (String id : feesIds) {
 				if (id != null || id != "") {
-					
 					receiptInfo = feesDetailsDao.readFeesDetails(Long.parseLong(id));
 					if (receiptInfo != null) {
 						student = studentDetailsDao.readUniqueObjectParents(receiptInfo.fetchSid());
