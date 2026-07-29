@@ -23,7 +23,7 @@ public class HrActionAdapter {
     private HrService hrService;
 
     private String BRANCHID = "branchid";
-    private String USERID ="userid";
+    private String USERID ="userloginid";
     private String CURRENTACADEMICYEAR ="currentAcademicYear";
     private String USERNAME = "username";
     private String USERAUTH = "userAuth";
