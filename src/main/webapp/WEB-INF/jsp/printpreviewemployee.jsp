@@ -1,336 +1,198 @@
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
-    <head >
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+<head>
+<meta charset="UTF-8">
 
-        <script type="text/javascript" language="JavaScript" src="/bright/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/bright/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/bright/css/graph/jquery.jqplot.css">
+<style>
 
-        <link rel="stylesheet" href="/bright/css/datePicker/demos.css">
-        <script type="text/javascript" src="/bright/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-
-        <script  type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/bright/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/bright/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/bright/js/graph/plugins/jqplot.trendline.min.js"></script>
-
-        <style type="text/css">
-            <!--
-            .dataTextInActive {
-                border-radius:1px;
-                font-family: Tahoma;
-                color: #4b6a84;
-                font-size: 12px;
-                font-weight: bold;
-                letter-spacing: normal;
-                text-align: left;
-                vertical-align: top;
-                text-decoration:none;
-            }
-            .headerText {
-                border-radius:3px;
-                font-family: Tahoma;
-                font-size: 12px;
-                background-color: #4b6a84;
-                color: #FFFFFF;
-                font-weight: normal;
-                width: auto ;
-                height: 22px;
-                vertical-align: middle;
-                text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
-            }
-            .headerTD{
-                background-color:#4b6a84;
-                color: #FFFFFF;
-                font-family: Tahoma;
-                font-size: 13px;
-                text-transform: uppercase;
-                text-align: center;
-                font-weight: bold;
-            }
-            .smallheaderTD{
-                color: #4b6a84;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .textFieldFixedWidth{
-                width: 57px;
-            }
-            .subHeaderTD{
-                color: #325F6D;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .divCSS{
-                overflow:  scroll;
-                height: 100%;
-                width: 100%;
-            }
-
-            .fiedlSet {
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-width: 1;
-                width: 100%;
-                color: #000000;
-                font-size: 16px;
-                font-weight: bold;
-                font-variant: normal;
-                font-stretch: wider;
-                background-color: #e2ebf3;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-            }
-            .legendCSS {
-                color: #666666;
-            }
-            .tableCSS {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-            }
-            .textAreaCSS {
-                height: auto;
-                width: auto;
-            }
-            .textField {
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                width: auto;
-                height: auto;
-            }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignLeft {
-                font-family: Tahoma;
-                font-size: 13px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: left;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignRightMultiple {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-weight: bolder;
-                text-align: right;
-                vertical-align: middle;
-                font-style: normal;
-                color: #325F6D;
-            }
-            .alignCentreMultiple {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-style: normal;
-                color: #000000;
-            }
-            .autoAdjust {
-                height: auto;
-                width: auto;
-            }
-            .radioSpanCSS {
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: left;
-                vertical-align: middle;
-            }
-            .radioCSS {
-                background-position: left center;
-            }
-            .spanText {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #000000;
-            }
-            .emptyFieldSet {
-                border-top-color: #FA7676;
-                border-right-color: #FA7676;
-                border-bottom-color: #FA7676;
-                border-left-color: #FA7676;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-width: thin;
-                border-right-width: thin;
-                border-bottom-width: thin;
-                border-left-width: thin;
-                background-image: url(images/close.JPG);
-                background-repeat: repeat-y;
-                background-attachment: scroll;
-                background-position: right;
-                width: auto;
-                height: auto;
-                display: inline;
-            }
-            .style1 {
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style2 {
-                color: #666666;
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style4 {
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                vertical-align: middle;
-                color: #325f6d;
-            }
-            .tablerows{
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                font-weight: bold;
-
-            }
-            -->
-            .dataTextBoldCenter {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 14px;
-	letter-spacing: normal;
-	text-align: center;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 9px;
-	letter-spacing: normal;
-	text-align: center;
+/* body{
+background:#f0f0f0;
+display:flex;
+justify-content:center;
+padding:20px;
+font-family:Arial,Helvetica,sans-serif;
+} */
+ @media screen {
+            .fontsize { font-size: 15px;
+                        font-weight: bold;
+                        font-family: 'Times New Roman'
+            }
+            .bodymargin{
+                margin-left: 0px ;
+                margin-right: 0px;
+            }
+        }
+
+.card{
+
+width:210px;
+height:322px;
+background:#fff;
+border-radius:10px;
+overflow:hidden;
+position:relative;
+border:2px solid #d7d7d7;
+box-shadow:0 0 6px rgba(0,0,0,.25);
+margin: 20px;
+
 }
-        </style>
-        <script type="text/javascript">
 
-            function updateContact() {
-                var form1 = document.getElementById("form1");
-                form1.action = "/bright/PersonalProcess/updateContactDetails?id=1";
-                form1.submit();
+svg{
+position:absolute;
+left:0;
+top:0;
+width:100%;
+height:100%;
+}
+
+.topLogo{
+
+position:absolute;
+top:12px;
+width:100%;
+text-align:center;
+z-index:5;
+
+}
+
+.schoolName{
+
+font-size:15px;
+font-weight:bold;
+line-height:15px;
+margin-top:2px;
+letter-spacing:.5px;
+
+}
+
+.schoolSub{
+
+font-size:10px;
+font-weight:600;
+letter-spacing:1px;
+
+}
+
+.photoWrap{
+
+position:absolute;
+top:92px;
+left:50%;
+transform:translateX(-50%);
+width:112px;
+height:112px;
+border-radius:50%;
+overflow:hidden;
+background:white;
+border:1px solid #999;
+z-index:10;
+
+}
+
+.photoWrap img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+.details{
+
+position:absolute;
+top:208px;
+left:0;
+width:100%;
+text-align:center;
+z-index:20;
+
+}
+
+.name{
+
+font-size:11px;
+font-weight:900;
+color:#143a77;
+letter-spacing:.4px;
+line-height:14px;
+text-transform:uppercase;
+
+}
+
+.designation{
+
+margin-top:2px;
+font-size:8px;
+font-weight:bold;
+color:#111;
+
+}
+
+.info{
+
+font-size:6.6px;
+font-weight:700;
+color:#111;
+line-height:8px;
+margin-top:3px;
+
+}
+
+.address{
+
+padding:0 14px;
+
+}
+
+.secretary{
+
+position:absolute;
+right:8px;
+bottom:16px;
+text-align:center;
+z-index:20;
+
+}
+
+.sign{
+
+margin-bottom:-2px;
+
+}
+
+.secretaryText{
+
+font-size:6px;
+font-weight:bold;
+color:#555;
+
+}
+</style>
+<style>
+ .print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        @media print{
+            .print-btn{
+                display: none;
             }
+        }
 
-            function hideButton() {
-
-            }
-
-        </script>
-
-        <script type="text/javascript">
-            $(function() {
-
-                $("#accordion").accordion({
-                    collapsible: true,
-                    autoHeight: false});
-                /*$("#set")
-                 .button()
-                 .click(function() {
-                 updateVisit();
-                 });  */
-            });
-        </script>
-
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable({
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 500,
-                    "aoColumnDefs": [
-                        {'bSortable': false, 'aTargets': [0]}
-                    ]
-
-                });
-            });
-        </script>
-        
-        <script type="text/javascript">
-                                $(function() {
-                                    $("#print")
-                                            .button()
-
-
-                                });
-                            </script>
-
-  <%
+</style>
+</head>
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -346,111 +208,9 @@ for(Cookie cookie : cookies){
 }
 }
 %>
- 
+<body class="bodymargin">
 
-   <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
- /*        .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 8.5cm;
-    height: 13cm;
-    border-radius: 25px;
-    background: blue;
-} */
-
-       .card {
-    width: 11cm;
-    height: 7cm;
-    background: #FEE12B;
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 1px 16px;
-}
-
-
- .tableidcard {
-        border-spacing: 0px;
-        table-layout: fixed;
-        margin-left: auto;
-        margin-right: auto;
-        width: 310px;
-      }
-      .tdidcard {
-        font-size: 16px;
-      }
-      
-/* .containerschoolname {
-		padding: 2px 5px;
-} */
-    </style>
-
-<style>
-    /* CSS to display tables side by side */
-   /* .table-container {
-      display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
-    
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
-    
-    /* CSS for table styling */
-    
-    
-    
-    
-    .vertical-line {
-      border-left: 2px solid #350c76; /* Add a vertical line */
-    }
-  </style>
-    </head>
-     
-
-    <body class="bodymargin">
-       
-        <form action="/bright/" method="post" id="form1" class="bodymargin">
-			
-		 <c:set var="iInitial" value="${iInitial}"/>
+ <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
           <c:forEach begin="1" end="${endValue}">
@@ -458,74 +218,166 @@ for(Cookie cookie : cookies){
                             int i = 1;
                         %>
 			<c:if test="${limit < iInitial}">	
-	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
-  <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname}</p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
-   </table>
-  </div>
 
-  <div class="table-container" style=" ">
- <table style="margin-left:10px;">
- <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:78px;width:60px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/bright/images/bright.png" width="65" height="72"/>
- </td>
- </tr>
- </table>
-   </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("teachername" + i + "")%></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("guardian" + i + "")%></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;DESIGNATION</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("designation" + i + "")%></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;EMPLOYEE ID</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("staffid" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "")%></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofjoining" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
-  </tr>
-</table>
-   
-<div height="30" width="20%" style="text-align:right;float:right;">
+<div class="card">
 
-<img src="/bright/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
+<svg viewBox="0 0 210 322">
+
+<defs>
+
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+
+<stop offset="0%" stop-color="#bfefff"/>
+
+<stop offset="100%" stop-color="#d9f7ff"/>
+
+</linearGradient>
+
+</defs>
+
+<!-- top background -->
+
+<path
+d="
+M0 0
+H210
+V120
+L165 140
+H45
+L0 120
+Z"
+fill="url(#sky)"/>
+
+<!-- left white triangle -->
+
+<polygon
+points="
+0,118
+60,142
+0,170"
+fill="white"/>
+
+<!-- right white triangle -->
+
+<polygon
+points="
+210,118
+150,142
+210,170"
+fill="white"/>
+
+<!-- left blue stripe -->
+
+<polygon
+points="
+0,150
+56,170
+52,176
+0,156"
+fill="#203d78"/>
+
+<!-- right blue stripe -->
+
+<polygon
+points="
+210,150
+154,170
+158,176
+210,156"
+fill="#203d78"/>
+
+<!-- bottom bar -->
+
+<rect
+x="0"
+y="292"
+width="210"
+height="30"
+fill="#1d376b"/>
+
+</svg>
+
+<div class="topLogo">
+
+<!-- Logo -->
+
+
+
+<div class="schoolName">
+<img src="/bright/images/bright.png" width="65" height="72"/>
 </div>
+
+
+
+</div>
+
+<div class="photoWrap">
+
+<img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" alt="Photo" />
+
+</div>
+
+<!--==========================
+    DETAILS SECTION
+===========================-->
+
+<div class="details">
+
+    <div class="name">
+         <%= request.getSession().getAttribute("teachername" + i + "")%>
+    </div>
+
+    <div class="designation">
+        <%= request.getSession().getAttribute("designation" + i + "")%>
+    </div>
+
+    <div class="info">
+        <b>Blood Group:</b>  <%= request.getSession().getAttribute("blodgroup" + i + "")%>
+    </div>
+
+    <div class="info">
+        <b>DOB:</b> <%= request.getSession().getAttribute("dateofjoining" + i + "") %>
+    </div>
+
+    <div class="info address">
+        <b>ADDRESS:</b>  <%= request.getSession().getAttribute("Address" + i + "") %>
+    </div>
+
+    <div class="info">
+        <b>Mob:</b>  <%= request.getSession().getAttribute("contactnumber" + i + "") %>
+    </div>
+
+</div>
+
+<!-- Secretary -->
+
+<!-- <div class="secretary">
+
+    <div class="sign">
+        <svg width="55" height="20" viewBox="0 0 120 40">
+
+            <path
+            d="
+            M5 25
+            C15 5 20 32 28 16
+            C35 5 40 30 48 12
+            C60 2 63 32 70 10
+            C80 18 88 3 98 18
+            C106 25 112 10 118 18"
+            fill="none"
+            stroke="#000"
+            stroke-width="3"
+            stroke-linecap="round"/>
+
+        </svg>
+    </div>
+
+    <div class="secretaryText">
+        Secretary
+    </div>
+ -->
+</div>
+
 </div>
  </c:if>
    <% i = i + 1;%>
@@ -535,20 +387,9 @@ principal&nbsp;&nbsp;&nbsp;</div>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-  
-                   <table  width="70%"  id="table11" align="left">
-                    <tr>
-                        <td width="30%"> 
-
-                        </td>
-                        <td>
-                            <button id="print" type="button" style="background-image: url(/bright/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
-                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
-                        </td>
-
-                    </tr>
-
-                </table>     
-        </form>
-    </body>
+   <div class="print-btn">
+    <button onclick="window.print()">Print</button>
+</div>                      
+                        
+</body>
 </html>
