@@ -82,6 +82,12 @@
 		<mapping resource="mappings/Transfercertificate.hbm.xml"></mapping>
 		<mapping resource="mappings/Exams.hbm.xml"></mapping>
 		<mapping resource="mappings/Examschedule.hbm.xml"></mapping>
+		<mapping resource="mappings/HolisticAssessment.hbm.xml"></mapping>
+		<mapping resource="mappings/AssessmentSubjectMaster.hbm.xml"></mapping>
+		<mapping resource="mappings/AssessmentSubject.hbm.xml"></mapping>
+		<mapping resource="mappings/HolisticAssessmentSchedule.hbm.xml"></mapping>
+		<mapping resource="mappings/HolisticRating.hbm.xml"></mapping>
+		<mapping resource="mappings/AssessmentRank.hbm.xml"></mapping>
 		<mapping resource="mappings/Perioddetails.hbm.xml"></mapping>
 		<mapping resource="mappings/Periodmaster.hbm.xml"></mapping>
 		<mapping resource="mappings/Leavetypemaster.hbm.xml"></mapping>
