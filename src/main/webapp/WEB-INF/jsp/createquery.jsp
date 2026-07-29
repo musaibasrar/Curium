@@ -21,6 +21,7 @@
             response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
         %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Create Query</title>
         <style type="text/css" title="currentStyle">
             @import "css/dataTable/css/demo_page.css";
@@ -68,15 +69,11 @@
 				border-right-color: #5d7e9b;
 				border-bottom-color: #5d7e9b;
 				border-left-color: #5d7e9b;
-				/* border-top-width: 1px;
-				border-right-width: 1px;
-				border-bottom-width: 1px;
-				border-left-width: 1px; */
-				width: 220px;
-				height: 28px;
 				color: black;
 				text-transform: capitalize;
 				border-radius: 4px;
+				width: 100%;
+				max-width: 300px;
 			}
             <!--
             .header {
@@ -176,7 +173,256 @@
 				text-align: left;
 				vertical-align: middle;
 				font-weight: bold;
-			}           
+			}
+			
+			/* Responsive Design */
+			* {
+				box-sizing: border-box;
+			}
+			
+			body {
+				margin: 0;
+				padding: 5px;
+				background-color: #f5f5f5;
+			}
+			
+			.ui-tabs {
+				width: 100%;
+				margin: 0 auto;
+			}
+			
+			.form-table-wrapper {
+				width: 100%;
+				overflow-x: auto;
+			}
+			
+			.form-table {
+				width: 100%;
+				margin: 0 auto;
+				border-collapse: collapse;
+			}
+			
+			.form-table tr {
+				display: table-row;
+			}
+			
+			.form-table td {
+				padding: 8px 10px;
+				vertical-align: middle;
+			}
+			
+			.form-table input[type="text"],
+			.form-table textarea,
+			.form-table select {
+				width: 100%;
+				max-width: 300px;
+				padding: 6px 8px;
+				font-family: Tahoma, Arial;
+				border: 1px solid #5d7e9b;
+				border-radius: 4px;
+			}
+			
+			.myclass {
+				width: 100%;
+				max-width: 300px !important;
+				height: auto !important;
+				min-height: 28px;
+				padding: 6px 8px !important;
+				font-size: 1em !important;
+			}
+			
+			.form-table textarea {
+				min-height: 120px;
+				max-width: 100%;
+				resize: vertical;
+			}
+			
+			table#dataTableTasks {
+				width: 100%;
+				border-collapse: collapse;
+				margin-bottom: 15px;
+			}
+			
+			table#dataTableTasks th,
+			table#dataTableTasks td {
+				padding: 8px;
+				border: 1px solid #ddd;
+			}
+			
+			table#dataTableTasks th {
+				background-color: #4b6a84;
+				color: white;
+				text-align: center;
+			}
+			
+			table#dataTableTasks tr:nth-child(even) {
+				background-color: #E3EFFF;
+			}
+			
+			.textfieldvaluesshorts {
+				width: 100%;
+				padding: 6px 8px;
+				font-size: 14px;
+				font-family: Tahoma, Arial;
+				border: 1px solid #5d7e9b;
+				border-radius: 4px;
+			}
+			
+			.textfield {
+				width: 100%;
+				padding: 6px 8px;
+				font-size: 14px;
+				font-family: Tahoma, Arial;
+				border: 1px solid #5d7e9b;
+				border-radius: 4px;
+			}
+			
+			.button-wrapper {
+				text-align: center;
+				margin: 15px 0;
+			}
+			
+			.button-wrapper button {
+				margin: 0 4px;
+				padding: 4px 10px;
+				background-color: #4b6a84;
+				color: white;
+				border: 1px solid #5d7e9b;
+				border-top-width: 0;
+				border-bottom-width: 0;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 12px;
+				transition: background-color 0.2s;
+			}
+			
+			.button-wrapper button:hover {
+				background-color: #3a5368;
+			}
+			
+			/* Responsive: Tablet (768px and below) */
+			@media (max-width: 768px) {
+				body {
+					padding: 3px;
+				}
+				
+				.form-table td:first-child {
+					min-width: 120px;
+				}
+				
+				.form-table input[type="text"],
+				.form-table textarea,
+				.form-table select,
+				.myclass {
+					max-width: 100%;
+				}
+				
+				.myclass {
+					width: 100% !important;
+				}
+				
+				table#dataTableTasks {
+					font-size: 12px;
+				}
+				
+				table#dataTableTasks th,
+				table#dataTableTasks td {
+					padding: 6px;
+				}
+				
+				.button-wrapper {
+					margin: 10px 0;
+				}
+				
+				.button-wrapper button {
+					display: inline-block;
+					margin: 5px 3px;
+					padding: 6px 12px;
+					font-size: 12px;
+				}
+			}
+			
+			/* Responsive: Mobile (480px and below) */
+			@media (max-width: 480px) {
+				body {
+					padding: 2px;
+				}
+				
+				.form-table tr {
+					display: block;
+					margin-bottom: 10px;
+					border: 1px solid #ddd;
+					padding: 5px;
+					background-color: white;
+				}
+				
+				.form-table td {
+					display: block;
+					width: 100%;
+					padding: 8px 0;
+					text-align: left;
+				}
+				
+				.form-table td:first-child {
+					font-weight: bold;
+					color: #325F6D;
+					padding-bottom: 5px;
+					border-bottom: 1px solid #ddd;
+				}
+				
+				.form-table input[type="text"],
+				.form-table textarea,
+				.form-table select,
+				.myclass {
+					width: 100%;
+					max-width: 100%;
+					font-size: 16px;
+				}
+				
+				table#dataTableTasks {
+					font-size: 11px;
+				}
+				
+				table#dataTableTasks th {
+					font-size: 11px;
+					padding: 4px 2px;
+				}
+				
+				table#dataTableTasks td {
+					padding: 4px 2px;
+					word-break: break-word;
+				}
+				
+				table#dataTableTasks tr {
+					margin-bottom: 10px;
+					display: block;
+					border: 1px solid #999;
+				}
+				
+				table#dataTableTasks th {
+					display: block;
+					text-align: center;
+					border-bottom: 2px solid #333;
+				}
+				
+				table#dataTableTasks td {
+					display: block;
+					text-align: left;
+					border: none;
+				}
+				
+				.button-wrapper {
+					margin: 10px 0;
+				}
+				
+				.button-wrapper button {
+					display: block;
+					width: 100%;
+					margin: 5px 0;
+					padding: 10px;
+					font-size: 14px;
+				}
+			}
         </style>
         <script type="text/javascript" charset="utf-8">
             $(document).ready(function() {
@@ -535,26 +781,24 @@
         		});
         		
                 $(".chosen-select").chosen({
-      			  no_results_text: "Oops, nothing found!"
+      			  no_results_text: "Oops, nothing found!",
+      			  width: "100%"
       			});
         	});
             
             function addRow() {
                 var rowCount = document.getElementById('dataTableTasks').rows.length;    
                 
-                var col1="<td class='dataTextInActive'><input type='checkbox' class = 'chcktbl' id=items_"+rowCount+" /><input type='hidden' name='itemids' id=items_id_"+rowCount+" value='' /></td>";
-                var col2="<td class='dataTextInActive'><label> <select name='assignto' id=assignto_"+rowCount+" style='width: 250px;height: 25px;'><option selected></option><c:forEach items='${employeeList}' var='employeeList'><option value='${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}'><c:out value='${employeeList.teachername}' /></option></c:forEach></select></label></td>";
-                var col3="<td class='dataTextInActive'><input type='text' name='task'  id=task_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;'/></td>";
-                var col4="<td class='dataTextInActive'><input type='text' name='description'  id=description_"+rowCount+" class='textfieldvaluesshorts' style='font-size: 14px;' /></td>";
-                var col5="<td class='dataTextInActive'><label><input type='date'  name='expecteddeliverydatetask' class='textfield' style='font-size: 14px;' style='width: 250px;height: 25px;'	id=expecteddeliverydatetask_"+rowCount+" autocomplete='false'></label></td>";
-                /* var col4="<td class='dataTextInActive'><input type='text' value='1' onclick='calculate("+rowCount+")'  onkeyup='calculate("+rowCount+")' name='feesQuantities' id=fees_quantity_"+rowCount+" /><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-                /* var col4="<td class='dataTextInActive'><select  onchange='calculate("+rowCount+")'  name='feesQuantities' id=fees_quantity_"+rowCount+"><option></option><option>JAN</option><option>Feb</option><option>MAR</option><option>APR</option><option>MAY</option><option>JUN</option><option>JUL</option><option>AUG</option><option>SEP</option><option>OCT</option><option>NOV</option><option>DEC</option></select><input type='hidden'   id=hiddenfees_quantity_"+rowCount+" value='' /></td>"; */
-                /* var col4="<td class='dataTextInActive'><input class='feesAmount' type='text' value='0'      name='feesAmounts' id=fees_amount_"+rowCount+" /></td>"; */
+                var col1="<td class='dataTextInActive'><input type='checkbox' class='chcktbl' id='items_"+rowCount+"' /><input type='hidden' name='itemids' id='items_id_"+rowCount+"' value='' /></td>";
+                var col2="<td class='dataTextInActive'><select name='assignto' id='assignto_"+rowCount+"' style='width: 100%;'><option selected></option><c:forEach items='${employeeList}' var='employeeList'><option value='${employeeList.tid}:${employeeList.teachername}:${employeeList.contactnumber}'><c:out value='${employeeList.teachername}' /></option></c:forEach></select></td>";
+                var col3="<td class='dataTextInActive'><input type='text' name='task' id='task_"+rowCount+"' class='textfieldvaluesshorts' style='width: 100%;'/></td>";
+                var col4="<td class='dataTextInActive'><input type='text' name='description' id='description_"+rowCount+"' class='textfieldvaluesshorts' style='width: 100%;' /></td>";
+                var col5="<td class='dataTextInActive'><input type='date' name='expecteddeliverydatetask' class='textfieldvaluesshorts' style='width: 100%;' id='expecteddeliverydatetask_"+rowCount+"' autocomplete='false'></td>";
                 var newRow = $("<tr class='trClass'>"+col1+col2+col3+col4+col5+"</tr>");
             
-            $(function() {
-                $("#dataTableTasks").find('tbody').append(newRow);
-            });
+                $(function() {
+                    $("#dataTableTasks").find('tbody').append(newRow);
+                });
             }  
         </script>
         
@@ -575,117 +819,86 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <body  >
+    <body>
 
         <form name="form1" id="form1" method="post">
             <div style="overflow: hidden" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
                 <table width="100%">
                     <tr>
-                        <td  class="headerTD">Create Job</td>
+                        <td class="headerTD">Create Job</td>
                     </tr>
                 </table>
-		           		<table style="margin-left: auto;margin-right: auto;">
-								<tr>
-									<td><input type="hidden" id = "employeeid_${employee.tid}" name="employeeIDs"  value="<c:out value="${employee.tid}:${employee.contactnumber}:${employee.teachername}"/>"/><br /></td>
-								</tr>
-								<tr>
-									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">Teacher Name:</td>
-									<td style="font-weight: bold;font-size: 16px;color: #eb6000;text-transform: uppercase;" ><label> <c:out value="${employee.teachername}" /></label></td>
-								</tr>		           		
-		           				<tr>
-									<td><br /></td>
-								</tr>
-								<tr>
-										
-										<td class="alignLeft">Title: &nbsp;</td>
-	
-										<td ><label>
-											<input type="text"  name="jobtitle" id="jobtitle"
-									class="textField myclass" style="font-size: 14px;width: 220px;height: 25px;" required>
-										</label></td>
-								</tr>
-								<tr>
-									<td><br></td>
-								</tr>
-								<tr>
-									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">Description* &nbsp;</td>
-									<td style="font-weight: bold"><label> <textarea  name="jobquery"
-													type="text" class="myclass" id="jobquery" rows="6" cols="55"
-													></textarea>
-									</label></td>
-								</tr>	           		
-								<%-- <tr>
-									<td class="alignLeft" style="font-weight: bold;font-size: 16px;">UID:</td>
-									<td style="font-weight: bold;font-size: 16px;color: #eb6000"><label> <c:out value="${student.studentexternalid}" /></label></td>
-								</tr>--%>
-		           				<tr>
-									<td><br /></td>
-								</tr>
-								
-									<tr>
-										
-										<td class="alignLeft">Expected End Date: &nbsp;</td>
-	
-										<td ><label>
-											<input type="text"  name="expecteddeliverydate"
-									class="textField myclass" style="font-size: 14px;width: 220px;height: 25px;"
-									id="expecteddeliverydate" autocomplete="false" required
-									data-validate="validate(required)">
-										</label></td>
-								</tr>
-								<tr>
-									<td><br></td>
-								</tr>
-								
-								<%-- <tr>
-										
-										<td class="alignLeft">Referred By: &nbsp;</td>
-	
-										<td ><label>
-											<select multiple class="chosen-select" name="referredby" id="referredby" style="width: 250px;border-radius: 4px;" >
-  										     <c:forEach items='${employeeList}' var='employeeList'>
-  										     	<option value='${employeeList.tid}'><c:out value='${employeeList.teachername}' /></option>
-  										     </c:forEach>
-  										  </select>
-										</label></td>
-								</tr>
-								<tr>
-									<td><br></td>
-								</tr> --%>
-						</table>
-						
-						<div align="center">
-						<p>
-						<h2 style="text-decoration: underline;color: #eb6000">Tasks Details</h2>	
-						<label><button id="addnewitem">Add Task</button></label><label><button id="removenewitem">Remove Task</button></label></p>
-						
-									
-					</div>
-					
-					<br>
-					<table style="margin-left: auto;margin-right: auto;border: 1px solid black;" id="dataTableTasks">
-						<thead>
-							<tr>
-								<th class="headerText">
-								<input type="checkbox" id="chckHeadReceived" />
-								<!-- <input type="checkbox"
-									id="selectAll" name="selectAll"
-									onclick="selectAllRow('dataTable')" /> --> </th>
-								<th class="headerText">Assign To</th>
-								<th class="headerText">Task</th>
-								<th class="headerText">Description</th>
-								<th class="headerText">Expected DD</th>
-							</tr>
-						</thead>
+                
+                <div class="form-table-wrapper">
+                    <table class="form-table">
+                        <tr>
+                            <td><input type="hidden" id="employeeid_${employee.tid}" name="employeeIDs" value="<c:out value='${employee.tid}:${employee.contactnumber}:${employee.teachername}'/>"/></td>
+                        </tr>
+                        <tr>
+                            <td class="alignLeft" style="font-weight: bold;font-size: 16px;">Teacher Name:</td>
+                            <td style="font-weight: bold;font-size: 16px;color: #eb6000;text-transform: uppercase;"><c:out value="${employee.teachername}" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br /></td>
+                        </tr>
+                        <tr>
+                            <td class="alignLeft">Title:</td>
+                            <td>
+                                <input type="text" name="jobtitle" id="jobtitle" class="myclass" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br></td>
+                        </tr>
+                        <tr>
+                            <td class="alignLeft" style="font-weight: bold;font-size: 16px;">Description*</td>
+                            <td>
+                                <textarea name="jobquery" type="text" class="myclass" id="jobquery" required></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br /></td>
+                        </tr>
+                        <tr>
+                            <td class="alignLeft">Expected End Date:</td>
+                            <td>
+                                <input type="text" name="expecteddeliverydate" class="myclass" id="expecteddeliverydate" autocomplete="false" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><br></td>
+                        </tr>
+                    </table>
+                </div>
 
-						<tbody>						
-						</tbody>
-					</table>
-						<div align="center">
-						<p>
-						<label><button id="createquery">Save</button></label></p>
-					</div>
-					</div>
+                <div style="text-align: center; margin: 20px 0;">
+                    <h2 style="text-decoration: underline;color: #eb6000; margin: 10px 0;">Tasks Details</h2>
+                    <div class="button-wrapper">
+                        <button type="button" id="addnewitem">Add Task</button>
+                        <button type="button" id="removenewitem">Remove Task</button>
+                    </div>
+                </div>
+
+                <table id="dataTableTasks">
+                    <thead>
+                        <tr>
+                            <th class="headerText" style="width: 50px;">
+                                <input type="checkbox" id="chckHeadReceived" />
+                            </th>
+                            <th class="headerText">Assign To</th>
+                            <th class="headerText">Task</th>
+                            <th class="headerText">Description</th>
+                            <th class="headerText">Expected DD</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+                <div class="button-wrapper">
+                    <button type="button" id="createquery">Save</button>
+                </div>
+            </div>
         </form>
     </body>
 </html>
