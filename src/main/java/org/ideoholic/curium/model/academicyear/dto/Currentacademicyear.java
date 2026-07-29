@@ -1,5 +1,7 @@
 package org.ideoholic.curium.model.academicyear.dto;
 
+import java.util.Date;
+
 // default package
 // Generated 8 May, 2015 5:04:47 PM by Hibernate Tools 4.0.0
 
@@ -35,7 +37,20 @@ public class Currentacademicyear implements java.io.Serializable {
 
 	@Column(name = "currentacademicyear", length = 100)
 	private String currentacademicyear;
+	
+	 @Column(name = "academicyearstartdate")
+	 private Date academicyearstartdate;
 
-	@Column(name = "userid")
-    private Integer userid;
+	 @Column(name = "academicyearenddate")
+	 private Date academicyearenddate;
+
+	 @Column(name = "active")
+	 private Boolean active;
+
+	 @Column(name = "branchid")
+	 private Integer branchid;
+	 
+	 @Column(name = "userid")
+	 private Integer userid;
+
 }

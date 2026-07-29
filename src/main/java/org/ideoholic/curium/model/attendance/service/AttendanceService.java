@@ -794,7 +794,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				e.printStackTrace();
 			}
 			List<Student> studentList = studentDetailsDao.getListStudents("from Student where archive=0 and passedout=0 AND droppedout=0 and leftout=0");
-			Currentacademicyear currentAcademicYear = yearDao.showYear();
+			Currentacademicyear currentAcademicYear = yearDao.showYear(0);
 			List<Attendancemaster> studentAttendanceMaster = attendanceDao.getAttendanceMasterDetails("00011");
 			String[] weeklyOffString = studentAttendanceMaster.get(0).getWeeklyoff().split(",");
 			List<Integer> studentWeeklyOffList = new ArrayList<Integer>();
@@ -1384,7 +1384,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			e.printStackTrace();
 		}
 		List<Teacher> staffList = employeeDao.readListOfObjects();
-		Currentacademicyear currentAcademicYear = yearDao.showYear();
+		Currentacademicyear currentAcademicYear = yearDao.showYear(0);
 		List<Staffdailyattendance> listStaffAttendance = new ArrayList<Staffdailyattendance>();
 		
 		for (Teacher teacher : staffList) {

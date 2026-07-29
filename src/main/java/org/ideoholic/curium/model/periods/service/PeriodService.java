@@ -54,7 +54,7 @@ public class PeriodService {
        TimeTableResponseDto result = TimeTableResponseDto.builder().success(false).build();
 
        try {
-           Currentacademicyear currentYear = yearDao.showYear();
+           Currentacademicyear currentYear = yearDao.showYear(Integer.parseInt(branchId));
            result.setCurrentYear(currentYear.getCurrentacademicyear());
 
            SubjectsResponseDto subjects = subjectDetailsService.readListOfSubjectNames(branchId);
@@ -244,7 +244,7 @@ public class PeriodService {
 		
         if (branchId != null) {
 
-            Currentacademicyear currentYear = yearDao.showYear();
+            Currentacademicyear currentYear = yearDao.showYear(Integer.parseInt(branchId));
             result.setCurrentYear(currentYear.getCurrentacademicyear());
 
             periodMaster = periodDao.getPeriodsDetails(currentYear.getCurrentacademicyear(), Integer.parseInt(branchId));
