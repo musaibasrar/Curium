@@ -41,7 +41,7 @@ public class diaryDAO {
 		
         try {
         	Pageable pageable = PageRequest.of(offset, noOfRecords);
-        	 results = diaryRepo.findByBranchid(branchId, pageable).toList();
+        	 results = diaryRepo.findByBranchidOrderByIdDesc(branchId, pageable).toList();
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
@@ -54,7 +54,7 @@ public class diaryDAO {
 		List<Diary> results = new ArrayList<>();
         try {
 			Pageable pageable = PageRequest.of(offset, noOfRecords);
-			results = diaryRepo.findByBranchidAndClasssec(branchId, classsec, pageable).toList();
+			results = diaryRepo.findByBranchidAndClasssecByIdDesc(branchId, classsec, pageable).toList();
         } catch (Exception hibernateException) { 
         	log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();

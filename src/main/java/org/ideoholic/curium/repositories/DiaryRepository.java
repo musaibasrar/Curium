@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface DiaryRepository extends JpaRepository<Diary, Integer> {
 
-	Page<Diary> findByBranchid(int branchid, Pageable pageable);
+	Page<Diary> findByBranchidOrderByIdDesc(int branchid, Pageable pageable);
 
-	Page<Diary> findByBranchidAndClasssec(int branchid, String classsec, Pageable pageable);
+	Page<Diary> findByBranchidAndClasssecByIdDesc(int branchid, String classsec, Pageable pageable);
 
 	long countByBranchid(int branchid);
 
