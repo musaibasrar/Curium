@@ -369,7 +369,10 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
-	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList) {
+	public String checkAndMarkStudentAttendance(List<Studentdailyattendance> studentDailyAttendanceList, Date dateofAttendance) {
+		
+		String result = null;
+		String attDate=  DateUtil.dateParseryyyymmdd(dateofAttendance);
 		
 		try {
 			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
