@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Hibernate mapping for HolisticRating -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.ratingdetails.dto.HolisticRating" table="holisticrating">
+        <id name="ratingid" type="java.lang.Integer">
+            <column name="ratingid" />
+            <generator class="identity" />
+        </id>
+        <property name="sid" type="java.lang.Integer">
+            <column name="sid" />
+        </property>
+        <property name="assessmentsubjectid" type="java.lang.Integer">
+            <column name="assessmentsubjectid" />
+        </property>
+        <property name="assessmentsubsubjectid" type="java.lang.Integer">
+            <column name="assessmentsubsubjectid" />
+        </property>
+        <property name="assessmentid" type="java.lang.Integer">
+            <column name="assessmentid" />
+        </property>
+        <property name="ratingvalue" type="java.lang.Float">
+            <column name="ratingvalue" />
+        </property>
+        <property name="ratinggrade" type="java.lang.String">
+            <column name="ratinggrade" length="10" />
+        </property>
+        <property name="academicyear" type="java.lang.String">
+            <column name="academicyear" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+	 			<column name="userid" />
+			</property>
+    </class>
+</hibernate-mapping>
