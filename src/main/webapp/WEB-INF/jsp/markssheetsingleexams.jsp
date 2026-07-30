@@ -380,7 +380,7 @@ body {
 				</div>
 		
 				<div class="schoolname">
-					<h3 style="font-size: 40px;color: #971d1d;">Little Flower Public School</h3>
+					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/sac/images/sacschoolname.png"> -->
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
@@ -441,16 +441,16 @@ body {
 
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment (SATS)
-							No : <c:out value="${Parents.parents.student.sts}" /></b></td>
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment
+							No : &nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
 							No :
-					<c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
+					&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
-							:
-						<c:choose>
+							: ${Parents.parents.student.classstudying}
+						<%-- <c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
 						    <c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
 						    <c:when test="${dataSubParts[0] == '1'}"><label >1<sup>st</sup> Std.</label></c:when>
@@ -463,7 +463,7 @@ body {
 						    <c:when test="${dataSubParts[0] == '8'}"><label>8<sup>th</sup> Std.</label></c:when>
 						    <c:when test="${dataSubParts[0] == '9'}"><label>9<sup>th</sup> Std.</label></c:when>
 						    <c:when test="${dataSubParts[0] == '10'}"><label>10<sup>th</sup> Std.</label></c:when>
-						</c:choose>
+						</c:choose> --%>
 					</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
@@ -545,8 +545,8 @@ body {
 						        	<tr>
 						            <th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> Scholastic Subject</th>
 						            <!-- Subject-wise Summary Headers -->
-						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
 						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Obtained Marks</th>
+						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
 						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Percentage</th>
 						            <th class="marksTableHeader" style="text-align: center; width: 10%;">Grade</th>
 						            <!-- <th class="marksTableHeader" style="text-align: center; width: 15%;">Remarks</th> -->
