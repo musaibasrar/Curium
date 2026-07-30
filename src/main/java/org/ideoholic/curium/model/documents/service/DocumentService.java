@@ -974,7 +974,7 @@ public class DocumentService {
 
 				if(!"".equalsIgnoreCase(querySub)) {
 					queryMain = queryMain + querySub;
-					searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+					searchStudentList = studentDetailsDao.getStudentsList(queryMain);
 				}
 				
 			}
