@@ -3,161 +3,135 @@ package org.ideoholic.curium.model.assessmentsubjectdetails.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import org.ideoholic.curium.util.Session;
-import org.ideoholic.curium.util.Session.Transaction;
-import org.hibernate.query.Query;
 import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubject;
 import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectMaster;
-import org.ideoholic.curium.util.HibernateUtil;
+import org.ideoholic.curium.repositories.AssessmentSubjectMasterRepository;
+import org.ideoholic.curium.repositories.AssessmentSubjectRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
-/**
- * DAO for Assessment Subject Details
- * Duplicated from SubjectDetailsDAO for independent assessment module
- */
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@Component
+@RequiredArgsConstructor
 public class AssessmentSubjectDetailsDAO {
 
-	Session session;
-	Transaction transaction;
-	
-	private static final Logger logger = LogManager.getLogger(AssessmentSubjectDetailsDAO.class);
-	
-	public AssessmentSubjectDetailsDAO() {
-		session = HibernateUtil.openCurrentSession();
-	}
-	
-	public List<AssessmentSubject> readListOfAssessmentSubjects(int branchId, String assessmentClass) {
-		List<AssessmentSubject> results = new ArrayList<AssessmentSubject>();
-		try {
-			transaction = session.beginTransaction();
-			results = (List<AssessmentSubject>) session.createQuery("From AssessmentSubject where assessmentclass = '"+assessmentClass+"' and branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-			return results;
-		}
-	}
+    private final AssessmentSubjectRepository assessmentSubjectRepo;
+    private final AssessmentSubjectMasterRepository assessmentSubjectMasterRepo;
 
-	public AssessmentSubject addAssessmentSubject(AssessmentSubject subject) {
-		try {
-			transaction = session.beginTransaction();
-			session.save(subject);
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-			return subject;
-		}
-	}
+    @Transactional
+    public List<AssessmentSubject> readListOfAssessmentSubjects(int branchId) {
+        List<AssessmentSubject> subjects = new ArrayList<>();
+        try {
+            subjects = assessmentSubjectRepo.findByBranchid(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subjects;
+    }
 
-	public void deleteMultiple(List ids) {
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from AssessmentSubject where assessmentsubjectid IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-	}
+    @Transactional
+    public AssessmentSubject addAssessmentSubject(AssessmentSubject subject) {
+        try {
+            subject = assessmentSubjectRepo.save(subject);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subject;
+    }
 
-	public AssessmentSubject getAssessmentSubjectDetails(Integer subid) {
-		AssessmentSubject subject = new AssessmentSubject();
-		try {
-			transaction = session.beginTransaction();
-			Query query =  session.createQuery("From AssessmentSubject where assessmentsubjectid="+subid);
-			subject = (AssessmentSubject) query.uniqueResult();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-			return subject;
-		}
-	}
+    @Transactional
+    public boolean deleteMultiple(List<Integer> ids) {
+        try {
+            assessmentSubjectRepo.deleteByAssessmentsubjectidIn(ids);
+            return true;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            return false;
+        }
+    }
 
-	public List<AssessmentSubject> readAllAssessmentSubjects(int branchId) {
-		List<AssessmentSubject> results = new ArrayList<AssessmentSubject>();
-		try {
-			transaction = session.beginTransaction();
-			results = (List<AssessmentSubject>) session.createQuery("From AssessmentSubject where branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-			return results;
-		}
-	}
+    @Transactional
+    public AssessmentSubjectMaster addAssessmentSubjectMaster(AssessmentSubjectMaster subjectMaster) {
+        try {
+            subjectMaster = assessmentSubjectMasterRepo.save(subjectMaster);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subjectMaster;
+    }
 
-	public AssessmentSubjectMaster addSubjectMaster(AssessmentSubjectMaster subjectMaster) {
-		try {
-			transaction = session.beginTransaction();
-			session.save(subjectMaster);
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-			return subjectMaster;
-		}
-	}
+    @Transactional
+    public List<AssessmentSubjectMaster> readListOfSubjectNames(int branchId) {
+        List<AssessmentSubjectMaster> subjectNames = new ArrayList<>();
+        try {
+            subjectNames = assessmentSubjectMasterRepo.findByBranchid(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subjectNames;
+    }
 
-	public List<AssessmentSubjectMaster> readListOfSubjectNames(int branchId) {
-		List<AssessmentSubjectMaster> results = new ArrayList<AssessmentSubjectMaster>();
-		try {
-			transaction = session.beginTransaction();
-			results = (List<AssessmentSubjectMaster>) session.createQuery("From AssessmentSubjectMaster where branchid="+branchId)
-					.list();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		} finally {
-			HibernateUtil.closeSession();
-			return results;
-		}
-	}
+    @Transactional
+    public boolean deleteMultipleSubjectMaster(List<Integer> ids) {
+        try {
+            assessmentSubjectMasterRepo.deleteBySubjectidIn(ids);
+            return true;
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            return false;
+        }
+    }
 
-	public void deleteMultipleSubjectMaster(List ids) {
-		try {
-			transaction = session.beginTransaction();
-			Query query = session
-					.createQuery("delete from AssessmentSubjectMaster where subjectid IN (:ids)");
-			query.setParameterList("ids", ids);
-			query.executeUpdate();
-			transaction.commit();
-		} catch (Exception hibernateException) { 
-			transaction.rollback(); 
-			logger.error(hibernateException);
-			hibernateException.printStackTrace();
-		}finally {
-			HibernateUtil.closeSession();
-		}
-	}
+    @Transactional
+    public List<AssessmentSubject> readAllAssessmentSubjects(String classCategory, int branchId) {
+        List<AssessmentSubject> subjects = new ArrayList<>();
+        try {
+            subjects = assessmentSubjectRepo.findByAssessmentclassAndBranchid(classCategory, branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subjects;
+    }
 
+    @Transactional
+    public AssessmentSubject getAssessmentSubjectDetails(Integer assessmentSubjectId) {
+        AssessmentSubject subject = null;
+        try {
+            subject = assessmentSubjectRepo.findByAssessmentsubjectid(assessmentSubjectId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return subject;
+    }
+
+    @Transactional
+    public List<Object[]> getCategoriesWithSubjects(int branchId) {
+        List<Object[]> categories = new ArrayList<>();
+        try {
+            categories = assessmentSubjectMasterRepo.getCategoriesWithSubjects(branchId);
+        } catch (Exception e) {
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            log.error(e.getMessage(), e);
+            e.printStackTrace();
+        }
+        return categories;
+    }
 }

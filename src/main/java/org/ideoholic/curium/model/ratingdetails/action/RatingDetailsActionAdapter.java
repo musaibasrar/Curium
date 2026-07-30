@@ -1,28 +1,28 @@
 package org.ideoholic.curium.model.ratingdetails.action;
 
-import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.assessmentdetails.dao.HolisticAssessmentDAO;
-import org.ideoholic.curium.model.assessmentdetails.dto.HolisticAssessment;
-import org.ideoholic.curium.model.assessmentsubjectdetails.dao.AssessmentSubjectDetailsDAO;
-import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectMaster;
-import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
-import org.ideoholic.curium.model.examdetails.dto.Exams;
-import org.ideoholic.curium.model.ratingdetails.dto.RatingDto;
-import org.ideoholic.curium.model.ratingdetails.dto.StudentReportCardDto;
-import org.ideoholic.curium.model.ratingdetails.dto.RatingUpdateDto;
-import org.ideoholic.curium.model.ratingdetails.dto.RatingViewDto;
-import org.ideoholic.curium.model.ratingdetails.dto.SearchStudentAssessmentDto;
-import org.ideoholic.curium.model.ratingdetails.service.RatingDetailsService;
-import org.ideoholic.curium.model.subjectdetails.dao.SubjectDetailsDAO;
-import org.ideoholic.curium.model.subjectdetails.dto.Subjectmaster;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.assessmentdetails.dto.AssessmentListResponseDto;
+import org.ideoholic.curium.model.assessmentdetails.dto.HolisticAssessment;
+import org.ideoholic.curium.model.assessmentdetails.service.HolisticAssessmentService;
+import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectMaster;
+import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectsResponseDto;
+import org.ideoholic.curium.model.assessmentsubjectdetails.service.AssessmentSubjectDetailsService;
+import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
+import org.ideoholic.curium.model.ratingdetails.dto.RatingDto;
+import org.ideoholic.curium.model.ratingdetails.dto.RatingUpdateDto;
+import org.ideoholic.curium.model.ratingdetails.dto.RatingViewDto;
+import org.ideoholic.curium.model.ratingdetails.dto.SearchStudentAssessmentDto;
+import org.ideoholic.curium.model.ratingdetails.dto.StudentReportCardDto;
+import org.ideoholic.curium.model.ratingdetails.service.RatingDetailsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 /**
  * Action Adapter for Holistic Rating Details
@@ -30,6 +30,7 @@ import javax.servlet.http.HttpSession;
  * CRITICAL: Processes grade codes (A+, B+, etc.) from UI
  */
 @Service
+@RequiredArgsConstructor
 public class RatingDetailsActionAdapter {
 
     @Autowired
@@ -38,8 +39,11 @@ public class RatingDetailsActionAdapter {
     @Autowired
     private HttpSession httpSession;
 
-    @Autowired
-    private RatingDetailsService ratingDetailsService;
+    private final RatingDetailsService ratingDetailsService;
+
+    private final AssessmentSubjectDetailsService assessmentSubjectDetailsService;
+
+    private final HolisticAssessmentService holisticAssessmentService;
 
     private static final String BRANCHID = "branchid";
     private static final String CURRENTACADEMICYEAR = "currentAcademicYear";
@@ -71,7 +75,7 @@ public class RatingDetailsActionAdapter {
      * Service layer converts to numeric values
      */
     public String addRatings() {
-        
+
         RatingUpdateDto dto = new RatingUpdateDto();
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setStudentsRatings(getFirstAvailableParameterValues("studentsRatings", "studentRatings")); // Grade codes: A+, B+, etc.
@@ -80,12 +84,9 @@ public class RatingDetailsActionAdapter {
         dto.setClassSearch(request.getParameter("classsearch"));
         dto.setAcademicYear(request.getParameter("academicyear"));
 
-        ResultResponse result = ratingDetailsService.addRatings(
-            dto, 
-            httpSession.getAttribute(BRANCHID).toString(),
-            httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
-            httpSession.getAttribute(USERLOGINID).toString()
-        );
+        ResultResponse result = ratingDetailsService.addRatings(dto, httpSession.getAttribute(BRANCHID).toString(),
+                httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+                httpSession.getAttribute(USERLOGINID).toString());
 
         if (result.isSuccess()) {
             return "true";
@@ -107,11 +108,15 @@ public class RatingDetailsActionAdapter {
 
         SearchStudentResponseDto result = ratingDetailsService.Search(dto, httpSession.getAttribute(BRANCHID).toString());
         // get all the subjects
-     	List<AssessmentSubjectMaster> subjectList = new AssessmentSubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+          AssessmentSubjectsResponseDto subjectResponse = assessmentSubjectDetailsService
+                  .readListOfSubjectNames(httpSession.getAttribute(BRANCHID).toString());
+          List<AssessmentSubjectMaster> subjectList = subjectResponse.getListSubjectNames();
      	request.setAttribute("listAssessmentSubjectNames", subjectList);
 
      	// get the list for all the assessments
-     	List<HolisticAssessment> assessments = new HolisticAssessmentDAO().readListOfAssessments(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+          AssessmentListResponseDto assessmentResponse = holisticAssessmentService
+                  .readListOfAssessments(httpSession.getAttribute(BRANCHID).toString());
+          List<HolisticAssessment> assessments = assessmentResponse.getAssessments();
      	request.setAttribute("listAssessment", assessments);
      	
      	request.setAttribute("classselected", dto.getAddClass());
@@ -160,11 +165,9 @@ public class RatingDetailsActionAdapter {
         dto.setRatingId(getFirstAvailableParameterValues("ratingid", "ratingsid"));
         dto.setStudentsRatings(getFirstAvailableParameterValues("studentsRatings", "studentRatings")); // Updated grade codes
 
-        ResultResponse result = ratingDetailsService.updateRatings(
-            dto,
-            httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
-            httpSession.getAttribute(BRANCHID).toString()
-        );
+        ResultResponse result = ratingDetailsService.updateRatings(dto,
+                httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+                httpSession.getAttribute(BRANCHID).toString());
 
         return result.isSuccess();
     }
@@ -206,10 +209,8 @@ public class RatingDetailsActionAdapter {
                 assessmentName = "Assessment Progress Report";
             }
 
-            List<StudentReportCardDto> reportCards = ratingDetailsService.buildAssessmentProgressReports(
-                    studentIds,
-                    assessmentName,
-                    httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
+            List<StudentReportCardDto> reportCards = ratingDetailsService.buildAssessmentProgressReports(studentIds,
+                    assessmentName, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),
                     httpSession.getAttribute(BRANCHID).toString());
 
             request.setAttribute("studentReportCards", reportCards);

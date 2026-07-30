@@ -13,9 +13,7 @@ import org.ideoholic.curium.model.assessmentdetails.dao.HolisticAssessmentDAO;
 import org.ideoholic.curium.model.assessmentdetails.dto.HolisticAssessment;
 import org.ideoholic.curium.model.assessmentsubjectdetails.dao.AssessmentSubjectDetailsDAO;
 import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubject;
-import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectMaster;
 import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
-import org.ideoholic.curium.model.marksdetails.dto.SubjectGrade;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.ratingdetails.dao.RatingDetailsDAO;
 import org.ideoholic.curium.model.ratingdetails.dto.AssessmentSubjectsDto;
@@ -33,13 +31,16 @@ import org.ideoholic.curium.model.ratingdetails.dto.StudentReportCardDto;
 import org.ideoholic.curium.model.ratingdetails.dto.StudentRatingGraphDto;
 import org.ideoholic.curium.model.ratingdetails.dto.StudentRatingGraphResponseDto;
 import org.ideoholic.curium.model.ratingdetails.dto.SubjectRatingDto;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
-import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.AssessmentSheet;
 import org.ideoholic.curium.util.AssessmentsDetails;
+import org.ideoholic.curium.util.DataUtil;
+import org.ideoholic.curium.util.PropertiesUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -49,7 +50,18 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class RatingDetailsService {
+
+	private final RatingDetailsDAO ratingDetailsDAO;
+	
+	private final StudentDetailsDAO studentDetailsDAO;
+	
+	private final AssessmentSubjectDetailsDAO assessmentSubjectDetailsDAO;
+	
+	private final HolisticAssessmentDAO holisticAssessmentDAO;
+
+	private final PropertiesUtil propertiesUtil;
 
 	/**
 	 * Grade to Numeric Value Conversion Map
@@ -91,7 +103,6 @@ public class RatingDetailsService {
 		String[] studentsRatings = dto.getStudentsRatings(); // These are grade codes: A+, B+, etc.
 		String[] assessmentidName = dto.getAssessment().split("__");
 		String subject = dto.getSubject();
-		String classSelected = dto.getClassSearch();
 		
 		log.debug("Subject id: {}, Assessment id: {}", subject, assessmentidName[0]);
 		
@@ -153,7 +164,7 @@ public class RatingDetailsService {
 				ratingList.add(rating);
 			}
 
-			String output = new RatingDetailsDAO().addRatings(ratingList);
+			String output = ratingDetailsDAO.addRatings(ratingList);
 			
 			if(output.equals("success")){
 				result.setMessage("true");
@@ -207,7 +218,7 @@ public class RatingDetailsService {
 			queryMain = queryMain + querySub;
 			log.debug("Search query: {}", queryMain);
 			
-			List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> searchStudentList = studentDetailsDAO.getStudentsList(queryMain);
 			result.setSearchStudentList(searchStudentList);
 
 			result.setClassSearch(addClass);
@@ -258,7 +269,7 @@ public class RatingDetailsService {
 				queryMain = queryMain + querySub;
 				log.debug("Search query: {}", queryMain);
 				
-				List<Parents> searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+				List<Parents> searchStudentList = studentDetailsDAO.getStudentsList(queryMain);
 				
 				// Get assessment subject and assessment details
 				String assessment = dto.getAssessment();
@@ -273,12 +284,9 @@ public class RatingDetailsService {
 				
 				// For each student, fetch ratings for this assessment/subject
 				for (Parents parent : searchStudentList) {
-					List<HolisticRating> singleRatingsList = new RatingDetailsDAO().readListOfRatings(
-						parent.getStudent().getSid(),
-						assessmentSubjectId,
-						assessmentId,
-						dto.getAcademicYear()
-					);
+					List<HolisticRating> singleRatingsList = ratingDetailsDAO
+							.readListOfRatings(parent.getStudent().getSid(), assessmentSubjectId, assessmentId,
+									dto.getAcademicYear());
 					
 					// Filter for ratings where assessmentsubsubjectid == 0
 					for (HolisticRating rating : singleRatingsList) {
@@ -311,6 +319,7 @@ public class RatingDetailsService {
 	/**
 	 * Update ratings with grade-to-numeric conversion
 	 */
+	@Transactional
 	public ResultResponse updateRatings(RatingUpdateDto dto, String currentAcademicYear, String branchId) {
 		
 		ResultResponse result = ResultResponse.builder().build();
@@ -352,7 +361,7 @@ public class RatingDetailsService {
 				ratingList.add(rating);
 			}
 			
-			boolean updateSuccess = new RatingDetailsDAO().updateRatings(ratingList);
+			boolean updateSuccess = ratingDetailsDAO.updateRatings(ratingList);
 			
 			if(updateSuccess) {
 				result.setSuccess(true);
@@ -378,8 +387,7 @@ public class RatingDetailsService {
 			for(String id : ratingIds) {
 				ids.add(Integer.valueOf(id));
 			}
-			new RatingDetailsDAO().deleteMultiple(ids);
-			return ResultResponse.builder().success(true).build();
+			return ResultResponse.builder().success(ratingDetailsDAO.deleteMultiple(ids)).build();
 		}
 		
 		return ResultResponse.builder().success(false).build();
@@ -390,14 +398,14 @@ public class RatingDetailsService {
 	 * Uses numeric values for ranking calculations
 	 */
 	public ResultResponse getStudentList(String branchId) {
-		List<Student> studentList = new studentDetailsDAO().readListOfObjectsForIcon(Integer.parseInt(branchId));
+		List<Student> studentList = studentDetailsDAO.readListOfObjectsForIcon(Integer.parseInt(branchId));
 		return ResultResponse.builder().resultList(studentList).success(true).build();
 	}
 
 	public AssessmentSubjectsDto getSubjectAssessments(String branchId) {
 		AssessmentSubjectsDto result = new AssessmentSubjectsDto();
-		result.setAssessmentSubjects(new AssessmentSubjectDetailsDAO().readAllAssessmentSubjects(Integer.parseInt(branchId)));
-		result.setAssessments(new HolisticAssessmentDAO().readListOfAssessments(Integer.parseInt(branchId)));
+		result.setAssessmentSubjects(assessmentSubjectDetailsDAO.readListOfAssessmentSubjects(Integer.parseInt(branchId)));
+		result.setAssessments(holisticAssessmentDAO.readListOfAssessments(Integer.parseInt(branchId)));
 		result.setSuccess(true);
 		return result;
 	}
@@ -411,11 +419,11 @@ public class RatingDetailsService {
 		StudentRatingGraphResponseDto result = StudentRatingGraphResponseDto.builder().build();
 
 		if (branchId != null && dto.getStudentIds() != null && dto.getStudentIds().length > 0) {
-			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(dto.getStudentIds()[0]));
+			Student searchStudent = studentDetailsDAO.readUniqueObject(Integer.parseInt(dto.getStudentIds()[0]));
 
 			List<HolisticAssessment> assessmentList = dto.getAssessmentsList();
 			if (assessmentList == null || assessmentList.isEmpty()) {
-				assessmentList = new HolisticAssessmentDAO().readListOfAssessments(Integer.parseInt(branchId));
+				assessmentList = holisticAssessmentDAO.readListOfAssessments(Integer.parseInt(branchId));
 			}
 
 			List<AssessmentsDetails> assessmentDetails = new ArrayList<AssessmentsDetails>();
@@ -425,14 +433,14 @@ public class RatingDetailsService {
 
 				List<Integer> studentIds = new ArrayList<Integer>();
 				studentIds.add(searchStudent.getSid());
-				List<HolisticRating> ratings = new RatingDetailsDAO().readListOfRatingsForAllAssessments(studentIds,
+				List<HolisticRating> ratings = ratingDetailsDAO.readListOfRatingsForAllAssessments(studentIds,
 						currentAcademicYear, Integer.parseInt(branchId));
 
 				List<String> subjects = new ArrayList<String>();
 				List<String> grades = new ArrayList<String>();
 				for (HolisticRating rating : ratings) {
 					if (assessment.getAssessmentid().equals(rating.getAssessmentid())) {
-						AssessmentSubject subject = new AssessmentSubjectDetailsDAO()
+						AssessmentSubject subject = assessmentSubjectDetailsDAO
 								.getAssessmentSubjectDetails(rating.getAssessmentsubjectid());
 						if (subject != null) {
 							subjects.add("\"" + subject.getSubjectname() + "\"");
@@ -463,21 +471,21 @@ public class RatingDetailsService {
 		List<AssessmentSheet> assessmentSheetList = new ArrayList<AssessmentSheet>();
 
 		if (branchId != null && currentAcademicYear != null && dto.getStudentIds() != null) {
-			List<HolisticAssessment> assessments = new HolisticAssessmentDAO().readListOfAssessments(Integer.parseInt(branchId));
+			List<HolisticAssessment> assessments = holisticAssessmentDAO.readListOfAssessments(Integer.parseInt(branchId));
 
 			for (String studentId : dto.getStudentIds()) {
 				AssessmentSheet sheet = new AssessmentSheet();
-				Parents parent = new studentDetailsDAO().readUniqueObjectParents(Integer.parseInt(studentId));
+				Parents parent = studentDetailsDAO.readUniqueObjectParents(Integer.parseInt(studentId));
 				sheet.setParents(parent);
 
 				List<Integer> studentIds = new ArrayList<Integer>();
 				studentIds.add(Integer.parseInt(studentId));
-				List<HolisticRating> ratings = new RatingDetailsDAO().readListOfRatingsForAllAssessments(studentIds,
+				List<HolisticRating> ratings = ratingDetailsDAO.readListOfRatingsForAllAssessments(studentIds,
 						currentAcademicYear, Integer.parseInt(branchId));
 
 				Map<String, Map<String, String>> subjectAssessmentRatings = new HashMap<String, Map<String, String>>();
 				for (HolisticRating rating : ratings) {
-					AssessmentSubject subject = new AssessmentSubjectDetailsDAO()
+					AssessmentSubject subject = assessmentSubjectDetailsDAO
 							.getAssessmentSubjectDetails(rating.getAssessmentsubjectid());
 					if (subject == null) {
 						continue;
@@ -520,7 +528,7 @@ public class RatingDetailsService {
 
 	public GenerateAssessmentReportResponseDto getStartDate() {
 		GenerateAssessmentReportResponseDto result = GenerateAssessmentReportResponseDto.builder().build();
-		result.setStartDate(new DataUtil().getPropertiesValue("startdate"));
+		result.setStartDate(propertiesUtil.getPropertiesValue("startdate"));
 		return result;
 	}
 
@@ -531,7 +539,7 @@ public class RatingDetailsService {
 		try {
 			// Get all students in the class
 			String queryMain = "From Parents as parents where parents.Student.classstudying like '" + classSearch + "%' AND parents.Student.archive=0 AND parents.branchid=" + Integer.parseInt(branchId);
-			List<Parents> studentList = new studentDetailsDAO().getStudentsList(queryMain);
+			List<Parents> studentList = studentDetailsDAO.getStudentsList(queryMain);
 			
 			List<AssessmentRank> assessmentRankList = new ArrayList<>();
 			
@@ -542,11 +550,8 @@ public class RatingDetailsService {
 				List<Integer> studentIds = new ArrayList<>();
 				studentIds.add(studentId);
 				
-				List<HolisticRating> ratings = new RatingDetailsDAO().readListOfRatingsForAllAssessments(
-					studentIds, 
-					academicYear, 
-					Integer.parseInt(branchId)
-				);
+				List<HolisticRating> ratings = ratingDetailsDAO.readListOfRatingsForAllAssessments(studentIds,
+						academicYear, Integer.parseInt(branchId));
 				
 				float totalRating = 0.0f;
 				for(HolisticRating rating : ratings) {
@@ -575,7 +580,7 @@ public class RatingDetailsService {
 			}
 			
 			// Save ranks
-			boolean saveSuccess = new RatingDetailsDAO().addAssessmentRank(assessmentRankList);
+			boolean saveSuccess = ratingDetailsDAO.addAssessmentRank(assessmentRankList);
 			
 			if(saveSuccess) {
 				result.setSuccess(true);
@@ -603,8 +608,7 @@ public class RatingDetailsService {
 
 		try {
 			// Fetch student information
-			studentDetailsDAO studentDAO = new studentDetailsDAO();
-			Parents studentInfo = studentDAO.readUniqueObjectParents(studentId);
+			Parents studentInfo = studentDetailsDAO.readUniqueObjectParents(studentId);
 
 			if (studentInfo == null) {
 				log.warn("Student not found: studentId={}", studentId);
@@ -612,8 +616,7 @@ public class RatingDetailsService {
 			}
 
 			// Fetch all ratings for this student
-			RatingDetailsDAO ratingDAO = new RatingDetailsDAO();
-			List<Object[]> progressData = ratingDAO.fetchStudentProgressData(studentId, academicYear, branchId);
+			List<Object[]> progressData = ratingDetailsDAO.fetchStudentProgressData(studentId, academicYear, branchId);
 
 			if (progressData == null || progressData.isEmpty()) {
 				log.debug("No ratings found for studentId={}, academicYear={}", studentId, academicYear);

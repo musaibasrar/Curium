@@ -3,8 +3,9 @@ package org.ideoholic.curium.model.assessmentdetails.action;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.assessmentdetails.dto.*;
 import org.ideoholic.curium.model.assessmentdetails.service.HolisticAssessmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,16 +15,14 @@ import javax.servlet.http.HttpSession;
  * Handles request/response mapping between web layer and service layer
  */
 @Service
+@RequiredArgsConstructor
 public class HolisticAssessmentActionAdapter {
-    
-    @Autowired
-    private HttpServletRequest request;
-    
-    @Autowired
-    private HttpSession httpSession;
-    
-    @Autowired
-    private HolisticAssessmentService holisticAssessmentService;
+
+    private final HttpServletRequest request;
+
+    private final HttpSession httpSession;
+
+    private final HolisticAssessmentService holisticAssessmentService;
 
     private static final String BRANCHID = "branchid";
     private static final String CURRENTACADEMICYEAR = "currentAcademicYear";

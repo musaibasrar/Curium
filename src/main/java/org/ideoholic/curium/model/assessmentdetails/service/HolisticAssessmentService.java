@@ -21,6 +21,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.stereotype.Service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -29,7 +30,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class HolisticAssessmentService {
+
+    private final HolisticAssessmentDAO holisticAssessmentDAO;
 
     public ResultResponse addAssessment(AddAssessmentDto addAssessmentDto, String branchId) {
 
@@ -38,9 +42,9 @@ public class HolisticAssessmentService {
         if (branchId != null) {
             assessment.setAssessmentname(DataUtil.emptyString(addAssessmentDto.getAssessmentName()));
             assessment.setBranchid(Integer.parseInt(branchId));
-            assessment = new HolisticAssessmentDAO().addAssessment(assessment);
+            assessment = holisticAssessmentDAO.create(assessment);
         }
-        
+
         if (assessment == null) {
             return ResultResponse.builder().success(false).build();
         }
@@ -49,12 +53,12 @@ public class HolisticAssessmentService {
 
     public AssessmentListResponseDto readListOfAssessments(String branchId) {
         AssessmentListResponseDto assessmentListResponseDto = new AssessmentListResponseDto();
-        
+
         if (branchId != null) {
-            List<HolisticAssessment> assessments = new HolisticAssessmentDAO().readListOfAssessments(Integer.parseInt(branchId));
+            List<HolisticAssessment> assessments = holisticAssessmentDAO.readListOfAssessments(Integer.parseInt(branchId));
             assessmentListResponseDto.setAssessments(assessments);
             assessmentListResponseDto.setSuccess(true);
-            
+
             if (assessments == null) {
                 assessmentListResponseDto.setSuccess(false);
             }
@@ -66,15 +70,14 @@ public class HolisticAssessmentService {
     public ResultResponse deleteMultiple(AssessmentIdsDto assessmentIdsDto) {
 
         String[] assessmentIds = assessmentIdsDto.getAssessmentIds();
-        
+
         if (assessmentIds != null) {
             List<Integer> ids = new ArrayList<>();
             for (String id : assessmentIds) {
-                log.debug("Assessment id: " + id);
+                log.debug("Assessment id: {}", id);
                 ids.add(Integer.valueOf(id));
             }
-            new HolisticAssessmentDAO().deleteMultiple(ids);
-            return ResultResponse.builder().success(true).build();
+            return ResultResponse.builder().success(holisticAssessmentDAO.deleteMultiple(ids)).build();
         } else {
             return ResultResponse.builder().success(false).build();
         }
@@ -99,22 +102,21 @@ public class HolisticAssessmentService {
                 for (int i = 0; i < subject.length; i++) {
                     HolisticAssessmentSchedule assessmentSchedule = new HolisticAssessmentSchedule();
                     assessmentSchedule.setAcademicyear(DataUtil.emptyString(addScheduleDto.getAcademicyear()));
-                    
-                    if(sectionSelected.equalsIgnoreCase("")) {
+
+                    if (sectionSelected.equalsIgnoreCase("")) {
                         assessmentSchedule.setClasses(selectedClass);
                     } else {
-                        assessmentSchedule.setClasses(selectedClass+"--"+sectionSelected);
+                        assessmentSchedule.setClasses(selectedClass + "--" + sectionSelected);
                     }
-                    
+
                     assessmentSchedule.setAssessmentname(DataUtil.emptyString(addScheduleDto.getAssessment()));
                     assessmentSchedule.setDate(DateUtil.dateParserUpdateStd(date[i]));
-                    
-                    // Parse start time
+
                     String[] starttimeSplit = startTime[i].split(":");
                     String hours = starttimeSplit[0];
                     String meridian = null;
                     String outputStartTime = null;
-                    
+
                     if (Integer.parseInt(hours) < 12) {
                         outputStartTime = startTime[i];
                         meridian = "AM";
@@ -132,13 +134,12 @@ public class HolisticAssessmentService {
                     }
 
                     assessmentSchedule.setStarttime(outputStartTime + " " + meridian);
-                    
-                    // Parse end time
+
                     String[] endtimeSplit = endTime[i].split(":");
                     String endhours = endtimeSplit[0];
                     String endmeridian = null;
                     String outputEndTime = null;
-                    
+
                     if (Integer.parseInt(endhours) < 12) {
                         outputEndTime = endTime[i];
                         endmeridian = "AM";
@@ -163,7 +164,7 @@ public class HolisticAssessmentService {
                     assessmentScheduleList.add(assessmentSchedule);
                 }
             }
-            result = new HolisticAssessmentDAO().addAssessmentSchedule(assessmentScheduleList);
+            result = holisticAssessmentDAO.addSchedule(assessmentScheduleList);
             return ResultResponse.builder().success(result).build();
         }
         return ResultResponse.builder().build();
@@ -174,7 +175,8 @@ public class HolisticAssessmentService {
         AssessmentScheduleResponseDto result = new AssessmentScheduleResponseDto();
 
         if (branchId != null) {
-            List<HolisticAssessmentSchedule> assessments = new HolisticAssessmentDAO().readListOfAssessmentSchedule(null, null, null, Integer.parseInt(branchId));
+            List<HolisticAssessmentSchedule> assessments = holisticAssessmentDAO
+                    .getAssessmentSchedule(Integer.parseInt(branchId));
             result.setAssessmentschedules(assessments);
             result.setSuccess(true);
             if (assessments == null) {
@@ -185,7 +187,8 @@ public class HolisticAssessmentService {
         return result;
     }
 
-    public AssessmentScheduleResponseDto getAssessmentScheduleDetails(AssessmentScheduleDto assessmentScheduleDto, String branchId) {
+    public AssessmentScheduleResponseDto getAssessmentScheduleDetails(AssessmentScheduleDto assessmentScheduleDto,
+            String branchId) {
         AssessmentScheduleResponseDto result = new AssessmentScheduleResponseDto();
 
         String academicYear = DataUtil.emptyString(assessmentScheduleDto.getAcademicYear());
@@ -219,8 +222,8 @@ public class HolisticAssessmentService {
         }
 
         if (branchId != null) {
-            List<HolisticAssessmentSchedule> assessmentschedules = new HolisticAssessmentDAO()
-                    .getAssessmentScheduleDetails(academicYear, classH, assessment, Integer.parseInt(branchId));
+            List<HolisticAssessmentSchedule> assessmentschedules = holisticAssessmentDAO
+                    .getAssessmentScheduleDetails(assessment, classH, academicYear, Integer.parseInt(branchId));
             result.setAssessmentschedules(assessmentschedules);
             result.setSuccess(true);
             if (!assessmentschedules.isEmpty()) {
@@ -233,15 +236,14 @@ public class HolisticAssessmentService {
     public ResultResponse deleteAssessmentSchedule(AssessmentIdsDto assessmentIdsDto) {
 
         String[] scheduleIds = assessmentIdsDto.getAssessmentIds();
-        
+
         if (scheduleIds != null) {
             List<Integer> ids = new ArrayList<>();
             for (String id : scheduleIds) {
-                log.debug("Schedule id: " + id);
+                log.debug("Schedule id: {}", id);
                 ids.add(Integer.valueOf(id));
             }
-            new HolisticAssessmentDAO().deleteMultipleSchedule(ids);
-            return ResultResponse.builder().success(true).build();
+            return ResultResponse.builder().success(holisticAssessmentDAO.deleteAssessmentSchedule(ids)).build();
         } else {
             return ResultResponse.builder().success(false).build();
         }

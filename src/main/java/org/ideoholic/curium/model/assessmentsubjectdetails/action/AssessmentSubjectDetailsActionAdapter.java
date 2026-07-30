@@ -5,8 +5,9 @@ import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubject
 import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectIdsDto;
 import org.ideoholic.curium.model.assessmentsubjectdetails.dto.AssessmentSubjectsResponseDto;
 import org.ideoholic.curium.model.assessmentsubjectdetails.service.AssessmentSubjectDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import lombok.RequiredArgsConstructor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,16 +17,14 @@ import javax.servlet.http.HttpSession;
  * Handles request/response mapping between web layer and service layer
  */
 @Service
+@RequiredArgsConstructor
 public class AssessmentSubjectDetailsActionAdapter {
 
-    @Autowired
-    private HttpServletRequest request;
+    private final HttpServletRequest request;
 
-    @Autowired
-    private HttpSession httpSession;
+    private final HttpSession httpSession;
 
-    @Autowired
-    private AssessmentSubjectDetailsService assessmentSubjectDetailsService;
+    private final AssessmentSubjectDetailsService assessmentSubjectDetailsService;
 
     private static final String BRANCHID = "branchid";
     private static final String USERLOGINID = "userloginid";
