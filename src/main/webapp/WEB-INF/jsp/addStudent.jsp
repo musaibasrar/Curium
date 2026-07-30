@@ -1508,13 +1508,14 @@ $(document).ready(function() {
 									 id="motherT"
 									style="width: 258px;border-radius: 4px;background: white;height: 28px;">
 										<option selected></option>
-										<option>Urdu</option>
-										<option>Hindi</option>
 										<option>English</option>
+										<option>Hindi</option>
 										<option>Kannada</option>
+										<option>Malayalam</option>
 										<option>Marathi</option>
-										<option>Telugu</option>
 										<option>Tamil</option>
+										<option>Telugu</option>
+										<option>Urdu</option>
 								</select>
 							</label>
 							</td>

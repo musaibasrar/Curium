@@ -958,13 +958,14 @@ for(Cookie cookie : cookies){
 							<select name="mothertongue" onblur="validateNameContact();"
 									id="mothertongue" style="width: 210px;border-radius: 4px;background: white;height: 28px;" onkeypress="return validateContactNum(this);">
 										<option selected>${student.mothertongue}</option>
-										<option>Urdu</option>
-										<option>Hindi</option>
 										<option>English</option>
+										<option>Hindi</option>
 										<option>Kannada</option>
+										<option>Malayalam</option>
 										<option>Marathi</option>
-										<option>Telugu</option>
 										<option>Tamil</option>
+										<option>Telugu</option>
+										<option>Urdu</option>
 								</select>
 							</label>
 							

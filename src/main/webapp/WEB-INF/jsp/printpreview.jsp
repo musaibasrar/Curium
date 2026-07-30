@@ -499,11 +499,11 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;font-size:7px;">&nbsp;&nbsp;F/NAME</td>
     <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
-  <tr>
+   <%--<tr>
     <td style="padding: 0;white-space: nowrap;font-size:7px;">&nbsp;&nbsp;CLASS</td>
     <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
- <%-- 
+ 
   <tr>
     <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
@@ -512,10 +512,18 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;font-size:7px;">&nbsp;&nbsp;D.O.B.</td>
     <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
-   <tr>
+   <%
+String classSection = (String) request.getSession().getAttribute("classsection" + i);
+
+if (classSection != null && !classSection.toUpperCase().contains(".K.G")) {
+%>
+<tr>
     <td style="padding: 0;white-space: nowrap;font-size:7px;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
-  </tr>
+    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i) %></td>
+</tr>
+<%
+}
+%>
    <tr>
     <td style="padding: 0;white-space: nowrap;font-size:7px;">&nbsp;&nbsp;BLD GRP</td>
     <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("bloodgroup" + i + "") %></td>
