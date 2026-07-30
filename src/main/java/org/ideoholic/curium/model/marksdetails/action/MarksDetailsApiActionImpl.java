@@ -151,6 +151,8 @@ public class MarksDetailsApiActionImpl implements MarksDetailsApiAction{
             return ResponseEntity.ok(result);
         } else if (result.getMessage() != null && result.getMessage().equals("Duplicate") ) {
             throw new CustomResponseException(CustomErrorMessage.ERRORADDINGMARKS);
+        } else if ("INVALID_SUBJECT_CONTEXT".equals(result.getMessage())) {
+            throw new CustomResponseException(CustomErrorMessage.INVALID_SUBJECT_CONTEXT);
         } else {
             throw new CustomResponseException(CustomErrorMessage.ERROR);
         }
