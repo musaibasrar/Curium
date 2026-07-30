@@ -201,7 +201,7 @@ for(Cookie cookie : cookies){
 			
 			<tr>
 			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 100px;" alt="logo" src="/iqra/images/iqra.png">
+			<img border="0" style="vertical-align: text-bottom;height: 79px;width: 100px;" alt="logo" src="/iqra/images/iqra.png">
 			</td>
 				<td >
 					<br>

@@ -285,7 +285,7 @@ for(Cookie cookie : cookies){
             <!-- ===== HEADER ===== -->
             <table width="100%" style="border-collapse: collapse;">
                 <tr>
-                    <td><img src="/iqra/images/iqra.jpg" width="30" height="30"/></td>
+                    <td><img src="/iqra/images/iqra.jpg" width="24" height="30"/></td>
                     <td align="center">
                         <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
                     </td>
@@ -311,7 +311,7 @@ for(Cookie cookie : cookies){
             <!-- ===== STUDENT DETAILS ===== -->
             <table width="100%">
                 <tr>
-                    <td style="text-align: left;font-size: 10px;">Student Name: <b>${Parents.student.name}</b></td>
+                    <td style="text-align: left;font-size: 10px;">Student Name: <label style="font-weight: bold;text-transform: uppercase;">${Parents.student.name}</label> </td>
                     <td style="text-align: left;font-size: 10px;">
                         Class:
                         <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
@@ -321,7 +321,7 @@ for(Cookie cookie : cookies){
                 </tr>
 
                 <tr>
-                    <td style="text-align: left;font-size: 10px;">Father's Name: ${Parents.fathersname}</td>
+                    <td style="text-align: left;font-size: 10px;">Father's Name: <label style="font-weight: bold;text-transform: uppercase;"> ${Parents.fathersname}</label></td>
                     <td style="text-align: left;font-size: 10px;">Admission No: ${Parents.student.admissionnumber}</td>
                 </tr>
             </table>
@@ -364,7 +364,7 @@ for(Cookie cookie : cookies){
                     <td style="font-weight: bold;align-content: center;">Principal</td>
                 </tr>
             </table>
-
+			<br>
         </div>
     </div>
 

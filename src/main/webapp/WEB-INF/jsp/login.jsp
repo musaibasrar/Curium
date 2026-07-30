@@ -155,7 +155,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 120px;width: 120px;" alt="ideoholic" src="/iqra/images/iqra.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 95px;width: 75px;" alt="ideoholic" src="/iqra/images/iqra.png"></h2>
 			</div>
 			<div class="col-md-8 col-xs-12 col-sm-12 login_form ">
 				<div class="container-fluid">
