@@ -1817,6 +1817,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 									displayMarks += " (" + marks.getSubgrade() + ")";
 								}
 							} else if (marksObtained == 999) {
+								marksObtained=0;
 								displayMarks = "AB";
 							} else {
 								displayMarks = marksObtained + "/" + maxMarks;
@@ -1882,7 +1883,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			//Generate Graph for Each Student
 			StudentGraphDto studentGraphDto = new StudentGraphDto();
 			String[] stdIds = {studentIds[i]};
-			studentGraphDto.setStudentIds(studentIds);
+			studentGraphDto.setStudentIds(stdIds);
 			studentGraphDto.setExamClass(examClass);
 			studentGraphDto.setExamsList(examsList);
 			StudentGraphResponseDto studentGraphResponseDto = getStudentGraph(studentGraphDto, branchId, currentAcademicYear);
