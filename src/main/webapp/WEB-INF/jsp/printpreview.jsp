@@ -1,336 +1,446 @@
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-    <head >
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+<html lang="en">
+<head>
 
-        <script type="text/javascript" language="JavaScript" src="/mfds/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/mfds/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/mfds/css/graph/jquery.jqplot.css">
+<meta charset="UTF-8">
 
-        <link rel="stylesheet" href="/mfds/css/datePicker/demos.css">
-        <script type="text/javascript" src="/mfds/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<title>School ID Card</title>
 
-        <script  type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/mfds/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/mfds/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/mfds/js/graph/plugins/jqplot.trendline.min.js"></script>
+<style>
 
-        <style type="text/css">
-            <!--
-            .dataTextInActive {
-                border-radius:1px;
-                font-family: Tahoma;
-                color: #4b6a84;
-                font-size: 12px;
-                font-weight: bold;
-                letter-spacing: normal;
-                text-align: left;
-                vertical-align: top;
-                text-decoration:none;
-            }
-            .headerText {
-                border-radius:3px;
-                font-family: Tahoma;
-                font-size: 12px;
-                background-color: #4b6a84;
-                color: #FFFFFF;
-                font-weight: normal;
-                width: auto ;
-                height: 22px;
-                vertical-align: middle;
-                text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
-            }
-            .headerTD{
-                background-color:#4b6a84;
-                color: #FFFFFF;
-                font-family: Tahoma;
-                font-size: 13px;
-                text-transform: uppercase;
-                text-align: center;
-                font-weight: bold;
-            }
-            .smallheaderTD{
-                color: #4b6a84;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .textFieldFixedWidth{
-                width: 57px;
-            }
-            .subHeaderTD{
-                color: #325F6D;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .divCSS{
-                overflow:  scroll;
-                height: 100%;
-                width: 100%;
-            }
-
-            .fiedlSet {
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-width: 1;
-                width: 100%;
-                color: #000000;
-                font-size: 16px;
-                font-weight: bold;
-                font-variant: normal;
-                font-stretch: wider;
-                background-color: #e2ebf3;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-            }
-            .legendCSS {
-                color: #666666;
-            }
-            .tableCSS {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-            }
-            .textAreaCSS {
-                height: auto;
-                width: auto;
-            }
-            .textField {
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                width: auto;
-                height: auto;
-            }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignLeft {
-                font-family: Tahoma;
-                font-size: 13px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: left;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignRightMultiple {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-weight: bolder;
-                text-align: right;
-                vertical-align: middle;
-                font-style: normal;
-                color: #325F6D;
-            }
-            .alignCentreMultiple {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-style: normal;
-                color: #000000;
-            }
-            .autoAdjust {
-                height: auto;
-                width: auto;
-            }
-            .radioSpanCSS {
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: left;
-                vertical-align: middle;
-            }
-            .radioCSS {
-                background-position: left center;
-            }
-            .spanText {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #000000;
-            }
-            .emptyFieldSet {
-                border-top-color: #FA7676;
-                border-right-color: #FA7676;
-                border-bottom-color: #FA7676;
-                border-left-color: #FA7676;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-width: thin;
-                border-right-width: thin;
-                border-bottom-width: thin;
-                border-left-width: thin;
-                background-image: url(images/close.JPG);
-                background-repeat: repeat-y;
-                background-attachment: scroll;
-                background-position: right;
-                width: auto;
-                height: auto;
-                display: inline;
-            }
-            .style1 {
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style2 {
-                color: #666666;
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style4 {
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                vertical-align: middle;
-                color: #325f6d;
-            }
-            .tablerows{
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                font-weight: bold;
-
-            }
-            -->
-            .dataTextBoldCenter {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 14px;
-	letter-spacing: normal;
-	text-align: center;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 9px;
-	letter-spacing: normal;
-	text-align: center;
+body{
+
+font-family:Arial,Helvetica,sans-serif;
+display:flex;
+//justify-content:center;
+padding:20px;
+
 }
-        </style>
-        <script type="text/javascript">
 
-            function updateContact() {
-                var form1 = document.getElementById("form1");
-                form1.action = "/mfds/PersonalProcess/updateContactDetails?id=1";
-                form1.submit();
+.card{
+
+position:relative;
+
+width:210px;
+height:322px;
+
+background:#fff;
+
+border-radius:12px;
+overflow:hidden;
+
+border:1px solid #bdbdbd;
+
+box-shadow:0 3px 10px rgba(0,0,0,.25);
+
+}
+
+/*==============================
+SVG
+===============================*/
+
+.bgsvg{
+
+position:absolute;
+
+left:0;
+top:0;
+
+width:100%;
+height:100%;
+
+z-index:1;
+
+}
+
+/*==============================
+LOGO PLACE
+===============================*/
+
+.logo{
+
+position:absolute;
+
+left:8px;
+
+top:9px;
+
+width:44px;
+
+height:44px;
+
+border-radius:50%;
+
+background:white;
+
+border:2px solid #d8c26b;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+overflow:hidden;
+
+z-index:20;
+
+}
+
+.logo img{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+/*==============================
+HEADER
+===============================*/
+
+.header{
+
+position:absolute;
+
+left:58px;
+top:6px;
+
+width:142px;
+
+text-align:center;
+
+z-index:20;
+
+color:#fff;
+
+}
+
+.trust{
+
+font-size:7px;
+font-weight:bold;
+line-height:9px;
+
+}
+
+.school{
+
+margin-top:3px;
+
+font-size:12px;
+font-weight:900;
+
+line-height:13px;
+
+letter-spacing:.4px;
+
+text-transform:uppercase;
+
+}
+
+.medium{
+
+margin-top:3px;
+
+font-size:5.8px;
+font-weight:bold;
+
+line-height:8px;
+
+}
+
+/*==============================
+PHOTO PLACE
+===============================*/
+
+.photo{
+
+position:absolute;
+
+left:63px;
+top:84px;
+
+width:84px;
+height:104px;
+
+background:white;
+
+border:2px solid #7a5561;
+
+border-radius:8px;
+
+padding:2px;
+
+overflow:hidden;
+
+z-index:20;
+
+box-shadow:
+0 0 3px rgba(0,0,0,.25);
+
+}
+
+.photo img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+border-radius:5px;
+
+}
+
+
+/*==============================
+PLACEHOLDER STYLE
+===============================*/
+
+.placeholder{
+
+font-size:10px;
+color:#888;
+font-weight:bold;
+
+}
+
+/*==============================
+DETAILS
+==============================*/
+
+.details{
+
+position:absolute;
+
+left:14px;
+
+top:202px;
+
+width:182px;
+
+z-index:20;
+
+}
+
+.infoTable{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+.infoTable td{
+
+vertical-align:top;
+
+padding:2px 0;
+
+}
+
+.label{
+
+width:52px;
+
+font-size:7px;
+
+font-weight:normal;
+
+color:#23236a;
+
+}
+
+.colon{
+
+width:8px;
+
+text-align:center;
+
+font-size:7px;
+
+font-weight:bold;
+
+color:#222;
+
+}
+
+.value{
+
+font-size:7px;
+
+font-weight:normal;
+
+color:#222;
+
+line-height:9px;
+
+}
+
+.nameValue{
+
+font-weight:bold;
+
+font-size:8px;
+
+color:#2c2d86;
+
+}
+
+.addressLabel{
+
+padding-top:2px;
+
+}
+
+.addressValue{
+
+line-height:9px;
+
+}
+
+/*==============================
+SIGNATURE
+==============================*/
+
+.hmSign{
+
+position:absolute;
+
+right:12px;
+
+bottom:23px;
+
+width:55px;
+
+text-align:center;
+
+z-index:20;
+
+}
+
+.hmSign img{
+
+width:30px;
+
+height:25px;
+
+object-fit:contain;
+
+}
+
+.signPlaceholder{
+
+width:48px;
+
+height:20px;
+
+margin:auto;
+
+border-bottom:1px solid #999;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:7px;
+
+color:#888;
+
+font-style:italic;
+
+}
+
+.hmText{
+
+margin-top:3px;
+
+font-size:6px;
+
+font-weight:bold;
+
+/* color:#2c2d86; */
+color:white;
+
+}
+.signatureBox{
+
+width:48px;
+
+height:20px;
+
+border-bottom:1px solid #999;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+font-size:6px;
+
+font-style:italic;
+
+color:#888;
+
+}
+/*==============================
+FOOTER
+==============================*/
+
+.footerText{
+
+position:absolute;
+
+left:10px;
+
+bottom:6px;
+
+width:190px;
+
+text-align:center;
+
+font-size:5.5px;
+
+font-weight:bold;
+
+line-height:7px;
+
+color:white;
+
+letter-spacing:.2px;
+
+z-index:20;
+
+}
+</style>
+<style>
+ .print-btn{
+            text-align: center;
+            margin: 10px;
+        }
+
+        @media print{
+            .print-btn{
+                display: none;
             }
+        }
 
-            function hideButton() {
-
-            }
-
-        </script>
-
-        <script type="text/javascript">
-            $(function() {
-
-                $("#accordion").accordion({
-                    collapsible: true,
-                    autoHeight: false});
-                /*$("#set")
-                 .button()
-                 .click(function() {
-                 updateVisit();
-                 });  */
-            });
-        </script>
-
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable({
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 500,
-                    "aoColumnDefs": [
-                        {'bSortable': false, 'aTargets': [0]}
-                    ]
-
-                });
-            });
-        </script>
-        
-        <script type="text/javascript">
-                                $(function() {
-                                    $("#print")
-                                            .button()
-
-
-                                });
-                            </script>
-
-  <%
+</style>
+</head>
+<%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -346,111 +456,8 @@ for(Cookie cookie : cookies){
 }
 }
 %>
- 
-
-   <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
- /*        .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 8.5cm;
-    height: 13cm;
-    border-radius: 25px;
-    background: blue;
-} */
-
-       .card {
-    width: 11cm;
-    height: 7cm;
-    background: #FEE12B;
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 1px 16px;
-}
-
-
- .tableidcard {
-        border-spacing: 0px;
-        table-layout: fixed;
-        margin-left: auto;
-        margin-right: auto;
-        width: 310px;
-      }
-      .tdidcard {
-        font-size: 16px;
-      }
-      
-/* .containerschoolname {
-		padding: 2px 5px;
-} */
-    </style>
-
-<style>
-    /* CSS to display tables side by side */
-   /* .table-container {
-      display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
-    
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
-    
-    /* CSS for table styling */
-    
-    
-    
-    
-    .vertical-line {
-      border-left: 2px solid #350c76; /* Add a vertical line */
-    }
-  </style>
-    </head>
-     
-
-    <body class="bodymargin">
-       
-        <form action="/mfds/" method="post" id="form1" class="bodymargin">
-			
-		 <c:set var="iInitial" value="${iInitial}"/>
+<body>
+ <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
           <c:forEach begin="1" end="${iInitial}">
@@ -458,74 +465,238 @@ for(Cookie cookie : cookies){
                             int i = 1;
                         %>
 			<c:if test="${limit < iInitial}">	
-	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
-  <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:27px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
-   </table>
-  </div>
+<div class="card">
 
-  <div class="table-container" style=" ">
- <table style="margin-left:10px;">
- <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/mfds/images/mfds.png" width="72" height="72"/>
- </td>
- </tr>
- </table>
-   </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;Katari Hill Road, <br/>Gaya, Pin Code-823001</td>
-  </tr>
-</table>
+<svg class="bgsvg" viewBox="0 0 210 322" preserveAspectRatio="none">
 
-<div height="30" width="20%" style="text-align:right;float:right;">
+<defs>
 
-<img src="/mfds/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
+<linearGradient id="headBlue" x1="0" y1="0" x2="0" y2="1">
+
+<stop offset="0%" stop-color="#5f66c5"/>
+
+<stop offset="100%" stop-color="#323a8c"/>
+
+</linearGradient>
+
+<linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+
+<stop offset="0%" stop-color="#11d6ff"/>
+
+<stop offset="100%" stop-color="#00a8ff"/>
+
+</linearGradient>
+
+<linearGradient id="footerBlue" x1="0" y1="0" x2="0" y2="1">
+
+<stop offset="0%" stop-color="#4f4da8"/>
+
+<stop offset="100%" stop-color="#2a2c73"/>
+
+</linearGradient>
+
+</defs>
+
+<!-- Header -->
+
+<path
+d="
+M0 0
+H210
+V90
+L170 124
+H40
+L0 90
+Z"
+fill="url(#headBlue)"/>
+
+<!-- Decorative polygons -->
+
+<polygon
+points="0,45 65,110 50,122 0,60"
+fill="#4347a5"/>
+
+<polygon
+points="210,45 145,110 160,122 210,60"
+fill="#4347a5"/>
+
+<!-- Cyan strips -->
+
+<polygon
+points="0,86 46,126 36,138 0,100"
+fill="url(#cyan)"/>
+
+<polygon
+points="210,86 164,126 174,138 210,100"
+fill="url(#cyan)"/>
+
+<!-- White body -->
+
+<rect
+x="0"
+y="136"
+width="210"
+height="156"
+fill="#ffffff"/>
+
+<!-- Footer -->
+
+<path
+d="
+M0 292
+H210
+V322
+H0
+Z"
+fill="url(#footerBlue)"/>
+
+<!-- Footer highlight -->
+
+<path
+d="
+M0 292
+H210"
+stroke="#9ea4ff"
+stroke-width="1"
+fill="none"/>
+</svg>
+
+<!-- LOGO -->
+
+<div class="logo">
+
+<!-- Replace with your logo -->
+<!-- <img src="logo.png"> -->
+
+<div class="placeholder">
+
+<img src="/mfds/images/mfds.png"/>
+
 </div>
+
+</div>
+
+<!-- HEADER -->
+
+<div class="header">
+
+<div class="trust">
+
+Universal Educational and Charitable Trust
+
+</div>
+
+<div class="school">
+
+MAAZ FOUNDATION<br>
+
+DANISH SCHOOL
+
+</div>
+
+<div class="medium">
+
+Pre-Primary &amp; Higher Primary<br>
+
+English Medium
+
+</div>
+
+</div>
+
+<!-- PHOTO -->
+
+<div class="photo">
+
+<!-- Replace with student's image -->
+<!-- <img src="student.jpg"> -->
+
+<div class="placeholder">
+
+<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>"  alt="Photo" />
+
+</div>
+
+</div>
+
+<!-- ============================
+     STUDENT DETAILS
+================================ -->
+
+<div class="details">
+
+    <table class="infoTable">
+
+        <tr>
+            <td class="label">Name</td>
+            <td class="colon">:</td>
+            <td class="value nameValue"><%= request.getSession().getAttribute("studentname" + i + "") %></td>
+        </tr>
+
+        <tr>
+            <td class="label">F.Name</td>
+            <td class="colon">:</td>
+            <td class="value"><%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+        </tr>
+
+        <tr>
+            <td class="label">Cell</td>
+            <td class="colon">:</td>
+            <td class="value"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+        </tr>
+
+        <tr>
+            <td class="label addressLabel">Address</td>
+            <td class="colon">:</td>
+            <td class="value addressValue">
+                <%= request.getSession().getAttribute("address" + i + "") %>
+            </td>
+        </tr>
+
+    </table>
+
+</div>
+
+<!-- ============================
+     H.M. SIGNATURE PLACEHOLDER
+================================ -->
+
+<div class="hmSign">
+
+    <!-- Signature Image -->
+    <!--
+    <img src="hm-sign.png">
+    -->
+
+    <div class="signatureBox">
+
+       
+ <img src="/mfds/images/hmsignature.png" />
+    </div>
+
+    <div class="hmText">
+
+        H.M. Sign.
+
+    </div>
+
+</div>
+<!-- ============================
+      FOOTER TEXT
+================================ -->
+
+<div class="footerText">
+
+    Near Masjid-e-Rahman Vakkalgera,
+    Kalaburagi - 585104
+
+    <br>
+
+    Office Contact :
+    9972732188
+
+</div>
+
 </div>
  </c:if>
    <% i = i + 1;%>
@@ -535,20 +706,8 @@ principal&nbsp;&nbsp;&nbsp;</div>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-  
-                   <table  width="70%"  id="table11" align="left">
-                    <tr>
-                        <td width="30%"> 
-
-                        </td>
-                        <td>
-                            <button id="print" type="button" style="background-image: url(/mfds/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
-                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
-                        </td>
-
-                    </tr>
-
-                </table>     
-        </form>
-    </body>
+                        <div class="print-btn">
+    <button onclick="window.print()">Print</button>
+</div>
+</body>
 </html>
