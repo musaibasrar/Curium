@@ -470,12 +470,12 @@ for(Cookie cookie : cookies){
   </div>
 
   <div class="table-container" style=" ">
- <table align="center" style="margin-top:55px;">
+ <table align="center" style="margin-top:57px;">
  <tr>
   <td style="writing-mode:vertical-lr;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">&nbsp;&nbsp;&nbsp;
  </td> 
  <td>&nbsp;
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:100px;border: 0px solid black;border-radius: 50%;" alt="Photo" />
+ <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:90px;width:90px;border: 0px solid black;border-radius: 50%;" alt="Photo" />
  </td>
  <td >
   <%-- Session<br> ${currentacadmicyear} --%> 
@@ -494,6 +494,7 @@ for(Cookie cookie : cookies){
                   left:50%;
                   transform:translateX(-50%);
                   width:90%;
+                  font-weight:bold;
                   ">
   <tr>
     <td style="padding: 0;font-size:7px;">&nbsp;&nbsp;F/NAME</td>
