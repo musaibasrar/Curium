@@ -11,7 +11,7 @@ public interface DiaryRepository extends JpaRepository<Diary, Integer> {
 
 	Page<Diary> findByBranchidOrderByIdDesc(int branchid, Pageable pageable);
 
-	Page<Diary> findByBranchidAndClasssecByIdDesc(int branchid, String classsec, Pageable pageable);
+	Page<Diary> findByBranchidAndClasssecOrderByIdDesc(int branchid, String classsec, Pageable pageable);
 
 	long countByBranchid(int branchid);
 

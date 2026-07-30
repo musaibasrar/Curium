@@ -99,7 +99,7 @@ public class UserService {
         Login login = userDao.readUniqueObject(userName, password);
 
         if (login != null) {
-            Currentacademicyear currentAcademicYear = yearDao.showYear();
+            Currentacademicyear currentAcademicYear = yearDao.showYear(login.getBranch().getIdbranch());
             String academicyear = "";
             if (currentAcademicYear != null) {
                 academicyear = currentAcademicYear.getCurrentacademicyear();
@@ -808,7 +808,7 @@ public class UserService {
     		    	httpSession.removeAttribute(element);
     		}
     	   
-            Currentacademicyear currentAcademicYear = yearDao.showYear();
+            Currentacademicyear currentAcademicYear = yearDao.showYear(branchId);
             String academicyear = "";
             if(currentAcademicYear!=null){
             academicyear = currentAcademicYear.getCurrentacademicyear();
