@@ -81,7 +81,11 @@ public class MarksDetailsService {
 	private HttpServletResponse response;
 
 	private static final int BUFFER_SIZE = 4096;
-
+	
+	private static final String INVALID_SUBJECT_CONTEXT = "Invalid subject context";
+	private static final String ADD_MARKS_SUCCESS = "success";
+	private static final String ADD_MARKS_DUPLICATE = "Duplicate";
+	
 	public ResultResponse addMarks(MarksUpdateDto dto, String branchId, String currentAcademicYear, String userId) {
 
 		ResultResponse result = ResultResponse.builder().build();
