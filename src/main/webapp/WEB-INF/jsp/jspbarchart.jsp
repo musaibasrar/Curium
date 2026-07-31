@@ -328,8 +328,8 @@
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Total Fees / This Month</span>
-                                <span class="summary-card__value">${totalFeesAmountDashBoard}</span>
-                                <span class="summary-card__secondary">${Currentmonth} Fees: ${sumOfFeesMonthly}</span>
+                                <span class="summary-card__value rupee-display" data-amount="${totalFeesAmountDashBoard}">${totalFeesAmountDashBoard}</span>
+                                <span class="summary-card__secondary">${Currentmonth} Fees: <span class="rupee-display" data-amount="${sumOfFeesMonthly}">${sumOfFeesMonthly}</span></span>
                             </div>
                         </div>
                     </div>
@@ -343,8 +343,8 @@
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Fees Paid / Due</span>
-                                <span class="summary-card__value">${totalPaidAmountDashBoard}</span>
-                                <span class="summary-card__secondary">Due: ${totalDueAmountDashBoard}</span>
+                                <span class="summary-card__value rupee-display" data-amount="${totalPaidAmountDashBoard}">${totalPaidAmountDashBoard}</span>
+                                <span class="summary-card__secondary">Due: <span class="rupee-display" data-amount="${totalDueAmountDashBoard}">${totalDueAmountDashBoard}</span></span>
                             </div>
                         </div>
                     </div>
@@ -358,7 +358,7 @@
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Today's Fees / Expenses</span>
-                                <span class="summary-card__value">${sumOfFeesDaily}</span>
+                                <span class="summary-card__value rupee-display" data-amount="${sumOfFeesDaily}">${sumOfFeesDaily}</span>
                                 <span class="summary-card__secondary">Expenses: ${dailyexpenses}</span>
                             </div>
                         </div>
@@ -483,6 +483,40 @@
                 return toNumber(rawValue.replace(/,/g, ""));
             }
 
+            var inrNumberFormatter = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
+
+            function formatAsRupee(value) {
+                if (value === null || value === undefined) {
+                    return "\u20B90";
+                }
+
+                var rawValue = String(value).replace(/\u20B9/g, "").replace(/,/g, "").trim();
+                if (!rawValue) {
+                    return "\u20B90";
+                }
+
+                var numericValue = Number(rawValue);
+                if (!isFinite(numericValue) || numericValue === 0) {
+                    return "\u20B90";
+                }
+
+                return "\u20B9" + inrNumberFormatter.format(numericValue);
+            }
+
+            function applyRupeeFormatting() {
+                var fields = document.querySelectorAll(".rupee-display");
+                fields.forEach(function (field) {
+                    var rawValue = field.getAttribute("data-amount");
+                    if (rawValue === null || rawValue === undefined) {
+                        rawValue = field.textContent || field.innerText || "";
+                    }
+
+                    var formattedValue = formatAsRupee(rawValue);
+                    field.textContent = formattedValue;
+                    field.setAttribute("title", formattedValue);
+                });
+            }
+
             function buildSeriesData(categories, values) {
                 var sourceCategories = Array.isArray(categories) ? categories : [];
                 var sourceValues = Array.isArray(values) ? values : [];
@@ -540,6 +574,18 @@
                 });
             }
 
+            function readChartValue(param) {
+                if (!param) {
+                    return 0;
+                }
+
+                if (param.value && typeof param.value === "object" && param.value.value !== undefined) {
+                    return toNumber(param.value.value);
+                }
+
+                return toNumber(param.value);
+            }
+
             var chartInstances = [];
 
             function registerChart(instance) {
@@ -595,7 +641,7 @@
                 };
             }
 
-            function renderSingleBarChart(containerId, seriesName, categories, values, palettePairs) {
+            function renderSingleBarChart(containerId, seriesName, categories, values, palettePairs, formatAsCurrency) {
                 var container = document.getElementById(containerId);
                 if (!container) {
                     return;
@@ -604,6 +650,24 @@
                 var rotateLabels = categories.length > 6;
                 var chart = registerChart(echarts.init(container));
                 var option = baseBarOption(categories, rotateLabels);
+                var useCurrencyFormat = !!formatAsCurrency;
+
+                if (useCurrencyFormat) {
+                    option.yAxis.axisLabel.formatter = function (value) {
+                        return formatAsRupee(value);
+                    };
+                    option.tooltip.formatter = function (params) {
+                        if (!params || !params.length) {
+                            return "";
+                        }
+
+                        var rows = [params[0].axisValueLabel || params[0].name || ""];
+                        params.forEach(function (item) {
+                            rows.push((item.marker || "") + item.seriesName + ": " + formatAsRupee(readChartValue(item)));
+                        });
+                        return rows.join("<br/>");
+                    };
+                }
 
                 option.legend.data = [seriesName];
                 option.series = [
@@ -616,7 +680,10 @@
                             show: true,
                             position: "top",
                             color: "#0f172a",
-                            fontWeight: "bold"
+                            fontWeight: "bold",
+                            formatter: useCurrencyFormat ? function (params) {
+                                return formatAsRupee(readChartValue(params));
+                            } : undefined
                         }
                     }
                 ];
@@ -703,7 +770,9 @@
                     animationEasing: "cubicOut",
                     tooltip: {
                         trigger: "item",
-                        formatter: "{b}: {c}"
+                        formatter: function (params) {
+                            return params.name + ": " + formatAsRupee(params.value);
+                        }
                     },
                     legend: {
                         bottom: 0,
@@ -720,7 +789,9 @@
                             center: ["50%", "44%"],
                             avoidLabelOverlap: true,
                             label: {
-                                formatter: "{b}: {c}",
+                                formatter: function (params) {
+                                    return params.name + ": " + formatAsRupee(params.value);
+                                },
                                 color: "#334155",
                                 fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif"
                             },
@@ -757,6 +828,8 @@
             var boysData = parseJsonLabel("boysData");
             var girlsData = parseJsonLabel("girlsData");
 
+            applyRupeeFormatting();
+
             renderSingleBarChart(
                 "student-chart",
                 "Total Students",
@@ -778,7 +851,8 @@
                 "Monthly Fees Collection",
                 feeMonths,
                 monthlyFees,
-                [["#5eead4", "#14b8a6"], ["#93c5fd", "#2563eb"], ["#c4b5fd", "#8b5cf6"]]
+                [["#5eead4", "#14b8a6"], ["#93c5fd", "#2563eb"], ["#c4b5fd", "#8b5cf6"]],
+                true
             );
 
             renderPieChart(
