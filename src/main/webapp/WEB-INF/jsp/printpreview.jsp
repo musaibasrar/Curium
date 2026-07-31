@@ -22,8 +22,11 @@ body{
 
 font-family:Arial,Helvetica,sans-serif;
 display:flex;
-//justify-content:center;
 padding:20px;
+margin: 0;
+flex-direction: column;   /* Vertical arrangement */
+align-items: left;      /* Center horizontally */
+gap: 10px; 
 
 }
 
@@ -42,6 +45,8 @@ overflow:hidden;
 border:1px solid #bdbdbd;
 
 box-shadow:0 3px 10px rgba(0,0,0,.25);
+
+margin:5px;
 
 }
 
@@ -432,11 +437,25 @@ z-index:20;
             margin: 10px;
         }
 
-        @media print{
-            .print-btn{
-                display: none;
-            }
-        }
+       @media print{
+
+    body{
+        display:block;
+        padding:0;
+        margin:0;
+    }
+
+    .card{
+        display:block;
+        margin:20px;
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    .print-btn{
+        display:none;
+    }
+}
 
 </style>
 </head>
