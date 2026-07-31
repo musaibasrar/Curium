@@ -142,6 +142,10 @@ form{
                 	window.open('/salihath/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/salihath/index_parents','_self');
+                }else if(type=='principal'){
+                	window.open('/salihath/index_principal','_self');
+                }else if(type=='documents'){
+                	window.open('/salihath/index_documents','_self');
                 }
             }
             else if(!flag1){

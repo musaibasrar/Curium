@@ -1,6 +1,6 @@
 <%-- 
-Document   : left settings
-Created on : May 10, 2018, 12:51:11 PM
+Document   : left
+Created on : Jan 4, 2012, 3:41:11 PM
 Author     : Musaib
 --%>
 
@@ -27,7 +27,111 @@ Author     : Musaib
         <link href="/salihath/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/salihath/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/salihath/css/font-awesome.css">
-      
+        <script type="text/javascript">
+            var get;
+            function getdata1() {
+                var startHour, startMin;
+                var tDate = new Date();
+                startHour = tDate.getHours();
+                startMin = tDate.getMinutes();
+
+                if (typeof XMLHttpRequest != "undefined") {
+                    get = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    get = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+
+                get.onreadystatechange = processdata;
+                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
+                get.send(null);
+
+            }
+
+            function processdata() {
+                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
+                if (get.readyState == 4)
+                {
+                    if (get.status == 200) {
+                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
+                        var visitNodes = visits.getElementsByTagName("Visit");
+                        for (var i = 0; i < visitNodes.length; i++) {
+                            var visit = visitNodes[i];
+
+                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
+                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
+                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+
+                            $(function() {
+                                $('#Notification').jnotifyAddMessage({
+                                    text: link,
+                                    permanent: false,
+                                    disappearTime: 30000
+                                });
+
+                            });
+
+                        }
+
+
+                        setTimeout('getdata1();', 60000);
+
+
+                    }
+                }
+
+            }
+            /**
+             * Comment
+             */
+            var getExpiringStockCount;
+            function getExpiringStock() {
+                if (typeof XMLHttpRequest != "undefined") {
+                    getExpiringStockCount = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+
+                getExpiringStockCount.onreadystatechange = processExpiringStockData;
+                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
+                getExpiringStockCount.send(null);
+
+            }
+           
+            var getDepletingStockCount;
+            function getDepletingStock() {
+                if (typeof XMLHttpRequest != "undefined") {
+                    getDepletingStockCount = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+
+                getDepletingStockCount.onreadystatechange = processDepletingStockData;
+                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
+                getDepletingStockCount.send(null);
+
+            }
+            function processDepletingStockData() {
+
+                if (getDepletingStockCount.readyState == 4)
+                {
+                    if (getDepletingStockCount.status == 200) {
+                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
+                        var depletingStockCount = count.childNodes[0].nodeValue;
+                        var depletingStock = document.getElementById("depletingStock");
+                        depletingStock.innerHTML = " " + depletingStockCount;
+                        setTimeout('getDepletingStock();', 60000);
+
+
+                    }
+                }
+
+            }
+
+        </script>
         <script type="text/javascript">
             var req;
 
@@ -172,14 +276,22 @@ Author     : Musaib
                 font-weight: bold;
                 height: 22px;
             }
-            
-            .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
+
+.sideaccordian{
+		
+		font-size: 12px;
+		/* border: 0px; */
+		border-radius: 5px;
+		/* border-bottom:  1px solid #010d1c !important; */
+}
+
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
 .ui-widget-content {
     border: 1px solid #b6cfe2;
     background: #ffffff;
     color: #222222;
 }
-
 
 
         </style>
@@ -330,92 +442,123 @@ for(Cookie cookie : cookies){
 }
 %>
     <body onload="StartClock()" onunload="KillClock()">
-        <!-- <form name="theClock">
+       <!--  <form name="theClock">
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
-        <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
+	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
         <div id="container" style="width: 95%" >
-            <h5 style="font-size: 12px"><a href="#">General</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/>
-                <a target="mainFrame" href="/salihath/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/salihath/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/salihath/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/salihath/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/salihath/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/salihath/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/salihath/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/salihath/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/salihath/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showSingleFeesDetails" style="font-size: 12px;">Stamp Single Fee</a><br/>
-                <a target="mainFrame" href="/salihath/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
+            
+                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/salihath/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
-
+             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/salihath/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/salihath/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/salihath/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/salihath/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/salihath/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
-                <a target="mainFrame" href="/salihath/SubjectDetailsProcess/subSubjectsDetails" style="font-size: 12px;">Sub Subject Details</a>
+            
+            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/salihath/changePassword" style="font-size: 12px;">Change Password</a>
+            			</td>
+            		</tr>
+                </table>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/salihath/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
             </div>
-            
-              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
-            <div>
-				<a target="mainFrame" href="/salihath/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
-            <div>
-                
-                <a target="mainFrame" href="/salihath/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/salihath/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
-            </div>
-
-            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
-            <div >
-                <a target="mainFrame" href="/salihath/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
-            </div>
-            
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/salihath/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
-            </div>
-            
-              <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/salihath/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
-            </div> -->
-            
-            </div>
+                   
             
             <!-- END -->
            

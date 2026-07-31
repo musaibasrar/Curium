@@ -126,8 +126,7 @@ form{
             var type='<c:out default="" value="${userType}"/>';
 
 
-            if(flag1){
-            	
+            if(flag1){ 	
             	if(type=='superadmin'){
                     window.open('/salihath/index_superadmin','_self');
                 }else if(type=='admin'){
@@ -136,8 +135,16 @@ form{
                     window.open('/salihath/index_feescollector','_self');
                 }else if(type=='officeadmin'){
                 	window.open('/salihath/index_officeadmin','_self');
+                }else if(type=='teacher'){
+                	window.open('/salihath/index_teacher','_self');
                 }else if(type=='marksentry'){
                 	window.open('/salihath/index_marksentry','_self');
+                }else if(type=='parents'){
+                	window.open('/salihath/index_parents','_self');
+                }else if(type=='principal'){
+                	window.open('/salihath/index_principal','_self');
+                }else if(type=='documents'){
+                	window.open('/salihath/index_documents','_self');
                 }
             }
             else if(!flag1){

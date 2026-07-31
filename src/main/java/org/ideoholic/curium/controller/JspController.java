@@ -655,4 +655,55 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/header_principal")
+	public String getHeaderPrincipal() {
+		return "header_principal";
+	}
+	
+	@GetMapping("/index_principal")
+	public String getIndexPrincipal() {
+		return "index_principal";
+	}
+	
+	@GetMapping("/left_principal")
+	public String getLeftPrincipal() {
+		return "left_principal";
+	}
+	
+	@GetMapping("/leftsettings_principal")
+	public String getLeftSettingsprincipal() {
+		return "leftsettings_principal";
+	}
+	
+	@GetMapping("/reports_principal")
+	public String getReportsPrincipal() {
+		return "reports_principal";
+	}
+	
+	@GetMapping("/header_documents")
+	public String getHeaderDocuments() {
+		return "header_documents";
+	}
+	
+	@GetMapping("/index_documents")
+	public String getIndexDocuments() {
+		return "index_documents";
+	}
+	
+	@GetMapping("/left_documents")
+	public String getLeftDocuments() {
+		return "left_documents";
+	}
+	
+	@GetMapping("/leftsettings_documents")
+	public String getLeftSettingsdocuments() {
+		return "leftsettings_documents";
+	}
+	
+	@GetMapping("/reports_documents")
+	public String getReportsDocuments() {
+		return "reports_documents";
+	}
+	
 }
