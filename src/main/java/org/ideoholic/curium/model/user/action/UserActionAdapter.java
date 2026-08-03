@@ -1,10 +1,13 @@
 package org.ideoholic.curium.model.user.action;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.user.dto.*;
+import org.ideoholic.curium.model.user.service.SuperDashboardService;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpSession;
 
 @Service
 public class UserActionAdapter {
+
+    private static final Logger log = LogManager.getLogger(UserActionAdapter.class);
 
     @Autowired
     private HttpServletRequest request;
@@ -28,6 +33,8 @@ public class UserActionAdapter {
     private AdminService adminService;
     @Autowired
     private FeesCollectionActionAdapter feesCollectionActionAdapter;
+    @Autowired
+    private SuperDashboardService superDashboardService;
 
     private String BRANCHID = "branchid";
     private String USERID = "userloginid";
@@ -133,6 +140,36 @@ public class UserActionAdapter {
         request.setAttribute("boysData", responseDto.getYaxisListBoys());
         request.setAttribute("girlsData", responseDto.getYaxisListGirls());
         
+    }
+
+    public void prepareSuperDashboard() {
+        request.setAttribute("selectedAcademicYear", httpSession.getAttribute(CURRENTACADEMICYEAR));
+        request.setAttribute("selectedSortBy", "highest_collection");
+    }
+
+    public SuperDashboardResponseDto getSuperDashboardData() {
+        SuperDashboardFilterRequestDto dto = new SuperDashboardFilterRequestDto();
+        dto.setAcademicYear(request.getParameter("academicYear"));
+        dto.setBranchIds(request.getParameter("branchIds"));
+        dto.setFromDate(request.getParameter("fromDate"));
+        dto.setToDate(request.getParameter("toDate"));
+        dto.setSelectedClass(request.getParameter("selectedClass"));
+        dto.setSection(request.getParameter("section"));
+        dto.setExamination(request.getParameter("examination"));
+        dto.setFeeCategory(request.getParameter("feeCategory"));
+        dto.setSortBy(request.getParameter("sortBy"));
+
+        Object sessionAcademicYearObj = httpSession.getAttribute(CURRENTACADEMICYEAR);
+        String sessionAcademicYear = sessionAcademicYearObj == null ? null : sessionAcademicYearObj.toString();
+
+        if (sessionAcademicYear == null || sessionAcademicYear.trim().isEmpty()) {
+            sessionAcademicYear = dto.getAcademicYear();
+        }
+
+        log.debug("SuperDashboard request - academicYear={}, sessionAcademicYear={}, branchIds={}, fromDate={}, toDate={}",
+                dto.getAcademicYear(), sessionAcademicYear, dto.getBranchIds(), dto.getFromDate(), dto.getToDate());
+
+        return superDashboardService.buildDashboardData(dto, sessionAcademicYear);
     }
 
     public boolean authenticateUser() {
