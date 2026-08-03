@@ -682,21 +682,45 @@ English Medium
 
 <div class="hmSign">
 
-    <!-- Signature Image -->
-    <!--
-    <img src="hm-sign.png">
-    -->
-
     <div class="signatureBox">
 
-       
- <img src="/mfds/images/hmsignature.png" />
+        <%
+        String className = (String) request.getSession().getAttribute("classsection" + i + "");
+
+        if (className != null) {
+            className = className.trim().toUpperCase();
+
+            if (className.equals("MONTESSORY--")
+                    || className.equals("L.K.G--")
+                    || className.equals("U.K.G--")
+                    || className.equals("1ST STD--")
+                    || className.equals("2ND STD--")
+                    || className.equals("3RD STD--")
+                    || className.equals("4TH STD")
+                    || className.equals("5TH STD--")) {
+        %>
+
+                <img src="/mfds/images/hmsignonetofive.png" alt="HM Signature"/>
+
+        <%
+            } else if (className.equals("6TH STD--")
+                    || className.equals("7TH STD--")
+                    || className.equals("8TH STD--")
+                    || className.equals("9TH STD--")
+                    || className.equals("10TH STD--")) {
+        %>
+
+                <img src="/mfds/images/hmsignature.png" alt="HM Signature"/>
+
+        <%
+            }
+        }
+        %>
+
     </div>
 
     <div class="hmText">
-
         H.M. Sign.
-
     </div>
 
 </div>
@@ -712,7 +736,38 @@ English Medium
     <br>
 
     Office Contact :
-    9972732188
+     <%
+        String classecName = (String) request.getSession().getAttribute("classsection" + i + "");
+
+        if (classecName != null) {
+        	classecName = classecName.trim().toUpperCase();
+
+            if (classecName.equals("MONTESSORY--")
+                    || classecName.equals("L.K.G--")
+                    || classecName.equals("U.K.G--")
+                    || classecName.equals("1ST STD--")
+                    || classecName.equals("2ND STD--")
+                    || classecName.equals("3RD STD--")
+                    || classecName.equals("4TH STD")
+                    || classecName.equals("5TH STD--")) {
+        %>
+
+                9535823748
+
+        <%
+            } else if (classecName.equals("6TH STD--")
+                    || classecName.equals("7TH STD--")
+                    || classecName.equals("8TH STD--")
+                    || classecName.equals("9TH STD--")
+                    || classecName.equals("10TH STD--")) {
+        %>
+
+                9972732188
+
+        <%
+            }
+        }
+        %>
 
 </div>
 
