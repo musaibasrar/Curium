@@ -127,13 +127,15 @@ for(Cookie cookie : cookies){
 			
 			
 			<tr>
-			<td>
+			<td rowspan="3">
 			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/hira/images/hira.png">
 			</td>
 				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
+					
+					<h2 style="margin-bottom:0px;margin-top:0px;text-align:left;">${branchname}</h2></td></tr>
+					<tr><td>
+					<h3 style="margin-bottom:0px;margin-top:0px;text-align:left;">${branchaddress}</h3></td></tr>
+					<tr><td><h3 style="margin-bottom:0px;margin-top:0px;text-align:left;">${branchcontact}</h3>
 					
 				</td>
 			</tr>
