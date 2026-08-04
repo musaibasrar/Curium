@@ -150,11 +150,16 @@ for(Cookie cookie : cookies){
 		 <table align="center">
                         		
 			<tr>
-				<td ><img src="/hira/images/hira.jpg" width="140" height="140"/></td>
-				<td  class="dataTextBoldCenter">
-				<h1 style="margin-bottom:0px;">	${branchname}</h1>
-				<h4 style="margin-top:0px;margin-bottom:0px;">	${branchaddress}</h4>
-				<h6 style="margin-top:0px; margin-bottom:0px;">${branchcontact}</h6>
+			<td rowspan="3">
+			<img border="0" style="vertical-align: text-bottom;height: 100px;width: 100px;" alt="logo" src="/hira/images/hira.png">
+			</td>
+				<td >
+					
+					<h2 style="margin-bottom:0px;margin-top:0px;text-align:left;">${branchname}</h2></td></tr>
+					<tr><td>
+					<h3 style="margin-bottom:0px;margin-top:0px;text-align:left;">${branchaddress}</h3></td></tr>
+					<tr><td><h3 style="margin-bottom:0px;margin-top:0px;text-align:left;">${branchcontact}</h3>
+					
 				</td>
 			</tr>
 		
