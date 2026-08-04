@@ -14,36 +14,36 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details</title>
+        <title>Update Time Table</title>
 
-        <script type="text/javascript" language="JavaScript" src="/presidency/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/presidency/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/presidency/css/graph/jquery.jqplot.css">
+        <script type="text/javascript" language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/presidency/css/datePicker/demos.css">
-        <script type="text/javascript" src="/presidency/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 
-        <script  type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/presidency/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/presidency/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/presidency/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/jquery.jqplot.js"></script>
+        <script  type="text/javascript" src="/vision/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.trendline.min.js"></script>
 
         <style type="text/css">
         .dataText {
@@ -296,55 +296,23 @@
         </style>
         
         <script type="text/javascript">
-            
-            
-<!--             function updatePeriods() {
-        		
-        		var form1 = document.getElementById("form1");
-        		if(form1.checkValidity()) {
-        			form1.action = "/presidency/PeriodProcess/updatenewPeriodDetails";
-        			form1.method = "POST";
-        			form1.submit();
-        		  }
-        	}
-
-           
-            
-      
-        </script>
-
-        
-        
-<script type="text/javascript">
-$("#tabs").tabs();
-
-$("#update").button().click(function() {
-	updatePeriods();
-	return false;
-});
-
-                                
-                               
- -->                            </script>
-                            
-                            <script type="text/javascript">
 	function updatePeriods() {
+		var addclass = document.getElementById("addclass");
+		if (!addclass || !addclass.value) {
+			alert("Please select a Class.");
+			return;
+		}
 		var form1 = document.getElementById("form1");
-		form1.action = "/presidency/PeriodProcess/updatenewPeriodDetails";
+		form1.action = "/vision/PeriodProcess/updatenewPeriodDetails";
 		form1.method = "POST";
 		form1.submit();
-
 	}
-	$(function() {
 
-		$("#tabs").tabs();
+	$(function() {
 		$("#update").button().click(function() {
 			updatePeriods();
 		});
-		//$("#effect").hide();
-
 	});
-	
 	</script>
 
 
@@ -353,7 +321,7 @@ $("#update").button().click(function() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/presidency/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -372,25 +340,28 @@ for(Cookie cookie : cookies){
 			<table width="100%">
 				<tr>
 					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;
-					<c:set var="itemparts" value="${fn:split(timetable.class_, '--')}" />
-					Class<select name="classsec" id="classsec"><option selected>${itemparts[0]}</option>
-					<c:forEach items="${classdetailslist}" var="classdetailslist">
-					                               <c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-													</c:if>
-										</c:forEach>
-										</select>
-										Section<select name="section" id="section"><option selected>${itemparts[1]}</option>
-					<c:forEach items="${classdetailslist}" var="classdetailslist">
-					                            <c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-												</c:if>
-										</c:forEach>
-										</select>
+					<select name='addclass' id='addclass'>
+						<option value='' <c:if test="${empty savedClass}">selected</c:if>>Select Class</option>
+						<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<c:if test="${classdetailslist.classdetails != ''}">
+								<option value="${classdetailslist.classdetails}"
+									<c:if test="${classdetailslist.classdetails == savedClass}">selected</c:if>>
+									<c:out value="${classdetailslist.classdetails}" />
+								</option>
+							</c:if>
+						</c:forEach>
+					</select>
+					<select name='addsec' id='addsec'>
+						<option value='' <c:if test="${empty savedSection}">selected</c:if>>Select Section</option>
+						<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<c:if test="${classdetailslist.section != ''}">
+								<option value="${classdetailslist.section}"
+									<c:if test="${classdetailslist.section == savedSection}">selected</c:if>>
+									<c:out value="${classdetailslist.section}" />
+								</option>
+							</c:if>
+						</c:forEach>
+					</select>
 				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>
 
 							<lable>Day start time<c:set var="item" value="${fn:split(timetable.daystart, ' ')}" />
