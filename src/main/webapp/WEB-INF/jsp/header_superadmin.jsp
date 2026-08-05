@@ -194,7 +194,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/dolphin/UserProcess/dashBoard"><img
+                href="/dolphin/UserProcess/superDashboard"><img
 									alt="Dash Board" src="/dolphin/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
