@@ -152,6 +152,12 @@ for(Cookie cookie : cookies){
 									src="/salihath/images/student_header.svg" width="18" height="18"
 									alt="Add New Student" style="vertical-align: bottom;" />Add Student
 							</a></td>
+							
+							<td ><a target="leftFrame" href="/salihath/leftsettings_principal">
+									<img alt="Settings" src="/salihath/images/settings.svg" width="18"
+									height="18" style="vertical-align: bottom;" />Master Settings
+							</a></td>
+							
 
 
 							<td ><!-- <a target="mainFrame" href="/salihath/sendsms"><img

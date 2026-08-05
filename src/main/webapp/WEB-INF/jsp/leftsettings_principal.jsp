@@ -349,22 +349,6 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/salihath/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showSingleFeesDetails" style="font-size: 12px;">Stamp Single Fee</a><br/>
-                <a target="mainFrame" href="/salihath/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
-            </div>
-            
-            <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
-            <div>
-                <a target="mainFrame" href="/salihath/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
-                <a target="mainFrame" href="/salihath/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
-
-            </div>
-            
             <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
             <div>
                 <a target="mainFrame" href="/salihath/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
@@ -400,11 +384,6 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/salihath/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
             </div>
 
-            <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
-            <div >
-                <a target="mainFrame" href="/salihath/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
-            </div>
-            
              <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
                 <a target="mainFrame" href="/salihath/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>

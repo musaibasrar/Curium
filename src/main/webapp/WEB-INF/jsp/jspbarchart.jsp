@@ -13,8 +13,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Dash Board</title>
-        <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
-        <script src="/vision/js/echarts/echarts.min.js"></script>
+        <link rel="stylesheet" href="/salihath/css/bootstrap.min.css">
+        <script src="/salihath/js/echarts/echarts.min.js"></script>
     </head>
 
     <style type="text/css">
@@ -274,7 +274,7 @@
         //allow access only if session exists
         String user = null;
         if (session.getAttribute("userAuth") == null) {
-            response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+            response.sendRedirect("/salihath/UserProcess/sessionTimeOut");
         } else {
             user = (String) session.getAttribute("userAuth");
         }
@@ -309,7 +309,7 @@
                     <div class="summary-card summary-card--students">
                         <div class="summary-card__row">
                             <div class="summary-card__icon">
-                                <img src="/vision/images/student.svg" alt="Students" />
+                                <img src="/salihath/images/student.svg" alt="Students" />
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Students / Teachers</span>
@@ -324,7 +324,7 @@
                     <div class="summary-card summary-card--fees">
                         <div class="summary-card__row">
                             <div class="summary-card__icon">
-                                <img src="/vision/images/totalfees.svg" alt="Fees" />
+                                <img src="/salihath/images/totalfees.svg" alt="Fees" />
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Total Fees / This Month</span>
@@ -339,7 +339,7 @@
                     <div class="summary-card summary-card--revenue">
                         <div class="summary-card__row">
                             <div class="summary-card__icon">
-                                <img src="/vision/images/feespaid.svg" alt="Fees Paid" />
+                                <img src="/salihath/images/feespaid.svg" alt="Fees Paid" />
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Fees Paid / Due</span>
@@ -354,7 +354,7 @@
                     <div class="summary-card summary-card--today">
                         <div class="summary-card__row">
                             <div class="summary-card__icon">
-                                <img src="/vision/images/todayscollection.svg" alt="Today" />
+                                <img src="/salihath/images/todayscollection.svg" alt="Today" />
                             </div>
                             <div class="summary-card__content">
                                 <span class="summary-card__label">Today's Fees / Expenses</span>

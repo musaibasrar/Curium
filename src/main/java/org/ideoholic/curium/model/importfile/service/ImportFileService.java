@@ -88,25 +88,33 @@ public class ImportFileService {
 							}
 						}
 						student.setAdmissionnumber(getCellValue(row, 0));
-						//student.setSts(getCellValue(row, 1));
-						student.setStudentexternalid(getCellValue(row, 1));
+						student.setSts(getCellValue(row, 1));
+						student.setStudentexternalid(getCellValue(row, 49));
 						student.setName(getCellValue(row, 2));
 						student.setGender(getCellValue(row, 3));
-
-						student.setDateofbirth(DateUtil.simpleDateParser(
-						        getCellValue(row, 16) + "/" +
-						        getCellValue(row, 17) + "/" +
-						        getCellValue(row, 18)));
+						
+						String dateOfBirth = getCellValue(row, 16) + "/" + getCellValue(row, 17) + "/" + getCellValue(row, 18);
+						if (dateOfBirth.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+						    student.setDateofbirth(DateUtil.simpleDateParser(dateOfBirth));
+						} else {
+						    // Handle invalid date format, e.g., log an error or set a default value
+						    System.err.println("Invalid date format for date of birth: " + dateOfBirth);
+						    student.setDateofbirth(null); // or set a default date if appropriate
+						}
 
 						student.setAge(Integer.parseInt(getCellValue(row, 5)));
-						student.setPlaceofbirth(getCellValue(row, 6));
+						//student.setPlaceofbirth(getCellValue(row, 6));
 
-						student.setAdmissiondate(DateUtil.simpleDateParser(
-						        getCellValue(row, 19) + "/" +
-						        getCellValue(row, 20) + "/" +
-						        getCellValue(row, 21)));
-
-						student.setClassstudying(getCellValue(row, 8) + "--");
+						String admissionDate = getCellValue(row, 19) + "/" + getCellValue(row, 20) + "/" + getCellValue(row, 21);
+						
+						if (admissionDate.matches("^\\d{2}/\\d{2}/\\d{4}$")) {
+						    student.setAdmissiondate(DateUtil.simpleDateParser(admissionDate));
+						} else {
+						    // Handle invalid date format, e.g., log an error or set a default value
+						    System.err.println("Invalid date format for admission date: " + admissionDate);
+						    student.setAdmissiondate(null); // or set a default date if appropriate
+						}
+						student.setClassstudying(getCellValue(row, 8) + "--" +getCellValue(row, 47));
 
 						//student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
@@ -134,10 +142,12 @@ public class ImportFileService {
 						student.setRte(0);
 						student.setStream("Admission");
 						student.setClassadmittedin("");
+						student.setPromotedyear("2026/27");
+						student.setPen(getCellValue(row, 48));
 						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
 						//student.setSts(getCellValue(row, 49));
 
-						student.setBranchid(2);
+						student.setBranchid(Integer.parseInt(getCellValue(row, 9)));
 						student.setArchive(0);
 						student.setPassedout(0);
 						student.setDroppedout(0);
@@ -158,7 +168,7 @@ public class ImportFileService {
 
 						parent.setAddresspermanent(getCellValue(row, 31));
 
-						parent.setAddresstemporary(getCellValue(row, 32));
+						//parent.setAddresstemporary(getCellValue(row, 32));
 						//student.setGuardiandetails(getCellValue(row, 33));
 						//parent.setRemarks(getCellValue(row, 34));
 
@@ -167,7 +177,7 @@ public class ImportFileService {
 						//parent.setMotherscastecertno(getCellValue(row, 36));
 						//parent.setProfession(getCellValue(row, 36));
 						//parent.setMothersqualification(getCellValue(row, 52));
-						parent.setCocontactnumber(getCellValue(row, 37));
+						parent.setCocontactnumber(getCellValue(row, 30));
 						//parent.setFatherscastecertno(getCellValue(row, 47));
 						//parent.setMotherscastecertno(getCellValue(row, 48));
 
