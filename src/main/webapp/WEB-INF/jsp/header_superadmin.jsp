@@ -146,6 +146,12 @@ for(Cookie cookie : cookies){
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
+														<td ><a target="mainFrame"
+								href="/awami/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/awami/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Bus Fee Collection
+							</a></td>
+							
 							<td>
 								<a target="mainFrame"
 								href="/awami/AccountProcess/createVoucher"> <img
@@ -169,11 +175,11 @@ for(Cookie cookie : cookies){
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="/awami/AdminProcess/viewAllExpenses"><img
 									alt="Admin Exp" src="/awami/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
-							</a></td>
+							</a></td> -->
 
 							<td ><!-- <a target="mainFrame" href="/awami/sendsms"><img
 									src="/awami/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
@@ -194,7 +200,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/awami/UserProcess/dashBoard"><img
+                href="/awami/UserProcess/superDashboard"><img
 									alt="Dash Board" src="/awami/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
