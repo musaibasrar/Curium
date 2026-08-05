@@ -150,7 +150,7 @@ public class MarksDetailsAction {
 	@PostMapping("/addMarks")
 	public String addMarks() {
 		String result = marksDetailsActionAdapter.addMarks();
-		if ("true".equals(result)) {
+		if ("success".equals(result)) {
 			return "markssaved";
 		} else if ("Duplicate".equals(result)) {
 			return "erroraddingmarks";
