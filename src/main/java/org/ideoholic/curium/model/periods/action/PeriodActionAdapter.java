@@ -102,8 +102,8 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeHr(request.getParameter("dayendtime"));
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
-        dto.setFromClass(request.getParameter("fromclass"));
-        dto.setToClass(request.getParameter("toclass"));
+        dto.setFromClass(request.getParameter("addclass"));
+        dto.setToClass(request.getParameter("addsec"));
 
         dto.setPeriods(request.getParameterValues("periods"));
         dto.setSubjects(request.getParameterValues("subject"));
@@ -141,6 +141,27 @@ public class PeriodActionAdapter {
         request.setAttribute("timetable", responseDto.getPeriodMaster());
         request.setAttribute("timetableperioddetails", responseDto.getPeriodDetails());
         request.setAttribute("periodmap", responseDto.getPeriodMap());
+
+     // Split the stored classSec (e.g. "PUC 1st Year Arts--A") into Class and Section.
+        String classSec = (responseDto.getPeriodMaster() != null
+                && responseDto.getPeriodMaster().getClassSec() != null)
+                ? responseDto.getPeriodMaster().getClassSec()
+                : "";
+
+        if (!classSec.isEmpty()) {
+            String[] parts = classSec.split("--", 2);
+
+            request.setAttribute("savedClass", parts[0].trim());
+
+            if (parts.length > 1) {
+                request.setAttribute("savedSection", parts[1].trim());
+            } else {
+                request.setAttribute("savedSection", "");
+            }
+        } else {
+            request.setAttribute("savedClass", "");
+            request.setAttribute("savedSection", "");
+        }
     }
 
     public void getPeriodDetail() {
@@ -163,8 +184,8 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
         dto.setPeriodMasterId(request.getParameter("periodmasterid"));
-        dto.setFromClass(request.getParameter("classsec"));
-        dto.setToClass(request.getParameter("section"));
+        dto.setFromClass(request.getParameter("addclass"));
+        dto.setToClass(request.getParameter("addsec"));
 
         dto.setPeriods(request.getParameterValues("periods"));
         dto.setPeriodId(request.getParameterValues("periodid"));
