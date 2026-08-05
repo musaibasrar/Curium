@@ -1,9 +1,17 @@
 package org.ideoholic.curium.model.periods.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.documents.action.DocumentActionAdapter;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
-import org.ideoholic.curium.model.periods.dto.*;
+import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
+import org.ideoholic.curium.model.periods.dto.PeriodsSaveDto;
+import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableViewResponseDto;
 import org.ideoholic.curium.model.periods.service.PeriodService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
@@ -11,10 +19,6 @@ import org.ideoholic.curium.util.Constants;
 import org.ideoholic.curium.util.DataUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Service
 public class PeriodActionAdapter {
@@ -98,7 +102,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeHr(request.getParameter("dayendtime"));
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
-        dto.setFromClass(request.getParameterValues("fromclass"));
+        dto.setFromClass(request.getParameter("fromclass"));
         dto.setToClass(request.getParameter("toclass"));
 
         dto.setPeriods(request.getParameterValues("periods"));
@@ -159,7 +163,7 @@ public class PeriodActionAdapter {
         dto.setDayEndTimeMin(request.getParameter("dayendminutes"));
         dto.setDayEndAm(request.getParameter("dayendam"));
         dto.setPeriodMasterId(request.getParameter("periodmasterid"));
-        dto.setFromClass(request.getParameterValues("classsec"));
+        dto.setFromClass(request.getParameter("classsec"));
         dto.setToClass(request.getParameter("section"));
 
         dto.setPeriods(request.getParameterValues("periods"));
