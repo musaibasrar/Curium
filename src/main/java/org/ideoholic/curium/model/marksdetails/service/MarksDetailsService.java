@@ -350,14 +350,14 @@ public class MarksDetailsService {
 			String[] studentIds = dto.getStudentIds();
 			Student searchStudent = new studentDetailsDAO().readUniqueObject(Integer.parseInt(studentIds[0]));
 			String[] examClass = dto.getExamClass();
-			String[] exCl = examClass[0].split("--");
+			//String[] exCl = examClass[0].split("--");
 				
 			if(dto.getExamsList() == null || dto.getExamsList().isEmpty()) {
 							List<Exams> examDetailsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
 									dto.setExamsList(examDetailsList);
 								}
 				
-				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),exCl[0]);
+				List<Subject> subjectDetailsList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),examClass[0]);
 				List<ExamsDetails> examDetails = new ArrayList<ExamsDetails>();
 				
 				for (Exams exams : dto.getExamsList()) {
@@ -1721,13 +1721,28 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String[] examClass = examC.split("--");
 		List<Integer> examIds = new ArrayList<Integer>();
 		String presentDate = dto.getTotalDaysPresent();
+		int branch = Integer.parseInt(branchId);
 
 		for (String examId : dto.getExamIds()) {
 			examIds.add(Integer.parseInt(examId));
 		}
 
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(examIds, Integer.parseInt(branchId));
+		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(examIds, branch);
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+
+		Map<Integer, List<Subject>> validSubjectsByExamId = new HashMap<Integer, List<Subject>>();
+		for (Exams exam : examsList) {
+			List<Subject> examSubjects = new SubjectDetailsDAO().readAllSubjectsClassWise(branch, examClass[0],
+					exam.getExamname());
+			List<Subject> validSubjects = new ArrayList<Subject>();
+			for (Subject subject : examSubjects) {
+				// Skip subjects without valid exam configuration so they don't appear in report or aggregates.
+				if (hasValidSubjectMarksConfig(subject)) {
+					validSubjects.add(subject);
+				}
+			}
+			validSubjectsByExamId.put(exam.getExid(), validSubjects);
+		}
 
 		for (int i = 0; i < studentIds.length; i++) {
 			MarksSheet markssheet = new MarksSheet();
@@ -1735,7 +1750,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 			// Handle attendance
 			List<Studentdailyattendance> studentDailyAttendance = new AttendanceDAO().getStudentTotalAttendanceDateWise(
-					studentDetails.getStudent().getStudentexternalid(), currentAcademicYear, Integer.parseInt(branchId),
+					studentDetails.getStudent().getStudentexternalid(), currentAcademicYear, branch,
 					DateUtil.indiandateParser(presentDate));
 
 			int absentDays = 0, totalDays = 0, totalPresent = 0;
@@ -1754,10 +1769,6 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			result.setTotalabsent(absentDays);
 
 			markssheet.setParents(studentDetails);
-
-			// Get all subjects once
-			List<Subject> subjectList = new SubjectDetailsDAO().readListOfSubjects(Integer.parseInt(branchId),
-					examClass[0]);
 
 			// Create exam-wise marks map (column-wise view)
 			Map<String, Map<String, String>> subjectExamMarks = new LinkedHashMap<>();
@@ -1778,15 +1789,15 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 				List<Marks> marksDetailsList = new MarksDetailsDAO()
 						.readMarksforStudent(Integer.parseInt(studentIds[i]), currentAcademicYear, exam.getExid());
+				List<Subject> validSubjects = validSubjectsByExamId.getOrDefault(exam.getExid(), Collections.emptyList());
 
-				for (Subject sub : subjectList) {
+				for (Subject sub : validSubjects) {
 					String subjectName = sub.getSubjectname();
 
 					if (!subjectExamMarks.containsKey(subjectName)) {
 						subjectExamMarks.put(subjectName, new LinkedHashMap<>());
 					}
 
-					// Initialize subject summary if not exists
 					if (!subjectSummaryMap.containsKey(subjectName)) {
 						SubjectSummary subjectSummary = SubjectSummary.builder().subjectName(subjectName)
 								.maxMarks(sub.getMaxmarks()).minMarks(sub.getMinmarks()).totalMarksObtained(0)
@@ -1818,18 +1829,16 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 									displayMarks += " (" + marks.getSubgrade() + ")";
 								}
 							} else if (marksObtained == 999) {
-								marksObtained=0;
+								marksObtained = 0;
 								displayMarks = "AB";
 							} else {
 								displayMarks = marksObtained + "/" + maxMarks;
 							}
 
-							// Keep exam-wise summary (column-wise)
 							subjectExamMarks.get(subjectName).put(exam.getExamname(), displayMarks);
 							totalObtainedMarks += marksObtained;
 							totalMarks += maxMarks;
 
-							// Add to subject-wise summary (row-wise)
 							SubjectSummary subjectSummary = subjectSummaryMap.get(subjectName);
 							subjectSummary.addExamMarks(exam.getExamname(), marksObtained, marks.getSubgrade());
 
@@ -1842,16 +1851,14 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 					}
 				}
 
-				// Calculate exam summary (column-wise)
-				if (examPresent) {
-					double percentage = (totalMarks > 0) ? (totalObtainedMarks * 100.0) / totalMarks : 0;
+				if (examPresent && totalMarks > 0) {
+					double percentage = (totalObtainedMarks * 100.0) / totalMarks;
 					examSummary.setTotalMarks((int) totalMarks);
 					examSummary.setTotalMarksObtained((int) totalObtainedMarks);
 					examSummary.setPercentage(percentage);
 
 					int mypercent = (int) Math.round(percentage);
-					List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO()
-							.readMarksGrade(Integer.parseInt(branchId));
+					List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(branch);
 					for (MarksGrade marksGrade : marksGradeDetailsList) {
 						if (mypercent >= marksGrade.getMinpercentage() && mypercent <= marksGrade.getMaxpercentage()) {
 							examSummary.setGrade(marksGrade.getStatus());
@@ -1860,7 +1867,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 					}
 
 					ExamRank examRank = new MarksDetailsDAO().getExamRank(Integer.parseInt(studentIds[i]),
-							exam.getExid(), currentAcademicYear, Integer.parseInt(branchId));
+							exam.getExid(), currentAcademicYear, branch);
 					if (examRank != null) {
 						examSummary.setRank(examRank.getRank());
 					}
@@ -1869,16 +1876,12 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				examSummaries.add(examSummary);
 			}
 
-			// Calculate final subject summaries with total marks and percentage (NEW)
 			for (SubjectSummary subjectSummary : subjectSummaryMap.values()) {
 				subjectSummary.calculateTotals();
 			}
 
-			// column-wise summary
 			markssheet.setSubjectExamMarks(subjectExamMarks);
-			// exam summaries
 			markssheet.setExamSummaries(examSummaries);
-			// row-wise subject summaries
 			markssheet.setSubjectSummaries(new ArrayList<>(subjectSummaryMap.values()));
 			
 			//Generate Graph for Each Student
@@ -1899,7 +1902,10 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 	}
 
 	return result;
+}
 
+private boolean hasValidSubjectMarksConfig(Subject subject) {
+	return subject != null && subject.getMinmarks() > 0 && subject.getMaxmarks() > 0;
 }
 
 public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto employeeDetails, SearchStudentExamDto dto, String branchId) {
