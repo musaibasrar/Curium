@@ -176,15 +176,14 @@
 	<form method="post" class="bodymargin">
 			<div style="border: 1px solid;border-radius: 15px">
 			
-			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+			<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: 80px;margin-right: 0px;">
                         		
 			<tr>
-				<td><img src="/hira/images/hira.jpg" width="80" height="80"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				</td>
+				<td width="100px" rowspan="3" style="text-align:left;"><img src="/hira/images/hira.jpg" width="80" height="80"/></td>
+				<td  style="text-align:left">
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label></td></tr>
+				<tr><td style="text-align:left;"><label class="addressLine">${branchaddress}</label></td></tr>
+				<tr><td style="text-align:left;"><label class="addressLine"> ${branchcontact}</label></td>
 			</tr>
 		</table>
 		
@@ -375,15 +374,14 @@
 		</div>
 		<br>
 		<div style="border: 1px solid;border-radius: 15px">
-		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
+		<table style="page-break-inside: avoid;border-collapse: collapse;margin-left: 80px;margin-right: 0px;">
                         		
 			<tr>
-				<td><img src="/hira/images/hira.jpg" width="80" height="80"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
-				</td>
+				<td width="100px" rowspan="3" style="text-align:left;"><img src="/hira/images/hira.jpg" width="80" height="80"/></td>
+				<td  style="text-align:left">
+				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label></td></tr>
+				<tr><td style="text-align:left;"><label class="addressLine">${branchaddress}</label></td></tr>
+				<tr><td style="text-align:left;"><label class="addressLine"> ${branchcontact}</label></td>
 			</tr>
 		</table>
 		

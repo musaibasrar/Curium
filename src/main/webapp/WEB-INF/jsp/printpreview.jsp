@@ -1,336 +1,349 @@
 <%@page import="java.lang.String"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
-    <head >
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Id Card</title> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Student ID Card</title>
 
-        <script type="text/javascript" language="JavaScript" src="/hira/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/hira/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/hira/css/graph/jquery.jqplot.css">
 
-        <link rel="stylesheet" href="/hira/css/datePicker/demos.css">
-        <script type="text/javascript" src="/hira/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<style>
 
-        <script  type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/hira/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/jquery.jqplot.js"></script>
-        <script  type="text/javascript" src="/hira/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/hira/js/graph/plugins/jqplot.trendline.min.js"></script>
-
-        <style type="text/css">
-            <!--
-            .dataTextInActive {
-                border-radius:1px;
-                font-family: Tahoma;
-                color: #4b6a84;
-                font-size: 12px;
-                font-weight: bold;
-                letter-spacing: normal;
-                text-align: left;
-                vertical-align: top;
-                text-decoration:none;
-            }
-            .headerText {
-                border-radius:3px;
-                font-family: Tahoma;
-                font-size: 12px;
-                background-color: #4b6a84;
-                color: #FFFFFF;
-                font-weight: normal;
-                width: auto ;
-                height: 22px;
-                vertical-align: middle;
-                text-align: center;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
-            }
-            .headerTD{
-                background-color:#4b6a84;
-                color: #FFFFFF;
-                font-family: Tahoma;
-                font-size: 13px;
-                text-transform: uppercase;
-                text-align: center;
-                font-weight: bold;
-            }
-            .smallheaderTD{
-                color: #4b6a84;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .textFieldFixedWidth{
-                width: 57px;
-            }
-            .subHeaderTD{
-                color: #325F6D;
-                font-family: Tahoma;
-                font-size: 11px;
-                text-transform: uppercase;
-                text-align: left;
-                font-weight: bold;
-            }
-            .divCSS{
-                overflow:  scroll;
-                height: 100%;
-                width: 100%;
-            }
-
-            .fiedlSet {
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-width: 1;
-                width: 100%;
-                color: #000000;
-                font-size: 16px;
-                font-weight: bold;
-                font-variant: normal;
-                font-stretch: wider;
-                background-color: #e2ebf3;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-            }
-            .legendCSS {
-                color: #666666;
-            }
-            .tableCSS {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-            }
-            .textAreaCSS {
-                height: auto;
-                width: auto;
-            }
-            .textField {
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                width: auto;
-                height: auto;
-            }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignLeft {
-                font-family: Tahoma;
-                font-size: 13px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: left;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .alignRightMultiple {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-weight: bolder;
-                text-align: right;
-                vertical-align: middle;
-                font-style: normal;
-                color: #325F6D;
-            }
-            .alignCentreMultiple {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-style: normal;
-                color: #000000;
-            }
-            .autoAdjust {
-                height: auto;
-                width: auto;
-            }
-            .radioSpanCSS {
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: left;
-                vertical-align: middle;
-            }
-            .radioCSS {
-                background-position: left center;
-            }
-            .spanText {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #000000;
-            }
-            .emptyFieldSet {
-                border-top-color: #FA7676;
-                border-right-color: #FA7676;
-                border-bottom-color: #FA7676;
-                border-left-color: #FA7676;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-width: thin;
-                border-right-width: thin;
-                border-bottom-width: thin;
-                border-left-width: thin;
-                background-image: url(images/close.JPG);
-                background-repeat: repeat-y;
-                background-attachment: scroll;
-                background-position: right;
-                width: auto;
-                height: auto;
-                display: inline;
-            }
-            .style1 {
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style2 {
-                color: #666666;
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style4 {
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                vertical-align: middle;
-                color: #325f6d;
-            }
-            .tablerows{
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                font-weight: bold;
-
-            }
-            -->
-            .dataTextBoldCenter {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 14px;
-	letter-spacing: normal;
-	text-align: center;
+ *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+ 
+body{
+    background:#ececec;
+    text-align:left;
 }
 
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 9px;
-	letter-spacing: normal;
-	text-align: center;
+.card{
+
+    width:210px;
+    height:322px;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    margin:20px 20;
+
+
+    border:1px solid #999;
 }
-        </style>
-        <script type="text/javascript">
 
-            function updateContact() {
-                var form1 = document.getElementById("form1");
-                form1.action = "/hira/PersonalProcess/updateContactDetails?id=1";
-                form1.submit();
-            }
+/*******************************
+            HEADER
+********************************/
 
-            function hideButton() {
+.header{
 
-            }
+    height:88px;
 
-        </script>
+    background:#1f212b;
 
-        <script type="text/javascript">
-            $(function() {
+    position:relative;
 
-                $("#accordion").accordion({
-                    collapsible: true,
-                    autoHeight: false});
-                /*$("#set")
-                 .button()
-                 .click(function() {
-                 updateVisit();
-                 });  */
-            });
-        </script>
+    overflow:hidden;
+}
 
-        <script type="text/javascript" charset="utf-8">
-            $(document).ready(function() {
-                $('#myTable').dataTable({
-                    "sScrollY": "380px",
-                    "bPaginate": true,
-                    "bLengthChange": false,
-                    "bFilter": true,
-                    "bSort": true,
-                    "bInfo": true,
-                    "bStateSave": false,
-                    "bProcessing": false,
-                    "bServerSide": false,
-                    "bAutoWidth": false,
-                    "iDisplayLength": 500,
-                    "aoColumnDefs": [
-                        {'bSortable': false, 'aTargets': [0]}
-                    ]
+/* Gold Shape */
 
-                });
-            });
-        </script>
-        
-        <script type="text/javascript">
-                                $(function() {
-                                    $("#print")
-                                            .button()
+.header:after{
+
+    content:"";
+
+    width:150px;
+    height:150px;
+
+    background:#d8a040;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    right:-70px;
+    top:-20px;
+}
+
+/* White Curve */
+
+.header:before{
+
+    content:"";
+
+    width:260px;
+    height:120px;
+
+    background:white;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:-40px;
+    bottom:-95px;
+
+    transform:rotate(8deg);
+}
+
+.school{
+
+    position:absolute;
+
+    width:100%;
+
+    top:8px;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    z-index:2;
+}
+
+.address{
+
+    position:absolute;
+
+    width:100%;
+
+    top:30px;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:9px;
+
+    font-weight:bold;
+
+    z-index:2;
+}
+
+.phone{
+
+    position:absolute;
+
+    width:100%;
+
+    top:47px;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:8px;
+
+    z-index:2;
+}
+
+/*******************************
+          SCHOOL LOGO
+********************************/
+
+.logo{
+
+    position:absolute;
+
+    left:8px;
+
+    top:52px;
+
+    width:42px;
+    height:42px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    z-index:5;
+}
+
+.logo img{
+
+    width:36px;
+}
+
+/*******************************
+      STUDENT PHOTO
+********************************/
+
+.photo{
+
+    width:90px;
+    height:90px;
+
+    border-radius:50%;
+
+    border:4px solid #d8a040;
+
+    overflow:hidden;
+
+   // margin:18px auto 0;
+    margin-left:60px;
+    position:relative;
+
+    z-index:4;
+}
+
+.photo img{
+
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/*******************************
+         STUDENT NAME
+********************************/
+
+.name{
+
+    margin-top:10px;
+
+    text-align:center;
+
+    color:#d94343;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    text-transform:uppercase;
+}
+
+/*******************************
+          DETAILS
+********************************/
+
+.details{
+
+    margin-top:10px;
+
+    padding:0 10px;
+
+    font-size:8px;
+
+    line-height:18px;
+}
+
+.details table{
+
+    width:100%;
+}
+
+.details td{
+
+    vertical-align:top;
+}
+
+.label{
+
+    width:58px;
+
+    font-weight:bold;
+}
+
+.value{
+
+    font-weight:bold;
+}
+
+/*******************************
+            FOOTER
+********************************/
+
+.footer{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+
+    height:32px;
+
+    background:#1f212b;
+
+    color:#fff;
+
+    text-align:center;
+
+    line-height:32px;
+
+    font-size:10px;
+
+    font-weight:bold;
+}
+
+/*.footer:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    top:-12px;
+
+    width:90px;
+    height:25px;
+
+    background:#d8a040;
+
+    border-radius:0 0 80px 80px;
+}*/
+
+.print{
+
+    text-align:center;
+
+    margin-top:15px;
+}
+
+@media print{
+
+.print{
+
+display:none;
+
+}
+
+body{
+
+background:white;
+text-align:left;
+
+}
+
+}
 
 
-                                });
-                            </script>
+</style>
 
-  <%
+</head>
+ <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
@@ -346,111 +359,8 @@ for(Cookie cookie : cookies){
 }
 }
 %>
- 
-
-   <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
- /*        .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 8.5cm;
-    height: 13cm;
-    border-radius: 25px;
-    background: blue;
-} */
-
-       .card {
-    width: 11cm;
-    height: 7cm;
-    background: #FEE12B;
-}
-
-.card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.container {
-    padding: 1px 16px;
-}
-
-
- .tableidcard {
-        border-spacing: 0px;
-        table-layout: fixed;
-        margin-left: auto;
-        margin-right: auto;
-        width: 310px;
-      }
-      .tdidcard {
-        font-size: 16px;
-      }
-      
-/* .containerschoolname {
-		padding: 2px 5px;
-} */
-    </style>
-
-<style>
-    /* CSS to display tables side by side */
-   /* .table-container {
-      display: flex;
-      margin-bottom: 20px;  Add a gap between table sets 
-    }*/
-    
-   /* .table-container table {
-      margin-right: 20px;
-    }*/
-    
-    /* CSS for table styling */
-    
-    
-    
-    
-    .vertical-line {
-      border-left: 2px solid #350c76; /* Add a vertical line */
-    }
-  </style>
-    </head>
-     
-
-    <body class="bodymargin">
-       
-        <form action="/hira/" method="post" id="form1" class="bodymargin">
-			
-		 <c:set var="iInitial" value="${iInitial}"/>
+<body  class="bodymargin" >
+ <c:set var="iInitial" value="${iInitial}"/>
          <c:set var="limit" value="1"/>
                         
           <c:forEach begin="1" end="${iInitial}">
@@ -458,74 +368,69 @@ for(Cookie cookie : cookies){
                             int i = 1;
                         %>
 			<c:if test="${limit < iInitial}">	
-	    
-			<div class="card" style="background-color: white; width: 5.5cm; height: 8.6cm;border: 1px solid;border-radius: 5px;margin: 20px;">
-  <div class="table-container" style="margin-bottom: 5px;">
-  <table width="100%">
-  <tr align="center"><td style="text-align:center;padding:0px;">
-    <p style="margin-bottom:0px;margin-top:0px;padding:0px;font-size:22px;font-weight: 900; color:red">${branchname} </p></td></tr><tr><td style="text-align:center;padding:0px;">
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchaddress}</p>
-   <p style="font-size:7px;margin-bottom:0px;margin-top:0px;padding:0px;">${branchcontact}</p>
-   </table>
-  </div>
+<div class="card">
 
-  <div class="table-container" style=" ">
- <table style="margin-left:10px;">
- <tr>
- <td style="writing-mode:vertical-lr;background-color: green;border-radius: 5px;text-align: center;font-weight: bold;transform:rotate(180deg);">IDENTITY-CARD
- </td>
- <td>
- <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:78px;width:60px;border: 1px solid black;border-radius: 10px;" alt="Photo" />
- </td>
- <td style="writing-mode:vertical-lr;font-weight: bold;transform:rotate(180deg);">
- SESSION ${currentacadmicyear}
- </td>
- <td>&nbsp;&nbsp;
- <img src="/hira/images/hira.png" width="80" height="80"/>
- </td>
- </tr>
- </table>
-   </div>
-   <div align="center">
-   <p style="font-size:18px;margin-bottom:0px;margin-top:0px; text-transform: uppercase;">&nbsp;&nbsp; <%= request.getSession().getAttribute("studentname" + i + "") %></p>
-	</div>
-    <table style="border-collapse: collapse;border-radius: 10px;background-color:white;width: 90%;margin-left: 10px">
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;white-space: nowrap;">&nbsp;&nbsp;ADM NO.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;MOBILE No.</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
-  </tr>
-  <tr>
-    <td style="padding: 0;">&nbsp;&nbsp;ADDRESS</td>
-    <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("address" + i + "") %></td>
-  </tr>
+<div class="header">
+
+<div class="school">
+HIRA PUBLIC SCHOOL
+</div>
+
+<div class="address">
+Arehalli, Belur Taluk, Hassan Dist.
+</div>
+
+<div class="phone">
+Cell : 8277201635
+</div>
+
+</div>
+
+<div class="logo">
+ <img src="/hira/images/hira.png" />
+</div>
+
+<div class="photo">
+<img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" alt="Photo" />
+<img src="images/student.jpg">
+</div>
+
+<div class="name">
+<%= request.getSession().getAttribute("studentname" + i + "") %>
+</div>
+
+<div class="details">
+
+<table>
+
+<tr>
+<td class="label">Father</td>
+<td>:</td>
+<td class="value"><%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+</tr>
+
+<tr>
+<td class="label">DOB</td>
+<td>:</td>
+<td class="value"><%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
+</tr>
+
+<tr>
+<td class="label">Cell</td>
+<td>:</td>
+<td class="value"><%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+</tr>
+
 </table>
 
-<div height="30" width="20%" style="text-align:right;float:right;">
-
-<img src="/hira/images/principalsignature.png" width="30" height="25"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<div>
-principal&nbsp;&nbsp;&nbsp;</div>
 </div>
+
+<div class="footer">
+
+DISE : 29230426413
+
+</div>
+
 </div>
  </c:if>
    <% i = i + 1;%>
@@ -535,20 +440,9 @@ principal&nbsp;&nbsp;&nbsp;</div>
                     <% i = 1;%>
                     <c:set var="iInitial" value="1"/>
                         <c:set var="limit" value="1"/>
-  
-                   <table  width="70%"  id="table11" align="left">
-                    <tr>
-                        <td width="30%"> 
+<div class="print">
+<button onclick="window.print()">Print</button>
+</div>
 
-                        </td>
-                        <td>
-                            <button id="print" type="button" style="background-image: url(/hira/images/print.jpg);width: 63px;height: 60px" onclick="window.print();
-                                    this.style.visibility = 'hidden', loading.style.visibility = 'visible'" class="hide"></button>     
-                        </td>
-
-                    </tr>
-
-                </table>     
-        </form>
-    </body>
+</body>
 </html>
