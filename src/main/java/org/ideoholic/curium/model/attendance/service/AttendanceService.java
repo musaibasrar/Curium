@@ -1142,7 +1142,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		List<Teacher> newStaffList = new ArrayList<Teacher>();
 		List<Staffdailyattendance> newStaffDailyAttendance = new ArrayList<Staffdailyattendance>();
 		
-		Date searchdate = DateUtil.dateParserUpdateStd(attendanceDetailsDto.getSearchDate());
+		Date searchdate = DateUtil.indiandateParser(attendanceDetailsDto.getSearchDate());
 		Timestamp timestamp = new Timestamp(searchdate.getTime());
 		for (Teacher teacher : searchStaffList) {
 
@@ -1198,8 +1198,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		if(currentAcademicYear!=null){
 			
 			String staffExternalId = DataUtil.emptyString(attendanceDto.getStaffExternalId());
-			Date fromDate = DateUtil.dateParserUpdateStd(attendanceDto.getFromDate());
-			Date toDate = DateUtil.dateParserUpdateStd(attendanceDto.getToDate());
+			Date fromDate = DateUtil.indiandateParser(attendanceDto.getFromDate());
+			Date toDate = DateUtil.indiandateParser(attendanceDto.getToDate());
 			Timestamp fromTimestamp = new Timestamp(fromDate.getTime());
 			Timestamp toTimestamp = new Timestamp(toDate.getTime());
 			
