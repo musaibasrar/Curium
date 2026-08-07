@@ -24,6 +24,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -1958,28 +1959,30 @@ public SearchStudentResponseDto SearchForTeacher(EmployeeDetailsResponseDto empl
 	result.setSearchStudentList(searchStudentList);
 	
 	
-	List<String> classTeacherList = Arrays.asList(employeeDetails.getEmployee().getSubjectsteaching().split("\\s*,\\s*"));
+	String subjectsTeachingCsv = DataUtil.emptyString(employeeDetails.getEmployee().getSubjectsteaching());
+	List<String> classTeacherList = Arrays.asList(subjectsTeachingCsv.split("\\s*,\\s*"));
 	// get all the subjects
 	List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectNames(Integer.parseInt(branchId));
 	List<Subjectmaster> subjectListFinal = new ArrayList<Subjectmaster>();
-	
-
 
 	classTeacherList = classTeacherList.stream()
-			            .filter(s -> s != null && !s.isEmpty())
-			            .collect(Collectors.toList());
-				
+				.filter(s -> s != null && !s.trim().isEmpty())
+				.collect(Collectors.toList());
+
 	if (classTeacherList.size() > 0) {
-		classTeacherList = new ArrayList<>(new LinkedHashSet<>(classTeacherList));
+		Set<String> normalizedTeacherSubjects = classTeacherList.stream()
+				.map(s -> s.trim().toLowerCase(Locale.ROOT))
+				.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		for (Subjectmaster subject : subjectList) {
-			String subjectName = subject.getSubjectname();
-			if (classTeacherList.contains(subjectName)) {
+			String subjectName = DataUtil.emptyString(subject.getSubjectname());
+			if (normalizedTeacherSubjects.contains(subjectName.trim().toLowerCase(Locale.ROOT))) {
 				subjectListFinal.add(subject);
 			}
 		}
 
-		result.setSubjectListName(subjectListFinal);
+		// Option B: if teacher subjects do not match master list, return all subjects
+		result.setSubjectListName(subjectListFinal.isEmpty() ? subjectList : subjectListFinal);
 	} else {
 		// get all the subjects
 		result.setSubjectListName(subjectList);
