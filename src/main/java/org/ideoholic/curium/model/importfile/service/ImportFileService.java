@@ -118,8 +118,8 @@ public class ImportFileService {
 
 						//student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
-						student.setMothertongue(getCellValue(row, 10));
-						student.setReligion(getCellValue(row, 11));
+						//student.setMothertongue(getCellValue(row, 10));
+						//student.setReligion(getCellValue(row, 11));
 						//student.setStudentscaste(getCellValue(row, 12));
 						student.setNationality(getCellValue(row, 13));
 						//student.setStudentscastecertno(getCellValue(row, 14));
@@ -166,7 +166,7 @@ public class ImportFileService {
 						//parent.setParentsannualincome(getCellValue(row, 29));
 						//parent.setEmergencycontactno(getCellValue(row, 30));
 
-						parent.setAddresspermanent(getCellValue(row, 31));
+						//parent.setAddresspermanent(getCellValue(row, 31));
 
 						//parent.setAddresstemporary(getCellValue(row, 32));
 						//student.setGuardiandetails(getCellValue(row, 33));
@@ -177,7 +177,7 @@ public class ImportFileService {
 						//parent.setMotherscastecertno(getCellValue(row, 36));
 						//parent.setProfession(getCellValue(row, 36));
 						//parent.setMothersqualification(getCellValue(row, 52));
-						parent.setCocontactnumber(getCellValue(row, 30));
+						//parent.setCocontactnumber(getCellValue(row, 30));
 						//parent.setFatherscastecertno(getCellValue(row, 47));
 						//parent.setMotherscastecertno(getCellValue(row, 48));
 
@@ -189,7 +189,7 @@ public class ImportFileService {
 //						        getCellValue(row, 58));
 						
 						parent.setStudent(student);
-						parent.setBranchid(Integer.parseInt(branchId));
+						parent.setBranchid(Integer.parseInt(getCellValue(row, 9)));
 
 						listParents.add(parent);
 
