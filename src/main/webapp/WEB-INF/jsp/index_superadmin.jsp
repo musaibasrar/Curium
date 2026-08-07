@@ -144,7 +144,7 @@ for(Cookie cookie : cookies){
 
             <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
                 <frame  src="/rahmani/left_superadmin" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/rahmani/welcome" name="mainFrame" scrolling="yes" />
+                <frame src="/rahmani/UserProcess/superDashboard" name="mainFrame" scrolling="yes" />
             </frameset>
 
    </frameset>
