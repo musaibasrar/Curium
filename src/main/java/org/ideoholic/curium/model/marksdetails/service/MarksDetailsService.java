@@ -380,8 +380,9 @@ public class MarksDetailsService {
 											}
 								
 									for (Marks marks3 : marksListPerSubject) {
-
-										if(subject2.getSubid() == marks3.getSubid()) {
+											int subId = subject2.getSubid();
+											int subIdMarks = marks3.getSubid();
+										if(subId == subIdMarks) {
 											subjectAppeared.add("\""+subject2.getSubjectname()+"\"");
 											marksScored.add(marks3.getMarksobtained());
 										}
