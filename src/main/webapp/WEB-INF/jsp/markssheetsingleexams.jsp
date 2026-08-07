@@ -442,10 +442,10 @@ body {
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment
-							No : &nbsp;&nbsp;&nbsp;</b></td>
+							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :
+							No :<c:out value="${Parents.parents.student.admissionnumber}" />
 					&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
@@ -593,8 +593,9 @@ body {
 						                                    <c:set var="maxMarks" value="${maxPart}" />
 						                                </c:if>
 						
-						                                <c:choose>
-						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+															                                <c:choose>
+																					<c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
+																						<%-- Full marks mode bypasses FA/SA conversion and falls through to c:otherwise raw marks rendering. --%>
 						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
@@ -613,7 +614,7 @@ body {
 						                                        </c:choose>
 						                                    </c:when>
 						
-						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
 						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
@@ -881,7 +882,7 @@ body {
 									        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
 									        <c:forEach items="${Parents.examSummaries}" var="exam">
 									        	<c:choose>
-						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
 						                                       		 <c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
@@ -897,7 +898,7 @@ body {
 																	</c:choose>
 						                                    </c:when>
 						
-						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
 						                                    			<c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
