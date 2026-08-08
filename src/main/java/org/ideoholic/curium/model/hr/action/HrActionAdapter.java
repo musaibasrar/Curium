@@ -42,7 +42,7 @@ public class HrActionAdapter {
     
     @Autowired
     private HrService hrService;
-
+    
     public boolean leaveType() {
 
         LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(httpSession.getAttribute(Constants.BRANCHID).toString());
@@ -82,7 +82,7 @@ public class HrActionAdapter {
     }
     public boolean viewLeavesDetails() {
 
-        LeavesDetailsResponseDto result = hrService.viewLeavesDetails(request.getParameter("id"),Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+        LeavesDetailsResponseDto result = hrService.viewLeavesDetails(request.getParameter("id"),Integer.parseInt(httpSession.getAttribute(Constants.BRANCHID).toString()));
 
         request.setAttribute("leavedetailslist", result.getLeaveDetailsList());
         request.setAttribute("teachername",result.getTeacherName());
