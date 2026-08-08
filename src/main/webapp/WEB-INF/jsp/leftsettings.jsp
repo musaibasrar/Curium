@@ -376,10 +376,10 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Holistic Development Assessment</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/HolisticAssessmentProcess/readListOfAssessments" style="font-size: 12px;">Assessment Details</a><br/>
-                <!-- <a target="mainFrame" href="/vision/HolisticAssessmentProcess/assessmentSchedule" style="font-size: 12px;">Assessment Schedule</a><br/> -->
-                <a target="mainFrame" href="/vision/AssessmentSubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Assessment Subject Master</a><br/>
-                <a target="mainFrame" href="/vision/AssessmentSubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Assessment Subject Details</a>
+                <a target="mainFrame" href="/divine/HolisticAssessmentProcess/readListOfAssessments" style="font-size: 12px;">Assessment Details</a><br/>
+                <!-- <a target="mainFrame" href="/divine/HolisticAssessmentProcess/assessmentSchedule" style="font-size: 12px;">Assessment Schedule</a><br/> -->
+                <a target="mainFrame" href="/divine/AssessmentSubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Assessment Subject Master</a><br/>
+                <a target="mainFrame" href="/divine/AssessmentSubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Assessment Subject Details</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
