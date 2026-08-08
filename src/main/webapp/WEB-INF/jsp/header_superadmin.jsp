@@ -194,7 +194,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/divine/UserProcess/dashBoard"><img
+                href="/divine/UserProcess/superDashboard"><img
 									alt="Dash Board" src="/divine/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
