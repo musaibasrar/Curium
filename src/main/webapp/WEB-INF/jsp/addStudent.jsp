@@ -41,6 +41,9 @@
 <link rel="stylesheet" href="/divine/css/datePicker/demos.css">
 <script type="text/javascript" language="javascript" src="/divine/js/dataTable/jquery.dataTables.js"></script>
 <link rel="stylesheet" href="/divine/css/datePicker/jquery-ui-1.8.18.custom.css">
+<script src="/divine/js/bootstrap.min.js"></script>
+<link href="/divine/css/select2.min.css" rel="stylesheet" />
+<script src="/divine/js/select2.min.js"></script>
 
 
 <style type="text/css">
@@ -948,7 +951,7 @@ $(document).ready(function() {
         var parentCount;
 
         function searchListOfParent() {
-
+ 
             var addClass = document.getElementById('addclass').value;
 
             if (!addClass) {
@@ -979,6 +982,13 @@ $(document).ready(function() {
                 // Load dropdown / parent list
                 document.getElementById("parentDiv").innerHTML =
                     xmlHttpParent.responseText;
+                
+                // Reinitialize Select2 on newly added dropdown
+                $('#parentId').select2({
+                    placeholder: "Search Parent",
+                    allowClear: true,
+                    width: '225px'
+                });
             }
         }
 
