@@ -621,7 +621,7 @@ border-radius:50%;
         <img src="/divine/images/phone.png"
              width="15" height="15"
              style="vertical-align:middle;" />
-        <span style="vertical-align:middle;padding:0px;margin:0px;">9916891788 / 8444946233</span>
+        <span style="vertical-align:middle;padding:0px;margin:0px;">9916891788 / 8494996266</span>
     </td>
 </tr>
 </table>

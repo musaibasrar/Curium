@@ -352,7 +352,7 @@ for(Cookie cookie : cookies){
 		</TABLE>
 		</div>
 		<br>
-		<br>
+		<br><br>
                                  
                         </c:forEach>
 			
