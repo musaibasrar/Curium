@@ -442,10 +442,10 @@ body {
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment
-							No : &nbsp;&nbsp;&nbsp;</b></td>
+							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :
+							No :<c:out value="${Parents.parents.student.admissionnumber}" />
 					&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
@@ -501,71 +501,7 @@ body {
         <div class="flex-row-container">
         <div class="marks-left-column">
 		<div class="marks">
-			<c:set var="subjectCount" value="${fn:length(Parents.subjectExamMarks)}" />
-			<c:choose>
-
-			<%-- NEW BRANCH: more than 8 subjects — one plain table per exam, subjects as columns --%>
-			<c:when test="${subjectCount > 8}">
-				<%-- Compute grand totals from examSummaries so totalbox works correctly --%>
-				<c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
-				<c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
-				<c:forEach items="${Parents.examSummaries}" var="examSummaryTotal">
-					<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
-					<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
-				</c:forEach>
-				<c:set var="grandPercentage" value="0" />
-				<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-					<c:set var="grandPercentage" value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" />
-				</c:if>
-				<c:set var="grandPercentagestring" value="0" />
-				<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-					<c:set var="grandPercentagestring"><fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="1" /></c:set>
-				</c:if>
-				<c:set var="roundedMarks"><fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" /></c:set>
-				<%-- Hidden span required by number-to-words JS --%>
-				<span class="amount" style="display: none;">${roundedMarks}</span>
-
-				<%-- Render one table per exam --%>
-				<c:forEach items="${Parents.examSummaries}" var="exam">
-					<div style="margin-top: 20px; page-break-inside: avoid;">
-						<h4 style="text-align: center; text-transform: uppercase; margin-bottom: 4px;"><c:out value="${exam.examName}" /></h4>
-						<hr style="border: 1px solid #000; margin-bottom: 4px;" />
-						<table style="border-collapse: collapse; width: 100%;">
-							<thead>
-								<tr>
-									<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
-										<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
-										<c:if test="${not empty markStr and markStr != '-'}">
-											<th class="marksTableHeader" style="text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></th>
-										</c:if>
-									</c:forEach>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
-										<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
-										<c:if test="${not empty markStr and markStr != '-'}">
-											<c:set var="parts" value="${fn:split(markStr, '/')}" />
-											<c:set var="secured" value="${parts[0]}" />
-											<td class="marksTableCell">
-												<c:choose>
-													<c:when test="${secured == '999'}">A</c:when>
-													<c:otherwise><c:out value="${secured}" /></c:otherwise>
-												</c:choose>
-											</td>
-										</c:if>
-									</c:forEach>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</c:forEach>
-			</c:when>
-
-			<%-- EXISTING logic unchanged: 6-exam CCE layout and general layout --%>
-			<c:otherwise>
-			<c:choose>
+			 <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<h4	style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART-A</h4>
 						        </c:when>
@@ -657,8 +593,9 @@ body {
 						                                    <c:set var="maxMarks" value="${maxPart}" />
 						                                </c:if>
 						
-						                                <c:choose>
-						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+															                                <c:choose>
+																					<c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
+																						<%-- Full marks mode bypasses FA/SA conversion and falls through to c:otherwise raw marks rendering. --%>
 						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
@@ -677,7 +614,7 @@ body {
 						                                        </c:choose>
 						                                    </c:when>
 						
-						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
 						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
@@ -945,7 +882,7 @@ body {
 									        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
 									        <c:forEach items="${Parents.examSummaries}" var="exam">
 									        	<c:choose>
-						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
 						                                       		 <c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
@@ -961,7 +898,7 @@ body {
 																	</c:choose>
 						                                    </c:when>
 						
-						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
 						                                    			<c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
@@ -1020,9 +957,6 @@ body {
 									    </tr>
 						    </tbody>
 						</table>
-
-			</c:otherwise>
-			</c:choose>
 
 		</div>
 
