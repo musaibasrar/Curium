@@ -763,7 +763,8 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 						<th class="headerText" style="display: none;"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">UID</th>
 						<th title="click to sort" class="headerText">Admission Number</th>
-						<th title="click to sort" class="headerText">Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th title="click to sort" class="headerText">Name</th>
+						<th title="click to sort" class="headerText">Father's Name</th>
 						<th title="click to sort" class="headerText">Class</th>
 						<th title="click to sort" class="headerText">Marks</th>
 
@@ -788,12 +789,13 @@ border-color: transparent;background-color:#E6EEF4;font-size: 15px;font-weight:b
 								><c:out
 										value="${Parents.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${Parents.student.name}" /></td>
+							<td class="dataText"><c:out value="${Parents.fathersname}" /></td>
 							<td class="dataText"><c:out value="${Parents.student.classstudying}" /></td>
 							<td class="dataText">
-									<c:if test="${newMarksDetails[status.index].marksobtained <= 100}">
+									<c:if test="${newMarksDetails[status.index].marksobtained <= 790}">
 											<c:set var="marksobtained" value="${newMarksDetails[status.index].marksobtained}" />
 									</c:if>
-									<c:if test="${newMarksDetails[status.index].marksobtained > 100}">
+									<c:if test="${newMarksDetails[status.index].marksobtained > 790}">
 											<c:set var="marksobtained" value="A" />
 									</c:if>
 							<input type="text" id="studentMarks" name="studentMarks" value="<c:out value="${marksobtained}" />"
