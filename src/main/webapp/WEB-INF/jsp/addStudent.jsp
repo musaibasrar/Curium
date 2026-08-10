@@ -37,13 +37,13 @@
 <script src="/patriswamy/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
 <script src="/patriswamy/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<script src="/vision/js/bootstrap.min.js"></script>
-<link href="/vision/css/select2.min.css" rel="stylesheet" />
-<script src="/vision/js/select2.min.js"></script>
+	src="/patriswamy/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/patriswamy/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/patriswamy/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/patriswamy/css/datePicker/jquery-ui-1.8.18.custom.css">
+<script src="/patriswamy/js/bootstrap.min.js"></script>
+<link href="/patriswamy/css/select2.min.css" rel="stylesheet" />
+<script src="/patriswamy/js/select2.min.js"></script>
 
 <style type="text/css">
 .myclass {
