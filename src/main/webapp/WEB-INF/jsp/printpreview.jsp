@@ -497,12 +497,12 @@ for(Cookie cookie : cookies){
                   font-weight:bold;
                   ">
   <tr>
-    <td style="padding: 0;font-size:7px;">&nbsp;&nbsp;F/NAME</td>
-    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
+    <td style="padding: 0;font-size:9px;">&nbsp;&nbsp;F/NAME</td>
+    <td style="padding: 0;font-size:9px;">:&nbsp;<%= request.getSession().getAttribute("fathersname" + i + "") %></td>
   </tr>
    <%--<tr>
-    <td style="padding: 0;white-space: nowrap;font-size:7px;">&nbsp;&nbsp;CLASS</td>
-    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
+    <td style="padding: 0;white-space: nowrap;font-size:9px;">&nbsp;&nbsp;CLASS</td>
+    <td style="padding: 0;font-size:9px;">:&nbsp;<%= request.getSession().getAttribute("classsection" + i + "") %></td>
   </tr>
  
   <tr>
@@ -510,8 +510,8 @@ for(Cookie cookie : cookies){
     <td style="padding: 0;">:&nbsp;<%= request.getSession().getAttribute("admissionnumber" + i + "") %></td>
   </tr> --%>
   <tr>
-    <td style="padding: 0;font-size:7px;">&nbsp;&nbsp;D.O.B.</td>
-    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
+    <td style="padding: 0;font-size:9px;">&nbsp;&nbsp;D.O.B.</td>
+    <td style="padding: 0;font-size:9px;">:&nbsp;<%= request.getSession().getAttribute("dateofbirth" + i + "") %></td>
   </tr>
    <%
 String classSection = (String) request.getSession().getAttribute("classsection" + i);
@@ -519,8 +519,8 @@ String classSection = (String) request.getSession().getAttribute("classsection" 
 if (classSection != null && !classSection.toUpperCase().contains(".K.G")) {
 %>
 <tr>
-    <td style="padding: 0;white-space: nowrap;font-size:7px;">&nbsp;&nbsp;STS</td>
-    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i) %></td>
+    <td style="padding: 0;white-space: nowrap;font-size:9px;">&nbsp;&nbsp;STS</td>
+    <td style="padding: 0;font-size:9px;">:&nbsp;<%= request.getSession().getAttribute("rollnumber" + i) %></td>
 </tr>
 <%
 }
@@ -530,12 +530,12 @@ if (classSection != null && !classSection.toUpperCase().contains(".K.G")) {
     <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("bloodgroup" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;font-size:7px;">&nbsp;&nbsp;MOBILE</td>
-    <td style="padding: 0;font-size:7px;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
+    <td style="padding: 0;font-size:9px;">&nbsp;&nbsp;MOBILE</td>
+    <td style="padding: 0;font-size:9px;">:&nbsp;<%= request.getSession().getAttribute("contactnumber" + i + "") %></td>
   </tr>
   <tr>
-    <td style="padding: 0;font-size:7px;vertical-align: top;"><table style="padding:0px;margin:0px;"><tr><td>ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table></td>
-    <td style="padding: 0px;font-size:7px;">
+    <td style="padding: 0;font-size:9px;vertical-align: top;"><table style="padding:0px;margin:0px;"><tr><td>ADDRESS&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table></td>
+    <td style="padding: 0px;font-size:9px;">
     <table style="padding:0px;margin:0px;"><tr><td style="padding:0px;margin:0px;">:<%= request.getSession().getAttribute("address" + i + "") %></td></tr></table></td>
   </tr>
 </table>
