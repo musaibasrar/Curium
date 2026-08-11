@@ -1,166 +1,413 @@
+<%-- 
+    Document   : Marks Sheet
+    Created on : Nov 29 2021, 09:22 PM
+    Author     : Musaib
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ page import="java.util.ArrayList,java.util.Collections,java.util.Comparator,java.util.List,java.util.regex.Matcher,java.util.regex.Pattern,java.lang.reflect.Method" %>
 
-<!DOCTYPE html>
+<%!
+private int extractFirstNumber(String value) {
+	if (value == null) {
+		return Integer.MAX_VALUE;
+	}
+	Matcher matcher = Pattern.compile("(\\d+)").matcher(value);
+	return matcher.find() ? Integer.parseInt(matcher.group(1)) : Integer.MAX_VALUE;
+}
+
+private String examNameOf(Object examSummary) {
+	if (examSummary == null) {
+		return "";
+	}
+	try {
+		Method method = examSummary.getClass().getMethod("getExamName");
+		Object examName = method.invoke(examSummary);
+		return examName == null ? "" : examName.toString().trim();
+	} catch (Exception e) {
+		return "";
+	}
+}
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
 <html>
 <head>
-<title>Marks Sheet</title>
-
+<title>Progress Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
+<script src="/patriswamy/js/echarts/echarts.min.js"></script>
 <style>
-
-/* ===== PRINT SETTINGS ===== */
-@page {
-    size: A4 portrait;
-    margin: 8mm;
-}
-
-/* @media print {
-    body { margin: 0; }
-}
- */
- @media print {
-    html, body {
-        width: 210mm;
-        height: 297mm;
-        margin: 0;
-        padding: 0;
-    }
-
-    body {
-        -webkit-print-color-adjust: exact;
-        print-color-adjust: exact;
-    }
-}
-/* ===== COMMON ===== */
 body {
-    font-family: Tahoma;
-    font-size: 12px;
+	font-family: "Times New Roman", Times, serif;
+	background: #f5f5f5;
 }
 
-/* ===== HEADER ===== */
+.container {
+	width: 800px;
+	margin: auto;
+	background: white;
+	border: 5px solid #2c8a6b;
+	padding: 10px;
+	border-style: double;
+}
+
+/* .header {
+	border-bottom: 1px solid #000;
+} */
+
+.topline {
+	font-size: 12px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.schoolbox {
+	display: flex;
+	align-items: center;
+	margin-top: 5px;
+	/*height:100px;*/
+}
+
+.logo {
+	width: 90px;
+	height: 95px;
+	/* border: 2px solid #538261; */
+}
+
+.schoolname {
+	background: #ffffff;
+	flex: 1;
+	text-align: center;
+	/* height: 40px; */
+	/* padding-top: 5px; */
+	/* border: 1px solid #000; */
+}
+
+.studentphoto {
+	width: 110px;
+	text-align: right;
+}
+
+.schoolname h2 {
+	margin: 0;
+}
+
+.schoolname h3 {
+	margin: 0;
+}
+
 .title {
-    font-size: 16px;
+	text-align: center;
+}
+
+.title h2 {
+	border: 2px solid black;
+	display: inline-block;
+	padding: 5px 20px;
+	border-radius: 10px; 
+	font-size: 25px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+  	outline: 2px solid black;       /* outer border */
+  	outline-offset: 6px;            /* gap between borders */
+
+  	border-radius: 10px;
+}
+
+.studentinfo {
+	margin-top: 10px;
+}
+
+.studentinfo table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.studentinfo td {
+	padding: 5px;
+	font-size: 14px;
+}
+
+.marks {
+	margin-top: 10px;
+}
+
+.marks table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.marks th, .marks td {
+	border: 1px solid #000;
+	text-align: center;
+	padding: 6px;
+	font-size: 19px;
+}
+
+.totalbox {
+	margin-top: 50px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.words {
+	border: 1px solid #000;
+	padding: 8px;
+	width: 70%;
+	background: #f4d5a6;
+	border-radius: 5px;
+	text-transform: uppercase;
+	font-size: 14px;
+}
+
+.percentage {
+	border: 1px solid #000;
+	padding: 8px;
+	width: 25%;
+	background: #e3a83d;
+	text-align: center;
+	font-weight: bold;
+	border-radius: 5px;
+	text-transform: uppercase;
+}
+
+.partb {
+	margin-top: 0px;
+}
+
+.partb table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.partb th, .partb td {
+	border: 1px solid #000;
+	padding: 6px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.footer {
+    text-align: right;
+    margin-top: 20px;
     font-weight: bold;
-    text-align: center;
+    color: blue;
 }
 
-.address {
-    text-align: center;
-    font-size: 12px;
+.signature {
+    display: block;
+    margin-left: auto;
+    margin-bottom: -10px;
 }
 
-/* ===== MAIN TABLE ===== */
-.main-border {
-    width: 100%;
-    border: 1px solid #000;
-    border-collapse: collapse;
-    page-break-inside: avoid;
+.headmaster {
+    padding-right: 90px;  /* 👈 required spacing */
 }
 
-.cell {
-    border-right: 1px solid #000;
-    border-bottom: 1px solid #000;
-    padding: 6px;
-    text-align: center;
-}
-
-.left {
-    text-align: left;
-}
-
-.last-col {
-    border-right: none;
-}
-
-/* ===== SUBJECT HEADER ===== */
-.subject-header {
-    transform: rotate(-90deg);
-    height: 150px;
-    vertical-align: middle;
-    font-weight: bold;
+.school-info {
+    font-weight: 700;
     font-size: 11px;
+}
+.printbtn {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.cce {
+	font-family: "Alex Brush", cursive;
+	font-size: 22px;
+	color: #1975d0;
+	font-weight: bold;
+}
+
+.certifyline {
+	text-align: center;
+	font-size: 14px;
+	margin-top: 5px;
+	margin-bottom: 8px;
+	font-style: italic;
+	padding-left:0px;
+	padding-right:0px;
+}
+
+
+.marksTableHeader {
+	background-color: #f2f2f2;
+	font-weight: bold;
+	border: 1px solid black;
+	padding: 8px;
+	text-align: center;
+}
+
+.marksTableCell {
+	border: 1px solid black;
+	padding: 8px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.marksTableCellLeft {
+	border: 1px solid black;
+	padding: 8px;
+	text-align: left;
+	font-weight: bold;
+}
+
+.summaryTableHeader {
+	background-color: #f9f9f9;
+	font-weight: bold;
+	border: 1px solid black;
+	padding: 8px;
+	text-align: left;
+}
+
+@media print {
+	.printbtn {
+		display: none;
+	}
+	body {
+		background: white;
+	}
+}
+
+.flex-row-container {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.marks-left-column {
+    flex: 1;
+}
+.graph-right-column {
+    width: 300px;
+    flex-shrink: 0;
 }
 
 </style>
 
-<script>
-window.onload = function(){
-    window.print();
-};
-</script>
+<script type="text/javascript">
+        function convertNumberToWords(num) {
+            const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+            const teens = ['Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+            const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+            
+            if (num === 0) return 'Zero';
+            
+            function convertBelowThousand(n) {
+                let result = '';
+                if (Math.floor(n / 100) > 0) {
+                    result = ones[Math.floor(n / 100)] + ' Hundred';
+                }
+                n = n % 100;
+                if (n >= 10 && n < 20) {
+                    if (result) result += ' ';
+                    result += teens[n - 10];
+                } else {
+                    if (Math.floor(n / 10) > 0) {
+                        if (result) result += ' ';
+                        result += tens[Math.floor(n / 10)];
+                    }
+                    if (n % 10 > 0) {
+                        if (result) result += ' ';
+                        result += ones[n % 10];
+                    }
+                }
+                return result;
+            }
+            
+            let crore = Math.floor(num / 10000000);
+            let croreRemainder = num % 10000000;
+            let lakh = Math.floor(croreRemainder / 100000);
+            let lakhRemainder = croreRemainder % 100000;
+            let thousand = Math.floor(lakhRemainder / 1000);
+            let remainder = lakhRemainder % 1000;
+            
+            let result = '';
+            if (crore > 0) result += convertBelowThousand(crore) + ' Crore';
+            if (lakh > 0) {
+                if (result) result += ' ';
+                result += convertBelowThousand(lakh) + ' Lakh';
+            }
+            if (thousand > 0) {
+                if (result) result += ' ';
+                result += convertBelowThousand(thousand) + ' Thousand';
+            }
+            if (remainder > 0) {
+                if (result) result += ' ';
+                result += convertBelowThousand(remainder);
+            }
+            return result.trim();
+        }
+
+        window.onload = function () {
+            // Get ALL amount and words elements
+            let amounts = document.querySelectorAll(".amount");
+            let wordsCells = document.querySelectorAll(".amountWords");
+
+            console.log("Processing " + amounts.length + " amounts...");
+
+            // Loop through each pair
+            for (let i = 0; i < amounts.length && i < wordsCells.length; i++) {
+                let value = amounts[i].innerText.trim();
+                
+                if (value && !isNaN(value)) {
+                    try {
+                        let intValue = Math.floor(Number(value));
+                        let words = convertNumberToWords(intValue);
+                        wordsCells[i].innerText = words + "";
+                        console.log("[" + i + "] " + intValue + " → " + words);
+                    } catch (e) {
+                        console.error("Error at index " + i + ": " + value);
+                        wordsCells[i].innerText = "Error";
+                    }
+                }
+            }
+        };
+    </script>
+
 
 </head>
 
 <body>
 
-<<<<<<< HEAD
-<!-- ===== SCHOOL HEADER ===== -->
-<table width="100%">
-    <tr>
-        <td width="20%" align="center">
-            <img src="/patriswamy/images/patriswamy.jpg" width="224" height="80">
-        </td>
-        <td width="80%">
-            <div class="title">${branchname}</div>
-            <div class="address">${branchaddress}</div>
-        </td>
-    </tr>
-</table>
-
-<br>
-
-<!-- ===== CLASS / EXAM INFO ===== -->
-<table width="100%">
-    <tr>
-        <td align="left"><b>Class:</b> ${examclass}</td>
-        <td align="center">
-    <b>Exam:</b>
-    <c:forEach items="${markssheetlist}" var="p" varStatus="ps">
-        <c:if test="${ps.index == 0}">
-            <c:forEach items="${p.exammarks}" var="em" varStatus="es">
-                <c:if test="${es.index == 0}">
-                    ${em.examName}
-                </c:if>
-            </c:forEach>
-        </c:if>
-    </c:forEach>
-</td>
-
-        <td align="right"><b>Academic Year:</b> ${currentAcademicYear}</td>
-    </tr>
-</table>
-
-<br>
-
-<!-- ===== MARKS TABLE ===== -->
-<table class="main-border">
-
-    <!-- HEADER -->
-    <tr>
-        <td class="cell"><b>Sl.No</b></td>
-        <td class="cell"><b>UID</b></td>
-        <td class="cell"><b>Student Name</b></td>
-        <td class="cell"><b>Father Name</b></td>
-
-      <c:forEach items="${markssheetlist[0].subjectSummaries}" var="sub">
-        <td class="cell subject-header">
-            ${sub.subjectName}
-        </td>
-    </c:forEach>
-
-        <td class="cell subject-header">Total Obtained</td>
-        <td class="cell subject-header">Total Marks</td>
-        <td class="cell subject-header">%</td>
-        <td class="cell subject-header last-col">Rank</td>
-    </tr>
-
-    <!-- DATA -->
-    <c:forEach items="${markssheetlist}" var="Parents" varStatus="s">
-=======
 <c:forEach items="${markssheetlist}" var="Parents" varStatus="studentStatus">
 	<c:set var="studentGraphKey" value="s${studentStatus.index}_${Parents.parents.student.sid}" />
+	<%
+	Object parentBean = pageContext.getAttribute("Parents");
+	List examSummariesRaw = Collections.emptyList();
+	try {
+		if (parentBean != null) {
+			Method getExamSummaries = parentBean.getClass().getMethod("getExamSummaries");
+			Object examValue = getExamSummaries.invoke(parentBean);
+			if (examValue instanceof List) {
+				examSummariesRaw = (List) examValue;
+			}
+		}
+	} catch (Exception ignored) {
+	}
+
+	List sortedExamSummaries = new ArrayList(examSummariesRaw);
+	Collections.sort(sortedExamSummaries, new Comparator() {
+		@Override
+		public int compare(Object left, Object right) {
+			String leftName = examNameOf(left);
+			String rightName = examNameOf(right);
+			int leftNumber = extractFirstNumber(leftName);
+			int rightNumber = extractFirstNumber(rightName);
+			if (leftNumber != rightNumber) {
+				return Integer.compare(leftNumber, rightNumber);
+			}
+			return leftName.compareToIgnoreCase(rightName);
+		}
+	});
+	pageContext.setAttribute("sortedExamSummaries", sortedExamSummaries);
+	%>
 		
 	<div style="page-break-inside: avoid;">   
 
@@ -179,13 +426,17 @@ window.onload = function(){
 					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
 				</div>
 			</div> -->
+			
+			<div class="schoolbox">
+			
+				<div class="schoolname">
+					<img border="0" style="vertical-align: text-bottom;height: 97px;width: 70px;" alt="ideoholic" src="/patriswamy/images/patriswamy.png">
+				</div>
+		
+			</div>
 
 			<div class="schoolbox">
 			
-				<div class="logo">
-					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/patriswamy/images/patriswamy.png">
-				</div>
-		
 				<div class="schoolname">
 					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/patriswamy/images/patriswamyschoolname.png"> -->
@@ -208,7 +459,7 @@ window.onload = function(){
 
 			Academic Year ${startYear}-${endYear}</div>
 			
-			<c:choose>
+			<%-- <c:choose>
 			<c:when test="${fn:length(Parents.examSummaries) == 6}">
 					<div class="cce" style="font-size: 27px;">Continuous And
 				Comprehensive Evaluation</div>
@@ -236,7 +487,7 @@ window.onload = function(){
 				<div class="cce" style="font-size: 27px;">Continuous And Comprehensive Evaluation</div>
 			</c:otherwise>
 			
-			</c:choose>
+			</c:choose> --%>
 			
 		</div>
 
@@ -310,71 +561,87 @@ window.onload = function(){
         <div class="flex-row-container">
         <div class="marks-left-column">
 		<div class="marks">
-			<c:set var="subjectCount" value="${fn:length(Parents.subjectExamMarks)}" />
-			<c:choose>
+		<c:choose>
 
-			<%-- NEW BRANCH: more than 8 subjects — one plain table per exam, subjects as columns --%>
-			<c:when test="${subjectCount > 8}">
-				<%-- Compute grand totals from examSummaries so totalbox still works correctly --%>
-				<c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
-				<c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
-				<c:forEach items="${Parents.examSummaries}" var="examSummaryTotal">
-					<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
-					<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
-				</c:forEach>
-				<c:set var="grandPercentage" value="0" />
-				<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-					<c:set var="grandPercentage" value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" />
-				</c:if>
-				<c:set var="grandPercentagestring" value="0" />
-				<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-					<c:set var="grandPercentagestring"><fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="1" /></c:set>
-				</c:if>
-				<c:set var="roundedMarks"><fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" /></c:set>
-				<%-- Hidden cell required by the number-to-words JS --%>
-				<span class="amount" style="display: none;">${roundedMarks}</span>
+			<%-- NEW: 2 or more exams -> simple transposed table (subjects as rows, exams as columns) --%>
+			<c:when test="${fn:length(Parents.examSummaries) > 1}">
 
-				<%-- Render one table per exam --%>
-				<c:forEach items="${Parents.examSummaries}" var="exam">
-					<div style="margin-top: 20px; page-break-inside: avoid;">
-						<h4 style="text-align: center; text-transform: uppercase; margin-bottom: 4px;"><c:out value="${exam.examName}" /></h4>
-						<hr style="border: 1px solid #000; margin-bottom: 4px;" />
-						<table style="border-collapse: collapse; width: 100%;">
-							<thead>
-								<tr>
-									<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
-										<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
-										<c:if test="${not empty markStr and markStr != '-'}">
-											<th class="marksTableHeader" style="text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></th>
-										</c:if>
-									</c:forEach>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
-										<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
-										<c:if test="${not empty markStr and markStr != '-'}">
+			<%-- Totals from backend examSummaries so totalbox + amount-in-words keep working --%>
+			<c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
+			<c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
+			<c:forEach items="${sortedExamSummaries}" var="examSummaryTotal">
+				<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
+				<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
+			</c:forEach>
+
+			<c:set var="grandPercentage" value="0" />
+			<c:set var="grandPercentagestring" value="0" />
+			<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
+				<c:set var="grandPercentage" value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" />
+				<c:set var="grandPercentagestring">
+					<fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="1" />
+				</c:set>
+			</c:if>
+			<c:set var="roundedMarks">
+				<fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" />
+			</c:set>
+
+			<table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+				<thead>
+					<tr>
+						<th class="marksTableHeader" style="text-align: center; width: 20%; text-transform: uppercase;">Exams</th>
+						<%-- Subject columns come dynamically from subjectExamMarks (already excludes excludedsubjectids) --%>
+						<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
+							<th class="marksTableHeader" style="text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></th>
+						</c:forEach>
+						<th class="marksTableHeader" style="text-transform: uppercase;">Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<%-- One row per exam --%>
+						<c:forEach items="${sortedExamSummaries}" var="exam">
+						<tr>
+							<td class="marksTableCellLeft" style="width: 20%; text-transform: uppercase;"><c:out value="${exam.examName}" /></td>
+
+							<c:set var="examRowTotal" value="0" />
+							<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
+								<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
+								<td class="marksTableCell">
+									<c:choose>
+										<c:when test="${empty markStr || markStr == '-'}">-</c:when>
+										<c:otherwise>
 											<c:set var="parts" value="${fn:split(markStr, '/')}" />
 											<c:set var="secured" value="${parts[0]}" />
-											<td class="marksTableCell">
-												<c:choose>
-													<c:when test="${secured == '999'}">A</c:when>
-													<c:otherwise><c:out value="${secured}" /></c:otherwise>
-												</c:choose>
-											</td>
-										</c:if>
-									</c:forEach>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</c:forEach>
-			</c:when>
+											<c:choose>
+												<c:when test="${secured == '999'}">A</c:when>
+												<c:when test="${secured == null || secured == '' || secured == 'AB'}"><c:out value="${secured}" /></c:when>
+												<c:otherwise>
+													<c:out value="${secured}" />
+													<%-- Only numeric marks contribute to the row total (excluded subjects already absent) --%>
+													<c:set var="examRowTotal" value="${examRowTotal + secured}" />
+												</c:otherwise>
+											</c:choose>
+										</c:otherwise>
+									</c:choose>
+								</td>
+							</c:forEach>
 
-			<%-- EXISTING logic unchanged: 6-exam CCE layout and general single-exam layout --%>
-			<c:otherwise>
-			<c:choose>
+							<td class="marksTableCell" style="font-weight: bold;">
+								<fmt:formatNumber value="${examRowTotal}" maxFractionDigits="1" />
+							</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+
+			<%-- Hidden element consumed by the amount-in-words script --%>
+			<span class="amount" style="display: none;">${roundedMarks}</span>
+
+		</c:when>
+
+		<%-- EXISTING logic below is unchanged --%>
+		<c:otherwise>
+			 <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<h4	style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART-A</h4>
 						        </c:when>
@@ -391,7 +658,7 @@ window.onload = function(){
 						    <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<tr>
-										<th rowspan="2" style="text-transform: uppercase;">Scholastic Subjects</th>
+										<th rowspan="2" style="text-transform: uppercase;">Subjects</th>
 										<th colspan="3" style="text-transform: uppercase;">Semester-1</th>
 										<th colspan="3" style="text-transform: uppercase;">Semester-2</th>
 										<th colspan="2" style="text-transform: uppercase;">TOTAL</th>
@@ -411,7 +678,7 @@ window.onload = function(){
 						
 						        <c:otherwise>
 						        	<tr>
-						        		<c:forEach items="${Parents.examSummaries}" var="exam">
+															        		<c:forEach items="${sortedExamSummaries}" var="exam">
 						                <th class="marksTableHeader" style="text-transform: uppercase;" colspan="5"><c:out value="${exam.examName}" /></th>
 						            </c:forEach>
 						        	</tr>
@@ -439,7 +706,7 @@ window.onload = function(){
 								        <%-- Use backend exam summaries for final totals so excluded subjects stay excluded in aggregates. --%>
 								        <c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
 								        <c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
-								        <c:forEach items="${Parents.examSummaries}" var="examSummaryTotal">
+											        <c:forEach items="${sortedExamSummaries}" var="examSummaryTotal">
 								        	<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
 								        	<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
 								        </c:forEach>
@@ -451,7 +718,7 @@ window.onload = function(){
 						                <c:set var="subjectTotalMarksObtained" value="0" />
 						                <c:set var="subjectTotalMaxMarks" value="0" />
 						                
-						                <c:forEach items="${Parents.examSummaries}" var="exam">
+														        <c:forEach items="${sortedExamSummaries}" var="exam">
 						                    <td class="marksTableCell">
 						                        <c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
 						
@@ -679,7 +946,7 @@ window.onload = function(){
 						        <!-- Summary Section Rows within the same table 
 						        <tr>
 						            <td class="summaryTableHeader" style="width: 20%;">Summary</td>
-						            <c:forEach items="${Parents.examSummaries}" var="exam">
+															            <c:forEach items="${sortedExamSummaries}" var="exam">
 						                <td class="marksTableCell">${exam.totalMarksObtained}</td>
 						            </c:forEach>
 						            <td class="marksTableCell"></td>
@@ -688,7 +955,7 @@ window.onload = function(){
 						
 						        <tr>
 						            <td class="summaryTableHeader">Total Marks Obtained</td>
-						            <c:forEach items="${Parents.examSummaries}" var="exam">
+															            <c:forEach items="${sortedExamSummaries}" var="exam">
 						                <td class="marksTableCell">${exam.totalMarksObtained}</td>
 						            </c:forEach>
 						            <td class="marksTableCell"></td>
@@ -697,7 +964,7 @@ window.onload = function(){
 						
 						        <tr>
 						            <td class="summaryTableHeader">Total Marks</td>
-						            <c:forEach items="${Parents.examSummaries}" var="exam">
+															            <c:forEach items="${sortedExamSummaries}" var="exam">
 						                <td class="marksTableCell">${exam.totalMarks}</td>
 						            </c:forEach>
 						            <td class="marksTableCell"></td>
@@ -706,7 +973,7 @@ window.onload = function(){
 						
 						        <tr>
 						            <td class="summaryTableHeader">Percentage</td>
-						            <c:forEach items="${Parents.examSummaries}" var="exam">
+															            <c:forEach items="${sortedExamSummaries}" var="exam">
 						                <td class="marksTableCell">
 						                    <c:choose>
 						                        <c:when test="${exam.percentage > 0}">
@@ -722,7 +989,7 @@ window.onload = function(){
 						
 						        <%-- <tr>
 						            <td class="summaryTableHeader">Grade</td>
-						            <c:forEach items="${Parents.examSummaries}" var="exam">
+															            <c:forEach items="${sortedExamSummaries}" var="exam">
 						                <td class="marksTableCell">
 						                    <c:choose>
 						                        <c:when test="${exam.grade != null && exam.grade != ''}">
@@ -740,7 +1007,7 @@ window.onload = function(){
 						
 						        <tr>
 						            <td class="summaryTableHeader">Rank</td>
-						            <c:forEach items="${Parents.examSummaries}" var="exam">
+															            <c:forEach items="${sortedExamSummaries}" var="exam">
 						                <td class="marksTableCell">
 						                    <c:choose>
 						                        <c:when test="${exam.rank > 0}">
@@ -760,7 +1027,7 @@ window.onload = function(){
 						           
 						           		 <tr style="background-color: #f0f0f0; font-weight: bold;">
 									        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
-									        <c:forEach items="${Parents.examSummaries}" var="exam">
+												        <c:forEach items="${sortedExamSummaries}" var="exam">
 									        	<c:choose>
 						                                    <c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
 						                                       		 <c:choose>
@@ -838,12 +1105,14 @@ window.onload = function(){
 						    </tbody>
 						</table>
 
-			</c:otherwise>
-			</c:choose>
+		</c:otherwise>
+		</c:choose>
 
 		</div>
 
 
+		<%-- Suppress totalbox when exams > 1; keep unchanged for the 1-exam layout --%>
+		<c:if test="${fn:length(Parents.examSummaries) == 1}">
 		<div class="totalbox">
 
 			<div class="words">
@@ -853,35 +1122,6 @@ window.onload = function(){
 			<div class="percentage">Percentage <br><fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
 
 		</div>
-
-		<c:set var="excludedWithGradeCount" value="0" />
-		<c:forEach items="${Parents.excludedSubjectGrades}" var="excludedEntry">
-			<c:if test="${not empty excludedEntry.value}">
-				<c:set var="excludedWithGradeCount" value="${excludedWithGradeCount + 1}" />
-			</c:if>
-		</c:forEach>
-
-		<c:if test="${excludedWithGradeCount > 0}">
-			<div class="marks" style="margin-top: 15px;">
-				<table class="excluded-subjects-table" style="border-collapse: collapse; width: 100%;">
-					<thead>
-						<tr>
-							<th class="marksTableHeader" style="text-transform: uppercase; width: 70%;">Subject Name</th>
-							<th class="marksTableHeader" style="text-transform: uppercase; width: 30%;">Grade</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${Parents.excludedSubjectGrades}" var="excludedEntry">
-							<c:if test="${not empty excludedEntry.value}">
-								<tr>
-									<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${excludedEntry.key}" /></td>
-									<td class="marksTableCell"><c:out value="${excludedEntry.value}" /></td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
 		</c:if>
 		
 		</div>
@@ -899,6 +1139,8 @@ window.onload = function(){
         </div>
         <!-- END OF FLEX CONTAINER -->
 
+	<%-- Suppress PART-B marks section when exams > 1; keep unchanged for the 1-exam layout --%>
+	<%-- <c:if test="${fn:length(Parents.examSummaries) == 1}">
 	<div class="marks" style="font-size: 19px;">
 		<c:choose>
 		
@@ -1019,6 +1261,7 @@ window.onload = function(){
 				</div></c:otherwise>
 		</c:choose>
 </div>
+	</c:if> --%>
 	<!-- <div class="footer">
     <img src="/patriswamy/images/hmsign.png" class="signature" width="200" height="60"/>
 
@@ -1034,52 +1277,166 @@ window.onload = function(){
 <!-- Signature Table -->
 <div style="margin-top: 50px;">
     <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
->>>>>>> 7fc6c7b92... 1. Exclude subjects in graph
         <tr>
-            <td class="cell">${s.index + 1}</td>
-            <td class="cell">${Parents.parents.student.studentexternalid}</td>
-            <td class="cell left">${Parents.parents.student.name}</td>
-            <td class="cell left">${Parents.parents.fathersname}</td>
-
-           
-
-            <c:forEach items="${Parents.subjectSummaries}" var="sub">
-    <td class="cell">
-        <fmt:formatNumber value="${sub.totalMarksObtained}" maxFractionDigits="0"/>
-        /
-        <fmt:formatNumber value="${sub.maxMarks}" maxFractionDigits="0"/>
-    </td>
-</c:forEach>
-            
-            <td class="cell">
-            
-                <fmt:formatNumber value="${Parents.examSummaries[0].totalMarksObtained}" maxFractionDigits="0"/> 
+            <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
+                <div style="min-height: 60px;"></div>
+                Signature of Principal
             </td>
-            <td class="cell">
-                <fmt:formatNumber value="${Parents.examSummaries[0].totalMarks}" maxFractionDigits="0"/>
+            <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
+                <div style="min-height: 60px;"></div>
+                Signature of Class Teacher
             </td>
-            <td class="cell">
-                <fmt:formatNumber value="${Parents.examSummaries[0].percentage}" maxFractionDigits="1"/>
+            <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
+                <div style="min-height: 60px;"></div>
+                Signature of Parents
             </td>
-            <td class="cell last-col">${Parents.examSummaries[0].rank}</td>
         </tr>
-    </c:forEach>
+        <tr>
+            <td colspan="3" style="border: 1px solid #000; padding: 10px; font-weight: bold; font-size: 14px;">
+                REMARK : <span style="font-weight: normal; margin-left: 10px;"></span>
+            </td>
+        </tr>
+    </table>
+</div>
 
-</table>
 
-<br><br>
 
-<!-- ===== SIGNATURE ===== -->
-<table width="100%">
-    <tr>
-        <td align="left">Class Teacher</td>
-        <td align="center">Parent</td>
-        <td align="right">
-            <img src="/patriswamy/images/principalsignature.png" width="60" height="28"><br>
-            Principal
-        </td>
-    </tr>
-</table>
+		<div class="printbtn">
+			<button onclick="window.print()">Print</button>
+		</div>
 
+	</div>
+	</div>
+
+	</c:forEach>
+	
+	<script>
+	(function () {
+	    var chartElements = document.querySelectorAll('.student-exam-chart');
+	    if (!chartElements || chartElements.length === 0) {
+	        return;
+	    }
+
+	    var palettePairs = [
+	        ["#ff6b6b", "#c0392b"],
+	        ["#4285f4", "#1d4ed8"],
+	        ["#34d399", "#0f766e"],
+	        ["#fbbf24", "#ca8a04"],
+	        ["#a78bfa", "#7c3aed"],
+	        ["#38bdf8", "#0369a1"],
+	        ["#f472b6", "#db2777"],
+	        ["#4ade80", "#16a34a"]
+	    ];
+
+	    function parseJsonArray(raw) {
+	        var value = (raw || '').trim();
+	        if (!value) return [];
+	        try {
+	            return JSON.parse(value);
+	        } catch (e) {
+	            return [];
+	        }
+	    }
+
+	    for (var i = 0; i < chartElements.length; i++) {
+	        var container = chartElements[i];
+	        if (!container) continue;
+
+	        var subjectNames = parseJsonArray(container.getAttribute('data-subjects'));
+	        var marksObtained = parseJsonArray(container.getAttribute('data-marks'));
+	        var rawMax = (container.getAttribute('data-max') || '').trim();
+	        var maxMarksVal = parseFloat(rawMax) || 100;
+
+	        var rawExam = (container.getAttribute('data-exam') || '').trim();
+	        var examName = '';
+	        try {
+	            examName = JSON.parse(rawExam);
+	        } catch (e) {
+	            examName = rawExam;
+	        }
+	        examName = String(examName).toUpperCase();
+
+	        var barData = marksObtained.map(function (val, idx) {
+	            var pair = palettePairs[idx % palettePairs.length];
+	            var markValue = Number(val);
+	            if (isNaN(markValue) || markValue > 700) {
+	                markValue = 0;
+	            }
+	            return {
+	                value: markValue,
+	                itemStyle: {
+	                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+	                        { offset: 0, color: pair[0] },
+	                        { offset: 1, color: pair[1] }
+	                    ]),
+	                    shadowBlur: 10,
+	                    shadowColor: 'rgba(15,23,42,0.18)',
+	                    shadowOffsetY: 6,
+	                    borderRadius: [6, 6, 0, 0]
+	                }
+	            };
+	        });
+
+	        var chart = echarts.init(container);
+	        chart.setOption({
+	            animationDuration: 800,
+	            animationEasing: 'cubicOut',
+	            title: {
+	                text: examName,
+	                left: 'center',
+	                top: 4,
+	                textStyle: {
+	                    fontSize: 14,
+	                    fontWeight: 'bold',
+	                    color: '#1e293b'
+	                }
+	            },
+	            tooltip: {
+	                trigger: 'axis',
+	                axisPointer: { type: 'shadow' }
+	            },
+	            grid: {
+	                left: 40,
+	                right: 16,
+	                top: 48,
+	                bottom: 60,
+	                containLabel: true
+	            },
+	            xAxis: {
+	                type: 'category',
+	                data: subjectNames,
+	                axisLabel: {
+	                    interval: 0,
+	                    rotate: subjectNames.length > 5 ? 35 : 0,
+	                    color: '#334155',
+	                    fontSize: 11
+	                },
+	                axisLine: { lineStyle: { color: 'rgba(15,23,42,0.20)' } }
+	            },
+	            yAxis: {
+	                type: 'value',
+	                min: 0,
+	                max: maxMarksVal,
+	                axisLabel: { color: '#334155', fontSize: 11 },
+	                splitLine: { lineStyle: { color: 'rgba(15,23,42,0.08)' } }
+	            },
+	            series: [{
+	                name: 'Marks',
+	                type: 'bar',
+	                barMaxWidth: 36,
+	                data: barData,
+	                label: {
+	                    show: true,
+	                    position: 'top',
+	                    color: '#0f172a',
+	                    fontWeight: 'bold',
+	                    fontSize: 11
+	                }
+	            }]
+	        });
+	    }
+	})();
+	</script>
+	
 </body>
 </html>
