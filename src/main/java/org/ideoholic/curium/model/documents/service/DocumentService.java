@@ -145,8 +145,16 @@ public class DocumentService {
 				 String[] classStudying = parents.getStudent().getClassstudying().split("--");
 				 String classinword = new DataUtil().classInWord(classStudying[0]);
 				 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStudying[0],Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-				 String classPromoted = classhierarchy.getUpperclass();
-				 String pinword =  new DataUtil().classInWord(classPromoted);
+				 String classPromoted =null;
+				 String pinword =  null;
+				 if(classhierarchy!=null) {
+					 classPromoted = classhierarchy.getUpperclass();
+					 pinword =  new DataUtil().classInWord(classPromoted);
+				 }else {
+					 classPromoted = "";
+					 pinword =  "";
+				 }
+				 
 				    request.setAttribute("leavingReason", leavingReason);
 					request.setAttribute("dateinword", dateinword);
 					request.setAttribute("leavingReason", leavingReason);
@@ -202,8 +210,16 @@ public class DocumentService {
 			 String classinword = new DataUtil().classInWord(classStudying[0]);
 			 String classStuDying = classStudying[0];
 			 Classhierarchy classhierarchy = new StandardDetailsDAO().getClassHierarchy(classStuDying,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
-			 String clschy = classhierarchy.getUpperclass();
-			 String pinword =  new DataUtil().classInWord(clschy);
+			 
+			 String clschy =null;
+			 String pinword =  null;
+			 if(classhierarchy!=null) {
+				 clschy = classhierarchy.getUpperclass();
+				 pinword =  new DataUtil().classInWord(clschy);
+			 }else {
+				 clschy = "";
+				 pinword =  "";
+			 }
 			 tcno = tcLastRow.getTcid()+1;
 			    request.setAttribute("leavingReason", leavingReason);
 				request.setAttribute("dateinword", dateinword);

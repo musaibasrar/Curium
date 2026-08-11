@@ -275,5 +275,11 @@ public class StudentAction {
 			return "viewAll";
 		}
 	}
+	
+	@PostMapping("/printStudentDetail")
+	public String printStudentDetail() {
+		new StudentService(request, response).printStudentDetail();
+		return "printstudentdetail";
+	}
 
 }

@@ -548,6 +548,7 @@ for(Cookie cookie : cookies){
             								<option value="exams">Exams</option> -->
             								<option value="festival">Festival</option>
             								<option value="feesreminder">Fees Reminder</option>
+            								<option value="aadhaarcamp">Aadhaar Camp</option>
 								</select>
 							
 							</label></td>
@@ -599,6 +600,17 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="feesremindervar2" name="feesremindervar2" maxlength="30">
 								<input type="hidden" id="feesremindervar3" name="feesremindervar3" maxlength="30">
 								<input type="hidden" id="feesremindervar4" name="feesremindervar4" maxlength="30">
+    							</div>
+    							
+    							
+    							<div class="aadhaarcamp box">		
+    								<span style="font-size: 16px;">Dear parents,kindly note there is a pending fee payment.kindly make the payment before <span style="font-weight: bold;color: red">Date</span>.Please ignore if already paid.</span>
+								<br><br>
+								<label style="color: red;">From Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="aadhaarcampvar1" name="aadhaarcampvar1" maxlength="30">&nbsp;&nbsp;
+								<label style="color: red;">To Date:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>&nbsp;<input type="text" id="aadhaarcampvar2" name="aadhaarcampvar2" maxlength="30">
+								<br><br>
+								<input type="hidden" id="aadhaarcampvar3" name="aadhaarcamp3" maxlength="30">
+								<input type="hidden" id="aadhaarcampvar4" name="aadhaarcamp4" maxlength="30">
     							</div>
 							
 							</td>
@@ -855,7 +867,6 @@ for(Cookie cookie : cookies){
 								<input type="hidden" id="feesremindernumbervar3" name="feesremindernumbervar3" maxlength="30">
 								<input type="hidden" id="feesremindernumbervar4" name="feesremindernumbervar4" maxlength="30">
     							</div>
-							
 							</td>
 							
 						</tr>

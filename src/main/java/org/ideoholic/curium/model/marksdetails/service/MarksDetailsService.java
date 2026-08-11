@@ -2898,23 +2898,28 @@ public void getStartDate() {
 					Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			Collections.sort(listExamRank);
 	
-			// Assign ranks
-	
-			for (int i1 = 0; i1 < listExamRank.size(); i1++) {
-	
-				if (i1 > 0) {
-					float currentMarks = listExamRank.get(i1).getMarksobtained();
-					float previousMarks = listExamRank.get(i1 - 1).getMarksobtained();
-					if (currentMarks != previousMarks) {
-						rank++;
-					}
+		// Assign ranks
+
+		for (int i1 = 0; i1 < listExamRank.size(); i1++) {
+
+			if (i1 > 0) {
+				float currentMarks = listExamRank.get(i1).getMarksobtained();
+				float previousMarks = listExamRank.get(i1 - 1).getMarksobtained();
+				// Round to 2 decimal places before comparing so that e.g. 480.504 and
+				// 480.506 are treated as the same mark; avoids float == / != pitfalls.
+				// rank = i1 + 1 implements competition (skip) ranking: 1-1-3-4-5.
+				long currentRounded  = Math.round(currentMarks  * 100);
+				long previousRounded = Math.round(previousMarks * 100);
+				if (currentRounded != previousRounded) {
+					rank = i1 + 1;
 				}
-	
-				listExamRank.get(i1).setRank(rank);
 			}
-	
-			if (new MarksDetailsDAO().updateExamRank(listExamRank))
-				result = true;
+
+			listExamRank.get(i1).setRank(rank);
+		}
+
+		if (new MarksDetailsDAO().updateExamRank(listExamRank))
+			result = true;
 	
 			/* } */
 	

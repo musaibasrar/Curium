@@ -248,7 +248,7 @@
 						value="${recieptdate}" />
 				</td>
 				
-				<td></td>
+				<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;Adm. No:&nbsp;<c:out value="${student.admissionnumber}" />	</td>
 			</tr>
 
 			<tr>

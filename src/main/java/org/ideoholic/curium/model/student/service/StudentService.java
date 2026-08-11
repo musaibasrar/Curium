@@ -1781,7 +1781,7 @@ public class StudentService {
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
 			Map<String, Object[]> headerData = new HashMap<String, Object[]>();
 			headerData.put("Header",
-					new Object[] { "Admission No.","STS","UID", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
+					new Object[] { "Admission No.","STS","UID","PEN", "Apaar Id", "Student Name", "Gender", "Date Of Birth", "Age", "Studying In Class",
 							"Admitted In Class", "Admission Date","Admission Year", "Promoted Year", "Blood Group", "Religion", "Student Aadhar Card",
 							"Caste", "Fathers Name", "Mothers Name","Contact No.", "Archive", "Graduated", "Left Out", "Dropped Out"});
 			int i = 1;
@@ -1790,6 +1790,8 @@ public class StudentService {
 						new Object[] { DataUtil.emptyString(studentDetails.getStudent().getAdmissionnumber()),
 								DataUtil.emptyString(studentDetails.getStudent().getSts()),
 								DataUtil.emptyString(studentDetails.getStudent().getStudentexternalid()),
+								DataUtil.emptyString(studentDetails.getStudent().getAccno()),
+								DataUtil.emptyString(studentDetails.getStudent().getBankifsc()),
 								 DataUtil.emptyString(studentDetails.getStudent().getName()),  DataUtil.emptyString(studentDetails.getStudent().getGender()),
 								 DateUtil.dateParserddMMYYYY(studentDetails.getStudent().getDateofbirth()),
 								 DataUtil.emptyString(Integer.toString(studentDetails.getStudent().getAge())),
@@ -2075,5 +2077,32 @@ public class StudentService {
 		return result;
 	}
 	//end of otherview of student
+
+	public void printStudentDetail() {
+		String[] studentIds = request.getParameterValues("studentIDs");
+	    List<Parents> allStudentList = new ArrayList<Parents>();
+
+	    if (studentIds != null) {
+
+	        for (String id : studentIds) {
+
+	            if (id != null && !id.trim().equals("")) {
+
+	                String queryMain =
+	                    "From Parents as parents where parents.Student.branchid="
+	                    + Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
+	                    + " AND parents.Student.id = "
+	                    + id
+	                    + " order by parents.Student.admissionnumber ASC";
+
+	                List<Parents> searchStudentList =
+	                        new studentDetailsDAO().getStudentsList(queryMain);
+
+	                allStudentList.addAll(searchStudentList);
+	            }
+	        }
+	    }
+		request.setAttribute("searchStudentList", allStudentList);
+	}
 	
 }

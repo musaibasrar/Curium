@@ -255,7 +255,7 @@ for(Cookie cookie : cookies){
 						                <td style="width: 70%; text-align: center; vertical-align: top; padding: 0; border: none;">
 						                    
 						                    <label style="font-size: 20px; font-weight: bold; text-transform: uppercase; display: block; margin-bottom: 5px;">
-						                        ${branchname},Gaya
+						                        ${branchname},Gaya Ji
 						                    </label>
 						                    
 						                    <label style="font-size: 12px; display: block;">A Senior Secondary School</label>
@@ -276,9 +276,9 @@ for(Cookie cookie : cookies){
 					
 					<tr>
 						<td  style="font-family: bold;background-color: #b5ffe6;">
-						<c:set var="dataSubParts" value="${fn:split(currentAcademicYear,'/')}" />
-						<%-- Academic Year: ${dataSubParts[0]}-${dataSubParts[1]} --%>
-						Academic Year: ${academicyear}<br>
+						<c:set var="dataSubParts" value="${fn:split(academicyear,'/')}" />
+						Academic Year: ${dataSubParts[0]}-${dataSubParts[1]}
+						<%-- Academic Year: ${academicyear} --%><br>
 						REPORT CARD						
 						</td>
 					</tr>
@@ -289,8 +289,8 @@ for(Cookie cookie : cookies){
 				        <td style="width: 15%; text-align: left; padding: 4px; border-right: 1px solid black; font-weight: bold; vertical-align: top;">
 				            <div style="margin-bottom: 3px;">Scholar No.</div>
 				            <div style="margin-bottom: 3px;">Name</div>
-				            <div style="margin-bottom: 3px;">Father Name</div>
-				            <div style="margin-bottom: 3px;">Mother Name</div>
+				            <div style="margin-bottom: 3px;">Father's Name</div>
+				            <div style="margin-bottom: 3px;">Mother's Name</div>
 				        </td>
 				        
 				        <td style="width: 25%; text-align: left; padding: 4px; border-right: 1px solid black; vertical-align: top;">
@@ -313,7 +313,26 @@ for(Cookie cookie : cookies){
 				            <div style="margin-bottom: 3px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></div>
 				            
 				            <div style="margin-bottom: 3px; font-size: 12px; line-height: 1.2;">
-				                Total Days: ${Parents.totalDays} | Present: ${Parents.totalPresent} | Absent: ${Parents.totalAbsent}
+				             <c:set var="classsec" value="${fn:split(Parents.parents.student.classstudying, '--')}" />
+				            	<c:set var="totalDays" value="69" />
+							
+							<c:choose>
+							    <c:when test="${classsec[0] == 'VI' || classsec[0] == 'VII' || classsec[0] == 'VIII'}">
+							        <c:set var="totalDays" value="69"/>
+							    </c:when>
+							
+							    <c:when test="${classsec[0] == 'IX' || classsec[0] == 'X'}">
+							        <c:set var="totalDays" value="78"/>
+							    </c:when>
+							</c:choose>
+							
+							<div style="margin-bottom: 3px; font-size: 12px; line-height: 1.2;">
+							    <%-- Total Days: ${totalDays} | Present: ${Parents.parents.student.degreedetails.exampassedappearance} |
+							    Absent: ${totalDays - Parents.parents.student.degreedetails.exampassedappearance} --%>
+							    Total Days: ${totalDays} | Present: ${Parents.parents.student.bankname} |
+							    Absent: ${totalDays - Parents.parents.student.bankname} 
+							</div>
+				               <%-- original  Total Days: ${Parents.totalDays} | Present: ${Parents.totalPresent} | Absent: ${Parents.totalAbsent} --%>
 				            </div>
 				        </td>
 				        
@@ -388,17 +407,27 @@ for(Cookie cookie : cookies){
                             					<td style="border: 1px solid black;text-align: left;">
                             					<fmt:formatNumber type = "number" maxFractionDigits = "1" value = "${exammarks.percentage}" /></td>
 	                                		</tr>	
-	                                		<tr style="border: 1px solid black;">
+	                                		<%-- <tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Grade</td>
                             					<td style="border: 1px solid black;text-align: left;">${exammarks.resultclass}</td>
-	                                		</tr>  
+	                                		</tr>   --%>
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Rank</td>
                             					<td style="border: 1px solid black;text-align: left;">${exammarks.rank}</td>
 	                                		</tr> 
 	                                		<tr style="border: 1px solid black;">
                             					<td style="border: 1px solid black;text-align: left;">Remarks</td>
-                            					<td style="border: 1px solid black;text-align: left;"></td>
+                            					<td style="border: 1px solid black;text-align: left;">
+                            					<c:choose>
+                            						<c:when test="${exammarks.percentage > 91 or exammarks.percentage == 91}">Outstanding</c:when>
+                            						<c:when test="${exammarks.percentage > 81 or exammarks.percentage == 81}">Excellent</c:when>
+                            						<c:when test="${exammarks.percentage > 71 or exammarks.percentage == 71}">Very Good</c:when>
+                            						<c:when test="${exammarks.percentage > 61 or exammarks.percentage == 61}">Good</c:when>
+                            						<c:when test="${exammarks.percentage > 51 or exammarks.percentage == 51}">Satisfactory</c:when>
+                            						<c:when test="${exammarks.percentage > 33 or exammarks.percentage == 33}">Need Improvement</c:when>
+                            						<c:otherwise>Failed</c:otherwise>
+                            					</c:choose>
+                            					</td>
 	                                		</tr>                                                           	
 	                                	</table>
                                 </td>
@@ -459,19 +488,27 @@ for(Cookie cookie : cookies){
                             
                             
                             <TABLE id="dataTable" width="100%" border="0"
-			style="page-break-inside:avoid; border-collapse: collapse;">
+       style="page-break-inside: avoid; border-collapse: collapse;">
 
-						<tr>
-							<td><br></td>
-						</tr>
-				<tr>
-					<td></td>
-					<td align="left">Class Teacher</td>	
-					<td align="centre">Principal</td>
-					<td align="centre">Parent</td>
-				</tr>
-                    
-		</TABLE>
+    <tr>
+        <td colspan="3"><br><br><br></td>
+    </tr>
+
+    <tr>
+        <td align="center" width="33%">
+            Class Teacher
+        </td>
+
+        <td align="center" width="34%">
+            Principal
+        </td>
+
+        <td align="center" width="33%">
+            Parent
+        </td>
+    </tr>
+
+</TABLE>
 		</div>
 		<br><br><br>
                                  

@@ -354,25 +354,29 @@ for(Cookie cookie : cookies){
 				        
 				        <td style="width: 35%; text-align: left; padding: 4px; border-right: 1px solid black; vertical-align: top;">
 				            <div style="margin-bottom: 3px;">${Parents.parents.student.sts}</div>
-				            <div style="margin-bottom: 3px;">${Parents.parents.student.classstudying}</div>
+				            <div style="margin-bottom: 3px;"><%-- ${Parents.parents.student.classstudying} --%>
+				            ${examclass}
+				            </div>
 				            <div style="margin-bottom: 3px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></div>
 				             <c:set var="classsec" value="${fn:split(Parents.parents.student.classstudying, '--')}" />
 
-							<c:set var="totalDays" value="217" />
+							<c:set var="totalDays" value="69" />
 							
 							<c:choose>
 							    <c:when test="${classsec[0] == 'VI' || classsec[0] == 'VII' || classsec[0] == 'VIII'}">
-							        <c:set var="totalDays" value="224"/>
+							        <c:set var="totalDays" value="69"/>
 							    </c:when>
 							
 							    <c:when test="${classsec[0] == 'IX' || classsec[0] == 'X'}">
-							        <c:set var="totalDays" value="232"/>
+							        <c:set var="totalDays" value="78"/>
 							    </c:when>
 							</c:choose>
 							
 							<div style="margin-bottom: 3px; font-size: 12px; line-height: 1.2;">
-							    Total Days: ${totalDays} | Present: ${Parents.parents.student.degreedetails.exampassedappearance} |
-							    Absent: ${totalDays - Parents.parents.student.degreedetails.exampassedappearance}
+							    <%-- Total Days: ${totalDays} | Present: ${Parents.parents.student.degreedetails.exampassedappearance} |
+							    Absent: ${totalDays - Parents.parents.student.degreedetails.exampassedappearance} --%>
+							    Total Days: ${totalDays} | Present: ${Parents.parents.student.bankname} |
+							    Absent: ${totalDays - Parents.parents.student.bankname} 
 							</div>
 				        </td>
 				        

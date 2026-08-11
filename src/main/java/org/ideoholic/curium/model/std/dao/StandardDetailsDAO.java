@@ -329,7 +329,7 @@ public class StandardDetailsDAO {
 			transaction = session.beginTransaction();
 			Query query = session.createQuery("From Classhierarchy where lowerclass = '"+classStudying+"' and branchid="+branchId+"");
 			classhierarchy = (Classhierarchy) query.uniqueResult();
-			query.executeUpdate();
+			//query.executeUpdate();
 			  transaction.commit();
 	    } catch (Exception hibernateException) {transaction.rollback();
 	            hibernateException.printStackTrace();

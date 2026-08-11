@@ -341,6 +341,10 @@
                     navigation: true,
                     active: false,
                     autoHeight: false});
+                $(".accordion4").accordion({
+                    collapsible: true,
+                    active: false,
+                    autoHeight: false});
                 /*$("#set")
                 .button()
                 .click(function() {
@@ -730,7 +734,7 @@ for(Cookie cookie : cookies){
     </div>
     
     
-    <div class="accordion" style="width: 100%;height: 100%">
+    <div class="accordion4" style="width: 100%;height: 100%">
 		
                 <h3><a href="#">Documents</a></h3>
                 <div>

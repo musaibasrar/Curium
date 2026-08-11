@@ -785,7 +785,7 @@ $(document).ready(function() {
 						<tr>
 							<td class="alignLeft">P.E.N. No. &nbsp;</td>
 							<td ><label> <input name="penno" 
-									type="text" class="myclass" id="admnno" size="36"
+									type="text" class="myclass" id="penno" size="36"
 									style=" text-transform: capitalize;">
 
 							</label></td>
@@ -793,7 +793,7 @@ $(document).ready(function() {
 									<td ><label> <input
 											name="apaar" type="text" class="myclass" size="36"
 											style="text-transform:capitalize;"
-											id="sts" size="36">
+											id="apaar" size="36">
 
 									</label></td>
 						</tr>
