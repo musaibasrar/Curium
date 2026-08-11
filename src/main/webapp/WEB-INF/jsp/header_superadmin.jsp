@@ -194,8 +194,8 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/patriswamy/UserProcess/dashBoard"><img
-									alt="Dash Board" src="/patriswamy/images/dashboard.svg" width="18"
+                href="/vision/UserProcess/superDashboard"><img
+									alt="Dash Board" src="/vision/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
 									</a></td>
