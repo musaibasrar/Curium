@@ -291,7 +291,16 @@ public class DocumentActionAdapter {
 		request.setAttribute("fromyear", request.getParameter("fromyear"));
 		request.setAttribute("toyear", request.getParameter("toyear"));
 		request.setAttribute("nameofprincipal", request.getParameter("nameofprincipal"));
-		
+	}
+
+	public void multiClassSearchRegistrationReport() {
+		StudentNameSearchDto studentNameSearchDto = new StudentNameSearchDto();
+		studentNameSearchDto.setNameSearch(request.getParameter("namesearch"));
+		studentNameSearchDto.setClassSearch(request.getParameterValues("classsearch"));
+		studentNameSearchDto.setYearOfAdmission(request.getParameter("yearofadmission"));
+		SearchStudentResponseDto searchStudentResponseDto = documentService.multiClassSearchRegistrationReport(
+				studentNameSearchDto, httpSession.getAttribute(Constants.BRANCHID).toString());
+		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
 }

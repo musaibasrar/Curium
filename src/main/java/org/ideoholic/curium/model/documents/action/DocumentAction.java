@@ -296,5 +296,17 @@ public class DocumentAction {
 			documentActionAdapter.printAdmissionAbstract();
 			return "printpreviewabstractsinglepage";
 		}
+	  
+	  @GetMapping("/studentsRegistrationReports")
+		public String studentsRegistrationReports() {
+		  standardActionAdapter.viewClasses(); 
+			return "studentsregistrationreport";
+		}
+	  
+	  @PostMapping("/multiClassSearchRegistrationReport")
+		public String multiClassSearchRegistrationReport() {
+		  documentActionAdapter.multiClassSearchRegistrationReport(); 
+			return "studentsregistrationreport";
+		}
 	 
 }
