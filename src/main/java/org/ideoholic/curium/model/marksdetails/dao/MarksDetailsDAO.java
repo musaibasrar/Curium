@@ -205,7 +205,7 @@ public class MarksDetailsDAO {
 					if(results==null) {
 						session.save(examrank);	
 					}else {
-						Query queryUpdate = session.createSQLQuery("update examrank set marksobtained="+examrank.getMarksobtained()+" where id = "+examrank.getId()+"");
+						Query queryUpdate = session.createSQLQuery("update examrank set marksobtained="+examrank.getMarksobtained()+" where id = "+results.getId()+"");
 						queryUpdate.executeUpdate();
 					}
 					
