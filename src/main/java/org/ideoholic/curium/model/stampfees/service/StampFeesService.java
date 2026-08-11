@@ -625,4 +625,39 @@ public class StampFeesService {
 
 	}
 
+	
+	public void printStudentDetail() {
+
+	    String[] studentIds = request.getParameterValues("studentIDs");
+
+	    List<Parents> allStudentList = new ArrayList<Parents>();
+
+	    if (studentIds != null) {
+
+	        for (String id : studentIds) {
+
+	            if (id != null && !id.trim().equals("")) {
+
+	                String queryMain =
+	                    "From Parents as parents where parents.Student.branchid="
+	                    + Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())
+	                    + " AND parents.Student.id = "
+	                    + id
+	                    + " order by parents.Student.admissionnumber ASC";
+
+	                List<Parents> searchStudentList =
+	                        new studentDetailsDAO().getStudentsList(queryMain);
+
+	                // Add all students into one common list
+	                allStudentList.addAll(searchStudentList);
+	            }
+	        }
+	    }
+
+	    // Set attribute only once
+	    request.setAttribute("searchStudentList", allStudentList);
+	}
+
+	
+
 }

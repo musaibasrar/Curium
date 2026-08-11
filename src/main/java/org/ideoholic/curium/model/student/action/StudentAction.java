@@ -278,7 +278,7 @@ public class StudentAction {
 	
 	@PostMapping("/printStudentDetail")
 	public String printStudentDetail() {
-		new StudentService(request, response).printStudentDetail();
+		new StampFeesService(request, response).printStudentDetail();
 		return "printstudentdetail";
 	}
 

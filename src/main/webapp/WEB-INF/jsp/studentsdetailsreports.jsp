@@ -364,6 +364,24 @@
 
 <script type="text/javascript" src="/shatabdi/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
+function printStudentDetail() {
+	var form1 = document.getElementById("form1");
+	form1.action = "/shatabdi/StudentProcess/printStudentDetail";
+	form1.method = "POST";
+	form1.submit();
+
+}
+
+$(function() {
+
+	$("#print").button().click(function() {
+		printStudentDetail();
+	});
+	
+
+});
+</script>
+<script type="text/javascript">
 	function searchForStudents() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/shatabdi/StudentProcess/multiClassSearch";
@@ -736,8 +754,8 @@ for(Cookie cookie : cookies){
 						
 						<input value="Export"
 							type="submit" id="export"/>
-							<input value="Print"
-							type="submit" id="print"/></td>
+						<input value="Print"
+							type="submit" id="print"/>	</td>
 							
 							
 
