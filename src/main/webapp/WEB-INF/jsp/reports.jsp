@@ -500,7 +500,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/vision/RatingDetailsProcess/progressReport" style="font-size: 12px;">Assessment Progress Report</a>
+            				 <a target="mainFrame" href="/patriswamy/RatingDetailsProcess/progressReport" style="font-size: 12px;">Assessment Progress Report</a>
             			</td>
             		</tr>
                 </table>

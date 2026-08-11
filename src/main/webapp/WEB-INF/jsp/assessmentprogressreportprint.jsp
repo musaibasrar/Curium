@@ -203,7 +203,7 @@ body {
     }
 }
 </style>
-<script src="/vision/js/Chart.min.js"></script>
+<script src="/patriswamy/js/Chart.min.js"></script>
 <script type="text/javascript">
 function printReport() {
     window.print();
@@ -231,7 +231,7 @@ function printReport() {
 <c:forEach items="${studentReportCards}" var="card" varStatus="reportStatus">
     <div class="report-page">
         <div class="school-header">
-            <img border="0" class="school-logo" alt="logo" src="/vision/images/vision.png">
+            <img border="0" class="school-logo" alt="logo" src="/patriswamy/images/patriswamy.png">
             <div class="school-info-block">
                 <h3 class="school-name">
                     <c:out value="${branchname}" />
