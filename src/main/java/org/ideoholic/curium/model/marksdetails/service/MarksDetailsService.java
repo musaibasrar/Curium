@@ -483,7 +483,7 @@ public class MarksDetailsService {
 		result.setNewMarksDetails(newMarksDetails);
 		result.setSubjectSelected(dto.getSubjectSelected());
 		result.setExamSelected(dto.getExamSelected());
-		result.setSubject(dto.getSubject());
+		result.setSubject(Integer.toString(subjectDetailsId));
 		result.setExam(exam);
 		result.setSuccess(true);
 		/*
