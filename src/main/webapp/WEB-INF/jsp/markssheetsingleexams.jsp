@@ -42,62 +42,79 @@ private String examNameOf(Object examSummary) {
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
 <script src="/patriswamy/js/echarts/echarts.min.js"></script>
 <style>
+@page {
+	size: A4 portrait;
+	margin: 8mm;
+}
+
 body {
 	font-family: "Times New Roman", Times, serif;
 	background: #f5f5f5;
+	margin: 0;
+	padding: 0;
+}
+
+.card-wrapper {
+	box-sizing: border-box;
+	page-break-inside: avoid;
+	margin-bottom: 10px;
+}
+
+.card-wrapper.page-break {
+	page-break-after: always;
+	margin-bottom: 0;
 }
 
 .container {
-	width: 800px;
+	width: 100%;
+	max-width: 780px;
 	margin: auto;
 	background: white;
-	border: 5px solid #2c8a6b;
-	padding: 10px;
+	border: 3px solid #2c8a6b;
+	padding: 6px;
 	border-style: double;
+	box-sizing: border-box;
 }
 
-/* .header {
-	border-bottom: 1px solid #000;
-} */
-
 .topline {
-	font-size: 12px;
+	font-size: 10px;
 	display: flex;
 	justify-content: space-between;
+}
+
+.header {
+	margin-bottom: 4px;
 }
 
 .schoolbox {
 	display: flex;
 	align-items: center;
-	margin-top: 5px;
-	/*height:100px;*/
+	justify-content: center;
+	gap: 12px;
+	margin-top: 2px;
 }
 
-.logo {
-	width: 90px;
-	height: 95px;
-	/* border: 2px solid #538261; */
+.logo-img {
+	height: 50px;
+	width: auto;
 }
 
 .schoolname {
 	background: #ffffff;
-	flex: 1;
 	text-align: center;
-	/* height: 40px; */
-	/* padding-top: 5px; */
-	/* border: 1px solid #000; */
+}
+
+.logo {
+	width: 60px;
+	height: 65px;
 }
 
 .studentphoto {
-	width: 110px;
+	width: 75px;
 	text-align: right;
 }
 
-.schoolname h2 {
-	margin: 0;
-}
-
-.schoolname h3 {
+.schoolname h2, .schoolname h3 {
 	margin: 0;
 }
 
@@ -106,21 +123,19 @@ body {
 }
 
 .title h2 {
-	border: 2px solid black;
+	border: 1.5px solid black;
 	display: inline-block;
-	padding: 5px 20px;
-	border-radius: 10px; 
-	font-size: 25px;
-	margin-bottom: 10px;
-	margin-top: 10px;
-  	outline: 2px solid black;       /* outer border */
-  	outline-offset: 6px;            /* gap between borders */
-
-  	border-radius: 10px;
+	padding: 2px 10px;
+	border-radius: 6px; 
+	font-size: 16px;
+	margin-bottom: 4px;
+	margin-top: 4px;
+  	outline: 1.5px solid black;
+  	outline-offset: 3px;
 }
 
 .studentinfo {
-	margin-top: 10px;
+	margin-top: 4px;
 }
 
 .studentinfo table {
@@ -129,12 +144,12 @@ body {
 }
 
 .studentinfo td {
-	padding: 5px;
-	font-size: 14px;
+	padding: 2px 4px;
+	font-size: 11px;
 }
 
 .marks {
-	margin-top: 10px;
+	margin-top: 4px;
 }
 
 .marks table {
@@ -145,35 +160,36 @@ body {
 .marks th, .marks td {
 	border: 1px solid #000;
 	text-align: center;
-	padding: 6px;
-	font-size: 19px;
+	padding: 3px;
+	font-size: 11px;
 }
 
 .totalbox {
-	margin-top: 50px;
+	margin-top: 8px;
 	display: flex;
 	justify-content: space-between;
 }
 
 .words {
 	border: 1px solid #000;
-	padding: 8px;
+	padding: 4px 6px;
 	width: 70%;
 	background: #f4d5a6;
-	border-radius: 5px;
+	border-radius: 4px;
 	text-transform: uppercase;
-	font-size: 14px;
+	font-size: 10px;
 }
 
 .percentage {
 	border: 1px solid #000;
-	padding: 8px;
+	padding: 4px 6px;
 	width: 25%;
 	background: #e3a83d;
 	text-align: center;
 	font-weight: bold;
-	border-radius: 5px;
+	border-radius: 4px;
 	text-transform: uppercase;
+	font-size: 10px;
 }
 
 .partb {
@@ -187,14 +203,14 @@ body {
 
 .partb th, .partb td {
 	border: 1px solid #000;
-	padding: 6px;
-	font-size: 12px;
+	padding: 3px;
+	font-size: 10px;
 	text-align: center;
 }
 
 .footer {
     text-align: right;
-    margin-top: 20px;
+    margin-top: 10px;
     font-weight: bold;
     color: blue;
 }
@@ -202,68 +218,98 @@ body {
 .signature {
     display: block;
     margin-left: auto;
-    margin-bottom: -10px;
+    margin-bottom: -5px;
 }
 
 .headmaster {
-    padding-right: 90px;  /* 👈 required spacing */
+    padding-right: 60px;
 }
 
 .school-info {
     font-weight: 700;
-    font-size: 11px;
+    font-size: 9px;
 }
+
 .printbtn {
 	text-align: center;
-	margin-top: 20px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 .cce {
 	font-family: "Alex Brush", cursive;
-	font-size: 22px;
+	font-size: 16px;
 	color: #1975d0;
 	font-weight: bold;
 }
 
 .certifyline {
 	text-align: center;
-	font-size: 14px;
-	margin-top: 5px;
-	margin-bottom: 8px;
+	font-size: 11px;
+	margin-top: 3px;
+	margin-bottom: 4px;
 	font-style: italic;
-	padding-left:0px;
-	padding-right:0px;
+	padding-left: 0px;
+	padding-right: 0px;
 }
-
 
 .marksTableHeader {
 	background-color: #f2f2f2;
 	font-weight: bold;
 	border: 1px solid black;
-	padding: 8px;
+	padding: 4px;
 	text-align: center;
+	font-size: 11px;
 }
 
 .marksTableCell {
 	border: 1px solid black;
-	padding: 8px;
+	padding: 3px 4px;
 	text-align: center;
 	font-weight: bold;
+	font-size: 11px;
 }
 
 .marksTableCellLeft {
 	border: 1px solid black;
-	padding: 8px;
+	padding: 3px 4px;
 	text-align: left;
 	font-weight: bold;
+	font-size: 11px;
 }
 
 .summaryTableHeader {
 	background-color: #f9f9f9;
 	font-weight: bold;
 	border: 1px solid black;
-	padding: 8px;
+	padding: 4px;
 	text-align: left;
+	font-size: 11px;
+}
+
+.flex-row-container {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.marks-left-column {
+    flex: 1;
+}
+
+.graph-right-column {
+    width: 220px;
+    flex-shrink: 0;
+}
+
+.sig-table td {
+	border: 1px solid #000;
+	padding: 20px 5px 5px 5px;
+	text-align: center;
+	width: 33.33%;
+	font-weight: bold;
+	font-size: 11px;
 }
 
 @media print {
@@ -273,22 +319,10 @@ body {
 	body {
 		background: white;
 	}
+	.container {
+		border-width: 2px;
+	}
 }
-
-.flex-row-container {
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-.marks-left-column {
-    flex: 1;
-}
-.graph-right-column {
-    width: 300px;
-    flex-shrink: 0;
-}
-
 </style>
 
 <script type="text/javascript">
@@ -346,13 +380,9 @@ body {
         }
 
         window.onload = function () {
-            // Get ALL amount and words elements
             let amounts = document.querySelectorAll(".amount");
             let wordsCells = document.querySelectorAll(".amountWords");
 
-            console.log("Processing " + amounts.length + " amounts...");
-
-            // Loop through each pair
             for (let i = 0; i < amounts.length && i < wordsCells.length; i++) {
                 let value = amounts[i].innerText.trim();
                 
@@ -361,16 +391,13 @@ body {
                         let intValue = Math.floor(Number(value));
                         let words = convertNumberToWords(intValue);
                         wordsCells[i].innerText = words + "";
-                        console.log("[" + i + "] " + intValue + " → " + words);
                     } catch (e) {
-                        console.error("Error at index " + i + ": " + value);
                         wordsCells[i].innerText = "Error";
                     }
                 }
             }
         };
-    </script>
-
+</script>
 
 </head>
 
@@ -409,164 +436,66 @@ body {
 	pageContext.setAttribute("sortedExamSummaries", sortedExamSummaries);
 	%>
 		
-	<div style="page-break-inside: avoid;">   
+	<div class="card-wrapper ${studentStatus.index % 2 == 1 ? 'page-break' : ''}">   
 
 	<div class="container">
 
 		<div class="header">
-
-			<!-- <div class="topline">
-				<div>
-					<b>SCHOOL DISE CODE : 29050505406</b>
-				</div>
-				<div>
-					<b style="color: green"><label style="font-size:12px;text-transform: uppercase;">Educational Trust®</label></b>
-				</div>
-				<div>
-					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
-				</div>
-			</div> -->
-			
-			<div class="schoolbox">
-			
-				<div class="schoolname">
-					<img border="0" style="vertical-align: text-bottom;height: 97px;width: 70px;" alt="ideoholic" src="/patriswamy/images/patriswamy.png">
-				</div>
-		
+	<div class="schoolbox">
+		<img border="0" class="logo-img" alt="logo" src="/patriswamy/images/patriswamy.png">
+		<div class="schoolname">
+			<h3 style="font-size: 24px;color: #971d1d;">${branchname}</h3>
+			<div>
+				<b><label style="font-size:12px;text-transform: uppercase;">${branchaddress}</label></b>
 			</div>
-
-			<div class="schoolbox">
-			
-				<div class="schoolname">
-					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
-					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/patriswamy/images/patriswamyschoolname.png"> -->
-					<div>
-						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
-					</div>
-				</div>
-
-			</div>
-
 		</div>
-
+	</div>
+</div>
 
 		<div class="title">
-			<h2><label style="font-size:29px;text-transform: uppercase;">Achievement Record</label></h2>
-			<div style="font-size: 21px;font-weight:bold;">
+			<h2><label style="font-size:16px;text-transform: uppercase;">Achievement Record</label></h2>
+			<div style="font-size: 13px;font-weight:bold;">
 			<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}" />
 			<c:set var="startYear" value="${yearParts[0]}" />
 			<c:set var="endYear" value="${startYear + 1}" />
 
 			Academic Year ${startYear}-${endYear}</div>
-			
-			<%-- <c:choose>
-			<c:when test="${fn:length(Parents.examSummaries) == 6}">
-					<div class="cce" style="font-size: 27px;">Continuous And
-				Comprehensive Evaluation</div>
-			<div class="certifyline" style="font-size: 16px;font-weight:bold;">
-				This is to certify that the below mentioned candidate has passed <b>
-				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
-						<c:choose>
-						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
-						    <c:when test="${dataSubParts[0] == '1'}"><label >1<sup>st</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '2'}"><label>2<sup>nd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '3'}"><label>3<sup>rd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '4'}"><label>4<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '5'}"><label>5<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '6'}"><label>6<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '7'}"><label>7<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '8'}"><label>8<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '9'}"><label>9<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '10'}"><label>10<sup>th</sup> Std.</label></c:when>
-						</c:choose>
-				</b> Examination with the following details.
-			</div>
-			</c:when>
-			
-			<c:otherwise>
-				<div class="cce" style="font-size: 27px;">Continuous And Comprehensive Evaluation</div>
-			</c:otherwise>
-			
-			</c:choose> --%>
-			
 		</div>
-
 
 		<div class="studentinfo">
-
 			<table>
-
 				<tr style="border: 1px solid black; border-collapse: collapse;">
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>SATS
-							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :<c:out value="${Parents.parents.student.admissionnumber}" />
-					&nbsp;&nbsp;&nbsp;</b></td>
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
-							: <%-- ${Parents.parents.student.classstudying} --%><c:set var="dataSubParts11" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts11[0]}
-						<%-- <c:choose>
-						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
-						    <c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
-						    <c:when test="${dataSubParts[0] == '1'}"><label >1<sup>st</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '2'}"><label>2<sup>nd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '3'}"><label>3<sup>rd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '4'}"><label>4<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '5'}"><label>5<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '6'}"><label>6<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '7'}"><label>7<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '8'}"><label>8<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '9'}"><label>9<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '10'}"><label>10<sup>th</sup> Std.</label></c:when>
-						</c:choose> --%>
-					</b></td>
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Section :
-							 <c:set var="dataSubParts112" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts112[1]}<%-- <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/> --%></b></td>
-					<%-- <td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
-							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td> --%>
+					<td style="border: 1px solid black; border-collapse: collapse; font-size: 11px;"><b>SATS No : <c:out value="${Parents.parents.student.sts}" /></b></td>
+					<td style="border: 1px solid black; border-collapse: collapse; font-size: 11px;"><b>Roll No : <c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
+					<td style="border: 1px solid black; border-collapse: collapse; font-size: 11px;"><b>Class : <c:set var="dataSubParts11" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts11[0]}</b></td>
+					<td style="border: 1px solid black; border-collapse: collapse; font-size: 11px;"><b>Section : <c:set var="dataSubParts112" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts112[1]}</b></td>
 				</tr>
 				<tr>
-					<br>
+					<td colspan="3" style="font-size: 12px; padding-top: 4px;"><b>Student's Name : <label style="text-transform: uppercase;"><c:out value="${Parents.parents.student.name}" /></label></b></td>
+					<td rowspan="3" align="center">
+						<div class="studentphoto">
+							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="70" height="70">
+						</div>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Student's Name :
-						<label style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.student.name}" /></label></b></td>
-					<td rowspan="3" align="center"><div class="studentphoto">
-							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="120" height="120">
-						</div></td>
+					<td colspan="3" style="font-size: 12px;"><b>Father's Name : <label style="text-transform: uppercase;"><c:out value="${Parents.parents.fathersname}" /></label></b></td>
 				</tr>
-
 				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Father's Name :
-						<label style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.fathersname}" /></label></b></td>
+					<td colspan="3" style="font-size: 12px;"><b>Mother's Name : <label style="text-transform: uppercase;"><c:out value="${Parents.parents.mothersname}" /></label></b></td>
 				</tr>
-
-				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Mother's Name :<label
-						style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.mothersname}" /></label></b></td>
-				</tr>
-
 			</table>
-
 		</div>
 
- 		<!-- NEW FLEX CONTAINER WRAPPER -->
+ 		<!-- FLEX CONTAINER WRAPPER -->
         <div class="flex-row-container">
         <div class="marks-left-column">
 		<div class="marks">
 		<c:choose>
 
-			<%-- NEW: 2 or more exams -> simple transposed table (subjects as rows, exams as columns) --%>
+			<%-- 2 or more exams -> dynamic transposed table --%>
 			<c:when test="${fn:length(Parents.examSummaries) > 1}">
 
-			<%-- Totals from backend examSummaries so totalbox + amount-in-words keep working --%>
 			<c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
 			<c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
 			<c:forEach items="${sortedExamSummaries}" var="examSummaryTotal">
@@ -586,11 +515,10 @@ body {
 				<fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" />
 			</c:set>
 
-			<table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+			<table style="border-collapse: collapse; width: 100%; margin-top: 8px;">
 				<thead>
 					<tr>
 						<th class="marksTableHeader" style="text-align: center; width: 20%; text-transform: uppercase;">Exams</th>
-						<%-- Subject columns come dynamically from subjectExamMarks (already excludes excludedsubjectids) --%>
 						<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
 							<th class="marksTableHeader" style="text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></th>
 						</c:forEach>
@@ -598,7 +526,6 @@ body {
 					</tr>
 				</thead>
 				<tbody>
-					<%-- One row per exam --%>
 						<c:forEach items="${sortedExamSummaries}" var="exam">
 						<tr>
 							<td class="marksTableCellLeft" style="width: 20%; text-transform: uppercase;"><c:out value="${exam.examName}" /></td>
@@ -617,7 +544,6 @@ body {
 												<c:when test="${secured == null || secured == '' || secured == 'AB'}"><c:out value="${secured}" /></c:when>
 												<c:otherwise>
 													<c:out value="${secured}" />
-													<%-- Only numeric marks contribute to the row total (excluded subjects already absent) --%>
 													<c:set var="examRowTotal" value="${examRowTotal + secured}" />
 												</c:otherwise>
 											</c:choose>
@@ -634,27 +560,20 @@ body {
 				</tbody>
 			</table>
 
-			<%-- Hidden element consumed by the amount-in-words script --%>
 			<span class="amount" style="display: none;">${roundedMarks}</span>
 
 		</c:when>
 
-		<%-- EXISTING logic below is unchanged --%>
+		<%-- Standard 1-exam layout --%>
 		<c:otherwise>
 			 <c:choose>
-						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
-						        	<h4	style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART-A</h4>
-						        </c:when>
-						        
-						        <c:otherwise>
-						        	
-						        </c:otherwise>
-						        
-						        </c:choose>
+		        <c:when test="${fn:length(Parents.examSummaries) == 6}">
+		        	<h4 style="text-align: center; margin: 2px 0;">PART-A</h4>
+		        </c:when>
+		     </c:choose>
 			
-						<table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+						<table style="border-collapse: collapse; width: 100%; margin-top: 8px;">
 						    <thead>
-						    
 						    <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<tr>
@@ -678,35 +597,27 @@ body {
 						
 						        <c:otherwise>
 						        	<tr>
-															        		<c:forEach items="${sortedExamSummaries}" var="exam">
-						                <th class="marksTableHeader" style="text-transform: uppercase;" colspan="5"><c:out value="${exam.examName}" /></th>
-						            </c:forEach>
+										<c:forEach items="${sortedExamSummaries}" var="exam">
+						                	<th class="marksTableHeader" style="text-transform: uppercase;" colspan="5"><c:out value="${exam.examName}" /></th>
+						            	</c:forEach>
 						        	</tr>
 						        	<tr>
-						            <th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> Scholastic Subject</th>
-						            <!-- Subject-wise Summary Headers -->
-						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Obtained Marks</th>
-						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
-						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Percentage</th>
-						            <th class="marksTableHeader" style="text-align: center; width: 10%;">Grade</th>
-						            <!-- <th class="marksTableHeader" style="text-align: center; width: 15%;">Remarks</th> -->
-						        </tr>      
-						            
-						                
+							            <th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> Scholastic Subject</th>
+							            <th class="marksTableHeader" style="text-align: center; width: 12%;">Obtained Marks</th>
+							            <th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
+							            <th class="marksTableHeader" style="text-align: center; width: 12%;">Percentage</th>
+							            <!-- <th class="marksTableHeader" style="text-align: center; width: 10%;">Grade</th> -->
+							        </tr>      
 						        </c:otherwise>
 						      </c:choose>
-						    
-						        
 						    </thead>
 						    <tbody>
-									     <!-- Initialize grand totals -->
 								        <c:set var="grandTotalMarksObtained" value="0" />
 								        <c:set var="grandTotalMaxMarks" value="0" />
 								        <c:set var="englishexam" value="" />
-								        <%-- Use backend exam summaries for final totals so excluded subjects stay excluded in aggregates. --%>
 								        <c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
 								        <c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
-											        <c:forEach items="${sortedExamSummaries}" var="examSummaryTotal">
+										<c:forEach items="${sortedExamSummaries}" var="examSummaryTotal">
 								        	<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
 								        	<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
 								        </c:forEach>
@@ -714,11 +625,10 @@ body {
 						            <tr>
 						                <td class="marksTableCellLeft" style="width: 20%;text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></td>
 						                
-						                <!-- Exam-wise marks calculation -->
 						                <c:set var="subjectTotalMarksObtained" value="0" />
 						                <c:set var="subjectTotalMaxMarks" value="0" />
 						                
-														        <c:forEach items="${sortedExamSummaries}" var="exam">
+										<c:forEach items="${sortedExamSummaries}" var="exam">
 						                    <td class="marksTableCell">
 						                        <c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
 						
@@ -731,7 +641,6 @@ body {
 						                                <c:set var="parts" value="${fn:split(markStr, '/')}" />
 						                                <c:set var="secured" value="${parts[0]}" />
 						                                <c:set var="maxPart" value="${parts[1]}" />
-						                                <!-- Extract max marks (before space or parenthesis) -->
 						                                <c:set var="maxMarks" value="${fn:trim(fn:substringBefore(maxPart, ' '))}" />
 						                                <c:if test="${empty maxMarks}">
 						                                    <c:set var="maxMarks" value="${fn:trim(fn:substringBefore(maxPart, '('))}" />
@@ -740,10 +649,8 @@ body {
 						                                    <c:set var="maxMarks" value="${maxPart}" />
 						                                </c:if>
 						
-															                                <c:choose>
-																					<c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
-																						<%-- Full marks mode bypasses FA/SA conversion and falls through to c:otherwise raw marks rendering. --%>
-						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
+						                                <c:choose>
+															<c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
 						                                                <c:set var="displayMarks" value="${(secured / 20) * 10}" />
@@ -752,7 +659,6 @@ body {
 						                                                <c:set var="subjectTotalMaxMarks" value="${subjectTotalMaxMarks + 10}" />
 						                                            </c:when>
 						                                            <c:otherwise>
-						                                                <!-- Non-numeric value like AB or 999 (Absent) - just display it -->
 						                                                <c:choose>
 						                                                    <c:when test="${secured == '999'}">A</c:when>
 						                                                    <c:otherwise><c:out value="${secured}" /></c:otherwise>
@@ -762,7 +668,6 @@ body {
 						                                    </c:when>
 						
 						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
-						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
 						                                                <c:set var="displayMarks" value="${(secured / 50) * 30}" />
@@ -771,7 +676,6 @@ body {
 						                                                <c:set var="subjectTotalMaxMarks" value="${subjectTotalMaxMarks + 30}" />
 						                                            </c:when>
 						                                            <c:otherwise>
-						                                                <!-- Non-numeric value like AB or 999 (Absent) - just display it -->
 						                                                <c:choose>
 						                                                    <c:when test="${secured == '999'}">A</c:when>
 						                                                    <c:otherwise><c:out value="${secured}" /></c:otherwise>
@@ -781,7 +685,6 @@ body {
 						                                    </c:when>
 						
 						                                    <c:otherwise>
-						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
 						                                                <c:out value="${secured}" />
@@ -789,7 +692,6 @@ body {
 						                                                <c:set var="subjectTotalMaxMarks" value="${subjectTotalMaxMarks + maxMarks}" />
 						                                            </c:when>
 						                                            <c:otherwise>
-						                                                <!-- Non-numeric value like AB or 999 (Absent) - just display it -->
 						                                                <c:choose>
 						                                                    <c:when test="${secured == '999'}">A</c:when>
 						                                                    <c:otherwise><c:out value="${secured}" /></c:otherwise>
@@ -803,13 +705,11 @@ body {
 						                    </td>
 						                </c:forEach>
 						                
-						                <!-- Calculate percentage for subject -->
 						                <c:set var="subjectPercentage" value="0" />
 						                <c:if test="${subjectTotalMaxMarks > 0}">
 						                    <c:set var="subjectPercentage" value="${(subjectTotalMarksObtained / subjectTotalMaxMarks) * 100}" />
 						                </c:if>
 						                
-						                <!-- Calculate grade based on percentage -->
 						                <c:set var="subjectGrade" value="-" />
 						                <c:choose>
 						                    <c:when test="${subjectPercentage >= 90}">
@@ -832,15 +732,13 @@ body {
 						                    </c:otherwise>
 						                </c:choose>
 						                
-						                 <!-- Add to grand totals -->
-                							<c:set var="grandTotalMarksObtained" value="${grandTotalMarksObtained + subjectTotalMarksObtained}" />
-                							<c:set var="grandTotalMaxMarks" value="${grandTotalMaxMarks + subjectTotalMaxMarks}" />
+                						<c:set var="grandTotalMarksObtained" value="${grandTotalMarksObtained + subjectTotalMarksObtained}" />
+                						<c:set var="grandTotalMaxMarks" value="${grandTotalMaxMarks + subjectTotalMaxMarks}" />
                 
-						                <!-- Total Marks for Subject -->
 						                <td class="marksTableCell" style="text-align: center;">
 						                    <fmt:formatNumber value="${subjectTotalMaxMarks}" maxFractionDigits="0" />
 						                </td>
-						                <!-- Percentage column for non-6-exam layout; Obt. Marks column for 6-exam layout -->
+						                
 						                <c:choose>
 						                    <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						                        <td class="marksTableCell" style="text-align: center;">
@@ -859,27 +757,12 @@ body {
 						                    </c:otherwise>
 						                </c:choose>
 						                
-						                <!-- Percentage for Subject 
-						                <td class="marksTableCell" style="text-align: center;">
-						                    <c:choose>
-						                        <c:when test="${subjectPercentage > 0}">
-						                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${subjectPercentage}" />%
-						                        </c:when>
-						                        <c:otherwise>-</c:otherwise>
-						                    </c:choose>
-						                </td>-->
-						                
-						                <!-- Grade for Subject (based on percentage) -->
-						                <td class="marksTableCell" style="text-align: left;">&emsp;
+						                <%-- <td class="marksTableCell" style="text-align: center;">
 						                    ${subjectGrade}
-						                </td>
-						                
-						                <!-- Remarks Column - Empty for now 
-						                <td class="marksTableCell" style="text-align: left; vertical-align: top; padding: 8px; width: 15%;"></td>-->
+						                </td> --%>
 						            </tr>
 						        </c:forEach>
 						        
-						         <!-- Calculate grand percentage and grade -->
 							        <c:set var="grandPercentagestring" value="0" />
 							        
 							        <c:set var="grandPercentage" value="0" />
@@ -894,12 +777,11 @@ body {
 										</c:set>
 							        </c:if>
 							         
-							         <c:set var="roundedMarks">
-									            <fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" />
-									        </c:set>
+							        <c:set var="roundedMarks">
+										<fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" />
+									</c:set>
 									        
-									        
-									       <c:choose>
+								    <c:choose>
 						                    <c:when test="${grandPercentage >= 90}">
 						                        <c:set var="grandGrade" value="A+" />
 						                    </c:when>
@@ -918,117 +800,12 @@ body {
 						                    <c:otherwise>
 						                        <c:set var="grandGrade" value="C" />
 						                    </c:otherwise>
-						                </c:choose>
+						            </c:choose>
 						                
-									        
-							        
-							        <c:choose>
-						                    <c:when test="${subjectPercentage >= 90}">
-						                        <c:set var="subjectGrade" value="A+" />
-						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 75}">
-						                        <c:set var="subjectGrade" value="A" />
-						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 60}">
-						                        <c:set var="subjectGrade" value="B+" />
-						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 50}">
-						                        <c:set var="subjectGrade" value="B" />
-						                    </c:when>
-						                    <c:when test="${subjectPercentage >= 30}">
-						                        <c:set var="subjectGrade" value="C+" />
-						                    </c:when>
-						                    <c:otherwise>
-						                        <c:set var="subjectGrade" value="C" />
-						                    </c:otherwise>
-						                </c:choose>
-						
-						        <!-- Summary Section Rows within the same table 
-						        <tr>
-						            <td class="summaryTableHeader" style="width: 20%;">Summary</td>
-															            <c:forEach items="${sortedExamSummaries}" var="exam">
-						                <td class="marksTableCell">${exam.totalMarksObtained}</td>
-						            </c:forEach>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						        </tr>
-						
-						        <tr>
-						            <td class="summaryTableHeader">Total Marks Obtained</td>
-															            <c:forEach items="${sortedExamSummaries}" var="exam">
-						                <td class="marksTableCell">${exam.totalMarksObtained}</td>
-						            </c:forEach>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						        </tr>
-						
-						        <tr>
-						            <td class="summaryTableHeader">Total Marks</td>
-															            <c:forEach items="${sortedExamSummaries}" var="exam">
-						                <td class="marksTableCell">${exam.totalMarks}</td>
-						            </c:forEach>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						        </tr>
-						
-						        <tr>
-						            <td class="summaryTableHeader">Percentage</td>
-															            <c:forEach items="${sortedExamSummaries}" var="exam">
-						                <td class="marksTableCell">
-						                    <c:choose>
-						                        <c:when test="${exam.percentage > 0}">
-						                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${exam.percentage}" />%
-						                        </c:when>
-						                        <c:otherwise>-</c:otherwise>
-						                    </c:choose>
-						                </td>
-						            </c:forEach>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						        </tr>
-						
-						        <%-- <tr>
-						            <td class="summaryTableHeader">Grade</td>
-															            <c:forEach items="${sortedExamSummaries}" var="exam">
-						                <td class="marksTableCell">
-						                    <c:choose>
-						                        <c:when test="${exam.grade != null && exam.grade != ''}">
-						                            ${exam.grade}
-						                        </c:when>
-						                        <c:otherwise>-</c:otherwise>
-						                    </c:choose>
-						                </td>
-						            </c:forEach>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						        </tr>
-						
-						        <tr>
-						            <td class="summaryTableHeader">Rank</td>
-															            <c:forEach items="${sortedExamSummaries}" var="exam">
-						                <td class="marksTableCell">
-						                    <c:choose>
-						                        <c:when test="${exam.rank > 0}">
-						                            ${exam.rank}
-						                        </c:when>
-						                        <c:otherwise>-</c:otherwise>
-						                    </c:choose>
-						                </td>
-						            </c:forEach>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						            <td class="marksTableCell"></td>
-						        </tr> --%>
-						         -->
-						           <!-- Grand Total Row -->
-						           
-						           		 <tr style="background-color: #f0f0f0; font-weight: bold;">
-									        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
-												        <c:forEach items="${sortedExamSummaries}" var="exam">
-									        	<c:choose>
+								    <tr style="background-color: #f0f0f0; font-weight: bold;">
+								        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
+											<c:forEach items="${sortedExamSummaries}" var="exam">
+								        	<c:choose>
 						                                    <c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
 						                                       		 <c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
@@ -1065,43 +842,34 @@ body {
 						                                        <td class="marksTableCell">${exam.totalMarksObtained}</td>
 						                                    </c:otherwise>
 						                                </c:choose>
-									        </c:forEach>
-									        
-									        <td class="amount" style="display: none;">${roundedMarks}</td>
-									        
-																		        <td class="marksTableCell" style="text-align: center;">
-													            <fmt:formatNumber value="${grandTotalMaxMarksFromExamSummary}" maxFractionDigits="0" />
-																		        </td>
-																		        <!-- Percentage column for non-6-exam layout; Obt. Marks column for 6-exam layout -->
-																		        <c:choose>
-																		            <c:when test="${fn:length(Parents.examSummaries) == 6}">
-																		                <td class="marksTableCell" style="text-align: center;">${roundedMarks}</td>
-																		            </c:when>
-																		            <c:otherwise>
-																		                <td class="marksTableCell" style="text-align: center;">
-																		                    <c:choose>
-																		                        <c:when test="${grandPercentage > 0}">
-																		                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentage}" />%
-																		                        </c:when>
-																		                        <c:otherwise>-</c:otherwise>
-																		                    </c:choose>
-																		                </td>
-																		            </c:otherwise>
-																		        </c:choose>
-									        
-									        <%-- <td class="marksTableCell" style="text-align: center;">
-								                <c:choose>
-								                    <c:when test="${grandPercentage > 0}">
-								                        <fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentage}" />%
-								                    </c:when>
-								                    <c:otherwise>-</c:otherwise>
-								                </c:choose>
-								            </td> --%>
-								            
-									        <td class="marksTableCell" style="text-align: left;">
-									            &emsp;&nbsp;${grandGrade}
-									        </td>
-									    </tr>
+								        </c:forEach>
+								        
+								        <td class="amount" style="display: none;">${roundedMarks}</td>
+								        
+								        <td class="marksTableCell" style="text-align: center;">
+							            	<fmt:formatNumber value="${grandTotalMaxMarksFromExamSummary}" maxFractionDigits="0" />
+								        </td>
+								        
+								        <c:choose>
+								            <c:when test="${fn:length(Parents.examSummaries) == 6}">
+								                <td class="marksTableCell" style="text-align: center;">${roundedMarks}</td>
+								            </c:when>
+								            <c:otherwise>
+								                <td class="marksTableCell" style="text-align: center;">
+								                    <c:choose>
+								                        <c:when test="${grandPercentage > 0}">
+								                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentage}" />%
+								                        </c:when>
+								                        <c:otherwise>-</c:otherwise>
+								                    </c:choose>
+								                </td>
+								            </c:otherwise>
+								        </c:choose>
+								        
+								        <%-- <td class="marksTableCell" style="text-align: center;">
+								            ${grandGrade}
+								        </td> --%>
+								    </tr>
 						    </tbody>
 						</table>
 
@@ -1110,17 +878,12 @@ body {
 
 		</div>
 
-
-		<%-- Suppress totalbox when exams > 1; keep unchanged for the 1-exam layout --%>
 		<c:if test="${fn:length(Parents.examSummaries) == 1}">
 		<div class="totalbox">
-
 			<div class="words">
-				<b>Total Marks Obtained (In Words) <br><label class="amountWords"></label>&nbsp; only</b>
+				<b>Total Marks Obtained (In Words): <label class="amountWords"></label>&nbsp; only</b>
 			</div>
-
-			<div class="percentage">Percentage <br><fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
-
+			<div class="percentage">Percentage: <fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
 		</div>
 		</c:if>
 		
@@ -1129,9 +892,9 @@ body {
             <!-- RIGHT COLUMN FOR GRAPH -->
             <c:if test="${fn:length(Parents.examSummaries) == 1}">
                 <div class="graph-right-column">
-					<div id="graph-scope-${studentGraphKey}" class="marks" style="margin-top: 20px;">
+					<div id="graph-scope-${studentGraphKey}" class="marks" style="margin-top: 8px;">
                         <c:forEach items="${Parents.examsDetails}" var="examDetailsGraph" varStatus="status">
-			  <div id="student-chart-${studentGraphKey}-${status.index}" class="student-exam-chart" data-subjects="${fn:escapeXml(examDetailsGraph.subjects)}" data-marks="${fn:escapeXml(examDetailsGraph.marks)}" data-exam="${fn:escapeXml(examDetailsGraph.examName)}" data-max="${maxMarks}" style="height: 380px; width: 100%;"></div>
+			  				<div id="student-chart-${studentGraphKey}-${status.index}" class="student-exam-chart" data-subjects="${fn:escapeXml(examDetailsGraph.subjects)}" data-marks="${fn:escapeXml(examDetailsGraph.marks)}" data-exam="${fn:escapeXml(examDetailsGraph.examName)}" data-max="${maxMarks}" style="height: 220px; width: 100%;"></div>
                         </c:forEach>
                     </div>
                 </div>
@@ -1139,176 +902,30 @@ body {
         </div>
         <!-- END OF FLEX CONTAINER -->
 
-	<%-- Suppress PART-B marks section when exams > 1; keep unchanged for the 1-exam layout --%>
-	<%-- <c:if test="${fn:length(Parents.examSummaries) == 1}">
-	<div class="marks" style="font-size: 19px;">
-		<c:choose>
-		
-			<c:when test="${fn:length(Parents.examSummaries) == 1}">
-                <!-- Graph already handled above in right column -->
-			</c:when>
-			
-			<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
-				<div style="margin-top: 50px;">
-				<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 10px;">PART-B</h4>
-				</div>
-				<div style="display: flex; gap: 10px;" class="partb">
-				    <table style="width: 50%; border-collapse: collapse;">
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <th>Co-Scholastic Subjects</th>
-				            <th>Grade</th>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Physical & Health Education</td>
-				            <td>A</td>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Art Education</td>
-				            <td>A</td>
-				        </tr>
-				    </table>
-				
-				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
-				        <tr style="text-transform: uppercase;">
-				        	<c:set var="attendanceParts" value="${fn:split(Parents.parents.student.urbanrural, '/')}" />
-							<c:set var="sem1" value="${attendanceParts[0]}" />
-							<c:set var="sem2" value="${attendanceParts[1]}" />
-				            <th>Attendance</th>
-				            <th>Semester-1</th>
-				            <th>Semester-2</th>
-				            <th>Total</th>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Total Working Days</td>
-				            <td>118</td>
-				            <td>126</td>
-				            <td>244</td>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td>Total Present Days</td>
-				            <td>${sem1}</td>
-				            <td>${sem2}</td>
-				            <td>${sem1+sem2}</td>
-				        </tr>
-				    </table>
-				
-				</div>
-			</c:when>
-			<c:otherwise>
-			
-			<div>
-			<h4 style="text-align:center ;margin-bottom:0px ;padding-bottom: 10px;">PART-B</h4>
-			</div>
-			
-			<div style="display: flex; gap: 10px;" class="partb">
-				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
-				        <tr style="text-transform: uppercase;">
-				            <th style="font-size:14px;">Co-Scholastic Subjects</th>
-				            <th style="font-size:14px;">Grade</th>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td style="font-size:14px;">Physical & Health Education</td>
-				            <td style="font-size:14px;">A</td>
-				        </tr>
-				        
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td style="font-size:14px;">ATTITUDE & VALUES</td>
-				            <td style="font-size:14px;">A</td>
-				        </tr>
-				        
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td style="font-size:14px;">Work Experience</td>
-				            <td style="font-size:14px;">A</td>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td style="font-size:14px;">Art Education</td>
-				            <td style="font-size:14px;">A</td>
-				        </tr>
-				    </table>
-				
-				    <table style="width: 50%; border-collapse: collapse;font-weight: bold;">
-				        <tr style="text-transform: uppercase;">
-				        	<c:set var="attendanceParts" value="${fn:split(Parents.parents.student.urbanrural, '/')}" />
-							<c:set var="sem1" value="${attendanceParts[0]}" />
-							<c:set var="sem2" value="${attendanceParts[1]}" />
-				            <th style="font-size:14px;">Attendance</th>
-				            <th style="font-size:14px;">Semester-1</th>
-				            <th style="font-size:14px;">Semester-2</th>
-				            <th style="font-size:14px;">Total</th>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td style="font-size:14px;">Total Working Days</td>
-				            <td style="font-size:14px;">118</td>
-				            <td style="font-size:14px;">126</td>
-				            <td style="font-size:14px;">244</td>
-				        </tr>
-				
-				        <tr style="text-transform: uppercase;font-weight: bold;">
-				            <td style="font-size:14px;">Total Present Days</td>
-				            <td style="font-size:14px;">${sem1}</td>
-				            <td style="font-size:14px;">${sem2}</td>
-				            <td style="font-size:14px;">${sem1+sem2}</td>
-				        </tr>
-				    </table>
-				
-				</div></c:otherwise>
-		</c:choose>
-</div>
-	</c:if> --%>
-	<!-- <div class="footer">
-    <img src="/patriswamy/images/hmsign.png" class="signature" width="200" height="60"/>
-
-    <div class="headmaster">H.M.</div>
-
-    <label class="school-info">
-       Little FLower Public School<br>
-        Serikar Layout, Shivpur Road, Basavakalyan-585327, DIST. BIDAR<br>
-        DISE CODE:00000000000,SSLC CODE:SS0000&nbsp;&nbsp;&nbsp;
-    </label>
-</div> -->
-
 <!-- Signature Table -->
-<div style="margin-top: 50px;">
-    <table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
+<div style="margin-top: 15px;">
+    <table class="sig-table" style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
         <tr>
-            <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
-                <div style="min-height: 60px;"></div>
-                Signature of Principal
-            </td>
-            <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
-                <div style="min-height: 60px;"></div>
-                Signature of Class Teacher
-            </td>
-            <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
-                <div style="min-height: 60px;"></div>
-                Signature of Parents
-            </td>
+            <td>Signature of Principal</td>
+            <td>Signature of Class Teacher</td>
+            <td>Signature of Parents</td>
         </tr>
         <tr>
-            <td colspan="3" style="border: 1px solid #000; padding: 10px; font-weight: bold; font-size: 14px;">
+            <td colspan="3" style="border: 1px solid #000; padding: 4px; font-weight: bold; font-size: 10px; text-align: left;">
                 REMARK : <span style="font-weight: normal; margin-left: 10px;"></span>
             </td>
         </tr>
     </table>
 </div>
 
-
-
-		<div class="printbtn">
-			<button onclick="window.print()">Print</button>
-		</div>
-
 	</div>
 	</div>
 
 	</c:forEach>
+
+	<div class="printbtn">
+		<button onclick="window.print()" style="padding: 6px 16px; font-weight: bold; font-size: 14px; cursor: pointer;">Print Marks Cards</button>
+	</div>
 	
 	<script>
 	(function () {
@@ -1369,10 +986,10 @@ body {
 	                        { offset: 0, color: pair[0] },
 	                        { offset: 1, color: pair[1] }
 	                    ]),
-	                    shadowBlur: 10,
+	                    shadowBlur: 4,
 	                    shadowColor: 'rgba(15,23,42,0.18)',
-	                    shadowOffsetY: 6,
-	                    borderRadius: [6, 6, 0, 0]
+	                    shadowOffsetY: 3,
+	                    borderRadius: [4, 4, 0, 0]
 	                }
 	            };
 	        });
@@ -1384,9 +1001,9 @@ body {
 	            title: {
 	                text: examName,
 	                left: 'center',
-	                top: 4,
+	                top: 2,
 	                textStyle: {
-	                    fontSize: 14,
+	                    fontSize: 11,
 	                    fontWeight: 'bold',
 	                    color: '#1e293b'
 	                }
@@ -1396,10 +1013,10 @@ body {
 	                axisPointer: { type: 'shadow' }
 	            },
 	            grid: {
-	                left: 40,
-	                right: 16,
-	                top: 48,
-	                bottom: 60,
+	                left: 30,
+	                right: 10,
+	                top: 30,
+	                bottom: 40,
 	                containLabel: true
 	            },
 	            xAxis: {
@@ -1409,7 +1026,7 @@ body {
 	                    interval: 0,
 	                    rotate: subjectNames.length > 5 ? 35 : 0,
 	                    color: '#334155',
-	                    fontSize: 11
+	                    fontSize: 9
 	                },
 	                axisLine: { lineStyle: { color: 'rgba(15,23,42,0.20)' } }
 	            },
@@ -1417,20 +1034,20 @@ body {
 	                type: 'value',
 	                min: 0,
 	                max: maxMarksVal,
-	                axisLabel: { color: '#334155', fontSize: 11 },
+	                axisLabel: { color: '#334155', fontSize: 9 },
 	                splitLine: { lineStyle: { color: 'rgba(15,23,42,0.08)' } }
 	            },
 	            series: [{
 	                name: 'Marks',
 	                type: 'bar',
-	                barMaxWidth: 36,
+	                barMaxWidth: 24,
 	                data: barData,
 	                label: {
 	                    show: true,
 	                    position: 'top',
 	                    color: '#0f172a',
 	                    fontWeight: 'bold',
-	                    fontSize: 11
+	                    fontSize: 9
 	                }
 	            }]
 	        });
