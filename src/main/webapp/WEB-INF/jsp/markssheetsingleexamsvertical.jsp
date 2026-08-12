@@ -13,7 +13,7 @@
 /* ===== PRINT SETTINGS ===== */
 @page {
     size: A4 portrait;
-    margin: 8mm;
+    margin: 6mm;
 }
 
 /* @media print {
@@ -22,8 +22,8 @@
  */
  @media print {
     html, body {
-        width: 210mm;
-        height: 297mm;
+        width: 100%;
+        height: auto;
         margin: 0;
         padding: 0;
     }
@@ -31,6 +31,10 @@
     body {
         -webkit-print-color-adjust: exact;
         print-color-adjust: exact;
+    }
+    
+    tr {
+        page-break-inside: avoid;
     }
 }
 /* ===== COMMON ===== */
@@ -56,7 +60,6 @@ body {
     width: 100%;
     border: 1px solid #000;
     border-collapse: collapse;
-    page-break-inside: avoid;
 }
 
 .cell {
@@ -80,7 +83,7 @@ body {
     height: 150px;
     vertical-align: middle;
     font-weight: bold;
-    font-size: 11px;
+    font-size: 10px;
 }
 
 </style>
@@ -116,15 +119,11 @@ window.onload = function(){
         <td align="left"><b>Class:</b> ${examclass}</td>
         <td align="center">
     <b>Exam:</b>
-    <c:forEach items="${markssheetlist}" var="p" varStatus="ps">
-        <c:if test="${ps.index == 0}">
-            <c:forEach items="${p.exammarks}" var="em" varStatus="es">
-                <c:if test="${es.index == 0}">
-                    ${em.examName}
-                </c:if>
-            </c:forEach>
-        </c:if>
-    </c:forEach>
+    <c:if test="${not empty markssheetlist}">
+                <c:forEach items="${markssheetlist[0].examSummaries}" var="em" varStatus="es">
+                    ${em.examName}<c:if test="${!es.last}">, </c:if>
+                </c:forEach>
+            </c:if>
 </td>
 
         <td align="right"><b>Academic Year:</b> ${currentAcademicYear}</td>
