@@ -228,6 +228,8 @@ public class MarksDetailsActionAdapter {
 		request.setAttribute("totalpresent", responseDto.getTotalpresent());
 		request.setAttribute("totalabsent", responseDto.getTotalabsent());
         request.setAttribute("showFullMarks", showFullMarks);
+        request.setAttribute("examclass", request.getParameter("examclass"));
+
         return responseDto.isSuccess();
     }
 
