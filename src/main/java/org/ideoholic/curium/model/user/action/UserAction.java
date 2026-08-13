@@ -8,6 +8,7 @@ import org.ideoholic.curium.model.adminexpenses.service.AdminService;
 import org.ideoholic.curium.model.feescollection.action.FeesCollectionActionAdapter;
 import org.ideoholic.curium.model.login.action.LoginActionAdapter;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
+import org.ideoholic.curium.model.user.dto.SuperDashboardResponseDto;
 import org.ideoholic.curium.model.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -89,8 +91,25 @@ public class UserAction {
 
 	@PostMapping("/dashBoard")
 	public String dashBoard() {
+		if (httpSession.getAttribute("userType") != null
+				&& "superadmin".equalsIgnoreCase(httpSession.getAttribute("userType").toString())) {
+			userActionAdapter.prepareSuperDashboard();
+			return "superuserdashboard";
+		}
 		userActionAdapter.dashBoard();
 		return "jspbarchart";
+	}
+
+	@RequestMapping(value = "/superDashboard", method = {RequestMethod.GET, RequestMethod.POST})
+	public String superDashboard() {
+		userActionAdapter.prepareSuperDashboard();
+		return "superuserdashboard";
+	}
+
+	@PostMapping("/superDashboardData")
+	@ResponseBody
+	public SuperDashboardResponseDto superDashboardData() {
+		return userActionAdapter.getSuperDashboardData();
 	}
 
 	@PostMapping("/authenticateUser")
