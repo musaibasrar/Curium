@@ -1820,6 +1820,9 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 								}
 								if (!excludedGrade.isEmpty()) {
 									excludedSubjectGrades.put(subjectName, excludedGrade);
+								}else {
+									int percent = (int) ((marksObtained * 100.0) / maxMarks);
+									excludedSubjectGrades.put(subjectName, ""+percent);
 								}
 								break;
 							}

@@ -437,18 +437,16 @@ body {
 		<div class="studentinfo">
 
 			<table>
-
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>SATS
-							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>STS
+							No :<c:out value="${Parents.parents.student.sts}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :<c:out value="${Parents.parents.student.admissionnumber}" />
-					&nbsp;&nbsp;&nbsp;</b></td>
+							No :<c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
-							: <%-- ${Parents.parents.student.classstudying} --%><c:set var="dataSubParts11" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts11[0]}
+							: ${Parents.parents.student.classstudying}
 						<%-- <c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
 						    <c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
@@ -465,11 +463,8 @@ body {
 						</c:choose> --%>
 					</b></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Section :
-							 <c:set var="dataSubParts112" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts112[1]}<%-- <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/> --%></b></td>
-					<%-- <td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
-							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td> --%>
+							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td>
 				</tr>
 				<tr>
 					<br>
@@ -503,71 +498,7 @@ body {
         <div class="flex-row-container">
         <div class="marks-left-column">
 		<div class="marks">
-			<c:set var="subjectCount" value="${fn:length(Parents.subjectExamMarks)}" />
-			<c:choose>
-
-			<%-- NEW BRANCH: more than 8 subjects — one plain table per exam, subjects as columns --%>
-			<c:when test="${subjectCount > 8}">
-				<%-- Compute grand totals from examSummaries so totalbox still works correctly --%>
-				<c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
-				<c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
-				<c:forEach items="${Parents.examSummaries}" var="examSummaryTotal">
-					<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
-					<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
-				</c:forEach>
-				<c:set var="grandPercentage" value="0" />
-				<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-					<c:set var="grandPercentage" value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" />
-				</c:if>
-				<c:set var="grandPercentagestring" value="0" />
-				<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-					<c:set var="grandPercentagestring"><fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="1" /></c:set>
-				</c:if>
-				<c:set var="roundedMarks"><fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" /></c:set>
-				<%-- Hidden cell required by the number-to-words JS --%>
-				<span class="amount" style="display: none;">${roundedMarks}</span>
-
-				<%-- Render one table per exam --%>
-				<c:forEach items="${Parents.examSummaries}" var="exam">
-					<div style="margin-top: 20px; page-break-inside: avoid;">
-						<h4 style="text-align: center; text-transform: uppercase; margin-bottom: 4px;"><c:out value="${exam.examName}" /></h4>
-						<hr style="border: 1px solid #000; margin-bottom: 4px;" />
-						<table style="border-collapse: collapse; width: 100%;">
-							<thead>
-								<tr>
-									<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
-										<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
-										<c:if test="${not empty markStr and markStr != '-'}">
-											<th class="marksTableHeader" style="text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></th>
-										</c:if>
-									</c:forEach>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry">
-										<c:set var="markStr" value="${subjectEntry.value[exam.examName]}" />
-										<c:if test="${not empty markStr and markStr != '-'}">
-											<c:set var="parts" value="${fn:split(markStr, '/')}" />
-											<c:set var="secured" value="${parts[0]}" />
-											<td class="marksTableCell">
-												<c:choose>
-													<c:when test="${secured == '999'}">A</c:when>
-													<c:otherwise><c:out value="${secured}" /></c:otherwise>
-												</c:choose>
-											</td>
-										</c:if>
-									</c:forEach>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</c:forEach>
-			</c:when>
-
-			<%-- EXISTING logic unchanged: 6-exam CCE layout and general single-exam layout --%>
-			<c:otherwise>
-			<c:choose>
+			 <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<h4	style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART-A</h4>
 						        </c:when>
@@ -1031,8 +962,46 @@ body {
 						    </tbody>
 						</table>
 
-			</c:otherwise>
-			</c:choose>
+									<c:if test="${not empty Parents.excludedSubjectGrades}">
+										<div style="margin-top: 10px;">
+											<table style="width: 100%; border-collapse: collapse;">
+												<tr>
+													<th class="marksTableHeader" style="text-align: center;">Co-Scholastic Subject</th>
+													<th class="marksTableHeader" style="text-align: center;">Grade</th>
+												</tr>
+												<c:forEach items="${Parents.excludedSubjectGrades}" var="coScholasticEntry">
+													<tr>
+														<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${coScholasticEntry.key}" /></td>
+														<td class="marksTableCell">
+															
+															<c:set var="subjectGradeCoScholasticGrade" value="-" />
+														        <c:choose>
+														            <c:when test="${coScholasticEntry.value >= 90}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="A+" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 70}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="A" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 50}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="B+" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 30}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="B" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 29}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="C" />
+														            </c:when>
+														            <c:otherwise>
+														                <c:set var="subjectGradeCoScholasticGrade" value="F" />
+														            </c:otherwise>
+														        </c:choose>
+														     <c:out value="${subjectGradeCoScholasticGrade}" />
+														</td>
+													</tr>
+												</c:forEach>
+											</table>
+										</div>
+									</c:if>
 
 		</div>
 
@@ -1046,36 +1015,6 @@ body {
 			<div class="percentage">Percentage <br><fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
 
 		</div>
-
-		<c:set var="excludedWithGradeCount" value="0" />
-		<c:forEach items="${Parents.excludedSubjectGrades}" var="excludedEntry">
-			<c:if test="${not empty excludedEntry.value}">
-				<c:set var="excludedWithGradeCount" value="${excludedWithGradeCount + 1}" />
-			</c:if>
-		</c:forEach>
-
-		<c:if test="${excludedWithGradeCount > 0}">
-			<div class="marks" style="margin-top: 15px;">
-				<table class="excluded-subjects-table" style="border-collapse: collapse; width: 100%;">
-					<thead>
-						<tr>
-							<th class="marksTableHeader" style="text-transform: uppercase; width: 70%;">Subject Name</th>
-							<th class="marksTableHeader" style="text-transform: uppercase; width: 30%;">Grade</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${Parents.excludedSubjectGrades}" var="excludedEntry">
-							<c:if test="${not empty excludedEntry.value}">
-								<tr>
-									<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${excludedEntry.key}" /></td>
-									<td class="marksTableCell"><c:out value="${excludedEntry.value}" /></td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</c:if>
 		
 		</div>
 
@@ -1390,4 +1329,3 @@ body {
 	
 </body>
 </html>
-
