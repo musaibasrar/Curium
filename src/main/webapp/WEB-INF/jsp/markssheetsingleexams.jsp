@@ -437,18 +437,16 @@ body {
 		<div class="studentinfo">
 
 			<table>
-
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>SATS
-							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>STS
+							No :<c:out value="${Parents.parents.student.sts}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :<c:out value="${Parents.parents.student.admissionnumber}" />
-					&nbsp;&nbsp;&nbsp;</b></td>
+							No :<c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
-							: <%-- ${Parents.parents.student.classstudying} --%><c:set var="dataSubParts11" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts11[0]}
+							: ${Parents.parents.student.classstudying}
 						<%-- <c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
 						    <c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
@@ -465,11 +463,8 @@ body {
 						</c:choose> --%>
 					</b></td>
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Section :
-							 <c:set var="dataSubParts112" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts112[1]}<%-- <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/> --%></b></td>
-					<%-- <td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
-							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td> --%>
+							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td>
 				</tr>
 				<tr>
 					<br>
@@ -966,6 +961,47 @@ body {
 									    </tr>
 						    </tbody>
 						</table>
+
+									<c:if test="${not empty Parents.excludedSubjectGrades}">
+										<div style="margin-top: 10px;">
+											<table style="width: 100%; border-collapse: collapse;">
+												<tr>
+													<th class="marksTableHeader" style="text-align: center;">Co-Scholastic Subject</th>
+													<th class="marksTableHeader" style="text-align: center;">Grade</th>
+												</tr>
+												<c:forEach items="${Parents.excludedSubjectGrades}" var="coScholasticEntry">
+													<tr>
+														<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${coScholasticEntry.key}" /></td>
+														<td class="marksTableCell">
+															
+															<c:set var="subjectGradeCoScholasticGrade" value="-" />
+														        <c:choose>
+														            <c:when test="${coScholasticEntry.value >= 90}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="A+" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 70}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="A" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 50}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="B+" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 30}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="B" />
+														            </c:when>
+														            <c:when test="${coScholasticEntry.value >= 29}">
+														                <c:set var="subjectGradeCoScholasticGrade" value="C" />
+														            </c:when>
+														            <c:otherwise>
+														                <c:set var="subjectGradeCoScholasticGrade" value="F" />
+														            </c:otherwise>
+														        </c:choose>
+														     <c:out value="${subjectGradeCoScholasticGrade}" />
+														</td>
+													</tr>
+												</c:forEach>
+											</table>
+										</div>
+									</c:if>
 
 		</div>
 
