@@ -18,8 +18,9 @@
 
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Advance Search for print</title>
+        <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Change Password Parent</title>
         <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
@@ -39,218 +40,377 @@
 
 
 
-        <style type="text/css">
+      
+ <style type="text/css">
 
-            .headerSearch{
-                font-size: 18px;
-                font-weight: bold;
+    /* ==============================
+       GLOBAL RESET
+       ============================== */
 
-            }
+    * {
+        box-sizing: border-box;
+    }
 
-            .myclass{
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                width: auto;
-                height: auto;
-                color: black;
-                text-transform:capitalize;
-            }
-            <!--
-            .divCSS{
-                overflow:  scroll;
-                height: 100%;
-                width: 100%;
-            }
+    html,
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        min-height: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f5f7fa;
+    }
 
-            .fiedlSet {
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-width: 1;
-                width: 100%;
-                color: #000000;
-                font-size: 16px;
-                font-weight: bold;
-                font-variant: normal;
-                font-stretch: wider;
-                background-color: #e2ebf3;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-            }
-            .legendCSS {
-                color: #666666;
-            }
-            .tableCSS {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                left: 0px;
-                top: 0px;
-            }
-            .textAreaCSS {
-                height: auto;
-                width: auto;
-            }
-            .textField {
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-color: #5d7e9b;
-                border-right-color: #5d7e9b;
-                border-bottom-color: #5d7e9b;
-                border-left-color: #5d7e9b;
-                border-top-width: 1px;
-                border-right-width: 1px;
-                border-bottom-width: 1px;
-                border-left-width: 1px;
+    body {
+        overflow-x: hidden;
+    }
 
+    form {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
-            }
-            .alignRight {
-                font-family: Tahoma;
-                font-size: 12px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
+    /* ==============================
+       MAIN TABS CONTAINER
+       ============================== */
 
-            .alignRightHead {
-                font-family: Tahoma;
-                font-size: 12px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
+    #tabs {
+        width: 100%;
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 0 15px;
+    }
 
+    #tabs-1 {
+        width: 100%;
+        background: #ffffff;
+        border: 1px solid #d5dce3;
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
 
-                font-weight: bold;
-            }
+    /* ==============================
+       TAB HEADER
+       ============================== */
 
+    #tabs > ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
 
+    #tabs > ul li {
+        display: inline-block;
+    }
 
-            .alignRightMultiple {
-                font-family: Tahoma;
-                font-size: 11px;
-                font-weight: bolder;
-                text-align: right;
-                vertical-align: middle;
-                font-style: normal;
-                color: #325F6D;
-            }
-            .alignCentreMultiple {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-style: normal;
-                color: #000000;
-            }
-            .autoAdjust {
-                height: auto;
-                width: auto;
-            }
-            .radioSpanCSS {
-                font-size: 12px;
-                font-family: Arial, Helvetica, sans-serif;
-                text-align: left;
-                vertical-align: middle;
-            }
-            .radioCSS {
-                background-position: left center;
-            }
-            .spanText {
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 12px;
-                font-weight: bold;
-                color: #000000;
-            }
-            .emptyFieldSet {
-                border-top-color: #FA7676;
-                border-right-color: #FA7676;
-                border-bottom-color: #FA7676;
-                border-left-color: #FA7676;
-                border-top-style: solid;
-                border-right-style: solid;
-                border-bottom-style: solid;
-                border-left-style: solid;
-                border-top-width: thin;
-                border-right-width: thin;
-                border-bottom-width: thin;
-                border-left-width: thin;
-                background-image: url(images/close.JPG);
-                background-repeat: repeat-y;
-                background-attachment: scroll;
-                background-position: right;
-                width: auto;
-                height: auto;
-                display: inline;
-            }
-            .style1 {
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style2 {
-                color: #666666;
-                font-family: Tahoma;
-                font-size: 14px;
-            }
-            .style4 {
-                font-size: 12px;
-                font-family: Tahoma;
-                text-align: left;
-                vertical-align: middle;
-                color: #325f6d;
-            }
+    #tabs > ul li a {
+        display: block;
+        padding: 10px 18px;
+        text-decoration: none;
+    }
 
+    /* ==============================
+       FORM TABLE
+       ============================== */
 
+    #table1 {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
 
-            -->
+    #table1 td {
+        padding: 8px;
+        vertical-align: middle;
+    }
 
-            .alignRight1 {
-                font-family: Tahoma;
-                font-size: 15px;
-                font-style: normal;
-                text-transform: capitalize;
-                color: #325F6D;
-                text-align: right;
-                vertical-align: middle;
-                font-weight: bold;
-            }
-            .mandatoryClass {
-    font-family: Tahoma;
-    font-size: 11px;
-    color: red;
-    font-style: normal;
-    text-transform: capitalize;
-    
-    text-align: right;
-    vertical-align: middle;
-    font-weight: bold;
-}
-        </style>
+    /* Label column */
+    #table1 td.alignRight {
+        width: 30%;
+        text-align: right;
+        padding-right: 15px;
+        white-space: normal;
+    }
 
+    /* Input column */
+    #table1 td:nth-child(2) {
+        width: 70%;
+    }
 
+    /* ==============================
+       LABELS
+       ============================== */
+
+    .alignRight {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 13px;
+        color: #325F6D;
+        text-align: right;
+        vertical-align: middle;
+        font-weight: bold;
+    }
+
+    .alignRight1 {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 15px;
+        color: #325F6D;
+        text-align: right;
+        vertical-align: middle;
+        font-weight: bold;
+    }
+
+    .mandatoryClass {
+        font-family: Tahoma, Arial, sans-serif;
+        font-size: 11px;
+        color: red;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    /* ==============================
+       INPUT FIELDS
+       ============================== */
+
+    .textField {
+        width: 100%;
+        max-width: 450px;
+        min-height: 38px;
+        padding: 8px 10px;
+
+        border: 1px solid #5d7e9b;
+        border-radius: 4px;
+
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+
+        background: #fff;
+
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .textField:focus {
+        border-color: #2878b5;
+        box-shadow: 0 0 0 3px rgba(40,120,181,0.12);
+    }
+
+    .emptyFieldSet {
+        width: 100%;
+        max-width: 450px;
+        min-height: 38px;
+
+        padding: 8px 10px;
+
+        border: 1px solid #FA7676;
+        border-radius: 4px;
+
+        background-color: #fff;
+    }
+
+    /* ==============================
+       BUTTONS
+       ============================== */
+
+    #save,
+    #cancel {
+        min-width: 100px;
+        min-height: 38px;
+        padding: 8px 20px;
+
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    /* ==============================
+       INNER BUTTON TABLE
+       ============================== */
+
+    #tabs-1 table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    /* ==============================
+       REMOVE FIXED/OLD STYLES
+       ============================== */
+
+    .tableCSS {
+        width: 100%;
+        height: auto;
+        position: static;
+    }
+
+    .textAreaCSS {
+        width: 100%;
+        height: auto;
+    }
+
+    .autoAdjust {
+        width: 100%;
+        height: auto;
+    }
+
+    .myclass {
+        width: 100%;
+        height: auto;
+        color: black;
+        text-transform: capitalize;
+        border: 1px solid #5d7e9b;
+    }
+
+    /* ==============================
+       TABLET
+       ============================== */
+
+    @media screen and (max-width: 768px) {
+
+        #tabs {
+            margin: 10px auto;
+            padding: 0 10px;
+        }
+
+        #tabs-1 {
+            padding: 20px 15px;
+        }
+
+        #table1 {
+            table-layout: auto;
+        }
+
+        #table1 td.alignRight {
+            width: 35%;
+            font-size: 12px;
+        }
+
+        #table1 td:nth-child(2) {
+            width: 65%;
+        }
+
+        .textField,
+        .emptyFieldSet {
+            max-width: 100%;
+            width: 100%;
+        }
+    }
+
+    /* ==============================
+       MOBILE
+       ============================== */
+
+    @media screen and (max-width: 600px) {
+
+        #tabs {
+            width: 100%;
+            margin: 0;
+            padding: 8px;
+        }
+
+        #tabs-1 {
+            padding: 15px 10px;
+            border-radius: 6px;
+        }
+
+        #tabs > ul li {
+            width: 100%;
+        }
+
+        #tabs > ul li a {
+            text-align: center;
+        }
+
+        /* Convert form table into stacked layout */
+        #table1,
+        #table1 tbody,
+        #table1 tr,
+        #table1 td {
+            display: block;
+            width: 100% !important;
+        }
+
+        #table1 tr {
+            margin-bottom: 10px;
+        }
+
+        #table1 td {
+            padding: 5px 0;
+        }
+
+        #table1 td.alignRight {
+            text-align: left;
+            padding: 5px 0;
+            font-size: 13px;
+        }
+
+        #table1 td:nth-child(2) {
+            padding-bottom: 10px;
+        }
+
+        .textField,
+        .emptyFieldSet {
+            width: 100%;
+            max-width: none;
+            min-height: 40px;
+            font-size: 16px;
+        }
+
+        .mandatoryClass {
+            font-size: 11px;
+            text-align: left;
+            padding: 5px 0;
+        }
+
+        /* Button area */
+        #tabs-1 table {
+            width: 100%;
+        }
+
+        #tabs-1 table td {
+            text-align: center;
+        }
+
+        #save,
+        #cancel {
+            width: 100%;
+            max-width: 250px;
+            margin: 5px auto;
+            display: block;
+        }
+    }
+
+    /* ==============================
+       VERY SMALL MOBILE
+       ============================== */
+
+    @media screen and (max-width: 380px) {
+
+        #tabs {
+            padding: 5px;
+        }
+
+        #tabs-1 {
+            padding: 12px 8px;
+        }
+
+        .alignRight {
+            font-size: 12px;
+        }
+
+        .textField,
+        .emptyFieldSet {
+            font-size: 16px;
+            min-height: 42px;
+        }
+
+        #save,
+        #cancel {
+            max-width: 100%;
+        }
+    }
+
+</style>
         <script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
         <script src="/vision/JavaScript/actb.js"></script>
         <script src="/vision/JavaScript/common.js"></script>
@@ -379,11 +539,11 @@ for(Cookie cookie : cookies){
 
                                 <td width="16%"  class="alignRight" >
                                     
-                                    Current Password*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </td>
+                                    Current Password*  </td>
 
                                 <td width="28%"  >
                                     <label>
-                                        <input name="currentpassword" type="password"  class="textField" id="currentpassword" required size="36"  >
+                                        <input name="currentpassword" type="password"  class="textField" id="currentpassword" required   >
                                     </label>
 
                                 </td>
@@ -405,11 +565,11 @@ for(Cookie cookie : cookies){
                             <tr>
 
                                 <td  class="alignRight" > 
-                                    New Password* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    New Password* 
                                 </td>
                                 <td  >
                                     <label>
-                                        <input name="newpassword" type="password"  class="textField" id="newpassword" required size="36"  >
+                                        <input name="newpassword" type="password"  class="textField" id="newpassword" required   >
                                     </label>
                                 </td>
                             </tr>
@@ -432,11 +592,11 @@ for(Cookie cookie : cookies){
 
 
                                 <td width="16%"  class="alignRight" >
-                                    Confirm new password* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                                    Confirm new password*  </td>
 
                                 <td>
                                     <label>
-                                        <input name="confirmpassword" type="password"  class="textField" id="confirmpassword" required size="36"  >
+                                        <input name="confirmpassword" type="password"  class="textField" id="confirmpassword" required   >
                                     </label>
                                 </td>
 
