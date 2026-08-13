@@ -20,7 +20,7 @@
     <head>
         <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Change Password Parent</title>
+        <title>Change Password</title>
         <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
 
