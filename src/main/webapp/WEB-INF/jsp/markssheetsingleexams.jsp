@@ -17,11 +17,15 @@
 <title>Progress Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script src="/greatindiaacademy/js/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-3d@1.0.0/dist/chartjs-plugin-3d.min.js"></script>
 =======
 <script src="/greatindiaacademy/js/echarts/echarts.min.js"></script>
 >>>>>>> 6820dfcc4... Marks sheet single exam generation bug fix
+=======
+<script src="/awami/js/echarts/echarts.min.js"></script>
+>>>>>>> cb9daddc4... converted marks and full marks option added
 <style>
 body {
 	font-family: "Times New Roman", Times, serif;
@@ -381,7 +385,11 @@ body {
 			<div class="schoolbox">
 			
 				<div class="logo">
+<<<<<<< HEAD
 					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/greatindiaacademy/images/greatindiaacademy.png">
+=======
+					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/awami/images/awami.png">
+>>>>>>> cb9daddc4... converted marks and full marks option added
 				</div>
 		
 				<div class="schoolname">
@@ -390,8 +398,12 @@ body {
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/greatindiaacademy/images/greatindiaacademyschoolname.png"> -->
 =======
 					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
+<<<<<<< HEAD
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/greatindiaacademy/images/greatindiaacademyschoolname.png"> -->
 >>>>>>> 6820dfcc4... Marks sheet single exam generation bug fix
+=======
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/awami/images/awamischoolname.png"> -->
+>>>>>>> cb9daddc4... converted marks and full marks option added
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
 					</div>
@@ -452,10 +464,10 @@ body {
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment
-							No : &nbsp;&nbsp;&nbsp;</b></td>
+							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :
+							No :<c:out value="${Parents.parents.student.admissionnumber}" />
 					&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
@@ -603,8 +615,9 @@ body {
 						                                    <c:set var="maxMarks" value="${maxPart}" />
 						                                </c:if>
 						
-						                                <c:choose>
-						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+															                                <c:choose>
+																					<c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
+																						<%-- Full marks mode bypasses FA/SA conversion and falls through to c:otherwise raw marks rendering. --%>
 						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
@@ -623,7 +636,7 @@ body {
 						                                        </c:choose>
 						                                    </c:when>
 						
-						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
 						                                        <!-- Check if secured is numeric and NOT 999 (Absent) -->
 						                                        <c:choose>
 						                                            <c:when test="${secured != null && secured != '' && secured != 'AB' && secured != '999'}">
@@ -891,7 +904,7 @@ body {
 									        <td class="summaryTableHeader" style="width: 20%;">TOTAL</td>
 									        <c:forEach items="${Parents.examSummaries}" var="exam">
 									        	<c:choose>
-						                                    <c:when test="${fn:contains(exam.examName, 'FA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'FA') and not showFullMarks}">
 						                                       		 <c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
@@ -907,7 +920,7 @@ body {
 																	</c:choose>
 						                                    </c:when>
 						
-						                                    <c:when test="${fn:contains(exam.examName, 'SA')}">
+						                                    <c:when test="${fn:contains(exam.examName, 'SA') and not showFullMarks}">
 						                                    			<c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
@@ -1116,7 +1129,11 @@ body {
 		</c:choose>
 </div>
 	<!-- <div class="footer">
+<<<<<<< HEAD
     <img src="/greatindiaacademy/images/hmsign.png" class="signature" width="200" height="60"/>
+=======
+    <img src="/awami/images/hmsign.png" class="signature" width="200" height="60"/>
+>>>>>>> cb9daddc4... converted marks and full marks option added
 
     <div class="headmaster">H.M.</div>
 
