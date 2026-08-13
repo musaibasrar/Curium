@@ -296,55 +296,23 @@
         </style>
         
         <script type="text/javascript">
-            
-            
-<!--             function updatePeriods() {
-        		
-        		var form1 = document.getElementById("form1");
-        		if(form1.checkValidity()) {
-        			form1.action = "/greatindiaacademy/PeriodProcess/updatenewPeriodDetails";
-        			form1.method = "POST";
-        			form1.submit();
-        		  }
-        	}
-
-           
-            
-      
-        </script>
-
-        
-        
-<script type="text/javascript">
-$("#tabs").tabs();
-
-$("#update").button().click(function() {
-	updatePeriods();
-	return false;
-});
-
-                                
-                               
- -->                            </script>
-                            
-                            <script type="text/javascript">
 	function updatePeriods() {
+		var addclass = document.getElementById("addclass");
+		if (!addclass || !addclass.value) {
+			alert("Please select a Class.");
+			return;
+		}
 		var form1 = document.getElementById("form1");
 		form1.action = "/greatindiaacademy/PeriodProcess/updatenewPeriodDetails";
 		form1.method = "POST";
 		form1.submit();
-
 	}
-	$(function() {
 
-		$("#tabs").tabs();
+	$(function() {
 		$("#update").button().click(function() {
 			updatePeriods();
 		});
-		//$("#effect").hide();
-
 	});
-	
 	</script>
 
 
@@ -371,13 +339,29 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;<select name='classsec' id='classsec'><option selected>${timetable.class_}</option>
-					<c:forEach items="${classdetailslist}" var="classdetailslist">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-										</c:forEach>
-										</select>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;
+					<select name='addclass' id='addclass'>
+						<option value='' <c:if test="${empty savedClass}">selected</c:if>>Select Class</option>
+						<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<c:if test="${classdetailslist.classdetails != ''}">
+								<option value="${classdetailslist.classdetails}"
+									<c:if test="${classdetailslist.classdetails == savedClass}">selected</c:if>>
+									<c:out value="${classdetailslist.classdetails}" />
+								</option>
+							</c:if>
+						</c:forEach>
+					</select>
+					<select name='addsec' id='addsec'>
+						<option value='' <c:if test="${empty savedSection}">selected</c:if>>Select Section</option>
+						<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<c:if test="${classdetailslist.section != ''}">
+								<option value="${classdetailslist.section}"
+									<c:if test="${classdetailslist.section == savedSection}">selected</c:if>>
+									<c:out value="${classdetailslist.section}" />
+								</option>
+							</c:if>
+						</c:forEach>
+					</select>
 				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>
 
 							<lable>Day start time<c:set var="item" value="${fn:split(timetable.daystart, ' ')}" />
