@@ -237,6 +237,25 @@ for(Cookie cookie : cookies){
         			</div>
         	</div>
         	</div>
+        	<div class="row" style="padding-left: 20px;">
+        	
+        	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1" style="background-color:#FF914D">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
+								href="/vision/changePassword?id=${username}&urlbranchid=${branchid}"><!--  <img
+									src="/vision/images/diary.svg" width="50" height="50"
+									alt="Student Profile" style="vertical-align: bottom;" /> -->Change Password
+							</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	</div>
         	 
         </div>
 </body>    
