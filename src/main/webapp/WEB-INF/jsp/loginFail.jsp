@@ -136,8 +136,16 @@ form{
                     window.open('/scholar/index_feescollector','_self');
                 }else if(type=='officeadmin'){
                 	window.open('/scholar/index_officeadmin','_self');
+                }else if(type=='teacher'){
+                	window.open('/scholar/index_teacher','_self');
                 }else if(type=='marksentry'){
                 	window.open('/scholar/index_marksentry','_self');
+                }else if(type=='parents'){
+                	window.open('/scholar/index_parents','_self');
+                }else if(type=='admissioncoordinator'){
+                	window.open('/scholar/index_admissioncoordinator','_self');
+                }else if(type=='principal'){
+                	window.open('/scholar/index_principal','_self');
                 }
             }
             else if(!flag1){

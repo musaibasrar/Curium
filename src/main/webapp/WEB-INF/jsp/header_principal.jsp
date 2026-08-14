@@ -132,17 +132,70 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/scholar/images/scholarheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
+
+							<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/scholar/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
+							
 							<td><a target="leftFrame" href="/scholar/left_principal"> <img
 									src="/scholar/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
 
 							<td>
+								<a target="mainFrame"
+								href="/scholar/AccountProcess/createVoucher"> <img
+									src="/scholar/images/createvoucher.svg" width="18" height="18"
+									alt="Create Voucher" style="vertical-align: bottom;" />
+									Create Voucher
+								</a>
+							</td>
+
+							<!-- <td ><a target="mainFrame" href="/scholar/feesCollectionDetails"><img  alt="Fees Details" src="/scholar/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
+                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
+
+							<td><a target="mainFrame"
+								href="/scholar/StudentProcess/addNew"> <img
+									src="/scholar/images/student_header.svg" width="18" height="18"
+									alt="Add New Student" style="vertical-align: bottom;" />Add Student
+							</a></td>
+
+							<td ><a target="mainFrame"
+								href="/scholar/AdminProcess/viewAllExpenses"><img
+									alt="Admin Exp" src="/scholar/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Admin Expense
+							</a></td>
+
+							<td ><!-- <a target="mainFrame" href="/scholar/sendsms"><img
+									src="/scholar/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
+									Send Message		
+							</a> -->
 								<a target="leftFrame" href="/scholar/reports_principal"><img
 									src="/scholar/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
 									Reports		
 								</a>
+								
+								<!-- <a target="leftFrame" href="/scholar/reports_officeadmin"><img
+									src="/scholar/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
+									Reports		
+								</a> -->
+							
 							</td>
+
+							<td ><a target="mainFrame"
+								href="/scholar/StudentProcess/viewAllStudentsWithParents"><img
+									alt="View All Students" src="/scholar/images/students.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+								View Students
+							</a></td>
+							
+							<td ><a target="mainFrame"
+								href="/scholar/dashboardloader"><img
+									alt="Dash Board" src="/scholar/images/dashboard.svg" width="18"
+									height="18" style="vertical-align: bottom;"/>
+									Dash Board
+									</a></td>
 								
 							<td ><a target="_parent"
 								href="/scholar/UserProcess/logout"><img

@@ -75,21 +75,16 @@ for(Cookie cookie : cookies){
 }
 }
 %>
-    <frameset    rows="55,*"frameborder="0" border="0" framespacing="0"  >
-    
-		   <c:if test="${(userType == 'principal')}">
-			    <frame   src="/scholar/header_principal"   name="topFrame" scrolling="NO" noresize frameborder="0">
-		   </c:if>
 
-            <frameset  cols="195,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/scholar/left_principal" name="leftFrame" scrolling="yes"  frameborder="1"   />
-                <frame src="/scholar/welcome" name="mainFrame" scrolling="yes" />
-            </frameset>
+	<frameset rows="55,*" frameborder="0" border="0" framespacing="0">
+        <frame src="/scholar/header_principal" name="topFrame" scrolling="NO" noresize frameborder="0">
 
-   </frameset>
+        <frameset cols="195,*" frameborder="0" border="0" framespacing="0">
+            <frame src="/scholar/left_principal" name="leftFrame" scrolling="yes" frameborder="1" />
+            <frame src="/scholar/welcome" name="mainFrame" scrolling="yes" />
+        </frameset>
 
-
-
+    </frameset>
 
     <noframes>
         <body>

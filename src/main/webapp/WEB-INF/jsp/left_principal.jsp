@@ -463,26 +463,539 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/scholar/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/StudentProcess/QuickStudentSave" style="font-size: 12px;">Quick Student Save</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
-              
-            <!--  <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/scholar/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
+            				 <a target="mainFrame" href="/scholar/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
+            			</td>
+            			            		
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
+            			</td>
+            		</tr> -->
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+             -->
+            
+            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+            
+                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
+            			</td>
+            		</tr>
+            		
+                </table>
+            </div>
+               
+              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+								<a target="mainFrame" href="/scholar/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
+            
+             <h5 class="sideaccordian" ><a href="#">Sponsor</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/SponserProcess/ViewAllSponsor" style="font-size: 12px;">View All</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/SponserProcess/addSponsorPage" style="font-size: 12px;">Add Sponsor</a>
+            			</td>
+            		</tr>
+            		
+            	                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Login Staff</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            
+            <h5 class="sideaccordian" ><a href="#">Events</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/EventProcess/create" style="font-size: 12px;">Create Event</a>
+            			</td>
+            		</tr> -->
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
+            			</td>
+            		</tr>
+            		
+            		
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/Backup&Restore" style="font-size: 12px;">Backup</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/changePassword" style="font-size: 12px;">Change Password</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
+        	
+        	<div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            	
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
+            
+            
+            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+              
+              <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/sendemail" style="font-size: 12px;">Email</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            
+            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+                              <a target="mainFrame" href="/scholar/importfile" style="font-size: 12px;">Import Files</a><br/>
+				        </td>
+				     </tr>
+				     <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+                              <a target="mainFrame" href="/scholar/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+				        </td>
+				     </tr>
+				 </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
             			
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/scholar/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
+            				 <a target="mainFrame" href="/scholar/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
+            			</td>
+            			
+            		</tr>
+            		
+                </table>
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
             			</td>
             			
             		</tr>
                 </table>
-            </div> -->
+            </div>
+             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            	
+            	<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
+            			</td>
+            			
+            		</tr>
+            	
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Staff Assignments</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
             
             </div>
                    

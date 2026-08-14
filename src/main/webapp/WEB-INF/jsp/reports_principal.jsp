@@ -347,7 +347,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/scholar/feesCollectionDetailsAdmin" style="font-size: 12px;">Fees Collection Details</a>
+            				 <a target="mainFrame" href="/scholar/FeesCollection/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
             			</td>
             		</tr>
             		
@@ -422,6 +422,11 @@ for(Cookie cookie : cookies){
             				<a target="mainFrame" href="/scholar/otherfeescancelledreceipts" style="font-size: 12px;">Cancelled Other Fees Receipts</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/FeesProcess/feesOutstanding" style="font-size: 12px;">Fees Outstanding</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
@@ -471,6 +476,16 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
             			</td>
             		</tr>
+            				<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/finalExamReport" style="font-size: 12px;">Final Exam Marks Card</a>
+            			</td>
+            		</tr>
+            				<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/finalExamReport" style="font-size: 12px;">Final Exam Marks Card</a>
+            			</td>
+            		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/scholar/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
@@ -479,6 +494,55 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/scholar/MarksDetailsProcess/rankReport" style="font-size: 12px;">Generate Student Rank</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/incomestatement" style="font-size: 12px;">Income Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/receiptpayment" style="font-size: 12px;">R & P Statement</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/daybook" style="font-size: 12px;">Day Book</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/trialbalance" style="font-size: 12px;">Trial Balance</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/scholar/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
             			</td>
             		</tr>
                 </table>
@@ -496,6 +560,57 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+            <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/generateBillsReport" style="font-size: 12px;">Receipts Report</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/dueReport" style="font-size: 12px;">Due Report</a>
+            			</td>
+            		</tr>
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessItemsMoveProcess/getDueReport" style="font-size: 12px;">Unpaid Receipts</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				<a target="mainFrame" href="/scholar/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/scholar/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
+            			</td>
+            		</tr>
+            	</table>
+            </div>
              <h5 class="sideaccordian" ><a href="#" >Subject</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -557,6 +672,21 @@ for(Cookie cookie : cookies){
             	</table>
             </div>
 		
+          <!--   <h5 class="sideaccordian">
+			<a href="#">Appointments</a>
+		</h5>
+		<div style="padding-left: 0px; padding-right: 0px;">
+			<table style="border-collapse: collapse; width: 100%">
+				<tr>
+					<td
+						style="text-align: left; padding: 4px; padding-left: 20px; background-color: #f5f8f9;">
+						<a target="mainFrame"
+						href="/scholar/AppointmentProcess/appointmentReport"
+						style="font-size: 12px;">Appointments Report</a>
+					</td>
+				</tr>
+			</table>
+		</div> -->
              <h5 class="sideaccordian" ><a href="#" >SMS</a></h5>
             
             <div style="padding-left: 0px;padding-right: 0px;">
@@ -565,6 +695,25 @@ for(Cookie cookie : cookies){
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
             				 <a target="mainFrame" href="/scholar/SMSProcess/SMSDeliveryReport" style="font-size: 12px;">SMS Report</a>
+            			</td>
+            		</tr>
+            		
+            	</table>
+            </div>
+            
+            <h5 class="sideaccordian" ><a href="#" >Documents</a></h5>
+            
+            <div style="padding-left: 0px;padding-right: 0px;">
+            
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/DocumentsProcess/getTcDetail" style="font-size: 12px;">Transfer Certificate Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/scholar/DocumentsProcess/getScDetail" style="font-size: 12px;">Study Certificate Report</a>
             			</td>
             		</tr>
             		

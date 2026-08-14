@@ -270,7 +270,7 @@ public class DocumentActionAdapter {
 		studentNameSearchDto.setClassSearch(request.getParameterValues("classsearch"));
 		studentNameSearchDto.setYearOfAdmission(request.getParameter("yearofadmission"));
 		SearchStudentResponseDto searchStudentResponseDto = documentService.multiClassSearchRegistrationReport(
-				studentNameSearchDto, httpSession.getAttribute(BRANCHID).toString());
+				studentNameSearchDto, httpSession.getAttribute(Constants.BRANCHID).toString());
 		request.setAttribute("searchStudentList", searchStudentResponseDto.getSearchStudentList());
 	}
 
