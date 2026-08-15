@@ -21,6 +21,7 @@ import org.ideoholic.curium.model.student.dto.StudentIdPageDto;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ImageCompressionUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -56,8 +57,25 @@ public class DiaryService {
 	        log.warn("Invalid file type: {}", contentType);
 	        return null;
 	    }
+	    byte[] rawBytes = file.getBytes();
 
-	    byte[] bytesEncoded = Base64.encodeBase64(file.getBytes());
+		// -------------------------------------------------------
+		// Compress image files (JPEG / PNG) to ≤ 100 KB before
+		// Base64-encoding.  PDFs and other non-image types are
+		// stored as-is.
+		// -------------------------------------------------------
+		if (contentType != null) {
+			try {
+				rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType); // 100 KB
+			} catch (IOException compressionEx) {
+				// Compression failed — fall back to the original bytes
+				// so the student can still be created.
+				compressionEx.printStackTrace();
+				rawBytes = file.getBytes();
+			}
+		}
+		
+	    byte[] bytesEncoded = Base64.encodeBase64(rawBytes);
 	    return "data:" + contentType + ";base64," + new String(bytesEncoded);
 	}
 
