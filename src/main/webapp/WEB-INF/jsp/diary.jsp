@@ -452,8 +452,8 @@ for(Cookie cookie : cookies){
     <input type="file"
            name="fileToUpload"
            id="file1"
-           accept="image/*"
-           onchange="Upload()">
+           accept="image/*,application/pdf"
+           >
 
     <br><br><br><br>
   </td>
@@ -470,8 +470,7 @@ for(Cookie cookie : cookies){
     <input type="file"
            name="fileToUpload"
            id="file2"
-           accept="image/*"
-           onchange="Upload()">
+           accept="image/*,application/pdf">
 
     <br><br><br><br>
   </td>
@@ -488,8 +487,7 @@ for(Cookie cookie : cookies){
     <input type="file"
            name="fileToUpload"
            id="file3"
-           accept="image/*"
-           onchange="Upload()">
+           accept="image/*,application/pdf">
 
     <br><br><br><br>
   </td>
