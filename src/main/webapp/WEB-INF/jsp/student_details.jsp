@@ -752,54 +752,327 @@ for(Cookie cookie : cookies){
                 <h3><a href="#">Documents</a></h3>
                 <div>
 
-                    <table  border="0px" width="100%"  id="table1" align="center">
-                    
-                        <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc1.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc1}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc2.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc2}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc3.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc3}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc4.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc4}"/>">Download</a>
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <a download="studentdoc5.jpg" href="data:image/jpg;base64,<c:out value="${student.studentdoc5}"/>">Download</a>
-                    </td>
-                    </tr>
-                    </table>
-                </div>
+				<table border="0px" width="100%" id="table1" align="center">
+
+					<!-- Student Document 1 -->
+					<tr>
+						<td><c:choose>
+								<c:when test="${not empty student.studentdoc1}">
+									<c:choose>
+										<c:when test="${fn:startsWith(student.studentdoc1, 'data:')}">
+											<c:choose>
+												<c:when
+													test="${fn:startsWith(student.studentdoc1, 'data:application/pdf')}">
+													<span>PDF Document</span>
+												</c:when>
+												<c:otherwise>
+													<img src="${student.studentdoc1}" alt="Student's Doc1"
+														style="width: 200px; height: 200px;">
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+
+										<c:otherwise>
+											<img src="data:image/jpeg;base64,${student.studentdoc1}"
+												alt="Student's Doc1" style="width: 200px; height: 200px;">
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+							</c:choose></td>
+
+						<td><c:choose>
+
+								<c:when
+									test="${not empty student.studentdoc1 
+                                && fn:startsWith(student.studentdoc1, 'data:')}">
+
+									<c:choose>
+
+										<c:when
+											test="${fn:startsWith(student.studentdoc1, 'data:application/pdf')}">
+											<a download="studentdoc1.pdf" href="${student.studentdoc1}">
+												Download PDF </a>
+										</c:when>
+
+										<c:otherwise>
+											<a download="studentdoc1.jpg" href="${student.studentdoc1}">
+												Download </a>
+										</c:otherwise>
+
+									</c:choose>
+								</c:when>
+
+								<c:when test="${not empty student.studentdoc1}">
+									<a download="studentdoc1.jpg"
+										href="data:image/jpeg;base64,${student.studentdoc1}">
+										Download </a>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+
+							</c:choose></td>
+					</tr>
+
+					<tr>
+						<td><c:choose>
+								<c:when test="${not empty student.studentdoc2}">
+									<c:choose>
+										<c:when test="${fn:startsWith(student.studentdoc2, 'data:')}">
+											<c:choose>
+												<c:when
+													test="${fn:startsWith(student.studentdoc2, 'data:application/pdf')}">
+													<span>PDF Document</span>
+												</c:when>
+												<c:otherwise>
+													<img src="${student.studentdoc2}" alt="Student's Doc2"
+														style="width: 200px; height: 200px;">
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+
+										<c:otherwise>
+											<img src="data:image/jpeg;base64,${student.studentdoc2}"
+												alt="Student's Doc2" style="width: 200px; height: 200px;">
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+							</c:choose></td>
+
+						<td><c:choose>
+
+								<c:when
+									test="${not empty student.studentdoc2 
+                                && fn:startsWith(student.studentdoc2, 'data:')}">
+
+									<c:choose>
+										<c:when
+											test="${fn:startsWith(student.studentdoc2, 'data:application/pdf')}">
+											<a download="studentdoc2.pdf" href="${student.studentdoc2}">
+												Download PDF </a>
+										</c:when>
+
+										<c:otherwise>
+											<a download="studentdoc2.jpg" href="${student.studentdoc2}">
+												Download </a>
+										</c:otherwise>
+									</c:choose>
+
+								</c:when>
+
+								<c:when test="${not empty student.studentdoc2}">
+									<a download="studentdoc2.jpg"
+										href="data:image/jpeg;base64,${student.studentdoc2}">
+										Download </a>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+
+							</c:choose></td>
+					</tr>
+
+					<tr>
+						<td><c:choose>
+								<c:when test="${not empty student.studentdoc3}">
+									<c:choose>
+										<c:when test="${fn:startsWith(student.studentdoc3, 'data:')}">
+											<c:choose>
+												<c:when
+													test="${fn:startsWith(student.studentdoc3, 'data:application/pdf')}">
+													<span>PDF Document</span>
+												</c:when>
+												<c:otherwise>
+													<img src="${student.studentdoc3}" alt="Student's Doc3"
+														style="width: 200px; height: 200px;">
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+
+										<c:otherwise>
+											<img src="data:image/jpeg;base64,${student.studentdoc3}"
+												alt="Student's Doc3" style="width: 200px; height: 200px;">
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+							</c:choose></td>
+
+						<td><c:choose>
+
+								<c:when
+									test="${not empty student.studentdoc3 
+                                && fn:startsWith(student.studentdoc3, 'data:')}">
+
+									<c:choose>
+										<c:when
+											test="${fn:startsWith(student.studentdoc3, 'data:application/pdf')}">
+											<a download="studentdoc3.pdf" href="${student.studentdoc3}">
+												Download PDF </a>
+										</c:when>
+
+										<c:otherwise>
+											<a download="studentdoc3.jpg" href="${student.studentdoc3}">
+												Download </a>
+										</c:otherwise>
+									</c:choose>
+
+								</c:when>
+
+								<c:when test="${not empty student.studentdoc3}">
+									<a download="studentdoc3.jpg"
+										href="data:image/jpeg;base64,${student.studentdoc3}">
+										Download </a>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+
+							</c:choose></td>
+					</tr>
+
+					<tr>
+						<td><c:choose>
+								<c:when test="${not empty student.studentdoc4}">
+									<c:choose>
+										<c:when test="${fn:startsWith(student.studentdoc4, 'data:')}">
+											<c:choose>
+												<c:when
+													test="${fn:startsWith(student.studentdoc4, 'data:application/pdf')}">
+													<span>PDF Document</span>
+												</c:when>
+												<c:otherwise>
+													<img src="${student.studentdoc4}" alt="Student's Doc4"
+														style="width: 200px; height: 200px;">
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+
+										<c:otherwise>
+											<img src="data:image/jpeg;base64,${student.studentdoc4}"
+												alt="Student's Doc4" style="width: 200px; height: 200px;">
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+							</c:choose></td>
+
+						<td><c:choose>
+
+								<c:when
+									test="${not empty student.studentdoc4 
+                                && fn:startsWith(student.studentdoc4, 'data:')}">
+
+									<c:choose>
+										<c:when
+											test="${fn:startsWith(student.studentdoc4, 'data:application/pdf')}">
+											<a download="studentdoc4.pdf" href="${student.studentdoc4}">
+												Download PDF </a>
+										</c:when>
+
+										<c:otherwise>
+											<a download="studentdoc4.jpg" href="${student.studentdoc4}">
+												Download </a>
+										</c:otherwise>
+									</c:choose>
+
+								</c:when>
+
+								<c:when test="${not empty student.studentdoc4}">
+									<a download="studentdoc4.jpg"
+										href="data:image/jpeg;base64,${student.studentdoc4}">
+										Download </a>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+
+							</c:choose></td>
+					</tr>
+
+					<tr>
+						<td><c:choose>
+								<c:when test="${not empty student.studentdoc5}">
+									<c:choose>
+										<c:when test="${fn:startsWith(student.studentdoc5, 'data:')}">
+											<c:choose>
+												<c:when
+													test="${fn:startsWith(student.studentdoc5, 'data:application/pdf')}">
+													<span>PDF Document</span>
+												</c:when>
+												<c:otherwise>
+													<img src="${student.studentdoc5}" alt="Student's Doc5"
+														style="width: 200px; height: 200px;">
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+
+										<c:otherwise>
+											<img src="data:image/jpeg;base64,${student.studentdoc5}"
+												alt="Student's Doc5" style="width: 200px; height: 200px;">
+										</c:otherwise>
+									</c:choose>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+							</c:choose></td>
+
+						<td><c:choose>
+
+								<c:when
+									test="${not empty student.studentdoc5 
+                                && fn:startsWith(student.studentdoc5, 'data:')}">
+
+									<c:choose>
+										<c:when
+											test="${fn:startsWith(student.studentdoc5, 'data:application/pdf')}">
+											<a download="studentdoc5.pdf" href="${student.studentdoc5}">
+												Download PDF </a>
+										</c:when>
+
+										<c:otherwise>
+											<a download="studentdoc5.jpg" href="${student.studentdoc5}">
+												Download </a>
+										</c:otherwise>
+									</c:choose>
+
+								</c:when>
+
+								<c:when test="${not empty student.studentdoc5}">
+									<a download="studentdoc5.jpg"
+										href="data:image/jpeg;base64,${student.studentdoc5}">
+										Download </a>
+								</c:when>
+
+								<c:otherwise>
+									<span>No document available</span>
+								</c:otherwise>
+
+							</c:choose></td>
+					</tr>
+
+				</table>
+			</div>
     </div>
     
     	<div class="accordion" style="width: 100%;height: 100%">
