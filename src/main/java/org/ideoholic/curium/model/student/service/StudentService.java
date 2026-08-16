@@ -127,7 +127,7 @@ public class StudentService {
 						}
 
 						byte[] bytesEncoded = Base64.encodeBase64(rawBytes);
-						String saveFile = new String(bytesEncoded);
+						String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 						switch (i) {
 							case 0:
 								student.setStudentpic(saveFile);
@@ -775,7 +775,7 @@ public class StudentService {
 					}
 					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 
 					student.setStudentpic(saveFile);
 
@@ -805,7 +805,7 @@ public class StudentService {
 					}
 					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 
 					student.setStudentdoc1(saveFile);
 
@@ -834,7 +834,7 @@ public class StudentService {
 					}
 					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 
 					student.setStudentdoc2(saveFile);
 
@@ -864,7 +864,7 @@ public class StudentService {
 					}
 					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 
 					student.setStudentdoc3(saveFile);
 
@@ -892,7 +892,7 @@ public class StudentService {
 					}
 					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 
 					student.setStudentdoc4(saveFile);
 
@@ -919,7 +919,7 @@ public class StudentService {
 						}
 					}
 					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
-					String saveFile = new String(bytesEncoded);
+					String saveFile = new String("data:" + contentType + ";base64," + new String(bytesEncoded));
 
 					student.setStudentdoc5(saveFile);
 
