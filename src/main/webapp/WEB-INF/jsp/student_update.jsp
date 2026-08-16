@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
@@ -1148,85 +1149,300 @@ for(Cookie cookie : cookies){
 				
 				
 				<div id="tabs-3">
-					<table width="100%" border="0" align="center" >
+					<table width="100%" border="0" align="center">
+
+						<!-- Student Picture -->
 						<tr>
-							<td>
-                  		 	 <input type="checkbox" name="studentpicdelete" value="delete">Delete
-                    		</td>
-							<td>
-                  		  	<img src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Pic" style="width: 200px;height: 200px;">
-                   			 </td>
-                    
-							<td><br />
-							<input type="file" name="fileToUpload" id="fileToUpload" onchange="Upload()" accept="image/*" >
-							</td>
+							<td><input type="checkbox" name="studentpicdelete"
+								value="delete"> Delete</td>
+
+							<td><c:choose>
+									<c:when test="${not empty student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentpic, 'data:application/pdf')}">
+														<a href="${student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentpic}" alt="Student's Pic"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentpic}"
+													alt="Student's Pic" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose></td>
+
+							<td><br /> <input type="file" name="fileToUpload"
+								id="fileToUpload" accept="image/*,application/pdf"></td>
 						</tr>
-						
+
+
+						<!-- Student Document 1 -->
 						<tr>
-						<td>
-                    <input type="checkbox" name="studentdoc1delete" value="delete">Delete
-                    </td>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc1}"/>" alt="Student's Doc1" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <input type="file" name="fileToUpload" id="studentdoc1" onchange="Upload()" accept="image/*" >
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <input type="checkbox" name="studentdoc2delete" value="delete">Delete
-                    </td>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc2}"/>" alt="Student's Doc2" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <input type="file" name="fileToUpload" id="studentdoc2" onchange="Upload()" accept="image/*" >
-                    </td>
-                    
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <input type="checkbox" name="studentdoc3delete" value="delete">Delete
-                    </td>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc3}"/>" alt="Student's Doc3" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                   <input type="file" name="fileToUpload" id="studentdoc3" onchange="Upload()" accept="image/*" >
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <input type="checkbox" name="studentdoc4delete" value="delete">Delete
-                    </td>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc4}"/>" alt="Student's Doc4" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <input type="file" name="fileToUpload" id="studentdoc4" onchange="Upload()" accept="image/*" >
-                    </td>
-                    </tr>
-                    
-                    <tr>
-                    <td>
-                    <input type="checkbox" name="studentdoc5delete" value="delete">Delete
-                    </td>
-                    <td>
-                    <img src="data:image;base64,<c:out value="${student.studentdoc5}"/>" alt="Student's Doc5" style="width: 200px;height: 200px;">
-                    </td>
-                    <td>
-                    <input type="file" name="fileToUpload" id="studentdoc5" onchange="Upload()" accept="image/*" >
-                    </td>
-                    </tr>
-				</table>
+							<td><input type="checkbox" name="studentdoc1delete"
+								value="delete"> Delete</td>
+
+							<td><c:choose>
+									<c:when test="${not empty student.studentdoc1}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentdoc1, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentdoc1, 'data:application/pdf')}">
+														<a href="${student.studentdoc1}" target="_blank"
+															rel="noopener noreferrer"> View PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentdoc1}" alt="Student's Doc1"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentdoc1}"
+													alt="Student's Doc1" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose></td>
+
+							<td><input type="file" name="fileToUpload" id="studentdoc1"
+								accept="image/*,application/pdf"></td>
+						</tr>
+
+
+						<!-- Student Document 2 -->
+						<tr>
+							<td><input type="checkbox" name="studentdoc2delete"
+								value="delete"> Delete</td>
+
+							<td><c:choose>
+									<c:when test="${not empty student.studentdoc2}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentdoc2, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentdoc2, 'data:application/pdf')}">
+														<a href="${student.studentdoc2}" target="_blank"
+															rel="noopener noreferrer"> View PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentdoc2}" alt="Student's Doc2"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentdoc2}"
+													alt="Student's Doc2" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose></td>
+
+							<td><input type="file" name="fileToUpload" id="studentdoc2"
+								accept="image/*,application/pdf"></td>
+						</tr>
+
+
+						<!-- Student Document 3 -->
+						<tr>
+							<td><input type="checkbox" name="studentdoc3delete"
+								value="delete"> Delete</td>
+
+							<td><c:choose>
+									<c:when test="${not empty student.studentdoc3}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentdoc3, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentdoc3, 'data:application/pdf')}">
+														<a href="${student.studentdoc3}" target="_blank"
+															rel="noopener noreferrer"> View PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentdoc3}" alt="Student's Doc3"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentdoc3}"
+													alt="Student's Doc3" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose></td>
+
+							<td><input type="file" name="fileToUpload" id="studentdoc3"
+								accept="image/*,application/pdf"></td>
+						</tr>
+
+
+						<!-- Student Document 4 -->
+						<tr>
+							<td><input type="checkbox" name="studentdoc4delete"
+								value="delete"> Delete</td>
+
+							<td><c:choose>
+									<c:when test="${not empty student.studentdoc4}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentdoc4, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentdoc4, 'data:application/pdf')}">
+														<a href="${student.studentdoc4}" target="_blank"
+															rel="noopener noreferrer"> View PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentdoc4}" alt="Student's Doc4"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentdoc4}"
+													alt="Student's Doc4" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose></td>
+
+							<td><input type="file" name="fileToUpload" id="studentdoc4"
+								accept="image/*,application/pdf"></td>
+						</tr>
+
+
+						<!-- Student Document 5 -->
+						<tr>
+							<td><input type="checkbox" name="studentdoc5delete"
+								value="delete"> Delete</td>
+
+							<td><c:choose>
+									<c:when test="${not empty student.studentdoc5}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentdoc5, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentdoc5, 'data:application/pdf')}">
+														<a href="${student.studentdoc5}" target="_blank"
+															rel="noopener noreferrer"> View PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentdoc5}" alt="Student's Doc5"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentdoc5}"
+													alt="Student's Doc5" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose></td>
+
+							<td><input type="file" name="fileToUpload" id="studentdoc5"
+								onchange="Upload()" accept="image/*,application/pdf"></td>
+						</tr>
+
+					</table>
 
 
 
-<div>
+					<div>
 							<table width="100%">
 								<tr>
 
