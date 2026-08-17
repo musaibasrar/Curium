@@ -354,6 +354,7 @@ for(Cookie cookie : cookies){
                 <a target="mainFrame" href="/abc/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
                 <a target="mainFrame" href="/abc/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
                 <a target="mainFrame" href="/abc/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/abc/StampFeesProcess/showSingleFeesDetails" style="font-size: 12px;">Stamp Single Fee</a><br/>
                 <a target="mainFrame" href="/abc/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
             </div>
             
