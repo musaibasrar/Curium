@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Super User Dashboard</title>
-    <link rel="stylesheet" href="/vision/css/bootstrap.min.css">
-    <script src="/vision/js/jquery.min.js"></script>
-    <script src="/vision/js/echarts/echarts.min.js"></script>
+    <link rel="stylesheet" href="/scholar/css/bootstrap.min.css">
+    <script src="/scholar/js/jquery.min.js"></script>
+    <script src="/scholar/js/echarts/echarts.min.js"></script>
     <style>
         @font-face {
             font-family: "IBMPlexSans";
@@ -362,7 +362,7 @@
 <%
 String user = null;
 if (session.getAttribute("userAuth") == null) {
-    response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+    response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
 } else {
     user = (String) session.getAttribute("userAuth");
 }
@@ -576,7 +576,7 @@ if (session.getAttribute("userAuth") == null) {
     }
 
     function loadDashboard() {
-        postFormEncoded("/vision/UserProcess/superDashboardData", currentFilters())
+        postFormEncoded("/scholar/UserProcess/superDashboardData", currentFilters())
             .done(function(data) {
                 if (window.console && console.debug) {
                     console.debug("[SuperDashboard] AJAX response", data);
