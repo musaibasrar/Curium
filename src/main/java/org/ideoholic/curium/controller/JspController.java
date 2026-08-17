@@ -660,4 +660,26 @@ public class JspController {
 	public String getLeftSettingsFeesCollector() {
 		return "leftsettings_feescollector";
 	}
+	
+	@GetMapping("/index_clerk")
+	public String getIndexClerk() {
+		return "index_clerk";
+	}
+	
+	@GetMapping("/header_clerk")
+	public String getHeaderClerk() {
+		return "header_clerk";
+	}
+	
+	@GetMapping("/left_clerk")
+	public String getLeftClerk() {
+		return "left_clerk";
+	}
+	
+	@GetMapping("/report_clerk")
+	public String getReportClerk() {
+		return "report_clerk";
+	}
+	
+	
 }

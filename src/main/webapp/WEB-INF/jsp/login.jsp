@@ -142,6 +142,8 @@ form{
                 	window.open('/shaheen/index_marksentry','_self');
                 }else if(type=='parents'){
                 	window.open('/shaheen/index_parents','_self');
+                }else if(type=='clerk'){
+                	window.open('/shaheen/index_clerk','_self');
                 }
             }
             else if(!flag1){

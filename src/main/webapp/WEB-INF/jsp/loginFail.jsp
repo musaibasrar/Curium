@@ -138,6 +138,8 @@ form{
                 	window.open('/shaheen/index_officeadmin','_self');
                 }else if(type=='marksentry'){
                 	window.open('/shaheen/index_marksentry','_self');
+                }else if(type=='clerk'){
+                	window.open('/shaheen/index_clerk','_self');
                 }
             }
             else if(!flag1){
