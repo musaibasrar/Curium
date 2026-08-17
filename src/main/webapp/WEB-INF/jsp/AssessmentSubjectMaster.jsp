@@ -16,8 +16,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Assessment Subject Master</title>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+<link rel="stylesheet" href="/scholar/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/scholar/css/datePicker/demos.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -278,19 +278,19 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/scholar/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/scholar/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/scholar/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/scholar/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/scholar/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/scholar/js/datePicker/ui/sliderAccess.js"></script>
 
 
 <script type="text/javascript" charset="utf-8">
@@ -333,11 +333,11 @@
 		});
 	});
 </script>
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/scholar/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 	function addAssessmentSubjects() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/AssessmentSubjectDetailsProcess/addAssessmentSubjectMaster";
+		form1.action = "/scholar/AssessmentSubjectDetailsProcess/addAssessmentSubjectMaster";
 		form1.method = "POST";
 		form1.submit();
 
@@ -345,7 +345,7 @@
 	
 	function deleteRecords() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/AssessmentSubjectDetailsProcess/deleteMultipleAssessmentSubjects";
+		form1.action = "/scholar/AssessmentSubjectDetailsProcess/deleteMultipleAssessmentSubjects";
 		form1.method = "POST";
 		form1.submit();
 
@@ -421,7 +421,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/scholar/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -434,7 +434,7 @@ for(Cookie cookie : cookies){
 }
 %>
 <body>
-	<form id="form1" action="/vision/AssessmentSubjectDetailsProcess/deleteMultipleAssessmentSubjects" method="POST">
+	<form id="form1" action="/scholar/AssessmentSubjectDetailsProcess/deleteMultipleAssessmentSubjects" method="POST">
 		<%
 			java.text.DateFormat df = new java.text.SimpleDateFormat(
 					"MM/dd/yyyy");
@@ -507,10 +507,10 @@ for(Cookie cookie : cookies){
 						<th class="headerText"><input type="checkbox" id="chckHead" /></th>
 						<th title="click to sort" class="headerText">Subject Name<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/vision/images/sort_both.png" /></th>
+							src="/scholar/images/sort_both.png" /></th>
 						<th title="click to sort" class="headerText">Category<img
 							alt=" " style="position: relative; top: 4px;"
-							src="/vision/images/sort_both.png" /></th>
+							src="/scholar/images/sort_both.png" /></th>
 						</tr>
 				</thead>
 
