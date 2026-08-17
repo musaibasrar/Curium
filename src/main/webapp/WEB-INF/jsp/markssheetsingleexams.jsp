@@ -16,7 +16,7 @@
 <head>
 <title>Progress Report</title>
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
-<script src="/vision/js/echarts/echarts.min.js"></script>
+<script src="/scholar/js/echarts/echarts.min.js"></script>
 <style>
 body {
 	font-family: "Times New Roman", Times, serif;
@@ -376,12 +376,12 @@ body {
 			<div class="schoolbox">
 			
 				<div class="logo">
-					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/vision/images/vision.png">
+					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/scholar/images/scholar.png">
 				</div>
 		
 				<div class="schoolname">
 					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
-					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/vision/images/visionschoolname.png"> -->
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/scholar/images/scholarschoolname.png"> -->
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
 					</div>
@@ -1152,7 +1152,7 @@ body {
 		</c:choose>
 </div>
 	<!-- <div class="footer">
-    <img src="/vision/images/hmsign.png" class="signature" width="200" height="60"/>
+    <img src="/scholar/images/hmsign.png" class="signature" width="200" height="60"/>
 
     <div class="headmaster">H.M.</div>
 
