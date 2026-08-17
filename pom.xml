@@ -27,6 +27,8 @@
 		<commons.fileupload.version>1.3.3</commons.fileupload.version>
 		<commons.email.version>1.5</commons.email.version>
 		<commons.net.version>3.6</commons.net.version>
+		<!-- PDFBox 2.x — last series compatible with Java 8 (PDFBox 3.x requires Java 11) -->
+		<pdfbox.version>2.0.31</pdfbox.version>
 		<!-- automatically run annotation processors within the incremental compilation -->
 		<m2e.apt.activation>jdt_apt</m2e.apt.activation>
 	</properties>
@@ -139,6 +141,13 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<!-- Apache PDFBox — PDF inspection and image recompression (Java 8 compatible) -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>${pdfbox.version}</version>
 		</dependency>
 
 		<!-- Quartz scheduler -->
