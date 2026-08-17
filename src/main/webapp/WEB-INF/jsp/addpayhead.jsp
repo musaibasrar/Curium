@@ -459,7 +459,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/HrProcess/getPayHead?payHeadType="+selected,true);
+			xmlHttp.open("GET", "/shaheen/HrProcess/getPayHead?payHeadType="+selected,true);
 			xmlHttp.send(null);
 		}
 	    
