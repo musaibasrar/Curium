@@ -474,7 +474,43 @@ body {
 						<label style="text-transform: uppercase;"><c:out
 								value="${Parents.parents.student.name}" /></label></b></td>
 					<td rowspan="3" align="center"><div class="studentphoto">
-							<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" width="120" height="120">
+							<c:choose>
+									<c:when test="${not empty Parents.parents.student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(Parents.parents.student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(Parents.parents.student.studentpic, 'data:application/pdf')}">
+														<a href="${Parents.parents.student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${Parents.parents.student.studentpic}" alt="Student's Pic"
+															style="width: 120px; height: 120px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${Parents.parents.student.studentpic}"
+													alt="Student's Pic" style="width: 120px; height: 120px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose>
 						</div></td>
 				</tr>
 
