@@ -235,7 +235,7 @@
 				</td>
 
 			<td class="dataTextBoldLeft" style="font-size: 14px;">&nbsp;&nbsp;&nbsp;Date:&nbsp;<c:out
-						value="${receiptdate}" /> &nbsp;${narrationreceipt}
+						value="${receiptdate}" /> &nbsp;
 				</td>
 				
 				<td></td>
@@ -367,7 +367,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>&nbsp;&nbsp;${narrationreceipt}<%-- Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp; --%></label>
 		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
@@ -568,7 +568,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp;</label>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>&nbsp;&nbsp;${narrationreceipt}<%-- Cashier Name:<label style="text-transform: capitalize;">${username}&nbsp;&nbsp;&nbsp; --%></label>
 		Date&nbsp;:&nbsp;${receiptdate}</td>
 		
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
