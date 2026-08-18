@@ -1694,13 +1694,31 @@ $(document).ready(function() {
 								</tr>
 								
 								<tr>
-									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />
+									
+																 <!-- Video element for webcam -->
+							        <video id="video" width="320" height="240" autoplay></video>
+							        <br>
+							
+							        <!-- Canvas element to hold captured image -->
+							        <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+							
+							        <!-- Button to capture the image -->
+							        <button type="button" id="capture">Capture Image</button>
+							
+							        <!-- Hidden input field to hold the captured image (blob) -->
+							        <input type="file" id="fileToUpload" name="fileToUpload" accept="image/*" />
+							
+							        <!-- Upload button for form submission -->
+							        <!-- <button type="submit" id="upload" style="display:none;">Upload Image</button> -->
+							        
+									<!--   <input type="file" name="fileToUpload"
+										id="fileToUpload" accept="image/*" onchange="Upload()"> --><br><br><br><br></td>
 								</tr>
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc1" accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1710,7 +1728,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc2" accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1720,7 +1738,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc3" accept="image/*,application/pdf"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1730,7 +1748,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc4" accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1740,7 +1758,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc5" accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 
 
@@ -2643,6 +2661,53 @@ $(document).ready(function() {
 
 							
 						</script>
+						
+						<script>
+        // Access the webcam video stream
+        const video = document.getElementById('video');
+        const canvas = document.getElementById('canvas');
+        const fileToUpload = document.getElementById('fileToUpload');
+
+        // Request access to the webcam
+       /*  navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+            video.srcObject = stream;
+        })
+        .catch(function(err) {
+            console.log("An error occurred: " + err);
+        }); */
+        
+        navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function (stream) {
+          // Works in both Chrome and Firefox
+          document.getElementById('video').srcObject = stream;
+        })
+        .catch(function (err) {
+          console.error("Error accessing the webcam: ", err);
+        });
+
+        // Capture the image and store it in a file input as a blob
+        document.getElementById('capture').addEventListener('click', function() {
+            const context = canvas.getContext('2d');
+            context.drawImage(video, 0, 0, 320, 240);
+
+            // Convert canvas image to a Blob
+            canvas.toBlob(function(blob) {
+                // Create a file object from the blob
+                const file = new File([blob], "captured_image.png", { type: 'image/png' });
+
+                // Create a DataTransfer object to populate the input field
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+
+                // Assign the DataTransfer file to the input field
+                fileToUpload.files = dataTransfer.files;
+
+                // Show the upload button after capturing the image
+                document.getElementById('upload').style.display = 'inline';
+            }, 'image/png');
+        });
+    </script>
 </body>
 </html>
 
