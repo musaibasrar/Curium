@@ -1469,10 +1469,10 @@ $(document).ready(function() {
 							<td><br /></td>
 						</tr>
 						<tr>
-							<td  class="alignLeft" >Belong to BPL&nbsp;</td>
-							<td>&nbsp;Yes<input
+							<td  class="alignLeft" >Student Type&nbsp;</td>
+							<td>&nbsp;Day Scholar<input
 								type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-								onclick="yesCheck(this.id);" />&nbsp; &nbsp;No<input
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Residential<input
 								type="checkbox" value="0" name="belongtobpl" id="no:bpl"
 								onclick="noCheck(this.id);" />
 

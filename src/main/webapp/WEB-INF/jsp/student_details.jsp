@@ -590,15 +590,15 @@ for(Cookie cookie : cookies){
                         </tr>
                         
                         <tr>
-                         <td  width="25%"  class="alignLeft" height="50" >Belong to BPL
+                         <td  width="25%"  class="alignLeft" height="50" >Student Type
                             </td>
                             <td width="25%" class="tablerows" >
                                
                                 <c:if test="${(student.belongtobpl ==0)}">    
-           						  <c:out default="" value="No" />
+           						  <c:out default="" value="Residential" />
            						 </c:if>
                                 <c:if test="${(student.belongtobpl ==1)}">    
-           						  <c:out default="" value="Yes" />
+           						  <c:out default="" value="Day Scholar" />
            						 </c:if>
            						 
                             </td>
