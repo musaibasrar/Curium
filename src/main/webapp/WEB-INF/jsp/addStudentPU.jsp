@@ -1098,7 +1098,7 @@ for(Cookie cookie : cookies){
 					<table width="100%" border="0" align="center" >
 						<tr>
 							<td><br />
-							<input type="file" name="fileToUpload" id="fileToUpload" accept="image/*" >
+							<input type="file" name="fileToUpload" id="fileToUpload"  accept="image/*,application/pdf" >
 							</td>
 						</tr>
 						
