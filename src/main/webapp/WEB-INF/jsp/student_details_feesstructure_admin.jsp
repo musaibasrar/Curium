@@ -458,29 +458,110 @@
         
         <script>
 
-function applyConcessionToAll() {
+        function applyConcessionToAll() {
 
-    var isChecked = document.getElementById("applyAllConcession").checked;
+            var isChecked = document.getElementById("applyAllConcession").checked;
 
-    var commonValue = document.getElementById("commonConcession").value;
+            var commonAmount = document.getElementById("commonConcession").value;
+            var commonPercent = document.getElementById("commonConcessionPercent").value;
+            var commonReason = document.getElementById("commonConcessionReason").value;
 
-    var concessionInputs = document.getElementsByClassName("concession");
+            var concessionInputs = document.getElementsByClassName("concession");
 
-    for (var i = 0; i < concessionInputs.length; i++) {
+            for (var i = 0; i < concessionInputs.length; i++) {
 
-        // if unchecked set zero
-        if (!isChecked) {
-            concessionInputs[i].value = 0;
-        } else {
-            concessionInputs[i].value = commonValue;
+                var sfsid = concessionInputs[i].id.replace("concession:", "");
+
+                var percentInput = document.getElementById("concessionPercent:" + sfsid);
+                var reasonInput = document.getElementById("concessionnotes:" + sfsid);
+
+                if (!isChecked) {
+
+                    // Clear common values from rows
+                    concessionInputs[i].value = "";
+                    percentInput.value = "";
+                    reasonInput.value = "";
+
+                } else {
+
+                    /*
+                     * If percentage is entered, percentage gets priority
+                     * and concession amount is calculated automatically.
+                     */
+                    if (commonPercent !== "") {
+
+                        percentInput.value = commonPercent;
+
+                        var feesAmount = parseFloat(
+                            concessionInputs[i]
+                                .closest("tr")
+                                .cells[2]
+                                .innerText
+                        );
+
+                        var dueInput = document.getElementsByName("dueamount:" + sfsid)[0];
+
+                        var dueAmount = parseFloat(dueInput.value);
+
+                        var percent = parseFloat(commonPercent);
+
+                        if (!isNaN(percent) && percent >= 0 && percent <= 100) {
+
+                            var concessionAmount =
+                                Math.round((feesAmount * percent) / 100);
+
+                            if (concessionAmount > dueAmount) {
+                                concessionInputs[i].value = "";
+                                percentInput.value = "";
+                                document.getElementById(sfsid).checked = false;
+                            } else {
+                                concessionInputs[i].value = concessionAmount;
+                                document.getElementById(sfsid).checked = true;
+                            }
+                        }
+
+                    } else if (commonAmount !== "") {
+
+                        // Apply common concession amount
+                        concessionInputs[i].value = commonAmount;
+
+                        // Clear percentage when amount is being used
+                        percentInput.value = "";
+
+                        // Existing validation
+                        var dueInput = document.getElementsByName("dueamount:" + sfsid)[0];
+
+                        if (dueInput) {
+                            checkConcession(
+                                parseFloat(dueInput.value),
+                                parseFloat(commonAmount),
+                                sfsid
+                            );
+                        }
+
+                    }
+
+                    // Apply common concession reason
+                    reasonInput.value = commonReason;
+                }
+            }
         }
+        
+        
+        $("#commonConcessionPercent").keypress(function(e) {
 
-        // trigger existing validation
-        if (typeof concessionInputs[i].onkeyup === "function") {
-            concessionInputs[i].onkeyup();
-        }
-    }
-}
+            if (e.which == 46) {
+                if ($(this).val().indexOf('.') != -1) {
+                    return false;
+                }
+                return true;
+            }
+
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+
+        });
 
 </script>
 <script>
@@ -505,16 +586,31 @@ function calculateConcessionPercent(feesAmount, percentValue, sfsid, dueAmount) 
 
     if (!isNaN(percent) && percentValue !== "") {
 
-        var concessionAmount = Math.round((feesAmount * percent) / 100);
-
-        if (concessionAmount > dueAmount) {
+        if (percent < 0 || percent > 100) {
+            document.getElementById("concessionPercent:" + sfsid).value = "";
             document.getElementById("concession:" + sfsid).value = "";
             document.getElementById(sfsid).checked = false;
+            return;
+        }
+
+        var concessionAmount =
+            Math.round((parseFloat(feesAmount) * percent) / 100);
+
+        if (concessionAmount > parseFloat(dueAmount)) {
+
+            document.getElementById("concession:" + sfsid).value = "";
+            document.getElementById(sfsid).checked = false;
+
         } else {
-            document.getElementById("concession:" + sfsid).value = concessionAmount;
+
+            document.getElementById("concession:" + sfsid).value =
+                concessionAmount;
+
             document.getElementById(sfsid).checked = true;
         }
+
     } else {
+
         document.getElementById("concession:" + sfsid).value = "";
         document.getElementById(sfsid).checked = false;
     }
@@ -730,28 +826,87 @@ for(Cookie cookie : cookies){
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                              <button id="print" onclick="window.location.href='/vision/printstudentdetailsfeesstructure'">Print</button>
-                                             
-                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        </td>
 
-											    <span style="color: #416884;font-size:13px; font-weight:bold;">Common Concession :</span>
+                                    </tr>
+                                    
+                                         <tr>
+
+                                        <td>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                    
+                                         <tr>
+                                        <td align="left">
+											    <span style="color:#416884;font-size:13px;font-weight:bold;">
+												    Common Concession Amount:
+												</span>
+
+											<input type="text"
+											       id="commonConcession"
+											       class="dataText"
+											       placeholder="Amount"
+											       style="width:100px;
+											              background:transparent;
+											              border:1px solid #4b6a84;
+											              color:#4b6a84;
+											              font-size:13px;
+											              padding:3px;"
+											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
+											                    applyConcessionToAll();
+											                }">
 											
-											    <input type="text"
-											           id="commonConcession"
-											           class="dataText"
-											           style="width:120px;
-											                  background: transparent;
-											                  border: 1px solid #4b6a84;
-											                  color: #4b6a84;
-											                  font-size: 13px;
-											                  padding: 3px;">
+											&nbsp;&nbsp;
 											
-											    <input type="checkbox"
-											           id="applyAllConcession"
-											           onclick="applyConcessionToAll()"
-											           style="vertical-align: middle;
-											                  cursor:pointer;">
+											<span style="color:#416884;font-size:13px;font-weight:bold;">
+											    Common Concession %:
+											</span>
 											
-											    <span style="color: #416884;font-size:13px; font-weight:bold;">Apply to all rows</span>
+											<input type="text"
+											       id="commonConcessionPercent"
+											       class="dataText"
+											       placeholder="%"
+											       style="width:70px;
+											              background:transparent;
+											              border:1px solid #4b6a84;
+											              color:#4b6a84;
+											              font-size:13px;
+											              padding:3px;"
+											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
+											                    applyConcessionToAll();
+											                }">
+											
+											&nbsp;&nbsp;
+											
+											<span style="color:#416884;font-size:13px;font-weight:bold;">
+											    Common Concession Reason:
+											</span>
+											
+											<input type="text"
+											       id="commonConcessionReason"
+											       class="dataText"
+											       placeholder="Reason"
+											       style="width:180px;
+											              background:transparent;
+											              border:1px solid #4b6a84;
+											              color:#4b6a84;
+											              font-size:13px;
+											              padding:3px;"
+											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
+											                    applyConcessionToAll();
+											                }">
+											
+											&nbsp;&nbsp;
+											
+											<input type="checkbox"
+											       id="applyAllConcession"
+											       onclick="applyConcessionToAll()"
+											       style="vertical-align:middle;cursor:pointer;">
+											
+											<span style="color:#416884;font-size:13px;font-weight:bold;">
+											    Apply to all rows
+											</span>
 
                                         </td>
 
@@ -770,6 +925,7 @@ for(Cookie cookie : cookies){
                                             <br/>
                                         </td>
                                     </tr>
+                                    
                                 </table>
                                 
                                 <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
