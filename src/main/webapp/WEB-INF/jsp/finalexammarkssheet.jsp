@@ -25,7 +25,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url("/greatindiaacademy/images/greatindiaacademy${branchid}.png") no-repeat center;
+    background: url("/greatindiaacademy/images/greatindiaacademy.png") no-repeat center;
     background-size: contain;
     opacity: 0.1; /* Adjust transparency */
     z-index: -1;

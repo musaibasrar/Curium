@@ -184,7 +184,7 @@
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">${branchcontact}</label><br>
-				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
+				<label class="addressLine" style="padding-left: 10px;">Duplicate Receipt</label>
 				</td>
 				<td><img  src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
@@ -368,7 +368,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>&nbsp;&nbsp;${narrationreceipt}<%-- Cashier Name:<label style="text-transform: capitalize;">${user.username} --%></label></td>
 		<!-- <td><img src="/greatindiaacademy/images/greatindiaacademypaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
@@ -384,7 +384,7 @@
 				<td>
 				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
 				<label class="addressLine">${branchaddress}</label><br>
-				<label class="addressLine">Contact: ${branchcontact}</label>
+				<label class="addressLine">${branchcontact}</label>
 				<label class="addressLine" style="padding-left: 90px;">Duplicate Receipt</label>
 				</td>
 				<td><img  src="data:image;base64,<c:out value="${student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
@@ -570,7 +570,7 @@
 		
 		<TABLE width="100%" border="0">
 		<tr style="font-size: 10px;">
-		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>Cashier Name:<label style="text-transform: capitalize;">${user.username}</label></td>
+		<td align="left" style="padding-left: 20px;">Payment Mode:&nbsp;${receiptinfo.paymenttype}<br><br>&nbsp;&nbsp;${narrationreceipt}<%-- Cashier Name:<label style="text-transform: capitalize;">${user.username} --%></label></td>
 		<!-- <td><img src="/greatindiaacademy/images/greatindiaacademypaytm.jpeg" width="70" height="65"/></td> -->
 		<td>Received with thanks,<br><br> Cashier/Accountant</td>
 		</tr>
