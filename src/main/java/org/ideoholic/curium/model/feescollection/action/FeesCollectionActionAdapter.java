@@ -498,7 +498,7 @@ public class FeesCollectionActionAdapter {
 
 	public boolean readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException {
 		FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
-		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles);
+		ResultResponse result = feesCollectionService.readFileForFees(uploadedFiles, httpSession.getAttribute(CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(USERID).toString(), httpSession.getAttribute(USERNAME).toString());
 		return result.isSuccess();
 	}
 
