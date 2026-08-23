@@ -168,11 +168,11 @@ public class StudentService {
 	        	String UID = studentDB.getStudentexternalid();
 	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
 	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+""+String.format("%05d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }else {
 	        	int studentSeq = 1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+""+String.format("%05d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }
 			
@@ -216,8 +216,7 @@ public class StudentService {
 		}
 		
 		//END of Generate External ID
-		
-		student.setBranchid(Integer.parseInt(branchId));
+		student.setAdmissionnumber(student.getStudentexternalid());
 		student.setUserid(Integer.parseInt(userId));
 		puDetails.setOptionalsubjects(optional.toString());
 		puDetails.setCompulsorysubjects(compulsory.toString());
