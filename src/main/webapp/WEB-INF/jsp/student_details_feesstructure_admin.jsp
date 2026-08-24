@@ -460,19 +460,209 @@
 
 function applyConcessionToAll() {
 
-    var isChecked = document.getElementById("applyAllConcession").checked;
+            var applyAll = document.getElementById("applyAllConcession").checked;
 
-    var commonValue = document.getElementById("commonConcession").value;
+            var commonAmount =
+                document.getElementById("commonConcession").value.trim();
 
-    var concessionInputs = document.getElementsByClassName("concession");
+            var commonPercent =
+                document.getElementById("commonConcessionPercent").value.trim();
 
-    for (var i = 0; i < concessionInputs.length; i++) {
+            var commonReason =
+                document.getElementById("commonConcessionReason").value;
 
-        // if unchecked set zero
-        if (!isChecked) {
-            concessionInputs[i].value = 0;
-        } else {
-            concessionInputs[i].value = commonValue;
+            // Get ALL rows from the fees table
+            var rows = document.querySelectorAll("#myTable tbody tr");
+
+            for (var i = 0; i < rows.length; i++) {
+
+                var row = rows[i];
+
+                // Get checkbox from this row
+                var checkbox = row.querySelector("input.chcktb2");
+
+                if (!checkbox) {
+                    continue;
+                }
+
+                var sfsid = checkbox.id;
+
+                // Get fields belonging to this row
+                var amountField =
+                    document.getElementById("concession:" + sfsid);
+
+                var percentField =
+                    document.getElementById("concessionPercent:" + sfsid);
+
+                var reasonField =
+                    document.getElementById("concessionnotes:" + sfsid);
+
+                var dueField =
+                    document.getElementsByName("dueamount:" + sfsid)[0];
+
+                if (!amountField || !percentField || !reasonField) {
+                    continue;
+                }
+
+                /*
+                 * UNCHECKED
+                 */
+                if (!applyAll) {
+
+                    checkbox.checked = false;
+
+                    amountField.value = "";
+                    percentField.value = "";
+                    reasonField.value = "";
+
+                    continue;
+                }
+
+                /*
+                 * IMPORTANT:
+                 * Select the row regardless of concession amount.
+                 */
+                checkbox.checked = true;
+
+
+                /*
+                 * CONCESSION PERCENTAGE
+                 */
+                if (commonPercent !== "") {
+
+                    var percent = parseFloat(commonPercent);
+
+                    if (isNaN(percent)) {
+                        continue;
+                    }
+
+                    if (percent < 0) {
+                        percent = 0;
+                    }
+
+                    if (percent > 100) {
+                        percent = 100;
+                    }
+
+
+                    /*
+                     * Get the original fees amount.
+                     *
+                     * Column indexes:
+                     *
+                     * 0 = checkbox
+                     * 1 = Fees Category
+                     * 2 = Fees Amount
+                     * 3 = Installments
+                     * 4 = Total Fees Amount
+                     * 5 = Fees Paid
+                     * 6 = Fees Due
+                     */
+                    var feesAmount =
+                        parseFloat(
+                            row.cells[2].innerText
+                                .replace(/,/g, "")
+                                .trim()
+                        );
+
+                    var dueAmount = 0;
+
+                    if (dueField) {
+                        dueAmount =
+                            parseFloat(
+                                dueField.value
+                                    .replace(/,/g, "")
+                                    .trim()
+                            );
+                    }
+
+                    if (isNaN(feesAmount)) {
+                        feesAmount = 0;
+                    }
+
+                    if (isNaN(dueAmount)) {
+                        dueAmount = 0;
+                    }
+
+
+                    /*
+                     * Calculate concession.
+                     *
+                     * For 100%, give the complete outstanding
+                     * due amount.
+                     */
+                    var concessionAmount;
+
+                    if (percent == 100) {
+
+                        concessionAmount = dueAmount;
+
+                    } else {
+
+                        concessionAmount =
+                            Math.round(
+                                (feesAmount * percent) / 100
+                            );
+
+                        /*
+                         * Don't allow concession greater
+                         * than outstanding due.
+                         */
+                        if (concessionAmount > dueAmount) {
+                            concessionAmount = dueAmount;
+                        }
+                    }
+
+
+                    /*
+                     * Set values
+                     */
+                    percentField.value = percent;
+                    amountField.value = concessionAmount;
+
+                }
+
+
+                /*
+                 * CONCESSION AMOUNT
+                 *
+                 * Only use amount when percentage
+                 * is not provided.
+                 */
+                else if (commonAmount !== "") {
+
+                    var amount = parseFloat(commonAmount);
+
+                    if (!isNaN(amount)) {
+
+                        var dueAmount = 0;
+
+                        if (dueField) {
+
+                            dueAmount =
+                                parseFloat(
+                                    dueField.value
+                                        .replace(/,/g, "")
+                                        .trim()
+                                );
+                        }
+
+                        if (!isNaN(dueAmount) && amount > dueAmount) {
+                            amount = dueAmount;
+                        }
+
+                        amountField.value = amount;
+                    }
+
+                    percentField.value = "";
+                }
+
+
+                /*
+                 * CONCESSION REASON
+                 */
+                reasonField.value = commonReason;
+            }
         }
 
         // trigger existing validation
