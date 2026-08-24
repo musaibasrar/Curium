@@ -966,29 +966,44 @@ body {
 										<div style="margin-top: 10px;">
 											<table style="width: 100%; border-collapse: collapse;">
 												<tr>
-													<th class="marksTableHeader" style="text-align: center;">Co-Scholastic Subject</th>
-													<th class="marksTableHeader" style="text-align: center;">Grade</th>
+													<th class="marksTableHeader" style="text-transform: uppercase;" colspan="5"><c:out value="PART-B" /></th>
+									        	</tr>
+												<tr>
+													<th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> CoScholastic Subject</th>
+						            				<th class="marksTableHeader" style="text-align: center; width: 12%;">Obtained Marks</th>
+						            				<th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
+						            				<th class="marksTableHeader" style="text-align: center; width: 12%;">Percentage</th>
+						            				<th class="marksTableHeader" style="text-align: center; width: 10%;">Grade</th>
 												</tr>
 												<c:forEach items="${Parents.excludedSubjectGrades}" var="coScholasticEntry">
+													<c:set var="markssummary" value="${fn:split(coScholasticEntry.value, '/')}" />
 													<tr>
 														<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${coScholasticEntry.key}" /></td>
 														<td class="marksTableCell">
-															
+															<c:out value="${markssummary[0]}" />
+														</td>
+														<td class="marksTableCell">
+															<c:out value="${markssummary[1]}" />
+														</td>
+														<td class="marksTableCell">
+															<c:out value="${markssummary[2]}" />%
+														</td>
+															<td class="marksTableCell">
 															<c:set var="subjectGradeCoScholasticGrade" value="-" />
 														        <c:choose>
-														            <c:when test="${coScholasticEntry.value >= 90}">
+														            <c:when test="${markssummary[2] >= 90}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="A+" />
 														            </c:when>
-														            <c:when test="${coScholasticEntry.value >= 70}">
+														            <c:when test="${markssummary[2] >= 70}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="A" />
 														            </c:when>
-														            <c:when test="${coScholasticEntry.value >= 50}">
+														            <c:when test="${markssummary[2] >= 50}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="B+" />
 														            </c:when>
-														            <c:when test="${coScholasticEntry.value >= 30}">
+														            <c:when test="${markssummary[2] >= 30}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="B" />
 														            </c:when>
-														            <c:when test="${coScholasticEntry.value >= 29}">
+														            <c:when test="${markssummary[2] >= 29}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="C" />
 														            </c:when>
 														            <c:otherwise>
