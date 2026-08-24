@@ -596,6 +596,7 @@ body {
 								        <c:set var="grandTotalMarksObtained" value="0" />
 								        <c:set var="grandTotalMaxMarks" value="0" />
 								        <c:set var="englishexam" value="" />
+								        <c:set var="customSubjectOrder" value="${fn:split('English,Kannada,Hindi,Urdu,Mathematics,Science,Social Science,Social Studies,Environmental Studies,Arabic', ',')}" />
 								        <%-- Use backend exam summaries for final totals so excluded subjects stay excluded in aggregates. --%>
 								        <c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
 								        <c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
@@ -603,7 +604,10 @@ body {
 								        	<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
 								        	<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
 								        </c:forEach>
+								        
+							<c:forEach items="${customSubjectOrder}" var="orderedSubjectName">
 						        <c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry" varStatus="status">
+						        	<c:if test="${fn:toLowerCase(fn:trim(subjectEntry.key)) == fn:toLowerCase(fn:trim(orderedSubjectName))}">
 						            <tr>
 						                <td class="marksTableCellLeft" style="width: 20%;text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></td>
 						                
@@ -770,7 +774,9 @@ body {
 						                <!-- Remarks Column - Empty for now 
 						                <td class="marksTableCell" style="text-align: left; vertical-align: top; padding: 8px; width: 15%;"></td>-->
 						            </tr>
+						            </c:if>
 						        </c:forEach>
+						       </c:forEach> 
 						        
 						         <!-- Calculate grand percentage and grade -->
 							        <c:set var="grandPercentagestring" value="0" />
@@ -788,7 +794,7 @@ body {
 							        </c:if>
 							         
 							         <c:set var="roundedMarks">
-									            <fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" />
+									            <fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="1" />
 									        </c:set>
 									        
 									        
@@ -955,7 +961,7 @@ body {
 						                                    </c:when>
 						
 						                                    <c:otherwise>
-						                                        <td class="marksTableCell">${exam.totalMarksObtained}</td>
+						                                        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></td>
 						                                    </c:otherwise>
 						                                </c:choose>
 									        </c:forEach>
