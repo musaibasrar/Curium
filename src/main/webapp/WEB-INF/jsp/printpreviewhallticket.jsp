@@ -331,9 +331,9 @@ for(Cookie cookie : cookies){
 						</tr> -->
 						<tr>
 							<td></td>
+							<td align="left"><img src="/presidency/images/clerksignature.png" width="35" height="35"/></td>
 							<td></td>
-							<td></td>
-							<td></td>
+							<td align="centre"><img src="/presidency/images/principalsignature.png" width="60" height="35"/></td>
 						</tr>
 				<tr>
 				<td></td>
