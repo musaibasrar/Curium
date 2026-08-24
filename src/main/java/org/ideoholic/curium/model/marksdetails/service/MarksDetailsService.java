@@ -1822,7 +1822,8 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 									excludedSubjectGrades.put(subjectName, excludedGrade);
 								}else {
 									int percent = (int) ((marksObtained * 100.0) / maxMarks);
-									excludedSubjectGrades.put(subjectName, ""+percent);
+									//excludedSubjectGrades.put(subjectName, ""+percent);
+									excludedSubjectGrades.put(subjectName, marksObtained+"/"+maxMarks+"/"+percent+"/"+excludedGrade);
 								}
 								break;
 							}
