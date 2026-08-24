@@ -1876,7 +1876,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				if (examPresent && totalMarks > 0) {
 					double percentage = (totalObtainedMarks * 100.0) / totalMarks;
 					examSummary.setTotalMarks((int) totalMarks);
-					examSummary.setTotalMarksObtained((int) totalObtainedMarks);
+					examSummary.setTotalMarksObtained(totalObtainedMarks);
 					examSummary.setPercentage(percentage);
 
 					int mypercent = (int) Math.round(percentage);
