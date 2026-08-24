@@ -919,7 +919,7 @@ body {
 						                                    </c:when>
 						
 						                                    <c:otherwise>
-						                                        <td class="marksTableCell">${exam.totalMarksObtained}</td>
+						                                        <td class="marksTableCell"><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></td>
 						                                    </c:otherwise>
 						                                </c:choose>
 									        </c:forEach>
