@@ -1174,7 +1174,7 @@ for(Cookie cookie : cookies){
 													<%-- Image --%>
 													<c:otherwise>
 														<img src="${student.studentpic}" alt="Student's Pic"
-															style="width: 200px; height: 200px;">
+															style="width: 120px; height: 120px;">
 													</c:otherwise>
 												</c:choose>
 
@@ -1183,7 +1183,7 @@ for(Cookie cookie : cookies){
 											<%-- Old raw Base64 format --%>
 											<c:otherwise>
 												<img src="data:image/jpeg;base64,${student.studentpic}"
-													alt="Student's Pic" style="width: 200px; height: 200px;">
+													alt="Student's Pic" style="width: 120px; height: 120px;">
 											</c:otherwise>
 										</c:choose>
 
