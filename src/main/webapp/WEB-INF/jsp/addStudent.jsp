@@ -2663,51 +2663,61 @@ $(document).ready(function() {
 						</script>
 						
 						<script>
-        // Access the webcam video stream
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const fileToUpload = document.getElementById('fileToUpload');
+    // Access DOM elements
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const fileToUpload = document.getElementById('fileToUpload');
 
-        // Request access to the webcam
-       /*  navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-            video.srcObject = stream;
-        })
-        .catch(function(err) {
-            console.log("An error occurred: " + err);
-        }); */
+    // Define constraints to prefer the rear camera
+    const constraints = {
+        video: {
+            facingMode: { ideal: "environment" },
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+        },
+        audio: false
+    };
+
+    // Request access to the rear webcam stream
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+        video.srcObject = stream;
+    })
+    .catch(function (err) {
+        console.error("Error accessing the rear camera: ", err);
+    });
+
+    // Capture the image and store it in the file input as a blob
+    document.getElementById('capture').addEventListener('click', function() {
+        const context = canvas.getContext('2d');
+        // Match canvas dimensions to actual video resolution for better capture quality
+        canvas.width = video.videoWidth || 320;
+        canvas.height = video.videoHeight || 240;
         
-        navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-          // Works in both Chrome and Firefox
-          document.getElementById('video').srcObject = stream;
-        })
-        .catch(function (err) {
-          console.error("Error accessing the webcam: ", err);
-        });
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-        // Capture the image and store it in a file input as a blob
-        document.getElementById('capture').addEventListener('click', function() {
-            const context = canvas.getContext('2d');
-            context.drawImage(video, 0, 0, 320, 240);
+        // Convert canvas image to a Blob
+        canvas.toBlob(function(blob) {
+            if (!blob) return;
 
-            // Convert canvas image to a Blob
-            canvas.toBlob(function(blob) {
-                // Create a file object from the blob
-                const file = new File([blob], "captured_image.png", { type: 'image/png' });
+            // Create a File object from the blob
+            const file = new File([blob], "captured_image.png", { type: 'image/png' });
 
-                // Create a DataTransfer object to populate the input field
-                const dataTransfer = new DataTransfer();
-                dataTransfer.items.add(file);
+            // Create a DataTransfer object to populate the input field
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
 
-                // Assign the DataTransfer file to the input field
-                fileToUpload.files = dataTransfer.files;
+            // Assign the DataTransfer file to the input field
+            fileToUpload.files = dataTransfer.files;
 
-                // Show the upload button after capturing the image
-                document.getElementById('upload').style.display = 'inline';
-            }, 'image/png');
-        });
-    </script>
+            // Show the upload button if present
+            const uploadBtn = document.getElementById('upload');
+            if (uploadBtn) {
+                uploadBtn.style.display = 'inline';
+            }
+        }, 'image/png');
+    });
+</script>
 </body>
 </html>
 

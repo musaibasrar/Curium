@@ -1173,8 +1173,20 @@ for(Cookie cookie : cookies){
                 </c:otherwise>
 								</c:choose></td>
 
-							<td><br /> <input type="file" name="fileToUpload"
-								id="fileToUpload" accept="image/*,application/pdf"></td>
+							<td><br /> <!-- Video element for webcam -->
+							        <video id="video" width="320" height="240" autoplay></video>
+							        <br>
+							
+							        <!-- Canvas element to hold captured image -->
+							        <canvas id="canvas" width="320" height="240" style="display:none;"></canvas>
+							
+							        <!-- Button to capture the image -->
+							        <button type="button" id="capture">Capture Image</button>
+							
+							        <!-- Hidden input field to hold the captured image (blob) -->
+							        <input type="file" id="fileToUpload" name="fileToUpload" accept="image/*" />
+							
+							</td>
 						</tr>
 
 
@@ -2200,5 +2212,62 @@ for(Cookie cookie : cookies){
 								  }
 							}
 						</script>
+						
+						<script>
+    // Access DOM elements
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const fileToUpload = document.getElementById('fileToUpload');
+
+    // Define constraints to prefer the rear camera
+    const constraints = {
+        video: {
+            facingMode: { ideal: "environment" },
+            width: { ideal: 1280 },
+            height: { ideal: 720 }
+        },
+        audio: false
+    };
+
+    // Request access to the rear webcam stream
+    navigator.mediaDevices.getUserMedia(constraints)
+    .then(function (stream) {
+        video.srcObject = stream;
+    })
+    .catch(function (err) {
+        console.error("Error accessing the rear camera: ", err);
+    });
+
+    // Capture the image and store it in the file input as a blob
+    document.getElementById('capture').addEventListener('click', function() {
+        const context = canvas.getContext('2d');
+        // Match canvas dimensions to actual video resolution for better capture quality
+        canvas.width = video.videoWidth || 320;
+        canvas.height = video.videoHeight || 240;
+        
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // Convert canvas image to a Blob
+        canvas.toBlob(function(blob) {
+            if (!blob) return;
+
+            // Create a File object from the blob
+            const file = new File([blob], "captured_image.png", { type: 'image/png' });
+
+            // Create a DataTransfer object to populate the input field
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+
+            // Assign the DataTransfer file to the input field
+            fileToUpload.files = dataTransfer.files;
+
+            // Show the upload button if present
+            const uploadBtn = document.getElementById('upload');
+            if (uploadBtn) {
+                uploadBtn.style.display = 'inline';
+            }
+        }, 'image/png');
+    });
+</script>
 </body>
 </html>
