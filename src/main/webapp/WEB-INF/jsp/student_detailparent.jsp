@@ -56,7 +56,43 @@ padding:1 rem;
      <div class="d-flex justify-content-center mb-2" style="width: 100%; padding: 0.25rem;">
   <div class="card" style="width: 100%; max-width: 360px;">
     <div class="card-body text-center">
-      <img class="rounded-circle mx-auto" src="${student.studentpic}"/>" alt="Student's Photo" style="width: 200px; height: 200px;">
+    	<c:choose>
+									<c:when test="${not empty student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentpic, 'data:application/pdf')}">
+														<a href="${student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img  class="rounded-circle mx-auto" src="${student.studentpic}" alt="Student's Pic"
+															style="width: 120px; height: 120px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img  class="rounded-circle mx-auto" src="data:image/jpeg;base64,${student.studentpic}"
+													alt="Student's Pic" style="width: 120px; height: 120px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose>
       <h5 class="my-3"><c:out value="${student.name}" /></h5>
       <p class="text-muted mb-1"><c:forEach var="splt" items="${fn:split(student.classstudying,'--')}">
         ${splt}

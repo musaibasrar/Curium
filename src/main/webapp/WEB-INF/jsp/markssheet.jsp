@@ -279,7 +279,44 @@ for(Cookie cookie : cookies){
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"></p></td> --%>
-							<td colspan="2" style="border-left: 1px solid black"><img  src="${Parents.parents.student.studentpic}" alt="Student's Photo" width="80" height="80"/></td>
+							<td colspan="2" style="border-left: 1px solid black">
+									<c:choose>
+									<c:when test="${not empty Parents.parents.student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(Parents.parents.student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(Parents.parents.student.studentpic, 'data:application/pdf')}">
+														<a href="${Parents.parents.student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${Parents.parents.student.studentpic}" alt="Student's Pic"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${Parents.parents.student.studentpic}"
+													alt="Student's Pic" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose>
 						</tr>
 					</table>
 								<table width="15%" border="0" style="border-color: #4b6a84;float: left;">

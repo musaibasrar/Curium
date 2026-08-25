@@ -287,7 +287,43 @@ for(Cookie cookie : cookies){
                             <table style=" border-collapse: collapse;width: 30%;float: left">
                             	<tr>
                             		<td>
-                            			<img src="${Parents.parents.student.studentpic}" alt="Student's Photo" style="width: 60px;height: 60px;">
+                            			<c:choose>
+									<c:when test="${not empty Parents.parents.student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(Parents.parents.student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(Parents.parents.student.studentpic, 'data:application/pdf')}">
+														<a href="${Parents.parents.student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${Parents.parents.student.studentpic}" alt="Student's Pic"
+															style="width: 200px; height: 200px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${Parents.parents.student.studentpic}"
+													alt="Student's Pic" style="width: 200px; height: 200px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose>
                             		</td>
                             	</tr>
                             

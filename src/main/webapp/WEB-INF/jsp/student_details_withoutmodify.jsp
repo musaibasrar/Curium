@@ -441,7 +441,43 @@ for(Cookie cookie : cookies){
                     
                     <tr>
                     <td>
-                    <img src="${student.studentpic}" alt="Student's Photo">
+                    <c:choose>
+									<c:when test="${not empty student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(student.studentpic, 'data:application/pdf')}">
+														<a href="${student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${student.studentpic}" alt="Student's Pic"
+															style="width: 30px; height: 30px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${student.studentpic}"
+													alt="Student's Pic" style="width: 30px; height: 30px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose>
                     </td>
                     </tr>
                     
