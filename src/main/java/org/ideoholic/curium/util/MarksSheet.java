@@ -20,11 +20,13 @@ public class MarksSheet  implements java.io.Serializable {
     Map<String, Map<String, String>> subjectExamMarks; // Subject -> (Exam -> Marks)
     List<ExamSummary> examSummaries;
     List<SubjectSummary> subjectSummaries;
+    List<ExamsDetails> examsDetails;
+	Map<String, String> excludedSubjectGrades;
     
     public MarksSheet() {
     }
 
-    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent,Map<String, Map<String, String>> subjectExamMarks,List<ExamSummary> examSummaries,List<SubjectSummary> subjectSummaries) {
+    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent,Map<String, Map<String, String>> subjectExamMarks,List<ExamSummary> examSummaries,List<SubjectSummary> subjectSummaries, List<ExamsDetails> examsDetails) {
         this.parents = parents;
         this.exammarks = exammarks;
         this.finaltermmarks = finaltermmarks;
@@ -36,6 +38,7 @@ public class MarksSheet  implements java.io.Serializable {
         this.subjectExamMarks = subjectExamMarks;
         this.examSummaries = examSummaries;
         this.subjectSummaries = subjectSummaries;
+        this.examsDetails = examsDetails;
     }
 
 
@@ -127,6 +130,22 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setSubjectSummaries(List<SubjectSummary> subjectSummaries) {
 		this.subjectSummaries = subjectSummaries;
+	}
+
+	public List<ExamsDetails> getExamsDetails() {
+		return examsDetails;
+	}
+
+	public void setExamsDetails(List<ExamsDetails> examsDetails) {
+		this.examsDetails = examsDetails;
+	}
+
+	public Map<String, String> getExcludedSubjectGrades() {
+		return excludedSubjectGrades;
+	}
+
+	public void setExcludedSubjectGrades(Map<String, String> excludedSubjectGrades) {
+		this.excludedSubjectGrades = excludedSubjectGrades;
 	}
 	
   }
