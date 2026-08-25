@@ -164,7 +164,7 @@ for(Cookie cookie : cookies){
         	</div>
         	</div>
         	
-        	<div class="row" style="padding-left: 20px;">
+        	<%-- <div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#FFCC00">
         			
@@ -181,7 +181,7 @@ for(Cookie cookie : cookies){
         			</table>
         			</div>
         	</div>
-        	</div>
+        	</div> --%>
         	
         	<div class="row" style="padding-left: 20px;">
         	<div class="col" style="padding-bottom: 40px;">
