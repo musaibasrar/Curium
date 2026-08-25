@@ -230,5 +230,23 @@ public class SubjectDetailsDAO {
 			return results;
 		}
 	}
+	
+	public List<Subject> readSubjectBySubjectId(int branchId, int subjectId) {
+		
+		List<Subject> results = new ArrayList<Subject>();
+		try {
+
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Subject where subjectid="+subjectId+" and branchid="+branchId);
+			results = query.list();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			
+			hibernateException.printStackTrace();
+		} finally {
+				HibernateUtil.closeSession();
+			return results;
+		}
+	}
 
 }

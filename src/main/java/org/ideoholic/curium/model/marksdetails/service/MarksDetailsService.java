@@ -483,7 +483,21 @@ public class MarksDetailsService {
 			String[] examClass = examC.split("--");
 			//String totalColumnNumber = new DataUtil().getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
-			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			String[] examIdsTermOne = new DataUtil().getPropertiesValue("TermOneExams"+httpSession.getAttribute(BRANCHID).toString()).split(",");
+			String[] examIdsTermTwo = new DataUtil().getPropertiesValue("TermTwoExams"+httpSession.getAttribute(BRANCHID).toString()).split(",");
+			List<Integer> termOneTwoExamIds = new ArrayList<Integer>();
+			
+			for(int i=0;i<examIdsTermOne.length;i++) {
+				termOneTwoExamIds.add(Integer.parseInt(examIdsTermOne[i]));
+			}
+			
+			for(int i=0;i<examIdsTermTwo.length;i++) {
+				termOneTwoExamIds.add(Integer.parseInt(examIdsTermTwo[i]));
+			}
+			
+			List<Exams> examsList = new ExamDetailsDAO().readListOfExams(termOneTwoExamIds,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+			
+			//List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 			List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 			String[] subjectListOtherExamIds = new DataUtil().getPropertiesValue("OtherExamsSubjects"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
 			List<Integer> subjectListOtherExam = new ArrayList<Integer>();	
@@ -526,9 +540,10 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubid();
+									int subId = sub.getSubid();
+									int subjectId = sub.getSubjectid();
 									
-									if(marksSubid == subjectId) {
+									if(marksSubid == subId) {
 										// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)
 										if(!subjectListOtherExam.contains(subjectId)) {
 											present = true;
@@ -587,32 +602,37 @@ public class MarksDetailsService {
 					int totalMarksObtainedSubjectAllExamsFinalTermOne = 0;
 					String grade;
 					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermOneIdsList);
-					List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					List<Subjectmaster> subjectMasterList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 					
-					for (Subjectmaster subFinal : subjectList) {
+					
+					for (Subjectmaster subMaster : subjectMasterList) {
 						
 						int marksObtainedSubjectAllExams = 0;
+						List<Subject> subjectList = new SubjectDetailsDAO().readSubjectBySubjectId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),subMaster.getSubjectid());
 						
+						for (Subject subList : subjectList) {
 						for (Marks marks : marksDetailsList) {
 							
 							//int examId = examTermOneIds;
 							int marksExamId = marks.getExamid();
 							
 									int marksSubid = marks.getSubid();
-									int subjectId = subFinal.getSubjectid();
+									int subId = subList.getSubid();
+									int subjectId = subList.getSubjectid();
 									
-									if(marksSubid == subjectId) {
+									if(marksSubid == subId) {
 										if(!subjectListOtherExam.contains(subjectId)) {
 										present = true;
-										
+										System.out.println("Subject "+subMaster.getSubjectname());
+										System.out.println("Marks Obtained "+marks.getMarksobtained());
 										int marksObtained = marks.getMarksobtained();
-										
+										totalMarks = totalMarks + subList.getMaxmarks();
 										marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
 										totalMarksObtainedSubjectAllExamsFinalTermOne = totalMarksObtainedSubjectAllExamsFinalTermOne + marksObtained;
 										}
 									}
 								}
-						
+						}
 						
 						if(marksObtainedSubjectAllExams!=0) {
 							
@@ -641,8 +661,8 @@ public class MarksDetailsService {
 							        grade = "F"; 
 							
 							}
-							subMarksTermOne.put(subFinal.getSubjectname(), marksObtainedSubjectAllExams*0.4);
-							subMarks.put(subFinal.getSubjectname(), Integer.toString(marksObtainedSubjectAllExams)+"_"+grade);
+							subMarksTermOne.put(subMaster.getSubjectname(), marksObtainedSubjectAllExams*0.4);
+							subMarks.put(subMaster.getSubjectname(), Integer.toString(marksObtainedSubjectAllExams)+"_"+grade);
 						}
 						
 						
@@ -703,9 +723,13 @@ public class MarksDetailsService {
 						
 						List<Marks> marksDetailsListFinalTermTwo = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermTwoIdsList);
 						
-						for (Subjectmaster subFinal : subjectList) {
+						for (Subjectmaster subMaster : subjectMasterList) {
 						
 							int marksObtainedSubjectAllExamsfinalTermTwo = 0;
+							
+							List<Subject> subjectList = new SubjectDetailsDAO().readSubjectBySubjectId(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),subMaster.getSubjectid());
+							
+							for (Subject subList : subjectList) {
 							
 							for (Marks marks : marksDetailsListFinalTermTwo) {
 								
@@ -713,21 +737,22 @@ public class MarksDetailsService {
 								int marksExamId = marks.getExamid();
 								
 										int marksSubid = marks.getSubid();
-										int subjectId = subFinal.getSubjectid();
+										int subId = subList.getSubid();
+										int subjectId = subList.getSubjectid();
 										
-										if(marksSubid == subjectId) {
+										if(marksSubid == subId) {
 											
 											if(!subjectListOtherExam.contains(subjectId)) {
 											presentTermTwo = true;
 											
 											int marksObtained = marks.getMarksobtained();
-											
+											totalMarks = totalMarks + subList.getMaxmarks();
 											marksObtainedSubjectAllExamsfinalTermTwo = marksObtainedSubjectAllExamsfinalTermTwo + marksObtained;
 											totalMarksObtainedSubjectAllExamsFinalTermTwo = totalMarksObtainedSubjectAllExamsFinalTermTwo + marksObtained;
 											}
 										}
 									}
-							
+							}
 							if(marksObtainedSubjectAllExamsfinalTermTwo!=0) {
 								
 								switch(marksObtainedSubjectAllExamsfinalTermTwo/10) {
@@ -755,8 +780,8 @@ public class MarksDetailsService {
 								        grade = "F"; 
 								
 								}
-								subMarksTermTwo.put(subFinal.getSubjectname(), marksObtainedSubjectAllExamsfinalTermTwo*0.6);
-								subMarksfinalTermTwo.put(subFinal.getSubjectname(), Integer.toString(marksObtainedSubjectAllExamsfinalTermTwo)+"_"+grade);
+								subMarksTermTwo.put(subMaster.getSubjectname(), marksObtainedSubjectAllExamsfinalTermTwo*0.6);
+								subMarksfinalTermTwo.put(subMaster.getSubjectname(), Integer.toString(marksObtainedSubjectAllExamsfinalTermTwo)+"_"+grade);
 							}
 							
 							
@@ -834,10 +859,15 @@ public class MarksDetailsService {
 										for (String sub : subjectListOtherExamIds) {
 											
 											int marksSubid = marks.getSubid();
-											int subjectId = Integer.parseInt(sub);
+											Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname(),Integer.parseInt(sub));
+											
+											if(subjectDetails!=null) {
+											
+											int subjectId = subjectDetails.getSubid();
+											
 											if(marksSubid == subjectId) {
 												presentOtherExamMarks = true;
-												Subject subjectDetails =  new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()),examClass[0],exam.getExamname(),subjectId);
+												
 												
 												int marksObtained = marks.getMarksobtained();
 												int minMarks = subjectDetails.getMinmarks();
@@ -892,6 +922,7 @@ public class MarksDetailsService {
 												otherExamMarksObtainedSubjectAllExams = otherExamMarksObtainedSubjectAllExams + marksObtained;
 												totalOtherExamMarksObtainedSubjectAllExams = totalOtherExamMarksObtainedSubjectAllExams + subjectDetails.getMaxmarks();
 												
+											}
 											}
 										}
 										
@@ -1391,7 +1422,7 @@ public class MarksDetailsService {
 								for (Subject sub : subjectList) {
 									
 									int marksSubid = marks.getSubid();
-									int subjectId = sub.getSubjectid();
+									int subjectId = sub.getSubid();
 									
 									if(marksSubid == subjectId) {
 										// &&  subjectId != subjectListOtherExam.get(0) && subjectId != subjectListOtherExam.get(1)
@@ -1462,37 +1493,48 @@ public class MarksDetailsService {
 				}
 				
 				//Read all the  subjects of term one and query their marks subject wise
+				List<FinalTermMarks> finalExamMarksList = new ArrayList<FinalTermMarks>();
+				
 				String[] examTermOneIds = new DataUtil().getPropertiesValue("TermOneExamsPreprimary"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
 				List<Integer> examTermOneIdsList = new ArrayList<Integer>();	
+				
 				for (String id : examTermOneIds) {
 					examTermOneIdsList.add(Integer.parseInt(id));
 					}
-					FinalTermMarks finalExamMarks = new FinalTermMarks();
-					List<FinalTermMarks> finalExamMarksList = new ArrayList<FinalTermMarks>();
+				
+				if(true) {
+				
+				List<Exams> examsListTermOne = new ExamDetailsDAO().readListOfExams(examTermOneIdsList,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Subjectmaster> subjectMasterList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermOneIdsList);
+				FinalTermMarks finalExamMarks = new FinalTermMarks();
+				int totalObtainedMarks = 0;
+				int totalMarks = 0;
+				int totalMarksObtainedSubjectAllExamsFinalTermOne = 0;
+				Map<String,String> subMarks = new HashMap<String, String>();
+				
+				for (Subjectmaster subjectmaster : subjectMasterList) {
+					
 					finalExamMarks.setExamName("Term 1");
 					boolean present = false;
-					Map<String,String> subMarks = new HashMap<String, String>();
-					int totalObtainedMarks = 0;
-					int totalMarks = 0;
-					int totalMarksObtainedSubjectAllExamsFinalTermOne = 0;
-					String grade;
-					List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermOneIdsList);
-					List<Subjectmaster> subjectList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+					float marksObtainedSubjectAllExams = 0;
+					String grade = null;
 					
-					for (Subjectmaster subFinal : subjectList) {
-						
-						int marksObtainedSubjectAllExams = 0;
-						
+					
+				for (Exams examOne : examsListTermOne) {
+					
+					//List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],examOne.getExamname());
+					Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), examClass[0], examOne.getExamname(), subjectmaster.getSubjectid());
+						if(subjectDetails!=null) {
 						for (Marks marks : marksDetailsList) {
 							
 							//int examId = examTermOneIds;
 							int marksExamId = marks.getExamid();
 							
 									int marksSubid = marks.getSubid();
-									int subjectId = subFinal.getSubjectid();
+									int subId = subjectDetails.getSubid();
 									
-									if(marksSubid == subjectId) {
-										//if(!subjectListOtherExam.contains(subjectId)) {
+									if(marksSubid == subId) {
 										present = true;
 										
 										int marksObtained = marks.getMarksobtained();
@@ -1501,11 +1543,14 @@ public class MarksDetailsService {
 										totalMarksObtainedSubjectAllExamsFinalTermOne = totalMarksObtainedSubjectAllExamsFinalTermOne + marksObtained;
 									}
 								}
+						}
+				}
 						
-						
+						if(present) {
 						if(marksObtainedSubjectAllExams!=0) {
+							int marksObtainedSubjectAllExamsInt = (int) marksObtainedSubjectAllExams;
 							
-							switch(marksObtainedSubjectAllExams/10) {
+							switch(marksObtainedSubjectAllExamsInt/10) {
 							
 							 case 10:
 							    case 9:
@@ -1530,164 +1575,185 @@ public class MarksDetailsService {
 							        grade = "F"; 
 							
 							}
-							subMarksTermOne.put(subFinal.getSubjectname(), marksObtainedSubjectAllExams*0.5);
-							subMarks.put(subFinal.getSubjectname(), Integer.toString(marksObtainedSubjectAllExams)+"_"+grade);
+							
 						}
-						
-						
-					}
-					
+						subMarksTermOne.put(subjectmaster.getSubjectname(), marksObtainedSubjectAllExams*0.4);
+						subMarks.put(subjectmaster.getSubjectname(), Float.toString(marksObtainedSubjectAllExams)+"_"+grade);
+						}
 					//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
-										
-					if(present) {
-						finalExamMarks.setTotalMarks(totalMarks);
-						finalExamMarks.setTotalMarksObtained(totalMarksObtainedSubjectAllExamsFinalTermOne);
-						String gradeTotal = null;
-						switch(totalMarksObtainedSubjectAllExamsFinalTermOne/10) {
-						
-						 case 10:
-						    case 9:
-						    	gradeTotal = "A1";
-						        break;
-						    case 8:
-						    	gradeTotal = "A2";
-						        break;
-						    case 7:
-						    	gradeTotal = "B1";
-						        break;
-						    case 6:
-						    	gradeTotal = "B2";
-						        break;
-						    case 5:
-						    	gradeTotal = "C1";
-						        break;
-						    case 4:
-						    	gradeTotal = "C2";
-						        break;
-						    default:
-						    	gradeTotal = "F"; 
-						
-						}
-						
-						double d = (totalObtainedMarks*100.0)/totalMarks;
-						finalExamMarks.setPercentage(d);
-						finalExamMarks.setSubMarks(subMarks);
-						finalExamMarks.setResultclass(gradeTotal);
-						finalExamMarksList.add(finalExamMarks);
+					
+				}
+				
+					finalExamMarks.setTotalMarks(totalMarks);
+					finalExamMarks.setTotalMarksObtained(totalMarksObtainedSubjectAllExamsFinalTermOne);
+					String gradeTotal = null;
+					int totalMarksObtainedSubjectAllExamsFinalTermOneInt = (int) totalMarksObtainedSubjectAllExamsFinalTermOne;
+					switch(totalMarksObtainedSubjectAllExamsFinalTermOneInt/10) {
+					
+					 case 10:
+					    case 9:
+					    	gradeTotal = "A1";
+					        break;
+					    case 8:
+					    	gradeTotal = "A2";
+					        break;
+					    case 7:
+					    	gradeTotal = "B1";
+					        break;
+					    case 6:
+					    	gradeTotal = "B2";
+					        break;
+					    case 5:
+					    	gradeTotal = "C1";
+					        break;
+					    case 4:
+					    	gradeTotal = "C2";
+					        break;
+					    default:
+					    	gradeTotal = "F"; 
+					
 					}
 					
+					double d = (totalObtainedMarks*100.0)/totalMarks;
+					finalExamMarks.setPercentage(d);
+					finalExamMarks.setSubMarks(subMarks);
+					finalExamMarks.setResultclass(gradeTotal);
+					finalExamMarksList.add(finalExamMarks);
 					
-					String[] examTermTwoIds = new DataUtil().getPropertiesValue("TermTwoExamsPreprimary"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
-					List<Integer> examTermTwoIdsList = new ArrayList<Integer>();	
+				}
+				//End reading all subject marks for term one
 					
-						for (String id : examTermTwoIds) {
-							examTermTwoIdsList.add(Integer.parseInt(id));
-						}
-						
-						FinalTermMarks finalTermTwoExamMarks = new FinalTermMarks();
-						finalTermTwoExamMarks.setExamName("Term 2");
-						boolean presentTermTwo = false;
-						Map<String,String> subMarksfinalTermTwo = new HashMap<String, String>();
-						int totalMarksObtainedSubjectAllExamsFinalTermTwo = 0;
-						
-						List<Marks> marksDetailsListFinalTermTwo = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermTwoIdsList);
-						
-						for (Subjectmaster subFinal : subjectList) {
-						
-							int marksObtainedSubjectAllExamsfinalTermTwo = 0;
+					
+				//Read all the  subjects of term two and query their marks subject wise
+				
+				String[] examTermTwoIds = new DataUtil().getPropertiesValue("TermTwoExamsPreprimary"+Integer.parseInt(httpSession.getAttribute(BRANCHID).toString())).split(",");
+				List<Integer> examTermTwoIdsList = new ArrayList<Integer>();	
+				
+				for (String id : examTermTwoIds) {
+					examTermTwoIdsList.add(Integer.parseInt(id));
+					}
+				
+				if(true) {
+				
+				List<Exams> examsListTermTwo = new ExamDetailsDAO().readListOfExams(examTermTwoIdsList,Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Subjectmaster> subjectMasterList = new SubjectDetailsDAO().readListOfSubjectMasterNames(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
+				List<Marks> marksDetailsList = new MarksDetailsDAO().readMarksPerExamPerSubject(Integer.parseInt(studentIds[i]),httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),examTermTwoIdsList);
+				FinalTermMarks finalExamMarks = new FinalTermMarks();
+				int totalObtainedMarks = 0;
+				int totalMarks = 0;
+				int totalMarksObtainedSubjectAllExamsFinalTermTwo = 0;
+				Map<String,String> subMarks = new HashMap<String, String>();
+				
+				for (Subjectmaster subjectmaster : subjectMasterList) {
+					
+					finalExamMarks.setExamName("Term 2");
+					boolean present = false;
+					float marksObtainedSubjectAllExams = 0;
+					String grade = null;
+					
+					
+				for (Exams examTwo : examsListTermTwo) {
+					
+					//List<Subject> subjectList = new SubjectDetailsDAO().readAllSubjectsClassWise(Integer.parseInt(branchId),examClass[0],examTwo.getExamname());
+					Subject subjectDetails = new SubjectDetailsDAO().readSubjectByExam(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()), examClass[0], examTwo.getExamname(), subjectmaster.getSubjectid());
+						if(subjectDetails!=null) {
+						for (Marks marks : marksDetailsList) {
 							
-							for (Marks marks : marksDetailsListFinalTermTwo) {
-								
-								//int examId = examTermOneIds;
-								int marksExamId = marks.getExamid();
-								
-										int marksSubid = marks.getSubid();
-										int subjectId = subFinal.getSubjectid();
+							//int examId = examTermTwoIds;
+							int marksExamId = marks.getExamid();
+							
+									int marksSubid = marks.getSubid();
+									int subId = subjectDetails.getSubid();
+									
+									if(marksSubid == subId) {
+										present = true;
 										
-										if(marksSubid == subjectId) {
-											
-											//if(!subjectListOtherExam.contains(subjectId)) {
-											presentTermTwo = true;
-											
-											int marksObtained = marks.getMarksobtained();
-											
-											marksObtainedSubjectAllExamsfinalTermTwo = marksObtainedSubjectAllExamsfinalTermTwo + marksObtained;
-											totalMarksObtainedSubjectAllExamsFinalTermTwo = totalMarksObtainedSubjectAllExamsFinalTermTwo + marksObtained;
-										}
+										int marksObtained = marks.getMarksobtained();
+										
+										marksObtainedSubjectAllExams = marksObtainedSubjectAllExams + marksObtained;
+										totalMarksObtainedSubjectAllExamsFinalTermTwo = totalMarksObtainedSubjectAllExamsFinalTermTwo + marksObtained;
 									}
-							
-							if(marksObtainedSubjectAllExamsfinalTermTwo!=0) {
-								
-								switch(marksObtainedSubjectAllExamsfinalTermTwo/10) {
-								
-								 case 10:
-								    case 9:
-								        grade = "A1";
-								        break;
-								    case 8:
-								        grade = "A2";
-								        break;
-								    case 7:
-								        grade = "B1";
-								        break;
-								    case 6:
-								        grade = "B2";
-								        break;
-								    case 5:
-								        grade = "C1";
-								        break;
-								    case 4:
-								        grade = "C2";
-								        break;
-								    default:
-								        grade = "F"; 
-								
 								}
-								subMarksTermTwo.put(subFinal.getSubjectname(), marksObtainedSubjectAllExamsfinalTermTwo*0.5);
-								subMarksfinalTermTwo.put(subFinal.getSubjectname(), Integer.toString(marksObtainedSubjectAllExamsfinalTermTwo)+"_"+grade);
-							}
-							
-							
 						}
+				}
 						
-						//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
-											
-						if(presentTermTwo) {
-							finalTermTwoExamMarks.setTotalMarks(totalMarks);
-							finalTermTwoExamMarks.setTotalMarksObtained(totalMarksObtainedSubjectAllExamsFinalTermTwo);
-							String gradeTotalTwo = null;
-							switch(totalMarksObtainedSubjectAllExamsFinalTermTwo/10) {
+						if(present) {
+						if(marksObtainedSubjectAllExams!=0) {
+							int marksObtainedSubjectAllExamsInt = (int) marksObtainedSubjectAllExams;
+							
+							switch(marksObtainedSubjectAllExamsInt/10) {
 							
 							 case 10:
 							    case 9:
-							    	gradeTotalTwo = "A1";
+							        grade = "A1";
 							        break;
 							    case 8:
-							    	gradeTotalTwo = "A2";
+							        grade = "A2";
 							        break;
 							    case 7:
-							    	gradeTotalTwo = "B1";
+							        grade = "B1";
 							        break;
 							    case 6:
-							    	gradeTotalTwo = "B2";
+							        grade = "B2";
 							        break;
 							    case 5:
-							    	gradeTotalTwo = "C1";
+							        grade = "C1";
 							        break;
 							    case 4:
-							    	gradeTotalTwo = "C2";
+							        grade = "C2";
 							        break;
 							    default:
-							    	gradeTotalTwo = "F"; 
+							        grade = "F"; 
 							
 							}
-							double d = (totalObtainedMarks*100.0)/totalMarks;
-							finalTermTwoExamMarks.setPercentage(d);
-							finalTermTwoExamMarks.setSubMarks(subMarksfinalTermTwo);
-							finalTermTwoExamMarks.setResultclass(gradeTotalTwo);
-							finalExamMarksList.add(finalTermTwoExamMarks);
+							
 						}
-						//end
+						subMarksTermTwo.put(subjectmaster.getSubjectname(), marksObtainedSubjectAllExams*0.6);
+						subMarks.put(subjectmaster.getSubjectname(), Float.toString(marksObtainedSubjectAllExams)+"_"+grade);
+						}
+					//subMarks.put("total", Integer.toString(00000000)+"/"+totalMarksObtainedSubjectAllExams+""+"_P");
+					
+				}
+				
+					finalExamMarks.setTotalMarks(totalMarks);
+					finalExamMarks.setTotalMarksObtained(totalMarksObtainedSubjectAllExamsFinalTermTwo);
+					String gradeTotal = null;
+					int totalMarksObtainedSubjectAllExamsFinalTermTwoInt = (int) totalMarksObtainedSubjectAllExamsFinalTermTwo;
+					switch(totalMarksObtainedSubjectAllExamsFinalTermTwoInt/10) {
+					
+					 case 10:
+					    case 9:
+					    	gradeTotal = "A1";
+					        break;
+					    case 8:
+					    	gradeTotal = "A2";
+					        break;
+					    case 7:
+					    	gradeTotal = "B1";
+					        break;
+					    case 6:
+					    	gradeTotal = "B2";
+					        break;
+					    case 5:
+					    	gradeTotal = "C1";
+					        break;
+					    case 4:
+					    	gradeTotal = "C2";
+					        break;
+					    default:
+					    	gradeTotal = "F"; 
+					
+					}
+					
+					double d = (totalObtainedMarks*100.0)/totalMarks;
+					finalExamMarks.setPercentage(d);
+					finalExamMarks.setSubMarks(subMarks);
+					finalExamMarks.setResultclass(gradeTotal);
+					finalExamMarksList.add(finalExamMarks);
+					
+				}
+				
+				//end reading all subject marks for term two
 						
 						// Over All Subjects
 						
