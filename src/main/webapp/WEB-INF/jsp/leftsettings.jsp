@@ -351,10 +351,11 @@ for(Cookie cookie : cookies){
             
             <h5 style="font-size: 12px"><a href="#">Fees</a></h5>
             <div>
-                <a target="mainFrame" href="/roshan/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
-                <a target="mainFrame" href="/roshan/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
-                <a target="mainFrame" href="/roshan/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
+                <a target="mainFrame" href="/brainystars/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
+                <a target="mainFrame" href="/brainystars/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a target="mainFrame" href="/brainystars/StampFeesProcess/showFeesDetailsAllStudents" style="font-size: 12px;">Stamp Fee All</a><br/>
+                <a target="mainFrame" href="/brainystars/StampFeesProcess/showSingleFeesDetails" style="font-size: 12px;">Stamp Single Fee</a><br/>
+                <a target="mainFrame" href="/brainystars/FeesProcess/bulkConcession" style="font-size: 12px;">Bulk Concession</a>
             </div>
             
             <h5 style="font-size: 12px"><a href="#">Other Fee</a></h5>
