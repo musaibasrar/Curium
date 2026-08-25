@@ -1692,12 +1692,12 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="fileToUpload"  accept="image/*,application/pdf"><br><br><br><br></td>
 								</tr>
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 1</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc1" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc1"  accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1707,7 +1707,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 2</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc2" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc2"  accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1717,7 +1717,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 3</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc3" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc3"  accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1727,7 +1727,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 4</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc4" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc4"  accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								
 								<tr>
@@ -1737,7 +1737,7 @@ $(document).ready(function() {
 								
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Doc 5</label><br /> <input type="file" name="fileToUpload"
-										id="studentdoc5" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="studentdoc5"  accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 
 
