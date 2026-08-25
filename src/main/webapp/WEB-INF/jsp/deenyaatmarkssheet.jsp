@@ -294,7 +294,7 @@ for(Cookie cookie : cookies){
                             <table style=" border-collapse: collapse;width: 20%;float: left">
                             	<tr>
                             		<td>
-                            			<img src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 80px;height: 80px;">
+                            			<img src="data:image/jpg;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" style="width: 80px;height: 80px;">
                             		</td>
                             	</tr>
                             

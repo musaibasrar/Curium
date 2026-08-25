@@ -529,7 +529,7 @@ for(Cookie cookie : cookies){
   <table style="width: 77%;margin-top:0px;padding-top:0px;">
    <tr>
         <td style="padding-bottom:0px;">&emsp;
-          <img src="data:image;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;margin-bottom:0px;" alt="Photo"  />
+          <img src="data:image/jpg;base64,<%= request.getSession().getAttribute("studentpic" + i + "") %>" style="height:100px;width:80px;border: 1px solid black;border-radius: 10px;margin-bottom:0px;" alt="Photo"  />
         </td>
       </tr>
       <tr>

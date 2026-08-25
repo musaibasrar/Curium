@@ -279,7 +279,7 @@ for(Cookie cookie : cookies){
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"></p></td> --%>
-							<td colspan="2" style="border-left: 1px solid black"><img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/></td>
+							<td colspan="2" style="border-left: 1px solid black"><img  src="data:image/jpg;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/></td>
 						</tr>
 					</table>
 								<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
@@ -884,7 +884,7 @@ for(Cookie cookie : cookies){
 					<td></td>
 					<td align="left">
 					Place:&nbsp;Ratlam<br><br>
-					Date:&nbsp;03/04/2024</td>	
+					Date:&nbsp;29/03/2026</td>	
 					<td align="centre">Signature<br><br>Class Teacher</td>
 					<td align="centre">Signature<br><br>Head Mistress</td>
 				</tr>

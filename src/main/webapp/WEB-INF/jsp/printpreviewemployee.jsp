@@ -459,7 +459,7 @@ for(Cookie cookie : cookies){
 	                         		
 		                         	
 	  								<img src="/bsr/images/logoId.png" alt="Brainy Stars" style=" width:90px;height:90px;padding-left: 10px;padding-right:10px;">
-	  								<img src="data:image;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:90px;width:90px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
+	  								<img src="data:image/jpg;base64,<%= request.getSession().getAttribute("employeephoto" + i + "")%>" style="height:90px;width:90px;border: 1px solid black;border-radius: 5px;" alt="Photo" />
 	  								</div>
 	  								<hr width="100%" style="margin-top:0px;margin-bottom:0px;">
 	  								<h3 style="margin-top: 0px;margin-bottom: 0px;font-weight: bold;" align="center">STAFF</h3>

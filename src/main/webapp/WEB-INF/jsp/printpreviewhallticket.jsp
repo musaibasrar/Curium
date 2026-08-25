@@ -248,7 +248,7 @@ for(Cookie cookie : cookies){
 				<label class="addressLine">Contact: ${branchcontact}</label><br>
 				<label class="addressLine">Email:&nbsp;thebrainystarsacademy@gmail.com </label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
+				<td><img  src="data:image/jpg;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
 			</tr>
 		</table>
 

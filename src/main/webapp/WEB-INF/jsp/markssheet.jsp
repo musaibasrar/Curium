@@ -279,7 +279,7 @@ for(Cookie cookie : cookies){
 								<p style="margin-bottom: 0px;margin-top: 0px;">${Parents.parents.student.classstudying}</p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"><fmt:formatDate type="date" value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></p>
 								<p style="margin-bottom: 0px;margin-top: 0px;"></p></td> --%>
-							<td colspan="2" style="border-left: 1px solid black"><img  src="data:image;base64,<c:out value="${Parents.parents.student.studentpic}"/>" alt="Student's Photo" width="80" height="80"/></td>
+							<td colspan="2" style="border-left: 1px solid black"><img  src="data:image/jpg;base64,${Parents.parents.student.studentpic}" alt="Student's Photo" width="80" height="80"/></td>
 						</tr>
 					</table>
 								<table width="15%" border="0" style="border-color: #4b6a84;float: left;">
@@ -478,7 +478,7 @@ for(Cookie cookie : cookies){
 								                                    <%-- <td style="border: 1px solid black;text-align: left;">${finaltermsubmarks.key}</td> --%>
 								                                    <c:set var="dateParts" value="${fn:split(finaltermsubmarks.value,'_')}" />
 								                                    <%-- <c:set var="dataSubParts" value="${fn:split(dateParts[0],'/')}" /> --%>
-								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}${dateParts[1]}</td>
+								                                    <td style="border: 1px solid black;text-align: left;">${dateParts[0]}</td>
 								                                    <%-- <td style="border: 1px solid black;text-align: left;">${dateParts[1]}</td> --%>
 								                                </tr>
 								                            </c:forEach>
@@ -521,7 +521,7 @@ for(Cookie cookie : cookies){
 								    <table width="15%" border="0" style="border-color: #4b6a84;float: left;">
 								        <thead>
 								            <tr style="border: 1px solid black;text-align: center;background-color: #A9A9A9">
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="8" end= "8" step="1">
 								                    <th style="border: 1px solid black;font-size: 12px;"><c:set var="examParts" value="${fn:split(exammarks.examName,'/')}" />
 								                    <c:out value="${examParts[1]}"/></th>
 								                    <th style="border: 1px solid black;font-size: 12px;">%<br>&nbsp;</th>
@@ -532,7 +532,7 @@ for(Cookie cookie : cookies){
 								        
 								        <tbody>
 								            <tr>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="8" end= "8" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -547,7 +547,7 @@ for(Cookie cookie : cookies){
 								                        </table>
 								                    </td>
 								                </c:forEach>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="8" end= "8" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -565,7 +565,7 @@ for(Cookie cookie : cookies){
 								                        </table>
 								                    </td>
 								                </c:forEach>
-								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="10" end= "10" step="1">
+								                <c:forEach items="${Parents.exammarks}" var="exammarks" begin="8" end= "8" step="1">
 								                    <td>
 								                        <table style="border-collapse: collapse;width: 100%;border: 1px solid black;">
 								                            <c:forEach items="${exammarks.subMarks}" var="submarks" >
@@ -886,7 +886,7 @@ for(Cookie cookie : cookies){
 					<td></td>
 					<td align="left">
 					Place:&nbsp;Ratlam<br><br>
-					Date:&nbsp;25/03/2025</td>	
+					Date:&nbsp;29/03/2026</td>	
 					<td align="centre">Signature<br><br>Class Teacher</td>
 					<td align="centre">Signature<br><br>Head Mistress</td>
 				</tr>
