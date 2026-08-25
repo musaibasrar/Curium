@@ -65,6 +65,7 @@ import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.ImageCompressionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -95,37 +96,60 @@ public class StudentService {
 		String[] currentAcademicYear = strCurrentAcademicYear.split("/");
 		
 		try {
-			// Process form file field (input type="file")
+			// Process form file fields (input type="file").
+			// Loop starts at 0 so that index 0 (studentpic) is also processed.
 			if (listOfFiles != null && listOfFiles.length != 0) {
-				for (int i = 1; i < listOfFiles.length; i++) {
+				for (int i = 0; i < listOfFiles.length; i++) {
 					MultipartFile fileItem = listOfFiles[i];
 					String fileName = (DataUtil.emptyString(fileItem.getOriginalFilename()));
 					String fileValue = (DataUtil.emptyString(fileItem.getName()));
 					if (!fileName.equalsIgnoreCase("")) {
-						byte[] bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
-						String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
-						 switch (i) {
-						 	case 0:
-			                    student.setStudentpic(saveFile);
-			                    break;
-			                case 1:
-			                    student.setStudentdoc1(saveFile);
-			                    break;
-			                case 2:
-			                    student.setStudentdoc2(saveFile);
-			                    break;
-			                case 3:
-			                    student.setStudentdoc3(saveFile);
-			                    break;
-			                case 4:
-			                    student.setStudentdoc4(saveFile);
-			                    break;
-			                case 5:
-			                    student.setStudentdoc5(saveFile);
-			                    break;
-			                default:
-			                    break;
-			            }
+						byte[] rawBytes = fileItem.getBytes();
+
+						// -------------------------------------------------------
+						// Compress uploaded files to ≤ 100 KB before Base64-
+						// encoding.  The unified dispatcher routes:
+						//   image/* → JPEG binary-search quality compression
+						//   application/pdf → PDFBox metadata strip + image
+						//                     re-encode compression
+						//   anything else   → stored as-is
+						// -------------------------------------------------------
+						String contentType = fileItem.getContentType();
+						if (contentType != null) {
+							try {
+								rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+							} catch (IOException compressionEx) {
+								// Compression failed — fall back to the original bytes
+								// so the student can still be created.
+								compressionEx.printStackTrace();
+								rawBytes = fileItem.getBytes();
+							}
+						}
+
+						byte[] bytesEncoded = Base64.encodeBase64(rawBytes);
+						String saveFile = new String(bytesEncoded);
+						switch (i) {
+							case 0:
+								student.setStudentpic(saveFile);
+								break;
+							case 1:
+								student.setStudentdoc1(saveFile);
+								break;
+							case 2:
+								student.setStudentdoc2(saveFile);
+								break;
+							case 3:
+								student.setStudentdoc3(saveFile);
+								break;
+							case 4:
+								student.setStudentdoc4(saveFile);
+								break;
+							case 5:
+								student.setStudentdoc5(saveFile);
+								break;
+							default:
+								break;
+						}
 					}
 				}
 			}
@@ -737,9 +761,21 @@ public class StudentService {
 
 				if (!fileName.equalsIgnoreCase("")) {
 					// Resize the image
-					byte[]   bytesEncoded = Base64.encodeBase64(fileItem.getBytes());
+					String contentType = fileItem.getContentType();
+					byte[] rawBytes = fileItem.getBytes();
+					if (contentType != null) {
+						try {
+							rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+						} catch (IOException compressionEx) {
+							// Compression failed — fall back to the original bytes
+							// so the student can still be created.
+							compressionEx.printStackTrace();
+							rawBytes = fileItem.getBytes();
+						}
+					}
+					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
+					String saveFile = new String(bytesEncoded);
 
 					student.setStudentpic(saveFile);
 
@@ -755,9 +791,21 @@ public class StudentService {
 
 				if (!studentdoc1.equalsIgnoreCase("")) {
 					// Resize the image
-					byte[]   bytesEncoded = Base64.encodeBase64(fileItem1.getBytes());
+					String contentType = fileItem1.getContentType();
+					byte[] rawBytes = fileItem1.getBytes();
+					if (contentType != null) {
+						try {
+							rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+						} catch (IOException compressionEx) {
+							// Compression failed — fall back to the original bytes
+							// so the student can still be created.
+							compressionEx.printStackTrace();
+							rawBytes = fileItem1.getBytes();
+						}
+					}
+					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
+					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc1(saveFile);
 
@@ -772,9 +820,21 @@ public class StudentService {
 				String studentdoc2 = (DataUtil.emptyString(fileItem2.getOriginalFilename()));
 				if (!studentdoc2.equalsIgnoreCase("")) {
 					// Resize the image
-					byte[]   bytesEncoded = Base64.encodeBase64(fileItem2.getBytes());
+					String contentType = fileItem2.getContentType();
+					byte[] rawBytes = fileItem2.getBytes();
+					if (contentType != null) {
+						try {
+							rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+						} catch (IOException compressionEx) {
+							// Compression failed — fall back to the original bytes
+							// so the student can still be created.
+							compressionEx.printStackTrace();
+							rawBytes = fileItem2.getBytes();
+						}
+					}
+					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
+					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc2(saveFile);
 
@@ -789,9 +849,22 @@ public class StudentService {
 				String studentdoc3 = (DataUtil.emptyString(fileItem3.getOriginalFilename()));
 				if (!studentdoc3.equalsIgnoreCase("")) {
 					// Resize the image
-					byte[]   bytesEncoded = Base64.encodeBase64(fileItem3.getBytes());
+					
+					String contentType = fileItem3.getContentType();
+					byte[] rawBytes = fileItem3.getBytes();
+					if (contentType != null) {
+						try {
+							rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+						} catch (IOException compressionEx) {
+							// Compression failed — fall back to the original bytes
+							// so the student can still be created.
+							compressionEx.printStackTrace();
+							rawBytes = fileItem3.getBytes();
+						}
+					}
+					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
+					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc3(saveFile);
 
@@ -805,9 +878,21 @@ public class StudentService {
 				String studentdoc4 = (DataUtil.emptyString(fileItem4.getOriginalFilename()));
 				if (!studentdoc4.equalsIgnoreCase("")) {
 					// Resize the image
-					byte[]   bytesEncoded = Base64.encodeBase64(fileItem4.getBytes());
+					String contentType = fileItem4.getContentType();
+					byte[] rawBytes = fileItem4.getBytes();
+					if (contentType != null) {
+						try {
+							rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+						} catch (IOException compressionEx) {
+							// Compression failed — fall back to the original bytes
+							// so the student can still be created.
+							compressionEx.printStackTrace();
+							rawBytes = fileItem4.getBytes();
+						}
+					}
+					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
 					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
+					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc4(saveFile);
 
@@ -821,9 +906,20 @@ public class StudentService {
 				String studentdoc5 = (DataUtil.emptyString(fileItem5.getOriginalFilename()));
 				if (!studentdoc5.equalsIgnoreCase("")) {
 					// Resize the image
-					byte[]   bytesEncoded = Base64.encodeBase64(fileItem5.getBytes());
-					System.out.println("ecncoded value is " + new String(bytesEncoded ));
-					String saveFile = new String("data:image/jpg;base64,"+bytesEncoded);
+					String contentType = fileItem5.getContentType();
+					byte[] rawBytes = fileItem5.getBytes();
+					if (contentType != null) {
+						try {
+							rawBytes = ImageCompressionUtil.compressFileBytes(rawBytes, contentType);
+						} catch (IOException compressionEx) {
+							// Compression failed — fall back to the original bytes
+							// so the student can still be created.
+							compressionEx.printStackTrace();
+							rawBytes = fileItem5.getBytes();
+						}
+					}
+					byte[]   bytesEncoded = Base64.encodeBase64(rawBytes);
+					String saveFile = new String(bytesEncoded);
 
 					student.setStudentdoc5(saveFile);
 
