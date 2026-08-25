@@ -36,8 +36,11 @@ public class Periodmaster implements java.io.Serializable {
 	@Column(name = "idperiodmaster", unique = true, nullable = false)
 	private Integer idperiodmaster;
 
+	//@Column(name = "class", length = 45)
+	//private String class_;
+	
 	@Column(name = "class", length = 45)
-	private String class_;
+	private String classSec;
 
 	@Column(name = "totalperiods")
 	private Integer totalperiods;
