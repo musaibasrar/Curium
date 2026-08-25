@@ -194,7 +194,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/brainystars/UserProcess/dashBoard"><img
+                href="/brainystars/UserProcess/superDashboard"><img
 									alt="Dash Board" src="/brainystars/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
