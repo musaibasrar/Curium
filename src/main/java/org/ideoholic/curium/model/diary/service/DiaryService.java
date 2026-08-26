@@ -112,7 +112,7 @@ public class DiaryService {
 				log.error("Error processing file upload", e);
 			}
 
-			diary = new diaryDAO().create(diary);
+			diary = diarysDao.create(diary);
 		}
 }
 
