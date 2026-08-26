@@ -71,6 +71,7 @@ import org.ideoholic.curium.util.ExamsMarks;
 import org.ideoholic.curium.util.FinalTermMarks;
 import org.ideoholic.curium.util.MarksSheet;
 import org.ideoholic.curium.util.PropertiesUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -81,6 +82,9 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @RequiredArgsConstructor
 public class MarksDetailsService {
+	
+	 @Autowired
+    private AttendanceDAO attendanceDAO;
 
 	private final HttpServletResponse response;
 	
@@ -602,7 +606,7 @@ public class MarksDetailsService {
 			String[] studentIds = dto.getStudentIds();
 			String examC = dto.getExamClass();
 			String[] examClass = examC.split("--");
-			String presentDate = dto.getTotalDaysPresent();
+			String presentDate = dto.getNoofpresentday();
 			//String totalColumnNumber = propertiesUtil.getPropertiesValue("totalColumnNumber");
 			//String[][] marksList = new String[studentIds.length][Integer.parseInt(totalColumnNumber)+1];
 			List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
@@ -633,7 +637,7 @@ public class MarksDetailsService {
 				String  startDateFormatted=sdf.format(startDate);
 				String endDateFormatted=sdf.format(endDate);
 				String academicYear = currentAcademicYear;
-				studentDailyAttendance = new AttendanceDAO().getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted, endDateFormatted, Integer.parseInt(branchId));
+				studentDailyAttendance = attendanceDAO.getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted, endDateFormatted, Integer.parseInt(branchId));
 				 List<Holidaysmaster> holidaysMasterList = marksDetailsDao.getListofHolidays(startDate,endDate);
 				 int holidayCount = 0;
 				 for(Holidaysmaster holiday:holidaysMasterList) {
@@ -2202,7 +2206,7 @@ public GenerateReportResponseDto generateFinalExamReport(GenerateReportDto dto, 
 		String examC = dto.getExamClass();
 		String[] examClass = examC.split("--");
 		String examName = dto.getExamName();
-		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(Integer.parseInt(branchId));
+		List<Exams> examsList = examDetailsDao.readListOfExams(Integer.parseInt(branchId));
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 		List<ExamRank> examRankList = new ArrayList<ExamRank>();
 
