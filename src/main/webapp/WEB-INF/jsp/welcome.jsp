@@ -1,24 +1,73 @@
 <%-- 
-    Document   : Welcome 
-    Created on : Apr 08, 2019, 09:38:53 PM
-    Author     : Musaib
+  Document   : Dash Board
+  Created on : Jan 13, 2012, 12:21:03 PM
+  Author     : Musaib
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE HTML>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>CURIUM</title>
-        <link rel="stylesheet" href="/abc/css/font-awesome.css">
-</head>
-<%
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Welcome Super Admin</title>
+        <script src="/syedbarey/js/Chart.min.js"></script>
+         <link rel="stylesheet" href="/syedbarey/css/bootstrap.min.css">
+        <script src="/syedbarey/js/jquery.min.js"></script>
+        <script src="/syedbarey/js/bootstrap.min.js"></script>
+        <script src="/syedbarey/js/popper.min.js"></script>
+    </head>
+    
+	<style type="text/css">
+
+		@font-face {
+		  font-family: "IBMPlexSans";
+  		  src: url("fonts/IBMPlexSans-Regular.ttf");
+		}
+
+		#rcorners1 {
+		  border-radius: 25px;
+		  border: 0px solid;
+		  padding: 10px; 
+		  width: 340px;
+		  height: 110px; 
+		  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+		}
+		
+		
+		#labelname {
+		 	font-family: IBMPlexSans;
+		 	font-size: 14px;
+		}
+		
+		#labelnumber {
+		 	font-family: IBMPlexSans;
+		 	font-size: 14px;
+		}
+		
+			a:link {
+                color: black;
+                text-decoration: none;
+                font-family: arial;
+                font-size: 14px;
+            }
+            a:active {
+                color: #ef5b00;
+                text-decoration: underline;
+            }
+            
+			a:hover {
+				text-decoration: underline;
+			}
+		
+	</style>    
+    <%
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/syedbarey/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -30,26 +79,123 @@ for(Cookie cookie : cookies){
 }
 }
 %>
+   
     <body>
-        <form id="form1" method="post">
-    		<table style="align-self: center;">
-      			<tr>
-      				<td height="200px;" width="100px;"></td>
-          			<td>
-          			<p style="text-transform: uppercase;color: #143160;font-weight: bolder;">Welcome, <label style="color: #93051f;"><c:out default="" value="${username}"/> </label></p><br><br>
-          			
-          			<p style="color: #143160;font-weight: bolder;">You can navigate your way through CURIUM using: </p><br><br>
-					
-					
-					<i class="fa fa-arrow-up" style="font-size:28px;color:#1b5605;"></i>&nbsp;&nbsp;<label style="color: #1b5605;">The shortcuts at the top</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-					<i class="fa fa-arrow-left" style="font-size:28px;color:#086d7c;"></i>&nbsp;&nbsp;<label style="color: #086d7c;">The menu to the left</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<i class="fa fa-bar-chart" style="font-size:28px;color:#93051f;"></i>&nbsp;&nbsp;<label style="color: #93051f;">DashBoard at the top right</label>
-          			
-         			</td>
-          			
-      			</tr>
-      			
-    		</table>
-       </form>
-    </body>
+    	
+
+	<div style="padding-left: 20px;">
+		<table style="align-self: left;">
+			<tr>
+				<td height="150px;"></td>
+				<td>
+					<p
+						style="text-transform: uppercase; color: #143160; font-weight: bolder;">
+						Welcome, <label style="color: #93051f;"><c:out default=""
+								value="${username}" /> </label>
+					</p>
+					<p style="color: #93051f; font-weight: bolder;">${branchname}</p>
+				</td>
+
+			</tr>
+
+		</table>
+	</div>
+
+	<div class="row" style="padding-left: 20px;">
+        	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:40px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;">Al Kareem School of Nursing</label><br>
+        						<a target="_parent" style="padding-left: 60px;"
+        						 href="/syedbarey/UserProcess/multiUser?branchid=2"> <img
+									src="/syedbarey/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	<div class="col" style="padding-bottom: 40px;"> 
+        			<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td style="padding-left:40px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;">Al Kareem College of Nursing</label><br>
+        						<a target="_parent" style="padding-left: 80px;"
+        						 href="/syedbarey/UserProcess/multiUser?branchid=3"> <img
+									src="/syedbarey/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	
+        	<div class="col" style="padding-bottom: 40px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td style="padding-left:20px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Next Generation P.U. Science College</label><br>
+        						<a target="_parent" style="padding-left: 110px;"
+        						 href="/syedbarey/UserProcess/multiUser?branchid=2"> <img
+									src="/syedbarey/images/login.svg" width="25" height="25" alt="Login"/>Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	
+        	 </div>
+        	 
+        	<div class="col" style="padding-bottom: 40px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td style="padding-left:15px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;">khasim Bee Saheba (KBS) College of<br> Pharmacy</label><br>
+        						<a target="_parent" style="padding-left: 110px;"
+        						 href="/syedbarey/UserProcess/multiUser?branchid=5"> <img
+									src="/syedbarey/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	 </div>
+        	 
+        	 
+        	 <div class="col" style="padding-bottom: 40px;"> 
+        			<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td style="padding-left:40px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;">SASSB College of Physiotherapy</label><br>
+        						<a target="_parent" style="padding-left: 90px;"
+        						 href="/syedbarey/UserProcess/multiUser?branchid=6"> <img
+									src="/syedbarey/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	
+        	 
+        	 <div class="col" style="padding-bottom: 10px;">
+        		<div id="rcorners1">
+        			<table>
+        				<tr>
+        					<td style="padding-left:40px;">
+        						<label style="font-family: Tahoma;font-weight: bolder;color: #5E87B0;font-size: 18px;"> Harmony College of Nursing</label><br>
+        						<a target="_parent" style="padding-left: 80px;"
+        						 href="/syedbarey/UserProcess/multiUser?branchid=7"> <img
+									src="/syedbarey/images/login.svg" width="25" height="25" alt="Login" />Login</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	 </div>
+        	 
+        	 
+        </div>
+</body>    
 </html>
