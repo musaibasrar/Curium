@@ -131,7 +131,9 @@ public class ImportFileService {
 						//student.setLastfirstlanguage(getCellValue(row, 44));
 
 						student.setUserid(2);
-
+						student.setRte(0);
+						student.setClassadmittedin("");
+						student.setStream("Admission");
 						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
 						//student.setSts(getCellValue(row, 49));
 
