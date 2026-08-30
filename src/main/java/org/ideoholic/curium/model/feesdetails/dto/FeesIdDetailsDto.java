@@ -15,4 +15,5 @@ public class FeesIdDetailsDto {
 	private String grandTotalAmount;
 	private String miscellanousamount;
 	private String balanceamount;
+	private String feesCollector;
 }
