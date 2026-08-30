@@ -194,7 +194,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/brightschool/UserProcess/dashBoard"><img
+                href="/brightschool/UserProcess/superDashboard"><img
 									alt="Dash Board" src="/brightschool/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
