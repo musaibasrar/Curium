@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Details</title>
+        <title>Update Time Table</title>
 
         <script type="text/javascript" language="JavaScript" src="/brightschool/js/motionpack.js"></script>
         <link rel="stylesheet" href="/brightschool/css/datePicker/jquery-ui-1.8.18.custom.css">
@@ -296,55 +296,23 @@
         </style>
         
         <script type="text/javascript">
-            
-            
-<!--             function updatePeriods() {
-        		
-        		var form1 = document.getElementById("form1");
-        		if(form1.checkValidity()) {
-        			form1.action = "/brightschool/PeriodProcess/updatenewPeriodDetails";
-        			form1.method = "POST";
-        			form1.submit();
-        		  }
-        	}
-
-           
-            
-      
-        </script>
-
-        
-        
-<script type="text/javascript">
-$("#tabs").tabs();
-
-$("#update").button().click(function() {
-	updatePeriods();
-	return false;
-});
-
-                                
-                               
- -->                            </script>
-                            
-                            <script type="text/javascript">
 	function updatePeriods() {
+		var addclass = document.getElementById("addclass");
+		if (!addclass || !addclass.value) {
+			alert("Please select a Class.");
+			return;
+		}
 		var form1 = document.getElementById("form1");
 		form1.action = "/brightschool/PeriodProcess/updatenewPeriodDetails";
 		form1.method = "POST";
 		form1.submit();
-
 	}
-	$(function() {
 
-		$("#tabs").tabs();
+	$(function() {
 		$("#update").button().click(function() {
 			updatePeriods();
 		});
-		//$("#effect").hide();
-
 	});
-	
 	</script>
 
 
@@ -372,25 +340,28 @@ for(Cookie cookie : cookies){
 			<table width="100%">
 				<tr>
 					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;
-					<c:set var="itemparts" value="${fn:split(timetable.class_, '--')}" />
-					Class<select name="classsec" id="classsec"><option selected>${itemparts[0]}</option>
-					<c:forEach items="${classdetailslist}" var="classdetailslist">
-					                               <c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-													</c:if>
-										</c:forEach>
-										</select>
-										Section<select name="section" id="section"><option selected>${itemparts[1]}</option>
-					<c:forEach items="${classdetailslist}" var="classdetailslist">
-					                            <c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-												</c:if>
-										</c:forEach>
-										</select>
+					<select name='addclass' id='addclass'>
+						<option value='' <c:if test="${empty savedClass}">selected</c:if>>Select Class</option>
+						<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<c:if test="${classdetailslist.classdetails != ''}">
+								<option value="${classdetailslist.classdetails}"
+									<c:if test="${classdetailslist.classdetails == savedClass}">selected</c:if>>
+									<c:out value="${classdetailslist.classdetails}" />
+								</option>
+							</c:if>
+						</c:forEach>
+					</select>
+					<select name='addsec' id='addsec'>
+						<option value='' <c:if test="${empty savedSection}">selected</c:if>>Select Section</option>
+						<c:forEach items="${classdetailslist}" var="classdetailslist">
+							<c:if test="${classdetailslist.section != ''}">
+								<option value="${classdetailslist.section}"
+									<c:if test="${classdetailslist.section == savedSection}">selected</c:if>>
+									<c:out value="${classdetailslist.section}" />
+								</option>
+							</c:if>
+						</c:forEach>
+					</select>
 				  <%--  <c:forEach items="${periodmasterlist}" var="periodmasterlist"> --%>
 
 							<lable>Day start time<c:set var="item" value="${fn:split(timetable.daystart, ' ')}" />
