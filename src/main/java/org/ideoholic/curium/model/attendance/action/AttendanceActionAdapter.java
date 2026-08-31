@@ -159,6 +159,8 @@ public class AttendanceActionAdapter {
 
         return attendanceMonthlyResponseDto.isSuccess();
     }
+    
+
 
     public boolean searchStudentAttendanceDetails() {
         AttendanceService attendanceService = new AttendanceService(request, response);
@@ -341,4 +343,10 @@ public class AttendanceActionAdapter {
 
         return resultResponse.isSuccess();
     }
+
+	public void singleStudentReport() {
+
+		request.setAttribute("userid",request.getParameter("id"));
+		
+	}
 }
