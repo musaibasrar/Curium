@@ -1,403 +1,895 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Admission Form</title>
 
 <style>
 
-h3{
-	margin-left: 400px;
-	margin-right: 30px;
-	margin-top: 10px;
+* {
+    box-sizing: border-box;
 }
 
-h2{
-	margin-left: 400px;
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f2f2f2;
 }
 
-h4{
-	margin-left: 400px;
+.admission-form {
+    width: 800px;
+    margin: auto;
+    background: #ffffff;
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 15px;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
+/* ================= HEADER ================= */
+
+.school-header {
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 5px;
 }
 
-td, th {
-  border: 1px solid black;
-  text-align: left;
-  padding: 8px;
+.logo {
+    position: absolute;
+    left: 20px;
+    top: 10px;
+    width: 110px;
+    height: 100px;
+    border: 1px solid #555;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #444;
 }
 
-input {
-  border: 0;
-  outline: 0;
-  border-bottom: solid;
-        
+.school-name {
+    font-family: "Times New Roman", serif;
+    font-size: 38px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }
 
+.school-subtitle {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+}
 
+.school-address {
+    font-size: 16px;
+    margin-top: 4px;
+}
 
+.school-phone {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* ================= TITLE ================= */
+
+.form-title {
+    width: 260px;
+    margin: 5px auto 10px auto;
+    background: #3d477c;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* ================= TOP SECTION ================= */
+
+.top-section {
+    width: 100%;
+}
+
+.top-section td {
+    vertical-align: top;
+}
+
+.form-no-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.form-no-table td {
+    padding: 6px;
+}
+
+.input-box {
+    border: 1px solid #444;
+    height: 28px;
+    width: 100%;
+}
+
+.small-input {
+    width: 120px;
+}
+
+.photo-box {
+    width: 120px;
+    height: 145px;
+    border: 1px solid #333;
+    text-align: center;
+    vertical-align: middle;
+    //padding-top: 45px;
+    font-size: 14px;
+}
+
+/* ================= NAME BOX ================= */
+
+.name-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.name-table td {
+    padding: 3px;
+}
+
+.name-label {
+    width: 130px;
+    font-size: 15px;
+}
+
+.letter-box-container {
+    width: 100%;
+}
+
+.letter-box {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.letter-box td {
+    border: 1px solid #444;
+    height: 24px;
+    width: 4%;
+}
+
+/* ================= DETAILS ================= */
+
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.details-table td {
+    padding: 3px 4px;
+    vertical-align: middle;
+}
+
+.label {
+    width: 140px;
+    font-size: 15px;
+}
+
+.text-field {
+    border: 1px solid #333;
+    height: 27px;
+    width: 100%;
+}
+
+.checkbox-box {
+    width: 100px;
+    height: 27px;
+    border: 1px solid #333;
+    display: inline-block;
+}
+
+.note-text {
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+/* ================= FULL WIDTH ROWS ================= */
+
+.full-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.full-table td {
+    padding: 3px;
+}
+
+.full-label {
+    width: 185px;
+    font-size: 15px;
+}
+
+.full-input {
+    width: 100%;
+    height: 27px;
+    border: 1px solid #333;
+}
+
+/* ================= ADDRESS ================= */
+
+.address-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.address-table td {
+    padding: 4px;
+}
+
+.address-label {
+    width: 130px;
+    vertical-align: top;
+    font-size: 15px;
+}
+
+.address-box {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #333;
+    padding: 5px;
+}
+
+/* ================= MOBILE ================= */
+
+.mobile-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mobile-table td {
+    padding: 4px;
+}
+
+/* ================= SCHOOL ================= */
+
+.school-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+.school-table td {
+    padding: 4px;
+}
+
+.school-label {
+    width: 135px;
+    vertical-align: top;
+    font-size: 14px;
+}
+
+/* ================= BOTTOM ================= */
+
+.bottom-section {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.bottom-section td {
+    vertical-align: top;
+    padding: 5px;
+}
+
+.signature-section {
+    margin-top: 15px;
+}
+
+.signature-section p {
+    margin: 10px 0;
+}
+
+/* ================= PRINT ================= */
+
+@media print {
+
+    body {
+        background: white;
+        padding: 0;
+    }
+
+    .admission-form {
+        width: 100%;
+        border: none;
+        margin: 0;
+        padding: 5px;
+    }
+
+}
 
 </style>
 
-
 </head>
+
 <body>
 
-<form method="post"  enctype="multipart/form-data">
+<div class="admission-form">
 
-	<div align="center">
-		<img alt="Govt Of Karnataka" src="/hira/images/hira.png"  width="120" height="119" >
-	</div>
-<h1 align="center">HIRA PUBLIC SCHOOL</h1>
-<h4 align="center" style="margin:0px;">STUDENT ENROLLMENT FORM FOR YEAR ${currentAcademicYear}</h4>
-<div align="center" class="schoolname">
-<label for="schoolname">School Name and Location:</label>
-  ${branchname}&nbsp;&nbsp;${branchaddress}
- </div>
-<h3 align="center" style="margin:0px;">Admission Detail For Higher Class</h3>
-<table>	
-  <tr>
-    <td>1</td>
-    <td>Admission To Class</td> 
-    <td style="width:70%">
-    	<c:set var="classonly" value="${fn:split(parents.student.classstudying, '--')}" />
-    	<c:forEach items="${classdetailslist}" var="classdetailslist">
-										<c:if test="${(classdetailslist.classdetails != '')}">
+    <!-- SCHOOL HEADER -->
 
-										<label class="labelClass" style="font-weight: bold;color:#325F6D">
-										${classdetailslist.classdetails}</label>
+    <div class="school-header">
 
-										<input type="checkbox"
-		 name="classsearch" 
-		${classdetailslist.classdetails == classonly[0] ? 'checked' : ''} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <div class="logo">
+            <img alt="Govt Of Karnataka" src="/hira/images/hira.png"  width="120" height="119" >
+        </div>
 
-										</c:if>	
-							</c:forEach>
+        <div class="school-name">
+            HIRA PUBLIC SCHOOL
+        </div>
 
-   </td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>Stream For 11 and 12</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>Medium For Instruction</td>
-    <td>Kannada<input type="checkbox"
-		value="Kannada" name="mediumofinstruction" id="yes:Kannada"
-		${parents.student.mediumofinstruction == 'Kannada' ? 'checked' : ''} />&nbsp;
-		&nbsp;Hindi<input type="checkbox" value="Hindi" name="mediumofinstruction"
-		id="no:Hindi" onclick="noCheck(this.id);"
-		${parents.student.mediumofinstruction == 'Hindi' ? 'checked' : ''} />
-		Urdu<input type="checkbox"
-		value="Urdu" name="mediumofinstruction" id="yes:Urdu"
-		${parents.student.mediumofinstruction == 'Urdu' ? 'checked' : ''} />&nbsp;
-		&nbsp;English<input type="checkbox" value="English" name="mediumofinstruction"
-		id="no:English" onclick="noCheck(this.id);"
-		${parents.student.mediumofinstruction == 'English' ? 'checked' : ''} />
-		Marathi<input type="checkbox"
-		value="Marathi" name="mediumofinstruction" id="yes:Marathi"
-		${parents.student.mediumofinstruction == 'Marathi' ? 'checked' : ''} />&nbsp;
-		&nbsp;Tamil<input type="checkbox" value="Tamil" name="mediumofinstruction"
-		id="no:Tamil" onclick="noCheck(this.id);"
-		${parents.student.mediumofinstruction == 'Tamil' ? 'checked' : ''} />
-		Telgu<input type="checkbox"
-		value="Telgu" name="mediumofinstruction" id="yes:Telgu"
-		${parents.student.mediumofinstruction == 'Telgu' ? 'checked' : ''} /></td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>Mother Tongue</td>
-    <td>Kannada<input type="checkbox"
-		value="Kannada" name="mothertongue" id="yes:Kannada"
-		${parents.student.mothertongue == 'Kannada' ? 'checked' : ''} />&nbsp;
-		&nbsp;Hindi<input type="checkbox" value="Hindi" name="mothertongue"
-		id="no:Hindi" onclick="noCheck(this.id);"
-		${parents.student.mothertongue == 'Hindi' ? 'checked' : ''} />
-		Urdu<input type="checkbox"
-		value="Urdu" name="mothertongue" id="yes:Urdu"
-		${parents.student.mothertongue == 'Urdu' ? 'checked' : ''} />&nbsp;
-		&nbsp;English<input type="checkbox" value="English" name="mothertongue"
-		id="no:English" onclick="noCheck(this.id);"
-		${parents.student.mothertongue == 'English' ? 'checked' : ''} />
-		Marathi<input type="checkbox"
-		value="Marathi" name="mothertongue" id="yes:Marathi"
-		${parents.student.mothertongue == 'Marathi' ? 'checked' : ''} />&nbsp;
-		&nbsp;Tamil<input type="checkbox" value="Tamil" name="mothertongue"
-		id="no:Tamil" onclick="noCheck(this.id);"
-		${parents.student.mothertongue == 'Tamil' ? 'checked' : ''} />
-		Telgu<input type="checkbox"
-		value="Telgu" name="mothertongue" id="yes:Telgu"
-		${parents.student.mothertongue == 'Telgu' ? 'checked' : ''} /></td>
-  </tr>
- 
+        <div class="school-subtitle">
+            (Run by Hira Welfare Trust®)
+        </div>
+
+        <div class="school-address">
+            Tamsa Masjid Road, Areahalli - 573 101, Hassan Dist.
+        </div>
+
+        <div class="school-phone">
+            Phone No.: 08177 - 221658
+        </div>
+
+    </div>
+
+
+    <!-- FORM TITLE -->
+
+    <div class="form-title">
+        ADMISSION FORM
+    </div>
+
+
+    <!-- FORM NUMBER SECTION -->
+
+    <table class="top-section">
+
+        <tr>
+
+            <td style="width:75%;">
+
+                <table class="form-no-table">
+
+                    <tr>
+                        <td style="width:130px;">Form No.</td>
+                        <td>
+                            <div class="input-box small-input"></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Admission No.</td>
+                        <td>
+                            <div class="input-box small-input"><c:out value="${parents.student.admissionnumber}"/></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Admission To Class</td>
+                        <td>
+                            <div class="input-box small-input"><c:out value="${parents.student.classstudying}"/></div>
+                        </td>
+
+                        <td>SATS No.</td>
+
+                        <td>
+                            <div class="input-box"><c:out value="${parents.student.sts}"/></div>
+                        </td>
+                    </tr>
+
+                </table>
+
+            </td>
+
+
+            <td style="width:25%; text-align:center;">
+
+                <div class="photo-box">
+                  <img src="data:image;base64,<c:out value="${parents.student.studentpic}"/>" alt="Student's Photo" style="width: 120px;height: 145px;">
+                </div>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <div class="note-text">
+        Note : Incomplete application will not be considered.
+    </div>
+
+
+    <!-- NAME -->
+
+    <table class="name-table">
+
+        <tr>
+
+            <td class="name-label">
+                Name :<br>
+                (in block letters)
+            </td>
+
+            <td>
+
+               <c:set var="studentName" value="${parents.student.name}" />
+
+<table class="letter-box">
+    <tr>
+
+        <c:forEach begin="0" end="19" var="i">
+
+            <td style="text-align:center">
+                <c:if test="${i < fn:length(studentName)}">
+                    ${fn:substring(studentName, i, i + 1)}
+                </c:if>
+            </td>
+
+        </c:forEach>
+
+    </tr>
 </table>
 
-<h3>Previous School Details</h3>
-<table>	
-  <tr>
-    <td>5</td>
-    <td>Previous School Affiliation</td>
-    <td style="width:70%"></td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>Transfer Certificate No.</td>
-    <td style="width:70%"><c:out default="" value="${parents.student.nooftc}" /></td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>SATS Child Number</td>
-    <td style="width:70%"><c:out default="" value="${parents.student.sts}" /></td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td>Previous School Name</td>
-    <td><c:out default="" value="${parents.student.schoollastattended}" /></td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td>Previous School Type</td>
-    <td>Government<input type="checkbox"
-		value="Government" name="previousschooltype" id="yes:Government"
-		${parents.student.previousschooltype == 'Government' ? 'checked' : ''} />&nbsp;
-		&nbsp;Private Aided<input type="checkbox" value="Private Aided" name="previousschooltype"
-		id="no:Private Aided" onclick="noCheck(this.id);"
-		${parents.student.previousschooltype == 'Private Aided' ? 'checked' : ''} />
-		Local Bodies<input type="checkbox"
-		value="Local Bodies" name="previousschooltype" id="yes:Local Bodies"
-		${parents.student.previousschooltype == 'Local Bodies' ? 'checked' : ''} />&nbsp;
-		&nbsp;Private Unaided School<input type="checkbox" value="Private Unaided School" name="previousschooltype"
-		id="no:Private Unaided School" onclick="noCheck(this.id);"
-		${parents.student.previousschooltype == 'Private Unaided School' ? 'checked' : ''} /></td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td>Previous School Address</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>11</td>
-    <td>District</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>12</td>
-    <td>Taluk</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>13</td>
-    <td>City</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>14</td>
-    <td>Pin Code</td>
-    <td></td>
-  </tr>
- 
-</table>   
+            </td>
+
+        </tr>
 
 
+        <tr>
 
-        <h3>Student Details</h3>
-<table>	
-  <tr>
-    <td>15</td>
-    <td>Student Name</td>
-    <td style="width:70%">&nbsp;<c:out value="${parents.student.name}" /></td>
-  </tr>
-  <tr>
-    <td>16</td>
-    <td>Mother's Name</td>
-    <td><c:out value="${parents.mothersname}" /></td>
-  </tr>
-  <tr>
-    <td>17</td>
-    <td>Father's Name</td>
-    <td> <c:out value="${parents.fathersname}" /></td>
-  </tr>
-  <tr>
-    <td>18</td>
-    <td>Date of birth</td>
-    <td><fmt:formatDate value="${parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></td>
-  </tr>
-  <tr>
-    <td>19</td>
-    <td>Child Admitted Under RTE Quota</td>
-    <td>
-    	<c:if test="${(parents.student.rte ==1)}">    
-           <c:out default="" value="Yes" />
-           </c:if>
-          <c:if test="${(parents.student.rte == 0)}">    
-           	<c:out default="" value="No" />
-           	</c:if>
-    </td>
-  </tr>
-  <tr>
-    <td>20</td>
-    <td>Gender</td>
-    <td>Male<input type="checkbox"
-		value="Male" name="gender" id="yes:male"
-		${parents.student.gender == 'Male' ? 'checked' : ''} />&nbsp;
-		&nbsp;Female<input type="checkbox" value="Female" name="gender"
-		id="no:male" onclick="noCheck(this.id);"
-		${parents.student.gender == 'Female' ? 'checked' : ''} /></td>
-  </tr>
-  <tr>
-    <td>21</td>
-    <td>Student Adhaar No</td>
-    <td>
-    <c:out default="" value="${parents.student.disabilitychild}" />
-    </td>
-  </tr>
-  <tr>
-    <td>22</td>
-    <td>Mother's Adhaar No</td>
-    <td><c:out default="" value="${parents.motherscastecertno}" /></td>
-  </tr>
-  <tr>
-    <td>23</td>
-    <td>Father's Adhaar No</td>
-    <td><c:out default="" value="${parents.fatherscastecertno}" /></td>
-  </tr>
-  <tr>
-    <td>24</td>
-    <td>Social Category</td>
-    <td> General<input type="checkbox"
-		value="General" name="socialcategory" id="yes:General"
-		${parents.student.socialcategory == 'General' ? 'checked' : ''} />&nbsp;
-		&nbsp;OBC<input type="checkbox" value="OBC" name="socialcategory"
-		id="no:OBC" onclick="noCheck(this.id);"
-		${parents.student.socialcategory == 'OBC' ? 'checked' : ''} />
-		SC<input type="checkbox"
-		value="SC" name="socialcategory" id="yes:SC"
-		${parents.student.socialcategory == 'SC' ? 'checked' : ''} />&nbsp;
-		&nbsp;ST<input type="checkbox" value="ST" name="socialcategory"
-		id="no:ST" onclick="noCheck(this.id);"
-		${parents.student.socialcategory == 'ST' ? 'checked' : ''} /></td>
-  </tr>
-  <tr>
-    <td>25</td>
-    <td>Sub Category</td>
-    <td><c:out default="" value="${parents.student.studentscaste}" /></td>
-  </tr>
-   <tr>
-    <td>26</td>
-    <td>Religion</td>
-    <td><c:out default="" value="${parents.student.religion}" /></td>
-  </tr>
-  </table>
-  <h3>TC not produced at the time of admission please fill the following information</h3>
-  <table>
-  <tr>
-    <td>27</td>
-    <td>Student Caste Certificate No</td>
-    <td style="width:70%"><c:out default="" value="${parents.student.studentscastecertno}" /></td>
-  </tr>
-  <tr>
-    <td>28</td>
-    <td>Mother's Caste Certificate No</td>
-    <td><c:out default="" value="${parents.motherscastecertno}" /></td>
-  </tr>
-   <tr>
-    <td>29</td>
-    <td>Father's Caste Certificate No</td>
-    <td><c:out value="${parents.fatherscastecertno}" /></td>
-  </tr>
-  <tr>
-    <td>30</td>
-    <td>Belong To BPL</td>
-    <td>&nbsp;Yes<input
-		type="checkbox" value="1" name="belongtobpl" id="yes:bpl"
-		onclick="yesCheck(this.id);" ${parents.student.belongtobpl == '1' ? 'checked' : ''}/>&nbsp; &nbsp;No<input
-		type="checkbox" value="0" name="belongtobpl" id="no:bpl"
-		onclick="noCheck(this.id);" ${parents.student.belongtobpl == '0' ? 'checked' : ''}/></td>
-  </tr>
-  <tr>
-    <td>31</td>
-    <td>Bhagyalaxmi Bond No</td>
-    <td><c:out default="" value="" /></td>
-  </tr>
-   <tr>
-    <td>32</td>
-    <td>Child with special need</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>33</td>
-    <td>Special Category</td>
-    <td>None<input type="checkbox"
-		value="None" name="specialcategory" id="yes:None"
-		${parents.student.specialcategory == 'None' ? 'checked' : ''} />&nbsp;
-		&nbsp;Destitute<input type="checkbox" value="Destitute" name="specialcategory"
-		id="no:Destitute" onclick="noCheck(this.id);"
-		${parents.student.specialcategory == 'Destitute' ? 'checked' : ''} />
-		HIV Case<input type="checkbox"
-		value="HIV Case" name="specialcategory" id="yes:HIV Case"
-		${parents.student.specialcategory == 'HIV Case' ? 'checked' : ''} />&nbsp;
-		&nbsp;Orphans<input type="checkbox" value="Orphans" name="specialcategory"
-		id="no:Orphans" onclick="noCheck(this.id);"
-		${parents.student.specialcategory == 'Orphans' ? 'checked' : ''} />
-		Others<input type="checkbox"
-		value="Others" name="specialcategory" id="yes:Others"
-		${parents.student.specialcategory == 'Others' ? 'checked' : ''} />&nbsp;</td>
-  </tr>
-  <tr>
-    <td>34</td>
-    <td>Pin Code</td>
-    <td></td>
-  </tr>
-   <tr>
-    <td>35</td>
-    <td>City/Village/Town</td>
-    <td></td>
-  </tr>
-  <tr>
-    <td>36</td>
-    <td>Address</td>
-    <td><c:out default="" value="${parents.addresspermanent}" /></td>
-  </tr>
-  <tr>
-    <td>37</td>
-    <td>Mobile Number</td>
-    <td><c:out default="" value="${parents.contactnumber}" /></td>
-  </tr>
-   <tr>
-    <td>36</td>
-    <td>BMTC Bus pass</td>
-    <td></td>
-  </tr>
-   
+            <td class="name-label">
+                Father's Name :
+            </td>
+
+            <td>
+
+                <c:set var="fatherName" value="${parents.fathersname}" />
+
+<table class="letter-box">
+    <tr>
+
+        <c:forEach begin="0" end="19" var="i">
+
+            <td style="text-align:center">
+                <c:if test="${i < fn:length(fatherName)}">
+                    ${fn:substring(fatherName, i, i + 1)}
+                </c:if>
+            </td>
+
+        </c:forEach>
+
+    </tr>
 </table>
-  		
 
-		<p>Note: Fill all the fields in capital letter.</p>
+            </td>
 
-	<h3>For Office Use Only</h3>
-		<label for="enrollmentno">Student Enrollment Number:</label>
-        <input type="text" name="enrollmentno">
-        <label for="admissiondate">Admission Date:</label>
-        <input type="date" name="admissiondate">
-        <label for="U-Dise">U-Dise Code:</label>
-        <input type="text" name="U-Dise"></br>
-        <label for="bankaccount">Student/Parent Bank Account Number:</label>
-        <input type="text" name="bankaccount" size="172" value="${parents.student.accno}"></br>
-        <label for="IFSC">Bank IFSC Code:</label>
-        <input type="text" name="IFSC" size="172"  value="${parents.student.bankifsc}"></br>
+        </tr>
 
- <button onclick="window.print()">Print</button>
- </div>
- </form>
+
+        <tr>
+
+            <td class="name-label">
+                Mother's Name :
+            </td>
+
+            <td>
+
+                <c:set var="motherName" value="${parents.mothersname}" />
+
+<table class="letter-box">
+    <tr>
+
+        <c:forEach begin="0" end="19" var="i">
+
+            <td style="text-align:center">
+                <c:if test="${i < fn:length(motherName)}">
+                    ${fn:substring(motherName, i, i + 1)}
+                </c:if>
+            </td>
+
+        </c:forEach>
+
+    </tr>
+</table>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- SEX AND DOB -->
+
+    <table class="details-table">
+
+        <tr>
+
+            <td class="label">Sex :</td>
+
+            <td style="width:50px;"></td>
+
+            <td style="width:100px;">
+                <div class="checkbox-box"><c:out value="${parents.student.gender}" /></div>
+            </td>
+
+            <td style="width:65px;"></td>
+
+            <td style="width:50px;">
+               <!--  <div class="checkbox-box"></div> -->
+            </td>
+
+            <td style="width:120px;">
+                Date of Birth
+            </td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.dateofbirth}" /></div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- DETAILS -->
+
+    <table class="details-table">
+
+        <tr>
+
+            <td class="label">Nationality :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.nationality}" /></div>
+            </td>
+
+            <td class="label">Place of Birth :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.placeofbirth}" /></div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="label">Religion :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.religion}" /></div>
+            </td>
+
+            <td class="label">Mother Tongue :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.mothertongue}" /></div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="label">Caste :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.caste}" /></div>
+            </td>
+
+            <td class="label">Languages :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.languagesstudied}" /></div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="label">Sub Caste :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.studentscaste}" /></div>
+            </td>
+
+            <td></td>
+
+            <td>
+                <div class="text-field"></div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="label">Category :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.socialcategory}" /></div>
+            </td>
+
+            <td></td>
+
+            <td>
+                <div class="text-field"></div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="label">Blood Group :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.bloodgroup}" /></div>
+            </td>
+
+            <td class="label">Aadhar Card No. :</td>
+
+            <td>
+                <div class="text-field"><c:out value="${parents.student.disabilitychild}" /></div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- PARENT QUALIFICATION -->
+
+    <table class="full-table">
+
+        <tr>
+
+            <td class="full-label">
+                Father's / Guardian's Qualification & Occupation :
+            </td>
+
+            <td>
+                <div class="full-input"><c:out value="${parents.fathersqualification}" /></div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="full-label">
+                Mother's Qualification & Occupation :
+            </td>
+
+            <td>
+                <div class="full-input"><c:out value="${parents.mothersqualification}" /></div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- ADDRESS -->
+
+    <table class="address-table">
+
+        <tr>
+
+            <td class="address-label">
+                Address of the<br>
+                Parent / Guardian :
+            </td>
+
+            <td>
+
+                <div class="address-box">
+                    Current Address :<c:out value="${parents.addresstemporary}" />
+                </div>
+
+                <div class="address-box" style="margin-top:5px;">
+                    Permanent Address :<c:out value="${parents.addresspermanent}" />
+                </div>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- MOBILE -->
+
+    <table class="mobile-table">
+
+        <tr>
+
+            <td style="width:140px;">
+                Mobile Number :
+            </td>
+
+            <td>
+                Father
+                <div class="text-field" style="width:120px; display:inline-block;"><c:out value="${parents.contactnumber}" /></div>
+            </td>
+
+            <td>
+                Mother
+                <div class="text-field" style="width:110px; display:inline-block;"><c:out value="${parents.cocontactnumber}" /></div>
+            </td>
+
+            <td>
+                Whatsapp
+                <div class="text-field" style="width:110px; display:inline-block;"><c:out value="${parents.contactnumber}" /></div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- IDENTIFICATION MARK -->
+
+    <table class="full-table">
+
+        <tr>
+
+            <td class="full-label">
+                Identification Mark :
+            </td>
+
+            <td>
+                <div class="full-input"></div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- PREVIOUS SCHOOL -->
+
+    <table class="school-table">
+
+        <tr>
+
+            <td class="school-label" rowspan="5">
+                School Previous attended:
+            </td>
+
+            <td>
+                <div class="full-input">
+                    Name : <c:out value="${parents.student.schoollastattended}" />
+                </div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                <div class="full-input">
+                    Address : <c:out value="${parents.student.previouschooladdress}" />
+                </div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                <div class="full-input">
+                    Standard in which he/she was studied :<c:out value="${parents.student.stdlaststudied}" />
+                </div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                <div class="full-input">
+                    Examination passed/failed :
+                </div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                <div class="full-input">
+                    T.C. & Marks Card on Last to be enclosed
+                </div>
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td></td>
+
+            <td>
+                <div class="full-input">
+                    Reason for leaving previous school:
+                </div>
+            </td>
+
+        </tr>
+
+    </table>
+
+
+    <!-- BOTTOM -->
+
+    <table class="bottom-section">
+
+        <tr>
+
+            <td style="width:60%;">
+
+                Other brothers & sister<br>
+                studying in the school :
+
+            </td>
+
+
+            <td style="width:40%;">
+
+                <div class="signature-section">
+
+                    <strong>
+                        Signature of the Parent / guardian
+                    </strong>
+
+                    <p>Name : __________________________</p>
+
+                    <p>Relation : ________________________</p>
+
+                    <p>Contact No. : _____________________</p>
+
+                </div>
+
+            </td>
+
+        </tr>
+
+
+        <tr>
+
+            <td>
+                Date : ____________________
+            </td>
+
+            <td></td>
+
+        </tr>
+
+    </table>
+
+</div>
+
 </body>
 </html>
