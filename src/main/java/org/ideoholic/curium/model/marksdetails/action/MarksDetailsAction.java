@@ -398,4 +398,13 @@ public class MarksDetailsAction {
 	}
 	}
 	
+	@PostMapping("/generateaSixMarksSheet")
+	public String generateaSixMarksSheet() {
+		if (marksDetailsActionAdapter.generateReportSingleExams()) {
+			return "generateasixmarkssheet";
+		} else {
+			return "error";
+		}
+	}
+	
 }
