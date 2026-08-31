@@ -21,7 +21,16 @@ public class YearService {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		currentacademicyear
 				.setCurrentacademicyear(DataUtil.emptyString(currentAcademicYearDto.getCurrentacademicyear()));
-
+		currentacademicyear.setAcademicyearstartdate(
+		        currentAcademicYearDto.getAcademicyearstartdate());
+		currentacademicyear.setAcademicyearenddate(
+		        currentAcademicYearDto.getAcademicyearenddate());
+		currentacademicyear.setActive(
+		        currentAcademicYearDto.getActive());
+		currentacademicyear.setBranchid(
+		        currentAcademicYearDto.getBranchid());
+		currentacademicyear.setUserid(
+		        currentAcademicYearDto.getUserid());
 		errorService = yearDAO.create(currentacademicyear);
 
 		if (currentacademicyear != null) {
@@ -33,11 +42,11 @@ public class YearService {
 
 	}
 
-	public CurrentAcademicYearResponseDto updateYear() {
+	public CurrentAcademicYearResponseDto updateYear(int branchId) {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		CurrentAcademicYearResponseDto result = null;
 
-		currentacademicyear =  yearDAO.showYear();
+		currentacademicyear =  yearDAO.showYear(branchId);
 		if (currentacademicyear != null) {
 			result = CurrentAcademicYearResponseDto.builder()
 					.currentayid(currentacademicyear.getCayid())
@@ -50,9 +59,9 @@ public class YearService {
 		return result;
 	}
 
-	public Currentacademicyear getYear() {
+	public Currentacademicyear getYear(int branchId) {
 		try {
-			return yearDAO.showYear();
+			return yearDAO.showYear(branchId);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

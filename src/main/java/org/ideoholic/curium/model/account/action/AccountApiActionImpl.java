@@ -249,8 +249,8 @@ public class AccountApiActionImpl implements AccountApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<CurrentAcademicYearResponseDto> updateYear() {
-        CurrentAcademicYearResponseDto result = yearService.updateYear();
+    public ResponseEntity<CurrentAcademicYearResponseDto> updateYear(String branchId) {
+        CurrentAcademicYearResponseDto result = yearService.updateYear(Integer.parseInt(branchId));
         return ResponseEntity.ok(result);
     }
 

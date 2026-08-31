@@ -494,6 +494,18 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
+            <h5 class="sideaccordian" ><a href="#">Holistic Development Assessment</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/school/RatingDetailsProcess/progressReport" style="font-size: 12px;">Assessment Progress Report</a>
+            			</td>
+            		</tr>
+                </table>
+            </div>
+            
             <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">
             	<table style=" border-collapse: collapse;width: 100%">
@@ -567,7 +579,7 @@ for(Cookie cookie : cookies){
             		
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/vision/MessItemsMoveProcess/dueReport" style="font-size: 12px;">Due Report</a>
+            				 <a target="mainFrame" href="/school/MessItemsMoveProcess/dueReport" style="font-size: 12px;">Due Report</a>
             			</td>
             		</tr>
             		

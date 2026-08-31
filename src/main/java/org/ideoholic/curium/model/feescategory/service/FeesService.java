@@ -496,6 +496,7 @@ public class FeesService {
 			String addSec = searchStudentDto.getSecSearch();
 			StringBuilder conClassStudying = new StringBuilder();
 			
+			if (addClass != null && addClass.length > 0) {
 			int i = 0;
 			for (String classOne : addClass) {
 
@@ -506,7 +507,7 @@ public class FeesService {
 				}
 
 				i++;
-			}
+			}}
 
 			String classStudying = DataUtil.emptyString(conClassStudying.toString());
 			String querySub = "";
@@ -517,11 +518,11 @@ public class FeesService {
 
 			if (!classStudying.equalsIgnoreCase("")
 					&& !querySub.equalsIgnoreCase("")) {
-				querySub = querySub + " AND parents.student.classstudying like '"
-						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " AND ( parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			} else if (!classStudying.equalsIgnoreCase("")) {
-				querySub = querySub + " parents.student.classstudying like '"
-						+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 and parents.branchid="+Integer.parseInt(branchid);
 			}
 
 			queryMain = queryMain + querySub;
@@ -555,8 +556,10 @@ public class FeesService {
 								singleStudent.add(fees);
 						}
 				}
-				parentsStudentFeesStructure.put(parents, singleStudent);
 				
+				if(!singleStudent.isEmpty()) {
+					parentsStudentFeesStructure.put(parents, singleStudent);
+				}
 			}
 			
 		}
@@ -633,7 +636,7 @@ public class FeesService {
                         		transactionsReverse.setCancelvoucher("no");
                         		transactionsReverse.setFinancialyear(accountDao.getCurrentFinancialYear(Integer.parseInt(branchId)).getFinancialid());
                         		transactionsReverse.setBranchid(Integer.parseInt(branchId));
-                        		transactionsReverse.setUserid(Integer.parseInt(branchId));
+                        		transactionsReverse.setUserid(Integer.parseInt(userId));
                         		
                         		String updateDrAccountReverse="update Accountdetailsbalance set currentbalance=currentbalance+"+grandTotalConcessionReverse+" where accountdetailsid="+drAccount;
 
@@ -898,7 +901,8 @@ for(int i = 0; i < feecategoryList.size(); i++) {
           // Column 4 – No. of installments
           .append("<td>")
           .append("<input type='text' size='18' required")
-          .append(" value='").append(checkFeesCat ? feecategoryList.get(i).getTotalinstallments() : "0").append("'")
+          //.append(" value='").append(checkFeesCat ? feecategoryList.get(i).getTotalinstallments() : "0").append("'")
+          .append(" value='").append("0").append("'")
           .append(" name='feesCount' id='feesCount_").append(i).append("'")
           .append(" onkeyup='calculate(").append(i).append(")' onclick='calculate(").append(i).append(")'/>")
           .append("<input type='hidden' name='totalinstallmentsactual' id='totalinstallmentsactual_").append(i).append("' value='").append(feecategoryList.get(i).getTotalinstallments()).append("'/>")
@@ -908,7 +912,8 @@ for(int i = 0; i < feecategoryList.size(); i++) {
           .append("<td>")
           .append("<input class='feesFullAmount' size='18' type='text'")
           .append(" name='feesFullCat' id='hiddenfees_full_amount_").append(i).append("'")
-          .append(" value='").append(totalAmountPerCategory).append("'/>")
+          //.append(" value='").append(totalAmountPerCategory).append("'/>")
+          .append(" value='").append("0").append("'/>")
           .append("</td>")
 
           .append("</tr>");
@@ -1025,7 +1030,8 @@ response.getWriter().println(buffer.toString());
 	        	String[] classHierarchyArray = new String[classHierarchyList.size()];
 	        	int j=0;
 	        	for (Classhierarchy classHierarchy : classHierarchyList) {
-	        		classHierarchyArray[j]=classHierarchy.getLowerclass();
+			      	//classHierarchyArray[j]=classHierarchy.getLowerclass();
+	        		classHierarchyArray[j]=classHierarchy.getUpperclass();
 	        		j++;
 				}
 
@@ -1038,7 +1044,7 @@ response.getWriter().println(buffer.toString());
 	                 }
 	             }
 	             
-	             if(diff>0) {
+	             if(diff>0  && classIndex>0) {
 	            	 searchClassName = classHierarchyArray[classIndex-diff];
 	             }else {
 	            	 searchClassName = classname;
@@ -1368,3 +1374,4 @@ response.getWriter().println(buffer.toString());
 	        	    }
 		}
 }
+

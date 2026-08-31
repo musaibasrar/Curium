@@ -41,11 +41,10 @@ public class YearDAO {
 	}
 
     @Transactional
-    public Currentacademicyear showYear() {
+    public Currentacademicyear showYear(int branchId) {
 		Currentacademicyear currentacademicyear = new Currentacademicyear();
 		try {
-			
-			List<Currentacademicyear> ca = queryUtil.runGivenQuery("select ca from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear) ", Currentacademicyear.class);
+			List<Currentacademicyear> ca = queryUtil.runGivenQuery("select ca from Currentacademicyear as ca where ca.cayid = (select max(cayid) from Currentacademicyear where ca.branchid="+branchId+") ", Currentacademicyear.class);
 			if(!CollectionUtils.isEmpty(ca)) {
 				currentacademicyear = ca.get(0);
 			}
