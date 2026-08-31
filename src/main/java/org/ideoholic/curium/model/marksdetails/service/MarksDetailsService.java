@@ -381,7 +381,8 @@ public class MarksDetailsService {
 									for (Marks marks3 : marksListPerSubject) {
 											int subId = subject2.getSubid();
 											int subIdMarks = marks3.getSubid();
-										if(subId == subIdMarks) {
+											boolean excludedFromAggregate = isExcludedFromAggregate(subId, dto.getExcludedSubjectIds());
+										if(subId == subIdMarks && !excludedFromAggregate) {
 											subjectAppeared.add("\""+subject2.getSubjectname()+"\"");
 											marksScored.add(marks3.getMarksobtained());
 										}
@@ -1888,6 +1889,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			studentGraphDto.setStudentIds(stdIds);
 			studentGraphDto.setExamClass(examClass);
 			studentGraphDto.setExamsList(examsList);
+			studentGraphDto.setExcludedSubjectIds(excludedSubjectIds);
 			StudentGraphResponseDto studentGraphResponseDto = getStudentGraph(studentGraphDto, branchId, currentAcademicYear);
 			markssheet.setExamsDetails(studentGraphResponseDto.getExamDetailsGraph());
 			//End Generate Graph
