@@ -66,8 +66,8 @@ public class SmsApiActionImpl implements SmsApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<ResultResponse> sendNumbersSMS(SendSMSDto dto) {
-        ResultResponse result = smsService.sendNumbersSMS(dto);
+    public ResponseEntity<ResultResponse> sendNumbersSMS(SendSMSDto dto, String branchId) {
+        ResultResponse result = smsService.sendNumbersSMS(dto, branchId);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }

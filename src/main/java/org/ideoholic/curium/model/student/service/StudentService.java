@@ -144,11 +144,11 @@ public class StudentService {
 	        	String UID = studentDB.getStudentexternalid();
 	        	String numbersOnly = UID.replaceAll("[^0-9]", "");
 	        	int studentSeq =  Integer.parseInt(numbersOnly)+1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+""+String.format("%05d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }else {
 	        	int studentSeq = 1;
-	            String studentExternalId = branchCode+""+String.format("%04d", studentSeq);
+	            String studentExternalId = branchCode+""+String.format("%05d", studentSeq);
 	            student.setStudentexternalid(studentExternalId);
 	        }
 			
@@ -165,9 +165,9 @@ public class StudentService {
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
 				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-				student.setStudentexternalid("REG"+String.format("%04d", studentSeq));
+				student.setStudentexternalid("REG"+String.format("%05d", studentSeq));
             }else {
-            	student.setStudentexternalid("REG"+String.format("%04d", 1));
+            	student.setStudentexternalid("REG"+String.format("%05d", 1));
             }
 			student.setArchive(1);
 			student.setPassedout(1);
@@ -179,9 +179,9 @@ public class StudentService {
 			if(studentDB!=null) {
 				String UID = studentDB.getStudentexternalid();
 				int studentSeq =  Integer.parseInt(UID.substring(UID.length() - 4))+1;
-				student.setStudentexternalid(branchCode+String.format("%04d", studentSeq+1));
+				student.setStudentexternalid(branchCode+String.format("%05d", studentSeq+1));
             }else {
-            	student.setStudentexternalid(branchCode+String.format("%04d", 1));
+            	student.setStudentexternalid(branchCode+String.format("%05d", 1));
             }
 			student.setPromotedyear(student.getYearofadmission());
 			student.setYearofadmission("");

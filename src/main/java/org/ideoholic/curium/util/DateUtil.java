@@ -79,7 +79,9 @@ public class DateUtil {
         }
 
     */
-
+    	if (stringDate == null || stringDate.trim().isEmpty()) {
+            return null;
+        }
 
 		Date datefinal = null;
 		try {

@@ -88,8 +88,8 @@ public class ImportFileService {
 							}
 						}
 						student.setAdmissionnumber(getCellValue(row, 0));
-						student.setSts(getCellValue(row, 1));
-						student.setStudentexternalid(getCellValue(row, 46));
+						//student.setSts(getCellValue(row, 1));
+						student.setStudentexternalid(getCellValue(row, 1));
 						student.setName(getCellValue(row, 2));
 						student.setGender(getCellValue(row, 3));
 
@@ -106,16 +106,16 @@ public class ImportFileService {
 						        getCellValue(row, 20) + "/" +
 						        getCellValue(row, 21)));*/
 
-						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 47));
-
+						student.setClassstudying(getCellValue(row, 8) + "--");
+						student.setClassadmittedin("");	
 						//student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
 						student.setMothertongue(getCellValue(row, 10));
 						student.setReligion(getCellValue(row, 11));
-						//student.setStudentscaste(getCellValue(row, 12));
+						student.setStudentscaste(getCellValue(row, 12));
 						student.setNationality(getCellValue(row, 13));
 						//student.setStudentscastecertno(getCellValue(row, 14));
-						//student.setDisabilitychild(getCellValue(row, 14)); // Aadhar no
+						student.setDisabilitychild(getCellValue(row, 14)); // Aadhar no
 						//student.setSocialcategory(getCellValue(row, 15));
 						//student.setSecondlanguage(getCellValue(row, 15));
 
@@ -131,11 +131,12 @@ public class ImportFileService {
 						//student.setLastfirstlanguage(getCellValue(row, 44));
 
 						student.setUserid(2);
+						student.setRte(0);
 
 						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
 						//student.setSts(getCellValue(row, 49));
 
-						student.setBranchid(2);
+						student.setBranchid(3);
 						student.setArchive(0);
 						student.setPassedout(0);
 						student.setDroppedout(0);
@@ -143,31 +144,32 @@ public class ImportFileService {
 
 						//student.setStudentexternalid(getCellValue(row, 1));
 
-						student.setLeftout(0);
+						//student.setPromotedyear("2026/27");
+						student.setStream("Admission");
 
 						parent.setFathersname(getCellValue(row, 25));
-						//parent.setProfession(getCellValue(row, 26));
-						//parent.setFathersqualification(getCellValue(row, 27));
+						parent.setProfession(getCellValue(row, 26));
+						parent.setFathersqualification(getCellValue(row, 27));
 
 						parent.setContactnumber(getCellValue(row, 28));
 
-						//parent.setParentsannualincome(getCellValue(row, 29));
+						parent.setParentsannualincome(getCellValue(row, 29));
 						//parent.setEmergencycontactno(getCellValue(row, 30));
 
 						parent.setAddresspermanent(getCellValue(row, 31));
 
-						//parent.setAddresstemporary(getCellValue(row, 32));
+						parent.setAddresstemporary(getCellValue(row, 32));
 						//student.setGuardiandetails(getCellValue(row, 33));
 						//parent.setRemarks(getCellValue(row, 34));
 
 						parent.setMothersname(getCellValue(row, 35));
 
-						//parent.setMotherscastecertno(getCellValue(row, 36));
+						//parent.setMotherscastecertno(getCellValue(row, 49));
 						//parent.setProfession(getCellValue(row, 36));
-						//parent.setMothersqualification(getCellValue(row, 52));
+						parent.setMothersqualification(getCellValue(row, 52));
 						//parent.setCocontactnumber(getCellValue(row, 37));
-						//parent.setFatherscastecertno(getCellValue(row, 47));
-						//parent.setMotherscastecertno(getCellValue(row, 48));
+						parent.setFatherscastecertno(getCellValue(row, 48));
+						parent.setMotherscastecertno(getCellValue(row, 49));
 
 						//parent.setAddresspermanent(
 //						        getCellValue(row, 54) + "-" +
@@ -177,7 +179,7 @@ public class ImportFileService {
 //						        getCellValue(row, 58));
 						
 						parent.setStudent(student);
-						parent.setBranchid(Integer.parseInt(branchId));
+						parent.setBranchid(3);
 
 						listParents.add(parent);
 

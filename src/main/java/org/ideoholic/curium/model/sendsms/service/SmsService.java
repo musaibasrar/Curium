@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -106,7 +107,7 @@ public class SmsService {
 						String message = dto.getMessage();
 						
 						while (attempts < maxRetries) {
-						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    resultSMS = sendSMS(numbers, message, SMSTempType, Integer.parseInt(branchId));
 						    
 						    if (resultSMS == 200) {
 						        break; // success, exit loop
@@ -128,11 +129,11 @@ public class SmsService {
 	}
 
 	
-	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
+	public ResultResponse sendNumbersSMS(SendSMSDto dto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all", Integer.parseInt(branchId));
 		if(resultSMS==200){
 			result.setSuccess(true);
 		}
@@ -183,7 +184,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						log.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall",Integer.parseInt(branchId));
 					}
 					
 				offset = offset+100;
@@ -197,24 +198,24 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message, String templateType) {
+	public int sendSMS(String numbers, String message, String templateType, int branchId) {
 		int responseCode = 0;
 		try 
 		{
 			Properties properties = new Properties();
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
-	        
-	        String sendsms = properties.getProperty(templateType+"sendsms");
+	         
+	        String sendsms = properties.getProperty(templateType+"sendsms"+branchId);
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
-	        	
+
 	        String smsuser = properties.getProperty("smsuser");
 	        String smssender = properties.getProperty("smssender");
 	        String apikey = properties.getProperty("apikey");
 	        String peid = properties.getProperty("peid");
-	        String templateid = properties.getProperty(templateType+"templateid");
-	        String templatemessage = properties.getProperty(templateType+"templatemessage");
+	        String templateid = properties.getProperty(templateType+"templateid"+branchId);
+	        String templatemessage = properties.getProperty(templateType+"templatemessage"+branchId);
 	        String[] messageSeq = message.split(":");
 	        String var1 = "";
 	        String var2 = "";
@@ -254,53 +255,62 @@ public class SmsService {
 	        templatemessage = templatemessage.replace("var4", var4);
 		// Construct data
 		String phonenumbers=numbers;
-		String data="username=" + URLEncoder.encode(smsuser, "UTF-8");
-		data +="&message=" + URLEncoder.encode(templatemessage, "UTF-8");
-		data +="&sendername=" + URLEncoder.encode(smssender, "UTF-8");
-		data +="&smstype=" + "TRANS";
-		data +="&numbers=" + URLEncoder.encode(phonenumbers, "UTF-8");
-		data +="&apikey=" + apikey;
-		data +="&peid=" + peid;
-		data +="&templateid=" + templateid;
+		
+		String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?";
+		 StringBuilder sgcPostContent = new StringBuilder(POST_URL);
+         sgcPostContent.append("APIKey=").append(URLEncoder.encode(apikey, "UTF-8"));
+         sgcPostContent.append("&senderid=").append(URLEncoder.encode(smssender, "UTF-8"));
+         sgcPostContent.append("&channel=").append(URLEncoder.encode("trans", "UTF-8"));
+         sgcPostContent.append("&DCS=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&flashsms=").append(URLEncoder.encode("0", "UTF-8"));
+         sgcPostContent.append("&number=").append(URLEncoder.encode(phonenumbers, "UTF-8"));
+         sgcPostContent.append("&text=").append(URLEncoder.encode(templatemessage, "UTF-8"));
+         sgcPostContent.append("&route=").append(URLEncoder.encode("04", "UTF-8"));
+         sgcPostContent.append("&DLTTemplateId=").append(URLEncoder.encode(templateid, "UTF-8"));
+         sgcPostContent.append("&PEID=").append(URLEncoder.encode(peid, "UTF-8"));
+				
 		// Send data
 		
-		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-		log.info(templateType+": URL "+POST_URL);
-		System.out.println(templateType+": URL "+POST_URL);
-        URL obj = new URL(POST_URL);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-		con.setRequestMethod("POST");
+		//String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?"+data;
+		log.info(templateType+": URL "+sgcPostContent.toString());
+		log.debug(templateType+": URL "+POST_URL);
+        URL obj = new URL(sgcPostContent.toString());
+        URLConnection myURLConnection = obj.openConnection();
+        myURLConnection.connect();
 
 		// For POST only - START
-		con.setDoOutput(true);
-		OutputStream os = con.getOutputStream();
-		os.write("CURIUM".getBytes());
-		os.flush();
-		os.close();
-		// For POST only - END
+        BufferedReader reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
+        
+        String output;
+        while ((output = reader.readLine()) != null) {
+            System.out.println("OUTPUT: " + output);
+            
+         // Check if ErrorCode is present
+            int errorCodeIndex = output.indexOf("\"ErrorCode\":\"");
+            if (errorCodeIndex != -1) {
+                int start = errorCodeIndex + "\"ErrorCode\":\"".length();
+                int end = output.indexOf("\"", start);
+                String errorCode = output.substring(start, end);
 
-		responseCode = con.getResponseCode();
-		log.info("POST Response Code :: " + responseCode);
+                if ("000".equals(errorCode)) {
+                	responseCode=200;
+                } else {
+                    System.out.println("❌ Message not sent. ErrorCode: " + errorCode);
+                }
+            } else {
+                System.out.println("⚠️ Invalid response format: ErrorCode not found.");
+            }
+        }
 
-		if (responseCode == HttpURLConnection.HTTP_OK) { //success
-			BufferedReader in = new BufferedReader(new InputStreamReader(
-					con.getInputStream()));
-			String inputLine;
-			StringBuffer response = new StringBuffer();
+        // Close reader
+        reader.close();
 
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-
-			// print result
-			log.info(response.toString());
 		} else {
-			log.info("POST request not worked");
-		}}}
+			log.error("POST request not worked");
+		}}
 		catch (Exception e)
 		{
-		log.info("Error SMS "+e);
+			log.error("Error SMS "+e);
 		}
 		return responseCode;
 	}
@@ -329,7 +339,7 @@ public class SmsService {
 										
 										int attempts = 0;
 								        while (attempts < 1) {
-								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
+								            resultSMS = sendSMS(phoneNo, message, SMSTempType,studentFeesReport.getParents().getStudent().getBranchid());
 								            if (resultSMS == 200) break;
 								            attempts++;
 								        }
