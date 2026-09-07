@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -198,6 +199,24 @@ public class AttendanceDAO {
 		return holidayMaster;
 	}
 
+	public List<Holidaysmaster> readListOfHolidaysForMonth(Date startDate, Date endDate, String currentAcademicYear, int branchId) {
+		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
+		try{
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and branchid="+branchId+" and todate >= :startDate and fromdate <= :endDate");
+			query.setParameter("startDate", startDate);
+			query.setParameter("endDate", endDate);
+			holidayMaster = query.list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			
+		} finally {
+			HibernateUtil.closeSession();
+		}
+		
+		return holidayMaster;
+	}
+
 	public boolean addAttendanceMaster(Attendancemaster attendanceMaster) {
 
 		try {
@@ -234,6 +253,25 @@ public class AttendanceDAO {
 		try{
 			transaction = session.beginTransaction();
 			studentAttendanceMaster = session.createQuery("From Attendancemaster where attendeeid = "+attendeeId+" and branchid="+branchId).list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			e.printStackTrace();
+		}finally {
+			HibernateUtil.closeSession();
+		}
+		return studentAttendanceMaster;
+	}
+
+	public List<Attendancemaster> getAttendanceMasterDetails(List<String> attendeeIds, int branchId) {
+		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
+		if(attendeeIds == null || attendeeIds.isEmpty()) {
+			return studentAttendanceMaster;
+		}
+		try{
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Attendancemaster where attendeeid IN (:ids) and branchid="+branchId);
+			query.setParameterList("ids", attendeeIds);
+			studentAttendanceMaster = query.list();
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
@@ -569,16 +607,26 @@ List<Staffdailyattendance> staffDailyAttendance = new ArrayList<Staffdailyattend
 			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
 			List<Teacher> staffList, int branchId) {
 
-
-		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new HashMap<String, List<Staffdailyattendance>>();
-		
+		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new LinkedHashMap<String, List<Staffdailyattendance>>();
 		try{
 			transaction = session.beginTransaction();
-			
+			List<String> staffExternalIds = new ArrayList<String>();
 			for (Teacher teacher : staffList) {
-				List<Staffdailyattendance> staffAttendance = new ArrayList<Staffdailyattendance>();
-				staffAttendance = session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"' and branchid="+branchId).list();
-				mapStaffAttendance.put(teacher.getTeachername(), staffAttendance);
+				staffExternalIds.add(teacher.getTeacherexternalid());
+				mapStaffAttendance.put(teacher.getTeacherexternalid(), new ArrayList<Staffdailyattendance>());
+			}
+			if(!staffExternalIds.isEmpty()) {
+				Query query = session.createQuery("from Staffdailyattendance where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid IN (:ids) and branchid="+branchId+" order by attendeeid, date");
+				query.setParameterList("ids", staffExternalIds);
+				List<Staffdailyattendance> attendanceList = query.list();
+				for (Staffdailyattendance staffdailyattendance : attendanceList) {
+					List<Staffdailyattendance> staffAttendance = mapStaffAttendance.get(staffdailyattendance.getAttendeeid());
+					if(staffAttendance == null) {
+						staffAttendance = new ArrayList<Staffdailyattendance>();
+						mapStaffAttendance.put(staffdailyattendance.getAttendeeid(), staffAttendance);
+					}
+					staffAttendance.add(staffdailyattendance);
+				}
 			}
 			transaction.commit();
 		}catch (Exception e) { transaction.rollback(); logger.error(e);

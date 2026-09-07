@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -416,32 +417,8 @@
 		$("#save").button().click(function() {
 			addDepartment();
 		});
-		
-		$("#monthof").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+10"
-		});
-		$("#anim").change(function() {
-			$("#dateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
 
 	});
-	
-	
-	   function checkDate(){
-			  var ofDate = document.getElementById('monthof').value;
-			  var currentDate = new Date();
-			  var sDate = new Date(ofDate);
-			  
-			if(ofDate!= '' && sDate > currentDate)
-			  {
-			    alert("Please ensure that the Date is lesser than or equals to current Date.");
-			    document.getElementById('todateofattendance').value = '';
-			    return false;
-			  }
-	   }
 </script>
 
 </head>
@@ -463,6 +440,11 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
+	<%
+		Calendar currentCalendar = Calendar.getInstance();
+		int currentMonth = currentCalendar.get(Calendar.MONTH) + 1;
+		int currentYear = currentCalendar.get(Calendar.YEAR);
+	%>
 	<form id="form1" action="/hwfschools/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
@@ -479,9 +461,32 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label> <input
-									name="monthof" type="text" class="textField"
-									id="monthof" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" data-validate="validate(required)"/>
+							<td class="alignRightFields">Month &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>
+								<select name="month" id="month" class="textField" style="width: 120px" data-validate="validate(required)">
+									<option value="1" <%= currentMonth == 1 ? "selected=\"selected\"" : "" %>>January</option>
+									<option value="2" <%= currentMonth == 2 ? "selected=\"selected\"" : "" %>>February</option>
+									<option value="3" <%= currentMonth == 3 ? "selected=\"selected\"" : "" %>>March</option>
+									<option value="4" <%= currentMonth == 4 ? "selected=\"selected\"" : "" %>>April</option>
+									<option value="5" <%= currentMonth == 5 ? "selected=\"selected\"" : "" %>>May</option>
+									<option value="6" <%= currentMonth == 6 ? "selected=\"selected\"" : "" %>>June</option>
+									<option value="7" <%= currentMonth == 7 ? "selected=\"selected\"" : "" %>>July</option>
+									<option value="8" <%= currentMonth == 8 ? "selected=\"selected\"" : "" %>>August</option>
+									<option value="9" <%= currentMonth == 9 ? "selected=\"selected\"" : "" %>>September</option>
+									<option value="10" <%= currentMonth == 10 ? "selected=\"selected\"" : "" %>>October</option>
+									<option value="11" <%= currentMonth == 11 ? "selected=\"selected\"" : "" %>>November</option>
+									<option value="12" <%= currentMonth == 12 ? "selected=\"selected\"" : "" %>>December</option>
+								</select>
+							</label>
+							&nbsp;&nbsp;&nbsp;&nbsp;Year&nbsp;&nbsp;&nbsp;<label>
+								<select name="year" id="year" class="textField" style="width: 110px" data-validate="validate(required)">
+									<%
+									for (int year = currentYear - 10; year <= currentYear + 2; year++) {
+									%>
+										<option value="<%=year%>" <%= year == currentYear ? "selected=\"selected\"" : "" %>><%=year%></option>
+									<%
+									}
+									%>
+								</select>
 							</label></td>
 						</tr>
 
