@@ -14,8 +14,11 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.codec.binary.Base64;
 import org.ideoholic.curium.model.diary.service.DiaryService;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
@@ -214,6 +217,18 @@ public class DataUtil {
 
 	    byte[] bytesEncoded = Base64.encodeBase64(file.getBytes());
 	    return "data:" + contentType + ";base64," + new String(bytesEncoded);
+	}
+   
+   public static String requireNonNullElse(String str, String defaultValue) {
+       return StringUtils.hasLength(str) ? str : defaultValue;
+   }
+   
+   public static String getSessionAttributeOrElseNull(HttpSession session, String paramName) {
+		Object obj = session.getAttribute(paramName);
+		if (obj == null) {
+			return null;
+		}
+		return requireNonNullElse(obj.toString(), null);
 	}
 
 
