@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class AttendanceActionAdapter {
@@ -25,6 +27,9 @@ public class AttendanceActionAdapter {
 
     private String BRANCHID = "branchid";
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
+    
+    @Autowired
+    private AttendanceService attendanceService;
 
     public boolean markStaffAttendance() {
         AttendanceService attendanceService = new AttendanceService(request, response);
@@ -297,9 +302,40 @@ public class AttendanceActionAdapter {
         AttendanceService attendanceService = new AttendanceService(request, response);
 
         MonthlyDataStaffDto monthlyDataStaffDto = new MonthlyDataStaffDto();
+        monthlyDataStaffDto.setMonth(request.getParameter("month"));
+        monthlyDataStaffDto.setYear(request.getParameter("year"));
         monthlyDataStaffDto.setMonthOf(request.getParameter("monthof"));
 
         ResultResponse resultResponse = attendanceService.exportMonthlyDataStaff(monthlyDataStaffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+    Map resultMap = resultResponse.getResultMap();
+    request.setAttribute("branchid", httpSession.getAttribute(BRANCHID));
+    request.setAttribute("branchname", httpSession.getAttribute("branchname"));
+    request.setAttribute("branchaddress", httpSession.getAttribute("branchaddress"));
+    request.setAttribute("currentAcademicYear", httpSession.getAttribute(CURRENTACADEMICYEAR));
+    httpSession.setAttribute("staffMonthlyAttendancePreviewRows", null);
+    httpSession.setAttribute("staffMonthlyAttendanceDayHeaders", null);
+    httpSession.setAttribute("staffMonthlyAttendanceSchoolName", null);
+    httpSession.setAttribute("staffMonthlyAttendanceSchoolAddress", null);
+    httpSession.setAttribute("staffMonthlyAttendanceAcademicYear", null);
+    httpSession.setAttribute("staffMonthlyAttendanceDateRange", null);
+    httpSession.setAttribute("staffMonthlyAttendanceReportTitle", null);
+    if(resultMap != null) {
+      request.setAttribute("previewRows", resultMap.get("previewRows"));
+      request.setAttribute("dayHeaders", resultMap.get("dayHeaders"));
+      request.setAttribute("schoolName", resultMap.get("schoolName"));
+      request.setAttribute("schoolAddress", resultMap.get("schoolAddress"));
+      request.setAttribute("academicYear", resultMap.get("academicYear"));
+      request.setAttribute("dateRange", resultMap.get("dateRange"));
+      request.setAttribute("reportTitle", resultMap.get("reportTitle"));
+      httpSession.setAttribute("staffMonthlyAttendancePreviewRows", resultMap.get("previewRows"));
+      httpSession.setAttribute("staffMonthlyAttendanceDayHeaders", resultMap.get("dayHeaders"));
+      httpSession.setAttribute("staffMonthlyAttendanceSchoolName", resultMap.get("schoolName"));
+      httpSession.setAttribute("staffMonthlyAttendanceSchoolAddress", resultMap.get("schoolAddress"));
+      httpSession.setAttribute("staffMonthlyAttendanceAcademicYear", resultMap.get("academicYear"));
+      httpSession.setAttribute("staffMonthlyAttendanceDateRange", resultMap.get("dateRange"));
+      httpSession.setAttribute("staffMonthlyAttendanceReportTitle", resultMap.get("reportTitle"));
+    }
 
         return resultResponse.isSuccess();
     }
@@ -323,9 +359,9 @@ public class AttendanceActionAdapter {
     }
 
     public boolean downloadFileStaff() {
-        AttendanceService attendanceService = new AttendanceService(request, response);
+    	ResultResponse resultResponse = attendanceService.downloadFileStaff();
 
-        return attendanceService.downloadFileStaff();
+        return resultResponse.isSuccess();
     }
 
     public boolean downloadFile() {
@@ -340,5 +376,13 @@ public class AttendanceActionAdapter {
         request.setAttribute("studentAttendanceMap", resultResponse.getResultList());
 
         return resultResponse.isSuccess();
+    }
+
+    public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList){
+
+        StudentsAttendanceDto dto = new StudentsAttendanceDto();
+        dto.setAttendanceClass(request.getParameter("attendanceclass"));
+
+        attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
     }
 }

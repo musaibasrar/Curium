@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -14,39 +15,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>fees structure</title>
-<script src="/vision/js/Chart.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/vision/css/graph/jquery.jqplot.min.css">
+<script src="/hwfschools/js/Chart.js"></script>
+<link rel="stylesheet" href="/hwfschools/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/hwfschools/css/datePicker/demos.css">
+<link rel="stylesheet" href="/hwfschools/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/hwfschools/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/hwfschools/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/vision/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/vision/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/vision/js/jquery.jqplot.min.js" ></script>
-        <script src="/vision/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/hwfschools/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/hwfschools/js/jquery.jqplot.min.js" ></script>
+        <script src="/hwfschools/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -328,42 +329,42 @@
 	
 }
 </style>
-<link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/hwfschools/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/hwfschools/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/hwfschools/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/hwfschools/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/hwfschools/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/hwfschools/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/hwfschools/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -389,7 +390,7 @@
 	
 </script>
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/hwfschools/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -401,7 +402,7 @@
 	
 	function exportMonthlyData() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/AttendanceProcess/exportMonthlyDataStaff";
+		form1.action = "/hwfschools/AttendanceProcess/exportMonthlyDataStaff";
 		form1.method = "POST";
 		form1.submit();
 
@@ -416,32 +417,8 @@
 		$("#save").button().click(function() {
 			addDepartment();
 		});
-		
-		$("#monthof").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+10"
-		});
-		$("#anim").change(function() {
-			$("#dateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
 
 	});
-	
-	
-	   function checkDate(){
-			  var ofDate = document.getElementById('monthof').value;
-			  var currentDate = new Date();
-			  var sDate = new Date(ofDate);
-			  
-			if(ofDate!= '' && sDate > currentDate)
-			  {
-			    alert("Please ensure that the Date is lesser than or equals to current Date.");
-			    document.getElementById('todateofattendance').value = '';
-			    return false;
-			  }
-	   }
 </script>
 
 </head>
@@ -449,7 +426,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/hwfschools/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -463,7 +440,12 @@ for(Cookie cookie : cookies){
 %>
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form id="form1" action="/vision/StampFeesProcess/applyFees" method="POST">
+	<%
+		Calendar currentCalendar = Calendar.getInstance();
+		int currentMonth = currentCalendar.get(Calendar.MONTH) + 1;
+		int currentYear = currentCalendar.get(Calendar.YEAR);
+	%>
+	<form id="form1" action="/hwfschools/StampFeesProcess/applyFees" method="POST">
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -479,9 +461,32 @@ for(Cookie cookie : cookies){
 						cellspacing="0" id="table1" style="display: block">
 
 						<tr>
-							<td class="alignRightFields">Date &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label> <input
-									name="monthof" type="text" class="textField"
-									id="monthof" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" data-validate="validate(required)"/>
+							<td class="alignRightFields">Month &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>
+								<select name="month" id="month" class="textField" style="width: 120px" data-validate="validate(required)">
+									<option value="1" <%= currentMonth == 1 ? "selected=\"selected\"" : "" %>>January</option>
+									<option value="2" <%= currentMonth == 2 ? "selected=\"selected\"" : "" %>>February</option>
+									<option value="3" <%= currentMonth == 3 ? "selected=\"selected\"" : "" %>>March</option>
+									<option value="4" <%= currentMonth == 4 ? "selected=\"selected\"" : "" %>>April</option>
+									<option value="5" <%= currentMonth == 5 ? "selected=\"selected\"" : "" %>>May</option>
+									<option value="6" <%= currentMonth == 6 ? "selected=\"selected\"" : "" %>>June</option>
+									<option value="7" <%= currentMonth == 7 ? "selected=\"selected\"" : "" %>>July</option>
+									<option value="8" <%= currentMonth == 8 ? "selected=\"selected\"" : "" %>>August</option>
+									<option value="9" <%= currentMonth == 9 ? "selected=\"selected\"" : "" %>>September</option>
+									<option value="10" <%= currentMonth == 10 ? "selected=\"selected\"" : "" %>>October</option>
+									<option value="11" <%= currentMonth == 11 ? "selected=\"selected\"" : "" %>>November</option>
+									<option value="12" <%= currentMonth == 12 ? "selected=\"selected\"" : "" %>>December</option>
+								</select>
+							</label>
+							&nbsp;&nbsp;&nbsp;&nbsp;Year&nbsp;&nbsp;&nbsp;<label>
+								<select name="year" id="year" class="textField" style="width: 110px" data-validate="validate(required)">
+									<%
+									for (int year = currentYear - 10; year <= currentYear + 2; year++) {
+									%>
+										<option value="<%=year%>" <%= year == currentYear ? "selected=\"selected\"" : "" %>><%=year%></option>
+									<%
+									}
+									%>
+								</select>
 							</label></td>
 						</tr>
 
