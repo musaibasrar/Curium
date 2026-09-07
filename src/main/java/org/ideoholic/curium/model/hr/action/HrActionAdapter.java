@@ -43,6 +43,7 @@ public class HrActionAdapter {
     @Autowired
     private HrService hrService;
 
+
     public boolean leaveType() {
 
         LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(httpSession.getAttribute(Constants.BRANCHID).toString());
