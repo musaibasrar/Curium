@@ -321,4 +321,20 @@ public class AttendanceAction {
 		return "attendancesummaryreport";
 	}
 	
+	@GetMapping("/viewAttendanceParent")
+	public String viewAttendanceParent() {
+		attendanceActionAdapter.singleStudentReport();
+		return "viewAttendanceParent";
+	}
+	
+	
+	@PostMapping("/searchSingleStudentAttendanceDetailsMonthly")
+	public String searchSingleStudentAttendanceDetailsMonthly() {
+
+		if (attendanceActionAdapter.viewStudentAttendanceDetailsMonthly()) {
+			return "viewAttendanceParent";
+		}
+		return errorPage;
+	}
+	
 }

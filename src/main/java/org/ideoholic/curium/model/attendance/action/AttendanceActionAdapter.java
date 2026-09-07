@@ -164,6 +164,8 @@ public class AttendanceActionAdapter {
 
         return attendanceMonthlyResponseDto.isSuccess();
     }
+    
+
 
     public boolean searchStudentAttendanceDetails() {
         AttendanceService attendanceService = new AttendanceService(request, response);
@@ -385,4 +387,10 @@ public class AttendanceActionAdapter {
 
         attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
     }
+    
+	public void singleStudentReport() {
+
+		request.setAttribute("userid",request.getParameter("id"));
+		
+	}
 }
