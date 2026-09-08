@@ -56,6 +56,7 @@ public class SmsActionAdapter {
         SmsService smsService = new SmsService(request,response);
         SendSMSDto dto = new SendSMSDto();
         String[] studentIds = request.getParameterValues("studentIDs");
+        dto.setFeesIds(request.getParameterValues("feescategory"));
         dto.setStudentIds(studentIds);
         dto.setMessage(request.getParameter("deadline"));
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
