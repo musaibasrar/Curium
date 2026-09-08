@@ -9,10 +9,14 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
@@ -316,48 +320,148 @@ public class SmsService {
 	}
 	
 	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto) {
-		int resultSMS=0;
-
-		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
-		String[] studentIds = dto.getStudentIds();
-		String numbers = null;
-					StringBuilder sbN = new StringBuilder();
-
-					if(!studentFeesReportList.isEmpty()){
-						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
-							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
-								String phoneNo = studentFeesReport.getParents().getContactnumber();
-								if(phoneNo!=null && phoneNo.length() == 10) {
-									
-										long dueAmount = 0l;
-										for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
-											dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
-										}
-										
-										String SMSTempType = "feesreminderwithdueamount";
-										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
-										
-										int attempts = 0;
-								        while (attempts < 1) {
-								            resultSMS = sendSMS(phoneNo, message, SMSTempType,studentFeesReport.getParents().getStudent().getBranchid());
-								            if (resultSMS == 200) break;
-								            attempts++;
-								        }
-								}
-								
-							}
-							
-						}
-						
-					}
-					
-			if(resultSMS==200){
-				return ResultResponse.builder().success(true).build();
-
-			}
-			
+		if (dto == null) {
 			return ResultResponse.builder().build();
 		}
+
+		List<StudentFeesReport> studentFeesReportList = dto.getStudentFeesReportList();
+		String[] studentIds = dto.getStudentIds();
+
+		if (studentFeesReportList == null || studentFeesReportList.isEmpty() || studentIds == null || studentIds.length == 0) {
+			return ResultResponse.builder().build();
+		}
+
+		Set<String> selectedStudentIds = new HashSet<>();
+		for (String studentId : studentIds) {
+			if (studentId != null && !studentId.trim().isEmpty()) {
+				selectedStudentIds.add(studentId.trim());
+			}
+		}
+
+		if (selectedStudentIds.isEmpty()) {
+			return ResultResponse.builder().build();
+		}
+
+		String[] feesIds = dto.getFeesIds();
+		Set<String> selectedFeeCategoryIds = new HashSet<>();
+		boolean filterBySelectedFeeCategory = feesIds != null && feesIds.length > 0;
+
+		if (filterBySelectedFeeCategory) {
+			for (String feeId : feesIds) {
+				if (feeId != null && !feeId.trim().isEmpty()) {
+					selectedFeeCategoryIds.add(feeId.trim());
+				}
+			}
+			if (selectedFeeCategoryIds.isEmpty()) {
+				filterBySelectedFeeCategory = false;
+			}
+		}
+
+		Map<String, Long> dueAmountByStudentId = new LinkedHashMap<>();
+		Map<String, String> phoneByStudentId = new LinkedHashMap<>();
+		Map<String, String> nameByStudentId = new LinkedHashMap<>();
+		Map<String, String> branchByStudentId = new LinkedHashMap<>();
+		Map<String, Set<String>> processedFeeCategoryByStudentId = new HashMap<>();
+
+		for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+			if (studentFeesReport == null || studentFeesReport.getParents() == null || studentFeesReport.getParents().getStudent() == null
+					|| studentFeesReport.getParents().getStudent().getSid() == null) {
+				continue;
+			}
+
+			String studentId = String.valueOf(studentFeesReport.getParents().getStudent().getSid());
+			if (!selectedStudentIds.contains(studentId)) {
+				continue;
+			}
+
+			String phoneNo = studentFeesReport.getParents().getContactnumber();
+			if (phoneNo != null) {
+				phoneNo = phoneNo.trim();
+			}
+			if (phoneNo == null || phoneNo.length() != 10 || !phoneNo.matches("\\d{10}")) {
+				continue;
+			}
+
+			if (!phoneByStudentId.containsKey(studentId)) {
+				phoneByStudentId.put(studentId, phoneNo);
+			}
+			if (!nameByStudentId.containsKey(studentId)) {
+				nameByStudentId.put(studentId, DataUtil.emptyString(studentFeesReport.getParents().getStudent().getName()));
+			}
+			if (!branchByStudentId.containsKey(studentId)) {
+				branchByStudentId.put(studentId, DataUtil.emptyString(String.valueOf(studentFeesReport.getParents().getStudent().getBranchid())));
+			}
+
+			List<Studentfeesstructure> feeStructures = studentFeesReport.getStudentFeesStructure();
+			if (feeStructures == null || feeStructures.isEmpty()) {
+				continue;
+			}
+
+			Set<String> processedFeeCategoryIds = processedFeeCategoryByStudentId.computeIfAbsent(studentId, k -> new HashSet<>());
+			long dueAmount = dueAmountByStudentId.getOrDefault(studentId, 0L);
+
+			for (Studentfeesstructure feeStructure : feeStructures) {
+				if (feeStructure == null || feeStructure.getFeescategory().getIdfeescategory() == null) {
+					continue;
+				}
+
+				String feeCategoryId = String.valueOf(feeStructure.getFeescategory().getIdfeescategory());
+				if (filterBySelectedFeeCategory && !selectedFeeCategoryIds.contains(feeCategoryId)) {
+					continue;
+				}
+
+				if (!processedFeeCategoryIds.add(feeCategoryId)) {
+					continue;
+				}
+
+				long feesAmount = feeStructure.getFeesamount() != null ? feeStructure.getFeesamount() : 0L;
+				long feesPaid = feeStructure.getFeespaid() != null ? feeStructure.getFeespaid() : 0L;
+				long concession = feeStructure.getConcession() != null ? feeStructure.getConcession().longValue() : 0L;
+				long waiveoff = feeStructure.getWaiveoff() != null ? feeStructure.getWaiveoff() : 0L;
+
+				dueAmount = dueAmount + (feesAmount - feesPaid - concession - waiveoff);
+			}
+
+			dueAmountByStudentId.put(studentId, dueAmount);
+		}
+
+		boolean anySmsAttempted = false;
+		boolean allSmsSucceeded = true;
+		String reminderMessage = DataUtil.emptyString(dto.getMessage());
+		String smsTemplateType = "feesreminderwithdueamount";
+
+		for (Map.Entry<String, Long> entry : dueAmountByStudentId.entrySet()) {
+			long dueAmount = entry.getValue() != null ? entry.getValue() : 0L;
+			if (dueAmount <= 0) {
+				continue;
+			}
+
+			String studentId = entry.getKey();
+			String phoneNo = phoneByStudentId.get(studentId);
+			if (phoneNo == null || phoneNo.length() != 10 || !phoneNo.matches("\\d{10}")) {
+				continue;
+			}
+
+			String studentName = DataUtil.emptyString(nameByStudentId.get(studentId));
+			studentName = studentName.substring(0, Math.min(18, studentName.length()));
+
+			String message = "Rs." + dueAmount + " (" + studentName + ") : " + reminderMessage;
+			anySmsAttempted = true;
+
+			String branchId = branchByStudentId.get(studentId);
+			
+			int resultSMS = sendSMS(phoneNo, message, smsTemplateType,Integer.parseInt(branchId));
+			if (resultSMS != HttpURLConnection.HTTP_OK) {
+				allSmsSucceeded = false;
+			}
+		}
+
+		if (anySmsAttempted && allSmsSucceeded) {
+			return ResultResponse.builder().success(true).build();
+		}
+
+		return ResultResponse.builder().build();
+	}
 
 
 	public SMSResponseDto SMSDeliveryReport() {
