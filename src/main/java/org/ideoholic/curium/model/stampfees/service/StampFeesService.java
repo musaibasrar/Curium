@@ -619,37 +619,42 @@ public class StampFeesService {
     		
     		if(branchid!=null){
     		
-    		String queryMain = "From Parents as parents where";
-    		String[] addClass = searchStudentDto.getClassesSearch();
-    		String querySub = "";
-    		String classStudying = "";
+    			String queryMain = "From Parents as parents where ";
+    			String[] addClass = searchStudentDto.getClassesSearch();
+    			String querySub = "";
+    			String classStudying = "";
 
-				if (addClass.length>0) {
-					StringBuilder sb = new StringBuilder();
+    			if (addClass != null && addClass.length > 0) {
+    			    StringBuilder sb = new StringBuilder();
+    			    sb.append("("); // Open parenthesis
 
-					for (int i = 0; i < addClass.length; i++) {
+    			    for (int i = 0; i < addClass.length; i++) {
+    			        sb.append("parents.Student.classstudying LIKE '%")
+    			          .append(addClass[i].trim())
+    			          .append("%'");
 
-					    sb.append(" parents.Student.classstudying LIKE '%")
-					      .append(addClass[i])
-					      .append("%' ");
+    			        if (i < addClass.length - 1) {
+    			            sb.append(" OR ");
+    			        }
+    			    }
 
-					    if (i < addClass.length - 1) {
-					        sb.append(" OR ");
-					    }
-					}
+    			    sb.append(")"); // Close parenthesis
+    			    classStudying = sb.toString();
+    			}
 
-					classStudying = sb.toString();
-	    		}
+    			if (!classStudying.isEmpty()) {
+    			    querySub = classStudying + " AND parents.Student.archive=0"
+    			                             + " AND parents.Student.passedout=0"
+    			                             + " AND parents.Student.droppedout=0"
+    			                             + " AND parents.Student.leftout=0"
+    			                             + " AND parents.Student.branchid=" + Integer.parseInt(branchid)
+    			                             + " ORDER BY parents.Student.admissionnumber ASC";
+    			}
 
-	    		if (!classStudying.equalsIgnoreCase("")) {
-	    			querySub = classStudying+"  AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchid)+" order by parents.Student.admissionnumber ASC";
-	    		}
-				
-
-    		if(!"".equalsIgnoreCase(querySub)) {
-    			queryMain = queryMain + querySub;
-    			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-    		}
+    			if (!querySub.isEmpty()) {
+    			    queryMain = queryMain + querySub;
+    			    searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+    			}
     		
     	}
     		
