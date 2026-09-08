@@ -241,7 +241,6 @@ for(Cookie cookie : cookies){
         	
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#be2900">
-        			
         			<table>
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
