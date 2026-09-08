@@ -1,18 +1,9 @@
 package org.ideoholic.curium.model.sendsms.service;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Properties;
-
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
@@ -23,25 +14,51 @@ import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
-import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
-@Service
 public class SmsService {
 	
+	 private HttpServletRequest request;
+	    private HttpServletResponse response;
+	    private HttpSession httpSession;
+	    
+	private static DecimalFormat df2 = new DecimalFormat(".##");
+	 private static final Logger logger = LogManager.getLogger(SmsService.class);
+	
+	public SmsService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+        this.response = response;
+        this.httpSession = request.getSession();
+	}
+
+
 	public ResultResponse sendAllSMS(SendSMSDto dto, String branchId) {
 
 		int noOfRecords = 100;
 		int offset=0;
-		
-		if(branchId!=null){
-			int maxRetries = 3;
-			int attempts = 0;
+		int maxRetries = 3;
+		int attempts = 0;
+		if(httpSession.getAttribute("branchid")!=null){
 			String queryMain ="From Parents as parents where ";
 			String querySub = "";
 			String addClass =dto.getAddClass();
@@ -49,7 +66,7 @@ public class SmsService {
 			String conClassStudying = "";
 			
 			if(addClass.contains("ALL")){
-				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
+				querySub = querySub + "parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 			}else{
 				if (!addClass.equalsIgnoreCase("")) {
 
@@ -64,7 +81,7 @@ public class SmsService {
 				String classStudying = DataUtil.emptyString(conClassStudying);
 				
 				if(!classStudying.equalsIgnoreCase("")){
-					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId);
+					querySub = querySub + "parents.Student.classstudying like '"+classStudying+"' AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(httpSession.getAttribute("branchid").toString());
 				}	
 			}
 			
@@ -74,7 +91,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			log.info("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> pContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -100,13 +117,13 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
+						logger.info("Numbers are *** "+numbers);
 						
 						String SMSTempType = dto.getSmsTempType();
 						String message = dto.getMessage();
 						
 						while (attempts < maxRetries) {
-						    resultSMS = sendSMS(numbers, message, SMSTempType, Integer.parseInt(branchId));
+						    resultSMS = sendSMS(numbers, message, SMSTempType);
 						    
 						    if (resultSMS == 200) {
 						        break; // success, exit loop
@@ -128,11 +145,11 @@ public class SmsService {
 	}
 
 	
-	public ResultResponse sendNumbersSMS(SendSMSDto dto, String branchId) {
+	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all", Integer.parseInt(branchId));
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
 		if(resultSMS==200){
 			result.setSuccess(true);
 		}
@@ -164,7 +181,7 @@ public class SmsService {
 			int resultSMS=0;
 			int iterations = (int) Math.ceil(totalNumbers/100);
 			
-			log.info("main query:"+queryMain);
+			logger.info("main query:"+queryMain);
 			
 			for(int i=0;i<iterations;i++){
 				List<Object> teacherContacts = new SmsDAO().readListOfObjectsPaginationALL(offset, noOfRecords, queryMain);
@@ -182,8 +199,8 @@ public class SmsService {
 						}
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
-						log.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall",Integer.parseInt(branchId));
+						logger.info("Numbers are *** "+numbers);
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
 					}
 					
 				offset = offset+100;
@@ -197,7 +214,7 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message, String templateType, int branchId) {
+	public int sendSMS(String numbers, String message, String templateType) {
 		int responseCode = 0;
 		try 
 		{
@@ -205,7 +222,7 @@ public class SmsService {
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
 	        
-	        String sendsms = properties.getProperty(templateType+"sendsms"+branchId);
+	        String sendsms = properties.getProperty(templateType+"sendsms");
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
 	        	
@@ -265,7 +282,7 @@ public class SmsService {
 		// Send data
 		
 		String POST_URL = "http://sms.bulksmsind.in/sendSMS?"+data;
-		log.info(templateType+": URL "+POST_URL);
+		logger.info(templateType+": URL "+POST_URL);
 		System.out.println(templateType+": URL "+POST_URL);
         URL obj = new URL(POST_URL);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -280,7 +297,7 @@ public class SmsService {
 		// For POST only - END
 
 		responseCode = con.getResponseCode();
-		log.info("POST Response Code :: " + responseCode);
+		logger.info("POST Response Code :: " + responseCode);
 
 		if (responseCode == HttpURLConnection.HTTP_OK) { //success
 			BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -294,60 +311,154 @@ public class SmsService {
 			in.close();
 
 			// print result
-			log.info(response.toString());
+			logger.info(response.toString());
 		} else {
-			log.info("POST request not worked");
+			logger.info("POST request not worked");
 		}}}
 		catch (Exception e)
 		{
-		log.info("Error SMS "+e);
+		logger.info("Error SMS "+e);
 		}
 		return responseCode;
 	}
 	
 	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto) {
-		int resultSMS=0;
-
-		List<StudentFeesReport> studentFeesReportList =dto.getStudentFeesReportList();
-		String[] studentIds = dto.getStudentIds();
-		String numbers = null;
-					StringBuilder sbN = new StringBuilder();
-
-					if(!studentFeesReportList.isEmpty()){
-						for (StudentFeesReport studentFeesReport : studentFeesReportList) {
-							if (Arrays.asList(studentIds).contains(studentFeesReport.getParents().getStudent().getSid().toString())) {
-								String phoneNo = studentFeesReport.getParents().getContactnumber();
-								if(phoneNo!=null && phoneNo.length() == 10) {
-									
-										long dueAmount = 0l;
-										for (Studentfeesstructure studentFeesStructure : studentFeesReport.getStudentFeesStructure()) {
-											dueAmount =dueAmount+(studentFeesStructure.getFeesamount()-studentFeesStructure.getFeespaid() - studentFeesStructure.getConcession() - studentFeesStructure.getWaiveoff());	
-										}
-										
-										String SMSTempType = "feesreminderwithdueamount";
-										String message = "Rs."+dueAmount+" ("+studentFeesReport.getParents().getStudent().getName().substring(0, Math.min(18, studentFeesReport.getParents().getStudent().getName().length()))+") : "+dto.getMessage()+"";
-										
-										int attempts = 0;
-								        while (attempts < 1) {
-								            resultSMS = sendSMS(phoneNo, message, SMSTempType,studentFeesReport.getParents().getStudent().getBranchid());
-								            if (resultSMS == 200) break;
-								            attempts++;
-								        }
-								}
-								
-							}
-							
-						}
-						
-					}
-					
-			if(resultSMS==200){
-				return ResultResponse.builder().success(true).build();
-
-			}
-			
+		if (dto == null) {
 			return ResultResponse.builder().build();
 		}
+
+		List<StudentFeesReport> studentFeesReportList = dto.getStudentFeesReportList();
+		String[] studentIds = dto.getStudentIds();
+
+		if (studentFeesReportList == null || studentFeesReportList.isEmpty() || studentIds == null || studentIds.length == 0) {
+			return ResultResponse.builder().build();
+		}
+
+		Set<String> selectedStudentIds = new HashSet<>();
+		for (String studentId : studentIds) {
+			if (studentId != null && !studentId.trim().isEmpty()) {
+				selectedStudentIds.add(studentId.trim());
+			}
+		}
+
+		if (selectedStudentIds.isEmpty()) {
+			return ResultResponse.builder().build();
+		}
+
+		String[] feesIds = dto.getFeesIds();
+		Set<String> selectedFeeCategoryIds = new HashSet<>();
+		boolean filterBySelectedFeeCategory = feesIds != null && feesIds.length > 0;
+
+		if (filterBySelectedFeeCategory) {
+			for (String feeId : feesIds) {
+				if (feeId != null && !feeId.trim().isEmpty()) {
+					selectedFeeCategoryIds.add(feeId.trim());
+				}
+			}
+			if (selectedFeeCategoryIds.isEmpty()) {
+				filterBySelectedFeeCategory = false;
+			}
+		}
+
+		Map<String, Long> dueAmountByStudentId = new LinkedHashMap<>();
+		Map<String, String> phoneByStudentId = new LinkedHashMap<>();
+		Map<String, String> nameByStudentId = new LinkedHashMap<>();
+		Map<String, Set<String>> processedFeeCategoryByStudentId = new HashMap<>();
+
+		for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+			if (studentFeesReport == null || studentFeesReport.getParents() == null || studentFeesReport.getParents().getStudent() == null
+					|| studentFeesReport.getParents().getStudent().getSid() == null) {
+				continue;
+			}
+
+			String studentId = String.valueOf(studentFeesReport.getParents().getStudent().getSid());
+			if (!selectedStudentIds.contains(studentId)) {
+				continue;
+			}
+
+			String phoneNo = studentFeesReport.getParents().getContactnumber();
+			if (phoneNo != null) {
+				phoneNo = phoneNo.trim();
+			}
+			if (phoneNo == null || phoneNo.length() != 10 || !phoneNo.matches("\\d{10}")) {
+				continue;
+			}
+
+			if (!phoneByStudentId.containsKey(studentId)) {
+				phoneByStudentId.put(studentId, phoneNo);
+			}
+			if (!nameByStudentId.containsKey(studentId)) {
+				nameByStudentId.put(studentId, DataUtil.emptyString(studentFeesReport.getParents().getStudent().getName()));
+			}
+
+			List<Studentfeesstructure> feeStructures = studentFeesReport.getStudentFeesStructure();
+			if (feeStructures == null || feeStructures.isEmpty()) {
+				continue;
+			}
+
+			Set<String> processedFeeCategoryIds = processedFeeCategoryByStudentId.computeIfAbsent(studentId, k -> new HashSet<>());
+			long dueAmount = dueAmountByStudentId.getOrDefault(studentId, 0L);
+
+			for (Studentfeesstructure feeStructure : feeStructures) {
+				if (feeStructure == null || feeStructure.getFeescategory().getIdfeescategory() == null) {
+					continue;
+				}
+
+				String feeCategoryId = String.valueOf(feeStructure.getFeescategory().getIdfeescategory());
+				if (filterBySelectedFeeCategory && !selectedFeeCategoryIds.contains(feeCategoryId)) {
+					continue;
+				}
+
+				if (!processedFeeCategoryIds.add(feeCategoryId)) {
+					continue;
+				}
+
+				long feesAmount = feeStructure.getFeesamount() != null ? feeStructure.getFeesamount() : 0L;
+				long feesPaid = feeStructure.getFeespaid() != null ? feeStructure.getFeespaid() : 0L;
+				long concession = feeStructure.getConcession() != null ? feeStructure.getConcession().longValue() : 0L;
+				long waiveoff = feeStructure.getWaiveoff() != null ? feeStructure.getWaiveoff() : 0L;
+
+				dueAmount = dueAmount + (feesAmount - feesPaid - concession - waiveoff);
+			}
+
+			dueAmountByStudentId.put(studentId, dueAmount);
+		}
+
+		boolean anySmsAttempted = false;
+		boolean allSmsSucceeded = true;
+		String reminderMessage = DataUtil.emptyString(dto.getMessage());
+		String smsTemplateType = "feesreminderwithdueamount";
+
+		for (Map.Entry<String, Long> entry : dueAmountByStudentId.entrySet()) {
+			long dueAmount = entry.getValue() != null ? entry.getValue() : 0L;
+			if (dueAmount <= 0) {
+				continue;
+			}
+
+			String studentId = entry.getKey();
+			String phoneNo = phoneByStudentId.get(studentId);
+			if (phoneNo == null || phoneNo.length() != 10 || !phoneNo.matches("\\d{10}")) {
+				continue;
+			}
+
+			String studentName = DataUtil.emptyString(nameByStudentId.get(studentId));
+			studentName = studentName.substring(0, Math.min(18, studentName.length()));
+
+			String message = "Rs." + dueAmount + " (" + studentName + ") : " + reminderMessage;
+			anySmsAttempted = true;
+
+			int resultSMS = sendSMS(phoneNo, message, smsTemplateType);
+			if (resultSMS != HttpURLConnection.HTTP_OK) {
+				allSmsSucceeded = false;
+			}
+		}
+
+		if (anySmsAttempted && allSmsSucceeded) {
+			return ResultResponse.builder().success(true).build();
+		}
+
+		return ResultResponse.builder().build();
+	}
 
 
 	public SMSResponseDto SMSDeliveryReport() {
