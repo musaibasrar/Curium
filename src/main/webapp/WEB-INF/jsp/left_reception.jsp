@@ -483,7 +483,47 @@ for(Cookie cookie : cookies){
                 </table>
             </div>
             
-            
+            <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
+            <div style="padding-left: 0px;padding-right: 0px;">
+            	<table style=" border-collapse: collapse;width: 100%">
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/FeesProcess/otherfeesCollect" style="font-size: 12px;">Other Fees Collect</a>
+            			</td>
+            		</tr>
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
+            			</td>
+            		</tr> -->
+            		
+            		<!-- <tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				<a target="mainFrame" href="/littleflower/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
+            			</td>
+            		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
+            				 <a target="mainFrame" href="/littleflower/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
+            			</td>
+            		</tr> -->
+                </table>
+            </div>
 			
             <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
             <div style="padding-left: 0px;padding-right: 0px;">

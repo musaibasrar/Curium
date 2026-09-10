@@ -136,6 +136,12 @@ for(Cookie cookie : cookies){
 									src="/littleflower/images/home.svg" width="18" height="18" 
 									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
 							</a></td>
+							
+							<td><a target="mainFrame"
+								href="/littleflower/FeesProcess/feesCollect"> <img
+									src="/littleflower/images/feescollect.svg" width="18" height="18"
+									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
+							</a></td>
 
 							
 							<td><a target="mainFrame"

@@ -780,6 +780,7 @@ for(Cookie cookie : cookies){
             								<option value="feesreminder">Fees Reminder</option>
             								<option value="booksale">Books Sale</option>
             								<option value="ptm">Parents Teacher Meeting</option>
+            								<option value="sslcmarkscard">SSLC Marks Card</option>
             								<!-- <option value="feesreminder">Fees Reminder</option> -->
 								</select>
 							
@@ -876,6 +877,17 @@ for(Cookie cookie : cookies){
 								<label style="color: red;">Time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="text" id="ptmvar3" name="ptmvar3" maxlength="30">
 								<input type="hidden" id="ptmvar4" name="ptmvar4" maxlength="30">
     							</div>
+    							
+    							
+    							<div class="sslcmarkscard box">
+    								<span style="font-size: 16px;">
+    									This is to inform you that the SSLC Marks Cards for the academic year <span style="font-weight: bold;color: red">Academic Year</span> have been received at the school.
+										Parents/Students are requested to collect the Marks Card from the school at the earliest.</span>
+								<br><br>
+								<label style="color: red;">Class:&nbsp;&nbsp;</label><input type="text" id="sslcmarkscardvar1" name="sslcmarkscardvar1" maxlength="10">
+								<br><br>
+    							</div>
+    							
 							
 							</td>
 							
