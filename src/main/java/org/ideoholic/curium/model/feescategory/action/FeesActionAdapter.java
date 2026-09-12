@@ -198,7 +198,8 @@ public class FeesActionAdapter {
 	public void getFeeCategoryHeadWise() throws IOException {
 		String classname = request.getParameter("classstudying");
     	String yearofAdmission = request.getParameter("yearofadmission");
-    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
+    	String studentType = request.getParameter("studenttype");
+    	FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmission,studentType,httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute(BRANCHID).toString());
     	httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
     	httpSession.setAttribute("feesduesearchyear", feescategoryResponseDto.getFeesDueSearchYear());
     	httpSession.setAttribute("feesduesearchclass", feescategoryResponseDto.getFeesDueSearchClass());

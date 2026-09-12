@@ -740,6 +740,13 @@ public class FeesCollectionService {
 			}
 			break;
 			
+		case "Passedout":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;
+			
 		case "All":
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = querySub + " (parents.Student.classstudying like '"
