@@ -444,6 +444,7 @@ var xmlHttp;
     function searchfeecategory() {
 		var classsearch=document.getElementById('classsearch').value;
 		var yoa=document.getElementById('yearofadmission').value;
+		var studenttype=document.getElementById('studenttype').value;
 			 if (typeof XMLHttpRequest != "undefined") {
 				 xmlHttp = new XMLHttpRequest();
 	            
@@ -452,7 +453,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"",true);
+			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"&studenttype="+studenttype+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -612,6 +613,7 @@ for(Cookie cookie : cookies){
 									style="width: 130px;border-radius: 4px;background: white;height: 28px;">
 										<option value="Active" selected>Active</option>
 										<option value="InActive">InActive</option>
+										<option value="Passedout">Passed Out</option>
 										<option value="All">All</option>
 								</select>
 
