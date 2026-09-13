@@ -1,16 +1,41 @@
 package org.ideoholic.curium.model.attendance.action;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
-import org.ideoholic.curium.model.attendance.dto.*;
+import org.ideoholic.curium.model.attendance.dto.AttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
+import org.ideoholic.curium.model.attendance.dto.HolidayIdsDto;
+import org.ideoholic.curium.model.attendance.dto.HolidaysDto;
+import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.MonthlyDataStaffDto;
+import org.ideoholic.curium.model.attendance.dto.StaffAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.StaffAttendanceDetailsResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StaffAttendanceMasterDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsMarkDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsMarkResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceGraphDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceGraphResponseDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMasterDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMonthlyDto;
+import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMonthlyResponseDto;
+import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
+import org.ideoholic.curium.model.attendance.dto.StudentsAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.UpdateStaffAttendanceDetailsDto;
+import org.ideoholic.curium.model.attendance.dto.ViewStaffAttendanceDto;
+import org.ideoholic.curium.model.attendance.dto.ViewStaffAttendanceResponseDto;
+import org.ideoholic.curium.model.attendance.dto.WeekOffDto;
 import org.ideoholic.curium.model.attendance.service.AttendanceService;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.List;
 
 @Service
 public class AttendanceActionAdapter {
@@ -22,7 +47,7 @@ public class AttendanceActionAdapter {
 
     private String BRANCHID = "branchid";
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
-
+    
     @Autowired
     private AttendanceService attendanceService;
 
@@ -276,9 +301,40 @@ public class AttendanceActionAdapter {
     public boolean exportMonthlyDataStaff() {
 
         MonthlyDataStaffDto monthlyDataStaffDto = new MonthlyDataStaffDto();
+        monthlyDataStaffDto.setMonth(request.getParameter("month"));
+        monthlyDataStaffDto.setYear(request.getParameter("year"));
         monthlyDataStaffDto.setMonthOf(request.getParameter("monthof"));
 
         ResultResponse resultResponse = attendanceService.exportMonthlyDataStaff(monthlyDataStaffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+
+    Map resultMap = resultResponse.getResultMap();
+    request.setAttribute("branchid", httpSession.getAttribute(BRANCHID));
+    request.setAttribute("branchname", httpSession.getAttribute("branchname"));
+    request.setAttribute("branchaddress", httpSession.getAttribute("branchaddress"));
+    request.setAttribute("currentAcademicYear", httpSession.getAttribute(CURRENTACADEMICYEAR));
+    httpSession.setAttribute("staffMonthlyAttendancePreviewRows", null);
+    httpSession.setAttribute("staffMonthlyAttendanceDayHeaders", null);
+    httpSession.setAttribute("staffMonthlyAttendanceSchoolName", null);
+    httpSession.setAttribute("staffMonthlyAttendanceSchoolAddress", null);
+    httpSession.setAttribute("staffMonthlyAttendanceAcademicYear", null);
+    httpSession.setAttribute("staffMonthlyAttendanceDateRange", null);
+    httpSession.setAttribute("staffMonthlyAttendanceReportTitle", null);
+    if(resultMap != null) {
+      request.setAttribute("previewRows", resultMap.get("previewRows"));
+      request.setAttribute("dayHeaders", resultMap.get("dayHeaders"));
+      request.setAttribute("schoolName", resultMap.get("schoolName"));
+      request.setAttribute("schoolAddress", resultMap.get("schoolAddress"));
+      request.setAttribute("academicYear", resultMap.get("academicYear"));
+      request.setAttribute("dateRange", resultMap.get("dateRange"));
+      request.setAttribute("reportTitle", resultMap.get("reportTitle"));
+      httpSession.setAttribute("staffMonthlyAttendancePreviewRows", resultMap.get("previewRows"));
+      httpSession.setAttribute("staffMonthlyAttendanceDayHeaders", resultMap.get("dayHeaders"));
+      httpSession.setAttribute("staffMonthlyAttendanceSchoolName", resultMap.get("schoolName"));
+      httpSession.setAttribute("staffMonthlyAttendanceSchoolAddress", resultMap.get("schoolAddress"));
+      httpSession.setAttribute("staffMonthlyAttendanceAcademicYear", resultMap.get("academicYear"));
+      httpSession.setAttribute("staffMonthlyAttendanceDateRange", resultMap.get("dateRange"));
+      httpSession.setAttribute("staffMonthlyAttendanceReportTitle", resultMap.get("reportTitle"));
+    }
 
         return resultResponse.isSuccess();
     }
@@ -300,9 +356,7 @@ public class AttendanceActionAdapter {
     }
 
     public boolean downloadFileStaff() {
-
-        ResultResponse resultResponse = attendanceService.downloadFileStaff();
-
+    	ResultResponse resultResponse = attendanceService.downloadFileStaff();
         return resultResponse.isSuccess();
     }
 
@@ -326,14 +380,14 @@ public class AttendanceActionAdapter {
         return resultResponse.isSuccess();
     }
 
-   /* public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList){
+    public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList){
 
         StudentsAttendanceDto dto = new StudentsAttendanceDto();
         dto.setAttendanceClass(request.getParameter("attendanceclass"));
 
         attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
-    }*/
-
+    }
+    
 	public void singleStudentReport() {
 
 		request.setAttribute("userid",request.getParameter("id"));
