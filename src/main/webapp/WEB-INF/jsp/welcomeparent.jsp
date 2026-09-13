@@ -241,13 +241,12 @@ for(Cookie cookie : cookies){
         	
         	<div class="col" style="padding-bottom: 40px;">
         			<div id="rcorners1" style="background-color:#be2900">
-        			
         			<table>
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/vision/changePassword?id=${username}&urlbranchid=${branchid}">  <img
-									src="/vision/images/changepasswordlogo.png" width="50" height="50"
+								href="/littleflower/changePassword?id=${username}&urlbranchid=${branchid}">  <img
+									src="/littleflower/images/changepasswordlogo.png" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Change Pwd
 							</a>
         					</td>
@@ -266,8 +265,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/vision/AttendanceProcess/viewAttendanceParent?id=${username}&urlbranchid=${branchid}"> <img
-									src="/vision/images/attendance.png" width="50" height="50"
+								href="/littleflower/AttendanceProcess/viewAttendanceParent?id=${username}&urlbranchid=${branchid}"> <img
+									src="/littleflower/images/attendance.png" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" /> Attendance
 							</a>
         					</td>
