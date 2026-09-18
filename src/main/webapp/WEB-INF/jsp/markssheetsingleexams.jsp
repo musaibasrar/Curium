@@ -596,7 +596,7 @@ body {
 								        <c:set var="grandTotalMarksObtained" value="0" />
 								        <c:set var="grandTotalMaxMarks" value="0" />
 								        <c:set var="englishexam" value="" />
-								        <c:set var="customSubjectOrder" value="${fn:split('English,Kannada,Hindi,Urdu,Mathematics,Science,Social Science,Social Studies,Environmental Studies,Arabic', ',')}" />
+								        <c:set var="customSubjectOrder" value="${fn:split('English,Kannada,Hindi,Mathematics,Science,Social Science,Social Studies,Environmental Studies,Urdu,Arabic,General Knowledge,Comprehension,Expression', ',')}" />
 								        <%-- Use backend exam summaries for final totals so excluded subjects stay excluded in aggregates. --%>
 								        <c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
 								        <c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
@@ -783,13 +783,15 @@ body {
 							        
 							        <c:set var="grandPercentage" value="0" />
 									<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
-									    <c:set var="grandPercentage" 
-									           value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" />
+									    <%-- <c:set var="grandPercentage" 
+									           value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" /> --%>
+									           <c:set var="grandPercentage" 
+       											value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 100) / 100.0}" />
 									</c:if>
 									
 							        <c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
 							            <c:set var="grandPercentagestring">
-									    <fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="1" />
+									    <fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="2" />
 										</c:set>
 							        </c:if>
 							         
@@ -980,7 +982,7 @@ body {
 																		                <td class="marksTableCell" style="text-align: center;">
 																		                    <c:choose>
 																		                        <c:when test="${grandPercentage > 0}">
-																		                            <fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentage}" />%
+																		                            <fmt:formatNumber type="number" maxFractionDigits="2" value="${grandPercentage}" />%
 																		                        </c:when>
 																		                        <c:otherwise>-</c:otherwise>
 																		                    </c:choose>
@@ -1069,7 +1071,7 @@ body {
 				<b>Total Marks Obtained (In Words) <br><label class="amountWords"></label>&nbsp; only</b>
 			</div>
 
-			<div class="percentage">Percentage <br><fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
+			<div class="percentage">Percentage <br><fmt:formatNumber type="number" maxFractionDigits="2" value="${grandPercentagestring}" />%</div>
 
 		</div>
 		
