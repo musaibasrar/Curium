@@ -122,7 +122,7 @@ body {
 	border: 1px solid #000;
 	text-align: center;
 	padding: 6px;
-	font-size: 19px;
+	font-size: 16px;
 }
 
 .totalbox {
@@ -508,7 +508,7 @@ body {
 									</c:when>
 
 									<c:otherwise>
-                    No document available
+                    --
                 </c:otherwise>
 								</c:choose>
 						</div></td>
@@ -554,7 +554,7 @@ body {
 										<th rowspan="2" style="text-transform: uppercase;">Scholastic Subjects</th>
 										<th colspan="3" style="text-transform: uppercase;">Semester-1</th>
 										<th colspan="3" style="text-transform: uppercase;">Semester-2</th>
-										<th colspan="2" style="text-transform: uppercase;">TOTAL</th>
+										<th colspan="3" style="text-transform: uppercase;">TOTAL</th>
 										<th rowspan="2" style="text-transform: uppercase;">OVER ALL Grade</th>
 									</tr>
 									<tr>
@@ -564,6 +564,7 @@ body {
 										<th>FA-3<br>(10%)</th>
 										<th>FA-4<br>(10%)</th>
 										<th>SA-2<br>(30%)</th>
+										<th>MIN.<br>MARKS</th>
 										<th>MAX.<br>MARKS</th>
 										<th>OBT.<br>MARKS</th>
 									</tr>
@@ -572,13 +573,14 @@ body {
 						        <c:otherwise>
 						        	<tr>
 						        		<c:forEach items="${Parents.examSummaries}" var="exam">
-						                <th class="marksTableHeader" style="text-transform: uppercase;" colspan="5"><c:out value="${exam.examName}" /></th>
+						                <th class="marksTableHeader" style="text-transform: uppercase;" colspan="6"><c:out value="${exam.examName}" /></th>
 						            </c:forEach>
 						        	</tr>
 						        	<tr>
 						            <th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> Scholastic Subject</th>
 						            <!-- Subject-wise Summary Headers -->
 						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Obtained Marks</th>
+						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Min. Marks</th>
 						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
 						            <th class="marksTableHeader" style="text-align: center; width: 12%;">Percentage</th>
 						            <th class="marksTableHeader" style="text-align: center; width: 10%;">Grade</th>
@@ -599,6 +601,7 @@ body {
 								        <c:set var="customSubjectOrder" value="${fn:split('English,Kannada,Hindi,Mathematics,Science,Social Science,Social Studies,Environmental Studies,Urdu,Arabic,General Knowledge,Comprehension,Expression', ',')}" />
 								        <%-- Use backend exam summaries for final totals so excluded subjects stay excluded in aggregates. --%>
 								        <c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
+								        <c:set var="grandTotalMinMarksFromSubjectSummary" value="0" />
 								        <c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
 								        <c:forEach items="${Parents.examSummaries}" var="examSummaryTotal">
 								        	<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
@@ -732,6 +735,23 @@ body {
 						                 <!-- Add to grand totals -->
                 							<c:set var="grandTotalMarksObtained" value="${grandTotalMarksObtained + subjectTotalMarksObtained}" />
                 							<c:set var="grandTotalMaxMarks" value="${grandTotalMaxMarks + subjectTotalMaxMarks}" />
+
+								                <c:set var="subjectMinMarksDisplay" value="" />
+								                <c:forEach items="${Parents.subjectSummaries}" var="subjectSummaryItem">
+								                	<c:if test="${fn:toLowerCase(fn:trim(subjectSummaryItem.subjectName)) == fn:toLowerCase(fn:trim(subjectEntry.key))}">
+								                		<c:set var="subjectMinMarksDisplay" value="${subjectSummaryItem.minMarks}" />
+								                	</c:if>
+								                </c:forEach>
+								                
+								                <td class="marksTableCell" style="text-align: center;">
+								                    <c:choose>
+								                        <c:when test="${not empty subjectMinMarksDisplay}">
+								                            <fmt:formatNumber value="${subjectMinMarksDisplay}" maxFractionDigits="0" />
+								                            <c:set var="grandTotalMinMarksFromSubjectSummary" value="${grandTotalMinMarksFromSubjectSummary + subjectMinMarksDisplay}" />
+								                        </c:when>
+								                        <c:otherwise>-</c:otherwise>
+								                    </c:choose>
+								                </td>
                 
 						                <!-- Total Marks for Subject -->
 						                <td class="marksTableCell" style="text-align: center;">
@@ -970,6 +990,9 @@ body {
 									        
 									        <td class="amount" style="display: none;">${roundedMarks}</td>
 									        
+												        <td class="marksTableCell" style="text-align: center;">
+										            <fmt:formatNumber value="${grandTotalMinMarksFromSubjectSummary}" maxFractionDigits="0" />
+												        </td>
 																		        <td class="marksTableCell" style="text-align: center;">
 													            <fmt:formatNumber value="${grandTotalMaxMarksFromExamSummary}" maxFractionDigits="0" />
 																		        </td>
@@ -1010,11 +1033,12 @@ body {
 										<div style="margin-top: 10px;">
 											<table style="width: 100%; border-collapse: collapse;">
 												<tr>
-													<th class="marksTableHeader" style="text-transform: uppercase;" colspan="5"><c:out value="PART-B" /></th>
+													<th class="marksTableHeader" style="text-transform: uppercase;" colspan="6"><c:out value="PART-B" /></th>
 									        	</tr>
 												<tr>
 													<th class="marksTableHeader" style="text-align: center; width: 20%;text-transform: uppercase;"> CoScholastic Subject</th>
 						            				<th class="marksTableHeader" style="text-align: center; width: 12%;">Obtained Marks</th>
+					            					<th class="marksTableHeader" style="text-align: center; width: 12%;">Min. Marks</th>
 						            				<th class="marksTableHeader" style="text-align: center; width: 12%;">Max. Marks</th>
 						            				<th class="marksTableHeader" style="text-align: center; width: 12%;">Percentage</th>
 						            				<th class="marksTableHeader" style="text-align: center; width: 10%;">Grade</th>
@@ -1027,27 +1051,39 @@ body {
 															<c:out value="${markssummary[0]}" />
 														</td>
 														<td class="marksTableCell">
-															<c:out value="${markssummary[1]}" />
+																		<c:choose>
+																			<c:when test="${not empty markssummary[2]}"><c:out value="${markssummary[2]}" /></c:when>
+																			<c:otherwise>-</c:otherwise>
+																		</c:choose>
+																	</td>
+																	<td class="marksTableCell">
+																		<c:choose>
+																			<c:when test="${not empty markssummary[1]}"><c:out value="${markssummary[1]}" /></c:when>
+																			<c:otherwise>-</c:otherwise>
+																		</c:choose>
 														</td>
 														<td class="marksTableCell">
-															<c:out value="${markssummary[2]}" />%
+																		<c:choose>
+																			<c:when test="${not empty markssummary[3]}"><c:out value="${markssummary[3]}" />%</c:when>
+																			<c:otherwise>-</c:otherwise>
+																		</c:choose>
 														</td>
 															<td class="marksTableCell">
 															<c:set var="subjectGradeCoScholasticGrade" value="-" />
 														        <c:choose>
-														            <c:when test="${markssummary[2] >= 90}">
+																			            <c:when test="${markssummary[3] >= 90}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="A+" />
 														            </c:when>
-														            <c:when test="${markssummary[2] >= 70}">
+																			            <c:when test="${markssummary[3] >= 70}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="A" />
 														            </c:when>
-														            <c:when test="${markssummary[2] >= 50}">
+																			            <c:when test="${markssummary[3] >= 50}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="B+" />
 														            </c:when>
-														            <c:when test="${markssummary[2] >= 30}">
+																			            <c:when test="${markssummary[3] >= 30}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="B" />
 														            </c:when>
-														            <c:when test="${markssummary[2] >= 29}">
+																			            <c:when test="${markssummary[3] >= 29}">
 														                <c:set var="subjectGradeCoScholasticGrade" value="C" />
 														            </c:when>
 														            <c:otherwise>

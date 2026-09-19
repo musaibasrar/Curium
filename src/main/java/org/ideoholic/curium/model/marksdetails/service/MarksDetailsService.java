@@ -1783,6 +1783,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
+				float totalMinMarks = 0;
 				boolean examPresent = false;
 
 				List<Marks> marksDetailsList = new MarksDetailsDAO()
@@ -1823,7 +1824,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 								}else {
 									int percent = (int) ((marksObtained * 100.0) / maxMarks);
 									//excludedSubjectGrades.put(subjectName, ""+percent);
-									excludedSubjectGrades.put(subjectName, marksObtained+"/"+maxMarks+"/"+percent+"/"+excludedGrade);
+									excludedSubjectGrades.put(subjectName, marksObtained+"/"+maxMarks+"/"+minMarks+"/"+percent+"/"+excludedGrade);
 								}
 								break;
 							}
@@ -1858,6 +1859,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 							if (!excludedFromAggregate) {
 								totalObtainedMarks += marksObtained;
 								totalMarks += maxMarks;
+								totalMinMarks += minMarks;
 							}
 
 							SubjectSummary subjectSummary = subjectSummaryMap.get(subjectName);
@@ -1876,6 +1878,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				if (examPresent && totalMarks > 0) {
 					double percentage = (totalObtainedMarks * 100.0) / totalMarks;
 					examSummary.setTotalMarks((int) totalMarks);
+					examSummary.setTotalMinMarks((int) totalMinMarks);
 					examSummary.setTotalMarksObtained(totalObtainedMarks);
 					examSummary.setPercentage(percentage);
 

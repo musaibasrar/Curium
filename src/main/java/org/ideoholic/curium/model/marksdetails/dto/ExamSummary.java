@@ -14,6 +14,7 @@ public class ExamSummary {
     private int examId;
     private int totalMarks;
     private float totalMarksObtained;
+    private int totalMinMarks;
     private double percentage;
     private String grade;
     private int rank;
