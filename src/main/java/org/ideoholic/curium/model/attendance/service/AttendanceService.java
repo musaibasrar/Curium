@@ -14,11 +14,14 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,36 +43,11 @@ import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.attendance.dao.AttendanceDAO;
-import org.ideoholic.curium.model.attendance.dto.AttendanceDetailsDto;
-import org.ideoholic.curium.model.attendance.dto.Attendancemaster;
-import org.ideoholic.curium.model.attendance.dto.ExportMonthlyDataDto;
-import org.ideoholic.curium.model.attendance.dto.HolidayIdsDto;
-import org.ideoholic.curium.model.attendance.dto.HolidaysDto;
-import org.ideoholic.curium.model.attendance.dto.Holidaysmaster;
-import org.ideoholic.curium.model.attendance.dto.MarkStaffAttendanceDto;
-import org.ideoholic.curium.model.attendance.dto.MonthlyDataStaffDto;
-import org.ideoholic.curium.model.attendance.dto.StaffAttendanceDetailsDto;
-import org.ideoholic.curium.model.attendance.dto.StaffAttendanceDetailsResponseDto;
-import org.ideoholic.curium.model.attendance.dto.StaffAttendanceMasterDto;
-import org.ideoholic.curium.model.attendance.dto.Staffdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsMarkDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsMarkResponseDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceDetailsResponseDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceGraphDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceGraphResponseDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMasterDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMonthlyDto;
-import org.ideoholic.curium.model.attendance.dto.StudentAttendanceMonthlyResponseDto;
-import org.ideoholic.curium.model.attendance.dto.Studentdailyattendance;
-import org.ideoholic.curium.model.attendance.dto.StudentsAttendanceDto;
-import org.ideoholic.curium.model.attendance.dto.UpdateStaffAttendanceDetailsDto;
-import org.ideoholic.curium.model.attendance.dto.ViewStaffAttendanceDto;
-import org.ideoholic.curium.model.attendance.dto.ViewStaffAttendanceResponseDto;
-import org.ideoholic.curium.model.attendance.dto.WeekOffDto;
-import org.ideoholic.curium.model.attendance.dto.Weeklyoff;
+import org.ideoholic.curium.model.attendance.dto.*;
 import org.ideoholic.curium.model.employee.dao.EmployeeDAO;
 import org.ideoholic.curium.model.employee.dto.Teacher;
+import org.ideoholic.curium.model.hr.dao.HrDAO;
+import org.ideoholic.curium.model.hr.dto.Leaveapplication;
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.sendsms.service.SmsService;
 import org.ideoholic.curium.model.std.dao.StandardDetailsDAO;
@@ -78,6 +56,7 @@ import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.Student;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -86,15 +65,31 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AttendanceService {
 	
+	 	@Autowired
 	 	private HttpServletRequest request;
+	    @Autowired
 	    private HttpServletResponse response;
+	    @Autowired
 	    private HttpSession httpSession;
 	    private static final int BUFFER_SIZE = 4096;
 	    private String CURRENTACADEMICYEAR = "currentAcademicYear";
 	    private String BRANCHID = "branchid";
+	    private static final String HOLIDAY_DISPLAY_VALUE = "Holiday";
+	    private static final String WEEK_OFF_DISPLAY_VALUE = "Week-Off";
+	    private static final String STUDENT_WEEK_OFF_DISPLAY_VALUE = "Weekly Off";
+	    private static final String SUNDAY_DAY_NAME = "Sunday";
 	    
 	    private static final Logger logger = LogManager.getLogger(AttendanceService.class);
 	    
+	    public AttendanceService(){
+	    }
+	    
+	public AttendanceService(HttpServletRequest request, HttpServletResponse response) {
+		this.request = request;
+        this.response = response;
+        this.httpSession = request.getSession();
+	}
+
 	public ResultResponse viewAllHolidays(String branchId, String currentAcademicYear) {
 		//remove it after testing
 		//httpSession.setAttribute("currentAcademicYear", "2017/18");
@@ -808,14 +803,14 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 					result.setSuccess(true);
 				}
 					if(res!=null && res.contains("success")) {
-						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto, dateofAttendance);
+						sendSMSAbsentees(studentDailyAttendanceList, attendanceDto);
 					}
 			}
 		}
 		return result;
 	}
 	
-	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto, Date dateofAttendance) {
+	public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList, StudentsAttendanceDto dto) {
 		
 		Properties properties = new Properties();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
@@ -838,8 +833,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         				List<Parents> parentDetails = new studentDetailsDAO().getStudentsList("from Parents as parents where parents.Student.studentexternalid='"+studentDailyAttendance.getAttendeeid()+"'");
         				
         				//String todaysDate = new DateUtil().dateParserddMMYYYY(new Date());
-        				String todaysDate = new DateUtil().dateParserddMMYYYY(dateofAttendance);
-            			new SmsService().sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent", parentDetails.get(0).getStudent().getBranchid());
+        				String todaysDate = new DateUtil().dateParserddMMYYYY(dto.getDateofAttendance());
+        				System.out.println("todays date "+todaysDate);
+            			new SmsService(request, response).sendSMS(parentDetails.get(0).getContactnumber(),parentDetails.get(0).getStudent().getName()+":"+todaysDate,"absent");
 						/*
 						 * if(parentDetails.size()>0) {
 						 * sbN.append(parentDetails.get(0).getContactnumber()); sbN.append(","); }
@@ -956,8 +952,27 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
 
-
-		Date monthOf = DateUtil.dateParserddmmyyyy(exportMonthlyDataDto.getMonthOf());
+		// Parse month and year to construct date range
+		Date monthOf;
+		if(exportMonthlyDataDto.getMonth() != null && exportMonthlyDataDto.getYear() != null
+				&& !exportMonthlyDataDto.getMonth().trim().isEmpty() && !exportMonthlyDataDto.getYear().trim().isEmpty()) {
+			try {
+				int selectedMonth = Integer.parseInt(exportMonthlyDataDto.getMonth());
+				int selectedYear = Integer.parseInt(exportMonthlyDataDto.getYear());
+				Calendar cStart = Calendar.getInstance();
+				cStart.set(Calendar.YEAR, selectedYear);
+				cStart.set(Calendar.MONTH, selectedMonth - 1);  // Calendar.MONTH is 0-indexed
+				cStart.set(Calendar.DAY_OF_MONTH, 1);
+				monthOf = cStart.getTime();
+			} catch (NumberFormatException ex) {
+				// Fallback to old method if parsing fails
+				logger.warn("Failed to parse month/year, falling back to monthOf: " + ex.getMessage());
+				monthOf = DateUtil.dateParserddmmyyyy(exportMonthlyDataDto.getMonthOf());
+			}
+		} else {
+			// Fallback to old method if month/year not provided
+			monthOf = DateUtil.dateParserddmmyyyy(exportMonthlyDataDto.getMonthOf());
+		}
 
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
@@ -975,9 +990,13 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
         String endDateAtt = sdf.format(Timestampto);
         
 		Map<String,List<Studentdailyattendance>> studentsAttendance = new AttendanceDAO().readListOfStudentAttendanceExport(currentAcademicYear, startDateAtt, endDateAtt, searchStudentList, Integer.parseInt(branchId));
+		
+		// Fetch holidays and weekly offs for the selected month/branch/academic year.
+		List<Holidaysmaster> holidaysForMonth = new AttendanceDAO().readListOfHolidaysForMonth(monthOf, lastDayOfMonth, currentAcademicYear, Integer.parseInt(branchId));
+		List<Weeklyoff> weekOffsForAcademicYear = new AttendanceDAO().readListOfWeekOff(currentAcademicYear, Integer.parseInt(branchId));
 
 		try {
-			result = exportDataToExcel(studentsAttendance, monthOf);
+			result = exportDataToExcel(studentsAttendance, monthOf, holidaysForMonth, weekOffsForAcademicYear);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -998,79 +1017,72 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		cStart.setTime(monthOf);
 		int numberOfDays = cStart.getActualMaximum(Calendar.DAY_OF_MONTH);
 		String monthName = new SimpleDateFormat("MMMM").format(monthOf);
-		
+
 		try {
 
 			// Creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
 			XSSFSheet sheet = workbook.createSheet(monthName);
 			Map<String, Object[]> data = new HashMap<String, Object[]>();
-			
+
 			Row headerRow = sheet.createRow(0);
 			headerRow.createCell(0).setCellValue("Student Name");
 			sheet.autoSizeColumn(0);
 			for(int j=1;j<=numberOfDays;j++){
 				headerRow.createCell(j).setCellValue(j);
 			}
-			
+
 			headerRow.createCell(numberOfDays+2).setCellValue("Total Days Present");
 			sheet.autoSizeColumn(numberOfDays+2);
 			headerRow.createCell(numberOfDays+3).setCellValue("Total Days Absent");
 			sheet.autoSizeColumn(numberOfDays+3);
 			int rownum = 1;
-			
-			for (Entry<String, List<Studentdailyattendance>> entry : studentDailyAttendance.entrySet())
-			{
-			    Row row = sheet.createRow(rownum++);
-			    row.createCell(0).setCellValue(entry.getKey());
-			    	int i=1;
-			    	int totalDaysPresent = 0;
-			    	int totalDaysAbsent = 0;
-			    for (Studentdailyattendance studentdailyattendance : entry.getValue()) {
-			    			
-			    		if(studentdailyattendance.getDate().compareTo(monthOf) > 0) {
-			    			
-			    			long difference = studentdailyattendance.getDate().getTime() - monthOf.getTime();
-			 		        float daysBetween = (difference / (1000*60*60*24));
-			 		        
-			 		        	for(int j=0; j<daysBetween; j++) {
-			 		        		row.createCell(i).setCellValue("NA");
-			 				    	sheet.autoSizeColumn(i);
-			 				    	i++;
-			 		        	}
-			 		       
-			    		}
-			    	
-			    	if("P".equalsIgnoreCase(studentdailyattendance.getAttendancestatus()) || "H".equalsIgnoreCase(studentdailyattendance.getAttendancestatus())){
-			    		totalDaysPresent++;
-			    	}
-			    	if("A".equalsIgnoreCase(studentdailyattendance.getAttendancestatus())){
-			    		totalDaysAbsent++;
-			    	}
-			    	row.createCell(i).setCellValue(studentdailyattendance.getAttendancestatus());
-			    	sheet.autoSizeColumn(i);
-			    	i++;
+
+		for (Entry<String, List<Studentdailyattendance>> entry : studentDailyAttendance.entrySet())
+		{
+			Row row = sheet.createRow(rownum++);
+			row.createCell(0).setCellValue(entry.getKey());
+				int totalDaysPresent = 0;
+				int totalDaysAbsent = 0;
+
+				// Create a map to track attendance by day of month
+				Map<Integer, String> attendanceByDay = new HashMap<Integer, String>();
+				for (Studentdailyattendance studentdailyattendance : entry.getValue()) {
+					if(studentdailyattendance.getDate() != null) {
+						Calendar dateCal = Calendar.getInstance();
+						dateCal.setTime(studentdailyattendance.getDate());
+						int dayOfMonth = dateCal.get(Calendar.DAY_OF_MONTH);
+						String status = studentdailyattendance.getAttendancestatus();
+						attendanceByDay.put(dayOfMonth, status);
+
+						// Count present and absent
+						if("P".equalsIgnoreCase(status) || "H".equalsIgnoreCase(status)){
+							totalDaysPresent++;
+							//System.out.println("present "+entry.getKey());
+						}
+						if("A".equalsIgnoreCase(status)){
+							totalDaysAbsent++;
+							//System.out.println("absent "+entry.getKey());
+						}
+					}
 				}
-			    
-			    if(i<numberOfDays) {
-			    	
-	 		        	for(int j=i; j<=numberOfDays; j++) {
-	 		        		row.createCell(i).setCellValue("NA");
-	 				    	sheet.autoSizeColumn(i);
-	 				    	i++;
-	 		        	}
-			    }
-			    
-			    
-			    row.createCell(++i).setCellValue(totalDaysPresent);
-			    row.createCell(++i).setCellValue(totalDaysAbsent);
-			}
-				
+
+				// Fill cells for each day of the month
+				for(int day = 1; day <= numberOfDays; day++) {
+					String cellValue = attendanceByDay.containsKey(day) ? attendanceByDay.get(day) : "NA";
+					row.createCell(day).setCellValue(cellValue);
+					sheet.autoSizeColumn(day);
+				}
+
+			row.createCell(numberOfDays+2).setCellValue(totalDaysPresent);
+			row.createCell(numberOfDays+3).setCellValue(totalDaysAbsent);
+		}
+
 				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1078,10 +1090,194 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		// getFile(name, path);
 	}
 
-	public ResultResponse downloadFile() {
+
+	public boolean exportDataToExcel(Map<String, List<Studentdailyattendance>> studentDailyAttendance, Date monthOf, List<Holidaysmaster> holidaysForMonth, List<Weeklyoff> weeklyOffs)
+			throws Exception {
+
+		boolean writeSucees = false;
+		Calendar cStart = Calendar.getInstance();
+		cStart.setTime(monthOf);
+		int numberOfDays = cStart.getActualMaximum(Calendar.DAY_OF_MONTH);
+		String monthName = new SimpleDateFormat("MMMM").format(monthOf);
+		Map<Integer, String> holidayDisplayByDay = resolveHolidayDisplayByDay(monthOf, numberOfDays, holidaysForMonth);
+		Set<String> weeklyOffDayNames = resolveWeeklyOffDayNames(weeklyOffs);
+		Set<Integer> nonWorkingDays = resolveStudentNonWorkingDays(monthOf, numberOfDays, holidayDisplayByDay, weeklyOffDayNames);
+		int totalWorkingDaysForMonth = numberOfDays - nonWorkingDays.size();
+
+		try {
+
+			// Creating an excel file
+			XSSFWorkbook workbook = new XSSFWorkbook();
+			XSSFSheet sheet = workbook.createSheet(monthName);
+			Map<String, Object[]> data = new HashMap<String, Object[]>();
+
+			Row headerRow = sheet.createRow(0);
+			headerRow.createCell(0).setCellValue("Student Name");
+			sheet.autoSizeColumn(0);
+			for(int j=1;j<=numberOfDays;j++){
+				headerRow.createCell(j).setCellValue(j);
+			}
+
+			headerRow.createCell(numberOfDays+2).setCellValue("Total Working Days");
+			sheet.autoSizeColumn(numberOfDays+2);
+			headerRow.createCell(numberOfDays+3).setCellValue("Total Days Present");
+			sheet.autoSizeColumn(numberOfDays+3);
+			headerRow.createCell(numberOfDays+4).setCellValue("Total Days Absent");
+			sheet.autoSizeColumn(numberOfDays+4);
+			int rownum = 1;
+
+		for (Entry<String, List<Studentdailyattendance>> entry : studentDailyAttendance.entrySet())
+		{
+			Row row = sheet.createRow(rownum++);
+			row.createCell(0).setCellValue(entry.getKey());
+				int totalDaysPresent = 0;
+				int totalDaysAbsent = 0;
+
+				// Create a map to track attendance by day of month
+				Map<Integer, String> attendanceByDay = new HashMap<Integer, String>();
+				for (Studentdailyattendance studentdailyattendance : entry.getValue()) {
+					if(studentdailyattendance.getDate() != null) {
+						Calendar dateCal = Calendar.getInstance();
+						dateCal.setTime(studentdailyattendance.getDate());
+						int dayOfMonth = dateCal.get(Calendar.DAY_OF_MONTH);
+						String status = studentdailyattendance.getAttendancestatus();
+						attendanceByDay.put(dayOfMonth, status);
+
+					}
+				}
+
+				// Fill cells for each day of the month
+				for(int day = 1; day <= numberOfDays; day++) {
+					String cellValue = resolveStudentExportDayValue(monthOf, day, attendanceByDay, holidayDisplayByDay, weeklyOffDayNames);
+					if("P".equalsIgnoreCase(cellValue) || "H".equalsIgnoreCase(cellValue)) {
+						totalDaysPresent++;
+					} else if("A".equalsIgnoreCase(cellValue)) {
+						totalDaysAbsent++;
+					}
+					row.createCell(day).setCellValue(cellValue);
+				}
+
+			row.createCell(numberOfDays+2).setCellValue(totalWorkingDaysForMonth);
+			row.createCell(numberOfDays+3).setCellValue(totalDaysPresent);
+			row.createCell(numberOfDays+4).setCellValue(totalDaysAbsent);
+		}
+
+			sheet.autoSizeColumn(0);
+			for(int j=1;j<=numberOfDays+4;j++){
+				sheet.autoSizeColumn(j);
+			}
+
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx"));
+				workbook.write(out);
+				out.close();
+				writeSucees = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return writeSucees;
+	}
+
+	private String resolveStudentExportDayValue(Date monthOf, int dayOfMonth, Map<Integer, String> attendanceByDay,
+			Map<Integer, String> holidayDisplayByDay, Set<String> weeklyOffDayNames) {
+		if(holidayDisplayByDay.containsKey(dayOfMonth)) {
+			return holidayDisplayByDay.get(dayOfMonth);
+		}
+		Calendar dayCalendar = Calendar.getInstance();
+		dayCalendar.setTime(monthOf);
+		dayCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+		String dayName = new SimpleDateFormat("EEEE").format(dayCalendar.getTime());
+		if(weeklyOffDayNames.contains(dayName)) {
+			return STUDENT_WEEK_OFF_DISPLAY_VALUE;
+		}
+		if(attendanceByDay.containsKey(dayOfMonth)) {
+			return attendanceByDay.get(dayOfMonth);
+		}
+		return "NA";
+	}
+
+	private Map<Integer, String> resolveHolidayDisplayByDay(Date monthOf, int numberOfDays, List<Holidaysmaster> holidaysForMonth) {
+		Map<Integer, String> holidayDisplayByDay = new HashMap<Integer, String>();
+		if(holidaysForMonth == null || holidaysForMonth.isEmpty()) {
+			return holidayDisplayByDay;
+		}
+		for (Holidaysmaster holiday : holidaysForMonth) {
+			if(holiday == null || holiday.getFromdate() == null || holiday.getTodate() == null) {
+				continue;
+			}
+			for (int day = 1; day <= numberOfDays; day++) {
+				Calendar dayCalendar = Calendar.getInstance();
+				dayCalendar.setTime(monthOf);
+				dayCalendar.set(Calendar.DAY_OF_MONTH, day);
+				if(isDateWithinRange(dayCalendar.getTime(), holiday.getFromdate(), holiday.getTodate())) {
+					String holidayName = holiday.getHolidayname();
+					if(holidayName != null && !holidayName.trim().isEmpty()) {
+						holidayDisplayByDay.put(day, HOLIDAY_DISPLAY_VALUE+" - "+holidayName.trim());
+					} else {
+						holidayDisplayByDay.put(day, HOLIDAY_DISPLAY_VALUE);
+					}
+				}
+			}
+		}
+		return holidayDisplayByDay;
+	}
+
+	private Set<String> resolveWeeklyOffDayNames(List<Weeklyoff> weeklyOffs) {
+		Set<String> weeklyOffDayNames = new LinkedHashSet<String>();
+		if(weeklyOffs == null || weeklyOffs.isEmpty()) {
+			weeklyOffDayNames.add(SUNDAY_DAY_NAME);
+			return weeklyOffDayNames;
+		}
+		for (Weeklyoff weeklyoff : weeklyOffs) {
+			if(weeklyoff != null && weeklyoff.getWeeklyoffday() != null && !weeklyoff.getWeeklyoffday().trim().isEmpty()) {
+				weeklyOffDayNames.add(weeklyoff.getWeeklyoffday().trim());
+			}
+		}
+		if(weeklyOffDayNames.isEmpty()) {
+			weeklyOffDayNames.add(SUNDAY_DAY_NAME);
+		}
+		return weeklyOffDayNames;
+	}
+
+	private Set<Integer> resolveStudentNonWorkingDays(Date monthOf, int numberOfDays, Map<Integer, String> holidayDisplayByDay, Set<String> weeklyOffDayNames) {
+		Set<Integer> nonWorkingDays = new LinkedHashSet<Integer>();
+		for (int day = 1; day <= numberOfDays; day++) {
+			if(holidayDisplayByDay.containsKey(day)) {
+				nonWorkingDays.add(day);
+				continue;
+			}
+			Calendar dayCalendar = Calendar.getInstance();
+			dayCalendar.setTime(monthOf);
+			dayCalendar.set(Calendar.DAY_OF_MONTH, day);
+			String dayName = new SimpleDateFormat("EEEE").format(dayCalendar.getTime());
+			if(weeklyOffDayNames.contains(dayName)) {
+				nonWorkingDays.add(day);
+			}
+		}
+		return nonWorkingDays;
+	}
+
+	private boolean isDateWithinRange(Date targetDate, Date startDate, Date endDate) {
+		Date target = stripTime(targetDate);
+		Date start = stripTime(startDate);
+		Date end = stripTime(endDate);
+		return !target.before(start) && !target.after(end);
+	}
+
+	private Date stripTime(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.set(Calendar.HOUR_OF_DAY, 0);
+		calendar.set(Calendar.MINUTE, 0);
+		calendar.set(Calendar.SECOND, 0);
+		calendar.set(Calendar.MILLISECOND, 0);
+		return calendar.getTime();
+	}
+
+	public boolean downloadFile() {
 		
 
-		ResultResponse result = ResultResponse.builder().build();
+		boolean result = false;
 		try {
 
 			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/studentsmonthlyattendance.xlsx");
@@ -1113,8 +1309,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 
 			inStream.close();
 			outStream.close();
-			result.setSuccess(true);
-			return result;
+			result = true;
 		} catch (Exception e) {
 			System.out.println("" + e);
 		}
@@ -1171,9 +1366,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto, String currentAcademicYear) {
+	public ResultResponse updateStaffAttendanceDetails(UpdateStaffAttendanceDetailsDto updateStaffAttendanceDetailsDto) {
 		
-		if(currentAcademicYear!=null){
+		if(updateStaffAttendanceDetailsDto.getCurrentAcademicYear()!=null){
 			String[] attendanceIds = updateStaffAttendanceDetailsDto.getAttendanceIds();
 			String[] studentAttendanceStatus = updateStaffAttendanceDetailsDto.getStudentAttendanceStatus();
 			List<Integer> attendanceIdsList = new ArrayList<Integer>();
@@ -1247,9 +1442,9 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		return result;
 	}
 
-	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto, String branchId, String currentAcademicYear) {
+	public ResultResponse markStaffAttendance(MarkStaffAttendanceDto markStaffAttendanceDto) {
 		ResultResponse result = null;
-		if(currentAcademicYear!=null){
+		if(markStaffAttendanceDto.getCurrentAcademicYear()!=null){
 			String[] attendanceIds = markStaffAttendanceDto.getAttendanceIds();
 			String[] staffAttendanceStatus = markStaffAttendanceDto.getStaffAttendanceStatus();
 			String[] inTime = markStaffAttendanceDto.getInTime();
@@ -1276,8 +1471,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				staffDailyAttendance.setIntime(inTimeList.get(i));
 				staffDailyAttendance.setOuttime(outTimeList.get(i));
 				staffDailyAttendance.setDate(new Date());
-				staffDailyAttendance.setAcademicyear(currentAcademicYear);
-				staffDailyAttendance.setBranchid(Integer.parseInt(branchId));
+				staffDailyAttendance.setAcademicyear(markStaffAttendanceDto.getCurrentAcademicYear());
+				staffDailyAttendance.setBranchid(markStaffAttendanceDto.getBranchId());
 				staffdailyattendanceList.add(staffDailyAttendance);
 			}
 			result = ResultResponse
@@ -1289,17 +1484,36 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 
 	public ResultResponse exportMonthlyDataStaff(MonthlyDataStaffDto monthlyDataStaffDto, String branchId, String currentAcademicYear) {
-		
+		boolean result = false;
+		Map<String, Object> resultMap = new LinkedHashMap<String, Object>();
 		if(currentAcademicYear!=null){
-			
-		Date monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
-		
+		Date monthOf;
 		Calendar cStart = Calendar.getInstance();
-		cStart.setTime(monthOf);
-		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMinimum(Calendar.DAY_OF_MONTH));
-		monthOf = cStart.getTime();
+		if(monthlyDataStaffDto.getMonth() != null && monthlyDataStaffDto.getYear() != null
+				&& !monthlyDataStaffDto.getMonth().trim().isEmpty() && !monthlyDataStaffDto.getYear().trim().isEmpty()) {
+			try {
+				int selectedMonth = Integer.parseInt(monthlyDataStaffDto.getMonth());
+				int selectedYear = Integer.parseInt(monthlyDataStaffDto.getYear());
+				cStart.clear();
+				cStart.set(Calendar.YEAR, selectedYear);
+				cStart.set(Calendar.MONTH, selectedMonth - 1);
+				cStart.set(Calendar.DAY_OF_MONTH, 1);
+				monthOf = cStart.getTime();
+			} catch (NumberFormatException ex) {
+				monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
+				cStart.setTime(monthOf);
+				cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMinimum(Calendar.DAY_OF_MONTH));
+				monthOf = cStart.getTime();
+			}
+		} else {
+			monthOf = DateUtil.dateParserUpdateStd(monthlyDataStaffDto.getMonthOf());
+			cStart.setTime(monthOf);
+			cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMinimum(Calendar.DAY_OF_MONTH));
+			monthOf = cStart.getTime();
+		}
 		Timestamp TimestampFrom = new Timestamp(monthOf.getTime());
 		
+		cStart.setTime(monthOf);
 		cStart.set(Calendar.DAY_OF_MONTH, cStart.getActualMaximum(Calendar.DAY_OF_MONTH));
 		Date lastDayOfMonth = cStart.getTime();
 		Timestamp Timestampto = new Timestamp(lastDayOfMonth.getTime());
@@ -1309,10 +1523,13 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
 		try {
-			ResultResponse
-					.builder()
-					.success(exportDataToExcelStaff(staffsAttendance,monthOf))
-					.build();
+			ResultResponse exportResult = exportDataToExcelStaff(staffsAttendance, monthOf, staffList, Integer.parseInt(branchId), currentAcademicYear);
+			if(exportResult != null) {
+				result = exportResult.isSuccess();
+				if(exportResult.getResultMap() != null) {
+					resultMap = exportResult.getResultMap();
+				}
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1320,126 +1537,259 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		}
 		return ResultResponse
 				.builder()
-				.success(false)
+				.success(result)
+				.resultMap(resultMap)
 				.build();
 	}
 
-	private boolean exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf) {
+	private ResultResponse exportDataToExcelStaff(Map<String, List<Staffdailyattendance>> staffsAttendance,Date monthOf, List<Teacher> staffList, int branchId, String currentAcademicYear) {
 
 		boolean writeSucees = false;
 		Calendar cStart = Calendar.getInstance();
 		cStart.setTime(monthOf);
 		int numberOfDays = cStart.getActualMaximum(Calendar.DAY_OF_MONTH);
 		String monthName = new SimpleDateFormat("MMMM").format(monthOf);
-		
+		SimpleDateFormat reportDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		Calendar monthStart = Calendar.getInstance();
+		monthStart.setTime(monthOf);
+		monthStart.set(Calendar.DAY_OF_MONTH, monthStart.getActualMinimum(Calendar.DAY_OF_MONTH));
+		Calendar monthEnd = Calendar.getInstance();
+		monthEnd.setTime(monthOf);
+		monthEnd.set(Calendar.DAY_OF_MONTH, monthEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date monthStartDate = monthStart.getTime();
+		Date monthEndDate = monthEnd.getTime();
+		String schoolName = httpSession.getAttribute("branchname") != null ? httpSession.getAttribute("branchname").toString() : "";
+		String schoolAddress = httpSession.getAttribute("branchaddress") != null ? httpSession.getAttribute("branchaddress").toString() : "";
+		String dateRange = reportDateFormat.format(monthStartDate)+" - "+reportDateFormat.format(monthEndDate);
+		List<Integer> dayHeaders = new ArrayList<Integer>();
+		for (int day = 1; day <= numberOfDays; day++) {
+			dayHeaders.add(day);
+		}
+		List<Map<String, Object>> previewRows = new ArrayList<Map<String, Object>>();
+
 		try {
 
 			// Creating an excel file
 			XSSFWorkbook workbook = new XSSFWorkbook();
 			XSSFSheet sheet = workbook.createSheet(monthName);
-			Map<String, Object[]> data = new HashMap<String, Object[]>();
-			
+			Map<String, Teacher> staffByExternalId = new LinkedHashMap<String, Teacher>();
+			Map<String, String> attendanceMasterIdToExternalId = new HashMap<String, String>();
+			List<String> attendanceMasterIds = new ArrayList<String>();
+			List<String> staffExternalIds = new ArrayList<String>();
+			for (Teacher teacher : staffList) {
+				staffByExternalId.put(teacher.getTeacherexternalid(), teacher);
+				staffExternalIds.add(teacher.getTeacherexternalid());
+				if(teacher.getTid() != null) {
+					String attendanceMasterId = teacher.getTid().toString();
+					attendanceMasterIds.add(attendanceMasterId);
+					attendanceMasterIdToExternalId.put(attendanceMasterId, teacher.getTeacherexternalid());
+				}
+			}
+			Map<String, Attendancemaster> attendanceMasterByStaff = new HashMap<String, Attendancemaster>();
+			Map<Integer, Weeklyoff> weeklyOffById = new HashMap<Integer, Weeklyoff>();
+			Map<Integer, Holidaysmaster> holidayById = new HashMap<Integer, Holidaysmaster>();
+			Map<String, Set<Integer>> leaveDaysByStaff = new HashMap<String, Set<Integer>>();
+			if(!staffExternalIds.isEmpty()) {
+				List<Attendancemaster> attendanceMasterList = new ArrayList<Attendancemaster>();
+				if(!attendanceMasterIds.isEmpty()) {
+					attendanceMasterList = new AttendanceDAO().getAttendanceMasterDetails(attendanceMasterIds, branchId);
+				}
+				Set<Integer> weeklyOffIds = new LinkedHashSet<Integer>();
+				for (Attendancemaster attendanceMaster : attendanceMasterList) {
+					String mappedExternalId = attendanceMasterIdToExternalId.get(attendanceMaster.getAttendeeid());
+					if(mappedExternalId != null) {
+						attendanceMasterByStaff.put(mappedExternalId, attendanceMaster);
+					} else {
+						attendanceMasterByStaff.put(attendanceMaster.getAttendeeid(), attendanceMaster);
+					}
+					weeklyOffIds.addAll(parseIds(attendanceMaster.getWeeklyoff()));
+				}
+				if(!weeklyOffIds.isEmpty()) {
+					for (Weeklyoff weeklyoff : new AttendanceDAO().readListOfWeeklyOff(new ArrayList<Integer>(weeklyOffIds), currentAcademicYear, branchId)) {
+						weeklyOffById.put(weeklyoff.getWid(), weeklyoff);
+					}
+				}
+				for (Holidaysmaster holiday : new AttendanceDAO().readListOfHolidaysForMonth(monthStartDate, monthEndDate, currentAcademicYear, branchId)) {
+					if(holiday.getShid() != null) {
+						holidayById.put(holiday.getShid(), holiday);
+					}
+				}
+				List<Leaveapplication> leaveApplications = new HrDAO().leaveApprovals(currentAcademicYear, branchId);
+				for (Leaveapplication leaveApplication : leaveApplications) {
+					if(leaveApplication == null || leaveApplication.getTeacher() == null || leaveApplication.getTeacher().getTeacherexternalid() == null) {
+						continue;
+					}
+					if(leaveApplication.getStatus() == null || !"approved".equalsIgnoreCase(leaveApplication.getStatus())) {
+						continue;
+					}
+					String staffExternalId = leaveApplication.getTeacher().getTeacherexternalid();
+					if(!staffByExternalId.containsKey(staffExternalId)) {
+						continue;
+					}
+					Calendar leaveStart = Calendar.getInstance();
+					leaveStart.setTime(leaveApplication.getFromdate());
+					Calendar leaveEnd = Calendar.getInstance();
+					leaveEnd.setTime(leaveApplication.getTodate());
+					if(leaveEnd.getTime().before(monthStartDate) || leaveStart.getTime().after(monthEndDate)) {
+						continue;
+					}
+					Set<Integer> leaveDays = leaveDaysByStaff.get(staffExternalId);
+					if(leaveDays == null) {
+						leaveDays = new LinkedHashSet<Integer>();
+						leaveDaysByStaff.put(staffExternalId, leaveDays);
+					}
+					Calendar leaveCursor = Calendar.getInstance();
+					leaveCursor.setTime(leaveStart.getTime().before(monthStart.getTime()) ? monthStart.getTime() : leaveStart.getTime());
+					Calendar leaveLimit = Calendar.getInstance();
+					leaveLimit.setTime(leaveEnd.getTime().after(monthEnd.getTime()) ? monthEnd.getTime() : leaveEnd.getTime());
+					while(!leaveCursor.getTime().after(leaveLimit.getTime())) {
+						leaveDays.add(leaveCursor.get(Calendar.DAY_OF_MONTH));
+						leaveCursor.add(Calendar.DAY_OF_MONTH, 1);
+					}
+				}
+			}
+
 			Row headerRow = sheet.createRow(0);
 			headerRow.createCell(0).setCellValue("Staff Name");
 			sheet.autoSizeColumn(0);
 			for(int j=1;j<=numberOfDays;j++){
 				headerRow.createCell(j).setCellValue(j);
 			}
-			
-			headerRow.createCell(numberOfDays+2).setCellValue("Total Days Present");
+
+			headerRow.createCell(numberOfDays+2).setCellValue("Total Working Days");
 			sheet.autoSizeColumn(numberOfDays+2);
-			headerRow.createCell(numberOfDays+3).setCellValue("Total Days Absent");
+			headerRow.createCell(numberOfDays+3).setCellValue("Total Days Present");
 			sheet.autoSizeColumn(numberOfDays+3);
 			headerRow.createCell(numberOfDays+4).setCellValue("Total Days Leave");
 			sheet.autoSizeColumn(numberOfDays+4);
+			headerRow.createCell(numberOfDays+5).setCellValue("Total Days Absent");
+			sheet.autoSizeColumn(numberOfDays+5);
 			int rownum = 1;
-			
-			for (Entry<String, List<Staffdailyattendance>> entry : staffsAttendance.entrySet())
-			{
-			    Row row = sheet.createRow(rownum++);
-			    row.createCell(0).setCellValue(entry.getKey());
-			    	int i=1;
-			    	int totalDaysPresent = 0;
-			    	int totalDaysAbsent = 0;
-			    	int totalLeaves = 0;
-			    for (Staffdailyattendance staffdailyattendance : entry.getValue()) {
-			    	if("P".equalsIgnoreCase(staffdailyattendance.getAttendancestatus()) || "L".equalsIgnoreCase(staffdailyattendance.getAttendancestatus())
-			    			|| "H".equalsIgnoreCase(staffdailyattendance.getAttendancestatus())){
-			    		totalDaysPresent++;
-			    	}
-			    	if("A".equalsIgnoreCase(staffdailyattendance.getAttendancestatus())){
-			    		totalDaysAbsent++;
-			    	}
-			    	if("L".equalsIgnoreCase(staffdailyattendance.getAttendancestatus())){
-			    		totalLeaves++;
-			    	}
-			    	row.createCell(i).setCellValue(staffdailyattendance.getAttendancestatus());
-			    	sheet.autoSizeColumn(i);
-			    	i++;
-			    	
+
+			for (Teacher teacher : staffList) {
+				String staffExternalId = teacher.getTeacherexternalid();
+				Attendancemaster attendanceMaster = attendanceMasterByStaff.get(staffExternalId);
+				Set<String> weeklyOffDayNames = resolveWeeklyOffDays(attendanceMaster, weeklyOffById);
+				Set<Integer> holidayDays = resolveHolidayDays(attendanceMaster, holidayById, monthOf, numberOfDays);
+				Set<Integer> approvedLeaveDays = leaveDaysByStaff.get(staffExternalId);
+				if(approvedLeaveDays == null) {
+					approvedLeaveDays = new LinkedHashSet<Integer>();
 				}
-			    
-			    row.createCell(++i).setCellValue(totalDaysPresent);
-			    row.createCell(++i).setCellValue(totalDaysAbsent);
-			    row.createCell(++i).setCellValue(totalLeaves);
-			}
-			
-			int rownumTwo = 2;
-			
-			for (Entry<String, List<Staffdailyattendance>> entry : staffsAttendance.entrySet())
-			{
-			    Row row = sheet.createRow(rownumTwo++);
-			    row.createCell(0).setCellValue("");
-			    	int i=1;
-			    for (Staffdailyattendance staffdailyattendance : entry.getValue()) {
-			    	row.createCell(i).setCellValue(staffdailyattendance.getIntime()+"/"+staffdailyattendance.getOuttime());
-			    	sheet.autoSizeColumn(i);
-			    	i++;
-			    	
+				Map<Integer, Staffdailyattendance> attendanceByDay = new HashMap<Integer, Staffdailyattendance>();
+				List<Staffdailyattendance> staffAttendanceRows = staffsAttendance.get(staffExternalId);
+				if(staffAttendanceRows != null) {
+					for (Staffdailyattendance staffdailyattendance : staffAttendanceRows) {
+						if(staffdailyattendance.getDate() != null) {
+							Calendar attendanceDate = Calendar.getInstance();
+							attendanceDate.setTime(staffdailyattendance.getDate());
+							attendanceByDay.put(attendanceDate.get(Calendar.DAY_OF_MONTH), staffdailyattendance);
+						}
+					}
 				}
+				Row row = sheet.createRow(rownum++);
+				row.createCell(0).setCellValue(teacher.getTeachername());
+				int totalWorkingDays = numberOfDays - holidayDays.size();
+				int totalDaysPresent = 0;
+				int totalDaysAbsent = 0;
+				int totalLeaves = 0;
+				List<String> statusDayValues = new ArrayList<String>();
+				List<String> timeDayValues = new ArrayList<String>();
+				for (int day = 1; day <= numberOfDays; day++) {
+					Calendar dayCalendar = Calendar.getInstance();
+					dayCalendar.setTime(monthOf);
+					dayCalendar.set(Calendar.DAY_OF_MONTH, day);
+					String dayName = new SimpleDateFormat("EEEE").format(dayCalendar.getTime());
+					Staffdailyattendance attendance = attendanceByDay.get(day);
+					String displayValue = resolveStaffExportDayValue(holidayDays, approvedLeaveDays, weeklyOffDayNames, dayName, attendance, day);
+					row.createCell(day).setCellValue(displayValue);
+					statusDayValues.add(displayValue);
+					if("P".equalsIgnoreCase(displayValue) || "H".equalsIgnoreCase(displayValue) || HOLIDAY_DISPLAY_VALUE.equalsIgnoreCase(displayValue) || WEEK_OFF_DISPLAY_VALUE.equalsIgnoreCase(displayValue)) {
+						totalDaysPresent++;
+					}else if("L".equalsIgnoreCase(displayValue)) {
+						totalLeaves++;
+					}else if("A".equalsIgnoreCase(displayValue)) {
+						totalDaysAbsent++;
+					}
+					sheet.autoSizeColumn(day);
+				}
+				row.createCell(numberOfDays+2).setCellValue(totalWorkingDays);
+				row.createCell(numberOfDays+3).setCellValue(totalDaysPresent);
+				row.createCell(numberOfDays+4).setCellValue(totalLeaves);
+				row.createCell(numberOfDays+5).setCellValue(totalDaysAbsent);
+
+				Map<String, Object> statusPreviewRow = new LinkedHashMap<String, Object>();
+				statusPreviewRow.put("rowKind", "STATUS");
+				statusPreviewRow.put("staffName", teacher.getTeachername());
+				statusPreviewRow.put("dayValues", statusDayValues);
+				statusPreviewRow.put("timeValues", timeDayValues);
+				statusPreviewRow.put("totalWorkingDays", totalWorkingDays);
+				statusPreviewRow.put("totalDaysPresent", totalDaysPresent);
+				statusPreviewRow.put("totalDaysLeave", totalLeaves);
+				statusPreviewRow.put("totalDaysAbsent", totalDaysAbsent);
+
+				Row timeRow = sheet.createRow(rownum++);
+				timeRow.createCell(0).setCellValue("");
+				for (int day = 1; day <= numberOfDays; day++) {
+					Staffdailyattendance attendance = attendanceByDay.get(day);
+					String timeValue = "";
+					if(attendance != null) {
+						timeValue = attendance.getIntime()+"/"+attendance.getOuttime();
+					}
+					timeRow.createCell(day).setCellValue(timeValue);
+					timeDayValues.add(timeValue);
+					sheet.autoSizeColumn(day);
+				}
+				Map<String, Object> timePreviewRow = new LinkedHashMap<String, Object>();
+				timePreviewRow.put("rowKind", "TIME");
+				timePreviewRow.put("staffName", "");
+				timePreviewRow.put("dayValues", timeDayValues);
+				timePreviewRow.put("timeValues", timeDayValues);
+				timePreviewRow.put("totalWorkingDays", "");
+				timePreviewRow.put("totalDaysPresent", "");
+				timePreviewRow.put("totalDaysLeave", "");
+				timePreviewRow.put("totalDaysAbsent", "");
+				statusPreviewRow.put("dayValues", new ArrayList<String>(statusDayValues));
+				previewRows.add(statusPreviewRow);
+				previewRows.add(timePreviewRow);
 			}
-				
-				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx"));
+
+				FileOutputStream out = new FileOutputStream(new File(System.getProperty("java.io.tmpdir")+"/staffsmonthlyattendance.xlsx"));
 				workbook.write(out);
 				out.close();
 				writeSucees = true;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return writeSucees;
+			Map<String, Object> reportData = new LinkedHashMap<String, Object>();
+			reportData.put("previewRows", previewRows);
+			reportData.put("dayHeaders", dayHeaders);
+			reportData.put("schoolName", schoolName);
+			reportData.put("schoolAddress", schoolAddress);
+			reportData.put("branchId", Integer.toString(branchId));
+			reportData.put("academicYear", currentAcademicYear);
+			reportData.put("dateRange", dateRange);
+			reportData.put("reportTitle", "Staff Attendance Report");
+			return ResultResponse.builder().success(writeSucees).resultMap(reportData).build();
 		// getFile(name, path);
 	}
 
 	public ResultResponse downloadFileStaff() {
-		
-
 		ResultResponse result = ResultResponse.builder().build();
 		try {
+			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"/staffsmonthlyattendance.xlsx");
+			FileInputStream inStream = new FileInputStream(downloadFile);
 
-			File downloadFile = new File(System.getProperty("java.io.tmpdir")+"staffsmonthlyattendance.xlsx");
-	        FileInputStream inStream = new FileInputStream(downloadFile);
-
-	        // get MIME type of the file
 			String mimeType = "application/vnd.ms-excel";
-
-			// set content attributes for the response
 			response.setContentType(mimeType);
-			// response.setContentLength((int) bis.length());
 
-			// set headers for the response
 			String headerKey = "Content-Disposition";
-			String headerValue = String.format("attachment; filename=\"%s\"",
-					"staffsmonthlyattendance.xlsx");
+			String headerValue = String.format("attachment; filename=\"%s\"", "staffsmonthlyattendance.xlsx");
 			response.setHeader(headerKey, headerValue);
 
-			// get output stream of the response
 			OutputStream outStream = response.getOutputStream();
-
 			byte[] buffer = new byte[BUFFER_SIZE];
 			int bytesRead = -1;
-
-			// write bytes read from the input stream into the output stream
 			while ((bytesRead = inStream.read(buffer)) != -1) {
 				outStream.write(buffer, 0, bytesRead);
 			}
@@ -1448,13 +1798,12 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			outStream.close();
 			result.setSuccess(true);
 		} catch (Exception e) {
-			System.out.println("" + e);
+			logger.error(e);
 		}
 		return result;
-		
-		}
+	}
 
-	public void markDailyAttendanceJobStaff() {
+public void markDailyAttendanceJobStaff() {
 		
 		Date todaysDate = new Date();
 		try {
@@ -1518,15 +1867,16 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 }
 
-	public StudentAttendanceMonthlyResponseDto attendanceSummaryReport(StudentAttendanceDetailsDto dto, String branchId) {
-
-		StudentAttendanceMonthlyResponseDto result = StudentAttendanceMonthlyResponseDto.builder().success(false).build();
-		String date = DateUtil.dateFromatConversionSlash(dto.getDateOfAttendance());
+	public ResultResponse attendanceSummaryReport(String branchId, String attendanceDate) {
+		
+		ResultResponse result = ResultResponse.builder().build();
+		String date = DateUtil.dateFromatConversionSlash(attendanceDate);
+		Date attdate = DateUtil.indiandateParser(attendanceDate);
 		int present = 0;
 		int absent = 0;
 		int totalNoofStudents = 0;
 		
-		List<Student> studentsList = new studentDetailsDAO().readListOfStudents(Integer.parseInt(branchId));
+		List<Student> studentsList = new studentDetailsDAO().readListOfStudents(Integer.parseInt(httpSession.getAttribute(BRANCHID).toString()));
 		totalNoofStudents = studentsList.size();
 		List<Studentdailyattendance> listStudentAttendance = new AttendanceDAO().getStudentAttendance(date);
 		for (Studentdailyattendance listStudent : listStudentAttendance) {
@@ -1537,10 +1887,10 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 				absent = absent + 1;
 			}
 		}
-		result.setTotalPresent(present);
-		result.setTotalAbsent(absent);
-		result.setTotalNoOfStudents(totalNoofStudents);
-		result.setAttendanceDate(dto.getDateOfAttendance());
+		request.setAttribute("present", present);
+		request.setAttribute("absent", absent);
+		request.setAttribute("totalnoofstudents", totalNoofStudents);
+		request.setAttribute("attendancedate", attdate);
 		List<Classsec> classsecList = new StandardDetailsDAO().viewClasses(Integer.parseInt(branchId));
 	    List<Classsec> secList = new ArrayList<Classsec>();
 	    Map<String,String> studentAttendanceMap = new HashMap<String, String>();
@@ -1628,12 +1978,107 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 	}
 	    	
 	    	List<String> classSecAttendanceList = Arrays.asList(classSecAttendance);
-	    	result.setClassSecAttendanceList(classSecAttendanceList);
+	    	result.setResultList(classSecAttendanceList);
 			if(!classSecAttendanceList.isEmpty()){
 				result.setSuccess(true);
 				return result;
 			}
 			return result;
-}
-	
+	}
+
+	/**
+	 * Helper method to parse comma-separated ID strings into integers
+	 */
+	private Set<Integer> parseIds(String idsString) {
+		Set<Integer> idSet = new LinkedHashSet<Integer>();
+		if(idsString != null && !idsString.isEmpty()) {
+			String[] idArray = idsString.split(",");
+			for (String id : idArray) {
+				try {
+					idSet.add(Integer.parseInt(id.trim()));
+				} catch (NumberFormatException e) {
+					logger.warn("Failed to parse ID: " + id, e);
+				}
+			}
+		}
+		return idSet;
+	}
+
+	/**
+	 * Helper method to resolve weekly off days from attendance master
+	 */
+	private Set<String> resolveWeeklyOffDays(Attendancemaster attendanceMaster, Map<Integer, Weeklyoff> weeklyOffById) {
+		Set<String> weeklyOffDays = new LinkedHashSet<String>();
+		if(attendanceMaster == null || attendanceMaster.getWeeklyoff() == null || attendanceMaster.getWeeklyoff().isEmpty()) {
+			return weeklyOffDays;
+		}
+		Set<Integer> weeklyOffIds = parseIds(attendanceMaster.getWeeklyoff());
+		for (Integer weeklyOffId : weeklyOffIds) {
+			Weeklyoff weeklyOff = weeklyOffById.get(weeklyOffId);
+			if(weeklyOff != null && weeklyOff.getWeeklyoffday() != null) {
+				weeklyOffDays.add(weeklyOff.getWeeklyoffday());
+			}
+		}
+		return weeklyOffDays;
+	}
+
+	/**
+	 * Helper method to resolve holiday days from attendance master
+	 */
+	private Set<Integer> resolveHolidayDays(Attendancemaster attendanceMaster, Map<Integer, Holidaysmaster> holidayById, Date monthOf, int numberOfDays) {
+		Set<Integer> holidayDays = new LinkedHashSet<Integer>();
+		if(attendanceMaster == null || attendanceMaster.getHolidayname() == null || attendanceMaster.getHolidayname().isEmpty()) {
+			return holidayDays;
+		}
+		Set<Integer> holidayIds = parseIds(attendanceMaster.getHolidayname());
+		Calendar monthStart = Calendar.getInstance();
+		monthStart.setTime(monthOf);
+		monthStart.set(Calendar.DAY_OF_MONTH, 1);
+		
+		for (Integer holidayId : holidayIds) {
+			Holidaysmaster holiday = holidayById.get(holidayId);
+			if(holiday != null && holiday.getFromdate() != null && holiday.getTodate() != null) {
+				Date fromDate = holiday.getFromdate();
+				Date toDate = holiday.getTodate();
+				// Find all days in this month that fall within the holiday range
+				Calendar dayCheck = Calendar.getInstance();
+				dayCheck.setTime(monthStart.getTime());
+				for (int day = 1; day <= numberOfDays; day++) {
+					dayCheck.set(Calendar.DAY_OF_MONTH, day);
+					Date dateToCheck = dayCheck.getTime();
+					if(!dateToCheck.before(fromDate) && !dateToCheck.after(toDate)) {
+						holidayDays.add(day);
+					}
+				}
+			}
+		}
+		return holidayDays;
+	}
+
+	/**
+	 * Helper method to resolve the display value for staff attendance on a given day
+	 */
+	private String resolveStaffExportDayValue(Set<Integer> holidayDays, Set<Integer> approvedLeaveDays, Set<String> weeklyOffDayNames, String dayName, Staffdailyattendance attendance, int dayOfMonth) {
+		if(holidayDays.contains(dayOfMonth)) {
+			return HOLIDAY_DISPLAY_VALUE;
+		}
+		if(weeklyOffDayNames.contains(dayName)) {
+			return WEEK_OFF_DISPLAY_VALUE;
+		}
+		if(approvedLeaveDays.contains(dayOfMonth)) {
+			return "L";
+		}
+		if(attendance == null) {
+			return "NA";
+		}
+		String status = attendance.getAttendancestatus();
+		if("P".equalsIgnoreCase(status)) {
+			return "P";
+		} else if("A".equalsIgnoreCase(status)) {
+			return "A";
+		} else if("H".equalsIgnoreCase(status)) {
+			return "H";
+		}
+		return "NA";
+	}
 }
