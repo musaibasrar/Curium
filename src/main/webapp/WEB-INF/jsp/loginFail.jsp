@@ -143,7 +143,7 @@ form{
                 }else if(type=='parents'){
                 	window.open('/roshan/index_parents','_self');
                 }else if(type=='stock'){
-                	window.open('/roshanold/index_stock','_self');
+                	window.open('/roshan/index_stock','_self');
                 }
             }
             else if(!flag1){
