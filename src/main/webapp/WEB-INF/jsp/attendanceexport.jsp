@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -130,7 +131,7 @@
 	font-style: normal;
 	text-transform: capitalize;
 	color: #325F6D;
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
 	font-weight: bold;
 }
@@ -416,17 +417,6 @@
 		$("#save").button().click(function() {
 			addDepartment();
 		});
-		
-		$("#monthof").datepicker({
-			changeYear : true,
-			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
-			yearRange: "-50:+0"
-		});
-		$( "#monthof" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
-		$("#anim").change(function() {
-			$("#dateofattendance").datepicker("option", "showAnim", $(this).val());
-		});
 
 	});
 	
@@ -465,6 +455,11 @@ for(Cookie cookie : cookies){
 <body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form id="form1" action="/hwfschools/StampFeesProcess/applyFees" method="POST">
+	<%
+		Calendar currentCalendar = Calendar.getInstance();
+		int currentMonth = currentCalendar.get(Calendar.MONTH) + 1;
+		int currentYear = currentCalendar.get(Calendar.YEAR);
+	%>
 		<!-- <div style="height: 28px">
 			<button id="add">Add Department</button>
 			<br />
@@ -476,77 +471,118 @@ for(Cookie cookie : cookies){
 					<li><a href="#tabs-1">Export Monthly Attendance</a></li>
 				</ul>
 				<div id="tabs-1">
-					<table width="100%" border="0" align="center" cellpadding="0"
-						cellspacing="0" id="table1" style="display: block">
+					<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0"
+       id="table1" style="display: block;">
 
-						<tr>
-							<td class="alignRightFields">Date &nbsp;</td>
-							<td width="12%" align="left"><label> <input
-									name="monthof" type="text" class="textField"
-									id="monthof" size="25" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" data-validate="validate(required)"/>
-							</label></td>
-							
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-
-						<tr>
-							<td class="alignRightFields">Class &nbsp;</td>
-							<td width="70%"><label> <select onfocus="checkDate();" name="classsearch"
-									id="classsearch" style="width: 90px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.classdetails != '')}">
-												<option value="${classdetailslist.classdetails}">
-													<c:out value="${classdetailslist.classdetails}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-
-							</label> <label> <select name="secsearch" id="secsearch"
-									style="width: 50px">
-										<option selected></option>
-										<c:forEach items="${classdetailslist}" var="classdetailslist">
-											<c:if test="${(classdetailslist.section != '')}">
-												<option value="${classdetailslist.section}">
-													<c:out value="${classdetailslist.section}" />
-												</option>
-											</c:if>
-										</c:forEach>
-								</select>
-							</label>
-						</tr>
-
-						<tr>
-							<td><br /></td>
-
-						</tr>
-						
-						<tr>
-							<td><br /></td>
-
-						</tr>
-
-						<tr>
-
-							<td width="30%" class="alignRight"></td>
-
-							<!-- <td width="30%" class="alignRight">&nbsp;</td> -->
-							<td width="30%" class="alignRight">&nbsp;&nbsp;&nbsp;&nbsp;
-								<button id="search">Export</button>
-							</td>
-						</tr>
-
-
-						<tr>
-							<td><br /></td>
-						</tr>
-
+					    <!-- Month + Year -->
+					    <tr>
+					        <td width="30%" class="alignRightFields">
+					            Month&nbsp;&nbsp;&nbsp;&nbsp;
+					        </td>
+					
+					        <td width="20%">
+					            <select name="month" id="month" class="textField"
+					                    style="width: 120px"
+					                    data-validate="validate(required)">
+					                <option value="1" <%= currentMonth == 1 ? "selected=\"selected\"" : "" %>>January</option>
+					                <option value="2" <%= currentMonth == 2 ? "selected=\"selected\"" : "" %>>February</option>
+					                <option value="3" <%= currentMonth == 3 ? "selected=\"selected\"" : "" %>>March</option>
+					                <option value="4" <%= currentMonth == 4 ? "selected=\"selected\"" : "" %>>April</option>
+					                <option value="5" <%= currentMonth == 5 ? "selected=\"selected\"" : "" %>>May</option>
+					                <option value="6" <%= currentMonth == 6 ? "selected=\"selected\"" : "" %>>June</option>
+					                <option value="7" <%= currentMonth == 7 ? "selected=\"selected\"" : "" %>>July</option>
+					                <option value="8" <%= currentMonth == 8 ? "selected=\"selected\"" : "" %>>August</option>
+					                <option value="9" <%= currentMonth == 9 ? "selected=\"selected\"" : "" %>>September</option>
+					                <option value="10" <%= currentMonth == 10 ? "selected=\"selected\"" : "" %>>October</option>
+					                <option value="11" <%= currentMonth == 11 ? "selected=\"selected\"" : "" %>>November</option>
+					                <option value="12" <%= currentMonth == 12 ? "selected=\"selected\"" : "" %>>December</option>
+					            </select>
+					        </td>
+					
+					        <td width="10%" class="alignRightFields">
+					            Year&nbsp;&nbsp;&nbsp;&nbsp;
+					        </td>
+					
+					        <td width="40%">
+					            <select name="year" id="year" class="textField"
+					                    style="width: 110px"
+					                    data-validate="validate(required)">
+					                <%
+					                    for (int year = currentYear - 10; year <= currentYear + 2; year++) {
+					                %>
+					                    <option value="<%=year%>"
+					                        <%= year == currentYear ? "selected=\"selected\"" : "" %>>
+					                        <%=year%>
+					                    </option>
+					                <%
+					                    }
+					                %>
+					            </select>
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <td><br /></td>
+					    </tr>
+					
+					    <!-- Class + Section -->
+					    <tr>
+					        <td width="30%" class="alignRightFields">
+					            Class&nbsp;&nbsp;&nbsp;&nbsp;
+					        </td>
+					
+					        <td colspan="3">
+					            <select onfocus="checkDate();"
+					                    name="classsearch"
+					                    id="classsearch"
+					                    style="width: 90px">
+					
+					                <option selected></option>
+					
+					                <c:forEach items="${classdetailslist}" var="classdetailslist">
+					                    <c:if test="${classdetailslist.classdetails != ''}">
+					                        <option value="${classdetailslist.classdetails}">
+					                            <c:out value="${classdetailslist.classdetails}" />
+					                        </option>
+					                    </c:if>
+					                </c:forEach>
+					            </select>
+					
+					            &nbsp;&nbsp;
+					
+					            <select name="secsearch"
+					                    id="secsearch"
+					                    style="width: 50px">
+					
+					                <option selected></option>
+					
+					                <c:forEach items="${classdetailslist}" var="classdetailslist">
+					                    <c:if test="${classdetailslist.section != ''}">
+					                        <option value="${classdetailslist.section}">
+					                            <c:out value="${classdetailslist.section}" />
+					                        </option>
+					                    </c:if>
+					                </c:forEach>
+					            </select>
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <td><br /></td>
+					    </tr>
+					
+					    <!-- Export -->
+					    <tr>
+					        <td></td>
+					        <td colspan="3">
+					            <button id="search">Export</button>
+					        </td>
+					    </tr>
+					
+					    <tr>
+					        <td><br /></td>
+					    </tr>
+					
 					</table>
 				</div>
 			</div>
