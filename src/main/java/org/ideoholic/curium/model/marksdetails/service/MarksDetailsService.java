@@ -14,14 +14,12 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -40,7 +38,6 @@ import org.ideoholic.curium.model.documents.dto.SearchStudentResponseDto;
 import org.ideoholic.curium.model.employee.dto.EmployeeDetailsResponseDto;
 import org.ideoholic.curium.model.examdetails.dao.ExamDetailsDAO;
 import org.ideoholic.curium.model.examdetails.dto.Exams;
-import org.ideoholic.curium.model.feescategory.dto.FeescategoryResponseDto;
 import org.ideoholic.curium.model.marksdetails.dao.MarksDetailsDAO;
 import org.ideoholic.curium.model.marksdetails.dto.ExamRank;
 import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
@@ -83,120 +80,174 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class MarksDetailsService {
 	
-	 @Autowired
+	@Autowired
     private AttendanceDAO attendanceDAO;
 
+	@Autowired
 	private final HttpServletResponse response;
 	
+	@Autowired
 	private final ExamDetailsDAO examDetailsDao;
 
+	@Autowired
 	private final MarksDetailsDAO marksDetailsDao;
 	
+	@Autowired
 	private final StudentDetailsDAO studentDetailsDao;
 	
+	@Autowired
 	private final SubjectDetailsDAO subjectDetailsDao;
 
+	@Autowired
 	private final PropertiesUtil propertiesUtil;
+	
+	private static final String INVALID_SUBJECT_CONTEXT = "Invalid subject context";
+	private static final String ADD_MARKS_SUCCESS = "success";
+	private static final String ADD_MARKS_DUPLICATE = "Duplicate";
+	private static final String EXCLUDED_SUBJECT_IDS_KEY = "excluded.subject.ids";
 
 	public ResultResponse addMarks(MarksUpdateDto dto, String branchId, String currentAcademicYear, String userId) {
 
 		ResultResponse result = ResultResponse.builder().build();
 
+		if (dto == null || branchId == null || userId == null) {
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
+
 		String[] studentIds = dto.getStudentIds();
 		String[] studentsMarks = dto.getStudentsMarks();
-		String[] examidName = dto.getExam().split("__");
+		String examValue = dto.getExam();
 		String subject = dto.getSubject();
 		String classSelected = dto.getClassSearch();
-		log.debug("the subject id is " + subject + ", and exam id is " + examidName[0]);
-		int sizeOfArray = 0;
-		Map<Integer, String> mapOfMarks = new HashMap<>();
+
+		if (studentIds == null || studentsMarks == null || studentIds.length == 0 || studentsMarks.length == 0
+				|| studentIds.length != studentsMarks.length || subject == null || subject.trim().isEmpty()
+				|| examValue == null || examValue.trim().isEmpty() || classSelected == null || classSelected.trim().isEmpty()) {
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
+
+		String[] examidName = examValue.split("__", 2);
+		if (examidName.length < 2 || examidName[0].trim().isEmpty() || examidName[1].trim().isEmpty()) {
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
+
+		int examid;
+		int subjectIdFromRequest;
+		int branch;
+		int user;
+		try {
+			examid = Integer.parseInt(examidName[0].trim());
+			subjectIdFromRequest = Integer.parseInt(subject.trim());
+			branch = Integer.parseInt(branchId);
+			user = Integer.parseInt(userId);
+		} catch (NumberFormatException ex) {
+			log.warn("addMarks rejected: invalid numeric context branchId={}, exam={}, subject={}, userId={}", branchId,
+					examidName[0], subject, userId);
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
+
 		List<Integer> ids = new ArrayList<Integer>();
 		List<String> studentsMarksList = new ArrayList<String>();
+		for (int i = 0; i < studentIds.length; i++) {
+			try {
+				ids.add(Integer.valueOf(studentIds[i]));
+			} catch (NumberFormatException ex) {
+				log.warn("addMarks rejected: invalid student id at index {} value={}", i, studentIds[i]);
+				result.setMessage(INVALID_SUBJECT_CONTEXT);
+				return result;
+			}
 
-		if (studentsMarks != null) {
+			String marksValue = studentsMarks[i];
+			if (marksValue == null || marksValue.trim().isEmpty()) {
+				log.warn("addMarks rejected: empty marks at index {}", i);
+				result.setMessage(INVALID_SUBJECT_CONTEXT);
+				return result;
+			}
 
-			for (String marksList : studentsMarks) {
-				
-				if(!marksList.equalsIgnoreCase("A")) {
-					studentsMarksList.add(marksList);
-				}else {
-					studentsMarksList.add("999");
+			if ("A".equalsIgnoreCase(marksValue.trim())) {
+				studentsMarksList.add("999");
+			} else {
+				try {
+					Float.parseFloat(marksValue.trim());
+					studentsMarksList.add(marksValue.trim());
+				} catch (NumberFormatException ex) {
+					log.warn("addMarks rejected: invalid marks at index {} value={}", i, marksValue);
+					result.setMessage(INVALID_SUBJECT_CONTEXT);
+					return result;
 				}
-				
-
 			}
 		}
 
-		if (studentIds != null && subject != null) {
+		Map<Integer, String> mapOfMarks = new HashMap<Integer, String>();
+		for (int i = 0; i < ids.size(); i++) {
+			mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
+		}
 
-			for (String id : studentIds) {
-				log.debug("id:{}", id);
-				ids.add(Integer.valueOf(id));
+		Subject subjectDetails = subjectDetailsDao.readSubjectByExam(branch, classSelected, examidName[1],
+				subjectIdFromRequest);
+		if (subjectDetails == null || subjectDetails.getSubid() == null) {
+			log.warn("addMarks rejected: unresolved subject context branchId={}, class={}, exam={}, subjectId={}", branch,
+					classSelected, examidName[1], subjectIdFromRequest);
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
 
+		float maxMarks = subjectDetails.getMaxmarks();
+		if (maxMarks <= 0) {
+			log.warn("addMarks rejected: invalid max marks for subject subid={} maxMarks={}", subjectDetails.getSubid(),
+					maxMarks);
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
+
+		List<SubjectGrade> subjectGradeDetailsList = marksDetailsDao.readSubjectGrade(branch, examid, classSelected);
+		Exams examDetails = examDetailsDao.getExamDetails(examid);
+		if (examDetails == null) {
+			log.warn("addMarks rejected: exam not found examId={}", examid);
+			result.setMessage(INVALID_SUBJECT_CONTEXT);
+			return result;
+		}
+		List<Marks> marksList = new ArrayList<Marks>();
+		for (Entry<Integer, String> mapEntry : mapOfMarks.entrySet()) {
+			float mymark = Float.parseFloat(mapEntry.getValue());
+			Student student = studentDetailsDao.readUniqueObject(mapEntry.getKey());
+			if (student == null) {
+				log.warn("addMarks rejected: student not found sid={}", mapEntry.getKey());
+				result.setMessage(INVALID_SUBJECT_CONTEXT);
+				return result;
 			}
 
-			sizeOfArray = ids.size();
+			Marks marks = new Marks();
+			marks.setExam(examDetails);
+			marks.setSubject(subjectDetails);
+			marks.setStudent(student);
+			marks.setMarksobtained(mymark);
+			marks.setAcademicyear(dto.getAcademicYear());
+			marks.setBranchid(branch);
+			marks.setUserid(user);
+			marks.setSubsubjectid(0);
 
-			log.debug("id length:{}", studentIds.length);
-
-			for (int i = 0; i < sizeOfArray; i++) {
-				mapOfMarks.put(ids.get(i), studentsMarksList.get(i));
-			}
-
-			Set mapSet = mapOfMarks.entrySet();
-			Iterator mapIterator = mapSet.iterator();
-
-			Exams exams = examDetailsDao.getExamDetails(Integer.parseInt(examidName[0]));
-			int subid = Integer.parseInt(subject);
-			List<Marks> marksList = new ArrayList<Marks>();
-			
-			Subject subjectDetails =  subjectDetailsDao.readSubjectByExam(Integer.parseInt(branchId),classSelected,examidName[1],subid);
-			float minMarks = subjectDetails.getMinmarks();
-			float maxMarks = subjectDetails.getMaxmarks();
-
-			while (mapIterator.hasNext()) {
-				Map.Entry mapEntry = (Entry) mapIterator.next();
-
-				Marks marks = new Marks();
-				marks.setExam(exams);
-				marks.setSubject(subjectDetails);
-				
-				float mymark= Float.parseFloat((String) mapEntry.getValue());
-				float subjectPercentage = ((float)mymark / maxMarks) * 100;
-				List<SubjectGrade> subjectGradeDetailsList = marksDetailsDao.readSubjectGrade(Integer.parseInt(branchId),exams.getExid(),classSelected);
-				int subPercentage = (int) Math.floor(subjectPercentage);
-				
-				for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
-					
-					if( subPercentage >= subjectGrade.getMinmarks() && subPercentage <= subjectGrade.getMaxmarks())	
-					{
-						marks.setSubgrade(subjectGrade.getStatus());
-					}
-					
+			float subjectPercentage = (mymark / maxMarks) * 100;
+			int subPercentage = (int) Math.floor(subjectPercentage);
+			for (SubjectGrade subjectGrade : subjectGradeDetailsList) {
+				if (subPercentage >= subjectGrade.getMinmarks() && subPercentage <= subjectGrade.getMaxmarks()) {
+					marks.setSubgrade(subjectGrade.getStatus());
+					break;
 				}
-				
-				marks.setStudent(studentDetailsDao.readUniqueObject((int) mapEntry.getKey()));
-				marks.setMarksobtained(mymark);
-				String currentYear = dto.getAcademicYear();
-				marks.setAcademicyear(currentYear);
-				marks.setBranchid(Integer.parseInt(branchId));
-				marks.setUserid(Integer.parseInt(userId));
-				marks.setSubsubjectid(0);
-				marksList.add(marks);
 			}
 
-			String output = marksDetailsDao.addMarks(marksList);
-			
-			if(output=="success"){
-				result.setMessage("true");
-			}else if (output.contains("Duplicate")){
-				result.setMessage("Duplicate");
-			}
-				
-			
-			/*if (marksDetailsDao.addMarks(marksList)) {
-				result = true;
-			}*/
+			marksList.add(marks);
+		}
+
+		String output = marksDetailsDao.addMarks(marksList);
+		if ("success".equals(output)) {
+			result.setMessage(ADD_MARKS_SUCCESS);
+		} else if (output != null && output.contains(ADD_MARKS_DUPLICATE)) {
+			result.setMessage(ADD_MARKS_DUPLICATE);
 		}
 
 		return result;
