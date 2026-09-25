@@ -100,6 +100,8 @@ public class MarksDetailsService {
 
 	@Autowired
 	private final PropertiesUtil propertiesUtil;
+
+	private static final int BUFFER_SIZE = 4096;
 	
 	private static final String INVALID_SUBJECT_CONTEXT = "Invalid subject context";
 	private static final String ADD_MARKS_SUCCESS = "success";
