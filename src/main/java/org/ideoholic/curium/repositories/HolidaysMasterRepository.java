@@ -18,4 +18,7 @@ public interface HolidaysMasterRepository extends JpaRepository<Holidaysmaster, 
 	
 	List<Holidaysmaster> findByTodateGreaterThanEqualAndFromdateLessThanEqual(Date fromDate,Date toDate);
 
+	List<Holidaysmaster> findByAcademicyearAndBranchidAndTodateGreaterThanEqualAndFromdateLessThanEqual(
+			String academicyear, int branchid, Date fromDate, Date toDate);
+
 }

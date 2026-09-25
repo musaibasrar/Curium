@@ -20,6 +20,9 @@ public interface StaffDailyAttendanceRepository extends JpaRepository<Staffdaily
 
     List<Staffdailyattendance> findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(Date fromDate, Date toDate, String academicyear, String attendeeid, int branchid);
 
+    List<Staffdailyattendance> findByDateBetweenAndAcademicyearAndAttendeeidInAndBranchidOrderByAttendeeidAscDateAsc(
+            Date fromDate, Date toDate, String academicyear, List<String> attendeeIds, int branchid);
+
     @Modifying
     @Query("UPDATE Staffdailyattendance s SET s.attendancestatus = :status WHERE s.attendanceid = :id")
     void updateAttendanceStatusById(@Param("id") Integer id, @Param("status") String status);
