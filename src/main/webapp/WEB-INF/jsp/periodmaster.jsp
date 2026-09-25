@@ -529,7 +529,7 @@
 	 
 	 function addColumn(count) {
 	        var i;
-	        var newCol;
+	        var newCol = "";
 	        for(i=0;i<count;i++){
 	        	var col1="<th class='timeth'><label><select name='periods' id='periods' style='width: 80px' required><option value='' disabled selected>Select Period</option><option value='period1'>Period-1</option><option value='period2'>Period-2</option><option value='period3'>Period-3</option><option value='period4'>Period-4</option><option value='period5'>Period-5</option><option value='period6'>Period-6</option><option value='period7'>Period-7</option><option value='period8'>Period-8</option><option value='period9'>Period-9</option><option value='period10'>Period-10</option><option value='break1'>Break-1</option><option value='break2'>Break-2</option><option value='leisure'>Leisure</option></select></label><br><br>"
 	        	+"<label><select name='subject' id='subject' style='width: 80px' required><option value='' disabled selected>Select Subject</option><c:forEach items='${listSubjectNames}' var='listSubject'><option value='${listSubject.subjectname}'><c:out value='${listSubject.subjectname}' /></option></c:forEach></select></label><br><br>"
@@ -551,6 +551,15 @@
 	
 
   function duplicatePeriods() {
+	    let allDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+	    // Collect only from the first (template) row in #dataTableNew.
+	    let templateRow = $("#dataTableNew thead tr:first");
+	    if (templateRow.length === 0) {
+	        alert("Please select Total Number Of Periods first to generate the period columns.");
+	        return;
+	    }
+
 	    let periods = [];
 	    let subjects = [];
 	    let staff = [];
@@ -560,33 +569,33 @@
 	    let periodendtimehrs = [];
 	    let periodendtimemins = [];
 	    let periodendtimeams = [];
-	    let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]; // Add your days array here
 
-	    // Collect data as before
-	    $("select[name='periods']").each(function() { periods.push($(this).val()); });
-	    $("select[name='subject']").each(function() { subjects.push($(this).val()); });
-	    $("select[name='staff']").each(function() { staff.push($(this).val()); });
-	    $("select[name='periodstarttimehr']").each(function() { periodstarttimehrs.push($(this).val()); });
-	    $("select[name='periodstarttimemin']").each(function() { periodstarttimemins.push($(this).val()); });
-	    $("select[name='periodstarttimeam']").each(function() { periodstarttimeams.push($(this).val()); });
-	    $("select[name='periodendtimehr']").each(function() { periodendtimehrs.push($(this).val()); });
-	    $("select[name='periodendtimemin']").each(function() { periodendtimemins.push($(this).val()); });
-	    $("select[name='periodendtimeam']").each(function() { periodendtimeams.push($(this).val()); });
-	    
+	    templateRow.find("select[name='periods']").each(function() { periods.push($(this).val()); });
+	    templateRow.find("select[name='subject']").each(function() { subjects.push($(this).val()); });
+	    templateRow.find("select[name='staff']").each(function() { staff.push($(this).val()); });
+	    templateRow.find("select[name='periodstarttimehr']").each(function() { periodstarttimehrs.push($(this).val()); });
+	    templateRow.find("select[name='periodstarttimemin']").each(function() { periodstarttimemins.push($(this).val()); });
+	    templateRow.find("select[name='periodstarttimeam']").each(function() { periodstarttimeams.push($(this).val()); });
+	    templateRow.find("select[name='periodendtimehr']").each(function() { periodendtimehrs.push($(this).val()); });
+	    templateRow.find("select[name='periodendtimemin']").each(function() { periodendtimemins.push($(this).val()); });
+	    templateRow.find("select[name='periodendtimeam']").each(function() { periodendtimeams.push($(this).val()); });
 
-	    // Add a single new row with collected data
-	     populateTableWithDropdowns(periods, subjects, staff, days,periodstarttimehrs,periodstarttimemins,periodstarttimeams,
-	    periodendtimehrs,periodendtimemins,periodendtimeams);
+	    // Determine the next default day based on how many rows already exist.
+	    // Row 0 (initial, in #dataTableNew) = Monday (index 0).
+	    // Row 1 (first Add) = Tuesday (index 1), etc.
+	    let existingRowCount = $("#dataTableNew thead tr").length + $("#duplicateTable thead tr").length;
+	    let defaultDayIndex = existingRowCount % allDays.length;
 
+	    populateTableWithDropdowns(periods, subjects, staff, allDays, defaultDayIndex,
+	        periodstarttimehrs, periodstarttimemins, periodstarttimeams,
+	        periodendtimehrs, periodendtimemins, periodendtimeams);
 	}
 
-	function populateTableWithDropdowns(periods, subjects, staff, days, periodstarttimehrs, periodstarttimemins, periodstarttimeams,
+	function populateTableWithDropdowns(periods, subjects, staff, days, defaultDayIndex, periodstarttimehrs, periodstarttimemins, periodstarttimeams,
 			periodendtimehrs, periodendtimemins, periodendtimeams) {
 	    let tableBody = document.getElementById('duplicateTable').getElementsByTagName('thead')[0];
-	   // tableBody.innerHTML = ""; // Clear previous rows
-		
 
-	    // Create one row per day, with multiple columns for Period, Subject, and Staff
+	    // Create one row with a day dropdown and one column per period
 	    for (let i = 0; i < 1; i++) {
 	        let row = tableBody.insertRow();
 
@@ -594,11 +603,14 @@
 	        let dayCell = row.insertCell(0);
 	        dayCell.className = "timeth";
 	        let daySelect = document.createElement("select");
-	        days.forEach(day => {
+	        daySelect.name = 'days';
+	        daySelect.required = true;
+	        days.forEach((day, idx) => {
 	            let option = document.createElement("option");
 	            option.value = day;
 	            option.textContent = day;
-	            if (day === days[i]) { // Set the default selected day
+	            // Pre-select the next logical day based on how many rows already exist
+	            if (idx === defaultDayIndex) {
 	                option.selected = true;
 	            }
 	            daySelect.appendChild(option);
@@ -612,9 +624,11 @@
 
 	            // Period dropdown
 	            let listOfPeriods = ['Period-1','Period-2','Period-3','Period-4','Period-5','Period-6','Period-7','Period-8','Period-9','Period-10','Break-1','Break-2','Leisure'];
-	            let listOfPeriodValues = ['period1','period2','period3','period4','period5','period6','period7','period8','period9','period10','break1','break2','leisure'];
+	            let listOfPeriodValues = ['Period-1','Period-2','Period-3','Period-4','Period-5','Period-6','Period-7','Period-8','Period-9','Period-10','Break-1','Break-2','Leisure'];
 	            
 	            let periodSelect = document.createElement("select");
+	            periodSelect.name = 'periods';
+	            periodSelect.required = true;
 	            periodSelect.appendChild(createPlaceHolderOption(PlaceHolder.PERIOD)); // Create and add the placeholder option
 	            let periodCounter = 0;
 	            listOfPeriods.forEach(period => {
@@ -638,6 +652,8 @@
 	       	 	</c:forEach>
 
 	            let subjectSelect = document.createElement("select");
+	            subjectSelect.name = 'subject';
+	            subjectSelect.required = true;
 	            subjectSelect.appendChild(createPlaceHolderOption(PlaceHolder.SUBJECT)); // Create and add the placeholder option
 
 	            listOfSubjects.forEach(subject => {
@@ -657,6 +673,7 @@
 		        	listOfStaff.push('${eName.teachername}');
 		        </c:forEach>
 	            let staffSelect = document.createElement("select");
+	            staffSelect.name = 'staff';
 	            staffSelect.appendChild(createPlaceHolderOption(PlaceHolder.TEACHER)); // Create and add the placeholder option
 
 	            listOfStaff.forEach(staffMember => {
@@ -673,7 +690,9 @@
 	            //hr selection
 	            let listOfPeriodStartTimeHrs = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 	            let periodstarttimehrSelect = document.createElement("select");
-	            periodstarttimehrSelect.appendChild(createPlaceHolderOption(PlaceHolder.HOUR)); // Create and add the placeholder option
+	            periodstarttimehrSelect.name = 'periodstarttimehr';
+	            periodstarttimehrSelect.required = true;
+	            periodstarttimehrSelect.appendChild(createPlaceHolderOption(PlaceHolder.HOUR));
 
 	            listOfPeriodStartTimeHrs.forEach(periodstarttimehr => {
 	                let option = document.createElement("option");
@@ -689,6 +708,8 @@
 	            //min selection
 	            let listOfPeriodStartTimeMins = ['00','05','10','15','20','25','30','35','40','45','50','55'];
 	            let periodstarttimeminSelect = document.createElement("select");
+	            periodstarttimeminSelect.name = 'periodstarttimemin';
+	            periodstarttimeminSelect.required = true;
 	            periodstarttimeminSelect.appendChild(createPlaceHolderOption(PlaceHolder.MINUTES)); // Create and add the placeholder option
 
 	            listOfPeriodStartTimeMins.forEach(periodstarttimemin => {
@@ -706,7 +727,9 @@
 	            //am selection
 	            let listOfPeriodStartTimeAmSelects = ['AM','PM'];
 	            let periodstarttimeamSelect = document.createElement("select");
-	            periodstarttimeamSelect.appendChild(createPlaceHolderOption(PlaceHolder.AMPM)); // Create and add the placeholder option
+	            periodstarttimeamSelect.name = 'periodstarttimeam';
+	            periodstarttimeamSelect.required = true;
+	            periodstarttimeamSelect.appendChild(createPlaceHolderOption(PlaceHolder.AMPM));
 
 	            listOfPeriodStartTimeAmSelects.forEach(periodstarttimeam => {
 	                let option = document.createElement("option");
@@ -729,6 +752,8 @@
 	            //hr selection
 	             let listOfPeriodEndTimeHrs = ['1','2','3','4','5','6','7','8','9','10','11','12'];
 	            let periodendtimehrSelect = document.createElement("select");
+	            periodendtimehrSelect.name = 'periodendtimehr';
+	            periodendtimehrSelect.required = true;
 	            periodendtimehrSelect.appendChild(createPlaceHolderOption(PlaceHolder.HOUR)); // Create and add the placeholder option
 
 	            listOfPeriodEndTimeHrs.forEach(periodendtimehr => {
@@ -745,6 +770,8 @@
 	            //min selection
 	            let listOfPeriodEndTimeMins = ['00','05','10','15','20','25','30','35','40','45','50','55'];
 	            let periodendtimeminSelect = document.createElement("select");
+	            periodendtimeminSelect.name = 'periodendtimemin';
+	            periodendtimeminSelect.required = true;
 	            periodendtimeminSelect.appendChild(createPlaceHolderOption(PlaceHolder.MINUTES)); // Create and add the placeholder option
 
 	            listOfPeriodEndTimeMins.forEach(periodendtimemin => {
@@ -761,6 +788,8 @@
 	            //am selection
 	            let listOfPeriodEndTimeAms = ['AM','PM'];
 	            let periodendtimeamSelect = document.createElement("select");
+	            periodendtimeamSelect.name = 'periodendtimeam';
+	            periodendtimeamSelect.required = true;
 	            periodendtimeamSelect.appendChild(createPlaceHolderOption(PlaceHolder.AMPM)); // Create and add the placeholder option
 
 	            listOfPeriodEndTimeAms.forEach(periodendtimeam => {

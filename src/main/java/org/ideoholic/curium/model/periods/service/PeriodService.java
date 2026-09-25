@@ -128,7 +128,7 @@ public class PeriodService {
 		List<Perioddetails> periodDetailsList = new ArrayList<>();
 		Periodmaster periodMaster = new Periodmaster();
 		periodMaster.setAcademicyear(academicYear);
-		periodMaster.setClassSec(fromClass);
+		periodMaster.setClassSec(toClass.isEmpty() ? fromClass : fromClass + "--" + toClass);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
 		periodMaster.setDurationofperiod(durationOfPeriodsHr+":"+durationOfPeriodsMin);
@@ -494,7 +494,7 @@ public class PeriodService {
 		}
 
 		Periodmaster periodMaster = new Periodmaster();
-		periodMaster.setClassSec(fromClass);
+		periodMaster.setClassSec(toClass.isEmpty() ? fromClass : fromClass + "--" + toClass);
 		periodMaster.setAcademicyear(academicYear);
 		periodMaster.setDaystart(dayStartTimeHr+":"+dayStartTimeMin+" "+dayStartAm);
 		periodMaster.setDayend(dayEndTimeHr+":"+dayEndTimeMin+" "+dayEndAm);
