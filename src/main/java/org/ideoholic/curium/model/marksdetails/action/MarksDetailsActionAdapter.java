@@ -214,7 +214,12 @@ public class MarksDetailsActionAdapter {
         dto.setStudentIds(request.getParameterValues("studentIDs"));
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamIds(request.getParameterValues("examslist"));
-        dto.setNoofpresentday(request.getParameter("dateforattendance"));
+        dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
+
+        // Default stays converted marks unless user explicitly selects full marks.
+        String reportMarkMode = request.getParameter("reportMarkMode");
+        boolean showFullMarks = "full".equalsIgnoreCase(reportMarkMode);
+        dto.setShowFullMarks(showFullMarks);
 
         GenerateReportResponseDto responseDto = marksDetailsService.generateReportSingleExams(dto, httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString(), httpSession.getAttribute(Constants.BRANCHID).toString());
         request.setAttribute("endloop", responseDto.getEndLoop());
@@ -222,6 +227,8 @@ public class MarksDetailsActionAdapter {
         request.setAttribute("totaldays", responseDto.getTotalDays());
 		request.setAttribute("totalpresent", responseDto.getTotalpresent());
 		request.setAttribute("totalabsent", responseDto.getTotalabsent());
+        request.setAttribute("showFullMarks", showFullMarks);
+        request.setAttribute("examclass", request.getParameter("examclass"));
 
         return responseDto.isSuccess();
     }

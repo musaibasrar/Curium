@@ -22,8 +22,9 @@ public enum CustomErrorMessage {
 	ERRORSMS(114, "errorsms"),
 	INVALID_CREDENTIALS(115,"usernameOrPasswordFail"),
 	BACKUPFAILED(116,"BackupFailed"),
-    IMPORTFAILURE(117,"importFailure");
-
+    IMPORTFAILURE(117,"importFailure"),
+	INVALID_SUBJECT_CONTEXT(114, "invalidsubjectcontext");
+	
 	private final int code;
 	private final String message;
 

@@ -10,4 +10,6 @@ public interface AttendanceMasterRepository extends JpaRepository<Attendancemast
 	List<Attendancemaster> findByAttendeeidAndBranchid(String attendeeId, int branchid);
 
 	List<Attendancemaster> findByAttendeeid(String attendeeId);
+
+	List<Attendancemaster> findByAttendeeidInAndBranchid(List<String> attendeeIds, int branchid);
 }

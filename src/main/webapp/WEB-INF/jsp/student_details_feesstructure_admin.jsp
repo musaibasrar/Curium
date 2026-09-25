@@ -458,27 +458,279 @@
         
         <script>
 
-function applyConcessionToAll() {
+        function applyConcessionToAll() {
 
-    var isChecked = document.getElementById("applyAllConcession").checked;
+            var applyAll = document.getElementById("applyAllConcession").checked;
 
-    var commonValue = document.getElementById("commonConcession").value;
+            var commonAmount =
+                document.getElementById("commonConcession").value.trim();
 
-    var concessionInputs = document.getElementsByClassName("concession");
+            var commonPercent =
+                document.getElementById("commonConcessionPercent").value.trim();
 
-    for (var i = 0; i < concessionInputs.length; i++) {
+            var commonReason =
+                document.getElementById("commonConcessionReason").value;
 
-        // if unchecked set zero
-        if (!isChecked) {
-            concessionInputs[i].value = 0;
+            // Get ALL rows from the fees table
+            var rows = document.querySelectorAll("#myTable tbody tr");
+
+            for (var i = 0; i < rows.length; i++) {
+
+                var row = rows[i];
+
+                // Get checkbox from this row
+                var checkbox = row.querySelector("input.chcktb2");
+
+                if (!checkbox) {
+                    continue;
+                }
+
+                var sfsid = checkbox.id;
+
+                // Get fields belonging to this row
+                var amountField =
+                    document.getElementById("concession:" + sfsid);
+
+                var percentField =
+                    document.getElementById("concessionPercent:" + sfsid);
+
+                var reasonField =
+                    document.getElementById("concessionnotes:" + sfsid);
+
+                var dueField =
+                    document.getElementsByName("dueamount:" + sfsid)[0];
+
+                if (!amountField || !percentField || !reasonField) {
+                    continue;
+                }
+
+                /*
+                 * UNCHECKED
+                 */
+                if (!applyAll) {
+
+                    checkbox.checked = false;
+
+                    amountField.value = "";
+                    percentField.value = "";
+                    reasonField.value = "";
+
+                    continue;
+                }
+
+                /*
+                 * IMPORTANT:
+                 * Select the row regardless of concession amount.
+                 */
+                checkbox.checked = true;
+
+
+                /*
+                 * CONCESSION PERCENTAGE
+                 */
+                if (commonPercent !== "") {
+
+                    var percent = parseFloat(commonPercent);
+
+                    if (isNaN(percent)) {
+                        continue;
+                    }
+
+                    if (percent < 0) {
+                        percent = 0;
+                    }
+
+                    if (percent > 100) {
+                        percent = 100;
+                    }
+
+
+                    /*
+                     * Get the original fees amount.
+                     *
+                     * Column indexes:
+                     *
+                     * 0 = checkbox
+                     * 1 = Fees Category
+                     * 2 = Fees Amount
+                     * 3 = Installments
+                     * 4 = Total Fees Amount
+                     * 5 = Fees Paid
+                     * 6 = Fees Due
+                     */
+                    var feesAmount =
+                        parseFloat(
+                            row.cells[2].innerText
+                                .replace(/,/g, "")
+                                .trim()
+                        );
+
+                    var dueAmount = 0;
+
+                    if (dueField) {
+                        dueAmount =
+                            parseFloat(
+                                dueField.value
+                                    .replace(/,/g, "")
+                                    .trim()
+                            );
+                    }
+
+                    if (isNaN(feesAmount)) {
+                        feesAmount = 0;
+                    }
+
+                    if (isNaN(dueAmount)) {
+                        dueAmount = 0;
+                    }
+
+
+                    /*
+                     * Calculate concession.
+                     *
+                     * For 100%, give the complete outstanding
+                     * due amount.
+                     */
+                    var concessionAmount;
+
+                    if (percent == 100) {
+
+                        concessionAmount = dueAmount;
+
+                    } else {
+
+                        concessionAmount =
+                            Math.round(
+                                (feesAmount * percent) / 100
+                            );
+
+                        /*
+                         * Don't allow concession greater
+                         * than outstanding due.
+                         */
+                        if (concessionAmount > dueAmount) {
+                            concessionAmount = dueAmount;
+                        }
+                    }
+
+
+                    /*
+                     * Set values
+                     */
+                    percentField.value = percent;
+                    amountField.value = concessionAmount;
+
+                }
+
+
+                /*
+                 * CONCESSION AMOUNT
+                 *
+                 * Only use amount when percentage
+                 * is not provided.
+                 */
+                else if (commonAmount !== "") {
+
+                    var amount = parseFloat(commonAmount);
+
+                    if (!isNaN(amount)) {
+
+                        var dueAmount = 0;
+
+                        if (dueField) {
+
+                            dueAmount =
+                                parseFloat(
+                                    dueField.value
+                                        .replace(/,/g, "")
+                                        .trim()
+                                );
+                        }
+
+                        if (!isNaN(dueAmount) && amount > dueAmount) {
+                            amount = dueAmount;
+                        }
+
+                        amountField.value = amount;
+                    }
+
+                    percentField.value = "";
+                }
+
+
+                /*
+                 * CONCESSION REASON
+                 */
+                reasonField.value = commonReason;
+            }
+        }
+        
+        
+        $("#commonConcessionPercent").keypress(function(e) {
+
+            if (e.which == 46) {
+                if ($(this).val().indexOf('.') != -1) {
+                    return false;
+                }
+                return true;
+            }
+
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+
+        });
+
+</script>
+<script>
+/*function calculateConcessionPercent(feesAmount, percentValue, sfsid,dueAmount) {
+    var percent = parseFloat(percentValue);
+    if (!isNaN(percent)) {
+        var concessionAmount = Math.round((feesAmount * percent) / 100);
+		var due = dueAmount
+        if (concessionAmount > due) {
+            document.getElementById('concession:' + sfsid).value = "";
+            document.getElementById(sfsid+'_concession').checked = false;
+            document.getElementById(sfsid).checked = true;
         } else {
-            concessionInputs[i].value = commonValue;
+            document.getElementById('concession:' + sfsid).value = concessionAmount;
+            document.getElementById(sfsid+'_concession').checked = true;
+        }
+    }
+}*/
+function calculateConcessionPercent(feesAmount, percentValue, sfsid, dueAmount) {
+
+    var percent = parseFloat(percentValue);
+
+    if (!isNaN(percent) && percentValue !== "") {
+
+        if (percent < 0 || percent > 100) {
+            document.getElementById("concessionPercent:" + sfsid).value = "";
+            document.getElementById("concession:" + sfsid).value = "";
+            document.getElementById(sfsid).checked = false;
+            return;
         }
 
-        // trigger existing validation
-        if (typeof concessionInputs[i].onkeyup === "function") {
-            concessionInputs[i].onkeyup();
+        var concessionAmount =
+            Math.round((parseFloat(feesAmount) * percent) / 100);
+
+        if (concessionAmount > parseFloat(dueAmount)) {
+
+            document.getElementById("concession:" + sfsid).value = "";
+            document.getElementById(sfsid).checked = false;
+
+        } else {
+
+            document.getElementById("concession:" + sfsid).value =
+                concessionAmount;
+
+            document.getElementById(sfsid).checked = true;
         }
+
+    } else {
+
+        document.getElementById("concession:" + sfsid).value = "";
+        document.getElementById(sfsid).checked = false;
     }
 }
 
@@ -623,6 +875,7 @@ for(Cookie cookie : cookies){
                             <th title="click to sort" class="headerText">Total Fees Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Paid&nbsp;</th>
                             <th title="click to sort" class="headerText">Fees Due&nbsp;</th>
+                             <th title="click to sort" class="headerText">Concession %&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Reason&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
@@ -643,11 +896,19 @@ for(Cookie cookie : cookies){
                                 <td class="dataText"><c:out value="${feesstructure.feesamount}"/></td>
                                 <td class="dataText"><c:out value="${feesstructure.feespaid}"/></td>
                                 <td class="dataText"><input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="dueamount:${feesstructure.sfsid}" value="${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff}" readonly></td>
+                                 <!-- here -->
+                                 <td class="dataText"><input type="text" 
+       id="concessionPercent:${feesstructure.sfsid}" 
+       placeholder="%"
+       style="width: 50px; margin-left: 5px; font-size: 13px;" 
+       onkeyup="calculateConcessionPercent(${feesstructure.feesamount}, this.value, ${feesstructure.sfsid}, ${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff})"></td>
+                             
                                 <td class="dataText">
                                 <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
                                 <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid},this.value,${feesstructure.sfsid})" 
                                 name="concession:${feesstructure.sfsid}" class="concession"
                                 value="${feesstructure.concession}"></td>
+                               
                                 <td class="dataText">
 	                                <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}">		
                                 </td>
@@ -682,29 +943,85 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/school/printstudentdetailsfeesstructure'">Print</button>
-                                             
-                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </tr>
+                                    
+                                         <tr>
 
-											    <span style="color: #416884;font-size:13px; font-weight:bold;">Common Concession :</span>
+                                        <td>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                    
+                                         <tr>
+                                        <td align="left">
+											    <span style="color:#416884;font-size:13px;font-weight:bold;">
+												    Common Concession Amount:
+												</span>
+
+											<input type="text"
+											       id="commonConcession"
+											       class="dataText"
+											       placeholder="Amount"
+											       style="width:100px;
+											              background:transparent;
+											              border:1px solid #4b6a84;
+											              color:#4b6a84;
+											              font-size:13px;
+											              padding:3px;"
+											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
+											                    applyConcessionToAll();
+											                }">
 											
-											    <input type="text"
-											           id="commonConcession"
-											           class="dataText"
-											           style="width:120px;
-											                  background: transparent;
-											                  border: 1px solid #4b6a84;
-											                  color: #4b6a84;
-											                  font-size: 13px;
-											                  padding: 3px;">
+											&nbsp;&nbsp;
 											
-											    <input type="checkbox"
-											           id="applyAllConcession"
-											           onclick="applyConcessionToAll()"
-											           style="vertical-align: middle;
-											                  cursor:pointer;">
+											<span style="color:#416884;font-size:13px;font-weight:bold;">
+											    Common Concession %:
+											</span>
 											
-											    <span style="color: #416884;font-size:13px; font-weight:bold;">Apply to all rows</span>
+											<input type="text"
+											       id="commonConcessionPercent"
+											       class="dataText"
+											       placeholder="%"
+											       style="width:70px;
+											              background:transparent;
+											              border:1px solid #4b6a84;
+											              color:#4b6a84;
+											              font-size:13px;
+											              padding:3px;"
+											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
+											                    applyConcessionToAll();
+											                }">
+											
+											&nbsp;&nbsp;
+											
+											<span style="color:#416884;font-size:13px;font-weight:bold;">
+											    Common Concession Reason:
+											</span>
+											
+											<input type="text"
+											       id="commonConcessionReason"
+											       class="dataText"
+											       placeholder="Reason"
+											       style="width:180px;
+											              background:transparent;
+											              border:1px solid #4b6a84;
+											              color:#4b6a84;
+											              font-size:13px;
+											              padding:3px;"
+											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
+											                    applyConcessionToAll();
+											                }">
+											
+											&nbsp;&nbsp;
+											
+											<input type="checkbox"
+											       id="applyAllConcession"
+											       onclick="applyConcessionToAll()"
+											       style="vertical-align:middle;cursor:pointer;">
+											
+											<span style="color:#416884;font-size:13px;font-weight:bold;">
+											    Apply to all rows
+											</span>
 
                                         </td>
 
@@ -723,6 +1040,7 @@ for(Cookie cookie : cookies){
                                             <br/>
                                         </td>
                                     </tr>
+                                    
                                 </table>
                                 
                                 <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
