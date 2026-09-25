@@ -14,6 +14,8 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -1764,6 +1766,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 		List<Exams> examsList = examDetailsDao.readListOfExams(examIds, branch);
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
+		Set<Integer> excludedSubjectIds = getExcludedSubjectIds(branch);
 
 		Map<Integer, List<Subject>> validSubjectsByExamId = new HashMap<Integer, List<Subject>>();
 		for (Exams exam : examsList) {
@@ -1839,6 +1842,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 						if (examid == exid && mSubid == subjectSubid) {
 							markFound = true;
 							examPresent = true;
+							boolean excludedFromAggregate = isExcludedFromAggregate(subjectSubid, excludedSubjectIds);
 
 							if (!subjectExamMarks.containsKey(subjectName)) {
 								subjectExamMarks.put(subjectName, new LinkedHashMap<String, String>());
@@ -1871,8 +1875,10 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 							}
 
 							subjectExamMarks.get(subjectName).put(exam.getExamname(), displayMarks);
-							totalObtainedMarks += marksObtained;
-							totalMarks += maxMarks;
+							if (!excludedFromAggregate) {
+								totalObtainedMarks += marksObtained;
+								totalMarks += maxMarks;
+							}
 
 							SubjectSummary subjectSummary = subjectSummaryMap.get(subjectName);
 							subjectSummary.addExamMarks(exam.getExamname(), marksObtained, marks.getSubgrade());
@@ -1942,6 +1948,48 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 private boolean hasValidSubjectMarksConfig(Subject subject) {
 	return subject != null && subject.getMinmarks() > 0 && subject.getMaxmarks() > 0;
+}
+
+private Set<Integer> getExcludedSubjectIds(int branchId) {
+	String branchSpecific = readPropertySafely(EXCLUDED_SUBJECT_IDS_KEY + branchId);
+	if (branchSpecific != null && !branchSpecific.trim().isEmpty()) {
+		return parseSubjectIdSet(branchSpecific);
+	}
+	String global = readPropertySafely(EXCLUDED_SUBJECT_IDS_KEY);
+	return parseSubjectIdSet(global);
+}
+
+private String readPropertySafely(String key) {
+	try {
+		return propertiesUtil.getPropertiesValue(key);
+	} catch (Exception ex) {
+		log.debug("Property not found or unreadable for key={}", key);
+		return "";
+	}
+}
+
+private Set<Integer> parseSubjectIdSet(String subjectIdsCsv) {
+	Set<Integer> subjectIds = new HashSet<Integer>();
+	if (subjectIdsCsv == null || subjectIdsCsv.trim().isEmpty()) {
+		return subjectIds;
+	}
+
+	String[] tokens = subjectIdsCsv.split(",");
+	for (String token : tokens) {
+		if (token == null || token.trim().isEmpty()) {
+			continue;
+		}
+		try {
+			subjectIds.add(Integer.parseInt(token.trim()));
+		} catch (NumberFormatException ex) {
+			log.warn("Ignoring invalid subject id '{}' in {}", token, EXCLUDED_SUBJECT_IDS_KEY);
+		}
+	}
+	return subjectIds;
+}
+
+private boolean isExcludedFromAggregate(int subId, Set<Integer> excludedSubjectIds) {
+	return excludedSubjectIds != null && excludedSubjectIds.contains(subId);
 }
 
 private Map<Integer, Subject> getValidSubjectsBySubId(int branchId, String examClass, String examName) {
