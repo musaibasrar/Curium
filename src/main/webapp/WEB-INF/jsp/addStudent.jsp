@@ -22,25 +22,25 @@
 <title>Add Student</title>
 
  <style type="text/css" title="currentStyle">
-            @import "/vision/css/dataTable/css/demo_page.css";
-            @import "/vision/css/dataTable/css/jquery.dataTables.css";
+            @import "/aysha/css/dataTable/css/demo_page.css";
+            @import "/aysha/css/dataTable/css/jquery.dataTables.css";
         </style>
 
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-<script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-<script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-<script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/aysha/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+<script src="/aysha/js/datePicker/jquery-1.7.1.js"></script>
+<script src="/aysha/js/datePicker/ui/jquery.ui.core.js"></script>
+<script src="/aysha/js/datePicker/ui/jquery.ui.widget.js"></script>
+<script src="/aysha/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script src="/aysha/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script src="/aysha/js/datePicker/ui/sliderAccess.js"></script>
+<script src="/aysha/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+<script src="/aysha/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<script type="text/javascript" language="javascript" src="/vision/js/dataTable/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+	src="/aysha/js/datePicker/ui/jquery.ui.button.js"></script>
+<link rel="stylesheet" href="/aysha/css/datePicker/demos.css">
+<script type="text/javascript" language="javascript" src="/aysha/js/dataTable/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="/aysha/css/datePicker/jquery-ui-1.8.18.custom.css">
 
 
 <style type="text/css">
@@ -279,7 +279,7 @@
 
 
 
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/aysha/js/datetimepicker_css.js"></script>
 
 <script>
 	$(function() {
@@ -617,7 +617,7 @@
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
+			xmlHttp.open("GET", "/aysha/FeesProcess/searchfeecategory?classstudying="+addClass+"&yearofadmission="+yoa+"&feescategories="+checkedFeesCategoryValues+"",true);
 			xmlHttp.send(null);
 		
 	}
@@ -681,7 +681,7 @@ function searchOtherFeecategory() {
             document.getElementById("otherFeescat").innerHTML = xmlHttpof.responseText;
         }
     };
-    xmlHttpof.open("GET", "/vision/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
+    xmlHttpof.open("GET", "/aysha/FeesProcess/searchOtherFeecategory?classstudying="+addClass+"&yearofadmission="+yoa, true);
     xmlHttpof.send(null);
 }
 </script>
@@ -965,7 +965,7 @@ $(document).ready(function() {
             xmlHttpParent.onreadystatechange = stateChangedParent;
             xmlHttpParent.open(
                 "GET",
-                "/vision/StudentProcess/searchListOfParent",
+                "/aysha/StudentProcess/searchListOfParent",
                 true
             );
             xmlHttpParent.send(null);
@@ -1067,7 +1067,7 @@ $(document).ready(function() {
 	//allow access only if session exists
 	String user = null;
 	if (session.getAttribute("userAuth") == null) {
-		response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+		response.sendRedirect("/aysha/UserProcess/sessionTimeOut");
 	} else
 		user = (String) session.getAttribute("userAuth");
 	String userName = null;
@@ -2615,14 +2615,14 @@ $(document).ready(function() {
 								var form1 = document.getElementById("form1");
 								if(form1.checkValidity()) {
 									form1.savestudent.disabled = true;
-									form1.action = "/vision/StudentProcess/AddStudent";
+									form1.action = "/aysha/StudentProcess/AddStudent";
 									form1.submit();
 								  }
 							}
 
 							function Cancel() {
 								var form1 = document.getElementById("form1");
-								form1.action = "/vision/StudentProcess/viewAll";
+								form1.action = "/aysha/StudentProcess/viewAll";
 								form1.submit();
 							}
 

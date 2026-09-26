@@ -57,11 +57,11 @@
     </head>
 
     <frameset    rows="139,*"frameborder="0" border="0" framespacing="0"  >
-        <frame   src="/abc/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
+        <frame   src="/aysha/header1"   name="topFrame" scrolling="NO" noresize frameborder="0">
 
             <frameset  cols="175,*" frameborder="0" border="0" framespacing="0">
-                <frame  src="/abc/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
-                <frame src="/abc/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
+                <frame  src="/aysha/left" name="leftFrame" scrolling="NO"  frameborder="1"   />
+                <frame src="/aysha/StudentProcess/viewAll" name="mainFrame" scrolling="yes" />
             </frameset>
 
    
