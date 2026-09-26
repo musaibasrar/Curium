@@ -246,8 +246,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/vision/changePassword?id=${username}&urlbranchid=${branchid}">  <img
-									src="/vision/images/changepasswordlogo.png" width="50" height="50"
+								href="/aysha/changePassword?id=${username}&urlbranchid=${branchid}">  <img
+									src="/aysha/images/changepasswordlogo.png" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" />Change Pwd
 							</a>
         					</td>
@@ -266,8 +266,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/vision/AttendanceProcess/viewAttendanceParent?id=${username}&urlbranchid=${branchid}"> <img
-									src="/vision/images/attendance.png" width="50" height="50"
+								href="/aysha/AttendanceProcess/viewAttendanceParent?id=${username}&urlbranchid=${branchid}"> <img
+									src="/aysha/images/attendance.png" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" /> Attendance
 							</a>
         					</td>
