@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -182,6 +183,23 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
+	public List<Holidaysmaster> readListOfHolidaysForMonth(Date startDate, Date endDate, String currentAcademicYear, int branchId) {
+		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
+		try{
+			//Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and branchid="+branchId+" and todate >= :startDate and fromdate <= :endDate");
+			holidayMaster = holidayMasterRepo
+					.findByAcademicyearAndBranchidAndTodateGreaterThanEqualAndFromdateLessThanEqual(
+							currentAcademicYear, branchId, startDate, endDate);
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		
+		return holidayMaster;
+	}
+
 	public boolean addAttendanceMaster(Attendancemaster attendanceMaster) {
 
 		try {
@@ -216,7 +234,7 @@ public class AttendanceDAO {
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId, int branchId) {
 		List<Attendancemaster> studentAttendanceMaster = new ArrayList<>();
 		try{
-
+			//Query query = session.createQuery("From Attendancemaster where attendeeid IN (:ids) and branchid="+branchId);
 			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeidAndBranchid(attendeeId,branchId);
 
 		}catch (Exception e) {
@@ -229,6 +247,23 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
+	public List<Attendancemaster> getAttendanceMasterDetails(List<String> attendeeIds, int branchId) {
+		List<Attendancemaster> studentAttendanceMaster = new ArrayList<Attendancemaster>();
+		if(attendeeIds == null || attendeeIds.isEmpty()) {
+			return studentAttendanceMaster;
+		}
+		try{
+			//Query query = session.createQuery("From Attendancemaster where attendeeid IN (:ids) and branchid="+branchId);
+			studentAttendanceMaster = attendanceMasterRepo.findByAttendeeidInAndBranchid(attendeeIds, branchId);
+		}catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return studentAttendanceMaster;
+	}
+	
 	public List<Attendancemaster> getAttendanceMasterDetails(String attendeeId) {
 		List<Attendancemaster> studentAttendanceMaster = new ArrayList<>();
 		try{
@@ -558,18 +593,31 @@ public class AttendanceDAO {
 		return result;
 	}
 
-	@Transactional
-	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(String currentAcademicYear, Timestamp timestampFrom,
-			Timestamp timestampto, List<Teacher> staffList, int branchId) {
+	public Map<String, List<Staffdailyattendance>> readListOfStaffAttendanceExport(
+			String currentAcademicYear, Timestamp timestampFrom, Timestamp timestampto,
+			List<Teacher> staffList, int branchId) {
 
-		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new HashMap<String, List<Staffdailyattendance>>();
+		Map<String, List<Staffdailyattendance>> mapStaffAttendance = new LinkedHashMap<String, List<Staffdailyattendance>>();
 		try{
-			
+			List<String> staffExternalIds = new ArrayList<String>();
 			for (Teacher teacher : staffList) {
-				// session.createQuery("from Staffdailyattendance  where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid = '"+teacher.getTeacherexternalid()+"' and branchid="+branchId).list();
-				List<Staffdailyattendance> staffAttendance = staffDailyAttendanceRepository
-	                    .findByDateBetweenAndAcademicyearAndAttendeeidAndBranchid(timestampFrom, timestampto, currentAcademicYear, teacher.getTeacherexternalid(), branchId);
-				mapStaffAttendance.put(teacher.getTeachername(), staffAttendance);
+				staffExternalIds.add(teacher.getTeacherexternalid());
+				mapStaffAttendance.put(teacher.getTeacherexternalid(), new ArrayList<Staffdailyattendance>());
+			}
+			if(!staffExternalIds.isEmpty()) {
+				//Query query = session.createQuery("from Staffdailyattendance where date between '"+timestampFrom+"' and '"+timestampto+"' and academicyear = '"+currentAcademicYear+"' and attendeeid IN (:ids) and branchid="+branchId+" order by attendeeid, date");
+				//query.setParameterList("ids", staffExternalIds);
+				List<Staffdailyattendance> attendanceList = staffDailyAttendanceRepository
+						.findByDateBetweenAndAcademicyearAndAttendeeidInAndBranchidOrderByAttendeeidAscDateAsc(
+								timestampFrom, timestampto, currentAcademicYear, staffExternalIds, branchId);
+				for (Staffdailyattendance staffdailyattendance : attendanceList) {
+					List<Staffdailyattendance> staffAttendance = mapStaffAttendance.get(staffdailyattendance.getAttendeeid());
+					if(staffAttendance == null) {
+						staffAttendance = new ArrayList<Staffdailyattendance>();
+						mapStaffAttendance.put(staffdailyattendance.getAttendeeid(), staffAttendance);
+					}
+					staffAttendance.add(staffdailyattendance);
+				}
 			}
 		} catch (Exception e) {
             log.error(e.getMessage(), e);

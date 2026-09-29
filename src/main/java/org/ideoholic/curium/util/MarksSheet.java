@@ -21,6 +21,7 @@ public class MarksSheet  implements java.io.Serializable {
     List<ExamSummary> examSummaries;
     List<SubjectSummary> subjectSummaries;
     List<ExamsDetails> examsDetails;
+	Map<String, String> excludedSubjectGrades;
     
     public MarksSheet() {
     }
@@ -137,6 +138,14 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setExamsDetails(List<ExamsDetails> examsDetails) {
 		this.examsDetails = examsDetails;
+	}
+
+	public Map<String, String> getExcludedSubjectGrades() {
+		return excludedSubjectGrades;
+	}
+
+	public void setExcludedSubjectGrades(Map<String, String> excludedSubjectGrades) {
+		this.excludedSubjectGrades = excludedSubjectGrades;
 	}
 	
   }

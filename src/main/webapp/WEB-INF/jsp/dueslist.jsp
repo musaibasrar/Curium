@@ -377,15 +377,15 @@
 	}
 	
 </script>
-<script src="/vision/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
-<link href="/vision/css/select2.min.css" rel="stylesheet" />
-<script src="/vision/js/select2.min.js"></script>
+<script src="/school/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
+<link href="/school/css/select2.min.css" rel="stylesheet" />
+<script src="/school/js/select2.min.js"></script>
 <script type="text/javascript">
 
 function generateDueReport() {
 	var form1 = document.getElementById("form1");
-	form1.action = "/vision/MessItemsMoveProcess/generateDueReport";
+	form1.action = "/school/MessItemsMoveProcess/generateDueReport";
 	form1.method = "POST";
 	form1.submit();
 }
