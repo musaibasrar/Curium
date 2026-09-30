@@ -701,4 +701,10 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/attendancemarkselectdate")
+	public String attendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
+	}
+	
 }
