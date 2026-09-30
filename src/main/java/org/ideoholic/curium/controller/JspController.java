@@ -656,13 +656,9 @@ public class JspController {
 		return "enquiryformonline";
 	}
 	
-	@GetMapping("/reports_marksentry")
-	public String getReportsMarksEntry() {
-		return "reports_marksentry";
+	@GetMapping("/attendancemarkselectdate")
+	public String attendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
 	}
 	
-	@GetMapping("/leftsettings_marksentry")
-	public String getLeftSettingsMarksEntry() {
-		return "leftsettings_marksentry";
-	}
 }
