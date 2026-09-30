@@ -335,4 +335,32 @@ public class AttendanceAction {
 		return errorPage;
 	}
 	
+	@PostMapping("/searchStudentAttendanceDetailsMarkSelectedDate")
+	public String searchStudentAttendanceDetailsMarkSelectedDate() {
+		
+		if (attendanceActionAdapter.searchStudentAttendanceDetailsMarkSelectedDate()) {
+			standardActionAdapter.viewClasses();
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
+	@PostMapping("/markStudentsAttendanceMonthly")
+	public String markStudentsAttendanceMonthly() {
+
+		if (attendanceActionAdapter.markStudentsAttendanceMonthly()) {
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
+	@PostMapping("/searchStudentAttendanceDetailsMarkMonthly")
+	public String searchStudentAttendanceDetailsMarkMonthly() {
+
+		if (attendanceActionAdapter.viewStudentAttendanceDetailsMark()) {
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
 }
