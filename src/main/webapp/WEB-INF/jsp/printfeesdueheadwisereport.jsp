@@ -257,7 +257,7 @@
 						<th class="datath">Class & Sec.</th>
 						<th class="datath">Father Name</th>
 						<th class="datath">Contact No.</th>
-						<th class="datath">Fees Details</th>
+						<!-- <th class="datath">Fees Details</th> -->
 						<th class="datath">Total Paid</th>
 						<th class="datath">Total Due</th>
 						<th class="datath">Total Fees</th>
@@ -297,7 +297,7 @@
 							<td class="datatd"><c:out value="${studentFeesReport.parents.student.classstudying}" /></td>
 						    <td class="datatd"><c:out value="${studentFeesReport.parents.fathersname}" /></td>
 						    <td class="datatd"><c:out value="${studentFeesReport.parents.contactnumber}" /></td>
-						    <td class="datatd"><c:out value="${feesDetails}" /></td>
+						    <%-- <td class="datatd"><c:out value="${feesDetails}" /></td> --%>
 						    <td class="datatd"><c:out value="${PaidAmount}" />
 						    <c:set var="grandtotalpaidAmount" value="${grandtotalpaidAmount+PaidAmount}" />
 						    </td>

@@ -247,7 +247,6 @@ for(Cookie cookie : cookies){
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="70" height="70"/></td>
 			</tr>
 		</table>
 
@@ -256,94 +255,78 @@ for(Cookie cookie : cookies){
 
                     <td colspan="4" ></td>
 
-            <!-- ===== TITLE ===== -->
-            <table width="100%">
-                <tr>
-                	<td width="30%"></td>
-                    <td class="dataTextBoldCenter">
-                        Hall Ticket<br>${examname}
-                    </td>
-                    <td align="right">
-                        <c:choose>
-									<c:when test="${not empty Parents.student.studentpic}">
+            <!-- ===== TITLE & STUDENT DETAILS WITH SIDE PHOTO ===== -->
+			<table width="100%" style="border-collapse: collapse; margin-bottom: 8px;">
+				<tr>
+					<!-- Left Section: Exam Title & Student Details -->
+					<td style="vertical-align: top; width: 78%; padding-right: 10px;">
+						<!-- Exam Title -->
+						<div class="dataTextBoldCenter"
+     style="text-align: center; margin-bottom: 12px; width: 128.2%; margin-left: 0;">
+    Hall Ticket<br>${examname}
+</div>
 
+						<!-- Student Details Grid -->
+						<table style="border-collapse: collapse; width: 100%;">
+							<tr>
+								<td class="namedetails" style="width: 55%;">
+									<label><strong>Student Name:</strong>&nbsp;</label>
+									<label style="text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label>
+								</td>
+								<td class="namedetails">
+									<label><strong>Class:</strong>&nbsp;</label>
+									<c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+										${splt}&nbsp;
+									</c:forEach>
+								</td>
+							</tr>
+							<tr>
+								<td class="namedetails">
+									<label><strong>Father's Name:</strong>&nbsp;</label>
+									<label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label>
+								</td>
+								<td class="namedetails">
+									<label><strong>Roll No.:</strong>&nbsp;</label>
+									<!-- <c:out value="${Parents.student.admissionnumber}"/> -->
+								</td>
+							</tr>
+						</table>
+					</td>
+
+					<!-- Right Section: Photo covering both title and details height -->
+					<td align="center" style="vertical-align: middle; width: 22%; border: 0px solid #333; padding: 4px;">
+						<c:choose>
+							<c:when test="${not empty Parents.student.studentpic}">
+								<c:choose>
+									<%-- New format --%>
+									<c:when test="${fn:startsWith(Parents.student.studentpic, 'data:')}">
 										<c:choose>
-											<%-- New format --%>
-											<c:when test="${fn:startsWith(Parents.student.studentpic, 'data:')}">
-
-												<c:choose>
-													<%-- PDF --%>
-													<c:when
-														test="${fn:startsWith(Parents.student.studentpic, 'data:application/pdf')}">
-														<a href="${Parents.student.studentpic}" target="_blank"
-															rel="noopener noreferrer"> PDF </a>
-													</c:when>
-
-													<%-- Image --%>
-													<c:otherwise>
-														<img src="${Parents.student.studentpic}" alt="Student's Pic"
-															style="width: 30px; height: 30px;">
-													</c:otherwise>
-												</c:choose>
-
+											<%-- PDF --%>
+											<c:when test="${fn:startsWith(Parents.student.studentpic, 'data:application/pdf')}">
+												<a href="${Parents.student.studentpic}" target="_blank" rel="noopener noreferrer">PDF Document</a>
 											</c:when>
-
-											<%-- Old raw Base64 format --%>
+											<%-- Image --%>
 											<c:otherwise>
-												<img src="data:image/jpeg;base64,${Parents.student.studentpic}"
-													alt="Student's Pic" style="width: 30px; height: 30px;">
+												<img src="${Parents.student.studentpic}" alt="Student Photo" style="width: 80px; height: 100px; object-fit: cover; display: block; margin: 0 auto;">
 											</c:otherwise>
 										</c:choose>
-
 									</c:when>
-
+									<%-- Old raw Base64 format --%>
 									<c:otherwise>
-                    No document available
-                </c:otherwise>
+										<img src="data:image/jpeg;base64,${Parents.student.studentpic}" alt="Student Photo" style="width: 80px; height: 100px; object-fit: cover; display: block; margin: 0 auto;">
+									</c:otherwise>
 								</c:choose>
-                    </td>
-                </tr>
-            </TABLE>
-            
-            <table width="100%" style="border-collapse: collapse;">
-					
-				<tr>
-					<td class="dataTextBoldCenter" style="width: 100%">Hall Ticket<br>${examname}
+							</c:when>
+							<c:otherwise>
+								<div style="width: 100px; height: 120px; border: 1px dashed #888; display: flex; align-items: center; justify-content: center; font-size: 11px; margin: 0 auto;">
+									Affix Photo
+								</div>
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
-				<tr>
-					<td></td>
-				</tr>
-				<tr></tr>
 			</table>
-
-			<table style=" border-collapse: collapse;width: 100%;">
-											
-                            <tr style="border-color:#000000">
-                                <td class="namedetails"><label>Student Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.student.name}"/></label></td>
-                                <td class="namedetails"><label>Class:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
-						    ${splt} 
-							</c:forEach>
-                                </td>
-                                
-                             </tr>
-                             
-                             
-                             <tr>   
-				<td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;</label><label style="text-transform: capitalize;"><c:out value="${Parents.fathersname}"/></label></td>	
-                                <td class="namedetails"><label>Roll. No.:&nbsp;&nbsp;&nbsp;</label><!--<c:out value="${Parents.student.admissionnumber}"/>--></td>
-                                <!--<td class="namedetails"><label>Date Of Issue:&nbsp;&nbsp;</label><input
-									name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-									 size="10" value="<fmt:formatDate type="date" value="${now}" pattern="dd-MM-yyyy"/>" ></td> -->
-                            </tr>
-                            
-                           <!-- <tr>
-                            <td><br></td>
-                            </tr> -->
-                            
-                            </table>
-                            
+            
                             <table style=" border-collapse: collapse;width: 100%;">
                             	<thead>
                             	<tr>
@@ -390,7 +373,7 @@ for(Cookie cookie : cookies){
                     
 		</TABLE>
 		</div>
-		<br>
+		<br><br><br><br><br>
                                  
                         </c:forEach>
 			
