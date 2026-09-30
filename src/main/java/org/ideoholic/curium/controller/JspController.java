@@ -660,4 +660,10 @@ public class JspController {
 	public String getSuperAdminWelcome() {
 		return "superadminwelcome";
 	}
+	
+	@GetMapping("/attendancemarkselectdate")
+	public String attendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
+	}
+	
 }

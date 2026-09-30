@@ -435,9 +435,44 @@ public class AttendanceDAO {
 			
 			transaction.commit();
 			return "success-Attedance has been marked successfully.";
-		} catch (Exception e) { transaction.rollback(); logger.error(e);
+		} catch (Exception e) { if (transaction != null) transaction.rollback(); logger.error(e);
 			System.out.println(""+e);
 		}finally {
+			HibernateUtil.closeSession();
+		}
+		return result;
+	}
+
+	public String checkAndMarkStudentMonthlyAttendance(List<Studentdailyattendance> studentDailyAttendanceList, Date dateofAttendance) {
+
+		String result = null;
+
+		try {
+			transaction = session.beginTransaction();
+
+			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
+				Date attendanceDate = studentDailyAttendance.getDate() != null ? studentDailyAttendance.getDate() : dateofAttendance;
+				Query query = session.createQuery("from Studentdailyattendance where attendeeid = :attendeeid and date = :attDate and academicyear = :academicYear and branchid = :branchId");
+				query.setParameter("attendeeid", studentDailyAttendance.getAttendeeid());
+				query.setParameter("attDate", attendanceDate);
+				query.setParameter("academicYear", studentDailyAttendance.getAcademicyear());
+				query.setParameter("branchId", studentDailyAttendance.getBranchid());
+				Studentdailyattendance existingAttendance = (Studentdailyattendance) query.uniqueResult();
+
+				if(existingAttendance == null) {
+					session.save(studentDailyAttendance);
+				} else {
+					existingAttendance.setAttendancestatus(studentDailyAttendance.getAttendancestatus());
+					existingAttendance.setIntime(studentDailyAttendance.getIntime());
+					existingAttendance.setOuttime(studentDailyAttendance.getOuttime());
+				}
+			}
+
+			transaction.commit();
+			return "success-Attedance has been marked successfully.";
+		} catch (Exception e) { if (transaction != null) transaction.rollback(); logger.error(e);
+			System.out.println(""+e);
+		} finally {
 			HibernateUtil.closeSession();
 		}
 		return result;
