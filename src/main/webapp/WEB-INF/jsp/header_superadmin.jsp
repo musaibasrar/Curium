@@ -125,73 +125,8 @@ for(Cookie cookie : cookies){
 						<tr style="height: 45px;">
 							
 									<td style="padding-left: 20px;">
-								<a target="mainFrame" href="/hwfschools/welcome" ><img src="/hwfschools/images/curiumheader.png" width="112" height="41"/></a>
+								<a target="mainFrame" href="/hwfschools/superadminwelcome" ><img src="/hwfschools/images/hwf.png" width="112" height="41"/></a>
 								</td>
-								
-							<!-- <td align="left"><img src="/hwfschools/images/hwfschoolsheader.png"
-								style="width: 200px; height: 20px;" /></td> -->
-								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
-									src="/hwfschools/images/menu.svg" width="18" height="18" 
-									alt="Toggle Menu" style="vertical-align: bottom;" />
-							</a></td>
-							
-							<td><a target="leftFrame" href="/hwfschools/left_superadmin"> <img
-									src="/hwfschools/images/home.svg" width="18" height="18" 
-									alt="Home" style="vertical-align: bottom;font-size: 144px;" />Home
-							</a></td>
-
-							<td><a target="mainFrame"
-								href="/hwfschools/FeesProcess/feesCollect"> <img
-									src="/hwfschools/images/feescollect.svg" width="18" height="18"
-									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
-							</a></td>
-
-							<td>
-								<a target="mainFrame"
-								href="/hwfschools/AccountProcess/createVoucher"> <img
-									src="/hwfschools/images/createvoucher.svg" width="18" height="18"
-									alt="Create Voucher" style="vertical-align: bottom;" />
-									Create Voucher
-								</a>
-							</td>
-
-							<!-- <td ><a target="mainFrame" href="/hwfschools/feesCollectionDetails"><img  alt="Fees Details" src="/hwfschools/images/feescoll.png" width="30" height="30" /> <div id="" class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></a></td>
-                                            <td><label style="color:white;font-size: 12px;">Fees <br>Details</label></td> -->
-
-							<td><a target="mainFrame"
-								href="/hwfschools/StudentProcess/addNew"> <img
-									src="/hwfschools/images/student_header.svg" width="18" height="18"
-									alt="Add New Student" style="vertical-align: bottom;" />Add Student
-							</a></td>
-
-							<td ><a target="leftFrame" href="/hwfschools/leftsettings">
-									<img alt="Settings" src="/hwfschools/images/settings.svg" width="18"
-									height="18" style="vertical-align: bottom;" />Master Settings
-							</a></td>
-
-							<td ><a target="mainFrame"
-								href="/hwfschools/AdminProcess/viewAllExpenses"><img
-									alt="Admin Exp" src="/hwfschools/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
-									Admin Expense
-							</a></td>
-
-							<td ><!-- <a target="mainFrame" href="/hwfschools/sendsms"><img
-									src="/hwfschools/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
-									Send Message		
-							</a> -->
-								<a target="leftFrame" href="/hwfschools/reports"><img
-									src="/hwfschools/images/reports.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
-									Reports		
-								</a>
-							
-							</td>
-
-							<td ><a target="mainFrame"
-								href="/hwfschools/StudentProcess/viewAllStudentsWithParents"><img
-									alt="View All Students" src="/hwfschools/images/students.svg" width="18"
-									height="18" style="vertical-align: bottom;"/>
-								View Students
-							</a></td>
 							
 							<td ><a target="mainFrame"
                 href="/hwfschools/UserProcess/superDashboard"><img

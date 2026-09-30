@@ -655,4 +655,9 @@ public class JspController {
 	public String enquiryFormOnline() {
 		return "enquiryformonline";
 	}
+	
+	@GetMapping("/superadminwelcome")
+	public String getSuperAdminWelcome() {
+		return "superadminwelcome";
+	}
 }
