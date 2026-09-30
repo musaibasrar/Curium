@@ -131,6 +131,7 @@ public class AttendanceActionAdapter {
         request.setAttribute("StudentListAttendance", attendanceDetailsMarkResponseDto.getStudentListAttendance());
         request.setAttribute("attendanceclass", attendanceDetailsMarkResponseDto.getAttendanceClass());
         request.setAttribute("attendanceclasssearch", attendanceDetailsMarkResponseDto.getAttendanceClassSearch());
+        request.setAttribute("dateofattendanceselected", normalizeAttendanceMonthYear(request.getParameter("dateofattendance")));
 
         return attendanceDetailsMarkResponseDto.isSuccess();
     }
@@ -393,4 +394,67 @@ public class AttendanceActionAdapter {
 		request.setAttribute("userid",request.getParameter("id"));
 		
 	}
+
+	public boolean searchStudentAttendanceDetailsMarkSelectedDate() {
+    request.setAttribute("dateofattendanceselected", normalizeAttendanceMonthYear(request.getParameter("dateofattendancemark")));
+        return true;
+    }
+
+	public boolean markStudentsAttendanceMonthly() {
+
+        StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
+        String normalizedDate = normalizeAttendanceToFirstDate(request.getParameter("dateofattendance"));
+        if (normalizedDate.isEmpty()) {
+            request.setAttribute("attendanceresult", "error-Please select a valid month and year.");
+            return true;
+        }
+        attendanceDto.setDateofAttendance(DateUtil.simpleDateParser(normalizedDate));
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        
+        ResultResponse resultResponse = attendanceService.markStudentsAttendanceMonthly(attendanceDto, parameterMap, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("attendanceresult", resultResponse.getMessage());
+
+        return resultResponse.isSuccess();
+    }
+
+  private String normalizeAttendanceMonthYear(String attendanceInput) {
+    if (attendanceInput == null) {
+      return "";
+    }
+
+    String trimmedInput = attendanceInput.trim();
+    if (trimmedInput.isEmpty()) {
+      return "";
+    }
+
+    String[] dateParts = trimmedInput.split("/");
+    try {
+      if (dateParts.length == 2) {
+        int month = Integer.parseInt(dateParts[0]);
+        int year = Integer.parseInt(dateParts[1]);
+        if (month >= 1 && month <= 12) {
+          return String.format("%02d/%04d", month, year);
+        }
+      }
+      if (dateParts.length == 3) {
+        int month = Integer.parseInt(dateParts[1]);
+        int year = Integer.parseInt(dateParts[2]);
+        if (month >= 1 && month <= 12) {
+          return String.format("%02d/%04d", month, year);
+        }
+      }
+    } catch (NumberFormatException ex) {
+      return "";
+    }
+
+    return "";
+  }
+
+  private String normalizeAttendanceToFirstDate(String attendanceInput) {
+    String monthYear = normalizeAttendanceMonthYear(attendanceInput);
+    if (monthYear.isEmpty()) {
+      return "";
+    }
+    return "01/" + monthYear;
+  }
 }
