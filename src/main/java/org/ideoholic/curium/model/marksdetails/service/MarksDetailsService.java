@@ -1718,11 +1718,16 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 		String presentDate = dto.getTotalDaysPresent();
 		int branch = Integer.parseInt(branchId);
 
-		for (String examId : dto.getExamIds()) {
+		String[] selectedExamIds = dto.getExamIds();
+		if (selectedExamIds == null || selectedExamIds.length == 0) {
+			return result;
+		}
+		for (String examId : selectedExamIds) {
 			examIds.add(Integer.parseInt(examId));
 		}
 
 		List<Exams> examsList = new ExamDetailsDAO().readListOfExams(examIds, branch);
+		examsList = orderExamsBySelectedIds(examsList, examIds);
 		List<MarksSheet> marksSheetList = new ArrayList<MarksSheet>();
 		Set<Integer> excludedSubjectIds = getExcludedSubjectIds(branch);
 		List<MarksGrade> marksGradeDetailsList = new MarksDetailsDAO().readMarksGrade(branch);
@@ -1770,6 +1775,10 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			// Create exam-wise marks map (column-wise view)
 			Map<String, Map<String, String>> subjectExamMarks = new LinkedHashMap<>();
 			Map<String, String> excludedSubjectGrades = new LinkedHashMap<String, String>();
+			Map<String, Float> excludedSubjectObtainedTotals = new LinkedHashMap<String, Float>();
+			Map<String, Float> excludedSubjectMaxTotals = new LinkedHashMap<String, Float>();
+			Map<String, Float> excludedSubjectMinTotals = new LinkedHashMap<String, Float>();
+			Map<String, Map<String, String>> excludedSubjectExamMarks = new LinkedHashMap<String, Map<String, String>>();
 
 			// Create subject-wise summary map (row-wise view)
 			Map<String, SubjectSummary> subjectSummaryMap = new LinkedHashMap<>();
@@ -1783,6 +1792,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 				float totalObtainedMarks = 0;
 				float totalMarks = 0;
+				float totalMinMarks = 0;
 				boolean examPresent = false;
 
 				List<Marks> marksDetailsList = new MarksDetailsDAO()
@@ -1808,23 +1818,36 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 							float maxMarks = sub.getMaxmarks();
 
 							if (excludedFromAggregate) {
-								String excludedGrade = (marks.getSubgrade() != null) ? marks.getSubgrade().trim() : "";
-								if (excludedGrade.isEmpty() && maxMarks > 0 && marksObtained != 999) {
-									int percent = (int) Math.round((marksObtained / maxMarks) * 100);
-									for (MarksGrade marksGrade : marksGradeDetailsList) {
-										if (percent >= marksGrade.getMinpercentage() && percent <= marksGrade.getMaxpercentage()) {
-											excludedGrade = marksGrade.getStatus();
-											break;
-										}
-									}
+								float effectiveObtained = (marksObtained == 999) ? 0 : marksObtained;
+								String excludedDisplayMarks = (marksObtained == 999) ? "AB" : Float.toString(marksObtained);
+
+								if (!excludedSubjectExamMarks.containsKey(subjectName)) {
+									excludedSubjectExamMarks.put(subjectName, new LinkedHashMap<String, String>());
 								}
-								if (!excludedGrade.isEmpty()) {
-									excludedSubjectGrades.put(subjectName, excludedGrade);
-								}else {
-									int percent = (int) ((marksObtained * 100.0) / maxMarks);
-									//excludedSubjectGrades.put(subjectName, ""+percent);
-									excludedSubjectGrades.put(subjectName, marksObtained+"/"+maxMarks+"/"+percent+"/"+excludedGrade);
+								excludedSubjectExamMarks.get(subjectName).put(exam.getExamname(), excludedDisplayMarks);
+
+								if (!excludedSubjectObtainedTotals.containsKey(subjectName)) {
+									excludedSubjectObtainedTotals.put(subjectName, 0f);
 								}
+								if (!excludedSubjectMaxTotals.containsKey(subjectName)) {
+									excludedSubjectMaxTotals.put(subjectName, 0f);
+								}
+								if (!excludedSubjectMinTotals.containsKey(subjectName)) {
+									excludedSubjectMinTotals.put(subjectName, 0f);
+								}
+
+								excludedSubjectObtainedTotals.put(
+										subjectName,
+										excludedSubjectObtainedTotals.get(subjectName) + effectiveObtained);
+
+								excludedSubjectMaxTotals.put(
+										subjectName,
+										excludedSubjectMaxTotals.get(subjectName) + maxMarks);
+								
+								excludedSubjectMinTotals.put(
+										subjectName,
+										excludedSubjectMinTotals.get(subjectName) + minMarks);
+
 								break;
 							}
 
@@ -1841,9 +1864,9 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 
 							String displayMarks;
 							if (marksObtained < minMarks) {
-								displayMarks = marksObtained + "/" + maxMarks + " (F)";
+								displayMarks = marksObtained + "/" + maxMarks + "/" + minMarks + " (F)";
 							} else if (marksObtained >= minMarks && marksObtained <= maxMarks) {
-								displayMarks = marksObtained + "/" + maxMarks;
+								displayMarks = marksObtained + "/" + maxMarks + "/" + minMarks;
 								if (marks.getSubgrade() != null && !marks.getSubgrade().isEmpty()) {
 									displayMarks += " (" + marks.getSubgrade() + ")";
 								}
@@ -1851,13 +1874,14 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 								marksObtained = 0;
 								displayMarks = "AB";
 							} else {
-								displayMarks = marksObtained + "/" + maxMarks;
+								displayMarks = marksObtained + "/" + maxMarks + "/" + maxMarks;
 							}
 
 							subjectExamMarks.get(subjectName).put(exam.getExamname(), displayMarks);
 							if (!excludedFromAggregate) {
 								totalObtainedMarks += marksObtained;
 								totalMarks += maxMarks;
+								totalMinMarks += minMarks;
 							}
 
 							SubjectSummary subjectSummary = subjectSummaryMap.get(subjectName);
@@ -1876,6 +1900,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				if (examPresent && totalMarks > 0) {
 					double percentage = (totalObtainedMarks * 100.0) / totalMarks;
 					examSummary.setTotalMarks((int) totalMarks);
+					examSummary.setTotalMinMarks(totalMinMarks);
 					examSummary.setTotalMarksObtained(totalObtainedMarks);
 					examSummary.setPercentage(percentage);
 
@@ -1901,10 +1926,39 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				subjectSummary.calculateTotals();
 			}
 
+			for (Map.Entry<String, Float> excludedEntry : excludedSubjectObtainedTotals.entrySet()) {
+				String subjectName = excludedEntry.getKey();
+				float totalObtained = excludedEntry.getValue();
+				float totalMax = excludedSubjectMaxTotals.getOrDefault(subjectName, 0f);
+				float totalMin = excludedSubjectMinTotals.getOrDefault(subjectName, 0f);
+
+				int roundedObtained = Math.round(totalObtained);
+				int roundedMax = Math.round(totalMax);
+				int roundedMin = Math.round(totalMin);
+				int percent = 0;
+				if (totalMax > 0f) {
+					percent = (int) Math.round((totalObtained / totalMax) * 100.0);
+				}
+
+				String grade = "";
+				for (MarksGrade marksGrade : marksGradeDetailsList) {
+					if (percent >= marksGrade.getMinpercentage() && percent <= marksGrade.getMaxpercentage()) {
+						grade = marksGrade.getStatus();
+						break;
+					}
+				}
+
+				// Part-B payload: obtained/max/min/percentage/grade (JSP indices 0 through 4).
+				excludedSubjectGrades.put(
+						subjectName,
+						roundedObtained + "/" + roundedMax + "/" + roundedMin + "/" + percent + "/" + grade);
+			}
+
 			markssheet.setSubjectExamMarks(subjectExamMarks);
 			markssheet.setExamSummaries(examSummaries);
 			markssheet.setSubjectSummaries(new ArrayList<>(subjectSummaryMap.values()));
 			markssheet.setExcludedSubjectGrades(excludedSubjectGrades);
+			markssheet.setExcludedSubjectExamMarks(excludedSubjectExamMarks);
 			
 			//Generate Graph for Each Student
 			StudentGraphDto studentGraphDto = new StudentGraphDto();
@@ -1930,6 +1984,26 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 	}
 
 	return result;
+}
+
+private List<Exams> orderExamsBySelectedIds(List<Exams> examsList, List<Integer> selectedExamIds) {
+	if (examsList == null || examsList.isEmpty() || selectedExamIds == null || selectedExamIds.isEmpty()) {
+		return examsList;
+	}
+
+	Map<Integer, Exams> examById = new LinkedHashMap<Integer, Exams>();
+	for (Exams exam : examsList) {
+		examById.put(exam.getExid(), exam);
+	}
+
+	List<Exams> orderedExams = new ArrayList<Exams>();
+	for (Integer selectedExamId : selectedExamIds) {
+		Exams exam = examById.get(selectedExamId);
+		if (exam != null) {
+			orderedExams.add(exam);
+		}
+	}
+	return orderedExams;
 }
 
 private float getFinalTotalMarksObtainedForOrdering(MarksSheet marksSheet) {

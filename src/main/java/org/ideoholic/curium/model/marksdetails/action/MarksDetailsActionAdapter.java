@@ -214,6 +214,12 @@ public class MarksDetailsActionAdapter {
         dto.setExamClass(request.getParameter("examclass"));
         dto.setExamIds(request.getParameterValues("examslist"));
         dto.setTotalDaysPresent(request.getParameter("dateforattendance"));
+        String[] semesterSelections = request.getParameterValues("semesterSelection");
+        String semesterSelection = "";
+        if (semesterSelections != null && semesterSelections.length > 0 && semesterSelections[0] != null) {
+            semesterSelection = semesterSelections[0].trim();
+        }
+        dto.setSemesterSelection(semesterSelection);
 
         // Default stays converted marks unless user explicitly selects full marks.
         String reportMarkMode = request.getParameter("reportMarkMode");
@@ -228,6 +234,11 @@ public class MarksDetailsActionAdapter {
 		request.setAttribute("totalabsent", responseDto.getTotalabsent());
         request.setAttribute("showFullMarks", showFullMarks);
         request.setAttribute("examclass", request.getParameter("examclass"));
+        if ("semester1".equalsIgnoreCase(semesterSelection)) {
+            request.setAttribute("selectedSemesterLabel", "Semester-1");
+        } else if ("semester2".equalsIgnoreCase(semesterSelection)) {
+            request.setAttribute("selectedSemesterLabel", "Semester-2");
+        }
 
         return responseDto.isSuccess();
     }
