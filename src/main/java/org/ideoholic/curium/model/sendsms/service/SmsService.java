@@ -256,54 +256,41 @@ public class SmsService {
 		// Construct data
 		String phonenumbers=numbers;
 		
-		String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?";
+		String POST_URL = "https://instantalerts.co/api/web/send/?";
 		 StringBuilder sgcPostContent = new StringBuilder(POST_URL);
-         sgcPostContent.append("APIKey=").append(URLEncoder.encode(apikey, "UTF-8"));
-         sgcPostContent.append("&senderid=").append(URLEncoder.encode(smssender, "UTF-8"));
-         sgcPostContent.append("&channel=").append(URLEncoder.encode("trans", "UTF-8"));
-         sgcPostContent.append("&DCS=").append(URLEncoder.encode("0", "UTF-8"));
-         sgcPostContent.append("&flashsms=").append(URLEncoder.encode("0", "UTF-8"));
-         sgcPostContent.append("&number=").append(URLEncoder.encode(phonenumbers, "UTF-8"));
-         sgcPostContent.append("&text=").append(URLEncoder.encode(templatemessage, "UTF-8"));
-         sgcPostContent.append("&route=").append(URLEncoder.encode("04", "UTF-8"));
-         sgcPostContent.append("&DLTTemplateId=").append(URLEncoder.encode(templateid, "UTF-8"));
-         sgcPostContent.append("&PEID=").append(URLEncoder.encode(peid, "UTF-8"));
+        sgcPostContent.append("apikey=").append(URLEncoder.encode(apikey, "UTF-8"));
+        sgcPostContent.append("&sender=").append(URLEncoder.encode(smssender, "UTF-8"));
+        //sgcPostContent.append("&channel=").append(URLEncoder.encode("trans", "UTF-8"));
+        //sgcPostContent.append("&DCS=").append(URLEncoder.encode("0", "UTF-8"));
+        //sgcPostContent.append("&flashsms=").append(URLEncoder.encode("0", "UTF-8"));
+        sgcPostContent.append("&to=").append(URLEncoder.encode(phonenumbers, "UTF-8"));
+        sgcPostContent.append("&message=").append(URLEncoder.encode(templatemessage, "UTF-8"));
+        //sgcPostContent.append("&route=").append(URLEncoder.encode("04", "UTF-8"));
+        //sgcPostContent.append("&DLTTemplateId=").append(URLEncoder.encode(templateid, "UTF-8"));
+        //sgcPostContent.append("&PEID=").append(URLEncoder.encode(peid, "UTF-8"));
 				
 		// Send data
 		
 		//String POST_URL = "http://bulksms.saakshisoftware.in/api/mt/SendSMS?"+data;
-		log.info(templateType+": URL "+sgcPostContent.toString());
-		log.debug(templateType+": URL "+POST_URL);
-        URL obj = new URL(sgcPostContent.toString());
-        URLConnection myURLConnection = obj.openConnection();
-        myURLConnection.connect();
-
-		// For POST only - START
-        BufferedReader reader = new BufferedReader(new InputStreamReader(myURLConnection.getInputStream()));
-        
-        String output;
-        while ((output = reader.readLine()) != null) {
-            System.out.println("OUTPUT: " + output);
-            
-         // Check if ErrorCode is present
-            int errorCodeIndex = output.indexOf("\"ErrorCode\":\"");
-            if (errorCodeIndex != -1) {
-                int start = errorCodeIndex + "\"ErrorCode\":\"".length();
-                int end = output.indexOf("\"", start);
-                String errorCode = output.substring(start, end);
-
-                if ("000".equals(errorCode)) {
-                	responseCode=200;
-                } else {
-                    System.out.println("❌ Message not sent. ErrorCode: " + errorCode);
-                }
-            } else {
-                System.out.println("⚠️ Invalid response format: ErrorCode not found.");
-            }
+        log.info(templateType+": URL "+sgcPostContent.toString());
+        log.debug(templateType+": URL "+POST_URL);
+        URL url = new URL(sgcPostContent.toString());
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setDoOutput(true);
+        con.getOutputStream();
+        con.getInputStream();
+        BufferedReader rd;
+        String line;
+        String result = "";
+        rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        while ((line = rd.readLine()) != null)
+        {
+           result += line;
         }
-
-        // Close reader
-        reader.close();
+        rd.close(); 
+        System.out.println("Result is" + result);
+        //return result;			
 
 		} else {
 			log.error("POST request not worked");

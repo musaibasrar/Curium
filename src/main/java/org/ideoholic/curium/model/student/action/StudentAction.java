@@ -332,6 +332,8 @@ public class StudentAction {
 				return "student_details_other_feesstructure_admin";
 			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_other_feesstructure_admin";
+			} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
+				return "student_details_other_feesstructure_admin";
 			} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 				return "student_details_other_feesstructure";
 			} else {
@@ -348,6 +350,8 @@ public class StudentAction {
 		if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("superadmin")) {
 			return "student_details_other_feesstructure_admin";
 		} else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
+			return "student_details_other_feesstructure_admin";
+		}else if (httpSession.getAttribute("userType").toString().equalsIgnoreCase("officeadmin")) {
 			return "student_details_other_feesstructure_admin";
 		} else if (!httpSession.getAttribute("userType").toString().equalsIgnoreCase("admin")) {
 			return "student_details_other_feesstructure";
