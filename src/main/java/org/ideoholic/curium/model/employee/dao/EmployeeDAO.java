@@ -40,7 +40,7 @@ public class EmployeeDAO {
 		boolean result = false;
 		try {
 			transaction = session.beginTransaction();
-			Query<Teacher> queryTeacher = session.createQuery("from Teacher where branchid = "+employee.getBranchid()+" order by id DESC");
+			Query<Teacher> queryTeacher = session.createQuery("from Teacher order by tid DESC");
 		 	List<Teacher> queryList = queryTeacher.list();
 		 	String externalId = employee.getTeacherexternalid();
 		 	
@@ -337,7 +337,7 @@ public class EmployeeDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("update Teacher set currentemployee = 0  where id IN (:ids)");
+					.createQuery("update Teacher set currentemployee = 0  where tid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
@@ -377,7 +377,7 @@ public class EmployeeDAO {
 		try {
 			transaction = session.beginTransaction();
 			Query query = session
-					.createQuery("update Teacher set currentemployee = 1  where id IN (:ids)");
+					.createQuery("update Teacher set currentemployee = 1  where tid IN (:ids)");
 			query.setParameterList("ids", ids);
 			query.executeUpdate();
 			transaction.commit();
