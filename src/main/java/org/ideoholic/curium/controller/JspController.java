@@ -706,4 +706,9 @@ public class JspController {
 		return "reports_documents";
 	}
 	
+	@GetMapping("/attendancemarkselectdate")
+	public String attendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
+	}
+	
 }

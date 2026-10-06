@@ -477,6 +477,11 @@ for(Cookie cookie : cookies){
             				 <a target="mainFrame" href="/salihath/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
             			</td>
             		</tr>
+            		<tr>
+            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
+            				 <a target="mainFrame" href="/littleflower/attendancemarkselectdate" style="font-size: 12px;">Mark Monthly Attendance</a>
+            			</td>
+            		</tr>
                 </table>
             </div>
             
