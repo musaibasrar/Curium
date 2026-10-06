@@ -5,4 +5,6 @@ import lombok.Data;
 @Data
 public class MonthlyDataStaffDto {
     private String monthOf;
+    private String month;
+    private String year;
 }
