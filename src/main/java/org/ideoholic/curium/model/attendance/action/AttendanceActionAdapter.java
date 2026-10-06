@@ -54,10 +54,10 @@ public class AttendanceActionAdapter {
     public boolean exportMonthlyData() {
 
         ExportMonthlyDataDto exportMonthlyDataDto = new ExportMonthlyDataDto();
-        exportMonthlyDataDto.setAddClass( request.getParameter("classsearch"));
+        exportMonthlyDataDto.setAddClass(request.getParameter("classsearch"));
         exportMonthlyDataDto.setAddSec(request.getParameter("secsearch"));
-        exportMonthlyDataDto.setMonthOf((request.getParameter("monthof")));
-
+        exportMonthlyDataDto.setMonth(request.getParameter("month"));
+        exportMonthlyDataDto.setYear(request.getParameter("year"));
 
         ResultResponse resultResponse = attendanceService.exportMonthlyData(exportMonthlyDataDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
