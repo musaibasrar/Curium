@@ -943,7 +943,7 @@ for(Cookie cookie : cookies){
                                              <button id="applyconcession">Apply Concession</button>
                                              
                                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                             <button id="print" onclick="window.location.href='/vision/printstudentdetailsfeesstructure'">Print</button>
+                                             <button id="print" onclick="window.location.href='/salihath/printstudentdetailsfeesstructure'">Print</button>
                                         </td>
 
                                     </tr>
