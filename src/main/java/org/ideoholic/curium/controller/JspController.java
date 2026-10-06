@@ -681,5 +681,8 @@ public class JspController {
 		return "report_clerk";
 	}
 	
-	
+	@GetMapping("/attendancemarkselectdate")
+	public String attendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
+	}
 }
