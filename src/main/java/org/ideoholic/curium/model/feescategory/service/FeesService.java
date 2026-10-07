@@ -942,7 +942,7 @@ response.getWriter().println(buffer.toString());
 			    return result;
 		}
 
-		public FeescategoryResponseDto getFeeCategoryHeadWise(String classname,String yearofAdmissionStr, String studentType,String currentAcademicYearStr,String branchid) throws IOException {
+		public FeescategoryResponseDto getFeeCategoryHeadWise(String classname,String yearofAdmissionStr, String currentAcademicYearStr,String studentType,String branchid) throws IOException {
 
 			FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
 	        if(branchid!=null){
