@@ -378,6 +378,16 @@
 		form1.submit();
 
 	}
+	
+function generateaSixMarksSheet() {
+		
+		
+		var form1 = document.getElementById("form1");
+		form1.action = "/rahmani/MarksDetailsProcess/generateaSixMarksSheet";
+		form1.method = "POST";
+		form1.submit();
+
+	}
 
 	$(function() {
 
@@ -407,6 +417,14 @@
             }
         }).click(function(){
         	generateReportVertical();	
+        });
+		
+		$("#generateasixmarkssheet").button({
+            icons:{
+                primary: "ui-icon-trash"
+            }
+        }).click(function(){
+        	generateaSixMarksSheet();	
         });
 		
 		$("#delete").button({
@@ -685,6 +703,8 @@ for(Cookie cookie : cookies){
 							type="submit" id="generatereport" />
 							<input value="Generate Report Vertical"
 							type="submit" id="generatereportvertical" />
+							<input value="A6 Marks Sheet"
+							type="submit" id="generateasixmarkssheet" />
 							
 							<!-- <input value="Delete Stamp Fees"
 							type="submit" id="deleteStamp" /> --></td>
