@@ -19,7 +19,7 @@ public interface AttendanceApiAction {
     ResponseEntity<ResultResponse> downloadStaffAttendance();
 
     @PostMapping("/exportMonthlyDataStaff")
-    ResponseEntity<ResultResponse> exportMonthlyAttendanceStaff(@RequestBody MonthlyDataStaffDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value="currentAcademicYear") String currentAcademicYear);
+    ResponseEntity<ResultResponse> exportMonthlyAttendanceStaff(@RequestBody MonthlyDataStaffDto dto, @RequestHeader(value = "branchid") String branchId, @RequestHeader(value="currentAcademicYear") String currentAcademicYear, @RequestHeader(value="branchName") String branchName,@RequestHeader(value="branchAddress") String branchAddress);
 
     @GetMapping("/attendanceExportViewStaff")
     ResponseEntity<ResultResponse> attendanceExportViewStaff(@RequestHeader(value = "branchid") String branchId);
