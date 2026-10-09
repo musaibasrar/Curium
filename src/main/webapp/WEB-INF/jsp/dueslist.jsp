@@ -377,7 +377,6 @@
 	}
 	
 </script>
-
 <script src="/school/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
 <link href="/school/css/select2.min.css" rel="stylesheet" />

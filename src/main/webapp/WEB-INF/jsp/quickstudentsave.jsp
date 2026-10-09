@@ -1342,7 +1342,7 @@ $(document).ready(function() {
 								<tbody id="hiddenSection" style="display:none;">
 								<tr>
 									<td><label style="font-size: 12px;color: #325F6D;font-weight: bold;">Student Pic</label><br />  <input type="file" name="fileToUpload"
-										id="fileToUpload" accept="image/*" onchange="Upload()"><br><br><br><br></td>
+										id="fileToUpload"  accept="image/*,application/pdf" ><br><br><br><br></td>
 								</tr>
 								<tr>
 										

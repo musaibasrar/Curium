@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AttendanceActionAdapter {
@@ -22,7 +23,7 @@ public class AttendanceActionAdapter {
 
     private String BRANCHID = "branchid";
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
-
+    
     @Autowired
     private AttendanceService attendanceService;
 
@@ -53,10 +54,10 @@ public class AttendanceActionAdapter {
     public boolean exportMonthlyData() {
 
         ExportMonthlyDataDto exportMonthlyDataDto = new ExportMonthlyDataDto();
-        exportMonthlyDataDto.setAddClass( request.getParameter("classsearch"));
+        exportMonthlyDataDto.setAddClass(request.getParameter("classsearch"));
         exportMonthlyDataDto.setAddSec(request.getParameter("secsearch"));
-        exportMonthlyDataDto.setMonthOf((request.getParameter("monthof")));
-
+        exportMonthlyDataDto.setMonth(request.getParameter("month"));
+        exportMonthlyDataDto.setYear(request.getParameter("year"));
 
         ResultResponse resultResponse = attendanceService.exportMonthlyData(exportMonthlyDataDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
 
@@ -106,6 +107,7 @@ public class AttendanceActionAdapter {
         request.setAttribute("StudentListAttendance", attendanceDetailsMarkResponseDto.getStudentListAttendance());
         request.setAttribute("attendanceclass", attendanceDetailsMarkResponseDto.getAttendanceClass());
         request.setAttribute("attendanceclasssearch", attendanceDetailsMarkResponseDto.getAttendanceClassSearch());
+        request.setAttribute("dateofattendanceselected", normalizeAttendanceMonthYear(request.getParameter("dateofattendance")));
 
         return attendanceDetailsMarkResponseDto.isSuccess();
     }
@@ -148,6 +150,8 @@ public class AttendanceActionAdapter {
 
         return attendanceMonthlyResponseDto.isSuccess();
     }
+    
+
 
     public boolean searchStudentAttendanceDetails() {
 
@@ -274,9 +278,40 @@ public class AttendanceActionAdapter {
     public boolean exportMonthlyDataStaff() {
 
         MonthlyDataStaffDto monthlyDataStaffDto = new MonthlyDataStaffDto();
+        monthlyDataStaffDto.setMonth(request.getParameter("month"));
+        monthlyDataStaffDto.setYear(request.getParameter("year"));
         monthlyDataStaffDto.setMonthOf(request.getParameter("monthof"));
 
-        ResultResponse resultResponse = attendanceService.exportMonthlyDataStaff(monthlyDataStaffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        ResultResponse resultResponse = attendanceService.exportMonthlyDataStaff(monthlyDataStaffDto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString(),httpSession.getAttribute("branchname").toString(),httpSession.getAttribute("branchaddress").toString());
+
+    Map resultMap = resultResponse.getResultMap();
+    request.setAttribute("branchid", httpSession.getAttribute(BRANCHID));
+    request.setAttribute("branchname", httpSession.getAttribute("branchname"));
+    request.setAttribute("branchaddress", httpSession.getAttribute("branchaddress"));
+    request.setAttribute("currentAcademicYear", httpSession.getAttribute(CURRENTACADEMICYEAR));
+    httpSession.setAttribute("staffMonthlyAttendancePreviewRows", null);
+    httpSession.setAttribute("staffMonthlyAttendanceDayHeaders", null);
+    httpSession.setAttribute("staffMonthlyAttendanceSchoolName", null);
+    httpSession.setAttribute("staffMonthlyAttendanceSchoolAddress", null);
+    httpSession.setAttribute("staffMonthlyAttendanceAcademicYear", null);
+    httpSession.setAttribute("staffMonthlyAttendanceDateRange", null);
+    httpSession.setAttribute("staffMonthlyAttendanceReportTitle", null);
+    if(resultMap != null) {
+      request.setAttribute("previewRows", resultMap.get("previewRows"));
+      request.setAttribute("dayHeaders", resultMap.get("dayHeaders"));
+      request.setAttribute("schoolName", resultMap.get("schoolName"));
+      request.setAttribute("schoolAddress", resultMap.get("schoolAddress"));
+      request.setAttribute("academicYear", resultMap.get("academicYear"));
+      request.setAttribute("dateRange", resultMap.get("dateRange"));
+      request.setAttribute("reportTitle", resultMap.get("reportTitle"));
+      httpSession.setAttribute("staffMonthlyAttendancePreviewRows", resultMap.get("previewRows"));
+      httpSession.setAttribute("staffMonthlyAttendanceDayHeaders", resultMap.get("dayHeaders"));
+      httpSession.setAttribute("staffMonthlyAttendanceSchoolName", resultMap.get("schoolName"));
+      httpSession.setAttribute("staffMonthlyAttendanceSchoolAddress", resultMap.get("schoolAddress"));
+      httpSession.setAttribute("staffMonthlyAttendanceAcademicYear", resultMap.get("academicYear"));
+      httpSession.setAttribute("staffMonthlyAttendanceDateRange", resultMap.get("dateRange"));
+      httpSession.setAttribute("staffMonthlyAttendanceReportTitle", resultMap.get("reportTitle"));
+    }
 
         return resultResponse.isSuccess();
     }
@@ -300,7 +335,6 @@ public class AttendanceActionAdapter {
     public boolean downloadFileStaff() {
 
         ResultResponse resultResponse = attendanceService.downloadFileStaff();
-
         return resultResponse.isSuccess();
     }
 
@@ -331,4 +365,73 @@ public class AttendanceActionAdapter {
 
         attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
     }
+    
+	public void singleStudentReport() {
+
+		request.setAttribute("userid",request.getParameter("id"));
+		
+	}
+
+	public boolean searchStudentAttendanceDetailsMarkSelectedDate() {
+    request.setAttribute("dateofattendanceselected", normalizeAttendanceMonthYear(request.getParameter("dateofattendancemark")));
+        return true;
+    }
+
+	public boolean markStudentsAttendanceMonthly() {
+
+        StudentsAttendanceDto attendanceDto = new StudentsAttendanceDto();
+        String normalizedDate = normalizeAttendanceToFirstDate(request.getParameter("dateofattendance"));
+        if (normalizedDate.isEmpty()) {
+            request.setAttribute("attendanceresult", "error-Please select a valid month and year.");
+            return true;
+        }
+        attendanceDto.setDateofAttendance(DateUtil.simpleDateParser(normalizedDate));
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        
+        ResultResponse resultResponse = attendanceService.markStudentsAttendanceMonthly(attendanceDto, parameterMap, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        request.setAttribute("attendanceresult", resultResponse.getMessage());
+
+        return resultResponse.isSuccess();
+    }
+
+  private String normalizeAttendanceMonthYear(String attendanceInput) {
+    if (attendanceInput == null) {
+      return "";
+    }
+
+    String trimmedInput = attendanceInput.trim();
+    if (trimmedInput.isEmpty()) {
+      return "";
+    }
+
+    String[] dateParts = trimmedInput.split("/");
+    try {
+      if (dateParts.length == 2) {
+        int month = Integer.parseInt(dateParts[0]);
+        int year = Integer.parseInt(dateParts[1]);
+        if (month >= 1 && month <= 12) {
+          return String.format("%02d/%04d", month, year);
+        }
+      }
+      if (dateParts.length == 3) {
+        int month = Integer.parseInt(dateParts[1]);
+        int year = Integer.parseInt(dateParts[2]);
+        if (month >= 1 && month <= 12) {
+          return String.format("%02d/%04d", month, year);
+        }
+      }
+    } catch (NumberFormatException ex) {
+      return "";
+    }
+
+    return "";
+  }
+
+  private String normalizeAttendanceToFirstDate(String attendanceInput) {
+    String monthYear = normalizeAttendanceMonthYear(attendanceInput);
+    if (monthYear.isEmpty()) {
+      return "";
+    }
+    return "01/" + monthYear;
+  }
 }

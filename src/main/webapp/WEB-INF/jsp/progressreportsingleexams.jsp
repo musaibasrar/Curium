@@ -379,6 +379,42 @@
 
 	}
 
+	function handleSemesterSelection(selectedId, otherId) {
+		var selected = document.getElementById(selectedId);
+		var other = document.getElementById(otherId);
+		if (selected && selected.checked && other) {
+			other.checked = false;
+		}
+		if (selected && selected.checked) {
+			applySemesterExamSelection(selected.value);
+		}
+	}
+
+	function applySemesterExamSelection(semesterValue) {
+		var examCheckboxes = document.querySelectorAll('input[name="examslist"].examSelectionCheckbox');
+		if (!examCheckboxes || examCheckboxes.length === 0) {
+			return;
+		}
+
+		for (var i = 0; i < examCheckboxes.length; i++) {
+			examCheckboxes[i].checked = false;
+		}
+
+		if (semesterValue === 'semester1') {
+			for (var j = 0; j < examCheckboxes.length && j < 3; j++) {
+				examCheckboxes[j].checked = true;
+			}
+		} else if (semesterValue === 'semester2') {
+			var startIndex = examCheckboxes.length - 3;
+			if (startIndex < 0) {
+				startIndex = 0;
+			}
+			for (var k = startIndex; k < examCheckboxes.length; k++) {
+				examCheckboxes[k].checked = true;
+			}
+		}
+	}
+
 	$(function() {
 
 		$("#search").button().click(function() {
@@ -586,13 +622,56 @@ for(Cookie cookie : cookies){
 						
 						
 						<tr>
+							<td class="alignRightFields">Semester &nbsp;</td>
+							<td>
+								<label style="font-weight: bold; color: #325F6D;">
+									<input type="checkbox" id="semester1" name="semesterSelection" value="semester1"
+										onclick="handleSemesterSelection('semester1', 'semester2')" />
+									Semester-1
+								</label>
+								&nbsp;&nbsp;
+								<label style="font-weight: bold; color: #325F6D;">
+									<input type="checkbox" id="semester2" name="semesterSelection" value="semester2"
+										onclick="handleSemesterSelection('semester2', 'semester1')" />
+									Semester-2
+								</label>
+							</td>
+						</tr>
+
+						<tr>
+							<td><br /></td>
+						</tr>
+
+						<tr>
 							<td class="alignRightFields">Exams &nbsp;</td>
 							<td><label><c:forEach items="${listExam}" var="listExamlist">
-										<input type="checkbox"  name="examslist" value="${listExamlist.exid}">
+									<input type="checkbox" class="examSelectionCheckbox" name="examslist" value="${listExamlist.exid}">
 										${listExamlist.examname}
 										<br/>
 							</c:forEach>
 							</label>
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
+						<tr>
+							<td class="alignRightFields">Report Mode &nbsp;</td>
+							<td>
+							
+								<label style="font-weight: bold; color: #325F6D;">
+									<input type="radio" name="reportMarkMode" value="full" checked="checked"/>
+									Full Marks
+								</label>
+								
+								<label style="font-weight: bold; color: #325F6D;">
+									<input type="radio" name="reportMarkMode" value="converted" />
+									Converted Marks
+								</label>
+								&nbsp;&nbsp;&nbsp;
+								
 							</td>
 						</tr>
 						

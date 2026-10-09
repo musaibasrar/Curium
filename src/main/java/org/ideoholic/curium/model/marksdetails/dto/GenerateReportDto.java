@@ -15,4 +15,7 @@ public class GenerateReportDto {
     private String noofpresentday;
     private String endDate;
     private String startDate;
+    // true => show raw/full marks; false => keep existing converted FA/SA behavior.
+    private boolean showFullMarks;
+    private String semesterSelection;
 }

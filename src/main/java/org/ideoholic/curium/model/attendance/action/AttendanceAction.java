@@ -319,4 +319,48 @@ public class AttendanceAction {
 		return "attendancesummaryreport";
 	}
 	
+	@GetMapping("/viewAttendanceParent")
+	public String viewAttendanceParent() {
+		attendanceActionAdapter.singleStudentReport();
+		return "viewAttendanceParent";
+	}
+	
+	
+	@PostMapping("/searchSingleStudentAttendanceDetailsMonthly")
+	public String searchSingleStudentAttendanceDetailsMonthly() {
+
+		if (attendanceActionAdapter.viewStudentAttendanceDetailsMonthly()) {
+			return "viewAttendanceParent";
+		}
+		return errorPage;
+	}
+	
+	@PostMapping("/searchStudentAttendanceDetailsMarkSelectedDate")
+	public String searchStudentAttendanceDetailsMarkSelectedDate() {
+		
+		if (attendanceActionAdapter.searchStudentAttendanceDetailsMarkSelectedDate()) {
+			standardActionAdapter.viewClasses();
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
+	@PostMapping("/markStudentsAttendanceMonthly")
+	public String markStudentsAttendanceMonthly() {
+
+		if (attendanceActionAdapter.markStudentsAttendanceMonthly()) {
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
+	@PostMapping("/searchStudentAttendanceDetailsMarkMonthly")
+	public String searchStudentAttendanceDetailsMarkMonthly() {
+
+		if (attendanceActionAdapter.viewStudentAttendanceDetailsMark()) {
+			return "attendancemarkmonthly";
+		}
+		return errorPage;
+	}
+	
 }

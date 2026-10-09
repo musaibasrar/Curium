@@ -213,7 +213,7 @@ public class feesDetailsDAO {
                 List<Object[]> results = new ArrayList<Object[]>();
 
                 try {
-                       // Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, s.admissiondate, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
+                       // Query q = session.createQuery("select s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, s.admissiondate, p.fathersname from Student s JOIN Parents p ON s.sid=p.Student.sid where s.branchid="+branchId+" and s.sid in (select f.sid from Studentfeesstructure f where f.branchid = "+branchId+")").setCacheable(true).setCacheRegion("commonregion");
 
                 	results= studentRepo.findStudentsByBranchId(branchId);
                 } catch (Exception hibernateException) { 

@@ -24,7 +24,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
 	@Query("SELECT s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, s.admissiondate, p.fathersname "
 			+ "FROM Student s JOIN s.parents p "
-			+ "WHERE s.sid IN (SELECT f.student.sid FROM Studentfeesstructure f WHERE f.branchid = :branchId)")
+			+ "WHERE s.branchid = :branchId and s.sid IN (SELECT f.student.sid FROM Studentfeesstructure f WHERE f.branchid = :branchId)")
 	List<Object[]> findStudentsByBranchId(@Param("branchId") Integer branchId);
 
 	@Query("SELECT s.sid, s.name, s.classstudying, s.studentexternalid, s.admissionnumber, p.fathersname "
