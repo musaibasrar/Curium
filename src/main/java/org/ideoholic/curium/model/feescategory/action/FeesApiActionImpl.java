@@ -219,8 +219,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	}
 	
 	public ResponseEntity<FeescategoryResponseDto> searchFeeCategoryHeadWise(@RequestParam(value="classname")
-	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr, String branchid) throws IOException {
-		FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmissionStr,currentAcademicYearStr,branchid);
+	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestParam(value="studentType") String studentType, String branchid) throws IOException {
+		FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmissionStr,currentAcademicYearStr,studentType,branchid);
 		if(feescategoryResponseDto.isSuccess())	{
 			return ResponseEntity.ok(feescategoryResponseDto);
 		}

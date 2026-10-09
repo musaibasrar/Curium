@@ -46,8 +46,8 @@ public class AttendanceApiActionImpl implements AttendanceApiAction {
 
     }
 
-    public ResponseEntity<ResultResponse> exportMonthlyAttendanceStaff(MonthlyDataStaffDto dto, String branchId, String currentAcademicYear) {
-        ResultResponse result = attendanceService.exportMonthlyDataStaff(dto, branchId, currentAcademicYear);
+    public ResponseEntity<ResultResponse> exportMonthlyAttendanceStaff(MonthlyDataStaffDto dto, String branchId, String currentAcademicYear, String branchName, String branchAddress) {
+        ResultResponse result = attendanceService.exportMonthlyDataStaff(dto, branchId, currentAcademicYear,branchName ,branchAddress);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
         }
