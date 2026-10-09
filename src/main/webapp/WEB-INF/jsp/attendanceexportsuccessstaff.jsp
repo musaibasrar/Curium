@@ -249,7 +249,7 @@
 <div class="report-wrapper">
   <div class="report-card">
     <div class="report-header">
-      <img class="report-logo" src="/hwfschools/images/hwfschools${branchid}.png" alt="School Logo" />
+      <img class="report-logo" src="/school/images/school${branchid}.png" alt="School Logo" />
       <div class="report-school">${displaySchoolName}</div>
       <div class="report-title">${displayReportTitle}</div>
       <div class="report-meta">
@@ -261,7 +261,7 @@
 
     <div class="report-actions hide-on-print">
       <button type="button" onclick="printReport();">Print</button>
-      <form id="exportForm" action="/hwfschools/AttendanceProcess/downloadStaffAttendance" method="post" target="downloadFrame" style="display:inline;">
+      <form id="exportForm" action="/school/AttendanceProcess/downloadStaffAttendance" method="post" target="downloadFrame" style="display:inline;">
         <button type="button" onclick="exportReport();">Export to Excel</button>
       </form>
     </div>
