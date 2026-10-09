@@ -432,6 +432,72 @@ public class AttendanceDAO {
 	}
 
 	@Transactional
+	public String checkAndMarkStudentMonthlyAttendance(List<Studentdailyattendance> studentDailyAttendanceList, Date dateofAttendance) {
+
+		int skippedCount = 0;
+		List<String> skippedStudentIds = new ArrayList<>();
+
+		try {
+			for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
+				Date attendanceDate = studentDailyAttendance.getDate() != null ? studentDailyAttendance.getDate() : dateofAttendance;
+				String attendeeId = studentDailyAttendance.getAttendeeid();
+
+				if (attendanceDate == null || attendeeId == null || attendeeId.trim().isEmpty()) {
+					skippedCount++;
+					skippedStudentIds.add(attendeeId == null ? "<empty>" : attendeeId);
+					log.warn("Skipping monthly attendance due to incomplete data. attendeeId={}, date={}, academicYear={}, branchId={}",
+							attendeeId,
+							attendanceDate,
+							studentDailyAttendance.getAcademicyear(),
+							studentDailyAttendance.getBranchid());
+					continue;
+				}
+
+				studentDailyAttendance.setDate(attendanceDate);
+
+				Optional<Studentdailyattendance> existingAttendance = studentDailyAttendanceRepository
+						.findByAttendeeStudentexternalidAndDateAndAcademicyearAndBranchid(
+								attendeeId,
+								attendanceDate,
+								studentDailyAttendance.getAcademicyear(),
+								studentDailyAttendance.getBranchid());
+
+				if (existingAttendance.isPresent()) {
+					Studentdailyattendance attendance = existingAttendance.get();
+					attendance.setAttendancestatus(studentDailyAttendance.getAttendancestatus());
+					attendance.setIntime(studentDailyAttendance.getIntime());
+					attendance.setOuttime(studentDailyAttendance.getOuttime());
+					studentDailyAttendanceRepository.save(attendance);
+					continue;
+				}
+
+				Student student = studentRepository.findByStudentexternalid(attendeeId);
+				if (student == null) {
+					skippedCount++;
+					skippedStudentIds.add(attendeeId);
+					log.warn("Skipping monthly attendance because student was not found. attendeeId={}, date={}, academicYear={}, branchId={}",
+							attendeeId,
+							attendanceDate,
+							studentDailyAttendance.getAcademicyear(),
+							studentDailyAttendance.getBranchid());
+					continue;
+				}
+
+				studentDailyAttendance.setAttendee(student);
+				studentDailyAttendanceRepository.save(studentDailyAttendance);
+			}
+
+			String skippedStudents = skippedStudentIds.isEmpty() ? "[]" : "[" + String.join(",", skippedStudentIds) + "]";
+			return "success-Attendance has been marked successfully. Skipped: " + skippedCount + " " + skippedStudents;
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
+			e.printStackTrace();
+			TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+		}
+		return "failure-Attendance marking failed.";
+	}
+
+	@Transactional
 	public boolean markDailyAttendanceJob(List<Studentdailyattendance> studentDailyAttendance) {
 		boolean result = true;
 

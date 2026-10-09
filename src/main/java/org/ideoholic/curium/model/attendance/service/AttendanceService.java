@@ -948,8 +948,8 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		Map<String,List<Studentdailyattendance>> studentsAttendance = attendanceDao.readListOfStudentAttendanceExport(currentAcademicYear, startDateAtt, endDateAtt, searchStudentList, Integer.parseInt(branchId));
 		
 		// Fetch holidays and weekly offs for the selected month/branch/academic year.
-		List<Holidaysmaster> holidaysForMonth = new AttendanceDAO().readListOfHolidaysForMonth(monthOf, lastDayOfMonth, currentAcademicYear, Integer.parseInt(branchId));
-		List<Weeklyoff> weekOffsForAcademicYear = new AttendanceDAO().readListOfWeekOff(currentAcademicYear, Integer.parseInt(branchId));
+		List<Holidaysmaster> holidaysForMonth = attendanceDao.readListOfHolidaysForMonth(monthOf, lastDayOfMonth, currentAcademicYear, Integer.parseInt(branchId));
+		List<Weeklyoff> weekOffsForAcademicYear = attendanceDao.readListOfWeekOff(currentAcademicYear, Integer.parseInt(branchId));
 
 		try {
 			result = exportDataToExcel(studentsAttendance, monthOf, holidaysForMonth, weekOffsForAcademicYear);
@@ -1476,7 +1476,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		
 		List<Teacher> staffList = employeeDao.readListOfObjects(Integer.parseInt(branchId));
 		
-		Map<String,List<Staffdailyattendance>> staffsAttendance = new AttendanceDAO().readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
+		Map<String,List<Staffdailyattendance>> staffsAttendance = attendanceDao.readListOfStaffAttendanceExport(currentAcademicYear, TimestampFrom, Timestampto,staffList, Integer.parseInt(branchId));
 		
 		try {
 			ResultResponse exportResult = exportDataToExcelStaff(staffsAttendance, monthOf, staffList, Integer.parseInt(branchId), currentAcademicYear, branchName, branchAddress);
@@ -1548,7 +1548,7 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 			if(!staffExternalIds.isEmpty()) {
 				List<Attendancemaster> attendanceMasterList = new ArrayList<Attendancemaster>();
 				if(!attendanceMasterIds.isEmpty()) {
-					attendanceMasterList = new AttendanceDAO().getAttendanceMasterDetails(attendanceMasterIds, branchId);
+					attendanceMasterList = attendanceDao.getAttendanceMasterDetails(attendanceMasterIds, branchId);
 				}
 				Set<Integer> weeklyOffIds = new LinkedHashSet<Integer>();
 				for (Attendancemaster attendanceMaster : attendanceMasterList) {
@@ -1561,11 +1561,11 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 					weeklyOffIds.addAll(parseIds(attendanceMaster.getWeeklyoff()));
 				}
 				if(!weeklyOffIds.isEmpty()) {
-					for (Weeklyoff weeklyoff : new AttendanceDAO().readListOfWeeklyOff(new ArrayList<Integer>(weeklyOffIds), currentAcademicYear, branchId)) {
+					for (Weeklyoff weeklyoff : attendanceDao.readListOfWeeklyOff(new ArrayList<Integer>(weeklyOffIds), currentAcademicYear, branchId)) {
 						weeklyOffById.put(weeklyoff.getWid(), weeklyoff);
 					}
 				}
-				for (Holidaysmaster holiday : new AttendanceDAO().readListOfHolidaysForMonth(monthStartDate, monthEndDate, currentAcademicYear, branchId)) {
+				for (Holidaysmaster holiday : attendanceDao.readListOfHolidaysForMonth(monthStartDate, monthEndDate, currentAcademicYear, branchId)) {
 					if(holiday.getShid() != null) {
 						holidayById.put(holiday.getShid(), holiday);
 					}
@@ -2036,5 +2036,52 @@ public void markDailyAttendanceJobStaff() {
 			return "H";
 		}
 		return "NA";
+	}
+
+	public ResultResponse markStudentsAttendanceMonthly(StudentsAttendanceDto attendanceDto, Map<String, String[]> parameterMap, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
+
+		if(currentAcademicYear!=null && parameterMap!=null){
+			
+			List<Studentdailyattendance> studentDailyAttendanceList = new ArrayList<Studentdailyattendance>();
+			String dateOfAttendance = DateUtil.dateParserddMMYYYY(attendanceDto.getDateofAttendance()) ;
+			Date dateofAttendance = attendanceDto.getDateofAttendance();
+
+			    for (String key : parameterMap.keySet()) {
+			        if (key.startsWith("attendance[")) {
+			            // Extract admission number and day
+			            String admissionNumber = key.substring(key.indexOf("[") + 1, key.indexOf("]"));
+			            String day = key.substring(key.lastIndexOf("[") + 1, key.lastIndexOf("]"));
+			            String[] values = parameterMap.get(key);
+			            String value = values != null && values.length > 0 ? values[0] : null;
+			            
+								    String formattedNumber = String.format("%02d", Integer.parseInt(day));
+			            
+			            // Ensure the formatted number has the correct length
+			            if (formattedNumber.length() > 2) {
+			                formattedNumber = formattedNumber.substring(formattedNumber.length() - 2);
+			            }
+
+			            String dateOfAttendanceNewDate = formattedNumber + dateOfAttendance.substring(2);
+			            Studentdailyattendance studentDailyAttendance = new Studentdailyattendance();
+			            studentDailyAttendance.setAttendeeid(admissionNumber);
+			            studentDailyAttendance.setAttendancestatus(value);
+			            studentDailyAttendance.setIntime("00:00");
+			            studentDailyAttendance.setDate(DateUtil.simpleDateParser(dateOfAttendanceNewDate));
+			            studentDailyAttendance.setAcademicyear(currentAcademicYear);
+			            studentDailyAttendance.setBranchid(Integer.parseInt(branchId));
+			            studentDailyAttendanceList.add(studentDailyAttendance);
+			        }
+			    }
+					
+			String res = attendanceDao.checkAndMarkStudentMonthlyAttendance(studentDailyAttendanceList, dateofAttendance);
+			result.setMessage(res);
+			
+				if(res!=null) {
+					result.setSuccess(true);
+				}
+			}
+		
+		return result;
 	}
 }
