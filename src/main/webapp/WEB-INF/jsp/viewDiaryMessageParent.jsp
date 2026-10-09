@@ -106,7 +106,7 @@ for(Cookie cookie : cookies){
                 <label for="message" style="font-size:20px;">Message</label>
                 <p id="message" class="message-content">${diary.message}</p>
             </div>
-            <form action="/school/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${Parents.student.branchid}" method="post">
+            <form action="/school/DiaryProcess/viewDiaryStudentParent?id=${username}&urlbranchid=${branchid}" method="post">
                 <div class="text-center">
                     <input type="submit" value="Back" class="btn">
                 </div>

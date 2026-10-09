@@ -450,7 +450,7 @@ public class StudentService {
 				httpSession.setAttribute("parentsfromservice",parents);
 				httpSession.setAttribute("idofstudentfromservice",id);*/
 
-				Currentacademicyear currentYear = yearDao.showYear();
+				Currentacademicyear currentYear = yearDao.showYear(Integer.parseInt(branchId));
 				result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 				//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
@@ -580,7 +580,7 @@ public class StudentService {
 			Parents parents = parentsDetailsDao.readploginUniqueObject(studentId);
 
 
-			Currentacademicyear currentYear = yearDao.showYear();
+			Currentacademicyear currentYear = yearDao.showYear(Integer.parseInt(branchId));
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			List<Receiptinfo> rinfo = feesCollectionDAO.getReceiptDetailsPerStudent(student.getSid(),currentYear.getCurrentacademicyear());
@@ -663,7 +663,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = yearDao.showYear();
+			Currentacademicyear currentYear = yearDao.showYear(Integer.parseInt(branchId));
 			result.setCurrentAcademicYear(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());
@@ -1530,7 +1530,7 @@ public class StudentService {
 			httpSession.setAttribute("parentsfromservice",parents);
 			httpSession.setAttribute("idofstudentfromservice",id);*/
 
-			Currentacademicyear currentYear = yearDao.showYear();
+			Currentacademicyear currentYear = yearDao.showYear(Integer.parseInt(branchId));
 			result.setCurrentYearFromService(currentYear.getCurrentacademicyear());
 
 			//List<Feesdetails> feesdetails = new feesDetailsDAO().readList(id, currentYear.getCurrentacademicyear());

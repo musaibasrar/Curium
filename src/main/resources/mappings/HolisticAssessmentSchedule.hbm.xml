@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Hibernate mapping for HolisticAssessmentSchedule -->
+<hibernate-mapping>
+    <class name="org.ideoholic.curium.model.assessmentdetails.dto.HolisticAssessmentSchedule" table="holisticassessmentschedule">
+        <id name="idassessmentschedule" type="java.lang.Integer">
+            <column name="idassessmentschedule" />
+            <generator class="identity" />
+        </id>
+        <property name="date" type="date">
+            <column name="date" length="10" />
+        </property>
+        <property name="starttime" type="string">
+            <column name="starttime" length="20" />
+        </property>
+        <property name="endtime" type="string">
+            <column name="endtime" length="20" />
+        </property>
+        <property name="subject" type="string">
+            <column name="subject" length="30" />
+        </property>
+        <property name="assessmentname" type="string">
+            <column name="assessmentname" length="30" />
+        </property>
+        <property name="classes" type="string">
+            <column name="classes" length="45" />
+        </property>
+        <property name="academicyear" type="string">
+            <column name="academicyear" length="45" />
+        </property>
+        <property name="branchid" type="int">
+            <column name="branchid" />
+        </property>
+        <property name="userid" type="int">
+ 			<column name="userid" />
+		</property>
+    </class>
+</hibernate-mapping>

@@ -34,7 +34,7 @@ public interface EmailApiAction {
 	public ResponseEntity<ResultResponse> sendNumbersSMS(@RequestBody SendSMSDto dto);
 	
 	@GetMapping("/updateYear")
-	public ResponseEntity<CurrentAcademicYearResponseDto> updateYear();
+	public ResponseEntity<CurrentAcademicYearResponseDto> updateYear(@RequestHeader(value = "branchid") String branchId);
 
 	
 
