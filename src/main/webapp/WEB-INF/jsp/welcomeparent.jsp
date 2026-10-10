@@ -93,7 +93,7 @@ for(Cookie cookie : cookies){
 	</div> -->
 	
 	<div class="row" style="padding-left: 150px;">
-						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/syedbarey/images/syedbarey${branchid}.png"></h2>
+						<h2><img border="0" style="vertical-align: text-bottom;height: 80px;width: 80px;" alt="ideoholic" src="/syedbarey/images/syedbarey.png"></h2>
 	</div>
 	
 	<div class="row" style="padding-left: 35px;">
@@ -240,15 +240,35 @@ for(Cookie cookie : cookies){
         	<div class="row" style="padding-left: 20px;">
         	
         	<div class="col" style="padding-bottom: 40px;">
-        			<div id="rcorners1" style="background-color:#FF914D">
+        			<div id="rcorners1" style="background-color:#be2900">
         			
         			<table>
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/syedbarey/changePassword?id=${username}&urlbranchid=${branchid}"><!--  <img
-									src="/syedbarey/images/diary.svg" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" /> -->Change Password
+								href="/syedbarey/changePassword?id=${username}&urlbranchid=${branchid}">  <img
+									src="/syedbarey/images/changepasswordlogo.png" width="50" height="50"
+									alt="Student Profile" style="vertical-align: bottom;" />Change Pwd
+							</a>
+        					</td>
+        				</tr>
+        			</table>
+        			</div>
+        	</div>
+        	</div>
+        	
+        	<div class="row" style="padding-left: 20px;">
+        	
+        	<div class="col" style="padding-bottom: 40px;">
+        			<div id="rcorners1" style="background-color:#cb6be6">
+        			
+        			<table>
+        				<tr>
+        					<td style="padding-left:10px;padding-top:1px;">
+        					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
+								href="/syedbarey/AttendanceProcess/viewAttendanceParent?id=${username}&urlbranchid=${branchid}"> <img
+									src="/syedbarey/images/attendance.png" width="50" height="50"
+									alt="Student Profile" style="vertical-align: bottom;" /> Attendance
 							</a>
         					</td>
         				</tr>
