@@ -246,8 +246,8 @@ for(Cookie cookie : cookies){
         				<tr>
         					<td style="padding-left:10px;padding-top:1px;">
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
-								href="/vision/changePassword?id=${username}&urlbranchid=${branchid}"><!--  <img
-									src="/vision/images/diary.svg" width="50" height="50"
+								href="/syedbarey/changePassword?id=${username}&urlbranchid=${branchid}"><!--  <img
+									src="/syedbarey/images/diary.svg" width="50" height="50"
 									alt="Student Profile" style="vertical-align: bottom;" /> -->Change Password
 							</a>
         					</td>

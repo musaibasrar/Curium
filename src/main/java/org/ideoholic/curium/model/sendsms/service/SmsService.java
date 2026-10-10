@@ -106,7 +106,7 @@ public class SmsService {
 						String message = dto.getMessage();
 						
 						while (attempts < maxRetries) {
-						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    resultSMS = sendSMS(numbers, message, SMSTempType, Integer.parseInt(branchId));
 						    
 						    if (resultSMS == 200) {
 						        break; // success, exit loop
@@ -128,11 +128,11 @@ public class SmsService {
 	}
 
 	
-	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
+	public ResultResponse sendNumbersSMS(SendSMSDto dto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all", Integer.parseInt(branchId));
 		if(resultSMS==200){
 			result.setSuccess(true);
 		}
@@ -183,7 +183,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						log.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall",Integer.parseInt(branchId));
 					}
 					
 				offset = offset+100;
@@ -197,7 +197,7 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message, String templateType) {
+	public int sendSMS(String numbers, String message, String templateType, int branchId) {
 		int responseCode = 0;
 		try 
 		{
@@ -205,7 +205,7 @@ public class SmsService {
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
 	        
-	        String sendsms = properties.getProperty(templateType+"sendsms");
+	        String sendsms = properties.getProperty(templateType+"sendsms"+branchId);
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
 	        	
@@ -329,7 +329,7 @@ public class SmsService {
 										
 										int attempts = 0;
 								        while (attempts < 1) {
-								            resultSMS = sendSMS(phoneNo, message, SMSTempType);
+								            resultSMS = sendSMS(phoneNo, message, SMSTempType,studentFeesReport.getParents().getStudent().getBranchid());
 								            if (resultSMS == 200) break;
 								            attempts++;
 								        }
