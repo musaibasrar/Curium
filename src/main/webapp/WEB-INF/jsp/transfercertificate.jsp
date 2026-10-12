@@ -513,7 +513,7 @@ for(Cookie cookie : cookies){
                     <td style="width: 45%;font-weight: bold;font-size: 15px;color: #4B6A84">&nbsp;&nbsp;&nbsp;&nbsp; </td>
                     </tr>
                     <tr>
-                    <td style="width: 45%">Admission No: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
+                    <td style="width: 45%">Student Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="admno" id="admno" style="width: 200px" onfocusout="datetowords()"/> <input name="studentId" type="hidden" id="studentId" value="" /> </td>
                     <td >Student Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input  type="text" name="studentName1" id="studentName1" style="width: 200px" readonly/></td>    
                         
                     </tr>
@@ -660,7 +660,26 @@ for(Cookie cookie : cookies){
                     <td >17.Date on which pupil name was struck of from the rolls:</td><td> <input  type="text" name="namestuckoff" id="namestuckoff" style="width: 200px" /></td>
                     <td >18.Whether the pupil has paid all the dues:</td><td> <input  type="text" name="allduespaid" id="allduespaid" style="width: 200px" /></td>    
                     </tr>
+                     <tr>
+                    <td><br></td>
+                    </tr>
                     
+                    
+                    <tr>
+                    	<td>Student Status: &nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    	
+                    	<td  height="30">&nbsp;Graduated<input
+								type="checkbox" value="passedout" name="studentadmissionstatus" id="yes:studentstatus"
+								onclick="yesCheck(this.id);" />&nbsp; &nbsp;Left Out<input
+								type="checkbox" value="leftout" name="studentadmissionstatus" id="no:studentstatus"
+								onclick="noCheck(this.id)" />
+
+							</td>
+							</tr>
+							 <tr>
+                    <td><br></td>
+                    </tr>
+							
                     <tr>
                     <td >Date of issue of certificate:</td><td> <input  type="text" name="dateissue" id="dateissue" style="width: 200px" /></td>
                     </tr>
