@@ -1,7 +1,9 @@
 package org.ideoholic.curium.util;
 
 import java.util.List;
+import java.util.Map;
 
+import org.ideoholic.curium.model.marksdetails.dto.ExamSummary;
 import org.ideoholic.curium.model.parents.dto.Parents;
 
 public class MarksSheet  implements java.io.Serializable {
@@ -14,12 +16,13 @@ public class MarksSheet  implements java.io.Serializable {
     int totalDays;
     int totalPresent;
     int totalAbsent;
-    
+    Map<String, Map<String, String>> subjectExamMarks; // Subject -> (Exam -> Marks)
+    List<ExamSummary> examSummaries;
     
     public MarksSheet() {
     }
 
-    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent) {
+    public MarksSheet(Parents parents, List<ExamsMarks> exammarks, List<FinalTermMarks> finaltermmarks,  List<ExamsMarks> otherexammarks, String overallresult, int totalDays, int totalPresent, int totalAbsent,Map<String, Map<String, String>> subjectExamMarks,List<ExamSummary> examSummaries) {
         this.parents = parents;
         this.exammarks = exammarks;
         this.finaltermmarks = finaltermmarks;
@@ -28,6 +31,8 @@ public class MarksSheet  implements java.io.Serializable {
         this.totalDays = totalDays;
         this.totalPresent = totalPresent;
         this.totalAbsent = totalAbsent;
+        this.subjectExamMarks = subjectExamMarks;
+        this.examSummaries = examSummaries;
     }
 
 
@@ -95,6 +100,22 @@ public class MarksSheet  implements java.io.Serializable {
 
 	public void setTotalAbsent(int totalAbsent) {
 		this.totalAbsent = totalAbsent;
+	}
+	
+	public Map<String, Map<String, String>> getSubjectExamMarks() {
+		return subjectExamMarks;
+	}
+
+	public void setSubjectExamMarks(Map<String, Map<String, String>> subjectExamMarks) {
+		this.subjectExamMarks = subjectExamMarks;
+	}
+
+	public List<ExamSummary> getExamSummaries() {
+		return examSummaries;
+	}
+
+	public void setExamSummaries(List<ExamSummary> examSummaries) {
+		this.examSummaries = examSummaries;
 	}
 	
   }
