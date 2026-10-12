@@ -17,4 +17,5 @@ public class StampFeesDto {
 	private String[] concession;
 	private String[] totalInstallments;
 	private String[] feesYears;
+	private String feesCategoryId;
 }
