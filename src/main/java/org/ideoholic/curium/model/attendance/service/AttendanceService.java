@@ -826,12 +826,6 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 						logger.info("send SMS "+e);
 					}
         
-        	String attendanceClass = request.getParameter("attendanceclass");
-        	String absentMessage = null;
-        	StringBuilder sbN = new StringBuilder();
-        	String numbers = null;
-        	
-        	
         	for (Studentdailyattendance studentDailyAttendance : studentDailyAttendanceList) {
 				  
         		if("A".equalsIgnoreCase(studentDailyAttendance.getAttendancestatus())) {
