@@ -482,9 +482,9 @@ for(Cookie cookie : cookies){
 							 <td class="dataText" align="center">${status.index + 1}</td>
 							<td class="dataText"><c:out value="${diary.subject}" /></td>
 							<td class="dataText"><c:out value="${diary.message}" /></td>
-							<td class="dataText"><c:out value="${diary.startdate}" /></td>
-							<td class="dataText"><c:out value="${diary.enddate}" /></td>
-							<td class="dataText"><c:out value="${diary.createddate}" /></td>
+							<td class="dataText"><fmt:formatDate value="${diary.startdate}" pattern="dd/MM/yyyy"/></td>
+							<td class="dataText"><fmt:formatDate value="${diary.enddate}" pattern="dd/MM/yyyy"/></td>
+							<td class="dataText"><fmt:formatDate value="${diary.createddate}" pattern="dd/MM/yyyy"/></td>
 							 <td class="dataText">
                     <a download="attachment1.${fn:split(fn:split(diary.attachment1,'/')[1],';')[0]}" 
                      href="${diary.attachment1}">Download</a>
