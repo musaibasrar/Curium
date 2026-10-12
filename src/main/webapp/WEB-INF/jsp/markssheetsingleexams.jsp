@@ -19,6 +19,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script src="/alirfan/js/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-3d@1.0.0/dist/chartjs-plugin-3d.min.js"></script>
 =======
@@ -30,6 +31,9 @@
 =======
 <script src="/salihath/js/echarts/echarts.min.js"></script>
 >>>>>>> a3578df25... exclude subjects in progress report
+=======
+<script src="/vision/js/echarts/echarts.min.js"></script>
+>>>>>>> 940e200f1... excluding the subjects in graph
 <style>
 body {
 	font-family: "Times New Roman", Times, serif;
@@ -391,6 +395,7 @@ body {
 				<div class="logo">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/alirfan/images/alirfan.png">
 =======
 					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/awami/images/awami.png">
@@ -398,6 +403,9 @@ body {
 =======
 					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/salihath/images/salihath.png">
 >>>>>>> a3578df25... exclude subjects in progress report
+=======
+					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/vision/images/vision.png">
+>>>>>>> 940e200f1... excluding the subjects in graph
 				</div>
 		
 				<div class="schoolname">
@@ -408,6 +416,7 @@ body {
 					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/alirfan/images/alirfanschoolname.png"> -->
 >>>>>>> 6820dfcc4... Marks sheet single exam generation bug fix
 =======
@@ -416,6 +425,9 @@ body {
 =======
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/salihath/images/salihathschoolname.png"> -->
 >>>>>>> a3578df25... exclude subjects in progress report
+=======
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/vision/images/visionschoolname.png"> -->
+>>>>>>> 940e200f1... excluding the subjects in graph
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
 					</div>
@@ -1152,6 +1164,7 @@ body {
 	<!-- <div class="footer">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <img src="/alirfan/images/hmsign.png" class="signature" width="200" height="60"/>
 =======
     <img src="/awami/images/hmsign.png" class="signature" width="200" height="60"/>
@@ -1159,6 +1172,9 @@ body {
 =======
     <img src="/salihath/images/hmsign.png" class="signature" width="200" height="60"/>
 >>>>>>> a3578df25... exclude subjects in progress report
+=======
+    <img src="/vision/images/hmsign.png" class="signature" width="200" height="60"/>
+>>>>>>> 940e200f1... excluding the subjects in graph
 
     <div class="headmaster">H.M.</div>
 
