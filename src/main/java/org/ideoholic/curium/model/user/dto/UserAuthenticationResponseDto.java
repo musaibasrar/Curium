@@ -25,6 +25,7 @@ public class UserAuthenticationResponseDto {
     private String attendanceStatus;
     private String subBranchName;
     private List<String> previousAcademicYears;
+    private String profileName;
     @Builder.Default
     private boolean success = false;
 }
