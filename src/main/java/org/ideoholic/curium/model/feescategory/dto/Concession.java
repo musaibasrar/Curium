@@ -16,4 +16,5 @@ public class Concession {
 	private String concession;
 	private String concessionOld;
 	private String concessionNotes;
+	private int sid;
 }
