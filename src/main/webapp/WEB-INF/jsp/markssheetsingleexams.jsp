@@ -18,6 +18,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script src="/alirfan/js/Chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-3d@1.0.0/dist/chartjs-plugin-3d.min.js"></script>
 =======
@@ -26,6 +27,9 @@
 =======
 <script src="/awami/js/echarts/echarts.min.js"></script>
 >>>>>>> cb9daddc4... converted marks and full marks option added
+=======
+<script src="/salihath/js/echarts/echarts.min.js"></script>
+>>>>>>> a3578df25... exclude subjects in progress report
 <style>
 body {
 	font-family: "Times New Roman", Times, serif;
@@ -386,10 +390,14 @@ body {
 			
 				<div class="logo">
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/alirfan/images/alirfan.png">
 =======
 					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/awami/images/awami.png">
 >>>>>>> cb9daddc4... converted marks and full marks option added
+=======
+					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/salihath/images/salihath.png">
+>>>>>>> a3578df25... exclude subjects in progress report
 				</div>
 		
 				<div class="schoolname">
@@ -399,11 +407,15 @@ body {
 =======
 					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/alirfan/images/alirfanschoolname.png"> -->
 >>>>>>> 6820dfcc4... Marks sheet single exam generation bug fix
 =======
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/awami/images/awamischoolname.png"> -->
 >>>>>>> cb9daddc4... converted marks and full marks option added
+=======
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/salihath/images/salihathschoolname.png"> -->
+>>>>>>> a3578df25... exclude subjects in progress report
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
 					</div>
@@ -415,8 +427,7 @@ body {
 
 
 		<div class="title">
-			<h2><label style="font-size:29px;text-transform: uppercase;">PROGRESS
-				REPORT</label></h2>
+			<h2><label style="font-size:29px;text-transform: uppercase;">Achievement Record</label></h2>
 			<div style="font-size: 21px;font-weight:bold;">
 			<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}" />
 			<c:set var="startYear" value="${yearParts[0]}" />
@@ -463,7 +474,7 @@ body {
 
 				<tr style="border: 1px solid black; border-collapse: collapse;">
 					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Enrollment
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>SATS
 							No :<c:out value="${Parents.parents.student.sts}" />&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
@@ -471,7 +482,7 @@ body {
 					&nbsp;&nbsp;&nbsp;</b></td>
 					<td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
-							: ${Parents.parents.student.classstudying}
+							: <%-- ${Parents.parents.student.classstudying} --%><c:set var="dataSubParts11" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts11[0]}
 						<%-- <c:choose>
 						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
 						    <c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
@@ -488,8 +499,11 @@ body {
 						</c:choose> --%>
 					</b></td>
 					<td
+						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Section :
+							 <c:set var="dataSubParts112" value="${fn:split(Parents.parents.student.classstudying,'--')}" />${dataSubParts112[1]}<%-- <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/> --%></b></td>
+					<%-- <td
 						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
-							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td>
+							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td> --%>
 				</tr>
 				<tr>
 					<br>
@@ -585,9 +599,16 @@ body {
 								        <c:set var="grandTotalMarksObtained" value="0" />
 								        <c:set var="grandTotalMaxMarks" value="0" />
 								        <c:set var="englishexam" value="" />
+								        <%-- Use backend exam summaries for final totals so excluded subjects stay excluded in aggregates. --%>
+								        <c:set var="grandTotalMarksObtainedFromExamSummary" value="0" />
+								        <c:set var="grandTotalMaxMarksFromExamSummary" value="0" />
+								        <c:forEach items="${Parents.examSummaries}" var="examSummaryTotal">
+								        	<c:set var="grandTotalMarksObtainedFromExamSummary" value="${grandTotalMarksObtainedFromExamSummary + examSummaryTotal.totalMarksObtained}" />
+								        	<c:set var="grandTotalMaxMarksFromExamSummary" value="${grandTotalMaxMarksFromExamSummary + examSummaryTotal.totalMarks}" />
+								        </c:forEach>
 						        <c:forEach items="${Parents.subjectExamMarks}" var="subjectEntry" varStatus="status">
 						            <tr>
-						                <td class="marksTableCellLeft" style="width: 20%;"><c:out value="${subjectEntry.key}" /></td>
+						                <td class="marksTableCellLeft" style="width: 20%;text-transform: capitalize;"><c:out value="${subjectEntry.key}" /></td>
 						                
 						                <!-- Exam-wise marks calculation -->
 						                <c:set var="subjectTotalMarksObtained" value="0" />
@@ -758,19 +779,19 @@ body {
 							        <c:set var="grandPercentagestring" value="0" />
 							        
 							        <c:set var="grandPercentage" value="0" />
-									<c:if test="${grandTotalMaxMarks > 0}">
+									<c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
 									    <c:set var="grandPercentage" 
-									           value="${Math.round(((grandTotalMarksObtained / grandTotalMaxMarks) * 100) * 10) / 10.0}" />
+									           value="${Math.round(((grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100) * 10) / 10.0}" />
 									</c:if>
 									
-							        <c:if test="${grandTotalMaxMarks > 0}">
+							        <c:if test="${grandTotalMaxMarksFromExamSummary > 0}">
 							            <c:set var="grandPercentagestring">
-										    <fmt:formatNumber value="${(grandTotalMarksObtained / grandTotalMaxMarks) * 100}" maxFractionDigits="1" />
+									    <fmt:formatNumber value="${(grandTotalMarksObtainedFromExamSummary / grandTotalMaxMarksFromExamSummary) * 100}" maxFractionDigits="1" />
 										</c:set>
 							        </c:if>
 							         
 							         <c:set var="roundedMarks">
-									            <fmt:formatNumber value="${grandTotalMarksObtained}" maxFractionDigits="0" />
+									            <fmt:formatNumber value="${grandTotalMarksObtainedFromExamSummary}" maxFractionDigits="0" />
 									        </c:set>
 									        
 									        
@@ -945,7 +966,7 @@ body {
 									        <td class="amount" style="display: none;">${roundedMarks}</td>
 									        
 																		        <td class="marksTableCell" style="text-align: center;">
-																		            <fmt:formatNumber value="${grandTotalMaxMarks}" maxFractionDigits="0" />
+													            <fmt:formatNumber value="${grandTotalMaxMarksFromExamSummary}" maxFractionDigits="0" />
 																		        </td>
 																		        <!-- Percentage column for non-6-exam layout; Obt. Marks column for 6-exam layout -->
 																		        <c:choose>
@@ -1130,10 +1151,14 @@ body {
 </div>
 	<!-- <div class="footer">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <img src="/alirfan/images/hmsign.png" class="signature" width="200" height="60"/>
 =======
     <img src="/awami/images/hmsign.png" class="signature" width="200" height="60"/>
 >>>>>>> cb9daddc4... converted marks and full marks option added
+=======
+    <img src="/salihath/images/hmsign.png" class="signature" width="200" height="60"/>
+>>>>>>> a3578df25... exclude subjects in progress report
 
     <div class="headmaster">H.M.</div>
 
@@ -1150,7 +1175,7 @@ body {
         <tr>
             <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
                 <div style="min-height: 60px;"></div>
-                Signature of Principal
+                Signature of Head Mistress
             </td>
             <td style="border: 1px solid #000; padding: 60px 10px 10px 10px; text-align: center; width: 33.33%; font-weight: bold; font-size: 14px;">
                 <div style="min-height: 60px;"></div>
