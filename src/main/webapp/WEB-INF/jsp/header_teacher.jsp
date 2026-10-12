@@ -132,6 +132,12 @@ for(Cookie cookie : cookies){
 								
 							<!-- <td align="left"><img src="/alirfan/images/alirfanheader.png"
 								style="width: 200px; height: 20px;" /></td> -->
+								
+								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
+									src="/alirfan/images/menu.svg" width="18" height="18" 
+									alt="Toggle Menu" style="vertical-align: bottom;" />
+							</a></td>
+							
 							<td>
 							<a target="leftFrame" href="/alirfan/left_teacher"><img
 									src="/alirfan/images/home.svg" width="18" height="18" alt="Reports" style="vertical-align: bottom;"/>
