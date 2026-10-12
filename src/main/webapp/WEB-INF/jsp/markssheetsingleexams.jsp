@@ -32,7 +32,7 @@
 <script src="/salihath/js/echarts/echarts.min.js"></script>
 >>>>>>> a3578df25... exclude subjects in progress report
 =======
-<script src="/vision/js/echarts/echarts.min.js"></script>
+<script src="/alirfan/js/echarts/echarts.min.js"></script>
 >>>>>>> 940e200f1... excluding the subjects in graph
 <style>
 body {
@@ -404,7 +404,7 @@ body {
 					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/salihath/images/salihath.png">
 >>>>>>> a3578df25... exclude subjects in progress report
 =======
-					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/vision/images/vision.png">
+					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/alirfan/images/alirfan.png">
 >>>>>>> 940e200f1... excluding the subjects in graph
 				</div>
 		
@@ -426,7 +426,7 @@ body {
 					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/salihath/images/salihathschoolname.png"> -->
 >>>>>>> a3578df25... exclude subjects in progress report
 =======
-					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/vision/images/visionschoolname.png"> -->
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/alirfan/images/alirfanschoolname.png"> -->
 >>>>>>> 940e200f1... excluding the subjects in graph
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
@@ -1209,7 +1209,7 @@ body {
     <img src="/salihath/images/hmsign.png" class="signature" width="200" height="60"/>
 >>>>>>> a3578df25... exclude subjects in progress report
 =======
-    <img src="/vision/images/hmsign.png" class="signature" width="200" height="60"/>
+    <img src="/alirfan/images/hmsign.png" class="signature" width="200" height="60"/>
 >>>>>>> 940e200f1... excluding the subjects in graph
 
     <div class="headmaster">H.M.</div>
