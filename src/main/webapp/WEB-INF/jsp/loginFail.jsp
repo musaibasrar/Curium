@@ -151,7 +151,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 140px;width: 132px;" alt="ideoholic" src="/global/images/global.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 140px;width: 132px;" alt="ideoholic" src="/global/images/global${branchid}.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>

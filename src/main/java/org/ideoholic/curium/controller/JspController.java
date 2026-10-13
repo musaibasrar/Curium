@@ -660,4 +660,9 @@ public class JspController {
 	public String getReportsMarksEntry() {
 		return "reports_marksentry";
 	}
+	
+	@GetMapping("/leftsettings_marksentry")
+	public String getLeftSettingsMarksEntry() {
+		return "leftsettings_marksentry";
+	}
 }

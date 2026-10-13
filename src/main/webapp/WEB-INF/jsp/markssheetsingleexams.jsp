@@ -376,7 +376,7 @@ body {
 			<div class="schoolbox">
 			
 				<div class="logo">
-					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/global/images/global.png">
+					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/global/images/global${branchid}.png">
 				</div>
 		
 				<div class="schoolname">

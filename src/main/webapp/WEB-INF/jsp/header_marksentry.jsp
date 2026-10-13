@@ -135,6 +135,11 @@ for(Cookie cookie : cookies){
 								</a>
 							</td>
 							
+							<td ><a target="leftFrame" href="/global/leftsettings_marksentry">
+									<img alt="Settings" src="/global/images/settings.svg" width="18"
+									height="18" style="vertical-align: bottom;" />Master Settings
+							</a></td>
+							
 							<td><a target="leftFrame"
 								href="/global/reports_marksentry"> <img
 									src="/global/images/feescollect.svg" width="18" height="18"
