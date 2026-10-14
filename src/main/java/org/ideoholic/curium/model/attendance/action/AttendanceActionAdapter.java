@@ -394,5 +394,4 @@ public class AttendanceActionAdapter {
 		request.setAttribute("userid",request.getParameter("id"));
 		
 	}
-	
 }
