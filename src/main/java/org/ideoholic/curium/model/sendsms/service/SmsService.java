@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -18,12 +17,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.employee.dto.Teacher;
 import org.ideoholic.curium.model.feescollection.dto.StudentFeesReport;
@@ -117,7 +110,7 @@ public class SmsService {
 						String message = dto.getMessage();
 						
 						while (attempts < maxRetries) {
-						    resultSMS = sendSMS(numbers, message, SMSTempType);
+						    resultSMS = sendSMS(numbers, message, SMSTempType, Integer.parseInt(branchId));
 						    
 						    if (resultSMS == 200) {
 						        break; // success, exit loop
@@ -139,11 +132,11 @@ public class SmsService {
 	}
 
 	
-	public ResultResponse sendNumbersSMS(SendSMSDto dto) {
+	public ResultResponse sendNumbersSMS(SendSMSDto dto, String branchId) {
 		ResultResponse result = ResultResponse.builder().build();
 
 		String numbers = DataUtil.emptyString(dto.getNumbers());
-		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all");
+		int resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyNumbers()),"all", Integer.parseInt(branchId));
 		if(resultSMS==200){
 			result.setSuccess(true);
 		}
@@ -194,7 +187,7 @@ public class SmsService {
 						numbers=sbN.toString();
 						numbers = numbers.substring(0, numbers.length()-1);
 						log.info("Numbers are *** "+numbers);
-						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall");
+						resultSMS = sendSMS(numbers,DataUtil.emptyString(dto.getMessageBodyStaff()),"staffall",Integer.parseInt(branchId));
 					}
 					
 				offset = offset+100;
@@ -208,7 +201,7 @@ public class SmsService {
         return result;
 	}
 	
-	public int sendSMS(String numbers, String message, String templateType) {
+	public int sendSMS(String numbers, String message, String templateType, int branchId) {
 		int responseCode = 0;
 		try 
 		{
@@ -216,7 +209,7 @@ public class SmsService {
 	        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Util.properties");
 	        properties.load(inputStream);
 	        
-	        String sendsms = properties.getProperty(templateType+"sendsms");
+	        String sendsms = properties.getProperty(templateType+"sendsms"+branchId);
 	        
 	        if("yes".equalsIgnoreCase(sendsms)) {
 	        	
@@ -316,7 +309,7 @@ public class SmsService {
 		return responseCode;
 	}
 	
-	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto) {
+	public ResultResponse sendSMSFeesDueReminder(SendSMSDto dto, String branchId) {
 		if (dto == null) {
 			return ResultResponse.builder().build();
 		}
@@ -441,7 +434,7 @@ public class SmsService {
 			String message = "Rs." + dueAmount + " (" + studentName + ") : " + reminderMessage;
 			anySmsAttempted = true;
 
-			int resultSMS = sendSMS(phoneNo, message, smsTemplateType);
+			int resultSMS = sendSMS(phoneNo, message, smsTemplateType, Integer.parseInt(branchId));
 			if (resultSMS != HttpURLConnection.HTTP_OK) {
 				allSmsSucceeded = false;
 			}

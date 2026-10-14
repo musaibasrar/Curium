@@ -21,20 +21,20 @@
         <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Change Password</title>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/global/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/global/css/validation/jquery.ketchup.css">
 
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.tabs.js"></script>
-        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <script src="/vision/js/validation/jquery.ketchup.all.min.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.button.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script type="text/javascript" src="/global/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script src="/global/js/datePicker/jquery-1.7.1.js"></script>
+        <script src="/global/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/global/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/global/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/global/js/datePicker/ui/jquery.ui.tabs.js"></script>
+        <script src="/global/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/global/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <script src="/global/js/validation/jquery.ketchup.all.min.js"></script>
+        <script type="text/javascript" src="/global/js/datePicker/ui/jquery.ui.button.js"></script>
+        <link rel="stylesheet" href="/global/css/datePicker/demos.css">
 
 
 
@@ -411,9 +411,9 @@
     }
 
 </style>
-        <script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
-        <script src="/vision/JavaScript/actb.js"></script>
-        <script src="/vision/JavaScript/common.js"></script>
+        <script type="text/javascript" src="/global/js/datetimepicker_css.js"></script>
+        <script src="/global/JavaScript/actb.js"></script>
+        <script src="/global/JavaScript/common.js"></script>
 
         <script>
 
@@ -484,7 +484,7 @@
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/global/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -666,14 +666,14 @@ for(Cookie cookie : cookies){
             function changePassword() {
 
                 var form1 = document.getElementById("form1");
-                form1.action = "/vision/UserProcess/changePassword";
+                form1.action = "/global/UserProcess/changePassword";
                 form1.submit();
 
             }
          
             function Cancel() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/vision/StudentProcess/viewAll";
+                form1.action = "/global/StudentProcess/viewAll";
                 form1.submit();
             }
 

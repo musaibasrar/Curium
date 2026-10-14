@@ -33,7 +33,7 @@ public class SmsActionAdapter {
         dto.setNumbers(request.getParameter("numbers"));
         dto.setMessageBodyNumbers(request.getParameter("messagebodynumbers"));
 
-        ResultResponse resultResponse = smsService.sendNumbersSMS(dto);
+        ResultResponse resultResponse = smsService.sendNumbersSMS(dto,httpSession.getAttribute(Constants.BRANCHID).toString());
 
         return resultResponse.isSuccess();
     }
@@ -57,7 +57,7 @@ public class SmsActionAdapter {
         dto.setStudentIds(studentIds);
         dto.setMessage(request.getParameter("deadline"));
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
-        ResultResponse result = smsService.sendSMSFeesDueReminder(dto);
+        ResultResponse result = smsService.sendSMSFeesDueReminder(dto,  httpSession.getAttribute(Constants.BRANCHID).toString());
 
        return  result.isSuccess();
     }
