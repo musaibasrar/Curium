@@ -453,7 +453,7 @@ var xmlHttp;
 	             
 	         }
 			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/vision/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"&studenttype="+studenttype+"",true);
+			xmlHttp.open("GET", "/roshan/FeesProcess/searchfeecategoryheadwise?classstudying="+classsearch+"&yearofadmission="+yoa+"&studenttype="+studenttype+"",true);
 			xmlHttp.send(null);
 		
 	}
