@@ -960,11 +960,15 @@ public StudentAttendanceGraphResponseDto viewStudentAttendanceDetailsMonthlyGrap
 		String querySub = "";
 
 		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = " student.classstudying like '" + classStudying
-					+ "' OR student.classstudying = '" + conClassStudyingEquals
-					+ "'  AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0  AND student.branchid=" + Integer.parseInt(branchId);
-		} else if (classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " AND student.archive=0 and student.passedout=0 AND student.droppedout=0 and student.leftout=0 AND student.branchid=" + Integer.parseInt(branchId);
+		    querySub = " (student.classstudying LIKE '" + classStudying
+		            + "' OR student.classstudying = '" + conClassStudyingEquals + "')"
+		            + " AND student.archive = 0 AND student.passedout = 0"
+		            + " AND student.droppedout = 0 AND student.leftout = 0"
+		            + " AND student.branchid = " + Integer.parseInt(branchId);
+		} else {
+		    querySub = querySub + " AND student.archive = 0 AND student.passedout = 0"
+		            + " AND student.droppedout = 0 AND student.leftout = 0"
+		            + " AND student.branchid = " + Integer.parseInt(branchId);
 		}
 		queryMain = queryMain + querySub;
 		List<Student> searchStudentList = new studentDetailsDAO().getListStudents(queryMain);
