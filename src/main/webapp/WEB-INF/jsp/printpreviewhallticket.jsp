@@ -251,24 +251,8 @@ for(Cookie cookie : cookies){
 				<label class="addressLine">${branchaddress}</label><br>
 				<label class="addressLine">Contact: ${branchcontact}</label>
 				</td>
-				<td><img  src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" width="140" height="70"/></td>
-			</tr>
-		</table>
-
-<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
-                <tr>
-
-                    <td colspan="4" ></td>
-
-            <!-- ===== TITLE ===== -->
-            <table width="100%">
-                <tr>
-                	<td width="30%"></td>
-                    <td class="dataTextBoldCenter">
-                        Hall Ticket<br>${examname}
-                    </td>
-                    <td align="right">
-                        <c:choose>
+				<td>
+				<c:choose>
 									<c:when test="${not empty Parents.student.studentpic}">
 
 										<c:choose>
@@ -286,7 +270,7 @@ for(Cookie cookie : cookies){
 													<%-- Image --%>
 													<c:otherwise>
 														<img src="${Parents.student.studentpic}" alt="Student's Pic"
-															style="width: 30px; height: 30px;">
+															style="width: 120px; height: 70px;">
 													</c:otherwise>
 												</c:choose>
 
@@ -295,7 +279,7 @@ for(Cookie cookie : cookies){
 											<%-- Old raw Base64 format --%>
 											<c:otherwise>
 												<img src="data:image/jpeg;base64,${Parents.student.studentpic}"
-													alt="Student's Pic" style="width: 30px; height: 30px;">
+													alt="Student's Pic" style="width: 120px; height: 70px;">
 											</c:otherwise>
 										</c:choose>
 
@@ -305,9 +289,15 @@ for(Cookie cookie : cookies){
                     No document available
                 </c:otherwise>
 								</c:choose>
-                    </td>
-                </tr>
-            </TABLE>
+				
+				</td>
+			</tr>
+		</table>
+
+<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+                <tr>
+
+                    <td colspan="4" ></td>
             
             <table width="100%" style="border-collapse: collapse;">
 					
