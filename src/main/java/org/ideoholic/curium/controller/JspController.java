@@ -675,4 +675,10 @@ public class JspController {
 	public String getReportsStock() {
 		return "reports_stock";
 	}
+
+	@GetMapping("/attendancemarkselectdate")
+	public String attendanceMarkSelectDate() {
+		return "attendancemarkselectdate";
+	}
+	
 }
