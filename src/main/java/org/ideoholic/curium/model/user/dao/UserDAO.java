@@ -85,7 +85,7 @@ public class UserDAO {
 	            //this.session = HibernateUtil.getSessionFactory().openCurrentSession();
 	            transaction = session.beginTransaction();
 
-	            results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"'  AND s.archive = 0 AND s.branchid="+branchId+"").list();
+              results = (java.util.List<Student>) session.createQuery("From Student s where (s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"') AND s.archive = 0 AND s.branchid="+branchId+"").list();
 	            noOfRecords = results.size();
 	            transaction.commit();
 
