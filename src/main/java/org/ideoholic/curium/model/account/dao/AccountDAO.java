@@ -571,7 +571,7 @@ public class AccountDAO {
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
 		try {
 			transaction = session.beginTransaction();												  	
-			accountDetails =  session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
+			accountDetails =  session.createQuery("from Accountdetails as accdetails where (accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5) and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
 			transaction.commit();
 		} catch (Exception e) { transaction.rollback(); logger.error(e);
 			e.printStackTrace();
