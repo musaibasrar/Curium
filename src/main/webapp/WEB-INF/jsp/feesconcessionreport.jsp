@@ -667,7 +667,11 @@ for(Cookie cookie : cookies){
 								        <div>
 								            <strong><c:out value="${fees.feescategory.feescategoryname}" /></strong> :
 								            <c:out value="${fees.feesamount}" />
-								            (<c:out value="${fees.concession}" />)
+								            (<c:out value="${fees.concession}" />
+								            	<c:if test="${not empty fees.concessionnotes}">
+													   C.R.: <c:out value="${fees.concessionnotes}" />
+												</c:if>
+								             )
 								        </div>
 								    </c:forEach>
 								</td>
