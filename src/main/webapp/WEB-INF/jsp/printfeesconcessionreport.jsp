@@ -260,7 +260,7 @@
  			 </thead>
  		 
 			<tbody>
-					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" >
+					<c:forEach items="${studentsfeesstructuredetailsconcession}" var="students" varStatus="status">
 							<c:set var="studentfeesconcession" value="${0}" />
 							<tr>
 									<td class="datatd" style="font-size: 9px;">${status.index+1}</td>
@@ -280,7 +280,11 @@
 					                            </strong>
 					                            :
 					                            <c:out value="${fees.feesamount}" />
-					                            (<c:out value="${fees.concession}" />)
+					                            (<c:out value="${fees.concession}" />
+					                            	<c:if test="${not empty fees.concessionnotes}">
+													   C.R.: <c:out value="${fees.concessionnotes}" />
+													</c:if>
+					                            )
 					                        </div>
 
                     					</c:forEach>
@@ -295,6 +299,7 @@
 									<td class="datatdright" style="font-size: 9px;">
 									<c:set var="itemTotal" value="${itemTotal + studentfeesconcession}" />
 										<c:out value="${studentfeesconcession}" /></td>
+										
 							</tr>	
 					</c:forEach>
 			</tbody>
