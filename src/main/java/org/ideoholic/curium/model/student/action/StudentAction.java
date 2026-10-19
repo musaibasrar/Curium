@@ -191,26 +191,38 @@ public class StudentAction {
 
 	@RequestMapping(value = "/updateStudent", method = RequestMethod.POST, consumes = "multipart/form-data")
 	public String updateStudent(@ModelAttribute("studentDto") StudentDto student, @RequestParam("fileToUpload") MultipartFile[] uploadedFiles) {
-		String idbranchid = studentActionAdapter.updateStudent(student, uploadedFiles);
-		String id[] = idbranchid.split("_");
-		return viewStudent(id[0], id[1]);
+		try {
+			String idbranchid = studentActionAdapter.updateStudent(student, uploadedFiles);
+			String id[] = idbranchid.split("_");
+			return viewStudent(id[0], id[1]);
+		} catch (IllegalArgumentException exception) {
+			if (studentActionAdapter.prepareUpdateStudentValidationError(exception.getMessage())) {
+				return getUpdateStudentView();
+			}
+			return "viewAll";
+		}
 	}
 
 	@PostMapping("/updateStudentDetails")
 	public String updateStudentDetails(HttpServletRequest request, HttpServletResponse response) {
 		if (studentActionAdapter.viewDetailsOfStudent()) {
-			String urlBranchId = request.getParameter("urlbranchid");
-			if ("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId)
-					|| "3".equalsIgnoreCase(urlBranchId)) {
-				return "student_update";
-			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("4")) {
-				return "student_update";
-			} else if (request.getParameter("urlbranchid").equalsIgnoreCase("5")) {
-				return "student_update";
-			}
-			return "student_update";
+			return getUpdateStudentView();
 		}
 		return "viewAll";
+	}
+
+	private String getUpdateStudentView() {
+		Object branchIdObject = request.getAttribute("urlbranchid");
+		String urlBranchId = branchIdObject == null ? request.getParameter("urlbranchid") : branchIdObject.toString();
+		if ("1".equalsIgnoreCase(urlBranchId) || "2".equalsIgnoreCase(urlBranchId)
+				|| "3".equalsIgnoreCase(urlBranchId)) {
+			return "student_update";
+		} else if ("4".equalsIgnoreCase(urlBranchId)) {
+			return "student_update";
+		} else if ("5".equalsIgnoreCase(urlBranchId)) {
+			return "student_update";
+		}
+		return "student_update";
 	}
 
 	@RequestMapping(value = "/ViewDetails", method = { RequestMethod.GET, RequestMethod.POST })
