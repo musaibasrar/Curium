@@ -496,6 +496,11 @@ for(Cookie cookie : cookies){
 	<form action="/hwfschools/PersonalProcess/viewAll" modelAttribute="student"
 		id="form1" method="POST" enctype="multipart/form-data">
 		<div>
+			<c:if test="${not empty errorMessage}">
+				<div style="margin: 10px auto; width: 90%; padding: 10px 15px; border: 1px solid #d9534f; background-color: #f2dede; color: #a94442; font-family: Tahoma; font-size: 12px; font-weight: bold;">
+					<c:out value="${errorMessage}" />
+				</div>
+			</c:if>
 			<div id="tabs">
 				<ul>
 					<li><a href="#tabs-1">Student Details</a></li>

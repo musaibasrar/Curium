@@ -465,6 +465,22 @@ public class studentDetailsDAO {
 		 }
 	}
 
+	public void updateStudentFeesStructureCategoryAndAmount(Integer sfsid, Integer feescategoryId, Long feesAmount) {
+		try {
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("update Studentfeesstructure set idfeescategory = :feescategoryId, feesamount = :feesAmount where sfsid = :sfsid");
+			query.setParameter("feescategoryId", feescategoryId);
+			query.setParameter("feesAmount", feesAmount);
+			query.setParameter("sfsid", sfsid);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception hibernateException) { transaction.rollback(); logger.error(hibernateException);
+			hibernateException.printStackTrace();
+		} finally {
+			HibernateUtil.closeSession();
+		}
+	}
+
 	public List<Studentfeesstructure> getStudentFeesStructure(long id,
 			String currentYear) {
 		List<Studentfeesstructure> results = new ArrayList<Studentfeesstructure>();
