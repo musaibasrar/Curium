@@ -474,12 +474,30 @@ for(Cookie cookie : cookies){
 				<div id="tabs-1">
 					<table width="100%" border="0" align="center" cellpadding="0"
 						cellspacing="0" id="table1" style="display: block">
+						
+						<tr>
+							<td class="alignRightFields" style="font-weight: bold;color:#325F6D">Student Type &nbsp;</td>
+							<td><label> 
+								<select name="studenttype" id="studenttype"
+									style="width: 130px;border-radius: 4px;background: white;height: 22px;">
+										<option value="Active" selected>Active</option>
+										<option value="InActive">InActive</option>
+										<option value="All">All</option>
+								</select>
+
+							</label> 
+						</tr>
+
+						<tr>
+							<td><br /></td>
+
+						</tr>
 
 						<tr>
 							<td class="alignRightFields">Student Name &nbsp;</td>
 							<td width="12%" align="left"><label> <input
 									name="namesearch" type="text" class="myclass" id="studentname"
-									size="36""><input name="studentId" type="hidden" id="studentId" value="" />
+									style="width: 220px;border-radius: 4px;background: white;height: 22px;"><input name="studentId" type="hidden" id="studentId" value="" />
 									<input  type="hidden" name="fathername" id="fathername" class="myclass" />
 							</label></td>
 							
@@ -495,7 +513,7 @@ for(Cookie cookie : cookies){
 							<td class="alignRightFields">Class &nbsp;</td>
 							<td width="70%"><label> 
 							<select name="classsearch" id="classsearch"
-									style="width: 150px;">
+									style="width: 120px;border-radius: 4px;background: white;height: 22px;">
 										<option selected></option>
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
 										<c:if test="${(classdetailslist.classdetails != '')}">
@@ -509,7 +527,7 @@ for(Cookie cookie : cookies){
 							</label> <label> 
 							
 							<select name="secsearch" id="secsearch"
-									style="width: 120px;">
+									style="width: 100px;border-radius: 4px;background: white;height: 22px;">
 										<option selected></option>
 
 										<c:forEach items="${classdetailslist}" var="classdetailslist">
