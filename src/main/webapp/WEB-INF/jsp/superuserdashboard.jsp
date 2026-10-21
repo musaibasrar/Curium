@@ -727,6 +727,123 @@ if (session.getAttribute("userAuth") == null) {
         return chartMap[id];
     }
 
+    function getChartById(id) {
+        if (!id) {
+            return null;
+        }
+        if (chartMap[id]) {
+            return chartMap[id];
+        }
+        var node = document.getElementById(id);
+        if (!node) {
+            return null;
+        }
+        var instance = echarts.getInstanceByDom(node);
+        if (instance) {
+            chartMap[id] = instance;
+            return instance;
+        }
+        return null;
+    }
+
+    function openChartInNewTab(id) {
+        var chart = getChartById(id);
+        if (!chart) {
+            return;
+        }
+
+        var image = chart.getDataURL({ pixelRatio: 2, backgroundColor: "#fff" });
+        var popup = window.open("", "_blank");
+        if (!popup) {
+            return;
+        }
+
+        var title = "Chart Preview";
+        var card = document.getElementById(id);
+        if (card) {
+            var chartCard = card.closest(".chart-card");
+            var heading = chartCard ? chartCard.querySelector(".chart-title") : null;
+            if (heading && heading.textContent) {
+                title = heading.textContent;
+            }
+        }
+
+        popup.document.open();
+        popup.document.write("<!doctype html><html><head><title>" + title + "</title><style>html,body{margin:0;width:100%;height:100%;background:#0f172a;} .wrap{display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;padding:14px;box-sizing:border-box;} img{max-width:100%;max-height:100%;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.35);}</style></head><body><div class='wrap'><img src='" + image + "' alt='" + title + "'></div></body></html>");
+        popup.document.close();
+    }
+
+    function printChart(id) {
+        var chart = getChartById(id);
+        if (!chart) {
+            return;
+        }
+
+        var image = chart.getDataURL({ pixelRatio: 2, backgroundColor: "#fff" });
+        var printWindow = window.open("", "_blank");
+        if (!printWindow) {
+            return;
+        }
+
+        var title = "Print Chart";
+        var card = document.getElementById(id);
+        if (card) {
+            var chartCard = card.closest(".chart-card");
+            var heading = chartCard ? chartCard.querySelector(".chart-title") : null;
+            if (heading && heading.textContent) {
+                title = heading.textContent;
+            }
+        }
+
+        printWindow.document.open();
+        printWindow.document.write("<!doctype html><html><head><title>" + title + "</title><style>html,body{margin:0;padding:0;background:#fff;} .sheet{padding:12px;} img{width:100%;max-width:1100px;display:block;margin:0 auto;} @page{size:auto;margin:10mm;}</style></head><body><div class='sheet'><img id='chartPrintImg' src='" + image + "' alt='Chart image'></div></body></html>");
+        printWindow.document.close();
+
+        var printed = false;
+        function triggerPrint() {
+            if (printed || printWindow.closed) {
+                return;
+            }
+            printed = true;
+            setTimeout(function() {
+                try {
+                    printWindow.focus();
+                    printWindow.print();
+                } catch (e) {
+                    // Keep silent; popup blockers or browser print policies may interrupt print.
+                }
+            }, 220);
+        }
+
+        setTimeout(function() {
+            if (printWindow.closed) {
+                return;
+            }
+            var img = printWindow.document.getElementById("chartPrintImg");
+            if (!img) {
+                triggerPrint();
+                return;
+            }
+
+            if (img.complete && img.naturalWidth > 0) {
+                triggerPrint();
+                return;
+            }
+
+            img.onload = function() {
+                triggerPrint();
+            };
+            img.onerror = function() {
+                triggerPrint();
+            };
+
+            // Fallback for slower browsers where onload can be delayed for large data URLs.
+            setTimeout(function() {
+                triggerPrint();
+            }, 1800);
+        }, 80);
+    }
+
     // Chart option builders - base configurations
     function baseBarOption(categories, rotateLabels) {
         return {
@@ -792,6 +909,40 @@ if (session.getAttribute("userAuth") == null) {
             rows.push((item.marker || "") + item.seriesName + ": " + rupee(readChartValue(item)));
         });
         return rows.join("<br/>");
+    }
+
+    function wrapAxisLabel(text, charsPerLine) {
+        var value = String(text || "");
+        var maxChars = Math.max(8, Number(charsPerLine || 18));
+        var words = value.split(" ");
+        var lines = [];
+        var current = "";
+
+        $.each(words, function(idx, word) {
+            if (!word) {
+                return;
+            }
+            if (!current.length) {
+                current = word;
+                return;
+            }
+            if ((current + " " + word).length <= maxChars) {
+                current += " " + word;
+            } else {
+                lines.push(current);
+                current = word;
+            }
+        });
+
+        if (current.length) {
+            lines.push(current);
+        }
+
+        if (!lines.length) {
+            return value;
+        }
+
+        return lines.join("\n");
     }
 
     // Render all charts
@@ -977,23 +1128,144 @@ if (session.getAttribute("userAuth") == null) {
         chartInstance("chartCategory").setOption(buildPieOption(charts.categoryDistribution || [], "Category Distribution"), true);
 
         // Fee Structure Analysis Chart
-        var structure = charts.feeStructureAnalysis || [];
-        var structureOption = baseBarOption($.map(structure, function(x) { return x.category; }), structure.length > 6);
+        var structure = (charts.feeStructureAnalysis || []).slice();
+        structure.sort(function(a, b) {
+            return toNumber(b.total) - toNumber(a.total);
+        });
+
+        var structureCategories = $.map(structure, function(x) { return x.category; });
+        var structureVisibleCount = 12;
+        var structureNode = document.getElementById("chartStructure");
+        if (structureNode) {
+            var categoryRows = Math.max(Math.min(structure.length, structureVisibleCount), 8);
+            var dynamicHeight = Math.max(390, (categoryRows * 36) + 110);
+            structureNode.style.height = dynamicHeight + "px";
+        }
+
+        var structureOption = {
+            animationDuration: 900,
+            animationEasing: "cubicOut",
+            tooltip: {
+                trigger: "axis",
+                axisPointer: { type: "shadow" },
+                formatter: currencyAxisTooltipFormatter
+            },
+            legend: {
+                bottom: 0,
+                data: ["Total", "Paid"],
+                textStyle: {
+                    fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif"
+                }
+            },
+            grid: {
+                left: 180,
+                right: structure.length > structureVisibleCount ? 68 : 24,
+                top: 36,
+                bottom: 58,
+                containLabel: false
+            },
+            xAxis: {
+                type: "value",
+                min: 0,
+                axisLabel: {
+                    color: "#334155",
+                    fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif",
+                    formatter: function (value) { return rupee(value); }
+                },
+                splitLine: {
+                    lineStyle: { color: "rgba(15,23,42,0.08)" }
+                }
+            },
+            yAxis: {
+                type: "category",
+                data: structureCategories,
+                axisLabel: {
+                    interval: 0,
+                    width: 160,
+                    overflow: "break",
+                    lineHeight: 14,
+                    color: "#334155",
+                    fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif",
+                    formatter: function (value) {
+                        return wrapAxisLabel(value, 18);
+                    }
+                },
+                axisLine: {
+                    lineStyle: { color: "rgba(15,23,42,0.20)" }
+                }
+            }
+        };
+
+        if (structure.length > structureVisibleCount) {
+            structureOption.dataZoom = [{
+                type: "inside",
+                yAxisIndex: 0,
+                startValue: 0,
+                endValue: structureVisibleCount - 1,
+                zoomLock: true,
+                moveOnMouseWheel: true
+            }, {
+                type: "slider",
+                yAxisIndex: 0,
+                right: 12,
+                width: 14,
+                startValue: 0,
+                endValue: structureVisibleCount - 1,
+                zoomLock: true,
+                brushSelect: false,
+                borderColor: "rgba(15,23,42,0.10)",
+                fillerColor: "rgba(37,99,235,0.16)",
+                handleStyle: { color: "#2563eb", borderColor: "#2563eb" }
+            }];
+        }
+
         structureOption.legend.data = ["Total", "Paid"];
-        structureOption.tooltip.formatter = currencyAxisTooltipFormatter;
-        structureOption.yAxis.axisLabel.formatter = function (value) { return rupee(value); };
         structureOption.series = [{
             type: "bar",
             name: "Total",
             barMaxWidth: 28,
-            data: buildGradientBarData($.map(structure, function(x) { return x.total; }), [["#93c5fd", "#2563eb"], ["#c4b5fd", "#7c3aed"], ["#fcd34d", "#f59e0b"]]),
-            label: { show: true, position: "top", color: "#0f172a", fontWeight: "bold", formatter: function (params) { return rupee(readChartValue(params)); } }
+            data: $.map(structure, function(x) {
+                return {
+                    value: toNumber(x.total),
+                    itemStyle: {
+                        color: gradientTopBottom("#93c5fd", "#2563eb"),
+                        shadowBlur: 10,
+                        shadowColor: "rgba(37,99,235,0.24)",
+                        shadowOffsetY: 4,
+                        borderRadius: [0, 8, 8, 0]
+                    }
+                };
+            }),
+            label: {
+                show: true,
+                position: "right",
+                color: "#0f172a",
+                fontWeight: "bold",
+                formatter: function (params) { return rupee(readChartValue(params)); }
+            }
         }, {
             type: "bar",
             name: "Paid",
             barMaxWidth: 28,
-            data: buildGradientBarData($.map(structure, function(x) { return x.paid; }), [["#5eead4", "#14b8a6"], ["#93c5fd", "#2563eb"], ["#6ee7b7", "#059669"]]),
-            label: { show: true, position: "top", color: "#0f172a", fontWeight: "bold", formatter: function (params) { return rupee(readChartValue(params)); } }
+            data: $.map(structure, function(x) {
+                return {
+                    value: toNumber(x.paid),
+                    itemStyle: {
+                        color: gradientTopBottom("#5eead4", "#14b8a6"),
+                        shadowBlur: 10,
+                        shadowColor: "rgba(20,184,166,0.24)",
+                        shadowOffsetY: 4,
+                        borderRadius: [0, 8, 8, 0]
+                    }
+                };
+            }),
+            label: {
+                show: true,
+                position: "right",
+                color: "#0f172a",
+                fontWeight: "bold",
+                formatter: function (params) { return rupee(readChartValue(params)); }
+            }
         }];
         chartInstance("chartStructure").setOption(structureOption, true);
 
@@ -1093,6 +1365,8 @@ if (session.getAttribute("userAuth") == null) {
 
     // Legacy jQuery event binding
     function bindEvents() {
+        $(".chart-actions button").attr("type", "button");
+
         // Apply and Reset button handlers
         $("#applyFilters").on("click", function() {
             loadDashboard();
@@ -1123,27 +1397,17 @@ if (session.getAttribute("userAuth") == null) {
         });
 
         // Fullscreen button handlers
-        $(document).on("click", "[data-fullscreen]", function() {
+        $(document).on("click", "[data-fullscreen]", function(e) {
+            e.preventDefault();
             var id = $(this).attr("data-fullscreen");
-            var node = document.getElementById(id);
-            if (node && node.requestFullscreen) {
-                node.requestFullscreen();
-            }
+            openChartInNewTab(id);
         });
 
         // Print button handlers
-        $(document).on("click", "[data-print]", function() {
+        $(document).on("click", "[data-print]", function(e) {
+            e.preventDefault();
             var id = $(this).attr("data-print");
-            var chart = chartMap[id];
-            if (!chart) {
-                return;
-            }
-            var image = chart.getDataURL({ pixelRatio: 2, backgroundColor: "#fff" });
-            var printWindow = window.open("", "_blank");
-            printWindow.document.write("<img src='" + image + "' style='width:100%;max-width:1000px;'>");
-            printWindow.document.close();
-            printWindow.focus();
-            printWindow.print();
+            printChart(id);
         });
 
         // Window resize handler for chart resizing
