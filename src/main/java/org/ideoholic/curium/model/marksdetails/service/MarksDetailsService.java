@@ -1783,6 +1783,12 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 			// Create subject-wise summary map (row-wise view)
 			Map<String, SubjectSummary> subjectSummaryMap = new LinkedHashMap<>();
 
+			// Maps a case/whitespace-insensitive subject key (e.g. "english") to the
+			// canonical display name used across all exams for this student, so that
+			// "English", "English " and "ENGLISH" coming from different exam/subject-master
+			// rows all collapse into a single row instead of duplicate rows per exam.
+			Map<String, String> canonicalSubjectNames = new LinkedHashMap<>();
+
 			List<ExamSummary> examSummaries = new ArrayList<>();
 
 			for (Exams exam : examsList) {
@@ -1800,7 +1806,11 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 				List<Subject> validSubjects = validSubjectsByExamId.getOrDefault(exam.getExid(), Collections.emptyList());
 
 				for (Subject sub : validSubjects) {
-					String subjectName = sub.getSubjectname();
+					// Normalize the subject name so marks from different exams/subject-master
+					// rows for the "same" subject (which may differ only in leading/trailing
+					// whitespace or casing) are aggregated under a single map key instead of
+					// producing duplicate rows in the marks sheet.
+					String subjectName = resolveCanonicalSubjectName(sub.getSubjectname(), canonicalSubjectNames);
 					boolean markFound = false;
 
 					for (Marks marks : marksDetailsList) {
@@ -2022,6 +2032,29 @@ private float getFinalTotalMarksObtainedForOrdering(MarksSheet marksSheet) {
 
 private boolean hasValidSubjectMarksConfig(Subject subject) {
 	return subject != null && subject.getMinmarks() > 0 && subject.getMaxmarks() > 0;
+}
+
+/**
+ * Builds a case-insensitive, whitespace-trimmed lookup key for a raw subject
+ * name, used solely to detect that two differently-spaced/cased subject
+ * names (e.g. "English " and "ENGLISH") refer to the same subject.
+ */
+private String normalizeSubjectKey(String rawSubjectName) {
+	return rawSubjectName != null ? rawSubjectName.trim().toLowerCase() : "";
+}
+
+/**
+ * Resolves the canonical (display) subject name for a raw subject name coming
+ * from a given exam's subject-master row. The first time a given normalized
+ * key (trimmed + lower-cased) is seen, its trimmed form is remembered as the
+ * canonical display name; every subsequent subject sharing that normalized
+ * key (regardless of casing/spacing differences) is mapped back to the same
+ * canonical name so all exam marks merge under a single subject row.
+ */
+private String resolveCanonicalSubjectName(String rawSubjectName, Map<String, String> canonicalSubjectNames) {
+	String normalizedKey = normalizeSubjectKey(rawSubjectName);
+	String trimmedName = rawSubjectName != null ? rawSubjectName.trim() : "";
+	return canonicalSubjectNames.computeIfAbsent(normalizedKey, k -> trimmedName);
 }
 
 private Set<Integer> getExcludedSubjectIds(int branchId) {
