@@ -68,9 +68,9 @@ public class UserDAO {
 
 	@Transactional
 	public int getNoOfStudentsOne(String classStudying, int branchId) {
-		int noOfRecords = 0;
-		try {
 
+	        int noOfRecords = 0;
+	        try {
 			// results = (java.util.List<Student>) session.createQuery("From Student s where s.classstudying LIKE '"+classStudying+" %' OR s.classstudying = '"+classStudying+"' AND s.archive = 0 AND s.branchid="+branchId+"").list();
 			noOfRecords = studentRepo.countNumberOfStudentInClass(classStudying + " %", 0, branchId);
 
