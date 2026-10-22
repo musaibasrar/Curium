@@ -34,6 +34,7 @@ import org.ideoholic.curium.model.degreedetails.dto.Degreedetails;
 import org.ideoholic.curium.model.documents.dto.StudentDetailsDto;
 import org.ideoholic.curium.model.family.dao.FamilyDao;
 import org.ideoholic.curium.model.family.dto.Family;
+import org.ideoholic.curium.model.feescategory.dao.FeesCategoryDAO;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescategory.dto.StudentListResponseDto;
 import org.ideoholic.curium.model.feescollection.dao.feesCollectionDAO;
@@ -51,6 +52,7 @@ import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
+import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.PromoteMultipleDto;
@@ -106,6 +108,8 @@ public class StudentService {
 	private final FamilyDao familyDao;
 	
 	private final PropertiesUtil propertiesUtil;
+	
+	private final FeesCategoryDAO feesCategoryDao;
 	
 	private StringBuilder optional = new StringBuilder();
 	private StringBuilder compulsory = new StringBuilder();
@@ -723,6 +727,7 @@ public class StudentService {
 		Parents parents = StudentMapper.INSTANCE.mapParent(studentDto);
 		Pudetails puDetails = StudentMapper.INSTANCE.mapPudetails(studentDto);
 		Degreedetails degreeDetails = StudentMapper.INSTANCE.mapDegreedetails(studentDto);
+		Student existingStudent = studentDetailsDao.readUniqueObject(studentDto.getSid());
 		String[] currentAcademicYear = strCurrentAcademicYear.split("/");
 		String id = studentDto.getSid().toString();
 		String pid = studentDto.getPid().toString();
@@ -1027,6 +1032,7 @@ public class StudentService {
 				
 		student.setBranchid(Integer.parseInt(strBranchId));
 		student.setUserid(studentDto.getUserid());
+		validateStudentFeeAmountBeforeClassUpdate(existingStudent, student, strCurrentAcademicYear);
 
 		if(puDetails.getIdpudetails()!=null) {
 			studentDetailsDao.updatePuDetails(puDetails);
@@ -1045,7 +1051,138 @@ public class StudentService {
 
 			parents = parentsDetailsDao.update(parents);
 		}
+
+		synchronizeStudentFeeStructureOnClassChange(existingStudent, student, strCurrentAcademicYear, userId);
 		return student;
+	}
+
+	private void validateStudentFeeAmountBeforeClassUpdate(Student existingStudent, Student updatedStudent, String currentAcademicYear) {
+		if (existingStudent == null || existingStudent.getSid() == null || updatedStudent == null || updatedStudent.getSid() == null) {
+			return;
+		}
+
+		String oldClass = extractClassName(existingStudent.getClassstudying());
+		String newClass = extractClassName(updatedStudent.getClassstudying());
+		if (oldClass.equalsIgnoreCase(newClass) || newClass.isEmpty()) {
+			return;
+		}
+
+		List<Feescategory> applicableFeeCategories = feesCategoryDao.getfeecategoryofstudent(newClass, currentAcademicYear, String.valueOf(updatedStudent.getBranchid()));
+		List<Studentfeesstructure> existingFeeStructures = studentDetailsDao.getStudentFeesStructure(updatedStudent.getSid(), currentAcademicYear);
+		if (existingFeeStructures == null || existingFeeStructures.isEmpty()) {
+			return;
+		}
+		if (applicableFeeCategories == null || applicableFeeCategories.isEmpty()) {
+			throw new IllegalArgumentException("One of the fees category doesnot match");
+		}
+
+		Map<Integer, Feescategory> matchedFeeCategories = resolveExactFeeCategoryMatches(existingFeeStructures, applicableFeeCategories);
+
+		for (Studentfeesstructure feesStructure : existingFeeStructures) {
+			if (feesStructure == null) {
+				continue;
+			}
+
+			Feescategory feescategory = matchedFeeCategories.get(feesStructure.getSfsid());
+			if (feescategory == null) {
+				throw new IllegalArgumentException("One of the fees category doesnot match");
+			}
+
+			long paidAmount = feesStructure.getFeespaid() == null ? 0L : feesStructure.getFeespaid();
+			long targetAmount = feescategory.getAmount() == null ? 0L : feescategory.getAmount().longValue();
+			if (targetAmount < paidAmount) {
+				throw new IllegalArgumentException("Cannot update class: fee amount for category '" + feescategory.getFeescategoryname() + "' is lower than already paid amount " + paidAmount + ".");
+			}
+		}
+	}
+
+	private void synchronizeStudentFeeStructureOnClassChange(Student existingStudent, Student updatedStudent, String currentAcademicYear, String userId) {
+		if (existingStudent == null || existingStudent.getSid() == null || updatedStudent == null || updatedStudent.getSid() == null) {
+			return;
+		}
+
+		String oldClass = extractClassName(existingStudent.getClassstudying());
+		String newClass = extractClassName(updatedStudent.getClassstudying());
+		if (oldClass.equalsIgnoreCase(newClass) || newClass.isEmpty()) {
+			return;
+		}
+
+		List<Studentfeesstructure> existingFeeStructures = new studentDetailsDAO().getStudentFeesStructure(updatedStudent.getSid(), currentAcademicYear);
+		List<Feescategory> applicableFeeCategories = feesCategoryDao.getfeecategoryofstudent(newClass, currentAcademicYear, String.valueOf(updatedStudent.getBranchid()));
+		if (existingFeeStructures == null || existingFeeStructures.isEmpty()) {
+			return;
+		}
+		if (applicableFeeCategories == null || applicableFeeCategories.isEmpty()) {
+			throw new IllegalArgumentException("One of the fees category doesnot match");
+		}
+		Map<Integer, Feescategory> matchedFeeCategories = resolveExactFeeCategoryMatches(existingFeeStructures, applicableFeeCategories);
+
+		for (Studentfeesstructure feesStructure : existingFeeStructures) {
+			if (feesStructure == null || feesStructure.getSfsid() == null) {
+				continue;
+			}
+
+			Feescategory feescategory = matchedFeeCategories.get(feesStructure.getSfsid());
+			if (feescategory == null || feescategory.getIdfeescategory() == null) {
+				continue;
+			}
+			new studentDetailsDAO().updateStudentFeesStructureCategoryAndAmount(
+					feesStructure.getSfsid(),
+					feescategory.getIdfeescategory(),
+					feescategory.getAmount() == null ? 0L : feescategory.getAmount().longValue()
+			);
+		}
+	}
+
+	private String extractClassName(String classStudying) {
+		String value = DataUtil.emptyString(classStudying);
+		if (value.isEmpty()) {
+			return "";
+		}
+		String[] classParts = value.split("--");
+		return DataUtil.emptyString(classParts[0]).trim();
+	}
+
+	private Map<Integer, Feescategory> resolveExactFeeCategoryMatches(List<Studentfeesstructure> existingFeeStructures, List<Feescategory> applicableFeeCategories) {
+		Map<String, List<Feescategory>> feeCategoriesByName = new HashMap<String, List<Feescategory>>();
+		for (Feescategory feescategory : applicableFeeCategories) {
+			if (feescategory == null) {
+				continue;
+			}
+			String feeCategoryName = DataUtil.emptyString(feescategory.getFeescategoryname());
+			if (feeCategoryName.isEmpty()) {
+				continue;
+			}
+			List<Feescategory> categoriesForName = feeCategoriesByName.get(feeCategoryName);
+			if (categoriesForName == null) {
+				categoriesForName = new ArrayList<Feescategory>();
+				feeCategoriesByName.put(feeCategoryName, categoriesForName);
+			}
+			categoriesForName.add(feescategory);
+		}
+
+		Map<Integer, Feescategory> matchedFeeCategories = new HashMap<Integer, Feescategory>();
+		for (Studentfeesstructure feesStructure : existingFeeStructures) {
+			if (feesStructure == null || feesStructure.getSfsid() == null || feesStructure.getFeescategory() == null) {
+				throw new IllegalArgumentException("One of the fees category doesnot match");
+			}
+
+			String feeCategoryName = DataUtil.emptyString(feesStructure.getFeescategory().getFeescategoryname());
+			if (feeCategoryName.isEmpty()) {
+				throw new IllegalArgumentException("One of the fees category doesnot match");
+			}
+
+			List<Feescategory> matchingFeeCategories = feeCategoriesByName.get(feeCategoryName);
+			if (matchingFeeCategories == null || matchingFeeCategories.isEmpty()) {
+				throw new IllegalArgumentException("One of the fees category doesnot match");
+			}
+			if (matchingFeeCategories.size() > 1) {
+				throw new IllegalArgumentException("One of the fees category doesnot match");
+			}
+
+			matchedFeeCategories.put(feesStructure.getSfsid(), matchingFeeCategories.get(0));
+		}
+		return matchedFeeCategories;
 	}
 
 	public StudentListResponseDto viewAllStudentsList(String branchId) {

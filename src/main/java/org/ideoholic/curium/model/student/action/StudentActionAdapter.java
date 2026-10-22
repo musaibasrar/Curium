@@ -262,6 +262,14 @@ public class StudentActionAdapter {
 		return stId+"_"+branchId;
     }
 
+    public boolean prepareUpdateStudentValidationError(String errorMessage) {
+
+        request.setAttribute("errorMessage", errorMessage);
+        request.setAttribute("urlbranchid", httpSession.getAttribute(BRANCHID).toString());
+
+        return viewDetailsOfStudent();
+    }
+
     public boolean viewDetailsOfStudent() {
 
         String studentId = request.getParameter("id");
