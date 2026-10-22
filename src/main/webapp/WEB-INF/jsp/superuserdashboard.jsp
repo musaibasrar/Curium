@@ -306,6 +306,41 @@
             height: 390px;
         }
 
+        body.chart-fullscreen-active {
+            overflow: hidden;
+        }
+
+        .chart-card.chart-card--fullscreen {
+            position: fixed;
+            z-index: 2500;
+            top: 12px;
+            right: 12px;
+            bottom: 12px;
+            left: 12px;
+            margin: 0;
+            padding: 16px 16px 12px;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 24px 60px rgba(15, 23, 42, 0.22);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chart-fullscreen-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 2400;
+            background: rgba(15, 23, 42, 0.45);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .chart-fullscreen-backdrop.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
         table { width: 100%; border-collapse: collapse; }
         th, td { border-bottom: 1px solid #e2e8f0; padding: 8px; font-size: 12px; }
         th { cursor: pointer; background: #f8fafc; }
@@ -476,6 +511,9 @@ if (session.getAttribute("userAuth") == null) {
     var chartMap = {};
     var chartInstances = [];
     var rankingSort = { key: "rank", asc: true };
+    var activeFullscreenChartId = null;
+    var fullscreenState = null;
+    var fullscreenBackdrop = null;
 
     // Formatting utilities
     function rupee(value) {
@@ -746,40 +784,302 @@ if (session.getAttribute("userAuth") == null) {
         return null;
     }
 
-    function openChartInNewTab(id) {
+    function structureViewportConfig(chart, viewportHeight, isFullscreen) {
+        var option = chart ? chart.getOption() : null;
+        var categories = (option && option.yAxis && option.yAxis[0] && option.yAxis[0].data) ? option.yAxis[0].data : [];
+        var categoryCount = categories.length || 0;
+        var rowsVisible = Math.max(8, Math.floor((viewportHeight - 120) / 30));
+        rowsVisible = Math.min(Math.max(rowsVisible, 8), categoryCount || rowsVisible);
+
+        var leftGrid = isFullscreen ? 260 : 180;
+        var rightGrid = categoryCount > rowsVisible ? (isFullscreen ? 82 : 68) : 24;
+        var widthLabel = isFullscreen ? 220 : 160;
+        var charsPerLine = isFullscreen ? 24 : 18;
+        var lineHeight = isFullscreen ? 16 : 14;
+        var fontSize = isFullscreen ? 12 : 11;
+
+        var patch = {
+            grid: [{
+                left: leftGrid,
+                right: rightGrid,
+                top: 36,
+                bottom: 58,
+                containLabel: false
+            }],
+            yAxis: [{
+                axisLabel: {
+                    width: widthLabel,
+                    overflow: "break",
+                    lineHeight: lineHeight,
+                    fontSize: fontSize,
+                    formatter: function(v) { return wrapAxisLabel(v, charsPerLine); }
+                }
+            }]
+        };
+
+        if (categoryCount > rowsVisible) {
+            patch.dataZoom = [{
+                type: "inside",
+                yAxisIndex: 0,
+                startValue: 0,
+                endValue: rowsVisible - 1,
+                zoomLock: true,
+                moveOnMouseWheel: true
+            }, {
+                type: "slider",
+                yAxisIndex: 0,
+                right: 12,
+                width: 14,
+                startValue: 0,
+                endValue: rowsVisible - 1,
+                zoomLock: true,
+                brushSelect: false,
+                borderColor: "rgba(15,23,42,0.10)",
+                fillerColor: "rgba(37,99,235,0.16)",
+                handleStyle: { color: "#2563eb", borderColor: "#2563eb" }
+            }];
+        } else {
+            patch.dataZoom = [];
+        }
+
+        return patch;
+    }
+
+    function fullscreenChartHeight(card) {
+        var header = card.querySelector(".chart-header");
+        var headerHeight = header ? header.offsetHeight : 0;
+        var style = window.getComputedStyle(card);
+        var paddingTop = parseInt(style.paddingTop || "0", 10);
+        var paddingBottom = parseInt(style.paddingBottom || "0", 10);
+        return Math.max(320, window.innerHeight - headerHeight - paddingTop - paddingBottom - 34);
+    }
+
+    function ensureFullscreenBackdrop() {
+        if (fullscreenBackdrop) {
+            return fullscreenBackdrop;
+        }
+        fullscreenBackdrop = document.createElement("div");
+        fullscreenBackdrop.className = "chart-fullscreen-backdrop";
+        fullscreenBackdrop.addEventListener("click", function() {
+            exitChartFullscreen();
+        });
+        document.body.appendChild(fullscreenBackdrop);
+        return fullscreenBackdrop;
+    }
+
+    function setFullscreenButtonLabel(card, isActive) {
+        var btn = card ? card.querySelector("[data-fullscreen]") : null;
+        if (btn) {
+            btn.textContent = isActive ? "Exit Fullscreen" : "Fullscreen";
+        }
+    }
+
+    function applyFullscreenLayout(id) {
+        var stage = document.getElementById(id);
         var chart = getChartById(id);
-        if (!chart) {
+        if (!stage || !chart) {
             return;
         }
 
-        var image = chart.getDataURL({ pixelRatio: 2, backgroundColor: "#fff" });
-        var popup = window.open("", "_blank");
-        if (!popup) {
+        var card = stage.closest(".chart-card");
+        if (!card) {
             return;
         }
 
-        var title = "Chart Preview";
-        var card = document.getElementById(id);
+        var h = fullscreenChartHeight(card);
+        stage.style.height = h + "px";
+
+        if (id === "chartStructure") {
+            var patch = structureViewportConfig(chart, h, card.classList.contains("chart-card--fullscreen"));
+            chart.setOption(patch, false);
+        }
+
+        chart.resize();
+        setTimeout(function() {
+            chart.resize();
+        }, 40);
+    }
+
+    function exitChartFullscreen() {
+        if (!activeFullscreenChartId || !fullscreenState) {
+            return;
+        }
+
+        var id = activeFullscreenChartId;
+        var stage = document.getElementById(id);
+        var card = stage ? stage.closest(".chart-card") : null;
+
         if (card) {
-            var chartCard = card.closest(".chart-card");
-            var heading = chartCard ? chartCard.querySelector(".chart-title") : null;
-            if (heading && heading.textContent) {
-                title = heading.textContent;
-            }
+            card.classList.remove("chart-card--fullscreen");
+            setFullscreenButtonLabel(card, false);
         }
 
-        popup.document.open();
-        popup.document.write("<!doctype html><html><head><title>" + title + "</title><style>html,body{margin:0;width:100%;height:100%;background:#0f172a;} .wrap{display:flex;align-items:center;justify-content:center;width:100vw;height:100vh;padding:14px;box-sizing:border-box;} img{max-width:100%;max-height:100%;background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.35);}</style></head><body><div class='wrap'><img src='" + image + "' alt='" + title + "'></div></body></html>");
-        popup.document.close();
+        document.body.classList.remove("chart-fullscreen-active");
+        if (fullscreenBackdrop) {
+            fullscreenBackdrop.classList.remove("is-visible");
+        }
+
+        if (stage) {
+            stage.style.height = fullscreenState.stageHeight;
+        }
+
+        activeFullscreenChartId = null;
+        fullscreenState = null;
+
+        var chart = getChartById(id);
+        if (chart && id === "chartStructure") {
+            chart.setOption(structureViewportConfig(chart, stage ? stage.offsetHeight : 390, false), false);
+        }
+
+        if (chart) {
+            chart.resize();
+        }
+    }
+
+    function toggleChartFullscreen(id) {
+        if (!id) {
+            return;
+        }
+
+        if (activeFullscreenChartId === id) {
+            exitChartFullscreen();
+            return;
+        }
+
+        if (activeFullscreenChartId) {
+            exitChartFullscreen();
+        }
+
+        var stage = document.getElementById(id);
+        var chart = getChartById(id);
+        if (!stage || !chart) {
+            return;
+        }
+
+        var card = stage.closest(".chart-card");
+        if (!card) {
+            return;
+        }
+
+        fullscreenState = {
+            stageHeight: stage.style.height || ""
+        };
+        activeFullscreenChartId = id;
+
+        document.body.classList.add("chart-fullscreen-active");
+        ensureFullscreenBackdrop().classList.add("is-visible");
+        card.classList.add("chart-card--fullscreen");
+        setFullscreenButtonLabel(card, true);
+
+        applyFullscreenLayout(id);
+    }
+
+    function printOptionPatchForChart(id) {
+        var axisLabelBase = {
+            fontSize: 22,
+            color: "#334155",
+            fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif"
+        };
+
+        var patch = {
+            legend: [{
+                textStyle: {
+                    fontSize: 24,
+                    color: "#0f172a",
+                    fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif"
+                },
+                itemWidth: 30,
+                itemHeight: 18
+            }],
+            xAxis: [{ axisLabel: axisLabelBase }],
+            yAxis: [{ axisLabel: axisLabelBase }],
+            series: []
+        };
+
+        for (var i = 0; i < 10; i++) {
+            patch.series.push({
+                label: {
+                    fontSize: 22,
+                    fontWeight: "bold"
+                }
+            });
+        }
+
+        if (id === "chartStructure") {
+            patch.grid = [{ left: 460, right: 130, top: 70, bottom: 110, containLabel: false }];
+            patch.yAxis = [{
+                axisLabel: {
+                    fontSize: 22,
+                    width: 420,
+                    overflow: "break",
+                    lineHeight: 28,
+                    color: "#334155",
+                    fontFamily: "IBMPlexSans, Segoe UI, Tahoma, Arial, sans-serif",
+                    formatter: function(v) { return wrapAxisLabel(v, 26); }
+                }
+            }];
+        }
+
+        return patch;
+    }
+
+    function buildPrintableChartImage(id) {
+        var sourceChart = getChartById(id);
+        var stage = document.getElementById(id);
+        if (!sourceChart || !stage) {
+            return null;
+        }
+
+        // A4 landscape at 300 DPI for sharper print output.
+        var exportWidth = 3508;
+        var exportHeight = 2480;
+
+        var exportHost = document.createElement("div");
+        exportHost.style.position = "fixed";
+        exportHost.style.left = "-10000px";
+        exportHost.style.top = "0";
+        exportHost.style.width = exportWidth + "px";
+        exportHost.style.height = exportHeight + "px";
+        exportHost.style.background = "#fff";
+        document.body.appendChild(exportHost);
+
+        var exportChart = echarts.init(exportHost, null, {
+            renderer: "canvas",
+            width: exportWidth,
+            height: exportHeight
+        });
+
+        var option = sourceChart.getOption();
+        exportChart.setOption(option, true);
+        exportChart.setOption(printOptionPatchForChart(id), false);
+
+        if (id === "chartStructure") {
+            exportChart.setOption(structureViewportConfig(exportChart, exportHeight, true), false);
+            exportChart.setOption(printOptionPatchForChart(id), false);
+        }
+
+        exportChart.resize({ width: exportWidth, height: exportHeight });
+
+        var image = exportChart.getDataURL({
+            type: "png",
+            pixelRatio: 1,
+            backgroundColor: "#fff"
+        });
+
+        exportChart.dispose();
+        if (exportHost.parentNode) {
+            exportHost.parentNode.removeChild(exportHost);
+        }
+
+        return image;
     }
 
     function printChart(id) {
-        var chart = getChartById(id);
-        if (!chart) {
+        var image = buildPrintableChartImage(id);
+        if (!image) {
             return;
         }
 
-        var image = chart.getDataURL({ pixelRatio: 2, backgroundColor: "#fff" });
         var printWindow = window.open("", "_blank");
         if (!printWindow) {
             return;
@@ -795,53 +1095,21 @@ if (session.getAttribute("userAuth") == null) {
             }
         }
 
+        var html = "";
+        html += "<!doctype html><html><head><title>" + title + "</title>";
+        html += "<style>";
+        html += "@page{size:A4 landscape;margin:6mm;}";
+        html += "html,body{margin:0;padding:0;background:#fff;color:#0f172a;font-family:Segoe UI,Tahoma,Arial,sans-serif;}";
+        html += ".page{width:100%;height:100%;box-sizing:border-box;display:flex;align-items:center;justify-content:center;overflow:hidden;page-break-after:avoid;}";
+        html += "img{display:block;width:100%;height:auto;max-height:100%;object-fit:contain;}";
+        html += "</style></head><body>";
+        html += "<div class='page'><img id='chartPrintImg' src='" + image + "' alt='Chart image'></div>";
+        html += "<script>(function(){var fired=false;function p(){if(fired){return;}fired=true;setTimeout(function(){window.focus();window.print();},120);}var img=document.getElementById('chartPrintImg');if(img&&img.complete&&img.naturalWidth>0){p();}else if(img){img.onload=p;img.onerror=p;}setTimeout(p,1200);})();<\/script>";
+        html += "</body></html>";
+
         printWindow.document.open();
-        printWindow.document.write("<!doctype html><html><head><title>" + title + "</title><style>html,body{margin:0;padding:0;background:#fff;} .sheet{padding:12px;} img{width:100%;max-width:1100px;display:block;margin:0 auto;} @page{size:auto;margin:10mm;}</style></head><body><div class='sheet'><img id='chartPrintImg' src='" + image + "' alt='Chart image'></div></body></html>");
+        printWindow.document.write(html);
         printWindow.document.close();
-
-        var printed = false;
-        function triggerPrint() {
-            if (printed || printWindow.closed) {
-                return;
-            }
-            printed = true;
-            setTimeout(function() {
-                try {
-                    printWindow.focus();
-                    printWindow.print();
-                } catch (e) {
-                    // Keep silent; popup blockers or browser print policies may interrupt print.
-                }
-            }, 220);
-        }
-
-        setTimeout(function() {
-            if (printWindow.closed) {
-                return;
-            }
-            var img = printWindow.document.getElementById("chartPrintImg");
-            if (!img) {
-                triggerPrint();
-                return;
-            }
-
-            if (img.complete && img.naturalWidth > 0) {
-                triggerPrint();
-                return;
-            }
-
-            img.onload = function() {
-                triggerPrint();
-            };
-            img.onerror = function() {
-                triggerPrint();
-            };
-
-            // Fallback for slower browsers where onload can be delayed for large data URLs.
-            setTimeout(function() {
-                triggerPrint();
-            }, 1800);
-        }, 80);
     }
 
     // Chart option builders - base configurations
@@ -1366,6 +1634,7 @@ if (session.getAttribute("userAuth") == null) {
     // Legacy jQuery event binding
     function bindEvents() {
         $(".chart-actions button").attr("type", "button");
+        ensureFullscreenBackdrop();
 
         // Apply and Reset button handlers
         $("#applyFilters").on("click", function() {
@@ -1400,7 +1669,13 @@ if (session.getAttribute("userAuth") == null) {
         $(document).on("click", "[data-fullscreen]", function(e) {
             e.preventDefault();
             var id = $(this).attr("data-fullscreen");
-            openChartInNewTab(id);
+            toggleChartFullscreen(id);
+        });
+
+        $(document).on("keydown", function(e) {
+            if (e.key === "Escape" && activeFullscreenChartId) {
+                exitChartFullscreen();
+            }
         });
 
         // Print button handlers
@@ -1412,9 +1687,28 @@ if (session.getAttribute("userAuth") == null) {
 
         // Window resize handler for chart resizing
         $(window).on("resize", function() {
+            if (activeFullscreenChartId) {
+                applyFullscreenLayout(activeFullscreenChartId);
+                return;
+            }
             $.each(chartInstances, function(idx, instance) {
                 instance.resize();
             });
+        });
+
+        // Some browsers dispatch orientation changes without reliable resize timing.
+        $(window).on("orientationchange", function() {
+            setTimeout(function() {
+                if (activeFullscreenChartId) {
+                    applyFullscreenLayout(activeFullscreenChartId);
+                    return;
+                }
+                $.each(chartInstances, function(idx, instance) {
+                    if (instance) {
+                        instance.resize();
+                    }
+                });
+            }, 120);
         });
     }
 
