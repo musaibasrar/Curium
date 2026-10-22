@@ -105,11 +105,11 @@ public class HrDAO {
         } catch (Exception hibernateException) {
             log.error(hibernateException.getMessage(), hibernateException);
             hibernateException.printStackTrace();
-
+            
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
         }
-        return false;
-    }
+		return false;
+	}
 
     @Transactional
     public boolean addLeaves(List<Leavedetails> leaveDetailsList) {

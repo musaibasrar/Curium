@@ -47,11 +47,11 @@ public class StampFeesService {
 
 	private final PropertiesUtil propertiesUtil;
 
-	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchid) {
+	public SearchStudentResponseDto advanceSearch(SearchStudentDto searchStudentDto, String branchId) {
 		SearchStudentResponseDto searchStudentResponseDto = new SearchStudentResponseDto();
 		List<Parents> searchStudentList = new ArrayList<>();
 		
-		if(StringUtils.hasLength(branchid)){
+		if(StringUtils.hasLength(branchId)){
 		
 		String queryMain = "From Parents as parents where";
 		String studentname = DataUtil.emptyString(searchStudentDto.getNameSearch());
@@ -71,17 +71,50 @@ public class StampFeesService {
 		String querySub = "";
 
 		if (StringUtils.hasLength(studentname)) {
-			querySub = " parents.student.name like '%" + studentname + "%' AND parents.student.branchid="+Integer.parseInt(branchid);
+			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.branchid="+Integer.parseInt(branchId);
+		}else {
+		
+		switch (searchStudentDto.getStudentType()) {
+		case "Active":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;
+			
+		case "InActive":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = " (parents.Student.classstudying like '"
+						+ classStudying + "') AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;
+			
+		case "Passedout":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = " (parents.Student.classstudying like '"
+						+ classStudying + "') AND (parents.Student.archive=1 or parents.Student.passedout=1 or parents.Student.droppedout=1 or parents.Student.leftout=1) AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;
+			
+		case "All":
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;	
+			
+		default:
+			if (!classStudying.equalsIgnoreCase("")) {
+				querySub = querySub + " (parents.Student.classstudying like '"
+						+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+			}
+			break;	
+			
+			
 		}
-
-		if (StringUtils.hasLength(classStudying) && StringUtils.hasLength(querySub)) {
-			querySub = querySub + " AND parents.student.classstudying like '"
-					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0";
-		} else if (StringUtils.hasLength(classStudying)) {
-			querySub = querySub + " parents.student.classstudying like '"
-					+ classStudying + "' AND parents.student.archive=0 and parents.student.passedout=0 AND parents.student.droppedout=0 and parents.student.leftout=0 AND parents.student.branchid="+Integer.parseInt(branchid)+" order by parents.student.admissionnumber ASC";
+		
 		}
-
+		
 		if(StringUtils.hasLength(querySub)) {
 			queryMain = queryMain + querySub;
 			searchStudentList = studentDetailsDao.getStudentsList(queryMain);

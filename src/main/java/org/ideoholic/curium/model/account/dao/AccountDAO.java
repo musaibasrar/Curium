@@ -551,6 +551,7 @@ public class AccountDAO {
 	public List<Accountdetails> getAccountdetailsIncomeExpense(int branchId) {
 		
 		List<Accountdetails> accountDetails = new ArrayList<Accountdetails>();
+
 		try{
 			// session.createQuery("from Accountdetails as accdetails where accdetails.accountGroupMaster.accountgroupid = 4 or accdetails.accountGroupMaster.accountgroupid = 5 and accdetails.branchid = "+branchId+" order by accountcode ASC").list();
 			accountDetails =  accountDetailsRepo.findIncomeAndExpenseAccountsByBranchId(branchId);
