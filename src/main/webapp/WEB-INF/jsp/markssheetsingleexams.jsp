@@ -716,7 +716,7 @@ body {
 																																											                                                		<fmt:formatNumber value="${displayMarks}" maxFractionDigits="1" />
 																																											                                                	</c:when>
 																																											                                                	<c:otherwise>
-																																											                                                		10
+																																																																																																																																																															<fmt:formatNumber value="${displayMarks}" maxFractionDigits="1" />
 																																											                                                	</c:otherwise>
 																																											                                                </c:choose>
 						                                                <c:set var="subjectTotalMarksObtained" value="${subjectTotalMarksObtained + displayMarks}" />
@@ -742,7 +742,7 @@ body {
 															                                                		<fmt:formatNumber value="${displayMarks}" maxFractionDigits="1" />
 															                                                	</c:when>
 															                                                	<c:otherwise>
-															                                                		30
+																																															<fmt:formatNumber value="${displayMarks}" maxFractionDigits="1" />
 															                                                	</c:otherwise>
 															                                                </c:choose>
 						                                                <c:set var="subjectTotalMarksObtained" value="${subjectTotalMarksObtained + displayMarks}" />
@@ -767,7 +767,7 @@ body {
 															                                                		<c:out value="${secured}" />
 															                                                	</c:when>
 															                                                	<c:otherwise>
-															                                                		<c:out value="${maxMarks}" />
+																																															<c:out value="${secured}" />
 															                                                	</c:otherwise>
 															                                                </c:choose>
 						                                                <c:set var="subjectTotalMarksObtained" value="${subjectTotalMarksObtained + secured}" />
@@ -950,14 +950,14 @@ body {
 						                                       		 <c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
-																											        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/60) * 30}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																																																															        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/60) * 30}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 						                                       		 	</c:when>
 						                                       		 	<c:when test="${dataSubParts[0]=='1' || dataSubParts[0]=='2' || dataSubParts[0]=='3' || dataSubParts[0]=='4' || dataSubParts[0]=='5'}">
 						                                       		 		<td class="marksTableCell">
-																											        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/100) * 50}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																																																															        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/100) * 50}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 						                                       		 	</c:when>
 																	    <c:otherwise>
-																								        <td class="marksTableCell"><c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/120) * 60}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																																																						        <td class="marksTableCell"><c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/120) * 60}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 																	    </c:otherwise>
 																	</c:choose>
 						                                    </c:when>
@@ -966,20 +966,20 @@ body {
 						                                    			<c:choose>
 						                                       		 	<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">
 						                                       		 		<td class="marksTableCell">
-																											        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/150) * 90}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																																																															        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/150) * 90}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 						                                       		 	</c:when>
 						                                       		 	<c:when test="${dataSubParts[0]=='1' || dataSubParts[0]=='2' || dataSubParts[0]=='3' || dataSubParts[0]=='4' || dataSubParts[0]=='5'}">
 						                                       		 		<td class="marksTableCell">
-																											        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/250) * 150}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																																																															        <c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/250) * 150}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 						                                       		 	</c:when>
 																	    <c:otherwise>
-																								        <td class="marksTableCell"><c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/300) * 180}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																																																						        <td class="marksTableCell"><c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${(exam.totalMarksObtained/300) * 180}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 																	    </c:otherwise>
 																	</c:choose>
 						                                    </c:when>
 						
 						                                    <c:otherwise>
-															                                        <td class="marksTableCell"><c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarks}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
+																		                                        <td class="marksTableCell"><c:choose><c:when test="${fn:length(Parents.examSummaries) == 6}"><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:when><c:otherwise><fmt:formatNumber value="${exam.totalMarksObtained}" maxFractionDigits="1" /></c:otherwise></c:choose></td>
 						                                    </c:otherwise>
 						                                </c:choose>
 									        </c:forEach>
