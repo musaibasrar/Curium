@@ -1822,7 +1822,7 @@ public GenerateReportResponseDto generateReportSingleExams(GenerateReportDto dto
 						if (examid == exid && mSubid == subjectSubid) {
 							markFound = true;
 							examPresent = true;
-							boolean excludedFromAggregate = isExcludedFromAggregate(subjectSubid, excludedSubjectIds);
+							boolean excludedFromAggregate = isExcludedFromAggregate(subjectSubid, sub.getSubjectid(), excludedSubjectIds);
 							float marksObtained = marks.getMarksobtained();
 							float minMarks = sub.getMinmarks();
 							float maxMarks = sub.getMaxmarks();
@@ -2096,7 +2096,18 @@ private Set<Integer> parseSubjectIdSet(String subjectIdsCsv) {
 }
 
 private boolean isExcludedFromAggregate(int subId, Set<Integer> excludedSubjectIds) {
-	return excludedSubjectIds != null && excludedSubjectIds.contains(subId);
+	return isExcludedFromAggregate(subId, null, excludedSubjectIds);
+}
+
+private boolean isExcludedFromAggregate(int subId, Integer subjectId, Set<Integer> excludedSubjectIds) {
+	if (excludedSubjectIds == null || excludedSubjectIds.isEmpty()) {
+		return false;
+	}
+	// Prefer stable subject master id across exams; keep subId fallback for older configs.
+	if (subjectId != null && excludedSubjectIds.contains(subjectId)) {
+		return true;
+	}
+	return excludedSubjectIds.contains(subId);
 }
 
 private Map<Integer, Subject> getValidSubjectsBySubId(int branchId, String examClass, String examName) {
