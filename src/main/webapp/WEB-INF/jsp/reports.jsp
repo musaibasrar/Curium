@@ -473,7 +473,7 @@ for(Cookie cookie : cookies){
             		</tr>
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/salihath/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Pre Primary Marks Card</a>
+            				 <a target="mainFrame" href="/salihath/MarksDetailsProcess/prePrimaryProgressReport" style="font-size: 12px;">Hifz Marks Card</a>
             			</td>
             		</tr>
             				<tr>

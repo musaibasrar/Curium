@@ -214,27 +214,26 @@ public class MarksDetailsAction {
 		}
 	}
 	
-	/*@GetMapping("/prePrimaryProgressReport")
+	@GetMapping("/prePrimaryProgressReport")
 	public String prePrimaryProgressReport() {
-		new StandardService(request, response).viewClasses();
+		standardActionAdapter.viewClasses();
 		return "preprimaryprogressreport";
 	}
 	
 	@PostMapping("/searchForPreprimaryReport")
 	public String searchForPreprimaryReport() {
-		new MarksDetailsService(request, response).Search();
+		marksDetailsActionAdapter.Search();
 		return "preprimaryprogressreport";
 	}
 	
 	@PostMapping("/generatePreprimaryReport")
 	public String generatePreprimaryReport() {
-		if (new MarksDetailsService(request, response).generatePreprimaryReport()) {
+		if (marksDetailsActionAdapter.generateReportSingleExams()) {
 			return "preprimarymarkssheet";
-			// return "reportcardsaved";
 		} else {
 			return "error";
 		}
-	}*/
+	}
 	
 	@RequestMapping(value = "/progressReportSingleExams", method = { RequestMethod.GET, RequestMethod.POST })
 	public String progressReportSingleExams() {

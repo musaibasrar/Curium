@@ -15,39 +15,39 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mark Attendance</title>
-<script src="/littleflower/js/Chart.js"></script>
-<link rel="stylesheet" href="/littleflower/css/datePicker/jquery-ui-1.8.18.custom.css">
-<link rel="stylesheet" href="/littleflower/css/datePicker/demos.css">
-<link rel="stylesheet" href="/littleflower/css/graph/jquery.jqplot.css">
-<link rel="stylesheet" href="/littleflower/css/graph/jquery.jqplot.min.css">
+<script src="/salihath/js/Chart.js"></script>
+<link rel="stylesheet" href="/salihath/css/datePicker/jquery-ui-1.8.18.custom.css">
+<link rel="stylesheet" href="/salihath/css/datePicker/demos.css">
+<link rel="stylesheet" href="/salihath/css/graph/jquery.jqplot.css">
+<link rel="stylesheet" href="/salihath/css/graph/jquery.jqplot.min.css">
 
 
-  <script type="text/javascript" src="/littleflower/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.dialog.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/sliderAccess.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+  <script type="text/javascript" src="/salihath/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.dialog.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.autocomplete.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/sliderAccess.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         
         
-         <script  type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.position.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.mouse.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.draggable.js"></script>
-        <script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.resizable.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/jquery.jqplot.js"></script>        
-        <script  type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.barRenderer.min.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.cursor.min.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.highlighter.min.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.dragable.min.js"></script>
-        <script type="text/javascript" src="/littleflower/js/graph/plugins/jqplot.trendline.min.js"></script>
-        <script src="/littleflower/js/jquery.jqplot.min.js" ></script>
-        <script src="/littleflower/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
+         <script  type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.position.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.mouse.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.draggable.js"></script>
+        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/jquery.jqplot.js"></script>        
+        <script  type="text/javascript" src="/salihath/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/plugins/jqplot.barRenderer.min.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/plugins/jqplot.cursor.min.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/plugins/jqplot.highlighter.min.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/plugins/jqplot.dragable.min.js"></script>
+        <script type="text/javascript" src="/salihath/js/graph/plugins/jqplot.trendline.min.js"></script>
+        <script src="/salihath/js/jquery.jqplot.min.js" ></script>
+        <script src="/salihath/js/graph/plugins/jqplot.pieRenderer.min.js" ></script> 
         
 <style type="text/css">
 <!--
@@ -386,42 +386,42 @@
 	display: none !important;
 }
 </style>
-<link rel="stylesheet" href="/littleflower/css/validation/jquery.ketchup.css">
-<script type="text/javascript" src="/littleflower/js/datePicker/jquery-1.7.1.js"></script>
+<link rel="stylesheet" href="/salihath/css/validation/jquery.ketchup.css">
+<script type="text/javascript" src="/salihath/js/datePicker/jquery-1.7.1.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
+	src="/salihath/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
 <script type="text/javascript" language="javascript"
-	src="/littleflower/js/dataTable/jquery.dataTables.js"></script>
-<script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.core.js"></script>
+	src="/salihath/js/dataTable/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.core.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.ui.widget.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.ui.widget.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-<script type="text/javascript" src="/littleflower/js/datePicker/ui/jquery.ui.tabs.js"></script>
-<script type="text/javascript" src="/littleflower/js/datePicker/ui/sliderAccess.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+<script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.tabs.js"></script>
+<script type="text/javascript" src="/salihath/js/datePicker/ui/sliderAccess.js"></script>
 
 <script type="text/javascript"
-	src="/littleflower/js/validation/jquery.ketchup.all.min.js"></script>
+	src="/salihath/js/validation/jquery.ketchup.all.min.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.ui.button.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.ui.button.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.effects.core.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.effects.core.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.ui.accordion.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.ui.accordion.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.effects.slide.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.effects.slide.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.effects.bounce.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.effects.bounce.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.effects.clip.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.effects.clip.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.effects.transfer.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.effects.transfer.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/jquery.effects.blind.js"></script>
+	src="/salihath/js/datePicker/ui/jquery.effects.blind.js"></script>
 <script type="text/javascript"
-	src="/littleflower/js/datePicker/ui/ScrollableGridPlugin.js"></script>
+	src="/salihath/js/datePicker/ui/ScrollableGridPlugin.js"></script>
 <script type="text/javascript" charset="utf-8">
 	$(document).ready(function() {
 		$('#myTable').dataTable({
@@ -531,7 +531,7 @@
 
     </style>
     
-<script type="text/javascript" src="/littleflower/js/datetimepicker_css.js"></script>
+<script type="text/javascript" src="/salihath/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
 
 	$(function() {
@@ -552,7 +552,7 @@
 	
 	function searchStudentAttendanceDetailsMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/littleflower/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
+		form1.action = "/salihath/AttendanceProcess/searchStudentAttendanceDetailsMonthly";
 		form1.method = "POST";
 		form1.submit();
 
@@ -560,7 +560,7 @@
 	
 	function searchStudentAttendanceDetailsMonthlyGraph() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/littleflower/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
+		form1.action = "/salihath/AttendanceProcess/searchStudentAttendanceDetailsMonthlyGraph";
 		form1.method = "POST";
 		form1.submit();
 
@@ -568,7 +568,7 @@
 	
 	function searchStudentAttendanceDetailsMarkMonthly() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/littleflower/AttendanceProcess/searchStudentAttendanceDetailsMarkMonthly";
+		form1.action = "/salihath/AttendanceProcess/searchStudentAttendanceDetailsMarkMonthly";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -618,7 +618,7 @@
 	
 	function updateRecords(){
 		var form1 = document.getElementById("form1");
-		form1.action = "/littleflower/AttendanceProcess/markStudentsAttendanceMonthly";
+		form1.action = "/salihath/AttendanceProcess/markStudentsAttendanceMonthly";
 		form1.method = "POST";
 		form1.submit();
 	}
@@ -853,7 +853,7 @@ $(document).ready(function() {
 // Function to submit the form
 function updateRecords() {
     var form1 = document.getElementById("form1");
-    form1.action = "/littleflower/AttendanceProcess/markStudentsAttendanceMonthly";
+    form1.action = "/salihath/AttendanceProcess/markStudentsAttendanceMonthly";
     form1.method = "POST";
     form1.submit();
 }
@@ -865,7 +865,7 @@ function updateRecords() {
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/littleflower/UserProcess/sessionTimeOut");
+	response.sendRedirect("/salihath/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
