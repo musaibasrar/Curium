@@ -345,7 +345,7 @@ public class AttendanceDAO {
 	}*/
 	
 	@Transactional
-	public List<Studentdailyattendance> getStudentDailyAttendance(String studentExternalId , String academicYear, String startDate, String endDate, int branchId) {
+	public List<Studentdailyattendance> getStudentDailyAttendance(String studentExternalId , String academicYear, Date startDate, Date endDate, int branchId) {
 
 	    List<Studentdailyattendance> studentDailyAttendance = new ArrayList<>();
 

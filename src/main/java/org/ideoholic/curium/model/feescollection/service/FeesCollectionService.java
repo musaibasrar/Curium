@@ -501,7 +501,7 @@ public class FeesCollectionService {
 
 				result.setFeesStructure(feesstructure);
 				result.setTotalSum(totalSum);
-				result.setDueAmount(totalFeesAmount);
+				result.setDueAmount(totalFeesAmount-totalSum);
 				result.setTotalFeesAmount(totalFeesAmount);
 				result.setAcademicPerYear(academicYear);
 				result.setCurrentAcademicYear(academicYear);
@@ -599,9 +599,8 @@ public class FeesCollectionService {
 			result.setReceiptInfo(rinfo);
 			result.setFeeCatMap(feeCatMap);
 			result.setDuplicate("duplicate");
+			result.setFeesDetailsResponse(getFeesDetails(String.valueOf(rinfo.fetchSid()), rinfo.getAcademicyear()));
 			result.setSuccess(true);
-
-			getFeesDetails(String.valueOf(rinfo.fetchSid()), rinfo.getAcademicyear());
 			
 		}
 		return result;

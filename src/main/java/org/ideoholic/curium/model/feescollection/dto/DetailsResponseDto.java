@@ -27,6 +27,7 @@ public class DetailsResponseDto {
     private Login userLogin;
     private Parents parents;
     private String narration;
+    private FeesDetailsResponseDto feesDetailsResponse;
     @Builder.Default
     private boolean success = false;
 
