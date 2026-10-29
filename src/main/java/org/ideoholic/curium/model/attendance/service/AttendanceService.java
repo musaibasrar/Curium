@@ -532,11 +532,11 @@ public class AttendanceService {
 			Timestamp fromTimestamp = new Timestamp(fromDateAtt.getTime());
 			Timestamp toTimestamp = new Timestamp(toDateAtt.getTime());
 			
-			String fromDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getFromDate());
-			String toDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getToDate());
+			//String fromDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getFromDate());
+			//String toDate = DateUtil.dateFromatConversionSlash(attendanceDetailsMonthlyDto.getToDate());
 
 			List<Studentdailyattendance> studentDailyAttendance = new ArrayList<Studentdailyattendance>();
-			studentDailyAttendance = attendanceDao.getStudentDailyAttendance(studentExternalId, fromDate, toDate, currentAcademicYear, Integer.parseInt(branchId));
+			studentDailyAttendance = attendanceDao.getStudentDailyAttendance(studentExternalId, currentAcademicYear, fromDateAtt, toDateAtt, Integer.parseInt(branchId));
 
 			result.setStudentDailyAttendance(studentDailyAttendance);
 			result.setStudentName(attendanceDetailsMonthlyDto.getStudentName());

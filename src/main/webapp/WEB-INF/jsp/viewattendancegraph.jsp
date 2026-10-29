@@ -396,15 +396,15 @@
                 name:'<c:out default="0" value="${student.name}" />',
                 classandsec:'<c:out default="0" value="${student.classstudying}" />',
                 id:'<c:out default="0" value="${student.sid}" />',
-                externalid:'<c:out default="0" value="${student.studentexternalid}" />',
+                externalid:'<c:out default="0" value="${student.studentexternalid}" />'
             }<c:if test="${!status.last}">,</c:if>
             </c:forEach>
         ];
             
             
-            var xAxis = [
-                            <c:forEach varStatus="status" items="${xaxis}" var="xaxis">{
-                                value:'<c:out default="0" value="${xaxis}" />',
+			var xAxis = [
+							<c:forEach varStatus="status" items="${xAxis}" var="xAxisItem">{
+								value:'<c:out default="0" value="${xAxisItem}" />'
                             }<c:if test="${!status.last}">,</c:if>
                             </c:forEach>
                         ];
@@ -419,109 +419,72 @@
             var xAxisValues = getFields(xAxis, "value");
             
             
-            var yAxis = [
-                         <c:forEach varStatus="status" items="${yaxis}" var="yaxis">{
-                             value:'<c:out default="0" value="${yaxis}" />',
+			var yAxis = [
+						 <c:forEach varStatus="status" items="${yAxis}" var="yAxisItem">{
+							 value:'<c:out default="0" value="${yAxisItem}" />'
                          }<c:if test="${!status.last}">,</c:if>
                          </c:forEach>
                      ];
          
-         function getFields(input, field) {
-             var output = [];
-             for (var i=0; i < input.length ; ++i)
-                 output.push(input[i][field]);
-             return output;
-         }
-
          var yAxisValues = getFields(yAxis, "value");
-            
-            
-        $(function() {
-            $( "#admno").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentId").val( ui.item.id );
-                    
-                    
-                },
-                focus: function( event, ui ) {
-                    $( "#studentId").val( ui.item.id );
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#studentId").val( ui.item.id );
-       			  $( "#studentname").val( ui.item.name );
-       			$( "#classandsec").val( ui.item.classandsec );
-               $("#studentexternalid").val( ui.item.externalid );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
-                .appendTo( ul );
-            };
-            
-                       
 
-        });
-        
-        $(function() {
-            $( "#admnograph").autocomplete({
-                source: students,
-                minLength: 1,
-                change:function(event,ui){
-                    $( "#studentIdgraph").val( ui.item.id );
-                    
-                    
-                },
-                focus: function( event, ui ) {
-                    $( "#studentIdgraph").val( ui.item.id );
-                    return true;
-                },
-                select: function( event, ui ) {
-                    $( "#studentIdgraph").val( ui.item.id );
-       			  $( "#studentnamegraph").val( ui.item.name );
-       			$( "#classandsecgraph").val( ui.item.classandsec );
-               $("#studentexternalidgraph").val( ui.item.externalid );
-                    return true;
-                }
-            }).data( "autocomplete" )._renderItem = function( ul, item ) {
-                return $( "<li></li>" )
-                .data( "item.autocomplete", item )
-                .append( "<a><b> " + item.value +" </b> </a>" )
-                .appendTo( ul );
-            };
-            
-                       
+         // Chart.js expects numeric dataset values.
+         var yAxisLabel = $.map(yAxisValues, function(value) {
+             var parsed = parseFloat(value);
+             return isNaN(parsed) ? 0 : parsed;
+         });
 
-        });
-              
+         var barChartData = {
+            labels : xAxisValues,
+            datasets : [
+                {
+                    fillColor : "rgba(0,0,0,0.8)",
+                    strokeColor : "rgba(220,220,220,0.8)",
+                    highlightFill: "rgba(0,0,0,0.75)",
+                    highlightStroke: "rgba(0,0,0,1)",
+                    data : yAxisLabel
+                }
+            ]
+         };
+
+		 $(function() {
+			 $( "#admnograph").autocomplete({
+				 source: students,
+				 minLength: 1,
+				 change:function(event,ui){
+					 if(ui.item){
+						 $( "#studentIdgraph").val( ui.item.id );
+					 }
+				 },
+				 focus: function( event, ui ) {
+					 if(ui.item){
+						 $( "#studentIdgraph").val( ui.item.id );
+					 }
+					 return true;
+				 },
+				 select: function( event, ui ) {
+					 $( "#studentIdgraph").val( ui.item.id );
+					 $( "#studentnamegraph").val( ui.item.name );
+					 $( "#classandsecgraph").val( ui.item.classandsec );
+					 $( "#studentexternalidgraph").val( ui.item.externalid );
+					 return true;
+				 }
+			 }).data( "autocomplete" )._renderItem = function( ul, item ) {
+				 return $( "<li></li>" )
+				 .data( "item.autocomplete", item )
+				 .append( "<a><b> " + item.value +" </b> </a>" )
+				 .appendTo( ul );
+			 };
+
+             var canvas = document.getElementById("canvas");
+             if (canvas && typeof Chart !== "undefined") {
+                 var ctx = canvas.getContext("2d");
+                 window.myBar = new Chart(ctx).Bar(barChartData, {
+                     responsive : true
+                 });
+             }
+         });
         
-        var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-    	
-    	var yAxisLabel = yAxisValues;
-    	var xAxislabel = xAxisValues;
-    	var barChartData = {
-    		labels : xAxisValues,
-    		datasets : [
-    			{
-    				fillColor : "rgba(0,0,0,0.8)",
-    				strokeColor : "rgba(220,220,220,0.8)",
-    				highlightFill: "rgba(0,0,0,0.75)",
-    				highlightStroke: "rgba(0,0,0,1)",
-    				data : yAxisLabel
-    			}
-    		]
-    	}
-    	window.onload = function(){
-    		var ctx = document.getElementById("canvas").getContext("2d");
-    		window.myBar = new Chart(ctx).Bar(barChartData, {
-    			responsive : true
-    		});
-    	}
-       
         </script>
 <script type="text/javascript" src="/school/js/datetimepicker_css.js"></script>
 <script type="text/javascript">
@@ -614,7 +577,7 @@
 		$("#frommonthlyattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
@@ -624,7 +587,7 @@
 		$("#tomonthlyattendance").datepicker({
 			changeYear : true,
 			changeMonth : true,
-			dateFormat: 'yy-mm-dd',
+			dateFormat: 'dd/mm/yy',
 			yearRange: "-50:+0"
 		});
 		$("#anim").change(function() {
@@ -864,7 +827,7 @@ for(Cookie cookie : cookies){
 							<label>To Date: &nbsp;</label>
 							<label> <input
 									name="todateofattendance" type="text" class="textField"
-									id="todateofattendance" size="25"  value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"/>
+								id="todateofattendance" size="25"  value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>"/>
 							</label>
 							</td>
 							

@@ -121,19 +121,31 @@ public class FeesCollectionActionAdapter {
 
     public FeesDetailsResponseDto getFeesDetails() {
 
+        return getFeesDetails(request.getParameter("studentId"), request.getParameter("academicyear"));
+    }
+
+    public FeesDetailsResponseDto getFeesDetails(String studentId, String academicYear) {
+
         FeesReportDto dto = new FeesReportDto();
-        dto.setStudentId(request.getParameter("studentId"));
-        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setStudentId(studentId);
+        dto.setAcademicYear(academicYear);
 
         FeesDetailsResponseDto responseDto = feesCollectionService.getFeesDetails(dto);
-        request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
+        applyFeesDetailsToSession(responseDto);
+        return responseDto;
+    }
+
+    private void applyFeesDetailsToSession(FeesDetailsResponseDto responseDto) {
+        if (responseDto == null) {
+            return;
+        }
+
         httpSession.setAttribute("feesstructure", responseDto.getFeesStructure());
         httpSession.setAttribute("sumoffees", responseDto.getTotalSum());
         httpSession.setAttribute("dueamount", responseDto.getDueAmount());
         httpSession.setAttribute("totalfees", responseDto.getTotalFeesAmount());
         httpSession.setAttribute("academicPerYear", responseDto.getAcademicPerYear());
         httpSession.setAttribute(Constants.CURRENTACADEMICYEAR, responseDto.getCurrentAcademicYear());
-       return  responseDto;
     }
 
     public void previewFeesDetails() {
@@ -147,6 +159,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("receiptinfo", responseDto.getReceiptInfo());
         request.setAttribute("feescatmap", responseDto.getFeeCatMap());
         request.setAttribute("duplicate", responseDto.getDuplicate());
+        applyFeesDetailsToSession(responseDto.getFeesDetailsResponse());
     }
 
     public void previewDetails() {
