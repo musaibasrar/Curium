@@ -23,7 +23,7 @@
       },
       "repositoryUrl": {
         "url": "https://github.com/musaibasrar/Curium",
-        "wellKnown": "https://github.com/musaibasrar/Curium/.well-known/funding-manifest-urls"
+        "wellKnown": "https://github.com/musaibasrar/Curium/blob/develop/.well-known/funding-manifest-urls"
       },
       "licenses": [
         "spdx:MIT"
