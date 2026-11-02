@@ -1,0 +1,100 @@
+{
+  "$schema": "https://floss.fund/schema/v1.0.0/funding.schema.json#",
+  "version": "v1.0.0",
+  "entity": {
+    "type": "individual",
+    "role": "owner",
+    "name": "Musaib Asrar",
+    "email": "musaib@ideoholic.com",
+    "phone": "9986338332",
+    "description": "Curium is a free and open-source school management system built to reduce dependency on expensive proprietary software for educational institutions. It focuses on affordability, data ownership, and long-term sustainability, especially for low-resource schools.",
+    "webpageUrl": {
+      "url": "https://ideoholic.com/curium",
+      "wellKnown": "https://ideoholic.com/.well-known/funding-manifest-urls"
+    }
+  },
+  "projects": [
+    {
+      "guid": "curium",
+      "name": "Curium",
+      "description": "Curium is a free and open-source school management system built to reduce dependency on expensive proprietary software for educational institutions. It focuses on affordability, data ownership, and long-term sustainability, especially for low-resource schools.",
+      "webpageUrl": {
+        "url": "https://ideoholic.com"
+      },
+      "repositoryUrl": {
+        "url": "https://github.com/musaibasrar/Curium",
+        "wellKnown": "https://github.com/musaibasrar/Curium/.well-known/funding-manifest-urls"
+      },
+      "licenses": [
+        "spdx:MIT"
+      ],
+      "tags": [
+        "education",
+        "open-source",
+        "cloud-hosted",
+        "school-erp"
+      ]
+    }
+  ],
+  "funding": {
+    "channels": [
+      {
+        "guid": "mybank",
+        "type": "bank",
+        "address": "",
+        "description": "Will accept direct bank transfers. Please e-mail me for details."
+      }
+    ],
+    "plans": [
+      {
+        "guid": "maintainer-time",
+        "status": "active",
+        "name": "Maintainer Yearly Compensation",
+        "description": "This will cover one year of part-time working on Curium.",
+        "amount": 400000,
+        "currency": "INR",
+        "frequency": "yearly",
+        "channels": [
+          "mybank"
+        ]
+      },
+      {
+        "guid": "ai-credits",
+        "status": "active",
+        "name": "Security and Reliability Upgrade",
+        "description": "Get AI credits to review the project, generate test cases and find and plug security and vulnerability loop holes",
+        "amount": 200000,
+        "currency": "INR",
+        "frequency": "yearly",
+        "channels": [
+          "mybank"
+        ]
+      },
+      {
+        "guid": "grow-community",
+        "status": "active",
+        "name": "Community Outreach",
+        "description": "Dependency updates, vulnerability patching and performance improvements.",
+        "amount": 100000,
+        "currency": "INR",
+        "frequency": "yearly",
+        "channels": [
+          "mybank"
+        ]
+      },
+      {
+        "guid": "documentation",
+        "status": "active",
+        "name": "User Manual Work",
+        "description": "Improving installation guides, admin manuals, and contributor onboarding documentation including video guides",
+        "amount": 150000,
+        "currency": "INR",
+        "frequency": "one-time",
+        "channels": [
+          "mybank"
+        ]
+      }
+    ],
+    "history": []
+  }
+}
