@@ -174,6 +174,31 @@ public class SuperDashboardDao {
         );
     }
 
+    public List<Object[]> fetchClassOrder(List<Integer> branchIds, String classFilter, String sectionFilter) {
+        Map<String, Object> params = new LinkedHashMap<String, Object>();
+        Map<String, List<?>> listParams = new LinkedHashMap<String, List<?>>();
+        listParams.put("branchIds", branchIds);
+
+        String classValue = safeTrim(classFilter);
+        String sectionValue = safeTrim(sectionFilter);
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("select cs.classdetails, min(cs.stdrdid) as firstid ")
+                .append("from classsec cs where cs.branchid in (:branchIds) ");
+
+        if (!classValue.isEmpty()) {
+            sql.append(" and cs.classdetails = :classFilter ");
+            params.put("classFilter", classValue);
+        }
+        if (!sectionValue.isEmpty()) {
+            sql.append(" and cs.section = :sectionFilter ");
+            params.put("sectionFilter", sectionValue);
+        }
+
+        sql.append(" group by cs.classdetails order by firstid asc");
+        return listRows(sql.toString(), params, listParams);
+    }
+
     public List<Object[]> fetchMonthlyReceiptRows(List<Integer> branchIds, Date trendStart, Date trendEnd) {
         Map<String, Object> params = new LinkedHashMap<String, Object>();
         params.put("trendStart", trendStart);
