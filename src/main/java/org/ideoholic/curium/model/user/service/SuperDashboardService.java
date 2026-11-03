@@ -125,6 +125,7 @@ public class SuperDashboardService {
             Object examCountObj = dao.countExamsConducted(selectedBranchIds, academicYear, Date.valueOf(toDate), examName);
 
             List<Object[]> studentDimensions = dao.fetchStudentDimensions(selectedBranchIds, academicYear, classFilter, sectionFilter);
+            List<Object[]> classOrderRows = dao.fetchClassOrder(selectedBranchIds, classFilter, sectionFilter);
 
             YearMonth trendStartMonth = currentMonth.minusMonths(11);
             List<Object[]> monthlyReceiptRows = dao.fetchMonthlyReceiptRows(
@@ -187,6 +188,14 @@ public class SuperDashboardService {
                     category = "Unspecified";
                 }
                 categoryWise.put(category, categoryWise.getOrDefault(category, 0L) + 1L);
+            }
+
+            List<String> orderedClassNames = new ArrayList<String>();
+            for (Object[] row : classOrderRows) {
+                String className = toText(row[0], "").trim();
+                if (!className.isEmpty()) {
+                    orderedClassNames.add(className);
+                }
             }
 
             List<Map<String, Object>> branchCards = new ArrayList<Map<String, Object>>();
@@ -379,7 +388,7 @@ public class SuperDashboardService {
             charts.put("monthlyCollectionMonths", trendMonths);
             charts.put("monthlyCollectionConsolidated", new ArrayList<Long>(consolidatedMonthly.values()));
             charts.put("monthlyCollectionSeries", monthlyTrendSeries);
-            charts.put("classWiseAnalysis", toTopItems(classWise, 20));
+            charts.put("classWiseAnalysis", toOrderedItems(classWise, orderedClassNames, 20));
             charts.put("genderDistribution", toPieItems(genderWise));
             charts.put("categoryDistribution", toPieItems(categoryWise));
             charts.put("feeStructureAnalysis", feeStructureSeries);
@@ -466,6 +475,46 @@ public class SuperDashboardService {
                     item.put("value", entry.getValue());
                     return item;
                 }).collect(Collectors.toList());
+    }
+
+    private List<Map<String, Object>> toOrderedItems(Map<String, Long> source, List<String> orderedKeys, int limit) {
+        List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+        int max = limit <= 0 ? Integer.MAX_VALUE : limit;
+
+        if (orderedKeys != null) {
+            for (String key : orderedKeys) {
+                if (list.size() >= max || !source.containsKey(key)) {
+                    continue;
+                }
+                Map<String, Object> item = new LinkedHashMap<String, Object>();
+                item.put("name", key);
+                item.put("value", source.get(key));
+                list.add(item);
+            }
+        }
+
+        if (list.size() < max) {
+            for (Map.Entry<String, Long> entry : source.entrySet()) {
+                if (list.size() >= max) {
+                    break;
+                }
+                boolean exists = false;
+                for (Map<String, Object> item : list) {
+                    if (entry.getKey().equals(item.get("name"))) {
+                        exists = true;
+                        break;
+                    }
+                }
+                if (!exists) {
+                    Map<String, Object> item = new LinkedHashMap<String, Object>();
+                    item.put("name", entry.getKey());
+                    item.put("value", entry.getValue());
+                    list.add(item);
+                }
+            }
+        }
+
+        return list;
     }
 
     private List<Map<String, Object>> toPieItems(Map<String, Long> source) {
