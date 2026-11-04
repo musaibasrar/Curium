@@ -705,7 +705,7 @@ public class MarksDetailsService {
 				String  startDateFormatted=sdf.format(startDate);
 				String endDateFormatted=sdf.format(endDate);
 				String academicYear = currentAcademicYear;
-				studentDailyAttendance = attendanceDAO.getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDateFormatted, endDateFormatted, Integer.parseInt(branchId));
+				studentDailyAttendance = attendanceDAO.getStudentDailyAttendance(studentDetails.getStudent().getStudentexternalid(), academicYear, startDate, endDate, Integer.parseInt(branchId));
 				 List<Holidaysmaster> holidaysMasterList = marksDetailsDao.getListofHolidays(startDate,endDate);
 				 int holidayCount = 0;
 				 for(Holidaysmaster holiday:holidaysMasterList) {
