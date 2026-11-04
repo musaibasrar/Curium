@@ -919,8 +919,8 @@ public class AccountService {
 	public ViewNextVoucherResponseDto viewVouchers(ViewNextVoucherDto viewNextVoucherDto, int voucherType) {
 
 		List<VoucherEntrytransactions> voucherTransactions = new ArrayList<VoucherEntrytransactions>();
-		String fromDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(viewNextVoucherDto.getFromDate()));
-		String toDate = DataUtil.dateFromatConversionSlash(DataUtil.emptyString(viewNextVoucherDto.getToDate()));
+		String fromDate = DataUtil.emptyString(viewNextVoucherDto.getFromDate());
+		String toDate = DataUtil.emptyString(viewNextVoucherDto.getToDate());
 
 		if(viewNextVoucherDto.getBranchId()!=null) {
 

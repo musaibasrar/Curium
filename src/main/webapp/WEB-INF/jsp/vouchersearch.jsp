@@ -597,7 +597,7 @@ for(Cookie cookie : cookies){
 							
 							<td width="20%" class="alignRight">To Date&nbsp;</td>
 							<td width="28%"><label> <input name="todate" autocomplete="off"
-									type="text" value="${todateselected}"
+									type="text"
 									class="textField" id="todate" size="36"
 									data-validate="validate(required)">
 									
