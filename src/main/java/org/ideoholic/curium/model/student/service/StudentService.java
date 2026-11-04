@@ -52,7 +52,6 @@ import org.ideoholic.curium.model.stampfees.dao.StampFeesDAO;
 import org.ideoholic.curium.model.stampfees.dto.Academicfeesstructure;
 import org.ideoholic.curium.model.std.service.StandardService;
 import org.ideoholic.curium.model.student.dao.StudentDetailsDAO;
-import org.ideoholic.curium.model.student.dao.studentDetailsDAO;
 import org.ideoholic.curium.model.student.dto.BonafideGenerationResponseDto;
 import org.ideoholic.curium.model.student.dto.CreateStudentDto;
 import org.ideoholic.curium.model.student.dto.PromoteMultipleDto;
@@ -1107,7 +1106,7 @@ public class StudentService {
 			return;
 		}
 
-		List<Studentfeesstructure> existingFeeStructures = new studentDetailsDAO().getStudentFeesStructure(updatedStudent.getSid(), currentAcademicYear);
+		List<Studentfeesstructure> existingFeeStructures = studentDetailsDao.getStudentFeesStructure(updatedStudent.getSid(), currentAcademicYear);
 		List<Feescategory> applicableFeeCategories = feesCategoryDao.getfeecategoryofstudent(newClass, currentAcademicYear, String.valueOf(updatedStudent.getBranchid()));
 		if (existingFeeStructures == null || existingFeeStructures.isEmpty()) {
 			return;
@@ -1126,7 +1125,7 @@ public class StudentService {
 			if (feescategory == null || feescategory.getIdfeescategory() == null) {
 				continue;
 			}
-			new studentDetailsDAO().updateStudentFeesStructureCategoryAndAmount(
+			studentDetailsDao.updateStudentFeesStructureCategoryAndAmount(
 					feesStructure.getSfsid(),
 					feescategory.getIdfeescategory(),
 					feescategory.getAmount() == null ? 0L : feescategory.getAmount().longValue()
