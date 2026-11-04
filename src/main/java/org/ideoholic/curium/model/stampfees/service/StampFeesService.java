@@ -74,7 +74,11 @@ public class StampFeesService {
 			querySub = " parents.Student.name like '%" + studentname + "%' AND parents.Student.branchid="+Integer.parseInt(branchId);
 		}else {
 		
-		switch (searchStudentDto.getStudentType()) {
+		String studentType = searchStudentDto.getStudentType();
+		if (studentType == null) {
+			studentType = "";
+		}
+		switch (studentType) {
 		case "Active":
 			if (!classStudying.equalsIgnoreCase("")) {
 				querySub = " (parents.Student.classstudying like '"
