@@ -528,7 +528,7 @@ public class FeesService {
                             //con.setFeescatid(Integer.valueOf(test[1]));
                             con.setConcessionOld(concessionDto.getRequestParams().get("concessionold:"+Integer.valueOf(test[0])));
                             con.setConcession(concessionDto.getRequestParams().get("concession:"+Integer.valueOf(test[0])));
-                            con.setConcessionNotes(concessionDto.getRequestParams().get("concessionnotes:"+Integer.valueOf(test[0])));
+                            con.setConcessionNotes(concessionDto.getRequestParams().get("concessionnotes:"+Integer.valueOf(test[0]))+"::"+concessionDto.getRequestParams().get("concessionapprovedby:"+Integer.valueOf(test[0])));
                             concessionList.add(con);
                             
                             

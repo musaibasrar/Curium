@@ -9,6 +9,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
     <head>
@@ -392,19 +393,6 @@
                     }
 
                 });
-                $('.chcktb2').click(function () {
-                    var length = $('.chcktb2:checked').length;
-                    var trLength=$('.trClass').length;
-                    alert(tdLength);
-                    if (length > trLength) {
-
-                        $('.chcktb2:not(:checked)').attr('disabled', true);
-                    }
-                    else {
-                        $('.chcktb2:not(:checked)').attr('disabled', false);
-                    }
-                });
-
             });
                       
             
@@ -443,107 +431,411 @@
             }
             
             function checkConcession(dueAmount,concession,sfsid){
-            	var due = dueAmount;
-            	var con = concession;
-            	
-            	if(con>due){
-            		document.getElementById("concession:"+sfsid).value="";
-            		document.getElementById(sfsid).checked = false;
-            	}else if(con<=due){
-            		document.getElementById(sfsid).checked = true;
+            	var amountField = document.getElementById("concession:" + sfsid);
+
+            	if (!amountField) {
+            		return;
             	}
+
+            	if (concession !== "" && parseFloat(concession) > parseFloat(dueAmount)) {
+            		amountField.value = "";
+            	}
+
+            	updateRowCheckboxState(sfsid);
             }
            
         </script>
         
         <script>
 
-        function applyConcessionToAll() {
+                        function trimValue(value) {
 
-            var isChecked = document.getElementById("applyAllConcession").checked;
+                            if (value == null) {
+                                return "";
+                            }
 
-            var commonAmount = document.getElementById("commonConcession").value;
-            var commonPercent = document.getElementById("commonConcessionPercent").value;
-            var commonReason = document.getElementById("commonConcessionReason").value;
+                            return String(value).replace(/^\s+|\s+$/g, "");
+                        }
 
-            var concessionInputs = document.getElementsByClassName("concession");
+                        function normalizeTextValue(value) {
 
-            for (var i = 0; i < concessionInputs.length; i++) {
+                            if (!value) {
+                                return "";
+                            }
 
-                var sfsid = concessionInputs[i].id.replace("concession:", "");
+                            return trimValue(value).replace(/\s+/g, " ").toLowerCase();
+                        }
 
-                var percentInput = document.getElementById("concessionPercent:" + sfsid);
-                var reasonInput = document.getElementById("concessionnotes:" + sfsid);
+                        function getFeeRows() {
 
-                if (!isChecked) {
+                            if (document.querySelectorAll) {
+                                return document.querySelectorAll("#feesStructureTable tbody tr");
+                            }
 
-                    // Clear common values from rows
-                    concessionInputs[i].value = "";
-                    percentInput.value = "";
-                    reasonInput.value = "";
+                            return $("#feesStructureTable tbody tr").toArray();
+                        }
 
-                } else {
+                        function getRowCheckbox(row) {
 
-                    /*
-                     * If percentage is entered, percentage gets priority
-                     * and concession amount is calculated automatically.
-                     */
-                    if (commonPercent !== "") {
+                            if (!row) {
+                                return null;
+                            }
 
-                        percentInput.value = commonPercent;
+                            if (row.querySelector) {
+                                return row.querySelector("input.chcktb2");
+                            }
 
-                        var feesAmount = parseFloat(
-                            concessionInputs[i]
-                                .closest("tr")
-                                .cells[2]
-                                .innerText
-                        );
+                            return $(row).find("input.chcktb2:first")[0] || null;
+                        }
 
-                        var dueInput = document.getElementsByName("dueamount:" + sfsid)[0];
+                        function getCellText(row, cellIndex) {
 
-                        var dueAmount = parseFloat(dueInput.value);
+                            if (!row || !row.cells || row.cells.length <= cellIndex) {
+                                return "";
+                            }
 
-                        var percent = parseFloat(commonPercent);
+                            var cell = row.cells[cellIndex];
 
-                        if (!isNaN(percent) && percent >= 0 && percent <= 100) {
+                            if (!cell) {
+                                return "";
+                            }
+
+                            if (cell.innerText != null) {
+                                return trimValue(cell.innerText);
+                            }
+
+                            if (cell.textContent != null) {
+                                return trimValue(cell.textContent);
+                            }
+
+                            return trimValue($(cell).text());
+                        }
+
+                        function normalizeFeesCategoryName(categoryName) {
+
+                            return normalizeTextValue(categoryName);
+                        }
+
+                        function isTuitionFeeRow(row) {
+
+                        	if (!row || !row.cells || row.cells.length < 2) {
+                                return false;
+                            }
+
+                            const normalized = normalizeFeesCategoryName(getCellText(row, 1)).toLowerCase();
+                            
+                            return normalized.includes("tuition fee");
+                        }
+
+                        function getFieldValue(fieldId) {
+
+                            var field = document.getElementById(fieldId);
+
+                            if (!field || field.value == null) {
+                                return "";
+                            }
+
+                            return trimValue(field.value);
+                        }
+
+                        function getConcessionPercentByReason(reason) {
+
+                            var normalizedReason = normalizeTextValue(reason);
+
+                            if (normalizedReason === "2nd child") {
+                                return "15";
+                            }
+
+                            if (normalizedReason === "3rd child") {
+                                return "100";
+                            }
+
+                            if (normalizedReason === "staff child") {
+                                return "100";
+                            }
+
+                            return "";
+                        }
+
+                        function getConcessionAmountFromPercent(feesAmount, percentValue, dueAmount) {
+
+                            var fees = parseFloat(feesAmount);
+                            var percent = parseFloat(percentValue);
+                            var due = parseFloat(dueAmount);
+
+                            if (isNaN(fees)) {
+                                fees = 0;
+                            }
+
+                            if (isNaN(due)) {
+                                due = 0;
+                            }
+
+                            if (isNaN(percent)) {
+                                return "";
+                            }
+
+                            if (percent < 0 || percent > 100) {
+                                return "";
+                            }
+
+                            if (percent == 100) {
+                                return due;
+                            }
+
+                            var concessionAmount = Math.round((fees * percent) / 100);
+
+                            if (concessionAmount > due) {
+                                concessionAmount = due;
+                            }
+
+                            return concessionAmount;
+                        }
+
+                        function updateRowCheckboxState(sfsid) {
+
+                            var checkbox = document.getElementById(sfsid);
+
+                            if (!checkbox) {
+                                return;
+                            }
+
+                            var amount = getFieldValue("concession:" + sfsid);
+                            var percent = getFieldValue("concessionPercent:" + sfsid);
+                            var reason = getFieldValue("concessionnotes:" + sfsid);
+                            var approvedBy = getFieldValue("concessionapprovedby:" + sfsid);
+
+                            checkbox.checked =
+                                amount !== "" ||
+                                percent !== "" ||
+                                reason !== "" ||
+                                approvedBy !== "";
+                        }
+
+                        function setRowConcessionFromPercent(sfsid, feesAmount, dueAmount, percentValue) {
+
+                            var percentField = document.getElementById("concessionPercent:" + sfsid);
+                            var amountField = document.getElementById("concession:" + sfsid);
+
+                            if (!percentField || !amountField) {
+                                return;
+                            }
+
+                            if (percentValue === "") {
+                                percentField.value = "";
+                                amountField.value = "";
+                                updateRowCheckboxState(sfsid);
+                                return;
+                            }
 
                             var concessionAmount =
-                                Math.round((feesAmount * percent) / 100);
+                                getConcessionAmountFromPercent(feesAmount, percentValue, dueAmount);
 
-                            if (concessionAmount > dueAmount) {
-                                concessionInputs[i].value = "";
-                                percentInput.value = "";
-                                document.getElementById(sfsid).checked = false;
-                            } else {
-                                concessionInputs[i].value = concessionAmount;
-                                document.getElementById(sfsid).checked = true;
+                            if (concessionAmount === "") {
+                                percentField.value = "";
+                                amountField.value = "";
+                                updateRowCheckboxState(sfsid);
+                                return;
+                            }
+
+                            percentField.value = parseFloat(percentValue);
+                            amountField.value = concessionAmount;
+                            updateRowCheckboxState(sfsid);
+                        }
+
+                        function rowConcessionReasonChanged(sfsid, feesAmount, dueAmount) {
+
+                            var reason = getFieldValue("concessionnotes:" + sfsid);
+                            var percentValue = getConcessionPercentByReason(reason);
+
+                            setRowConcessionFromPercent(sfsid, feesAmount, dueAmount, percentValue);
+                            updateRowCheckboxState(sfsid);
+                        }
+
+                        function rowConcessionApprovedByChanged(sfsid) {
+                            updateRowCheckboxState(sfsid);
+                        }
+
+                        function applyCommonConcessionValuesToRow(row, checkbox, amountField, percentField,
+                                reasonField, approvedByField, dueField, commonAmount, commonPercent,
+                                commonReason, commonConcessionApprovedBy) {
+
+                            var hasCommonPercent = commonPercent !== "";
+                            var hasCommonAmount = commonAmount !== "";
+
+                            if (!row || !checkbox || !amountField || !percentField || !reasonField) {
+                                return;
+                            }
+
+                            var sfsid = checkbox.id;
+                            var dueAmount = 0;
+
+                            if (dueField) {
+                                dueAmount =
+                                    parseFloat(
+                                        trimValue(dueField.value)
+                                            .replace(/,/g, "")
+                                    );
+                            }
+
+                            if (isNaN(dueAmount)) {
+                                dueAmount = 0;
+                            }
+
+                            if (hasCommonPercent) {
+
+                                var totalFeesAmount =
+                                    parseFloat(
+                                        getCellText(row, 4)
+                                            .replace(/,/g, "")
+                                    );
+
+                                var concessionAmount =
+                                    getConcessionAmountFromPercent(totalFeesAmount, commonPercent, dueAmount);
+
+                                if (concessionAmount !== "") {
+                                    percentField.value = parseFloat(commonPercent);
+                                    amountField.value = concessionAmount;
+                                }
+
+                            } else if (hasCommonAmount) {
+
+                                var amount = parseFloat(commonAmount);
+
+                                if (!isNaN(amount)) {
+
+                                    if (amount > dueAmount) {
+                                        amount = dueAmount;
+                                    }
+
+                                    amountField.value = amount;
+                                }
+
+                                percentField.value = "";
+                            }
+
+                            reasonField.value = commonReason;
+
+                            if (approvedByField) {
+                                approvedByField.value = commonConcessionApprovedBy;
+                            }
+
+                            updateRowCheckboxState(sfsid);
+                        }
+
+                        function syncTuitionFeeRowsForCommonConcession() {
+
+                            var commonAmount =
+                                getFieldValue("commonConcession");
+
+                            var commonPercent =
+                                getFieldValue("commonConcessionPercent");
+
+                            var commonReason =
+                                getFieldValue("commonConcessionReason");
+
+                            var commonConcessionApprovedBy =
+                                getFieldValue("commonConcessionApprovedBy");
+
+                            var hasCommonSelection =
+                                commonReason !== "" || commonConcessionApprovedBy !== "";
+
+                            if (!hasCommonSelection) {
+                                return;
+                            }
+
+                            var rows = getFeeRows();
+
+                            for (var i = 0; i < rows.length; i++) {
+
+                                var row = rows[i];
+
+                                if (!isTuitionFeeRow(row)) {
+                                    continue;
+                                }
+
+                                var checkbox = getRowCheckbox(row);
+
+                                if (!checkbox) {
+                                    continue;
+                                }
+
+                                var sfsid = checkbox.id;
+                                var amountField = document.getElementById("concession:" + sfsid);
+                                var percentField = document.getElementById("concessionPercent:" + sfsid);
+                                var reasonField = document.getElementById("concessionnotes:" + sfsid);
+                                var approvedByField = document.getElementById("concessionapprovedby:" + sfsid);
+                                var dueField = document.getElementsByName("dueamount:" + sfsid)[0];
+
+                                applyCommonConcessionValuesToRow(row, checkbox, amountField, percentField,
+                                    reasonField, approvedByField, dueField, commonAmount, commonPercent,
+                                    commonReason, commonConcessionApprovedBy);
                             }
                         }
 
-                    } else if (commonAmount !== "") {
+        function applyConcessionToAll() {
 
-                        // Apply common concession amount
-                        concessionInputs[i].value = commonAmount;
+            var applyAll = document.getElementById("applyAllConcession").checked;
 
-                        // Clear percentage when amount is being used
-                        percentInput.value = "";
+            var commonAmount =
+                getFieldValue("commonConcession");
 
-                        // Existing validation
-                        var dueInput = document.getElementsByName("dueamount:" + sfsid)[0];
+            var commonPercent =
+                getFieldValue("commonConcessionPercent");
 
-                        if (dueInput) {
-                            checkConcession(
-                                parseFloat(dueInput.value),
-                                parseFloat(commonAmount),
-                                sfsid
-                            );
-                        }
+            var commonReason =
+                getFieldValue("commonConcessionReason");
+            
+            var commonConcessionApprovedBy =
+                getFieldValue("commonConcessionApprovedBy");
 
-                    }
+            // Get ALL rows from the fees table
+            var rows = getFeeRows();
 
-                    // Apply common concession reason
-                    reasonInput.value = commonReason;
+            for (var i = 0; i < rows.length; i++) {
+
+                var row = rows[i];
+
+                // Get checkbox from this row
+                var checkbox = getRowCheckbox(row);
+
+                if (!checkbox) {
+                    continue;
                 }
+
+                var sfsid = checkbox.id;
+
+                // Get fields belonging to this row
+                var amountField =
+                    document.getElementById("concession:" + sfsid);
+
+                var percentField =
+                    document.getElementById("concessionPercent:" + sfsid);
+
+                var reasonField =
+                    document.getElementById("concessionnotes:" + sfsid);
+
+                var approvedByField =
+                    document.getElementById("concessionapprovedby:" + sfsid);
+
+                var dueField =
+                    document.getElementsByName("dueamount:" + sfsid)[0];
+
+                if (!amountField || !percentField || !reasonField) {
+                    continue;
+                }
+
+                if (!isTuitionFeeRow(row)) {
+                    continue;
+                }
+
+                if (!applyAll) {
+                    continue;
+                }
+
+                applyCommonConcessionValuesToRow(row, checkbox, amountField, percentField,
+                    reasonField, approvedByField, dueField, commonAmount, commonPercent,
+                    commonReason, commonConcessionApprovedBy);
             }
         }
         
@@ -582,37 +874,35 @@
 }*/
 function calculateConcessionPercent(feesAmount, percentValue, sfsid, dueAmount) {
 
-    var percent = parseFloat(percentValue);
+    setRowConcessionFromPercent(sfsid, feesAmount, dueAmount, percentValue);
+}
 
-    if (!isNaN(percent) && percentValue !== "") {
+function commonConcessionReasonChanged() {
 
-        if (percent < 0 || percent > 100) {
-            document.getElementById("concessionPercent:" + sfsid).value = "";
-            document.getElementById("concession:" + sfsid).value = "";
-            document.getElementById(sfsid).checked = false;
-            return;
-        }
+    var reason = getFieldValue("commonConcessionReason");
+    var percentField = document.getElementById("commonConcessionPercent");
 
-        var concessionAmount =
-            Math.round((parseFloat(feesAmount) * percent) / 100);
+    if (!percentField) {
+        return;
+    }
 
-        if (concessionAmount > parseFloat(dueAmount)) {
+    percentField.value = getConcessionPercentByReason(reason);
 
-            document.getElementById("concession:" + sfsid).value = "";
-            document.getElementById(sfsid).checked = false;
+    syncTuitionFeeRowsForCommonConcession();
 
-        } else {
+    // If Apply to all is already selected,
+    // immediately apply the new percentage/reason
+    if (document.getElementById("applyAllConcession").checked) {
+        applyConcessionToAll();
+    }
+}
 
-            document.getElementById("concession:" + sfsid).value =
-                concessionAmount;
+function commonConcessionApprovedByChanged() {
 
-            document.getElementById(sfsid).checked = true;
-        }
+    syncTuitionFeeRowsForCommonConcession();
 
-    } else {
-
-        document.getElementById("concession:" + sfsid).value = "";
-        document.getElementById(sfsid).checked = false;
+    if (document.getElementById("applyAllConcession").checked) {
+        applyConcessionToAll();
     }
 }
 
@@ -746,7 +1036,7 @@ for(Cookie cookie : cookies){
                 <h class="dataTextDueFees"> Rs.  ${dueamount}</h>&nbsp;&nbsp;&nbsp;
                 <h class="dataTextFees">Total Fees Concession : Rs.  ${totalfeesconcession}</h>
                 </div>
-                    <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="myTable">
+                    <table   width="100%"  border="0" style="border-color:#4b6a84;"  id="feesStructureTable">
 
                     <thead>
                         <tr>
@@ -760,6 +1050,7 @@ for(Cookie cookie : cookies){
                              <th title="click to sort" class="headerText">Concession %&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Amount&nbsp;</th>
                             <th title="click to sort" class="headerText">Concession Reason&nbsp;</th>
+                            <th title="click to sort" class="headerText">Approved By&nbsp;</th>
                             <th title="click to sort" class="headerText">Waive Off Amount&nbsp;</th>
                         </tr>
                     </thead>
@@ -787,13 +1078,48 @@ for(Cookie cookie : cookies){
                              
                                 <td class="dataText">
                                 <input type="hidden" id="concessionold:${feesstructure.sfsid}" name="concessionold:${feesstructure.sfsid}" value="${feesstructure.concession}">
-                                <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid},this.value,${feesstructure.sfsid})" 
+                                <input type="text" id="concession:${feesstructure.sfsid}" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" onkeyup="checkConcession(${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff},this.value,${feesstructure.sfsid})" 
                                 name="concession:${feesstructure.sfsid}" class="concession"
                                 value="${feesstructure.concession}"></td>
                                
                                 <td class="dataText">
-	                                <input type="text" style="background: transparent;border: none;color: #4b6a84;font-size: 13px;" name="concessionnotes:${feesstructure.sfsid}" id="concessionnotes:${feesstructure.sfsid}" value="${feesstructure.concessionnotes}">		
-                                </td>
+								    <c:set var="concessionnotes" value="${fn:split(feesstructure.concessionnotes, '::')}" />
+								    <select name="concessionnotes:${feesstructure.sfsid}" 
+								            id="concessionnotes:${feesstructure.sfsid}"
+								            class="dataText"
+								            style="width:180px;
+								                   background:transparent;
+								                   border:1px solid #4b6a84;
+								                   color:#4b6a84;
+								                   font-size:13px;
+                                   padding:3px;"
+                            onchange="rowConcessionReasonChanged(${feesstructure.sfsid}, ${feesstructure.feesamount}, ${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff})">
+								        <option value="">Select Reason</option>
+								        <option value="2ND Child" ${concessionnotes[0] eq '2ND Child' ? 'selected' : ''}>2ND Child</option>
+								        <option value="3RD Child" ${concessionnotes[0] eq '3RD Child' ? 'selected' : ''}>3RD Child</option>
+								        <option value="Staff Child" ${concessionnotes[0] eq 'Staff Child' ? 'selected' : ''}>Staff Child</option>
+								        <option value="Gift Scholar" ${concessionnotes[0] eq 'Gift Scholar' ? 'selected' : ''}>Gift Scholar</option>
+								        <option value="Sponsored" ${concessionnotes[0] eq 'Sponsored' ? 'selected' : ''}>Sponsored</option>
+								    </select>
+								</td>
+								
+								<td class="dataText">
+								    <select name="concessionapprovedby:${feesstructure.sfsid}" 
+								            id="concessionapprovedby:${feesstructure.sfsid}"
+								            class="dataText"
+								            style="width:180px;
+								                   background:transparent;
+								                   border:1px solid #4b6a84;
+								                   color:#4b6a84;
+								                   font-size:13px;
+                                   padding:3px;"
+                            onchange="rowConcessionApprovedByChanged(${feesstructure.sfsid})">
+								        <option value="">Approved By</option>
+								        <option value="Ikram Sir" ${concessionnotes[1] eq 'Ikram Sir' ? 'selected' : ''}>Ikram Sir</option>
+								        <option value="Najam Sir" ${concessionnotes[1] eq 'Najam Sir' ? 'selected' : ''}>Najam Sir</option>
+								        <option value="Talha Sir" ${concessionnotes[1] eq 'Talha Sir' ? 'selected' : ''}>Talha Sir</option>
+								    </select>
+								</td>
                                 <td class="dataText">
                                 
                                 <input type="hidden" name="waiveoff:${feesstructure.sfsid}" value="${feesstructure.waiveoff}" >
@@ -880,22 +1206,46 @@ for(Cookie cookie : cookies){
 											&nbsp;&nbsp;
 											
 											<span style="color:#416884;font-size:13px;font-weight:bold;">
-											    Common Concession Reason:
+											    Common Concession:
 											</span>
 											
-											<input type="text"
-											       id="commonConcessionReason"
-											       class="dataText"
-											       placeholder="Reason"
-											       style="width:180px;
-											              background:transparent;
-											              border:1px solid #4b6a84;
-											              color:#4b6a84;
-											              font-size:13px;
-											              padding:3px;"
-											       onkeyup="if(document.getElementById('applyAllConcession').checked) {
-											                    applyConcessionToAll();
-											                }">
+											<select id="commonConcessionReason"
+											        class="dataText"
+											        style="width:180px;
+											               background:transparent;
+											               border:1px solid #4b6a84;
+											               color:#4b6a84;
+											               font-size:13px;
+											               padding:3px;"
+                                    onchange="commonConcessionReasonChanged()">
+											
+											    <option value="">Select Reason</option>
+											    <option value="2ND Child">2ND Child</option>
+											    <option value="3RD Child">3RD Child</option>
+											    <option value="Staff Child">Staff Child</option>
+											    <option value="Gift Scholar">Gift Scholar</option>
+											    <option value="Sponsored">Sponsored</option>
+											
+											</select>
+											
+											&nbsp;&nbsp;
+											
+											<select id="commonConcessionApprovedBy"
+											        class="dataText"
+											        style="width:180px;
+											               background:transparent;
+											               border:1px solid #4b6a84;
+											               color:#4b6a84;
+											               font-size:13px;
+											               padding:3px;"
+                                    onchange="commonConcessionApprovedByChanged()">
+											
+											    <option value="">Approved By</option>
+											    <option value="Ikram Sir">Ikram Sir</option>
+											    <option value="Najam Sir">Najam Sir</option>
+											    <option value="Talha Sir">Talha Sir</option>
+											
+											</select>
 											
 											&nbsp;&nbsp;
 											
