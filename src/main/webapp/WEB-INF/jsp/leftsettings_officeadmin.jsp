@@ -172,12 +172,155 @@ Author     : Musaib
                 font-weight: bold;
                 height: 22px;
             }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                padding: 8px 6px;
+                background: #ffffff;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #143160;
+                overflow-x: hidden;
+            }
+
+            .headerTD {
+                background-color: #143160;
+                color: #ffffff;
+                border-radius: 6px;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 700;
+                padding: 9px 8px;
+                margin-bottom: 8px;
+                letter-spacing: 0.4px;
+                box-shadow: 0 2px 4px rgba(20, 49, 96, 0.2);
+                height: auto;
+                background-image: none;
+            }
             
             .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
 .ui-widget-content {
     border: 1px solid #b6cfe2;
     background: #ffffff;
     color: #222222;
+}
+
+.ui-accordion .ui-accordion-header .ui-icon {
+    display: none !important;
+}
+
+.ui-widget-content,
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    border: none !important;
+    background: transparent !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian {
+    margin: 0 0 1px 0 !important;
+    padding: 0 !important;
+    border-radius: 5px !important;
+    border-left: 3px solid transparent !important;
+    outline: none !important;
+    position: relative;
+    transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian a {
+    display: block !important;
+    padding: 6px 20px 6px 7px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    color: #143160 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sideaccordian a i {
+    display: inline-block;
+    width: 14px;
+    margin-right: 5px;
+    text-align: center;
+    color: #143160;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover,
+.ui-accordion .ui-accordion-header.ui-state-active {
+    background-color: #eff6ff !important;
+    border-left: 3px solid #143160 !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover a,
+.ui-accordion .ui-accordion-header.ui-state-active a {
+    color: #143160 !important;
+    font-weight: 600 !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover a i,
+.ui-accordion .ui-accordion-header.ui-state-active a i {
+    color: #143160 !important;
+}
+
+.sideaccordian a::after {
+    content: "\f105";
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #64748b;
+}
+
+.sideaccordian:hover a::after {
+    color: #143160;
+}
+
+.ui-state-active a::after {
+    content: "\f107";
+    color: #143160 !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    margin: 0 0 2px 13px !important;
+    padding: 2px 4px 3px 8px !important;
+    border-left: 1.5px solid #bfdbfe !important;
+    overflow: hidden !important;
+}
+
+.menu-link {
+    display: block;
+    width: 100%;
+    padding: 4px 6px;
+    color: #334155;
+    text-decoration: none !important;
+    font-size: 11.5px;
+    line-height: 1.3;
+    border-radius: 4px;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+
+.menu-link:hover {
+    background-color: #dbeafe;
+    color: #143160;
+    font-weight: 500;
+    padding-left: 9px;
+    text-decoration: none !important;
 }
 
 
@@ -334,81 +477,81 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        <div class="headerTD"><label>A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
         <%-- <div class="headerTD" style="width: 95%">Master Settings <c:out default="" value="${userAuth}"/> </div> --%>
 
         <div id="container" style="width: 95%" >
-            <h5 style="font-size: 12px"><a href="#">General</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-cog"></i>General</a></h5>
             <div>
-                <!-- <a target="mainFrame" href="/vision/YearProcess/updateYear" style="font-size: 12px;">Academic year</a><br/> -->
-                <a target="mainFrame" href="/vision/PeriodProcess/periodConfiguration" style="font-size: 12px;">Time Table</a><br/>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/YearProcess/updateYear">Academic year</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/periodConfiguration">Time Table</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Class</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-sitemap"></i>Class</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/ClassProcess/viewClasses" style="font-size: 12px;">Add Classes</a><br/>
+                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/viewClasses">Add Classes</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">FEES</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>FEES</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/FeesProcess/feesView" style="font-size: 12px;">Fees Category</a><br/>
-                <a target="mainFrame" href="/vision/StampFeesProcess/showFeesDetails" style="font-size: 12px;">Stamp Fee</a><br/>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesView">Fees Category</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StampFeesProcess/showFeesDetails">Stamp Fee</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Bus Fee</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-bus"></i>Bus Fee</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/FeesProcess/otherFeesView" style="font-size: 12px;">Bus Fees Category</a><br/>
-                <a target="mainFrame" href="/vision/StampFeesProcess/showOtherFeesDetails" style="font-size: 12px;">Bus Fee Stamp</a><br/>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherFeesView">Bus Fees Category</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StampFeesProcess/showOtherFeesDetails">Bus Fee Stamp</a>
 
             </div>
             
-            <h5 style="font-size: 12px"><a href="#">Exams</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/ExamDetailsProcess/examSchedule" style="font-size: 12px;">Exam Schedule</a><br/>
-                <a target="mainFrame" href="/vision/ExamDetailsProcess/readListOfExams" style="font-size: 12px;">Exam Details</a><br/>
-                <a target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjectNames" style="font-size: 12px;">Subject Master</a><br/>
-                <a target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjects" style="font-size: 12px;">Subject Details</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/examSchedule">Exam Schedule</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/readListOfExams">Exam Details</a>
+                <a class="menu-link" target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjectNames">Subject Master</a>
+                <a class="menu-link" target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjects">Subject Details</a>
             </div>
             
-          <!--   <h5 style="font-size: 12px"><a href="#">Attendance</a></h5>
+          <!--   <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Attendance</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/vision/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceConfiguration">Staff/Students</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAllHolidays">Holidays/WeeklyOff</a>
             </div>
             
-              <h5 style="font-size: 12px"><a href="#" >Promotion</a></h5>
+              <h5 class="sideaccordian"><a href="#"><i class="fa fa-level-up"></i>Promotion</a></h5>
             <div>
-				<a target="mainFrame" href="/vision/ClassProcess/classHierarchy" style="font-size: 12px;">Class Hierarchy</a><br/>
+				<a class="menu-link" target="mainFrame" href="/vision/ClassProcess/classHierarchy">Class Hierarchy</a>
             </div> -->
             
-            <h5 style="font-size: 12px"><a href="#">Staff</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
             <div>
                 
-                <a target="mainFrame" href="/vision/DepartmentProcess/departmentView" style="font-size: 12px;">Add Department</a><br/>
-                <a target="mainFrame" href="/vision/PositionProcess/positionView" style="font-size: 12px;">Add Position</a><br/>
+                <a class="menu-link" target="mainFrame" href="/vision/DepartmentProcess/departmentView">Add Department</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PositionProcess/positionView">Add Position</a>
             </div>
 
-            <!-- <h5 style="font-size: 12px"><a href="#" >Accounts</a></h5>
-            <div >
-                <a target="mainFrame" href="/vision/AccountProcess/getCurrentFinancialYear" style="font-size: 12px;">Accounting Year</a><br/>
+            <!-- <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/getCurrentFinancialYear">Accounting Year</a>
             </div>
             
-             <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/vision/HrProcess/leaveType" style="font-size: 12px;">Leave Type</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/assignLeave" style="font-size: 12px;">Assign/View Leave</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/payHead" style="font-size: 12px;">Pay Head</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/addPayHead" style="font-size: 12px;">Add Pay Head</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/deletePayHead" style="font-size: 12px;">Delete Pay Head</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/basicPaySettings" style="font-size: 12px;">Apply Basic Pay</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/viewEditbasicPay" style="font-size: 12px;">View/Edit Basic Pay</a><br/>
-                <a target="mainFrame" href="/vision/HrProcess/pfSettings" style="font-size: 12px;">PF Settings</a><br/>
+             <h5 class="sideaccordian"><a href="#"><i class="fa fa-sitemap"></i>H.R.</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/leaveType">Leave Type</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/assignLeave">Assign/View Leave</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/payHead">Pay Head</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/addPayHead">Add Pay Head</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/deletePayHead">Delete Pay Head</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/basicPaySettings">Apply Basic Pay</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/viewEditbasicPay">View/Edit Basic Pay</a>
+                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/pfSettings">PF Settings</a>
             </div> -->
             
-              <!--  <h5 style="font-size: 12px"><a href="#">Extras</a></h5>
+              <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
             <div>
-                <a target="mainFrame" href="/vision/AttendanceProcess/attendanceConfiguration" style="font-size: 12px;">Staff/Students</a><br/>
-                <a target="mainFrame" href="/vision/AttendanceProcess/viewAllHolidays" style="font-size: 12px;">Holidays/WeeklyOff</a><br/>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceConfiguration">Staff/Students</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAllHolidays">Holidays/WeeklyOff</a>
             </div> -->
             
             </div>
