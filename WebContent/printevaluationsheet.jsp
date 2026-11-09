@@ -90,15 +90,21 @@
     width: 100%;
 }
 
-.datatd, .datath {
+.datatd {
     border: 1px solid #000000;
     text-align: left;
     padding: 8px;
 }
 
+.datath {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 8px;
+}
+
 .reportheaders{
 	font-weight: bold;
-	font-size: 20px;
+	font-size: 16px;
 
 }
 
@@ -253,11 +259,16 @@
 			</tr>
 			<tr>
 					<c:if test="${(printcentername != '')}">
-						<td class="dataTextBoldLeft" style="width: 30%"><label class="reportheaders"><c:out value="${printcentername}" /></label></td>
+						<td class="dataTextBoldLeft"><label class="reportheaders"><c:out value="${printcentername}" /></label></td>
 					</c:if>
-						<td></td>
+
+			</tr>
+			<tr>
+			<td></td>
+			</tr>
+			<tr>
 					<c:if test="${(printexamlevel != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
+						<td class="dataTextBoldLeft"><label class="reportheaders"><c:out value="${printexamlevel}" /></label></td>
 					</c:if>
 
 			</tr>
@@ -267,10 +278,10 @@
 			<tr>
 								
 					<c:if test="${(printlanguage != '')}">
-						<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders"><c:out value="${printlanguage}" /></label></td>
+						<td class="dataTextBoldLeft"><label class="reportheaders"><c:out value="${printlanguage}" /></label></td>
 					</c:if>
 					<td></td>
-					<td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders">Subject: <c:out value="${parentsexam.key.subjectname}" /></label></td>
+					<%-- <td class="dataTextBoldLeft" style="width: 50%"><label class="reportheaders">Subject: <c:out value="${parentsexam.key.subjectname}" /></label></td> --%>
 			</tr>
 			<tr>
 			<td></td>
@@ -293,7 +304,7 @@
   						<th  class="datath">Admission Number</th>
 						<th  class="datath">Student Name</th>
 						<th  class="datath">Marks</th>
-						<th  class="datath">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Marks In Words&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+						<th  class="datath">Marks In Words</th>
  				 </tr>
  			 </thead>
  		 

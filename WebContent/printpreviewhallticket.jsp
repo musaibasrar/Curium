@@ -212,6 +212,44 @@ span{
 		}
         </script>
         
+        <style>
+    .clean-table {
+        width: 100%;
+        border-collapse: collapse;
+        border: none; /* Guarantees no lines anywhere */
+    }
+    .clean-table td {
+        padding: 5px 15px 5px 0; /* Replaces empty rows with clean margin spacing */
+        border: none; /* Guarantees no lines below text */
+        text-align: left; /* Left justified */
+        vertical-align: top;
+    }
+    .label-col {
+        white-space: nowrap; /* Ensures label NEVER wraps to a second line */
+        width: 1%; /* Magic trick: Forces the column to perfectly hug the longest label */
+    }
+    .value-col {
+        font-weight: bold;
+    }
+    
+    /* Centers the table headings */
+th.subjectdetails {
+    text-align: center;
+}
+
+/* Forces the column to shrink to perfectly fit its content */
+.col-fit {
+    width: 1%;
+    white-space: nowrap;
+}
+
+/* Allows text to wrap to multiple lines for the reference books */
+.col-wrap {
+    white-space: normal;
+    word-wrap: break-word;
+}
+</style>
+        
        <title>Hall Ticket</title>
         
 </head>
@@ -261,99 +299,97 @@ for(Cookie cookie : cookies){
 
                 </tr>
             </TABLE>
-			<table style=" border-collapse: collapse;width: 100%;">
-							<tr>   
-                                <td class="namedetails"><label>Admission No:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;font-size: 18px;"><c:out value="${Parents.key.student.admissionnumber}"/></label></td>
-                                <td class="namedetails"><label>Language Opted.:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.languageopted}"/></label></td>
-                            </tr>
-                            
-                            <tr>
-                            <td></td>
-                            </tr>	
-                            				
-                            <tr style="border-color:#000000">
-                                <td class="namedetails">
-                                <label>Candidate Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.name}"/></label>
-                            	</td>
-                                
-                             </tr>
-                             
-                             <tr style="border-color:#000000">
-                                <c:if test="${(Parents.key.student.guardiandetails != '')}">
-                                <td class="namedetails"><label>Guardian Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.student.guardiandetails}"/></label></td>
-                                </c:if>
+			<table class="clean-table">
+    <!-- Row 1: Split into 4 columns to keep Admission and Language side-by-side -->
+    <tr>   
+        <td class="label-col">Admission No :</td>
+        <td class="value-col" style="font-size: 18px;"><c:out value="${Parents.key.student.admissionnumber}"/></td>
+        
+        <td class="label-col" style="padding-left: 20px;">Language Opted. :</td>
+        <td class="value-col"><c:out value="${Parents.key.student.languageopted}"/></td>
+    </tr>
+    
+    <!-- All following rows use 2 columns (Label and Value) -->
+    <tr>
+        <td class="label-col">Candidate Name :</td>
+        <td class="value-col" colspan="3"><c:out value="${Parents.key.student.name}"/></td>
+    </tr>
+     
+    <c:if test="${(Parents.key.student.guardiandetails != '')}">
+        <tr>
+            <td class="label-col">Guardian Name :</td>
+            <td class="value-col" colspan="3"><c:out value="${Parents.key.student.guardiandetails}"/></td>
+        </tr>
+    </c:if>
 
-							<c:if test="${(Parents.key.fathersname != '')}">
-                                <td class="namedetails"><label>Father's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.fathersname}"/></label></td>
-							</c:if>
-							
-							<c:if test="${(Parents.key.mothersname != '')}">
-                                <td class="namedetails"><label>Husband's Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${Parents.key.mothersname}"/></label></td>
-							</c:if>	
-                             </tr>
-                             
-                             <tr>
-                            <td></td>
-                            </tr>	
-                             
-                              <tr style="border-color:#000000">
-                                <td class="namedetails">
-                                <label>Center Code/Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;font-size: 18px"><c:out value="${centercodename}"/></label>
-                            	</td>
-                             </tr>
-                             <tr>
-                            <td></td>
-                            </tr>	
-                             
-                             <tr style="border-color:#000000">
-                                <td class="namedetails">
-                                <label>Exam Code/Name :&nbsp;&nbsp;&nbsp;&nbsp;</label><label style="font-weight: bold;"><c:out value="${examcodename}"/></label>
-                            	</td>
-                             </tr>
-                            </table>
-                            
-                            <table style=" border-collapse: collapse;width: 100%;">
-                            	<thead>
-                            	<tr>
-                            	<th class="subjectdetails">Date</th>
-                            	<th class="subjectdetails">Subject</th>
-                            	<th class="subjectdetails">Reference Books</th>
-                            	<th class="subjectdetails">Time</th>
-                            	<th class="subjectdetails">Examiner's Sign</th>
-                            	</tr>
-                            	</thead>
-                            	<tbody>
-                            	<c:forEach items="${Parents.value}" var="examschedulelist" varStatus = "status">
-                             	<tr>
-                                <td class="subjectdetails"><fmt:formatDate value="${examschedulelist.date}" pattern="dd-MM-yyyy"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.subject}"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.referencebooks}"/></td>
-                                <td class="subjectdetails"><c:out value="${examschedulelist.starttime}"/>&nbsp;-&nbsp;<c:out value="${examschedulelist.endtime}"/></td>
-                                <td class="subjectdetails"></td>
-                                </tr>
-                                 </c:forEach>
-                                 <c:if test="${totalpapers < 2}">
-						 		<tr>
-	                                <td class="nosubjectdetails"></td>
-                                	<td class="nosubjectdetails"></td>
-                               	    <td class="nosubjectdetails"></td>
-                                	<td class="nosubjectdetails"></td>
-                                	<td class="nosubjectdetails"></td>
-                                </tr>
-                                <tr>
-	                                <td class="nosubjectdetails"></td>
-                                	<td class="nosubjectdetails"></td>
-                               	    <td class="nosubjectdetails"></td>
-                                	<td class="nosubjectdetails"></td>
-                                	<td class="nosubjectdetails"></td>
-                                </tr>
-								</c:if>
-                                 
-                    </tbody>
-                            </table>
-                            
-                            
-                            <TABLE id="dataTable" width="100%" border="0"
+    <c:if test="${(Parents.key.fathersname != '')}">
+        <tr>
+            <td class="label-col">Father's Name :</td>
+            <td class="value-col" colspan="3"><c:out value="${Parents.key.fathersname}"/></td>
+        </tr>
+    </c:if>
+    
+    <c:if test="${(Parents.key.mothersname != '')}">
+        <tr>
+            <td class="label-col">Husband's Name :</td>
+            <td class="value-col" colspan="3"><c:out value="${Parents.key.mothersname}"/></td>
+        </tr>
+    </c:if>	
+     
+    <tr>
+        <td class="label-col">Center Code/Name :</td>
+        <td class="value-col" colspan="3" style="font-size: 18px;"><c:out value="${centercodename}"/></td>
+    </tr>
+     
+    <tr>
+        <td class="label-col">Exam Code/Name :</td>
+        <td class="value-col" colspan="3"><c:out value="${examcodename}"/></td>
+    </tr>
+</table>
+
+				<table style="border-collapse: collapse; width: 100%;">
+					<thead>
+						<tr>
+							<th class="subjectdetails col-fit">Date</th>
+							<th class="subjectdetails col-wrap">Reference Books</th>
+							<th class="subjectdetails col-fit">Time</th>
+							<th class="subjectdetails col-fit">Examiner's Sign</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${Parents.value}" var="examschedulelist"
+							varStatus="status">
+							<tr>
+								<td class="subjectdetails col-fit"><fmt:formatDate
+										value="${examschedulelist.date}" pattern="dd-MM-yyyy" /></td>
+								<td class="subjectdetails col-wrap"><c:out
+										value="${examschedulelist.referencebooks}" /></td>
+								<td class="subjectdetails col-fit"><c:out
+										value="${examschedulelist.starttime}" />&nbsp;-&nbsp;<c:out
+										value="${examschedulelist.endtime}" /></td>
+								<td class="subjectdetails"></td>
+							</tr>
+						</c:forEach>
+
+						<c:if test="${totalpapers < 2}">
+							<tr>
+								<td class="nosubjectdetails col-fit"></td>
+								<td class="nosubjectdetails col-wrap"></td>
+								<td class="nosubjectdetails col-fit"></td>
+								<td class="nosubjectdetails"></td>
+							</tr>
+							<tr>
+								<td class="nosubjectdetails col-fit"></td>
+								<td class="nosubjectdetails col-wrap"></td>
+								<td class="nosubjectdetails col-fit"></td>
+								<td class="nosubjectdetails"></td>
+							</tr>
+						</c:if>
+					</tbody>
+				</table>
+
+
+				<TABLE id="dataTable" width="100%" border="0"
 			style="page-break-inside:avoid; border-collapse: collapse;">
 
 		
@@ -378,7 +414,7 @@ for(Cookie cookie : cookies){
 			</tr>
 		</TABLE>
 		</div>    
-			<br>		           
+			<br><br><br>		           
       </c:forEach>
 	</form>
 	

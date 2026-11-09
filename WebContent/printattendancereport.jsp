@@ -98,12 +98,16 @@
     width: 100%;
 }
 
-.datatd, .datath {
+.datatd {
     border: 1px solid #000000;
     text-align: left;
     padding: 8px;
 }
-
+.datath {
+    border: 1px solid #000000;
+    text-align: center;
+    padding: 8px;
+}
 </style>
 
 <script>
@@ -208,7 +212,7 @@
 				</td>
 				<td class="dataTextBoldCenter" style="width: 100%">
 				BOARD OF ISLAMIC EDUCATION KARNATAKA<br><br>
-				<label class="examlabels">${attendancecentercode}</label><label class="addressLine">&nbsp;&nbsp;&nbsp;ATTENDANCE LIST&nbsp;&nbsp;&nbsp;
+				<label class="examlabels">${attendancecentercode}</label><br><label class="addressLine">&nbsp;&nbsp;&nbsp;ATTENDANCE LIST&nbsp;&nbsp;&nbsp;
 				 </label>
 				 <%-- <label class="examlabels">
 				 Exam Code:
@@ -228,28 +232,18 @@
 
                 </tr>
     </TABLE>
-            
-<c:forEach items="${viewAttendancemaplist}" var="viewAttendancemaplist" >
-	
-	<br>
-		<table>
+    
+    <table>
 		
 		<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
 			<tr>
 					<td class="dataTextBoldLeft">
 					<c:if test="${(attendancecentername != '')}">
 						<c:out value="${attendancecentername}" />
 					</c:if>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					
 					<c:if test="${(attendanceexamlevelname != '')}">
-						Exam Code/Exam Name:${viewAttendancemaplist.value}
+						<br>Exam Code/Exam Name:${viewAttendancemaplist.value}
 					</c:if>
 					</td>
 			</tr>
@@ -265,6 +259,9 @@
 			<td></td>
 			</tr>
 		</table>
+            
+<c:forEach items="${viewAttendancemaplist}" var="viewAttendancemaplist" >
+	
 		<TABLE  width="100%" border="1" style="border-collapse:collapse;">
                 <tr>
 
@@ -281,13 +278,13 @@
   						<th  class="datath">Registration No.</th>
 						<th  class="datath">Student Name</th>
 						<c:set var="attendanexamlevel" value="${fn:split(viewAttendancemaplist.value, '/')}" />
-						<c:if test="${(attendanexamlevel[0] == 'CF') || (attendanexamlevel[0] == 'CS') || (attendanexamlevel[0] == 'DFA')  || (attendanexamlevel[0] == 'DSA')  || (attendanexamlevel[0] == 'DTA')}">
-								<th class="datath">Paper 1</th>
+						<c:if test="${(attendanexamlevel[0] == 'CF') || (attendanexamlevel[0] == 'CS') || (attendanexamlevel[0] == 'DFA')  || (attendanexamlevel[0] == 'DSA')  || (attendanexamlevel[0] == 'DTA') || (attendanexamlevel[0] == 'ICC')}">
+								<th class="datath">Paper</th>
 							</c:if>
 							
 							<c:if test="${(attendanexamlevel[0] == 'DF') || (attendanexamlevel[0] == 'DS') || (attendanexamlevel[0] == 'DT') || (attendanexamlevel[0] == 'TC') }">
-								<th class="datath">Paper 1</th>
-								<th class="datath">Paper 2</th>
+								<th class="datath">Paper</th>
+								<th class="datath">Paper</th>
 							</c:if>
 						<%-- <c:forEach items="${attendancesubexamlevel}" var="subexamlevel">
 						<th class="datath">${subexamlevel.subjectname}</th>
@@ -300,7 +297,7 @@
 			<c:forEach items="${viewAttendancemaplist.key}" var="viewAttendancemap" varStatus="status">
 
 						<tr>
-							<td class="datatd"><c:out value="${(status.index)+1}" /></td>
+							<td class="datath"><c:out value="${(status.index)+1}" /></td>
 							<td class="datatd"><c:out value="${viewAttendancemap.key.admissionnumber}" /></td>
 							<td class="datatd"><c:out value="${viewAttendancemap.key.name}" /></td>
 							
