@@ -15,7 +15,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
-<link rel="stylesheet" href="/vision/css/font-awesome.css">
+<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {

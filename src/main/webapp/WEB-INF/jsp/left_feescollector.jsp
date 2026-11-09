@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/vision/css/font-awesome.css">
+		<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
