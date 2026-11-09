@@ -754,6 +754,11 @@ for(Cookie cookie : cookies){
 											<option value="2022/23" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2022/23</option>
 											<option value="2023/24" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2023/24</option>
 											<option value="2024/25" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2024/25</option>
+											<option value="2025/26" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2025/26</option>
+											<option value="2026/27" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2026/27</option>
+											<option value="2027/28" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2027/28</option>
+											<option value="2028/29" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2028/29</option>
+											<option value="2029/30" style="text-transform:uppercase;height: 18px;font-size: 13px;font-weight: bold;">2029/30</option>
 								</select>	
 								</label></td>
 						</tr>
