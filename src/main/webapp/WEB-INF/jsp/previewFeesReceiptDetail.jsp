@@ -174,7 +174,6 @@ if (cookies != null) {
                 </tbody>
                 <tfoot>
                     <tr>
-                        <td align="center"><a id="print" href="/greatindiaacademy/FeesCollection/printFeesReceipt?id=<c:out value="${recieptinfo.receiptnumber}" />&sid=<c:out value="${student.sid}"/>">Print</a></td>
                         <td>Total Amount</td>
                         <td class="totalAmount"><c:out value="${receiptinfo.totalamount}" /></td>
                     </tr>
