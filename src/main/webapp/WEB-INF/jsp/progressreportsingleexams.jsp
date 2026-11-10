@@ -627,13 +627,13 @@ for(Cookie cookie : cookies){
 								<label style="font-weight: bold; color: #325F6D;">
 									<input type="checkbox" id="semester1" name="semesterSelection" value="semester1"
 										onclick="handleSemesterSelection('semester1', 'semester2')" />
-									Semester-1
+									Term-1
 								</label>
 								&nbsp;&nbsp;
 								<label style="font-weight: bold; color: #325F6D;">
 									<input type="checkbox" id="semester2" name="semesterSelection" value="semester2"
 										onclick="handleSemesterSelection('semester2', 'semester1')" />
-									Semester-2
+									Term-2
 								</label>
 							</td>
 						</tr>

@@ -117,6 +117,35 @@ Author     : Musaib
                 height: 22px;
             }
 
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                padding: 8px 6px;
+                background: #ffffff;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #143160;
+                overflow-x: hidden;
+            }
+
+            .headerTD {
+                background-color: #143160;
+                color: #ffffff;
+                border-radius: 6px;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 700;
+                padding: 9px 8px;
+                margin-bottom: 8px;
+                letter-spacing: 0.4px;
+                box-shadow: 0 2px 4px rgba(20, 49, 96, 0.2);
+                height: auto;
+                background-image: none;
+            }
+
 .sideaccordian{
 		
 		font-size: 12px;
@@ -131,6 +160,120 @@ Author     : Musaib
     border: 1px solid #b6cfe2;
     background: #ffffff;
     color: #222222;
+}
+
+.ui-accordion .ui-accordion-header .ui-icon {
+    display: none !important;
+}
+
+.ui-widget-content,
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    border: none !important;
+    background: transparent !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian {
+    margin: 0 0 1px 0 !important;
+    padding: 0 !important;
+    border-radius: 5px !important;
+    border-left: 3px solid transparent !important;
+    outline: none !important;
+    position: relative;
+    transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian a {
+    display: block !important;
+    padding: 6px 20px 6px 7px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    color: #143160 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sideaccordian a i {
+    display: inline-block;
+    width: 14px;
+    margin-right: 5px;
+    text-align: center;
+    color: #143160;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover,
+.ui-accordion .ui-accordion-header.ui-state-active {
+    background-color: #eff6ff !important;
+    border-left: 3px solid #143160 !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover a,
+.ui-accordion .ui-accordion-header.ui-state-active a {
+    color: #143160 !important;
+    font-weight: 600 !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover a i,
+.ui-accordion .ui-accordion-header.ui-state-active a i {
+    color: #143160 !important;
+}
+
+.sideaccordian a::after {
+    content: "\f105";
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #64748b;
+}
+
+.sideaccordian:hover a::after {
+    color: #143160;
+}
+
+.ui-state-active a::after {
+    content: "\f107";
+    color: #143160 !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    margin: 0 0 2px 13px !important;
+    padding: 2px 4px 3px 8px !important;
+    border-left: 1.5px solid #bfdbfe !important;
+    overflow: hidden !important;
+}
+
+.menu-link {
+    display: block;
+    width: 100%;
+    padding: 4px 6px;
+    color: #334155;
+    text-decoration: none !important;
+    font-size: 11.5px;
+    line-height: 1.3;
+    border-radius: 4px;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+
+.menu-link:hover {
+    background-color: #dbeafe;
+    color: #143160;
+    font-weight: 500;
+    padding-left: 9px;
+    text-decoration: none !important;
 }
 
 
@@ -287,200 +430,74 @@ for(Cookie cookie : cookies){
             <div id="clock" class="headerTD"></div>
         </form> -->
         <%-- <div class="headerTD">Welcome <c:out default="" value="${userAuth}"/> </div> --%>
-        <div class="headerTD" style="width: 95%" ><label style="font-size: 14px;">A.Y:&nbsp;${currentAcademicYear}</label> </div>
+        <div class="headerTD"><label>A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
         <div id="container" style="width: 95%" >
             
              
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Detail Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/hwfschools/DocumentsProcess/studentsAdmissionReports" style="font-size: 12px;">Admission Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/DocumentsProcess/studentsPendingAdmissionReports" style="font-size: 12px;">Pending Admission Report</a>
-            			</td>
-            		</tr>
-            		
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/DocumentsProcess/studentsDetailsReports">Detail Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/DocumentsProcess/studentsAdmissionReports">Admission Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/DocumentsProcess/studentsPendingAdmissionReports">Pending Admission Report</a>
             </div>
             
             
-              <!-- <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/hwfschools/FeesProcess/feesDueStampFees" style="font-size: 12px;">Fees Stamp Due Report</a>
-            			</td>
-            		</tr>
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/hwfschools/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/hwfschools/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/hwfschools/feescancelledreceipts" style="font-size: 12px;">Cancelled Fees Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/hwfschools/FeesProcess/otherfeesReport" style="font-size: 12px;">Other Fees Report</a>
-            			</td>
-            		</tr>
-                </table>
+              <!-- <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/feesCollectionDetails">Fees Collection Details</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/FeesProcess/feesReport">Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/FeesProcess/feesDueStampFees">Fees Stamp Due Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/FeesProcess/feesConcessionReport">Fees Concession Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/feescancelledreceipts">Cancelled Fees Receipts</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/FeesProcess/otherfeesReport">Bus Fees Report</a>
             </div> -->
             
             
-             <h5 class="sideaccordian" ><a href="#">Student Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
+             <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Student Attendance</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/AttendanceProcess/attendanceExport">Export Attendance</a>
             </div>
             
             
-             <!--  <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
+             <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/AttendanceProcess/attendanceExportViewStaff">Export Attendance</a>
             </div> -->
             
 
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Marks Card</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/hwfschools/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MarksDetailsProcess/progressReport">Generate Marks Card</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a>
             </div>
             
-            <!-- <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/hwfschools/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/hwfschools/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr>
-                </table>
+            <!-- <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/AccountProcess/generalLedgerReport">General Ledger Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/incomestatement">Income Statement</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/trialbalance">Trial Balance</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/AccountProcess/balanceSheet">Balance Sheet</a>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Expense</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/adminexpensesreport" style="font-size: 12px;">Expense Report</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-credit-card"></i>Expense</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/adminexpensesreport">Expense Report</a>
             </div>
             
-              <h5 class="sideaccordian" ><a href="#">Stock Receipts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/MessItemsMoveProcess/billsReport" style="font-size: 12px;">Receipts Report</a>
-            			</td>
-            		</tr>
-                </table>
+              <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Receipts</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MessItemsMoveProcess/billsReport">Receipts Report</a>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#" >Stock</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-bar-chart"></i>Stock</a></h5>
             
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/hwfschools/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/hwfschools/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/hwfschools/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/hwfschools/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MessItemsProcess/currentStock">Stock Quantity Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MessItemsProcess/batchStock">Stock Price Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MessItemsProcess/issuanceStock">Stock Issuance Report</a>
+                <a class="menu-link" target="mainFrame" href="/hwfschools/MessItemsProcess/receiveStock">Stock Received Report</a>
             </div> -->
             
             </div>

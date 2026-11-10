@@ -28,9 +28,9 @@ body {
 	max-width: 98vw;
 	margin: auto;
 	background: white;
-	border: 5px solid #2c8a6b;
+	border: 2px solid #561778; /* Changed to match the purple header */
 	padding: 10px;
-	border-style: double;
+	border-radius: 12px;
 	box-sizing: border-box;
 }
 
@@ -59,7 +59,6 @@ body {
 
 .schoolname {
 	background: #ffffff;
-	flex: 1;
 	text-align: center;
 	/* height: 40px; */
 	/* padding-top: 5px; */
@@ -98,17 +97,79 @@ body {
 }
 
 .studentinfo {
-	margin-top: 10px;
+	margin-top: 5px;
+	width: 100%;
+	border: 1.5px solid #4a90e2;
+	border-radius: 8px;
+	overflow: hidden;
+	box-sizing: border-box;
 }
 
 .studentinfo table {
 	width: 100%;
-	border-collapse: collapse;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: none;
+	table-layout: fixed;
+	background-color: #ffffff;
+	margin: 0;
 }
 
 .studentinfo td {
-	padding: 5px;
-	font-size: 14px;
+	border-right: 1px solid #4a90e2;
+	border-bottom: 1px solid #4a90e2;
+	padding: 4px 6px;
+	font-size: 13px;
+	vertical-align: middle;
+	box-sizing: border-box;
+}
+
+.studentinfo tr:last-child td {
+	border-bottom: none;
+}
+
+.studentinfo tr td:last-child {
+	border-right: none;
+}
+
+.studentinfo tr:first-child td:first-child {
+	border-top-left-radius: 7px;
+}
+
+.studentinfo tr:first-child td:last-child {
+	border-top-right-radius: 7px;
+}
+
+.studentinfo tr:last-child td:first-child {
+	border-bottom-left-radius: 7px;
+}
+
+.studentinfo tr:last-child td:last-child {
+	border-bottom-right-radius: 7px;
+}
+
+.studentinfo .si-label {
+	background-color: #daedfc;
+	color: #0b3b60;
+	font-weight: bold;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.studentinfo .si-data {
+	background-color: #ffffff;
+	color: #000000;
+	font-weight: bold;
+}
+
+.studentinfo .si-data-left {
+	text-align: left;
+	padding-left: 8px;
+	text-transform: uppercase;
+}
+
+.studentinfo .si-data-center {
+	text-align: center;
 }
 
 .marks {
@@ -135,7 +196,6 @@ body {
 }
 
 .totalbox {
-	margin-top: 50px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -147,7 +207,7 @@ body {
 	background: #f4d5a6;
 	border-radius: 5px;
 	text-transform: uppercase;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .percentage {
@@ -285,7 +345,52 @@ body {
     width: 300px;
     flex-shrink: 0;
 }
+.rounded-table {
+					width: 100%;
+					border-collapse: separate; /* Crucial for border-radius to work on tables */
+					border-spacing: 0;
+					border: 1px solid #3b82f6; /* Outer blue border */
+					border-radius: 8px; /* Adjust number for more or less rounding */
+					overflow: hidden;
+					table-layout: fixed;
+				}
 
+				.rounded-table td {
+					border-right: 1px solid #3b82f6; /* Inner vertical borders */
+					border-bottom: 1px solid #3b82f6; /* Inner horizontal borders */
+					padding: 6px 8px;
+					font-size: 13px;
+					font-weight: bold;
+				}
+
+				/* Remove inner borders that touch the outer boundary to prevent double lines */
+				.rounded-table tr:last-child td {
+					border-bottom: none;
+				}
+				.rounded-table td:last-child {
+					border-right: none;
+				}
+
+				/* Cell Colors matching the provided image */
+				.si-label {
+					background-color: #dcf0ff;
+					color: #003380;
+					text-align: center;
+				}
+
+				.si-data {
+					background-color: #f4faff;
+					color: #000000;
+				}
+
+				.si-data-center {
+					text-align: center;
+				}
+
+				.si-data-left {
+					text-align: left;
+					padding-left: 10px !important;
+				}
 </style>
 
 <script type="text/javascript">
@@ -367,7 +472,117 @@ body {
             }
         };
     </script>
+<style>
+		/* 1. The rounded container */
+		div.marks-wrapper {
+			border: 1px solid #3b82f6 !important;
+			border-radius: 10px !important;
+			overflow: hidden !important;
+			margin-top: 20px !important;
+			margin-bottom: 10px !important;
+			background: #fff !important;
+			/* Fixes clipping issues in some browsers (Safari) */
+			-webkit-mask-image: -webkit-radial-gradient(white, black);
+		}
+		
+		/* 2. The Academic Performance Title */
+		div.marks-header-title {
+			background-color: #e2d4f5 !important;
+			color: #5c2082 !important;
+			font-weight: bold !important;
+			padding: 8px 12px !important;
+			font-size: 15px !important;
+			border-bottom: 1px solid #3b82f6 !important;
+			text-align: left !important;
+		}
 
+		/* 3. The Table itself */
+		div.marks-wrapper table, 
+		div.marks-wrapper .marks-table {
+			width: 100% !important;
+			border-collapse: collapse !important; /* Guarantees inner borders touch */
+			margin: 0 !important;
+			border-style: hidden !important; /* Hides the table's square outer edge so the wrapper's rounded edge shows */
+		}
+
+		/* 4. Force Blue Borders on ALL Cells */
+		div.marks-wrapper table th, 
+		div.marks-wrapper table td {
+			border: 1px solid #3b82f6 !important; /* !important overrides any old inline styles */
+		}
+
+		/* 5. Header Cell Colors (Light Blue) */
+		div.marks-wrapper table th,
+		div.marks-wrapper table .marksTableHeader,
+		div.marks-wrapper table .summaryTableHeader {
+			background-color: #dcf0ff !important;
+			color: #003380 !important;
+			font-weight: bold !important;
+		}
+
+		/* 6. Data Cell Colors (White/Light) */
+		div.marks-wrapper table td,
+		div.marks-wrapper table .marksTableCell,
+		div.marks-wrapper table .marksTableCellLeft {
+			background-color: #f4faff !important; 
+			color: #000 !important;
+		}
+		
+		div.marks-wrapper-coscholastic {
+			border: 1px solid #3b82f6 !important;
+			border-radius: 10px !important;
+			overflow: hidden !important;
+			margin-top: 10px !important;
+			margin-bottom: 10px !important;
+			background: #fff !important;
+			/* Fixes clipping issues in some browsers (Safari) */
+			-webkit-mask-image: -webkit-radial-gradient(white, black);
+		}
+		
+		
+		/* 7. The Co-scholastic Title */
+		div.marks-header-title-coscholastic {
+			background-color: #81ff80 !important;
+			color: #5c2082 !important;
+			font-weight: bold !important;
+			padding: 8px 12px !important;
+			font-size: 15px !important;
+			border-bottom: 1px solid #3b82f6 !important;
+			text-align: left !important;
+		}
+
+		/* 8. The Table itself */
+		div.marks-wrapper-coscholastic table, 
+		div.marks-wrapper-coscholastic .marks-table-coscholastic {
+			width: 100% !important;
+			border-collapse: collapse !important; /* Guarantees inner borders touch */
+			margin: 0 !important;
+			border-style: hidden !important; /* Hides the table's square outer edge so the wrapper's rounded edge shows */
+		}
+
+		/* 9. Force Blue Borders on ALL Cells */
+		div.marks-wrapper-coscholastic table th, 
+		div.marks-wrapper-coscholastic table td {
+			border: 1px solid #3b82f6 !important; /* !important overrides any old inline styles */
+		}
+
+		/* 10. Header Cell Colors (Light Blue) */
+		div.marks-wrapper-coscholastic table th,
+		div.marks-wrapper-coscholastic table .marksTableHeader-coscholastic,
+		div.marks-wrapper -coscholastictable .summaryTableHeader-coscholastic {
+			background-color: #cffec4 !important;
+			color: #003380 !important;
+			font-weight: bold !important;
+		}
+
+		/* 11. Data Cell Colors (White/Light) */
+		div.marks-wrapper-coscholastic table td,
+		div.marks-wrapper-coscholastic table .marksTableCell-coscholastic,
+		div.marks-wrapper-coscholastic table .marksTableCellLeft-coscholastic {
+			background-color: #cffec4 !important; 
+			color: #000 !important;
+		}
+	</style>
 
 </head>
 
@@ -381,206 +596,180 @@ body {
 	<div class="container">
 
 		<div class="header">
-
-			<!-- <div class="topline">
-				<div>
-					<b>SCHOOL DISE CODE : 29050505406</b>
-				</div>
-				<div>
-					<b style="color: green"><label style="font-size:12px;text-transform: uppercase;">Educational Trust®</label></b>
-				</div>
-				<div>
-					<b>SSLC BOARD (KSEAB) CODE : SS0612</b>
-				</div>
-			</div> -->
-
-			<div class="schoolbox">
+			<div class="schoolbox" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #5c2082; padding-bottom: 10px; position: relative;">
 			
-				<div class="logo">
-					<img border="0" style="vertical-align: text-bottom;height: 90px;width: 90px;" alt="ideoholic" src="/hwfschools/images/hwfschools.png">
+				<div class="logo" style="width: 120px; text-align: left;">
+					<img border="0" style="vertical-align: middle; height: 85px; width: 155px;" alt="School Logo" src="/hwfschools/images/hwfschools${branchid}.png">
 				</div>
 		
-				<div class="schoolname">
-					<h3 style="font-size: 40px;color: #971d1d;">${branchname}</h3>
-					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/hwfschools/images/hwfschoolsschoolname.png"> -->
-					<div>
-						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
+				<div class="schoolname" style="flex: 0.7; text-align: center; font-family: Arial, sans-serif;">
+					<h4 style="font-size: 32px; color: #5c2082; margin: 0; font-weight: bold; text-transform: capitalize;">${branchname}</h4>
+					<div style="color: #008080; font-size: 10px; font-weight: bold; margin-top: 6px;">
+						(Run by Human Welfare Foundation, New Delhi)
+					</div>
+					<div style="color: #008080; font-size: 10px; font-weight: bold; margin-top: 3px;">
+						${branchaddress}
+					</div>
+					<div style="color: #008080; font-size: 10px; font-weight: bold; margin-top: 3px;">
+						CBSE Affiliation No. - 
+						<c:choose>
+							<c:when test="${branchid==2}"><c:out value="" /></c:when>
+							<c:when test="${branchid==3}"><c:out value="" /></c:when>
+							<c:when test="${branchid==4}"><c:out value="" /></c:when>
+							<c:when test="${branchid==5}"><c:out value="" /></c:when>
+							<c:when test="${branchid==6}"><c:out value="" /></c:when>
+							<c:when test="${branchid==7}"><c:out value="" /></c:when>
+							<c:when test="${branchid==8}"><c:out value="230319" /></c:when>
+							<c:when test="${branchid==9}"><c:out value="" /></c:when>
+							<c:otherwise>230319</c:otherwise>
+						</c:choose>
 					</div>
 				</div>
 
-			</div>
+				<!-- Right side Vision 2026 Logo -->
+				<div class="logo" style="width: 120px; text-align: right;">
+					<img border="0" style="vertical-align: middle; height: 62px; width: 155px;" alt="Vision 2026" src="/hwfschools/images/hwfschools2026.png">
+				</div>
 
+			</div>
 		</div>
 
-
-		<div class="title">
-			<h2><label style="font-size:29px;text-transform: uppercase;">Achievement Record</label></h2>
-			<div style="font-size: 21px;font-weight:bold;">
+		<div class="title" style="text-align: center; margin-top: -18px; position: relative; z-index: 10;">
 			<c:set var="yearParts" value="${fn:split(currentAcademicYear, '/')}" />
 			<c:set var="startYear" value="${yearParts[0]}" />
 			<c:set var="endYear" value="${startYear + 1}" />
-
-			Academic Year ${startYear}-${endYear}</div>
+			<!-- Formats the end year as two digits (e.g., 2026 + 1 -> 27) -->
+			<c:set var="endYearSuffix" value="${fn:substring(startYear + 1, 2, 4)}" />
+			<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
 			
-			<c:choose>
-			<c:when test="${fn:length(Parents.examSummaries) == 6}">
-					<div class="cce" style="font-size: 27px;">Continuous And
-				Comprehensive Evaluation</div>
-			<div class="certifyline" style="font-size: 16px;font-weight:bold;">
-				This is to certify that the below mentioned candidate has passed <b>
-				<c:set var="dataSubParts" value="${fn:split(Parents.parents.student.classstudying,'--')}" />
-						<c:choose>
-						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
-						    <c:when test="${dataSubParts[0] == '1'}"><label >1<sup>st</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '2'}"><label>2<sup>nd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '3'}"><label>3<sup>rd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '4'}"><label>4<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '5'}"><label>5<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '6'}"><label>6<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '7'}"><label>7<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '8'}"><label>8<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '9'}"><label>9<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '10'}"><label>10<sup>th</sup> Std.</label></c:when>
-						</c:choose>
-				</b> Examination with the following details.
+			<!-- Purple pill badge with white border overlapping the header line -->
+			<div style="background-color: #5c2082; color: #ffffff; display: inline-block; padding: 6px 40px; border-radius: 20px; font-size: 16px; font-weight: bold; border: 3px solid #ffffff;">
+				<c:choose>
+					<c:when test="${not empty selectedSemesterLabel}">
+						${selectedSemesterLabel} Examination ${startYear}-${endYearSuffix}
+					</c:when>
+					<c:when test="${not empty Parents.examSummaries && fn:length(Parents.examSummaries) == 1}">
+						${Parents.examSummaries[0].examName} Examination ${startYear}-${endYearSuffix}
+					</c:when>
+					<c:otherwise>
+						Term - I Examination ${startYear}-${endYearSuffix}
+					</c:otherwise>
+				</c:choose>
 			</div>
-			</c:when>
-			<c:when test="${fn:length(Parents.examSummaries) == 3}">
-				<div class="cce" style="font-size: 27px;">Continuous And Comprehensive Evaluation</div>
-				<c:if test="${not empty selectedSemesterLabel}">
-					<div style="font-size: 22px; font-weight: bold; margin-top: 4px;"><c:out value="${selectedSemesterLabel}" /></div>
-				</c:if>
-			</c:when>
-			
-			<c:otherwise>
-				<div class="cce" style="font-size: 27px;">Continuous And Comprehensive Evaluation</div>
-			</c:otherwise>
-			
-			</c:choose>
-			
 		</div>
 
 
 		<div class="studentinfo">
-
-			<table>
-				<tr style="border: 1px solid black; border-collapse: collapse;">
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>STS
-							No :<c:out value="${Parents.parents.student.sts}" /></b></td>
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Roll
-							No :<c:out value="${Parents.parents.student.admissionnumber}" /></b></td>
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Class
-							: ${Parents.parents.student.classstudying}
-						<%-- <c:choose>
-						<c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}">${dataSubParts[0]}</c:when>
-						    <c:when test="${dataSubParts[0]=='Nursery' || dataSubParts[0]=='L.K.G' || dataSubParts[0]=='U.K.G'}"><label style="text-transform: uppercase;">${dataSubParts[0]}</label></c:when>
-						    <c:when test="${dataSubParts[0] == '1'}"><label >1<sup>st</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '2'}"><label>2<sup>nd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '3'}"><label>3<sup>rd</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '4'}"><label>4<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '5'}"><label>5<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '6'}"><label>6<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '7'}"><label>7<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '8'}"><label>8<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '9'}"><label>9<sup>th</sup> Std.</label></c:when>
-						    <c:when test="${dataSubParts[0] == '10'}"><label>10<sup>th</sup> Std.</label></c:when>
-						</c:choose> --%>
-					</b></td>
-					<td
-						style="border: 1px solid black; border-collapse: collapse; font-size: 18px;"><b>Date of Birth
-							: <fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/></b></td>
-				</tr>
-				<tr>
-					<br>
-				</tr>
-				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Student's Name :
-						<label style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.student.name}" /></label></b></td>
-					<td rowspan="3" align="center"><div class="studentphoto">
+			<table class="rounded-table">
+				<colgroup>
+					<col style="width: 13.5%;">
+					<col style="width: 7.0%;">
+					<col style="width: 14.0%;">
+					<col style="width: 14.0%;">
+					<col style="width: 15.0%;">
+					<col style="width: 12.5%;">
+					<col style="width: 9.5%;">
+					<col style="width: 7.5%;">
+					<col style="width: 7.0%;">
+				</colgroup>
+				<tbody>
+					<tr>
+						<td class="si-label">Admission No.</td>
+						<td class="si-data si-data-center">
+							<c:out value="${Parents.parents.student.admissionnumber}" />
+						</td>
+						
+						<td class="si-label">Student Name</td>
+						<td class="si-data si-data-left" colspan="2">
+							<label style="text-transform: uppercase;"><c:out value="${Parents.parents.student.name}" /></label>
+						</td>
+						
+						<td class="si-label">Class</td>
+						<td class="si-data si-data-center">
 							<c:choose>
-									<c:when test="${not empty Parents.parents.student.studentpic}">
-
-										<c:choose>
-											<%-- New format --%>
-											<c:when test="${fn:startsWith(Parents.parents.student.studentpic, 'data:')}">
-
-												<c:choose>
-													<%-- PDF --%>
-													<c:when
-														test="${fn:startsWith(Parents.parents.student.studentpic, 'data:application/pdf')}">
-														<a href="${Parents.parents.student.studentpic}" target="_blank"
-															rel="noopener noreferrer"> PDF </a>
-													</c:when>
-
-													<%-- Image --%>
-													<c:otherwise>
-														<img src="${Parents.parents.student.studentpic}" alt="Student's Pic"
-															style="width: 120px; height: 120px;">
-													</c:otherwise>
-												</c:choose>
-
-											</c:when>
-
-											<%-- Old raw Base64 format --%>
-											<c:otherwise>
-												<img src="data:image/jpeg;base64,${Parents.parents.student.studentpic}"
-													alt="Student's Pic" style="width: 120px; height: 120px;">
-											</c:otherwise>
-										</c:choose>
-
-									</c:when>
-
-									<c:otherwise>
-                    
-                </c:otherwise>
-								</c:choose>
-						</div></td>
-				</tr>
-
-				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Father's Name :
-						<label style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.fathersname}" /></label></b></td>
-				</tr>
-
-				<tr>
-					<td colspan="3" style="font-size: 20px;"><b>Mother's Name :<label
-						style="text-transform: uppercase;"><c:out
-								value="${Parents.parents.mothersname}" /></label></b></td>
-				</tr>
-
+								<c:when test="${fn:length(dataSubParts) > 0}">
+									<c:out value="${dataSubParts[0]}" />
+								</c:when>
+								<c:otherwise>
+									<c:out value="${Parents.parents.student.classstudying}" />
+								</c:otherwise>
+							</c:choose>
+						</td>
+						
+						<td class="si-label">Roll No.</td>
+						<td class="si-data si-data-center">
+							<c:out value="" />
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="si-label">Father's Name</td>
+						<td class="si-data si-data-left" colspan="2">
+							<label style="text-transform: uppercase;"><c:out value="${Parents.parents.fathersname}" /></label>
+						</td>
+						
+						<td class="si-label">Mother's Name</td>
+						<td class="si-data si-data-left">
+							<label style="text-transform: uppercase;"><c:out value="${Parents.parents.mothersname}" /></label>
+						</td>
+						
+						<td class="si-label">Date of Birth</td>
+						<td class="si-data si-data-center">
+							<fmt:formatDate value="${Parents.parents.student.dateofbirth}" pattern="dd/MM/yyyy"/>
+						</td>
+						
+						<td class="si-label">Section</td>
+						<td class="si-data si-data-center">
+							<c:choose>
+								<c:when test="${fn:length(dataSubParts) > 1}">
+									<c:out value="${dataSubParts[1]}" />
+								</c:when>
+								<c:otherwise>
+									&nbsp;
+								</c:otherwise>
+							</c:choose>
+						</td>
+					</tr>
+				</tbody>
 			</table>
-
+			
+			<%-- Preserved student photo logic if needed in future
+			<c:choose>
+				<c:when test="${not empty Parents.parents.student.studentpic}">
+					<c:choose>
+						<c:when test="${fn:startsWith(Parents.parents.student.studentpic, 'data:')}">
+							<c:choose>
+								<c:when test="${fn:startsWith(Parents.parents.student.studentpic, 'data:application/pdf')}">
+									<a href="${Parents.parents.student.studentpic}" target="_blank" rel="noopener noreferrer"> PDF </a>
+								</c:when>
+								<c:otherwise>
+									<img src="${Parents.parents.student.studentpic}" alt="Student's Pic" style="width: 120px; height: 120px;">
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+						<c:otherwise>
+							<img src="data:image/jpeg;base64,${Parents.parents.student.studentpic}" alt="Student's Pic" style="width: 120px; height: 120px;">
+						</c:otherwise>
+					</c:choose>
+				</c:when>
+			</c:choose>
+			--%>
 		</div>
 
  		<!-- NEW FLEX CONTAINER WRAPPER -->
         <div class="flex-row-container">
         <div class="marks-left-column">
 		<div class="marks">
-			 			<c:choose>
-						        <c:when test="${fn:length(Parents.examSummaries) == 6 || fn:length(Parents.examSummaries) == 3}">
-						        	<h4	style="text-align: center; margin-bottom: 0px; padding-bottom: 0px;">PART-A</h4>
-						        </c:when>
-						        
-						        <c:otherwise>
-						        	
-						        </c:otherwise>
-						        
-						        </c:choose>
-			
 				<c:choose>
 					<c:when test="${fn:length(Parents.examSummaries) == 6 || fn:length(Parents.examSummaries) == 3}">
-						<table style="border-collapse: collapse; width: 100%; margin-top: 20px;">
+						<div class="marks-wrapper">
+					    <div class="marks-header-title">Academic Performance</div>
+					    <table class="marks-table">
 						    <thead>
-						    
 						    <c:choose>
 						        <c:when test="${fn:length(Parents.examSummaries) == 6}">
 						        	<tr>
-										<th rowspan="2" style="text-transform: uppercase;">Scholastic<br>Subjects</th>
+										<th rowspan="2" style="text-transform: uppercase;">Subjects</th>
 										<th colspan="3" style="text-transform: uppercase;">Semester-1</th>
 										<th colspan="3" style="text-transform: uppercase;">Semester-2</th>
 										<th colspan="2" style="text-transform: uppercase;">TOTAL</th>
@@ -626,11 +815,11 @@ body {
 						        </c:when>
 						
 						        <c:otherwise>
-						        	<tr>
+						        	<%-- <tr>
 						        		<c:forEach items="${Parents.examSummaries}" var="exam">
 						                <th class="marksTableHeader" style="text-transform: uppercase;" colspan="6"><c:out value="${exam.examName}" /></th>
 						            </c:forEach>
-						        	</tr>
+						        	</tr> --%>
 						        	<tr>
 						            <th class="marksTableHeader" style="text-align: center; text-transform: uppercase;">Scholastic<br>Subjects</th>
 						            <!-- Subject-wise Summary Headers -->
@@ -1014,6 +1203,7 @@ body {
 									    </tr>
 						    </tbody>
 						</table>
+						</div>
 						</c:when>
 						<c:otherwise>
 						
@@ -1430,23 +1620,53 @@ body {
 						
 						</c:choose>
 
-															<c:if test="${not empty Parents.excludedSubjectGrades || not empty Parents.excludedSubjectExamMarks}">
-										<div style="margin-top: 10px;">
-											<table style="width: 100%; border-collapse: collapse;">
+															
+
+		</div>
+
+
+		<div class="totalbox">
+
+			<div class="words">
+				<b>Total Marks Obtained (In Words)&nbsp;&nbsp;<label class="amountWords"></label>&nbsp; only</b>
+			</div>
+
+			<div class="percentage">Percentage&nbsp;&nbsp;<fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
+
+		</div>
+		
+		</div>
+
+            <!-- RIGHT COLUMN FOR GRAPH -->
+            <c:if test="${fn:length(Parents.examSummaries) == 1}">
+                <div class="graph-right-column">
+					<div id="graph-scope-${studentGraphKey}" class="marks" style="margin-top: 20px;">
+                        <c:forEach items="${Parents.examsDetails}" var="examDetailsGraph" varStatus="status">
+			  <div id="student-chart-${studentGraphKey}-${status.index}" class="student-exam-chart" data-subjects="${fn:escapeXml(examDetailsGraph.subjects)}" data-marks="${fn:escapeXml(examDetailsGraph.marks)}" data-exam="${fn:escapeXml(examDetailsGraph.examName)}" data-max="${maxMarks}" style="height: 380px; width: 100%;"></div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+        <div class="marks">
+        	<c:if test="${not empty Parents.excludedSubjectGrades || not empty Parents.excludedSubjectExamMarks}">
+																	<div class="marks-wrapper-coscholastic">
+																	<div class="marks-header-title-coscholastic">Co-Scholastic</div>
+    																	<table class="marks-table-coscholastic">
 																			<c:choose>
 																				<c:when test="${(fn:length(Parents.examSummaries) == 3 || fn:length(Parents.examSummaries) == 6) && not empty Parents.excludedSubjectExamMarks}">
-																					<tr>
+																					<%-- <tr>
 																						<th class="marksTableHeader" style="text-transform: uppercase;" colspan="${fn:length(Parents.examSummaries) + 4}"><c:out value="PART-B" /></th>
-																					</tr>
+																					</tr> --%>
 																					<tr>
-																						<th class="marksTableHeader" rowspan="2" style="text-transform: uppercase;">Co-Scholastic Subjects</th>
+																						<th class="marksTableHeader-coscholastic" rowspan="2" style="text-transform: uppercase;">Subjects</th>
 																						<c:choose>
 																							<c:when test="${fn:length(Parents.examSummaries) == 6}">
-																								<th class="marksTableHeader" colspan="3" style="text-transform: uppercase;">Semester-1</th>
-																								<th class="marksTableHeader" colspan="3" style="text-transform: uppercase;">Semester-2</th>
+																								<th class="marksTableHeader-coscholastic" colspan="3" style="text-transform: uppercase;">Semester-1</th>
+																								<th class="marksTableHeader-coscholastic" colspan="3" style="text-transform: uppercase;">Semester-2</th>
 																							</c:when>
 																							<c:otherwise>
-																								<th class="marksTableHeader" colspan="3" style="text-transform: uppercase;">
+																								<th class="marksTableHeader-coscholastic" colspan="3" style="text-transform: uppercase;">
 																									<c:choose>
 																										<c:when test="${not empty selectedSemesterLabel}"><c:out value="${selectedSemesterLabel}" /></c:when>
 																										<c:otherwise>Semester</c:otherwise>
@@ -1454,18 +1674,18 @@ body {
 																								</th>
 																							</c:otherwise>
 																						</c:choose>
-																						<th class="marksTableHeader" colspan="2" style="text-transform: uppercase;">TOTAL</th>
-																						<th class="marksTableHeader" rowspan="2" style="text-transform: uppercase;">OVER ALL Grade</th>
+																						<th class="marksTableHeader-coscholastic" colspan="2" style="text-transform: uppercase;">TOTAL</th>
+																						<th class="marksTableHeader-coscholastic" rowspan="2" style="text-transform: uppercase;">OVER ALL Grade</th>
 																					</tr>
 																					<tr>
 																						<c:forEach items="${Parents.examSummaries}" var="exam">
-																							<th class="marksTableHeader" style="text-transform: uppercase;">
+																							<th class="marksTableHeader-coscholastic" style="text-transform: uppercase;">
 																								<c:set var="updatedName" value="${exam.examName.replaceAll('(?i)formative assessment', 'FA').replaceAll('(?i)summative assessment', 'SA')}" />
 																								<c:out value="${updatedName}" />
 																							</th>
 																						</c:forEach>
-																						<th class="marksTableHeader">MAX.<br>MARKS</th>
-																						<th class="marksTableHeader">OBT.<br>MARKS</th>
+																						<th class="marksTableHeader-coscholastic">MAX.<br>MARKS</th>
+																						<th class="marksTableHeader-coscholastic">OBT.<br>MARKS</th>
 																					</tr>
 																					<c:forEach items="${Parents.excludedSubjectExamMarks}" var="excludedEntryExamWise">
 																						<c:set var="totalsStr" value="${Parents.excludedSubjectGrades[excludedEntryExamWise.key]}" />
@@ -1474,9 +1694,9 @@ body {
 																						<c:set var="coScholasticPercentage" value="${markssummary[3]}" />
 																						<c:set var="coScholasticGrade" value="${markssummary[4]}" />
 																						<tr>
-																							<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${excludedEntryExamWise.key}" /></td>
+																							<td class="marksTableCellLeft-coscholastic" style="text-transform: capitalize;"><c:out value="${excludedEntryExamWise.key}" /></td>
 																							<c:forEach items="${Parents.examSummaries}" var="exam">
-																								<td class="marksTableCell">
+																								<td class="marksTableCell-coscholastic">
 																									<c:choose>
 																										<c:when test="${not empty excludedEntryExamWise.value[exam.examName]}">
 																											<c:out value="${excludedEntryExamWise.value[exam.examName]}" />
@@ -1485,9 +1705,9 @@ body {
 																									</c:choose>
 																								</td>
 																							</c:forEach>
-																							<td class="marksTableCell"><c:out value="${markssummary[1]}" /></td>
-																							<td class="marksTableCell"><c:out value="${markssummary[0]}" /></td>
-																							<td class="marksTableCell">
+																							<td class="marksTableCell-coscholastic"><c:out value="${markssummary[1]}" /></td>
+																							<td class="marksTableCell-coscholastic"><c:out value="${markssummary[0]}" /></td>
+																							<td class="marksTableCell-coscholastic">
 																								<c:set var="subjectGradeCoScholasticGrade" value="-" />
 																								<c:choose>
 																									<c:when test="${not empty coScholasticGrade}"><c:out value="${coScholasticGrade}" /></c:when>
@@ -1520,12 +1740,12 @@ body {
 																						<c:set var="coScholasticPercentage" value="${markssummary[3]}" />
 																						<c:set var="coScholasticGrade" value="${markssummary[4]}" />
 																						<tr>
-																							<td class="marksTableCellLeft" style="text-transform: capitalize;"><c:out value="${coScholasticEntry.key}" /></td>
+																							<td class="marksTableCellLeft-coscholastic" style="text-transform: capitalize;"><c:out value="${coScholasticEntry.key}" /></td>
 																																																								<td class="marksTableCell"><c:out value="${markssummary[1]}" /></td>
 																																																								<td class="marksTableCell"><c:out value="${markssummary[2]}" /></td>
 																																																								<td class="marksTableCell"><c:out value="${markssummary[0]}" /></td>
 																																																								<td class="marksTableCell"><c:out value="${coScholasticPercentage}" />%</td>
-																							<td class="marksTableCell">
+																							<td class="marksTableCell-coscholastic">
 																								<c:choose>
 																									<c:when test="${not empty coScholasticGrade}"><c:out value="${coScholasticGrade}" /></c:when>
 																									<c:when test="${coScholasticPercentage >= 90}">A+</c:when>
@@ -1543,32 +1763,7 @@ body {
 											</table>
 										</div>
 									</c:if>
-
-		</div>
-
-
-		<div class="totalbox">
-
-			<div class="words">
-				<b>Total Marks Obtained (In Words) <br><label class="amountWords"></label>&nbsp; only</b>
-			</div>
-
-			<div class="percentage">Percentage <br><fmt:formatNumber type="number" maxFractionDigits="1" value="${grandPercentagestring}" />%</div>
-
-		</div>
-		
-		</div>
-
-            <!-- RIGHT COLUMN FOR GRAPH -->
-            <c:if test="${fn:length(Parents.examSummaries) == 1}">
-                <div class="graph-right-column">
-					<div id="graph-scope-${studentGraphKey}" class="marks" style="margin-top: 20px;">
-                        <c:forEach items="${Parents.examsDetails}" var="examDetailsGraph" varStatus="status">
-			  <div id="student-chart-${studentGraphKey}-${status.index}" class="student-exam-chart" data-subjects="${fn:escapeXml(examDetailsGraph.subjects)}" data-marks="${fn:escapeXml(examDetailsGraph.marks)}" data-exam="${fn:escapeXml(examDetailsGraph.examName)}" data-max="${maxMarks}" style="height: 380px; width: 100%;"></div>
-                        </c:forEach>
-                    </div>
-                </div>
-            </c:if>
+        
         </div>
         <!-- END OF FLEX CONTAINER -->
 
