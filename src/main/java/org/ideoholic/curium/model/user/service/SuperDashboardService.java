@@ -301,19 +301,18 @@ public class SuperDashboardService {
                 cursor = cursor.plusMonths(1);
             }
 
-            Map<String, Map<String, Long>> monthlyByBranchName = new LinkedHashMap<String, Map<String, Long>>();
+            Map<Integer, Map<String, Long>> monthlyByBranchId = new LinkedHashMap<Integer, Map<String, Long>>();
             Map<String, Long> consolidatedMonthly = new LinkedHashMap<String, Long>();
             for (String month : trendMonths) {
                 consolidatedMonthly.put(month, 0L);
             }
 
             for (Integer branchId : selectedBranchIds) {
-                String branchName = branchNames.getOrDefault(branchId, "Branch " + branchId);
                 Map<String, Long> bucket = new LinkedHashMap<String, Long>();
                 for (String month : trendMonths) {
                     bucket.put(month, 0L);
                 }
-                monthlyByBranchName.put(branchName, bucket);
+                monthlyByBranchId.put(branchId, bucket);
             }
 
             for (Object[] row : monthlyReceiptRows) {
@@ -333,17 +332,17 @@ public class SuperDashboardService {
                 long amount = toLong(row[2]);
                 consolidatedMonthly.put(month, consolidatedMonthly.get(month) + amount);
 
-                String branchName = branchNames.getOrDefault(branchId, "Branch " + branchId);
-                Map<String, Long> branchMonthMap = monthlyByBranchName.get(branchName);
+                Map<String, Long> branchMonthMap = monthlyByBranchId.get(branchId);
                 if (branchMonthMap != null) {
                     branchMonthMap.put(month, branchMonthMap.get(month) + amount);
                 }
             }
 
             List<Map<String, Object>> monthlyTrendSeries = new ArrayList<Map<String, Object>>();
-            for (Map.Entry<String, Map<String, Long>> entry : monthlyByBranchName.entrySet()) {
+            for (Map.Entry<Integer, Map<String, Long>> entry : monthlyByBranchId.entrySet()) {
                 Map<String, Object> series = new LinkedHashMap<String, Object>();
-                series.put("name", entry.getKey());
+                series.put("branchId", entry.getKey());
+                series.put("name", branchNames.getOrDefault(entry.getKey(), "Branch " + entry.getKey()));
                 series.put("data", new ArrayList<Long>(entry.getValue().values()));
                 monthlyTrendSeries.add(series);
             }
@@ -371,6 +370,7 @@ public class SuperDashboardService {
                 String branchName = branchNames.getOrDefault(id, "Branch " + id);
                 long[] attendanceMetrics = attendanceByBranch.getOrDefault(id, new long[]{0L, 0L});
                 double attendancePctValue = attendanceMetrics[1] == 0 ? 0.0 : (attendanceMetrics[0] * 100.0 / attendanceMetrics[1]);
+                item.put("branchId", id);
                 item.put("branch", branchName);
                 item.put("students", studentsByBranch.getOrDefault(id, 0L));
                 item.put("collection", feesByBranch.getOrDefault(id, Arrays.asList(0L, 0L, 0L)).get(1));
@@ -715,3 +715,4 @@ public class SuperDashboardService {
         Collections.sort(branchCards, comparator);
     }
 }
+
