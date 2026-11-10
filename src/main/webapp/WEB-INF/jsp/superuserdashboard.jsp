@@ -578,6 +578,55 @@ if (session.getAttribute("userAuth") == null) {
         return '<span class="' + cls + '">' + marker + ' ' + Math.abs(value).toFixed(1) + '% vs previous month</span>';
     }
 
+    // Hardcoded branch location, keyed by branch ID (branchid used in superadminwelcome.jsp).
+    // Branches without an entry keep their original name.
+    var BRANCH_LOCATION_BY_ID = {
+    	2: "Hazaribagh, Jharkhand",
+    	3: "Nuh, Haryana",
+        4: "Darbhanga, Bihar",
+        5: "Rargaon, Jharkhand",
+        6: "Howrah, West Bengal",
+        7: "Malda, West Bengal",
+        8: "Guwahati, Assam",
+        9: "Jamia Nagar, New Delhi"
+        // 5: "<city>, <state>",   // The Scholar School Rargaon - location not provided
+        // 9: "<city>, <state>"    // The Scholar School Delhi - location not provided
+    };
+
+    // Display name by branch ID ("Name – City, State"), rebuilt on each load.
+    var branchDisplayById = {};
+
+    function buildBranchDisplayMap(filterBranches) {
+        branchDisplayById = {};
+        $.each(filterBranches || [], function(i, b) {
+            var location = BRANCH_LOCATION_BY_ID[b.id];
+            if (location) {
+                b.name = b.name + " \u2013 " + location;
+            }
+            branchDisplayById[b.id] = b.name;
+        });
+    }
+
+    function displayBranchName(branchId, fallbackName) {
+        return branchDisplayById.hasOwnProperty(branchId) ? branchDisplayById[branchId] : fallbackName;
+    }
+
+    // Applies the id-based display names to every place the branch name is shown.
+    function normalizeBranchNames(data) {
+        if (!data) {
+            return;
+        }
+        buildBranchDisplayMap((data.filterOptions || {}).branches);
+
+        $.each(data.branches || [], function(i, b) { b.branchName = displayBranchName(b.branchId, b.branchName); });
+        $.each(data.ranking || [], function(i, r) { r.branchName = displayBranchName(r.branchId, r.branchName); });
+        var charts = data.charts || {};
+        $.each(["studentStrengthComparison", "feeCollectionComparison", "attendanceAnalysis", "resultAnalysis"], function(i, key) {
+            $.each(charts[key] || [], function(j, item) { item.branch = displayBranchName(item.branchId, item.branch); });
+        });
+        $.each(charts.monthlyCollectionSeries || [], function(i, s) { s.name = displayBranchName(s.branchId, s.name); });
+    }
+
     // Filter utilities
     function selectedBranchCsv() {
         var ids = [];
@@ -626,6 +675,7 @@ if (session.getAttribute("userAuth") == null) {
                     }
                     return;
                 }
+                normalizeBranchNames(dashboardData);
                 renderAll();
             })
             .fail(function() {
@@ -1722,3 +1772,4 @@ if (session.getAttribute("userAuth") == null) {
 </script>
 </body>
 </html>
+
