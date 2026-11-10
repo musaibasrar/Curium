@@ -14,7 +14,7 @@
 <title>Other Fees Cancelled Receipt</title>
 <link rel="stylesheet" href="/hwfschools/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/hwfschools/css/datePicker/demos.css">
-<link rel="stylesheet" href="/hwfschools/css/font-awesome.css">
+<link rel="stylesheet" href="/hwfschools/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {

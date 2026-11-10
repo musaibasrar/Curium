@@ -11,10 +11,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Bus Fees Collection Details</title>
+<title>Other Fees Collection Details</title>
 <link rel="stylesheet" href="/hwfschools/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/hwfschools/css/datePicker/demos.css">
-<link rel="stylesheet" href="/hwfschools/css/font-awesome.css">
+<link rel="stylesheet" href="/hwfschools/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {

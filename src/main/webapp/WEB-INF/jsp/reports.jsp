@@ -26,9 +26,8 @@ Author     : Musaib
         <script src="/hwfschools/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/hwfschools/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/hwfschools/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/hwfschools/css/font-awesome.css">
-        
-        
+		<link rel="stylesheet" href="/hwfschools/css/font-awesome.min.css">
+
         <style>
 
             .noti_Container {

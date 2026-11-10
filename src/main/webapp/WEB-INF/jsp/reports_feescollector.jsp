@@ -16,7 +16,6 @@ Author     : Musaib
         <script language="JavaScript" src="/hwfschools/js/motionpack.js"></script>
         <link rel="stylesheet" href="/hwfschools/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/hwfschools/css/datePicker/demos.css">
-		
         <script type="text/javascript" src="/hwfschools/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/hwfschools/js/datePicker/ui/jquery.ui.core.js"></script>
         <script src="/hwfschools/js/datePicker/ui/jquery.ui.widget.js"></script>
@@ -26,8 +25,7 @@ Author     : Musaib
         <script src="/hwfschools/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/hwfschools/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/hwfschools/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/hwfschools/css/font-awesome.css">
-        
+		<link rel="stylesheet" href="/hwfschools/css/font-awesome.min.css">
         
         <style>
 
