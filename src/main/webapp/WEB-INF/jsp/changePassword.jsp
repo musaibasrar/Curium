@@ -21,8 +21,8 @@
         <meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Change Password</title>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/validation/jquery.ketchup.css">
+        <link rel="stylesheet" href="/awami/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/awami/css/validation/jquery.ketchup.css">
 
         <script type="text/javascript" src="/awami/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
         <script src="/awami/js/datePicker/jquery-1.7.1.js"></script>
@@ -406,9 +406,9 @@
     }
 
 </style>
-        <script type="text/javascript" src="/vision/js/datetimepicker_css.js"></script>
-        <script src="/vision/JavaScript/actb.js"></script>
-        <script src="/vision/JavaScript/common.js"></script>
+        <script type="text/javascript" src="/awami/js/datetimepicker_css.js"></script>
+        <script src="/awami/JavaScript/actb.js"></script>
+        <script src="/awami/JavaScript/common.js"></script>
 
         <script>
 
