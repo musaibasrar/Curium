@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/awami/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/awami/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/awami/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/awami/css/font-awesome.css">
+		<link rel="stylesheet" href="/awami/css/font-awesome.min.css">
         
         
         <style>

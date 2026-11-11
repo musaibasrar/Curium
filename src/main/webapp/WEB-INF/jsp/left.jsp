@@ -16,7 +16,6 @@ Author     : Musaib
         <script language="JavaScript" src="/awami/js/motionpack.js"></script>
         <link rel="stylesheet" href="/awami/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/awami/css/datePicker/demos.css">
-		
         <script type="text/javascript" src="/awami/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/awami/js/datePicker/ui/jquery.ui.core.js"></script>
         <script src="/awami/js/datePicker/ui/jquery.ui.widget.js"></script>
@@ -26,7 +25,7 @@ Author     : Musaib
         <script src="/awami/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/awami/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/awami/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/awami/css/font-awesome.css">
+		<link rel="stylesheet" href="/awami/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {

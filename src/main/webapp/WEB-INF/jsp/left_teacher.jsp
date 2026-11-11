@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/awami/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/awami/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/awami/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/awami/css/font-awesome.css">
+		<link rel="stylesheet" href="/awami/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -595,10 +595,10 @@ for(Cookie cookie : cookies){
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
             				<a target="mainFrame" href="/awami/PeriodProcess/viewTeacherTimeTable?teachername=<c:out value="${profilename}" />">View</a>
             			</td>
-            			
             		</tr>
                 </table>
             </div>
+            
             </div>
                    
             
