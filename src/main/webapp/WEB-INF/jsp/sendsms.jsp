@@ -328,7 +328,7 @@
 			$("#datepickerCD").datepicker("option", "showAnim", $(this).val());
 		});
 	});
-	 $(function() {
+	 /*$(function() {
 			$("#holidayvar1").datepicker({
 				changeYear : true,
 				changeMonth : true,
@@ -338,7 +338,7 @@
 			$("#anim").change(function() {
 				$("#holidayvar1").datepicker("option", "showAnim", $(this).val());
 			});
-		});
+		});*/
 		 $(function() {
 				$("#examsvar2").datepicker({
 					changeYear : true,
