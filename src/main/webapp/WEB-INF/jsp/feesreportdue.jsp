@@ -363,6 +363,13 @@
 		form1.method = "POST";
 		form1.submit();
 }
+	
+	function printRecordsDueSlip() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/FeesDetails/printDataForFeesReportdueSlip";
+		form1.method = "POST";
+		form1.submit();
+}
 
 	$(function() {
 
@@ -413,6 +420,13 @@
 		}).click(function(){
 			printRecords();	
      	});
+		$("#printdueslip").button({
+			 icons : {
+				primary : "ui-icon-print"
+			} 
+		}).click(function(){
+			printRecordsDueSlip();	
+    	});
 	});
 
 	$(function() {
@@ -944,6 +958,7 @@ for(Cookie cookie : cookies){
                     <td  class="footerTD" colspan="9" >
                     
                     		<button value="Export" type="submit" id="export">Export</button>&nbsp;&nbsp;<button value="Print" id="print">Print</button>
+                    		&nbsp;&nbsp;<button value="PrintDueSlip" id="printdueslip">Print Due Slip</button>
                     		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label>
                     		<input type="text" id="deadline" name="deadline" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>">
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
