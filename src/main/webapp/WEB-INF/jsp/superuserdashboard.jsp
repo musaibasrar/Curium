@@ -392,6 +392,110 @@
                 flex-direction: column;
             }
         }
+
+        /* Compact searchable multi-branch selector */
+        .branch-select-wrap {
+            position: relative;
+            width: 100%;
+        }
+
+        .branch-select-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+            background: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .branch-select-caret {
+            margin-left: 8px;
+            color: #64748b;
+            flex: 0 0 auto;
+        }
+
+        .branch-select-menu {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            width: 290px;
+            max-width: min( min(90vw, 340px), calc(100vw - 30px));
+            padding: 10px;
+            background: #fff;
+            border: 1px solid rgba(15, 23, 42, 0.14);
+            border-radius: 10px;
+            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.16);
+            z-index: 1050;
+        }
+
+        .branch-select-actions {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 2px;
+            font-size: 12px;
+        }
+
+        .branch-checkbox-list {
+            max-height: 230px;
+            overflow-y: auto;
+            border-top: 1px solid #eef2f7;
+            border-bottom: 1px solid #eef2f7;
+            padding: 4px 0;
+        }
+
+        .branch-checkbox-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 7px 5px;
+            margin: 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: normal;
+            line-height: 1.25;
+        }
+
+        .branch-checkbox-option:hover {
+            background: #f3f7fb;
+        }
+
+        .branch-checkbox-option input {
+            margin: 2px 0 0;
+            flex: 0 0 auto;
+        }
+
+        .branch-checkbox-text {
+            min-width: 0;
+            overflow-wrap: anywhere;
+        }
+
+        .branch-checkbox-name {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .branch-checkbox-meta {
+            display: block;
+            margin-top: 2px;
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .branch-select-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 9px;
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        .branch-select-footer .btn {
+            padding: 3px 12px;
+        }
     </style>
 </head>
 <%
@@ -410,9 +514,31 @@ if (session.getAttribute("userAuth") == null) {
                 <label>Academic Year</label>
                 <select id="fAcademicYear" class="form-control form-control-sm"></select>
             </div>
-            <div>
-                <label>Branch (multi-select)</label>
-                <select id="fBranches" class="form-control form-control-sm" multiple></select>
+            <div class="branch-filter">
+                <label for="branchFilterToggle">Branches</label>
+                <div class="branch-select-wrap">
+                    <button type="button" id="branchFilterToggle"
+                            class="form-control form-control-sm branch-select-toggle"
+                            aria-expanded="false" aria-controls="branchFilterMenu">
+                        <span id="branchSelectionLabel">All Branches</span>
+                        <span class="branch-select-caret">&#9662;</span>
+                    </button>
+                    <div id="branchFilterMenu" class="branch-select-menu" style="display:none;">
+                        <input type="text" id="branchSearch"
+                               class="form-control form-control-sm"
+                               placeholder="Search branches..." autocomplete="off">
+                        <div class="branch-select-actions">
+                            <a href="#" id="selectAllBranches">Select All</a>
+                            <a href="#" id="clearAllBranches">Clear All</a>
+                        </div>
+                        <div id="branchCheckboxList" class="branch-checkbox-list"></div>
+                        <div class="branch-select-footer">
+                            <span id="branchSelectedCount">0 selected</span>
+                            <button type="button" id="branchFilterDone"
+                                    class="btn btn-primary btn-xs">Done</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div>
                 <label>From</label>
@@ -630,7 +756,7 @@ if (session.getAttribute("userAuth") == null) {
     // Filter utilities
     function selectedBranchCsv() {
         var ids = [];
-        $("#fBranches option:selected").each(function() {
+        $("#branchCheckboxList .branch-checkbox:checked").each(function() {
             ids.push($(this).val());
         });
         return ids.join(",");
@@ -1622,6 +1748,23 @@ if (session.getAttribute("userAuth") == null) {
         $el.val(current);
     }
 
+    function updateBranchSelectionLabel() {
+        var total = $("#branchCheckboxList .branch-checkbox").length;
+        var selected = $("#branchCheckboxList .branch-checkbox:checked").length;
+        var label = selected === 0 ? "No Branches Selected" :
+                    selected === total ? "All Branches" :
+                    selected + " Branches Selected";
+
+        $("#branchSelectionLabel").text(label);
+        $("#branchSelectedCount").text(selected + " of " + total + " selected");
+    }
+
+    function setVisibleBranchesSelected(checked) {
+        $("#branchCheckboxList .branch-checkbox-option:visible .branch-checkbox")
+            .prop("checked", checked);
+        updateBranchSelectionLabel();
+    }
+
     function populateFilterOptions() {
         if (!dashboardData || !dashboardData.filterOptions) {
             return;
@@ -1637,15 +1780,27 @@ if (session.getAttribute("userAuth") == null) {
         populateSelect("fClass", classRows, "id", "name", true);
         populateSelect("fSection", sectionRows, "id", "name", true);
 
-        var $branchEl = $("#fBranches");
-        if ($branchEl.find("option").length === 0) {
-            var branchHtml = "";
+        var $branchList = $("#branchCheckboxList");
+        if ($branchList.children().length === 0) {
             $.each(f.branches || [], function(idx, b) {
-                branchHtml += '<option value="' + b.id + '" selected>' + b.name + '</option>';
+                var $label = $("<label>", {
+                    "class": "branch-checkbox-option",
+                    "data-search": (b.name || "").toLowerCase()
+                });
+                var $checkbox = $("<input>", {
+                    type: "checkbox",
+                    "class": "branch-checkbox",
+                    value: b.id,
+                    checked: true
+                });
+                var $text = $("<span>", {"class": "branch-checkbox-text"});
+                $("<span>", {"class": "branch-checkbox-name"}).text(b.name || ("Branch " + b.id)).appendTo($text);
+                $label.append($checkbox).append($text);
+                $branchList.append($label);
             });
-            $branchEl.html(branchHtml);
+            updateBranchSelectionLabel();
             if (window.console && console.debug) {
-                console.debug("[SuperDashboard] Branch options added", $branchEl.find("option").length);
+                console.debug("[SuperDashboard] Branch options added", $branchList.children().length);
             }
         }
     }
@@ -1686,6 +1841,54 @@ if (session.getAttribute("userAuth") == null) {
         $(".chart-actions button").attr("type", "button");
         ensureFullscreenBackdrop();
 
+        // Compact searchable multi-branch selector
+        $("#branchFilterToggle").on("click", function(e) {
+            e.stopPropagation();
+            var $menu = $("#branchFilterMenu");
+            var opening = !$menu.is(":visible");
+            $menu.toggle(opening);
+            $(this).attr("aria-expanded", opening ? "true" : "false");
+            if (opening) {
+                $("#branchSearch").trigger("focus");
+            }
+        });
+
+        $("#branchFilterMenu").on("click", function(e) {
+            e.stopPropagation();
+        });
+
+        $(document).on("click", function() {
+            $("#branchFilterMenu").hide();
+            $("#branchFilterToggle").attr("aria-expanded", "false");
+        });
+
+        $("#branchSearch").on("input", function() {
+            var query = $.trim($(this).val()).toLowerCase();
+            $("#branchCheckboxList .branch-checkbox-option").each(function() {
+                var text = $(this).text().toLowerCase();
+                $(this).toggle(text.indexOf(query) !== -1);
+            });
+        });
+
+        $("#selectAllBranches").on("click", function(e) {
+            e.preventDefault();
+            setVisibleBranchesSelected(true);
+        });
+
+        $("#clearAllBranches").on("click", function(e) {
+            e.preventDefault();
+            setVisibleBranchesSelected(false);
+        });
+
+        $("#branchCheckboxList").on("change", ".branch-checkbox", function() {
+            updateBranchSelectionLabel();
+        });
+
+        $("#branchFilterDone").on("click", function() {
+            $("#branchFilterMenu").hide();
+            $("#branchFilterToggle").attr("aria-expanded", "false");
+        });
+
         // Apply and Reset button handlers
         $("#applyFilters").on("click", function() {
             loadDashboard();
@@ -1698,8 +1901,8 @@ if (session.getAttribute("userAuth") == null) {
             $("#fExam").val("");
             $("#fFeeCategory").val("");
             $("#fSortBy").val("highest_collection");
-            var $branchEl = $("#fBranches");
-            $branchEl.find("option").prop("selected", true);
+            $("#branchCheckboxList .branch-checkbox").prop("checked", true);
+            updateBranchSelectionLabel();
             loadDashboard();
         });
 
@@ -1772,4 +1975,3 @@ if (session.getAttribute("userAuth") == null) {
 </script>
 </body>
 </html>
-
