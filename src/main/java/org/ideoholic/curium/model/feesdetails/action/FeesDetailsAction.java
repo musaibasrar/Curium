@@ -98,4 +98,12 @@ public class FeesDetailsAction {
 		
 	}
 	
+	@PostMapping("/printDataForFeesReportdueSlip")
+	public String printFeesReportDueDataSlip() {
+		
+		 feesCollectionActionAdapter.getFeesReportDue();
+			return "printfeesDueReportSlip";
+		
+	}
+	
 }
