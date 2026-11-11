@@ -323,6 +323,7 @@ public class FeesCollectionActionAdapter {
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
         request.setAttribute("selectedFeesCategoryList", dto.getFeesCat());
         request.setAttribute("selectedClassList", dto.getAddClass());
+        request.setAttribute("deadline", request.getParameter("deadline"));
     }
 
     public void getFeesStampDueReport() {
