@@ -571,7 +571,7 @@ for(Cookie cookie : cookies){
 						<th title="click to sort" class="headerText">Class &
 							Sec&nbsp;</th>
 						<th title="click to sort" class="headerText">Admission Date</th>
-
+						<th title="click to sort" class="headerText">Photo</th>
 
 
 					</tr>
@@ -597,8 +597,8 @@ for(Cookie cookie : cookies){
 							<td class="dataText"><c:out
 									value="${Parents.student.classstudying}" /></td>
 							<td class="dataText"><fmt:formatDate value="${Parents.student.admissiondate}" pattern="dd/MM/yyyy"/></td>
-
-
+							<td class="dataText"><img src="data:image;base64,<c:out value="${Parents.student.studentpic}"/>" alt="Student's Photo" style="width: 50px;height: 50px;"></td>
+	
 						</tr>
 					</c:forEach>
 				</tbody>

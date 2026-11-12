@@ -324,11 +324,11 @@ public class AttendanceActionAdapter {
         return resultResponse.isSuccess();
     }
 
-    public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList){
+    /*public void sendSMSAbsentees(List<Studentdailyattendance> studentDailyAttendanceList){
 
         StudentsAttendanceDto dto = new StudentsAttendanceDto();
         dto.setAttendanceClass(request.getParameter("attendanceclass"));
 
         attendanceService.sendSMSAbsentees(studentDailyAttendanceList, dto);
-    }
+    }*/
 }

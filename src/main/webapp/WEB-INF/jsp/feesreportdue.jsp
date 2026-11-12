@@ -909,7 +909,7 @@ for(Cookie cookie : cookies){
                     
                     		<button value="Export" type="submit" id="export">Export</button>&nbsp;&nbsp;<button value="Print" id="print">Print</button>
                     		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label>
-                    		<input type="text" id="deadline" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>">
+                    		<input type="text" id="deadline" name="deadline" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>">
                             &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;

@@ -66,7 +66,7 @@ public class SmsApiActionImpl implements SmsApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<ResultResponse> sendNumbersSMS(SendSMSDto dto) {
+    public ResponseEntity<ResultResponse> sendNumbersSMS(SendSMSDto dto,String branchId) {
         ResultResponse result = smsService.sendNumbersSMS(dto);
         if (result.isSuccess()) {
             return ResponseEntity.ok(result);
@@ -74,8 +74,8 @@ public class SmsApiActionImpl implements SmsApiAction {
         throw new CustomResponseException(CustomErrorMessage.ERROR);
     }
 
-    public ResponseEntity<CurrentAcademicYearResponseDto> updateYear() {
-        CurrentAcademicYearResponseDto result = yearService.updateYear();
+    public ResponseEntity<CurrentAcademicYearResponseDto> updateYear(String branchId) {
+        CurrentAcademicYearResponseDto result = yearService.updateYear(Integer.parseInt(branchId));
         return ResponseEntity.ok(result);
 
     }
