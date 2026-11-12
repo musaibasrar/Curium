@@ -376,12 +376,12 @@ body {
 			<div class="schoolbox">
 			
 				<div class="logo">
-					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/cambridge/images/cambridge.png">
+					<img border="0" style="vertical-align: text-bottom;height: 80px;width: 90px;" alt="ideoholic" src="/cambridge/images/cambridge${branchid}.png">
 				</div>
 		
 				<div class="schoolname">
 					<h3 style="font-size: 40px;color: #971d1d;">Little Flower Public School</h3>
-					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/cambridge/images/cambridgeschoolname.png"> -->
+					<!-- <img border="0" style="vertical-align: text-bottom;height: 30px;width: 200px;" alt="ideoholic" src="/cambridge/images/cambridge${branchid}schoolname.png"> -->
 					<div>
 						<b><label style="font-size:17px;text-transform: uppercase;">${branchaddress}</label></b>
 					</div>

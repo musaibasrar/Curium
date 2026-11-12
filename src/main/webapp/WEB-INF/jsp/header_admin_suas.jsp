@@ -179,7 +179,7 @@ for(Cookie cookie : cookies){
                     <td valign="top" background="/images/h_bg.jpg">
                         <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" bordercolor="#FFFFFF">
                             <!-- <tr>
-                               <td width="234" ><div align="center"><img src="/cambridge/images/cambridge.png" width="200" height="64" /></div></td> 
+                               <td width="234" ><div align="center"><img src="/cambridge/images/cambridge${branchid}.png" width="200" height="64" /></div></td> 
                                 <td width="700" ><div align="center"><img src="/cambridge/images/SMS.png" width="391" height="50" /></div></td>
                                
                             </tr> -->
@@ -188,7 +188,7 @@ for(Cookie cookie : cookies){
                             </tr>
                             <tr>
                             				<td width="10"></td>
-                                          	<td align="left"><img src="/cambridge/images/cambridgeheader.png" /></td>  
+                                          	<td align="left"><img src="/cambridge/images/cambridge${branchid}header.png" /></td>  
                                           	<!-- <td><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td> -->
                             				<td width="40" ><div align="center" ><a target="leftFrame" href="/cambridge/left"><img src="/cambridge/images/house_home.png" width="35" height="35" alt="Fees Collection" /></a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>
                             				<td><a target="leftFrame" href="/cambridge/left" style="color:white;font-size: 11px;font-family: arial;">Home</a><div class="noti_bubbleEmpty"></div><div id="" class="noti_bubbleEmpty"></div></td>

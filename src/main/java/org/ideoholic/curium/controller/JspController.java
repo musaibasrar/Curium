@@ -660,4 +660,29 @@ public class JspController {
 	public String getLeftSettingsFeescollector() {
 		return "leftsettings_feescollector";
 	}
+	
+	@GetMapping("/header_principal")
+	public String getHeaderPrincipal() {
+		return "header_principal";
+	}
+	
+	@GetMapping("/index_principal")
+	public String getIndexPrincipal() {
+		return "index_principal";
+	}
+	
+	@GetMapping("/left_principal")
+	public String getLeftPrincipal() {
+		return "left_principal";
+	}
+	
+	@GetMapping("/leftsettings_principal")
+	public String getLeftSettingsprincipal() {
+		return "leftsettings_principal";
+	}
+	
+	@GetMapping("/reports_principal")
+	public String getReportsPrincipal() {
+		return "reports_principal";
+	}
 }

@@ -136,8 +136,14 @@ form{
                     window.open('/cambridge/index_feescollector','_self');
                 }else if(type=='officeadmin'){
                 	window.open('/cambridge/index_officeadmin','_self');
+                }else if(type=='teacher'){
+                	window.open('/cambridge/index_teacher','_self');
                 }else if(type=='marksentry'){
                 	window.open('/cambridge/index_marksentry','_self');
+                }else if(type=='parents'){
+                	window.open('/cambridge/index_parents','_self');
+                }else if(type=='principal'){
+                	window.open('/cambridge/index_principal','_self');
                 }
             }
             else if(!flag1){
@@ -151,7 +157,7 @@ form{
 		<div class="row main-content bg-success text-center">
 			<div class="col-md-4 text-center company__info">
 			<span class="company__logo">
-			<h2><img border="0" style="vertical-align: text-bottom;height: 130px;width: 130px;" alt="ideoholic" src="/cambridge/images/cambridge.png"></h2>
+			<h2><img border="0" style="vertical-align: text-bottom;height: 130px;width: 130px;" alt="ideoholic" src="/cambridge/images/cambridge${branchid}.png"></h2>
 			<!-- <h5 style="font-weight: bold;">Shaheen Kidz</h5> --></span>
 				<!-- <h3 class="company_title">Zaiqa<br> Enterprises</h3> -->
 			</div>

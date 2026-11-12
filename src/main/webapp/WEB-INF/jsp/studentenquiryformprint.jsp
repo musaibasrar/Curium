@@ -298,7 +298,7 @@
 				</ul>
 				
 				<div id="fragment-1">
-					<div class="title"><img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/cambridge/images/cambridge.png"></div>
+					<div class="title"><img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/cambridge/images/cambridge${branchid}.png"></div>
 					<div class="title">${branchname}</div>
 					<div class="subtitle">Admission Enquiry Form - ${admissionEnquiry.academicYear}</div>
 					<table style="width: auto;height: auto;" border="0" align="center" id="table1">

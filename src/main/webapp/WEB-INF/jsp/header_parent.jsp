@@ -121,7 +121,7 @@ for(Cookie cookie : cookies){
 								<a target="mainFrame" href="/cambridge/welcomeparent" ><img src="/cambridge/images/curiumheader.png" width="90" height="30"/></a>
 								</td>
 								
-							<!-- <td align="left"><img src="/cambridge/images/cambridge/header.png"
+							<!-- <td align="left"><img src="/cambridge/images/cambridge${branchid}/header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 							<td align="left" style="padding-left:40px;">
  

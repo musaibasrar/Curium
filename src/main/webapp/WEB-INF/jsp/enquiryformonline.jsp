@@ -375,7 +375,7 @@
                 <div id="tabs">
                     <div class="card-header">
                         <div class="card-logo">
-                            <img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/cambridge/images/cambridge.png">
+                            <img border="0" style="vertical-align: text-bottom;height: 80px;width: 140px;" alt="ideoholic" src="/cambridge/images/cambridge${branchid}.png">
                         </div>
                         <div class="card-title">Admission Enquiry Form</div>
                     </div>

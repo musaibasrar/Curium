@@ -130,7 +130,7 @@ for(Cookie cookie : cookies){
 								</a>
 								</td>
 								
-							<!-- <td align="left"><img src="/cambridge/images/cambridgeheader.png"
+							<!-- <td align="left"><img src="/cambridge/images/cambridge${branchid}header.png"
 								style="width: 200px; height: 20px;" /></td> -->
 								<td><a href="javascript:parent.toggleLeftFrame()" style="cursor: pointer;"> <img
 									src="/cambridge/images/menu.svg" width="18" height="18" 
