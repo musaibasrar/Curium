@@ -234,22 +234,124 @@ for(Cookie cookie : cookies){
 <body style="text-align: center" class="bodymargin">
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
 	<form method="post" class="bodymargin">
-                        <c:forEach items="${studentList}" var="Parents">
-                        
-                        <div style="page-break-inside: avoid;border-style: solid;border-width: thin;">   
-                        
-         <table style="page-break-inside: avoid;border-collapse: collapse;margin-left: auto;margin-right: auto;">
-                        		
-			<tr>
-				<td><img src="/cambridge/images/cambridge${branchid}.jpg" width="60" height="50"/></td>
-				<td>
-				<label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
-				<label class="addressLine">${branchaddress}</label><br>
-				</td>
-			</tr>
-		</table>
+                        <div class="ticket-container">
 
-<TABLE  width="100%" border="1" style="page-break-inside: avoid;border-collapse:collapse;">
+<c:forEach items="${studentList}" var="Parents" varStatus="status">
+
+    <div class="ticket">
+        <div class="ticket-inner">
+
+            <!-- ===== HEADER ===== -->
+            <table width="100%" style="border-collapse: collapse;">
+                <tr>
+                    <td><img src="/cambridge/images/cambridge${branchid}.jpg" width="30" height="30"/></td>
+                    <td align="center">
+                        <label class="dataTextBoldCenter" style="text-transform: uppercase;">${branchname}</label><br>
+                    </td>
+                </tr>
+            </table>
+
+            <hr style="margin-top: 2px;margin-bottom: 2px;">
+
+            <!-- ===== TITLE ===== -->
+            <table width="100%">
+                <tr>
+                	<td width="30%"></td>
+                    <td class="dataTextBoldCenter">
+                        Hall Ticket<br>${examname}
+                    </td>
+                    <td align="right">
+                        <c:choose>
+									<c:when test="${not empty Parents.student.studentpic}">
+
+										<c:choose>
+											<%-- New format --%>
+											<c:when test="${fn:startsWith(Parents.student.studentpic, 'data:')}">
+
+												<c:choose>
+													<%-- PDF --%>
+													<c:when
+														test="${fn:startsWith(Parents.student.studentpic, 'data:application/pdf')}">
+														<a href="${Parents.student.studentpic}" target="_blank"
+															rel="noopener noreferrer"> PDF </a>
+													</c:when>
+
+													<%-- Image --%>
+													<c:otherwise>
+														<img src="${Parents.student.studentpic}" alt="Student's Pic"
+															style="width: 30px; height: 30px;">
+													</c:otherwise>
+												</c:choose>
+
+											</c:when>
+
+											<%-- Old raw Base64 format --%>
+											<c:otherwise>
+												<img src="data:image/jpeg;base64,${Parents.student.studentpic}"
+													alt="Student's Pic" style="width: 30px; height: 30px;">
+											</c:otherwise>
+										</c:choose>
+
+									</c:when>
+
+									<c:otherwise>
+                    No document available
+                </c:otherwise>
+								</c:choose>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- ===== STUDENT DETAILS ===== -->
+            <table width="100%">
+                <tr>
+                    <td style="text-align: left;font-size: 10px;">Student Name: <b>${Parents.student.name}</b></td>
+                    <td style="text-align: left;font-size: 10px;">
+                        Class:
+                        <c:forEach var="splt" items="${fn:split(Parents.student.classstudying,'--')}">
+                            ${splt}
+                        </c:forEach>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td style="text-align: left;font-size: 10px;">Father's Name: ${Parents.fathersname}</td>
+                    <td style="text-align: left;font-size: 10px;">Admission No: ${Parents.student.admissionnumber}</td>
+                </tr>
+            </table>
+
+            <!-- ===== EXAM TABLE ===== -->
+            <table width="100%" class="datatable">
+                <thead>
+                <tr>
+                    <th class="datath">Date</th>
+                    <th class="datath">Day</th>
+                    <th class="datath">Subject</th>
+                    <th class="datath">Time</th>
+                    <th class="datath">Sign</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <c:forEach items="${examschedulelist}" var="schedule">
+                    <tr>
+                        <td class="datatd">
+                            <fmt:formatDate value="${schedule.date}" pattern="dd/MM/yyyy"/>
+                        </td>
+                        <td class="datatd">
+                            <fmt:formatDate value="${schedule.date}" pattern="E"/>
+                        </td>
+                        <td class="datatd">${schedule.subject}</td>
+                        <td class="datatd">${schedule.starttime} - ${schedule.endtime}</td>
+                        <td class="datatd"></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+
+            <br><br>
+
+            <table width="100%">
                 <tr>
 
                     <td colspan="4" ></td>
