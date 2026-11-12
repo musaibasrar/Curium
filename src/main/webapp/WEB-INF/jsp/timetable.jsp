@@ -37,6 +37,7 @@
         <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.mouse.js"></script>
         <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.draggable.js"></script>
         <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.resizable.js"></script>
+        <script type="text/javascript" src="/cambridge/js/datePicker/ui/jquery.ui.button.js"></script>
         <script type="text/javascript" src="/cambridge/js/graph/jquery.jqplot.js"></script>
         <script  type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.dateAxisRenderer.min.js"></script>
         <script type="text/javascript" src="/cambridge/js/graph/plugins/jqplot.barRenderer.min.js"></script>
@@ -315,11 +316,8 @@
 <script type="text/javascript">
                                 $(function() {
                                     
-                                    $( "#modify" )
-                                    .button()
-                                    .click(function() {
-                                        updatePeriodDetail();
-
+                                    $( "#modify" ).button().click(function() {
+                                        window.location.href = "/cambridge/PeriodProcess/updatePeriodDetails?id=<c:out value='${periodMasterid}' />";
                                     });
                                    
                                 });
@@ -351,7 +349,7 @@ for(Cookie cookie : cookies){
 		<div>
 			<table width="100%">
 				<tr>
-					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.class_}</td>
+					<td class="headerTD">TIME TABLE &nbsp;&nbsp;&nbsp;&nbsp;${timetable.classSec}</td>
 				</tr>
 			</table>
 			<table width="100%" border="1" style="border-color: #4b6a84;"
@@ -383,8 +381,7 @@ for(Cookie cookie : cookies){
 		<table  width="70%"  id="table11" align="center">
 		<tr><td><br></td></tr>
                         <tr>
-                                <td align="center" style="font-size:16px;"><a id="print" href="/cambridge/PeriodProcess/updatePeriodDetails?id=<c:out value="${periodMasterid}" />">Modify</a></td>
-                            </td>
+                                <td align="center" style="font-size:16px;"><button id="modify" type="button">Modify</button></td>
 
                         </tr>
 
