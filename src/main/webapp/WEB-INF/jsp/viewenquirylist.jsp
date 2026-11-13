@@ -14,7 +14,7 @@
 <title>View Enquiries</title>
 <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
-<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
+<link rel="stylesheet" href="/cambridge/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {

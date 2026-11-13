@@ -15,7 +15,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
-<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
+<link rel="stylesheet" href="/cambridge/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -705,11 +705,11 @@ for(Cookie cookie : cookies){
 						<td class="dataText">${feesbybank}</td>
 					</tr>
 					<tr>
-						<td class="dataText">Total Other Fees Paid by Cash</td>
+						<td class="dataText">Total Bus Fees Paid by Cash</td>
 						<td class="dataText">${feesbycashotherfees}</td>
 					</tr>
 					<tr>
-						<td class="dataText">Total Other Fees Paid by Bank</td>
+						<td class="dataText">Total Bus Fees Paid by Bank</td>
 						<td class="dataText">${feesbybankotherfees}</td>
 					</tr>
 				

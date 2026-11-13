@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/cambridge/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/cambridge/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/cambridge/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
+		<link rel="stylesheet" href="/cambridge/css/font-awesome.min.css">
         
         <script type="text/javascript">
             var get;

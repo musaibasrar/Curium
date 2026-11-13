@@ -11,10 +11,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Other Fees Cancelled Receipt</title>
+<title>Bus Fees Cancelled Receipt</title>
 <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
-<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
+<link rel="stylesheet" href="/cambridge/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {

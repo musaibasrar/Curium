@@ -14,7 +14,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/cambridge/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/cambridge/css/datePicker/demos.css">
-<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
+<link rel="stylesheet" href="/cambridge/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -694,7 +694,23 @@ for(Cookie cookie : cookies){
 						<tr>
 						<td>&nbsp;</td>
 						</tr>
+						<tr>
+							<td width="20%" class="alignRight">Fees Collector&nbsp;&nbsp;</td>
+							<td ><label>
+                                         <select name="feescollector" id="feescollector"
+									style="width: 240px">
+										<option value="${userloginid}:${username}" selected>${username}</option>
+										</select>
+                              </label></td>
+						</tr>
+							
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
 						
+						<tr>
+						<td>&nbsp;</td>
+						</tr>
 						<!-- <tr>
 							<td width="20%" class="alignRight">Select Branch  &nbsp;&nbsp;</td>
 							<td ><label> <select name="selectedbranchid"
@@ -780,7 +796,6 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/cambridge/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
-
                             </tr>
                         </c:forEach>
                     </tbody>
