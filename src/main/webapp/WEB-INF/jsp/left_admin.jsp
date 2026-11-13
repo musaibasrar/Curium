@@ -27,6 +27,7 @@ Author     : Musaib
         <link href="/cambridge/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/cambridge/js/notification/jquery.jnotify.js" type="text/javascript"></script>
 		<link rel="stylesheet" href="/cambridge/css/font-awesome.css">
+        
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -41,11 +42,9 @@ Author     : Musaib
                     get = new ActiveXObject("Microsoft.XMLHTTP");
                 }
 
-
                 get.onreadystatechange = processdata;
                 get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
                 get.send(null);
-
             }
 
             function processdata() {
@@ -69,22 +68,13 @@ Author     : Musaib
                                     permanent: false,
                                     disappearTime: 30000
                                 });
-
                             });
-
                         }
-
-
                         setTimeout('getdata1();', 60000);
-
-
                     }
                 }
-
             }
-            /**
-             * Comment
-             */
+            
             var getExpiringStockCount;
             function getExpiringStock() {
                 if (typeof XMLHttpRequest != "undefined") {
@@ -93,11 +83,9 @@ Author     : Musaib
                     getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
                 }
 
-
                 getExpiringStockCount.onreadystatechange = processExpiringStockData;
                 getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
                 getExpiringStockCount.send(null);
-
             }
            
             var getDepletingStockCount;
@@ -108,14 +96,12 @@ Author     : Musaib
                     getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
                 }
 
-
                 getDepletingStockCount.onreadystatechange = processDepletingStockData;
                 getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
                 getDepletingStockCount.send(null);
-
             }
+            
             function processDepletingStockData() {
-
                 if (getDepletingStockCount.readyState == 4)
                 {
                     if (getDepletingStockCount.status == 200) {
@@ -124,20 +110,14 @@ Author     : Musaib
                         var depletingStock = document.getElementById("depletingStock");
                         depletingStock.innerHTML = " " + depletingStockCount;
                         setTimeout('getDepletingStock();', 60000);
-
-
                     }
                 }
-
             }
-
         </script>
+        
         <script type="text/javascript">
             var req;
-
-
             function count() {
-
                 var idField = document.getElementById("userid");
                 var url = "AppointmentController";
                 if (typeof XMLHttpRequest != "undefined") {
@@ -146,168 +126,206 @@ Author     : Musaib
                     req = new ActiveXObject("Microsoft.XMLHTTP");
                 }
                 reload(req);
-                //req.open("POST", url, true);
-
-                //req.send();
-                /*req.onreadystatechange = function()
-                 {
-                 if (req.readyState==4)
-                 {
-                 if (req.status==200){
-                 
-                 var count = req.responseXML.getElementsByTagName("count")[0];
-                 var childCount=count.childNodes[0].nodeValue;
-                 var mdiv = document.getElementById("n1");
-                 mdiv.innerHTML=childCount;
-                 mdiv.style.visible='block';
-                 
-                 }
-                 }
-                 }*/
-
-
-
             }
+            
             function handleRequest() {
                 if (req.readyState == 4)
                 {
                     if (req.status == 200) {
-
                         var count = req.responseXML.getElementsByTagName("count")[0];
                         var childCount = count.childNodes[0].nodeValue;
                         var mdiv = document.getElementById("n1");
                         mdiv.innerHTML = childCount;
                         mdiv.style.visible = 'block';
-
                     }
                 }
                 setTimeout(function() {
                     reload(req);
                 }, 100);
             }
-
-
-
         </script>
-        <style>
 
+        <!-- MODERN UI CSS: CUSTOM COLOR #143160 & COMPACT SIDEBAR -->
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                padding: 8px 6px;
+                background: #ffffff;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #143160;
+                overflow-x: hidden;
+            }
+
+            .headerTD {
+                background-color: #143160;
+                color: #ffffff;
+                border-radius: 6px;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 700;
+                padding: 9px 8px;
+                margin-bottom: 8px;
+                letter-spacing: 0.4px;
+                box-shadow: 0 2px 4px rgba(20, 49, 96, 0.2);
+            }
+
+            /* Strip all default jQuery UI borders, backgrounds, and left icons */
+            .ui-accordion .ui-accordion-header .ui-icon {
+                display: none !important;
+            }
+
+            .ui-widget-content,
+            .ui-state-default,
+            .ui-widget-content .ui-state-default,
+            .ui-widget-header .ui-state-default {
+                border: none !important;
+                background: transparent !important;
+            }
+
+            /* Compact Main Feature Headers */
+            .ui-accordion .ui-accordion-header.sideaccordian {
+                margin: 0 0 1px 0 !important;
+                padding: 0 !important;
+                border-radius: 5px !important;
+                border-left: 3px solid transparent !important;
+                outline: none !important;
+                position: relative;
+                transition: background-color 0.15s ease, border-color 0.15s ease !important;
+            }
+
+            .ui-accordion .ui-accordion-header.sideaccordian a {
+                display: block !important;
+                padding: 6px 20px 6px 7px !important;
+                margin: 0 !important;
+                font-size: 13px !important;
+                font-weight: 500 !important;
+                line-height: 1.3 !important;
+                color: #143160 !important;
+                text-decoration: none !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Tight gap between icon and feature name */
+            .sideaccordian a i {
+                display: inline-block;
+                width: 14px;
+                margin-right: 5px;
+                text-align: center;
+                color: #143160;
+                font-size: 13px;
+                font-weight: normal;
+            }
+
+            /* Hover & Active States in #143160 */
+            .ui-accordion .ui-accordion-header.sideaccordian:hover,
+            .ui-accordion .ui-accordion-header.ui-state-active {
+                background-color: #eff6ff !important;
+                border-left: 3px solid #143160 !important;
+            }
+
+            .ui-accordion .ui-accordion-header.sideaccordian:hover a,
+            .ui-accordion .ui-accordion-header.ui-state-active a {
+                color: #143160 !important;
+                font-weight: 600 !important;
+            }
+
+            .ui-accordion .ui-accordion-header.sideaccordian:hover a i,
+            .ui-accordion .ui-accordion-header.ui-state-active a i {
+                color: #143160 !important;
+            }
+
+            /* Right Arrow Default -> Down Arrow on Select */
+            .sideaccordian a::after {
+                content: "\f105"; /* fa-angle-right */
+                font-family: 'FontAwesome';
+                position: absolute;
+                right: 7px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 13px;
+                color: #64748b;
+            }
+
+            .sideaccordian:hover a::after {
+                color: #143160;
+            }
+
+            .ui-state-active a::after {
+                content: "\f107"; /* fa-angle-down */
+                color: #143160 !important;
+            }
+
+            /* Sub-options Container & Single-line Small Font Links */
+            .ui-accordion .ui-accordion-content {
+                margin: 0 0 2px 13px !important;
+                padding: 2px 4px 3px 8px !important;
+                border-left: 1.5px solid #bfdbfe !important;
+                overflow: hidden !important;
+            }
+
+            .menu-link {
+                display: block;
+                width: 100%;
+                padding: 4px 6px;
+                color: #334155;
+                text-decoration: none !important;
+                font-size: 11.5px;
+                line-height: 1.3;
+                border-radius: 4px;
+                margin-bottom: 1px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+            }
+
+            .menu-link:hover {
+                background-color: #dbeafe;
+                color: #143160;
+                font-weight: 500;
+                padding-left: 9px;
+                text-decoration: none !important;
+            }
+
+            /* Notification bubble styling */
             .noti_Container {
-                position:relative;
-                border:1px solid blue; /* This is just to show you where the container ends */
-                width:16px;
-                height:16px;
+                position: relative;
+                width: 16px;
+                height: 16px;
                 cursor: pointer;
             }
+            
             .noti_bubble {
-                position:absolute;
+                position: absolute;
                 font-size: 12px;
                 top: 450px;
                 left: 0px;
-                padding-right:2px;
-                background-color:transparent;
-                color:black;
-                font-weight:bold;
-
+                padding-right: 2px;
+                background-color: transparent;
+                color: black;
+                font-weight: bold;
                 z-index: 2;
                 width: 100%;
                 height: 16px;
             }
         </style>
-        <style>
-            body{
-                margin:0;
-                padding:0;
-                background:#FFFFFF;
-                font:80% Tahoma;
-                color:#555;
-                line-height:150%;
-                text-align:left;
-
-            }
-            /*body{
-                margin:0;
-                padding:0;
-                background:#E6EEF4;
-                font:80% Tahoma;
-                color:#555;
-                line-height:150%;
-                text-align:left;
-
-            }*/
-            a{
-                text-decoration:none;
-
-                color:#cfe0ea;;
-            }
-            a:hover{
-                text-decoration:underline;
-                color:#EB6000;
-            }
-            h1{
-                font-size:140%;
-                margin:0 20px;
-                line-height:80px;	
-            }
-
-            #content{margin:0 0px;}
-            p{	
-                margin:0 auto;
-                width:700px;
-                padding:1em 0;
-            }
-
-
-            .noti_Container {
-                position:relative;
-                border:1px solid blue; /* This is just to show you where the container ends */
-                width:16px;
-                height:16px;
-                cursor: pointer;
-            }
-            .headerTD{
-                border-radius:1px;
-                background-color:#4b6a84;
-                background-image: url("/images/ui-bg_diagonals-small_50_466580_40x40.png");
-                color: #FFFFFF;
-                font-family: Tahoma;
-                font-size: 13px;
-                text-transform: uppercase;
-                text-align: center;
-                font-weight: bold;
-                height: 22px;
-            }
-
-.sideaccordian{
-		
-		font-size: 12px;
-		/* border: 0px; */
-		border-radius: 5px;
-		/* border-bottom:  1px solid #010d1c !important; */
-}
-
-
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { border: 1px solid #cccccc; background: #ffffff url(images/ui-bg_glass_100_f6f6f6_1x400.png) 50% 50% repeat-x; font-weight: bold; color: #1c94c4; }
-.ui-widget-content {
-    border: 1px solid #b6cfe2;
-    background: #ffffff;
-    color: #222222;
-}
-
-
-        </style>
 
         <script>
-            function f1()
-            {
+            function f1() {
                 document.getElementById("n1").style.visibility = 'hidden';
             }
         </script>
+        
         <script type="text/javascript">
             var req;
-
-
             function count() {
-
                 var idField = document.getElementById("userid");
                 var url = "AppointmentController";
                 if (typeof XMLHttpRequest != "undefined") {
@@ -317,41 +335,27 @@ Author     : Musaib
                 }
                 var url = "AppointmentController";
                 req.open("POST", url, true);
-
-
-
-                //req.open("POST", url, true);
-
                 req.send();
-                req.onreadystatechange = function()
-                {
-                    if (req.readyState == 4)
-                    {
+                req.onreadystatechange = function() {
+                    if (req.readyState == 4) {
                         if (req.status == 200) {
-
                             var count = req.responseXML.getElementsByTagName("count")[0];
                             var childCount = count.childNodes[0].nodeValue;
                             var mdiv = document.getElementById("n1");
                             mdiv.innerHTML = childCount;
                             mdiv.style.visible = 'block';
-
                         }
                     }
                 }
-
-
-
             }
 
-
             var timer = null;
-            function auto_reload()
-            {
+            function auto_reload() {
                 alert();
                 window.location = '/notication';
             }
-
         </script>
+        
         <script language="JavaScript">
             var clockID = 0;
             function UpdateClock() {
@@ -363,891 +367,303 @@ Author     : Musaib
                 var tDate = new Date();
                 var clockDiv = document.getElementById('clock');
                 var hours, min, sec;
-                if (tDate.getHours() < 10) {
-                    hours = "0" + tDate.getHours();
-
+                
+                if (tDate.getHours() < 10) { hours = "0" + tDate.getHours(); }
+                else { hours = tDate.getHours(); }
+                
+                if (tDate.getMinutes() < 10) { min = "0" + tDate.getMinutes(); }
+                else { min = tDate.getMinutes(); }
+                
+                if (tDate.getSeconds() < 10) { sec = "0" + tDate.getSeconds(); }
+                else { sec = tDate.getSeconds(); }
+                
+                if(clockDiv) {
+                    clockDiv.innerHTML = " " + months[tDate.getMonth()] + " " + tDate.getDate() + " " + tDate.getFullYear() + " "
+                            + hours + ":" + min + ":" + sec;
                 }
-                else {
-                    hours = tDate.getHours();
-                }
-                if (tDate.getMinutes() < 10) {
-                    min = "0" + tDate.getMinutes();
-
-                }
-                else {
-                    min = tDate.getMinutes();
-                }
-                if (tDate.getSeconds() < 10) {
-                    sec = "0" + tDate.getSeconds();
-
-                }
-                else {
-                    sec = tDate.getSeconds();
-                }
-                clockDiv.innerHTML = " " + months[tDate.getMonth()] + " " + tDate.getDate() + " " + tDate.getFullYear() + " "
-                        + hours + ":"
-                        + min + ":"
-                        + sec;
-
                 clockID = setTimeout("UpdateClock()", 1000);
             }
-            function StartClock() {
-                clockID = setTimeout("UpdateClock()", 1);
-            }
-            function KillClock() {
-                if (clockID) {
-                    clearTimeout(clockID);
-                    clockID = 0;
-                }
-
-            }
+            function StartClock() { clockID = setTimeout("UpdateClock()", 1); }
+            function KillClock() { if (clockID) { clearTimeout(clockID); clockID = 0; } }
             function change(id, image) {
                 var img = document.getElementById(id);
                 img.src = "/images/" + image;
-
             }
-            
-           
         </script>
 
         <script>
             $(function() {
-
-
                 $("#container").accordion({
                     collapsible: true,
                     active: false,
                     autoHeight: false,
-                    navigation: true
+                    navigation: true,
+                    icons: false
                 });
-
-
             });
         </script>
     </head>
-      <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
-%>
+    
+    <%
+    //allow access only if session exists
+    String user = null;
+    if(session.getAttribute("userAuth") == null){
+        response.sendRedirect("/cambridge/UserProcess/sessionTimeOut");
+    }else user = (String) session.getAttribute("userAuth");
+    
+    String userName = null;
+    String sessionID = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies !=null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("user")) userName = cookie.getValue();
+            if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+        }
+    }
+    %>
+    
     <body onload="StartClock()" onunload="KillClock()">
-       <!--  <form name="theClock">
+        
+        <div class="headerTD"><label>A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
-            <div id="clock" class="headerTD"></div>
-        </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
-
-        <div id="container" style="width: 95%" >
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/QuickStudentSave" style="font-size: 12px;">Quick Student Save</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/littleflower/attendancemarkselectdate" style="font-size: 12px;">Mark Monthly Attendance</a>
-            			</td>
-            		</tr>
-                </table>
+        <div id="container">
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentProcess/viewAll">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentProcess/addNew">Add New</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentProcess/QuickStudentSave">Quick Student Save</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AttendanceProcess/viewAttendance">View Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AttendanceProcess/markAttendance">Mark Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/attendancemarkselectdate">Mark Monthly Attendance</a>
             </div>
             
-            
-			
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/FeesProcess/otherfeesCollect" style="font-size: 12px;">Bus Fees Collect</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr> -->
-            		
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr> -->
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/FeesProcess/feesCollect">Fees Collect</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/FeesProcess/feesStructure">Fees Structure</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-credit-card"></i>Expenses</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AdminProcess/viewAllExpenses">Expenses</a>
             </div>
             
-            
-            
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr> -->
-                </table>
+            <!-- 1. Accounts (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AccountProcess/createAccount">Chart of Accounts</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AccountProcess/createVoucher">Create Voucher</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/vouchersearch">View/Cancel Voucher</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AccountProcess/viewCancelledVouchers">Cancelled Vouchers</a>
             </div>
             
-            
-            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr> -->
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-file-text-o"></i>Documents</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DocumentsProcess/admissionAbstract">Admission Abstract</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DocumentsProcess/studentsDetailsStudyCertificate">Study Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DocumentsProcess/studentsArticleCertificate">Article 371</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DocumentsProcess/characterCertificate">Character Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DocumentsProcess/transferCertificate">Transfer Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/PeriodProcess/generateTimeTable">Class Time Table</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
             </div>
             
-            
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-             -->
-            
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
-							<a target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr> -->
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MarksDetailsProcess/marksEntry">Enter Marks</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MarksDetailsProcess/marksEntrySub">Enter Marks All</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExams">View Marks</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MarksDetailsProcess/getSubjectsExamsSub">View Marks All</a>
             </div>
             
-            
-                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-trophy"></i>Holistic Development Assessment</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/RatingDetailsProcess/ratingEntry">Enter Ratings</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/RatingDetailsProcess/getSubjectsAssessments">View Ratings</a>
             </div>
             
-             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-search"></i>Advance Search</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentProcess/advanceSearchStudents">Search</a>
             </div>
             
-             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
-            			</td>
-            		</tr>
-            		
-                </table>
+            <!-- 2. Generate Cards (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-print"></i>Generate Cards</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/Printids/generateIds">Student IDs</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/Printids/generateIdsEmployees">Staff IDs</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-book"></i>Library</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/LibraryProcess/addbooks">Add Books</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/LibraryProcess/viewbooks">View Books</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/LibraryProcess/issuebooks">Issue Books</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/LibraryProcess/returnbooks">Return Books</a>
             </div>
                
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/cambridge/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr> -->
-                </table>
+            <!-- 3. Staff (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EmployeeProcess/ViewAllEmployee">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EmployeeProcess/addEmployeePage">Add Staff</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AttendanceProcess/attendanceMarkStaff">Mark Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/AttendanceProcess/viewAttendanceStaff">View Attendance</a>
             </div>
             
-             <h5 class="sideaccordian" ><a href="#">Sponsor</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/SponserProcess/ViewAllSponsor" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/SponserProcess/addSponsorPage" style="font-size: 12px;">Add Sponsor</a>
-            			</td>
-            		</tr>
-            		
-            	                </table>
+            <!-- 4. Sponsor (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-thumbs-o-up"></i>Sponsor</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/SponserProcess/ViewAllSponsor">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/SponserProcess/addSponsorPage">Add Sponsor</a>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Login Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-sign-in"></i>Login Staff</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/LoginProcess/viewLoginDetail">View Login Detail</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/LoginProcess/addLoginStaff">Add Staff Login</a>
             </div>
             
-            
-            
-            <h5 class="sideaccordian" ><a href="#">Events</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/EventProcess/create" style="font-size: 12px;">Create Event</a>
-            			</td>
-            		</tr> -->
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
-            			</td>
-            		</tr>
-            		
-            		
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Events</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EventProcess/calendar">Create Event</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EventProcess/viewCalendar">View Calendar</a>
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/Backup&Restore" style="font-size: 12px;">Backup</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/changePassword" style="font-size: 12px;">Change Password</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/Backup&Restore">Backup</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/changePassword">Change Password</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/uploadattendance">Upload Attendance File</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentProcess/archiveViewAll">Archive Students</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EmployeeProcess/archiveEmployeeViewAll">Archive Employee</a>
             </div>
             
-           <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
-            <div >
-                <a target="mainFrame" href="/cambridge/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/cambridge/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/cambridge/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/cambridge/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/cambridge/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Management</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessItemsMoveProcess/issueItems">Generate Receipts</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessItemsMoveProcess/generateTaxInvoice">Generate Tax Invoice</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessItemsMoveProcess/generateTaxInvoiceReport">Tax Invoice Report</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessItemsProcess/purchaseItems">Purchase</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessItemsProcess/purchaseOrder">Purchase Order</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessItemsProcess/viewItems">View/Add Items</a>
             </div>
             
-            <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
-            <div >
-                <a target="mainFrame" href="/cambridge/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/cambridge/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-truck"></i>Suppliers</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-bell"></i>Send Notifications</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/SMSProcess/sendSMS">SMS</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/sendemail">Email</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-level-up"></i>Promotion</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/ClassProcess/promoteClass">Promotions</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-upload"></i>Import</a></h5>
+            <div>
+                  <a class="menu-link" target="mainFrame" href="/cambridge/importfile">Import Files</a>
+                  <a class="menu-link" target="mainFrame" href="/cambridge/importfilefees">Import Fees Files</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil"></i>Diary</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DiaryProcess/getdiarystudent">Diary</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/DiaryProcess/viewdiarystudent">View Diary</a>
+            </div>
+            
+            <!-- 5. Logbook (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-clipboard"></i>Logbook</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentDiaryProcess/getdiarystudent">Add Log</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/StudentDiaryProcess/viewdiarystudent">View Logbook</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-question-circle"></i>Enquiry</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EnquiryProcess/enquiry">Enquiry</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/EnquiryProcess/viewEnquiry">View Enquiry</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-tasks"></i>Staff Assignments</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/JobProcess/viewAllQueries">View Assignment</a>
+                 <a class="menu-link" target="mainFrame" href="/cambridge/JobProcess/viewAllTasks">View Tasks</a>
+            </div>
+            
+            <!-- 6. H.R. (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-sitemap"></i>H.R.</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/advanceSalary">Advance Salary</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/salaryApproval">Advance Salary Approval</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/salaryIssue">Advance Salary Issue</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/processSalary">Process Salary</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/issueStaffSalary">Issue Staff Salary</a>
+            </div>
+            
+            <!-- 7. Leave Management (FA 4.0 compatible) -->
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar-o"></i>Leave Management</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/leaveApplication">Leave Application</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/HrProcess/leaveApprovals">Leave Approvals</a>
+            </div>
+
+            <!-- 8. Appointments (FA 4.0 compatible) -->
+            <!-- <h5 class="sideaccordian"><a href="#"><i class="fa fa-clock-o"></i>Appointments</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/cambridge/AppointmentProcess/viewAllAppointments">Appointment</a>
+            </div>
+
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-briefcase"></i>Case</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/cambridge/CasesProcess/viewAllCases">Cases</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/CasesProcess/createCase">Create Cases</a>
+            </div>
+
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-exclamation-triangle"></i>Caveat</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/cambridge/CaveatProcess/viewAllCaveats">Caveats</a>
+                <a class="menu-link" target="mainFrame" href="/cambridge/CaveatProcess/createCaveats">Create Caveat</a>
             </div> -->
             
-            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
-        	
-        	<div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div>
-            
-            
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
-              
-              <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div>
-            
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
-            
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
-            			</td>
-            		</tr>
-            	</table>
-            </div> -->
-            
-            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/cambridge/sendemail" style="font-size: 12px;">Email</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/cambridge/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-            <h5 style="font-size: 12px"><a href="#" >Import</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/cambridge/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				     <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-                              <a target="mainFrame" href="/cambridge/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
-				        </td>
-				     </tr>
-				 </table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
-            			</td>
-            			
-            		</tr>
-            		
-                </table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
-            			</td>
-            			
-            		</tr>
-                </table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            	<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
-            			</td>
-            			
-            		</tr>
-            	
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
-            			</td>
-            			
-            		</tr> -->
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Staff Assignments</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-             <!--  <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Case</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Caveat</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/cambridge/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/cambridge/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
-            
-            </div>
-                   
-            
-            <!-- END -->
-           
+        </div>
        
         <script type="text/javascript">
             $(document).ready(function() {
-
-                $('#Notification')
-                        .jnotifyInizialize({
+                $('#Notification').jnotifyInizialize({
                     oneAtTime: false,
                     appendType: 'append'
-
-                })
-                        .css({'position': 'absolute',
+                }).css({
+                    'position': 'absolute',
                     'marginTop': '200px',
                     'left': '0px',
                     'width': '175px',
                     'height': '40px',
                     'z-index': '9999'
                 });
-                // --------------------------------------------------------------------------
-
-                // For add a notification on button click
-                // Parameter:
-                // text: Html do you want to show
-                // type: 'message' or 'error'
-                // permanent: True if you want to make a message permanent
-                // disappearTime: Time spent before closing message
-
-
-
-
-                // -----------------------------------------------------
             });
         </script>
 
-
         <div id="n1" class="noti_bubble">
             <table width="100%" border="0">
-
-
-                <tr>                   
-
-
-                </tr>
-
+                <tr></tr>
             </table>
-
         </div>
 
         <script>
             getdata1();
-            
         </script>
     </body>
-
 </html>
