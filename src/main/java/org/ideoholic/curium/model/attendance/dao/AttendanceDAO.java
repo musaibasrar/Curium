@@ -198,7 +198,25 @@ public class AttendanceDAO {
 		
 		return holidayMaster;
 	}
-
+	
+	public List<Holidaysmaster> readListOfHolidaysForMonth(Date startDate, Date endDate, String currentAcademicYear, int branchId) {
+		List<Holidaysmaster> holidayMaster = new ArrayList<Holidaysmaster>();
+		try{
+			transaction = session.beginTransaction();
+			Query query = session.createQuery("From Holidaysmaster where academicyear='"+currentAcademicYear+"' and branchid="+branchId+" and todate >= :startDate and fromdate <= :endDate");
+			query.setParameter("startDate", startDate);
+			query.setParameter("endDate", endDate);
+			holidayMaster = query.list();
+			transaction.commit();
+		}catch (Exception e) { transaction.rollback(); logger.error(e);
+			
+		} finally {
+			HibernateUtil.closeSession();
+		}
+		
+		return holidayMaster;
+	}
+	
 	public boolean addAttendanceMaster(Attendancemaster attendanceMaster) {
 
 		try {
