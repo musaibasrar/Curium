@@ -1,20 +1,34 @@
 package org.ideoholic.curium.model.periods.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.academicyear.dao.YearDAO;
 import org.ideoholic.curium.model.academicyear.dto.Currentacademicyear;
 import org.ideoholic.curium.model.employee.action.EmployeeActionAdapter;
 import org.ideoholic.curium.model.periods.dao.PeriodDAO;
-import org.ideoholic.curium.model.periods.dto.*;
+import org.ideoholic.curium.model.periods.dto.PeriodMasterIdDto;
+import org.ideoholic.curium.model.periods.dto.Perioddetails;
+import org.ideoholic.curium.model.periods.dto.Periodmaster;
+import org.ideoholic.curium.model.periods.dto.PeriodsSaveDto;
+import org.ideoholic.curium.model.periods.dto.TeacherTimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableResponseDto;
+import org.ideoholic.curium.model.periods.dto.TimeTableViewResponseDto;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
 import org.ideoholic.curium.model.subjectdetails.action.SubjectDetailsActionAdapter;
 import org.ideoholic.curium.util.DataUtil;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.*;
-import java.util.Map.Entry;
 
 public class PeriodService {
     private StandardActionAdapter standardActionAdapter;
