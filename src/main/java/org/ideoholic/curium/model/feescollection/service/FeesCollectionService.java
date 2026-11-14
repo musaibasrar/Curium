@@ -60,6 +60,7 @@ public class FeesCollectionService {
 	private String username = "username";
 	
 	private static final int BUFFER_SIZE = 4096;
+	private static final String SCOPE_ALL = "ALL";
 
 	public FeesCollectionService(HttpServletRequest request,
 			HttpServletResponse response, StandardActionAdapter standardActionAdapter) {
@@ -3091,6 +3092,50 @@ public class FeesCollectionService {
 		
 		return result;
 	  }
+	
+	/**
+	 * Returns the classes the fees report should cover.
+	 * Scope "ALL" means every class in {@code allClasses}; any other scope means only the classes the user ticked.
+	 */
+	public String[] resolveClassSelection(String[] selectedClasses, String classScope, List<Classsec> allClasses) {
+		boolean useAllClasses = SCOPE_ALL.equalsIgnoreCase(classScope) && allClasses != null && !allClasses.isEmpty();
+		if (!useAllClasses) {
+			return nullToEmpty(selectedClasses);
+		}
+
+		// LinkedHashSet: the class list has one row per section, so the same class name can repeat
+		Set<String> classNames = new LinkedHashSet<>();
+		for (Classsec classsec : allClasses) {
+			String className = classsec == null ? null : classsec.getClassdetails();
+			if (className != null && !className.trim().isEmpty()) {
+				classNames.add(className);
+			}
+		}
+		return classNames.toArray(new String[0]);
+	}
+
+	/**
+	 * Returns the fee category ids the fees report should cover.
+	 * Scope "ALL" means every category in {@code allFeeCategories}; any other scope means only the ticked ids.
+	 */
+	public String[] resolveFeesCategorySelection(String[] selectedFeeIds, String feeScope, List<Feescategory> allFeeCategories) {
+		boolean useAllCategories = SCOPE_ALL.equalsIgnoreCase(feeScope) && allFeeCategories != null && !allFeeCategories.isEmpty();
+		if (!useAllCategories) {
+			return nullToEmpty(selectedFeeIds);
+		}
+
+		Set<String> feeIds = new LinkedHashSet<>();
+		for (Feescategory feeCategory : allFeeCategories) {
+			if (feeCategory != null && feeCategory.getIdfeescategory() != null) {
+				feeIds.add(String.valueOf(feeCategory.getIdfeescategory()));
+			}
+		}
+		return feeIds.toArray(new String[0]);
+	}
+
+	private static String[] nullToEmpty(String[] values) {
+		return values != null ? values : new String[0];
+	}
 }
 
 

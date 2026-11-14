@@ -90,7 +90,7 @@ public class StampFeesApiActionImpl implements StampFeesApiAction {
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear) {
 		FeescategoryResponseDto result;
 		try {
-			result = feesService.viewFeesYearly(branchId, currentAcademicYear);
+			result = feesService.viewFeesYearly(currentAcademicYear, branchId);
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new CustomResponseException(CustomErrorMessage.ERROR);
