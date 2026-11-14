@@ -219,10 +219,10 @@ public class FeesActionAdapter {
 	}
 
 	public void viewFeesYearly() throws IOException {
-		FeesCategoryDto feesCategoryDto = new FeesCategoryDto();
-		String academicYear =request.getParameter("year");
-		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesYearly(academicYear,httpSession.getAttribute(BRANCHID).toString());
-		 httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
+		String academicYear = request.getParameter("year");
+		FeescategoryResponseDto feescategoryResponseDto = feesService.viewFeesForReport(academicYear,
+				httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+		httpSession.setAttribute("feescategory", feescategoryResponseDto.getFeescategory());
 	}
 
 	public boolean downlaodFile() {
