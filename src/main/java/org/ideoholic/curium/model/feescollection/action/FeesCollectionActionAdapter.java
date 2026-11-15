@@ -1,6 +1,7 @@
 package org.ideoholic.curium.model.feescollection.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
+import org.ideoholic.curium.model.feescategory.dto.Feescategory;
 import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -39,21 +40,44 @@ public class FeesCollectionActionAdapter {
     private String USERNAME = "username";
     private String CURRENTACADEMICYEAR = "currentAcademicYear";
 
+    /** Default radio selections on the fees report page. */
+    private static final String DEFAULT_CLASS_SCOPE = "SINGLE";
+    private static final String DEFAULT_FEE_SCOPE = "ALL";
+
 
 
     public void getFeesReport() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
 
+        String classScope = valueOrDefault(request.getParameter("classScope"), DEFAULT_CLASS_SCOPE);
+        String feeScope = valueOrDefault(request.getParameter("feeScope"), DEFAULT_FEE_SCOPE);
+
+        // Both lists are loaded into the session when the fees report page is opened
+        @SuppressWarnings("unchecked")
+        List<Classsec> allClasses = (List<Classsec>) httpSession.getAttribute("classdetailslist");
+        @SuppressWarnings("unchecked")
+        List<Feescategory> allFeeCategories = (List<Feescategory>) httpSession.getAttribute("feescategory");
+
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
-        dto.setFeesCat(request.getParameterValues("feescategory"));
-        dto.setAddClass(request.getParameterValues("classsearch"));
         dto.setStudentType(request.getParameter("studenttype"));
+        dto.setAddClass(feesCollectionService.resolveClassSelection(
+                request.getParameterValues("classsearch"), classScope, allClasses));
+        dto.setFeesCat(feesCollectionService.resolveFeesCategorySelection(
+                request.getParameterValues("feescategory"), feeScope, allFeeCategories));
+
         ResultResponse resultResponse = feesCollectionService.getFeesReport(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+
+        // Sent back so the page re-opens with the same selections
         request.setAttribute("selectedClassList", dto.getAddClass());
         request.setAttribute("selectedFeesCategoryList", dto.getFeesCat());
+        request.setAttribute("classScope", classScope);
+        request.setAttribute("feeScope", feeScope);
+    }
 
+    private static String valueOrDefault(String value, String defaultValue) {
+        return (value == null || value.trim().isEmpty()) ? defaultValue : value;
     }
 
     public void undoFeesReceipt() {
