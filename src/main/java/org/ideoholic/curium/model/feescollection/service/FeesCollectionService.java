@@ -76,6 +76,7 @@ import org.ideoholic.curium.model.user.dao.UserDAO;
 import org.ideoholic.curium.model.user.dto.Login;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
+import org.ideoholic.curium.util.FeeSequenceUtil;
 import org.ideoholic.curium.util.NumberToWord;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -253,6 +254,17 @@ public class FeesCollectionService {
 			
 		}
 		 }
+		// sequence (month-wise / exam-wise) of the outstanding fee categories, used to enforce sequential selection
+		Map<Integer,String> feesSequenceGroupMap = new HashMap<Integer, String>();
+		Map<Integer,Integer> feesSequenceOrderMap = new HashMap<Integer, Integer>();
+		Map<Integer,Integer> sequenceOrders = getFeesSequenceOrders(feesstructure);
+		for (Studentfeesstructure singleFeesStructure : feesMap.keySet()) {
+			String feesCategoryName = singleFeesStructure.getFeescategory() != null ? singleFeesStructure.getFeescategory().getFeescategoryname() : null;
+			feesSequenceGroupMap.put(singleFeesStructure.getSfsid(), FeeSequenceUtil.getSequenceGroup(feesCategoryName));
+			feesSequenceOrderMap.put(singleFeesStructure.getSfsid(), sequenceOrders.containsKey(singleFeesStructure.getSfsid()) ? sequenceOrders.get(singleFeesStructure.getSfsid()) : -1);
+		}
+		result.setFeesSequenceGroupMap(feesSequenceGroupMap);
+		result.setFeesSequenceOrderMap(feesSequenceOrderMap);
 		//request.setAttribute("admnoDetails", request.getParameter("admno"));
 		result.setPreviousYearFeesMap(feesMapPreviousYear);
 		//result.setPreviousYear(previousYear);
@@ -304,6 +316,11 @@ public class FeesCollectionService {
 			}
 				
 		//End Payment Details
+		
+		// month-wise / exam-wise fee categories must be selected in sequence
+		if(studentSfsIds!=null && !isSequentialFeesSelection(sid, dto.getAcademicYear(), studentSfsIds)) {
+			return receiptInfo;
+		}
 		
 		if(studentSfsIds!=null || miscAmount!=0 || fineAmount!=0){
 			
@@ -457,6 +474,54 @@ public class FeesCollectionService {
 		}
 		}
 		return receiptInfo;
+	}
+
+	private boolean isSequentialFeesSelection(String sid, String academicYear, String[] studentSfsIds) {
+		Set<Integer> selectedSfsIds = new HashSet<Integer>();
+		for (String studentSfsId : studentSfsIds) {
+			selectedSfsIds.add(DataUtil.parseInt(studentSfsId.split("_")[0]));
+		}
+		
+		Map<Integer,String> outstandingFees = new LinkedHashMap<Integer, String>();
+		List<Studentfeesstructure> feesstructure = new studentDetailsDAO().getStudentFeesStructure(DataUtil.parseLong(sid), academicYear);
+		for (Studentfeesstructure singleFeesStructure : feesstructure) {
+			Long totalDueAmount = singleFeesStructure.getFeesamount() - singleFeesStructure.getFeespaid() - singleFeesStructure.getConcession() - singleFeesStructure.getWaiveoff();
+			if(totalDueAmount>0 && singleFeesStructure.getFeescategory() != null) {
+				outstandingFees.put(singleFeesStructure.getSfsid(), singleFeesStructure.getFeescategory().getFeescategoryname());
+			}
+		}
+		
+		String error = FeeSequenceUtil.validateSequentialSelection(outstandingFees, getFeesSequenceOrders(feesstructure), selectedSfsIds);
+		if(error != null) {
+			request.setAttribute("feessequenceerror", error);
+			return false;
+		}
+		return true;
+	}
+
+	/**
+	 * Sequence order (sfsid -> order) of the student's fee categories. All the categories (paid and due) are
+	 * taken in their insertion order (idfeescategory) so that the first inserted month-wise category of each
+	 * fee type decides the starting month of that fee type.
+	 */
+	private Map<Integer,Integer> getFeesSequenceOrders(List<Studentfeesstructure> feesstructure) {
+		List<Studentfeesstructure> insertionOrder = new ArrayList<Studentfeesstructure>(feesstructure);
+		Collections.sort(insertionOrder, new Comparator<Studentfeesstructure>() {
+			@Override
+			public int compare(Studentfeesstructure first, Studentfeesstructure second) {
+				int result = Integer.compare(first.getIdfeescategory() != null ? first.getIdfeescategory() : 0,
+						second.getIdfeescategory() != null ? second.getIdfeescategory() : 0);
+				return result != 0 ? result : Integer.compare(first.getSfsid(), second.getSfsid());
+			}
+		});
+		
+		Map<Integer,String> feesCategories = new LinkedHashMap<Integer, String>();
+		for (Studentfeesstructure singleFeesStructure : insertionOrder) {
+			if(singleFeesStructure.getFeescategory() != null) {
+				feesCategories.put(singleFeesStructure.getSfsid(), singleFeesStructure.getFeescategory().getFeescategoryname());
+			}
+		}
+		return FeeSequenceUtil.getSequenceOrders(feesCategories);
 	}
 
 	private void getFeesDetails(String sid, String academicYear) {
