@@ -26,6 +26,8 @@ public class StampFeeResponseDto {
     private String dateOfFeesDetails;
     private Map<Studentotherfeesstructure,Long> otherFeesMap;
     private String fatherName;
+    private Map<Integer,String> feesSequenceGroupMap;
+    private Map<Integer,Integer> feesSequenceOrderMap;
     @Builder.Default
     private boolean success = false;
 }

@@ -133,6 +133,8 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("studentIdDetails", responseDto.getStudentIdDetails());
         request.setAttribute("dateoffeesDetails", responseDto.getDateOfFeesDetails());
         request.setAttribute("fatherNameDetails", responseDto.getFatherName());
+        request.setAttribute("feesSequenceGroup", responseDto.getFeesSequenceGroupMap());
+        request.setAttribute("feesSequenceOrder", responseDto.getFeesSequenceOrderMap());
     }
 
     public void getFeesDetails() {
