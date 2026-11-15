@@ -14,7 +14,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/demos.css">
-<link rel="stylesheet" href="/greatindiaacademy/css/font-awesome.css">
+<link rel="stylesheet" href="/greatindiaacademy/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {
