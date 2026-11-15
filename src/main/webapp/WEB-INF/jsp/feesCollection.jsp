@@ -867,7 +867,7 @@
             		document.getElementById(sfsid).checked = false; 
             	}
             	
-            	
+            	applyFeeSequence();
             }
             
             
@@ -993,7 +993,54 @@
 			    var index = parts[1]; // if your value is like "sfsid_3"
 			    calculate(index, cb.checked);
 			  });
+			  applyFeeSequence();
 			}
+		
+		/*
+		 * Month-wise / exam-wise fee categories (same data-feegroup) must be selected in sequence (data-feeseq).
+		 * A fee category is selectable only when all the earlier outstanding fee categories of its group are selected.
+		 */
+		function applyFeeSequence() {
+			var boxes = $('input.chcktb2[name="studentsfsids"]');
+			boxes.each(function() {
+				var cb = this;
+				var group = $(cb).attr('data-feegroup');
+				var seq = parseInt($(cb).attr('data-feeseq'), 10);
+				var pending = null;
+				if (group) {
+					boxes.each(function() {
+						if (this !== cb && $(this).attr('data-feegroup') == group
+								&& parseInt($(this).attr('data-feeseq'), 10) < seq && !this.checked) {
+							if (pending == null || parseInt($(this).attr('data-feeseq'), 10) < parseInt($(pending).attr('data-feeseq'), 10)) {
+								pending = this;
+							}
+						}
+					});
+				}
+				var index = $(cb).attr('data-feeindex');
+				var amountInput = $('#amountpaying_' + index);
+				var row = $(cb).closest('tr');
+				if (pending != null) {
+					if (cb.checked) {
+						cb.checked = false;
+						calculate(index, false);
+					}
+					cb.disabled = true;
+					amountInput.attr('readonly', 'readonly');
+					row.css('opacity', '0.5');
+					row.attr('title', 'Select ' + $(pending).attr('data-feename') + ' first');
+				} else {
+					cb.disabled = false;
+					amountInput.removeAttr('readonly');
+					row.css('opacity', '');
+					row.removeAttr('title');
+				}
+			});
+		}
+		
+		$(document).ready(function() {
+			applyFeeSequence();
+		});
 	</script>
 
 </head>
@@ -1161,7 +1208,11 @@ for(Cookie cookie : cookies){
 							<td class="dataText" align="center"><input type="checkbox"  class = "chcktb2"
 								id="<c:out value="${studentfeesdetails.key.sfsid}"/>" 
 								name="studentsfsids" 
-								onclick="calculate(${status.index},this.checked)"
+								data-feeindex="${status.index}"
+								data-feegroup="<c:out value="${feesSequenceGroup[studentfeesdetails.key.sfsid]}"/>"
+								data-feeseq="<c:out value="${feesSequenceOrder[studentfeesdetails.key.sfsid]}"/>"
+								data-feename="<c:out value="${studentfeesdetails.key.feescategory.feescategoryname}"/>"
+								onclick="calculate(${status.index},this.checked);applyFeeSequence();"
 								value="<c:out value="${studentfeesdetails.key.sfsid}"/>_${status.index}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;"><c:out	value="${studentfeesdetails.key.feescategory.feescategoryname}" /></a><input name="idfeescategory" type="hidden" id="idfeescategory" value="${studentfeesdetails.key.idfeescategory}" /></td>
 							<td class="dataText" align="center" style="font-weight: bold;font-size: 13px;">
