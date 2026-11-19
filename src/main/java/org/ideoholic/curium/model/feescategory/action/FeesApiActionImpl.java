@@ -266,8 +266,8 @@ public class FeesApiActionImpl implements FeesApiAction{
 	
 	@GetMapping("/searchfeecategoryheadwise")
 	public ResponseEntity<FeescategoryResponseDto> searchFeeCategoryHeadWise(@RequestParam(value="classname")
-	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid) throws IOException {
-		FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmissionStr,currentAcademicYearStr,branchid);
+	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="studentType") String studentType ,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid) throws IOException {
+		FeescategoryResponseDto feescategoryResponseDto = feesService.getFeeCategoryHeadWise(classname,yearofAdmissionStr,studentType,currentAcademicYearStr,branchid);
 		if(feescategoryResponseDto.isSuccess())	{
 			return ResponseEntity.ok(feescategoryResponseDto);
 		}
@@ -311,7 +311,5 @@ public class FeesApiActionImpl implements FeesApiAction{
 		return ResponseEntity.ok(feescategoryDetailDto);
 
 	}
-
-	
 
 	}

@@ -87,9 +87,9 @@ public class ImportFileService {
 
 							}
 						}
-						student.setAdmissionnumber(getCellValue(row, 0));
+						//student.setAdmissionnumber(getCellValue(row, 0));
 						student.setSts(getCellValue(row, 1));
-						student.setStudentexternalid(getCellValue(row, 46));
+						student.setStudentexternalid(getCellValue(row, 0));
 						student.setName(getCellValue(row, 2));
 						student.setGender(getCellValue(row, 3));
 
@@ -101,18 +101,18 @@ public class ImportFileService {
 						student.setAge(Integer.parseInt(getCellValue(row, 5)));
 						student.setPlaceofbirth(getCellValue(row, 6));
 
-						/*student.setAdmissiondate(DateUtil.simpleDateParser(
+						student.setAdmissiondate(DateUtil.simpleDateParser(
 						        getCellValue(row, 19) + "/" +
 						        getCellValue(row, 20) + "/" +
-						        getCellValue(row, 21)));*/
+						        getCellValue(row, 21)));
 
-						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 47));
+						student.setClassstudying(getCellValue(row, 8) + "--" + getCellValue(row, 51));
 
-						//student.setClassadmittedin(getCellValue(row, 42) + "--");
+						student.setClassadmittedin(getCellValue(row, 42) + "--");
 						//student.setBloodgroup(getCellValue(row, 9));
 						student.setMothertongue(getCellValue(row, 10));
 						student.setReligion(getCellValue(row, 11));
-						//student.setStudentscaste(getCellValue(row, 12));
+						student.setStudentscaste(getCellValue(row, 12));
 						student.setNationality(getCellValue(row, 13));
 						//student.setStudentscastecertno(getCellValue(row, 14));
 						//student.setDisabilitychild(getCellValue(row, 14)); // Aadhar no
@@ -124,16 +124,17 @@ public class ImportFileService {
 						        getCellValue(row, 23) + "/" +
 						        getCellValue(row, 24)));
 
-						//student.setSchoollastattended(getCellValue(row, 38));
+						student.setSchoollastattended(getCellValue(row, 38));
 						//student.setLastschooladdress(getCellValue(row, 39));
 						//student.setTotalmarks(Integer.parseInt(getCellValue(row, 40)));
 						//student.setPercentage(getCellValue(row, 41));
 						//student.setLastfirstlanguage(getCellValue(row, 44));
 
 						student.setUserid(2);
-
+						student.setRte(0);
 						//student.setBhagyalakshmibondnumber(getCellValue(row, 50));
 						//student.setSts(getCellValue(row, 49));
+						student.setPen(getCellValue(row, 49));
 
 						student.setBranchid(2);
 						student.setArchive(0);
@@ -165,7 +166,7 @@ public class ImportFileService {
 						//parent.setMotherscastecertno(getCellValue(row, 36));
 						//parent.setProfession(getCellValue(row, 36));
 						//parent.setMothersqualification(getCellValue(row, 52));
-						//parent.setCocontactnumber(getCellValue(row, 37));
+						parent.setCocontactnumber(getCellValue(row, 37));
 						//parent.setFatherscastecertno(getCellValue(row, 47));
 						//parent.setMotherscastecertno(getCellValue(row, 48));
 

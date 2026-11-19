@@ -83,7 +83,7 @@ public interface FeesApiAction {
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);
 	
 	ResponseEntity<FeescategoryResponseDto> searchFeeCategoryHeadWise(@RequestParam(value="classname")
-	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid) throws IOException;
+	String classname,@RequestParam(value="yearofAdmissionStr") String yearofAdmissionStr,@RequestParam(value="studentType") String studentType,@RequestParam(value="currentAcademicYearStr") String currentAcademicYearStr,@RequestHeader(value = "branchid") String branchid) throws IOException;
 
 	ResponseEntity<FeescategoryDetailDto> defaulterReport(@RequestHeader(value = "branchid") String branchId,
 			@RequestHeader(value = "currentAcademicYear") String currentAcademicYear);

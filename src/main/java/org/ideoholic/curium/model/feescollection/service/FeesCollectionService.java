@@ -2558,7 +2558,7 @@ public class FeesCollectionService {
 						        dto.setPaymentMethod(group.get(0).getCell(5).getStringCellValue());
 						        dto.setAckNo("");
 						        dto.setTransferDate("");
-						        //dto.setTransferBankName(row.getCell(2).getStringCellValue());
+						        dto.setTransferBankName("bank");
 						        dto.setChequeNo("");
 						        dto.setChequeDate("");
 						        //dto.setChequeBankName(request.getParameter("chequebankname"));
@@ -2751,8 +2751,8 @@ public class FeesCollectionService {
 				                row = (XSSFRow) rowIterator.next();
 				                Cell receiptCell = row.getCell(0); // Assuming receipt number is in the first column
 				                if (receiptCell != null) {
-				                    String receiptNumber = receiptCell.getStringCellValue();
-				                    groupedData.computeIfAbsent(receiptNumber, k -> new ArrayList<>()).add(row);
+				                	double receiptNumber = receiptCell.getNumericCellValue();
+				                    groupedData.computeIfAbsent(Double.toString(receiptNumber), k -> new ArrayList<>()).add(row);
 				                }
 				            }
 				            
