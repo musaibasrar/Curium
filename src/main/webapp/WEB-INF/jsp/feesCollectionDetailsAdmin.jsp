@@ -15,7 +15,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
-<link rel="stylesheet" href="/alirfan/css/font-awesome.css">
+<link rel="stylesheet" href="/alirfan/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -991,7 +991,6 @@ for(Cookie cookie : cookies){
                         <tr>
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Gr.No.</th>
                             <th title="click to sort" class="headerText">Student Name</th>
                             <th title="click to sort" class="headerText">Class</th>
                             <th title="click to sort" class="headerText">Receipt No.</th>
@@ -1018,7 +1017,6 @@ for(Cookie cookie : cookies){
 								name="feesIDs"
 								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.sts}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>

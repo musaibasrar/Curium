@@ -14,7 +14,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/alirfan/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/alirfan/css/datePicker/demos.css">
-<link rel="stylesheet" href="/alirfan/css/font-awesome.css">
+<link rel="stylesheet" href="/alirfan/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -763,7 +763,6 @@ for(Cookie cookie : cookies){
                             <th class="headerText"><input type="checkbox" id="chckHead" /></th>
                             <th class="headerText">Sl No</th>
                             <th title="click to sort" class="headerText">Date of fees</th>
-                            <th title="click to sort" class="headerText">Gr.No.</th>
                             <th title="click to sort" class="headerText">Student Name</th>
                             <th title="click to sort" class="headerText">Class</th>
                             <th title="click to sort" class="headerText">Receipt No.</th>
@@ -788,7 +787,6 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${feesdetails.key.receiptnumber}"/>" /></td>
 								<td class="dataText" align="center">${status.index + 1}</td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.date}"/></td>
-                                <td  class="dataText"><c:out value="${feesdetails.value.student.sts}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.name}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.classstudying}"/></td>
                                 <td  class="dataText"><c:out value="${feesdetails.key.branchreceiptnumber}"/></td>
@@ -798,7 +796,6 @@ for(Cookie cookie : cookies){
                                 <td  class="dataText"><c:out value="${feesdetails.value.student.remarks}"/></td>
                                 <td class="dataText"><c:out value="${feesdetails.key.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/alirfan/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.key.receiptnumber}'/>&sid=<c:out value='${feesdetails.key.sid}'/>">View Details</a></td>
-
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/alirfan/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/alirfan/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/alirfan/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/alirfan/css/font-awesome.css">
+		<link rel="stylesheet" href="/alirfan/css/font-awesome.min.css">
       
         <script type="text/javascript">
             var req;
