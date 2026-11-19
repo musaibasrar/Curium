@@ -49,6 +49,7 @@ import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 @Service
 public class FeesService {
@@ -59,6 +60,9 @@ public class FeesService {
              * Size of a byte buffer to read/write file
              */
             private static final int BUFFER_SIZE = 4096;
+
+            /** Text of the default option in the academic year dropdown on the report pages. */
+            private static final String CURRENT_AND_NEXT_YEAR = "Current & Next Year";
         
 			
 
@@ -615,42 +619,79 @@ public class FeesService {
 
 	public FeescategoryResponseDto viewFeesYearly(String academicYear,String branchid) throws IOException {
 		FeescategoryResponseDto feescategoryResponseDto = new FeescategoryResponseDto();
-        if(branchid!=null){
-        	
-                List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(branchid),academicYear);
-                feescategoryResponseDto.setFeescategory(list);
-                PrintWriter out = response.getWriter(); 
-       			response.setContentType("text/xml");
-       		    response.setHeader("Cache-Control", "no-cache");
-       		        try {
-       		        	
-       		        	if(!list.isEmpty()){
-       		        		String buffer = "<div style='overflow:scroll;width:420px; height: 100px;'>";
-       		        		/*String buffer = "<select name='subgroupname' style='width: 240px' id='sgname' onchange='dropdowndist();getSSGroup();'>";
-       		        		buffer = buffer +  "<option></option>";*/
-       			        	for(int i =0; i<list.size();i++){
-       			        		buffer = buffer +  "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
-       			        				+ "<label class='labelClass' style='font-weight: bold;color:#325F6D'> <input"
-       			        				+ "									 type='checkbox' name='feescategory' class='chcktbl' value="+list.get(i).getIdfeescategory()+""
-       			        				+ "									size='36'> "+list.get(i).getFeescategoryname()+" : </label> <label style='font-weight: bold;color:#eb6000'>"+list.get(i).getParticularname()+""
-       			        				+ "							</label><br>";
-       			        	}
-       			        	buffer = buffer + "</div>";
-       			        	response.getWriter().println(buffer);
-       		        	}else{
-       		        		String buffer = "<input type='checkbox'  name='chcktbl'>";
-       		        		response.getWriter().println(buffer);
-       		        	}
-       		        	
-       		        } catch (Exception e) {
-       		            out.write("<subgroup>0</subgroup>");
-       		        } finally {
-       		            out.flush();
-       		            out.close();
-       		        }
-       
-        }
-	    return feescategoryResponseDto;
+		if (branchid != null) {
+			List<Feescategory> list = new feesCategoryDAO().readListOfObjects(Integer.parseInt(branchid), academicYear);
+			feescategoryResponseDto.setFeescategory(list);
+			writeFeeCategoryTableHtml(list);
+		}
+		return feescategoryResponseDto;
+	}
+
+	/**
+	 * Loads fee categories for the report pages and writes them as a checkbox table.
+	 * "Current & Next Year" (or no year) loads the current + next year list, otherwise only the given year.
+	 */
+	public FeescategoryResponseDto viewFeesForReport(String academicYear, String branchid, String currentAcademicYear) throws IOException {
+		if (!isCurrentAndNextYear(academicYear)) {
+			return viewFeesYearly(academicYear, branchid);
+		}
+		FeescategoryResponseDto feescategoryResponseDto = viewFees(branchid, currentAcademicYear);
+		writeFeeCategoryTableHtml(feescategoryResponseDto.getFeescategory());
+		return feescategoryResponseDto;
+	}
+
+	private static boolean isCurrentAndNextYear(String academicYear) {
+		return academicYear == null
+				|| academicYear.trim().isEmpty()
+				|| CURRENT_AND_NEXT_YEAR.equalsIgnoreCase(academicYear.trim());
+	}
+
+	/** Writes the fee categories as a checkbox table (used by the report pages via AJAX). */
+	public void writeFeeCategoryTableHtml(List<Feescategory> feeCategories) throws IOException {
+		response.setContentType("text/html;charset=UTF-8");
+		response.setHeader("Cache-Control", "no-cache");
+		PrintWriter out = response.getWriter();
+		try {
+			out.println(buildFeeCategoryTableHtml(feeCategories));
+		} finally {
+			out.flush();
+			out.close();
+		}
+	}
+
+	private String buildFeeCategoryTableHtml(List<Feescategory> feeCategories) {
+		if (feeCategories == null || feeCategories.isEmpty()) {
+			return "<span style='font-weight:bold;color:#325F6D;'>No fees categories found.</span>";
+		}
+
+		StringBuilder html = new StringBuilder();
+		html.append("<div style='overflow:scroll;width:420px;height:250px;'>")
+			.append("<table id='myTableFeesCat' width='100%' border='0' style='border-color:#4b6a84;'>")
+			.append("<thead><tr>")
+			.append("<th class='headerText'>Select</th>")
+			.append("<th class='headerText'>Fees Details</th>")
+			.append("</tr></thead><tbody>");
+
+		for (Feescategory category : feeCategories) {
+			html.append("<tr>")
+				.append("<td class='dataText' style='background-color:white;'>")
+				.append("<input type='checkbox' name='feescategory' class='chcktbl' value='")
+				.append(category.getIdfeescategory())
+				.append("'/></td>")
+				.append("<td class='dataText' style='font-weight:bold;color:#325F6D;background-color:white;text-align:left'>")
+				.append(escapeHtml(category.getFeescategoryname()))
+				.append(" : <span style='color:#eb6000;'>")
+				.append(escapeHtml(category.getParticularname()))
+				.append("</span></td>")
+				.append("</tr>");
+		}
+
+		html.append("</tbody></table></div>");
+		return html.toString();
+	}
+
+	private static String escapeHtml(String value) {
+		return HtmlUtils.htmlEscape(DataUtil.emptyString(value));
 	}
 	
 	   public OtherFeesCategoryResponseDto viewOtherFees(String branchid, String currentAcademicYear ) {
