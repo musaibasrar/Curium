@@ -1431,33 +1431,37 @@ body {
           <col style="width: 30%;">
         </colgroup>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <th style="text-align: center;">Co-Scholastic Subjects</th>
+          <th style="text-align: center;">Hifz Program</th>
           <th style="text-align: center;">Grade</th>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Physical Education</td>
+          <td>Mu'rajah</td>
           <td></td>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Art and Craft</td>
+          <td>Memorisation Speed</td>
           <td></td>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Creativity</td>
+          <td>Retention</td>
           <td></td>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Organisational Skills</td>
+          <td>Tajweed Rules</td>
           <td></td>
         </tr>
-        <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Literary and Communication</td>
+                <tr style="text-transform: uppercase; font-weight: bold;">
+          <td>Masnoon Dua</td>
+          <td></td>
+        </tr>
+                <tr style="text-transform: uppercase; font-weight: bold;">
+          <td>Islamic Adab</td>
           <td></td>
         </tr>
       </table>
     </div>
 
-    <!-- Column 2 -->
+    <!-- Column 2 
     <div style="flex: 1 1 0; min-width: 0; box-sizing: border-box;">
       <h4 style="text-align: center; margin: 0; padding-bottom: 10px;">PART-C</h4>
       <table style="width: 100%; border-collapse: collapse; table-layout: fixed;">
@@ -1466,31 +1470,27 @@ body {
           <col style="width: 30%;">
         </colgroup>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <th style="text-align: center;">Co-Scholastic Subjects</th>
+          <th style="text-align: center;">PERSONALITY AND CHARACTER</th>
           <th style="text-align: center;">Grade</th>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Discipline</td>
+          <td>Punctuality</td>
           <td></td>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Responsibility</td>
+          <td>Classroom Discipline</td>
           <td></td>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Moral Values</td>
+          <td>Salah and Islamic Adab</td>
           <td></td>
         </tr>
         <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Attitude</td>
-          <td></td>
-        </tr>
-        <tr style="text-transform: uppercase; font-weight: bold;">
-          <td>Personal Hygiene</td>
+          <td>Masnoon Dua</td>
           <td></td>
         </tr>
       </table>
-    </div>
+    </div>-->
 
   </div>
 </div>
