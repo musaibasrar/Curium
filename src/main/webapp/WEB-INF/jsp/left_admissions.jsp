@@ -1,0 +1,471 @@
+<%-- 
+Document   : left
+Created on : Jan 4, 2012, 3:41:11 PM
+Author     : Musaib
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Left</title>
+        <script language="JavaScript" src="/greatindiaacademy/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/greatindiaacademy/css/datePicker/demos.css">
+		
+        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/greatindiaacademy/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/greatindiaacademy/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/greatindiaacademy/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/greatindiaacademy/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/greatindiaacademy/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/greatindiaacademy/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/greatindiaacademy/css/font-awesome.min.css">
+        
+        <script type="text/javascript">
+            var get;
+            function getdata1() {
+                var startHour, startMin;
+                var tDate = new Date();
+                startHour = tDate.getHours();
+                startMin = tDate.getMinutes();
+
+                if (typeof XMLHttpRequest != "undefined") {
+                    get = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    get = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                get.onreadystatechange = processdata;
+                get.open("POST", "/VisitProcess/getAJaxNextVisit?startHour=" + startHour + "&startMin=" + startMin, true);
+                get.send(null);
+            }
+
+            function processdata() {
+                var id, hourID, patientID, reminderTime, visitTime, rating, name, complaint, link;
+                if (get.readyState == 4)
+                {
+                    if (get.status == 200) {
+                        var visits = get.responseXML.getElementsByTagName("Visits")[0];
+                        var visitNodes = visits.getElementsByTagName("Visit");
+                        for (var i = 0; i < visitNodes.length; i++) {
+                            var visit = visitNodes[i];
+
+                            patientID = visit.getElementsByTagName("PatientID")[0].firstChild.nodeValue;
+                            visitTime = visit.getElementsByTagName("VisitTime")[0].firstChild.nodeValue;
+                            name = visit.getElementsByTagName("PatientName")[0].firstChild.nodeValue;
+                            link = "<a target='mainFrame' href='/PatientProcess/viewDetails?id=" + patientID + "'>" + name + "   " + visitTime + "</a>";
+
+                            $(function() {
+                                $('#Notification').jnotifyAddMessage({
+                                    text: link,
+                                    permanent: false,
+                                    disappearTime: 30000
+                                });
+                            });
+                        }
+                        setTimeout('getdata1();', 60000);
+                    }
+                }
+            }
+            
+            var getExpiringStockCount;
+            function getExpiringStock() {
+                if (typeof XMLHttpRequest != "undefined") {
+                    getExpiringStockCount = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    getExpiringStockCount = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                getExpiringStockCount.onreadystatechange = processExpiringStockData;
+                getExpiringStockCount.open("POST", "/StockProcess/getExpiringStock", true);
+                getExpiringStockCount.send(null);
+            }
+           
+            var getDepletingStockCount;
+            function getDepletingStock() {
+                if (typeof XMLHttpRequest != "undefined") {
+                    getDepletingStockCount = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    getDepletingStockCount = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+
+                getDepletingStockCount.onreadystatechange = processDepletingStockData;
+                getDepletingStockCount.open("POST", "/StockProcess/getDepletingStock", true);
+                getDepletingStockCount.send(null);
+            }
+            
+            function processDepletingStockData() {
+                if (getDepletingStockCount.readyState == 4)
+                {
+                    if (getDepletingStockCount.status == 200) {
+                        var count = getDepletingStockCount.responseXML.getElementsByTagName("DepletingStockCount")[0];
+                        var depletingStockCount = count.childNodes[0].nodeValue;
+                        var depletingStock = document.getElementById("depletingStock");
+                        depletingStock.innerHTML = " " + depletingStockCount;
+                        setTimeout('getDepletingStock();', 60000);
+                    }
+                }
+            }
+        </script>
+        
+        <script type="text/javascript">
+            var req;
+            function count() {
+                var idField = document.getElementById("userid");
+                var url = "AppointmentController";
+                if (typeof XMLHttpRequest != "undefined") {
+                    req = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                reload(req);
+            }
+            
+            function handleRequest() {
+                if (req.readyState == 4)
+                {
+                    if (req.status == 200) {
+                        var count = req.responseXML.getElementsByTagName("count")[0];
+                        var childCount = count.childNodes[0].nodeValue;
+                        var mdiv = document.getElementById("n1");
+                        mdiv.innerHTML = childCount;
+                        mdiv.style.visible = 'block';
+                    }
+                }
+                setTimeout(function() {
+                    reload(req);
+                }, 100);
+            }
+        </script>
+
+        <!-- MODERN UI CSS: CUSTOM COLOR #143160 & COMPACT SIDEBAR -->
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                padding: 8px 6px;
+                background: #ffffff;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #143160;
+                overflow-x: hidden;
+            }
+
+            .headerTD {
+                background-color: #143160;
+                color: #ffffff;
+                border-radius: 6px;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 700;
+                padding: 9px 8px;
+                margin-bottom: 8px;
+                letter-spacing: 0.4px;
+                box-shadow: 0 2px 4px rgba(20, 49, 96, 0.2);
+            }
+
+            /* Strip all default jQuery UI borders, backgrounds, and left icons */
+            .ui-accordion .ui-accordion-header .ui-icon {
+                display: none !important;
+            }
+
+            .ui-widget-content,
+            .ui-state-default,
+            .ui-widget-content .ui-state-default,
+            .ui-widget-header .ui-state-default {
+                border: none !important;
+                background: transparent !important;
+            }
+
+            /* Compact Main Feature Headers */
+            .ui-accordion .ui-accordion-header.sideaccordian {
+                margin: 0 0 1px 0 !important;
+                padding: 0 !important;
+                border-radius: 5px !important;
+                border-left: 3px solid transparent !important;
+                outline: none !important;
+                position: relative;
+                transition: background-color 0.15s ease, border-color 0.15s ease !important;
+            }
+
+            .ui-accordion .ui-accordion-header.sideaccordian a {
+                display: block !important;
+                padding: 6px 20px 6px 7px !important;
+                margin: 0 !important;
+                font-size: 13px !important;
+                font-weight: 500 !important;
+                line-height: 1.3 !important;
+                color: #143160 !important;
+                text-decoration: none !important;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            /* Tight gap between icon and feature name */
+            .sideaccordian a i {
+                display: inline-block;
+                width: 14px;
+                margin-right: 5px;
+                text-align: center;
+                color: #143160;
+                font-size: 13px;
+                font-weight: normal;
+            }
+
+            /* Hover & Active States in #143160 */
+            .ui-accordion .ui-accordion-header.sideaccordian:hover,
+            .ui-accordion .ui-accordion-header.ui-state-active {
+                background-color: #eff6ff !important;
+                border-left: 3px solid #143160 !important;
+            }
+
+            .ui-accordion .ui-accordion-header.sideaccordian:hover a,
+            .ui-accordion .ui-accordion-header.ui-state-active a {
+                color: #143160 !important;
+                font-weight: 600 !important;
+            }
+
+            .ui-accordion .ui-accordion-header.sideaccordian:hover a i,
+            .ui-accordion .ui-accordion-header.ui-state-active a i {
+                color: #143160 !important;
+            }
+
+            /* Right Arrow Default -> Down Arrow on Select */
+            .sideaccordian a::after {
+                content: "\f105"; /* fa-angle-right */
+                font-family: 'FontAwesome';
+                position: absolute;
+                right: 7px;
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 13px;
+                color: #64748b;
+            }
+
+            .sideaccordian:hover a::after {
+                color: #143160;
+            }
+
+            .ui-state-active a::after {
+                content: "\f107"; /* fa-angle-down */
+                color: #143160 !important;
+            }
+
+            /* Sub-options Container & Single-line Small Font Links */
+            .ui-accordion .ui-accordion-content {
+                margin: 0 0 2px 13px !important;
+                padding: 2px 4px 3px 8px !important;
+                border-left: 1.5px solid #bfdbfe !important;
+                overflow: hidden !important;
+            }
+
+            .menu-link {
+                display: block;
+                width: 100%;
+                padding: 4px 6px;
+                color: #334155;
+                text-decoration: none !important;
+                font-size: 11.5px;
+                line-height: 1.3;
+                border-radius: 4px;
+                margin-bottom: 1px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+            }
+
+            .menu-link:hover {
+                background-color: #dbeafe;
+                color: #143160;
+                font-weight: 500;
+                padding-left: 9px;
+                text-decoration: none !important;
+            }
+
+            /* Notification bubble styling */
+            .noti_Container {
+                position: relative;
+                width: 16px;
+                height: 16px;
+                cursor: pointer;
+            }
+            
+            .noti_bubble {
+                position: absolute;
+                font-size: 12px;
+                top: 450px;
+                left: 0px;
+                padding-right: 2px;
+                background-color: transparent;
+                color: black;
+                font-weight: bold;
+                z-index: 2;
+                width: 100%;
+                height: 16px;
+            }
+        </style>
+
+        <script>
+            function f1() {
+                document.getElementById("n1").style.visibility = 'hidden';
+            }
+        </script>
+        
+        <script type="text/javascript">
+            var req;
+            function count() {
+                var idField = document.getElementById("userid");
+                var url = "AppointmentController";
+                if (typeof XMLHttpRequest != "undefined") {
+                    req = new XMLHttpRequest();
+                } else if (window.ActiveXObject) {
+                    req = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                var url = "AppointmentController";
+                req.open("POST", url, true);
+                req.send();
+                req.onreadystatechange = function() {
+                    if (req.readyState == 4) {
+                        if (req.status == 200) {
+                            var count = req.responseXML.getElementsByTagName("count")[0];
+                            var childCount = count.childNodes[0].nodeValue;
+                            var mdiv = document.getElementById("n1");
+                            mdiv.innerHTML = childCount;
+                            mdiv.style.visible = 'block';
+                        }
+                    }
+                }
+            }
+
+            var timer = null;
+            function auto_reload() {
+                alert();
+                window.location = '/notication';
+            }
+        </script>
+        
+        <script language="JavaScript">
+            var clockID = 0;
+            function UpdateClock() {
+                if (clockID) {
+                    clearTimeout(clockID);
+                    clockID = 0;
+                }
+                var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                var tDate = new Date();
+                var clockDiv = document.getElementById('clock');
+                var hours, min, sec;
+                
+                if (tDate.getHours() < 10) { hours = "0" + tDate.getHours(); }
+                else { hours = tDate.getHours(); }
+                
+                if (tDate.getMinutes() < 10) { min = "0" + tDate.getMinutes(); }
+                else { min = tDate.getMinutes(); }
+                
+                if (tDate.getSeconds() < 10) { sec = "0" + tDate.getSeconds(); }
+                else { sec = tDate.getSeconds(); }
+                
+                if(clockDiv) {
+                    clockDiv.innerHTML = " " + months[tDate.getMonth()] + " " + tDate.getDate() + " " + tDate.getFullYear() + " "
+                            + hours + ":" + min + ":" + sec;
+                }
+                clockID = setTimeout("UpdateClock()", 1000);
+            }
+            function StartClock() { clockID = setTimeout("UpdateClock()", 1); }
+            function KillClock() { if (clockID) { clearTimeout(clockID); clockID = 0; } }
+            function change(id, image) {
+                var img = document.getElementById(id);
+                img.src = "/images/" + image;
+            }
+        </script>
+
+        <script>
+            $(function() {
+                $("#container").accordion({
+                    collapsible: true,
+                    active: false,
+                    autoHeight: false,
+                    navigation: true,
+                    icons: false
+                });
+            });
+        </script>
+    </head>
+    
+    <%
+    //allow access only if session exists
+    String user = null;
+    if(session.getAttribute("userAuth") == null){
+        response.sendRedirect("/greatindiaacademy/UserProcess/sessionTimeOut");
+    }else user = (String) session.getAttribute("userAuth");
+    
+    String userName = null;
+    String sessionID = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies !=null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("user")) userName = cookie.getValue();
+            if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
+        }
+    }
+    %>
+    
+    <body onload="StartClock()" onunload="KillClock()">
+        
+        <div class="headerTD"><label>A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+
+        <div id="container">
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/greatindiaacademy/StudentProcess/viewAll">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/greatindiaacademy/StudentProcess/addNew">Add New</a>
+                 <a class="menu-link" target="mainFrame" href="/greatindiaacademy/StudentProcess/QuickStudentSave">Quick Student Save</a>
+            </div>
+            
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
+            <div>
+                 <a class="menu-link" target="mainFrame" href="/greatindiaacademy/changePassword">Change Password</a>
+                 <a class="menu-link" target="mainFrame" href="/greatindiaacademy/StudentProcess/archiveViewAll">Archive Students</a>
+            </div>
+        </div>
+       
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#Notification').jnotifyInizialize({
+                    oneAtTime: false,
+                    appendType: 'append'
+                }).css({
+                    'position': 'absolute',
+                    'marginTop': '200px',
+                    'left': '0px',
+                    'width': '175px',
+                    'height': '40px',
+                    'z-index': '9999'
+                });
+            });
+        </script>
+
+        <div id="n1" class="noti_bubble">
+            <table width="100%" border="0">
+                <tr></tr>
+            </table>
+        </div>
+
+        <script>
+            getdata1();
+        </script>
+    </body>
+</html>

@@ -688,9 +688,9 @@ for(Cookie cookie : cookies){
 							<td class="dataText" style="display: none;"><input type="checkbox" checked="checked" 
 								id="<c:out value="${attendanceList.student.studentexternalid}"/>" class="chcktbl"
 								name="externalIDs"
-								value="<c:out value="${attendanceList.studentexternalid},${status.index}"/>" /></td>
+								value="<c:out value="${attendanceList.student.studentexternalid},${status.index}"/>" /></td>
 								<td class="dataTextInActive"><a class="dataTextInActive"><c:out
-										value="${attendanceList.studentexternalid}" /></a></td>
+										value="${attendanceList.student.studentexternalid}" /></a></td>
 							<td class="dataTextInActive"><a class="dataTextInActive"><c:out
 										value="${attendanceList.student.admissionnumber}" /></a></td>
 							<td class="dataText"><c:out value="${attendanceList.student.name}" /></td>

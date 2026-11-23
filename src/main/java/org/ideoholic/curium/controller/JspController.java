@@ -686,4 +686,24 @@ public class JspController {
 		return "attendancemarkselectdate";
 	}
 	
+	@GetMapping("/index_admissions")
+	public String getIndexAdmissions() {
+		return "index_admissions";
+	}
+
+	@GetMapping("/header_admissions")
+	public String getHeaderAdmissions() {
+		return "header_admissions";
+	}
+	
+	@GetMapping("/left_admissions")
+	public String getLeftAdmissions() {
+		return "left_admissions";
+	}
+	
+	@GetMapping("/reports_admissions")
+	public String getReportsAdmissions() {
+		return "reports_admissions";
+	}
+	
 }
