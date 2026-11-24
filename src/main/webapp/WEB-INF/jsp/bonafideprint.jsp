@@ -8,334 +8,237 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-
-<html moznomarginboxes >
+<!DOCTYPE html>
+<html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Bonafide Certificate</title>
 
-<style type="text/css">
-<!--
-.headerText {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: center;
-}
-
-.headerTextLeft {
-	width: 10px;
-	font-family: Tahoma;
-	font-size: 12px;
-	color: #FFFFFF;
-	font-weight: normal;
-	width: auto;
-	height: 22px;
-	vertical-align: middle;
-	text-align: left;
-}
-
-.dataTextBold {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataTextBoldLeft {
-	font-weight: normal;
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: left;
-}
-
-.dataTextBoldCenter {
-	font-weight: bold;
-	font-family: Tahoma;
-	color: black;
-	font-size: 18px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.addressLine{
-	font-weight: normal;
-	font-family: ariel;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
-
-.dataText {
-	font-family: Tahoma;
-	color: black;
-	font-size: 12px;
-	letter-spacing: normal;
-	text-align: center;
-}
--->
-
-span{
-    display:inline-block;
-    border-bottom:2px solid black;
-    padding-bottom:1px;
-    width: 250px;
-    font-weight: normal;
-}
-</style>
-
-
-<!-- <style type="text/css">
-
-        @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
-            }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-            	margin-top: 0px;
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              size: auto;   /* auto is the current printer page size */
-           	  margin: 0mm;  /* this affects the margin in the printer settings */ 
-            
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-        }
-    </style> -->
-    
     <style type="text/css">
+        /* Base Reset & Styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, Georgia, serif;
+            color: #111;
+            background-color: #fff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Certificate Container: Leaves balanced margins on left and right */
+        .certificate-sheet {
+            width: 86%;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px 40px;
+            box-sizing: border-box;
+        }
+
+        /* Certificate Title */
+        .cert-header {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 35px;
+        }
+
+        .cert-title {
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: underline;
+            margin: 0;
+        }
+
+        /* Meta Information (Ref No & Date) */
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        /* Certificate Body Paragraphs */
+        .cert-body {
+            font-size: 17px;
+            line-height: 2.6;
+            text-align: justify;
+            margin-bottom: 40px;
+        }
+
+        /* Fill-in-the-blank style underlines */
+        .blank-field {
+            display: inline-block;
+            border-bottom: 1.5px solid #000;
+            text-align: center;
+            font-weight: bold;
+            padding: 0 10px;
+            line-height: 1.2;
+            vertical-align: baseline;
+        }
+
+        .w-name { min-width: 320px; text-transform: capitalize; }
+        .w-father { min-width: 280px; text-transform: capitalize; }
+        .w-class { min-width: 100px; }
+        .w-year { min-width: 120px; }
+        .w-dob { min-width: 140px; }
+        .w-detail { min-width: 110px; text-transform: capitalize; }
+
+        /* Secondary Details Row (Religion, Caste, GR No.) */
+        .details-grid {
+            margin-top: 15px;
+            display: block;
+            line-height: 2.4;
+        }
+
+        /* Signature Section */
+        .cert-footer {
+            margin-top: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .footer-item {
+            text-align: center;
+            min-width: 160px;
+        }
+
+        .signature-line {
+            border-top: 1.5px solid #000;
+            margin-bottom: 5px;
+            padding-top: 4px;
+        }
+
+        /* Print Settings */
+        @page {
+            size: A4 portrait;
+            margin: 15mm 20mm 15mm 20mm; /* Symmetrical page padding for print */
+        }
 
         @media print {
-            .fontsize { font-size: 15px ;
-                        font-weight: bold;
-                        font-family: 'Times New Roman';
-                        
-                        
+            body {
+                background: none;
             }
-            .header,.hide { visibility: hidden }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
-            }
-            
-        }
-        
-        @page {
-              
-             margin-left:  0cm;
-             margin-right: 0cm;
-             margin-bottom: 0cm;
-             margin-top: 0cm;
-             size: auto;
-        }
-
-        @media screen {
-            .fontsize { font-size: 15px;
-                        font-weight: bold;
-                        font-family: 'Times New Roman'
-            }
-            .bodymargin{
-                margin-left: 0px ;
-                margin-right: 0px;
+            .certificate-sheet {
+                width: 100%;
+                max-width: 100%;
+                margin: 0 auto;
+                padding: 0;
             }
         }
     </style>
-        <title>Bonafide Print</title>
-        <script type="text/javascript">
-             window.onload = function(){
-            	 window.print();
-             }
-        </script>
 
+    <script type="text/javascript">
+        window.onload = function() {
+            window.print();
+        };
+    </script>
 </head>
+
 <%
-//allow access only if session exists
-String user = null;
-if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
-}else user = (String) session.getAttribute("userAuth");
-String userName = null;
-String sessionID = null;
-Cookie[] cookies = request.getCookies();
-if(cookies !=null){
-for(Cookie cookie : cookies){
-	if(cookie.getName().equals("user")) userName = cookie.getValue();
-	if(cookie.getName().equals("JSESSIONID")) sessionID = cookie.getValue();
-}
-}
+    // Restrict access if session has expired
+    if (session.getAttribute("userAuth") == null) {
+        response.sendRedirect("/alirfan/UserProcess/sessionTimeOut");
+        return;
+    }
 %>
-<body style="text-align: center" class="bodymargin">
+
+<body>
 <jsp:useBean id="now" class="java.util.Date" scope="page" />
-	<form method="post" class="bodymargin">
-		<br><br>
-		<table align="center">
-			
-			
-			<tr>
-			<td>
-			<img border="0" style="vertical-align: text-bottom;height: 105px;width: 90px;" alt="logo" src="/alirfan/images/alirfan.png">
-			</td>
-				<td >
-					<br>
-					<h2 style="margin-bottom:0px;">${branchname}</h2>
-					<h3 style="margin-top:0px;">${branchaddress}<br>${branchcontact}</h3>
-					
-				</td>
-			</tr>
-			</table>
-			
-		<table align="center" style="padding-left: 30px;padding-right: 20px;">
-			<tr>
-			<td class="dataTextBoldLeft">
-			<br>
-				<%-- Date:&nbsp;&nbsp;
-				<input name="dateofcr" type="text" class="textField" style="border: none;border-color: transparent;"
-					size="10" value="<fmt:formatDate type="date" value="${now}" pattern="yyyy-MM-dd"/>" > --%></td>
-			
-			</tr>
-			
-			<tr>
-				<td colspan="4" class="dataTextBoldCenter">
-					<br>
-					<u>BONAFIDE CERTIFICATE</u>
-					<br><br>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			
-			</tr>
-			
-			<tr>
-			
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Smt/Sri &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
-					<%-- with Registration Number &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.student.admissionnumber}" /></span> --%>
-					</h3>
-				</td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					S/o, D/o &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;width: 400px;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>					
-					is/ was a student of this School/College.
-					 
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				
-				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					 He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
-								&nbsp;&nbsp;&nbsp;&nbsp;
-								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
-						    		${splt} 
-								</c:forEach>
-					</span>
-					during the year &nbsp;&nbsp;<span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
-					</h3>
-				</td>
-			
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			
-				<td class="dataTextBoldLeft"  >
-				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
-					</h3>
-					
-				</td>
-				
+<br><br><br><br><br>
+<div class="certificate-sheet">
 
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-				<td class="dataTextBoldLeft"  style="padding-left: 60px;">
-				<h3 style="font-weight: normal;" align="center">
-					He/She bears good Moral Character
-					</h3>
-				</td>
-				
+    <!-- Top Spacing / Optional Reference & Date Row -->
+    <div class="meta-row">
+        <div>
+            Ref. No.: <span class="blank-field" style="min-width: 140px;">&nbsp;</span>
+        </div>
+        <div>
+            Date: 
+            <span class="blank-field" style="min-width: 110px;">
+                <fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>
+            </span>
+        </div>
+    </div>
 
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		</table>
-		
+    <!-- Certificate Heading -->
+    <div class="cert-header">
+        <h1 class="cert-title">Bonafide Certificate</h1>
+    </div>
 
-		<TABLE width="100%" border="0" style="page-break-after: always; border-collapse: collapse;">
+    <!-- Main Certificate Content -->
+    <div class="cert-body">
+        This is to certify that Master/Kumari&nbsp;
+        <span class="blank-field w-name">
+            <c:out value="${studentdetailsbonafide.student.name}" />
+        </span>, 
+        Son  of Mr.&nbsp;
+        <span class="blank-field w-father">
+            <c:out value="${studentdetailsbonafide.fathersname}" />
+        </span>, 
+        is a bonafide student of this institution, studying in class&nbsp;
+        <span class="blank-field w-class">
+            <c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
+                ${splt}&nbsp;
+            </c:forEach>
+        </span>
+        during the academic year&nbsp;
+        <span class="blank-field w-year">
+            <c:out value="${currentAcademicYear}" />
+        </span>.
+        
+        <br>
 
-			<tr>
-			<td>
-			<br>
-			<br><br><br></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-			<tr>
-			<td></td>
-			</tr>
-		<tr>
-			<td style="padding-left: 10px;">Date</td>	
-			<td align="right" style="padding-right: 70px;">Principal</td>
-		</tr>
-		</TABLE>
-	</form>
-	
-	
+        As per the school general register records, his/her date of birth is&nbsp;
+        <span class="blank-field w-dob">
+            <fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/>
+        </span>.
+
+        <!-- Supplementary Student Details -->
+        <div class="details-grid">
+            Religion:&nbsp;
+            <span class="blank-field w-detail">
+                <c:out value="${studentdetailsbonafide.student.religion}" />
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            Caste:&nbsp;
+            <span class="blank-field w-detail">
+                <c:out value="${studentdetailsbonafide.student.caste}" />
+            </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            Sub-Caste:&nbsp;
+            <span class="blank-field w-detail">&nbsp;</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            G.R. No.:&nbsp;
+            <span class="blank-field w-detail">
+                <c:out value="${studentdetailsbonafide.student.sts}" />
+            </span>
+        </div>
+    </div>
+
+    <!-- Signatures and Stamp Footer 
+    <div class="cert-footer">
+        <div class="footer-item">
+            <div class="signature-line">Prepared By</div>
+        </div>
+        <div class="footer-item">
+            <div class="signature-line">Verified By</div>
+        </div>
+        <div class="footer-item">
+            <div class="signature-line">Principal / Headmaster</div>
+            <div>(Seal & Signature)</div>
+        </div>
+    </div>-->
+
+</div>
+
 </body>
 </html>

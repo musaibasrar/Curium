@@ -92,6 +92,36 @@ span{
     width: 300px;
     font-weight: normal;
 }
+
+.certificateTable {
+	width: 960px;
+	margin: 0 auto;
+}
+
+.certificateLine {
+	margin: 0;
+	line-height: 1.8;
+}
+
+.nameField,
+.parentField {
+	width: 400px;
+}
+
+.classField {
+	width: 90px;
+	text-align: center;
+}
+
+.yearField {
+	width: 140px;
+	text-align: center;
+}
+
+.dobField {
+	width: 150px;
+	text-align: center;
+}
 </style>
 	<script type="text/javascript" src="/alirfan/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/alirfan/js/datePicker/ui/jquery-ui-1.8.17.custom.js"></script>
@@ -134,7 +164,7 @@ for(Cookie cookie : cookies){
 			</tr>
 			</table>
 			
-		<table>
+		<table class="certificateTable">
 			<tr>
 			<td class="dataTextBoldLeft">
 			<br><br>
@@ -163,8 +193,8 @@ for(Cookie cookie : cookies){
 			<tr>
 			
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;">This is to certify that Mr./Ms. &nbsp;&nbsp;
-					<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
+					<h3 class="certificateLine" style="font-weight: normal;">This is to certify that Master &nbsp;&nbsp;
+					<span class="nameField" style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp; <c:out value="${studentdetailsbonafide.student.name}" /></span>
 					</h3>
 				</td>
 			</tr>
@@ -174,11 +204,9 @@ for(Cookie cookie : cookies){
 			<tr>
 				
 				<td class="dataTextBoldLeft">
-					<h3 style="font-weight: normal;" >
-					Son/Daughter of &nbsp;&nbsp;<span style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
-					is/ was a student of this School/College.
-					</span>
-					
+					<h3 class="certificateLine" style="font-weight: normal;" >
+					S/o &nbsp;&nbsp;<span class="parentField" style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<c:out value="${studentdetailsbonafide.fathersname}" /></span>
+					is bonafide student of this school studying in.
 					</h3>
 				</td>
 			
@@ -190,14 +218,14 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-				<h3 style="font-weight: normal;" >
-					He/She is/was studied/passed/filled in&nbsp;&nbsp; <span style="font-weight: bold;width: 60px;">
+				<h3 class="certificateLine" style="font-weight: normal;" >
+					<span class="classField" style="font-weight: bold;">
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<c:forEach var="splt" items="${fn:split(studentdetailsbonafide.student.classstudying,'--')}">
 						    		${splt} 
 								</c:forEach>
 					</span>
-					during the year <span style="font-weight: bold;width: 80px;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;His/ her date of birth
+					during the academic year <span class="yearField" style="font-weight: bold;">${currentAcademicYear}</span>&nbsp;&nbsp;&nbsp;&nbsp;As per school record
 					</h3>
 					
 				</td>
@@ -212,9 +240,9 @@ for(Cookie cookie : cookies){
 			
 				<td class="dataTextBoldLeft"  >
 				
-				<h3 style="font-weight: normal;" >
-					 as per School/College record is
-					<span style="font-weight: bold;text-transform: capitalize;width: 120px;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
+				<h3 class="certificateLine" style="font-weight: normal;" >
+					 his date of birth is &nbsp;&nbsp;
+					<span class="dobField" style="font-weight: bold;text-transform: capitalize;">&nbsp;&nbsp;&nbsp;&nbsp;<fmt:formatDate value="${studentdetailsbonafide.student.dateofbirth}" pattern="dd/MM/yyyy"/></span>
 					</h3>
 					
 				</td>
@@ -244,10 +272,8 @@ for(Cookie cookie : cookies){
 			<td></td>
 			</tr>
 		<tr>
-		<td></td>
-			<td align="left">Clerk</td>	
-			<td align="center">College Seal</td>
-			<td align="center">Principal</td>
+			<td style="padding-left: 10px;">Date</td>	
+			<td align="right" style="padding-right: 70px;">Principal</td>
 		</tr>
 		
 			<tr>
