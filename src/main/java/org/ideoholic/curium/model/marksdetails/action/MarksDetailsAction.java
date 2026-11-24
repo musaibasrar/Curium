@@ -150,9 +150,11 @@ public class MarksDetailsAction {
 	@PostMapping("/addMarks")
 	public String addMarks() {
 		String result = marksDetailsActionAdapter.addMarks();
-		if (result == "true") {
+		if ("true".equals(result)) {
 			return "markssaved";
-		} else if (result == "Duplicate") {
+		} else if ("Duplicate".equals(result)) {
+			return "erroraddingmarks";
+		} else if ("INVALID_SUBJECT_CONTEXT".equals(result)) {
 			return "erroraddingmarks";
 		} else {
 			return "error";
