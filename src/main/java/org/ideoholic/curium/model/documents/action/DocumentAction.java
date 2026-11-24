@@ -307,5 +307,12 @@ public class DocumentAction {
 		  documentActionAdapter.multiClassSearchRegistrationReport(); 
 			return "studentsregistrationreport";
 		}
+	  
+	  @PostMapping("/generateTransferCertificatePreview")
+		public String generateTransferCertificatePreview() {
+		  
+		  		documentActionAdapter.generateTransferCertificatePreview();
+				return "transfercertificatetemplatepreview";
+		}
 	 
 }
