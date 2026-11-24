@@ -600,6 +600,28 @@ for(Cookie cookie : cookies){
 							<td><br /></td>
 						</tr>
 						
+						<tr>
+							<td class="alignRightFields">Report Mode &nbsp;</td>
+							<td>
+							
+								<label style="font-weight: bold; color: #325F6D;">
+									<input type="radio" name="reportMarkMode" value="full" checked="checked"/>
+									Full Marks
+								</label>
+								
+								<label style="font-weight: bold; color: #325F6D;">
+									<input type="radio" name="reportMarkMode" value="converted" />
+									Converted Marks
+								</label>
+								&nbsp;&nbsp;&nbsp;
+								
+							</td>
+						</tr>
+						
+						<tr>
+							<td><br /></td>
+						</tr>
+						
 						
 					</table>
 					
