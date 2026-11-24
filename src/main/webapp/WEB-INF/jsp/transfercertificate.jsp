@@ -495,7 +495,7 @@
             
             function previewTransferCertificate(){
  	            var form1 = document.getElementById("form1");
-    			form1.action = "/vision/DocumentsProcess/generateTransferCertificatePreview";
+    			form1.action = "/noblewisdom/DocumentsProcess/generateTransferCertificatePreview";
             	form1.method = "POST";
             	form1.submit();
             }
