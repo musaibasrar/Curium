@@ -963,6 +963,122 @@ public class DocumentService {
 				return searchStudentResponseDto;
 			}
 			
+		public TransferCertificateResponseDto generateTransferCertificatePreview(TransferCertificateDto transferCertificateDto) {
+			TransferCertificateResponseDto transferCertificateResponseDto = new TransferCertificateResponseDto();
+			Student student = new Student();
+			Parents parents = new Parents();
+			Transfercertificate tc = new Transfercertificate();
+			String transferCertificateString = null;
 			
+			int studentId = DataUtil.parseInt(transferCertificateDto.getStudentId());
+			String leavingReason = DataUtil.emptyString(transferCertificateDto.getReason());
+			String bookno = DataUtil.emptyString(transferCertificateDto.getBookNo());
+			String tcno = DataUtil.emptyString(transferCertificateDto.getTcNo());
+			String caste = DataUtil.emptyString(transferCertificateDto.getCaste());
+			String classinword = DataUtil.emptyString(transferCertificateDto.getClassInWord());
+			String lastexam = DataUtil.emptyString(transferCertificateDto.getLastExam());
+			String failpass = DataUtil.emptyString(transferCertificateDto.getFailPass());
+			String firstsubject = DataUtil.emptyString(transferCertificateDto.getFirstSubject());
+			String secondsubject = DataUtil.emptyString(transferCertificateDto.getSecondSubject());
+			String thirdsubject = DataUtil.emptyString(transferCertificateDto.getThirdSubject());
+			String Fourthsubject = DataUtil.emptyString(transferCertificateDto.getFourthSubject());
+			String Fifthsubject = DataUtil.emptyString(transferCertificateDto.getFifthSubject());
+			String sixthsubject = DataUtil.emptyString(transferCertificateDto.getSixthSubject());
+			String pinfig = DataUtil.emptyString(transferCertificateDto.getPinFig());
+			String pinword = DataUtil.emptyString(transferCertificateDto.getPinWord());
+			String dues = DataUtil.emptyString(transferCertificateDto.getDues());
+			String concession = DataUtil.emptyString(transferCertificateDto.getConcession());
+			String workingdays = DataUtil.emptyString(transferCertificateDto.getWorkingDays());
+			String present = DataUtil.emptyString(transferCertificateDto.getPresent());
+			String ncc = DataUtil.emptyString(transferCertificateDto.getNcc());
+			String game = DataUtil.emptyString(transferCertificateDto.getGame());
+			String conduct = DataUtil.emptyString(transferCertificateDto.getConduct());
+			String datecert = DataUtil.emptyString(transferCertificateDto.getDateCert());
+			String Remarks = DataUtil.emptyString(transferCertificateDto.getRemarks());
+			Date dateOfTc = DateUtil.dateParserUpdateStd(transferCertificateDto.getDateOfTc());
+			String studentAdmissionStatus = DataUtil.emptyString(transferCertificateDto.getStudentAdmissionStatus());
+			
+			student.setReasonleaving(leavingReason);
+			student.setSid(studentId);
+			 
+				 tc.setSid(studentId);
+				 tc.setApplicationstatus("applied");
+				 tc.setDateofissues(dateOfTc);
+				 tc.setNoofissues(1);
+				 
+				 Transfercertificate transferCertificate = new DocumentDAO().getTransferCertificateDetails(tc.getSid()); 
+				 if(transferCertificate != null){
+					 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+					 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+					 String dateinword = new DateUtil().generateDateInWord(parents.getStudent().getDateofbirth());
+					 transferCertificateResponseDto.setReason(leavingReason); 
+					 transferCertificateResponseDto.setBookNo(bookno);
+					 transferCertificateResponseDto.setTcNo(tcno);
+					 transferCertificateResponseDto.setCaste(caste);
+					 transferCertificateResponseDto.setClassInWord(classinword);	
+					 transferCertificateResponseDto.setDateInWord(dateinword);
+					 transferCertificateResponseDto.setLastExam(lastexam);	
+					 transferCertificateResponseDto.setFailPass(failpass);	
+					 transferCertificateResponseDto.setFirstSubject(firstsubject);
+					 transferCertificateResponseDto.setSecondSubject(secondsubject);	
+					 transferCertificateResponseDto.setThirdSubject(thirdsubject);
+					 transferCertificateResponseDto.setFourthSubject(Fourthsubject);
+					 transferCertificateResponseDto.setFifthSubject(Fifthsubject);
+					 transferCertificateResponseDto.setSixthSubject(sixthsubject);
+					 transferCertificateResponseDto.setPinFig(pinfig);
+					 transferCertificateResponseDto.setPinWord(pinword);	
+					 transferCertificateResponseDto.setDues(dues);
+					 transferCertificateResponseDto.setConcession(concession);
+					 transferCertificateResponseDto.setWorkingDays(workingdays);
+					 transferCertificateResponseDto.setPresent(present);
+					 transferCertificateResponseDto.setNcc(ncc);
+					 transferCertificateResponseDto.setGame(game);
+					 transferCertificateResponseDto.setConduct(conduct);
+					 transferCertificateResponseDto.setDateCert(datecert);
+					 transferCertificateResponseDto.setRemarks(Remarks);
+					 transferCertificateResponseDto.setParents(parents);
+					 transferCertificateResponseDto.setTc(tc);
+					 transferCertificateResponseDto.setStatus(TransferStatus.TCEXISTS);
+					 return transferCertificateResponseDto;
+				 }
+			 
+			 
+			 if("true".equalsIgnoreCase(transferCertificateString)){
+				 String getStudentInfo  = "from Parents as parents where parents.Student.sid="+studentId;
+				 parents = new studentDetailsDAO().getStudentRecords(getStudentInfo);
+				 String dateinword = new DateUtil().generateDateInWord(parents.getStudent().getDateofbirth());
+				 transferCertificateResponseDto.setReason(leavingReason); 
+				 transferCertificateResponseDto.setBookNo(bookno);
+				 transferCertificateResponseDto.setTcNo(tcno);
+				 transferCertificateResponseDto.setCaste(caste);
+				 transferCertificateResponseDto.setClassInWord(classinword);	
+				 transferCertificateResponseDto.setDateInWord(dateinword);
+				 transferCertificateResponseDto.setLastExam(lastexam);	
+				 transferCertificateResponseDto.setFailPass(failpass);	
+				 transferCertificateResponseDto.setFirstSubject(firstsubject);
+				 transferCertificateResponseDto.setSecondSubject(secondsubject);	
+				 transferCertificateResponseDto.setThirdSubject(thirdsubject);
+				 transferCertificateResponseDto.setFourthSubject(Fourthsubject);
+				 transferCertificateResponseDto.setFifthSubject(Fifthsubject);
+				 transferCertificateResponseDto.setSixthSubject(sixthsubject);
+				 transferCertificateResponseDto.setPinFig(pinfig);
+				 transferCertificateResponseDto.setPinWord(pinword);	
+				 transferCertificateResponseDto.setDues(dues);
+				 transferCertificateResponseDto.setConcession(concession);
+				 transferCertificateResponseDto.setWorkingDays(workingdays);
+				 transferCertificateResponseDto.setPresent(present);
+				 transferCertificateResponseDto.setNcc(ncc);
+				 transferCertificateResponseDto.setGame(game);
+				 transferCertificateResponseDto.setConduct(conduct);
+				 transferCertificateResponseDto.setDateCert(datecert);
+				 transferCertificateResponseDto.setRemarks(Remarks);
+				 transferCertificateResponseDto.setParents(parents);
+				 transferCertificateResponseDto.setTc(tc);
+				 transferCertificateResponseDto.setStatus(TransferStatus.TCNEW);
+				 return transferCertificateResponseDto;
+			 }
+			 transferCertificateResponseDto.setStatus(TransferStatus.TCFAILED);
+			return transferCertificateResponseDto;
+		}
 			 
 }
