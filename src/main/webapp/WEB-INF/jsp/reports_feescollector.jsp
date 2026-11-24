@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Reports</title>
-        <script language="JavaScript" src="/salihath/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/salihath/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/salihath/css/datePicker/demos.css">
+        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/salihath/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/salihath/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/salihath/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/salihath/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/salihath/css/font-awesome.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
         
         
         <style>
@@ -412,7 +412,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/salihath/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -437,57 +437,57 @@ for(Cookie cookie : cookies){
              
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsReports">Detail Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsAdmissionReports">Admission Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsPendingAdmissionReports">Pending Admission Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/ClassProcess/viewGraduated">Graduated Student</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/ClassProcess/viewLeftOut">Former Students</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/ClassProcess/viewDropped">Dropped Out Students</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsRegistrationReports">Registration Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsReports">Detail Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsAdmissionReports">Admission Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsPendingAdmissionReports">Pending Admission Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/viewGraduated">Graduated Student</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/viewLeftOut">Former Students</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/viewDropped">Dropped Out Students</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsRegistrationReports">Registration Report</a>
             </div>
             
             
               <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/feessummary">Fees Summary</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/feesCollectionDetails">Fees Collection Details</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesReport">Fees Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesReportDue">Fees Due Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/feescollectiondetailscategory">Fees Collection Head Wise</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesDueReportHeadWise">Fees Due Head Wise</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesDueStampFees">Fees Stamp Due Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesConcessionReport">Fees Concession Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/feescancelledreceipts">Cancelled Fees Receipts</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/otherfeesReport">Bus Fees Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/otherfeesCollectionDetails">Bus Fees Collection Details</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/defaulterReport">Defaulter Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/dndReport">DND Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/otherfeescancelledreceipts">Cancelled Bus Fees Receipts</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feessummary">Fees Summary</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feesCollectionDetails">Fees Collection Details</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesReport">Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesReportDue">Fees Due Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feescollectiondetailscategory">Fees Collection Head Wise</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesDueReportHeadWise">Fees Due Head Wise</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesDueStampFees">Fees Stamp Due Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesConcessionReport">Fees Concession Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feescancelledreceipts">Cancelled Fees Receipts</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherfeesReport">Bus Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/otherfeesCollectionDetails">Bus Fees Collection Details</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/defaulterReport">Defaulter Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/dndReport">DND Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/otherfeescancelledreceipts">Cancelled Bus Fees Receipts</a>
             </div>
 
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/progressReportSingleExams">Marks Card</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/progressReport">Consolidated Marks Card</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/prePrimaryProgressReport">Pre Primary Marks Card</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/rankReport">Generate Student Rank</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/progressReportSingleExams">Marks Card</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/progressReport">Consolidated Marks Card</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/prePrimaryProgressReport">Pre Primary Marks Card</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/rankReport">Generate Student Rank</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Receipts</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsMoveProcess/billsReport">Receipts Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsMoveProcess/getDueReport">Due Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/billsReport">Receipts Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/getDueReport">Due Report</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-bar-chart"></i>Stock</a></h5>
             
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/currentStock">Stock Quantity Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/batchStock">Stock Price Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/issuanceStock">Stock Issuance Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/receiveStock">Stock Received Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/currentStock">Stock Quantity Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/batchStock">Stock Price Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/issuanceStock">Stock Issuance Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/receiveStock">Stock Received Report</a>
             </div>
              
             

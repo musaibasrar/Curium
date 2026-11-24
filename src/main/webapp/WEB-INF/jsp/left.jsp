@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/salihath/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/salihath/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/salihath/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/salihath/css/font-awesome.css">
+		<link rel="stylesheet" href="/salihath/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {

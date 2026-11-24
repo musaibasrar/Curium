@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/salihath/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/salihath/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/salihath/css/datePicker/demos.css">
+        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/salihath/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/salihath/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/salihath/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/salihath/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/salihath/css/font-awesome.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -572,7 +572,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/salihath/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -594,164 +594,164 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/StudentProcess/viewAll">View All</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/StudentProcess/addNew">Add New</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/viewAttendance">View Attendance</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/markAttendance">Mark Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/viewAll">View All</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/addNew">Add New</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendance">View Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/markAttendance">Mark Attendance</a>
             </div>
             
             
 			
               <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesCollect">Fees Collect</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesStructure">Fees Structure</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/feesCollectionDetails">Fees Collection Details</a> -->
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/feescancelledreceipts">Cancelled Fees Receipts</a> -->
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesReport">Fees Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesConcessionReport">Fees Concession Report</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesCollect">Fees Collect</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesStructure">Fees Structure</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/feesCollectionDetails">Fees Collection Details</a> -->
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/feescancelledreceipts">Cancelled Fees Receipts</a> -->
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesReport">Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesConcessionReport">Fees Concession Report</a> -->
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-credit-card"></i>Expenses</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/AdminProcess/viewAllExpenses">Expenses</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AdminProcess/viewAllExpenses">Expenses</a>
             </div>
             
             
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/AccountProcess/createAccount">Chart of Accounts</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AccountProcess/createVoucher">Create Voucher</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AccountProcess/viewVoucherReceipt">View/Cancel Voucher</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AccountProcess/viewCancelledVouchers">Cancelled Vouchers</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/AccountProcess/generalLedgerReport">General Ledger Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/incomestatement">Income Statement</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/trialbalance">Trial Balance</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AccountProcess/balanceSheet">Balance Sheet</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/createAccount">Chart of Accounts</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/createVoucher">Create Voucher</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/viewVoucherReceipt">View/Cancel Voucher</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/viewCancelledVouchers">Cancelled Vouchers</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/generalLedgerReport">General Ledger Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/incomestatement">Income Statement</a>
+                <a class="menu-link" target="mainFrame" href="/vision/trialbalance">Trial Balance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/balanceSheet">Balance Sheet</a> -->
             </div>
             
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-file-text-o"></i>Documents</a></h5>
             <div>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsReports">Student Details</a> -->
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/admissionAbstract">Admission Abstract</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/transferCertificate">Transfer Certificate</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/PeriodProcess/generateTimeTable">Class Time Table</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsReports">Student Details</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/admissionAbstract">Admission Abstract</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/transferCertificate">Transfer Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTimeTable">Class Time Table</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
             </div>
             
             
             <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Attendance</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/viewAttendance">View Attendance</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/markAttendance">Mark Attendance</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/attendanceExport">Export Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendance">View Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/markAttendance">Mark Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceExport">Export Attendance</a>
             </div>
              -->
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/marksEntry">Enter Marks</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/getSubjectsExams">View Marks</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/progressReport">Generate Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/marksEntry">Enter Marks</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams">View Marks</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/progressReport">Generate Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a> -->
             </div>
             
             
                   <h5 class="sideaccordian"><a href="#"><i class="fa fa-search"></i>Advance Search</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/StudentProcess/advanceSearchStudents">Search</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/advanceSearchStudents">Search</a>
             </div>
             
              <h5 class="sideaccordian"><a href="#"><i class="fa fa-print"></i>Generate Cards</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/Printids/generateIds">Generate IDs</a>
+                <a class="menu-link" target="mainFrame" href="/vision/Printids/generateIds">Generate IDs</a>
             </div>
             
             
                
               <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/EmployeeProcess/ViewAllEmployee">View All</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/EmployeeProcess/addEmployeePage">Add Staff</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/attendanceMarkStaff">Mark Attendance</a>
-        <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/viewAttendanceStaff">View Attendance</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/AttendanceProcess/attendanceExportViewStaff">Export Attendance</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/ViewAllEmployee">View All</a>
+                <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/addEmployeePage">Add Staff</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceMarkStaff">Mark Attendance</a>
+        <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendanceStaff">View Attendance</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceExportViewStaff">Export Attendance</a> -->
             </div>
             
             
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/Backup&Restore">Backup</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/changePassword">Change Password</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/uploadattendance">Upload Attendance File</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/StudentProcess/archiveViewAll">Archive Students</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/Backup&Restore">Backup</a>
+                <a class="menu-link" target="mainFrame" href="/vision/changePassword">Change Password</a>
+                <a class="menu-link" target="mainFrame" href="/vision/uploadattendance">Upload Attendance File</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/archiveViewAll">Archive Students</a> -->
             </div>
             
            <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/salihath/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/salihath/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/salihath/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Management</a></h5>
         	
           <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsMoveProcess/issueItems">Issue</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/purchaseItems">Receive</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/viewItems">View/Add Items</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/issueItems">Issue</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/purchaseItems">Receive</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/viewItems">View/Add Items</a>
             </div>
             
             
            <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-bar-chart"></i>Stock Reports</a></h5>
             
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/currentStock">Stock Quantity Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/batchStock">Stock Price Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/issuanceStock">Stock Issuance Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/receiveStock">Stock Received Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/currentStock">Stock Quantity Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/batchStock">Stock Price Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/issuanceStock">Stock Issuance Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/receiveStock">Stock Received Report</a>
             </div> -->
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-truck"></i>Suppliers</a></h5>
               
               <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
             </div>
             
            <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-print"></i>Mess Cards</a></h5>
             
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/Printids/generateIds">Generate IDs</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/Printids/cardValidity">Card Validity</a>
+                <a class="menu-link" target="mainFrame" href="/vision/Printids/generateIds">Generate IDs</a>
+                <a class="menu-link" target="mainFrame" href="/vision/Printids/cardValidity">Card Validity</a>
             </div> -->
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-bell"></i>Send Notifications</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/SMSProcess/sendSMS">SMS</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/sendemail">Email</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/SMSProcess/sendSMS">SMS</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/sendemail">Email</a> -->
             </div>
             
                <h5 class="sideaccordian"><a href="#"><i class="fa fa-level-up"></i>Promotion</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/ClassProcess/promoteClass">Promotions</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/promoteClass">Promotions</a>
             </div>
             
             
@@ -760,7 +760,7 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/salihath/importfile" style="font-size: 12px;">Import Files</a><br/>
+                              <a target="mainFrame" href="/vision/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>

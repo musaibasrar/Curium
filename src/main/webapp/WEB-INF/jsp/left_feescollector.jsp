@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/salihath/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/salihath/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/salihath/css/datePicker/demos.css">
+        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/salihath/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/salihath/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/salihath/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/salihath/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/salihath/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/salihath/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/salihath/css/font-awesome.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -572,7 +572,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/salihath/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -594,54 +594,54 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
               <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesCollect">Fees Collect</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/feesStructure">Fees Structure</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesCollect">Fees Collect</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesStructure">Fees Structure</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-file-text-o"></i>Documents</a></h5>
             <div>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsReports">Student Details</a> -->
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/admissionAbstract">Admission Abstract</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/studentsDetailsStudyCertificate">Study Certificate</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/characterCertificate">Character Certificate</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/DocumentsProcess/transferCertificate">Transfer Certificate</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/PeriodProcess/generateTimeTable">Class Time Table</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsReports">Student Details</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/admissionAbstract">Admission Abstract</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsStudyCertificate">Study Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/characterCertificate">Character Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/transferCertificate">Transfer Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTimeTable">Class Time Table</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/marksEntry">Enter Marks</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/getSubjectsExams">View Marks</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/progressReport">Generate Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/marksEntry">Enter Marks</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams">View Marks</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/progressReport">Generate Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a> -->
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/changePassword">Change Password</a>
+                <a class="menu-link" target="mainFrame" href="/vision/changePassword">Change Password</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Management</a></h5>
         	
           <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsMoveProcess/issueItems">Generate Receipts</a>
-                <!-- <a class="menu-link" target="mainFrame" href="/salihath/MessItemsMoveProcess/issueItems">Issue</a> -->
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/purchaseItems">Purchase</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessItemsProcess/viewItems">View/Add Items</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/issueItems">Generate Receipts</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/issueItems">Issue</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/purchaseItems">Purchase</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/viewItems">View/Add Items</a>
             </div>
             
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-truck"></i>Suppliers</a></h5>
               
               <div>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
-                <a class="menu-link" target="mainFrame" href="/salihath/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
             </div>
             
             </div>
