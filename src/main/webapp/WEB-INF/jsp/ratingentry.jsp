@@ -603,7 +603,7 @@ for(Cookie cookie : cookies){
 										<c:forEach items="${listAssessmentSubjectNames}" var="listSubject">
 
 											<option value="${listSubject.subjectid}">
-												<c:out value="${listSubject.subjectname}" />
+												<c:out value="${listSubject.subjectname}--${listSubject.category}" />
 											</option>
 
 

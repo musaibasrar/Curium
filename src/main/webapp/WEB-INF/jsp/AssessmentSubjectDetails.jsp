@@ -533,7 +533,7 @@ for(Cookie cookie : cookies){
 										<c:if test="${(subjectnames.subjectname != '')}">
 										
 										<label class="labelClass" style="font-weight: bold;color:#325F6D"><input type="checkbox" id="subjectname"  name="subjectname" value="${subjectnames.subjectname}:${subjectnames.subjectid}">
-										${subjectnames.subjectname}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										${subjectnames.subjectname}-${subjectnames.category}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										</c:if>	
 							</c:forEach>
 

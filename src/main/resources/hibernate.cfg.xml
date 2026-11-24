@@ -133,5 +133,8 @@
     	<mapping resource="mappings/Events.hbm.xml"/>
     	<mapping resource="mappings/SubSubject.hbm.xml"/>
     	<mapping resource="mappings/StudyCertificate.hbm.xml"/>
+    	<mapping resource="mappings/HolisticAssessment.hbm.xml"/>
+    	<mapping resource="mappings/HolisticAssessmentSchedule.hbm.xml"/>
+    	<mapping resource="mappings/HolisticRating.hbm.xml"/>
 	</session-factory>
 </hibernate-configuration>
