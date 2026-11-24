@@ -379,6 +379,10 @@
             runEffect();
             return false;
         });
+        $( "#previewtc" ).button().click(function() {
+        	 previewTransferCertificate();
+        	 return false;
+        	});
     });
         </script> 
         <script type="text/javascript">
@@ -389,7 +393,7 @@
             runEffect();
 
         });
-        $( "#submit" ).button();
+        $( "#submittc" ).button();
         $( "#effect" ).hide();
     });
             
@@ -488,6 +492,13 @@
     		    }
     		    return true;
     		  }
+            
+            function previewTransferCertificate(){
+ 	            var form1 = document.getElementById("form1");
+    			form1.action = "/vision/DocumentsProcess/generateTransferCertificatePreview";
+            	form1.method = "POST";
+            	form1.submit();
+            }
             
         </script>
     </head>
@@ -645,7 +656,9 @@ for(Cookie cookie : cookies){
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						
-						<input type="submit" value="Generate Transfer Certificate" id="submit"/></td>
+						<input type="submit" value="Generate Transfer Certificate" id="submittc"/></td>
+						<td><input type="button" value="Preview Transfer Certificate" id="previewtc"/></td>
+						
 						<td></td>
                     </tr>
                      <tr>
