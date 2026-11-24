@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/noblewisdom/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/noblewisdom/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/noblewisdom/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/noblewisdom/css/font-awesome.css">
+		<link rel="stylesheet" href="/noblewisdom/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -481,7 +481,6 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-
             				 <a target="mainFrame" href="/noblewisdom/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
             			</td>
             			

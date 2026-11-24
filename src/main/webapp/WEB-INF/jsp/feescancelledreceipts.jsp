@@ -14,7 +14,7 @@
 <title>Fees Collecion Details</title>
 <link rel="stylesheet" href="/noblewisdom/css/datePicker/jquery-ui-1.8.18.custom.css">
 <link rel="stylesheet" href="/noblewisdom/css/datePicker/demos.css">
-<link rel="stylesheet" href="/noblewisdom/css/font-awesome.css">
+<link rel="stylesheet" href="/noblewisdom/css/font-awesome.min.css">
 <style type="text/css">
 <!--
 .divCSS {
@@ -713,7 +713,7 @@ for(Cookie cookie : cookies){
 								value="<c:out value="${feesdetails.receiptnumber}"/>" /></td>
 								<td class="dataText" align="center">${status.index + 1}</td>
                                 <td  class="dataText"><c:out value="${feesdetails.date}"/></a></td>
-                                <td  class="dataText"><c:out value="${feesdetails.branchreceiptnumber}"/></a></td>
+                                <td  class="dataText"><c:out value="${feesdetails.receiptnumber}"/></a></td>
                                 <td class="dataText"><c:out value="${feesdetails.totalamount}"/></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/noblewisdom/FeesCollection/ViewDetails?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>">View Details</a></td>
                                 <td  class="dataTextInActive"><a class="dataTextInActive" href="/noblewisdom/FeesCollection/UndoFeesReceipt?id=<c:out value='${feesdetails.receiptnumber}'/>&sid=<c:out value='${feesdetails.sid}'/>"><i class="fa fa-undo" style="color:#1b5605;font-size: 18px;"></i></a></td>

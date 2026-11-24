@@ -22,7 +22,7 @@
         <script src="/noblewisdom/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/noblewisdom/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/noblewisdom/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/noblewisdom/css/font-awesome.css">
+		<link rel="stylesheet" href="/noblewisdom/css/font-awesome.min.css">
         
         
         <style>
