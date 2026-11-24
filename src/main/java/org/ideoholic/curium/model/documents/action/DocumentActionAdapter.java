@@ -331,7 +331,7 @@ public class DocumentActionAdapter {
 		transferCertificateDto.setRemarks(request.getParameter("Remarks"));
 		transferCertificateDto.setDateOfTc(request.getParameter("dateoftc"));
 		transferCertificateDto.setStudentAdmissionStatus(request.getParameter("studentadmissionstatus"));
-		TransferCertificateResponseDto transferCertificateResponseDto = documentService.generateTransferCertificate(transferCertificateDto);
+		TransferCertificateResponseDto transferCertificateResponseDto = documentService.generateTransferCertificatePreview(transferCertificateDto);
 		
 		request.setAttribute("leavingReason", transferCertificateResponseDto.getReason());
 		request.setAttribute("bookno", transferCertificateResponseDto.getBookNo());
