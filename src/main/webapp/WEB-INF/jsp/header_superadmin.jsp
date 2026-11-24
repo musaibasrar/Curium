@@ -146,6 +146,12 @@ for(Cookie cookie : cookies){
 									alt="Fees Collection" style="vertical-align: bottom;" />Fees Collection
 							</a></td>
 
+														<td ><a target="mainFrame"
+								href="/noblewisdom/FeesProcess/otherfeesCollect"><img
+									alt="Bus Fee" src="/noblewisdom/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
+									Bus Fee Collection
+							</a></td>
+							
 							<td>
 								<a target="mainFrame"
 								href="/noblewisdom/AccountProcess/createVoucher"> <img
@@ -169,11 +175,11 @@ for(Cookie cookie : cookies){
 									height="18" style="vertical-align: bottom;" />Master Settings
 							</a></td>
 
-							<td ><a target="mainFrame"
+							<!-- <td ><a target="mainFrame"
 								href="/noblewisdom/AdminProcess/viewAllExpenses"><img
 									alt="Admin Exp" src="/noblewisdom/images/adminexp.svg" width="18" height="18" style="vertical-align: bottom;"/>
 									Admin Expense
-							</a></td>
+							</a></td> -->
 
 							<td ><!-- <a target="mainFrame" href="/noblewisdom/sendsms"><img
 									src="/noblewisdom/images/sendmessage.svg" width="18" height="18" alt="Send SMS" style="vertical-align: bottom;"/>
@@ -194,7 +200,7 @@ for(Cookie cookie : cookies){
 							</a></td>
 							
 							<td ><a target="mainFrame"
-								href="/noblewisdom/UserProcess/dashBoard"><img
+                href="/noblewisdom/UserProcess/superDashboard"><img
 									alt="Dash Board" src="/noblewisdom/images/dashboard.svg" width="18"
 									height="18" style="vertical-align: bottom;"/>
 									Dash Board
