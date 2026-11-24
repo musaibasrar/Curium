@@ -43,6 +43,12 @@ public class HrActionAdapter {
     @Autowired
     private HrService hrService;
 
+    private String BRANCHID = "branchid";
+    private String USERID ="userloginid";
+    private String CURRENTACADEMICYEAR ="currentAcademicYear";
+    private String USERNAME = "username";
+    private String USERAUTH = "userAuth";
+
     public boolean leaveType() {
 
         LeaveTypeResponseDto leaveTypeResponseDto = hrService.leaveType(httpSession.getAttribute(Constants.BRANCHID).toString());
