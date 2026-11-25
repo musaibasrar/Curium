@@ -83,4 +83,17 @@ public class SmsActionAdapter {
 
         return result.isSuccess();
     }
+    
+    public boolean sendSMSFeesDueReminderWithFeesCat() {
+        SmsService smsService = new SmsService(request,response);
+        SendSMSDto dto = new SendSMSDto();
+        String[] studentIds = request.getParameterValues("studentIDs");
+        dto.setFeesIds(request.getParameterValues("feescategory"));
+        dto.setStudentIds(studentIds);
+        dto.setMessage(request.getParameter("deadline"));
+        dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
+        ResultResponse result = smsService.sendSMSFeesDueReminderWithFeesCat(dto);
+
+       return  result.isSuccess();
+    }
 }
