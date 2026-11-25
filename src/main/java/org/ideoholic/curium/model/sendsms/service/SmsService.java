@@ -537,5 +537,166 @@ public class SmsService {
 		 
 		 return result;
 	}
+
+
+	public ResultResponse sendSMSFeesDueReminderWithFeesCat(SendSMSDto dto) {
+		if (dto == null) {
+			return ResultResponse.builder().build();
+		}
+
+		List<StudentFeesReport> studentFeesReportList = dto.getStudentFeesReportList();
+		String[] studentIds = dto.getStudentIds();
+
+		if (studentFeesReportList == null || studentFeesReportList.isEmpty() || studentIds == null || studentIds.length == 0) {
+			return ResultResponse.builder().build();
+		}
+
+		Set<String> selectedStudentIds = new HashSet<>();
+		for (String studentId : studentIds) {
+			if (studentId != null && !studentId.trim().isEmpty()) {
+				selectedStudentIds.add(studentId.trim());
+			}
+		}
+
+		if (selectedStudentIds.isEmpty()) {
+			return ResultResponse.builder().build();
+		}
+
+		String[] feesIds = dto.getFeesIds();
+		Set<String> selectedFeeCategoryIds = new HashSet<>();
+		boolean filterBySelectedFeeCategory = feesIds != null && feesIds.length > 0;
+
+		if (filterBySelectedFeeCategory) {
+			for (String feeId : feesIds) {
+				if (feeId != null && !feeId.trim().isEmpty()) {
+					selectedFeeCategoryIds.add(feeId.trim());
+				}
+			}
+			if (selectedFeeCategoryIds.isEmpty()) {
+				filterBySelectedFeeCategory = false;
+			}
+		}
+
+		Map<String, Long> totalDueByStudentId = new LinkedHashMap<>();
+		Map<String, Map<String, Long>> dueByStudentAndCategory = new LinkedHashMap<>();
+		Map<String, String> phoneByStudentId = new LinkedHashMap<>();
+		Map<String, String> nameByStudentId = new LinkedHashMap<>();
+		Map<String, Set<String>> processedFeeCategoryByStudentId = new HashMap<>();
+
+		for (StudentFeesReport studentFeesReport : studentFeesReportList) {
+			if (studentFeesReport == null || studentFeesReport.getParents() == null || studentFeesReport.getParents().getStudent() == null
+					|| studentFeesReport.getParents().getStudent().getSid() == null) {
+				continue;
+			}
+
+			String studentId = String.valueOf(studentFeesReport.getParents().getStudent().getSid());
+			if (!selectedStudentIds.contains(studentId)) {
+				continue;
+			}
+
+			String phoneNo = studentFeesReport.getParents().getContactnumber();
+			if (phoneNo != null) {
+				phoneNo = phoneNo.trim();
+			}
+			if (phoneNo == null || phoneNo.length() != 10 || !phoneNo.matches("\\d{10}")) {
+				continue;
+			}
+
+			phoneByStudentId.putIfAbsent(studentId, phoneNo);
+			nameByStudentId.putIfAbsent(studentId, DataUtil.emptyString(studentFeesReport.getParents().getStudent().getName()));
+
+			List<Studentfeesstructure> feeStructures = studentFeesReport.getStudentFeesStructure();
+			if (feeStructures == null || feeStructures.isEmpty()) {
+				continue;
+			}
+
+			Set<String> processedFeeCategoryIds = processedFeeCategoryByStudentId.computeIfAbsent(studentId, k -> new HashSet<>());
+			Map<String, Long> categoryDueMap = dueByStudentAndCategory.computeIfAbsent(studentId, k -> new LinkedHashMap<>());
+			long totalDue = totalDueByStudentId.getOrDefault(studentId, 0L);
+
+			for (Studentfeesstructure feeStructure : feeStructures) {
+				if (feeStructure == null || feeStructure.getFeescategory() == null || feeStructure.getFeescategory().getIdfeescategory() == null) {
+					continue;
+				}
+
+				String feeCategoryId = String.valueOf(feeStructure.getFeescategory().getIdfeescategory());
+				if (filterBySelectedFeeCategory && !selectedFeeCategoryIds.contains(feeCategoryId)) {
+					continue;
+				}
+
+				if (!processedFeeCategoryIds.add(feeCategoryId)) {
+					continue;
+				}
+
+				long feesAmount = feeStructure.getFeesamount() != null ? feeStructure.getFeesamount() : 0L;
+				long feesPaid = feeStructure.getFeespaid() != null ? feeStructure.getFeespaid() : 0L;
+				long concession = feeStructure.getConcession() != null ? feeStructure.getConcession().longValue() : 0L;
+				long waiveoff = feeStructure.getWaiveoff() != null ? feeStructure.getWaiveoff() : 0L;
+				long categoryDue = feesAmount - feesPaid - concession - waiveoff;
+
+				if (categoryDue <= 0) {
+					continue;
+				}
+
+				String categoryName = DataUtil.emptyString(feeStructure.getFeescategory().getFeescategoryname());
+				if (categoryName.isEmpty()) {
+					categoryName = "Fee";
+				}
+
+				categoryDueMap.put(categoryName, categoryDueMap.getOrDefault(categoryName, 0L) + categoryDue);
+				totalDue += categoryDue;
+			}
+
+			totalDueByStudentId.put(studentId, totalDue);
+		}
+
+		boolean anySmsAttempted = false;
+		boolean allSmsSucceeded = true;
+		String reminderMessage = DataUtil.emptyString(dto.getMessage());
+		String smsTemplateType = "feesreminderwithdueamount";
+
+		for (Map.Entry<String, Long> entry : totalDueByStudentId.entrySet()) {
+			long totalDue = entry.getValue() != null ? entry.getValue() : 0L;
+			if (totalDue <= 0) {
+				continue;
+			}
+
+			String studentId = entry.getKey();
+			String phoneNo = phoneByStudentId.get(studentId);
+			if (phoneNo == null || phoneNo.length() != 10 || !phoneNo.matches("\\d{10}")) {
+				continue;
+			}
+
+			Map<String, Long> categoryDueMap = dueByStudentAndCategory.get(studentId);
+			if (categoryDueMap == null || categoryDueMap.isEmpty()) {
+				continue;
+			}
+
+			String studentName = DataUtil.emptyString(nameByStudentId.get(studentId));
+			studentName = studentName.substring(0, Math.min(18, studentName.length()));
+
+			StringBuilder categoryDetailsBuilder = new StringBuilder();
+			for (Map.Entry<String, Long> categoryEntry : categoryDueMap.entrySet()) {
+				if (categoryDetailsBuilder.length() > 0) {
+					categoryDetailsBuilder.append(", ");
+				}
+				categoryDetailsBuilder.append(categoryEntry.getKey()).append(" Rs.").append(categoryEntry.getValue());
+			}
+
+			String message = "Rs." + totalDue + " (" + studentName + ") [" + categoryDetailsBuilder + "] : " + reminderMessage;
+			anySmsAttempted = true;
+
+			int resultSMS = sendSMS(phoneNo, message, smsTemplateType);
+			if (resultSMS != HttpURLConnection.HTTP_OK) {
+				allSmsSucceeded = false;
+			}
+		}
+
+		if (anySmsAttempted && allSmsSucceeded) {
+			return ResultResponse.builder().success(true).build();
+		}
+
+		return ResultResponse.builder().build();
+	}
 	
 }
