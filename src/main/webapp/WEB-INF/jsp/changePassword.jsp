@@ -673,7 +673,7 @@ for(Cookie cookie : cookies){
          
             function Cancel() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/vision/StudentProcess/viewAll";
+                form1.action = "/vision/UserProcess/changePassword";
                 form1.submit();
             }
 
