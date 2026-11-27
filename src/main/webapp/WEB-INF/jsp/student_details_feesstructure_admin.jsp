@@ -56,6 +56,13 @@
                 background-color: #E3EFFF;
 
             }
+            .concessionReasonControl {
+                box-sizing: border-box;
+                width: 180px;
+                padding: 3px;
+                border: 1px solid #4b6a84;
+                background: transparent;
+            }
             .dataTextFees {
                 border-radius:3px;
                 font-family: ariel;
@@ -312,6 +319,7 @@
             $(function() {
 
                 $("#accordion").accordion();
+
                 
                 $("#search")
                 .button()
@@ -645,7 +653,15 @@
 
                         function rowConcessionReasonChanged(sfsid, feesAmount, dueAmount) {
 
-                            var reason = getFieldValue("concessionnotes:" + sfsid);
+                            var choice = document.getElementById("concessionReasonChoice:" + sfsid);
+                            var field = document.getElementById("concessionnotes:" + sfsid);
+                            var custom = choice.value === "Other";
+                            var reason = custom ? "" : choice.value;
+                            field.value = reason;
+                            field.style.display = custom ? "" : "none";
+                            if (custom) {
+                                field.focus();
+                            }
                             var percentValue = getConcessionPercentByReason(reason);
 
                             setRowConcessionFromPercent(sfsid, feesAmount, dueAmount, percentValue);
@@ -715,6 +731,8 @@
                             }
 
                             reasonField.value = commonReason;
+                            reasonField.style.display = "none";
+                            document.getElementById("concessionReasonChoice:" + sfsid).value = commonReason;
 
                             if (approvedByField) {
                                 approvedByField.value = commonConcessionApprovedBy;
@@ -1083,24 +1101,27 @@ for(Cookie cookie : cookies){
                                 value="${feesstructure.concession}"></td>
                                
                                 <td class="dataText">
-								    <c:set var="concessionnotes" value="${fn:split(feesstructure.concessionnotes, '::')}" />
-								    <select name="concessionnotes:${feesstructure.sfsid}" 
-								            id="concessionnotes:${feesstructure.sfsid}"
-								            class="dataText"
-								            style="width:180px;
-								                   background:transparent;
-								                   border:1px solid #4b6a84;
-								                   color:#4b6a84;
-								                   font-size:13px;
-                                   padding:3px;"
+                    <c:set var="notes" value="${feesstructure.concessionnotes}" />
+                    <c:set var="separator" value="${empty notes ? -1 : notes.lastIndexOf('::')}" />
+                    <c:set var="savedReason" value="${separator lt 0 ? notes : fn:substring(notes, 0, separator)}" />
+                    <c:set var="savedApprover" value="${separator lt 0 ? '' : fn:substring(notes, separator + 2, fn:length(notes))}" />
+                    <c:set var="customReason" value="${not empty savedReason}" />
+                    <select id="concessionReasonChoice:${feesstructure.sfsid}" aria-label="Concession reason"
+                            class="dataText concessionReasonControl"
                             onchange="rowConcessionReasonChanged(${feesstructure.sfsid}, ${feesstructure.feesamount}, ${feesstructure.feesamount-feesstructure.feespaid-feesstructure.concession-feesstructure.waiveoff})">
-								        <option value="">Select Reason</option>
-								        <option value="2ND Child" ${concessionnotes[0] eq '2ND Child' ? 'selected' : ''}>2ND Child</option>
-								        <option value="3RD Child" ${concessionnotes[0] eq '3RD Child' ? 'selected' : ''}>3RD Child</option>
-								        <option value="Staff Child" ${concessionnotes[0] eq 'Staff Child' ? 'selected' : ''}>Staff Child</option>
-								        <option value="Gift Scholar" ${concessionnotes[0] eq 'Gift Scholar' ? 'selected' : ''}>Gift Scholar</option>
-								        <option value="Sponsored" ${concessionnotes[0] eq 'Sponsored' ? 'selected' : ''}>Sponsored</option>
-								    </select>
+                        <option value="">Select Reason</option>
+                        <c:forEach var="preset" items="${fn:split('2ND Child,3RD Child,Staff Child,Gift Scholar,Sponsored', ',')}">
+                            <c:if test="${savedReason eq preset}">
+                                <c:set var="customReason" value="${false}" />
+                            </c:if>
+                            <option value="${preset}" ${savedReason eq preset ? 'selected' : ''}>${preset}</option>
+                        </c:forEach>
+                        <option value="Other" ${customReason ? 'selected' : ''}>Other (write your own)</option>
+                    </select>
+                    <input type="text" id="concessionnotes:${feesstructure.sfsid}" name="concessionnotes:${feesstructure.sfsid}"
+                           class="dataText concessionReasonControl" style="display:${customReason ? 'inline-block' : 'none'}" aria-label="Custom concession reason"
+                           placeholder="Enter concession reason" value="${fn:escapeXml(savedReason)}"
+                           oninput="updateRowCheckboxState(${feesstructure.sfsid})">
 								</td>
 								
 								<td class="dataText">
@@ -1115,9 +1136,9 @@ for(Cookie cookie : cookies){
                                    padding:3px;"
                             onchange="rowConcessionApprovedByChanged(${feesstructure.sfsid})">
 								        <option value="">Approved By</option>
-								        <option value="Ikram Sir" ${concessionnotes[1] eq 'Ikram Sir' ? 'selected' : ''}>Ikram Sir</option>
-								        <option value="Najam Sir" ${concessionnotes[1] eq 'Najam Sir' ? 'selected' : ''}>Najam Sir</option>
-								        <option value="Talha Sir" ${concessionnotes[1] eq 'Talha Sir' ? 'selected' : ''}>Talha Sir</option>
+                        <option value="Ikram Sir" ${savedApprover eq 'Ikram Sir' ? 'selected' : ''}>Ikram Sir</option>
+                        <option value="Najam Sir" ${savedApprover eq 'Najam Sir' ? 'selected' : ''}>Najam Sir</option>
+                        <option value="Talha Sir" ${savedApprover eq 'Talha Sir' ? 'selected' : ''}>Talha Sir</option>
 								    </select>
 								</td>
                                 <td class="dataText">
