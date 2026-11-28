@@ -362,7 +362,7 @@
 	
 	function sendSMSWithFeesCat() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/SMSProcess/sendSMSFeesDueReminderWithFeesCat";
+		form1.action = "/shaheen/SMSProcess/sendSMSFeesDueReminderWithFeesCat";
 		form1.method = "POST";
 		form1.submit();
 

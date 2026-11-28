@@ -248,7 +248,7 @@ for(Cookie cookie : cookies){
         					<a target="mainFrame" style="color:#ffffff;font-size: 34px;"
 								href="/shaheen/changePassword?id=${username}&urlbranchid=${branchid}">  <img
 									src="/shaheen/images/changepasswordlogo.png" width="50" height="50"
-									alt="Student Profile" style="vertical-align: bottom;" />Change Pwd
+									alt="Change Password" style="vertical-align: bottom;" />Change Pwd
 							</a>
         					</td>
         				</tr>
