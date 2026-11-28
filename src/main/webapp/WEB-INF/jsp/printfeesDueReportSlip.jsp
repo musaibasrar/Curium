@@ -238,7 +238,8 @@
                 </div>
 
                 <div class="important-warning">
-                    IMPORTANT: If the pending fee is not paid by the given date, your child will not be permitted to attend classes until the dues are cleared.
+                    IMPORTANT: If the pending fee is not paid by the given date, your child will not be permitted to attend<br>
+                    classes until the dues are cleared.
                 </div>
 
                 <div class="card-footer">

@@ -370,6 +370,13 @@
 		form1.method = "POST";
 		form1.submit();
 }
+	
+	function printRecordsDueSlip() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/shaheen/FeesDetails/printDataForFeesReportdueSlip";
+		form1.method = "POST";
+		form1.submit();
+}
 
 	$(function() {
 
