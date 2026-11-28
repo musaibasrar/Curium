@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/shaheen/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/shaheen/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/shaheen/css/datePicker/demos.css">
+        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/shaheen/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/shaheen/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/shaheen/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/shaheen/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/shaheen/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/shaheen/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/shaheen/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/shaheen/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/shaheen/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/shaheen/css/font-awesome.css">
+        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/vision/css/font-awesome.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
@@ -277,6 +277,35 @@ Author     : Musaib
                 height: 22px;
             }
 
+            * {
+                box-sizing: border-box;
+            }
+
+            body {
+                margin: 0;
+                padding: 8px 6px;
+                background: #ffffff;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                color: #143160;
+                overflow-x: hidden;
+            }
+
+            .headerTD {
+                background-color: #143160;
+                color: #ffffff;
+                border-radius: 6px;
+                font-size: 13px;
+                text-transform: uppercase;
+                text-align: center;
+                font-weight: 700;
+                padding: 9px 8px;
+                margin-bottom: 8px;
+                letter-spacing: 0.4px;
+                box-shadow: 0 2px 4px rgba(20, 49, 96, 0.2);
+                height: auto;
+                background-image: none;
+            }
+
 .sideaccordian{
 		
 		font-size: 12px;
@@ -291,6 +320,120 @@ Author     : Musaib
     border: 1px solid #b6cfe2;
     background: #ffffff;
     color: #222222;
+}
+
+.ui-accordion .ui-accordion-header .ui-icon {
+    display: none !important;
+}
+
+.ui-widget-content,
+.ui-state-default,
+.ui-widget-content .ui-state-default,
+.ui-widget-header .ui-state-default {
+    border: none !important;
+    background: transparent !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian {
+    margin: 0 0 1px 0 !important;
+    padding: 0 !important;
+    border-radius: 5px !important;
+    border-left: 3px solid transparent !important;
+    outline: none !important;
+    position: relative;
+    transition: background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian a {
+    display: block !important;
+    padding: 6px 20px 6px 7px !important;
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    line-height: 1.3 !important;
+    color: #143160 !important;
+    text-decoration: none !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sideaccordian a i {
+    display: inline-block;
+    width: 14px;
+    margin-right: 5px;
+    text-align: center;
+    color: #143160;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover,
+.ui-accordion .ui-accordion-header.ui-state-active {
+    background-color: #eff6ff !important;
+    border-left: 3px solid #143160 !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover a,
+.ui-accordion .ui-accordion-header.ui-state-active a {
+    color: #143160 !important;
+    font-weight: 600 !important;
+}
+
+.ui-accordion .ui-accordion-header.sideaccordian:hover a i,
+.ui-accordion .ui-accordion-header.ui-state-active a i {
+    color: #143160 !important;
+}
+
+.sideaccordian a::after {
+    content: "\f105";
+    font-family: 'FontAwesome';
+    position: absolute;
+    right: 7px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: #64748b;
+}
+
+.sideaccordian:hover a::after {
+    color: #143160;
+}
+
+.ui-state-active a::after {
+    content: "\f107";
+    color: #143160 !important;
+}
+
+.ui-accordion .ui-accordion-content {
+    margin: 0 0 2px 13px !important;
+    padding: 2px 4px 3px 8px !important;
+    border-left: 1.5px solid #bfdbfe !important;
+    overflow: hidden !important;
+}
+
+.menu-link {
+    display: block;
+    width: 100%;
+    padding: 4px 6px;
+    color: #334155;
+    text-decoration: none !important;
+    font-size: 11.5px;
+    line-height: 1.3;
+    border-radius: 4px;
+    margin-bottom: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.15s ease;
+}
+
+.menu-link:hover {
+    background-color: #dbeafe;
+    color: #143160;
+    font-weight: 500;
+    padding-left: 9px;
+    text-decoration: none !important;
 }
 
 
@@ -429,7 +572,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/shaheen/UserProcess/sessionTimeOut");
+	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -446,596 +589,174 @@ for(Cookie cookie : cookies){
 
             <div id="clock" class="headerTD"></div>
         </form> -->
-	<div class="headerTD" style="width: 95%" ><label style="font-size:14px;">A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
+  <div class="headerTD"><label>A.Y:&nbsp;<c:out default="" value="${currentAcademicYear}"/></label></div>
 
         <div id="container" style="width: 95%" >
-            <h5 class="sideaccordian"><a href="#">Dashboard</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-                <table style=" border-collapse: collapse;width: 100%">
-                    <tr>
-                        <td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                            <a target="mainFrame" href="/shaheen/UserProcess/superDashboard" style="font-size: 12px;">Super User Dashboard</a>
-                        </td>
-                    </tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-tachometer"></i>Dashboard</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/UserProcess/superDashboard">Super User Dashboard</a>
             </div>
 
-            <h5 class="sideaccordian" ><a href="#">Students</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/StudentProcess/viewAll" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/StudentProcess/addNew" style="font-size: 12px;">Add New</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/viewAll">View All</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/addNew">Add New</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendance">View Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/markAttendance">Mark Attendance</a>
             </div>
             
             
 			
-              <h5 class="sideaccordian" ><a href="#">Fees</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/feesCollect" style="font-size: 12px;">Fees Collect</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/FeesProcess/feesStructure" style="font-size: 12px;">Fees Structure</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/otherfeesCollect" style="font-size: 12px;">Bus Fees Collect</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/feesCollectionDetails" style="font-size: 12px;">Fees Collection Details</a>
-            			</td>
-            		</tr> -->
-            		
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/feesReport" style="font-size: 12px;">Fees Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/FeesProcess/feesWaiveoffReport" style="font-size: 12px;">Fees Waive off Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/FeesProcess/feesConcessionReport" style="font-size: 12px;">Fees Concession Report</a>
-            			</td>
-            		</tr> -->
-                </table>
+              <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesCollect">Fees Collect</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesStructure">Fees Structure</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/feesCollectionDetails">Fees Collection Details</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/feescancelledreceipts">Cancelled Fees Receipts</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesReport">Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesConcessionReport">Fees Concession Report</a> -->
             </div>
             
-            <h5 class="sideaccordian" ><a href="#">Expenses</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AdminProcess/viewAllExpenses" style="font-size: 12px;">Expenses</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-credit-card"></i>Expenses</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/AdminProcess/viewAllExpenses">Expenses</a>
             </div>
             
             
             
-            <h5 class="sideaccordian" ><a href="#">Accounts</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AccountProcess/createAccount" style="font-size: 12px;">Chart of Accounts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/AccountProcess/createVoucher" style="font-size: 12px;">Create Voucher</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/vouchersearch" style="font-size: 12px;">View/Cancel Voucher</a>
-            			</td>
-            			            		
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/AccountProcess/viewCancelledVouchers" style="font-size: 12px;">Cancelled Vouchers</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AccountProcess/generalLedgerReport" style="font-size: 12px;">General Ledger Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/incomestatement" style="font-size: 12px;">Income Statement</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/trialbalance" style="font-size: 12px;">Trial Balance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/AccountProcess/balanceSheet" style="font-size: 12px;">Balance Sheet</a>
-            			</td>
-            		</tr> -->
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/createAccount">Chart of Accounts</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/createVoucher">Create Voucher</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/viewVoucherReceipt">View/Cancel Voucher</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/viewCancelledVouchers">Cancelled Vouchers</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/generalLedgerReport">General Ledger Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/incomestatement">Income Statement</a>
+                <a class="menu-link" target="mainFrame" href="/vision/trialbalance">Trial Balance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/balanceSheet">Balance Sheet</a> -->
             </div>
             
             
-            <h5 class="sideaccordian" ><a href="#">Documents</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsReports" style="font-size: 12px;">Student Details</a>
-            			</td>
-            		</tr> -->
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/DocumentsProcess/admissionAbstract" style="font-size: 12px;">Admission Abstract</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsBonafide" style="font-size: 12px;">Bonafide Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsStudyCertificate" style="font-size: 12px;">Study Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/DocumentsProcess/studentsArticleCertificate" style="font-size: 12px;">Article 371</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/DocumentsProcess/characterCertificate" style="font-size: 12px;">Character Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/DocumentsProcess/transferCertificate" style="font-size: 12px;">Transfer Certificate</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/ExamDetailsProcess/generateHallTicket" style="font-size: 12px;">Hall Ticket</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/PeriodProcess/generateTimeTable" style="font-size: 12px;">Class Time Table</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/PeriodProcess/generateTeacherTimeTable" style="font-size: 12px;">Teacher Time Table</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-file-text-o"></i>Documents</a></h5>
+            <div>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsReports">Student Details</a> -->
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/admissionAbstract">Admission Abstract</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/transferCertificate">Transfer Certificate</a>
+                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTimeTable">Class Time Table</a>
+                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
             </div>
             
             
-            <!--  <h5 class="sideaccordian" ><a href="#">Attendance</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendance" style="font-size: 12px;">View Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/markAttendance" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/attendanceExport" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr>
-                </table>
+            <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Attendance</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendance">View Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/markAttendance">Mark Attendance</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceExport">Export Attendance</a>
             </div>
              -->
             
-            <h5 class="sideaccordian" ><a href="#">Exams</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MarksDetailsProcess/marksEntry" style="font-size: 12px;">Enter Marks</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MarksDetailsProcess/marksEntrySub" style="font-size: 12px;">Enter Marks All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/MarksDetailsProcess/getSubjectsExams" style="font-size: 12px;">View Marks</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/MarksDetailsProcess/getSubjectsExamsSub" style="font-size: 12px;">View Marks All</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MarksDetailsProcess/progressReport" style="font-size: 12px;">Generate Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/MarksDetailsProcess/getGraphicalReportData" style="font-size: 12px;">Graphical Report</a>
-            			</td>
-            		</tr> -->
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/marksEntry">Enter Marks</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams">View Marks</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/progressReport">Generate Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getGraphicalReportData">Graphical Report</a> -->
             </div>
             
             
-                  <h5 class="sideaccordian" ><a href="#">Advance Search</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/StudentProcess/advanceSearchStudents" style="font-size: 12px;">Search</a>
-            			</td>
-            		</tr>
-                </table>
+                  <h5 class="sideaccordian"><a href="#"><i class="fa fa-search"></i>Advance Search</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/advanceSearchStudents">Search</a>
             </div>
             
-             <h5 class="sideaccordian" ><a href="#">Generate Cards</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/Printids/generateIds" style="font-size: 12px;">Student IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/Printids/generateIdsEmployees" style="font-size: 12px;">Staff IDs</a>
-            			</td>
-            		</tr>
-                </table>
+             <h5 class="sideaccordian"><a href="#"><i class="fa fa-print"></i>Generate Cards</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/Printids/generateIds">Generate IDs</a>
             </div>
             
-             <h5 class="sideaccordian" ><a href="#">Library</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/LibraryProcess/addbooks" style="font-size: 12px;">Add Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/LibraryProcess/viewbooks" style="font-size: 12px;">View Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/LibraryProcess/issuebooks" style="font-size: 12px;">Issue Books</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/LibraryProcess/returnbooks" style="font-size: 12px;">Return Books</a>
-            			</td>
-            		</tr>
-            		
-                </table>
-            </div>
+            
                
-              <h5 class="sideaccordian" ><a href="#">Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/EmployeeProcess/ViewAllEmployee" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/EmployeeProcess/addEmployeePage" style="font-size: 12px;">Add Staff</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/attendanceMarkStaff" style="font-size: 12px;">Mark Attendance</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-								<a target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendanceStaff" style="font-size: 12px;">View Attendance</a>            				 
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AttendanceProcess/attendanceExportViewStaff" style="font-size: 12px;">Export Attendance</a>
-            			</td>
-            		</tr> -->
-                </table>
-            </div>
-            
-             <h5 class="sideaccordian" ><a href="#">Sponsor</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/SponserProcess/ViewAllSponsor" style="font-size: 12px;">View All</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/SponserProcess/addSponsorPage" style="font-size: 12px;">Add Sponsor</a>
-            			</td>
-            		</tr>
-            		
-            	                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Login Staff</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/LoginProcess/viewLoginDetail" style="font-size: 12px;">View Login Detail</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/LoginProcess/addLoginStaff" style="font-size: 12px;">Add Staff Login</a>
-            			</td>
-            		</tr>
-                </table>
+              <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/ViewAllEmployee">View All</a>
+                <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/addEmployeePage">Add Staff</a>
+                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceMarkStaff">Mark Attendance</a>
+        <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendanceStaff">View Attendance</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceExportViewStaff">Export Attendance</a> -->
             </div>
             
             
-            <h5 class="sideaccordian" ><a href="#">Events</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/EventProcess/calendar" style="font-size: 12px;">Create Event</a>
-            			</td>
-            		</tr>
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/EventProcess/create" style="font-size: 12px;">Create Event</a>
-            			</td>
-            		</tr> -->
-            		
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/EventProcess/viewCalendar" style="font-size: 12px;">View Calendar</a>
-            			</td>
-            		</tr>
-            		
-            		
-                </table>
-            </div>
             
-            <h5 class="sideaccordian" ><a href="#">Extras</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/Backup&Restore" style="font-size: 12px;">Backup</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/changePassword" style="font-size: 12px;">Change Password</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/uploadattendance" style="font-size: 12px;">Upload Attendance File</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/StudentProcess/archiveViewAll" style="font-size: 12px;">Archive Students</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/EmployeeProcess/archiveEmployeeViewAll" style="font-size: 12px;">Archive Employee</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/Backup&Restore">Backup</a>
+                <a class="menu-link" target="mainFrame" href="/vision/changePassword">Change Password</a>
+                <a class="menu-link" target="mainFrame" href="/vision/uploadattendance">Upload Attendance File</a>
+                <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/archiveViewAll">Archive Students</a>
             </div>
             
            <!--   <h5 style="font-size: 12px"><a href="#" >H.R.</a></h5>
             <div >
-                <a target="mainFrame" href="/shaheen/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/advanceSalary" style="font-size: 12px;">Advance Salary</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/salaryApproval" style="font-size: 12px;">Advance Salary Approval</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/salaryIssue" style="font-size: 12px;">Advance Salary Status</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/processSalary" style="font-size: 12px;">Process Salary</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/issueStaffSalary" style="font-size: 12px;">Issue Staff Salary</a><br/>
             </div>
             
             <h5 style="font-size: 12px"><a href="#" >Leave Management</a></h5>
             <div >
-                <a target="mainFrame" href="/shaheen/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
-                <a target="mainFrame" href="/shaheen/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/leaveApplication" style="font-size: 12px;">Leave Application</a><br/>
+                <a target="mainFrame" href="/vision/HrProcess/leaveApprovals" style="font-size: 12px;">Leave Approvals</a><br/>
             </div> -->
             
-            <h5 class="sideaccordian" ><a href="#" >Stock Management</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Management</a></h5>
         	
-        	<div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/issueItems" style="font-size: 12px;">Generate Receipts</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/generateTaxInvoice" style="font-size: 12px;">Generate Tax Invoice</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsMoveProcess/generateTaxInvoiceReport" style="font-size: 12px;">Tax Invoice Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/purchaseItems" style="font-size: 12px;">Purchase</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/purchaseOrder" style="font-size: 12px;">Purchase Order</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/MessItemsProcess/viewItems" style="font-size: 12px;">View/Add Items</a>
-            			</td>
-            		</tr>
-            	</table>
+          <div>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/issueItems">Issue</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/purchaseItems">Receive</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/viewItems">View/Add Items</a>
             </div>
             
             
-           <!--  <h5 class="sideaccordian" ><a href="#" >Stock Reports</a></h5>
+           <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-bar-chart"></i>Stock Reports</a></h5>
             
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/currentStock" style="font-size: 12px;">Stock Quantity Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/batchStock" style="font-size: 12px;">Stock Price Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/MessItemsProcess/issuanceStock" style="font-size: 12px;">Stock Issuance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessItemsProcess/receiveStock" style="font-size: 12px;">Stock Received Report</a>
-            			</td>
-            		</tr>
-            	</table>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/currentStock">Stock Quantity Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/batchStock">Stock Price Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/issuanceStock">Stock Issuance Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/receiveStock">Stock Received Report</a>
             </div> -->
             
-            <h5 class="sideaccordian"><a href="#" >Suppliers</a></h5>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-truck"></i>Suppliers</a></h5>
               
-              <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/MessSuppliersProcess/paymentSuppliers" style="font-size: 12px;">Make Payment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessSuppliersProcess/balanceSuppliers" style="font-size: 12px;">Balance Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/MessSuppliersProcess/supplierPaymentReport" style="font-size: 12px;">Payment & Receipt Report</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/MessSuppliersProcess/viewSuppliers" style="font-size: 12px;">View/Add Suppliers</a>
-            			</td>
-            		</tr>
-            	</table>
+              <div>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
             </div>
             
-           <!--  <h5 class="sideaccordian"><a href="#" >Mess Cards</a></h5>
+           <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-print"></i>Mess Cards</a></h5>
             
-            <div style="padding-left: 0px;padding-right: 0px;">
-            
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/Printids/generateIds" style="font-size: 12px;">Generate IDs</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/Printids/cardValidity" style="font-size: 12px;">Card Validity</a>
-            			</td>
-            		</tr>
-            	</table>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/Printids/generateIds">Generate IDs</a>
+                <a class="menu-link" target="mainFrame" href="/vision/Printids/cardValidity">Card Validity</a>
             </div> -->
             
-            <h5 class="sideaccordian" ><a href="#">Send Notifications</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/SMSProcess/sendSMS" style="font-size: 12px;">SMS</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				<a target="mainFrame" href="/shaheen/sendemail" style="font-size: 12px;">Email</a>
-            			</td>
-            		</tr>
-                </table>
+            <h5 class="sideaccordian"><a href="#"><i class="fa fa-bell"></i>Send Notifications</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/SMSProcess/sendSMS">SMS</a>
+                <a class="menu-link" target="mainFrame" href="/vision/sendemail">Email</a>
             </div>
             
-               <h5 class="sideaccordian" ><a href="#">Promotion</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				<a target="mainFrame" href="/shaheen/ClassProcess/promoteClass" style="font-size: 12px;">Promotions</a>
-            			</td>
-            		</tr>
-                </table>
+               <h5 class="sideaccordian"><a href="#"><i class="fa fa-level-up"></i>Promotion</a></h5>
+            <div>
+                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/promoteClass">Promotions</a>
             </div>
             
             
@@ -1044,142 +765,11 @@ for(Cookie cookie : cookies){
             	<table style=" border-collapse: collapse;width: 100%">
             		<tr>
             			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-                              <a target="mainFrame" href="/shaheen/importfile" style="font-size: 12px;">Import Files</a><br/>
-				        </td>
-				     </tr>
-				     <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-                              <a target="mainFrame" href="/shaheen/importfilefees" style="font-size: 12px;">Import Fees Files</a><br/>
+                              <a target="mainFrame" href="/vision/importfile" style="font-size: 12px;">Import Files</a><br/>
 				        </td>
 				     </tr>
 				 </table>
             </div>
-             <h5 class="sideaccordian" ><a href="#">Diary</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/DiaryProcess/getdiarystudent" style="font-size: 12px;">Diary</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/DiaryProcess/viewdiarystudent" style="font-size: 12px;">View Diary</a>
-            			</td>
-            			
-            		</tr>
-            		
-                </table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#">Logbook</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/StudentDiaryProcess/getdiarystudent" style="font-size: 12px;">Add Log</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/StudentDiaryProcess/viewdiarystudent" style="font-size: 12px;">View Logbook</a>
-            			</td>
-            			
-            		</tr>
-                </table>
-            </div>
-             <h5 class="sideaccordian" ><a href="#">Enquiry</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            	
-            	<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/enquiry" style="font-size: 12px;">Enquiry</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/viewEnquiry" style="font-size: 12px;">View Enquiry</a>
-            			</td>
-            			
-            		</tr>
-            	
-            		<!-- <tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/newEnquiry" style="font-size: 12px;">Enquiry</a>
-            			</td>
-            			
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/EnquiryProcess/newEnquiry" style="font-size: 12px;">View Enquiries</a>
-            			</td>
-            			
-            		</tr> -->
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Staff Assignments</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/JobProcess/viewAllQueries" style="font-size: 12px;">View Assignment</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/JobProcess/viewAllTasks" style="font-size: 12px;">View Tasks</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            
-             <!--  <h5 class="sideaccordian" ><a href="#">Appointments</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/AppointmentProcess/viewAllAppointments" style="font-size: 12px;">Appointment</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Case</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/CasesProcess/viewAllCases" style="font-size: 12px;">Cases</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/CasesProcess/createCase" style="font-size: 12px;">Create Cases</a>
-            			</td>
-            		</tr>
-                </table>
-            </div>
-            
-            <h5 class="sideaccordian" ><a href="#">Caveat</a></h5>
-            <div style="padding-left: 0px;padding-right: 0px;">
-            	<table style=" border-collapse: collapse;width: 100%">
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;background-color: #f5f8f9;">
-            				 <a target="mainFrame" href="/shaheen/CaveatProcess/viewAllCaveats" style="font-size: 12px;">Caveats</a>
-            			</td>
-            		</tr>
-            		<tr>
-            			<td style="text-align: left;  padding: 4px;padding-left:20px ;">
-            				 <a target="mainFrame" href="/shaheen/CaveatProcess/createCaveats" style="font-size: 12px;">Create Caveat</a>
-            			</td>
-            		</tr>
-                </table>
-            </div> -->
             
             </div>
                    
