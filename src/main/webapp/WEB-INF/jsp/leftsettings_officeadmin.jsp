@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script language="JavaScript" src="/shaheen/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/shaheen/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/shaheen/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
+        <script type="text/javascript" src="/shaheen/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shaheen/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/shaheen/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/shaheen/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/shaheen/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/shaheen/css/font-awesome.min.css">
       
         <script type="text/javascript">
             var req;
@@ -460,7 +460,7 @@ Author     : Musaib
 //allow access only if session exists
 String user = null;
 if(session.getAttribute("userAuth") == null){
-	response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+	response.sendRedirect("/shaheen/UserProcess/sessionTimeOut");
 }else user = (String) session.getAttribute("userAuth");
 String userName = null;
 String sessionID = null;
@@ -483,75 +483,75 @@ for(Cookie cookie : cookies){
         <div id="container" style="width: 95%" >
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-cog"></i>General</a></h5>
             <div>
-                <!-- <a class="menu-link" target="mainFrame" href="/vision/YearProcess/updateYear">Academic year</a> -->
-                <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/periodConfiguration">Time Table</a>
+                <!-- <a class="menu-link" target="mainFrame" href="/shaheen/YearProcess/updateYear">Academic year</a> -->
+                <a class="menu-link" target="mainFrame" href="/shaheen/PeriodProcess/periodConfiguration">Time Table</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-sitemap"></i>Class</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/viewClasses">Add Classes</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/ClassProcess/viewClasses">Add Classes</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>FEES</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesView">Fees Category</a>
-                <a class="menu-link" target="mainFrame" href="/vision/StampFeesProcess/showFeesDetails">Stamp Fee</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesView">Fees Category</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/StampFeesProcess/showFeesDetails">Stamp Fee</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-bus"></i>Bus Fee</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherFeesView">Bus Fees Category</a>
-                <a class="menu-link" target="mainFrame" href="/vision/StampFeesProcess/showOtherFeesDetails">Bus Fee Stamp</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/otherFeesView">Bus Fees Category</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/StampFeesProcess/showOtherFeesDetails">Bus Fee Stamp</a>
 
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/examSchedule">Exam Schedule</a>
-                <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/readListOfExams">Exam Details</a>
-                <a class="menu-link" target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjectNames">Subject Master</a>
-                <a class="menu-link" target="mainFrame" href="/vision/SubjectDetailsProcess/readListOfSubjects">Subject Details</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/ExamDetailsProcess/examSchedule">Exam Schedule</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/ExamDetailsProcess/readListOfExams">Exam Details</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/SubjectDetailsProcess/readListOfSubjectNames">Subject Master</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/SubjectDetailsProcess/readListOfSubjects">Subject Details</a>
             </div>
             
           <!--   <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Attendance</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceConfiguration">Staff/Students</a>
-                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAllHolidays">Holidays/WeeklyOff</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/attendanceConfiguration">Staff/Students</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/viewAllHolidays">Holidays/WeeklyOff</a>
             </div>
             
               <h5 class="sideaccordian"><a href="#"><i class="fa fa-level-up"></i>Promotion</a></h5>
             <div>
-				<a class="menu-link" target="mainFrame" href="/vision/ClassProcess/classHierarchy">Class Hierarchy</a>
+				<a class="menu-link" target="mainFrame" href="/shaheen/ClassProcess/classHierarchy">Class Hierarchy</a>
             </div> -->
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
             <div>
                 
-                <a class="menu-link" target="mainFrame" href="/vision/DepartmentProcess/departmentView">Add Department</a>
-                <a class="menu-link" target="mainFrame" href="/vision/PositionProcess/positionView">Add Position</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/DepartmentProcess/departmentView">Add Department</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/PositionProcess/positionView">Add Position</a>
             </div>
 
             <!-- <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/getCurrentFinancialYear">Accounting Year</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/AccountProcess/getCurrentFinancialYear">Accounting Year</a>
             </div>
             
              <h5 class="sideaccordian"><a href="#"><i class="fa fa-sitemap"></i>H.R.</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/leaveType">Leave Type</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/assignLeave">Assign/View Leave</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/payHead">Pay Head</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/addPayHead">Add Pay Head</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/deletePayHead">Delete Pay Head</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/basicPaySettings">Apply Basic Pay</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/viewEditbasicPay">View/Edit Basic Pay</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/pfSettings">PF Settings</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/leaveType">Leave Type</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/assignLeave">Assign/View Leave</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/payHead">Pay Head</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/addPayHead">Add Pay Head</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/deletePayHead">Delete Pay Head</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/basicPaySettings">Apply Basic Pay</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/viewEditbasicPay">View/Edit Basic Pay</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/pfSettings">PF Settings</a>
             </div> -->
             
               <!--  <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceConfiguration">Staff/Students</a>
-                <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAllHolidays">Holidays/WeeklyOff</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/attendanceConfiguration">Staff/Students</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/viewAllHolidays">Holidays/WeeklyOff</a>
             </div> -->
             
             </div>

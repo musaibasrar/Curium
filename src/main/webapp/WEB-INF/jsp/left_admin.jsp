@@ -13,20 +13,20 @@ Author     : Musaib
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Left</title>
-        <script language="JavaScript" src="/vision/js/motionpack.js"></script>
-        <link rel="stylesheet" href="/vision/css/datePicker/jquery-ui-1.8.18.custom.css">
-        <link rel="stylesheet" href="/vision/css/datePicker/demos.css">
+        <script language="JavaScript" src="/shaheen/js/motionpack.js"></script>
+        <link rel="stylesheet" href="/shaheen/css/datePicker/jquery-ui-1.8.18.custom.css">
+        <link rel="stylesheet" href="/shaheen/css/datePicker/demos.css">
 		
-        <script type="text/javascript" src="/vision/js/datePicker/jquery-1.7.1.js"></script>
-        <script type="text/javascript" src="/vision/js/datePicker/ui/jquery.ui.core.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.widget.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.datepicker.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery.ui.accordion.js"></script>
-        <script src="/vision/js/datePicker/ui/sliderAccess.js"></script>
-        <script src="/vision/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
-        <link href="/vision/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
-        <script src="/vision/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/vision/css/font-awesome.min.css">
+        <script type="text/javascript" src="/shaheen/js/datePicker/jquery-1.7.1.js"></script>
+        <script type="text/javascript" src="/shaheen/js/datePicker/ui/jquery.ui.core.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery.ui.widget.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery.ui.datepicker.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery.ui.accordion.js"></script>
+        <script src="/shaheen/js/datePicker/ui/sliderAccess.js"></script>
+        <script src="/shaheen/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
+        <link href="/shaheen/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
+        <script src="/shaheen/js/notification/jquery.jnotify.js" type="text/javascript"></script>
+		<link rel="stylesheet" href="/shaheen/css/font-awesome.min.css">
         
         <script type="text/javascript">
             var get;
@@ -408,7 +408,7 @@ Author     : Musaib
     //allow access only if session exists
     String user = null;
     if(session.getAttribute("userAuth") == null){
-        response.sendRedirect("/vision/UserProcess/sessionTimeOut");
+        response.sendRedirect("/shaheen/UserProcess/sessionTimeOut");
     }else user = (String) session.getAttribute("userAuth");
     
     String userName = null;
@@ -430,212 +430,212 @@ Author     : Musaib
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-users"></i>Students</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/viewAll">View All</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/addNew">Add New</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/QuickStudentSave">Quick Student Save</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendance">View Attendance</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/markAttendance">Mark Attendance</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/attendancemarkselectdate">Mark Monthly Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentProcess/viewAll">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentProcess/addNew">Add New</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentProcess/QuickStudentSave">Quick Student Save</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendance">View Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/markAttendance">Mark Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/attendancemarkselectdate">Mark Monthly Attendance</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesCollect">Fees Collect</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesStructure">Fees Structure</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesCollect">Fees Collect</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesStructure">Fees Structure</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/otherfeesCollect">Bus Fees Collect</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-credit-card"></i>Expenses</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/AdminProcess/viewAllExpenses">Expenses</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AdminProcess/viewAllExpenses">Expenses</a>
             </div>
             
             <!-- 1. Accounts (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-list-alt"></i>Accounts</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/createAccount">Chart of Accounts</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/createVoucher">Create Voucher</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/vouchersearch">View/Cancel Voucher</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/AccountProcess/viewCancelledVouchers">Cancelled Vouchers</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AccountProcess/createAccount">Chart of Accounts</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AccountProcess/createVoucher">Create Voucher</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/vouchersearch">View/Cancel Voucher</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AccountProcess/viewCancelledVouchers">Cancelled Vouchers</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-file-text-o"></i>Documents</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/admissionAbstract">Admission Abstract</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsDetailsStudyCertificate">Study Certificate</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/studentsArticleCertificate">Article 371</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/characterCertificate">Character Certificate</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/DocumentsProcess/transferCertificate">Transfer Certificate</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTimeTable">Class Time Table</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DocumentsProcess/admissionAbstract">Admission Abstract</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsBonafide">Bonafide Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DocumentsProcess/studentsDetailsStudyCertificate">Study Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DocumentsProcess/studentsArticleCertificate">Article 371</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DocumentsProcess/characterCertificate">Character Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DocumentsProcess/transferCertificate">Transfer Certificate</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/ExamDetailsProcess/generateHallTicket">Hall Ticket</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/PeriodProcess/generateTimeTable">Class Time Table</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/PeriodProcess/generateTeacherTimeTable">Teacher Time Table</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil-square-o"></i>Exams</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/marksEntry">Enter Marks</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/marksEntrySub">Enter Marks All</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExams">View Marks</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MarksDetailsProcess/getSubjectsExamsSub">View Marks All</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MarksDetailsProcess/marksEntry">Enter Marks</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MarksDetailsProcess/marksEntrySub">Enter Marks All</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MarksDetailsProcess/getSubjectsExams">View Marks</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MarksDetailsProcess/getSubjectsExamsSub">View Marks All</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-trophy"></i>Holistic Development Assessment</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/RatingDetailsProcess/ratingEntry">Enter Ratings</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/RatingDetailsProcess/getSubjectsAssessments">View Ratings</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/RatingDetailsProcess/ratingEntry">Enter Ratings</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/RatingDetailsProcess/getSubjectsAssessments">View Ratings</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-search"></i>Advance Search</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/advanceSearchStudents">Search</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentProcess/advanceSearchStudents">Search</a>
             </div>
             
             <!-- 2. Generate Cards (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-print"></i>Generate Cards</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/Printids/generateIds">Student IDs</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/Printids/generateIdsEmployees">Staff IDs</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/Printids/generateIds">Student IDs</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/Printids/generateIdsEmployees">Staff IDs</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-book"></i>Library</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/LibraryProcess/addbooks">Add Books</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/LibraryProcess/viewbooks">View Books</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/LibraryProcess/issuebooks">Issue Books</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/LibraryProcess/returnbooks">Return Books</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/LibraryProcess/addbooks">Add Books</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/LibraryProcess/viewbooks">View Books</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/LibraryProcess/issuebooks">Issue Books</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/LibraryProcess/returnbooks">Return Books</a>
             </div>
                
             <!-- 3. Staff (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-user"></i>Staff</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/ViewAllEmployee">View All</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/addEmployeePage">Add Staff</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/attendanceMarkStaff">Mark Attendance</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/AttendanceProcess/viewAttendanceStaff">View Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EmployeeProcess/ViewAllEmployee">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EmployeeProcess/addEmployeePage">Add Staff</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/attendanceMarkStaff">Mark Attendance</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/AttendanceProcess/viewAttendanceStaff">View Attendance</a>
             </div>
             
             <!-- 4. Sponsor (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-thumbs-o-up"></i>Sponsor</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/SponserProcess/ViewAllSponsor">View All</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/SponserProcess/addSponsorPage">Add Sponsor</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/SponserProcess/ViewAllSponsor">View All</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/SponserProcess/addSponsorPage">Add Sponsor</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-sign-in"></i>Login Staff</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/LoginProcess/viewLoginDetail">View Login Detail</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/LoginProcess/addLoginStaff">Add Staff Login</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/LoginProcess/viewLoginDetail">View Login Detail</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/LoginProcess/addLoginStaff">Add Staff Login</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar"></i>Events</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/EventProcess/calendar">Create Event</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/EventProcess/viewCalendar">View Calendar</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EventProcess/calendar">Create Event</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EventProcess/viewCalendar">View Calendar</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-plus-square"></i>Extras</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/Backup&Restore">Backup</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/changePassword">Change Password</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/uploadattendance">Upload Attendance File</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentProcess/archiveViewAll">Archive Students</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/EmployeeProcess/archiveEmployeeViewAll">Archive Employee</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/Backup&Restore">Backup</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/changePassword">Change Password</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/uploadattendance">Upload Attendance File</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentProcess/archiveViewAll">Archive Students</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EmployeeProcess/archiveEmployeeViewAll">Archive Employee</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-shopping-cart"></i>Stock Management</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/issueItems">Generate Receipts</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/generateTaxInvoice">Generate Tax Invoice</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessItemsMoveProcess/generateTaxInvoiceReport">Tax Invoice Report</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/purchaseItems">Purchase</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/purchaseOrder">Purchase Order</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessItemsProcess/viewItems">View/Add Items</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessItemsMoveProcess/issueItems">Generate Receipts</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessItemsMoveProcess/generateTaxInvoice">Generate Tax Invoice</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessItemsMoveProcess/generateTaxInvoiceReport">Tax Invoice Report</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessItemsProcess/purchaseItems">Purchase</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessItemsProcess/purchaseOrder">Purchase Order</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessItemsProcess/viewItems">View/Add Items</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-truck"></i>Suppliers</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessSuppliersProcess/paymentSuppliers">Make Payment</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessSuppliersProcess/balanceSuppliers">Balance Report</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessSuppliersProcess/supplierPaymentReport">Payment & Receipt Report</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/MessSuppliersProcess/viewSuppliers">View/Add Suppliers</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-bell"></i>Send Notifications</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/SMSProcess/sendSMS">SMS</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/sendemail">Email</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/SMSProcess/sendSMS">SMS</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/sendemail">Email</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-level-up"></i>Promotion</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/ClassProcess/promoteClass">Promotions</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/ClassProcess/promoteClass">Promotions</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-upload"></i>Import</a></h5>
             <div>
-                  <a class="menu-link" target="mainFrame" href="/vision/importfile">Import Files</a>
-                  <a class="menu-link" target="mainFrame" href="/vision/importfilefees">Import Fees Files</a>
+                  <a class="menu-link" target="mainFrame" href="/shaheen/importfile">Import Files</a>
+                  <a class="menu-link" target="mainFrame" href="/shaheen/importfilefees">Import Fees Files</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-pencil"></i>Diary</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/DiaryProcess/getdiarystudent">Diary</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/DiaryProcess/viewdiarystudent">View Diary</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DiaryProcess/getdiarystudent">Diary</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/DiaryProcess/viewdiarystudent">View Diary</a>
             </div>
             
             <!-- 5. Logbook (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-clipboard"></i>Logbook</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentDiaryProcess/getdiarystudent">Add Log</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/StudentDiaryProcess/viewdiarystudent">View Logbook</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentDiaryProcess/getdiarystudent">Add Log</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/StudentDiaryProcess/viewdiarystudent">View Logbook</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-question-circle"></i>Enquiry</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/EnquiryProcess/enquiry">Enquiry</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/EnquiryProcess/viewEnquiry">View Enquiry</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EnquiryProcess/enquiry">Enquiry</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/EnquiryProcess/viewEnquiry">View Enquiry</a>
             </div>
             
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-tasks"></i>Staff Assignments</a></h5>
             <div>
-                 <a class="menu-link" target="mainFrame" href="/vision/JobProcess/viewAllQueries">View Assignment</a>
-                 <a class="menu-link" target="mainFrame" href="/vision/JobProcess/viewAllTasks">View Tasks</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/JobProcess/viewAllQueries">View Assignment</a>
+                 <a class="menu-link" target="mainFrame" href="/shaheen/JobProcess/viewAllTasks">View Tasks</a>
             </div>
             
             <!-- 6. H.R. (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-sitemap"></i>H.R.</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/advanceSalary">Advance Salary</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/salaryApproval">Advance Salary Approval</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/salaryIssue">Advance Salary Issue</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/processSalary">Process Salary</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/issueStaffSalary">Issue Staff Salary</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/advanceSalary">Advance Salary</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/salaryApproval">Advance Salary Approval</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/salaryIssue">Advance Salary Issue</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/processSalary">Process Salary</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/issueStaffSalary">Issue Staff Salary</a>
             </div>
             
             <!-- 7. Leave Management (FA 4.0 compatible) -->
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-calendar-o"></i>Leave Management</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/leaveApplication">Leave Application</a>
-                <a class="menu-link" target="mainFrame" href="/vision/HrProcess/leaveApprovals">Leave Approvals</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/leaveApplication">Leave Application</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/HrProcess/leaveApprovals">Leave Approvals</a>
             </div>
 
             <!-- 8. Appointments (FA 4.0 compatible) -->
             <!-- <h5 class="sideaccordian"><a href="#"><i class="fa fa-clock-o"></i>Appointments</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/AppointmentProcess/viewAllAppointments">Appointment</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/AppointmentProcess/viewAllAppointments">Appointment</a>
             </div>
 
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-briefcase"></i>Case</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/CasesProcess/viewAllCases">Cases</a>
-                <a class="menu-link" target="mainFrame" href="/vision/CasesProcess/createCase">Create Cases</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/CasesProcess/viewAllCases">Cases</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/CasesProcess/createCase">Create Cases</a>
             </div>
 
             <h5 class="sideaccordian"><a href="#"><i class="fa fa-exclamation-triangle"></i>Caveat</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/vision/CaveatProcess/viewAllCaveats">Caveats</a>
-                <a class="menu-link" target="mainFrame" href="/vision/CaveatProcess/createCaveats">Create Caveat</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/CaveatProcess/viewAllCaveats">Caveats</a>
+                <a class="menu-link" target="mainFrame" href="/shaheen/CaveatProcess/createCaveats">Create Caveat</a>
             </div> -->
             
         </div>
