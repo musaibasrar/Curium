@@ -328,9 +328,16 @@ public class FeesCollectionActionAdapter {
     public void getFeesReportDue() {
         FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardService, smsService);
 
+        // No default here: bulk concession and print also call this method without a feeScope,
+        // and they must keep using only the ticked fee categories
+        String feeScope = request.getParameter("feeScope");
+        @SuppressWarnings("unchecked")
+        List<Feescategory> allFeeCategories = (List<Feescategory>) httpSession.getAttribute("feescategory");
+
         FeesReportDto dto = new FeesReportDto();
         dto.setAcademicYear(request.getParameter("academicyear"));
-        dto.setFeesCat(request.getParameterValues("feescategory"));
+        dto.setFeesCat(feesCollectionService.resolveFeesCategorySelection(
+                request.getParameterValues("feescategory"), feeScope, allFeeCategories));
         dto.setAddClass(request.getParameterValues("classsearch"));
 
         ResultResponse resultResponse = feesCollectionService.getFeesReportDue(dto, httpSession.getAttribute(Constants.BRANCHID).toString(), httpSession.getAttribute(Constants.CURRENTACADEMICYEAR).toString());
@@ -338,6 +345,7 @@ public class FeesCollectionActionAdapter {
         request.setAttribute("selectedFeesCategoryList", dto.getFeesCat());
         request.setAttribute("selectedClassList", dto.getAddClass());
         request.setAttribute("deadline", request.getParameter("deadline"));
+        request.setAttribute("feeScope", feeScope);
     }
 
     public void getFeesStampDueReport() {
