@@ -54,6 +54,7 @@ public class SmsActionAdapter {
         SendSMSDto dto = new SendSMSDto();
         String[] studentIds = request.getParameterValues("studentIDs");
         dto.setFeesIds(request.getParameterValues("feescategory"));
+        dto.setOtherFeesIds(request.getParameterValues("otherfeescategory"));
         dto.setStudentIds(studentIds);
         dto.setMessage(request.getParameter("deadline"));
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
@@ -91,7 +92,7 @@ public class SmsActionAdapter {
         dto.setStudentIds(studentIds);
         dto.setMessage(request.getParameter("deadline"));
         dto.setStudentFeesReportList((List<StudentFeesReport>) httpSession.getAttribute("studentfeesreportlist"));
-        ResultResponse result = smsService.sendSMSFeesDueReminderWithFeesCat(dto);
+        ResultResponse result = smsService.sendSMSFeesDueReminderWithFeesCat(dto, httpSession.getAttribute("branchid").toString());
 
        return  result.isSuccess();
     }

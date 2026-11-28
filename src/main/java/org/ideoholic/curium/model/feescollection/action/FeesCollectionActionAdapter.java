@@ -2,6 +2,7 @@ package org.ideoholic.curium.model.feescollection.action;
 
 import org.ideoholic.curium.dto.ResultResponse;
 import org.ideoholic.curium.model.feescategory.dto.Feescategory;
+import org.ideoholic.curium.model.feescategory.dto.OtherFeecategory;
 import org.ideoholic.curium.model.feescollection.dto.*;
 import org.ideoholic.curium.model.feescollection.service.FeesCollectionService;
 import org.ideoholic.curium.model.std.action.StandardActionAdapter;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpSession;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import org.ideoholic.curium.util.Constants;
 
@@ -561,5 +564,45 @@ public class FeesCollectionActionAdapter {
         													  	
         ResultResponse resultResponse = feesCollectionService.getFeesReportOutsanding(dto, httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
         httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+    }
+	
+	public void getConsolidatedFeesReportDue() {
+        FeesCollectionService feesCollectionService = new FeesCollectionService(request, response, standardActionAdapter);
+
+        String feeScope = request.getParameter("feeScope");
+        @SuppressWarnings("unchecked")
+        List<Feescategory> allFeeCategories = (List<Feescategory>) httpSession.getAttribute("feescategory");
+        @SuppressWarnings("unchecked")
+        List<OtherFeecategory> otherFeeCategories = (List<OtherFeecategory>) httpSession.getAttribute("otherfeescategory");
+
+        FeesReportDto dto = new FeesReportDto();
+        dto.setAcademicYear(request.getParameter("academicyear"));
+        dto.setFeesCat(feesCollectionService.resolveFeesCategorySelection(
+                request.getParameterValues("feescategory"), feeScope, allFeeCategories));
+        dto.setAddClass(request.getParameterValues("classsearch"));
+
+        // FEW: only the ticked other fees categories; otherwise every loaded other fees category
+        List<String> otherFeesCat = new ArrayList<>();
+        if ("FEW".equalsIgnoreCase(feeScope)) {
+            String[] selectedOtherFeesCat = request.getParameterValues("otherfeescategory");
+            if (selectedOtherFeesCat != null) {
+                otherFeesCat.addAll(Arrays.asList(selectedOtherFeesCat));
+            }
+        } else if (otherFeeCategories != null) {
+            for (OtherFeecategory otherFeeCategory : otherFeeCategories) {
+                if (otherFeeCategory != null && otherFeeCategory.getIdfeescategory() != null) {
+                    otherFeesCat.add(String.valueOf(otherFeeCategory.getIdfeescategory()));
+                }
+            }
+        }
+
+        ResultResponse resultResponse = feesCollectionService.getConsolidatedFeesReportDue(dto, otherFeesCat.toArray(new String[0]),
+                httpSession.getAttribute(BRANCHID).toString(), httpSession.getAttribute(CURRENTACADEMICYEAR).toString());
+        httpSession.setAttribute("studentfeesreportlist", resultResponse.getResultList());
+        request.setAttribute("selectedFeesCategoryList", dto.getFeesCat());
+        request.setAttribute("selectedOtherFeesCategoryList", otherFeesCat);
+        request.setAttribute("selectedClassList", dto.getAddClass());
+        request.setAttribute("deadline", request.getParameter("deadline"));
+        request.setAttribute("feeScope", feeScope);
     }
 }

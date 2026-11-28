@@ -1162,6 +1162,18 @@ public class FeesCollectionService {
 					totalAmount = totalAmount+studentFee.getFeesamount()-studentFee.getConcession()-studentFee.getWaiveoff();
 					feesDetails=feesDetails+studentFee.getFeescategory().getFeescategoryname()+":"+feesDue+"/"+feesTotal+"\n";
 				}
+
+				// Other fees: only filled by the consolidated fees due report
+				List<Studentotherfeesstructure> otherSfs = studentFeesReport.getStudentOtherFeesStructure();
+				if (otherSfs != null) {
+					for (Studentotherfeesstructure otherFee : otherSfs) {
+						long feesTotal = toLong(otherFee.getFeesamount()) - toLong(otherFee.getConcession()) - toLong(otherFee.getWaiveoff());
+						long feesDue = feesTotal - toLong(otherFee.getFeespaid());
+						dueAmount = dueAmount + feesDue;
+						totalAmount = totalAmount + feesTotal;
+						feesDetails = feesDetails + otherFee.getOtherfeescategory().getFeescategoryname() + " (Other):" + feesDue + "/" + feesTotal + "\n";
+					}
+				}
 				
 				data.put(Integer.toString(i),
 						new Object[] { DataUtil.emptyString(studentFeesReport.getParents().getStudent().getStudentexternalid()),  DataUtil.emptyString(studentFeesReport.getParents().getStudent().getAdmissionnumber()),
@@ -2469,40 +2481,7 @@ public class FeesCollectionService {
 		
 		//Get Students
 		
-		List<Parents> searchStudentList = new ArrayList<Parents>();
-		
-		if(branchId!=null){
-		
-		String queryMain = "From Parents as parents where";
-		String[] addClass = dto.getAddClass();
-		StringBuffer conClassStudying = new StringBuffer();
-
-			int i = 0;
-			for (String classOne : addClass) {
-				
-				if(i>0) {
-					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
-				}else {
-					conClassStudying.append(classOne+"--"+"%");
-				}
-				
-				i++;
-			}
-		
-		String classStudying = DataUtil.emptyString(conClassStudying.toString());
-		String querySub = "";
-
-		if (!classStudying.equalsIgnoreCase("")) {
-			querySub = querySub + " (parents.Student.classstudying like '"
-					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
-		}
-
-		if(!"".equalsIgnoreCase(querySub)) {
-			queryMain = queryMain + querySub;
-			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
-		}
-		
-	}
+		List<Parents> searchStudentList = searchFeesReportDueStudents(dto, branchId);
 		//End Students
 		
 		
@@ -2546,7 +2525,48 @@ public class FeesCollectionService {
 		}
 		return result;
 	  }
-	
+
+	/** Active students of the selected classes, shared by the fees due and consolidated fees due reports. */
+	private List<Parents> searchFeesReportDueStudents(FeesReportDto dto, String branchId) {
+		List<Parents> searchStudentList = new ArrayList<Parents>();
+		
+		if(branchId!=null){
+		
+		String queryMain = "From Parents as parents where";
+		// No class selected: no students (avoids a NullPointerException when nothing is ticked)
+		String[] addClass = dto.getAddClass() != null ? dto.getAddClass() : new String[0];
+		StringBuffer conClassStudying = new StringBuffer();
+
+			int i = 0;
+			for (String classOne : addClass) {
+				
+				if(i>0) {
+					conClassStudying.append("' OR parents.Student.classstudying LIKE '"+classOne+"--"+"%");
+				}else {
+					conClassStudying.append(classOne+"--"+"%");
+				}
+				
+				i++;
+			}
+		
+		String classStudying = DataUtil.emptyString(conClassStudying.toString());
+		String querySub = "";
+
+		if (!classStudying.equalsIgnoreCase("")) {
+			querySub = querySub + " (parents.Student.classstudying like '"
+					+ classStudying + "') AND parents.Student.archive=0 and parents.Student.passedout=0 AND parents.Student.droppedout=0 and parents.Student.leftout=0 AND parents.Student.branchid="+Integer.parseInt(branchId)+" order by parents.Student.admissionnumber ASC";
+		}
+
+		if(!"".equalsIgnoreCase(querySub)) {
+			queryMain = queryMain + querySub;
+			searchStudentList = new studentDetailsDAO().getStudentsList(queryMain);
+		}
+		
+	}
+		return searchStudentList;
+	}
+
+
 	public ResultResponse readFileForFees(MultipartFile uploadedFiles) throws FileNotFoundException, IOException{
 		// Student student = new Student();
 		ResultResponse result = ResultResponse.builder().success(false).build();
@@ -3215,6 +3235,77 @@ public class FeesCollectionService {
 
 	private static String[] nullToEmpty(String[] values) {
 		return values != null ? values : new String[0];
+	}
+	
+	/**
+	 * Fees due report covering both regular fee categories ({@code dto.getFeesCat()})
+	 * and other fee categories ({@code otherFeesCat}) for the same set of students.
+	 */
+	public ResultResponse getConsolidatedFeesReportDue(FeesReportDto dto, String[] otherFeesCat, String branchId, String currentAcademicYear) {
+		ResultResponse result = ResultResponse.builder().build();
+
+		List<Parents> searchStudentList = branchId != null ? searchFeesReportDueStudents(dto, branchId) : new ArrayList<Parents>();
+
+		if (currentAcademicYear != null) {
+
+			List<Integer> feesCatList = toFeesCategoryIdList(dto.getFeesCat());
+			List<Integer> otherFeesCatList = toFeesCategoryIdList(otherFeesCat);
+			List<StudentFeesReport> studentFeesReportList = new ArrayList<StudentFeesReport>();
+
+			for (Parents parents : searchStudentList) {
+
+				long id = parents.getStudent().getSid();
+
+				List<Studentfeesstructure> feesStructure = new ArrayList<Studentfeesstructure>();
+				if (!feesCatList.isEmpty()) {
+					for (Studentfeesstructure studentFeesStructure : new studentDetailsDAO().getStudentFeesStructurebyFeesCategory(id, feesCatList)) {
+						if (getDueAmount(studentFeesStructure.getFeesamount(), studentFeesStructure.getFeespaid(), studentFeesStructure.getConcession(), studentFeesStructure.getWaiveoff()) > 0) {
+							feesStructure.add(studentFeesStructure);
+						}
+					}
+				}
+
+				List<Studentotherfeesstructure> otherFeesStructure = new ArrayList<Studentotherfeesstructure>();
+				if (!otherFeesCatList.isEmpty()) {
+					for (Studentotherfeesstructure studentOtherFeesStructure : new studentDetailsDAO().getStudentotherFeesStructurebyFeesCategory(id, otherFeesCatList)) {
+						if (getDueAmount(studentOtherFeesStructure.getFeesamount(), studentOtherFeesStructure.getFeespaid(), studentOtherFeesStructure.getConcession(), studentOtherFeesStructure.getWaiveoff()) > 0) {
+							otherFeesStructure.add(studentOtherFeesStructure);
+						}
+					}
+				}
+
+				if (!feesStructure.isEmpty() || !otherFeesStructure.isEmpty()) {
+					StudentFeesReport studentFeesReport = new StudentFeesReport();
+					studentFeesReport.setParents(parents);
+					studentFeesReport.setStudentFeesStructure(feesStructure);
+					studentFeesReport.setStudentOtherFeesStructure(otherFeesStructure);
+					studentFeesReportList.add(studentFeesReport);
+				}
+			}
+
+			result.setResultList(studentFeesReportList);
+			result.setSuccess(true);
+		}
+		return result;
+	}
+
+	private static List<Integer> toFeesCategoryIdList(String[] feesCat) {
+		// Set removes repeated ids so a fee row is never fetched (and counted) twice
+		Set<Integer> feesCatIds = new LinkedHashSet<>();
+		if (feesCat != null) {
+			for (String feescat : feesCat) {
+				feesCatIds.add(Integer.parseInt(feescat));
+			}
+		}
+		return new ArrayList<>(feesCatIds);
+	}
+
+	private static long getDueAmount(Number feesAmount, Number feesPaid, Number concession, Number waiveOff) {
+		return toLong(feesAmount) - toLong(feesPaid) - toLong(concession) - toLong(waiveOff);
+	}
+
+	private static long toLong(Number value) {
+		return value != null ? value.longValue() : 0L;
 	}
 }
 

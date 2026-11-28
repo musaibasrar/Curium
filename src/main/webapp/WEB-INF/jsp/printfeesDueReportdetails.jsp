@@ -297,6 +297,18 @@
 								     <c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
 								     <c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
 								</c:forEach>
+								<%-- Other fees: only filled by the consolidated fees due report --%>
+								<c:forEach items="${studentfeesreportlist.studentOtherFeesStructure}" var="studentotherfeesdetails">
+									<c:set var="otherFeesTotal" value="${studentotherfeesdetails.feesamount - studentotherfeesdetails.concession - studentotherfeesdetails.waiveoff}" />
+									<c:set var="otherFeesDue" value="${otherFeesTotal - studentotherfeesdetails.feespaid}" />
+									<c:set var="DueAmount" value="${DueAmount + otherFeesDue}" />
+									<c:set var="TotalAmount" value="${TotalAmount + otherFeesTotal}" />
+									<c:set var="TotalPaidAmount" value="${TotalPaidAmount + studentotherfeesdetails.feespaid}" />
+									<c:set var="TotalDueAmount" value="${TotalDueAmount + otherFeesDue}" />
+									<c:set var="TotalSum" value="${TotalSum + otherFeesTotal}" />
+									<c:set var="TotalSumper" value="${(TotalPaidAmount/TotalSum)*100}" />
+									<c:set var="TotalDueper" value="${(TotalDueAmount/TotalSum)*100}" />
+								</c:forEach>
 							</td>
 							<td class="datatd">
 									<table>

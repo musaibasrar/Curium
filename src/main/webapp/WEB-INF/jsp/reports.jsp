@@ -449,22 +449,23 @@ for(Cookie cookie : cookies){
             
               <h5 class="sideaccordian"><a href="#"><i class="fa fa-money"></i>Fees</a></h5>
             <div>
-                <a class="menu-link" target="mainFrame" href="/shaheen/feessummary">Fees Summary</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesCollection/feesCollectionDetails">Fees Collection Details</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesReport">Fees Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesReportDue">Fees Due Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/feescollectiondetailscategory">Fees Collection Head Wise</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesDueReportHeadWise">Fees Due Head Wise</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesDueStampFees">Fees Stamp Due Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesConcessionReport">Fees Concession Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/feescancelledreceipts">Cancelled Fees Receipts</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/otherfeesReport">Bus Fees Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/otherfeesCollectionDetails">Bus Fees Collection Details</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/defaulterReport">Defaulter Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/dndReport">DND Report</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/otherfeescancelledreceipts">Cancelled Bus Fees Receipts</a>
-                <a class="menu-link" target="mainFrame" href="/shaheen/FeesProcess/feesOutstanding">Fees Outstanding</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feessummary">Fees Summary</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesCollection/feesCollectionDetails">Fees Collection Details</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesReport">Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesReportDue">Fees Due Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feescollectiondetailscategory">Fees Collection Head Wise</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesDueReportHeadWise">Fees Due Head Wise</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesDueStampFees">Fees Stamp Due Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesWaiveoffReport">Fees Waive off Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesConcessionReport">Fees Concession Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/feescancelledreceipts">Cancelled Fees Receipts</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/otherfeesReport">Bus Fees Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/otherfeesCollectionDetails">Bus Fees Collection Details</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/defaulterReport">Defaulter Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/dndReport">DND Report</a>
+                <a class="menu-link" target="mainFrame" href="/vision/otherfeescancelledreceipts">Cancelled Bus Fees Receipts</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesOutstanding">Fees Outstanding</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/consolidatedFeesReportDue">Fees Due Consolidated Report</a>
             </div>
             
             

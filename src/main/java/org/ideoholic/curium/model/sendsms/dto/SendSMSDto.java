@@ -26,5 +26,6 @@ public class SendSMSDto {
     private String message;
     private String[] studentIds;
     private String[] feesIds;
+    private String[] otherFeesIds;
 
 }

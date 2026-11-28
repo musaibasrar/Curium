@@ -3,13 +3,12 @@ package org.ideoholic.curium.model.sendsms.service;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -26,6 +25,7 @@ import org.ideoholic.curium.model.sendsms.dao.SmsDAO;
 import org.ideoholic.curium.model.sendsms.dto.SMSResponseDto;
 import org.ideoholic.curium.model.sendsms.dto.SendSMSDto;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 import org.ideoholic.curium.util.DataUtil;
 import org.ideoholic.curium.util.SMSReportResponse;
 import org.springframework.stereotype.Service;
@@ -329,18 +329,27 @@ public class SmsService {
 
 		String[] feesIds = dto.getFeesIds();
 		Set<String> selectedFeeCategoryIds = new HashSet<>();
-		boolean filterBySelectedFeeCategory = feesIds != null && feesIds.length > 0;
-
-		if (filterBySelectedFeeCategory) {
+		if (feesIds != null) {
 			for (String feeId : feesIds) {
 				if (feeId != null && !feeId.trim().isEmpty()) {
 					selectedFeeCategoryIds.add(feeId.trim());
 				}
 			}
-			if (selectedFeeCategoryIds.isEmpty()) {
-				filterBySelectedFeeCategory = false;
+		}
+
+		// Other fees category ids come separately because they can overlap with regular fees category ids
+		String[] otherFeesIds = dto.getOtherFeesIds();
+		Set<String> selectedOtherFeeCategoryIds = new HashSet<>();
+		if (otherFeesIds != null) {
+			for (String otherFeeId : otherFeesIds) {
+				if (otherFeeId != null && !otherFeeId.trim().isEmpty()) {
+					selectedOtherFeeCategoryIds.add(otherFeeId.trim());
+				}
 			}
 		}
+
+		// No category selected (either type) keeps the existing behaviour: every due in the report is included
+		boolean filterBySelectedFeeCategory = !selectedFeeCategoryIds.isEmpty() || !selectedOtherFeeCategoryIds.isEmpty();
 
 		Map<String, Long> dueAmountByStudentId = new LinkedHashMap<>();
 		Map<String, String> phoneByStudentId = new LinkedHashMap<>();
@@ -374,14 +383,15 @@ public class SmsService {
 			}
 
 			List<Studentfeesstructure> feeStructures = studentFeesReport.getStudentFeesStructure();
-			if (feeStructures == null || feeStructures.isEmpty()) {
+			List<Studentotherfeesstructure> otherFeeStructures = studentFeesReport.getStudentOtherFeesStructure();
+			if ((feeStructures == null || feeStructures.isEmpty()) && (otherFeeStructures == null || otherFeeStructures.isEmpty())) {
 				continue;
 			}
 
 			Set<String> processedFeeCategoryIds = processedFeeCategoryByStudentId.computeIfAbsent(studentId, k -> new HashSet<>());
 			long dueAmount = dueAmountByStudentId.getOrDefault(studentId, 0L);
 
-			for (Studentfeesstructure feeStructure : feeStructures) {
+			for (Studentfeesstructure feeStructure : (feeStructures != null ? feeStructures : Collections.<Studentfeesstructure>emptyList())) {
 				if (feeStructure == null || feeStructure.getFeescategory().getIdfeescategory() == null) {
 					continue;
 				}
@@ -401,6 +411,32 @@ public class SmsService {
 				long waiveoff = feeStructure.getWaiveoff() != null ? feeStructure.getWaiveoff() : 0L;
 
 				dueAmount = dueAmount + (feesAmount - feesPaid - concession - waiveoff);
+			}
+
+			if (otherFeeStructures != null) {
+				for (Studentotherfeesstructure otherFeeStructure : otherFeeStructures) {
+					if (otherFeeStructure == null || otherFeeStructure.getOtherfeescategory() == null
+							|| otherFeeStructure.getOtherfeescategory().getIdfeescategory() == null) {
+						continue;
+					}
+
+					String otherFeeCategoryId = String.valueOf(otherFeeStructure.getOtherfeescategory().getIdfeescategory());
+					if (filterBySelectedFeeCategory && !selectedOtherFeeCategoryIds.contains(otherFeeCategoryId)) {
+						continue;
+					}
+
+					// Prefixed so an other fees category never clashes with a regular fees category of the same id
+					if (!processedFeeCategoryIds.add("other:" + otherFeeCategoryId)) {
+						continue;
+					}
+
+					long feesAmount = otherFeeStructure.getFeesamount() != null ? otherFeeStructure.getFeesamount() : 0L;
+					long feesPaid = otherFeeStructure.getFeespaid() != null ? otherFeeStructure.getFeespaid() : 0L;
+					long concession = otherFeeStructure.getConcession() != null ? otherFeeStructure.getConcession().longValue() : 0L;
+					long waiveoff = otherFeeStructure.getWaiveoff() != null ? otherFeeStructure.getWaiveoff() : 0L;
+
+					dueAmount = dueAmount + (feesAmount - feesPaid - concession - waiveoff);
+				}
 			}
 
 			dueAmountByStudentId.put(studentId, dueAmount);
@@ -521,7 +557,7 @@ public class SmsService {
 	}
 
 
-	public ResultResponse sendSMSFeesDueReminderWithFeesCat(SendSMSDto dto) {
+	public ResultResponse sendSMSFeesDueReminderWithFeesCat(SendSMSDto dto, String branchId) {
 		if (dto == null) {
 			return ResultResponse.builder().build();
 		}
@@ -668,7 +704,7 @@ public class SmsService {
 			String message = "Rs." + totalDue + " (" + studentName + ") [" + categoryDetailsBuilder + "] : " + reminderMessage;
 			anySmsAttempted = true;
 
-			int resultSMS = sendSMS(phoneNo, message, smsTemplateType);
+			int resultSMS = sendSMS(phoneNo, message, smsTemplateType, Integer.parseInt(branchId));
 			if (resultSMS != HttpURLConnection.HTTP_OK) {
 				allSmsSucceeded = false;
 			}
