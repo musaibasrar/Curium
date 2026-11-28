@@ -673,7 +673,7 @@ for(Cookie cookie : cookies){
          
             function Cancel() {
                 var form1 = document.getElementById("form1");
-                form1.action = "/fathima/StudentProcess/viewAll";
+                form1.action = "/fathima/UserProcess/changePassword";
                 form1.submit();
             }
 

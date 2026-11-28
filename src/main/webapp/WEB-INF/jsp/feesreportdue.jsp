@@ -362,7 +362,7 @@
 	
 	function sendSMSWithFeesCat() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/SMSProcess/sendSMSFeesDueReminderWithFeesCat";
+		form1.action = "/fathima/SMSProcess/sendSMSFeesDueReminderWithFeesCat";
 		form1.method = "POST";
 		form1.submit();
 
@@ -377,7 +377,7 @@
 	
 	function printRecordsDueSlip() {
 		var form1 = document.getElementById("form1");
-		form1.action = "/vision/FeesDetails/printDataForFeesReportdueSlip";
+		form1.action = "/fathima/FeesDetails/printDataForFeesReportdueSlip";
 		form1.method = "POST";
 		form1.submit();
 }
@@ -604,7 +604,7 @@ function getFeesCategory() {
 
 	// Passing the year as data lets jQuery URL-encode it ("Current & Next Year" contains '&')
 	$.ajax({
-		url: '/vision/StampFeesProcess/showFeesDetailsYearly',
+		url: '/fathima/StampFeesProcess/showFeesDetailsYearly',
 		type: 'GET',
 		data: { year: $('#academicyear').val() },
 		dataType: 'html',
