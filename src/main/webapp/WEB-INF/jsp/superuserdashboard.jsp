@@ -1782,11 +1782,7 @@ if (session.getAttribute("userAuth") == null) {
 
         var $branchList = $("#branchCheckboxList");
         if ($branchList.children().length === 0) {
-            var hasHeadOffice = false;
             $.each(f.branches || [], function(idx, b) {
-                if (String(b.id) === "1") {
-                    hasHeadOffice = true;
-                }
                 var $label = $("<label>", {
                     "class": "branch-checkbox-option",
                     "data-search": (b.name || "").toLowerCase()
@@ -1795,7 +1791,7 @@ if (session.getAttribute("userAuth") == null) {
                     type: "checkbox",
                     "class": "branch-checkbox",
                     value: b.id,
-                    checked: String(b.id) !== "1"
+                    checked: true
                 });
                 var $text = $("<span>", {"class": "branch-checkbox-text"});
                 $("<span>", {"class": "branch-checkbox-name"}).text(b.name || ("Branch " + b.id)).appendTo($text);
@@ -1805,14 +1801,6 @@ if (session.getAttribute("userAuth") == null) {
             updateBranchSelectionLabel();
             if (window.console && console.debug) {
                 console.debug("[SuperDashboard] Branch options added", $branchList.children().length);
-            }
-
-            // The very first dashboard request fires before this checkbox list exists,
-            // so it is sent with no branch filter and the backend defaults to ALL
-            // branches (including Head Office). Now that the list is built with Head
-            // Office excluded by default, reload once so the data matches the UI state.
-            if (hasHeadOffice) {
-                loadDashboard();
             }
         }
     }
@@ -1913,9 +1901,7 @@ if (session.getAttribute("userAuth") == null) {
             $("#fExam").val("");
             $("#fFeeCategory").val("");
             $("#fSortBy").val("highest_collection");
-            $("#branchCheckboxList .branch-checkbox").each(function() {
-                $(this).prop("checked", String($(this).val()) !== "1");
-            });
+            $("#branchCheckboxList .branch-checkbox").prop("checked", true);
             updateBranchSelectionLabel();
             loadDashboard();
         });
@@ -1989,4 +1975,3 @@ if (session.getAttribute("userAuth") == null) {
 </script>
 </body>
 </html>
-
