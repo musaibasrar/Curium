@@ -16,7 +16,7 @@ Author     : Musaib
         <script language="JavaScript" src="/fathima/js/motionpack.js"></script>
         <link rel="stylesheet" href="/fathima/css/datePicker/jquery-ui-1.8.18.custom.css">
         <link rel="stylesheet" href="/fathima/css/datePicker/demos.css">
-		
+	
         <script type="text/javascript" src="/fathima/js/datePicker/jquery-1.7.1.js"></script>
         <script type="text/javascript" src="/fathima/js/datePicker/ui/jquery.ui.core.js"></script>
         <script src="/fathima/js/datePicker/ui/jquery.ui.widget.js"></script>
@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/fathima/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/fathima/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/fathima/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/fathima/css/font-awesome.css">
+		<link rel="stylesheet" href="/fathima/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
