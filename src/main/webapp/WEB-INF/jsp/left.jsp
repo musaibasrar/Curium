@@ -26,7 +26,7 @@ Author     : Musaib
         <script src="/shaheen/js/datePicker/ui/jquery-ui-timepicker-addon.js"></script>
         <link href="/shaheen/css/notification/jquery.jnotify.css" rel="stylesheet" type="text/css" />
         <script src="/shaheen/js/notification/jquery.jnotify.js" type="text/javascript"></script>
-		<link rel="stylesheet" href="/shaheen/css/font-awesome.css">
+		<link rel="stylesheet" href="/shaheen/css/font-awesome.min.css">
         <script type="text/javascript">
             var get;
             function getdata1() {
