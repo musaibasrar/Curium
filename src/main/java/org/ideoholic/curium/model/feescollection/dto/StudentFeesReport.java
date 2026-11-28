@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.ideoholic.curium.model.parents.dto.Parents;
 import org.ideoholic.curium.model.student.dto.Studentfeesstructure;
+import org.ideoholic.curium.model.student.dto.Studentotherfeesstructure;
 
 public class StudentFeesReport {
 
 	
 	private Parents parent;
 	private List<Studentfeesstructure> studentFeesStructure;
+	private List<Studentotherfeesstructure> studentOtherFeesStructure;
 	private Long dueAmount;
 	private int userid;
 	
@@ -41,7 +43,7 @@ public class StudentFeesReport {
 	public void setStudentFeesStructure(List<Studentfeesstructure> studentFeesStructure) {
 		this.studentFeesStructure = studentFeesStructure;
 	}
-	
+
 	public int getUserid() {
 			return userid;
 	}
@@ -67,6 +69,14 @@ public class StudentFeesReport {
 
 	public void setParent(Parents parent) {
 		this.parent = parent;
+	}
+	
+	public List<Studentotherfeesstructure> getStudentOtherFeesStructure() {
+		return studentOtherFeesStructure;
+	}
+
+	public void setStudentOtherFeesStructure(List<Studentotherfeesstructure> studentOtherFeesStructure) {
+		this.studentOtherFeesStructure = studentOtherFeesStructure;
 	}
 
 	

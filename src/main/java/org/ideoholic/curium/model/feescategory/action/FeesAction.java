@@ -295,4 +295,44 @@ public class FeesAction {
 		feesCollectionActionAdapter.getFeesReportDue();
 		return "bulkconcession";
 	}
+	
+	@GetMapping("/consolidatedFeesReportDue")
+	public String consolidatedFeesReportDue() {
+		standardActionAdapter.viewClasses();
+		feesActionAdapter.viewFees();
+		feesActionAdapter.viewOtherFees();
+		return "consolidatedfeesreportdue";
+	}
+
+	@PostMapping("/searchConsolidatedFeesReportDue")
+	public String searchConsolidatedFeesReportDue() {
+		// Reload: other pages overwrite "otherfeescategory" in the session with class-wise lists
+		feesActionAdapter.viewOtherFees();
+		feesCollectionActionAdapter.getConsolidatedFeesReportDue();
+		return "consolidatedfeesreportdue";
+	}
+
+	@PostMapping("/printConsolidatedFeesReportDue")
+	public String printConsolidatedFeesReportDue() {
+		loadConsolidatedFeesReportDueForPrint();
+		return "printfeesDueReportdetails";
+	}
+
+	@PostMapping("/printConsolidatedFeesReportDueSlip")
+	public String printConsolidatedFeesReportDueSlip() {
+		loadConsolidatedFeesReportDueForPrint();
+		return "printfeesDueReportSlip";
+	}
+
+	/**
+	 * Re-runs the consolidated search when classes are posted; otherwise prints the
+	 * "studentfeesreportlist" already stored in the session by the last search.
+	 */
+	private void loadConsolidatedFeesReportDueForPrint() {
+		String[] selectedClasses = request.getParameterValues("classsearch");
+		if (selectedClasses != null && selectedClasses.length > 0) {
+			feesActionAdapter.viewOtherFees();
+			feesCollectionActionAdapter.getConsolidatedFeesReportDue();
+		}
+	}
 }

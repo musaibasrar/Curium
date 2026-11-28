@@ -177,6 +177,10 @@
         <c:forEach items="${studentfeesreportlist.studentFeesStructure}" var="studentfeescatagorydetails">
             <c:set var="DueAmount" value="${DueAmount + studentfeescatagorydetails.feesamount - studentfeescatagorydetails.feespaid - studentfeescatagorydetails.concession - studentfeescatagorydetails.waiveoff}" />
         </c:forEach>
+        <%-- Other fees: only filled by the consolidated fees due report --%>
+        <c:forEach items="${studentfeesreportlist.studentOtherFeesStructure}" var="studentotherfeesdetails">
+            <c:set var="DueAmount" value="${DueAmount + studentotherfeesdetails.feesamount - studentotherfeesdetails.feespaid - studentotherfeesdetails.concession - studentotherfeesdetails.waiveoff}" />
+        </c:forEach>
 
         <%-- Only print reminder cards for students with pending dues --%>
         <c:if test="${DueAmount > 0}">

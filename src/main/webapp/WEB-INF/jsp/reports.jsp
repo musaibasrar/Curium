@@ -465,6 +465,7 @@ for(Cookie cookie : cookies){
                 <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/dndReport">DND Report</a>
                 <a class="menu-link" target="mainFrame" href="/vision/otherfeescancelledreceipts">Cancelled Bus Fees Receipts</a>
                 <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/feesOutstanding">Fees Outstanding</a>
+                <a class="menu-link" target="mainFrame" href="/vision/FeesProcess/consolidatedFeesReportDue">Fees Due Consolidated Report</a>
             </div>
             
             
