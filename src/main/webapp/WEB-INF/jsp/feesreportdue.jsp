@@ -360,6 +360,14 @@
 
 	}
 	
+	function sendSMSWithFeesCat() {
+		var form1 = document.getElementById("form1");
+		form1.action = "/vision/SMSProcess/sendSMSFeesDueReminderWithFeesCat";
+		form1.method = "POST";
+		form1.submit();
+
+	}
+	
 	function printRecords() {
 		var form1 = document.getElementById("form1");
 		form1.action = "/shaheen/FeesDetails/printDataForFeesReportdue";
@@ -399,10 +407,18 @@
 	         }).click(function(){
 	        	 sendSMS();	
 	         	});
+		
+	      $("#sendsmswithfeescat").button({
+	             icons:{
+	                 primary: "ui-icon-mail-closed"
+	             }
+	         }).click(function(){
+	        	 sendSMSWithFeesCat();	
+	         	});
 	             
 
 	});
-
+	
 	$(function() {
 
 		$("#tabs").tabs();
@@ -1017,7 +1033,8 @@ for(Cookie cookie : cookies){
                     		&nbsp;&nbsp;<button value="PrintDueSlip" id="printdueslip">Print Due Slip</button>
                     		<label style="color:white;font-weight: bold;font-size: 14px;">Due Date:</label>
                     		<input type="text" id="deadline" name="deadline" value="<fmt:formatDate type="date" value="${now}" pattern="dd/MM/yyyy"/>">
-                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button> 
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsms">Send SMS Reminder</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;<button id="sendsmswithfeescat">Send SMS Reminder With Fees Cat</button> 
                             &nbsp;&nbsp;&nbsp;&nbsp;
                              &nbsp;&nbsp;&nbsp;&nbsp;
                            <label style="color:white;font-weight: bold;font-size: 14px;">Total Due Amount: Rs. ${TotalDueAmount } (<fmt:formatNumber value="${TotalDueper}" pattern="0.00" />%)</label>

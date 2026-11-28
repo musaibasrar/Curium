@@ -91,5 +91,13 @@ public class SmsAction {
 		}
 		return "error";
 	}
+	
+	@PostMapping("/sendSMSFeesDueReminderWithFeesCat")
+	public String sendSMSFeesDueReminderWithFeesCat() {
+		if (smsActionAdapter.sendSMSFeesDueReminderWithFeesCat()) {
+			return "successsms";
+		}
+		return "errorsms";
+}
 
 }
