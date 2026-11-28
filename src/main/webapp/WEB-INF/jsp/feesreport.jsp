@@ -581,7 +581,7 @@ function getFeesCategory() {
 
 	// Passing the year as data lets jQuery URL-encode it ("Current & Next Year" contains '&')
 	$.ajax({
-		url: '/shaheen/StampFeesProcess/showFeesDetailsYearly',
+		url: '/vision/StampFeesProcess/showFeesDetailsYearly',
 		type: 'GET',
 		data: { year: $('#academicyear').val() },
 		dataType: 'html',

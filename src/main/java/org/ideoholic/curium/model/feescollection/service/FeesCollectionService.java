@@ -3139,7 +3139,6 @@ public class FeesCollectionService {
 		if (!useAllCategories) {
 			return nullToEmpty(selectedFeeIds);
 		}
-
 		Set<String> feeIds = new LinkedHashSet<>();
 		for (Feescategory feeCategory : allFeeCategories) {
 			if (feeCategory != null && feeCategory.getIdfeescategory() != null) {
