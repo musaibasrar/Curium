@@ -281,12 +281,10 @@ public class SmsService {
         URL url = new URL(sgcPostContent.toString());
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestMethod("GET");
-        con.setDoOutput(true);
-        con.getOutputStream();
-        con.getInputStream();
         BufferedReader rd;
         String line;
         String result = "";
+        responseCode = con.getResponseCode();
         rd = new BufferedReader(new InputStreamReader(con.getInputStream()));
         while ((line = rd.readLine()) != null)
         {
@@ -409,7 +407,7 @@ public class SmsService {
 		}
 
 		boolean anySmsAttempted = false;
-		boolean allSmsSucceeded = true;
+		boolean anySmsSucceeded = false;
 		String reminderMessage = DataUtil.emptyString(dto.getMessage());
 		String smsTemplateType = "feesreminderwithdueamount";
 
@@ -426,18 +424,18 @@ public class SmsService {
 			}
 
 			String studentName = DataUtil.emptyString(nameByStudentId.get(studentId));
-			studentName = studentName.substring(0, Math.min(18, studentName.length()));
+			studentName = studentName.substring(0, Math.min(10, studentName.length()));
 
 			String message = "Rs." + dueAmount + " (" + studentName + ") : " + reminderMessage;
 			anySmsAttempted = true;
 
 			int resultSMS = sendSMS(phoneNo, message, smsTemplateType, Integer.parseInt(branchId));
-			if (resultSMS != HttpURLConnection.HTTP_OK) {
-				allSmsSucceeded = false;
+			if (resultSMS == HttpURLConnection.HTTP_OK) {
+				anySmsSucceeded = true;
 			}
 		}
 
-		if (anySmsAttempted && allSmsSucceeded) {
+		if (anySmsAttempted && anySmsSucceeded) {
 			return ResultResponse.builder().success(true).build();
 		}
 
