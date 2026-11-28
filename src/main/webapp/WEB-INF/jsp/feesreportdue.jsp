@@ -342,6 +342,9 @@
 <script type="text/javascript">
 
 	function searchForStudents() {
+		if (!validateReportFilters()) {
+			return;
+		}
 		var form1 = document.getElementById("form1");
 		form1.action = "/shaheen/FeesCollection/searchFeesReportDue";
 		form1.method = "POST";
@@ -437,69 +440,12 @@
 	});
 
 	$(function() {
-		$('#chckHead').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.labelClass').length;
-			if (length > 0) {
-				$('.chcktbl:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl:checked').attr('checked', false);
-				} else {
-					$('.chcktbl:not(:checked)').attr('checked', true);
-				}
-
-			}
-
-		});
-		
-		$('.chcktbl').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.labelClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktbl:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl:not(:checked)').attr('disabled', false);
-			}
-		});
-
-	});
-	
-	
-	
-	$(function() {
 		$('#chckHeadSMS').click(function() {
-			var length = $('.chcktblSMS:checked').length;
-			var trLength = $('.labelClass').length;
-			if (length > 0) {
-				$('.chcktblSMS:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktblSMS:checked').attr('checked', false);
-				} else {
-					$('.chcktblSMS:not(:checked)').attr('checked', true);
-				}
-
-			}
-
+			$('.chcktblSMS').prop('checked', this.checked);
 		});
 		
 		$('.chcktblSMS').click(function() {
-			var length = $('.chcktblSMS:checked').length;
-			var trLength = $('.labelClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktblSMS:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktblSMS:not(:checked)').attr('disabled', false);
-			}
+			$('#chckHeadSMS').prop('checked', $('.chcktblSMS:not(:checked)').length === 0);
 		});
 
 	});
@@ -507,33 +453,11 @@
 	
 	$(function() {
 		$('#chckHead1').click(function() {
-			var length = $('.chcktbl1:checked').length;
-			var trLength = $('.labelClass').length;
-			if (length > 0) {
-				$('.chcktbl1:checked').attr('checked', false);
-				this.checked = false;
-
-			} else {
-				if (this.checked == false) {
-					$('.chcktbl1:checked').attr('checked', false);
-				} else {
-					$('.chcktbl1:not(:checked)').attr('checked', true);
-				}
-
-			}
-
+			$('.chcktbl1').prop('checked', this.checked);
 		});
 		
 		$('.chcktbl1').click(function() {
-			var length = $('.chcktbl:checked').length;
-			var trLength = $('.labelClass').length;
-			alert(tdLength);
-			if (length > trLength) {
-
-				$('.chcktbl1:not(:checked)').attr('disabled', true);
-			} else {
-				$('.chcktbl1:not(:checked)').attr('disabled', false);
-			}
+			$('#chckHead1').prop('checked', $('.chcktbl1:not(:checked)').length === 0);
 		});
 
 	});
@@ -594,30 +518,7 @@
     }
     
     
-    var xmlHttp;
     var count;
-    function getFeesCategory() {
-
-		var selected=document.getElementById('academicyear').value;
-			
-			 if (typeof XMLHttpRequest != "undefined") {
-				 xmlHttp = new XMLHttpRequest();
-	            
-	         } else if (window.ActiveXObject) {
-	        	 xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
-	             
-	         }
-			xmlHttp.onreadystatechange = stateChanged;
-			xmlHttp.open("GET", "/shaheen/StampFeesProcess/showFeesDetailsYearly?year="+selected,true);
-			xmlHttp.send(null);
-	}
-    
-	function stateChanged() {
-
-		if (xmlHttp.readyState == 4 || xmlHttp.readyState == "complete") {
-			document.getElementById("feescat").innerHTML = xmlHttp.responseText;
-		}
-	}
 	function GetXmlHttpObject() {
 		var xmlHttp = null;
 		try {
@@ -647,28 +548,134 @@ $(function() {
 	});
 });
 </script>
-<script type="text/javascript" charset="utf-8">
-	$(document).ready(function() {
-		/*$('#myTable').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});*/
-		
-		$('#myTableFeesCat').dataTable({
-			"sScrollY" : "380px",
-			"bPaginate" : false,
-			"bLengthChange" : false,
-			"bFilter" : true,
-			"bSort" : true,
-			"bInfo" : false,
-			"bAutoWidth" : false
-		});
+<script type="text/javascript">
+/*
+ * Fees category selection for the fees due report (same behaviour as feesreport.jsp).
+ *
+ * feeScope: FEW = user ticks fee categories, ALL = every fee category
+ *
+ * Fee categories are only loaded (via AJAX) when the user picks FEW, because there
+ * can be thousands of them. Every action that changes the fee checkboxes ends with
+ * refreshFeeCategoryState(), which keeps the "All" checkbox and the counters in sync.
+ */
+var FEE_SCOPE_FEW = 'FEW';
+
+var FEE_CHECKBOXES = '#feescat .chcktbl';
+var FEE_ROWS = '#feescat #myTableFeesCat tbody tr';
+
+function getSelectedScope(radioName) {
+	var radio = document.querySelector('input[name="' + radioName + '"]:checked');
+	return radio ? radio.value : null;
+}
+
+function updateFeeSelectionMode() {
+	var pickFewCategories = getSelectedScope('feeScope') === FEE_SCOPE_FEW;
+
+	$('.feeCategorySection').toggle(pickFewCategories);
+	// Disabled checkboxes are not submitted, so stale ticks are ignored in ALL mode
+	$(FEE_CHECKBOXES + ', #chckHead').prop('disabled', !pickFewCategories);
+
+	if (!pickFewCategories) {
+		return;
+	}
+	if ($(FEE_CHECKBOXES).length === 0) {
+		getFeesCategory();
+	} else {
+		filterFeeCategories();
+	}
+}
+
+// Called on FEW selection and when the academic year changes
+function getFeesCategory() {
+	if (getSelectedScope('feeScope') !== FEE_SCOPE_FEW) {
+		return;
+	}
+
+	$('#feescat').html('<span style="font-weight:bold;color:#325F6D;">Loading fees categories...</span>');
+
+	// Passing the year as data lets jQuery URL-encode it ("Current & Next Year" contains '&')
+	$.ajax({
+		url: '/shaheen/StampFeesProcess/showFeesDetailsYearly',
+		type: 'GET',
+		data: { year: $('#academicyear').val() },
+		dataType: 'html',
+		cache: false,
+		success: function(html) {
+			$('#feescat').html(html);
+			// Respect the current mode in case the user switched back to ALL while loading
+			$(FEE_CHECKBOXES).prop('disabled', getSelectedScope('feeScope') !== FEE_SCOPE_FEW);
+			filterFeeCategories();
+		},
+		error: function(xhr) {
+			$('#feescat').html('<span style="font-weight:bold;color:red;">Could not load fees categories (status ' + xhr.status + '). Please try again.</span>');
+			refreshFeeCategoryState();
+		}
 	});
+}
+
+function filterFeeCategories() {
+	var searchText = ($('#feesCategorySearch').val() || '').toLowerCase();
+
+	$(FEE_ROWS).each(function() {
+		var matchesSearch = $(this).text().toLowerCase().indexOf(searchText) > -1;
+		$(this).toggle(matchesSearch);
+	});
+	refreshFeeCategoryState();
+}
+
+function getVisibleFeeRows() {
+	return $(FEE_ROWS).filter(':visible');
+}
+
+function setVisibleFeeCategoriesChecked(checked) {
+	getVisibleFeeRows().find('.chcktbl:enabled').prop('checked', checked);
+	refreshFeeCategoryState();
+}
+
+function selectVisibleFeesCategories() {
+	setVisibleFeeCategoriesChecked(true);
+}
+
+function unselectVisibleFeesCategories() {
+	setVisibleFeeCategoriesChecked(false);
+}
+
+function clearSelectedFeesCategories() {
+	$(FEE_CHECKBOXES).prop('checked', false);
+	refreshFeeCategoryState();
+}
+
+function refreshFeeCategoryState() {
+	var allCheckboxes = $(FEE_CHECKBOXES);
+	var checkedCount = allCheckboxes.filter(':checked').length;
+
+	$('#chckHead').prop('checked', allCheckboxes.length > 0 && checkedCount === allCheckboxes.length);
+	$('#selectedFeesCount').text(checkedCount);
+	$('#visibleFeesCount').text(getVisibleFeeRows().length);
+}
+
+function validateReportFilters() {
+	if (getSelectedScope('feeScope') === FEE_SCOPE_FEW && $(FEE_CHECKBOXES + ':checked').length === 0) {
+		alert('Please select at least one fees category.');
+		return false;
+	}
+	return true;
+}
+
+$(function() {
+	$('input[name="feeScope"]').change(updateFeeSelectionMode);
+
+	$('#chckHead').click(function() {
+		$(FEE_CHECKBOXES + ':enabled').prop('checked', this.checked);
+		refreshFeeCategoryState();
+	});
+
+	// Delegated: fee checkboxes are replaced every time they are loaded via AJAX
+	$(document).on('click', FEE_CHECKBOXES, refreshFeeCategoryState);
+	$(document).on('keyup', '#feesCategorySearch', filterFeeCategories);
+
+	updateFeeSelectionMode();
+});
 </script>
 </head>
   <%
@@ -737,8 +744,7 @@ for(Cookie cookie : cookies){
                            class="chcktbl1"
                            name="classsearch"
                            value="${classSec}"
-                           <c:if test="${isChecked}">checked</c:if>
-                           onclick="syncSelectAll()" />
+                           <c:if test="${isChecked}">checked</c:if> />
                     ${classSec}
                 </label>
             </c:if>
@@ -776,8 +782,46 @@ for(Cookie cookie : cookies){
                      <tr>
 						<td><br></td>
                     </tr>
-                    
-                    		<tr>
+
+						<tr>
+							<td style="font-weight: bold;color:#325F6D">Fees Categories:</td>
+							<td>
+								<label style="font-weight: bold;color:#325F6D">
+									<input type="radio" name="feeScope" value="FEW"
+										<c:if test="${feeScope eq 'FEW'}">checked</c:if>>
+									Few Categories
+								</label>
+								&nbsp;&nbsp;
+								<label style="font-weight: bold;color:#325F6D">
+									<input type="radio" name="feeScope" value="ALL"
+										<c:if test="${empty feeScope or feeScope eq 'ALL'}">checked</c:if>>
+									All Categories
+								</label>
+							</td>
+						</tr>
+
+						<tr class="feeCategorySection">
+							<td style="font-weight: bold;color:#325F6D">Search Fees Category:</td>
+							<td>
+								<input type="text" id="feesCategorySearch"
+									style="width: 320px;border-radius:4px;height:26px;"
+									placeholder="Type to filter loaded fees categories" />
+								&nbsp;&nbsp;
+								<span style="font-weight:bold;color:#325F6D;">Selected:</span>
+								<span id="selectedFeesCount" style="font-weight:bold;color:#eb6000;">0</span>
+								&nbsp;&nbsp;
+								<span style="font-weight:bold;color:#325F6D;">Visible:</span>
+								<span id="visibleFeesCount" style="font-weight:bold;color:#eb6000;">0</span>
+								&nbsp;&nbsp;
+								<a href="#" onclick="selectVisibleFeesCategories(); return false;" style="font-weight:bold;color:#325F6D;">Select Visible</a>
+								&nbsp;&nbsp;
+								<a href="#" onclick="unselectVisibleFeesCategories(); return false;" style="font-weight:bold;color:#325F6D;">Unselect Visible</a>
+								&nbsp;&nbsp;
+								<a href="#" onclick="clearSelectedFeesCategories(); return false;" style="font-weight:bold;color:#325F6D;">Clear Selection</a>
+							</td>
+						</tr>
+
+                    		<tr class="feeCategorySection">
 							<td style="font-weight: bold;color:#325F6D">Fees Category: &nbsp;&nbsp;&nbsp;&nbsp;</td>
 							<td>
 							<label class="labelClass" style="font-weight: bold;color:#325F6D">  <input  type="checkbox" id = "chckHead" />All
@@ -785,10 +829,11 @@ for(Cookie cookie : cookies){
 							</td>
 							
 						</tr>
-						<tr>
+						<tr class="feeCategorySection">
     <td></td>
     <td id="feescat">
-    
+    <c:choose>
+    	<c:when test="${feeScope eq 'FEW'}">
         <div style="overflow:scroll;width:420px; height:250px;">
 
     <table id="myTableFeesCat" width="100%" border="0" style="border-color: #4b6a84;">
@@ -820,17 +865,16 @@ for(Cookie cookie : cookies){
                                name="feescategory"
                                class="chcktbl"
                                value="${item.idfeescategory}"
-                               <c:if test="${isChecked}">checked</c:if>
-                               onclick="syncFeesSelectAll()" />
+                               <c:if test="${isChecked}">checked</c:if> />
 
                     </td>
 
                     <td class="dataText"
                         style="font-weight:bold;color:#325F6D;background-color:white;text-align:left">
 
-                        ${item.feescategoryname} :
+                        <c:out value="${item.feescategoryname}" /> :
                         <span style="color:#eb6000;">
-                            ${item.particularname}
+                            <c:out value="${item.particularname}" />
                         </span>
 
                     </td>
@@ -842,6 +886,11 @@ for(Cookie cookie : cookies){
     </table>
 
 </div>
+	</c:when>
+	<c:otherwise>
+		<span style="font-weight:bold;color:#325F6D;">All fees categories will be included.</span>
+	</c:otherwise>
+    </c:choose>
 
     </td>
 </tr>
